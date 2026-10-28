@@ -1,5 +1,7 @@
 # Native quick start
 
+Private audio production/POST now connects both generated routes, full-track PCM/ALAC assembly, scoped once-only ASR, captions/licensed music and stored-manifest recovery. See the [implementation and reproducible commands](../实施/原生有声订单制作与后期接入-v1.0.md). Tests use native database/media with synthetic external responses. Public audio orders, listening/QC and delivery remain closed; ASR configuration defaults to disabled.
+
 [中文](QUICKSTART.md) · [Project README](../../README.en.md) · [Status](STATUS.md)
 
 The internal transcription service has separate `ASR_SERVICE_ENABLED=false`, `ASR_BASE_URL`, `ASR_API_KEY` and `ASR_ALLOWED_HOSTS` configuration. It defaults to disabled. Environment variables alone cannot admit audible orders: the original POST lease, model/rate contract, registered private video and restricted HTTPS storage are still required. [Configuration and seventeen native fixtures](../实施/异步音频转写与原任务回执-v1.0.md). The [audio contract and original-order accounting guide](../实施/原生声音合同与原订单费用-v1.0.md) documents character/voice/music rights, captions, one complete-track ASR, migration023 and twenty-three additional native fixtures. Real authorizations/providers, scoped audio-order tools and the complete audio pipeline remain unadmitted.

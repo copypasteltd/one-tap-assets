@@ -1,0 +1,70 @@
+{
+  "scope": "FAILED_ATTEMPTS_PRESERVED_NOT_COUNTED_AS_FULL_PASS",
+  "corrected_failures": [
+    "synthetic allowed-host fixture reset",
+    "fixture runtime root outside launcher/build",
+    "actual AAC distinct stereo requires explicit frozen derivative",
+    "QC fixture stage had not been enqueued"
+  ],
+  "original_local_logs": [
+    {
+      "path": "runtime/test-results/native-order-focused-first.log",
+      "sha256": "f2370464a46ab5e30a78554e2dcd6561f10f2f08fc3d5bc107229ef3f3de5cda"
+    },
+    {
+      "path": "runtime/test-results/native-order-focused-second.log",
+      "sha256": "83dd6bcc025469ab2b8884bba5a1657af911bd27dc9177d7bbf6257401fe1077"
+    },
+    {
+      "path": "runtime/test-results/native-order-focused-third.log",
+      "sha256": "b71f02f598406d112d22af4b4eea21f8d7e557bc48e6b9fd5fe2fe9b78ccc79d"
+    },
+    {
+      "path": "runtime/test-results/native-order-focused-fourth.log",
+      "sha256": "c0ec2ded2342a4c2aba7bf4b529762d9d57f4419006af8e54f20d939a6e32923"
+    }
+  ],
+  "first_full_attempt": {
+    "tests": 334,
+    "passed": 324,
+    "failed": 10,
+    "accepted_as_pass": false,
+    "source_set_hash": "bf54a34aa4f32227364a8f1c807794413404a61250aa71a559f8fdc140c46517",
+    "cause": "Synthetic media turn/start waited for complete rendering before replying, exceeding the unchanged 30-second protocol ACK limit; the dependent sample cases then failed. Fixture now acknowledges production/POST first and sends completion asynchronously. Other phases retain completion-before-ACK coverage. Sample fixture heartbeat is stopped/drained before commit.",
+    "local_files": [
+      {
+        "path": "runtime/test-results/native-order-full-first-integration.json",
+        "sha256": "697685e2ca10c143fd54e75cdb73e9c73d7402c4e13800adfccbd0abd8690214"
+      },
+      {
+        "path": "runtime/test-results/native-order-full-first-native.log",
+        "sha256": "b5229200d85cb3956204af9ad12c651e9859d0e9eb105fbf23226dd3609453ef"
+      },
+      {
+        "path": "runtime/test-results/native-order-full-first-evidence.json",
+        "sha256": "894bba3ad19bcde90e1ddd079432684503e729206328bafc5d63ed82305f0d57"
+      }
+    ]
+  },
+  "build_timeout": {
+    "platform": "ALIPAY",
+    "command_timeout_seconds": 180,
+    "native_full_suite_passed_before_retry": true,
+    "source_set_hash": "a61ef78878baddc1e41405dbe686cacaa13e22285ab49525379815ab1124fbfb",
+    "unchanged_source_contracts_resources": true,
+    "retained_native_report_sha256": "1a9c7cb9b5bfa0767a7fdcb915b9fc0b77bfc155d247521582287f07adf897a6",
+    "local_files": [
+      {
+        "path": "runtime/test-results/native-order-build-timeout-evidence.json",
+        "sha256": "d6fc92e72b58c6d6020ec5eae9caa0830ebd032d886f78034bb6635df2400a86"
+      },
+      {
+        "path": "runtime/test-results/native-order-build-timeout.log",
+        "sha256": "8583f111a34fd62993f6434cedad74a25df9a7d3a9501bae81f83b95b6d168dd"
+      }
+    ]
+  },
+  "final_full_suite_source_set_hash": "a61ef78878baddc1e41405dbe686cacaa13e22285ab49525379815ab1124fbfb",
+  "full_product_verified": false,
+  "production_admitted": false
+}

@@ -12,7 +12,7 @@ import {reserve,settle} from '../budget/reservations.js';
 import {PendingExternal,type StageLease} from '../queue/leases.js';
 import type {NativeTranscript} from '../media/native-captions.js';
 import {SpeechClient,actualSpeechTranscript,admitSpeechContract,frozenSpeechContract,speechCost,speechRequest,speechTask,type SpeechContract} from '../providers/dashscope-asr.js';
-import {boundSpeechContract,prepareSpeechSource,sourceBytes,speechContext,type SpeechSource} from './input.js';
+import {boundSpeechContract,prepareSpeechSource,sourceBytes,speechContext,verifySpeechDerivative,type SpeechSource} from './input.js';
 import {allocateNativeAudioRights,frozenNativeAudio} from '../audio/contract.js';
 
 type Pointer={ordinal:number;kind:'SUBMIT'|'QUERY'|'RESULT';key:string};
@@ -36,7 +36,8 @@ export class SpeechGateway {
     const r=(await db.query<Submission>(`SELECT * FROM provider_submissions WHERE tenant_id=$1 AND id=$2 AND generation_kind='ASR'${lock?' FOR UPDATE':''}`,[tenant,submission])).rows[0]??notFound();
     const c=frozenSpeechContract(r.private.wire_contract);requireThat(hash(c)===r.private.contract_hash&&c.model_version_id===r.model_version_id
       &&r.input_hash===hash({contract:hash(c),source:r.private.prepared.source,deadline_at:r.private.prepared.deadline_at})
-      &&r.private.prepared.source.source_sha256===r.private.prepared.source.audio.source_sha256,'ASR_BINDING_INVALID','原转写绑定已变化',503);return r;
+      &&r.private.prepared.source.source_sha256===r.private.prepared.source.audio.source_sha256,'ASR_BINDING_INVALID','原转写绑定已变化',503);
+    verifySpeechDerivative(r.private.prepared.source,c);return r;
   }
   private async object(r:Submission,key:string,kind:'MEDIA'|'RECEIPT',maximum:number):Promise<Buffer|null>{
     const record=(await this.pool.query<{sha256:string;state:string;delete_requested:boolean;expires_at:Date}>(`SELECT sha256,state,delete_requested,expires_at FROM private_object_writes

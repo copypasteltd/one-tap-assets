@@ -1,5 +1,7 @@
 # 文档目录 / Documentation index
 
+新增专项 / New implementation: [原生有声订单制作与后期 / Private native-audio production and POST](实施/原生有声订单制作与后期接入-v1.0.md)：内部两生成路线、受控原整轨 ASR、实际 PCM/ALAC、字幕/许可配乐及原清单恢复；十项整链/四项声道回归。公开有声订单、听音/QC/交付继续阻断，真实外部服务未准入。
+
 [中文入口](../README.md) · [English entry](../README.en.md)
 
 新增专项 / New implementation: [原生声音合同与原订单费用 / Frozen audio contract and original-order accounting](实施/原生声音合同与原订单费用-v1.0.md)，23项原生专项；[持久异步转写 / Durable ASR](实施/异步音频转写与原任务回执-v1.0.md)17项专项。使用合成授权/识别/用量，真实服务与有声整包未准入。

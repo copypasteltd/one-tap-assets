@@ -20,7 +20,8 @@ import {PhotoMediaPipeline,assertMediaAlive,inspectImage} from './photo-pipeline
 import {operationArtifacts,type MediaOperation,type MediaPhase,type MediaReceipt,type PrivateArtifact} from './artifacts.js';
 import {loadProductionFont} from './font.js';
 import {renderLayout} from './layout.js';
-import {nativeCommand,inspectVideo} from './native.js';
+import {nativeCommand,inspectVideo,type MediaInspection} from './native.js';
+import type {NativeOrderAudio} from '../audio/order-proof.js';
 
 export const GENERATED_PIPELINE_VERSION='YPCC-GENERATED-SILENT-1.0.0';
 /** Actual generated PNG/MP4 inputs only; no still-animation substitution. */
@@ -36,7 +37,7 @@ export class GeneratedMediaPipeline extends PhotoMediaPipeline {
     requireThat(context.snapshot.engine!=='PHOTO_LAYOUT'&&context.snapshot.audio_policy.speech_mode==='NONE'
       &&!context.snapshot.audio_policy.music_license_ids.length,'MEDIA_ROUTE_UNAVAILABLE','当前生成执行器仅接受冻结的无声整包',503);
   }
-  private async material(db:Db,context:ExecutionContext,receipt:MediaReceipt){
+  protected async material(db:Db,context:ExecutionContext,receipt:MediaReceipt){
     const stageId=receipt.phase==='POST'?(await operationArtifacts(db,context,'PRODUCTION')).operation.stage_run_id
       :(await db.query<{stage_run_id:string}>('SELECT stage_run_id FROM media_operations WHERE tenant_id=$1 AND order_id=$2 AND id=$3 AND phase=$4',
         [context.tenantId,context.orderId,receipt.operation_id,receipt.phase])).rows[0]?.stage_run_id;
@@ -47,6 +48,8 @@ export class GeneratedMediaPipeline extends PhotoMediaPipeline {
     this.assertRoute(context);checkGeneratedSources(receipt,await this.material(this.pool,context,receipt));
     await super.verify(context,receipt,directory,signal,selected);
   }
+  protected async alternateGeneratedVideo(_context:ExecutionContext,_material:Awaited<ReturnType<typeof generatedOutputs>>,_directory:string,_signal:AbortSignal):
+    Promise<{bytes:Buffer;inspection:MediaInspection;native_audio:NativeOrderAudio}|undefined>{return undefined;}
   protected override async produce(context:ExecutionContext,operation:MediaOperation,directory:string,signal:AbortSignal,scope:ToolScope):Promise<PrivateArtifact[]>{
     const lease=(await this.pool.query<StageLease>('SELECT * FROM stage_runs WHERE tenant_id=$1 AND id=$2',[scope.tenant_id,scope.stage_run_id])).rows[0]!;
     requireThat(String(lease.fencing_token)===String(scope.stage_fencing_token),'LEASE_LOST','制作租约代次已变化',409);
@@ -69,6 +72,15 @@ export class GeneratedMediaPipeline extends PhotoMediaPipeline {
       const spec=this.spec(context,'PRODUCTION','image',await inspectImage(bytes),[planned.asset_id]);
       spec.generation_sources=sourcesForSlot(material,'image',slot.slot_id);spec.reference_approval_hash=hash(material.approval);
       artifacts.push(await this.artifact(context,operation,slot.slot_id,bytes,spec));
+    }
+    const alternate=await this.alternateGeneratedVideo(context,material,directory,signal);
+    if(alternate){
+      for(const slot of context.snapshot.outputs.filter(s=>s.kind==='video')){
+        const spec=this.spec(context,'PRODUCTION','video',alternate.inspection,context.contract.creative.shots.map(s=>s.asset_id));
+        spec.generation_sources=sourcesForSlot(material,'video',slot.slot_id);spec.reference_approval_hash=hash(material.approval);spec.native_audio=alternate.native_audio;
+        artifacts.push(await this.artifact(context,operation,slot.slot_id,alternate.bytes,spec));
+      }
+      return artifacts;
     }
     const clips=join(directory,'generated-clips');await mkdir(clips);
     for(const [index,key] of material.videoKeys.entries()){
@@ -95,8 +107,8 @@ export class GeneratedMediaPipeline extends PhotoMediaPipeline {
     }
     return artifacts;
   }
-  protected override async post(context:ExecutionContext,operation:MediaOperation,source:MediaReceipt,directory:string,signal:AbortSignal):Promise<PrivateArtifact[]>{
-    const artifacts=await super.post(context,operation,source,directory,signal);
+  protected override async post(context:ExecutionContext,operation:MediaOperation,source:MediaReceipt,directory:string,signal:AbortSignal,scope:ToolScope):Promise<PrivateArtifact[]>{
+    const artifacts=await super.post(context,operation,source,directory,signal,scope);
     for(const item of artifacts.filter(a=>a.spec.kind!=='copy')){
       const original=source.artifacts.find(a=>a.slot_id===item.slot_id)!;
       requireThat(original.spec.generation_sources&&original.spec.reference_approval_hash,

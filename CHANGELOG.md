@@ -1,5 +1,21 @@
 # 更新记录 / Changelog
 
+## 2026-10-29 · 原生有声订单制作与后期 / Private native-audio production and POST
+
+- 最终54项单元、334项完整原生集成通过。支付宝首次构建180秒超时后，以源码/契约/资源完全未变的受限重试保留本轮原始原生通过报告，其余五项重新执行全部通过；首次样例失败与构建超时均保留原摘要。Final validation passes 54 unit and 334 complete native integration cases. A strictly unchanged-source build retry retains this round's native report and passes the other five checks; failed attempts remain recorded.
+
+- 首次完整334项中324通过、10项样例断言失败：媒体替身在渲染结束才回复turn/start，触发30秒应答超时并造成样例依赖连锁失败。改为先ACK、后异步完成；其他阶段保留提前通知覆盖，样例心跳在提交前停止并等待在途查询。原生产时限/预算/截止/断言不变，失败报告保留，修正后重新全量验证。The initial full run remains a failure; its media fixture now separates turn-start acknowledgment from asynchronous rendering completion, without relaxing production limits.
+
+- 内部两生成路线接入受控制作、原声完整组装、一次持久ASR和字幕/许可配乐后期；ALAC中间片逐字节保留PCM，最终输出AAC。Connected both private generated routes through actual full-track assembly, once-only durable ASR and POST, preserving original stereo PCM.
+- 新冻结MEAN_STEREO_V1策略以双边均值生成ASR私有副本，拒绝静音/显著相消；历史合同继续严格同声道，交付双声道不变。Added explicit frozen ASR derivation with phase-cancellation rejection and legacy compatibility.
+- 许可配乐冻结命名空间/实际字节，付费生成前预检；原来源、成功转写/原费用、资源授权与租约在提交事务重验。Missing/replaced music blocks purchases; commit revalidates original source, settled transcript, rights and fencing.
+- 原生成/ASR意图和已存后期清单覆盖ACK丢失、提交回滚及恢复，不补购、不重置原预算/截止；生成整包夹具改用串行且可等待结束的心跳。Retained original-task and stored-manifest recovery, with serial fixture heartbeat draining.
+- 新增十项原生整链、四项声道单元回归；使用实际PG/媒体/HTTPS-stdio-MCP和合成外部模型/授权/ASR/用量/隔离。完整执行以实现索引为准，不拼接局部结果。Added native integration and channel-policy regressions; synthetic responses do not verify real provider quality.
+- 双语README、架构/操作/进度和验证证据同步；既有截图/录屏/GIF保留原SHA和来源，本轮未改页面、未打开浏览器，C基线不变。Refreshed bilingual documentation and retained unchanged UI/audio media provenance.
+- 公开有声报价/订单、独立听音/QC/双复核/有声交付、官方多人和真实服务继续未准入，全部禁售/完整IN_PROGRESS保留。Public audio orders, listening/QC and delivery remain closed.
+
+
+
 ## 2026-10-29 · 原生声音合同与原订单费用 / Native audio contract and original-order accounting
 
 - 冻结原人物/声音/视频模型组合、授权版本和许可全文摘要、字幕/字体/配乐/压低/循环、原声单位增益、一次整轨ASR及全部声音成本，并绑定订单执行快照。Added a private frozen audio contract and snapshot digest; this does not admit public audible quotes.

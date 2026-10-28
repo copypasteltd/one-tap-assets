@@ -3,22 +3,22 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-28T19:34:00.341Z",
+  "checked_at": "2026-10-28T20:56:03.836Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
   "verification_mode": "MINI_BUILD_RETRY_WITH_RETAINED_NATIVE_INTEGRATION",
   "retained_integration": {
-    "checked_at": "2026-10-28T19:32:44.672Z",
-    "previous_source_set_hash": "29a74dd488c8fc8ee923a319732545353b6d4edb4703faf39bcaf3613c17af23",
-    "validated_source_set_hash": "29a74dd488c8fc8ee923a319732545353b6d4edb4703faf39bcaf3613c17af23",
+    "checked_at": "2026-10-28T20:52:46.784Z",
+    "previous_source_set_hash": "a61ef78878baddc1e41405dbe686cacaa13e22285ab49525379815ab1124fbfb",
+    "validated_source_set_hash": "a61ef78878baddc1e41405dbe686cacaa13e22285ab49525379815ab1124fbfb",
     "allowed_changed_files": [],
-    "report_sha256": "99d29bbe896139d790a0cb4a5e7745ee0911aab2e978cff19a020c0d911ca201",
+    "report_sha256": "1a9c7cb9b5bfa0767a7fdcb915b9fc0b77bfc155d247521582287f07adf897a6",
     "command": {
       "command": "./scripts/run.ps1 test:integration",
       "status": "PASS",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "1025866b12a2b27a24694b205a48a71e388ce0c331431e3e3e2192ea94ad4432"
+      "log_sha256": "2c034697c989f407e40bd3a1828fb95d86d8fbde31ed1121990159744b5ee72f"
     }
   },
   "command_checks_passed": true,
@@ -27,63 +27,63 @@
       "command": "./scripts/run.ps1 typecheck",
       "status": "PASS",
       "log_path": "runtime/test-results/typecheck.log",
-      "log_sha256": "b5aa43f87d69764ff3cf345c6eff1f87c196ab22ec1e7e18ff1189160f15f467"
+      "log_sha256": "87303d5f3f34c4bb664e1377cf7b16ec723473a9684db864c071f4e45254e16f"
     },
     {
       "command": "./scripts/run.ps1 test",
       "status": "PASS",
       "log_path": "runtime/test-results/test.log",
-      "log_sha256": "c981a62ef1f74c2080dfc4e6a73f79fc97b2912df44e258c744e88ae69a1a1c6"
+      "log_sha256": "ff54ef854993f8d1ded68b33330781dd6a1aa49bfa65a55f570dfca4865a48d0"
     },
     {
       "command": "./scripts/run.ps1 test:integration",
       "status": "PASS",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "1025866b12a2b27a24694b205a48a71e388ce0c331431e3e3e2192ea94ad4432"
+      "log_sha256": "2c034697c989f407e40bd3a1828fb95d86d8fbde31ed1121990159744b5ee72f"
     },
     {
       "command": "./scripts/run.ps1 build:server",
       "status": "PASS",
       "log_path": "runtime/test-results/build-server.log",
-      "log_sha256": "73c56fbaf6a17e9a7e97900a166f2ff3f2d0e21c7212a18cfe51084acd23e998"
+      "log_sha256": "eeaacd22033f0e3142f4fa99bdad9034a784095f3a8f65d7735b1351a12037ad"
     },
     {
       "command": "./scripts/run.ps1 build:alipay",
       "status": "PASS",
       "log_path": "runtime/test-results/build-alipay.log",
-      "log_sha256": "9ee09e7886e02cac67f2a7c8bf474c4d8b727417c570df640f458e2998b48ef1"
+      "log_sha256": "e673b4052d19dd0ad49ccdefe32e2779304c5042e7e5b84847a80b56351006be"
     },
     {
       "command": "./scripts/run.ps1 build:douyin",
       "status": "PASS",
       "log_path": "runtime/test-results/build-douyin.log",
-      "log_sha256": "cb256b44ffcadf5fba831b1f12e68b201e33e6c870bf4b61b8f4a9706a0532b7"
+      "log_sha256": "5528f314933d7e731a001246d2893f8a19c3da00e17eb7ae899857e3700e5056"
     }
   ],
   "suites": [
     {
       "kind": "unit",
       "status": "PASS",
-      "tests": 50,
-      "passed": 50,
+      "tests": 54,
+      "passed": 54,
       "failed": 0,
-      "executed_at": "2026-10-28T19:33:36.179Z",
+      "executed_at": "2026-10-28T20:54:45.443Z",
       "report_path": "runtime/test-results/unit.json",
-      "report_sha256": "6605f7e32e7fdb1c90311315207fe82fa9f443d66a4348c7e659ef78714e41cc"
+      "report_sha256": "a1e4e19ed560a7cedd55faf5ada3e0dbde043b1d7648fe1be335b08485770394"
     },
     {
       "kind": "integration",
       "status": "PASS",
-      "tests": 324,
-      "passed": 324,
+      "tests": 334,
+      "passed": 334,
       "failed": 0,
-      "executed_at": "2026-10-28T19:18:07.153Z",
+      "executed_at": "2026-10-28T20:31:55.079Z",
       "report_path": "runtime/test-results/integration.json",
-      "report_sha256": "99d29bbe896139d790a0cb4a5e7745ee0911aab2e978cff19a020c0d911ca201"
+      "report_sha256": "1a9c7cb9b5bfa0767a7fdcb915b9fc0b77bfc155d247521582287f07adf897a6"
     }
   ],
-  "source_files": 316,
-  "source_set_hash": "29a74dd488c8fc8ee923a319732545353b6d4edb4703faf39bcaf3613c17af23",
+  "source_files": 324,
+  "source_set_hash": "a61ef78878baddc1e41405dbe686cacaa13e22285ab49525379815ab1124fbfb",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -247,7 +247,7 @@
     },
     {
       "path": "src/api/modules/commerce.ts",
-      "sha256": "6e29e58740d4c729e07b8d8bc8bff7bedea0be11fdcf62b3dfcd3699b0aed280"
+      "sha256": "73a0a5da44b7e0b57f950fdc738286e37f846f2c94a2aed363be9cce30c61e5e"
     },
     {
       "path": "src/api/modules/community.ts",
@@ -639,7 +639,11 @@
     },
     {
       "path": "src/worker/audio/contract.ts",
-      "sha256": "02bb18b80fae829670aa246bb215fa45834172bec8030a3c661ab1a79cd94e08"
+      "sha256": "5fb0ed42403778a855c3839d47fe083453b288951a48dfc5c09ff3a4a89f8e44"
+    },
+    {
+      "path": "src/worker/audio/order-proof.ts",
+      "sha256": "228c30ac26d2510e87c0831dd04cce8467a4f0b34187698dd3e261c1cd4cca30"
     },
     {
       "path": "src/worker/budget/platform.ts",
@@ -663,7 +667,7 @@
     },
     {
       "path": "src/worker/codex/media-stage.ts",
-      "sha256": "dc9c2f8527c1159b2170120d7cbc4a8fb946d7cabef19928809097348b120e90"
+      "sha256": "d470f61f6ce3e65d5e06d01cd9313abd837b40f9c5e80572f517f0667333d62f"
     },
     {
       "path": "src/worker/codex/planning.ts",
@@ -703,7 +707,7 @@
     },
     {
       "path": "src/worker/generation/contracts.ts",
-      "sha256": "22c50abc0c1ec3eb42d99d5a3182813a328aaf2aec07591554a41f49f9c18fb0"
+      "sha256": "69b90c108d52ffad9894db1a12a5f2abcd25d4bdc0a6f10c1c6608f5587fdb9e"
     },
     {
       "path": "src/worker/generation/execute.ts",
@@ -719,7 +723,7 @@
     },
     {
       "path": "src/worker/generation/prepare.ts",
-      "sha256": "8502a2345c087cbda9ea95c83884499bf2cac840e052a9c73a838fffbe19465d"
+      "sha256": "915549cb6253336752b31172df37204527959b3e192a7dcf7f777125b0e0d6b5"
     },
     {
       "path": "src/worker/generation/reference-approval.ts",
@@ -739,7 +743,7 @@
     },
     {
       "path": "src/worker/generation/requests.ts",
-      "sha256": "9bd24266be4c8b5011cf054a50e0ff3785abd27b3633e22e5df8a994d52f498f"
+      "sha256": "f44f5c8fac9825c4b1ae9e6a53521737bdbd0ecfbfba01076f7b73376f425316"
     },
     {
       "path": "src/worker/lifecycle/cleanup-files.ts",
@@ -791,7 +795,7 @@
     },
     {
       "path": "src/worker/media/artifacts.ts",
-      "sha256": "721e17e9b6cc75cfb33463e2cf68135afe211d796ae9677aa5e5c6d9a5015564"
+      "sha256": "9b8c34382f1875e38f2fa6f33934c27a16c094715c7603a1c40dd3d4efb11c0b"
     },
     {
       "path": "src/worker/media/font.ts",
@@ -799,11 +803,15 @@
     },
     {
       "path": "src/worker/media/generated-pipeline.ts",
-      "sha256": "b6b23a11be5c7418b46bf0a4eb27deed0d40d47880e28c958d2c4e5435b85db1"
+      "sha256": "d4e6bb929fca104c043ecfdb10f0c3313a1aac25b6f088b727b7fe51ced1de73"
     },
     {
       "path": "src/worker/media/layout.ts",
       "sha256": "a4445b15b7d31beccb00ffdda9c4eeacf4b68c62172bd59f39d8d355863f3d10"
+    },
+    {
+      "path": "src/worker/media/native-audio-assembly.ts",
+      "sha256": "917e77b2ddcb72fbe211398df6621cdfa39bf05d9830d2921848de238c12289a"
     },
     {
       "path": "src/worker/media/native-audio-post.ts",
@@ -818,12 +826,16 @@
       "sha256": "98399776374928d5e4164993f7ded07a4816b36ee3dd714d94342cd81d278ef2"
     },
     {
+      "path": "src/worker/media/native-order-pipeline.ts",
+      "sha256": "1494035ca3a397a73617368459208086663794a846bef27d3a4cf20b3f2c3e77"
+    },
+    {
       "path": "src/worker/media/native.ts",
       "sha256": "1b2c0039003d7d2d559176d263df993bc2cd8aeb547f4925ec3447bfada4bc05"
     },
     {
       "path": "src/worker/media/photo-pipeline.ts",
-      "sha256": "d995303f0167fb391518283abf777cc18f1bf4ae7d8ad93faf0b2f5dbfc9a4d7"
+      "sha256": "641872bd05f087956bf81d283744d9c80386497ed4bb3a13ea1ad58dd6ea7b8f"
     },
     {
       "path": "src/worker/media/photo-video.ts",
@@ -843,7 +855,7 @@
     },
     {
       "path": "src/worker/providers/dashscope-asr.ts",
-      "sha256": "fe3ebcaaa361300d6fb6c053279de0483e48e079e65e817edd9765f8285516e5"
+      "sha256": "a0e1da8b5f9935c722f7beb6c13ff5cbf172b5c3adf88a59d3b2dd7def4e3ccf"
     },
     {
       "path": "src/worker/providers/vision.ts",
@@ -942,12 +954,16 @@
       "sha256": "15b613af099fe7811cfa45d7e783e305e11bd9c9581f94abc03c99fd44dd8486"
     },
     {
+      "path": "src/worker/speech/execute.ts",
+      "sha256": "deb01c890cc5e560c1c2d857962d979475f91f5cd62f5311c42ea9b9f82ce8d7"
+    },
+    {
       "path": "src/worker/speech/gateway.ts",
-      "sha256": "d833b76930c94f507fb6517c2d639f3ae902114a6fb91de5708e4e9c1c841783"
+      "sha256": "33076c60818dc9190bfb94380ab5dbda0e958873049db55cb2bae26798e13185"
     },
     {
       "path": "src/worker/speech/input.ts",
-      "sha256": "9f4052319d9f301d999b97a67886a6e4f1d65ca3bdf3969f6b4897c9bb933d7e"
+      "sha256": "ff2fa276bd1b12b3f68a061a28f9d930c94575a4f02f19ab2b82d2adc314d8d3"
     },
     {
       "path": "src/worker/tool-gateway/consumer.ts",
@@ -975,7 +991,7 @@
     },
     {
       "path": "src/worker/tool-gateway/production-tools.ts",
-      "sha256": "63958bc972a470a2c010774477ef6df388e5371a9d8765091f1c95b5fd6bf6a7"
+      "sha256": "29fa3b43f6ddf95e38293e139756e4265afd60e4d9d07c7b67138cb1652f9a5a"
     },
     {
       "path": "src/worker/tool-gateway/reference-tools.ts",
@@ -1003,7 +1019,7 @@
     },
     {
       "path": "tests/fixtures/codex-role.cjs",
-      "sha256": "f71262380aab06eec06f69b5b01791291ef1a01adc643a353fb33afa59cced1f"
+      "sha256": "c697d5b25eeca7b11f804c4651db9ca83067e09c5d793a2a38ac26e9d98a6a8a"
     },
     {
       "path": "tests/helpers/audio.ts",
@@ -1026,8 +1042,16 @@
       "sha256": "cfe4b2c8e8666828113a609f0d1eb15562136bd07c562850b6edce147b0e5474"
     },
     {
+      "path": "tests/helpers/lease.ts",
+      "sha256": "6d80c9967d4a6674fb8bf84c63a74b85f31b40c8b051624ba1c4d513d762824e"
+    },
+    {
       "path": "tests/helpers/media.ts",
       "sha256": "f96600fff9b07452fde36199aadaeb4cc33c957257e4ced0937b4232b47bd2dc"
+    },
+    {
+      "path": "tests/helpers/native-order.ts",
+      "sha256": "aa6302bc02b865235e577d8d4601e3aee9241fb9174af495757116f1768481a1"
     },
     {
       "path": "tests/helpers/reference.ts",
@@ -1075,7 +1099,7 @@
     },
     {
       "path": "tests/integration/generated-production.test.ts",
-      "sha256": "35a91e5b2f13f9c6d256624e7a0ab9f91cf350c6bb2662fed8480d3103dcd661"
+      "sha256": "026693e23b53ad8d7208f5a3dd12ca9d50e4140c4536f9849fbb80ae4f9f5d89"
     },
     {
       "path": "tests/integration/generation-gateway.test.ts",
@@ -1112,6 +1136,10 @@
     {
       "path": "tests/integration/native-media.test.ts",
       "sha256": "7b055593a27780bb6ddfb9470125ee48486a47c0a9f5c33ce7f11dfc81b21c4e"
+    },
+    {
+      "path": "tests/integration/native-order.test.ts",
+      "sha256": "f0ed7e1a89b233ff3d458ffbc8b5a2dcc426c23d98f6ef298d89563d3929099b"
     },
     {
       "path": "tests/integration/optional-preview.test.ts",
@@ -1155,7 +1183,7 @@
     },
     {
       "path": "tests/integration/sample-production.test.ts",
-      "sha256": "5a021912ff5d6c736bc050d5ad1988edfdce2927961f527904550f5d7aab5600"
+      "sha256": "2f2f70456cc14cf0fe014c692f9b04894ac1ca6a8af81b5403ad12073dfc9b75"
     },
     {
       "path": "tests/integration/speech-gateway.test.ts",
@@ -1212,6 +1240,10 @@
     {
       "path": "tests/unit/review-packet.test.ts",
       "sha256": "b852ee4e07e57d9c5a67a27f33eb0b7cc62dff4e556fe158255d42cae48537bb"
+    },
+    {
+      "path": "tests/unit/speech-channel.test.ts",
+      "sha256": "e1915a87059b63299e59df93e4553dc429d296e6a5991e0d78016eff8851b6ef"
     },
     {
       "path": "tests/unit/vision-wire.test.ts",
@@ -1319,7 +1351,7 @@
     },
     {
       "path": "scripts/verify-implementation.ts",
-      "sha256": "ee42dba9f0a5c5f086687305bccd8c6b55149cbe946a635876edf39e22fb8138"
+      "sha256": "22516655367eceb7da705817ddde8a0af563af9e33c76d022d459860b279f372"
     },
     {
       "path": "scripts/verify-publication.ts",
@@ -1623,10 +1655,10 @@
     "original_deadline_and_cancellation": true,
     "durable_asr_implemented": true,
     "independent_audio_review_implemented": false,
-    "order_tool_registered": false,
+    "order_tool_registered": true,
     "native_speech_order_admitted": false,
     "real_chinese_speech_verified": false,
-    "notes": "Native PostgreSQL/FFmpeg/AAC/PNG/PCM with synthetic tones and explicitly manual timecodes. Actual encoded waveforms, subtitle pixels/timing, music-only ducking, license revocation, exact sample counts, permitted loops and cleanup are exercised. Receipt hashes and signal presence are not recognizer admission or semantic audio review. This internal kernel does not register an order tool or remove NATIVE_AUDIO_NOT_ADMITTED."
+    "notes": "Standalone kernel fixtures use native PostgreSQL/FFmpeg/AAC/PNG/PCM with synthetic tones and explicitly manual timecodes. Actual encoded waveforms, subtitle pixels/timing, music-only ducking, revocation, sample counts, loops and cleanup are exercised. The separate native_order_media scope now wraps the kernel in private ORDER PRODUCTION/POST; kernel proof flags still describe its standalone scope. Receipt hashes and signal presence do not certify recognition, semantic listening or complete audible delivery. NATIVE_AUDIO_NOT_ADMITTED remains."
   },
   "speech_transcription": {
     "implemented": true,
@@ -1635,15 +1667,18 @@
     "wire": "QWEN3_ASR_FLASH_FILETRANS_ASYNC",
     "original_intent_receipts_and_budget": true,
     "private_mono_wav": true,
-    "distinct_stereo_rejected": true,
+    "legacy_distinct_stereo_rejected": true,
+    "frozen_mean_stereo_derivative": true,
+    "phase_cancellation_guard": true,
     "actual_word_timestamps_required": true,
     "stored_receipt_maintenance": true,
-    "order_tool_registered": false,
+    "order_tool_registered": true,
+    "production_post_connected": true,
     "order_pipeline_connected": false,
     "real_provider_verified": false,
     "real_chinese_speech_verified": false,
     "native_speech_order_admitted": false,
-    "notes": "Native PostgreSQL/FFmpeg/AAC/PCM/private files with synthetic HTTPS transport and transcript/usage responses. Original request, send marker, task ID, append-only raw ACK/query/result, bounded source/PCM/WAV hashes and original order cost reservation are persisted. Missing ACK/usage never permits another purchase. Only mono or exact dual mono is accepted; no distinct-channel downmix. This internal POST service is not a production ASR admission, independent listening review or audible order pipeline."
+    "notes": "Native PostgreSQL/FFmpeg/AAC/PCM/private files with synthetic HTTPS transport and transcript/usage responses. Original intent, send marker, task ID, append-only ACK/query/result, source/PCM/WAV hashes and original cost reservation persist. Missing ACK/usage never permits another purchase. Legacy contracts require identical stereo; an explicitly frozen MEAN_STEREO_V1 derivative uses both channels, rejects destructive cancellation and leaves production stereo unchanged. The scoped private POST tool is connected; independent listening, QC, public orders and audio delivery remain closed."
   },
   "native_audio_contract": {
     "implemented": true,
@@ -1656,15 +1691,42 @@
     "live_rights_on_payment_and_resume": true,
     "immutable_license_and_character_evidence": true,
     "native_quotes_admitted": false,
-    "order_tool_registered": false,
+    "order_tool_registered": true,
+    "production_post_connected": true,
     "order_pipeline_connected": false,
     "independent_audio_review_implemented": false,
     "real_authorizations_verified": false,
     "real_provider_verified": false,
     "notes": "Native PostgreSQL/FFmpeg/actual AAC plus synthetic character/voice/music authorization, ASR transport/transcript/usage and payment facts. Contract compilation, snapshot hashes, revoked-rights payment refund intent, original budget and concurrent full-track ASR limits are exercised. Fixed prepaid allocation is internal accounting, not proof of an external license purchase. The primary character/voice binding does not certify official multi-presenter support. NATIVE_AUDIO_NOT_ADMITTED and all sales-disabled gates remain."
   },
+  "native_order_media": {
+    "implemented": true,
+    "native_fixture_verified": true,
+    "version": "YPCC-NATIVE-ORDER-PIPELINE-1",
+    "routes": [
+      "PER_SHOT_AI",
+      "REFERENCE_FILM"
+    ],
+    "production_post_connected": true,
+    "actual_full_track_pcm_assembly": true,
+    "lossless_intermediate_codec": "ALAC",
+    "final_audio_codec": "AAC",
+    "canonical_original_source_only": true,
+    "scoped_asr_tool": true,
+    "once_only_original_asr": true,
+    "stored_post_receipt_restore": true,
+    "licensed_music_bytes_preflight": true,
+    "frozen_mono_derivative": "MEAN_STEREO_V1",
+    "independent_audio_review_implemented": false,
+    "audio_qc_connected": false,
+    "audio_delivery_connected": false,
+    "native_quotes_admitted": false,
+    "official_multi_presenter_verified": false,
+    "real_provider_verified": false,
+    "notes": "Ten native PostgreSQL/actual AAC-ALAC-PCM/media/HTTPS-stdio-MCP cases with synthetic external model, authorizations, ASR/usage and isolation. Both private production/POST routes, licensed music, original-task recovery after lost ACK, stored POST transaction rollback recovery, forged or replaced sources, missing/replaced licensed bytes, commit-time revocation and public-order rejection are exercised. Four unit cases cover equal stereo weights, immutable PCM, legacy behavior and silence/phase-cancellation rejection. No real Chinese listening, official multi-presenter, public audio ordering, QC or delivery admission."
+  },
   "codex_implementation": {
-    "scope": "CONTENT PLAN, silent PHOTO_LAYOUT/PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST, independent generated-reference facts review and fresh final visual REVIEW_FACTS/REVIEW_STYLE runtime adapters, metered Responses gateway, atomic pack publication, independent seven-stage photo creator SAMPLE pipeline",
+    "scope": "CONTENT PLAN, silent PHOTO_LAYOUT/PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST and private native-audio PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST with scoped original-track ASR, independent generated-reference facts review and fresh final visual REVIEW_FACTS/REVIEW_STYLE runtime adapters, metered Responses gateway, atomic silent pack publication, independent seven-stage photo creator SAMPLE pipeline",
     "fixture_tests_only": true,
     "real_codex_turn_verified": false,
     "native_launcher_executable_provided": false,

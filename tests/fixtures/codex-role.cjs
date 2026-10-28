@@ -95,6 +95,7 @@ async function dispatch(message) {
       output = { results };
       await tool('persist_stage_result', { result: output });
     } else if (input.phase === 'PRODUCTION' || input.phase === 'POST') {
+      if (input.phase === 'POST' && input.native_audio) await tool('transcribe_actual_audio', { artifact_id: input.native_audio.source_artifact_id });
       const engine = input.snapshot?.engine ?? input.source?.engine;
       const primary = input.phase === 'PRODUCTION' ? ['PER_SHOT_AI','REFERENCE_FILM'].includes(engine)?'render_generated_pack':'render_photo_pack' : 'execute_post_plan';
       const made = await tool(primary, { snapshot_hash: input.snapshot_hash });
@@ -154,6 +155,15 @@ async function dispatch(message) {
 const lines = readline.createInterface({ input: process.stdin });
 lines.on('line', line => {
   const message = JSON.parse(line); if (message.id === undefined || message.id === 'synthetic-forbidden-shell') return;
+  if (message.method === 'turn/start' && ['PRODUCTION','POST'].includes(input.phase)) {
+    // Start acknowledges the turn; native rendering completes asynchronously.
+    // Other phases retain completion-before-ACK coverage for the RPC buffer.
+    send({ id: message.id, result: { turn: { id: 'synthetic-turn', status: 'inProgress' } } });
+    void dispatch(message).catch(() => send({ method: 'turn/completed', params: {
+      threadId: message.params.threadId, turn: { id: 'synthetic-turn', status: 'failed' }
+    } }));
+    return;
+  }
   void dispatch(message).then(result => send({ id: message.id, result }), () => send({ id: message.id, error: { code: -32000, message: 'Synthetic fixture operation failed' } }));
 });
 lines.on('close', () => { bridge?.stdin.end(); });

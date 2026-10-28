@@ -20,6 +20,7 @@ export interface CharacterVoiceAdmission {
 }
 export interface AudioRight {
   kind:AudioRightKind;binding:ResourceBinding;license_version:string;license_sha256:string;allocation_micro:number;
+  media?:{object_key:string;sha256:string;size_bytes:number;mime_type:string};
 }
 export interface NativeAudioContract {
   version:typeof AUDIO_CONTRACT_VERSION;source_policy_hash:string;plan_hash:string;target_frames:number;
@@ -39,6 +40,8 @@ const resource=exact({resource_version_id:text,license_record_id:text,hash:diges
 const characterSchema=exact({version:{const:'YPCC-CHARACTER-VOICE-1'},character_version_id:text,native_voice_id:text,video_model_version_id:text,
   evidence_sha256:digest,valid_until:text,language:{const:'zh-CN'},secondary_tts:{const:false},character_binding:resource,voice_binding:resource});
 const rightSchema=exact({kind:{enum:['NATIVE_CHARACTER','NATIVE_VOICE','MUSIC']},binding:resource,license_version:text,license_sha256:digest,allocation_micro:integer(0,1_000_000_000)});
+Object.assign(rightSchema.properties,{media:exact({object_key:{type:'string',pattern:'^licensed-resources/[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$'},
+  sha256:digest,size_bytes:integer(1,64_000_000),mime_type:{enum:['audio/wav','audio/mpeg','audio/mp4','audio/flac','audio/ogg']}})});
 const ajv=new Ajv2020({strict:false}),validCharacter=ajv.compile<CharacterVoiceAdmission>(characterSchema);
 const validAudio=ajv.compile<NativeAudioContract>(exact({version:{const:AUDIO_CONTRACT_VERSION},source_policy_hash:digest,plan_hash:digest,target_frames:integer(1,3600),
   language:{const:'zh-CN'},preserve_native_audio:{const:true},secondary_tts:{const:false},original_gain_db:{const:0},sample_rate:{const:48000},channels:{const:2},
@@ -120,7 +123,7 @@ async function readCharacter(db:Db,contract:FrozenContract,lock=false):Promise<C
 }
 async function readRight(db:Db,binding:ResourceBinding,kind:AudioRightKind,lock=false):Promise<AudioRight>{
   const row=(await db.query<{version:string;data:{resource_version_id?:string;resource_hash?:string;license_text?:string;license_sha256?:string;admission_state?:string;
-    audio_rights?:{kind?:string;allowed_use?:string;allocation_mode?:string;allocation_micro?:number}}}>(
+    audio_media?:AudioRight['media'];audio_rights?:{kind?:string;allowed_use?:string;allocation_mode?:string;allocation_micro?:number}}}>(
     `SELECT version,data FROM resource_licenses WHERE id=$1 AND resource_id=$2 AND revoked_at IS NULL
       AND (expires_at IS NULL OR expires_at>clock_timestamp())${lock?' FOR SHARE':''}`,[binding.license_record_id,binding.resource_version_id])).rows[0];
   const d=row?.data,rights=d?.audio_rights;
@@ -129,7 +132,11 @@ async function readRight(db:Db,binding:ResourceBinding,kind:AudioRightKind,lock=
     &&rights?.kind===kind&&rights.allowed_use==='GENERATED_COMMERCIAL_AD'&&rights.allocation_mode==='PREPAID_ORDER_ALLOCATION'
     &&Number.isSafeInteger(rights.allocation_micro)&&rights.allocation_micro! >= 0&&rights.allocation_micro! <= 1_000_000_000,
     'AUDIO_LICENSE_UNAVAILABLE','声音资源许可缺失、撤销、内容摘要或固定成本不一致',503);
-  return {kind,binding:structuredClone(binding),license_version:row.version,license_sha256:d.license_sha256!,allocation_micro:rights.allocation_micro!};
+  const result:AudioRight={kind,binding:structuredClone(binding),license_version:row.version,license_sha256:d.license_sha256!,allocation_micro:rights.allocation_micro!,
+    ...(d.audio_media?{media:structuredClone(d.audio_media)}:{})};
+  requireThat(!result.media||(kind==='MUSIC'&&ajv.validate(rightSchema,result)&&result.media.sha256===binding.hash
+    &&result.media.object_key.startsWith(`licensed-resources/${binding.resource_version_id}/`)),
+    'AUDIO_LICENSE_UNAVAILABLE','配乐媒体必须使用绑定原字节的独立许可资源命名空间',503);return result;
 }
 /** Quote compiler. Admission of the full audio order pipeline is a separate
  * gate: compiling this private contract does not open sales. */

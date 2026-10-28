@@ -15,16 +15,21 @@ export interface SpeechContract {
   base_url:string;official_documentation:typeof ASR_DOCUMENTATION;capability_evidence_sha256:string;valid_until:string;
   input_hosts:string[];result_hosts:string[];max_response_bytes:number;max_queries:number;poll_seconds:number;
   max_audio_seconds:number;rate:{unit:'AUDIO_SECOND';micro_per_million_units:number;max_billable_units:number;ceiling_micro:number};
+  channel_policy?:'MEAN_STEREO_V1';
 }
 const s={type:'string',minLength:1,maxLength:200};
 const n=(minimum:number,maximum:number)=>({type:'integer',minimum,maximum});
 const exact=(properties:Record<string,unknown>)=>({type:'object',properties,required:Object.keys(properties),additionalProperties:false});
 const hosts={type:'array',minItems:1,maxItems:8,uniqueItems:true,items:{type:'string',pattern:'^[a-z0-9.-]{1,253}$'}};
-const valid=new Ajv2020({strict:false}).compile<SpeechContract>(exact({version:{const:'YPCC-DASHSCOPE-FILETRANS-1'},provider:{const:'ALIYUN_DASHSCOPE'},state:{const:'ADMITTED'},
+const contractSchema=exact({version:{const:'YPCC-DASHSCOPE-FILETRANS-1'},provider:{const:'ALIYUN_DASHSCOPE'},state:{const:'ADMITTED'},
   model_version_id:s,request_model:{const:'qwen3-asr-flash-filetrans'},actual_model:s,registry_version:s,rate_snapshot_id:s,base_url:{type:'string',maxLength:1000},
   official_documentation:{const:ASR_DOCUMENTATION},capability_evidence_sha256:{type:'string',pattern:'^[a-f0-9]{64}$'},valid_until:s,
   input_hosts:hosts,result_hosts:hosts,max_response_bytes:n(1000,4_000_000),max_queries:n(1,720),poll_seconds:n(1,60),max_audio_seconds:n(1,120),
-  rate:exact({unit:{const:'AUDIO_SECOND'},micro_per_million_units:n(1,1_000_000_000_000),max_billable_units:n(1,120),ceiling_micro:n(1,1_000_000_000)})}));
+  rate:exact({unit:{const:'AUDIO_SECOND'},micro_per_million_units:n(1,1_000_000_000_000),max_billable_units:n(1,120),ceiling_micro:n(1,1_000_000_000)})});
+// Optional for existing immutable contracts. Absence retains strict identical
+// stereo behavior; the new policy participates in the frozen contract hash.
+Object.assign(contractSchema.properties,{channel_policy:{const:'MEAN_STEREO_V1'}});
+const valid=new Ajv2020({strict:false}).compile<SpeechContract>(contractSchema);
 export function speechCost(c:SpeechContract,seconds:number):number {
   requireThat(Number.isSafeInteger(seconds)&&seconds>=0&&seconds<=c.rate.max_billable_units,'ASR_USAGE_INVALID','转写实际秒数缺失或超出冻结上界',503);
   const cost=Number((BigInt(seconds)*BigInt(c.rate.micro_per_million_units)+999999n)/1000000n);

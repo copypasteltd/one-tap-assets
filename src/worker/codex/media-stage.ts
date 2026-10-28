@@ -15,6 +15,7 @@ import type { RoleExecutor } from './planning.js';
 import {GenerationGateway} from '../generation/gateway.js';
 import {prepareGeneratedReferences} from '../generation/prepare.js';
 import {validateGenerationExecution} from '../generation/contracts.js';
+import {NativeOrderMediaPipeline} from '../media/native-order-pipeline.js';
 
 export class MediaStageService {
   private executor: RoleExecutor;
@@ -29,7 +30,8 @@ export class MediaStageService {
       'MEDIA_STAGE_INVALID', '媒体执行阶段无效', 500);
     const phase = lease.stage_name as MediaPhase;
     const context = await executionContext(this.pool, lease.tenant_id, lease.scope_id, lease.input_hash);
-    if(context.snapshot.engine!=='PHOTO_LAYOUT')validateGenerationExecution(context.contract);
+    const native=context.snapshot.audio_policy.speech_mode==='NATIVE_ZH';
+    if(context.snapshot.engine!=='PHOTO_LAYOUT')validateGenerationExecution(context.contract,native);
     const binding = context.contract.runtime_binding; const cc = context.snapshot.codex_contract;
     requireThat(binding && binding.limits.owner_id === context.ownerId && binding.limits.ceiling_micro === cc.agent_cost_ceiling_micro
       && binding.limits.max_input_tokens === cc.max_input_tokens && binding.limits.max_output_tokens === cc.max_output_tokens
@@ -41,6 +43,7 @@ export class MediaStageService {
       'CODEX_SOLD_BINDING_INVALID', '当前运行能力与原订单不一致', 503);
     if(phase==='PRODUCTION'&&context.snapshot.engine!=='PHOTO_LAYOUT'){
       const store=this.testPorts?.store??storage(this.cfg);
+      if(native)await new NativeOrderMediaPipeline(this.pool,this.cfg,store,this.testPorts?.gateway).preflight(context);
       await prepareGeneratedReferences(this.pool,this.cfg,store,lease,context,this.executor,
         this.testPorts?.gateway??new GenerationGateway(this.pool,this.cfg,store),signal);
     }
@@ -58,8 +61,10 @@ export class MediaStageService {
       const primaryTool = phase === 'PRODUCTION' ? context.snapshot.engine==='PHOTO_LAYOUT'?'render_photo_pack':'render_generated_pack' : 'execute_post_plan';
       completed = await this.executor.execute({ lease, role: phase, variantId: context.snapshot.variant_id, bundleHash: cc.skill_bundle_hash,
         admission, limits: binding.limits, maxToolCalls: cc.max_tool_calls, maxScopeToolCalls: cc.max_tool_calls,
-        allowedTools: [primaryTool, 'inspect_actual_media', 'persist_stage_result'], outputSchema: mediaStageResultSchema,
+        allowedTools: [primaryTool, 'inspect_actual_media', 'persist_stage_result',...(native&&phase==='POST'?['transcribe_actual_audio']:[])], outputSchema: mediaStageResultSchema,
         input: { phase, snapshot_hash: context.snapshotHash, snapshot: context.snapshot, creative_plan: context.contract.creative,
+          ...(native?{native_audio:{contract_hash:context.snapshot.native_audio_contract_hash,
+            source_artifact_id:previous?.receipt.artifacts.filter(a=>a.spec.kind==='video').sort((a,b)=>a.slot_id.localeCompare(b.slot_id))[0]?.id??null}}:{}),
           production: previous ? { operation_id: previous.operation.id, outputs: previous.receipt.artifacts.map(a => ({ artifact_id: a.id, slot_id: a.slot_id, sha256: a.sha256 })) } : null,
           task: `按已售快照和风格 Skill 完成${phase === 'PRODUCTION' ? '对应路线的实际整包制作' : '显式后期处理'}。调用 ${primaryTool}，再 inspect_actual_media 检查全部真实产物；将检查工具返回的 tool_receipt_id 加入 stage_result.tool_receipt_ids，其余字段沿用制作工具结果。通过 persist_stage_result 保存最终完整结果并原样返回。不得改商品、清单、模型、路线、预算或截止。` } }, signal);
     }

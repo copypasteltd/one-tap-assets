@@ -85,6 +85,7 @@ export async function createOrder(db: Db, cfg: Config, p: Principal, request: DT
   requireThat(quote.state === 'OPEN' && Date.parse(quote.data.expires_at) > Date.now(), 'QUOTE_EXPIRED', '报价已过期，请重新确认清单和费用', 410);
   const contract = quote.private!.contract as FrozenContract;
   requireThat(hash(contract)===quote.private!.contract_hash,'QUOTE_CONTRACT_MISMATCH','原报价合同摘要不一致',503);
+  requireThat(contract.source.audio_policy.speech==='none','NATIVE_AUDIO_NOT_ADMITTED','有声订单的独立听音、QC和交付尚未准入',503);
   await verifyNativeAudioLive(db,contract,true);
   const product = await owned<DTO<'Product'>>(db, 'product_drafts', contract.product.product_id, p);
   requireThat(!product.deleted_at && new Date(String(product.expires_at)).getTime() > Date.now()

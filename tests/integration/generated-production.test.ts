@@ -5,6 +5,7 @@ import type {FastifyInstance} from 'fastify';
 import sharp from 'sharp';
 import {testDatabase,type TestDatabase} from '../helpers/database.js';
 import {mediaFixture} from '../helpers/media.js';
+import {withFixtureLease} from '../helpers/lease.js';
 import {syntheticArkContract} from '../helpers/generation.js';
 import {syntheticSse} from '../helpers/codex.js';
 import {FixtureLauncher} from '../helpers/role-launcher.js';
@@ -24,7 +25,7 @@ import {MediaStageService} from '../../src/worker/codex/media-stage.js';
 import {ToolConsumer} from '../../src/worker/tool-gateway/consumer.js';
 import {productionTools} from '../../src/worker/tool-gateway/production-tools.js';
 import {reviewTools} from '../../src/worker/tool-gateway/review-tools.js';
-import {claimStage,completeStage,heartbeatStage,PendingExternal,type StageLease} from '../../src/worker/queue/leases.js';
+import {claimStage,completeStage,PendingExternal,type StageLease} from '../../src/worker/queue/leases.js';
 import {enqueueStage} from '../../src/worker/queue/enqueue.js';
 import {QualityControlService} from '../../src/worker/review/qc.js';
 import {ReviewStageService} from '../../src/worker/review/stage.js';
@@ -96,8 +97,7 @@ async function setup(engine:Engine,options:{mode?:string;wrongAspect?:boolean;un
     service:new MediaStageService(db.pool,f.cfg,executor,{gateway,store:f.store})};
 }
 async function finish(lease:StageLease,handle:()=>Promise<(db:import('pg').PoolClient)=>Promise<void>>){
-  const pulse=setInterval(()=>{void heartbeatStage(db.pool,lease);},5000);
-  try{await completeStage(db.pool,lease,await handle());}finally{clearInterval(pulse);}
+  const commit=await withFixtureLease(db.pool,lease,handle);await completeStage(db.pool,lease,commit);
 }
 async function next(f:Awaited<ReturnType<typeof setup>>,name:string,parent:StageLease){
   const stageId=await enqueueStage(db.pool,{tenantId:f.p.tenantId,scopeType:'ORDER',scopeId:f.orderId,name,inputHash:f.snapshotHash,

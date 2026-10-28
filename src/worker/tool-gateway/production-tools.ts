@@ -10,7 +10,9 @@ import { executionContext, type ExecutionContext } from '../compiler/order-conte
 import { artifactSetHash, checkpointHash, receiptFromArtifacts, type MediaOperation, type MediaPhase, type MediaReceipt } from '../media/artifacts.js';
 import { PhotoMediaPipeline, checkReceiptSlots } from '../media/photo-pipeline.js';
 import {GeneratedMediaPipeline} from '../media/generated-pipeline.js';
+import {NativeOrderMediaPipeline} from '../media/native-order-pipeline.js';
 import type {GenerationGateway} from '../generation/gateway.js';
+import type {SpeechGateway} from '../speech/gateway.js';
 import type { ToolHandler } from './consumer.js';
 import type { ToolScope } from './http.js';
 
@@ -57,9 +59,10 @@ export async function validateMediaStageResult(db: pg.Pool | pg.PoolClient, cont
     'MEDIA_TOOL_PROOF_MISSING', '媒体阶段缺少本次运行的成功工具回执', 422);
   return { result, receipt };
 }
-export function productionTools(pool: pg.Pool, cfg: Config, store: ObjectStorage,gateway?:GenerationGateway): Record<string, ToolHandler> {
-  requireThat(!gateway||cfg.env==='test','TEST_PORT_FORBIDDEN','制作供应商端口仅限测试',500);
-  const pipelineFor=(context:ExecutionContext)=>context.snapshot.engine==='PHOTO_LAYOUT'?new PhotoMediaPipeline(pool,cfg,store):new GeneratedMediaPipeline(pool,cfg,store,gateway);
+export function productionTools(pool: pg.Pool, cfg: Config, store: ObjectStorage,gateway?:GenerationGateway,speech?:SpeechGateway): Record<string, ToolHandler> {
+  requireThat(!(gateway||speech)||cfg.env==='test','TEST_PORT_FORBIDDEN','制作供应商端口仅限测试',500);
+  const pipelineFor=(context:ExecutionContext)=>context.snapshot.engine==='PHOTO_LAYOUT'?new PhotoMediaPipeline(pool,cfg,store)
+    :context.snapshot.audio_policy.speech_mode==='NATIVE_ZH'?new NativeOrderMediaPipeline(pool,cfg,store,gateway,speech):new GeneratedMediaPipeline(pool,cfg,store,gateway);
   const render = (phase: MediaPhase,generatedOnly?:boolean): ToolHandler => async (scope, args, intent, signal) => {
     requireThat(args.snapshot_hash===scope.snapshot_hash,'INPUT_HASH_MISMATCH','制作参数与原冻结输入不一致',422);
     const context=await executionContext(pool,scope.tenant_id,scope.order_id!,scope.snapshot_hash);
@@ -71,6 +74,11 @@ export function productionTools(pool: pg.Pool, cfg: Config, store: ObjectStorage
   };
   return {
     render_photo_pack: render('PRODUCTION',false),render_generated_pack:render('PRODUCTION',true), execute_post_plan: render('POST'),
+    transcribe_actual_audio:async(scope,args,_intent,signal)=>{
+      const transcript=await new NativeOrderMediaPipeline(pool,cfg,store,gateway,speech).transcribe(scope,String(args.artifact_id),signal);
+      return {result:{submission_id:transcript.submission_id,state:'SUCCEEDED',source_artifact_id:transcript.source_artifact_id,
+        transcript_hash:hash(transcript.transcript),transcript:transcript.transcript}};
+    },
     inspect_actual_media: async (scope, args, intent, signal) => {
       requireThat(scope.order_id && (scope.role === 'PRODUCTION' || scope.role === 'POST'), 'MEDIA_SCOPE_INVALID', '此检查入口只接受制作或后期角色', 409);
       const context = await executionContext(pool, scope.tenant_id, scope.order_id, scope.snapshot_hash); const ids = args.asset_ids as string[];

@@ -14,7 +14,35 @@ import {inspectVideo} from '../media/native.js';
 import {frozenSpeechContract,type SpeechContract} from '../providers/dashscope-asr.js';
 import {frozenNativeAudio} from '../audio/contract.js';
 
-export interface SpeechSource {source_write_id:string;source_sha256:string;audio:NativeAudioEvidence;wav_sha256:string}
+export interface MonoDerivativeProof {
+  version:'YPCC-ASR-MONO-DERIVATIVE-1';policy:'MEAN_STEREO_V1';source_pcm_sha256:string;mono_pcm_sha256:string;
+  samples:number;coefficients:[0.5,0.5];energy_ratio:number;min_energy_ratio:0.1;
+}
+export interface SpeechSource {source_write_id:string;source_sha256:string;audio:NativeAudioEvidence;wav_sha256:string;mono_derivative?:MonoDerivativeProof}
+export function verifySpeechDerivative(source:SpeechSource,contract:SpeechContract):void{
+  const p=source.mono_derivative;
+  requireThat(!contract.channel_policy?!p:!!p&&p.version==='YPCC-ASR-MONO-DERIVATIVE-1'&&p.policy===contract.channel_policy
+    &&p.source_pcm_sha256===source.audio.pcm_sha256&&p.samples===source.audio.samples&&/^[a-f0-9]{64}$/.test(p.mono_pcm_sha256)
+    &&p.coefficients.length===2&&p.coefficients[0]===0.5&&p.coefficients[1]===0.5&&p.min_energy_ratio===0.1
+    &&Number.isFinite(p.energy_ratio)&&p.energy_ratio>=0.1,'ASR_BINDING_INVALID','转写声道副本与原冻结策略或PCM证据不一致',503);
+}
+/** Equal-weight, round-to-nearest derivative for ASR only. Delivery keeps the
+ * original stereo PCM. Reject destructive phase cancellation before buying ASR. */
+export function speechMonoDerivative(pcm:Buffer,policy?:SpeechContract['channel_policy']):{mono:Buffer;proof?:MonoDerivativeProof}{
+  requireThat(pcm.length>0&&pcm.length%4===0,'ASR_PCM_INVALID','转写立体声PCM格式无效',422);
+  const mono=Buffer.alloc(pcm.length/2);let sourceEnergy=0,monoEnergy=0;
+  for(let p=0,q=0;p<pcm.length;p+=4,q+=2){
+    const left=pcm.readInt16LE(p),right=pcm.readInt16LE(p+2);
+    requireThat(policy==='MEAN_STEREO_V1'||left===right,'ASR_STEREO_REVIEW_REQUIRED','不同的左右声道须先完成多声道识别与合并准入',422);
+    const sample=policy==='MEAN_STEREO_V1'?Math.round((left+right)/2):left;
+    mono.writeInt16LE(sample,q);sourceEnergy+=(left*left+right*right)/2;monoEnergy+=sample*sample;
+  }
+  if(!policy)return {mono};
+  const ratio=sourceEnergy===0?0:monoEnergy/sourceEnergy;
+  requireThat(ratio>=0.1,'ASR_STEREO_CANCELLATION','双声道均值存在显著相消，须独立复核后才能转写',422);
+  return {mono,proof:{version:'YPCC-ASR-MONO-DERIVATIVE-1',policy,source_pcm_sha256:sha256(pcm),mono_pcm_sha256:sha256(mono),
+    samples:pcm.length/4,coefficients:[0.5,0.5],energy_ratio:Number(ratio.toFixed(6)),min_energy_ratio:0.1}};
+}
 export async function speechContext(db:Db,lease:StageLease):Promise<ExecutionContext>{
   requireThat(lease.scope_type==='ORDER'&&lease.stage_name==='POST','ASR_SCOPE_INVALID','转写只允许原订单后期阶段',403);
   const owner=(await db.query<{owner_id:string}>('SELECT owner_id FROM orders WHERE tenant_id=$1 AND id=$2',[lease.tenant_id,lease.scope_id])).rows[0]??notFound();
@@ -50,14 +78,10 @@ export async function prepareSpeechSource(db:Db,cfg:Config,store:ObjectStorage,c
     const audio=frozenNativeAudio(context.contract);
     requireThat(!audio||inspected.frames===audio.target_frames,'ASR_TIMELINE_MISMATCH','转写必须使用原合同完整时间轴，不能把单镜头当作整轨',422);
     const native=await decodeNativeAudio(cfg,{...execution,path,source_sha256:sha256(bytes),target_frames:inspected.frames});
-    const mono=Buffer.alloc(native.pcm.length/2);
-    for(let p=0,q=0;p<native.pcm.length;p+=4,q+=2){
-      requireThat(native.pcm.readInt16LE(p)===native.pcm.readInt16LE(p+2),'ASR_STEREO_REVIEW_REQUIRED','不同的左右声道须先完成多声道识别与合并准入',422);
-      mono.writeInt16LE(native.pcm.readInt16LE(p),q);
-    }
+    const {mono,proof}=speechMonoDerivative(native.pcm,c.channel_policy);
     const header=Buffer.alloc(44);header.write('RIFF');header.writeUInt32LE(36+mono.length,4);header.write('WAVEfmt ',8);header.writeUInt32LE(16,16);
     header.writeUInt16LE(1,20);header.writeUInt16LE(1,22);header.writeUInt32LE(48000,24);header.writeUInt32LE(96000,28);header.writeUInt16LE(2,32);header.writeUInt16LE(16,34);
     header.write('data',36);header.writeUInt32LE(mono.length,40);const wav=Buffer.concat([header,mono]);
-    return {source:{source_write_id:writeId,source_sha256:sha256(bytes),audio:native.evidence,wav_sha256:sha256(wav)},wav};
+    return {source:{source_write_id:writeId,source_sha256:sha256(bytes),audio:native.evidence,wav_sha256:sha256(wav),...(proof?{mono_derivative:proof}:{})},wav};
   });}finally{await rm(root,{recursive:true,force:true});}
 }

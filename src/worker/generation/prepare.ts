@@ -17,7 +17,7 @@ import {submitGenerationNode} from './execute.js';
  * so no nested role waits on the same serial MCP consumer. */
 export async function prepareGeneratedReferences(pool:pg.Pool,cfg:Config,store:ObjectStorage,lease:StageLease,
   context:ExecutionContext,executor:RoleExecutor,gateway:GenerationGateway,signal:AbortSignal):Promise<void>{
-  validateGenerationExecution(context.contract);
+  validateGenerationExecution(context.contract,context.snapshot.audio_policy.speech_mode==='NATIVE_ZH');
   const bundle=await bundleForVariant(cfg,context.snapshot.variant_id);
   requireThat(bundle.sha256===context.snapshot.codex_contract.skill_bundle_hash,'SKILL_BUNDLE_MISSING','原参考制作风格Skill摘要已变化',503);
   const shots=context.snapshot.engine==='REFERENCE_FILM'?['film']:context.contract.creative.shots.map(s=>s.shot_id);

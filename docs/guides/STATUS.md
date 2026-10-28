@@ -7,15 +7,15 @@
 | 编号 / No. | 检查 / Check | 结果 / Result | 证明范围 / Scope |
 | --- | --- | --- | --- |
 | 01 | TypeScript | PASS | 当前类型检查 / Current type checking |
-| 02 | 单元 / Unit | 50 / 50 PASS | 领域、客户端、策略与适配器逻辑 / Domain, client and adapter logic |
-| 03 | 原生集成 / Native integration | 324 / 324 PASS | 原生PG/实际媒体/HTTPS/MCP及显式合成角色、供应商、支付、宿主 / Actual database/media with synthetic external responses |
+| 02 | 单元 / Unit | 54 / 54 PASS | 领域、客户端、策略与适配器逻辑 / Domain, client and adapter logic |
+| 03 | 原生集成 / Native integration | 334 / 334 PASS | 原生PG/实际媒体/HTTPS/MCP及显式合成角色、供应商、支付、宿主 / Actual database/media with synthetic external responses |
 | 04 | 服务端 / Server | PASS | 编译API、Worker、回收、媒体维护和删除日志入口 / Compiled native entries |
 | 05 | 双小程序 / Both mini-programs | PASS | Taro支付宝/抖音构建，不是宿主真机验收 / Compilation, not device certification |
 | 06 | 浏览器回放 / Browser replay | PASS | Vite构建、10页断言/截图、实际WebM/MP4/GIF；无外部请求，浏览器已关闭 / Actual local capture |
 
 机器可读结果：[实现索引](../../assets/implementation/current.json)、[发布核验摘要](../verification/publication.json)、[媒体清单](../media/capture-manifest.json)。完整执行日志/测试JSON位于未提交的`runtime/test-results/`；公开摘要保留计数、命令结果与摘要引用，但不包含本地凭证或运行数据库。Source hashes and original local log hashes are recorded; private runtime files are excluded from Git. Static documentation checks validate contracts/links, not product execution.
 
-本轮声音合同源码先全新执行完整原生集成；构建超时后按全部源码/契约/资源未变的受限重试保留本轮原始通过报告，其余五项重新执行，未沿用上一轮301项。 This audio-contract source first executes the complete native integration suite freshly. After a build timeout, an explicit same-source/contracts/resources retry retains this original passing report and repeats the other five checks; the previous round's 301 cases are not reused. [验证来源](../verification/README.md)。
+本轮原生订单制作/后期源码先全新执行完整原生集成；构建超时后，仅在源码/契约/资源完全未变时受限重试，保留本轮原始通过报告并重新执行其余五项。未沿用上一轮324项。 This native production/POST source first executes the complete native suite freshly. Following a build timeout, a strictly unchanged-source/contracts/resources retry retains this round's original native report and repeats the other five checks; the previous 324-case report is not reused. [验证来源](../verification/README.md)。
 
 ## 当前实现边界 / Implementation boundary
 
@@ -29,16 +29,17 @@
 | 06 | 社区 / Community | 收藏/草稿/授权/发布状态/治理，独立原图无声SAMPLE，审核后独立公开副本与撤回；完整商业发布未验 / Native lifecycle coverage, incomplete commercial admission |
 | 07 | 恢复与隐私 / Recovery and privacy | 租约、预算、原回执、登记对象回收、主库逻辑脱敏、外部签名删除日志与原生备份重放；真实物理/外部边界未验 / Controlled recovery coverage, incomplete production erasure |
 | 08 | 设计与文档 / Design and docs | C基线保留、双语README/操作指南、真实浏览器媒体、源码证据 / Frozen baseline, bilingual operational docs and actual replay media |
-| 09 | 原生声音内核 / Native audio kernel | 实际PCM/四字幕/许可配乐与压低/编码后检查，15项原生专项；合成音与人工时间码，尚未接入有声订单或独立听音 / Actual native media kernel, explicit tone fixtures; no audio-order admission |
-| 10 | 持久转写 / Durable ASR | POST内部服务、私有单声道WAV、原任务/回执/原预算/恢复与撤权、17项专项；识别/用量/网络为合成，真实ASR及正式订单工具未验 / Internal service with synthetic provider responses; no real-provider or audible-order admission |
-| 11 | 声音合同与费用 / Audio contract and costs | 原人物/声音/视频模型、许可正文摘要/固定分摊、字幕/配乐、一次整轨ASR、快照/撤权/到账退款意图、23项专项；授权/识别/费用/付款为合成，正式有声报价/订单工具/听音/QC/交付未准入 / Frozen private contract and original budget, no audio-order admission |
+| 09 | 原生声音内核 / Native audio kernel | 实际PCM/四字幕/许可配乐与压低/编码后检查，15项专项；内部订单POST现已包装接入，独立听音未验 / Actual kernel and private POST wrapper, no listening admission |
+| 10 | 持久转写 / Durable ASR | 17项专项，原任务/费用/私有WAV和实际字级时间码；POST受控工具、显式均值副本与相消检查已接入，真实服务未验 / Scoped private POST service; real provider unverified |
+| 11 | 声音合同与费用 / Audio contract and costs | 23项专项，人物/声音/许可/预算/一次整轨ASR/撤权退款；内部制作/POST已消费，公开有声订单/听音/QC/交付仍拒绝 / Frozen original contract, partial internal integration, no public audio admission |
+| 12 | 有声制作与后期 / Native production and POST | 十项原生整链/四项声道回归；两路线完整原声/ALAC、一次ASR、字幕/许可配乐、原清单恢复与事务撤权校验；外部响应合成，完整有声交付仍关闭 / Actual private pipeline, synthetic external responses, no audio QC/delivery |
 
 ## 待完成优先顺序 / Remaining priorities
 
 | 顺序 / Priority | 待办 / Work | 完成条件 / Completion evidence |
 | --- | --- | --- |
 | 01 | 生成式官方变体与真实服务验收 / Official generated variants and real-service acceptance | 在已有两条无声内部链路上验证真实模型、商品身份/风格质量、完整规格和原费用/恢复；不能用2秒夹具替代 / Real model/quality/specification evidence beyond short silent fixtures |
-| 02 | 原生有声与资源规格 / Native audio and resources | 在已有内核/转写/冻结合同上验证真实授权/ASR/OSS/费用，补多人逐镜绑定、订单工具/整包POST/QC封存与独立听音，再接事务交付 / Real rights/ASR/storage, multi-presenter binding, scoped tools, listening and audio delivery |
+| 02 | 原生有声与资源规格 / Native audio and resources | 在已有内部制作/ASR/POST上验证真实授权/识别/OSS/费用，补多人逐镜绑定、独立听音/QC封存/最终双复核，再接事务交付 / Real rights/ASR/storage, multi-presenter binding, independent listening/QC/final reviews and audio delivery |
 | 03 | 真实Codex与受限身份/释放 / Real Codex, restricted identity and cleanup | 服务凭证、真实推理计量、原生启动器、隔离/进程树/孤儿回收与G0证据 / Native verified operation |
 | 04 | 支付/模型/对象存储与四组真机 / Live integrations and four device groups | 宿主登录/照片/付款/退款/下载/相册，真实费用及OSS/隐私边界 / Live platform and device evidence |
 | 05 | 完整社区与售后 / Community and aftercare | 生成式/有声/资源样例、发布准入、许可撤销、完整修改与平台纠错 / End-to-end eligible capabilities |

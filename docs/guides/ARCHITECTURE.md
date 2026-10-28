@@ -1,8 +1,10 @@
 # 技术结构与执行逻辑 / Architecture and execution
 
+2026-10-29原生订单增补 / Native ORDER update: [内部制作与后期](../实施/原生有声订单制作与后期接入-v1.0.md)连接两条生成路线、原整轨PCM/ALAC、受控一次ASR、字幕/许可配乐以及原清单恢复；`transcribe_actual_audio`仅授予本订单POST。显式冻结双声道均值仅用于ASR副本，交付保持原声。Public audio order creation, listening/QC, independent final audio review and delivery remain closed. Synthetic external responses do not verify real speech quality or multi-presenter support. 以下历史“订单工具未接入”按本增补区分内部PRODUCTION/POST与完整有声产线。
+
 2026-10-29增补：[异步转写与原任务回执](../实施/异步音频转写与原任务回执-v1.0.md)已实现内部POST服务：实际视频/PCM→私有单声道WAV→原任务/原费用/回执恢复→实际字级转写。`provider_submissions`增加ASR类型且与Ark分流，媒体维护器只核对已存回执。17项原生专项使用合成供应商，不代表真实中文ASR/OSS、独立听音或正式有声交付已准入。后文历史“持久ASR待实现”按本条区分内部实现与真实服务准入；原有声销售门禁保留。
 
-The internal POST transcription service reuses the original ledger and private-object scope. Its seventeen native fixtures use synthetic provider responses. Real ASR/storage admission, audio contracts, scoped order tools, listening/QC and atomic audio delivery remain incomplete.
+The internal POST transcription service reuses the original ledger and private-object scope. Its seventeen native fixtures use synthetic provider responses. Frozen audio contracts and scoped private production/POST tools are now connected as described above; real ASR/storage admission, independent listening/QC, final audio reviews and atomic audio delivery remain incomplete.
 
 [中文README](../../README.md) · [English README](../../README.en.md) · [状态 / Status](STATUS.md)
 

@@ -7,6 +7,8 @@ import {frozenNativeAudio} from '../audio/contract.js';
 
 export interface GenerationModelRow {id:string;status:string;data:ModelBinding;private?:{ark_contract?:unknown;speech_contract?:unknown}}
 export const GENERATED_QC_POLICY='YPCC-QC-GENERATED-SILENT-1.0.0';
+// A private production/POST contract, not admission of listening/QC or sales.
+export const NATIVE_AUDIO_QC_POLICY='YPCC-QC-GENERATED-NATIVE-AUDIO-1.0.0';
 function matches(c:ArkContract,row:GenerationModelRow):boolean{
   const role=c.wire==='ARK_IMAGE'?'IMAGE':'VIDEO';
   return c.model_version_id===row.id&&row.data.provider===c.provider&&row.data.actual_model===c.actual_model
@@ -28,7 +30,7 @@ export function generationContract(contract:FrozenContract,kind:'IMAGE'|'VIDEO')
   requireThat(contract.model_versions.some(data=>matches(c,{id:c.model_version_id,status:'ADMITTED',data})),
     'GENERATION_MODEL_BINDING_INVALID','原订单的生成协议与模型快照不一致',503);return c;
 }
-export function validateGenerationBudget(contract:FrozenContract):void{
+export function validateGenerationBudget(contract:FrozenContract,nativeOrder=false):void{
   if(contract.source.engine==='PHOTO_LAYOUT')return;
   const image=generationContract(contract,'IMAGE'),video=generationContract(contract,'VIDEO');
   const shots=contract.creative.shots.length;
@@ -38,14 +40,15 @@ export function validateGenerationBudget(contract:FrozenContract):void{
     +BigInt(contract.codex_contract.agent_cost_ceiling_micro)+BigInt(contract.revision_policy?.budget_micro??0)+BigInt(contract.repair_ceiling_micro)
     +BigInt(frozenNativeAudio(contract)?.cost.ceiling_micro??0);
   requireThat(minimum<=BigInt(contract.budget_micro),'GENERATION_BUDGET_INVALID','原总预算不能覆盖冻结素材、Agent、售后与修复上界',503);
-  requireThat(contract.source.audio_policy.speech==='none','NATIVE_AUDIO_NOT_ADMITTED','原生人声和人物能力尚未完成单独准入',503);
+  requireThat(nativeOrder?!!frozenNativeAudio(contract):contract.source.audio_policy.speech==='none',
+    'NATIVE_AUDIO_NOT_ADMITTED','原生人声必须使用独立内部订单执行器；公开准入仍未完成',503);
 }
 /** Admission before the first paid call, never a runtime quota increase. The
  * reference reviewer and final facts reviewer share the original facts bucket. */
-export function validateGenerationExecution(contract:FrozenContract):void{
-  validateGenerationBudget(contract);
-  requireThat(contract.source.engine!=='PHOTO_LAYOUT'&&contract.codex_contract.qc_policy_version===GENERATED_QC_POLICY,
-    'GENERATION_QC_NOT_ADMITTED','生成式订单必须冻结对应的无声全包验收规则',503);
+export function validateGenerationExecution(contract:FrozenContract,nativeOrder=false):void{
+  validateGenerationBudget(contract,nativeOrder);
+  requireThat(contract.source.engine!=='PHOTO_LAYOUT'&&contract.codex_contract.qc_policy_version===(nativeOrder?NATIVE_AUDIO_QC_POLICY:GENERATED_QC_POLICY),
+    'GENERATION_QC_NOT_ADMITTED','生成式订单必须冻结对应声音路线的独立验收规则',503);
   const binding=contract.runtime_binding,cc=contract.codex_contract;
   requireThat(binding&&binding.limits.max_requests>=5&&(binding.limits.max_requests_per_role??0)>=2
     &&cc.max_turns_per_role>=2&&cc.max_tool_calls>=12,'GENERATION_ROLE_BUDGET_INVALID','冻结次数不能覆盖参考核验、制作、后期与最终双复核',503);

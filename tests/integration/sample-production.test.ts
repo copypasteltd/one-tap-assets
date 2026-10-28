@@ -5,6 +5,7 @@ import type { FastifyInstance, HTTPMethods } from 'fastify';
 import { testDatabase, account, type TestDatabase } from '../helpers/database.js';
 import { planningFixture, syntheticSse } from '../helpers/codex.js';
 import { FixtureLauncher } from '../helpers/role-launcher.js';
+import {withFixtureLease} from '../helpers/lease.js';
 import type { NativeLaunchManifest } from '../../src/worker/codex/launcher.js';
 import { buildApp } from '../../src/api/app.js';
 import { insert } from '../../src/api/db/store.js';
@@ -14,7 +15,7 @@ import { LocalStorage } from '../../src/api/storage/storage.js';
 import { writePrivateObject } from '../../src/api/storage/private-objects.js';
 import { id, hash, sha256, addSeconds } from '../../src/api/lib/crypto.js';
 import { createDraft, submitRights } from '../../src/api/modules/community.js';
-import { claimStage, completeStage, heartbeatStage, type StageLease } from '../../src/worker/queue/leases.js';
+import { claimStage, completeStage, type StageLease } from '../../src/worker/queue/leases.js';
 import { stopScope } from '../../src/worker/lifecycle/termination.js';
 import { CodexRuntimeAdapter } from '../../src/worker/codex/runtime.js';
 import { ToolConsumer } from '../../src/worker/tool-gateway/consumer.js';
@@ -66,8 +67,8 @@ async function run(name: string, s = sample, mode?: string) {
   const lease = (await claimStage(db.pool, id('sample-worker'), [name]))!;
   expect(lease?.scope_id).toBe(s.sample_id);
   const active = mode ? new SampleProductionService(db.pool, f.cfg, store, new CodexRuntimeAdapter(db.pool, f.cfg, new SampleLauncher(mode))) : service;
-  const pulse = setInterval(() => { void heartbeatStage(db.pool, lease); }, 5000);
-  try { await completeStage(db.pool, lease, await active.handle(lease, controller.signal)); } finally { clearInterval(pulse); }
+  const commit=await withFixtureLease(db.pool,lease,signal=>active.handle(lease,signal),controller.signal);
+  await completeStage(db.pool,lease,commit);
   return lease;
 }
 beforeAll(async () => {

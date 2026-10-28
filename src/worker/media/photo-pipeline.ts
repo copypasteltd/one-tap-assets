@@ -133,7 +133,7 @@ export class PhotoMediaPipeline {
     }
     return artifacts;
   }
-  protected async post(context: ExecutionContext, operation: MediaOperation, source: MediaReceipt, directory: string, signal: AbortSignal): Promise<PrivateArtifact[]> {
+  protected async post(context: ExecutionContext, operation: MediaOperation, source: MediaReceipt, directory: string, signal: AbortSignal, _scope:ToolScope): Promise<PrivateArtifact[]> {
     const artifacts: PrivateArtifact[] = [];
     for (const slot of requiredSlots(context, 'POST')) {
       assertMediaAlive(context, signal);
@@ -181,7 +181,7 @@ export class PhotoMediaPipeline {
         operation = await claimMediaGeneration(this.pool, scope, intent, operation);
         if (previous) { const verifyDir = join(directory, 'verify-source'); await mkdir(verifyDir); await this.verify(context, previous.receipt, verifyDir, signal); }
         const artifacts = phase === 'PRODUCTION' ? await this.produce(context, operation, directory, signal, scope)
-          : await this.post(context, operation, previous!.receipt, directory, signal);
+          : await this.post(context, operation, previous!.receipt, directory, signal, scope);
         receipt = { version: 'YPCC-MEDIA-1', operation_id: operation.id, phase, snapshot_hash: context.snapshotHash, input_hash: inputHash,
           artifacts: artifacts.sort((a, b) => a.slot_id.localeCompare(b.slot_id)) };
         checkReceiptSlots(context, receipt); assertMediaAlive(context, signal);
