@@ -64,3 +64,9 @@ Register private writes before I/O; reconcile original unknown bytes before eras
 业务77/管理26接口、229业务schema及71逻辑实体以`assets/development/v1.1/`及生成源为准；当前数据库21个迁移。修改契约同步生成源、产物、客户端、迁移与恢复测试，不能破坏已售快照。C设计25个基线文件与原始归档保持原字节，界面从tokens派生。[开发规范](../开发/README.md)有完整细则。
 
 The versioned development assets define 77 business/26 management endpoints, 229 business schemas and 71 logical entities; the current database has 21 migrations. Changes update generators, generated contracts, callers, migrations and recovery tests while retaining sold snapshots. The 25-file C baseline and archive remain byte-preserved; implementation uses its tokens.
+
+## 原生声音内核 / Native audio kernel
+
+`src/worker/media/native-audio.ts`提取有界实际PCM与信号证据；`native-captions.ts`检查转写来源/时间码并编译四字幕；`native-audio-post.ts`核对许可、保留原声单位增益、仅配乐压低、实际字幕烧录和编码后波形复验。接口属于独立服务端内核，尚无订单/MCP注册或快照迁移，原有声禁售门禁继续有效。真实ASR持久回执/费用、人物/声音许可、独立听音、QC封存及事务交付必须按[接入顺序](../实施/原生音轨字幕与配乐后期内核-v1.0.md)继续实现。
+
+The independent server kernel performs bounded PCM decoding, four caption styles, rights checks, unit-gain original-voice mixing, music-only ducking, actual burn-in and encoded waveform checks. It adds no order tool or snapshot migration. Real durable ASR/billing, character/voice rights, independent listening, sealed QC and atomic audio publication remain required; native speech admission stays closed.

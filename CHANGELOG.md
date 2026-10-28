@@ -1,5 +1,14 @@
 # 更新记录 / Changelog
 
+## 2026-10-29 · 原生声音与字幕后期内核 / Native audio and caption kernel
+
+- 新增实际视频原声提取、48kHz双声道PCM摘要/20ms信号证据、唯一音轨/完整解码/时长/削波门禁；信号不冒称人声或中文识别。Added bounded native decoding and physical audio evidence, without treating signal presence as speech recognition.
+- 新增绑定实际文件/PCM/证据的转写时间码及四种中文字幕烧录，karaoke要求词级实际时间码，固定字体/AI标识，拒绝错绑、静音区、重叠、字形缺失与ASS注入。Added actual-audio caption binding and four burned-in styles with explicit word timing and protected rendering inputs.
+- 许可配乐按冻结音量/循环策略解码，原声保持单位增益，仅背景音按原PCM包络压低；精确采样相加、削波拒绝、实际AAC后波形/相关性/SNR、前后许可撤销检查及原期限/取消清理。Added sample-preserving native mixing, music-only ducking, encoded waveform verification, rights checks and deadline/cancellation handling.
+- 15项原生数据库/实际PNG-MP4-AAC-PCM专项通过；使用自绘商品、合成正弦音与人工时间码，不是ASR或人物讲解证据。Added fifteen native fixtures with actual media and explicit synthetic tones/manual timestamps.
+- 新增`docs:audio`、四种实际MP4/取帧、GIF及独立来源/SHA清单；同步中英README和开发说明，发布核验检查新增媒体及源码绑定。Added reproducible native media evidence and bilingual repository documentation.
+- 未注册有声订单工具，真实ASR/费用恢复、声音/人物准入、Codex听音、封存QC和有声交付仍待完成；四生成式变体、完整产品与生产准入均未通过，官方全部禁售。Audio orders and production speech admission remain disabled; the complete product remains in progress.
+
 记录可核验的最终行为及已知范围；历史设计文档保留原版，最新状态见[状态指南](docs/guides/STATUS.md)。Record actual behavior and limits; historical design records remain preserved.
 
 ## 2026-10-28 · 生成式无声整包编排 / Silent generated pack orchestration

@@ -27,6 +27,7 @@
     "test:integration": "vitest run --config vitest.integration.config.ts",
     "test:ui": "tsx scripts/record-preview.ts",
     "docs:media": "tsx scripts/record-preview.ts",
+    "docs:audio": "tsx scripts/record-native-audio.ts",
     "verify:implementation": "tsx scripts/verify-implementation.ts",
     "verify:publication": "tsx scripts/verify-publication.ts",
     "start:api": "node runtime/build/api/main.js",

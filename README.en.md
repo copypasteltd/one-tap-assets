@@ -16,6 +16,14 @@ This repository is under active development: requirements **v3.1**, development 
 
 These are **actual browser captures at 430 × 932**, reusing shared mini-program screens with local synthetic business data and an original illustrated product. The recording lasts about 14.56 seconds. They show UI behavior, not native mini-program device captures, real paid orders or model-generated product results, and do not represent an implemented Plus app. The ¥0 order, 2030 collection date and product illustration are fixtures. The script closes its browser and checks page failures and external requests.
 
+## Native audio post-processing experiment
+
+An independently runnable native kernel now extracts actual audio, binds transcript timestamps to PCM evidence, burns four Chinese caption styles, and mixes licensed music with music-only ducking. It checks encoded waveforms, caption timing/pixels, license revocation, the original deadline and cancellation cleanup. **Audio orders remain disconnected and unavailable for sale.** Durable real ASR, Chinese speech quality, independent listening and billing recovery remain incomplete.
+
+![Actual subtitle processing with synthetic tones and manual timecodes](docs/media/native-audio/preview.gif)
+
+[Four styles, actual MP4/PNG files and recapture](docs/media/native-audio/README.md) · [Processing design and trust boundary](docs/实施/原生音轨字幕与配乐后期内核-v1.0.md) · [Audio media hashes and provenance](docs/media/native-audio/capture-manifest.json). The GIF has no audio; MP4 clips contain synthetic tones. These fixtures contain no real Chinese speech or ASR, do not prove that displayed words were spoken, and are not official presenter samples. Reproduce with `.\scripts\run.ps1 docs:audio`; no browser or external model is called.
+
 ## Customer workflow
 
 1. **Take photos.** Capture or select 3–5 photos showing the whole product, another angle and real details. No product form is required.
@@ -187,9 +195,9 @@ Root READMEs and operational guides are bilingual. Detailed historical requireme
 
 For UI evidence, start `dev:preview` and run `docs:media` in another terminal. `test:ui` invokes the same capture/assertion script. Local Edge, native FFmpeg/ffprobe and project-local Playwright recording components are required; see the [demo guide](docs/guides/DEMO.md).
 
-For this 2026-10-28 snapshot, type checking, **50/50 unit tests, 269/269 native integration tests**, server and both mini-program builds passed. The unchanged UI retains its previously verified replay build and ten-screen capture, with identical media hashes. Exact results live in the implementation JSON. Public summaries distinguish actual database/media processing from synthetic models/payments/isolation.
+For this 2026-10-29 snapshot, type checking, **50/50 unit tests, 284/284 native integration tests**, server and both mini-program builds passed. The unchanged UI retains its previously verified replay build and ten-screen capture, with identical media hashes. Exact results live in the implementation JSON. Public summaries distinguish actual database/media processing from synthetic models/payments/isolation.
 
-For the final build-script fix, source hashes establish unchanged application/tests, the complete executed native integration report is retained, and type/unit/server/mini builds run again. `verify:implementation --retry-mini-builds` accepts only bounded CSS-build/verifier changes and checks the original log/report plus contracts/resources; application changes reject reuse. The default verifier always executes all six checks. See [validation provenance](docs/verification/README.md).
+This audio source update first executes the complete native integration suite freshly. After an initial 180-second Alipay build-startup timeout, an explicit retry verifies unchanged source/contracts/resources and retains that original passing report; type/unit/server/both mini builds run again. No previous-round native report is reused. `verify:implementation --retry-mini-builds` accepts only bounded CSS-build/verifier changes and checks the original log/report plus contracts/resources; application changes reject reuse. The default verifier always executes all six checks. See [validation provenance](docs/verification/README.md).
 
 Remaining work includes official-variant and real-service acceptance of both generative routes, native audio, real Codex/isolation/cleanup, provider/payment/storage admission, four device groups, 14 variants × 30 full-pack benchmarks, complete community/aftercare, Plus/management UI and acceptance of all **58 requirements / 52 P0 requirements**. Follow [status and priorities](docs/guides/STATUS.md).
 

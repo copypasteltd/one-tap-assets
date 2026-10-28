@@ -15,7 +15,7 @@
 | 设计基线 / Frozen design | [C定型文档](设计/定型/C-柚子创作社-v1.0/README.md) · [追踪矩阵](设计/需求追踪矩阵-v3.1.md) |
 | 开发规范 / Engineering specifications | [开发00–18](开发/README.md) · [CONTRIBUTING](../CONTRIBUTING.md) · [SECURITY](../SECURITY.md) |
 | 实际源码状态 / Implemented source | [源码进度](实施/源码实现进度-v3.1.md) · [技术骨架](实施/当前开发方案与技术骨架-v3.1.md) · [实现索引](../assets/implementation/current.json) |
-| 最近专项 / Recent implementation | [生成调用/转存](实施/生成服务持久调用与媒体转存-v1.0.md) · [参考帧身份核验](实施/参考帧独立身份核验-v1.0.md) · [购买门禁与MCP](实施/生成式购买门禁与MCP工具接入-v1.0.md) · [无声整包编排](实施/生成式无声整包与阶段编排-v1.0.md) · [受限修改](实施/受限修改执行与新版本交付-v1.0.md) |
+| 最近专项 / Recent implementation | [原生声音/字幕/配乐内核](实施/原生音轨字幕与配乐后期内核-v1.0.md) · [音频实验媒体](media/native-audio/README.md) · [生成调用/转存](实施/生成服务持久调用与媒体转存-v1.0.md) · [参考帧身份核验](实施/参考帧独立身份核验-v1.0.md) · [购买门禁与MCP](实施/生成式购买门禁与MCP工具接入-v1.0.md) · [无声整包编排](实施/生成式无声整包与阶段编排-v1.0.md) · [受限修改](实施/受限修改执行与新版本交付-v1.0.md) |
 | 上游研究 / Upstream research | [案例深析](评估/方案案例与生成流程深析-2026-10-27.md) · [研究数据](../assets/research/one-tap-ads/README.md) |
 | 版本与来源 / Changes and attribution | [CHANGELOG](../CHANGELOG.md) · [THIRD_PARTY_NOTICES](../THIRD_PARTY_NOTICES.md) |
 

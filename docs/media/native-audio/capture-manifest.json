@@ -1,0 +1,415 @@
+{
+  "schema_version": "1.0",
+  "type": "NATIVE_AUDIO_KERNEL_SYNTHETIC_FIXTURE",
+  "checked_at": "2026-10-28T16:29:30.071Z",
+  "data_source": "SYNTHETIC_SINE_TONES_AND_MANUAL_TIMESTAMPS",
+  "browser_used": false,
+  "real_speech_verified": false,
+  "real_asr_verified": false,
+  "order_pipeline_connected": false,
+  "production_admitted": false,
+  "full_product_verified": false,
+  "source_files": [
+    {
+      "path": "src/worker/media/native-audio.ts",
+      "sha256": "2a0fd67d2f3fd06051316b66fd11b9aabfa4fe2a5137b6d31cb733ddf045ed55"
+    },
+    {
+      "path": "src/worker/media/native-captions.ts",
+      "sha256": "98399776374928d5e4164993f7ded07a4816b36ee3dd714d94342cd81d278ef2"
+    },
+    {
+      "path": "src/worker/media/native-audio-post.ts",
+      "sha256": "8af3878b0067c56e1eb14ddda743502b598acb190f3df26af8eddd38718028cb"
+    },
+    {
+      "path": "tests/helpers/audio.ts",
+      "sha256": "8631a2f31160a79973f67a145144fcb885de6768686d6c574d5c910510431214"
+    },
+    {
+      "path": "scripts/record-native-audio.ts",
+      "sha256": "99f79439fffa5a9e4de7376255f1116128a38dad5b306e8375c57a55261bce0b"
+    }
+  ],
+  "font_binding": {
+    "resource_version_id": "font-noto-sans-sc-a85815a42757630c",
+    "license_record_id": "license-noto-sans-sc-ofl-a85815a4",
+    "hash": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da"
+  },
+  "owned_temporary_directory_removed_on_exit": true,
+  "source_frames": 120,
+  "video": {
+    "kind": "video",
+    "width": 1080,
+    "height": 1920,
+    "codec": "h264",
+    "pixelFormat": "yuv420p",
+    "fps": 30,
+    "frames": 120,
+    "durationSeconds": 4,
+    "hasAudio": true,
+    "audioCodec": "aac",
+    "bytes": 137661
+  },
+  "gif_frames": 32,
+  "styles": [
+    {
+      "style": "standard",
+      "inspection": {
+        "kind": "video",
+        "width": 1080,
+        "height": 1920,
+        "codec": "h264",
+        "pixelFormat": "yuv420p",
+        "fps": 30,
+        "frames": 120,
+        "durationSeconds": 4,
+        "hasAudio": true,
+        "audioCodec": "aac",
+        "bytes": 88463
+      },
+      "source_sha256": "792e64b348dc640cb6db466b4a75588e9e1ed23c3668697e1bd0a01e424b1bf8",
+      "output_sha256": "63ec8146ccdf1a6f0e14ae1b88cd6e2ef08306851137412c489e980b8eea7d4f",
+      "native_audio": {
+        "policy": "YPCC-NATIVE-AUDIO-KERNEL-1.0.0",
+        "source_sha256": "792e64b348dc640cb6db466b4a75588e9e1ed23c3668697e1bd0a01e424b1bf8",
+        "pcm_sha256": "7175f47ec516e8e0b81f89b7299621da56cccfd8521dc67b6eb7633629388270",
+        "target_frames": 120,
+        "codec": "aac",
+        "source_sample_rate": 48000,
+        "source_channels": 2,
+        "source_start_ms": 0,
+        "sample_rate": 48000,
+        "channels": 2,
+        "samples": 192000,
+        "duration_ms": 4000,
+        "peak_dbfs": -14.995628,
+        "rms_dbfs": -21.073937,
+        "clipped_ratio": 0,
+        "active_ms": 2000
+      },
+      "audio_windows_hash": "44fd072939c8a250d7825e647f2532c65a9c3e590a229a94521bc70b9ac47e45",
+      "encoded_audio": {
+        "policy": "YPCC-NATIVE-AUDIO-KERNEL-1.0.0",
+        "source_sha256": "63ec8146ccdf1a6f0e14ae1b88cd6e2ef08306851137412c489e980b8eea7d4f",
+        "pcm_sha256": "8326fe417851ca6da68ca377fb0b3d741043ea7f820db836c0818fd2c37c3ccb",
+        "target_frames": 120,
+        "codec": "aac",
+        "source_sample_rate": 48000,
+        "source_channels": 2,
+        "source_start_ms": 0,
+        "sample_rate": 48000,
+        "channels": 2,
+        "samples": 192000,
+        "duration_ms": 4000,
+        "peak_dbfs": -14.970337,
+        "rms_dbfs": -21.073979,
+        "clipped_ratio": 0,
+        "active_ms": 2000
+      },
+      "encoded_windows_hash": "d3c38be4dfe65e6a04d0bf6e6e761a0462e7fd2c9d23ee6197f4ddd6fc22b71e",
+      "caption_script_sha256": "9e7c75e56dbd15378a38b2db0ead74051a0bfbf8c411e3fbeec09aa185f35bec",
+      "transcript_hash": "5e5294d4217c6f23d4a81394c6cba631626f60838d5db2060637a721ee559df1",
+      "encoded_mix_comparison": {
+        "samples_per_channel": 192000,
+        "correlation": 1,
+        "snr_db": 64.574669
+      },
+      "music": null,
+      "original_proof_log_path": "runtime/test-results/native-audio-capture/standard-proof.json",
+      "original_proof_sha256": "8a16ab185bfe48260827212fdd06186790f61c4b20aba2cc4fba229cd65c8c1a",
+      "semantic_review": "NOT_PERFORMED",
+      "order_pipeline_connected": false
+    },
+    {
+      "style": "bold",
+      "inspection": {
+        "kind": "video",
+        "width": 1080,
+        "height": 1920,
+        "codec": "h264",
+        "pixelFormat": "yuv420p",
+        "fps": 30,
+        "frames": 120,
+        "durationSeconds": 4,
+        "hasAudio": true,
+        "audioCodec": "aac",
+        "bytes": 89349
+      },
+      "source_sha256": "792e64b348dc640cb6db466b4a75588e9e1ed23c3668697e1bd0a01e424b1bf8",
+      "output_sha256": "b0f0ba7ca6c651b8efe32e057c9d5343d1dd4bb19717aa25d97d4f015f21a722",
+      "native_audio": {
+        "policy": "YPCC-NATIVE-AUDIO-KERNEL-1.0.0",
+        "source_sha256": "792e64b348dc640cb6db466b4a75588e9e1ed23c3668697e1bd0a01e424b1bf8",
+        "pcm_sha256": "7175f47ec516e8e0b81f89b7299621da56cccfd8521dc67b6eb7633629388270",
+        "target_frames": 120,
+        "codec": "aac",
+        "source_sample_rate": 48000,
+        "source_channels": 2,
+        "source_start_ms": 0,
+        "sample_rate": 48000,
+        "channels": 2,
+        "samples": 192000,
+        "duration_ms": 4000,
+        "peak_dbfs": -14.995628,
+        "rms_dbfs": -21.073937,
+        "clipped_ratio": 0,
+        "active_ms": 2000
+      },
+      "audio_windows_hash": "44fd072939c8a250d7825e647f2532c65a9c3e590a229a94521bc70b9ac47e45",
+      "encoded_audio": {
+        "policy": "YPCC-NATIVE-AUDIO-KERNEL-1.0.0",
+        "source_sha256": "b0f0ba7ca6c651b8efe32e057c9d5343d1dd4bb19717aa25d97d4f015f21a722",
+        "pcm_sha256": "8326fe417851ca6da68ca377fb0b3d741043ea7f820db836c0818fd2c37c3ccb",
+        "target_frames": 120,
+        "codec": "aac",
+        "source_sample_rate": 48000,
+        "source_channels": 2,
+        "source_start_ms": 0,
+        "sample_rate": 48000,
+        "channels": 2,
+        "samples": 192000,
+        "duration_ms": 4000,
+        "peak_dbfs": -14.970337,
+        "rms_dbfs": -21.073979,
+        "clipped_ratio": 0,
+        "active_ms": 2000
+      },
+      "encoded_windows_hash": "d3c38be4dfe65e6a04d0bf6e6e761a0462e7fd2c9d23ee6197f4ddd6fc22b71e",
+      "caption_script_sha256": "6a998f26924e5a3861cefd5c0e0ad99d6aff1e3bea4e244e47dbba0f825d9d6a",
+      "transcript_hash": "5e5294d4217c6f23d4a81394c6cba631626f60838d5db2060637a721ee559df1",
+      "encoded_mix_comparison": {
+        "samples_per_channel": 192000,
+        "correlation": 1,
+        "snr_db": 64.574669
+      },
+      "music": null,
+      "original_proof_log_path": "runtime/test-results/native-audio-capture/bold-proof.json",
+      "original_proof_sha256": "a24961807f881e873597043a50eaa1868a46246af212997debb4f9598051387a",
+      "semantic_review": "NOT_PERFORMED",
+      "order_pipeline_connected": false
+    },
+    {
+      "style": "minimal",
+      "inspection": {
+        "kind": "video",
+        "width": 1080,
+        "height": 1920,
+        "codec": "h264",
+        "pixelFormat": "yuv420p",
+        "fps": 30,
+        "frames": 120,
+        "durationSeconds": 4,
+        "hasAudio": true,
+        "audioCodec": "aac",
+        "bytes": 87443
+      },
+      "source_sha256": "792e64b348dc640cb6db466b4a75588e9e1ed23c3668697e1bd0a01e424b1bf8",
+      "output_sha256": "22b62782bd40c36fc89eef094a7c57faf77eff4518a94228821da7fdb9b1a3d7",
+      "native_audio": {
+        "policy": "YPCC-NATIVE-AUDIO-KERNEL-1.0.0",
+        "source_sha256": "792e64b348dc640cb6db466b4a75588e9e1ed23c3668697e1bd0a01e424b1bf8",
+        "pcm_sha256": "7175f47ec516e8e0b81f89b7299621da56cccfd8521dc67b6eb7633629388270",
+        "target_frames": 120,
+        "codec": "aac",
+        "source_sample_rate": 48000,
+        "source_channels": 2,
+        "source_start_ms": 0,
+        "sample_rate": 48000,
+        "channels": 2,
+        "samples": 192000,
+        "duration_ms": 4000,
+        "peak_dbfs": -14.995628,
+        "rms_dbfs": -21.073937,
+        "clipped_ratio": 0,
+        "active_ms": 2000
+      },
+      "audio_windows_hash": "44fd072939c8a250d7825e647f2532c65a9c3e590a229a94521bc70b9ac47e45",
+      "encoded_audio": {
+        "policy": "YPCC-NATIVE-AUDIO-KERNEL-1.0.0",
+        "source_sha256": "22b62782bd40c36fc89eef094a7c57faf77eff4518a94228821da7fdb9b1a3d7",
+        "pcm_sha256": "8326fe417851ca6da68ca377fb0b3d741043ea7f820db836c0818fd2c37c3ccb",
+        "target_frames": 120,
+        "codec": "aac",
+        "source_sample_rate": 48000,
+        "source_channels": 2,
+        "source_start_ms": 0,
+        "sample_rate": 48000,
+        "channels": 2,
+        "samples": 192000,
+        "duration_ms": 4000,
+        "peak_dbfs": -14.970337,
+        "rms_dbfs": -21.073979,
+        "clipped_ratio": 0,
+        "active_ms": 2000
+      },
+      "encoded_windows_hash": "d3c38be4dfe65e6a04d0bf6e6e761a0462e7fd2c9d23ee6197f4ddd6fc22b71e",
+      "caption_script_sha256": "53bde616191a3cd85f038b1e87ad3d922793646971d44eb800ed201aa92f8cd6",
+      "transcript_hash": "5e5294d4217c6f23d4a81394c6cba631626f60838d5db2060637a721ee559df1",
+      "encoded_mix_comparison": {
+        "samples_per_channel": 192000,
+        "correlation": 1,
+        "snr_db": 64.574669
+      },
+      "music": null,
+      "original_proof_log_path": "runtime/test-results/native-audio-capture/minimal-proof.json",
+      "original_proof_sha256": "a96168376abae456642d3fa65de2a33fe698d8f92531020477ceeceed12e2ac4",
+      "semantic_review": "NOT_PERFORMED",
+      "order_pipeline_connected": false
+    },
+    {
+      "style": "karaoke",
+      "inspection": {
+        "kind": "video",
+        "width": 1080,
+        "height": 1920,
+        "codec": "h264",
+        "pixelFormat": "yuv420p",
+        "fps": 30,
+        "frames": 120,
+        "durationSeconds": 4,
+        "hasAudio": true,
+        "audioCodec": "aac",
+        "bytes": 137661
+      },
+      "source_sha256": "792e64b348dc640cb6db466b4a75588e9e1ed23c3668697e1bd0a01e424b1bf8",
+      "output_sha256": "ed374d60ac7af9211c7c98eafa3bb647a86426794390dd4d015d9b5f936910a9",
+      "native_audio": {
+        "policy": "YPCC-NATIVE-AUDIO-KERNEL-1.0.0",
+        "source_sha256": "792e64b348dc640cb6db466b4a75588e9e1ed23c3668697e1bd0a01e424b1bf8",
+        "pcm_sha256": "7175f47ec516e8e0b81f89b7299621da56cccfd8521dc67b6eb7633629388270",
+        "target_frames": 120,
+        "codec": "aac",
+        "source_sample_rate": 48000,
+        "source_channels": 2,
+        "source_start_ms": 0,
+        "sample_rate": 48000,
+        "channels": 2,
+        "samples": 192000,
+        "duration_ms": 4000,
+        "peak_dbfs": -14.995628,
+        "rms_dbfs": -21.073937,
+        "clipped_ratio": 0,
+        "active_ms": 2000
+      },
+      "audio_windows_hash": "44fd072939c8a250d7825e647f2532c65a9c3e590a229a94521bc70b9ac47e45",
+      "encoded_audio": {
+        "policy": "YPCC-NATIVE-AUDIO-KERNEL-1.0.0",
+        "source_sha256": "ed374d60ac7af9211c7c98eafa3bb647a86426794390dd4d015d9b5f936910a9",
+        "pcm_sha256": "65da4a92fe07abc3b56fceccf5754356e62c1feb8f82cfa7466d1fbbe34340dc",
+        "target_frames": 120,
+        "codec": "aac",
+        "source_sample_rate": 48000,
+        "source_channels": 2,
+        "source_start_ms": 0,
+        "sample_rate": 48000,
+        "channels": 2,
+        "samples": 192000,
+        "duration_ms": 4000,
+        "peak_dbfs": -14.534322,
+        "rms_dbfs": -21.025307,
+        "clipped_ratio": 0,
+        "active_ms": 4000
+      },
+      "encoded_windows_hash": "24b689574a47d981a3b2d6ba52a81460582031e76cc11a4f77d57e53a2dbfdd9",
+      "caption_script_sha256": "22d5fdc314ff45e28c6317cf7da98e11688ddcf9dcb4e30b9fc0e64eb42a0e9e",
+      "transcript_hash": "5e5294d4217c6f23d4a81394c6cba631626f60838d5db2060637a721ee559df1",
+      "encoded_mix_comparison": {
+        "samples_per_channel": 192000,
+        "correlation": 0.99999,
+        "snr_db": 46.831421
+      },
+      "music": {
+        "binding": {
+          "resource_version_id": "synthetic-audio-bed-1",
+          "license_record_id": "synthetic-audio-bed-license-1",
+          "hash": "da37e4bc18b6020e51df4c1665cd33f6fcf796c33898d35ef246dcc94dceea50"
+        },
+        "gain_db": -12,
+        "ducking": true,
+        "ducking_policy": {
+          "version": "YPCC-PCM-BED-DUCK-1.0.0",
+          "detector": "STEREO_RMS_20MS",
+          "threshold_linear": 0.02,
+          "reduction_db": -18,
+          "attack_ms": 10,
+          "release_ms": 200
+        },
+        "loop_to_timeline": false,
+        "bed_pcm_sha256": "871166cab04d809548f213ae76483b866d03dfd5ea42c6e20a94c67ce8b523a7",
+        "bed_analysis": {
+          "samples": 192000,
+          "duration_ms": 4000,
+          "peak_dbfs": -33.07831
+        }
+      },
+      "original_proof_log_path": "runtime/test-results/native-audio-capture/karaoke-proof.json",
+      "original_proof_sha256": "7a6e630d9131f2148455be159d1e2da7738476d0556b7b8dc4a8a23fb4596cf7",
+      "semantic_review": "NOT_PERFORMED",
+      "order_pipeline_connected": false
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/media/native-audio/source.mp4",
+      "bytes": 75886,
+      "sha256": "792e64b348dc640cb6db466b4a75588e9e1ed23c3668697e1bd0a01e424b1bf8"
+    },
+    {
+      "path": "docs/media/native-audio/synthetic-bed.wav",
+      "bytes": 768078,
+      "sha256": "da37e4bc18b6020e51df4c1665cd33f6fcf796c33898d35ef246dcc94dceea50"
+    },
+    {
+      "path": "docs/media/native-audio/standard.mp4",
+      "bytes": 88463,
+      "sha256": "63ec8146ccdf1a6f0e14ae1b88cd6e2ef08306851137412c489e980b8eea7d4f"
+    },
+    {
+      "path": "docs/media/native-audio/standard.png",
+      "bytes": 139012,
+      "sha256": "a342c82ddbd88c6d3a591d1bf44d76e46337bceef0540ca106e3f5c7f21327f7"
+    },
+    {
+      "path": "docs/media/native-audio/bold.mp4",
+      "bytes": 89349,
+      "sha256": "b0f0ba7ca6c651b8efe32e057c9d5343d1dd4bb19717aa25d97d4f015f21a722"
+    },
+    {
+      "path": "docs/media/native-audio/bold.png",
+      "bytes": 142783,
+      "sha256": "119c3a4ed10dc42128939ca8772a0e5467f3ec3efa152887ed267eeb80162c0d"
+    },
+    {
+      "path": "docs/media/native-audio/minimal.mp4",
+      "bytes": 87443,
+      "sha256": "22b62782bd40c36fc89eef094a7c57faf77eff4518a94228821da7fdb9b1a3d7"
+    },
+    {
+      "path": "docs/media/native-audio/minimal.png",
+      "bytes": 135547,
+      "sha256": "13ce4356f59fd8131665e3c753660fe0c80e38ac1d34c0a8b2702c06e93df0ea"
+    },
+    {
+      "path": "docs/media/native-audio/karaoke.mp4",
+      "bytes": 137661,
+      "sha256": "ed374d60ac7af9211c7c98eafa3bb647a86426794390dd4d015d9b5f936910a9"
+    },
+    {
+      "path": "docs/media/native-audio/karaoke.png",
+      "bytes": 140026,
+      "sha256": "6f614da768b82dca84372d8de85ddd501f5905f27e6cfb7b5f8c804de030accd"
+    },
+    {
+      "path": "docs/media/native-audio/overview.png",
+      "bytes": 213766,
+      "sha256": "2b3b0d00f4feea809dc2b6da1a3371355c9597c5521b6288daddc33472b0ef31"
+    },
+    {
+      "path": "docs/media/native-audio/preview.gif",
+      "bytes": 45015,
+      "sha256": "262903e06f45cd43d40eab84adb060777060cf99980e5e9693e2d50fe241f9fa"
+    }
+  ],
+  "notes": "Actual PNG/MP4/AAC/PCM/GIF. Sine tones and manual text timings are explicit fixtures, not Chinese recognition, speaker/lip-sync quality or order delivery. Karaoke includes a licensed synthetic test bed in an isolated native PostgreSQL schema. No browser or external API is used."
+}

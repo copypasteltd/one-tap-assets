@@ -38,6 +38,26 @@ for(const file of manifest.files){
 }
 for(const s of manifest.screenshots){const m=await sharp(s.path).metadata();check(m.width===430&&m.height===932,`Wrong page size: ${s.path}`);}
 const gif=await sharp('docs/media/walkthrough.gif',{animated:true}).metadata();check((gif.pages??0)>1,'GIF is not animated');
+const audio=JSON.parse(await readFile('docs/media/native-audio/capture-manifest.json','utf8')) as {
+  type:string;data_source:string;browser_used:boolean;real_speech_verified:boolean;real_asr_verified:boolean;
+  order_pipeline_connected:boolean;production_admitted:boolean;full_product_verified:boolean;
+  source_files:{path:string;sha256:string}[];files:{path:string;sha256:string;bytes:number}[];
+  styles:{style:string;output_sha256:string;semantic_review:string;order_pipeline_connected:boolean}[];gif_frames:number;
+};
+check(audio.type==='NATIVE_AUDIO_KERNEL_SYNTHETIC_FIXTURE'&&audio.data_source==='SYNTHETIC_SINE_TONES_AND_MANUAL_TIMESTAMPS',
+  'Audio kernel fixture provenance missing');
+check(!audio.browser_used&&!audio.real_speech_verified&&!audio.real_asr_verified&&!audio.order_pipeline_connected
+  &&!audio.production_admitted&&!audio.full_product_verified,'Audio fixture cannot certify speech, ASR or delivery');
+check(audio.styles.length===4&&new Set(audio.styles.map(s=>s.style)).size===4,'Four caption fixture styles required');
+for(const file of audio.files){
+  check(file.path.startsWith('docs/media/native-audio/')&&!file.path.includes('..'),'Unsafe audio fixture path');
+  const bytes=await readFile(file.path);check(bytes.length===file.bytes&&sha256(bytes)===file.sha256,`Changed audio media: ${file.path}`);
+}
+for(const file of audio.source_files)check(sha256(await readFile(file.path))===file.sha256,`Stale audio capture source: ${file.path}`);
+for(const style of audio.styles)check(style.semantic_review==='NOT_PERFORMED'&&!style.order_pipeline_connected
+  &&audio.files.some(f=>f.path===`docs/media/native-audio/${style.style}.mp4`&&f.sha256===style.output_sha256),'Audio fixture style evidence mismatch');
+const audioGif=await sharp('docs/media/native-audio/preview.gif',{animated:true}).metadata();
+check((audioGif.pages??0)>1&&audioGif.pages===audio.gif_frames,'Audio fixture GIF frame count mismatch');
 const raw=execFileSync('git',['ls-files','--cached','--others','--exclude-standard','-z'],{encoding:'utf8',windowsHide:true});
 const candidates=[...new Set(raw.split('\0').filter(Boolean))];
 let bytes=0;
@@ -63,7 +83,8 @@ for(const f of [...implementation.files,...implementation.runtime_contract_files
   check(sha256(await readFile(f.path))===f.sha256,`Stale implementation evidence: ${f.path}`);
 const report={schema_version:'1.0',checked_at:new Date().toISOString(),status:'PASS',
   scope:'Repository documentation/media/source snapshot checks; not real provider, payment, native device or production admission',
-  documentation_files:guides.length,local_links:links,media_files:manifest.files.length,screenshots:manifest.screenshots.length,
+  documentation_files:guides.length,local_links:links,media_files:manifest.files.length+audio.files.length,screenshots:manifest.screenshots.length,
+  audio_fixture_files:audio.files.length,audio_fixture_styles:audio.styles.length,audio_fixture_gif_frames:audioGif.pages,
   gif_frames:gif.pages,candidate_files:candidates.length,candidate_bytes:bytes,browser_closed:true,
   credential_check:'No private-key blocks or long OpenAI-style key strings in candidate text; not a guarantee for every possible secret format',
   implementation_evidence_sha256:sha256(await readFile('assets/implementation/current.json')),

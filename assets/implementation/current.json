@@ -3,25 +3,22 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-28T15:54:27.795Z",
+  "checked_at": "2026-10-28T16:50:41.518Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
   "verification_mode": "MINI_BUILD_RETRY_WITH_RETAINED_NATIVE_INTEGRATION",
   "retained_integration": {
-    "checked_at": "2026-10-28T15:45:32.980Z",
-    "previous_source_set_hash": "cf3c9316b920d19be46b7f2b2434f5b07e29d4ad4ac33a27517eca9d5865c0b9",
-    "validated_source_set_hash": "637f31ac197eb8cadbbe35da2502deee82615aebf9d95721de2f5481c38a6d31",
-    "allowed_changed_files": [
-      "scripts/mini-config.cjs",
-      "scripts/verify-implementation.ts"
-    ],
-    "report_sha256": "edf2d0dd0e503316a6f14a292fb41893e8aeba022ee90ce1e0d7a54a2d457fba",
+    "checked_at": "2026-10-28T16:45:24.272Z",
+    "previous_source_set_hash": "d451449300d096023a2d49dfcca6dde91b5af14ebf8bde6c5a10ae03ee38cb8d",
+    "validated_source_set_hash": "d451449300d096023a2d49dfcca6dde91b5af14ebf8bde6c5a10ae03ee38cb8d",
+    "allowed_changed_files": [],
+    "report_sha256": "dc12cfca9677228821b0141ff86b70dc6296175198ba2f0c47f16b33fc7f7bb7",
     "command": {
       "command": "./scripts/run.ps1 test:integration",
       "status": "PASS",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "78fbde0bdf0dd2ae40e31bb21351dc56d1e3590f81ac086ca9705d1ba0b95fce"
+      "log_sha256": "acd2c4359009f85d41cee3610dee31373ec8cd41e875af380f25ecd84760e6c6"
     }
   },
   "command_checks_passed": true,
@@ -30,37 +27,37 @@
       "command": "./scripts/run.ps1 typecheck",
       "status": "PASS",
       "log_path": "runtime/test-results/typecheck.log",
-      "log_sha256": "65a9ea5b2b13ca5252a2828de03e701abe1f5b4cdf574ac865e7be3d31a68cc2"
+      "log_sha256": "e9d0388a35992339396f0e179885d23844b48519cf1b36eb07931c3d48e9c923"
     },
     {
       "command": "./scripts/run.ps1 test",
       "status": "PASS",
       "log_path": "runtime/test-results/test.log",
-      "log_sha256": "0a1baccae563e855b3046ae2d6f58e96b9a1f2abe5955ad9a426b03ca5e74351"
+      "log_sha256": "3adc1cf83e86be7adff86af5b07df272344e1b037a5bc8798b7f8accef901794"
     },
     {
       "command": "./scripts/run.ps1 test:integration",
       "status": "PASS",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "78fbde0bdf0dd2ae40e31bb21351dc56d1e3590f81ac086ca9705d1ba0b95fce"
+      "log_sha256": "acd2c4359009f85d41cee3610dee31373ec8cd41e875af380f25ecd84760e6c6"
     },
     {
       "command": "./scripts/run.ps1 build:server",
       "status": "PASS",
       "log_path": "runtime/test-results/build-server.log",
-      "log_sha256": "f99f9e441a3bae856ab2b9e847da5989be1c04ed2314fa6fa5c6b27ae0615c21"
+      "log_sha256": "427799e6d09f6777c7f42956bade7c35fb56857b699dc1192596a5eadeb96ff7"
     },
     {
       "command": "./scripts/run.ps1 build:alipay",
       "status": "PASS",
       "log_path": "runtime/test-results/build-alipay.log",
-      "log_sha256": "5d44cc65fb4dfd2d3d760771f68420346e7d6a7a434e12ebeb7d4980dc6cb2b0"
+      "log_sha256": "857ef723ed99d8d29f44d9eb1ee4094cbf9337995c2b41016711d3dd63eebe2a"
     },
     {
       "command": "./scripts/run.ps1 build:douyin",
       "status": "PASS",
       "log_path": "runtime/test-results/build-douyin.log",
-      "log_sha256": "56d9af33e0f9fbfbeb380ad464af23ae33dcd461111c95a03c6898493d8099b0"
+      "log_sha256": "490d0c1de6d69da54bc9d4bd53d0b6295078f94a6c9887187a010f4754355ec1"
     }
   ],
   "suites": [
@@ -70,23 +67,23 @@
       "tests": 50,
       "passed": 50,
       "failed": 0,
-      "executed_at": "2026-10-28T15:53:45.246Z",
+      "executed_at": "2026-10-28T16:47:26.118Z",
       "report_path": "runtime/test-results/unit.json",
-      "report_sha256": "3787a4ea9b894d15a68e1cc9a78a4dd1c2c4ccffe393294e501f56fbd47ce0ac"
+      "report_sha256": "c26984b8577aaebfaa04e85a0406e5b9cfdc3547d1ab332333701cf340a4e1b1"
     },
     {
       "kind": "integration",
       "status": "PASS",
-      "tests": 269,
-      "passed": 269,
+      "tests": 284,
+      "passed": 284,
       "failed": 0,
-      "executed_at": "2026-10-28T15:30:34.126Z",
+      "executed_at": "2026-10-28T16:30:55.410Z",
       "report_path": "runtime/test-results/integration.json",
-      "report_sha256": "edf2d0dd0e503316a6f14a292fb41893e8aeba022ee90ce1e0d7a54a2d457fba"
+      "report_sha256": "dc12cfca9677228821b0141ff86b70dc6296175198ba2f0c47f16b33fc7f7bb7"
     }
   ],
-  "source_files": 301,
-  "source_set_hash": "637f31ac197eb8cadbbe35da2502deee82615aebf9d95721de2f5481c38a6d31",
+  "source_files": 307,
+  "source_set_hash": "d451449300d096023a2d49dfcca6dde91b5af14ebf8bde6c5a10ae03ee38cb8d",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -797,6 +794,18 @@
       "sha256": "a4445b15b7d31beccb00ffdda9c4eeacf4b68c62172bd59f39d8d355863f3d10"
     },
     {
+      "path": "src/worker/media/native-audio-post.ts",
+      "sha256": "8af3878b0067c56e1eb14ddda743502b598acb190f3df26af8eddd38718028cb"
+    },
+    {
+      "path": "src/worker/media/native-audio.ts",
+      "sha256": "2a0fd67d2f3fd06051316b66fd11b9aabfa4fe2a5137b6d31cb733ddf045ed55"
+    },
+    {
+      "path": "src/worker/media/native-captions.ts",
+      "sha256": "98399776374928d5e4164993f7ded07a4816b36ee3dd714d94342cd81d278ef2"
+    },
+    {
       "path": "src/worker/media/native.ts",
       "sha256": "1b2c0039003d7d2d559176d263df993bc2cd8aeb547f4925ec3447bfada4bc05"
     },
@@ -973,6 +982,10 @@
       "sha256": "f71262380aab06eec06f69b5b01791291ef1a01adc643a353fb33afa59cced1f"
     },
     {
+      "path": "tests/helpers/audio.ts",
+      "sha256": "8631a2f31160a79973f67a145144fcb885de6768686d6c574d5c910510431214"
+    },
+    {
       "path": "tests/helpers/codex.ts",
       "sha256": "b69019748fb3bf90170f1363f5508b1fc0f0329dd1b90b7beb95a5c018683618"
     },
@@ -1059,6 +1072,10 @@
     {
       "path": "tests/integration/multipart-upload.test.ts",
       "sha256": "3dda31215718482de463f9d6b3d09f9725110e66c94cc7dce3d0e19bb535fbd9"
+    },
+    {
+      "path": "tests/integration/native-audio.test.ts",
+      "sha256": "b8a4c1b169e2bbb40b2135bf1893b00afac497be56dbb1b51273825637661736"
     },
     {
       "path": "tests/integration/native-media.test.ts",
@@ -1249,6 +1266,10 @@
       "sha256": "2182becd95024b96e5ce21132d6f77deb44b468a4e119a7b675e652ebbac57c1"
     },
     {
+      "path": "scripts/record-native-audio.ts",
+      "sha256": "99f79439fffa5a9e4de7376255f1116128a38dad5b306e8375c57a55261bce0b"
+    },
+    {
       "path": "scripts/record-preview.ts",
       "sha256": "1f43465b42a4778f692f7950e2f10d82a0f3bf1aae102d98431537de832eef48"
     },
@@ -1262,15 +1283,15 @@
     },
     {
       "path": "scripts/verify-implementation.ts",
-      "sha256": "4359847cbd877994ceaee568ccc8bfe157b5079caa06b732540b36dec975825d"
+      "sha256": "5f88e5b09ac865f854588d9601a703ea8be030d0947ca287664163264f5837b1"
     },
     {
       "path": "scripts/verify-publication.ts",
-      "sha256": "9a9d95650a4e6fddcea4c68b1546b2eb4b1faea4102e80de555ca065732c0950"
+      "sha256": "ae4451ea3a4f479f3fb585b6c6cd6bf4fd759c4d9941354541f0da606c592d0c"
     },
     {
       "path": "package.json",
-      "sha256": "b2bf65727068a79a05adc6dac3977f411642cd278008dee24a88b23409e5f489"
+      "sha256": "71b8fa53d5eea16c8182b55c4b59ff52e41e75f0aeadcdd205888172d8a6c327"
     },
     {
       "path": "pnpm-lock.yaml",
@@ -1548,6 +1569,28 @@
     "native_audio_verified": false,
     "real_provider_call_verified": false,
     "notes": "Both silent generated routes now execute platform-derived references, a released independent identity review, one PRODUCTION role and bounded render_generated_pack, actual generated image/video assembly, explicit POST, route-specific QC, fresh final facts/style reviews and atomic delivery. Reference and final facts runs share the original two-turn facts bucket; five paid roles and twelve tool calls must fit the sold limits. Same-generation role uniqueness, original budget and deadline remain unchanged. Generated source/approval hashes and actual stored bytes are revalidated through post, QC and publication, including inside the publication transaction. Seven complete-pack/rejection/recovery fixtures join the 35 gateway, 6 MCP and 15 reference cases, using native PostgreSQL, actual PNG/MP4, HTTPS and stdio/MCP with synthetic model, usage and isolation. Actual source clip colors and order are checked after final download; no still-animation substitution. Official audio variants, real semantic quality/provider admission, generated SAMPLE/revisions and full variant benchmarks remain incomplete."
+  },
+  "native_audio_kernel": {
+    "implemented": true,
+    "native_fixture_verified": true,
+    "policy": "YPCC-NATIVE-AUDIO-KERNEL-1.0.0",
+    "caption_styles": [
+      "standard",
+      "bold",
+      "minimal",
+      "karaoke"
+    ],
+    "actual_pcm_decode": true,
+    "actual_caption_burn_in": true,
+    "native_voice_unit_gain": true,
+    "licensed_bed_ducking": true,
+    "original_deadline_and_cancellation": true,
+    "durable_asr_implemented": false,
+    "independent_audio_review_implemented": false,
+    "order_tool_registered": false,
+    "native_speech_order_admitted": false,
+    "real_chinese_speech_verified": false,
+    "notes": "Native PostgreSQL/FFmpeg/AAC/PNG/PCM with synthetic tones and explicitly manual timecodes. Actual encoded waveforms, subtitle pixels/timing, music-only ducking, license revocation, exact sample counts, permitted loops and cleanup are exercised. Receipt hashes and signal presence are not recognizer admission or semantic audio review. This internal kernel does not register an order tool or remove NATIVE_AUDIO_NOT_ADMITTED."
   },
   "codex_implementation": {
     "scope": "CONTENT PLAN, silent PHOTO_LAYOUT/PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST, independent generated-reference facts review and fresh final visual REVIEW_FACTS/REVIEW_STYLE runtime adapters, metered Responses gateway, atomic pack publication, independent seven-stage photo creator SAMPLE pipeline",

@@ -1,7 +1,7 @@
 {
   "baseline_id": "YPCC-DEV-1.1.0",
   "requirements_version": "3.1",
-  "checked_at": "2026-10-28T15:55:48.215069+00:00",
+  "checked_at": "2026-10-28T16:52:21.936406+00:00",
   "status": "PASS",
   "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
   "counts": {
@@ -10,9 +10,9 @@
     "skills": 19,
     "skill_bundles": 14,
     "development_documents": 20,
-    "base_contract_checks": 3285,
-    "codex_checks": 1212,
-    "total_checks": 4497,
+    "base_contract_checks": 3289,
+    "codex_checks": 1254,
+    "total_checks": 4543,
     "codex_synthetic_examples": 39
   },
   "product_tests_executed": false,
@@ -2569,6 +2569,16 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/README.md->实施/原生音轨字幕与配乐后期内核-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->media/native-audio/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/README.md->实施/生成服务持久调用与媒体转存-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -2650,6 +2660,11 @@
     },
     {
       "name": "document_link:docs/guides/ARCHITECTURE.md->../开发/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/ARCHITECTURE.md->../实施/原生音轨字幕与配乐后期内核-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -2754,6 +2769,16 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/DEMO.md->../media/native-audio/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/native-audio/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/guides/QUICKSTART.en.md",
       "status": "PASS",
       "detail": ""
@@ -2850,6 +2875,16 @@
     },
     {
       "name": "document_encoding_fences:docs/verification/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->../media/native-audio/capture-manifest.json",
       "status": "PASS",
       "detail": ""
     },
@@ -3044,6 +3079,66 @@
       "detail": ""
     },
     {
+      "name": "document_encoding_fences:docs/实施/原生音轨字幕与配乐后期内核-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生音轨字幕与配乐后期内核-v1.0.md->../开发/05-云端任务与生成管线.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生音轨字幕与配乐后期内核-v1.0.md->../开发/17-交叉核验与交付门禁.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生音轨字幕与配乐后期内核-v1.0.md->../设计/方案组件与执行变体规格-v3.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生音轨字幕与配乐后期内核-v1.0.md->../../src/worker/media/native-audio.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生音轨字幕与配乐后期内核-v1.0.md->../../src/worker/media/native-captions.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生音轨字幕与配乐后期内核-v1.0.md->../../src/worker/media/native-audio-post.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生音轨字幕与配乐后期内核-v1.0.md->../guides/QUICKSTART.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生音轨字幕与配乐后期内核-v1.0.md->../../tests/integration/native-audio.test.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生音轨字幕与配乐后期内核-v1.0.md->../media/native-audio/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生音轨字幕与配乐后期内核-v1.0.md->../media/native-audio/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生音轨字幕与配乐后期内核-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/实施/参考帧独立身份核验-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3155,6 +3250,11 @@
     },
     {
       "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->原生音轨字幕与配乐后期内核-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -3335,6 +3435,11 @@
     },
     {
       "name": "document_encoding_fences:docs/实施/源码实现进度-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->原生音轨字幕与配乐后期内核-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -5569,6 +5674,91 @@
       "detail": ""
     },
     {
+      "name": "document_encoding_fences:docs/media/native-audio/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/native-audio/README.md->../../../README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/native-audio/README.md->../../../README.en.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/native-audio/README.md->../../实施/原生音轨字幕与配乐后期内核-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/native-audio/README.md->capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/native-audio/README.md->overview.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/native-audio/README.md->standard.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/native-audio/README.md->standard.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/native-audio/README.md->bold.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/native-audio/README.md->bold.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/native-audio/README.md->minimal.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/native-audio/README.md->minimal.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/native-audio/README.md->karaoke.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/native-audio/README.md->karaoke.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/native-audio/README.md->preview.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/native-audio/README.md->source.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/native-audio/README.md->synthetic-bed.wav",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:assets/skills/ypcc/v1.0/README.md",
       "status": "PASS",
       "detail": ""
@@ -5845,6 +6035,26 @@
     },
     {
       "name": "document_link:README.md->docs/media/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/native-audio/preview.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/native-audio/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/实施/原生音轨字幕与配乐后期内核-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/native-audio/capture-manifest.json",
       "status": "PASS",
       "detail": ""
     },

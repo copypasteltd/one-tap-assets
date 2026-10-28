@@ -59,3 +59,9 @@ The script clicks real UI controls, selects three photos, asserts ten presets an
 UI变化同步更新相关截图、完整录屏/GIF和清单；README、CHANGELOG与状态指南同步说明。不要用客户照片、账号、付款信息或个人浏览器登录态录制公共演示。C设计原稿和归档保持不变；本目录为可更新的实际实现截图。
 
 Recapture affected screens and the walkthrough/manifest when UI behavior changes, and update both READMEs and the changelog. Public captures use no customer photos, account/payment details or personal browser profiles. The frozen C artwork/archive is unchanged; this media directory documents the evolving implementation.
+
+## 原生音频内核媒体 / Native audio kernel media
+
+[四种字幕视频、取帧和GIF](../media/native-audio/README.md)使用另一套明确标注的正弦音/人工时间码夹具，展示实际后期处理，不是页面录屏、中文识别或讲解订单。复录命令为`.\scripts\run.ps1 docs:audio`，使用独立原生测试库，不打开浏览器、不访问外部模型。源音轨/编码后波形、字幕时点、许可压低和来源SHA见独立清单。
+
+[Four caption videos, extracted frames and GIF](../media/native-audio/README.md) demonstrate native post-processing using synthetic tones and manual timestamps. They are not UI recordings, Chinese ASR or presenter orders. Run `.\scripts\run.ps1 docs:audio` to reproduce with an isolated native test schema and no browser or external model. Its separate manifest binds actual media and processing evidence.
