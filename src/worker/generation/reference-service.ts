@@ -11,8 +11,9 @@ import {PendingExternal,type StageLease} from '../queue/leases.js';
 import {generationContext} from './context.js';
 import {referenceMaterial,referenceRoleInput} from './reference-material.js';
 import {referenceReportSchema,validateReferenceReport,type ReferenceReport} from './reference-report.js';
+import type {ReferenceApproval} from './reference-approval.js';
+export type {ReferenceApproval} from './reference-approval.js';
 
-export interface ReferenceApproval {run_id:string;packet_hash:string;report_hash:string;frames:{asset_id:string;sha256:string;operation_key:string}[]}
 export class ReferenceIdentityService {
   private executor:RoleExecutor;
   constructor(private pool:pg.Pool,private cfg:Config,private store:ObjectStorage,executor?:RoleExecutor){

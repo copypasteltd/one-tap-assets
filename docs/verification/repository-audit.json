@@ -1,23 +1,27 @@
 {
   "status": "PASS",
-  "checked_at": "2026-10-28T12:33:47.822794+00:00",
-  "markdown_files": 116,
-  "published_local_links": 813,
+  "checked_at": "2026-10-28T14:39:02.478781+00:00",
+  "markdown_files": 117,
+  "published_local_links": 825,
   "unpublished_local_links": 0,
-  "staged_hash_bound_files": 380,
-  "source_snapshot_files": 291,
+  "staged_hash_bound_files": 386,
+  "source_snapshot_files": 295,
   "runtime_contract_files": 42,
   "resource_files": 4,
   "capture_files": 20,
   "frozen_design_files": 25,
   "design_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
-  "contract_document_checks": 4459,
+  "contract_document_checks": 4470,
   "preview_build": {
     "status": "PASS",
     "local_log_sha256": "8f7d8da10273897976c04f19ebb42335837a9cf1b146504dc20e7b48ffab6d4c"
   },
   "staged_whitespace_check": "PASS; CRLF accepted; upstream OFL notice original whitespace preserved by a file-specific attribute",
   "credential_patterns": "OpenAI-style/private-key patterns in verify:publication, plus GitHub/AWS key patterns; not an exhaustive secret audit",
+  "reference_purchase_red_green_record": {
+    "path": "assets/implementation/regressions/reference-video-gate.json",
+    "sha256": "56665f50fe3c382ad3d83649d92cf8a61db00fd83dd555a0aec2a08c5fe6899c"
+  },
   "full_product_verified": false,
   "production_admitted": false
 }

@@ -75,7 +75,26 @@ async function dispatch(message) {
     }
     if (mode !== 'NO_INFERENCE') await inference(message.params.input);
     let output;
-    if (input.phase === 'PRODUCTION' || input.phase === 'POST') {
+    if (input.phase === 'GENERATION_TOOL_PROBE') {
+      // Protocol-only probe. The test-only persistence handler records these
+      // observations without claiming a production pack or advancing a stage.
+      const results = [];
+      for (const call of input.calls) {
+        if (call.wait_ms) await new Promise(resolve => setTimeout(resolve, call.wait_ms));
+        const args = { ...call.arguments };
+        if (args.submission_id === '$PREVIOUS') args.submission_id = results.at(-1).submission_id;
+        try {
+          const result = JSON.parse((await tool(call.tool, args)).content[0].text);
+          if (call.expect_error) throw new Error('Synthetic forbidden tool call succeeded');
+          results.push(result);
+        } catch (error) {
+          if (!call.expect_error || error.message === 'Synthetic forbidden tool call succeeded') throw error;
+          results.push({ rejected: true });
+        }
+      }
+      output = { results };
+      await tool('persist_stage_result', { result: output });
+    } else if (input.phase === 'PRODUCTION' || input.phase === 'POST') {
       const primary = input.phase === 'PRODUCTION' ? 'render_photo_pack' : 'execute_post_plan';
       const made = await tool(primary, { snapshot_hash: input.snapshot_hash });
       const data = JSON.parse(made.content[0].text); output = data.stage_result || data;

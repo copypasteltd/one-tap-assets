@@ -34,8 +34,8 @@ A preset is a versioned declarative specification: inputs, product evidence, sho
 | Route | Behavior and use | Current boundary |
 | --- | --- | --- |
 | `PHOTO_LAYOUT` | Original photos, deterministic motion, rapid cuts, product cards and companion video | Actual media plus synthetic-role coverage for silent production/post/QC/double review/delivery |
-| `PER_SHOT_AI` | Per-shot references and clips for premium details, lifestyle scenes and single-shot presentations | Durable provider foundation and reference identity service exist; production MCP, video purchase gating and complete packs are not connected |
-| `REFERENCE_FILM` | Unified references/timecodes for continuous multi-shot ads, preserving contracted native audio | Async video foundation exists; complete reference generation, pack/post/reviews and audio remain incomplete |
+| `PER_SHOT_AI` | Per-shot references and clips for premium details, lifestyle scenes and single-shot presentations | Durable calls, mandatory reference identity gating and three scoped MCP handlers exist; complete stage and pack orchestration remains incomplete |
+| `REFERENCE_FILM` | Unified references/timecodes for continuous multi-shot ads, preserving contracted native audio | Film reference generation, identity gating and original video recovery exist; complete packs/post/final reviews and audio remain incomplete |
 
 The paid route cannot silently fall back to photo layout. Moving a still is not a real turntable shot. One approved reference cannot replace complete-pack review. Audio is contracted separately: silent tests do not prove native sound, music or subtitles.
 
@@ -68,7 +68,7 @@ Content planning, production, post-production and pre-delivery review are design
 | `REVIEW_FACTS` / `REVIEW_STYLE` | Fresh instances independently examine facts and style/experience using actual images and sealed text; immutable reports bind hashes and execution evidence |
 | `DELIVER` / release | Recheck order/reports transactionally, publish an immutable manifest, revoke capabilities and use an independent reaper for instances/orphans |
 
-Generated references have a separate identity service comparing actual original/generated PNGs against every product anchor. Missing evidence, forged sources, uncertainty or failed instance release blocks approval. Its core has 15 integration cases but **is not connected to video purchasing yet**. Final packs still require both reviews. Current role tests use synthetic processes, model responses, usage and isolation assertions. Real Codex, the restricted native launcher and production cleanup remain unverified.
+Generated references have an independent identity service comparing actual original/generated PNGs against every product anchor. Missing evidence, forged sources, uncertainty or failed instance release blocks approval. **Both video routes now require the original approved report and the corresponding generated PNG**, revalidated during reservation, submission, recovery and media completion. Three scoped MCP handlers accept logical shot/submission IDs; the platform derives frozen prompts, references, models, rates and video specifications. The 15 reference, 35 gateway and six MCP cases exercise native PostgreSQL/media with synthetic inference and isolation assertions. [Execution and recovery details](docs/实施/生成式购买门禁与MCP工具接入-v1.0.md) explain the role uniqueness, lease takeover tests and incomplete stage orchestration. Final packs still require both independent reviews. Real Codex, the restricted native launcher and production cleanup remain unverified.
 
 ## Architecture and stack
 
@@ -185,9 +185,9 @@ Root READMEs and operational guides are bilingual. Detailed historical requireme
 
 For UI evidence, start `dev:preview` and run `docs:media` in another terminal. `test:ui` invokes the same capture/assertion script. Local Edge, native FFmpeg/ffprobe and project-local Playwright recording components are required; see the [demo guide](docs/guides/DEMO.md).
 
-For this 2026-10-28 snapshot, type checking, **50/50 unit tests, 250/250 native integration tests**, server and both mini-program builds passed; replay build and ten-screen capture passed. Exact results live in the implementation JSON. Public summaries distinguish actual database/media processing from synthetic models/payments/isolation.
+For this 2026-10-28 snapshot, type checking, **50/50 unit tests, 262/262 native integration tests**, server and both mini-program builds passed. The unchanged UI retains its previously verified replay build and ten-screen capture, with identical media hashes. Exact results live in the implementation JSON. Public summaries distinguish actual database/media processing from synthetic models/payments/isolation.
 
-Remaining work includes generative MCP and both complete generative routes, native audio, real Codex/isolation/cleanup, provider/payment/storage admission, four device groups, 14 variants × 30 full-pack benchmarks, complete community/aftercare, Plus/management UI and acceptance of all **58 requirements / 52 P0 requirements**. Follow [status and priorities](docs/guides/STATUS.md).
+Remaining work includes generative stage orchestration and both complete generative routes, native audio, real Codex/isolation/cleanup, provider/payment/storage admission, four device groups, 14 variants × 30 full-pack benchmarks, complete community/aftercare, Plus/management UI and acceptance of all **58 requirements / 52 P0 requirements**. Follow [status and priorities](docs/guides/STATUS.md).
 
 Each development round synchronizes code, both READMEs, affected guides, applicable screenshots/video/GIF and the [changelog](CHANGELOG.md), then commits, pushes normally and verifies the remote commit. Never overwrite unfamiliar remote work or commit credentials, customer photos, database files or caches.
 

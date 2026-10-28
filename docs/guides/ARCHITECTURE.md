@@ -41,9 +41,9 @@ Lease generations and heartbeats fence stale workers. Financial, payment, refund
 
 ## 生成参考身份核验 / Reference identity
 
-`generation/reference-*`恢复真实原图、生成PNG、商品锚点与冻结合同。独立REVIEW_FACTS只获两个限定工具，报告逐帧/逐锚点引用原图证据，且需实例已释放。15项原生集成使用合成模型/隔离；视频购买门禁与生成生产工具尚未连接，因此不能宣称生成路线可交付。[专项说明](../实施/参考帧独立身份核验-v1.0.md)。
+`generation/reference-*`恢复真实原图、生成PNG、商品锚点与冻结合同。独立REVIEW_FACTS只获两个限定工具，报告逐帧/逐锚点引用原图证据，且需实例已释放。两路线视频意图在不可变`prepared`中绑定完整报告和实际生成帧，预留/发送/恢复/媒体提交重新验证。3个订单 MCP 从平台恢复输入，POST只能读取原制作完成结果。15参考/35网关/6 MCP专项使用合成模型/隔离，完整生成式阶段和整包尚未串联。[购买门禁与恢复](../实施/生成式购买门禁与MCP工具接入-v1.0.md)。
 
-The service reviews actual originals/generated PNGs against every identity anchor and requires instance release. Its 15 native integration cases use synthetic model/isolation responses. It is not yet connected to video purchasing or production tools, so it does not authorize complete generative delivery.
+The service reviews actual originals/generated PNGs against every identity anchor and requires instance release. Both routes bind the original report and generated frames to immutable video intents and revalidate them before paid effects and media completion. Scoped MCP handlers derive frozen inputs; POST reads completed original outputs only. The 15 reference, 35 gateway and six MCP cases use native media/database and synthetic inference/isolation. Same-stage same-generation role uniqueness, shared cost/call limits and original deadlines remain enforced; protocol continuation tests use actual lease takeover. Complete generative orchestration and delivery remain incomplete.
 
 ## 实例与隐私 / Instances and privacy
 

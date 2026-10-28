@@ -1,7 +1,7 @@
 {
   "baseline_id": "YPCC-DEV-1.1.0",
   "requirements_version": "3.1",
-  "checked_at": "2026-10-28T12:32:50.378655+00:00",
+  "checked_at": "2026-10-28T14:37:43.037664+00:00",
   "status": "PASS",
   "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
   "counts": {
@@ -10,9 +10,9 @@
     "skills": 19,
     "skill_bundles": 14,
     "development_documents": 20,
-    "base_contract_checks": 3282,
-    "codex_checks": 1177,
-    "total_checks": 4459,
+    "base_contract_checks": 3283,
+    "codex_checks": 1187,
+    "total_checks": 4470,
     "codex_synthetic_examples": 39
   },
   "product_tests_executed": false,
@@ -2579,6 +2579,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/README.md->实施/生成式购买门禁与MCP工具接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/README.md->实施/受限修改执行与新版本交付-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -2629,7 +2634,7 @@
       "detail": ""
     },
     {
-      "name": "document_link:docs/guides/ARCHITECTURE.md->../实施/参考帧独立身份核验-v1.0.md",
+      "name": "document_link:docs/guides/ARCHITECTURE.md->../实施/生成式购买门禁与MCP工具接入-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -2869,6 +2874,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/verification/README.md->../../assets/implementation/regressions/reference-video-gate.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/verification/README.md->../guides/QUICKSTART.en.md",
       "status": "PASS",
       "detail": ""
@@ -3024,6 +3034,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/实施/参考帧独立身份核验-v1.0.md->生成式购买门禁与MCP工具接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/实施/双小程序源码与构建-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3115,6 +3130,11 @@
     },
     {
       "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->生成式购买门禁与MCP工具接入-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -3289,6 +3309,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->生成式购买门禁与MCP工具接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/实施/源码实现进度-v3.1.md->参考帧独立身份核验-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3414,7 +3439,27 @@
       "detail": ""
     },
     {
+      "name": "document_encoding_fences:docs/实施/生成式购买门禁与MCP工具接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式购买门禁与MCP工具接入-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式购买门禁与MCP工具接入-v1.0.md->../guides/DEMO.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/实施/生成服务持久调用与媒体转存-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成服务持久调用与媒体转存-v1.0.md->生成式购买门禁与MCP工具接入-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -5700,6 +5745,11 @@
     },
     {
       "name": "document_link:README.md->assets/blueprints/云端方案映射.v3.1.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/实施/生成式购买门禁与MCP工具接入-v1.0.md",
       "status": "PASS",
       "detail": ""
     },

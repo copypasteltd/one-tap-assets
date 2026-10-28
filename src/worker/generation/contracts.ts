@@ -30,7 +30,7 @@ export function validateGenerationBudget(contract:FrozenContract):void{
   if(contract.source.engine==='PHOTO_LAYOUT')return;
   const image=generationContract(contract,'IMAGE'),video=generationContract(contract,'VIDEO');
   const shots=contract.creative.shots.length;
-  const imageCalls=contract.source.output_slots.filter(slot=>slot.kind==='image').length+(contract.source.engine==='PER_SHOT_AI'?shots:0);
+  const imageCalls=contract.source.output_slots.filter(slot=>slot.kind==='image').length+(contract.source.engine==='PER_SHOT_AI'?shots:1);
   const videoCalls=contract.source.engine==='PER_SHOT_AI'?shots:1;
   const minimum=BigInt(imageCalls)*BigInt(image.rate.ceiling_micro)+BigInt(videoCalls)*BigInt(video.rate.ceiling_micro)
     +BigInt(contract.codex_contract.agent_cost_ceiling_micro)+BigInt(contract.revision_policy?.budget_micro??0)+BigInt(contract.repair_ceiling_micro);

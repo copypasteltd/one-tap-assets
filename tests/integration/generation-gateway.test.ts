@@ -1,10 +1,11 @@
-import {beforeAll,afterAll,describe,it,expect,vi} from 'vitest';
+import {beforeAll,afterAll,afterEach,describe,it,expect,vi} from 'vitest';
 import {mkdir,readFile,writeFile,rm} from 'node:fs/promises';
 import {join} from 'node:path';
 import sharp from 'sharp';
 import {testDatabase,type TestDatabase} from '../helpers/database.js';
 import {mediaFixture} from '../helpers/media.js';
 import {syntheticArkContract as wire} from '../helpers/generation.js';
+import {reviewGeneratedReferences} from '../helpers/reference.js';
 import {config,inside} from '../../src/api/config.js';
 import {hash,id,sha256,addSeconds} from '../../src/api/lib/crypto.js';
 import {AppError} from '../../src/api/lib/errors.js';
@@ -27,13 +28,16 @@ beforeAll(async()=>{
     '-c:v','libx264','-pix_fmt','yuv420p','-movflags','+faststart',path],{cwd:root,timeoutMs:30000});video=await readFile(path);
 });
 afterAll(async()=>{await db?.close();for(const root of roots)await rm(inside(db.cfg.runtimeRoot,root),{recursive:true,force:true});});
+afterEach(async()=>{await db.pool.query("UPDATE stage_runs SET state='CANCELLED' WHERE state NOT IN ('SUCCEEDED','FAILED')");});
 const http=(body:unknown,status=200):HttpResponse=>{const bytes=Buffer.isBuffer(body)?body:Buffer.from(JSON.stringify(body));return {status,headers:{},bytes,json:()=>JSON.parse(bytes.toString('utf8')) as unknown};};
-async function fixture(options:{principal?:Principal;transport?:ArkTransport;store?:(original:ObjectStorage)=>ObjectStorage}={},testDb=db){
+async function fixture(options:{principal?:Principal;engine?:'PER_SHOT_AI'|'REFERENCE_FILM';transport?:ArkTransport;store?:(original:ObjectStorage)=>ObjectStorage}={},testDb=db){
   const imageContract=wire('IMAGE'),videoContract=wire('VIDEO');
   const root=inside(testDb.cfg.runtimeRoot,`tests/generation/${id('case')}`);roots.push(root);await mkdir(root,{recursive:true});
   const cfg=config({...testDb.cfg,runtimeRoot:root,generationEnabled:true,provider:{...testDb.cfg.provider,baseUrl:imageContract.base_url,
     apiKey:'synthetic-not-a-real-key',imageModel:imageContract.request_model,videoModel:videoContract.request_model,allowedHosts:['generation.example.test','media.example.test']}});
-  const f=await mediaFixture({...testDb,cfg},{...(options.principal?{principal:options.principal}:{}),generation:{engine:'REFERENCE_FILM',contracts:[imageContract,videoContract]}});
+  const engine=options.engine??'REFERENCE_FILM';
+  const f=await mediaFixture({...testDb,cfg},{...(options.principal?{principal:options.principal}:{}),generation:{engine,contracts:[imageContract,videoContract],
+    variantId:engine==='PER_SHOT_AI'?'quiet-luxury.ai-detail':'portrait-social.ai-presenter-multi'}});
   f.cfg.provider.allowedHosts=[...f.cfg.provider.allowedHosts,'generation.example.test','media.example.test'];
   const calls:{url:string;method:string;headers:Record<string,string>}[]=[];
   const transport:ArkTransport=async(url,hosts,opts={})=>{
@@ -49,14 +53,66 @@ async function fixture(options:{principal?:Principal;transport?:ArkTransport;sto
   const gateway=new GenerationGateway(testDb.pool,f.cfg,store,client);
   const request:GenerationRequest={kind:'IMAGE',operation_key:`image:${f.contract.source.output_slots.find(slot=>slot.kind==='image')!.slot_id}`,
     prompt:'Use the authorized product, preserve its visible structure.',reference_asset_ids:[f.assetIds[0]!]};
-  const videoRequest:GenerationRequest={kind:'VIDEO',operation_key:'film:original',prompt:'Show the authorized product in one continuous shot.',reference_asset_ids:[f.assetIds[0]!],
+  const videoRequest:GenerationRequest={kind:'VIDEO',operation_key:engine==='REFERENCE_FILM'?'film:original':`video:${f.contract.creative.shots[0]!.shot_id}`,prompt:'Show the authorized product in one continuous shot.',reference_asset_ids:[f.assetIds[0]!],
     video:{duration:1,resolution:'480p',ratio:'3:4',audio:false,mode:'FIRST_FRAME'}};
-  return {...f,imageContract,videoContract,calls,client,gateway,request,videoRequest,store};
+  const approve=async(mode='NORMAL')=>{
+    // Preparation uses its own transport/store so ACK-loss faults remain aimed
+    // at the video under test. Its real incurred cost remains in order funds.
+    const preparation=new GenerationGateway(testDb.pool,f.cfg,f.store,new ArkClient(f.cfg,async()=>http({model:imageContract.actual_model,
+      data:[{b64_json:image.toString('base64')}],usage:{generated_images:1}})));
+    const generated=await preparation.submit(f.lease,{kind:'IMAGE',operation_key:engine==='REFERENCE_FILM'?'reference:film':`reference:${f.contract.creative.shots[0]!.shot_id}`,
+      prompt:'Preserve the authorized product identity.',reference_asset_ids:[f.assetIds[0]!]},signal());
+    const approval=await reviewGeneratedReferences(testDb,f,mode);videoRequest.reference_asset_ids=[generated.submission_id];
+    return {approval,generated,beforeVideo:(await testDb.pool.query<{spent:number;reserved:number}>('SELECT spent_micro::int AS spent,reserved_micro::int AS reserved FROM orders WHERE id=$1',[f.orderId])).rows[0]!};
+  };
+  return {...f,imageContract,videoContract,calls,client,gateway,request,videoRequest,store,approve};
 }
 async function due(submissionId:string){await db.pool.query('UPDATE provider_submissions SET next_query_at=now()-interval \'1 second\' WHERE id=$1',[submissionId]);}
 async function funds(orderId:string){return (await db.pool.query<{spent:number;reserved:number}>('SELECT spent_micro::int AS spent,reserved_micro::int AS reserved FROM orders WHERE id=$1',[orderId])).rows[0]!;}
 
 describe('generation gateway / native PG, actual PNG + MP4, synthetic provider only',()=>{
+  it('refuses a reference-film video purchase before any generated-frame identity approval',async()=>{
+    const f=await fixture();
+    await expect(f.gateway.submit(f.lease,f.videoRequest,signal())).rejects.toMatchObject({code:'GENERATION_REFERENCE_REVIEW_REQUIRED'});
+    expect(f.calls).toHaveLength(0);expect(await funds(f.orderId)).toEqual({spent:0,reserved:0});
+    expect((await db.pool.query("SELECT id FROM provider_submissions WHERE order_id=$1 AND generation_kind='VIDEO'",[f.orderId])).rowCount).toBe(0);
+  });
+  it('also refuses a per-shot video purchase without a complete reference review',async()=>{
+    const f=await fixture({engine:'PER_SHOT_AI'});
+    await expect(f.gateway.submit(f.lease,f.videoRequest,signal())).rejects.toMatchObject({code:'GENERATION_REFERENCE_REVIEW_REQUIRED'});
+    expect(f.calls).toHaveLength(0);expect(await funds(f.orderId)).toEqual({spent:0,reserved:0});
+  });
+  it.each(['REFERENCE_FAIL','REFERENCE_UNCERTAIN'])('does not purchase a video after persisted %s',async mode=>{
+    const f=await fixture();await expect(f.approve(mode)).rejects.toMatchObject({code:'REFERENCE_IDENTITY_REJECTED'});
+    const before=await funds(f.orderId);
+    await expect(f.gateway.submit(f.lease,f.videoRequest,signal())).rejects.toMatchObject({code:'REFERENCE_IDENTITY_REJECTED'});
+    expect(f.calls).toHaveLength(0);expect(await funds(f.orderId)).toEqual(before);
+    expect((await db.pool.query("SELECT id FROM provider_submissions WHERE order_id=$1 AND generation_kind='VIDEO'",[f.orderId])).rowCount).toBe(0);
+  });
+  it('binds the original report and generated per-shot bytes, rejecting original-photo substitution',async()=>{
+    const f=await fixture({engine:'PER_SHOT_AI'}),{approval,generated,beforeVideo}=await f.approve();
+    await expect(f.gateway.submit(f.lease,{...f.videoRequest,reference_asset_ids:[f.assetIds[0]!] },signal())).rejects.toMatchObject({code:'GENERATION_REFERENCE_INVALID'});
+    expect(f.calls).toHaveLength(0);expect(await funds(f.orderId)).toEqual(beforeVideo);
+    const accepted=await f.gateway.submit(f.lease,f.videoRequest,signal());
+    const row=(await db.pool.query('SELECT private FROM provider_submissions WHERE id=$1',[accepted.submission_id])).rows[0];
+    expect(row.private.prepared.reference_approval).toEqual(approval);
+    expect(row.private.prepared.references).toEqual([expect.objectContaining({id:generated.submission_id,sha256:generated.output!.sha256})]);
+    const sent=JSON.parse((await f.store.get(row.private.request_key)).toString('utf8'));
+    const content=sent.content.find((item:{type:string})=>item.type==='image_url');
+    expect(sha256(Buffer.from(content.image_url.url.split(',')[1],'base64'))).toBe(generated.output!.sha256);
+    await due(accepted.submission_id);expect((await f.gateway.resume(f.lease,accepted.submission_id,signal())).state).toBe('SUCCEEDED');
+    expect(f.calls.filter(call=>call.method==='POST')).toHaveLength(1);expect(await funds(f.orderId)).toEqual({spent:beforeVideo.spent+250,reserved:0});
+  });
+  it('blocks polling on changed reference bytes and restores only the original accepted task',async()=>{
+    const f=await fixture(),{generated,beforeVideo}=await f.approve();
+    const accepted=await f.gateway.submit(f.lease,f.videoRequest,signal()),bytes=await f.store.get(generated.output!.object_key);
+    await f.store.put(generated.output!.object_key,Buffer.from('changed-approved-frame'),'image/png');await due(accepted.submission_id);
+    await expect(f.gateway.resume(f.lease,accepted.submission_id,signal())).rejects.toMatchObject({code:'REFERENCE_BYTES_CHANGED'});
+    expect(f.calls).toHaveLength(1);expect(await funds(f.orderId)).toEqual({spent:beforeVideo.spent,reserved:500});
+    await f.store.put(generated.output!.object_key,bytes,'image/png');
+    expect((await f.gateway.resume(f.lease,accepted.submission_id,signal())).state).toBe('SUCCEEDED');
+    expect(f.calls.filter(call=>call.method==='POST')).toHaveLength(1);expect(await funds(f.orderId)).toEqual({spent:beforeVideo.spent+250,reserved:0});
+  });
   it('rejects a valid stage lease rebound to another order of the same owner before purchase',async()=>{
     const original=await fixture(),other=await fixture({principal:original.p});
     const rebound={...original.lease,scope_id:other.orderId,input_hash:other.snapshotHash};
@@ -97,9 +153,9 @@ describe('generation gateway / native PG, actual PNG + MP4, synthetic provider o
     const replay=await f.gateway.submit(f.lease,f.request,signal());expect(replay.state).toBe('SUCCEEDED');expect(f.calls).toHaveLength(1);expect(await funds(f.orderId)).toEqual({spent:100,reserved:0});
   });
   it('persists a video acknowledgement, polls only that task and inspects the actual MP4',async()=>{
-    const f=await fixture();const first=await f.gateway.submit(f.lease,f.videoRequest,signal());expect(first.state).toBe('RUNNING');expect(await funds(f.orderId)).toEqual({spent:0,reserved:500});
+    const f=await fixture(),{beforeVideo}=await f.approve();const first=await f.gateway.submit(f.lease,f.videoRequest,signal());expect(first.state).toBe('RUNNING');expect(await funds(f.orderId)).toEqual({spent:beforeVideo.spent,reserved:500});
     await due(first.submission_id);const ready=await f.gateway.resume(f.lease,first.submission_id,signal());expect(ready.state).toBe('SUCCEEDED');
-    expect(ready.output?.inspection).toMatchObject({kind:'video',width:480,height:640,fps:24,frames:24,hasAudio:false});expect(await funds(f.orderId)).toEqual({spent:250,reserved:0});
+    expect(ready.output?.inspection).toMatchObject({kind:'video',width:480,height:640,fps:24,frames:24,hasAudio:false});expect(await funds(f.orderId)).toEqual({spent:beforeVideo.spent+250,reserved:0});
     expect(f.calls.filter(call=>call.method==='POST')).toHaveLength(1);expect(f.calls[1]?.url.endsWith('/synthetic-task-1')).toBe(true);
     const download=f.calls.find(call=>call.url.startsWith('https://media.example.test/'));expect(download?.headers).toEqual({});
     expect(await f.gateway.resume(f.lease,first.submission_id,signal())).toEqual(ready);expect(f.calls).toHaveLength(3);
@@ -107,7 +163,7 @@ describe('generation gateway / native PG, actual PNG + MP4, synthetic provider o
   it('recovers a lost original video ACK and keeps the same paid task',async()=>{
     let lost=false;const f=await fixture({store:original=>({put:async(key,bytes,mime)=>{await original.put(key,bytes,mime);
       if(key.endsWith('/submit.json')&&!lost){lost=true;throw new Error('synthetic lost ACK storage acknowledgement');}},get:original.get.bind(original),exists:original.exists.bind(original),delete:original.delete.bind(original)})});
-    await expect(f.gateway.submit(f.lease,f.videoRequest,signal())).rejects.toThrow('synthetic lost ACK');await reconcileUncertainObjectWrites(db.pool,f.store);
+    await f.approve();await expect(f.gateway.submit(f.lease,f.videoRequest,signal())).rejects.toThrow('synthetic lost ACK');await reconcileUncertainObjectWrites(db.pool,f.store);
     const recovered=await f.gateway.submit(f.lease,f.videoRequest,signal());expect(recovered.state).toBe('RUNNING');await due(recovered.submission_id);
     expect((await f.gateway.resume(f.lease,recovered.submission_id,signal())).state).toBe('SUCCEEDED');expect(f.calls.filter(call=>call.method==='POST')).toHaveLength(1);
   });
@@ -159,7 +215,8 @@ describe('generation gateway / native PG, actual PNG + MP4, synthetic provider o
       "UPDATE provider_submissions SET private=jsonb_set(private,'{receipts}','[]') WHERE id=$1",
       "UPDATE provider_submissions SET state='UNKNOWN' WHERE id=$1",
       "UPDATE provider_submissions SET operation_key='another' WHERE id=$1"]){await expect(db.pool.query(sql,[ready.submission_id])).rejects.toThrow();}
-    const accepted=await f.gateway.submit(f.lease,f.videoRequest,signal());await expect(db.pool.query("UPDATE provider_submissions SET provider_task_id='another-task' WHERE id=$1",[accepted.submission_id])).rejects.toThrow('original provider task');
+    await f.approve();const accepted=await f.gateway.submit(f.lease,f.videoRequest,signal());await expect(db.pool.query("UPDATE provider_submissions SET provider_task_id='another-task' WHERE id=$1",[accepted.submission_id])).rejects.toThrow('original provider task');
+    await expect(db.pool.query("UPDATE provider_submissions SET private=jsonb_set(private,'{prepared,reference_approval,report_hash}',to_jsonb(repeat('0',64))) WHERE id=$1",[accepted.submission_id])).rejects.toThrow();
   });
   it('rejects unauthorized media origins and redirects without leaking API credentials',async()=>{
     const f=await fixture();await expect(f.client.download(f.videoContract,'https://127.0.0.1/private',signal())).rejects.toMatchObject({code:'GENERATION_MEDIA_URL_INVALID'});
@@ -189,17 +246,17 @@ describe('generation gateway / native PG, actual PNG + MP4, synthetic provider o
       if(queries===2)return http({id:'synthetic-task-1',model:'synthetic-video',status:'running'});
       return http({id:'synthetic-task-1',model:'synthetic-video',status:'succeeded',content:{video_url:'https://media.example.test/original.mp4'},usage:{completion_tokens:250,total_tokens:250}});
     }});
-    const initial=await f.gateway.submit(f.lease,f.videoRequest,signal());
-    for(let i=0;i<2;i++){await due(initial.submission_id);expect((await f.gateway.resume(f.lease,initial.submission_id,signal())).state).toBe('RUNNING');expect(await funds(f.orderId)).toEqual({spent:0,reserved:500});}
+    const {beforeVideo}=await f.approve(),initial=await f.gateway.submit(f.lease,f.videoRequest,signal());
+    for(let i=0;i<2;i++){await due(initial.submission_id);expect((await f.gateway.resume(f.lease,initial.submission_id,signal())).state).toBe('RUNNING');expect(await funds(f.orderId)).toEqual({spent:beforeVideo.spent,reserved:500});}
     await due(initial.submission_id);expect((await f.gateway.resume(f.lease,initial.submission_id,signal())).state).toBe('SUCCEEDED');
-    expect(queries).toBe(3);expect(f.calls.filter(call=>call.method==='POST')).toHaveLength(1);expect(await funds(f.orderId)).toEqual({spent:250,reserved:0});
+    expect(queries).toBe(3);expect(f.calls.filter(call=>call.method==='POST')).toHaveLength(1);expect(await funds(f.orderId)).toEqual({spent:beforeVideo.spent+250,reserved:0});
   });
   it('enforces the frozen query limit without reopening the purchase or its budget',async()=>{
     const f=await fixture({transport:async(_url,_hosts,opts={})=>opts.method==='POST'?http({id:'synthetic-task-1'}):http({id:'synthetic-task-1',model:'synthetic-video',status:'running'})});
-    const initial=await f.gateway.submit(f.lease,f.videoRequest,signal());
+    const {beforeVideo}=await f.approve(),initial=await f.gateway.submit(f.lease,f.videoRequest,signal());
     for(let i=0;i<4;i++){await due(initial.submission_id);expect((await f.gateway.resume(f.lease,initial.submission_id,signal())).state).toBe('RUNNING');}
     await due(initial.submission_id);await expect(f.gateway.resume(f.lease,initial.submission_id,signal())).rejects.toMatchObject({code:'GENERATION_QUERY_LIMIT'});
-    expect(f.calls).toHaveLength(5);expect(f.calls.filter(call=>call.method==='POST')).toHaveLength(1);expect(await funds(f.orderId)).toEqual({spent:0,reserved:500});
+    expect(f.calls).toHaveLength(5);expect(f.calls.filter(call=>call.method==='POST')).toHaveLength(1);expect(await funds(f.orderId)).toEqual({spent:beforeVideo.spent,reserved:500});
   });
   it('recovers an uncertain generated-media PUT by its original key, with one write and one purchase',async()=>{
     let writes=0;const f=await fixture({store:original=>({put:async(key,bytes,mime)=>{await original.put(key,bytes,mime);
@@ -231,9 +288,9 @@ describe('generation gateway / native PG, actual PNG + MP4, synthetic provider o
     }});
     const root=inside(f.cfg.runtimeRoot,'wrong-size'),source=join(root,'source.mp4'),output=join(root,'wrong.mp4');await mkdir(root,{recursive:true});await writeFile(source,video);
     await nativeCommand(f.cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-i',source,'-vf','scale=240:320','-an','-c:v','libx264','-pix_fmt','yuv420p',output],{cwd:root,timeoutMs:30000});wrong=await readFile(output);
-    const accepted=await f.gateway.submit(f.lease,f.videoRequest,signal());await due(accepted.submission_id);
+    const {beforeVideo}=await f.approve(),accepted=await f.gateway.submit(f.lease,f.videoRequest,signal());await due(accepted.submission_id);
     await expect(f.gateway.resume(f.lease,accepted.submission_id,signal())).rejects.toMatchObject({code:'GENERATION_VIDEO_INVALID'});
-    expect(await funds(f.orderId)).toEqual({spent:250,reserved:0});expect((await f.gateway.resume(f.lease,accepted.submission_id,signal())).state).toBe('FAILED');
+    expect(await funds(f.orderId)).toEqual({spent:beforeVideo.spent+250,reserved:0});expect((await f.gateway.resume(f.lease,accepted.submission_id,signal())).state).toBe('FAILED');
     expect(f.calls.filter(call=>call.method==='POST')).toHaveLength(1);
   });
   it('rejects unsold nodes, changed duration and newly revoked model capability before reserving money',async()=>{

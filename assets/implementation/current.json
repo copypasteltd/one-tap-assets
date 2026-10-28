@@ -3,7 +3,7 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-28T11:53:41.585Z",
+  "checked_at": "2026-10-28T14:32:53.453Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
@@ -13,37 +13,37 @@
       "command": "./scripts/run.ps1 typecheck",
       "status": "PASS",
       "log_path": "runtime/test-results/typecheck.log",
-      "log_sha256": "647b04f09f53036a51882c5e83cf6301aa7e8f4f660126bb35cb733a5cd65878"
+      "log_sha256": "5a290b9e953054f3160f0e8ee5be251823cc22564c09f2bb249e1935dac1875a"
     },
     {
       "command": "./scripts/run.ps1 test",
       "status": "PASS",
       "log_path": "runtime/test-results/test.log",
-      "log_sha256": "b5b3b101cc388b2b0498a728194521ac0e4aebc244f60772ebd0198537b565ab"
+      "log_sha256": "beba84192b17279b7ba403db61890b094fcd6ea1df63387e30e48660300e5b4a"
     },
     {
       "command": "./scripts/run.ps1 test:integration",
       "status": "PASS",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "6aabf282882ab75583d6b814a4b74222be567b0d6407969dc6dc1311d4938cb3"
+      "log_sha256": "640f02a4f97374a6f2a76bfcba6ee1e7e8dd92fb94b405ae6b8e574d601a9fc3"
     },
     {
       "command": "./scripts/run.ps1 build:server",
       "status": "PASS",
       "log_path": "runtime/test-results/build-server.log",
-      "log_sha256": "28af2280d9c184a846290badc057f2e407d7a47705df629e7b39a3c2c75a04c2"
+      "log_sha256": "f99f9e441a3bae856ab2b9e847da5989be1c04ed2314fa6fa5c6b27ae0615c21"
     },
     {
       "command": "./scripts/run.ps1 build:alipay",
       "status": "PASS",
       "log_path": "runtime/test-results/build-alipay.log",
-      "log_sha256": "585b87937d3f932e98b39ec346b7d91bbd0cc2f25a5cffaa901d03e05a2a36e1"
+      "log_sha256": "0153ffa2b152906f06a51354f8e392d08d751f1909bd2bd870be1ce6fdf72a10"
     },
     {
       "command": "./scripts/run.ps1 build:douyin",
       "status": "PASS",
       "log_path": "runtime/test-results/build-douyin.log",
-      "log_sha256": "49791976eeff39834fba14f718f0cad6a5c27546307080cad1d6b7ecb7151249"
+      "log_sha256": "73995b41b0bbd4c08dff5826fb3f78780871832cdc376d09ce82639b7ff67039"
     }
   ],
   "suites": [
@@ -53,23 +53,23 @@
       "tests": 50,
       "passed": 50,
       "failed": 0,
-      "executed_at": "2026-10-28T11:43:11.396Z",
+      "executed_at": "2026-10-28T14:22:11.466Z",
       "report_path": "runtime/test-results/unit.json",
-      "report_sha256": "68f980a6676142ba1c5358fa060be64761edc573699a855ea624325175f23d93"
+      "report_sha256": "90f743c9e60178e35734fa443f5d7869b1bfabfcde3977e378c4325be7f381cb"
     },
     {
       "kind": "integration",
       "status": "PASS",
-      "tests": 250,
-      "passed": 250,
+      "tests": 262,
+      "passed": 262,
       "failed": 0,
-      "executed_at": "2026-10-28T11:43:21.032Z",
+      "executed_at": "2026-10-28T14:22:15.561Z",
       "report_path": "runtime/test-results/integration.json",
-      "report_sha256": "eaa4bd399e3184949c6d4ef22f792dce0aa5354c7754417c9ac7311b9dc37eb9"
+      "report_sha256": "bb453322657c3d0f7ffddfdedcb5a2a63aee709a314672de92e9830c372eb3f0"
     }
   ],
-  "source_files": 291,
-  "source_set_hash": "ab6921277340ca454b5ed8bbbbd13b08d5ad9837ba41fac0913ae4faffae6efc",
+  "source_files": 295,
+  "source_set_hash": "7481bd10d465be3e36348b2f3317389de6146a65ec7cd117801a3269059970ee",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -677,11 +677,15 @@
     },
     {
       "path": "src/worker/generation/contracts.ts",
-      "sha256": "6383de53db28bf900e2f26ee45eec6bc245ba3105648fdd062f538465d5579eb"
+      "sha256": "b989fa7b5256fa8b6bee497f307c43c10d2cd46fec4dff3f72c05b945a634a45"
     },
     {
       "path": "src/worker/generation/gateway.ts",
-      "sha256": "8a16742fdd30a3d17d9fc348a00c1fce668f795ea52169a742e038fffc48fb92"
+      "sha256": "2afc20401dab04f04e9a165b1e51365d553e872e34d155c64aa50bff6ff676bf"
+    },
+    {
+      "path": "src/worker/generation/reference-approval.ts",
+      "sha256": "498ab2e78791d8738143fc68dc6d7a64fa7286b2d6736941d7f5305feef43b37"
     },
     {
       "path": "src/worker/generation/reference-material.ts",
@@ -693,7 +697,7 @@
     },
     {
       "path": "src/worker/generation/reference-service.ts",
-      "sha256": "d8e71fe0439c3121ba02ecbca84260f74fcb029ac796de1d81797cdb67cc455b"
+      "sha256": "faf93ddfac261cefddc7288bd52fc79f4b369c539fd39e9b95cb4886d21d92bc"
     },
     {
       "path": "src/worker/lifecycle/cleanup-files.ts",
@@ -741,7 +745,7 @@
     },
     {
       "path": "src/worker/main.ts",
-      "sha256": "8525a46df884136dd78363a3ccb4e9730e71f40f2b90531a79549cafdc5c3a82"
+      "sha256": "60da3009792f8c47127633bef7b3d0d50d83bce65d767989d9307f52d81b5474"
     },
     {
       "path": "src/worker/media/artifacts.ts",
@@ -884,6 +888,10 @@
       "sha256": "6b11831ebe643862cd4c8ed7f72acaa3d6f6bfbf85ed3bdb4c70c1c6a2bd92f1"
     },
     {
+      "path": "src/worker/tool-gateway/generation-tools.ts",
+      "sha256": "7c16e2a3b9cbabb86a1f733521a406d045755110b710afee7db186200dde783f"
+    },
+    {
       "path": "src/worker/tool-gateway/http.ts",
       "sha256": "4fef03722c2391243f9a752235458372590b1908807d898c1103bff985cce89e"
     },
@@ -925,7 +933,7 @@
     },
     {
       "path": "tests/fixtures/codex-role.cjs",
-      "sha256": "16756d783e10f30856a6a3769104e64dd9fcca84df24847a3eae02f51b6b367f"
+      "sha256": "5d439921e2297c1c3347f90e983a4d5e16d3e8aff80b5a4bff478e9feecf2087"
     },
     {
       "path": "tests/helpers/codex.ts",
@@ -946,6 +954,10 @@
     {
       "path": "tests/helpers/media.ts",
       "sha256": "c61fcd3d7bc780ebfbd02a2e65b76cf484e9989e48be2b7e3970a13b982fd78a"
+    },
+    {
+      "path": "tests/helpers/reference.ts",
+      "sha256": "c6484f4ba43cedc0f0103f413e8712575d77ced8fdc7a997da532dfa74c9c38a"
     },
     {
       "path": "tests/helpers/role-launcher.ts",
@@ -981,7 +993,11 @@
     },
     {
       "path": "tests/integration/generation-gateway.test.ts",
-      "sha256": "fc5c0c609a01a57c37d37f8a79902102a5f1becfc42fcf724313a6d06d96c05b"
+      "sha256": "f60f10ac9db7c19093abc537e65ed81a8d61dd5d80554b57e0e5a0e0b27ac050"
+    },
+    {
+      "path": "tests/integration/generation-tools.test.ts",
+      "sha256": "f77a94dcb2ad2f2bba5b9678ca133d6f201f00bba2b7715bb8fd7d22de5d3935"
     },
     {
       "path": "tests/integration/instance-reaper.test.ts",
@@ -1205,7 +1221,7 @@
     },
     {
       "path": "scripts/verify-implementation.ts",
-      "sha256": "c3c8d607d4efa39d6b6e460b5fa1538312192ce225a83a603eccbf87be01e44d"
+      "sha256": "dc777818cc3f1dbec8c61d828d1630463f13c63ce945dbb54026feea4eeedeef"
     },
     {
       "path": "scripts/verify-publication.ts",
@@ -1476,14 +1492,16 @@
     "original_stage_binding_fixture_verified": true,
     "unsettled_generation_receipts_retained": true,
     "absolute_purchase_deadline_propagated": true,
-    "production_tools_registered": false,
-    "generated_reference_semantic_gate_implemented": false,
+    "production_tools_registered": true,
+    "generated_reference_semantic_gate_implemented": true,
+    "production_tools_fixture_verified": true,
+    "reference_purchase_gate_fixture_verified": true,
     "reference_identity_service_implemented": true,
     "reference_identity_service_fixture_verified": true,
     "all_generated_routes_verified": false,
     "native_audio_verified": false,
     "real_provider_call_verified": false,
-    "notes": "Internal production-lease gateway only. Requests, original ACK/query receipts, immutable task IDs and frozen model/rate contracts are durable. UNKNOWN holds are not rebought. Separate optional generation credentials, exact media origins, no CDN Authorization, bounded original task polling, actual Sharp PNG normalization and native MP4 decoding are exercised with synthetic provider responses. Wrong actual media is rejected after settling known costs; stale/cancelled scopes cannot publish. A separate reference identity service supplies actual original and generated PNG bytes to a fresh REVIEW_FACTS role, validates every frame/anchor/source and requires release before approval; 15 native integration cases use synthetic model/isolation responses. This service is not connected to the video purchase gate or production MCP tools. Model names/prices are not hardcoded. Final generated pack assembly, production MCP registration, generated post/QC/double review/delivery and native audio remain incomplete."
+    "notes": "Original production-lease provider gateway and three scoped MCP handlers are implemented. Both video routes require the complete original independent identity report, released instance and actual generated PNGs; immutable prepared evidence binds the report/frame hashes to the paid intent and is revalidated before reservation, send, recovery and media completion. Requests, original ACK/query receipts, task IDs and frozen model/rate contracts are durable; UNKNOWN holds are not rebought. POST reads only completed original outputs. Tool inputs are platform-derived and reject arbitrary prompts/references or silent aspect-ratio changes. The 35 gateway, 6 MCP and 15 reference cases exercise native PostgreSQL/actual PNG-MP4/HTTPS-MCP with synthetic model, usage and isolation responses. Same-generation same-role uniqueness and original shared cost/call limits remain enforced; protocol continuation uses actual stage lease takeover. Complete generative stage orchestration, pack assembly, generated post/QC/final double review/delivery, native audio and real provider admission remain incomplete."
   },
   "codex_implementation": {
     "scope": "CONTENT PLAN, PHOTO_LAYOUT PRODUCTION/POST and fresh visual REVIEW_FACTS/REVIEW_STYLE runtime adapters, metered text and sealed-image Responses gateway, atomic PHOTO publication, independent seven-stage creator SAMPLE pipeline",

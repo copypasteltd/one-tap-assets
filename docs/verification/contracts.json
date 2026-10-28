@@ -3,6 +3,8 @@
   "type": "DOCUMENT_AND_CONTRACT_CHECKS_NOT_PRODUCT_ACCEPTANCE",
   "reports": [
     {
+      "baseline_id": "YPCC-DEV-1.1.0",
+      "checked_at": "2026-10-28T14:37:42.079836+00:00",
       "status": "PASS",
       "scope": "开发文档、官方OpenAPI结构、JSON Schema/合成正负例、状态图、实体/需求/设计/工作包追踪及C留存一致性",
       "counts": {
@@ -18,17 +20,20 @@
         "requirements": 58,
         "work_packages": 20,
         "frozen_design_files": 25,
-        "checks": 3282
+        "checks": 3283
       },
-      "passed": 3282,
+      "passed": 3283,
       "failed": 0,
-      "errors": [],
-      "product_tests_executed": false
+      "product_tests_executed": false,
+      "real_model_calls_executed": false,
+      "real_payments_executed": false,
+      "cloud_deployed": false,
+      "errors": []
     },
     {
       "baseline_id": "YPCC-DEV-1.1.0",
       "requirements_version": "3.1",
-      "checked_at": "2026-10-28T12:32:50.378655+00:00",
+      "checked_at": "2026-10-28T14:37:43.037664+00:00",
       "status": "PASS",
       "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
       "counts": {
@@ -37,9 +42,9 @@
         "skills": 19,
         "skill_bundles": 14,
         "development_documents": 20,
-        "base_contract_checks": 3282,
-        "codex_checks": 1177,
-        "total_checks": 4459,
+        "base_contract_checks": 3283,
+        "codex_checks": 1187,
+        "total_checks": 4470,
         "codex_synthetic_examples": 39
       },
       "product_tests_executed": false,
@@ -52,5 +57,5 @@
       "errors": []
     }
   ],
-  "local_log_sha256": "f4e302d2189d2911ce4c18843a4b61d70d0aaafe5acd5ddd09d08b0d4bbb6910"
+  "local_log_sha256": "acf9379157c01f1a4c38f71bf8fda411897c00a4e13a7c0cb8b7828eae57d2af"
 }

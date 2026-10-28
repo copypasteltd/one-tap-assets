@@ -2,6 +2,21 @@
 
 记录可核验的最终行为及已知范围；历史设计文档保留原版，最新状态见[状态指南](docs/guides/STATUS.md)。Record actual behavior and limits; historical design records remain preserved.
 
+## 2026-10-28 · 参考帧购买门禁与受控生成工具 / Reference-gated generation tools
+
+- 修复参考整片可绕过身份核验并直接使用原图购买视频的缺口；逐镜与整片均绑定原独立报告和对应生成PNG，预留/发送/恢复/媒体提交重验。Fixed an unreviewed reference-film purchase path; both routes now bind the original released identity review and generated PNGs to immutable video intents.
+- 新增整片`reference:film`、冻结报告/全帧SHA凭证，沿用迁移021保护；整片预算包含一次参考生成。Added film-reference generation, immutable approval/frame bindings and the missing reference-image cost bound, without a new migration.
+- 注册生成参考、提交视频、查询原任务3个订单MCP。平台恢复冻结商品/风格/模型/费率/规格，拒绝任意提示词/原图替换/比例暗换；POST只读原制作完成结果。Registered three scoped tools with platform-derived inputs and read-only completed POST inputs.
+- 原网关专项扩至35项，新增6项实际stdio/HTTPS/MCP专项，15项参考核验继续覆盖。保留先红后绿回归摘要。Expanded native purchase/recovery coverage; synthetic model/usage/isolation remains explicit.
+- 同阶段同代次同角色唯一约束未放宽。MCP视频协议通过实际租约过期/接管恢复，原次数/费用不重置；完整阶段间编排仍待完成。Same-generation role uniqueness and shared costs/call limits remain enforced; protocol continuation tests use real lease takeover rather than an index bypass.
+- 中英README、架构/状态与专项同步；小程序页面未改动，已有实际截图/WebM/MP4/GIF与C冻结稿保持原字节。Updated bilingual documentation; existing UI captures and frozen C files remain byte-identical.
+
+本轮类型检查、50单元/262原生集成、服务端及双小程序构建全部通过，295个源码/测试/配置文件摘要已刷新。首次全量运行触及旧480秒整套超时，保留单项断言/时限后将整套上限调整为720秒并完整重跑通过；原失败日志留存本地。Type checking, 50 unit/262 integration tests and all three builds passed; the 295-file source manifest was refreshed. A first suite-level timeout was preserved before rerunning with a larger suite ceiling, without changing individual test assertions or timeouts.
+
+当前验证数量以[实现索引](assets/implementation/current.json)为准。完整生成式编排/整包/后期/QC/最终双复核/交付、原生有声和真实Codex/模型/隔离/真机准入仍未完成，所有预设禁售。Exact executed test/build results live in the manifest. Complete generated pipelines and real production admission remain incomplete; sales stay disabled.
+
+细则 / Details：[购买门禁与MCP](docs/实施/生成式购买门禁与MCP工具接入-v1.0.md)。
+
 ## 2026-10-28 · 0.1.0 · 首次仓库整理 / Initial repository publication
 
 ### 已加入 / Added

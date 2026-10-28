@@ -12,6 +12,7 @@ import { contentTools } from './tool-gateway/content-tools.js';
 import { ContentPlanningService } from './codex/planning.js';
 import { MediaStageService } from './codex/media-stage.js';
 import { productionTools } from './tool-gateway/production-tools.js';
+import {generationTools} from './tool-gateway/generation-tools.js';
 import { QualityControlService } from './review/qc.js';
 import { ReviewStageService } from './review/stage.js';
 import { PublicationService } from './review/publication.js';
@@ -74,7 +75,7 @@ try {
   if (cfg.env === 'production' && cfg.generationEnabled && missing.length) throw new Error('Full production stage registry is incomplete');
   const content = contentTools(pool); const mediaTools = productionTools(pool, cfg, storage(cfg));
   const reviews = reviewTools(pool, cfg, storage(cfg));
-  const orderTools: Record<string, ToolHandler> = { ...content, ...mediaTools, ...reviews,
+  const orderTools: Record<string, ToolHandler> = { ...content, ...mediaTools, ...reviews, ...generationTools(pool,cfg,storage(cfg)),
     persist_stage_result: (scope, args, intent, signal) => (scope.role === 'CONTENT' ? content
       : scope.role === 'REVIEW_FACTS' || scope.role === 'REVIEW_STYLE' ? reviews : mediaTools).persist_stage_result!(scope, args, intent, signal) };
   const samples = sampleTools(pool, cfg, storage(cfg));

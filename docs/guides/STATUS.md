@@ -8,7 +8,7 @@
 | --- | --- | --- | --- |
 | 01 | TypeScript | PASS | 当前类型检查 / Current type checking |
 | 02 | 单元 / Unit | 50 / 50 PASS | 领域、客户端、策略与适配器逻辑 / Domain, client and adapter logic |
-| 03 | 原生集成 / Native integration | 250 / 250 PASS | 原生PG/实际媒体/HTTPS/MCP及显式合成角色、供应商、支付、宿主 / Actual database/media with synthetic external responses |
+| 03 | 原生集成 / Native integration | 262 / 262 PASS | 原生PG/实际媒体/HTTPS/MCP及显式合成角色、供应商、支付、宿主 / Actual database/media with synthetic external responses |
 | 04 | 服务端 / Server | PASS | 编译API、Worker、回收、媒体维护和删除日志入口 / Compiled native entries |
 | 05 | 双小程序 / Both mini-programs | PASS | Taro支付宝/抖音构建，不是宿主真机验收 / Compilation, not device certification |
 | 06 | 浏览器回放 / Browser replay | PASS | Vite构建、10页断言/截图、实际WebM/MP4/GIF；无外部请求，浏览器已关闭 / Actual local capture |
@@ -22,8 +22,8 @@
 | 01 | 双小程序与API / Clients and API | 17共享页面；77业务/26管理接口契约与原生路由，账户恢复/相册journal；真机未验 / Shared source and builds, no native device certification |
 | 02 | 商品档案与内容 / Recognition and plan | 冻结照片、证据/unknown、商品锁、Skill预载/受控内容工具；真实模型未验 / Implemented contracts and fixtures, real model unverified |
 | 03 | 原图无声 / Silent photo layout | 实际PNG/MP4、后期/QC、封存双复核/事务交付、本人预览与有限修改；角色/计量/隔离为合成 / Actual native media, synthetic agent evidence |
-| 04 | 生成基础 / Generation foundation | 火山方舟图片/异步视频适配、原任务恢复、预算/截止/媒体校验；29项专项 / Provider contract fixtures, actual downloaded media validation |
-| 05 | 参考身份 / Reference identity | 逐帧/锚点/原证据、独立角色与释放检查、接管复用；15项专项，视频购买门禁未接入 / Service core only, purchase boundary not connected |
+| 04 | 生成基础 / Generation foundation | 图片/异步视频、原任务恢复、预算/截止/实际媒体；35项网关和6项受控MCP专项 / Native provider-boundary and scoped-protocol fixtures |
+| 05 | 参考身份 / Reference identity | 15项核心；两路线购买/恢复强制绑定报告和实际生成帧，释放未验证则拒绝 / Mandatory immutable report/frame gate; complete orchestration remains incomplete |
 | 06 | 社区 / Community | 收藏/草稿/授权/发布状态/治理，独立原图无声SAMPLE，审核后独立公开副本与撤回；完整商业发布未验 / Native lifecycle coverage, incomplete commercial admission |
 | 07 | 恢复与隐私 / Recovery and privacy | 租约、预算、原回执、登记对象回收、主库逻辑脱敏、外部签名删除日志与原生备份重放；真实物理/外部边界未验 / Controlled recovery coverage, incomplete production erasure |
 | 08 | 设计与文档 / Design and docs | C基线保留、双语README/操作指南、真实浏览器媒体、源码证据 / Frozen baseline, bilingual operational docs and actual replay media |
@@ -32,7 +32,7 @@
 
 | 顺序 / Priority | 待办 / Work | 完成条件 / Completion evidence |
 | --- | --- | --- |
-| 01 | 生成式生产工具、视频购买前身份门禁、完整两条产线 / Generative tools, mandatory reference gate and both pipelines | 原真实输入→参考核验→视频→后期→QC→独立双复核→交付，故障/费用恢复一致 / Complete packs and recovery |
+| 01 | 生成式阶段间编排与完整两条产线 / Generative stage orchestration and both complete pipelines | 同角色唯一约束/原次数和费用内续跑，原输入→参考核验→视频→整包/后期→QC→最终双复核→交付 / Complete packs and recovery within frozen limits |
 | 02 | 原生有声与资源规格 / Native audio and resource contracts | 实际声音、字幕/配乐、许可、成片检查和报价一致 / Actual contracted audio and rights |
 | 03 | 真实Codex与受限身份/释放 / Real Codex, restricted identity and cleanup | 服务凭证、真实推理计量、原生启动器、隔离/进程树/孤儿回收与G0证据 / Native verified operation |
 | 04 | 支付/模型/对象存储与四组真机 / Live integrations and four device groups | 宿主登录/照片/付款/退款/下载/相册，真实费用及OSS/隐私边界 / Live platform and device evidence |

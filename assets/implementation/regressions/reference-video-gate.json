@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "type": "NATIVE_PG_SYNTHETIC_PROVIDER_RED_GREEN_REGRESSION",
+  "baseline_commit": "c11c876f7e9e314446a46952c8d3f4fb54988c3c",
+  "baseline_gateway_sha256": "8a16742fdd30a3d17d9fc348a00c1fce668f795ea52169a742e038fffc48fb92",
+  "test_name": "refuses a reference-film video purchase before any generated-frame identity approval",
+  "red": {
+    "status": "EXPECTED_FAILURE",
+    "failed": 1,
+    "behavior": "Video request resolved before independent generated-reference approval",
+    "local_report": "runtime/test-results/reference-purchase-gate-red.json",
+    "report_sha256": "e0cf4f0b519e206679c400bed14638e4e6115d52d909c366dc82babc1ff79ca7"
+  },
+  "green": {
+    "status": "PASS",
+    "passed": 1,
+    "failed": 0,
+    "behavior": "GENERATION_REFERENCE_REVIEW_REQUIRED before provider submission or reservation",
+    "local_report": "runtime/test-results/reference-purchase-gate-green.json",
+    "report_sha256": "b8a98874ec888c1cf53d48e90e546ea663bf9e0c93e4901e256417f5152edb98"
+  },
+  "limits": "Actual native PostgreSQL. Synthetic provider/identity/usage/isolation fixtures; this does not certify complete generated production or real model quality. Original reports are excluded from Git."
+}
