@@ -9,7 +9,7 @@ import { validateInternal } from '../lib/validation.js';
 import type { CreativePlan } from '../../worker/compiler/plan.js';
 import { bindSnapshot, type FrozenContract, type ModelBinding, type ResourceBinding } from '../../worker/compiler/snapshot.js';
 import { enqueueStage } from '../../worker/queue/enqueue.js';
-import {freezeGenerationContracts,validateGenerationBudget,type GenerationModelRow} from '../../worker/generation/contracts.js';
+import {freezeGenerationContracts,validateGenerationExecution,type GenerationModelRow} from '../../worker/generation/contracts.js';
 import { stopScope } from '../../worker/lifecycle/termination.js';
 import { requestRefundInternal } from './refunds.js';
 import { checkAdmission, type CodexAdmission } from '../../worker/codex/admission.js';
@@ -61,7 +61,7 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
       daily_ceiling_micro: codexContract.agent_cost_ceiling_micro } } };
   contract.revision_policy=freezeRevisionPolicy(contract);
   if(contract.source.engine!=='PHOTO_LAYOUT'){
-    contract.generation_contracts=freezeGenerationContracts(cfg,models.rows);validateGenerationBudget(contract);
+    contract.generation_contracts=freezeGenerationContracts(cfg,models.rows);validateGenerationExecution(contract);
   }
   requireThat(contract.budget_micro >= codexContract.agent_cost_ceiling_micro + contract.revision_policy.budget_micro,
     'BUDGET_INVALID', '原订单总预算必须同时覆盖制作与受限修改', 503);

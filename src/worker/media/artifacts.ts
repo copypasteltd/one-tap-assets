@@ -14,6 +14,7 @@ import type { ResourceBinding } from '../compiler/snapshot.js';
 
 export type MediaPhase = 'PRODUCTION' | 'POST';
 export interface ArtifactSpec {
+  generation_sources?:import('../generation/outputs.js').GenerationSource[];reference_approval_hash?:string;
   phase: MediaPhase; kind: 'image' | 'video' | 'copy'; snapshot_hash: string; plan_hash: string;
   identity_lock_hash: string; renderer_version: string; source_asset_ids: string[]; source_artifact_ids: string[];
   resource_bindings: ResourceBinding[];

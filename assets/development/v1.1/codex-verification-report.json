@@ -1,7 +1,7 @@
 {
   "baseline_id": "YPCC-DEV-1.1.0",
   "requirements_version": "3.1",
-  "checked_at": "2026-10-28T14:37:43.037664+00:00",
+  "checked_at": "2026-10-28T15:55:48.215069+00:00",
   "status": "PASS",
   "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
   "counts": {
@@ -10,9 +10,9 @@
     "skills": 19,
     "skill_bundles": 14,
     "development_documents": 20,
-    "base_contract_checks": 3283,
-    "codex_checks": 1187,
-    "total_checks": 4470,
+    "base_contract_checks": 3285,
+    "codex_checks": 1212,
+    "total_checks": 4497,
     "codex_synthetic_examples": 39
   },
   "product_tests_executed": false,
@@ -2584,6 +2584,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/README.md->实施/生成式无声整包与阶段编排-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/README.md->实施/受限修改执行与新版本交付-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -2635,6 +2640,11 @@
     },
     {
       "name": "document_link:docs/guides/ARCHITECTURE.md->../实施/生成式购买门禁与MCP工具接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/ARCHITECTURE.md->../实施/生成式无声整包与阶段编排-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -2830,6 +2840,11 @@
     },
     {
       "name": "document_link:docs/guides/STATUS.md->../media/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/STATUS.md->../verification/README.md",
       "status": "PASS",
       "detail": ""
     },
@@ -3039,6 +3054,16 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/实施/参考帧独立身份核验-v1.0.md->生成式无声整包与阶段编排-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/参考帧独立身份核验-v1.0.md->生成式购买门禁与MCP工具接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/实施/双小程序源码与构建-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3130,6 +3155,11 @@
     },
     {
       "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->生成式无声整包与阶段编排-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -3309,6 +3339,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->生成式无声整包与阶段编排-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/实施/源码实现进度-v3.1.md->生成式购买门禁与MCP工具接入-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3439,7 +3474,77 @@
       "detail": ""
     },
     {
+      "name": "document_encoding_fences:docs/实施/生成式无声整包与阶段编排-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式无声整包与阶段编排-v1.0.md->生成式购买门禁与MCP工具接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式无声整包与阶段编排-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式无声整包与阶段编排-v1.0.md->../../src/worker/generation/requests.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式无声整包与阶段编排-v1.0.md->../../src/worker/generation/prepare.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式无声整包与阶段编排-v1.0.md->../../src/worker/generation/execute.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式无声整包与阶段编排-v1.0.md->../../src/worker/generation/outputs.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式无声整包与阶段编排-v1.0.md->../../src/worker/media/generated-pipeline.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式无声整包与阶段编排-v1.0.md->../../src/worker/codex/media-stage.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式无声整包与阶段编排-v1.0.md->../../src/worker/tool-gateway/production-tools.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式无声整包与阶段编排-v1.0.md->../../src/worker/review/qc.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式无声整包与阶段编排-v1.0.md->../../src/worker/review/publication.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式无声整包与阶段编排-v1.0.md->../../tests/integration/generated-production.test.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/实施/生成式购买门禁与MCP工具接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式购买门禁与MCP工具接入-v1.0.md->生成式无声整包与阶段编排-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -3455,6 +3560,16 @@
     },
     {
       "name": "document_encoding_fences:docs/实施/生成服务持久调用与媒体转存-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成服务持久调用与媒体转存-v1.0.md->生成式购买门禁与MCP工具接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成服务持久调用与媒体转存-v1.0.md->生成式无声整包与阶段编排-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -5734,6 +5849,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:README.md->docs/实施/生成式无声整包与阶段编排-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:README.md->assets/presets/presets.v3.1.json",
       "status": "PASS",
       "detail": ""
@@ -5835,6 +5955,11 @@
     },
     {
       "name": "document_link:README.md->docs/guides/DEMO.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/verification/README.md",
       "status": "PASS",
       "detail": ""
     },

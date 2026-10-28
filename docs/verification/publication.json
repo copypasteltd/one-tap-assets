@@ -1,18 +1,18 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-28T14:38:21.248Z",
+  "checked_at": "2026-10-28T15:56:00.198Z",
   "status": "PASS",
   "scope": "Repository documentation/media/source snapshot checks; not real provider, payment, native device or production admission",
   "documentation_files": 11,
-  "local_links": 165,
+  "local_links": 174,
   "media_files": 20,
   "screenshots": 10,
   "gif_frames": 102,
-  "candidate_files": 562,
-  "candidate_bytes": 58086935,
+  "candidate_files": 569,
+  "candidate_bytes": 58160676,
   "browser_closed": true,
   "credential_check": "No private-key blocks or long OpenAI-style key strings in candidate text; not a guarantee for every possible secret format",
-  "implementation_evidence_sha256": "24fddf7d09209374154efa97c7fc5557ac5c26161e704dde861653a2d89c7b12",
+  "implementation_evidence_sha256": "13f904b67a7432e03a82bc8cd6de56dd788281a1f01ebc49b371e177d4eca2ff",
   "suites": [
     {
       "kind": "unit",
@@ -22,12 +22,12 @@
     },
     {
       "kind": "integration",
-      "tests": 262,
-      "passed": 262,
+      "tests": 269,
+      "passed": 269,
       "failed": 0
     }
   ],
-  "source_files_verified": 295,
+  "source_files_verified": 301,
   "runtime_contract_files_verified": 42,
   "resource_files_verified": 4,
   "full_product_verified": false,

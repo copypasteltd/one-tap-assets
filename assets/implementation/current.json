@@ -3,29 +3,46 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-28T14:32:53.453Z",
+  "checked_at": "2026-10-28T15:54:27.795Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
+  "verification_mode": "MINI_BUILD_RETRY_WITH_RETAINED_NATIVE_INTEGRATION",
+  "retained_integration": {
+    "checked_at": "2026-10-28T15:45:32.980Z",
+    "previous_source_set_hash": "cf3c9316b920d19be46b7f2b2434f5b07e29d4ad4ac33a27517eca9d5865c0b9",
+    "validated_source_set_hash": "637f31ac197eb8cadbbe35da2502deee82615aebf9d95721de2f5481c38a6d31",
+    "allowed_changed_files": [
+      "scripts/mini-config.cjs",
+      "scripts/verify-implementation.ts"
+    ],
+    "report_sha256": "edf2d0dd0e503316a6f14a292fb41893e8aeba022ee90ce1e0d7a54a2d457fba",
+    "command": {
+      "command": "./scripts/run.ps1 test:integration",
+      "status": "PASS",
+      "log_path": "runtime/test-results/test-integration.log",
+      "log_sha256": "78fbde0bdf0dd2ae40e31bb21351dc56d1e3590f81ac086ca9705d1ba0b95fce"
+    }
+  },
   "command_checks_passed": true,
   "commands": [
     {
       "command": "./scripts/run.ps1 typecheck",
       "status": "PASS",
       "log_path": "runtime/test-results/typecheck.log",
-      "log_sha256": "5a290b9e953054f3160f0e8ee5be251823cc22564c09f2bb249e1935dac1875a"
+      "log_sha256": "65a9ea5b2b13ca5252a2828de03e701abe1f5b4cdf574ac865e7be3d31a68cc2"
     },
     {
       "command": "./scripts/run.ps1 test",
       "status": "PASS",
       "log_path": "runtime/test-results/test.log",
-      "log_sha256": "beba84192b17279b7ba403db61890b094fcd6ea1df63387e30e48660300e5b4a"
+      "log_sha256": "0a1baccae563e855b3046ae2d6f58e96b9a1f2abe5955ad9a426b03ca5e74351"
     },
     {
       "command": "./scripts/run.ps1 test:integration",
       "status": "PASS",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "640f02a4f97374a6f2a76bfcba6ee1e7e8dd92fb94b405ae6b8e574d601a9fc3"
+      "log_sha256": "78fbde0bdf0dd2ae40e31bb21351dc56d1e3590f81ac086ca9705d1ba0b95fce"
     },
     {
       "command": "./scripts/run.ps1 build:server",
@@ -37,13 +54,13 @@
       "command": "./scripts/run.ps1 build:alipay",
       "status": "PASS",
       "log_path": "runtime/test-results/build-alipay.log",
-      "log_sha256": "0153ffa2b152906f06a51354f8e392d08d751f1909bd2bd870be1ce6fdf72a10"
+      "log_sha256": "5d44cc65fb4dfd2d3d760771f68420346e7d6a7a434e12ebeb7d4980dc6cb2b0"
     },
     {
       "command": "./scripts/run.ps1 build:douyin",
       "status": "PASS",
       "log_path": "runtime/test-results/build-douyin.log",
-      "log_sha256": "73995b41b0bbd4c08dff5826fb3f78780871832cdc376d09ce82639b7ff67039"
+      "log_sha256": "56d9af33e0f9fbfbeb380ad464af23ae33dcd461111c95a03c6898493d8099b0"
     }
   ],
   "suites": [
@@ -53,23 +70,23 @@
       "tests": 50,
       "passed": 50,
       "failed": 0,
-      "executed_at": "2026-10-28T14:22:11.466Z",
+      "executed_at": "2026-10-28T15:53:45.246Z",
       "report_path": "runtime/test-results/unit.json",
-      "report_sha256": "90f743c9e60178e35734fa443f5d7869b1bfabfcde3977e378c4325be7f381cb"
+      "report_sha256": "3787a4ea9b894d15a68e1cc9a78a4dd1c2c4ccffe393294e501f56fbd47ce0ac"
     },
     {
       "kind": "integration",
       "status": "PASS",
-      "tests": 262,
-      "passed": 262,
+      "tests": 269,
+      "passed": 269,
       "failed": 0,
-      "executed_at": "2026-10-28T14:22:15.561Z",
+      "executed_at": "2026-10-28T15:30:34.126Z",
       "report_path": "runtime/test-results/integration.json",
-      "report_sha256": "bb453322657c3d0f7ffddfdedcb5a2a63aee709a314672de92e9830c372eb3f0"
+      "report_sha256": "edf2d0dd0e503316a6f14a292fb41893e8aeba022ee90ce1e0d7a54a2d457fba"
     }
   ],
-  "source_files": 295,
-  "source_set_hash": "7481bd10d465be3e36348b2f3317389de6146a65ec7cd117801a3269059970ee",
+  "source_files": 301,
+  "source_set_hash": "637f31ac197eb8cadbbe35da2502deee82615aebf9d95721de2f5481c38a6d31",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -225,7 +242,7 @@
     },
     {
       "path": "src/api/modules/commerce.ts",
-      "sha256": "1cb2367af189f7e462c3fb823dd0568ea3ec51ac58d46b8195e926f52fa734ae"
+      "sha256": "ecaf57b6531ab231c186133df029254084fe6cd57fb3b8238e5afaa32545fda1"
     },
     {
       "path": "src/api/modules/community.ts",
@@ -637,7 +654,7 @@
     },
     {
       "path": "src/worker/codex/media-stage.ts",
-      "sha256": "3bf46219da38309cfa7737f80a748fb3fb85745ea361ba5ccad8ac550f7009f3"
+      "sha256": "dc9c2f8527c1159b2170120d7cbc4a8fb946d7cabef19928809097348b120e90"
     },
     {
       "path": "src/worker/codex/planning.ts",
@@ -677,11 +694,23 @@
     },
     {
       "path": "src/worker/generation/contracts.ts",
-      "sha256": "b989fa7b5256fa8b6bee497f307c43c10d2cd46fec4dff3f72c05b945a634a45"
+      "sha256": "8c748c380e4cf89145132545da96fb25b6d734cfd9c0ead59fc3147042f93ef8"
+    },
+    {
+      "path": "src/worker/generation/execute.ts",
+      "sha256": "ea83f0757a598a09ecc8bf2fa65aaf3ef9a93ff66c6f4b623757e80ee8a1ae7d"
     },
     {
       "path": "src/worker/generation/gateway.ts",
-      "sha256": "2afc20401dab04f04e9a165b1e51365d553e872e34d155c64aa50bff6ff676bf"
+      "sha256": "c7970e641e55e1df4175f22bbcb8a6537e5554207c184bac912a88a2456c8497"
+    },
+    {
+      "path": "src/worker/generation/outputs.ts",
+      "sha256": "c70297ff952cce9c579b4a5693c752286d5cbd633d430c0997fab00de7c4dd22"
+    },
+    {
+      "path": "src/worker/generation/prepare.ts",
+      "sha256": "8502a2345c087cbda9ea95c83884499bf2cac840e052a9c73a838fffbe19465d"
     },
     {
       "path": "src/worker/generation/reference-approval.ts",
@@ -698,6 +727,10 @@
     {
       "path": "src/worker/generation/reference-service.ts",
       "sha256": "faf93ddfac261cefddc7288bd52fc79f4b369c539fd39e9b95cb4886d21d92bc"
+    },
+    {
+      "path": "src/worker/generation/requests.ts",
+      "sha256": "9bd24266be4c8b5011cf054a50e0ff3785abd27b3633e22e5df8a994d52f498f"
     },
     {
       "path": "src/worker/lifecycle/cleanup-files.ts",
@@ -749,11 +782,15 @@
     },
     {
       "path": "src/worker/media/artifacts.ts",
-      "sha256": "d2b44c8c1fe876fc019bc0619269502f9e7dc380b84b7964bb08a592c312118b"
+      "sha256": "721e17e9b6cc75cfb33463e2cf68135afe211d796ae9677aa5e5c6d9a5015564"
     },
     {
       "path": "src/worker/media/font.ts",
       "sha256": "7d8a3ff8cf0044a2d2d9768392f0e4bdd72b6b91c785112b24f129d054d8eb7e"
+    },
+    {
+      "path": "src/worker/media/generated-pipeline.ts",
+      "sha256": "b6b23a11be5c7418b46bf0a4eb27deed0d40d47880e28c958d2c4e5435b85db1"
     },
     {
       "path": "src/worker/media/layout.ts",
@@ -765,7 +802,7 @@
     },
     {
       "path": "src/worker/media/photo-pipeline.ts",
-      "sha256": "8d9250f9acd2ec8c9753ee2c947415284b5122e5060ed2291a8934a6c2c0270b"
+      "sha256": "d995303f0167fb391518283abf777cc18f1bf4ae7d8ad93faf0b2f5dbfc9a4d7"
     },
     {
       "path": "src/worker/media/photo-video.ts",
@@ -813,11 +850,11 @@
     },
     {
       "path": "src/worker/review/publication.ts",
-      "sha256": "95a99a29a29866dc6d32a2a19d08feeb768c38987ae1c23cc78d498072a47125"
+      "sha256": "7628d82b60652c29a67dd27a43b38285695bd938477732af7b40f02d9321a29d"
     },
     {
       "path": "src/worker/review/qc.ts",
-      "sha256": "12c75a78e97c8131bfe6bc526062c7dd0fcb26cebfb6db0d7125d18f818cbfca"
+      "sha256": "bee1d1c0ab5a16ab8f715873530ef38992724660e955d8a7b180bc94775510e0"
     },
     {
       "path": "src/worker/review/reports.ts",
@@ -889,7 +926,7 @@
     },
     {
       "path": "src/worker/tool-gateway/generation-tools.ts",
-      "sha256": "7c16e2a3b9cbabb86a1f733521a406d045755110b710afee7db186200dde783f"
+      "sha256": "e3f8943692149b172c29e44eb953a9c498ac40b66ed948370a33c18be73784a4"
     },
     {
       "path": "src/worker/tool-gateway/http.ts",
@@ -901,11 +938,11 @@
     },
     {
       "path": "src/worker/tool-gateway/policy.ts",
-      "sha256": "46439f7f6477ccff3704635dfec3fc3cf30252ac0d0b24c95a7d4da7fb1ec354"
+      "sha256": "d4d0cec5b9239f30ecbfcfd5065339be1f194b828b113f4eaf3f6c37e1b46508"
     },
     {
       "path": "src/worker/tool-gateway/production-tools.ts",
-      "sha256": "3e466fee478a810bd6a2d7819520783703922fa18b18b0a3618fec04c2f8dfb2"
+      "sha256": "63958bc972a470a2c010774477ef6df388e5371a9d8765091f1c95b5fd6bf6a7"
     },
     {
       "path": "src/worker/tool-gateway/reference-tools.ts",
@@ -933,7 +970,7 @@
     },
     {
       "path": "tests/fixtures/codex-role.cjs",
-      "sha256": "5d439921e2297c1c3347f90e983a4d5e16d3e8aff80b5a4bff478e9feecf2087"
+      "sha256": "f71262380aab06eec06f69b5b01791291ef1a01adc643a353fb33afa59cced1f"
     },
     {
       "path": "tests/helpers/codex.ts",
@@ -953,7 +990,7 @@
     },
     {
       "path": "tests/helpers/media.ts",
-      "sha256": "c61fcd3d7bc780ebfbd02a2e65b76cf484e9989e48be2b7e3970a13b982fd78a"
+      "sha256": "28057c56abaef8c11d4a929eb8dbbaadca026c6e239f71475ce645e9582e630f"
     },
     {
       "path": "tests/helpers/reference.ts",
@@ -990,6 +1027,10 @@
     {
       "path": "tests/integration/community.test.ts",
       "sha256": "3a5e86acd5c47e4c4fca5afe60d0445b90ab4fe87991298b81aa4944f779e75a"
+    },
+    {
+      "path": "tests/integration/generated-production.test.ts",
+      "sha256": "35a91e5b2f13f9c6d256624e7a0ab9f91cf350c6bb2662fed8480d3103dcd661"
     },
     {
       "path": "tests/integration/generation-gateway.test.ts",
@@ -1165,7 +1206,7 @@
     },
     {
       "path": "scripts/生成Codex开发契约.py",
-      "sha256": "7b6b9922e0061dc7aba82f7a1f33ed31184aeb96362ea4edbfd514deade416ac"
+      "sha256": "efb4cf02d121eee4ff7a38f27885c755c71b14761ebc26ba12ba246d4de49503"
     },
     {
       "path": "scripts/生成v3需求配置.py",
@@ -1205,7 +1246,7 @@
     },
     {
       "path": "scripts/mini-config.cjs",
-      "sha256": "c92942aedd9a213e4e4aff4095c30bb284c543a62ab2bd351723dea2713245af"
+      "sha256": "2182becd95024b96e5ce21132d6f77deb44b468a4e119a7b675e652ebbac57c1"
     },
     {
       "path": "scripts/record-preview.ts",
@@ -1221,7 +1262,7 @@
     },
     {
       "path": "scripts/verify-implementation.ts",
-      "sha256": "dc777818cc3f1dbec8c61d828d1630463f13c63ce945dbb54026feea4eeedeef"
+      "sha256": "4359847cbd877994ceaee568ccc8bfe157b5079caa06b732540b36dec975825d"
     },
     {
       "path": "scripts/verify-publication.ts",
@@ -1498,13 +1539,18 @@
     "reference_purchase_gate_fixture_verified": true,
     "reference_identity_service_implemented": true,
     "reference_identity_service_fixture_verified": true,
+    "silent_generated_pack_implemented": true,
+    "silent_generated_pack_fixture_verified": true,
+    "generated_post_qc_final_review_delivery_implemented": true,
+    "generated_original_role_recovery_fixture_verified": true,
+    "silent_qc_policy": "YPCC-QC-GENERATED-SILENT-1.0.0",
     "all_generated_routes_verified": false,
     "native_audio_verified": false,
     "real_provider_call_verified": false,
-    "notes": "Original production-lease provider gateway and three scoped MCP handlers are implemented. Both video routes require the complete original independent identity report, released instance and actual generated PNGs; immutable prepared evidence binds the report/frame hashes to the paid intent and is revalidated before reservation, send, recovery and media completion. Requests, original ACK/query receipts, task IDs and frozen model/rate contracts are durable; UNKNOWN holds are not rebought. POST reads only completed original outputs. Tool inputs are platform-derived and reject arbitrary prompts/references or silent aspect-ratio changes. The 35 gateway, 6 MCP and 15 reference cases exercise native PostgreSQL/actual PNG-MP4/HTTPS-MCP with synthetic model, usage and isolation responses. Same-generation same-role uniqueness and original shared cost/call limits remain enforced; protocol continuation uses actual stage lease takeover. Complete generative stage orchestration, pack assembly, generated post/QC/final double review/delivery, native audio and real provider admission remain incomplete."
+    "notes": "Both silent generated routes now execute platform-derived references, a released independent identity review, one PRODUCTION role and bounded render_generated_pack, actual generated image/video assembly, explicit POST, route-specific QC, fresh final facts/style reviews and atomic delivery. Reference and final facts runs share the original two-turn facts bucket; five paid roles and twelve tool calls must fit the sold limits. Same-generation role uniqueness, original budget and deadline remain unchanged. Generated source/approval hashes and actual stored bytes are revalidated through post, QC and publication, including inside the publication transaction. Seven complete-pack/rejection/recovery fixtures join the 35 gateway, 6 MCP and 15 reference cases, using native PostgreSQL, actual PNG/MP4, HTTPS and stdio/MCP with synthetic model, usage and isolation. Actual source clip colors and order are checked after final download; no still-animation substitution. Official audio variants, real semantic quality/provider admission, generated SAMPLE/revisions and full variant benchmarks remain incomplete."
   },
   "codex_implementation": {
-    "scope": "CONTENT PLAN, PHOTO_LAYOUT PRODUCTION/POST and fresh visual REVIEW_FACTS/REVIEW_STYLE runtime adapters, metered text and sealed-image Responses gateway, atomic PHOTO publication, independent seven-stage creator SAMPLE pipeline",
+    "scope": "CONTENT PLAN, silent PHOTO_LAYOUT/PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST, independent generated-reference facts review and fresh final visual REVIEW_FACTS/REVIEW_STYLE runtime adapters, metered Responses gateway, atomic pack publication, independent seven-stage photo creator SAMPLE pipeline",
     "fixture_tests_only": true,
     "real_codex_turn_verified": false,
     "native_launcher_executable_provided": false,
@@ -1516,7 +1562,7 @@
     "scoped_internal_traffic_fixture_verified": true,
     "role_lease_heartbeat_fixture_verified": true,
     "limited_revision_notes": "Five durable REVISION stages produce a new linked PHOTO_LAYOUT/no-speech manifest for existing-image cover selection, full-pack display order or actual replacement copy bytes. Three new synthetic roles review a new sealed packet; original expiry and original delivery remain intact. Pre-sale frozen aftercare costs share the original total budget across failed retries; UNKNOWN holds are not reset. Stage fencing, recovery, late writes and private role graph are exercised. Generated/audio revisions and real Codex/isolation/device verification remain incomplete. Internal traffic is bounded per live run across all four tool/inference routes; invalid/revoked tokens use the shared IP bucket, and durable cost/tool limits still apply.",
-    "notes": "Real HTTPS/MCP, synthetic native stdio roles, persisted planning/photo media and complete sealed visual/text review inputs, original receipt recovery, immutable independent reports, fenced atomic publication and authorized hash-checked downloads are exercised. Independent durable reaping uses registered real Node children and test-only cleanup ports; claims, expired-owner rejection, immutable retries and actual directory guards are exercised. All model judgments, token usage and native isolation assertions remain fixtures. Real Codex, restricted OS identity/process-tree cleanup, certified image cost, semantic quality, generated/audio routes and bounded repair remain incomplete."
+    "notes": "Real HTTPS/MCP, synthetic native stdio roles, persisted planning/photo media and complete sealed visual/text review inputs, original receipt recovery, immutable independent reports, fenced atomic publication and authorized hash-checked downloads are exercised. Independent durable reaping uses registered real Node children and test-only cleanup ports; claims, expired-owner rejection, immutable retries and actual directory guards are exercised. All model judgments, token usage and native isolation assertions remain fixtures. Real Codex, restricted OS identity/process-tree cleanup, certified image cost, semantic quality, official generated/audio variants and bounded repair remain incomplete; both short silent generated pack fixtures have separate native coverage."
   },
   "lifecycle_implementation": {
     "independent_reaper_entry": "src/worker/lifecycle/reaper-main.ts",

@@ -47,6 +47,20 @@
       ]
     },
     {
+      "name": "render_generated_pack",
+      "allowed_roles": [
+        "PRODUCTION"
+      ],
+      "checks": [
+        "TENANT_ORDER_OR_PREVIEW_SCOPE",
+        "ROLE_STAGE",
+        "FENCING_TOKEN",
+        "SNAPSHOT_HASH",
+        "DEADLINE",
+        "ATOMIC_COST_RESERVATION"
+      ]
+    },
+    {
       "name": "generate_reference_frames",
       "allowed_roles": [
         "PRODUCTION"

@@ -11,6 +11,7 @@ const exact = (properties: Record<string, unknown>, required = Object.keys(prope
 export const toolSchemas: Record<string, object> = {
   analyze_photos: exact({}), validate_content_plan: exact({ plan: { type: 'object' } }),
   render_photo_pack: exact({ snapshot_hash: hashSchema }),
+  render_generated_pack:exact({snapshot_hash:hashSchema}),
   generate_reference_frames: exact({ shot_id: idSchema }), submit_video: exact({ shot_id: { anyOf: [idSchema, { type: 'null' }] } }),
   query_original_submission: exact({ submission_id: idSchema }),
   inspect_actual_media: exact({ asset_ids: { type: 'array', items: idSchema, minItems: 1, maxItems: 100, uniqueItems: true } }),

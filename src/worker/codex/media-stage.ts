@@ -2,6 +2,8 @@ import type pg from 'pg';
 import type { Config } from '../../api/config.js';
 import { hash } from '../../api/lib/crypto.js';
 import { requireThat } from '../../api/lib/errors.js';
+import {storage} from '../../api/storage/storage.js';
+import type {ObjectStorage} from '../../api/storage/storage.js';
 import { executionContext } from '../compiler/order-context.js';
 import { operationArtifacts, type MediaPhase } from '../media/artifacts.js';
 import { PendingExternal, type StageLease } from '../queue/leases.js';
@@ -10,11 +12,16 @@ import { mediaStageResultSchema, validateMediaStageResult } from '../tool-gatewa
 import { checkAdmission } from './admission.js';
 import { CodexRuntimeAdapter, type RoleResult } from './runtime.js';
 import type { RoleExecutor } from './planning.js';
+import {GenerationGateway} from '../generation/gateway.js';
+import {prepareGeneratedReferences} from '../generation/prepare.js';
+import {validateGenerationExecution} from '../generation/contracts.js';
 
 export class MediaStageService {
   private executor: RoleExecutor;
-  constructor(private pool: pg.Pool, private cfg: Config, executor?: RoleExecutor) {
+  constructor(private pool: pg.Pool, private cfg: Config, executor?: RoleExecutor,
+    private testPorts?:{gateway?:GenerationGateway;store?:ObjectStorage}) {
     requireThat(!executor || cfg.env === 'test', 'TEST_PORT_FORBIDDEN', '角色执行替身只能用于显式测试环境', 500);
+    requireThat(!testPorts||cfg.env==='test','TEST_PORT_FORBIDDEN','制作端口注入仅限测试',500);
     this.executor = executor ?? new CodexRuntimeAdapter(pool, cfg);
   }
   async handle(lease: StageLease, signal: AbortSignal): Promise<StageCommit> {
@@ -22,7 +29,7 @@ export class MediaStageService {
       'MEDIA_STAGE_INVALID', '媒体执行阶段无效', 500);
     const phase = lease.stage_name as MediaPhase;
     const context = await executionContext(this.pool, lease.tenant_id, lease.scope_id, lease.input_hash);
-    requireThat(context.snapshot.engine === 'PHOTO_LAYOUT', 'MEDIA_ROUTE_UNAVAILABLE', '生成式路线尚需对应执行器，不能替换成原图排版', 503);
+    if(context.snapshot.engine!=='PHOTO_LAYOUT')validateGenerationExecution(context.contract);
     const binding = context.contract.runtime_binding; const cc = context.snapshot.codex_contract;
     requireThat(binding && binding.limits.owner_id === context.ownerId && binding.limits.ceiling_micro === cc.agent_cost_ceiling_micro
       && binding.limits.max_input_tokens === cc.max_input_tokens && binding.limits.max_output_tokens === cc.max_output_tokens
@@ -32,6 +39,11 @@ export class MediaStageService {
     requireThat(admission.runtime_sha256 === cc.runtime_sha256 && admission.runtime_build_id === cc.runtime_build_id
       && admission.protocol_version === cc.protocol_version && admission.model_version_id === cc.model_version_id && admission.rate_version_id === cc.rate_version_id,
       'CODEX_SOLD_BINDING_INVALID', '当前运行能力与原订单不一致', 503);
+    if(phase==='PRODUCTION'&&context.snapshot.engine!=='PHOTO_LAYOUT'){
+      const store=this.testPorts?.store??storage(this.cfg);
+      await prepareGeneratedReferences(this.pool,this.cfg,store,lease,context,this.executor,
+        this.testPorts?.gateway??new GenerationGateway(this.pool,this.cfg,store),signal);
+    }
     const previous = phase === 'POST' ? await operationArtifacts(this.pool, context, 'PRODUCTION') : null;
     const prior = (await this.pool.query<{ id: string; instance_id: string; state: string; input_hash: string; output_hash: string; private: { stage_result: unknown } }>(
       `SELECT id,instance_id,state,input_hash,output_hash,private FROM agent_runs WHERE tenant_id=$1 AND private->>'stage_run_id'=$2
@@ -43,13 +55,13 @@ export class MediaStageService {
       requireThat(prior.output_hash && hash(prior.private.stage_result) === prior.output_hash, 'CODEX_RESULT_NOT_PERSISTED', '原角色结果摘要不一致', 503);
       completed = { runId: prior.id, instanceId: prior.instance_id, result: prior.private.stage_result, resultHash: prior.output_hash };
     } else {
-      const primaryTool = phase === 'PRODUCTION' ? 'render_photo_pack' : 'execute_post_plan';
+      const primaryTool = phase === 'PRODUCTION' ? context.snapshot.engine==='PHOTO_LAYOUT'?'render_photo_pack':'render_generated_pack' : 'execute_post_plan';
       completed = await this.executor.execute({ lease, role: phase, variantId: context.snapshot.variant_id, bundleHash: cc.skill_bundle_hash,
         admission, limits: binding.limits, maxToolCalls: cc.max_tool_calls, maxScopeToolCalls: cc.max_tool_calls,
         allowedTools: [primaryTool, 'inspect_actual_media', 'persist_stage_result'], outputSchema: mediaStageResultSchema,
         input: { phase, snapshot_hash: context.snapshotHash, snapshot: context.snapshot, creative_plan: context.contract.creative,
           production: previous ? { operation_id: previous.operation.id, outputs: previous.receipt.artifacts.map(a => ({ artifact_id: a.id, slot_id: a.slot_id, sha256: a.sha256 })) } : null,
-          task: `按已售快照和风格 Skill 完成${phase === 'PRODUCTION' ? '原图实际制作' : '显式后期处理'}。调用 ${primaryTool}，再 inspect_actual_media 检查全部真实产物；将检查工具返回的 tool_receipt_id 加入 stage_result.tool_receipt_ids，其余字段沿用制作工具结果。通过 persist_stage_result 保存最终完整结果并原样返回。不得改商品、清单、模型、路线、预算或截止。` } }, signal);
+          task: `按已售快照和风格 Skill 完成${phase === 'PRODUCTION' ? '对应路线的实际整包制作' : '显式后期处理'}。调用 ${primaryTool}，再 inspect_actual_media 检查全部真实产物；将检查工具返回的 tool_receipt_id 加入 stage_result.tool_receipt_ids，其余字段沿用制作工具结果。通过 persist_stage_result 保存最终完整结果并原样返回。不得改商品、清单、模型、路线、预算或截止。` } }, signal);
     }
     const checked = await validateMediaStageResult(this.pool, context, lease.id, completed.runId, phase, completed.result);
     requireThat(hash(checked.result) === completed.resultHash, 'CODEX_RESULT_NOT_PERSISTED', '媒体角色结果摘要不一致', 503);

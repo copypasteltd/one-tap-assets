@@ -9,6 +9,8 @@ import { validateInternal } from '../../api/lib/validation.js';
 import { executionContext, type ExecutionContext } from '../compiler/order-context.js';
 import { artifactSetHash, checkpointHash, receiptFromArtifacts, type MediaOperation, type MediaPhase, type MediaReceipt } from '../media/artifacts.js';
 import { PhotoMediaPipeline, checkReceiptSlots } from '../media/photo-pipeline.js';
+import {GeneratedMediaPipeline} from '../media/generated-pipeline.js';
+import type {GenerationGateway} from '../generation/gateway.js';
 import type { ToolHandler } from './consumer.js';
 import type { ToolScope } from './http.js';
 
@@ -44,7 +46,7 @@ export async function validateMediaStageResult(db: pg.Pool | pg.PoolClient, cont
   const proofs = (await db.query<{ id: string; tool_name: string; data: { result?: { operation_id?: string; output_set_hash?: string; artifact_ids?: string[] } } }>(
     "SELECT id,tool_name,data FROM agent_tool_intents WHERE tenant_id=$1 AND run_id=$2 AND id=ANY($3) AND state='SUCCEEDED'",
     [context.tenantId, runId, result.tool_receipt_ids])).rows;
-  const required = phase === 'PRODUCTION' ? 'render_photo_pack' : 'execute_post_plan';
+  const required = phase === 'PRODUCTION' ? context.snapshot.engine==='PHOTO_LAYOUT'?'render_photo_pack':'render_generated_pack' : 'execute_post_plan';
   const inspected = proofs.filter(p => p.tool_name === 'inspect_actual_media' && p.data.result?.output_set_hash === artifactSetHash(receipt.artifacts))
     .flatMap(p => p.data.result?.artifact_ids ?? []);
   requireThat(proofs.length === result.tool_receipt_ids.length && new Set(result.tool_receipt_ids).size === proofs.length
@@ -55,15 +57,20 @@ export async function validateMediaStageResult(db: pg.Pool | pg.PoolClient, cont
     'MEDIA_TOOL_PROOF_MISSING', '媒体阶段缺少本次运行的成功工具回执', 422);
   return { result, receipt };
 }
-export function productionTools(pool: pg.Pool, cfg: Config, store: ObjectStorage): Record<string, ToolHandler> {
-  const pipeline = new PhotoMediaPipeline(pool, cfg, store);
-  const render = (phase: MediaPhase): ToolHandler => async (scope, _args, intent, signal) => {
+export function productionTools(pool: pg.Pool, cfg: Config, store: ObjectStorage,gateway?:GenerationGateway): Record<string, ToolHandler> {
+  requireThat(!gateway||cfg.env==='test','TEST_PORT_FORBIDDEN','制作供应商端口仅限测试',500);
+  const pipelineFor=(context:ExecutionContext)=>context.snapshot.engine==='PHOTO_LAYOUT'?new PhotoMediaPipeline(pool,cfg,store):new GeneratedMediaPipeline(pool,cfg,store,gateway);
+  const render = (phase: MediaPhase,generatedOnly?:boolean): ToolHandler => async (scope, args, intent, signal) => {
+    requireThat(args.snapshot_hash===scope.snapshot_hash,'INPUT_HASH_MISMATCH','制作参数与原冻结输入不一致',422);
+    const context=await executionContext(pool,scope.tenant_id,scope.order_id!,scope.snapshot_hash);
+    if(phase==='PRODUCTION')requireThat((context.snapshot.engine!=='PHOTO_LAYOUT')===generatedOnly,
+      'MEDIA_ROUTE_UNAVAILABLE','制作工具与原冻结路线不一致',503);
+    const pipeline=pipelineFor(context);
     const output = await pipeline.execute(scope, intent, phase, signal);
-    const context = await executionContext(pool, scope.tenant_id, scope.order_id!, scope.snapshot_hash);
     return { result: { ...(output.result as object), stage_result: await stageResult(pool, context, scope, output.receipt, intent.id) }, commit: output.commit };
   };
   return {
-    render_photo_pack: render('PRODUCTION'), execute_post_plan: render('POST'),
+    render_photo_pack: render('PRODUCTION',false),render_generated_pack:render('PRODUCTION',true), execute_post_plan: render('POST'),
     inspect_actual_media: async (scope, args, intent, signal) => {
       requireThat(scope.order_id && (scope.role === 'PRODUCTION' || scope.role === 'POST'), 'MEDIA_SCOPE_INVALID', '此检查入口只接受制作或后期角色', 409);
       const context = await executionContext(pool, scope.tenant_id, scope.order_id, scope.snapshot_hash); const ids = args.asset_ids as string[];
@@ -74,7 +81,7 @@ export function productionTools(pool: pg.Pool, cfg: Config, store: ObjectStorage
       requireThat(operation.stage_run_id === scope.stage_run_id, 'MEDIA_SELECTION_INVALID', '检查产物不属于当前阶段', 422);
       const receipt = await receiptFromArtifacts(pool, context, operation); const directory = inside(cfg.runtimeRoot, `media-inspect/${id('inspect')}`);
       await mkdir(directory, { recursive: true });
-      try { await pipeline.verify(context, receipt, directory, signal, new Set(ids)); }
+      try { await pipelineFor(context).verify(context, receipt, directory, signal, new Set(ids)); }
       finally { await rm(directory, { recursive: true, force: true }); }
       return { result: { inspected: true, tool_receipt_id: intent.id, artifact_ids: ids, output_set_hash: artifactSetHash(receipt.artifacts),
         reports: receipt.artifacts.filter(a => ids.includes(a.id)).map(a => ({ artifact_id: a.id, sha256: a.sha256, actual: a.spec.inspection })) } };

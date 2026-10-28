@@ -622,7 +622,7 @@ def main() -> None:
     save("contracts/codex-fixtures.json", add_fixtures(contract))
     tools = {
         "analyze_photos": ["CONTENT"], "validate_content_plan": ["CONTENT"],
-        "render_photo_pack": ["PRODUCTION"], "generate_reference_frames": ["PRODUCTION"],
+        "render_photo_pack": ["PRODUCTION"], "render_generated_pack": ["PRODUCTION"], "generate_reference_frames": ["PRODUCTION"],
         "submit_video": ["PRODUCTION"], "query_original_submission": ["PRODUCTION", "POST"],
         "inspect_actual_media": ROLES, "extract_review_evidence": ["REVIEW_FACTS", "REVIEW_STYLE"],
         "transcribe_actual_audio": ["POST", "REVIEW_FACTS", "REVIEW_STYLE"],

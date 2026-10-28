@@ -334,7 +334,13 @@ export class GenerationGateway {
     const claimed=await this.claim(row);if(!claimed)throw new PendingExternal(2,'GENERATION_BUSY');row=claimed;
     try{await this.recover(row);row=await this.row(row.tenant_id,row.id);await this.query(row,signal);
       row=await this.row(row.tenant_id,row.id);return this.result(await this.materialize(row,lease,signal));
-    }catch(error){await this.mediaFailure(row,error);throw error;}finally{await this.release(claimed);}
+    }catch(error){
+      await this.mediaFailure(row,error);
+      await this.pool.query(`UPDATE provider_submissions SET private=private||jsonb_build_object('last_error',$3::text),updated_at=now()
+        WHERE tenant_id=$1 AND id=$2 AND lease_generation=$4 AND lease_owner=$5`,
+        [row.tenant_id,row.id,code(error),claimed.lease_generation,claimed.lease_owner]);
+      throw error;
+    }finally{await this.release(claimed);}
   }
   /** Read-only completed input for an already-authorized POST role. Unresolved
    * supplier tasks stay in PRODUCTION and cannot be polled through this path. */

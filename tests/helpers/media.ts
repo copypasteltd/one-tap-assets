@@ -12,13 +12,14 @@ import { enqueueStage } from '../../src/worker/queue/enqueue.js';
 import { claimStage } from '../../src/worker/queue/leases.js';
 import { FONT_BINDING } from '../../src/worker/media/font.js';
 import { PHOTO_QC_POLICY } from '../../src/worker/review/qc.js';
+import {GENERATED_QC_POLICY} from '../../src/worker/generation/contracts.js';
 import {freezeRevisionPolicy,ensureRevisionBudget} from '../../src/worker/revisions/contract.js';
 import type {ArkContract} from '../../src/worker/providers/ark.js';
 import {bundleForVariant} from '../../src/worker/codex/skills.js';
 
 /** Actual private files, PostgreSQL and native media; a one-second synthetic
  * contract keeps fault tests bounded. This is not an official-variant run. */
-export async function mediaFixture(db: TestDatabase,options:{principal?:Principal;revisions?:boolean;generation?:{engine:'PER_SHOT_AI'|'REFERENCE_FILM';contracts:ArkContract[];variantId?:string}}={}) {
+export async function mediaFixture(db: TestDatabase,options:{principal?:Principal;revisions?:boolean;generation?:{engine:'PER_SHOT_AI'|'REFERENCE_FILM';contracts:ArkContract[];variantId?:string;twoShots?:boolean}}={}) {
   const assetIds = [id('photo'), id('photo'), id('photo')]; const f = await planningFixture(db, assetIds, options.principal);
   // Synthetic receipt accounting only, not a certified real-model image bound.
   f.admission.review_vision = { evidence_sha256: 'f'.repeat(64), detail: 'original', max_images: 100,
@@ -39,6 +40,8 @@ export async function mediaFixture(db: TestDatabase,options:{principal?:Principa
   await db.pool.query('UPDATE product_photo_versions SET photo_set_hash=$2 WHERE id=$1', [photoId, photoHash]);
   const source = structuredClone(f.source); source.timeline_policy = { ...source.timeline_policy, target_frames: 30,
     base_segments: [{ role: '商品实拍', start_seconds: 0, end_seconds: 1 }] };
+  if(options.generation?.twoShots)source.timeline_policy={...source.timeline_policy,target_frames:60,
+    base_segments:[{role:'商品实拍',start_seconds:0,end_seconds:1},{role:'细节展示',start_seconds:1,end_seconds:2}]};
   if(options.generation){source.engine=options.generation.engine;source.variant_id=options.generation.variantId??`synthetic-${options.generation.engine.toLowerCase()}`;}
   const creative = basePlan(f.profile, source);
   const base = (JSON.parse(readFileSync('assets/development/v1.1/contracts/codex-fixtures.json', 'utf8')) as { cases: { name: string; value: DTO<'CodexContract'> }[] }).cases.find(c => c.name === 'frozen_codex_contract')!.value;
@@ -46,7 +49,7 @@ export async function mediaFixture(db: TestDatabase,options:{principal?:Principa
     :(await db.pool.query('SELECT private FROM plan_versions WHERE id=$1', [f.plan.plan_id])).rows[0].private.bundle_hash as string;
   const cc: DTO<'CodexContract'> = { ...base, runtime_build_id: f.admission.runtime_build_id, runtime_sha256: f.admission.runtime_sha256,
     protocol_version: f.admission.protocol_version, model_version_id: f.admission.model_version_id, rate_version_id: f.admission.rate_version_id,
-    skill_bundle_hash: bundleHash, qc_policy_version: PHOTO_QC_POLICY, max_turns_per_role: 2, max_input_tokens: 80000, max_output_tokens: 8000, max_tool_calls: 24, agent_cost_ceiling_micro: 1000000 };
+    skill_bundle_hash: bundleHash, qc_policy_version: options.generation?GENERATED_QC_POLICY:PHOTO_QC_POLICY, max_turns_per_role: 2, max_input_tokens: 80000, max_output_tokens: 8000, max_tool_calls: 24, agent_cost_ceiling_micro: 1000000 };
   const contract: FrozenContract = { product: f.product, profile: f.profile, photo_set_hash: photoHash, identity_lock_hash: f.identityLock.content_hash,
     request: { product_id: f.product.product_id, photo_version: 1, profile_id: f.profile.profile_id, identity_lock_id: f.profile.identity_lock_id,
       preset_id: 'minimal-clean', preset_version: '3.1.0', variant_id: source.variant_id, variant_version: source.version },

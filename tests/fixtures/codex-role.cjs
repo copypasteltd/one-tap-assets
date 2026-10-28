@@ -95,7 +95,8 @@ async function dispatch(message) {
       output = { results };
       await tool('persist_stage_result', { result: output });
     } else if (input.phase === 'PRODUCTION' || input.phase === 'POST') {
-      const primary = input.phase === 'PRODUCTION' ? 'render_photo_pack' : 'execute_post_plan';
+      const engine = input.snapshot?.engine ?? input.source?.engine;
+      const primary = input.phase === 'PRODUCTION' ? ['PER_SHOT_AI','REFERENCE_FILM'].includes(engine)?'render_generated_pack':'render_photo_pack' : 'execute_post_plan';
       const made = await tool(primary, { snapshot_hash: input.snapshot_hash });
       const data = JSON.parse(made.content[0].text); output = data.stage_result || data;
       if (mode !== 'MEDIA_SKIP_INSPECT') {

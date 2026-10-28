@@ -4,7 +4,7 @@
 
 **Photograph a product, choose a preset, receive a coordinated asset pack.** One Tap Assets is a recoverable cloud production service designed primarily for **Alipay and Douyin mini-programs**. It covers product recognition, content planning, image/video production, post-production, review and asset retrieval. The planned **Plus web application** serves advanced editing and deeper production and remains P1 work.
 
-This repository is under active development: requirements **v3.1**, development contracts **v1.1**, and frozen **C “Yuzu Creative Studio” design v1.0**. The complete product and production admission have **not** passed; every official preset remains unavailable for sale. Shared screens, the native backend and several media/recovery paths are implemented. Real Codex operation, complete generative pipelines, native devices and commercial operation remain incomplete. See [implementation evidence](assets/implementation/current.json) and the [public verification summary](docs/verification/publication.json).
+This repository is under active development: requirements **v3.1**, development contracts **v1.1**, and frozen **C “Yuzu Creative Studio” design v1.0**. The complete product and production admission have **not** passed; every official preset remains unavailable for sale. Shared screens, the native backend and silent pack implementations for all three routes exist. Real Codex operation, audio/official variants, native devices and commercial operation remain incomplete. See [implementation evidence](assets/implementation/current.json) and the [public verification summary](docs/verification/publication.json).
 
 ## Screens and recorded interaction
 
@@ -34,10 +34,12 @@ A preset is a versioned declarative specification: inputs, product evidence, sho
 | Route | Behavior and use | Current boundary |
 | --- | --- | --- |
 | `PHOTO_LAYOUT` | Original photos, deterministic motion, rapid cuts, product cards and companion video | Actual media plus synthetic-role coverage for silent production/post/QC/double review/delivery |
-| `PER_SHOT_AI` | Per-shot references and clips for premium details, lifestyle scenes and single-shot presentations | Durable calls, mandatory reference identity gating and three scoped MCP handlers exist; complete stage and pack orchestration remains incomplete |
-| `REFERENCE_FILM` | Unified references/timecodes for continuous multi-shot ads, preserving contracted native audio | Film reference generation, identity gating and original video recovery exist; complete packs/post/final reviews and audio remain incomplete |
+| `PER_SHOT_AI` | Per-shot references and clips for premium details, lifestyle scenes and single-shot presentations | Silent reference review → actual generated packs → post/QC/final double review/delivery has native-media and synthetic-role coverage; official variants and real operation remain unverified |
+| `REFERENCE_FILM` | Unified references/timecodes for continuous multi-shot ads, preserving contracted native audio | The silent film route uses the same complete pack chain; native audio, official variants and real operation remain unverified |
 
 The paid route cannot silently fall back to photo layout. Moving a still is not a real turntable shot. One approved reference cannot replace complete-pack review. Audio is contracted separately: silent tests do not prove native sound, music or subtitles.
+
+Generated execution first derives references from the frozen Codex plan, completes and releases an independent facts reviewer, then starts the unique production role with `render_generated_pack`. It recovers original image/video intents, assembles actual generated PNG/MP4 and binds source/approval hashes through post and delivery. Fresh facts and style roles review the entire output pack. Reference and final facts reviews share the original role quota; takeover does not increase cost/call limits or extend the deadline. See the [silent-pack orchestration specification](docs/实施/生成式无声整包与阶段编排-v1.0.md) for fixture coverage and remaining admission boundaries.
 
 The official baseline comprises **10 styles and at least 14 execution variants**, all within the complete P0 target:
 
@@ -185,9 +187,11 @@ Root READMEs and operational guides are bilingual. Detailed historical requireme
 
 For UI evidence, start `dev:preview` and run `docs:media` in another terminal. `test:ui` invokes the same capture/assertion script. Local Edge, native FFmpeg/ffprobe and project-local Playwright recording components are required; see the [demo guide](docs/guides/DEMO.md).
 
-For this 2026-10-28 snapshot, type checking, **50/50 unit tests, 262/262 native integration tests**, server and both mini-program builds passed. The unchanged UI retains its previously verified replay build and ten-screen capture, with identical media hashes. Exact results live in the implementation JSON. Public summaries distinguish actual database/media processing from synthetic models/payments/isolation.
+For this 2026-10-28 snapshot, type checking, **50/50 unit tests, 269/269 native integration tests**, server and both mini-program builds passed. The unchanged UI retains its previously verified replay build and ten-screen capture, with identical media hashes. Exact results live in the implementation JSON. Public summaries distinguish actual database/media processing from synthetic models/payments/isolation.
 
-Remaining work includes generative stage orchestration and both complete generative routes, native audio, real Codex/isolation/cleanup, provider/payment/storage admission, four device groups, 14 variants × 30 full-pack benchmarks, complete community/aftercare, Plus/management UI and acceptance of all **58 requirements / 52 P0 requirements**. Follow [status and priorities](docs/guides/STATUS.md).
+For the final build-script fix, source hashes establish unchanged application/tests, the complete executed native integration report is retained, and type/unit/server/mini builds run again. `verify:implementation --retry-mini-builds` accepts only bounded CSS-build/verifier changes and checks the original log/report plus contracts/resources; application changes reject reuse. The default verifier always executes all six checks. See [validation provenance](docs/verification/README.md).
+
+Remaining work includes official-variant and real-service acceptance of both generative routes, native audio, real Codex/isolation/cleanup, provider/payment/storage admission, four device groups, 14 variants × 30 full-pack benchmarks, complete community/aftercare, Plus/management UI and acceptance of all **58 requirements / 52 P0 requirements**. Follow [status and priorities](docs/guides/STATUS.md).
 
 Each development round synchronizes code, both READMEs, affected guides, applicable screenshots/video/GIF and the [changelog](CHANGELOG.md), then commits, pushes normally and verifies the remote commit. Never overwrite unfamiliar remote work or commit credentials, customer photos, database files or caches.
 

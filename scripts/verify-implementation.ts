@@ -4,14 +4,55 @@ import { resolve, relative, join } from 'node:path';
 import { sha256, hash } from '../src/api/lib/crypto.js';
 const root = process.cwd(); const pnpm = resolve('runtime/tools/package-manager/node_modules/pnpm/bin/pnpm.cjs');
 await mkdir('runtime/test-results', { recursive: true }); await mkdir('assets/implementation', { recursive: true });
+interface FileHash {path:string;sha256:string}
+async function sourceFiles():Promise<FileHash[]> {
+  const found:FileHash[]=[];
+  async function walk(dir:string):Promise<void>{
+    for(const item of (await readdir(dir,{withFileTypes:true})).sort((a,b)=>a.name.localeCompare(b.name))){
+      const path=join(dir,item.name);if(item.isDirectory())await walk(path);
+      else if(/\.(?:ts|tsx|cjs|js|css|html|sql|json|py|ps1)$/.test(item.name))found.push({path:relative(root,path).replaceAll('\\','/'),sha256:sha256(await readFile(path))});
+    }
+  }
+  for(const dir of ['src','tests','scripts'])await walk(resolve(dir));
+  for(const path of ['package.json','pnpm-lock.yaml','.npmrc','tsconfig.json','vitest.config.ts','vitest.integration.config.ts'])found.push({path,sha256:sha256(await readFile(path))});
+  return found;
+}
+type CommandCheck={command:string;status:'PASS'|'FAIL';log_path:string;log_sha256:string};
+let retainedIntegration:{checked_at:string;previous_source_set_hash:string;validated_source_set_hash:string;allowed_changed_files:string[];report_sha256:string;command:CommandCheck}|undefined;
+// Explicit recovery of a failed mini build, not an application-test cache.
+// Only the minimizer config and this verifier may differ from the prior run;
+// type/unit/server/mini checks run again, while native integration is retained.
+if(process.argv.includes('--retry-mini-builds')){
+  const previous=JSON.parse(await readFile('assets/implementation/current.json','utf8')) as {
+    checked_at:string;source_set_hash:string;files:FileHash[];runtime_contract_files:FileHash[];resource_files:FileHash[];commands:CommandCheck[]};
+  const current=await sourceFiles(),prior=new Map(previous.files.map(f=>[f.path,f.sha256]));
+  const allowed=new Set(['scripts/mini-config.cjs','scripts/verify-implementation.ts']);
+  const changed=current.filter(f=>prior.get(f.path)!==f.sha256).map(f=>f.path);
+  if(current.length!==previous.files.length||current.some(f=>!prior.has(f.path))||changed.some(path=>!allowed.has(path)))
+    throw new Error('Mini retry requires unchanged application/test/config inputs');
+  for(const f of [...previous.runtime_contract_files,...previous.resource_files])
+    if(sha256(await readFile(f.path))!==f.sha256)throw new Error(`Mini retry contract/resource changed: ${f.path}`);
+  const command=previous.commands.find(c=>c.command==='./scripts/run.ps1 test:integration');
+  if(!command||command.status!=='PASS'||command.log_path!=='runtime/test-results/test-integration.log'
+    ||sha256(await readFile(command.log_path))!==command.log_sha256)throw new Error('Original passing native integration log unavailable');
+  const raw=await readFile('runtime/test-results/integration.json'),native=JSON.parse(raw.toString('utf8')) as TestReport;
+  if(!native.success||native.numFailedTests||native.numTotalTests!==native.numPassedTests||native.startTime>Date.parse(previous.checked_at)
+    ||!native.testResults.length||native.testResults.some(s=>s.status!=='passed'||s.assertionResults.some(t=>t.status!=='passed')))
+    throw new Error('Original complete integration report unavailable');
+  retainedIntegration={checked_at:previous.checked_at,previous_source_set_hash:previous.source_set_hash,validated_source_set_hash:hash(current),allowed_changed_files:changed,report_sha256:sha256(raw),command};
+}
 const results: { command: string; status: 'PASS' | 'FAIL'; log_path: string; log_sha256: string }[] = [];
 const commands = ['typecheck', 'test', 'test:integration', 'build:server', 'build:alipay', 'build:douyin'];
 for (const command of commands) {
+  if(command==='test:integration'&&retainedIntegration){results.push(retainedIntegration.command);
+    process.stdout.write('test:integration: PASS (retained native run; build-only delta verified)\n');continue;}
   const started = Date.now();
   const result = spawnSync(process.execPath, [pnpm, command], { cwd: root, windowsHide: true, encoding: 'utf8', env: process.env,
     // Native media and Codex protocol fixtures execute serially; preserve their
     // assertions and per-test limits while allowing the growing suite to finish.
-    timeout: command === 'test:integration' ? 720000 : 180000 });
+    // The observed 269-case run took 700s even with incomplete SAMPLE work;
+    // allow the complete native SAMPLE regression and process/file I/O overhead.
+    timeout: command === 'test:integration' ? 900000 : 180000 });
   const diagnostic = { exit_code: result.status, signal: result.signal, error_code: (result.error as NodeJS.ErrnoException | undefined)?.code ?? null, elapsed_ms: Date.now() - started };
   const log = (result.stdout ?? '') + (result.stderr ?? '') + `\nVerification process: ${JSON.stringify(diagnostic)}\n`; const path = `runtime/test-results/${command.replaceAll(':', '-')}.log`;
   await writeFile(path, log); const passed = result.status === 0; results.push({ command: `./scripts/run.ps1 ${command}`, status: passed ? 'PASS' : 'FAIL', log_path: path, log_sha256: sha256(log) });
@@ -25,6 +66,7 @@ let integrationReport: TestReport | undefined; let unitReport: TestReport | unde
 if (results.length === commands.length && results.every(r => r.status === 'PASS')) {
   for (const kind of ['unit', 'integration']) {
     const path = `runtime/test-results/${kind}.json`; const raw = await readFile(path); const report = JSON.parse(raw.toString('utf8')) as TestReport;
+    if(kind==='integration'&&retainedIntegration&&sha256(raw)!==retainedIntegration.report_sha256)throw new Error('Retained integration report changed during mini retry');
     if (!report.success || report.numFailedTests || report.numTotalTests !== report.numPassedTests) throw new Error(`Test report disagrees: ${kind}`);
     if (kind === 'integration') integrationReport = report;
     else unitReport = report;
@@ -36,15 +78,8 @@ function verifiedCases(file: string, minimum: number, kind = 'integration'): boo
   const entry = (kind === 'integration' ? integrationReport : unitReport)?.testResults.find(result => result.name.replaceAll('\\', '/').endsWith(`/tests/${kind}/${file}`));
   return entry?.status === 'passed' && entry.assertionResults.length >= minimum && entry.assertionResults.every(result => result.status === 'passed');
 }
-const files: { path: string; sha256: string }[] = [];
-async function inventory(dir: string): Promise<void> {
-  for (const item of (await readdir(dir, { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
-    const path = join(dir, item.name); if (item.isDirectory()) await inventory(path);
-    else if (/\.(?:ts|tsx|cjs|js|css|html|sql|json|py|ps1)$/.test(item.name)) files.push({ path: relative(root, path).replaceAll('\\', '/'), sha256: sha256(await readFile(path)) });
-  }
-}
-await inventory(resolve('src')); await inventory(resolve('tests')); await inventory(resolve('scripts'));
-for (const path of ['package.json', 'pnpm-lock.yaml', '.npmrc', 'tsconfig.json', 'vitest.config.ts', 'vitest.integration.config.ts']) files.push({ path, sha256: sha256(await readFile(path)) });
+const files=await sourceFiles();
+if(retainedIntegration&&hash(files)!==retainedIntegration.validated_source_set_hash)throw new Error('Source changed during mini retry');
 const contractFiles: { path: string; sha256: string }[] = [];
 async function contractInventory(dir: string): Promise<void> {
   for (const item of (await readdir(dir, { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
@@ -59,6 +94,8 @@ for (const path of ['assets/presets/presets.v3.1.json', 'assets/blueprints/äº‘ç«
 const report = {
   schema_version: '1.0.0', requirements_version: '3.1', development_contract_version: '1.1', status: 'IN_PROGRESS',
   checked_at: new Date().toISOString(), full_product_verified: false, production_admitted: false, cloud_deployed: false,
+  verification_mode:retainedIntegration?'MINI_BUILD_RETRY_WITH_RETAINED_NATIVE_INTEGRATION':'FRESH_FULL',
+  retained_integration:retainedIntegration??null,
   command_checks_passed: results.length === commands.length && results.every(r => r.status === 'PASS'), commands: results, suites,
   source_files: files.length, source_set_hash: hash(files), files,
   runtime_contract_files: contractFiles, runtime_contract_set_hash: hash(contractFiles),
@@ -91,9 +128,14 @@ const report = {
     reference_purchase_gate_fixture_verified: verifiedCases('generation-gateway.test.ts',35) && verifiedCases('reference-identity.test.ts',15),
     reference_identity_service_implemented: true,
     reference_identity_service_fixture_verified: verifiedCases('reference-identity.test.ts',15),
+    silent_generated_pack_implemented: true,
+    silent_generated_pack_fixture_verified: verifiedCases('generated-production.test.ts',7),
+    generated_post_qc_final_review_delivery_implemented: true,
+    generated_original_role_recovery_fixture_verified: verifiedCases('generated-production.test.ts',7),
+    silent_qc_policy: 'YPCC-QC-GENERATED-SILENT-1.0.0',
     all_generated_routes_verified: false, native_audio_verified: false, real_provider_call_verified: false,
-    notes: 'Original production-lease provider gateway and three scoped MCP handlers are implemented. Both video routes require the complete original independent identity report, released instance and actual generated PNGs; immutable prepared evidence binds the report/frame hashes to the paid intent and is revalidated before reservation, send, recovery and media completion. Requests, original ACK/query receipts, task IDs and frozen model/rate contracts are durable; UNKNOWN holds are not rebought. POST reads only completed original outputs. Tool inputs are platform-derived and reject arbitrary prompts/references or silent aspect-ratio changes. The 35 gateway, 6 MCP and 15 reference cases exercise native PostgreSQL/actual PNG-MP4/HTTPS-MCP with synthetic model, usage and isolation responses. Same-generation same-role uniqueness and original shared cost/call limits remain enforced; protocol continuation uses actual stage lease takeover. Complete generative stage orchestration, pack assembly, generated post/QC/final double review/delivery, native audio and real provider admission remain incomplete.' },
-  codex_implementation: { scope: 'CONTENT PLAN, PHOTO_LAYOUT PRODUCTION/POST and fresh visual REVIEW_FACTS/REVIEW_STYLE runtime adapters, metered text and sealed-image Responses gateway, atomic PHOTO publication, independent seven-stage creator SAMPLE pipeline',
+    notes: 'Both silent generated routes now execute platform-derived references, a released independent identity review, one PRODUCTION role and bounded render_generated_pack, actual generated image/video assembly, explicit POST, route-specific QC, fresh final facts/style reviews and atomic delivery. Reference and final facts runs share the original two-turn facts bucket; five paid roles and twelve tool calls must fit the sold limits. Same-generation role uniqueness, original budget and deadline remain unchanged. Generated source/approval hashes and actual stored bytes are revalidated through post, QC and publication, including inside the publication transaction. Seven complete-pack/rejection/recovery fixtures join the 35 gateway, 6 MCP and 15 reference cases, using native PostgreSQL, actual PNG/MP4, HTTPS and stdio/MCP with synthetic model, usage and isolation. Actual source clip colors and order are checked after final download; no still-animation substitution. Official audio variants, real semantic quality/provider admission, generated SAMPLE/revisions and full variant benchmarks remain incomplete.' },
+  codex_implementation: { scope: 'CONTENT PLAN, silent PHOTO_LAYOUT/PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST, independent generated-reference facts review and fresh final visual REVIEW_FACTS/REVIEW_STYLE runtime adapters, metered Responses gateway, atomic pack publication, independent seven-stage photo creator SAMPLE pipeline',
     fixture_tests_only: true, real_codex_turn_verified: false, native_launcher_executable_provided: false,
     native_isolation_verified: false, certified_token_cost_bound_verified: false, independent_reaper_implemented: true,
     independent_reaper_fixture_verified: verifiedCases('instance-reaper.test.ts', 11) && verifiedCases('built-worker.test.ts', 3),
@@ -101,7 +143,7 @@ const report = {
     scoped_internal_traffic_fixture_verified: verifiedCases('agent-traffic.test.ts', 3),
     role_lease_heartbeat_fixture_verified: verifiedCases('codex-planning.test.ts', 11),
     limited_revision_notes: 'Five durable REVISION stages produce a new linked PHOTO_LAYOUT/no-speech manifest for existing-image cover selection, full-pack display order or actual replacement copy bytes. Three new synthetic roles review a new sealed packet; original expiry and original delivery remain intact. Pre-sale frozen aftercare costs share the original total budget across failed retries; UNKNOWN holds are not reset. Stage fencing, recovery, late writes and private role graph are exercised. Generated/audio revisions and real Codex/isolation/device verification remain incomplete. Internal traffic is bounded per live run across all four tool/inference routes; invalid/revoked tokens use the shared IP bucket, and durable cost/tool limits still apply.',
-    notes: 'Real HTTPS/MCP, synthetic native stdio roles, persisted planning/photo media and complete sealed visual/text review inputs, original receipt recovery, immutable independent reports, fenced atomic publication and authorized hash-checked downloads are exercised. Independent durable reaping uses registered real Node children and test-only cleanup ports; claims, expired-owner rejection, immutable retries and actual directory guards are exercised. All model judgments, token usage and native isolation assertions remain fixtures. Real Codex, restricted OS identity/process-tree cleanup, certified image cost, semantic quality, generated/audio routes and bounded repair remain incomplete.' },
+    notes: 'Real HTTPS/MCP, synthetic native stdio roles, persisted planning/photo media and complete sealed visual/text review inputs, original receipt recovery, immutable independent reports, fenced atomic publication and authorized hash-checked downloads are exercised. Independent durable reaping uses registered real Node children and test-only cleanup ports; claims, expired-owner rejection, immutable retries and actual directory guards are exercised. All model judgments, token usage and native isolation assertions remain fixtures. Real Codex, restricted OS identity/process-tree cleanup, certified image cost, semantic quality, official generated/audio variants and bounded repair remain incomplete; both short silent generated pack fixtures have separate native coverage.' },
   lifecycle_implementation: { independent_reaper_entry: 'src/worker/lifecycle/reaper-main.ts',
     cleanup_protocol: 'YPCC-CLEANUP-1', cleanup_evidence: 'IMMUTABLE_PER_GENERATION',
     cleanup_ports_test_only: true, real_native_cleanup_verified: false,

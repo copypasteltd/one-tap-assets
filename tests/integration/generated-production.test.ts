@@ -1,0 +1,196 @@
+import {beforeAll,afterAll,afterEach,it,expect} from 'vitest';
+import {mkdir,readFile,rm,writeFile} from 'node:fs/promises';
+import {join} from 'node:path';
+import type {FastifyInstance} from 'fastify';
+import sharp from 'sharp';
+import {testDatabase,type TestDatabase} from '../helpers/database.js';
+import {mediaFixture} from '../helpers/media.js';
+import {syntheticArkContract} from '../helpers/generation.js';
+import {syntheticSse} from '../helpers/codex.js';
+import {FixtureLauncher} from '../helpers/role-launcher.js';
+import {config,inside} from '../../src/api/config.js';
+import {buildApp} from '../../src/api/app.js';
+import {id,hash,sha256} from '../../src/api/lib/crypto.js';
+import {AppError} from '../../src/api/lib/errors.js';
+import {createDownloadLink,getDeliverables} from '../../src/api/modules/delivery.js';
+import {ArkClient} from '../../src/worker/providers/ark.js';
+import {GenerationGateway} from '../../src/worker/generation/gateway.js';
+import {validateGenerationExecution} from '../../src/worker/generation/contracts.js';
+import {executionContext} from '../../src/worker/compiler/order-context.js';
+import {operationArtifacts} from '../../src/worker/media/artifacts.js';
+import {nativeCommand,inspectVideo} from '../../src/worker/media/native.js';
+import {CodexRuntimeAdapter} from '../../src/worker/codex/runtime.js';
+import {MediaStageService} from '../../src/worker/codex/media-stage.js';
+import {ToolConsumer} from '../../src/worker/tool-gateway/consumer.js';
+import {productionTools} from '../../src/worker/tool-gateway/production-tools.js';
+import {reviewTools} from '../../src/worker/tool-gateway/review-tools.js';
+import {claimStage,completeStage,heartbeatStage,PendingExternal,type StageLease} from '../../src/worker/queue/leases.js';
+import {enqueueStage} from '../../src/worker/queue/enqueue.js';
+import {QualityControlService} from '../../src/worker/review/qc.js';
+import {ReviewStageService} from '../../src/worker/review/stage.js';
+import {PublicationService} from '../../src/worker/review/publication.js';
+
+// Real PostgreSQL/HTTPS/stdio/MCP/PNG/MP4; synthetic model and OS identity.
+// These small silent contracts do not certify the official generated variants.
+let db:TestDatabase,root:string,image:Buffer;
+const clips=new Map<string,Buffer>();
+const active:{app:FastifyInstance;controller:AbortController;task:Promise<void>}[]=[];
+beforeAll(async()=>{
+  db=await testDatabase();root=inside(db.cfg.runtimeRoot,`tests/generated-pack/${id('media')}`);await mkdir(root,{recursive:true});
+  image=await sharp({create:{width:640,height:800,channels:3,background:'#284E73'}}).jpeg().toBuffer();
+  for(const color of ['red','blue']){
+    const path=join(root,`${color}.mp4`);
+    await nativeCommand(db.cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-f','lavfi','-i',`color=c=${color}:s=360x640:r=24`,
+      '-t','1','-an','-c:v','libx264','-pix_fmt','yuv420p','-movflags','+faststart',path],{cwd:root,timeoutMs:30000});
+    clips.set(color,await readFile(path));
+  }
+  await writeFile(join(root,'concat.txt'),"file 'red.mp4'\nfile 'blue.mp4'\n");
+  await nativeCommand(db.cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-f','concat','-safe','1','-i',join(root,'concat.txt'),
+    '-an','-c','copy',join(root,'film.mp4')],{cwd:root,timeoutMs:30000});clips.set('film',await readFile(join(root,'film.mp4')));
+});
+afterEach(async()=>{
+  for(const a of active.splice(0)){a.controller.abort();await a.task;await a.app.close();}
+  await db.pool.query("UPDATE stage_runs SET state='CANCELLED' WHERE state NOT IN ('SUCCEEDED','FAILED')");
+});
+afterAll(async()=>{await db?.close();if(root)await rm(root,{recursive:true,force:true});});
+type Engine='PER_SHOT_AI'|'REFERENCE_FILM';
+async function setup(engine:Engine,options:{mode?:string;wrongAspect?:boolean;unknownReference?:boolean;loseFirstQuery?:boolean}={}){
+  const ic=syntheticArkContract('IMAGE'),vc=syntheticArkContract('VIDEO');vc.video!.durations=[1,2];
+  if(!options.wrongAspect){vc.video!.ratios=['9:16'];vc.video!.dimensions=[{resolution:'480p',ratio:'9:16',width:360,height:640}];}
+  const cfg=config({...db.cfg,generationEnabled:true,provider:{...db.cfg.provider,apiKey:'synthetic-not-real',baseUrl:ic.base_url,
+    imageModel:ic.request_model,videoModel:vc.request_model,allowedHosts:['generation.example.test','media.example.test']}});
+  const f=await mediaFixture({...db,cfg},{generation:{engine,contracts:[ic,vc],twoShots:true,
+    variantId:engine==='PER_SHOT_AI'?'quiet-luxury.ai-detail':'portrait-social.ai-presenter-multi'}});
+  f.cfg.provider.allowedHosts.push('generation.example.test','media.example.test');
+  const calls:{url:string;method:string;body?:Record<string,unknown>}[]=[],tasks=new Map<string,string>(),images:number[]=[];let queryLost=false;
+  const gateway=new GenerationGateway(db.pool,f.cfg,f.store,new ArkClient(f.cfg,async(url,_hosts,optionsHttp={})=>{
+    const body=optionsHttp.body?JSON.parse(String(optionsHttp.body)) as Record<string,unknown>:undefined;
+    calls.push({url,method:optionsHttp.method??'GET',...(body?{body}:{})});
+    let value:unknown;
+    if(url.includes('/images/generations')){
+      if(options.unknownReference)throw new AppError('REMOTE_UNKNOWN','Synthetic lost acknowledgement',503);
+      value={model:ic.actual_model,data:[{b64_json:image.toString('base64')}],usage:{generated_images:1}};
+    }else if(optionsHttp.method==='POST'){
+      const task=id('synthetic_video'),content=body!.content as {type:string;text?:string}[];
+      const plan=JSON.parse(content.find(i=>i.type==='text')!.text!.split('\n').at(-1)!) as {shots:{shot_id:string}[]};
+      tasks.set(task,engine==='REFERENCE_FILM'?'film':plan.shots[0]!.shot_id==='shot-1'?'red':'blue');value={id:task};
+    }else if(url.startsWith('https://media.example.test/'))value=clips.get(tasks.get(url.split('/').at(-1)!.replace('.mp4',''))!)!;
+    else {if(options.loseFirstQuery&&!queryLost){queryLost=true;throw new AppError('REMOTE_UNKNOWN','Synthetic original status timeout',503);}
+      const task=url.split('/').at(-1)!;value={id:task,model:vc.actual_model,status:'succeeded',
+      content:{video_url:`https://media.example.test/${task}.mp4`},usage:{completion_tokens:250,total_tokens:250}};}
+    const bytes=Buffer.isBuffer(value)?value:Buffer.from(JSON.stringify(value));
+    return {status:200,headers:{},bytes,json:()=>JSON.parse(bytes.toString('utf8')) as unknown};
+  }));
+  const app=await buildApp({cfg:f.cfg,pool:db.pool,inferenceHttp:async(_cfg,_url,o)=>{
+    const input=JSON.parse(o!.body!.toString()).input[0].content as {type:string}[];
+    images.push(Array.isArray(input)?input.filter(c=>c.type==='input_image').length:0);
+    return {status:200,headers:{'content-type':'text/event-stream'},bytes:syntheticSse(f.admission),json:()=>null};
+  }});
+  await app.listen({host:'127.0.0.1',port:0});const address=app.server.address();if(!address||typeof address==='string')throw new Error('Missing HTTPS');
+  f.cfg.publicBaseUrl=`https://localhost:${address.port}`;
+  const controller=new AbortController(),launcher=new FixtureLauncher(options.mode),executor=new CodexRuntimeAdapter(db.pool,f.cfg,launcher);
+  const media=productionTools(db.pool,f.cfg,f.store,gateway),review=reviewTools(db.pool,f.cfg,f.store);
+  active.push({app,controller,task:new ToolConsumer(db.pool,id('generated_tools'),{...media,...review,
+    persist_stage_result:(scope,...args)=>(scope.role.startsWith('REVIEW_')?review:media).persist_stage_result!(scope,...args)}).run(controller.signal)});
+  return {...f,app,controller,launcher,executor,gateway,calls,images,
+    service:new MediaStageService(db.pool,f.cfg,executor,{gateway,store:f.store})};
+}
+async function finish(lease:StageLease,handle:()=>Promise<(db:import('pg').PoolClient)=>Promise<void>>){
+  const pulse=setInterval(()=>{void heartbeatStage(db.pool,lease);},5000);
+  try{await completeStage(db.pool,lease,await handle());}finally{clearInterval(pulse);}
+}
+async function next(f:Awaited<ReturnType<typeof setup>>,name:string,parent:StageLease){
+  const stageId=await enqueueStage(db.pool,{tenantId:f.p.tenantId,scopeType:'ORDER',scopeId:f.orderId,name,inputHash:f.snapshotHash,
+    deadlineAt:f.snapshot.deadline_at,jobId:f.lease.job_id!,dependencies:[parent.id]});
+  const lease=(await claimStage(db.pool,id('generated_worker'),[name]))!;expect(lease.id).toBe(stageId);return lease;
+}
+it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('delivers the actual silent %s pack through reference review, production, post, QC and final independent reviews',async engine=>{
+  const f=await setup(engine,{loseFirstQuery:true}),signal=f.controller.signal;
+  // A crash after role completion but before stage commit must reuse its role,
+  // supplier intents and charged responses after a real lease takeover.
+  const first=await f.service.handle(f.lease,signal),posts=f.calls.filter(c=>c.method==='POST').length;
+  expect(f.launcher.launches).toBe(2);expect(f.images[0]).toBe(3+(engine==='PER_SHOT_AI'?2:1));
+  await db.pool.query("UPDATE stage_runs SET lease_expires_at=now()-interval '1 second' WHERE id=$1",[f.lease.id]);
+  const old=f.lease,lease=(await claimStage(db.pool,id('takeover'),['PRODUCTION']))!;
+  expect(lease.id).toBe(old.id);expect(Number(lease.fencing_token)).toBe(Number(old.fencing_token)+1);
+  await finish(lease,()=>f.service.handle(lease,signal));expect(f.launcher.launches).toBe(2);
+  await expect(completeStage(db.pool,old,first)).rejects.toMatchObject({code:'LEASE_LOST'});
+  expect(f.calls.filter(c=>c.method==='POST')).toHaveLength(posts);
+  const post=(await claimStage(db.pool,id('post'),['POST']))!;await finish(post,()=>f.service.handle(post,signal));
+  const qc=await next(f,'QC',post);await finish(qc,()=>new QualityControlService(db.pool,f.cfg,f.store).handle(qc,signal));
+  const reviewer=new ReviewStageService(db.pool,f.cfg,f.executor);
+  const facts=await next(f,'REVIEW_FACTS',qc);await finish(facts,()=>reviewer.handle(facts,signal));
+  const style=await next(f,'REVIEW_STYLE',facts);await finish(style,()=>reviewer.handle(style,signal));
+  const delivery=await next(f,'DELIVER',style),publisher=new PublicationService(db.pool,f.cfg,f.store);
+  const context=await executionContext(db.pool,f.p.tenantId,f.orderId,f.snapshotHash),postPack=await operationArtifacts(db.pool,context,'POST');
+  for(const a of postPack.receipt.artifacts.filter(a=>a.spec.kind!=='copy')){
+    expect(a.spec.generation_sources!.length).toBeGreaterThan(0);expect(a.spec.reference_approval_hash).toMatch(/^[a-f0-9]{64}$/);
+  }
+  const commit=await publisher.handle(delivery,signal);
+  // Publication repeats source authorization in its transaction, including a
+  // reference revoked after preflight. Rollback cannot publish a partial pack.
+  const source=(await db.pool.query("SELECT private FROM provider_submissions WHERE order_id=$1 AND generation_kind='VIDEO' LIMIT 1",[f.orderId])).rows[0].private.output;
+  await db.pool.query('UPDATE private_object_writes SET delete_requested=true WHERE object_key=$1',[source.object_key]);
+  await expect(completeStage(db.pool,delivery,commit)).rejects.toMatchObject({code:'GENERATION_MEDIA_REVOKED'});
+  expect((await db.pool.query('SELECT id FROM delivery_manifests WHERE order_id=$1',[f.orderId])).rowCount).toBe(0);
+  await db.pool.query('UPDATE private_object_writes SET delete_requested=false WHERE object_key=$1',[source.object_key]);
+  await completeStage(db.pool,delivery,commit);
+  const pack=await getDeliverables(db.pool,f.p,f.orderId);expect(pack.items).toHaveLength(f.snapshot.outputs.length);
+  const item=pack.items.find(i=>i.kind==='video')!;expect(item.duration_frames).toBe(60);expect(item.fps).toBe(30);
+  const link=await createDownloadLink(db.pool,f.cfg,f.p,item.deliverable_id),url=new URL(link.url);
+  const download=await f.app.inject({method:'GET',url:url.pathname+url.search});expect(download.statusCode).toBe(200);
+  expect(sha256(download.rawPayload)).toBe(item.sha256);
+  const actual=join(root,`${engine}.mp4`);await writeFile(actual,download.rawPayload);const inspected=await inspectVideo(f.cfg,actual,signal);
+  expect(inspected).toMatchObject({width:1080,height:1920,frames:60,fps:30,hasAudio:false});
+  for(const [index,red] of [[5,true],[45,false]] as const){
+    const path=join(root,`${engine}-${index}.png`);
+    await nativeCommand(f.cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-i',actual,'-vf',`select=eq(n\\,${index})`,
+      '-frames:v','1',path],{cwd:root,timeoutMs:30000,signal});const stats=await sharp(path).stats();
+    expect(red?stats.channels[0]!.mean-stats.channels[2]!.mean:stats.channels[2]!.mean-stats.channels[0]!.mean).toBeGreaterThan(150);
+  }
+  const runs=(await db.pool.query(`SELECT r.id,r.role,r.state,i.state AS instance_state FROM agent_runs r JOIN agent_instances i ON i.id=r.instance_id
+    WHERE i.order_id=$1`,[f.orderId])).rows;expect(runs).toHaveLength(5);expect(new Set(runs.map(r=>r.id)).size).toBe(5);
+  expect(runs.every(r=>r.state==='SUCCEEDED'&&r.instance_state==='RELEASED')).toBe(true);
+  const counts=(await db.pool.query(`SELECT r.role,count(*)::int AS n FROM inference_requests q JOIN agent_runs r ON r.id=q.run_id
+    WHERE q.scope_id=$1 GROUP BY r.role ORDER BY r.role`,[f.orderId])).rows;
+  expect(counts).toEqual([{role:'POST',n:1},{role:'PRODUCTION',n:1},{role:'REVIEW_FACTS',n:2},{role:'REVIEW_STYLE',n:1}]);
+  const submissions=(await db.pool.query('SELECT operation_key,state FROM provider_submissions WHERE order_id=$1',[f.orderId])).rows;
+  expect(submissions.every(s=>s.state==='SUCCEEDED')).toBe(true);expect(new Set(submissions.map(s=>s.operation_key)).size).toBe(submissions.length);
+  expect(f.calls.filter(c=>c.method==='POST')).toHaveLength(submissions.length);
+  expect((await db.pool.query("SELECT id FROM provider_submissions WHERE order_id=$1 AND generation_kind='VIDEO' AND private->>'last_error'='REMOTE_UNKNOWN'",[f.orderId])).rowCount).toBe(1);
+  const packTools=(await db.pool.query("SELECT state,data->>'error_code' AS code FROM agent_tool_intents WHERE stage_run_id=$1 AND tool_name='render_generated_pack'",[lease.id])).rows;
+  expect(packTools).toEqual([{state:'SUCCEEDED',code:'GENERATION_PACK_PENDING'}]);
+  const money=(await db.pool.query('SELECT reserved_micro::int AS reserved,spent_micro::int AS spent,private FROM orders WHERE id=$1',[f.orderId])).rows[0];
+  expect(money.reserved).toBe(0);expect(money.spent).toBeGreaterThan(0);expect(hash(money.private.contract)).toBe(hash(f.contract));
+  expect((await db.pool.query("SELECT id FROM outbox_events WHERE aggregate_id=$1 AND aggregate_type='ReleaseRequested' AND event_key=$2",[f.orderId,`release:delivered:${f.orderId}`])).rowCount).toBe(1);
+},120000);
+it.each(['REFERENCE_FAIL','REFERENCE_UNCERTAIN'])('stops %s before starting production or buying a video and reuses the original decision',async mode=>{
+  const f=await setup('PER_SHOT_AI',{mode});
+  for(let i=0;i<2;i++)await expect(f.service.handle(f.lease,f.controller.signal)).rejects.toMatchObject({code:'REFERENCE_IDENTITY_REJECTED'});
+  expect(f.launcher.launches).toBe(1);expect(f.calls.filter(c=>c.method==='POST')).toHaveLength(2);
+  expect((await db.pool.query("SELECT id FROM provider_submissions WHERE order_id=$1 AND generation_kind='VIDEO'",[f.orderId])).rowCount).toBe(0);
+  expect((await db.pool.query('SELECT id FROM media_operations WHERE order_id=$1',[f.orderId])).rowCount).toBe(0);
+});
+it('refuses an unsupported sold video aspect before any reference purchase or role',async()=>{
+  const f=await setup('REFERENCE_FILM',{wrongAspect:true});
+  await expect(f.service.handle(f.lease,f.controller.signal)).rejects.toMatchObject({code:'GENERATION_VIDEO_SPEC_UNAVAILABLE'});
+  expect(f.calls).toHaveLength(0);expect(f.launcher.launches).toBe(0);
+});
+it('rejects insufficient original reference/final-review quotas, vision capacity and durations at admission',async()=>{
+  const f=await setup('PER_SHOT_AI');
+  for(const [change,code] of [
+    [(c:typeof f.contract)=>{c.runtime_binding!.limits.max_requests_per_role=1;},'GENERATION_ROLE_BUDGET_INVALID'],
+    [(c:typeof f.contract)=>{c.runtime_binding!.admission.review_vision!.max_images=4;},'REFERENCE_VISION_NOT_ADMITTED'],
+    [(c:typeof f.contract)=>{c.generation_contracts!.find(c=>c.wire==='ARK_VIDEO')!.video!.durations=[2];
+      const wire=c.generation_contracts!.find(c=>c.wire==='ARK_VIDEO')!;c.model_versions.find(m=>m.actual_model===wire.actual_model)!.capability_hash=hash(wire);},'GENERATION_VIDEO_SPEC_UNAVAILABLE']
+  ] as const){const c=structuredClone(f.contract);change(c);expect(()=>validateGenerationExecution(c)).toThrowError(expect.objectContaining({code}));}
+  expect(f.calls).toHaveLength(0);expect(f.launcher.launches).toBe(0);
+});
+it('retains an unknown reference purchase and its original hold without resubmitting or starting a reviewer',async()=>{
+  const f=await setup('REFERENCE_FILM',{unknownReference:true});
+  await expect(f.service.handle(f.lease,f.controller.signal)).rejects.toBeInstanceOf(PendingExternal);
+  await expect(f.service.handle(f.lease,f.controller.signal)).rejects.toMatchObject({code:'GENERATION_REFERENCE_PENDING'});
+  expect(f.calls.filter(c=>c.method==='POST')).toHaveLength(1);expect(f.launcher.launches).toBe(0);
+  const rows=(await db.pool.query('SELECT state FROM provider_submissions WHERE order_id=$1',[f.orderId])).rows;expect(rows).toEqual([{state:'UNKNOWN'}]);
+  expect((await db.pool.query('SELECT reserved_micro::int AS n FROM orders WHERE id=$1',[f.orderId])).rows[0].n).toBe(100);
+});

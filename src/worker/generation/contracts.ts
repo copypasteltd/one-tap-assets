@@ -5,6 +5,7 @@ import type {FrozenContract,ModelBinding} from '../compiler/snapshot.js';
 import {admitArkContract,frozenArkContract,type ArkContract} from '../providers/ark.js';
 
 export interface GenerationModelRow {id:string;status:string;data:ModelBinding;private?:{ark_contract?:unknown}}
+export const GENERATED_QC_POLICY='YPCC-QC-GENERATED-SILENT-1.0.0';
 function matches(c:ArkContract,row:GenerationModelRow):boolean{
   const role=c.wire==='ARK_IMAGE'?'IMAGE':'VIDEO';
   return c.model_version_id===row.id&&row.data.provider===c.provider&&row.data.actual_model===c.actual_model
@@ -36,4 +37,24 @@ export function validateGenerationBudget(contract:FrozenContract):void{
     +BigInt(contract.codex_contract.agent_cost_ceiling_micro)+BigInt(contract.revision_policy?.budget_micro??0)+BigInt(contract.repair_ceiling_micro);
   requireThat(minimum<=BigInt(contract.budget_micro),'GENERATION_BUDGET_INVALID','原总预算不能覆盖冻结素材、Agent、售后与修复上界',503);
   requireThat(contract.source.audio_policy.speech==='none','NATIVE_AUDIO_NOT_ADMITTED','原生人声和人物能力尚未完成单独准入',503);
+}
+/** Admission before the first paid call, never a runtime quota increase. The
+ * reference reviewer and final facts reviewer share the original facts bucket. */
+export function validateGenerationExecution(contract:FrozenContract):void{
+  validateGenerationBudget(contract);
+  requireThat(contract.source.engine!=='PHOTO_LAYOUT'&&contract.codex_contract.qc_policy_version===GENERATED_QC_POLICY,
+    'GENERATION_QC_NOT_ADMITTED','生成式订单必须冻结对应的无声全包验收规则',503);
+  const binding=contract.runtime_binding,cc=contract.codex_contract;
+  requireThat(binding&&binding.limits.max_requests>=5&&(binding.limits.max_requests_per_role??0)>=2
+    &&cc.max_turns_per_role>=2&&cc.max_tool_calls>=12,'GENERATION_ROLE_BUDGET_INVALID','冻结次数不能覆盖参考核验、制作、后期与最终双复核',503);
+  const originals=new Set(contract.profile.photo_roles.map(p=>p.asset_id)).size;
+  const references=contract.source.engine==='PER_SHOT_AI'?contract.creative.shots.length:1;
+  requireThat(binding.admission.review_vision&&(originals+references)<=binding.admission.review_vision.max_images,
+    'REFERENCE_VISION_NOT_ADMITTED','冻结视觉能力不能同时检查原图与完整参考帧',503);
+  const policy=generationContract(contract,'VIDEO').video!,videoSlots=contract.source.output_slots.filter(s=>s.kind==='video');
+  requireThat(videoSlots.length>0&&videoSlots.every(s=>s.width===1080&&s.height===1920
+    &&policy.dimensions.some(d=>Math.abs(d.width/d.height-1080/1920)<0.02)),
+    'GENERATION_VIDEO_SPEC_UNAVAILABLE','冻结模型与交付短片比例不匹配',503);
+  const durations=contract.source.engine==='PER_SHOT_AI'?contract.creative.shots.map(s=>(s.end_frame-s.start_frame)/30):[contract.creative.target_frames/30];
+  requireThat(durations.every(d=>policy.durations.includes(d)),'GENERATION_VIDEO_SPEC_UNAVAILABLE','冻结模型不支持原计划镜头时长',503);
 }

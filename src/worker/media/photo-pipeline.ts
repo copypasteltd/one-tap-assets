@@ -41,7 +41,12 @@ export function checkReceiptSlots(context: ExecutionContext, receipt: MediaRecei
     'MEDIA_OUTPUT_INCOMPLETE', '媒体阶段缺少合同槽位或包含额外产物', 422);
 }
 export class PhotoMediaPipeline {
-  constructor(private pool: pg.Pool, private cfg: Config, private store: ObjectStorage) {}
+  protected readonly rendererVersion:string=PHOTO_PIPELINE_VERSION;
+  constructor(protected pool: pg.Pool, protected cfg: Config, protected store: ObjectStorage) {}
+  protected assertRoute(context:ExecutionContext):void{
+    requireThat(context.snapshot.engine==='PHOTO_LAYOUT'&&context.snapshot.audio_policy.speech_mode==='NONE',
+      'MEDIA_ROUTE_UNAVAILABLE','此执行器只承担原图无声路线',503);
+  }
   async photos(context: ExecutionContext): Promise<Map<string, Buffer>> {
     const rows = (await this.pool.query<{ id: string; object_key: string; sha256: string }>(`SELECT a.id,a.object_key,a.sha256 FROM product_photo_items p
       JOIN assets a ON a.tenant_id=p.tenant_id AND a.id=p.asset_id WHERE p.tenant_id=$1 AND p.photo_version_id=$2
@@ -57,7 +62,7 @@ export class PhotoMediaPipeline {
     }
     return photos;
   }
-  private async artifact(context: ExecutionContext, operation: MediaOperation, slotId: string, bytes: Buffer, spec: ArtifactSpec): Promise<PrivateArtifact> {
+  protected async artifact(context: ExecutionContext, operation: MediaOperation, slotId: string, bytes: Buffer, spec: ArtifactSpec): Promise<PrivateArtifact> {
     const artifactId = id('artifact'); const extension = spec.kind === 'image' ? 'png' : spec.kind === 'video' ? 'mp4' : 'txt';
     const objectKey = `${context.tenantId}/media/${context.orderId}/${operation.id}/generation-${operation.generation}/${artifactId}.${extension}`;
     await writePrivateObject(this.pool, this.store, { tenantId: context.tenantId, ownerId: context.ownerId,
@@ -65,13 +70,13 @@ export class PhotoMediaPipeline {
       spec.kind === 'image' ? 'image/png' : spec.kind === 'video' ? 'video/mp4' : 'text/plain; charset=utf-8');
     return { id: artifactId, slot_id: slotId, object_key: objectKey, sha256: sha256(bytes), spec };
   }
-  private spec(context: ExecutionContext, phase: MediaPhase, kind: ArtifactSpec['kind'], inspection: ArtifactSpec['inspection'], sourceAssets: string[], sourceArtifacts: string[] = []): ArtifactSpec {
+  protected spec(context: ExecutionContext, phase: MediaPhase, kind: ArtifactSpec['kind'], inspection: ArtifactSpec['inspection'], sourceAssets: string[], sourceArtifacts: string[] = []): ArtifactSpec {
     return { phase, kind, snapshot_hash: context.snapshotHash, plan_hash: context.snapshot.plan_hash,
-      identity_lock_hash: context.snapshot.identity_lock_hash, renderer_version: PHOTO_PIPELINE_VERSION,
+      identity_lock_hash: context.snapshot.identity_lock_hash, renderer_version: this.rendererVersion,
       source_asset_ids: [...new Set(sourceAssets)].sort(), source_artifact_ids: [...new Set(sourceArtifacts)].sort(),
       resource_bindings: context.snapshot.resource_versions, inspection };
   }
-  private async videoInspection(context: ExecutionContext, path: string, signal: AbortSignal): Promise<MediaInspection> {
+  protected async videoInspection(context: ExecutionContext, path: string, signal: AbortSignal): Promise<MediaInspection> {
     assertMediaAlive(context, signal); const actual = await inspectVideo(this.cfg, path, signal);
     requireThat(actual.codec === 'h264' && actual.pixelFormat === 'yuv420p' && actual.width === 1080 && actual.height === 1920
       && actual.fps === 30 && actual.frames !== null && Math.abs(actual.frames - context.snapshot.timeline.target_frames) <= 1
@@ -90,7 +95,7 @@ export class PhotoMediaPipeline {
       requireThat(sha256(bytes) === artifact.sha256, 'ARTIFACT_HASH_MISMATCH', '私有产物字节与检查点不一致', 503);
       const slot = context.snapshot.outputs.find(s => s.slot_id === artifact.slot_id)!;
       requireThat(artifact.spec.snapshot_hash === context.snapshotHash && artifact.spec.plan_hash === context.snapshot.plan_hash
-        && artifact.spec.identity_lock_hash === context.snapshot.identity_lock_hash && artifact.spec.renderer_version === PHOTO_PIPELINE_VERSION
+        && artifact.spec.identity_lock_hash === context.snapshot.identity_lock_hash && artifact.spec.renderer_version === this.rendererVersion
         && hash(artifact.spec.resource_bindings) === hash(context.snapshot.resource_versions),
         'MEDIA_RECEIPT_MISMATCH', '产物来源不属于冻结合同或执行器版本', 503);
       let actual: ArtifactSpec['inspection'];
@@ -107,7 +112,7 @@ export class PhotoMediaPipeline {
       requireThat(hash(actual) === hash(artifact.spec.inspection), 'MEDIA_INSPECTION_MISMATCH', '实际文件与原媒体检测记录不一致', 503);
     }
   }
-  private async produce(context: ExecutionContext, operation: MediaOperation, directory: string, signal: AbortSignal): Promise<PrivateArtifact[]> {
+  protected async produce(context: ExecutionContext, operation: MediaOperation, directory: string, signal: AbortSignal, _scope:ToolScope): Promise<PrivateArtifact[]> {
     const font = await loadProductionFont(this.cfg.projectRoot);
     const photos = await this.photos(context); const creative = context.contract.creative; const artifacts: PrivateArtifact[] = [];
     const configuredStyle = context.contract.source.creative_components.platform_style_id;
@@ -128,7 +133,7 @@ export class PhotoMediaPipeline {
     }
     return artifacts;
   }
-  private async post(context: ExecutionContext, operation: MediaOperation, source: MediaReceipt, directory: string, signal: AbortSignal): Promise<PrivateArtifact[]> {
+  protected async post(context: ExecutionContext, operation: MediaOperation, source: MediaReceipt, directory: string, signal: AbortSignal): Promise<PrivateArtifact[]> {
     const artifacts: PrivateArtifact[] = [];
     for (const slot of requiredSlots(context, 'POST')) {
       assertMediaAlive(context, signal);
@@ -163,11 +168,10 @@ export class PhotoMediaPipeline {
       'MEDIA_SCOPE_INVALID', '媒体工具只接受本单对应的制作阶段', 409);
     const context = await executionContext(this.pool, scope.tenant_id, scope.order_id, scope.snapshot_hash);
     await verifyResourceLicenses(this.pool, context.snapshot.resource_versions);
-    requireThat(context.snapshot.engine === 'PHOTO_LAYOUT' && context.snapshot.audio_policy.speech_mode === 'NONE',
-      'MEDIA_ROUTE_UNAVAILABLE', '此执行器只承担原图排版，不能代替生成式或中文原声路线', 503);
+    this.assertRoute(context);
     assertMediaAlive(context, signal);
     const previous = phase === 'POST' ? await operationArtifacts(this.pool, context, 'PRODUCTION') : null;
-    const inputHash = hash({ renderer_version: PHOTO_PIPELINE_VERSION, phase, snapshot_hash: context.snapshotHash,
+    const inputHash = hash({ renderer_version: this.rendererVersion, phase, snapshot_hash: context.snapshotHash,
       creative: context.contract.creative, production_set_hash: previous ? artifactSetHash(previous.receipt.artifacts) : null });
     let operation = await operationFor(this.pool, scope, intent, phase, inputHash);
     const directory = inside(this.cfg.runtimeRoot, `media-work/${operation.id}/${id('attempt')}`); await mkdir(directory, { recursive: true });
@@ -176,7 +180,7 @@ export class PhotoMediaPipeline {
       if (!receipt) {
         operation = await claimMediaGeneration(this.pool, scope, intent, operation);
         if (previous) { const verifyDir = join(directory, 'verify-source'); await mkdir(verifyDir); await this.verify(context, previous.receipt, verifyDir, signal); }
-        const artifacts = phase === 'PRODUCTION' ? await this.produce(context, operation, directory, signal)
+        const artifacts = phase === 'PRODUCTION' ? await this.produce(context, operation, directory, signal, scope)
           : await this.post(context, operation, previous!.receipt, directory, signal);
         receipt = { version: 'YPCC-MEDIA-1', operation_id: operation.id, phase, snapshot_hash: context.snapshotHash, input_hash: inputHash,
           artifacts: artifacts.sort((a, b) => a.slot_id.localeCompare(b.slot_id)) };

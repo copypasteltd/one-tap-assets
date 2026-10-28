@@ -27,7 +27,7 @@ The Fastify API owns domain boundaries and tenant-scoped operations. A separate 
 
 内容角色不通过任意Shell直接决定交付。工具范围、单次/整单预算、次数、期限和租户由服务端验证；图片/模型输出中的指令不成为工具授权。SkillBundle版本和摘要随冻结输入保留。原图无声路径已有集成证据，生成式和真实运行边界见[状态](STATUS.md)。
 
-The content role cannot publish by arbitrary shell execution. Server-side scopes, tenant checks, cost/call limits and deadlines authorize tools; instructions inside images/model output do not. Bundle versions/hashes are frozen with the inputs. Silent photo-layout coverage must not be generalized to generative routes or real operation.
+The content role cannot publish by arbitrary shell execution. Server-side scopes, tenant checks, cost/call limits and deadlines authorize tools; instructions inside images/model output do not. Bundle versions/hashes are frozen with the inputs. Each route has separate fixture coverage; synthetic roles cannot certify real operation or official audio variants.
 
 ## 付费副作用与故障恢复 / Paid effects and recovery
 
@@ -41,7 +41,11 @@ Lease generations and heartbeats fence stale workers. Financial, payment, refund
 
 ## 生成参考身份核验 / Reference identity
 
-`generation/reference-*`恢复真实原图、生成PNG、商品锚点与冻结合同。独立REVIEW_FACTS只获两个限定工具，报告逐帧/逐锚点引用原图证据，且需实例已释放。两路线视频意图在不可变`prepared`中绑定完整报告和实际生成帧，预留/发送/恢复/媒体提交重新验证。3个订单 MCP 从平台恢复输入，POST只能读取原制作完成结果。15参考/35网关/6 MCP专项使用合成模型/隔离，完整生成式阶段和整包尚未串联。[购买门禁与恢复](../实施/生成式购买门禁与MCP工具接入-v1.0.md)。
+`generation/reference-*`恢复真实原图、生成PNG、商品锚点与冻结合同。独立REVIEW_FACTS只获两个限定工具，报告逐帧/逐锚点引用原图证据，且需实例已释放。两路线视频意图在不可变`prepared`中绑定完整报告和实际生成帧，预留/发送/恢复/媒体提交重新验证。3个订单MCP继续提供受控原节点操作；制作阶段新增`render_generated_pack`恢复实际生成图/视频并组装整包，之后显式POST、专属无声QC、最终全包双复核和事务交付。[购买门禁](../实施/生成式购买门禁与MCP工具接入-v1.0.md)与[完整无声编排](../实施/生成式无声整包与阶段编排-v1.0.md)分别记录边界。
+
+平台按冻结Codex计划生成参考，独立核验结束释放后才启动唯一制作角色，避免串行工具消费者嵌套等待角色。参考与最终事实角色共享原两轮额度，五次推理和十二次工具调用必须在原单预算内。生成来源与参考报告摘要随产物继承，在后期、QC、发布预检查与事务内核对实际字节/撤权；接管复用原意图与已完成角色。专项使用原生数据库/媒体/协议与合成模型/用量/隔离；有声、官方全变体及真实服务未准入。
+
+The platform derives references from the frozen Codex plan, releases their independent reviewer and then starts the unique production role. The bounded pack tool assembles actual generated images/clips, followed by explicit post, silent-route QC, fresh whole-pack facts/style reviews and atomic delivery. Reference/final facts reviews share the sold quota; takeover reuses original intents and completed roles. Source and approval hashes, stored bytes and revocation are rechecked through publication, including its transaction. Native protocol/media fixtures do not certify real models, OS isolation, audio or every official variant.
 
 The service reviews actual originals/generated PNGs against every identity anchor and requires instance release. Both routes bind the original report and generated frames to immutable video intents and revalidate them before paid effects and media completion. Scoped MCP handlers derive frozen inputs; POST reads completed original outputs only. The 15 reference, 35 gateway and six MCP cases use native media/database and synthetic inference/isolation. Same-stage same-generation role uniqueness, shared cost/call limits and original deadlines remain enforced; protocol continuation tests use actual lease takeover. Complete generative orchestration and delivery remain incomplete.
 

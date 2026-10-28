@@ -2,6 +2,19 @@
 
 记录可核验的最终行为及已知范围；历史设计文档保留原版，最新状态见[状态指南](docs/guides/STATUS.md)。Record actual behavior and limits; historical design records remain preserved.
 
+## 2026-10-28 · 生成式无声整包编排 / Silent generated pack orchestration
+
+- 两条生成式路线接入参考独立核验、唯一制作角色、实际生成PNG/MP4整包、显式后期、专属QC、全包最终双复核与事务交付。Connected both silent generated routes through complete native-media pack orchestration and independent final reviews.
+- 新增受控`render_generated_pack`，冻结计划驱动请求；每镜视频按原帧数/顺序处理，整片保留原任务，拒绝原图动画替代。The bounded pack tool uses frozen requests and actual provider video bytes rather than substituting animated originals.
+- 参考与最终事实共享原角色额度，租约接管复用原完成角色/意图/费用；新购买前检查原QC规则、次数、视觉与视频规格。Reference and final facts reviews share sold quotas; takeover preserves original identities, costs and deadlines.
+- 原生成来源和参考摘要随产物进入后期，QC和发布事务重验实际字节/撤权，撤权导致整包发布回滚。Source/approval bindings survive post and are checked through atomic delivery.
+- 修正供应商购买回执/原状态查询丢失时的调度：持久记录原错误，未决购买保持原预留并等待恢复，不直接作为制作失败。Persisted purchase/query failures defer original work rather than retiring the stage or buying again.
+- 新增7项原生数据库/媒体/HTTPS/MCP专项，明确合成模型/用量/隔离边界；结果以[实现索引](assets/implementation/current.json)为准。Added seven native execution/recovery/rejection cases with explicit synthetic external evidence.
+- 同步中英README、架构/状态/专项与实现证据；页面无变更，沿用实际截图/录屏/GIF及冻结C原件。Updated bilingual documentation and evidence while retaining applicable UI captures and frozen design assets.
+- 修正本机Taro并行CSS压缩停滞，改同进程执行相同压缩算法。新增受摘要约束的`--retry-mini-builds`：仅限定构建/核验器变更可留用完整集成报告，业务文件变化会拒绝；类型/单元/服务端/双端构建重新执行。Fixed a native CSS-worker stall without disabling minification; build-only retry preserves verified native integration with explicit provenance and rejects changed application inputs.
+
+官方生成式有声变体、真实Codex/供应商/隔离、生成式社区样例/售后、全量14变体基准、真机和生产准入仍未完成，全部方案禁售。[编排细则](docs/实施/生成式无声整包与阶段编排-v1.0.md)保留限制。Official audio variants, real operation, generated samples/revisions, full benchmarks and production admission remain incomplete; sales stay disabled.
+
 ## 2026-10-28 · 参考帧购买门禁与受控生成工具 / Reference-gated generation tools
 
 - 修复参考整片可绕过身份核验并直接使用原图购买视频的缺口；逐镜与整片均绑定原独立报告和对应生成PNG，预留/发送/恢复/媒体提交重验。Fixed an unreviewed reference-film purchase path; both routes now bind the original released identity review and generated PNGs to immutable video intents.

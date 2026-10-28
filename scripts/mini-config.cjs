@@ -11,6 +11,9 @@ module.exports = function miniConfig(platform) {
     mini: { compile: { include: [path.join(root, 'src/shared')] },
       webpackChain(chain) {
         chain.cache(false); chain.resolve.set('extensionAlias', { '.js': ['.ts', '.tsx', '.js'] });
+        // Keep CSS minification in the native build process. Worker startup
+        // stalled in CssMinimizerPlugin on this Windows host.
+        chain.optimization.minimizer('cssoWebpackPlugin').tap(args => { args[0].parallel = false; return args; });
         chain.module.rule('script').use('babelLoader').tap(options => ({ ...options, configFile: path.join(root, 'src', platform === 'alipay' ? 'mini-alipay' : 'mini-douyin', 'babel.config.js') }));
       },
       postcss: { pxtransform: { enable: true, config: { designWidth: 375 } }, url: { enable: true, config: { limit: 1024 } } } },

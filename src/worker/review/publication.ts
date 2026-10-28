@@ -15,19 +15,24 @@ import { executionContext, type ExecutionContext } from '../compiler/order-conte
 import { operationArtifacts, type MediaReceipt } from '../media/artifacts.js';
 import { loadProductionFont, verifyResourceLicenses } from '../media/font.js';
 import { PhotoMediaPipeline } from '../media/photo-pipeline.js';
+import {GeneratedMediaPipeline} from '../media/generated-pipeline.js';
+import {generatedOutputs} from '../generation/outputs.js';
 import { assertLease, PendingExternal, type StageLease } from '../queue/leases.js';
 import type { StageCommit } from '../runtime.js';
 import { currentReviewPacket, packetImages } from './context.js';
 import { assertReviewConsensus } from './packet.js';
 import { packetReports } from './reports.js';
-import { PHOTO_QC_POLICY, unsettledOrderCalls, verifySealedEvidence } from './qc.js';
+import { mediaQcPolicy, unsettledOrderCalls, verifySealedEvidence } from './qc.js';
 
 export class PublicationService {
   constructor(private pool: pg.Pool, private cfg: Config, private store: ObjectStorage) {}
   private async ready(db: Db, context: ExecutionContext, lockResources = false): Promise<DTO<'ReviewPacket'>> {
     const packet = await currentReviewPacket(db, context);
-    requireThat(context.snapshot.engine === 'PHOTO_LAYOUT' && context.snapshot.audio_policy.speech_mode === 'NONE'
-      && packet.qc_policy_version === PHOTO_QC_POLICY, 'PUBLICATION_ROUTE_UNAVAILABLE', '当前发布器只支持已接通的原图无声路线', 503);
+    requireThat(packet.qc_policy_version===mediaQcPolicy(context),'PUBLICATION_ROUTE_UNAVAILABLE','原订单验收与发布规则不一致',503);
+    if(context.snapshot.engine!=='PHOTO_LAYOUT'){
+      const production=await operationArtifacts(db,context,'PRODUCTION');
+      await generatedOutputs(db,this.cfg,this.store,context,production.operation.stage_run_id);
+    }
     requireThat(packet.state === 'PASSED' && packet.publication_decision === 'PENDING', 'PUBLICATION_NOT_READY', '当前封存包尚未通过独立复核', 409);
     const reports = await packetReports(db, this.cfg, context, packet);
     requireThat(hash(reports) === hash(packet.reports), 'REVIEW_REPORT_STALE', '封存包报告与已完成阶段不一致', 409);
@@ -53,7 +58,7 @@ export class PublicationService {
     const packet = await this.ready(this.pool, context); const post = await operationArtifacts(this.pool, context, 'POST');
     const directory = join(this.cfg.runtimeRoot, 'publication-work', id('attempt')); await mkdir(directory, { recursive: true });
     try {
-      const pipeline = new PhotoMediaPipeline(this.pool, this.cfg, this.store);
+      const pipeline = context.snapshot.engine==='PHOTO_LAYOUT'?new PhotoMediaPipeline(this.pool,this.cfg,this.store):new GeneratedMediaPipeline(this.pool,this.cfg,this.store);
       await pipeline.photos(context); await pipeline.verify(context, post.receipt, directory, signal);
       await packetImages(this.pool, this.store, context, packet);
     } finally { await rm(directory, { recursive: true, force: true }); }

@@ -13,6 +13,8 @@ import { executionContext, type ExecutionContext } from '../compiler/order-conte
 import { operationArtifacts, type MediaOperation, type MediaReceipt } from '../media/artifacts.js';
 import { loadProductionFont, verifyResourceLicenses } from '../media/font.js';
 import { PhotoMediaPipeline, assertMediaAlive, inspectImage } from '../media/photo-pipeline.js';
+import {GeneratedMediaPipeline} from '../media/generated-pipeline.js';
+import {GENERATED_QC_POLICY} from '../generation/contracts.js';
 import { assertLease, PendingExternal, type StageLease } from '../queue/leases.js';
 import type { StageCommit } from '../runtime.js';
 import { validateMediaStageResult } from '../tool-gateway/production-tools.js';
@@ -20,6 +22,12 @@ import { extractEvidenceFrames, FRAME_SAMPLING_POLICY } from './evidence.js';
 import { assertSealedPacket, packetHash, reviewHash, REVIEW_HASH_ALGORITHM } from './packet.js';
 
 export const PHOTO_QC_POLICY = 'YPCC-QC-PHOTO-1.0.0';
+export function mediaQcPolicy(context:ExecutionContext):string{
+  const policy=context.snapshot.engine==='PHOTO_LAYOUT'?PHOTO_QC_POLICY:GENERATED_QC_POLICY;
+  requireThat(context.snapshot.audio_policy.speech_mode==='NONE'&&!context.snapshot.audio_policy.music_license_ids.length
+    &&context.snapshot.codex_contract.qc_policy_version===policy,'QC_POLICY_UNAVAILABLE','原订单没有冻结对应路线的无声验收规则',503);
+  return policy;
+}
 export interface ReviewEvidence {
   id: string; kind: 'CANDIDATE_IMAGE' | 'VIDEO_FRAME' | 'CONTRACT' | 'COPY'; artifact_id: string | null;
   object_key: string; sha256: string; mime_type: string; frame_index: number | null; time_ms: number | null; data: Record<string, unknown>;
@@ -62,9 +70,7 @@ export class QualityControlService {
     requireThat(lease.stage_name === 'QC' && lease.scope_type === 'ORDER', 'QC_STAGE_INVALID', '文件验收阶段无效', 500);
     await assertLease(this.pool, lease, false);
     const context = await executionContext(this.pool, lease.tenant_id, lease.scope_id, lease.input_hash);
-    requireThat(context.snapshot.engine === 'PHOTO_LAYOUT' && context.snapshot.audio_policy.speech_mode === 'NONE'
-      && context.snapshot.codex_contract.qc_policy_version === PHOTO_QC_POLICY,
-    'QC_POLICY_UNAVAILABLE', '此验收规则只承担已冻结的原图无声路线', 503);
+    const policy=mediaQcPolicy(context);
     await loadProductionFont(this.cfg.projectRoot); await verifyResourceLicenses(this.pool, context.snapshot.resource_versions);
     if (await unsettledOrderCalls(this.pool, context)) throw new PendingExternal(5, 'QC_PAID_CALL_UNRESOLVED');
     const production = await operationArtifacts(this.pool, context, 'PRODUCTION');
@@ -72,10 +78,10 @@ export class QualityControlService {
     const identities = await Promise.all([productionIdentity(this.pool, context, production.operation), productionIdentity(this.pool, context, post.operation)]);
     requireThat(['run_id', 'thread_id', 'process_ref'].every(key => new Set(identities.map(i => i[key as keyof ProductionIdentity])).size === 2),
       'REVIEW_PROVENANCE_REUSED', '制作与后期缺少不同的运行身份', 503);
-    const packetId = `review_${hash({ stage: lease.id, production: production.operation.manifest_hash, post: post.operation.manifest_hash, policy: PHOTO_QC_POLICY }).slice(0, 40)}`;
+    const packetId = `review_${hash({ stage: lease.id, production: production.operation.manifest_hash, post: post.operation.manifest_hash, policy }).slice(0, 40)}`;
     const directory = inside(this.cfg.runtimeRoot, `review-work/${packetId}/${id('attempt')}`); await mkdir(directory, { recursive: true });
     try {
-      const pipeline = new PhotoMediaPipeline(this.pool, this.cfg, this.store);
+      const pipeline = context.snapshot.engine==='PHOTO_LAYOUT'?new PhotoMediaPipeline(this.pool,this.cfg,this.store):new GeneratedMediaPipeline(this.pool,this.cfg,this.store);
       const photos = await pipeline.photos(context);
       for (const [phase, receipt] of [['production', production.receipt], ['post', post.receipt]] as const) {
         const verify = join(directory, phase); await mkdir(verify); await pipeline.verify(context, receipt, verify, signal);
@@ -110,13 +116,13 @@ export class QualityControlService {
           }
         } else await save(artifact.spec.kind === 'image' ? 'CANDIDATE_IMAGE' : 'COPY', bytes, artifact.id, { slot_id: artifact.slot_id });
       }
-      await save('CONTRACT', Buffer.from(JSON.stringify({ version: PHOTO_QC_POLICY, snapshot: context.snapshot, profile: context.contract.profile,
+      await save('CONTRACT', Buffer.from(JSON.stringify({ version: policy, snapshot: context.snapshot, profile: context.contract.profile,
         creative_plan: context.contract.creative, resources: context.snapshot.resource_versions, sampling_policy: FRAME_SAMPLING_POLICY,
         outputs: post.receipt.artifacts.map(a => ({ artifact_id: a.id, slot_id: a.slot_id, sha256: a.sha256, spec: a.spec })) })), null, { snapshot_hash: context.snapshotHash });
       const outputs = post.receipt.artifacts.map(a => ({ slot_id: a.slot_id, asset_id: a.id, sha256: a.sha256 }));
       const packet: DTO<'ReviewPacket'> = { packet_id: packetId, tenant_id: context.tenantId, order_id: context.orderId,
         state: 'SEALED', packet_hash: '', snapshot_hash: context.snapshotHash, identity_lock_hash: context.snapshot.identity_lock_hash,
-        skill_bundle_hash: context.snapshot.codex_contract.skill_bundle_hash, qc_policy_version: PHOTO_QC_POLICY,
+        skill_bundle_hash: context.snapshot.codex_contract.skill_bundle_hash, qc_policy_version: policy,
         original_assets: [...photos].map(([asset_id, bytes]) => ({ asset_id, sha256: sha256(bytes) })),
         evidence_assets: evidence.map(e => ({ asset_id: e.id, sha256: e.sha256 })), required_slot_ids: context.snapshot.outputs.map(s => s.slot_id),
         outputs, output_set_hash: reviewHash(outputs), production_run_ids: identities.map(i => i.run_id),
@@ -141,7 +147,7 @@ export class QualityControlService {
             state: 'SEALED', data: packet, private: { hash_algorithm: REVIEW_HASH_ALGORITHM, production_operation_id: production.operation.id, post_operation_id: post.operation.id } });
           for (const row of evidence) await insert(db, 'review_evidence', { ...row, tenant_id: context.tenantId, packet_id: packetId, order_id: context.orderId });
           for (const artifact of post.receipt.artifacts) await insert(db, 'qc_decisions', { id: id('qc'), tenant_id: context.tenantId,
-            order_id: context.orderId, artifact_id: artifact.id, ruleset_version: PHOTO_QC_POLICY, decision: 'PASS',
+            order_id: context.orderId, artifact_id: artifact.id, ruleset_version: policy, decision: 'PASS',
             data: { packet_id: packetId, packet_hash: packet.packet_hash, sha256: artifact.sha256, inspection: artifact.spec.inspection,
               checked: ['FULL_DECODE', 'EXACT_SLOTS', 'SPEC', 'SOLD_PROVENANCE', 'RESOURCE_LICENSE', 'FULL_TIMELINE_EVIDENCE'], semantic_review: 'PENDING' } });
         }
