@@ -5,6 +5,7 @@ import { notFound, requireThat } from '../../api/lib/errors.js';
 import { validate, validateInternal } from '../../api/lib/validation.js';
 import { creativePlanHash, validateCreativePlan } from './plan.js';
 import type { FrozenContract, Snapshot } from './snapshot.js';
+import {frozenNativeAudio,verifyNativeAudioLive} from '../audio/contract.js';
 
 export interface ExecutionContext {
   tenantId: string; orderId: string; ownerId: string; snapshotHash: string;
@@ -34,6 +35,13 @@ export async function executionContext(db: pg.Pool | pg.PoolClient, tenantId: st
   const { profile_hash, ...body } = contract.profile;
   requireThat(hash(body) === profile_hash, 'PROFILE_HASH_MISMATCH', '商品档案摘要不一致', 503);
   validateCreativePlan(contract.creative, contract.profile, contract.source);
+  const audio=frozenNativeAudio(contract);
+  requireThat(snapshot.native_audio_contract_hash===(audio?hash(audio):undefined)
+    &&hash(snapshot.audio_policy)===hash({speech_mode:audio?'NATIVE_ZH':'NONE',language:audio?'zh-CN':null,
+      native_voice_id:audio?audio.character.native_voice_id:contract.creative.native_voice_id,preserve_native_speech:!!audio,
+      caption_alignment:audio?'ACTUAL_AUDIO':'NO_SPEECH',music_license_ids:audio?.music?[audio.music.binding.license_record_id]:[],
+      ducking_enabled:audio?.music?.ducking??false}),'EXECUTION_AUDIO_MISMATCH','音频快照与原合同不一致',503);
+  await verifyNativeAudioLive(db,contract);
   const photo = (await db.query<{ id: string; photo_set_hash: string }>(
     `SELECT id,photo_set_hash FROM product_photo_versions WHERE tenant_id=$1 AND product_id=$2 AND revision=$3`,
     [tenantId, snapshot.product_id, snapshot.photo_version])).rows[0];

@@ -49,8 +49,20 @@ let f:Fixture;let original:DTO<'Deliverables'>;let current:DTO<'Revision'>;let t
 let body:DTO<'RevisionRequest'>;let finalLease:StageLease;let finalCommit:(db:import('pg').PoolClient)=>Promise<void>;
 let worker:RevisionService;const controller=new AbortController();
 let coverFixture:Fixture;let coverParent:DTO<'Deliverables'>;let coverRequest:DTO<'RevisionRequest'>;
+async function whileLease<T>(lease:StageLease,action:()=>Promise<T>):Promise<T>{
+  let pending:Promise<void>|null=null;let failure:unknown;
+  const timer=setInterval(()=>{
+    if(pending)return;
+    pending=heartbeatStage(db.pool,lease).then(ok=>{if(!ok)throw new Error('Fixture lease was lost');})
+      .catch(error=>{failure=error;}).finally(()=>{pending=null;});
+  },5000);
+  try{
+    const result=await action();clearInterval(timer);if(pending)await pending;
+    if(failure)throw failure;return result;
+  }finally{clearInterval(timer);if(pending)await pending;}
+}
 async function finish(lease:StageLease,handle:()=>Promise<(db:import('pg').PoolClient)=>Promise<void>>):Promise<void>{
-  const pulse=setInterval(()=>{void heartbeatStage(db.pool,lease);},5000);try{await completeStage(db.pool,lease,await handle());}finally{clearInterval(pulse);}
+  const commit=await whileLease(lease,handle);await completeStage(db.pool,lease,commit);
 }
 async function next(name:string):Promise<StageLease>{const lease=await claimStage(db.pool,id('worker'),[name]);expect(lease).toBeTruthy();return lease!;}
 async function delivered(revisions=true):Promise<Fixture>{
@@ -138,8 +150,7 @@ it('keeps UNKNOWN costs reserved across a failed request and settles the origina
   expect((await db.pool.query('SELECT id FROM revision_budgets WHERE order_id=$1',[f.orderId])).rowCount).toBe(1);
 });
 it('changes actual copy bytes and recovers a completed POST checkpoint without purchasing a second inference',async()=>{
-  const lease=await next('REVISION');const pulse=setInterval(()=>{void heartbeatStage(db.pool,lease);},5000);
-  let commit;try{commit=await worker.handle(lease,controller.signal);}finally{clearInterval(pulse);}
+  const lease=await next('REVISION');const commit=await whileLease(lease,()=>worker.handle(lease,controller.signal));
   const c=await revisionContext(db.pool,f.p.tenantId,current.revision_id);const item=(c.row.private.candidate as {items:DTO<'Deliverable'>[]}).items.find(i=>i.kind==='copy')!;
   expect(item.deliverable_id).not.toBe(original.items.find(i=>i.kind==='copy')!.deliverable_id);expect((await candidateBytes(db.pool,f.store,c,item)).toString('utf8')).toBe(body.display_text);
   expect((await getDeliverables(db.pool,f.p,f.orderId)).manifest_revision).toBe(1);

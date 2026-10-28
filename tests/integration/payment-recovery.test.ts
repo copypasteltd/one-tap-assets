@@ -95,7 +95,7 @@ describe('payment recovery with explicit synthetic provider transport', () => {
     const quote: DTO<'Quote'> = { quote_id: quoteId, plan_id: f.planId, plan_hash: f.contract.plan_hash, state: 'OPEN', currency: 'CNY',
       amount_fen: 100, expires_at: addSeconds(900), output_slots: [], terms_version: 'YPCC-TERMS-3.1', hard_deadline_seconds: 600 };
     await insert(db.pool, 'quotes', { id: quoteId, tenant_id: f.tenantId, owner_id: f.p.userId, plan_id: f.planId,
-      plan_hash: quote.plan_hash, amount_fen: 100, expires_at: quote.expires_at, state: 'OPEN', data: quote, private: { contract: f.contract } });
+      plan_hash: quote.plan_hash, amount_fen: 100, expires_at: quote.expires_at, state: 'OPEN', data: quote, private: { contract: f.contract, contract_hash:hash(f.contract) } });
     const productBefore = (await db.pool.query('SELECT expires_at FROM product_drafts WHERE id=$1', [f.product.product_id])).rows[0].expires_at;
     const order = await transaction(db.pool, client => createOrder(client, db.cfg, f.p, { quote_id: quoteId, channel: 'alipay' }));
     expect(order.payment_state).toBe('CREATED');

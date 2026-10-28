@@ -688,6 +688,10 @@
     "revision_policy_hash": {
       "type": "string",
       "pattern": "^[a-f0-9]{64}$"
+    },
+    "native_audio_contract_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
     }
   },
   "required": [

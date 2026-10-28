@@ -52,7 +52,7 @@ for (const command of commands) {
     // assertions and per-test limits while allowing the growing suite to finish.
     // The observed 269-case run took 700s even with incomplete SAMPLE work;
     // allow the complete native SAMPLE regression and process/file I/O overhead.
-    timeout: command === 'test:integration' ? 900000 : 180000 });
+    timeout: command === 'test:integration' ? 1200000 : 180000 });
   const diagnostic = { exit_code: result.status, signal: result.signal, error_code: (result.error as NodeJS.ErrnoException | undefined)?.code ?? null, elapsed_ms: Date.now() - started };
   const log = (result.stdout ?? '') + (result.stderr ?? '') + `\nVerification process: ${JSON.stringify(diagnostic)}\n`; const path = `runtime/test-results/${command.replaceAll(':', '-')}.log`;
   await writeFile(path, log); const passed = result.status === 0; results.push({ command: `./scripts/run.ps1 ${command}`, status: passed ? 'PASS' : 'FAIL', log_path: path, log_sha256: sha256(log) });
@@ -146,6 +146,12 @@ const report = {
     private_mono_wav:true,distinct_stereo_rejected:true,actual_word_timestamps_required:true,stored_receipt_maintenance:true,
     order_tool_registered:false,order_pipeline_connected:false,real_provider_verified:false,real_chinese_speech_verified:false,native_speech_order_admitted:false,
     notes:'Native PostgreSQL/FFmpeg/AAC/PCM/private files with synthetic HTTPS transport and transcript/usage responses. Original request, send marker, task ID, append-only raw ACK/query/result, bounded source/PCM/WAV hashes and original order cost reservation are persisted. Missing ACK/usage never permits another purchase. Only mono or exact dual mono is accepted; no distinct-channel downmix. This internal POST service is not a production ASR admission, independent listening review or audible order pipeline.'},
+  native_audio_contract: {implemented:true,native_fixture_verified:verifiedCases('audio-contract.test.ts',23),
+    version:'YPCC-NATIVE-AUDIO-CONTRACT-1',frozen_character_voice_video_binding:true,frozen_captions_and_music:true,
+    original_order_budget_and_once_only_prepaid_allocation:true,one_assembled_track_asr_intent:true,live_rights_on_payment_and_resume:true,
+    immutable_license_and_character_evidence:true,native_quotes_admitted:false,order_tool_registered:false,order_pipeline_connected:false,
+    independent_audio_review_implemented:false,real_authorizations_verified:false,real_provider_verified:false,
+    notes:'Native PostgreSQL/FFmpeg/actual AAC plus synthetic character/voice/music authorization, ASR transport/transcript/usage and payment facts. Contract compilation, snapshot hashes, revoked-rights payment refund intent, original budget and concurrent full-track ASR limits are exercised. Fixed prepaid allocation is internal accounting, not proof of an external license purchase. The primary character/voice binding does not certify official multi-presenter support. NATIVE_AUDIO_NOT_ADMITTED and all sales-disabled gates remain.'},
   codex_implementation: { scope: 'CONTENT PLAN, silent PHOTO_LAYOUT/PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST, independent generated-reference facts review and fresh final visual REVIEW_FACTS/REVIEW_STYLE runtime adapters, metered Responses gateway, atomic pack publication, independent seven-stage photo creator SAMPLE pipeline',
     fixture_tests_only: true, real_codex_turn_verified: false, native_launcher_executable_provided: false,
     native_isolation_verified: false, certified_token_cost_bound_verified: false, independent_reaper_implemented: true,

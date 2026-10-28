@@ -13,12 +13,13 @@ import {PendingExternal,type StageLease} from '../queue/leases.js';
 import type {NativeTranscript} from '../media/native-captions.js';
 import {SpeechClient,actualSpeechTranscript,admitSpeechContract,frozenSpeechContract,speechCost,speechRequest,speechTask,type SpeechContract} from '../providers/dashscope-asr.js';
 import {boundSpeechContract,prepareSpeechSource,sourceBytes,speechContext,type SpeechSource} from './input.js';
+import {allocateNativeAudioRights,frozenNativeAudio} from '../audio/contract.js';
 
 type Pointer={ordinal:number;kind:'SUBMIT'|'QUERY'|'RESULT';key:string};
 interface Submission {
   id:string;tenant_id:string;order_id:string;stage_run_id:string;generation_kind:'ASR';model_version_id:string;operation_key:string;
   input_hash:string;state:string;provider_task_id:string|null;reservation_id:string;lease_owner:string|null;lease_generation:string;next_query_at:Date|null;
-  private:{owner_id:string;product_id:string;wire_contract:SpeechContract;contract_hash:string;request_key:string;request_sha256:string;
+  private:{owner_id:string;product_id:string;wire_contract:SpeechContract;contract_hash:string;audio_contract_hash?:string;request_key:string;request_sha256:string;
     prepared:{source:SpeechSource;url:string;wav_key:string;deadline_at:string};receipts:Pointer[];sending_started_at?:string;
     provider_terminal?:boolean;terminal_receipt_ordinal?:number;billing_valid?:boolean;output?:{object_key:string;sha256:string};};
 }
@@ -111,7 +112,9 @@ export class SpeechGateway {
   }
   private async authorize(lease:StageLease,r:Submission):Promise<void>{
     const context=await transaction(this.pool,db=>speechContext(db,lease));
+    const audio=frozenNativeAudio(context.contract);
     requireThat(r.order_id===lease.scope_id&&r.stage_run_id===lease.id&&hash(boundSpeechContract(context))===r.private.contract_hash
+      &&r.private.audio_contract_hash===(audio?hash(audio):undefined)
       &&context.snapshot.deadline_at===r.private.prepared.deadline_at,'ASR_SCOPE_INVALID','转写与原订单阶段或合同不一致',403);
     requireThat(sha256(await sourceBytes(this.pool,this.store,context,r.private.prepared.source.source_write_id))===r.private.prepared.source.source_sha256,
       'ASR_SOURCE_HASH_MISMATCH','原转写视频绑定变化',503);
@@ -190,8 +193,14 @@ export class SpeechGateway {
     admitSpeechContract(this.cfg,c);requireThat(this.store.signedReadUrl,'ASR_PRIVATE_URL_UNAVAILABLE','当前私有存储未提供受限HTTPS读取能力',503);
     const prepared=await prepareSpeechSource(this.pool,this.cfg,this.store,context,sourceWriteId,signal);
     const submission=await transaction(this.pool,async db=>{
-      await speechContext(db,lease);await db.query('SELECT pg_advisory_xact_lock(hashtextextended($1,0))',[intent]);
+      const current=await speechContext(db,lease),audio=frozenNativeAudio(current.contract);
+      await db.query('SELECT pg_advisory_xact_lock(hashtextextended($1,0))',[`speech-order:${lease.tenant_id}:${lease.scope_id}`]);
       const prior=(await db.query<{id:string}>('SELECT id FROM provider_submissions WHERE intent_key=$1',[intent])).rows[0];if(prior)return {id:prior.id,created:false};
+      if(audio){
+        requireThat(((await db.query(`SELECT id FROM provider_submissions WHERE tenant_id=$1 AND order_id=$2 AND generation_kind='ASR'`,
+          [lease.tenant_id,lease.scope_id])).rowCount??0)<audio.asr.max_calls,'ASR_ORIGINAL_CALL_LIMIT','原订单已创建整轨转写，只能恢复原任务',409);
+        await allocateNativeAudioRights(db,lease.tenant_id,lease.scope_id,current.contract);
+      }
       requireThat((await db.query(`SELECT id FROM provider_model_versions WHERE id=$1 AND status='ADMITTED' AND data->>'capability_hash'=$2
         AND private->'speech_contract'=$3::jsonb FOR SHARE`,[c.model_version_id,hash(c),JSON.stringify(c)])).rowCount===1,'ASR_NOT_ADMITTED','原转写模型已撤销准入',503);
       const reservation=await reserve(db,{tenantId:lease.tenant_id,orderId:lease.scope_id},intent,c.rate.ceiling_micro,{contract_hash:hash(c),rate_snapshot_id:c.rate_snapshot_id,rate:c.rate});
@@ -199,7 +208,7 @@ export class SpeechGateway {
       const url=this.store.signedReadUrl!(wavKey,new Date(Math.min(lease.deadline_at.getTime(),Date.now()+7200000))),body=speechRequest(c,url);
       await insert(db,'provider_submissions',{id:submissionId,tenant_id:lease.tenant_id,order_id:lease.scope_id,stage_run_id:lease.id,generation_kind:'ASR',model_version_id:c.model_version_id,
         operation_key:operation,intent_key:intent,input_hash:hash({contract:hash(c),source:prepared.source,deadline_at:context.snapshot.deadline_at}),state:'SUBMITTING',reservation_id:reservation,
-        data:{submission_id:submissionId,state:'SUBMITTING',kind:'ASR'},private:{owner_id:context.ownerId,product_id:context.snapshot.product_id,wire_contract:c,contract_hash:hash(c),
+        data:{submission_id:submissionId,state:'SUBMITTING',kind:'ASR'},private:{owner_id:context.ownerId,product_id:context.snapshot.product_id,wire_contract:c,contract_hash:hash(c),...(audio?{audio_contract_hash:hash(audio)}:{}),
           request_key:`${prefix}/request.json`,request_sha256:sha256(body),prepared:{source:prepared.source,url,wav_key:wavKey,deadline_at:context.snapshot.deadline_at},
           receipts:[{ordinal:0,kind:'SUBMIT',key:`${prefix}/submit.json`}]}});
       await db.query('UPDATE budget_reservations SET submission_id=$2 WHERE id=$1',[reservation,submissionId]);return {id:submissionId,created:true};

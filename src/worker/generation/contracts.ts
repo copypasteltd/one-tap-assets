@@ -3,8 +3,9 @@ import {hash} from '../../api/lib/crypto.js';
 import {requireThat} from '../../api/lib/errors.js';
 import type {FrozenContract,ModelBinding} from '../compiler/snapshot.js';
 import {admitArkContract,frozenArkContract,type ArkContract} from '../providers/ark.js';
+import {frozenNativeAudio} from '../audio/contract.js';
 
-export interface GenerationModelRow {id:string;status:string;data:ModelBinding;private?:{ark_contract?:unknown}}
+export interface GenerationModelRow {id:string;status:string;data:ModelBinding;private?:{ark_contract?:unknown;speech_contract?:unknown}}
 export const GENERATED_QC_POLICY='YPCC-QC-GENERATED-SILENT-1.0.0';
 function matches(c:ArkContract,row:GenerationModelRow):boolean{
   const role=c.wire==='ARK_IMAGE'?'IMAGE':'VIDEO';
@@ -34,7 +35,8 @@ export function validateGenerationBudget(contract:FrozenContract):void{
   const imageCalls=contract.source.output_slots.filter(slot=>slot.kind==='image').length+(contract.source.engine==='PER_SHOT_AI'?shots:1);
   const videoCalls=contract.source.engine==='PER_SHOT_AI'?shots:1;
   const minimum=BigInt(imageCalls)*BigInt(image.rate.ceiling_micro)+BigInt(videoCalls)*BigInt(video.rate.ceiling_micro)
-    +BigInt(contract.codex_contract.agent_cost_ceiling_micro)+BigInt(contract.revision_policy?.budget_micro??0)+BigInt(contract.repair_ceiling_micro);
+    +BigInt(contract.codex_contract.agent_cost_ceiling_micro)+BigInt(contract.revision_policy?.budget_micro??0)+BigInt(contract.repair_ceiling_micro)
+    +BigInt(frozenNativeAudio(contract)?.cost.ceiling_micro??0);
   requireThat(minimum<=BigInt(contract.budget_micro),'GENERATION_BUDGET_INVALID','原总预算不能覆盖冻结素材、Agent、售后与修复上界',503);
   requireThat(contract.source.audio_policy.speech==='none','NATIVE_AUDIO_NOT_ADMITTED','原生人声和人物能力尚未完成单独准入',503);
 }

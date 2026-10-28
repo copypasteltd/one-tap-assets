@@ -8,11 +8,13 @@ import type { CodexAdmission } from '../codex/admission.js';
 import type { InferenceLimits } from '../codex/inference.js';
 import type {RevisionPolicy} from '../revisions/contract.js';
 import type {ArkContract} from '../providers/ark.js';
+import {frozenNativeAudio,type NativeAudioContract} from '../audio/contract.js';
 
 export interface ModelBinding { provider: string; actual_model: string; registry_version: string; roles: ('VISION_ANALYSIS' | 'IMAGE' | 'VIDEO' | 'SPEECH' | 'QC')[]; capability_hash: string; rate_snapshot_id: string }
 export interface ResourceBinding { resource_version_id: string; license_record_id: string; hash: string }
 export interface Snapshot {
   revision_policy_hash?:string;
+  native_audio_contract_hash?:string;
   schema_version: '1.1.0'; order_id: string; tenant_id: string; product_id: string; photo_version: number; photo_set_hash: string;
   profile_id: string; profile_hash: string; identity_lock_id: string; identity_lock_hash: string; preset_id: string; preset_version: string;
   variant_id: string; variant_version: string; engine: DTO<'Engine'>; plan_hash: string; canonicalization: 'RFC8785';
@@ -26,6 +28,7 @@ export interface Snapshot {
   fulfillable_at: string; deadline_at: string; policy_version: string; codex_contract: DTO<'CodexContract'>;
 }
 export interface FrozenContract {
+  native_audio_contract?:NativeAudioContract;
   speech_contract?:import('../providers/dashscope-asr.js').SpeechContract;
   generation_contracts?:ArkContract[];
   revision_policy?:RevisionPolicy;
@@ -36,6 +39,7 @@ export interface FrozenContract {
   runtime_binding?: { admission: CodexAdmission; limits: InferenceLimits };
 }
 export function bindSnapshot(order: DTO<'Order'>, tenantId: string, contract: FrozenContract, now: string): Snapshot {
+  const audio=frozenNativeAudio(contract);
   const speech = contract.source.audio_policy.speech !== 'none';
   const deadline = new Date(Date.parse(now) + Number(contract.source.slo_policy && (contract.source.slo_policy as { hard_deadline_seconds: number }).hard_deadline_seconds) * 1000).toISOString();
   const snapshot: Snapshot = {
@@ -46,7 +50,7 @@ export function bindSnapshot(order: DTO<'Order'>, tenantId: string, contract: Fr
     engine: contract.source.engine, plan_hash: contract.plan_hash, canonicalization: 'RFC8785', model_versions: contract.model_versions,
     resource_versions: contract.resource_versions, reference_policy: { max_images: 5, max_total_pixels: 150_000_000, mapping_hash: null },
     audio_policy: { speech_mode: speech ? 'NATIVE_ZH' : 'NONE', language: speech ? 'zh-CN' : null,
-      native_voice_id: contract.creative.native_voice_id, preserve_native_speech: speech, caption_alignment: speech ? 'ACTUAL_AUDIO' : 'NO_SPEECH', music_license_ids: [], ducking_enabled: false },
+      native_voice_id: contract.creative.native_voice_id, preserve_native_speech: speech, caption_alignment: speech ? 'ACTUAL_AUDIO' : 'NO_SPEECH', music_license_ids: audio?.music ? [audio.music.binding.license_record_id] : [], ducking_enabled: audio?.music?.ducking??false },
     timeline: { fps: 30, target_frames: contract.creative.target_frames, shots: contract.creative.shots.map(({ shot_id, start_frame, end_frame, overlap_frames, evidence_ids, spoken_text }) => ({ shot_id, start_frame, end_frame, overlap_frames, evidence_ids, spoken_text })) },
     outputs: order ? contract.source.output_slots.map(s => ({ slot_id: s.slot_id, kind: s.kind, count: 1, width: s.width, height: s.height, fps: s.kind === 'video' ? 30 : null, duration_frames: s.kind === 'video' ? contract.creative.target_frames : null, format: s.kind === 'video' ? 'mp4-h264-yuv420p' : 'png' })) : [],
     pricing: { currency: 'CNY', amount_fen: order.amount_fen, terms_version: 'YPCC-TERMS-3.1' },
@@ -55,6 +59,7 @@ export function bindSnapshot(order: DTO<'Order'>, tenantId: string, contract: Fr
   };
   snapshot.outputs.push({ slot_id: 'copy', kind: 'copy', count: 1, width: null, height: null, fps: null, duration_frames: null, format: 'text' });
   if(contract.revision_policy)snapshot.revision_policy_hash=hash(contract.revision_policy);
+  if(audio)snapshot.native_audio_contract_hash=hash(audio);
   validateInternal('execution-snapshot', snapshot);
   requireThat(snapshot.codex_contract.agent_cost_ceiling_micro <= snapshot.budget.ceiling_micro, 'BUDGET_INVALID', 'Agent预算不能超过订单总成本上限', 500);
   return snapshot;

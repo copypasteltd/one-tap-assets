@@ -9,7 +9,7 @@ import { hash } from '../lib/crypto.js';
 export interface SourceSlot { slot_id: string; kind: 'image' | 'video'; width: number; height: number; fps?: number; duration_seconds?: number; role: string }
 export interface VariantSource {
   variant_id: string; version: string; name: string; engine: DTO<'Engine'>; output_slots: SourceSlot[];
-  required_auxiliary_outputs: string[]; audio_policy: { speech: string; language: string | null; music: string; preserve_native_speech: boolean; caption_alignment: string };
+  required_auxiliary_outputs: string[]; audio_policy: { speech: string; language: string | null; music: string; preserve_native_speech: boolean; caption_alignment: string; second_tts_over_native_speech_allowed?:boolean; action_sound_required?:boolean };
   timeline_policy: { target_frames: number; fps: number; base_segments: { role: string; start_seconds: number; end_seconds: number }[] | null };
   input: { shot_hints: string[] }; creative_components: Record<string, unknown>;
   skill_bundle: { id: string; version: string; hash: string }; [key: string]: unknown;

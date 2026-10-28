@@ -3,22 +3,22 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-28T17:34:39.169Z",
+  "checked_at": "2026-10-28T19:34:00.341Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
   "verification_mode": "MINI_BUILD_RETRY_WITH_RETAINED_NATIVE_INTEGRATION",
   "retained_integration": {
-    "checked_at": "2026-10-28T17:31:47.416Z",
-    "previous_source_set_hash": "d2c3d6f883b6d36a7f32c6dbcb33c496795da1ef7a6fcc4d50dc00cdab75b7ce",
-    "validated_source_set_hash": "d2c3d6f883b6d36a7f32c6dbcb33c496795da1ef7a6fcc4d50dc00cdab75b7ce",
+    "checked_at": "2026-10-28T19:32:44.672Z",
+    "previous_source_set_hash": "29a74dd488c8fc8ee923a319732545353b6d4edb4703faf39bcaf3613c17af23",
+    "validated_source_set_hash": "29a74dd488c8fc8ee923a319732545353b6d4edb4703faf39bcaf3613c17af23",
     "allowed_changed_files": [],
-    "report_sha256": "80516f622f4096ef7fad0a6839e221626f8f5de6e93a681fe5d65f4e5ade2b04",
+    "report_sha256": "99d29bbe896139d790a0cb4a5e7745ee0911aab2e978cff19a020c0d911ca201",
     "command": {
       "command": "./scripts/run.ps1 test:integration",
       "status": "PASS",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "5ab812a6912f026b10b8b59b715b292c407faf259cd9afa3dac73f3f7b5d1f54"
+      "log_sha256": "1025866b12a2b27a24694b205a48a71e388ce0c331431e3e3e2192ea94ad4432"
     }
   },
   "command_checks_passed": true,
@@ -27,37 +27,37 @@
       "command": "./scripts/run.ps1 typecheck",
       "status": "PASS",
       "log_path": "runtime/test-results/typecheck.log",
-      "log_sha256": "b00f8663aaa0e7a7865ca9207ef6312a8556561eb318e0d195a1f8c893774ebe"
+      "log_sha256": "b5aa43f87d69764ff3cf345c6eff1f87c196ab22ec1e7e18ff1189160f15f467"
     },
     {
       "command": "./scripts/run.ps1 test",
       "status": "PASS",
       "log_path": "runtime/test-results/test.log",
-      "log_sha256": "66fa7ddedbe42d9b7a07da695af681cbf1534d52d3040d73a2c73450ef035945"
+      "log_sha256": "c981a62ef1f74c2080dfc4e6a73f79fc97b2912df44e258c744e88ae69a1a1c6"
     },
     {
       "command": "./scripts/run.ps1 test:integration",
       "status": "PASS",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "5ab812a6912f026b10b8b59b715b292c407faf259cd9afa3dac73f3f7b5d1f54"
+      "log_sha256": "1025866b12a2b27a24694b205a48a71e388ce0c331431e3e3e2192ea94ad4432"
     },
     {
       "command": "./scripts/run.ps1 build:server",
       "status": "PASS",
       "log_path": "runtime/test-results/build-server.log",
-      "log_sha256": "a26cc94fce930ce4f39b85451747885ce46cbd2f665173512418504623b91f6b"
+      "log_sha256": "73c56fbaf6a17e9a7e97900a166f2ff3f2d0e21c7212a18cfe51084acd23e998"
     },
     {
       "command": "./scripts/run.ps1 build:alipay",
       "status": "PASS",
       "log_path": "runtime/test-results/build-alipay.log",
-      "log_sha256": "344fd83026db30715b52d8ebf37a287a3ab256ffaace0b186e92bb5319f44a4b"
+      "log_sha256": "9ee09e7886e02cac67f2a7c8bf474c4d8b727417c570df640f458e2998b48ef1"
     },
     {
       "command": "./scripts/run.ps1 build:douyin",
       "status": "PASS",
       "log_path": "runtime/test-results/build-douyin.log",
-      "log_sha256": "75fbb924b8845d2255827194b46217783eab48d1f36c2ae8f2d5fc42cba50a6b"
+      "log_sha256": "cb256b44ffcadf5fba831b1f12e68b201e33e6c870bf4b61b8f4a9706a0532b7"
     }
   ],
   "suites": [
@@ -67,23 +67,23 @@
       "tests": 50,
       "passed": 50,
       "failed": 0,
-      "executed_at": "2026-10-28T17:33:25.709Z",
+      "executed_at": "2026-10-28T19:33:36.179Z",
       "report_path": "runtime/test-results/unit.json",
-      "report_sha256": "745196c62b3fd305c4df708873b66d6eab2fba5e46ba6ff3a6589571b7ec1963"
+      "report_sha256": "6605f7e32e7fdb1c90311315207fe82fa9f443d66a4348c7e659ef78714e41cc"
     },
     {
       "kind": "integration",
       "status": "PASS",
-      "tests": 301,
-      "passed": 301,
+      "tests": 324,
+      "passed": 324,
       "failed": 0,
-      "executed_at": "2026-10-28T17:16:58.897Z",
+      "executed_at": "2026-10-28T19:18:07.153Z",
       "report_path": "runtime/test-results/integration.json",
-      "report_sha256": "80516f622f4096ef7fad0a6839e221626f8f5de6e93a681fe5d65f4e5ade2b04"
+      "report_sha256": "99d29bbe896139d790a0cb4a5e7745ee0911aab2e978cff19a020c0d911ca201"
     }
   ],
-  "source_files": 312,
-  "source_set_hash": "d2c3d6f883b6d36a7f32c6dbcb33c496795da1ef7a6fcc4d50dc00cdab75b7ce",
+  "source_files": 316,
+  "source_set_hash": "29a74dd488c8fc8ee923a319732545353b6d4edb4703faf39bcaf3613c17af23",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -194,6 +194,10 @@
       "sha256": "e4b6f864017d4f2de47a18075db3662e446a7b65f02a01a2ed145b53bf01e8a3"
     },
     {
+      "path": "src/api/db/migrations/023_native_audio_rights.sql",
+      "sha256": "1adaa124b1b66205b87302e9d67871308170a6f162745956dc8e8fdee7569811"
+    },
+    {
       "path": "src/api/db/pool.ts",
       "sha256": "81dff3e39d44a521e3a3cfafe6d7b734cfb477f5cd33926c14694c0364777850"
     },
@@ -239,11 +243,11 @@
     },
     {
       "path": "src/api/modules/catalog.ts",
-      "sha256": "b229e49b365e7d7bca130694685fa2e793a7883dc0da958c9d1248310f373b18"
+      "sha256": "2cdad1af89f4511b2da33df941f0a98096e4148f4cf604002c17e4dc11c7f91a"
     },
     {
       "path": "src/api/modules/commerce.ts",
-      "sha256": "ecaf57b6531ab231c186133df029254084fe6cd57fb3b8238e5afaa32545fda1"
+      "sha256": "6e29e58740d4c729e07b8d8bc8bff7bedea0be11fdcf62b3dfcd3699b0aed280"
     },
     {
       "path": "src/api/modules/community.ts",
@@ -634,6 +638,10 @@
       "sha256": "42df331b9460dcf314b343bababfd49472ed06cfc90aac74d8df4f0683227c4d"
     },
     {
+      "path": "src/worker/audio/contract.ts",
+      "sha256": "02bb18b80fae829670aa246bb215fa45834172bec8030a3c661ab1a79cd94e08"
+    },
+    {
       "path": "src/worker/budget/platform.ts",
       "sha256": "0a966b6bd867670b4d992a336e156e44d05422fb2448632398b24c7a642035d1"
     },
@@ -679,7 +687,7 @@
     },
     {
       "path": "src/worker/compiler/order-context.ts",
-      "sha256": "a27a86b18da3e079ff959a5e493f8b46d40df40ec54aace0065a53506dac58d0"
+      "sha256": "5c341f502eb5b18a8a216cbf9dd50a4d683c7e73a93796e8b0c42a52526625cd"
     },
     {
       "path": "src/worker/compiler/plan.ts",
@@ -687,7 +695,7 @@
     },
     {
       "path": "src/worker/compiler/snapshot.ts",
-      "sha256": "8f67d74cfc17358d1f623a1dc551565efa3f45a28759ea15417c733565d476b7"
+      "sha256": "3304d606f4a54dd647e51ab47a969be3828c8c3b8916d568336585702a5ced52"
     },
     {
       "path": "src/worker/generation/context.ts",
@@ -695,7 +703,7 @@
     },
     {
       "path": "src/worker/generation/contracts.ts",
-      "sha256": "8c748c380e4cf89145132545da96fb25b6d734cfd9c0ead59fc3147042f93ef8"
+      "sha256": "22c50abc0c1ec3eb42d99d5a3182813a328aaf2aec07591554a41f49f9c18fb0"
     },
     {
       "path": "src/worker/generation/execute.ts",
@@ -935,11 +943,11 @@
     },
     {
       "path": "src/worker/speech/gateway.ts",
-      "sha256": "a9c4043353fae1367e66ea1eea91b243cce31e067e5087d49f5d506f1de90837"
+      "sha256": "d833b76930c94f507fb6517c2d639f3ae902114a6fb91de5708e4e9c1c841783"
     },
     {
       "path": "src/worker/speech/input.ts",
-      "sha256": "652508584bb797abd65cb24229dca99e1ea1d09ca2b3641eff366cdc98dd0c4a"
+      "sha256": "9f4052319d9f301d999b97a67886a6e4f1d65ca3bdf3969f6b4897c9bb933d7e"
     },
     {
       "path": "src/worker/tool-gateway/consumer.ts",
@@ -1019,7 +1027,7 @@
     },
     {
       "path": "tests/helpers/media.ts",
-      "sha256": "c93e5bdc8afda278c94b5458653569e1df3be78606c6e86236b14364a3d6b014"
+      "sha256": "f96600fff9b07452fde36199aadaeb4cc33c957257e4ced0937b4232b47bd2dc"
     },
     {
       "path": "tests/helpers/reference.ts",
@@ -1030,12 +1038,20 @@
       "sha256": "9fd99905162ebd466bfd6b5ee2319d6754d47c7dca811f531a9ca5cbfb73a5cb"
     },
     {
+      "path": "tests/helpers/speech.ts",
+      "sha256": "4d0f5f183fdf74a121a438f388e48871c8385f4af333a1bbe270cb4962109690"
+    },
+    {
       "path": "tests/integration/agent-traffic.test.ts",
       "sha256": "0b68f8bb6de66f56c1d05ab66b96c7780bb54034aa657d539983c9030df5209d"
     },
     {
       "path": "tests/integration/api-isolation.test.ts",
       "sha256": "d25167f37b535203502ad6830f99594ab2efddde9e793720b14a301c374fe8fb"
+    },
+    {
+      "path": "tests/integration/audio-contract.test.ts",
+      "sha256": "8248f88c93309fb435b42573f61359c01d65504c08de8d432dc1aa638ef1869e"
     },
     {
       "path": "tests/integration/built-worker.test.ts",
@@ -1075,7 +1091,7 @@
     },
     {
       "path": "tests/integration/limited-revision.test.ts",
-      "sha256": "9968f169721bc05e3bc432559c90659ad4de0dccb54a468d908d62bb170dbf81"
+      "sha256": "0e59c2364bbc61583871e07ad0623991f14a6d51b4ee49057dd93bf67daec11f"
     },
     {
       "path": "tests/integration/media-erasure.test.ts",
@@ -1083,7 +1099,7 @@
     },
     {
       "path": "tests/integration/media-stages.test.ts",
-      "sha256": "671682eaa438e22ab5031c1532c7026dd4562a149ee7605106f11b0e66058fe1"
+      "sha256": "25d5e5ca31b3674d571f181dcc324755922f5b4715561f0fe5ff4b4e667dd817"
     },
     {
       "path": "tests/integration/multipart-upload.test.ts",
@@ -1103,7 +1119,7 @@
     },
     {
       "path": "tests/integration/payment-recovery.test.ts",
-      "sha256": "e70b98853b7b78217b197b6cdd2cac2d9d0f129e5675558cfdf172f90d3749fa"
+      "sha256": "0595705bcd6d15f7faa0beb38b2a72f817dbc70457a4295990cad79293425b69"
     },
     {
       "path": "tests/integration/privacy-redaction.test.ts",
@@ -1143,7 +1159,7 @@
     },
     {
       "path": "tests/integration/speech-gateway.test.ts",
-      "sha256": "4e0769b7e40640c0217e964d38dbb34b9767bfc28fb0bdf8017e35a5598758e5"
+      "sha256": "98706bd991e12fb4fbbb4f2881240af4c923e12ecd495cb59e53c5ed7e5295f5"
     },
     {
       "path": "tests/integration/tool-consumer.test.ts",
@@ -1243,7 +1259,7 @@
     },
     {
       "path": "scripts/生成Codex开发契约.py",
-      "sha256": "efb4cf02d121eee4ff7a38f27885c755c71b14761ebc26ba12ba246d4de49503"
+      "sha256": "9a65600b293184c0b4527e7adf9c6e32c45e5a63536f06b878b4d747bad90544"
     },
     {
       "path": "scripts/生成v3需求配置.py",
@@ -1303,7 +1319,7 @@
     },
     {
       "path": "scripts/verify-implementation.ts",
-      "sha256": "0baa3b6a2428b1a60e82d8130ced78cd4ee33fde899b5ba3a2384172f4f56daa"
+      "sha256": "ee42dba9f0a5c5f086687305bccd8c6b55149cbe946a635876edf39e22fb8138"
     },
     {
       "path": "scripts/verify-publication.ts",
@@ -1369,7 +1385,7 @@
     },
     {
       "path": "assets/development/v1.1/contracts/execution-snapshot.schema.json",
-      "sha256": "ddb72d1e13f54613da97e6fb7b9196dcacb1ea47d67167cf216d43be519d3f03"
+      "sha256": "c7aec535e7b2de72540fd7d92fdd71882f69d79f32b0a5e13e913c837d139076"
     },
     {
       "path": "assets/development/v1.1/contracts/management-endpoints.json",
@@ -1504,7 +1520,7 @@
       "sha256": "00da44c3cecb74ca9b34a746bddb4e83c18d1358dfca206157a104425ad1177e"
     }
   ],
-  "runtime_contract_set_hash": "5ef524328f25f9900d6a874b1366cc2b9d58173d309b0ef18102aaac348827ed",
+  "runtime_contract_set_hash": "316ce01cd1fa8a6556575c677e87313f89bac94cfd757d6d5ed6a5a7388c0e74",
   "resource_files": [
     {
       "path": "assets/resources/fonts/noto-sans-sc/NotoSansSC[wght].ttf",
@@ -1628,6 +1644,24 @@
     "real_chinese_speech_verified": false,
     "native_speech_order_admitted": false,
     "notes": "Native PostgreSQL/FFmpeg/AAC/PCM/private files with synthetic HTTPS transport and transcript/usage responses. Original request, send marker, task ID, append-only raw ACK/query/result, bounded source/PCM/WAV hashes and original order cost reservation are persisted. Missing ACK/usage never permits another purchase. Only mono or exact dual mono is accepted; no distinct-channel downmix. This internal POST service is not a production ASR admission, independent listening review or audible order pipeline."
+  },
+  "native_audio_contract": {
+    "implemented": true,
+    "native_fixture_verified": true,
+    "version": "YPCC-NATIVE-AUDIO-CONTRACT-1",
+    "frozen_character_voice_video_binding": true,
+    "frozen_captions_and_music": true,
+    "original_order_budget_and_once_only_prepaid_allocation": true,
+    "one_assembled_track_asr_intent": true,
+    "live_rights_on_payment_and_resume": true,
+    "immutable_license_and_character_evidence": true,
+    "native_quotes_admitted": false,
+    "order_tool_registered": false,
+    "order_pipeline_connected": false,
+    "independent_audio_review_implemented": false,
+    "real_authorizations_verified": false,
+    "real_provider_verified": false,
+    "notes": "Native PostgreSQL/FFmpeg/actual AAC plus synthetic character/voice/music authorization, ASR transport/transcript/usage and payment facts. Contract compilation, snapshot hashes, revoked-rights payment refund intent, original budget and concurrent full-track ASR limits are exercised. Fixed prepaid allocation is internal accounting, not proof of an external license purchase. The primary character/voice binding does not certify official multi-presenter support. NATIVE_AUDIO_NOT_ADMITTED and all sales-disabled gates remain."
   },
   "codex_implementation": {
     "scope": "CONTENT PLAN, silent PHOTO_LAYOUT/PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST, independent generated-reference facts review and fresh final visual REVIEW_FACTS/REVIEW_STYLE runtime adapters, metered Responses gateway, atomic pack publication, independent seven-stage photo creator SAMPLE pipeline",

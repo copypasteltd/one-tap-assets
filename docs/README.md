@@ -2,7 +2,7 @@
 
 [中文入口](../README.md) · [English entry](../README.en.md)
 
-新增专项 / New implementation: [持久异步转写、原任务/费用与实际字级时间码 / Durable ASR and original receipts](实施/异步音频转写与原任务回执-v1.0.md)。内部源码与17项原生夹具已实现，真实供应商及有声订单未准入。
+新增专项 / New implementation: [原生声音合同与原订单费用 / Frozen audio contract and original-order accounting](实施/原生声音合同与原订单费用-v1.0.md)，23项原生专项；[持久异步转写 / Durable ASR](实施/异步音频转写与原任务回执-v1.0.md)17项专项。使用合成授权/识别/用量，真实服务与有声整包未准入。
 
 当前需求v3.1、开发契约v1.1、C设计v1.0。应用整体IN_PROGRESS，源码与演示的范围由当前实现索引决定。Current requirements are v3.1, engineering contracts v1.1 and frozen design C v1.0. The complete product remains in progress.
 

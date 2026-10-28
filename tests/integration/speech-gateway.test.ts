@@ -4,6 +4,7 @@ import {join} from 'node:path';
 import {createHmac} from 'node:crypto';
 import {testDatabase,type TestDatabase} from '../helpers/database.js';
 import {mediaFixture} from '../helpers/media.js';
+import {syntheticSpeechContract as contract} from '../helpers/speech.js';
 import {config,inside} from '../../src/api/config.js';
 import {id,hash,sha256,addSeconds} from '../../src/api/lib/crypto.js';
 import type {HttpResponse} from '../../src/api/lib/http.js';
@@ -23,11 +24,6 @@ const signal=()=>new AbortController().signal;
 const http=(body:unknown,status=200):HttpResponse=>{const bytes=Buffer.from(JSON.stringify(body));return {status,bytes,headers:{},json:()=>body};};
 const resultBody=(url:string)=>({file_url:url,transcripts:[{channel_id:0,text:'商品实拍。',sentences:[{begin_time:100,end_time:800,language:'zh',text:'商品实拍。',
   words:[{begin_time:100,end_time:400,text:'商品',punctuation:''},{begin_time:400,end_time:800,text:'实拍',punctuation:'。'}]}]}]});
-function contract():SpeechContract{return {version:'YPCC-DASHSCOPE-FILETRANS-1',provider:'ALIYUN_DASHSCOPE',state:'ADMITTED',model_version_id:id('synthetic_asr'),
-  request_model:'qwen3-asr-flash-filetrans',actual_model:'qwen3-asr-flash-filetrans',registry_version:'SYNTHETIC-NOT-PRODUCTION',rate_snapshot_id:'synthetic-asr-rate',
-  base_url:'https://speech.example.test/api/v1',official_documentation:ASR_DOCUMENTATION,capability_evidence_sha256:'a'.repeat(64),valid_until:addSeconds(3600),
-  input_hosts:['input.example.test'],result_hosts:['result.example.test'],max_response_bytes:100000,max_queries:4,poll_seconds:1,max_audio_seconds:1,
-  rate:{unit:'AUDIO_SECOND',micro_per_million_units:100_000_000,max_billable_units:1,ceiling_micro:100}};}
 beforeAll(async()=>{db=await testDatabase();const root=inside(db.cfg.runtimeRoot,`tests/asr/${id('videos')}`);roots.push(root);await mkdir(root,{recursive:true});
   for(const [name,source] of [['mono','sine=frequency=660:sample_rate=48000:duration=1'],['stereo','aevalsrc=0.1*sin(2*PI*660*t)|0.1*sin(2*PI*440*t):s=48000:d=1']]){
     const path=join(root,`${name}.mp4`);await nativeCommand(db.cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-f','lavfi','-i','color=c=green:s=320x480:r=30:d=1',

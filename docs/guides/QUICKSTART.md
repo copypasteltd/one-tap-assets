@@ -2,7 +2,7 @@
 
 [English](QUICKSTART.en.md) · [项目说明](../../README.md) · [当前状态](STATUS.md)
 
-转写专项新增独立的 `ASR_SERVICE_ENABLED=false` / `ASR_BASE_URL` / `ASR_API_KEY` / `ASR_ALLOWED_HOSTS` 配置，默认不启用。仅设置这些值不生成正式音频合同或开放有声订单；内部服务仍须原 POST 租约、冻结模型/费率、登记私有视频和受限 HTTPS 存储。[完整配置与17项专项复现](../实施/异步音频转写与原任务回执-v1.0.md)。
+转写专项提供独立的 `ASR_SERVICE_ENABLED=false` / `ASR_BASE_URL` / `ASR_API_KEY` / `ASR_ALLOWED_HOSTS` 配置，默认不启用。仅设置环境值不能开放有声订单；内部服务仍须原 POST 租约、冻结模型/费率、登记私有视频和受限 HTTPS 存储。[完整配置与17项专项复现](../实施/异步音频转写与原任务回执-v1.0.md)。[声音合同与原订单费用](../实施/原生声音合同与原订单费用-v1.0.md)另说明人物/声音/配乐许可、字幕、一次整轨ASR、迁移023及23项原生专项；真实授权/服务、有声订单MCP和完整产线仍未准入。
 
 本指南面向Windows PowerShell，命令全部在克隆的项目根目录执行。当前工作区为`E:\dev\sandbox\支付宝黑客松\一品成片`。禁止启动Docker、WSL、虚拟机或间接容器脚本；工具、缓存、构建、测试媒体、数据库均留在`runtime/`，该目录不提交。
 

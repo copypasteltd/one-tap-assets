@@ -20,7 +20,9 @@ These are **actual browser captures at 430 × 932**, reusing shared mini-program
 
 An independently runnable native kernel extracts actual audio, binds transcript timestamps to PCM evidence, burns four Chinese caption styles, and mixes licensed music with music-only ducking. It checks encoded waveforms, caption timing/pixels, license revocation, the original deadline and cancellation cleanup. **Audio orders remain disconnected and unavailable for sale.**
 
-The new [durable asynchronous transcription service](docs/实施/异步音频转写与原任务回执-v1.0.md) derives a private WAV from a registered order video, freezes its model/rate and original budget, stores raw submit/query/result receipts, and binds supplier word timestamps to the source video/PCM. Missing ACKs never authorize another purchase; distinct stereo channels are currently rejected and results require approved HTTPS URLs. Seventeen native database/media cases use **synthetic recognition and usage responses**, not real-provider recognition evidence. Audio quote contracts, scoped order tools, real Chinese ASR, independent listening and audio QC/delivery remain incomplete. ASR configuration defaults to disabled and does not admit sales.
+The [durable asynchronous transcription service](docs/实施/异步音频转写与原任务回执-v1.0.md) derives a private WAV from a registered order video, freezes its model/rate and original budget, stores raw submit/query/result receipts, and binds supplier word timestamps to the source video/PCM. Missing ACKs never authorize another purchase; distinct stereo channels are currently rejected and results require approved HTTPS URLs. Seventeen native database/media cases use **synthetic recognition and usage responses**, not real-provider recognition evidence. ASR configuration defaults to disabled.
+
+The new [native audio contract and original-order accounting](docs/实施/原生声音合同与原订单费用-v1.0.md) freezes the character/voice/video-model combination, authorization versions and text digests, four caption styles and a fixed font, explicit no-bed or licensed-music gain/ducking/looping, original unit gain, and **one ASR request over the complete assembled track**. The execution snapshot binds this contract. Once-only prepaid-license allocations and the ASR ceiling share the original total while preserving aftercare funds; changing source videos or resuming instances cannot replenish the ASR allowance. Revocation stops execution; an original payment received after revocation is recorded and produces one refund intent. Twenty-three native cases use **synthetic authorizations, recognition/usage and payment facts**, not commercial-rights or real speech certification. Multi-presenter binding, scoped order tools, independent listening and audio QC/delivery remain incomplete; `NATIVE_AUDIO_NOT_ADMITTED` and all sales-disabled gates remain.
 
 ![Actual subtitle processing with synthetic tones and manual timecodes](docs/media/native-audio/preview.gif)
 
@@ -107,7 +109,7 @@ flowchart LR
 | Mini-programs | Taro 4.3.1, React 18.3.1, TypeScript 5.9.3; 17 shared screens and platform ports |
 | Browser replay | Vite 8.3.5 and React DOM adapters with local fixtures |
 | Backend | Node.js 24, tested with 24.22.1; Fastify 5.12.7; worker/reaper/maintenance CLIs |
-| Persistence | Native PostgreSQL, local 17.6-1; durable stages/outbox, lease fencing and immutable receipts; 21 migrations |
+| Persistence | Native PostgreSQL, local 17.6-1; durable stages/outbox, lease fencing and immutable receipts; 23 migrations |
 | Media | Sharp 0.35.5, native FFmpeg/ffprobe, private storage and local development storage |
 | Agent | Codex app-server, bounded stdio/MCP, metered inference and style SkillBundles |
 | Verification | Vitest 5.0.5, Playwright 1.64.1, native PG/actual media and explicit synthetic provider/host fixtures |
@@ -166,7 +168,7 @@ Persist a one-time intent and atomically reserve the original order’s total bu
 ## Repository map and docs
 
 ```text
-src/api/            API, auth, domain services, 21 SQL migrations
+src/api/            API, auth, domain services, 23 SQL migrations
 src/worker/         Durable stages, Codex, MCP, media/review/reaping/privacy
 src/shared/         Shared screens, platform ports, recovery and generated contracts
 src/mini-alipay/    Alipay shell
@@ -197,9 +199,9 @@ Root READMEs and operational guides are bilingual. Detailed historical requireme
 
 For UI evidence, start `dev:preview` and run `docs:media` in another terminal. `test:ui` invokes the same capture/assertion script. Local Edge, native FFmpeg/ffprobe and project-local Playwright recording components are required; see the [demo guide](docs/guides/DEMO.md).
 
-For this 2026-10-29 snapshot, type checking, **50/50 unit tests, 301/301 native integration tests**, server and both mini-program builds passed. The unchanged UI retains its previously verified replay build and ten-screen capture, with identical media hashes. Exact results live in the implementation JSON. Public summaries distinguish actual database/media processing from synthetic models/payments/isolation.
+For this 2026-10-29 snapshot, type checking, **50/50 unit tests, 324/324 native integration tests**, server and both mini-program builds passed. The unchanged UI retains its previously verified replay build and ten-screen capture, with identical media hashes. Exact results live in the implementation JSON. Public summaries distinguish actual database/media processing from synthetic models/payments/isolation.
 
-This transcription source first executes the complete native integration suite freshly. After a build timeout, an explicit same-source/contracts/resources retry retains this original passing report and repeats the other five checks; the previous round's 284 cases are not reused. The default verifier runs the full suite. See [validation provenance](docs/verification/README.md) for bounded build-retry rules.
+This audio-contract source first executes the complete native integration suite freshly. After a build timeout, an explicit same-source/contracts/resources retry retains this original passing report and repeats the other five checks; the previous round's 301 cases are not reused. The default verifier runs the full suite. See [validation provenance](docs/verification/README.md) for bounded build-retry rules.
 
 Remaining work includes official-variant and real-service acceptance of both generative routes, native audio, real Codex/isolation/cleanup, provider/payment/storage admission, four device groups, 14 variants × 30 full-pack benchmarks, complete community/aftercare, Plus/management UI and acceptance of all **58 requirements / 52 P0 requirements**. Follow [status and priorities](docs/guides/STATUS.md).
 

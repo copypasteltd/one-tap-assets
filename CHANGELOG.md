@@ -1,5 +1,18 @@
 # 更新记录 / Changelog
 
+## 2026-10-29 · 原生声音合同与原订单费用 / Native audio contract and original-order accounting
+
+- 冻结原人物/声音/视频模型组合、授权版本和许可全文摘要、字幕/字体/配乐/压低/循环、原声单位增益、一次整轨ASR及全部声音成本，并绑定订单执行快照。Added a private frozen audio contract and snapshot digest; this does not admit public audible quotes.
+- 原总预算覆盖ASR上界和一次性预付许可分摊，保留售后额度；换源/并发/租约恢复不能补充ASR次数，原任务及UNKNOWN费用继续恢复。Added once-only internal prepaid allocations and complete-track ASR limits within the original budget; no external license purchase is claimed.
+- 付款及恢复复查许可，许可失效后的已验证付款保留原事实并创建唯一退款意图；迁移023保护许可/人物证据、固定分摊、退役/撤销和ASR合同摘要。Added revoked-rights payment handling and immutable native-audio registrations.
+- 新增23项原生PG/实际AAC-PCM/私有文件专项，授权、识别/用量/HTTPS和付款事实为合成；同步双语README、使用/开发约束和实现证据。Added twenty-three native fixtures and bilingual implementation documentation; final full-suite results are recorded in the implementation manifest.
+- 首次全量回归定位并修正脱敏订单迟到付款的合同访问顺序，补齐旧支付夹具的原报价SHA；900秒整套超时记录保留，整套命令上限按实测调整为1200秒，单例/断言与业务预算/截止不变，重新全量验证。Preserved the failed first run, corrected payment compatibility and allowed the serial native suite more command-level time without relaxing assertions or business limits.
+- 后续324项断言通过但心跳夹具出现未处理拒绝，仍按失败留存；受限修改及媒体夹具串行续期、传播失败，提交前停止并等待在途查询；媒体诊断保留原错误码，重新完整验证。A later all-assertion pass is not accepted because Vitest detected an unhandled fixture heartbeat; serial fixture heartbeats are stopped and drained before commit, and errors remain failures.
+- 再次全量遇到媒体测试Worker原生异常退出`0xC0000374`，313/324项的不完整报告留存为失败；单独复测后全新重跑，不拼接成通过结果，长期原生稳定性继续待验。A native worker crash remains a recorded failed attempt; partial and focused reports are not combined into full-suite acceptance.
+- 最终本轮完整原生集成324/324、单元50/50通过；支付宝构建180秒超时后，按源码/契约/资源完全未变的受限重试保留本轮原始集成报告，其他五项重新执行并全部通过。发布索引记录来源，不沿用上一轮301项。The current source passes 324 native integration and 50 unit cases; after an Alipay build timeout, a strictly unchanged-source retry retains this round's original integration report and passes the other five checks.
+- 本轮服务端改动沿用已核验截图/录屏/GIF原SHA，未打开浏览器；C25份设计与冻结归档不变。Existing UI/audio media retain original hashes and provenance.
+- 多人逐镜绑定、受控有声订单工具、独立听音/QC/交付与真实授权/服务未准入；全部禁售和完整产品IN_PROGRESS保留。Multi-presenter routing, audio orders and production remain incomplete.
+
 ## 2026-10-29 · 异步音频转写与原任务恢复 / Durable asynchronous transcription
 
 - 新增百炼Qwen3异步文件转写适配、原任务查询、受限HTTPS结果下载和实际字级时间码解析；完整原文/标点/空格保留，长句只按真实词边界拆分，不均分或捏造时间码。Added a bounded asynchronous ASR adapter with original-task recovery and source-preserving word timestamps.

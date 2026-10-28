@@ -12,6 +12,7 @@ import {assertLease,type StageLease} from '../queue/leases.js';
 import {decodeNativeAudio,withAudioDeadline,type NativeAudioEvidence} from '../media/native-audio.js';
 import {inspectVideo} from '../media/native.js';
 import {frozenSpeechContract,type SpeechContract} from '../providers/dashscope-asr.js';
+import {frozenNativeAudio} from '../audio/contract.js';
 
 export interface SpeechSource {source_write_id:string;source_sha256:string;audio:NativeAudioEvidence;wav_sha256:string}
 export async function speechContext(db:Db,lease:StageLease):Promise<ExecutionContext>{
@@ -46,6 +47,8 @@ export async function prepareSpeechSource(db:Db,cfg:Config,store:ObjectStorage,c
     const inspected=await inspectVideo(cfg,path,execution.signal);
     requireThat(inspected.fps===30&&inspected.frames&&inspected.frames>0&&inspected.frames<=c.max_audio_seconds*30,
       'ASR_SOURCE_INVALID','转写源必须是原30fps且在冻结长度内的视频',422);
+    const audio=frozenNativeAudio(context.contract);
+    requireThat(!audio||inspected.frames===audio.target_frames,'ASR_TIMELINE_MISMATCH','转写必须使用原合同完整时间轴，不能把单镜头当作整轨',422);
     const native=await decodeNativeAudio(cfg,{...execution,path,source_sha256:sha256(bytes),target_frames:inspected.frames});
     const mono=Buffer.alloc(native.pcm.length/2);
     for(let p=0,q=0;p<native.pcm.length;p+=4,q+=2){

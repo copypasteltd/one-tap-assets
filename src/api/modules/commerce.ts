@@ -3,7 +3,7 @@ import type { Config } from '../config.js';
 import type { DTO, Principal } from '../../shared/contracts/types.js';
 import { owned, scoped, insert, update, outbox } from '../db/store.js';
 import { id, hash, iso, addSeconds } from '../lib/crypto.js';
-import { requireThat, notFound } from '../lib/errors.js';
+import { AppError, requireThat, notFound } from '../lib/errors.js';
 import { getVariant } from './catalog.js';
 import { validateInternal } from '../lib/validation.js';
 import type { CreativePlan } from '../../worker/compiler/plan.js';
@@ -18,6 +18,7 @@ import { extendFrozenInputRetention } from './retention.js';
 import { POLICIES } from '../../shared/domain/policies.js';
 import { lockMediaOwner } from './media-access.js';
 import {freezeRevisionPolicy,ensureRevisionBudget} from '../../worker/revisions/contract.js';
+import {freezeNativeAudio,verifyNativeAudioLive} from '../../worker/audio/contract.js';
 export { requestRefundInternal } from './refunds.js';
 
 export async function createQuote(db: Db, cfg: Config, p: Principal, request: DTO<'QuoteRequest'>): Promise<DTO<'Quote'>> {
@@ -61,8 +62,10 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
       daily_ceiling_micro: codexContract.agent_cost_ceiling_micro } } };
   contract.revision_policy=freezeRevisionPolicy(contract);
   if(contract.source.engine!=='PHOTO_LAYOUT'){
-    contract.generation_contracts=freezeGenerationContracts(cfg,models.rows);validateGenerationExecution(contract);
+    contract.generation_contracts=freezeGenerationContracts(cfg,models.rows);
   }
+  await freezeNativeAudio(db,cfg,contract,models.rows);
+  if(contract.source.engine!=='PHOTO_LAYOUT')validateGenerationExecution(contract);
   requireThat(contract.budget_micro >= codexContract.agent_cost_ceiling_micro + contract.revision_policy.budget_micro,
     'BUDGET_INVALID', '原订单总预算必须同时覆盖制作与受限修改', 503);
   const data: DTO<'Quote'> = { quote_id: id('quote'), plan_id: plan.id, plan_hash: request.plan_hash, state: 'OPEN', currency: 'CNY', amount_fen: current.data.price_fen,
@@ -81,6 +84,8 @@ export async function createOrder(db: Db, cfg: Config, p: Principal, request: DT
   }
   requireThat(quote.state === 'OPEN' && Date.parse(quote.data.expires_at) > Date.now(), 'QUOTE_EXPIRED', '报价已过期，请重新确认清单和费用', 410);
   const contract = quote.private!.contract as FrozenContract;
+  requireThat(hash(contract)===quote.private!.contract_hash,'QUOTE_CONTRACT_MISMATCH','原报价合同摘要不一致',503);
+  await verifyNativeAudioLive(db,contract,true);
   const product = await owned<DTO<'Product'>>(db, 'product_drafts', contract.product.product_id, p);
   requireThat(!product.deleted_at && new Date(String(product.expires_at)).getTime() > Date.now()
     && product.data.profile_id === contract.profile.profile_id, 'INPUT_VERSION_CHANGED', '商品输入已更新或过期，请重新获取报价');
@@ -110,8 +115,13 @@ export async function confirmPayment(db: Db, event: VerifiedPayment): Promise<DT
   if (payment.state === 'CONFIRMED') return order.data;
   await insert(db, 'ledger_entries', { id: id('ledger'), tenant_id: tenant, order_id: event.orderId, event_key: `paid:${payment.id}`, entry_type: 'PAYMENT', amount_fen: event.amountFen, currency: 'CNY' });
   await update(db, 'payments', payment.id, { state: 'CONFIRMED', provider_order_id: event.providerOrderId, data: { ...payment.data, state: 'CONFIRMED', action: { kind: 'QUERY_ORIGINAL_ORDER' } }, updated_at: iso() }, tenant);
-  const eligible = order.data.fulfillment_state === 'NOT_STARTED' && Date.parse(order.data.payable_until) >= Date.now()
-    && !('media_revoked' in order.private) && await extendFrozenInputRetention(db, tenant, order.owner_id,
+  const canExecute=order.data.fulfillment_state==='NOT_STARTED'&&Date.parse(order.data.payable_until)>=Date.now()&&!('media_revoked' in order.private);
+  let audioEligible=true;
+  try{if(canExecute)await verifyNativeAudioLive(db,order.private.contract,true);}catch(e){
+    if(e instanceof AppError&&['AUDIO_LICENSE_UNAVAILABLE','CHARACTER_VOICE_NOT_ADMITTED','AUDIO_CHARACTER_CHANGED','AUDIO_LICENSE_CHANGED','RESOURCE_LICENSE_UNAVAILABLE'].includes(e.code))audioEligible=false;
+    else throw e;
+  }
+  const eligible = canExecute && audioEligible && await extendFrozenInputRetention(db, tenant, order.owner_id,
       { product_id: order.private.contract.product.product_id, photo_version: order.private.contract.profile.photo_version,
         photo_set_hash: order.private.contract.photo_set_hash }, addSeconds(POLICIES.deliveryDays * 86400));
   const data: DTO<'Order'> = { ...order.data, payment_state: 'CONFIRMED', fulfillment_state: eligible ? 'QUEUED' : 'CANCELLED' };
@@ -132,7 +142,7 @@ export async function confirmPayment(db: Db, event: VerifiedPayment): Promise<DT
     await outbox(db, tenant, 'RenderRequested', data.order_id, `render:${data.order_id}`, { job_id: jobId });
   }
   await update(db, 'orders', data.order_id, { data, payment_state: data.payment_state, fulfillment_state: data.fulfillment_state, updated_at: iso() }, tenant);
-  if (!eligible) data.refund_id = (await requestRefundInternal(db, tenant, data.order_id, 'LATE_OR_CANCELLED_PAYMENT')).refund_id;
+  if (!eligible) data.refund_id = (await requestRefundInternal(db, tenant, data.order_id, audioEligible?'LATE_OR_CANCELLED_PAYMENT':'AUDIO_RIGHTS_UNAVAILABLE')).refund_id;
   return data;
 }
 export async function cancelOrder(db: Db, p: Principal, orderId: string, reason: string): Promise<DTO<'Order'>> {

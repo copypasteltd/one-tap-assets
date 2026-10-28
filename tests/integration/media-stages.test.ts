@@ -40,8 +40,20 @@ async function setup(mode = 'NORMAL') {
   const launcher = new FixtureLauncher(mode); const runtime = new CodexRuntimeAdapter(db.pool, f.cfg, launcher);
   const service = new MediaStageService(db.pool, f.cfg, runtime);
   const handle = async (lease: StageLease) => {
-    const pulse = setInterval(() => { void heartbeatStage(db.pool, lease); }, 5000);
-    try { return await service.handle(lease, new AbortController().signal); } finally { clearInterval(pulse); }
+    const role = new AbortController(); let pending: Promise<void> | null = null; let failure: unknown;
+    const pulse = setInterval(() => {
+      if (pending || role.signal.aborted) return;
+      pending = heartbeatStage(db.pool, lease).then(ok => { if (!ok) throw new Error('Fixture lease was lost'); })
+        .catch(error => { failure = error; role.abort(); }).finally(() => { pending = null; });
+    }, 5000);
+    try {
+      const result = await service.handle(lease, role.signal); clearInterval(pulse); if (pending) await pending;
+      if (failure) throw failure; return result;
+    } catch (error) {
+      const tools = (await db.pool.query("SELECT tool_name,state,data->>'error_code' AS error_code FROM agent_tool_intents WHERE stage_run_id=$1 ORDER BY created_at", [lease.id])).rows;
+      if (error instanceof Error) error.message += `; synthetic media tool states: ${JSON.stringify({ tools })}`;
+      throw error;
+    } finally { clearInterval(pulse); if (pending) await pending; }
   };
   return { ...f, launcher, service, handle, inferences: () => inferences };
 }

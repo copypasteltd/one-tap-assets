@@ -19,7 +19,7 @@ import {bundleForVariant} from '../../src/worker/codex/skills.js';
 
 /** Actual private files, PostgreSQL and native media; a one-second synthetic
  * contract keeps fault tests bounded. This is not an official-variant run. */
-export async function mediaFixture(db: TestDatabase,options:{principal?:Principal;revisions?:boolean;speech?:import('../../src/worker/providers/dashscope-asr.js').SpeechContract;generation?:{engine:'PER_SHOT_AI'|'REFERENCE_FILM';contracts:ArkContract[];variantId?:string;twoShots?:boolean}}={}) {
+export async function mediaFixture(db: TestDatabase,options:{principal?:Principal;revisions?:boolean;configureContract?:(contract:FrozenContract)=>Promise<void>;speech?:import('../../src/worker/providers/dashscope-asr.js').SpeechContract;generation?:{engine:'PER_SHOT_AI'|'REFERENCE_FILM';contracts:ArkContract[];variantId?:string;twoShots?:boolean}}={}) {
   const assetIds = [id('photo'), id('photo'), id('photo')]; const f = await planningFixture(db, assetIds, options.principal);
   // Synthetic receipt accounting only, not a certified real-model image bound.
   f.admission.review_vision = { evidence_sha256: 'f'.repeat(64), detail: 'original', max_images: 100,
@@ -76,6 +76,10 @@ export async function mediaFixture(db: TestDatabase,options:{principal?:Principa
       await insert(db.pool,'provider_model_versions',{id:c.model_version_id,provider:c.provider,actual_model:c.actual_model,
         status:'ADMITTED',version:c.registry_version,data:binding,private:{ark_contract:c}});
     }
+  }
+  if(options.configureContract){
+    if(db.cfg.env!=='test')throw new Error('Synthetic contract configuration requires APP_ENV=test');
+    await options.configureContract(contract);
   }
   const quoteId = id('quote'); const orderId = id('order'); const jobId = id('job'); const snapshotId = id('snapshot');
   await insert(db.pool, 'quotes', { id: quoteId, tenant_id: f.p.tenantId, owner_id: f.p.userId, plan_id: f.plan.plan_id,
