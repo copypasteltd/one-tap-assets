@@ -12,7 +12,8 @@ export interface Config {
   alipay: { appId: string; privateKey: string; publicKey: string; merchantId: string; gateway: string };
   douyin: { appId: string; secret: string; merchantId: string; paymentKey: string; privateKey: string; keyVersion: string; tradeContractPath: string; salt: string; gateway: string };
   provider: { baseUrl: string; apiKey: string; allowedHosts: string[]; visionModel: string; imageModel: string; videoModel: string; rateVersion: string; visionContractPath: string; visionDailyBudgetMicro: number;
-    generation?:{baseUrl:string;apiKey:string;allowedHosts:string[]} };
+    generation?:{baseUrl:string;apiKey:string;allowedHosts:string[]};
+    speech?:{enabled:boolean;baseUrl:string;apiKey:string;allowedHosts:string[]} };
   managementTokens: string;
   samples: { dailyBudgetMicro: number; costCeilingMicro: number; maxConcurrent: number; deadlineSeconds: number };
   privacyJournal: { enabled: boolean; directory: string; sourceId: string; keyId: string; hmacKey: string };
@@ -43,7 +44,9 @@ export function config(overrides: Partial<Config> = {}): Config {
     douyin: { appId: text('DOUYIN_APP_ID'), secret: text('DOUYIN_APP_SECRET'), merchantId: text('DOUYIN_MERCHANT_ID'), paymentKey: text('DOUYIN_PAYMENT_VERIFY_KEY'), privateKey: text('DOUYIN_APP_PRIVATE_KEY'), keyVersion: text('DOUYIN_KEY_VERSION'), tradeContractPath: text('DOUYIN_TRADE_CONTRACT_PATH'), salt: text('DOUYIN_PAYMENT_SALT'), gateway: text('DOUYIN_PAYMENT_GATEWAY', 'https://open.douyin.com') },
     provider: { baseUrl: text('PROVIDER_BASE_URL'), apiKey: text('PROVIDER_API_KEY'), allowedHosts: text('PROVIDER_ALLOWED_HOSTS', 'api.openai.com').split(',').map(s => s.trim()).filter(Boolean), visionModel: text('VISION_MODEL_ID'), imageModel: text('IMAGE_MODEL_ID'), videoModel: text('VIDEO_MODEL_ID'), rateVersion: text('MODEL_REGISTRY_VERSION'), visionContractPath: text('VISION_CONTRACT_PATH'), visionDailyBudgetMicro: num('VISION_DAILY_BUDGET_MICRO', 0),
       ...(text('GENERATION_BASE_URL')?{generation:{baseUrl:text('GENERATION_BASE_URL'),apiKey:text('GENERATION_API_KEY'),
-        allowedHosts:text('GENERATION_ALLOWED_HOSTS').split(',').map(s=>s.trim()).filter(Boolean)}}:{}) },
+        allowedHosts:text('GENERATION_ALLOWED_HOSTS').split(',').map(s=>s.trim()).filter(Boolean)}}:{}),
+      ...(text('ASR_BASE_URL')?{speech:{enabled:enabled('ASR_SERVICE_ENABLED'),baseUrl:text('ASR_BASE_URL'),apiKey:text('ASR_API_KEY'),
+        allowedHosts:text('ASR_ALLOWED_HOSTS').split(',').map(s=>s.trim()).filter(Boolean)}}:{}) },
     managementTokens: text('MANAGEMENT_TOKENS_JSON'),
     samples: { dailyBudgetMicro: num('SAMPLE_DAILY_BUDGET_MICRO', 0), costCeilingMicro: num('SAMPLE_COST_CEILING_MICRO', 0), maxConcurrent: num('SAMPLE_MAX_CONCURRENT', 1), deadlineSeconds: num('SAMPLE_DEADLINE_SECONDS', 3600) },
     privacyJournal: { enabled: enabled('PRIVACY_JOURNAL_ENABLED'), directory: text('PRIVACY_JOURNAL_DIRECTORY', 'privacy-journal'),

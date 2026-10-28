@@ -3,22 +3,22 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-28T16:50:41.518Z",
+  "checked_at": "2026-10-28T17:34:39.169Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
   "verification_mode": "MINI_BUILD_RETRY_WITH_RETAINED_NATIVE_INTEGRATION",
   "retained_integration": {
-    "checked_at": "2026-10-28T16:45:24.272Z",
-    "previous_source_set_hash": "d451449300d096023a2d49dfcca6dde91b5af14ebf8bde6c5a10ae03ee38cb8d",
-    "validated_source_set_hash": "d451449300d096023a2d49dfcca6dde91b5af14ebf8bde6c5a10ae03ee38cb8d",
+    "checked_at": "2026-10-28T17:31:47.416Z",
+    "previous_source_set_hash": "d2c3d6f883b6d36a7f32c6dbcb33c496795da1ef7a6fcc4d50dc00cdab75b7ce",
+    "validated_source_set_hash": "d2c3d6f883b6d36a7f32c6dbcb33c496795da1ef7a6fcc4d50dc00cdab75b7ce",
     "allowed_changed_files": [],
-    "report_sha256": "dc12cfca9677228821b0141ff86b70dc6296175198ba2f0c47f16b33fc7f7bb7",
+    "report_sha256": "80516f622f4096ef7fad0a6839e221626f8f5de6e93a681fe5d65f4e5ade2b04",
     "command": {
       "command": "./scripts/run.ps1 test:integration",
       "status": "PASS",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "acd2c4359009f85d41cee3610dee31373ec8cd41e875af380f25ecd84760e6c6"
+      "log_sha256": "5ab812a6912f026b10b8b59b715b292c407faf259cd9afa3dac73f3f7b5d1f54"
     }
   },
   "command_checks_passed": true,
@@ -27,37 +27,37 @@
       "command": "./scripts/run.ps1 typecheck",
       "status": "PASS",
       "log_path": "runtime/test-results/typecheck.log",
-      "log_sha256": "e9d0388a35992339396f0e179885d23844b48519cf1b36eb07931c3d48e9c923"
+      "log_sha256": "b00f8663aaa0e7a7865ca9207ef6312a8556561eb318e0d195a1f8c893774ebe"
     },
     {
       "command": "./scripts/run.ps1 test",
       "status": "PASS",
       "log_path": "runtime/test-results/test.log",
-      "log_sha256": "3adc1cf83e86be7adff86af5b07df272344e1b037a5bc8798b7f8accef901794"
+      "log_sha256": "66fa7ddedbe42d9b7a07da695af681cbf1534d52d3040d73a2c73450ef035945"
     },
     {
       "command": "./scripts/run.ps1 test:integration",
       "status": "PASS",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "acd2c4359009f85d41cee3610dee31373ec8cd41e875af380f25ecd84760e6c6"
+      "log_sha256": "5ab812a6912f026b10b8b59b715b292c407faf259cd9afa3dac73f3f7b5d1f54"
     },
     {
       "command": "./scripts/run.ps1 build:server",
       "status": "PASS",
       "log_path": "runtime/test-results/build-server.log",
-      "log_sha256": "427799e6d09f6777c7f42956bade7c35fb56857b699dc1192596a5eadeb96ff7"
+      "log_sha256": "a26cc94fce930ce4f39b85451747885ce46cbd2f665173512418504623b91f6b"
     },
     {
       "command": "./scripts/run.ps1 build:alipay",
       "status": "PASS",
       "log_path": "runtime/test-results/build-alipay.log",
-      "log_sha256": "857ef723ed99d8d29f44d9eb1ee4094cbf9337995c2b41016711d3dd63eebe2a"
+      "log_sha256": "344fd83026db30715b52d8ebf37a287a3ab256ffaace0b186e92bb5319f44a4b"
     },
     {
       "command": "./scripts/run.ps1 build:douyin",
       "status": "PASS",
       "log_path": "runtime/test-results/build-douyin.log",
-      "log_sha256": "490d0c1de6d69da54bc9d4bd53d0b6295078f94a6c9887187a010f4754355ec1"
+      "log_sha256": "75fbb924b8845d2255827194b46217783eab48d1f36c2ae8f2d5fc42cba50a6b"
     }
   ],
   "suites": [
@@ -67,23 +67,23 @@
       "tests": 50,
       "passed": 50,
       "failed": 0,
-      "executed_at": "2026-10-28T16:47:26.118Z",
+      "executed_at": "2026-10-28T17:33:25.709Z",
       "report_path": "runtime/test-results/unit.json",
-      "report_sha256": "c26984b8577aaebfaa04e85a0406e5b9cfdc3547d1ab332333701cf340a4e1b1"
+      "report_sha256": "745196c62b3fd305c4df708873b66d6eab2fba5e46ba6ff3a6589571b7ec1963"
     },
     {
       "kind": "integration",
       "status": "PASS",
-      "tests": 284,
-      "passed": 284,
+      "tests": 301,
+      "passed": 301,
       "failed": 0,
-      "executed_at": "2026-10-28T16:30:55.410Z",
+      "executed_at": "2026-10-28T17:16:58.897Z",
       "report_path": "runtime/test-results/integration.json",
-      "report_sha256": "dc12cfca9677228821b0141ff86b70dc6296175198ba2f0c47f16b33fc7f7bb7"
+      "report_sha256": "80516f622f4096ef7fad0a6839e221626f8f5de6e93a681fe5d65f4e5ade2b04"
     }
   ],
-  "source_files": 307,
-  "source_set_hash": "d451449300d096023a2d49dfcca6dde91b5af14ebf8bde6c5a10ae03ee38cb8d",
+  "source_files": 312,
+  "source_set_hash": "d2c3d6f883b6d36a7f32c6dbcb33c496795da1ef7a6fcc4d50dc00cdab75b7ce",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -99,7 +99,7 @@
     },
     {
       "path": "src/api/config.ts",
-      "sha256": "4f600847f9dbd793fd3c0d7cf6fed1868688f09596642b1512fa789d9b3533e3"
+      "sha256": "67555d8707e248e930b5d79a51912674ecf4f6cb3803a7bf3d04eb5b7f7f7ae5"
     },
     {
       "path": "src/api/db/migrate.ts",
@@ -188,6 +188,10 @@
     {
       "path": "src/api/db/migrations/021_generation_submissions.sql",
       "sha256": "da5eda9bf217419a02af65552d78d30d9e2a1a44034fe790d674ca8acef94b87"
+    },
+    {
+      "path": "src/api/db/migrations/022_speech_submissions.sql",
+      "sha256": "e4b6f864017d4f2de47a18075db3662e446a7b65f02a01a2ed145b53bf01e8a3"
     },
     {
       "path": "src/api/db/pool.ts",
@@ -315,7 +319,7 @@
     },
     {
       "path": "src/api/storage/storage.ts",
-      "sha256": "f8e6e043a4ca412ee2dfff1f30808157e8d68fac2f00156fca291b68febb5c15"
+      "sha256": "769e99fbc18d27b5943bac5856275234ecf456d2311074cafc2de86ed30e1188"
     },
     {
       "path": "src/mini-alipay/app.config.ts",
@@ -683,7 +687,7 @@
     },
     {
       "path": "src/worker/compiler/snapshot.ts",
-      "sha256": "8ce88a0427ea52fad701a0ccc1dda070cf3e0598f44fd1c3a5ca056114bd89fe"
+      "sha256": "8f67d74cfc17358d1f623a1dc551565efa3f45a28759ea15417c733565d476b7"
     },
     {
       "path": "src/worker/generation/context.ts",
@@ -699,11 +703,11 @@
     },
     {
       "path": "src/worker/generation/gateway.ts",
-      "sha256": "c7970e641e55e1df4175f22bbcb8a6537e5554207c184bac912a88a2456c8497"
+      "sha256": "4bec72bb045c2f423e1678b79dd7a01c7fdb4ca9c33342538af10335d403544f"
     },
     {
       "path": "src/worker/generation/outputs.ts",
-      "sha256": "c70297ff952cce9c579b4a5693c752286d5cbd633d430c0997fab00de7c4dd22"
+      "sha256": "cfff8bdb77107e12c750d781acd5311b169366a6c4e81a37c7fd2cd02b9d2410"
     },
     {
       "path": "src/worker/generation/prepare.ts",
@@ -747,7 +751,7 @@
     },
     {
       "path": "src/worker/lifecycle/media-maintenance-main.ts",
-      "sha256": "4168a910f559f746488b084f1671140f328282ee82a242532200ae0600e0e394"
+      "sha256": "d77997c39ccbe5b367a8fd6bada5d1456f5366900237a64e69bd98ae1fabae50"
     },
     {
       "path": "src/worker/lifecycle/privacy-journal-main.ts",
@@ -828,6 +832,10 @@
     {
       "path": "src/worker/providers/ark.ts",
       "sha256": "e34495a16b75032d84b820776540d8c2eab9f9ea1546e1ebeb7dbeccd42526d0"
+    },
+    {
+      "path": "src/worker/providers/dashscope-asr.ts",
+      "sha256": "fe3ebcaaa361300d6fb6c053279de0483e48e079e65e817edd9765f8285516e5"
     },
     {
       "path": "src/worker/providers/vision.ts",
@@ -926,6 +934,14 @@
       "sha256": "15b613af099fe7811cfa45d7e783e305e11bd9c9581f94abc03c99fd44dd8486"
     },
     {
+      "path": "src/worker/speech/gateway.ts",
+      "sha256": "a9c4043353fae1367e66ea1eea91b243cce31e067e5087d49f5d506f1de90837"
+    },
+    {
+      "path": "src/worker/speech/input.ts",
+      "sha256": "652508584bb797abd65cb24229dca99e1ea1d09ca2b3641eff366cdc98dd0c4a"
+    },
+    {
       "path": "src/worker/tool-gateway/consumer.ts",
       "sha256": "ed6759380154f526d0057cb69c3eb00c36afa77360220d571a851239a227a09d"
     },
@@ -1003,7 +1019,7 @@
     },
     {
       "path": "tests/helpers/media.ts",
-      "sha256": "28057c56abaef8c11d4a929eb8dbbaadca026c6e239f71475ce645e9582e630f"
+      "sha256": "c93e5bdc8afda278c94b5458653569e1df3be78606c6e86236b14364a3d6b014"
     },
     {
       "path": "tests/helpers/reference.ts",
@@ -1124,6 +1140,10 @@
     {
       "path": "tests/integration/sample-production.test.ts",
       "sha256": "5a021912ff5d6c736bc050d5ad1988edfdce2927961f527904550f5d7aab5600"
+    },
+    {
+      "path": "tests/integration/speech-gateway.test.ts",
+      "sha256": "4e0769b7e40640c0217e964d38dbb34b9767bfc28fb0bdf8017e35a5598758e5"
     },
     {
       "path": "tests/integration/tool-consumer.test.ts",
@@ -1283,7 +1303,7 @@
     },
     {
       "path": "scripts/verify-implementation.ts",
-      "sha256": "5f88e5b09ac865f854588d9601a703ea8be030d0947ca287664163264f5837b1"
+      "sha256": "0baa3b6a2428b1a60e82d8130ced78cd4ee33fde899b5ba3a2384172f4f56daa"
     },
     {
       "path": "scripts/verify-publication.ts",
@@ -1585,12 +1605,29 @@
     "native_voice_unit_gain": true,
     "licensed_bed_ducking": true,
     "original_deadline_and_cancellation": true,
-    "durable_asr_implemented": false,
+    "durable_asr_implemented": true,
     "independent_audio_review_implemented": false,
     "order_tool_registered": false,
     "native_speech_order_admitted": false,
     "real_chinese_speech_verified": false,
     "notes": "Native PostgreSQL/FFmpeg/AAC/PNG/PCM with synthetic tones and explicitly manual timecodes. Actual encoded waveforms, subtitle pixels/timing, music-only ducking, license revocation, exact sample counts, permitted loops and cleanup are exercised. Receipt hashes and signal presence are not recognizer admission or semantic audio review. This internal kernel does not register an order tool or remove NATIVE_AUDIO_NOT_ADMITTED."
+  },
+  "speech_transcription": {
+    "implemented": true,
+    "native_fixture_verified": true,
+    "provider": "ALIYUN_DASHSCOPE",
+    "wire": "QWEN3_ASR_FLASH_FILETRANS_ASYNC",
+    "original_intent_receipts_and_budget": true,
+    "private_mono_wav": true,
+    "distinct_stereo_rejected": true,
+    "actual_word_timestamps_required": true,
+    "stored_receipt_maintenance": true,
+    "order_tool_registered": false,
+    "order_pipeline_connected": false,
+    "real_provider_verified": false,
+    "real_chinese_speech_verified": false,
+    "native_speech_order_admitted": false,
+    "notes": "Native PostgreSQL/FFmpeg/AAC/PCM/private files with synthetic HTTPS transport and transcript/usage responses. Original request, send marker, task ID, append-only raw ACK/query/result, bounded source/PCM/WAV hashes and original order cost reservation are persisted. Missing ACK/usage never permits another purchase. Only mono or exact dual mono is accepted; no distinct-channel downmix. This internal POST service is not a production ASR admission, independent listening review or audible order pipeline."
   },
   "codex_implementation": {
     "scope": "CONTENT PLAN, silent PHOTO_LAYOUT/PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST, independent generated-reference facts review and fresh final visual REVIEW_FACTS/REVIEW_STYLE runtime adapters, metered Responses gateway, atomic pack publication, independent seven-stage photo creator SAMPLE pipeline",

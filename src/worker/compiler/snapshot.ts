@@ -26,6 +26,7 @@ export interface Snapshot {
   fulfillable_at: string; deadline_at: string; policy_version: string; codex_contract: DTO<'CodexContract'>;
 }
 export interface FrozenContract {
+  speech_contract?:import('../providers/dashscope-asr.js').SpeechContract;
   generation_contracts?:ArkContract[];
   revision_policy?:RevisionPolicy;
   product: DTO<'Product'>; profile: DTO<'Profile'>; photo_set_hash: string; identity_lock_hash: string;

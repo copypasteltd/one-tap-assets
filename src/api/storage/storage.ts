@@ -13,6 +13,7 @@ export interface ObjectStorage {
   put(key: string, bytes: Buffer, mime: string): Promise<void>; get(key: string, maxBytes?: number): Promise<Buffer>;
   delete(key: string): Promise<void>; exists(key: string): Promise<boolean>;
   erase?(key: string, signal?: AbortSignal): Promise<ObjectErasure>;
+  signedReadUrl?(key:string,expiresAt:Date):string;
 }
 export function validObjectKey(key: string): string {
   if (!/^[a-zA-Z0-9][a-zA-Z0-9/_.-]{0,500}$/.test(key) || key.split('/').some(s => s === '..' || s === '.' || !s)) throw new AppError('INVALID_OBJECT_KEY', '无效的存储路径', 500);
@@ -61,6 +62,14 @@ export class OssStorage implements ObjectStorage {
   constructor(private cfg: Config, private http: typeof fetch = fetch) {
     if (!cfg.storage.endpoint.startsWith('https://') || !cfg.storage.bucket || !cfg.storage.keyId || !cfg.storage.secret) throw new Error('OSS configuration incomplete');
     requireThat(http === fetch || cfg.env === 'test', 'TEST_PORT_FORBIDDEN', '存储替身只能用于显式测试环境', 500);
+  }
+  /** A private capability for one exact object, never a public bucket ACL. */
+  signedReadUrl(key:string,expiresAt:Date):string {
+    validObjectKey(key);const expires=Math.floor(expiresAt.getTime()/1000),now=Math.floor(Date.now()/1000);
+    requireThat(Number.isSafeInteger(expires)&&expires>now&&expires-now<=7200,'STORAGE_URL_EXPIRY_INVALID','私有读取URL不得超出原任务两小时上界',503);
+    const {bucket,endpoint,keyId,secret}=this.cfg.storage;const url=new URL(endpoint);url.hostname=`${bucket}.${url.hostname}`;url.pathname=`/${key}`;
+    const signature=createHmac('sha1',secret).update(`GET\n\n\n${expires}\n/${bucket}/${key}`).digest('base64');
+    url.searchParams.set('OSSAccessKeyId',keyId);url.searchParams.set('Expires',String(expires));url.searchParams.set('Signature',signature);return url.href;
   }
   private async request(method: string, key: string, body?: Buffer, mime = '', query: Record<string, string> = {}, signal?: AbortSignal): Promise<Response> {
     if (key) validObjectKey(key); else requireThat(query.versions === '', 'INVALID_OBJECT_KEY', '不允许未指定对象的存储操作', 500);

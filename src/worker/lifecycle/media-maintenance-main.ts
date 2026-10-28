@@ -12,6 +12,7 @@ import { VisionAnalysisService } from '../analysis/service.js';
 import { InferenceGateway } from '../codex/inference.js';
 import { expireAuthorizedSamples } from '../../api/modules/authorized-samples.js';
 import {GenerationGateway} from '../generation/gateway.js';
+import {SpeechGateway} from '../speech/gateway.js';
 
 const cfg = config(); const pool = createPool(cfg); const controller = new AbortController(); const workerId = id('media_cleanup');
 for (const signal of ['SIGINT','SIGTERM'] as const) process.once(signal, () => controller.abort());
@@ -20,6 +21,7 @@ try {
   await migrate(pool); const store = storage(cfg); const media = new MediaErasureService(pool, store, workerId, deletionJournal(cfg));
   const vision = new VisionAnalysisService(pool, cfg, store); const inference = new InferenceGateway(pool, cfg, store);
   const generation=new GenerationGateway(pool,cfg,store);
+  const speech=new SpeechGateway(pool,cfg,store);
   const events = new WorkerRuntime({ pool, workerId, stages: {}, events: { PrivacyDeletionRequested: event => media.requestEvent(event) }, log });
   let lastScan = -Infinity; log({ event: 'media_maintenance_ready', worker_id: workerId });
   do {
@@ -28,7 +30,7 @@ try {
       try {
         const objects = await reconcileUncertainObjectWrites(pool, store);
         if (objects.recovered || objects.blocked) log({ event: 'private_object_writes_reconciled', ...objects });
-        const receipts = [await vision.reconcileReceipts(), await inference.reconcileReceipts(),await generation.reconcileReceipts(20,controller.signal)];
+        const receipts = [await vision.reconcileReceipts(), await inference.reconcileReceipts(),await generation.reconcileReceipts(20,controller.signal),await speech.reconcileReceipts()];
         if (receipts.some(r => r.settled || r.blocked)) log({ event: 'private_receipts_reconciled', receipts });
         await expireAuthorizedSamples(pool); await media.expire(); await media.refreshPending();
       }

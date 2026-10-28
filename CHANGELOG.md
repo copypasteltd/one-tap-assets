@@ -1,5 +1,15 @@
 # 更新记录 / Changelog
 
+## 2026-10-29 · 异步音频转写与原任务恢复 / Durable asynchronous transcription
+
+- 新增百炼Qwen3异步文件转写适配、原任务查询、受限HTTPS结果下载和实际字级时间码解析；完整原文/标点/空格保留，长句只按真实词边界拆分，不均分或捏造时间码。Added a bounded asynchronous ASR adapter with original-task recovery and source-preserving word timestamps.
+- 原订单POST读取登记视频、实际解码PCM并派生私有单声道WAV；不同左右声道直接拒绝。原视频/PCM/WAV/合同/原截止均绑定。Added native private audio preparation without silently dropping a stereo channel.
+- 复用原订单预算及provider_submissions，迁移022增加ASR分流，保留不可变发送标记/任务/请求及追加式原回执；提交/音频写入/结果写入ACK丢失不重购，未知费用不猜测免费。Reused the original ledger and protected receipts; uncertain operations cannot buy again.
+- 独立媒体维护器只恢复已存ASR回执；私有单对象OSS签名URL、绝对截止/取消与发送/完成撤权检查已有源码。Added stored-receipt reconciliation and bounded private-object access; external privacy remains unverified.
+- 新增17项原生PG/FFmpeg/AAC/PCM/私有文件专项，供应商转写/用量与传输为合成；双语README、配置、开发边界和证据同步。Added seventeen native fixtures with explicit synthetic ASR responses and updated bilingual documentation.
+- 当前50单元/301全量原生集成、服务端与双小程序构建通过；首次支付宝构建启动180秒超时留存，受限重试核对全部源码/契约/资源未变，保留本轮原始301项报告并重跑其他五项，未沿用旧284项。Current validation passes with explicit provenance for a same-source mini-build retry; the new native suite is executed freshly.
+- 未接入正式有声合同、MCP订单工具、独立听音/QC与原子交付，真实ASR/OSS/中文识别质量未验，全部禁售不变。No audio-order or production admission; the full product remains in progress.
+
 ## 2026-10-29 · 原生声音与字幕后期内核 / Native audio and caption kernel
 
 - 新增实际视频原声提取、48kHz双声道PCM摘要/20ms信号证据、唯一音轨/完整解码/时长/削波门禁；信号不冒称人声或中文识别。Added bounded native decoding and physical audio evidence, without treating signal presence as speech recognition.

@@ -1,5 +1,9 @@
 # 技术结构与执行逻辑 / Architecture and execution
 
+2026-10-29增补：[异步转写与原任务回执](../实施/异步音频转写与原任务回执-v1.0.md)已实现内部POST服务：实际视频/PCM→私有单声道WAV→原任务/原费用/回执恢复→实际字级转写。`provider_submissions`增加ASR类型且与Ark分流，媒体维护器只核对已存回执。17项原生专项使用合成供应商，不代表真实中文ASR/OSS、独立听音或正式有声交付已准入。后文历史“持久ASR待实现”按本条区分内部实现与真实服务准入；原有声销售门禁保留。
+
+The internal POST transcription service reuses the original ledger and private-object scope. Its seventeen native fixtures use synthetic provider responses. Real ASR/storage admission, audio contracts, scoped order tools, listening/QC and atomic audio delivery remain incomplete.
+
 [中文README](../../README.md) · [English README](../../README.en.md) · [状态 / Status](STATUS.md)
 
 ## 入口与模块 / Surfaces and modules

@@ -2,6 +2,8 @@
 
 [中文](QUICKSTART.md) · [Project README](../../README.en.md) · [Status](STATUS.md)
 
+The internal transcription service adds separate `ASR_SERVICE_ENABLED=false`, `ASR_BASE_URL`, `ASR_API_KEY` and `ASR_ALLOWED_HOSTS` configuration. It defaults to disabled. Setting these variables does not freeze an audio quote or admit audible orders: the original POST lease, model/rate contract, registered private video and restricted HTTPS storage are still required. [Implementation boundaries and seventeen native fixtures](../实施/异步音频转写与原任务回执-v1.0.md).
+
 Run all commands from the checkout root in Windows PowerShell. The current development workspace is `E:\dev\sandbox\支付宝黑客松\一品成片`. Do not launch Docker, WSL, VMs or indirect container scripts. Tools, caches, builds, test media and the local database belong in ignored `runtime/`.
 
 ## 1. Dependencies and browser replay

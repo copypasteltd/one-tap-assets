@@ -50,7 +50,7 @@ export class GenerationGateway {
     return {tenantId:row.tenant_id,ownerId:row.private.owner_id,productId:row.private.product_id,orderId:row.order_id,kind};
   }
   private async row(tenantId:string,submissionId:string,db:Db=this.pool,lock=false):Promise<Submission>{
-    return (await db.query<Submission>(`SELECT * FROM provider_submissions WHERE tenant_id=$1 AND id=$2 AND generation_kind IS NOT NULL${lock?' FOR UPDATE':''}`,
+    return (await db.query<Submission>(`SELECT * FROM provider_submissions WHERE tenant_id=$1 AND id=$2 AND generation_kind IN ('IMAGE','VIDEO')${lock?' FOR UPDATE':''}`,
       [tenantId,submissionId])).rows[0]??notFound();
   }
   private contract(row:Submission):ArkContract{
@@ -363,7 +363,7 @@ export class GenerationGateway {
    * retired runtime sessions and expired model admission. It never submits. */
   async reconcileReceipts(limit=20,signal:AbortSignal=new AbortController().signal):Promise<{settled:number;blocked:number}>{
     requireThat(Number.isSafeInteger(limit)&&limit>0&&limit<=100,'RECONCILIATION_LIMIT_INVALID','对账批次无效',500);
-    const rows=(await this.pool.query<Submission>(`SELECT * FROM provider_submissions WHERE generation_kind IS NOT NULL
+    const rows=(await this.pool.query<Submission>(`SELECT * FROM provider_submissions WHERE generation_kind IN ('IMAGE','VIDEO')
       AND state IN ('SUBMITTING','UNKNOWN','RUNNING') ORDER BY updated_at,id LIMIT $1`,[limit])).rows;
     let settled=0,blocked=0;
     for(const candidate of rows){const claimed=await this.claim(candidate);if(!claimed){blocked++;continue;}

@@ -19,7 +19,7 @@ import {bundleForVariant} from '../../src/worker/codex/skills.js';
 
 /** Actual private files, PostgreSQL and native media; a one-second synthetic
  * contract keeps fault tests bounded. This is not an official-variant run. */
-export async function mediaFixture(db: TestDatabase,options:{principal?:Principal;revisions?:boolean;generation?:{engine:'PER_SHOT_AI'|'REFERENCE_FILM';contracts:ArkContract[];variantId?:string;twoShots?:boolean}}={}) {
+export async function mediaFixture(db: TestDatabase,options:{principal?:Principal;revisions?:boolean;speech?:import('../../src/worker/providers/dashscope-asr.js').SpeechContract;generation?:{engine:'PER_SHOT_AI'|'REFERENCE_FILM';contracts:ArkContract[];variantId?:string;twoShots?:boolean}}={}) {
   const assetIds = [id('photo'), id('photo'), id('photo')]; const f = await planningFixture(db, assetIds, options.principal);
   // Synthetic receipt accounting only, not a certified real-model image bound.
   f.admission.review_vision = { evidence_sha256: 'f'.repeat(64), detail: 'original', max_images: 100,
@@ -60,6 +60,13 @@ export async function mediaFixture(db: TestDatabase,options:{principal?:Principa
       limits: { max_requests: 8, max_requests_per_role: 2, max_input_tokens: 80000, max_output_tokens: 8000,
         ceiling_micro: 1000000, daily_ceiling_micro: 1000000, owner_id: f.p.userId } } };
   if(options.revisions)contract.revision_policy=freezeRevisionPolicy(contract);
+  if(options.speech){
+    if(db.cfg.env!=='test')throw new Error('Synthetic speech admission requires APP_ENV=test');
+    const c=options.speech;contract.speech_contract=structuredClone(c);
+    const binding={provider:c.provider,actual_model:c.actual_model,registry_version:c.registry_version,roles:['SPEECH' as const],capability_hash:hash(c),rate_snapshot_id:c.rate_snapshot_id};
+    contract.model_versions.push(binding);
+    await insert(db.pool,'provider_model_versions',{id:c.model_version_id,provider:c.provider,actual_model:c.actual_model,status:'ADMITTED',version:c.registry_version,data:binding,private:{speech_contract:c}});
+  }
   if(options.generation){
     contract.generation_contracts=structuredClone(options.generation.contracts);
     for(const c of contract.generation_contracts){

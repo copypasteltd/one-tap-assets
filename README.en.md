@@ -18,7 +18,9 @@ These are **actual browser captures at 430 × 932**, reusing shared mini-program
 
 ## Native audio post-processing experiment
 
-An independently runnable native kernel now extracts actual audio, binds transcript timestamps to PCM evidence, burns four Chinese caption styles, and mixes licensed music with music-only ducking. It checks encoded waveforms, caption timing/pixels, license revocation, the original deadline and cancellation cleanup. **Audio orders remain disconnected and unavailable for sale.** Durable real ASR, Chinese speech quality, independent listening and billing recovery remain incomplete.
+An independently runnable native kernel extracts actual audio, binds transcript timestamps to PCM evidence, burns four Chinese caption styles, and mixes licensed music with music-only ducking. It checks encoded waveforms, caption timing/pixels, license revocation, the original deadline and cancellation cleanup. **Audio orders remain disconnected and unavailable for sale.**
+
+The new [durable asynchronous transcription service](docs/实施/异步音频转写与原任务回执-v1.0.md) derives a private WAV from a registered order video, freezes its model/rate and original budget, stores raw submit/query/result receipts, and binds supplier word timestamps to the source video/PCM. Missing ACKs never authorize another purchase; distinct stereo channels are currently rejected and results require approved HTTPS URLs. Seventeen native database/media cases use **synthetic recognition and usage responses**, not real-provider recognition evidence. Audio quote contracts, scoped order tools, real Chinese ASR, independent listening and audio QC/delivery remain incomplete. ASR configuration defaults to disabled and does not admit sales.
 
 ![Actual subtitle processing with synthetic tones and manual timecodes](docs/media/native-audio/preview.gif)
 
@@ -195,9 +197,9 @@ Root READMEs and operational guides are bilingual. Detailed historical requireme
 
 For UI evidence, start `dev:preview` and run `docs:media` in another terminal. `test:ui` invokes the same capture/assertion script. Local Edge, native FFmpeg/ffprobe and project-local Playwright recording components are required; see the [demo guide](docs/guides/DEMO.md).
 
-For this 2026-10-29 snapshot, type checking, **50/50 unit tests, 284/284 native integration tests**, server and both mini-program builds passed. The unchanged UI retains its previously verified replay build and ten-screen capture, with identical media hashes. Exact results live in the implementation JSON. Public summaries distinguish actual database/media processing from synthetic models/payments/isolation.
+For this 2026-10-29 snapshot, type checking, **50/50 unit tests, 301/301 native integration tests**, server and both mini-program builds passed. The unchanged UI retains its previously verified replay build and ten-screen capture, with identical media hashes. Exact results live in the implementation JSON. Public summaries distinguish actual database/media processing from synthetic models/payments/isolation.
 
-This audio source update first executes the complete native integration suite freshly. After an initial 180-second Alipay build-startup timeout, an explicit retry verifies unchanged source/contracts/resources and retains that original passing report; type/unit/server/both mini builds run again. No previous-round native report is reused. `verify:implementation --retry-mini-builds` accepts only bounded CSS-build/verifier changes and checks the original log/report plus contracts/resources; application changes reject reuse. The default verifier always executes all six checks. See [validation provenance](docs/verification/README.md).
+This transcription source first executes the complete native integration suite freshly. After a build timeout, an explicit same-source/contracts/resources retry retains this original passing report and repeats the other five checks; the previous round's 284 cases are not reused. The default verifier runs the full suite. See [validation provenance](docs/verification/README.md) for bounded build-retry rules.
 
 Remaining work includes official-variant and real-service acceptance of both generative routes, native audio, real Codex/isolation/cleanup, provider/payment/storage admission, four device groups, 14 variants × 30 full-pack benchmarks, complete community/aftercare, Plus/management UI and acceptance of all **58 requirements / 52 P0 requirements**. Follow [status and priorities](docs/guides/STATUS.md).
 

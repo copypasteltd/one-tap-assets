@@ -1,28 +1,31 @@
-# 公开验证说明 / Public verification
+# 验证与发布证据 / Verification and publication evidence
 
-2026-10-29声音源码先执行全新完整验证，31个文件284项原生集成全部通过，676.27秒，其中15项为新声音/字幕/配乐专项。首次支付宝构建启动180秒超时，失败日志保留本地；随后在全部源码/测试/契约/资源完全不变的条件下执行受限构建重试，留用本轮原始284项报告，类型/单元/服务端/双端构建重新执行。当前模式和摘要以[实现索引](../../assets/implementation/current.json)为准；未沿用上一轮269项。[独立音频媒体清单](../media/native-audio/capture-manifest.json)记录12个实际文件、四种字幕、32帧GIF及显式合成音/人工时间码；发布脚本逐项核对媒体字节和相关源码摘要。真实语音识别/听音及有声订单仍未验证。
+2026-10-29转写源码：**50单元 / 301原生集成**通过，32个集成文件，原始集成报告跨度约700.63秒。源码/测试/配置摘要312份，运行契约42份，资源4份。本轮转写源码先执行全新完整原生集成；构建超时后按全部源码/契约/资源未变的受限重试保留本轮原始通过报告，其余五项重新执行，未沿用上一轮284项。
 
-The audio source executes a fresh complete native run: 284 cases across 31 files pass in 676.27 seconds, including fifteen audio fixtures. An initial Alipay build-startup command times out at 180 seconds. An explicit build retry checks identical source/test/contracts/resources and retains this original 284-case report; type/unit/server/both mini builds repeat. It does not reuse the previous round's 269 cases. A separate twelve-file/four-style/32-frame media record supplements the unchanged browser replay. These synthetic-tone/manual-timecode results do not certify real speech, ASR, listening review or audio orders. The historical build retry below retains its original provenance.
+This transcription source first executes the complete native integration suite freshly. After a build timeout, an explicit same-source/contracts/resources retry retains this original passing report and repeats the other five checks; the previous round's 284 cases are not reused. The manifest records 50 unit and 301 native integration cases and 312 source/test/config hashes. Mode: `MINI_BUILD_RETRY_WITH_RETAINED_NATIVE_INTEGRATION`.
 
-当前源码检查完成于2026-10-29。机器可读主证据为[assets/implementation/current.json](../../assets/implementation/current.json)，包含六项命令状态、50单元/284集成计数、307个源码/测试/配置文件摘要及独立契约/资源摘要。原始日志和测试JSON保存在忽略的`runtime/test-results/`，主证据保留其SHA引用，不会将本地环境、数据库或凭证上传。
+| 编号 / No. | 检查 / Check | 结果 / Result | 可审查依据 / Evidence |
+| --- | --- | --- | --- |
+| 01 | 类型、单元、完整原生集成、服务端和双小程序 / Types, tests and builds | PASS | [实现清单](../../assets/implementation/current.json)，六项命令/原始日志和报告SHA |
+| 02 | ASR / Transcription | 17项专项PASS | 原生PG/FFmpeg/AAC/PCM/私有文件；合成识别/用量/网络，不是实测供应商 |
+| 03 | 文档/契约 / Documentation/contracts | PASS | [契约摘要](contracts.json)，不等于产品验收 |
+| 04 | 页面媒体 / UI media | 20个文件保留原SHA | 10截图、概览、录屏、GIF及静态说明等，[原始清单](../media/capture-manifest.json) |
+| 05 | 声音媒体 / Audio media | 12个文件保留原SHA | 四MP4/PNG、源MP4/合成WAV/概览/GIF，32帧GIF，[来源](../media/native-audio/capture-manifest.json) |
+| 06 | 设计/暂存/发布 / Design and staged publication | 单独核验 | [发布摘要](publication.json) / [暂存审计](repository-audit.json) |
 
-The implementation manifest records the six executed commands, 50 unit and 284 integration cases, 307 source/test/config file hashes, and independent contract/resource hashes. Original local reports/logs are excluded from Git; their digests remain referenced. This public repository does not contain local credentials or runtime databases.
+主证据为[实现索引](../../assets/implementation/current.json)，包括原始命令日志/测试JSON的SHA；原始文件位于忽略的`runtime/test-results/`。新转写源码必须全新跑集成，不能使用此前声音内核284项报告代替。类型/编译、合成供应商与真实服务准入分别记录，完整产品与生产准入仍为false。
 
-| 检查 / Check | 结果 / Result | 可审查依据 / Evidence |
-| --- | --- | --- |
-| 类型、单元、原生集成、服务端、双小程序 / Types, tests and builds | PASS；50/284 | [实现清单 / Manifest](../../assets/implementation/current.json) |
-| Vite回放 / Preview build | PASS | `build:preview`，输出到忽略的`runtime/build/preview/` / Native Vite output |
-| 页面捕获 / UI capture | PASS；10页、约14.56秒 / 10 screens, about 14.56s | [逐文件SHA和ffprobe / Capture manifest](../media/capture-manifest.json) |
-| 文档与发布 / Docs and publication | 以生成摘要为准 / See generated result | [publication.json](publication.json) |
-| 文档/契约结构 / Document and contract structure | PASS | [独立检查报告 / Contract report](contracts.json) |
-| 发布文件与留存 / Publication files and preservation | PASS | [仓库链接/暂存字节复核 / Repository audit](repository-audit.json) |
-| 设计C / C design | 保留25基线文件与归档 / Preserved | [原基线 / Baseline](../../assets/design/柚子创作社/v1.0/baseline-manifest.json) |
+The original logs/reports stay in ignored runtime storage with their hashes referenced publicly. Native database/media execution is distinct from synthetic external responses and real-service admission. The new ASR gateway does not register an audible order tool or remove sales guards.
 
-`verify:publication`核验双语入口的本地链接、媒体实际字节/SHA、动画GIF、10张截图尺寸、浏览器关闭/无异常/无外部请求、源码/契约/资源快照、Git候选大小/隐私路径/有限凭证模式和忽略规则。凭证扫描只覆盖明确模式，不宣称穷尽所有secret格式；还须审查暂存内容。它不证明模型质量、真机支付、物理隐私或生产准入。
+本轮没有修改前端或录制脚本，沿用已核验的Vite回放构建、10页断言和相同媒体SHA；没有打开浏览器。页面录像不是支付宝/抖音真机或Plus，声音录像仍为合成提示音/人工时间码，不改标为ASR样片。C基线25份和冻结归档保持原字节。发布另核对全部文档本地链接、媒体/源码摘要、Git暂存字节、忽略项及有限凭证模式，不能替代真实物理隐私或完整密钥审计。
 
-Publication verification checks local documentation links, actual media bytes/hashes, animated GIF, screenshot sizes, capture cleanup/errors/network, current source snapshots, Git candidate paths/sizes, limited secret patterns and ignore rules. It is not exhaustive secret discovery or production certification; review staged files as well.
+The unchanged UI retains its prior verified replay capture. No browser was opened in this round. Media provenance does not change when the ASR source is added. Publication checks inspect local links, registered media/source hashes, staged bytes, ignore rules and limited credential patterns.
 
-参考整片未核验购买的[先红后绿摘要](../../assets/implementation/regressions/reference-video-gate.json)保留旧网关基线提交、旧源码SHA和原始失败/通过报告摘要；原报告保留本地。当前全量284项还包含15项声音内核专项；上一轮无声整包/身份/MCP已完成269项。The red/green record preserves the old gateway baseline and report digests, while the full integration run verifies the current source. The previous publication round established the 720-second full-suite ceiling after an observed 480-second timeout; individual assertions and per-test limits remain unchanged.
+## 历史验证来源 / Historical provenance
+
+此前声音内核轮执行284项全量集成，首次支付宝构建启动180秒超时，再按全部源码未变的显式受限重试保留该轮原始报告；并非本轮新ASR源码的验证替代。`--retry-mini-builds`只允许受限构建/核验器变化，拒绝应用/测试变动，核对源路径/摘要、契约/资源与原始报告/日志；默认六项全新执行。
+
+参考整片未核验购买的[先红后绿摘要](../../assets/implementation/regressions/reference-video-gate.json)保留旧网关基线提交、旧源码SHA和原始失败/通过报告摘要；原报告保留本地。声音内核轮完整284项包含15项声音专项；此前无声整包/身份/MCP轮为269项。这些是历史记录，当前全量见上方。The red/green record preserves the old gateway baseline and report digests, while the full integration run verifies the current source. The previous publication round established the 720-second full-suite ceiling after an observed 480-second timeout; individual assertions and per-test limits remain unchanged.
 
 文档契约核验使用`verify:docs`，发布前另核对C基线、归档和Git暂存字节与工作区证据一致。需要重现时按[快速启动](../guides/QUICKSTART.en.md)准备原生环境，再运行README中的命令。Reproduce through the native setup guide; contract/document checks are distinct from application acceptance.
 

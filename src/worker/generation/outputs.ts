@@ -18,7 +18,7 @@ export async function generatedOutputs(db:Db,cfg:Config,store:ObjectStorage,cont
     private:{owner_id:string;product_id:string;contract_hash:string;wire_contract:unknown;request_sha256:string;billing_valid?:boolean;provider_terminal?:boolean;
       prepared:{request_hash:string;contract_hash:string;reference_approval?:unknown;references:{id:string;sha256:string}[]};output?:GenerationOutput}}>(
     `SELECT id,operation_key,generation_kind,model_version_id,input_hash,state,private FROM provider_submissions
-    WHERE tenant_id=$1 AND order_id=$2 AND stage_run_id=$3 AND operation_key=ANY($4) AND generation_kind IS NOT NULL`,
+    WHERE tenant_id=$1 AND order_id=$2 AND stage_run_id=$3 AND operation_key=ANY($4) AND generation_kind IN ('IMAGE','VIDEO')`,
     [context.tenantId,context.orderId,stageId,required])).rows;
   requireThat(rows.length===required.length&&new Set(rows.map(r=>r.operation_key)).size===required.length,
     'GENERATED_PACK_INCOMPLETE','生成式整包缺少原计划节点',409);
