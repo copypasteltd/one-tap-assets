@@ -1,0 +1,21 @@
+{
+  "project": "一品成片",
+  "baseline_id": "YPCC-DS-C-1.0.0",
+  "design_version": "1.0.0",
+  "requirements_version": "3.0",
+  "direction_id": "C",
+  "direction_name": "柚子创作社",
+  "product_name": "一品成片",
+  "status": "DIRECTION_CONFIRMED_SPEC_BASELINED",
+  "decision_date": "2026-10-27",
+  "user_decision": "选用方案 C",
+  "selection_source": "本会话用户明确指示",
+  "scope_note": "用户确认视觉方向；本轮形成详细规格，尚未实现或真机验收。",
+  "documentation": "docs/设计/定型/C-柚子创作社-v1.0/README.md",
+  "asset_root": "assets/design/柚子创作社/v1.0",
+  "tokens": "assets/design/柚子创作社/v1.0/design-tokens.json",
+  "manifest": "assets/design/柚子创作社/v1.0/baseline-manifest.json",
+  "reference_gallery": "assets/design/柚子创作社/v1.0/reference/index.html",
+  "implementation_status": "NOT_IMPLEMENTED",
+  "device_validation_status": "NOT_RUN"
+}

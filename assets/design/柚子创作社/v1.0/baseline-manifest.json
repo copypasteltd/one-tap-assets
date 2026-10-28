@@ -1,0 +1,151 @@
+{
+  "baseline_id": "YPCC-DS-C-1.0.0",
+  "version": "1.0.0",
+  "requirements_version": "3.0",
+  "status": "DIRECTION_CONFIRMED_SPEC_BASELINED",
+  "user_decision": "选用方案 C",
+  "frozen_at": "2026-10-27T00:20:21.810269+00:00",
+  "original_board_sha256": "b919b0de25c4bbab45bafa033f2990a2a40511d5010935815e2c4391a58e4a41",
+  "high_fidelity_reference_pages": [
+    "D01",
+    "D04",
+    "D11"
+  ],
+  "page_spec_count": 23,
+  "component_spec_count": 22,
+  "archive": "assets/design/柚子创作社/archives/一品成片-C-设计定型-v1.0-20261027.zip",
+  "manifest_excludes": [
+    "baseline-manifest.json itself",
+    "verification-report.json derived result",
+    "archive and its digest sidecar"
+  ],
+  "implementation_status": "NOT_IMPLEMENTED",
+  "device_validation_status": "NOT_RUN",
+  "files": [
+    {
+      "path": "assets/design/current.json",
+      "bytes": 944,
+      "sha256": "f1835f430303a799eda7d25cd06ddf38b60c38152488ff3316e3e0ff1967a1c8"
+    },
+    {
+      "path": "assets/design/柚子创作社/v1.0/README.md",
+      "bytes": 2460,
+      "sha256": "4375deccba7d0e4e3e5cfc0db4af524af52c5e42c4f263a51b2f4fe25813ea0b"
+    },
+    {
+      "path": "assets/design/柚子创作社/v1.0/component-registry.json",
+      "bytes": 3908,
+      "sha256": "b34beac560a250f886a5b391f78e2ca60c2704157f43120c1a3302f1d78075e9"
+    },
+    {
+      "path": "assets/design/柚子创作社/v1.0/contrast-report.json",
+      "bytes": 3222,
+      "sha256": "8a56bc017f5ff349aacc22caaf2b2508a53816c51699f0d912e6fdbd5a211556"
+    },
+    {
+      "path": "assets/design/柚子创作社/v1.0/design-tokens.css",
+      "bytes": 1775,
+      "sha256": "89fd000fefdc9b43267c3960e2337eb133242624a90e23b8364f8dc27631e544"
+    },
+    {
+      "path": "assets/design/柚子创作社/v1.0/design-tokens.json",
+      "bytes": 4386,
+      "sha256": "00da44c3cecb74ca9b34a746bddb4e83c18d1358dfca206157a104425ad1177e"
+    },
+    {
+      "path": "assets/design/柚子创作社/v1.0/page-registry.json",
+      "bytes": 10306,
+      "sha256": "645fdda8317cc8fc2576b48e34672691ffa606160a0c662dc3af5c8ca11f5dc3"
+    },
+    {
+      "path": "assets/design/柚子创作社/v1.0/reference/C-原始提示词.txt",
+      "bytes": 6622,
+      "sha256": "2eab6f6401fe30856ec494ebd1647ebf8dbcaca17b4b76d4c6c07c6fccbf4844"
+    },
+    {
+      "path": "assets/design/柚子创作社/v1.0/reference/C-拍照制作.png",
+      "bytes": 504082,
+      "sha256": "955c20531e7763bc96ba8d4a046ca34a7bad8ff4b79dcf4a1e0d3056f74ae9c9"
+    },
+    {
+      "path": "assets/design/柚子创作社/v1.0/reference/C-方案社区.png",
+      "bytes": 504044,
+      "sha256": "93412e9fcd98d26174e59ceca9c40c26eb331f23d812097ea70c7922cf6af3f0"
+    },
+    {
+      "path": "assets/design/柚子创作社/v1.0/reference/C-柚子创作社-原始设计稿.png",
+      "bytes": 1895670,
+      "sha256": "b919b0de25c4bbab45bafa033f2990a2a40511d5010935815e2c4391a58e4a41"
+    },
+    {
+      "path": "assets/design/柚子创作社/v1.0/reference/C-素材领取.png",
+      "bytes": 454489,
+      "sha256": "9d96f68f29700009f68c5a9b0b0ec51a905da5cbea0c4ebc5ec61bf87c401571"
+    },
+    {
+      "path": "assets/design/柚子创作社/v1.0/reference/index.html",
+      "bytes": 6922,
+      "sha256": "765059d4519a86a92505cbefdc3d12c71e160e02829fb417dc0e69194d9b1cce"
+    },
+    {
+      "path": "assets/design/柚子创作社/v1.0/reference/source-record.json",
+      "bytes": 1249,
+      "sha256": "2cb97f982688ed918cddb2b5032cc668889131bd0d8414a4ff6c0f75c3b288a1"
+    },
+    {
+      "path": "assets/design/柚子创作社/v1.0/requirements-design-map.json",
+      "bytes": 26362,
+      "sha256": "73747eb60cacd14d4819fca65fa1671256ea58382742274c4d5f3acc20d6934e"
+    },
+    {
+      "path": "docs/设计/定型/C-柚子创作社-v1.0/00-设计定型总纲.md",
+      "bytes": 6412,
+      "sha256": "72f07d0f17a793e476a999c8db2abaad1671bbe77b7d105abd9c7f2552f90235"
+    },
+    {
+      "path": "docs/设计/定型/C-柚子创作社-v1.0/01-视觉与布局规范.md",
+      "bytes": 8269,
+      "sha256": "7c939fef0fcdf8d36081d5d57a443285ed2cd835bcb2eea522ac9eb7d29e3a83"
+    },
+    {
+      "path": "docs/设计/定型/C-柚子创作社-v1.0/02-组件与交互状态规范.md",
+      "bytes": 7549,
+      "sha256": "18fbc40a4563b305d1e02c6e6accd4655d08e996357f8f44b7d124db12166d97"
+    },
+    {
+      "path": "docs/设计/定型/C-柚子创作社-v1.0/03-页面与导航定型.md",
+      "bytes": 9524,
+      "sha256": "86ef41167f88cb65e9f46c0c47481f80b04be985d9961aedce9de1ca0d17f3e2"
+    },
+    {
+      "path": "docs/设计/定型/C-柚子创作社-v1.0/04-全流程状态与文案.md",
+      "bytes": 8711,
+      "sha256": "1cb20e00f2e619d2254224bb0edfb5082517bd4504dea16e5868830239a163be"
+    },
+    {
+      "path": "docs/设计/定型/C-柚子创作社-v1.0/05-双端适配与无障碍规范.md",
+      "bytes": 6482,
+      "sha256": "5b8390dccbfac6385f71ba0a4dd8f108f68168f1db7b7aa37c619c59a9300af3"
+    },
+    {
+      "path": "docs/设计/定型/C-柚子创作社-v1.0/06-开发交付与设计验收.md",
+      "bytes": 5255,
+      "sha256": "2fc26fab2348ecea481e132ea865dc0a18ed8cb2245dbb336a70d691dce19d68"
+    },
+    {
+      "path": "docs/设计/定型/C-柚子创作社-v1.0/07-需求设计追踪与变更记录.md",
+      "bytes": 6427,
+      "sha256": "037098a958131efd3c96f02ce725a980125c2500e5b968748a63bee030fd1439"
+    },
+    {
+      "path": "docs/设计/定型/C-柚子创作社-v1.0/README.md",
+      "bytes": 3073,
+      "sha256": "054e9a0a5f600df3fe9e88639770e216d2291bb7d638e06c29ad41c4ea2e8b38"
+    },
+    {
+      "path": "scripts/设计选型/定型C设计基线.py",
+      "bytes": 26181,
+      "sha256": "01156d6a339ab3a17569dccc1b9ca37b33f0b6d0151e330bb1176e41cfafe493"
+    }
+  ]
+}

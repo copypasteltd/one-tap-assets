@@ -1,0 +1,963 @@
+{
+  "baseline_id": "YPCC-DS-C-1.0.0",
+  "checked_at": "2026-10-27T13:16:19.937388+00:00",
+  "status": "PASS",
+  "check_count": 233,
+  "design_document_count": 9,
+  "page_spec_count": 23,
+  "component_spec_count": 22,
+  "requirement_count": 50,
+  "high_fidelity_reference_count": 3,
+  "retained_png_count": 4,
+  "document_links_checked": 116,
+  "contrast_pairs_checked": 15,
+  "archive": {
+    "path": "assets/design/柚子创作社/archives/一品成片-C-设计定型-v1.0-20261027.zip",
+    "bytes": 3318489,
+    "sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
+    "entries": 26
+  },
+  "not_executed": [
+    "Mini-program implementation",
+    "Real device rendering, native permissions, payment and album",
+    "User research and screen reader validation",
+    "Backend/model/provider/product acceptance"
+  ],
+  "browser_used": false,
+  "virtualization_used": false,
+  "errors": [],
+  "checks": [
+    {
+      "name": "Current selection and baseline identity",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: assets/design/current.json",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: assets/design/柚子创作社/v1.0/README.md",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: assets/design/柚子创作社/v1.0/component-registry.json",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: assets/design/柚子创作社/v1.0/contrast-report.json",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: assets/design/柚子创作社/v1.0/design-tokens.css",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: assets/design/柚子创作社/v1.0/design-tokens.json",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: assets/design/柚子创作社/v1.0/page-registry.json",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: assets/design/柚子创作社/v1.0/reference/C-原始提示词.txt",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: assets/design/柚子创作社/v1.0/reference/C-拍照制作.png",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: assets/design/柚子创作社/v1.0/reference/C-方案社区.png",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: assets/design/柚子创作社/v1.0/reference/C-柚子创作社-原始设计稿.png",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: assets/design/柚子创作社/v1.0/reference/C-素材领取.png",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: assets/design/柚子创作社/v1.0/reference/index.html",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: assets/design/柚子创作社/v1.0/reference/source-record.json",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: assets/design/柚子创作社/v1.0/requirements-design-map.json",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: docs/设计/定型/C-柚子创作社-v1.0/00-设计定型总纲.md",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: docs/设计/定型/C-柚子创作社-v1.0/01-视觉与布局规范.md",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: docs/设计/定型/C-柚子创作社-v1.0/02-组件与交互状态规范.md",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: docs/设计/定型/C-柚子创作社-v1.0/03-页面与导航定型.md",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: docs/设计/定型/C-柚子创作社-v1.0/04-全流程状态与文案.md",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: docs/设计/定型/C-柚子创作社-v1.0/05-双端适配与无障碍规范.md",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: docs/设计/定型/C-柚子创作社-v1.0/06-开发交付与设计验收.md",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: docs/设计/定型/C-柚子创作社-v1.0/07-需求设计追踪与变更记录.md",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: docs/设计/定型/C-柚子创作社-v1.0/README.md",
+      "passed": true
+    },
+    {
+      "name": "Frozen bytes: scripts/设计选型/定型C设计基线.py",
+      "passed": true
+    },
+    {
+      "name": "Original selected image retained byte-for-byte",
+      "passed": true
+    },
+    {
+      "name": "Original page crop retained: 拍照制作",
+      "passed": true
+    },
+    {
+      "name": "Original page crop retained: 方案社区",
+      "passed": true
+    },
+    {
+      "name": "Original page crop retained: 素材领取",
+      "passed": true
+    },
+    {
+      "name": "Original prompt retained",
+      "passed": true
+    },
+    {
+      "name": "PNG decode and dimensions: C-拍照制作.png",
+      "passed": true
+    },
+    {
+      "name": "PNG decode and dimensions: C-方案社区.png",
+      "passed": true
+    },
+    {
+      "name": "PNG decode and dimensions: C-柚子创作社-原始设计稿.png",
+      "passed": true
+    },
+    {
+      "name": "Original board size is 1536x1024",
+      "passed": true
+    },
+    {
+      "name": "PNG decode and dimensions: C-素材领取.png",
+      "passed": true
+    },
+    {
+      "name": "Nine design documents including entry point",
+      "passed": true
+    },
+    {
+      "name": "23 unique page/interaction units",
+      "passed": true
+    },
+    {
+      "name": "22 unique components",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D01",
+      "passed": true
+    },
+    {
+      "name": "Page reference file: D01",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D02",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D03",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D04",
+      "passed": true
+    },
+    {
+      "name": "Page reference file: D04",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D05",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D06",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D07",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D08",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D09",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D10",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D11",
+      "passed": true
+    },
+    {
+      "name": "Page reference file: D11",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D12",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D13",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D14",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D15",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D16",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D17",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D18",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D19",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D20",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D21",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D22",
+      "passed": true
+    },
+    {
+      "name": "Page references and states: D23",
+      "passed": true
+    },
+    {
+      "name": "Only three pages claim high-fidelity references",
+      "passed": true
+    },
+    {
+      "name": "Three root navigation destinations",
+      "passed": true
+    },
+    {
+      "name": "50 requirements mapped to design responsibilities",
+      "passed": true
+    },
+    {
+      "name": "P1/P2 stay future design scope",
+      "passed": true
+    },
+    {
+      "name": "All 15 production solid-color text pairs reach 4.5",
+      "passed": true
+    },
+    {
+      "name": "Touch, button and typography size floors",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/00-设计定型总纲.md -> ../../../01-产品需求PRD.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/01-视觉与布局规范.md -> ../../../../assets/design/柚子创作社/v1.0/design-tokens.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/01-视觉与布局规范.md -> ../../../../assets/design/柚子创作社/v1.0/contrast-report.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/02-组件与交互状态规范.md -> ../../../../assets/design/柚子创作社/v1.0/component-registry.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/03-页面与导航定型.md -> ../../../../assets/design/柚子创作社/v1.0/page-registry.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/06-开发交付与设计验收.md -> ../../../../assets/design/柚子创作社/v1.0/verification-report.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/07-需求设计追踪与变更记录.md -> ../../../../assets/design/柚子创作社/v1.0/requirements-design-map.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/README.md -> 00-设计定型总纲.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/README.md -> 01-视觉与布局规范.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/README.md -> 02-组件与交互状态规范.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/README.md -> 03-页面与导航定型.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/README.md -> 04-全流程状态与文案.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/README.md -> 05-双端适配与无障碍规范.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/README.md -> 06-开发交付与设计验收.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/README.md -> 07-需求设计追踪与变更记录.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/README.md -> ../../../../assets/design/柚子创作社/v1.0/reference/index.html",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/README.md -> ../../../../assets/design/柚子创作社/v1.0/reference/C-柚子创作社-原始设计稿.png",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/README.md -> ../../../../assets/design/柚子创作社/v1.0/README.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/README.md -> ../../../../assets/design/柚子创作社/v1.0/design-tokens.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/README.md -> ../../../../assets/design/柚子创作社/v1.0/page-registry.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/README.md -> ../../../../assets/design/柚子创作社/v1.0/component-registry.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/README.md -> ../../../../assets/design/柚子创作社/v1.0/baseline-manifest.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/README.md -> ../../../../assets/design/柚子创作社/v1.0/verification-report.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/定型/C-柚子创作社-v1.0/README.md -> ../../../../assets/design/柚子创作社/archives/一品成片-C-设计定型-v1.0-20261027.zip",
+      "passed": true
+    },
+    {
+      "name": "Document link: assets/design/柚子创作社/v1.0/README.md -> ../../../../docs/设计/定型/C-柚子创作社-v1.0/README.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: assets/design/柚子创作社/v1.0/README.md -> reference/index.html",
+      "passed": true
+    },
+    {
+      "name": "Document link: assets/design/柚子创作社/v1.0/README.md -> reference/C-柚子创作社-原始设计稿.png",
+      "passed": true
+    },
+    {
+      "name": "Document link: assets/design/柚子创作社/v1.0/README.md -> reference/C-拍照制作.png",
+      "passed": true
+    },
+    {
+      "name": "Document link: assets/design/柚子创作社/v1.0/README.md -> reference/C-方案社区.png",
+      "passed": true
+    },
+    {
+      "name": "Document link: assets/design/柚子创作社/v1.0/README.md -> reference/C-素材领取.png",
+      "passed": true
+    },
+    {
+      "name": "Document link: assets/design/柚子创作社/v1.0/README.md -> reference/C-原始提示词.txt",
+      "passed": true
+    },
+    {
+      "name": "Document link: assets/design/柚子创作社/v1.0/README.md -> reference/source-record.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: assets/design/柚子创作社/v1.0/README.md -> design-tokens.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: assets/design/柚子创作社/v1.0/README.md -> design-tokens.css",
+      "passed": true
+    },
+    {
+      "name": "Document link: assets/design/柚子创作社/v1.0/README.md -> page-registry.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: assets/design/柚子创作社/v1.0/README.md -> component-registry.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: assets/design/柚子创作社/v1.0/README.md -> requirements-design-map.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: assets/design/柚子创作社/v1.0/README.md -> contrast-report.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: assets/design/柚子创作社/v1.0/README.md -> baseline-manifest.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: assets/design/柚子创作社/v1.0/README.md -> verification-report.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: assets/design/柚子创作社/v1.0/README.md -> ../archives/一品成片-C-设计定型-v1.0-20261027.zip",
+      "passed": true
+    },
+    {
+      "name": "Document link: assets/design/柚子创作社/v1.0/README.md -> ../archives/一品成片-C-设计定型-v1.0-20261027.zip.sha256",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/实施/当前开发方案与技术骨架-v3.1.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/实施/源码实现进度-v3.1.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> assets/implementation/current.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/设计/小程序优先与预设素材包-2026-10-27.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/01-产品需求PRD.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/02-功能需求与用户流程.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/03-架构数据与接口.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/04-计费交易与运营.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/05-验收测试与实施计划.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/设计/方案组件与执行变体规格-v3.0.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> assets/presets/presets.v3.1.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/开发/18-Codex接入验证与实施计划.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/设计/需求变更记录-v3.1.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/设计/需求追踪矩阵-v3.1.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> assets/requirements/需求核验-v3.1.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/开发/README.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> assets/development/v1.1/development-baseline.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> assets/development/v1.1/contracts/openapi.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> assets/development/v1.1/contracts/endpoint-catalog.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> assets/development/v1.1/state-machines.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> assets/development/v1.1/data-model.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> assets/development/v1.1/work-packages.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> CONTRIBUTING.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> SECURITY.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> .env.example",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> assets/development/v1.1/verification-report.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/开发/14-Codex内核与分阶段编排.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> assets/skills/ypcc/v1.0/README.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/设计/定型/C-柚子创作社-v1.0/README.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> assets/design/柚子创作社/v1.0/reference/index.html",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> assets/design/current.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> assets/design/柚子创作社/v1.0/design-tokens.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> assets/design/柚子创作社/v1.0/baseline-manifest.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> assets/design/柚子创作社/archives/一品成片-C-设计定型-v1.0-20261027.zip",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/设计/五种视觉方向选型-2026-10-27.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> output/imagegen/2026-10-27-设计选型/index.html",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> output/imagegen/2026-10-27-设计选型/五种视觉方向总览.jpg",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> output/imagegen/2026-10-27-设计选型/designs.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/评估/one-tap-ads仓库核查与差距评估-2026-10-27.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/实施/一品成片架构与实现细则-2026-10-27.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/实施/开发任务与评估修订-2026-10-27.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/评估/one-tap-ads核查证据-2026-10-27.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/评估/方案案例与生成流程深析-2026-10-27.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/评估/one-tap-ads全量方案目录-2026-10-27.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> docs/实施/方案驱动的云端服务与小程序封装-2026-10-27.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> assets/research/one-tap-ads/README.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> assets/blueprints/云端方案映射.v3.1.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> ../需求文档/README.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: README.md -> ../README.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/五种视觉方向选型-2026-10-27.md -> 定型/C-柚子创作社-v1.0/README.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/五种视觉方向选型-2026-10-27.md -> 定型/C-柚子创作社-v1.0/README.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/五种视觉方向选型-2026-10-27.md -> ../../output/imagegen/2026-10-27-设计选型/designs.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/五种视觉方向选型-2026-10-27.md -> ../../output/imagegen/2026-10-27-设计选型/index.html",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/五种视觉方向选型-2026-10-27.md -> ../../output/imagegen/2026-10-27-设计选型/A-晴蓝工具箱.png",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/五种视觉方向选型-2026-10-27.md -> ../../output/imagegen/2026-10-27-设计选型/B-片场手记.png",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/五种视觉方向选型-2026-10-27.md -> ../../output/imagegen/2026-10-27-设计选型/C-柚子创作社.png",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/五种视觉方向选型-2026-10-27.md -> ../../output/imagegen/2026-10-27-设计选型/D-品物画廊.png",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/五种视觉方向选型-2026-10-27.md -> ../../output/imagegen/2026-10-27-设计选型/E-光谱实验室.png",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/01-产品需求PRD.md -> 设计/定型/C-柚子创作社-v1.0/README.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/01-产品需求PRD.md -> 评估/方案案例与生成流程深析-2026-10-27.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/01-产品需求PRD.md -> 评估/one-tap-ads全量方案目录-2026-10-27.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/01-产品需求PRD.md -> 设计/方案组件与执行变体规格-v3.0.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/01-产品需求PRD.md -> ../assets/presets/presets.v3.1.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/01-产品需求PRD.md -> 设计/小程序优先与预设素材包-2026-10-27.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/01-产品需求PRD.md -> 05-验收测试与实施计划.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/01-产品需求PRD.md -> 实施/v3.0云端生成服务任务与里程碑.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/01-产品需求PRD.md -> 设计/需求变更记录-v3.0.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/01-产品需求PRD.md -> 开发/14-Codex内核与分阶段编排.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/01-产品需求PRD.md -> 开发/README.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/小程序优先与预设素材包-2026-10-27.md -> 定型/C-柚子创作社-v1.0/README.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/小程序优先与预设素材包-2026-10-27.md -> 方案组件与执行变体规格-v3.0.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/小程序优先与预设素材包-2026-10-27.md -> ../实施/v3.0云端生成服务任务与里程碑.md",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/小程序优先与预设素材包-2026-10-27.md -> ../../assets/presets/presets.v3.json",
+      "passed": true
+    },
+    {
+      "name": "Document link: docs/设计/小程序优先与预设素材包-2026-10-27.md -> ../05-验收测试与实施计划.md",
+      "passed": true
+    },
+    {
+      "name": "Native Node.js available for gallery syntax check",
+      "passed": true
+    },
+    {
+      "name": "Gallery local asset: ../../../../../docs/设计/定型/C-柚子创作社-v1.0/README.md",
+      "passed": true
+    },
+    {
+      "name": "Gallery local asset: ../design-tokens.json",
+      "passed": true
+    },
+    {
+      "name": "Gallery local asset: ../baseline-manifest.json",
+      "passed": true
+    },
+    {
+      "name": "Gallery local asset: ../../archives/一品成片-C-设计定型-v1.0-20261027.zip",
+      "passed": true
+    },
+    {
+      "name": "Gallery local asset: C-柚子创作社-原始设计稿.png",
+      "passed": true
+    },
+    {
+      "name": "Gallery local asset: C-柚子创作社-原始设计稿.png",
+      "passed": true
+    },
+    {
+      "name": "Gallery local asset: source-record.json",
+      "passed": true
+    },
+    {
+      "name": "Gallery local asset: ../verification-report.json",
+      "passed": true
+    },
+    {
+      "name": "Gallery JavaScript syntax: assets/design/柚子创作社/v1.0/reference/index.html",
+      "passed": true
+    },
+    {
+      "name": "Gallery template resolved: assets/design/柚子创作社/v1.0/reference/index.html",
+      "passed": true
+    },
+    {
+      "name": "Gallery local asset: 五种视觉方向总览.jpg",
+      "passed": true
+    },
+    {
+      "name": "Gallery local asset: ../../../docs/设计/五种视觉方向选型-2026-10-27.md",
+      "passed": true
+    },
+    {
+      "name": "Gallery local asset: designs.json",
+      "passed": true
+    },
+    {
+      "name": "Gallery JavaScript syntax: output/imagegen/2026-10-27-设计选型/index.html",
+      "passed": true
+    },
+    {
+      "name": "Gallery template resolved: output/imagegen/2026-10-27-设计选型/index.html",
+      "passed": true
+    },
+    {
+      "name": "Historical comparison honors user selection C",
+      "passed": true
+    },
+    {
+      "name": "Historical gallery defaults to C",
+      "passed": true
+    },
+    {
+      "name": "Archive SHA-256 matches sidecar",
+      "passed": true
+    },
+    {
+      "name": "Archive contains exact baseline file set",
+      "passed": true
+    },
+    {
+      "name": "Archive content: assets/design/current.json",
+      "passed": true
+    },
+    {
+      "name": "Archive content: assets/design/柚子创作社/v1.0/README.md",
+      "passed": true
+    },
+    {
+      "name": "Archive content: assets/design/柚子创作社/v1.0/component-registry.json",
+      "passed": true
+    },
+    {
+      "name": "Archive content: assets/design/柚子创作社/v1.0/contrast-report.json",
+      "passed": true
+    },
+    {
+      "name": "Archive content: assets/design/柚子创作社/v1.0/design-tokens.css",
+      "passed": true
+    },
+    {
+      "name": "Archive content: assets/design/柚子创作社/v1.0/design-tokens.json",
+      "passed": true
+    },
+    {
+      "name": "Archive content: assets/design/柚子创作社/v1.0/page-registry.json",
+      "passed": true
+    },
+    {
+      "name": "Archive content: assets/design/柚子创作社/v1.0/reference/C-原始提示词.txt",
+      "passed": true
+    },
+    {
+      "name": "Archive content: assets/design/柚子创作社/v1.0/reference/C-拍照制作.png",
+      "passed": true
+    },
+    {
+      "name": "Archive content: assets/design/柚子创作社/v1.0/reference/C-方案社区.png",
+      "passed": true
+    },
+    {
+      "name": "Archive content: assets/design/柚子创作社/v1.0/reference/C-柚子创作社-原始设计稿.png",
+      "passed": true
+    },
+    {
+      "name": "Archive content: assets/design/柚子创作社/v1.0/reference/C-素材领取.png",
+      "passed": true
+    },
+    {
+      "name": "Archive content: assets/design/柚子创作社/v1.0/reference/index.html",
+      "passed": true
+    },
+    {
+      "name": "Archive content: assets/design/柚子创作社/v1.0/reference/source-record.json",
+      "passed": true
+    },
+    {
+      "name": "Archive content: assets/design/柚子创作社/v1.0/requirements-design-map.json",
+      "passed": true
+    },
+    {
+      "name": "Archive content: docs/设计/定型/C-柚子创作社-v1.0/00-设计定型总纲.md",
+      "passed": true
+    },
+    {
+      "name": "Archive content: docs/设计/定型/C-柚子创作社-v1.0/01-视觉与布局规范.md",
+      "passed": true
+    },
+    {
+      "name": "Archive content: docs/设计/定型/C-柚子创作社-v1.0/02-组件与交互状态规范.md",
+      "passed": true
+    },
+    {
+      "name": "Archive content: docs/设计/定型/C-柚子创作社-v1.0/03-页面与导航定型.md",
+      "passed": true
+    },
+    {
+      "name": "Archive content: docs/设计/定型/C-柚子创作社-v1.0/04-全流程状态与文案.md",
+      "passed": true
+    },
+    {
+      "name": "Archive content: docs/设计/定型/C-柚子创作社-v1.0/05-双端适配与无障碍规范.md",
+      "passed": true
+    },
+    {
+      "name": "Archive content: docs/设计/定型/C-柚子创作社-v1.0/06-开发交付与设计验收.md",
+      "passed": true
+    },
+    {
+      "name": "Archive content: docs/设计/定型/C-柚子创作社-v1.0/07-需求设计追踪与变更记录.md",
+      "passed": true
+    },
+    {
+      "name": "Archive content: docs/设计/定型/C-柚子创作社-v1.0/README.md",
+      "passed": true
+    },
+    {
+      "name": "Archive content: scripts/设计选型/定型C设计基线.py",
+      "passed": true
+    },
+    {
+      "name": "Archive manifest matches retained manifest",
+      "passed": true
+    }
+  ]
+}

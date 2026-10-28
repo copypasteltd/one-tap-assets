@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "checked_at": "2026-10-28T12:37:12.618Z",
+  "status": "PASS",
+  "scope": "Repository documentation/media/source snapshot checks; not real provider, payment, native device or production admission",
+  "documentation_files": 11,
+  "local_links": 160,
+  "media_files": 20,
+  "screenshots": 10,
+  "gif_frames": 102,
+  "candidate_files": 556,
+  "candidate_bytes": 58035787,
+  "browser_closed": true,
+  "credential_check": "No private-key blocks or long OpenAI-style key strings in candidate text; not a guarantee for every possible secret format",
+  "implementation_evidence_sha256": "d81797c5199fe0a40c728e2894ec9a7a274b279246145fdbc4e21d60dcb8ddef",
+  "suites": [
+    {
+      "kind": "unit",
+      "tests": 50,
+      "passed": 50,
+      "failed": 0
+    },
+    {
+      "kind": "integration",
+      "tests": 250,
+      "passed": 250,
+      "failed": 0
+    }
+  ],
+  "source_files_verified": 291,
+  "runtime_contract_files_verified": 42,
+  "resource_files_verified": 4,
+  "full_product_verified": false,
+  "production_admitted": false
+}

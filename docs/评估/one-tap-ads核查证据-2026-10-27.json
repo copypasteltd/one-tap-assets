@@ -1,0 +1,150 @@
+{
+  "review_date": "2026-10-27",
+  "recorded_at": "2026-10-27T04:53:07.482039+08:00",
+  "timezone": "Asia/Taipei",
+  "repository": "https://github.com/copypasteltd/one-tap-ads",
+  "requested_remote": "git@github.com:copypasteltd/one-tap-ads.git",
+  "read_transport": "public HTTPS clone",
+  "commit": "1aab133dd75f4db57c3f62e6da2fdd121c5d509b",
+  "branch": "main",
+  "clone_depth": 1,
+  "checkout": "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\repository-review\\one-tap-ads",
+  "checkout_modified": false,
+  "git_status_porcelain": "",
+  "inventory": {
+    "tracked_files": 643,
+    "api_route_files": 72,
+    "test_files": 139,
+    "builtin_ad_recipes": 391,
+    "schema_tables": 19
+  },
+  "environment": {
+    "os": "native Windows",
+    "node": "v22.14.0",
+    "vitest": "4.1.0",
+    "ffmpeg": "8.1-full_build-www.gyan.dev",
+    "test_environment": "isolated harness, node, not upstream jsdom default",
+    "docker_or_wsl_used": false,
+    "provider_calls_made": 0,
+    "browser_ui_tabs_opened": 0
+  },
+  "upstream_unit_subset": {
+    "numTotalTests": 148,
+    "numPassedTests": 147,
+    "numFailedTests": 1,
+    "numPendingTests": 0,
+    "success": false,
+    "files": 16,
+    "failures": [
+      {
+        "file": "paths.test.ts",
+        "test": "paths 运行时路径解析 注入 APP_DATA_DIR 时所有可写路径都迁过去（Electron 打包关键）",
+        "messages": [
+          "AssertionError: expected '\\tmp\\daihuo-userdata\\uploads' to be '/tmp/daihuo-userdata/uploads' // Object.is equality\n    at E:/dev/sandbox/支付宝黑客松/一品成片/runtime/repository-review/one-tap-ads/src/lib/__tests__/paths.test.ts:26:29\n    at file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/runtime/repository-review/node_modules/.pnpm/@vitest+runner@4.1.0/node_modules/@vitest/runner/dist/index.js:296:11\n    at file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/runtime/repository-review/node_modules/.pnpm/@vitest+runner@4.1.0/node_modules/@vitest/runner/dist/index.js:1258:26\n    at file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/runtime/repository-review/node_modules/.pnpm/@vitest+runner@4.1.0/node_modules/@vitest/runner/dist/index.js:1681:20\n    at new Promise (<anonymous>)\n    at runWithCancel (file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/runtime/repository-review/node_modules/.pnpm/@vitest+runner@4.1.0/node_modules/@vitest/runner/dist/index.js:1678:10)\n    at file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/runtime/repository-review/node_modules/.pnpm/@vitest+runner@4.1.0/node_modules/@vitest/runner/dist/index.js:1660:20\n    at new Promise (<anonymous>)\n    at runWithTimeout (file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/runtime/repository-review/node_modules/.pnpm/@vitest+runner@4.1.0/node_modules/@vitest/runner/dist/index.js:1627:10)\n    at file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%"
+        ]
+      }
+    ]
+  },
+  "target_capability_probes": {
+    "numTotalTests": 8,
+    "numPassedTests": 7,
+    "numFailedTests": 1,
+    "numPendingTests": 0,
+    "success": false,
+    "files": 1,
+    "failures": [
+      {
+        "file": "repository-capability-probes.test.ts",
+        "test": "repository observations; not product acceptance tests renders Chinese text cards using the bundled OFL font",
+        "messages": [
+          "Error: Command failed: ffmpeg -y -f lavfi -i gradients=s=1080x1440:c0=0x2a0e05:c1=0x6b2810:x0=0:y0=0:x1=1080:y1=1440 -vf drawtext=fontfile='E\\:/dev/sandbox/支付宝黑客松/一品成片/runtime/repository-review/one-tap-ads/public/fonts/subtitle.otf':expansion=none:text='商品实拍':fontsize=92:fontcolor=white:borderw=4:x=(w-text_w)/2:y=(h-138)/2+0 -frames:v 1 E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\repository-review\\native-smoke\\cards\\review-0.png\nffmpeg version 8.1-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers\r\n  built with gcc 15.2.0 (Rev11, Built by MSYS2 project)\r\n  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec -"
+        ]
+      }
+    ]
+  },
+  "font_relative_path_diagnostic": {
+    "numTotalTests": 1,
+    "numPassedTests": 1,
+    "numFailedTests": 0,
+    "numPendingTests": 0,
+    "success": true,
+    "files": 1,
+    "failures": []
+  },
+  "observations": {
+    "templateCount": 391,
+    "emptyProfileAccepted": {
+      "sellingPoints": []
+    },
+    "unvalidatedProfileAccepted": {
+      "productName": 77,
+      "category": "not-a-category",
+      "sellingPoints": [
+        "100%纯棉",
+        "绝对防水"
+      ]
+    },
+    "durationTolerance": {
+      "id": "duration",
+      "level": "ok",
+      "message": {
+        "zh": "时长正常（12.0 秒）",
+        "en": "Duration OK (12.0s)"
+      }
+    },
+    "silentVideoPolicy": {
+      "id": "audio-stream",
+      "level": "fail",
+      "message": {
+        "zh": "成片缺少音频流（配音/BGM 丢失）",
+        "en": "The output has no audio stream (voiceover/BGM missing)"
+      }
+    },
+    "crossfadeTimeline": {
+      "inputSeconds": 9,
+      "outputSeconds": 8,
+      "needsCompensation": true
+    },
+    "nativeCompose": {
+      "outputPath": "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\repository-review\\test-data\\output\\repository-native-smoke\\final_1793047407749.mp4",
+      "elapsedMs": 6670,
+      "info": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1080,
+            "height": 1920,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "30/1",
+            "nb_frames": "180"
+          }
+        ],
+        "format": {
+          "duration": "6.000000",
+          "size": "659032"
+        }
+      },
+      "syntheticInputs": true,
+      "providerCalls": 0,
+      "sha256": "5b534e3d05520aff57ae5167d71ab31d489dc02fa429dfe36c6045656ed58d69"
+    }
+  },
+  "font_path_diagnostic": {
+    "absolutePathProbePreviouslyFailed": true,
+    "paths": [
+      "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\repository-review\\native-smoke\\cards-relative-font\\relative-font-0.png",
+      "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\repository-review\\native-smoke\\cards-relative-font\\relative-font-1.png"
+    ],
+    "passed": true
+  },
+  "limitations": [
+    "未安装完整仓库依赖、未运行next build/全量139测试文件/Electron打包/Playwright",
+    "视觉能力观察使用本地模拟响应，未验证真实商品识别准确率",
+    "原生视频仅6秒合成测试图，不代表10套质量或p95性能",
+    "未创建或真机验证任何小程序、支付、社区服务",
+    "未修改上游源码，字体相对路径是本地对照通过，原绝对路径失败仍保留"
+  ]
+}

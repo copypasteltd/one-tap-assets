@@ -1,0 +1,135 @@
+{
+  "baseline_id": "YPCC-DS-C-1.0.0",
+  "method": "sRGB_relative_luminance_pure_solid_colors",
+  "status": "PASS",
+  "pairs": [
+    {
+      "name": "primary_button",
+      "foreground": "#263B32",
+      "background": "#FF7948",
+      "contrast": 4.60676,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "name": "pressed_button",
+      "foreground": "#263B32",
+      "background": "#FF8B62",
+      "contrast": 5.20018,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "name": "secondary_button",
+      "foreground": "#263B32",
+      "background": "#CFE9D6",
+      "contrast": 9.28114,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "name": "disabled_button_reason",
+      "foreground": "#5A6A61",
+      "background": "#E5E9E0",
+      "contrast": 4.65078,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "name": "page_body",
+      "foreground": "#263B32",
+      "background": "#FFFAEE",
+      "contrast": 11.49384,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "name": "card_body",
+      "foreground": "#263B32",
+      "background": "#FFFFFF",
+      "contrast": 11.97224,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "name": "page_secondary",
+      "foreground": "#5A6A61",
+      "background": "#FFFAEE",
+      "contrast": 5.49498,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "name": "card_secondary",
+      "foreground": "#5A6A61",
+      "background": "#FFFFFF",
+      "contrast": 5.72369,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "name": "page_link",
+      "foreground": "#C04420",
+      "background": "#FFFAEE",
+      "contrast": 4.93051,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "name": "card_link",
+      "foreground": "#C04420",
+      "background": "#FFFFFF",
+      "contrast": 5.13573,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "name": "selected_body",
+      "foreground": "#263B32",
+      "background": "#FFF0E8",
+      "contrast": 10.76434,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "name": "ai_badge",
+      "foreground": "#263B32",
+      "background": "#FFD766",
+      "contrast": 8.64512,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "name": "error",
+      "foreground": "#B83232",
+      "background": "#FFF0EE",
+      "contrast": 5.35273,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "name": "success",
+      "foreground": "#236449",
+      "background": "#EAF5ED",
+      "contrast": 6.28058,
+      "minimum": 4.5,
+      "passed": true
+    },
+    {
+      "name": "warning",
+      "foreground": "#6B4B0C",
+      "background": "#FFF3CF",
+      "contrast": 7.19528,
+      "minimum": 4.5,
+      "passed": true
+    }
+  ],
+  "source_board_correction": {
+    "foreground": "#FFFFFF",
+    "background": "#FF7948",
+    "contrast": 2.59884,
+    "accepted_for_normal_text": false,
+    "action": "retain_original_board_use_ink_text_in_implementation"
+  },
+  "limit": "Pure-color arithmetic only; real rendering, images, accessibility and devices remain untested."
+}

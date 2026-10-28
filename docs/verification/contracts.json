@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "type": "DOCUMENT_AND_CONTRACT_CHECKS_NOT_PRODUCT_ACCEPTANCE",
+  "reports": [
+    {
+      "status": "PASS",
+      "scope": "开发文档、官方OpenAPI结构、JSON Schema/合成正负例、状态图、实体/需求/设计/工作包追踪及C留存一致性",
+      "counts": {
+        "development_documents": 20,
+        "api_operations": 77,
+        "openapi_schemas": 229,
+        "management_api_operations": 26,
+        "total_api_operations": 103,
+        "internal_schemas": 3,
+        "synthetic_contract_examples": 39,
+        "state_machines": 18,
+        "logical_data_entities": 71,
+        "requirements": 58,
+        "work_packages": 20,
+        "frozen_design_files": 25,
+        "checks": 3282
+      },
+      "passed": 3282,
+      "failed": 0,
+      "errors": [],
+      "product_tests_executed": false
+    },
+    {
+      "baseline_id": "YPCC-DEV-1.1.0",
+      "requirements_version": "3.1",
+      "checked_at": "2026-10-28T12:32:50.378655+00:00",
+      "status": "PASS",
+      "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
+      "counts": {
+        "requirements": 58,
+        "P0": 52,
+        "skills": 19,
+        "skill_bundles": 14,
+        "development_documents": 20,
+        "base_contract_checks": 3282,
+        "codex_checks": 1177,
+        "total_checks": 4459,
+        "codex_synthetic_examples": 39
+      },
+      "product_tests_executed": false,
+      "real_codex_runs_executed": false,
+      "real_provider_calls_executed": false,
+      "global_skills_installed": false,
+      "cloud_deployed": false,
+      "application_implementation_status": "IN_PROGRESS",
+      "implementation_evidence_manifest": "assets/implementation/current.json",
+      "errors": []
+    }
+  ],
+  "local_log_sha256": "f4e302d2189d2911ce4c18843a4b61d70d0aaafe5acd5ddd09d08b0d4bbb6910"
+}

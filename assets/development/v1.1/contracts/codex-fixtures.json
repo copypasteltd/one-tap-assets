@@ -1,0 +1,2579 @@
+{
+  "status": "SYNTHETIC_CONTRACT_EXAMPLES_ONLY",
+  "product_tests_executed": false,
+  "cases": [
+    {
+      "name": "frozen_codex_contract",
+      "schema": "codex-contract",
+      "value": {
+        "runtime_kind": "CODEX_APP_SERVER",
+        "runtime_build_id": "fixture_build",
+        "runtime_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "protocol_version": "fixture-protocol",
+        "model_version_id": "fixture_codex_model",
+        "rate_version_id": "fixture_rate",
+        "skill_bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+        "skill_bundle_version": "1.0.0",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "role_prompt_version": "fixture_prompts",
+        "tool_policy_version": "fixture_tools",
+        "qc_policy_version": "fixture_qc",
+        "required_roles": [
+          "CONTENT",
+          "PRODUCTION",
+          "POST",
+          "REVIEW_FACTS",
+          "REVIEW_STYLE"
+        ],
+        "max_turns_per_role": 4,
+        "max_input_tokens": 100000,
+        "max_output_tokens": 10000,
+        "max_tool_calls": 30,
+        "agent_cost_ceiling_micro": 100000,
+        "inference_spend_control": "PRE_REQUEST_RESERVATION_AND_HARD_LIMIT",
+        "independent_reviewers": 2,
+        "review_context_policy": "FRESH_THREADS_NO_CREATOR_HISTORY",
+        "isolation": "NATIVE_RESTRICTED_IDENTITY",
+        "release_after_terminal": true,
+        "release_grace_seconds": 30,
+        "release_target_seconds": 300,
+        "repair_extends_deadline": false
+      },
+      "expected_valid": true,
+      "semantic_rule": null
+    },
+    {
+      "name": "cannot_disable_review",
+      "schema": "codex-contract",
+      "value": {
+        "runtime_kind": "CODEX_APP_SERVER",
+        "runtime_build_id": "fixture_build",
+        "runtime_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "protocol_version": "fixture-protocol",
+        "model_version_id": "fixture_codex_model",
+        "rate_version_id": "fixture_rate",
+        "skill_bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+        "skill_bundle_version": "1.0.0",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "role_prompt_version": "fixture_prompts",
+        "tool_policy_version": "fixture_tools",
+        "qc_policy_version": "fixture_qc",
+        "required_roles": [
+          "CONTENT",
+          "PRODUCTION",
+          "POST",
+          "REVIEW_FACTS",
+          "REVIEW_STYLE"
+        ],
+        "max_turns_per_role": 4,
+        "max_input_tokens": 100000,
+        "max_output_tokens": 10000,
+        "max_tool_calls": 30,
+        "agent_cost_ceiling_micro": 100000,
+        "inference_spend_control": "PRE_REQUEST_RESERVATION_AND_HARD_LIMIT",
+        "independent_reviewers": 1,
+        "review_context_policy": "FRESH_THREADS_NO_CREATOR_HISTORY",
+        "isolation": "NATIVE_RESTRICTED_IDENTITY",
+        "release_after_terminal": true,
+        "release_grace_seconds": 30,
+        "release_target_seconds": 300,
+        "repair_extends_deadline": false
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "cannot_reuse_creator_context",
+      "schema": "codex-contract",
+      "value": {
+        "runtime_kind": "CODEX_APP_SERVER",
+        "runtime_build_id": "fixture_build",
+        "runtime_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "protocol_version": "fixture-protocol",
+        "model_version_id": "fixture_codex_model",
+        "rate_version_id": "fixture_rate",
+        "skill_bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+        "skill_bundle_version": "1.0.0",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "role_prompt_version": "fixture_prompts",
+        "tool_policy_version": "fixture_tools",
+        "qc_policy_version": "fixture_qc",
+        "required_roles": [
+          "CONTENT",
+          "PRODUCTION",
+          "POST",
+          "REVIEW_FACTS",
+          "REVIEW_STYLE"
+        ],
+        "max_turns_per_role": 4,
+        "max_input_tokens": 100000,
+        "max_output_tokens": 10000,
+        "max_tool_calls": 30,
+        "agent_cost_ceiling_micro": 100000,
+        "inference_spend_control": "PRE_REQUEST_RESERVATION_AND_HARD_LIMIT",
+        "independent_reviewers": 2,
+        "review_context_policy": "FORK_CREATOR_HISTORY",
+        "isolation": "NATIVE_RESTRICTED_IDENTITY",
+        "release_after_terminal": true,
+        "release_grace_seconds": 30,
+        "release_target_seconds": 300,
+        "repair_extends_deadline": false
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "cannot_use_virtualization",
+      "schema": "codex-contract",
+      "value": {
+        "runtime_kind": "CODEX_APP_SERVER",
+        "runtime_build_id": "fixture_build",
+        "runtime_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "protocol_version": "fixture-protocol",
+        "model_version_id": "fixture_codex_model",
+        "rate_version_id": "fixture_rate",
+        "skill_bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+        "skill_bundle_version": "1.0.0",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "role_prompt_version": "fixture_prompts",
+        "tool_policy_version": "fixture_tools",
+        "qc_policy_version": "fixture_qc",
+        "required_roles": [
+          "CONTENT",
+          "PRODUCTION",
+          "POST",
+          "REVIEW_FACTS",
+          "REVIEW_STYLE"
+        ],
+        "max_turns_per_role": 4,
+        "max_input_tokens": 100000,
+        "max_output_tokens": 10000,
+        "max_tool_calls": 30,
+        "agent_cost_ceiling_micro": 100000,
+        "inference_spend_control": "PRE_REQUEST_RESERVATION_AND_HARD_LIMIT",
+        "independent_reviewers": 2,
+        "review_context_policy": "FRESH_THREADS_NO_CREATOR_HISTORY",
+        "isolation": "DOCKER",
+        "release_after_terminal": true,
+        "release_grace_seconds": 30,
+        "release_target_seconds": 300,
+        "repair_extends_deadline": false
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "cannot_use_soft_budget_as_hard",
+      "schema": "codex-contract",
+      "value": {
+        "runtime_kind": "CODEX_APP_SERVER",
+        "runtime_build_id": "fixture_build",
+        "runtime_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "protocol_version": "fixture-protocol",
+        "model_version_id": "fixture_codex_model",
+        "rate_version_id": "fixture_rate",
+        "skill_bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+        "skill_bundle_version": "1.0.0",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "role_prompt_version": "fixture_prompts",
+        "tool_policy_version": "fixture_tools",
+        "qc_policy_version": "fixture_qc",
+        "required_roles": [
+          "CONTENT",
+          "PRODUCTION",
+          "POST",
+          "REVIEW_FACTS",
+          "REVIEW_STYLE"
+        ],
+        "max_turns_per_role": 4,
+        "max_input_tokens": 100000,
+        "max_output_tokens": 10000,
+        "max_tool_calls": 30,
+        "agent_cost_ceiling_micro": 100000,
+        "inference_spend_control": "USAGE_EVENT_ONLY",
+        "independent_reviewers": 2,
+        "review_context_policy": "FRESH_THREADS_NO_CREATOR_HISTORY",
+        "isolation": "NATIVE_RESTRICTED_IDENTITY",
+        "release_after_terminal": true,
+        "release_grace_seconds": 30,
+        "release_target_seconds": 300,
+        "repair_extends_deadline": false
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "cannot_extend_deadline",
+      "schema": "codex-contract",
+      "value": {
+        "runtime_kind": "CODEX_APP_SERVER",
+        "runtime_build_id": "fixture_build",
+        "runtime_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "protocol_version": "fixture-protocol",
+        "model_version_id": "fixture_codex_model",
+        "rate_version_id": "fixture_rate",
+        "skill_bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+        "skill_bundle_version": "1.0.0",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "role_prompt_version": "fixture_prompts",
+        "tool_policy_version": "fixture_tools",
+        "qc_policy_version": "fixture_qc",
+        "required_roles": [
+          "CONTENT",
+          "PRODUCTION",
+          "POST",
+          "REVIEW_FACTS",
+          "REVIEW_STYLE"
+        ],
+        "max_turns_per_role": 4,
+        "max_input_tokens": 100000,
+        "max_output_tokens": 10000,
+        "max_tool_calls": 30,
+        "agent_cost_ceiling_micro": 100000,
+        "inference_spend_control": "PRE_REQUEST_RESERVATION_AND_HARD_LIMIT",
+        "independent_reviewers": 2,
+        "review_context_policy": "FRESH_THREADS_NO_CREATOR_HISTORY",
+        "isolation": "NATIVE_RESTRICTED_IDENTITY",
+        "release_after_terminal": true,
+        "release_grace_seconds": 30,
+        "release_target_seconds": 300,
+        "repair_extends_deadline": true
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "freeze_codex_before_order_exists",
+      "schema": "codex-quote-binding",
+      "value": {
+        "tenant_id": "fixture_tenant",
+        "quote_id": "fixture_quote",
+        "preview_session_id": "fixture_preview",
+        "plan_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "codex_contract": {
+          "runtime_kind": "CODEX_APP_SERVER",
+          "runtime_build_id": "fixture_build",
+          "runtime_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "protocol_version": "fixture-protocol",
+          "model_version_id": "fixture_codex_model",
+          "rate_version_id": "fixture_rate",
+          "skill_bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+          "skill_bundle_version": "1.0.0",
+          "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+          "role_prompt_version": "fixture_prompts",
+          "tool_policy_version": "fixture_tools",
+          "qc_policy_version": "fixture_qc",
+          "required_roles": [
+            "CONTENT",
+            "PRODUCTION",
+            "POST",
+            "REVIEW_FACTS",
+            "REVIEW_STYLE"
+          ],
+          "max_turns_per_role": 4,
+          "max_input_tokens": 100000,
+          "max_output_tokens": 10000,
+          "max_tool_calls": 30,
+          "agent_cost_ceiling_micro": 100000,
+          "inference_spend_control": "PRE_REQUEST_RESERVATION_AND_HARD_LIMIT",
+          "independent_reviewers": 2,
+          "review_context_policy": "FRESH_THREADS_NO_CREATOR_HISTORY",
+          "isolation": "NATIVE_RESTRICTED_IDENTITY",
+          "release_after_terminal": true,
+          "release_grace_seconds": 30,
+          "release_target_seconds": 300,
+          "repair_extends_deadline": false
+        },
+        "codex_contract_hash": "4ef9a7fbd6445049d3f38835ec47f935c9cf9e5f70c3f112de6e9f6b7d4ef3b0",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "expires_at": "2026-10-27T00:15:00Z"
+      },
+      "expected_valid": true,
+      "semantic_rule": "quote_binding"
+    },
+    {
+      "name": "changed_codex_quote_contract_rejected",
+      "schema": "codex-quote-binding",
+      "value": {
+        "tenant_id": "fixture_tenant",
+        "quote_id": "fixture_quote",
+        "preview_session_id": "fixture_preview",
+        "plan_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "codex_contract": {
+          "runtime_kind": "CODEX_APP_SERVER",
+          "runtime_build_id": "fixture_build",
+          "runtime_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "protocol_version": "fixture-protocol",
+          "model_version_id": "fixture_codex_model",
+          "rate_version_id": "fixture_rate",
+          "skill_bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+          "skill_bundle_version": "1.0.0",
+          "skill_bundle_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "role_prompt_version": "fixture_prompts",
+          "tool_policy_version": "fixture_tools",
+          "qc_policy_version": "fixture_qc",
+          "required_roles": [
+            "CONTENT",
+            "PRODUCTION",
+            "POST",
+            "REVIEW_FACTS",
+            "REVIEW_STYLE"
+          ],
+          "max_turns_per_role": 4,
+          "max_input_tokens": 100000,
+          "max_output_tokens": 10000,
+          "max_tool_calls": 30,
+          "agent_cost_ceiling_micro": 100000,
+          "inference_spend_control": "PRE_REQUEST_RESERVATION_AND_HARD_LIMIT",
+          "independent_reviewers": 2,
+          "review_context_policy": "FRESH_THREADS_NO_CREATOR_HISTORY",
+          "isolation": "NATIVE_RESTRICTED_IDENTITY",
+          "release_after_terminal": true,
+          "release_grace_seconds": 30,
+          "release_target_seconds": 300,
+          "repair_extends_deadline": false
+        },
+        "codex_contract_hash": "4ef9a7fbd6445049d3f38835ec47f935c9cf9e5f70c3f112de6e9f6b7d4ef3b0",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "expires_at": "2026-10-27T00:15:00Z"
+      },
+      "expected_valid": false,
+      "semantic_rule": "quote_binding"
+    },
+    {
+      "name": "prequote_tool_has_preview_scope",
+      "schema": "tool-call-intent",
+      "value": {
+        "tenant_id": "fixture_tenant",
+        "order_id": null,
+        "preview_session_id": "fixture_preview",
+        "intent_id": "fixture_intent",
+        "instance_id": "fixture_instance",
+        "run_id": "fixture_content",
+        "role": "CONTENT",
+        "tool_name": "analyze_photos",
+        "snapshot_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "idempotency_key": "fixture_original_analysis",
+        "fencing_token": 1,
+        "reservation_id": "fixture_preview_reservation",
+        "reserved_cost_micro": 1,
+        "currency": "CNY",
+        "state": "INTENT",
+        "provider_submission_id": null,
+        "capability_expires_at": "2026-10-27T00:01:00Z",
+        "deadline_at": "2026-10-27T00:02:00Z"
+      },
+      "expected_valid": true,
+      "semantic_rule": "tool_role"
+    },
+    {
+      "name": "tool_cannot_mix_preview_order",
+      "schema": "tool-call-intent",
+      "value": {
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "preview_session_id": "fixture_preview",
+        "intent_id": "fixture_intent",
+        "instance_id": "fixture_instance",
+        "run_id": "fixture_content",
+        "role": "CONTENT",
+        "tool_name": "analyze_photos",
+        "snapshot_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "idempotency_key": "fixture_original_analysis",
+        "fencing_token": 1,
+        "reservation_id": "fixture_preview_reservation",
+        "reserved_cost_micro": 1,
+        "currency": "CNY",
+        "state": "INTENT",
+        "provider_submission_id": null,
+        "capability_expires_at": "2026-10-27T00:01:00Z",
+        "deadline_at": "2026-10-27T00:02:00Z"
+      },
+      "expected_valid": false,
+      "semantic_rule": "tool_role"
+    },
+    {
+      "name": "style_reviewer_cannot_run_product_analysis",
+      "schema": "tool-call-intent",
+      "value": {
+        "tenant_id": "fixture_tenant",
+        "order_id": null,
+        "preview_session_id": "fixture_preview",
+        "intent_id": "fixture_intent",
+        "instance_id": "fixture_instance",
+        "run_id": "fixture_content",
+        "role": "REVIEW_STYLE",
+        "tool_name": "analyze_photos",
+        "snapshot_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "request_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "idempotency_key": "fixture_original_analysis",
+        "fencing_token": 1,
+        "reservation_id": "fixture_preview_reservation",
+        "reserved_cost_micro": 1,
+        "currency": "CNY",
+        "state": "INTENT",
+        "provider_submission_id": null,
+        "capability_expires_at": "2026-10-27T00:01:00Z",
+        "deadline_at": "2026-10-27T00:02:00Z"
+      },
+      "expected_valid": false,
+      "semantic_rule": "tool_role"
+    },
+    {
+      "name": "paid_scope",
+      "schema": "AgentInstance",
+      "value": {
+        "instance_id": "fixture_instance",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "preview_session_id": null,
+        "state": "READY",
+        "fencing_token": 1,
+        "os_identity_ref": "fixture_identity",
+        "workspace_ref": "fixture_workspace",
+        "isolation_profile_id": "fixture_native_profile",
+        "skill_bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+        "run_ids": [],
+        "allocated_at": "2026-10-27T00:00:00Z",
+        "lease_expires_at": "2026-10-27T00:01:00Z",
+        "release_reason": null
+      },
+      "expected_valid": true,
+      "semantic_rule": null
+    },
+    {
+      "name": "prequote_scope",
+      "schema": "AgentInstance",
+      "value": {
+        "instance_id": "fixture_instance",
+        "tenant_id": "fixture_tenant",
+        "order_id": null,
+        "preview_session_id": "fixture_preview",
+        "state": "READY",
+        "fencing_token": 1,
+        "os_identity_ref": "fixture_identity",
+        "workspace_ref": "fixture_workspace",
+        "isolation_profile_id": "fixture_native_profile",
+        "skill_bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+        "run_ids": [],
+        "allocated_at": "2026-10-27T00:00:00Z",
+        "lease_expires_at": "2026-10-27T00:01:00Z",
+        "release_reason": null
+      },
+      "expected_valid": true,
+      "semantic_rule": null
+    },
+    {
+      "name": "cannot_mix_order_preview",
+      "schema": "AgentInstance",
+      "value": {
+        "instance_id": "fixture_instance",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "preview_session_id": "fixture_preview",
+        "state": "READY",
+        "fencing_token": 1,
+        "os_identity_ref": "fixture_identity",
+        "workspace_ref": "fixture_workspace",
+        "isolation_profile_id": "fixture_native_profile",
+        "skill_bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+        "run_ids": [],
+        "allocated_at": "2026-10-27T00:00:00Z",
+        "lease_expires_at": "2026-10-27T00:01:00Z",
+        "release_reason": null
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "two_fresh_reviews_allow_delivery",
+      "schema": "review-packet",
+      "value": {
+        "packet_id": "fixture_packet",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "state": "PASSED",
+        "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+        "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+        "identity_lock_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "qc_policy_version": "fixture_qc",
+        "original_assets": [
+          {
+            "asset_id": "fixture_original_0",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "asset_id": "fixture_original_1",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "asset_id": "fixture_original_2",
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ],
+        "evidence_assets": [
+          {
+            "asset_id": "fixture_actual_media_evidence",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ],
+        "required_slot_ids": [
+          "fixture_image_slot",
+          "fixture_video_slot"
+        ],
+        "outputs": [
+          {
+            "slot_id": "fixture_image_slot",
+            "asset_id": "fixture_image",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "slot_id": "fixture_video_slot",
+            "asset_id": "fixture_video",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "production_run_ids": [
+          "fixture_make",
+          "fixture_post"
+        ],
+        "production_thread_ids": [
+          "fixture_make_thread",
+          "fixture_post_thread"
+        ],
+        "production_process_refs": [
+          "fixture_make_process",
+          "fixture_post_process"
+        ],
+        "reports": [
+          {
+            "report_id": "fixture_report_0",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_0",
+            "thread_id": "fixture_review_thread_0",
+            "role": "REVIEW_FACTS",
+            "runtime_process_ref": "fixture_review_process_0",
+            "isolation_evidence_id": "fixture_isolation_evidence_0",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          },
+          {
+            "report_id": "fixture_report_1",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_1",
+            "thread_id": "fixture_review_thread_1",
+            "role": "REVIEW_STYLE",
+            "runtime_process_ref": "fixture_review_process_1",
+            "isolation_evidence_id": "fixture_isolation_evidence_1",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          }
+        ],
+        "deterministic_pass": true,
+        "evidence_complete": true,
+        "unknown_paid_calls": 0,
+        "publication_decision": "ALLOW"
+      },
+      "expected_valid": true,
+      "semantic_rule": "review_gate"
+    },
+    {
+      "name": "creator_cannot_sign_review",
+      "schema": "review-packet",
+      "value": {
+        "packet_id": "fixture_packet",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "state": "PASSED",
+        "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+        "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+        "identity_lock_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "qc_policy_version": "fixture_qc",
+        "original_assets": [
+          {
+            "asset_id": "fixture_original_0",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "asset_id": "fixture_original_1",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "asset_id": "fixture_original_2",
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ],
+        "evidence_assets": [
+          {
+            "asset_id": "fixture_actual_media_evidence",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ],
+        "required_slot_ids": [
+          "fixture_image_slot",
+          "fixture_video_slot"
+        ],
+        "outputs": [
+          {
+            "slot_id": "fixture_image_slot",
+            "asset_id": "fixture_image",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "slot_id": "fixture_video_slot",
+            "asset_id": "fixture_video",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "production_run_ids": [
+          "fixture_make",
+          "fixture_post"
+        ],
+        "production_thread_ids": [
+          "fixture_make_thread",
+          "fixture_post_thread"
+        ],
+        "production_process_refs": [
+          "fixture_make_process",
+          "fixture_post_process"
+        ],
+        "reports": [
+          {
+            "report_id": "fixture_report_0",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_make",
+            "thread_id": "fixture_review_thread_0",
+            "role": "REVIEW_FACTS",
+            "runtime_process_ref": "fixture_review_process_0",
+            "isolation_evidence_id": "fixture_isolation_evidence_0",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          },
+          {
+            "report_id": "fixture_report_1",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_1",
+            "thread_id": "fixture_review_thread_1",
+            "role": "REVIEW_STYLE",
+            "runtime_process_ref": "fixture_review_process_1",
+            "isolation_evidence_id": "fixture_isolation_evidence_1",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          }
+        ],
+        "deterministic_pass": true,
+        "evidence_complete": true,
+        "unknown_paid_calls": 0,
+        "publication_decision": "ALLOW"
+      },
+      "expected_valid": false,
+      "semantic_rule": "review_gate"
+    },
+    {
+      "name": "creator_thread_cannot_review",
+      "schema": "review-packet",
+      "value": {
+        "packet_id": "fixture_packet",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "state": "PASSED",
+        "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+        "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+        "identity_lock_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "qc_policy_version": "fixture_qc",
+        "original_assets": [
+          {
+            "asset_id": "fixture_original_0",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "asset_id": "fixture_original_1",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "asset_id": "fixture_original_2",
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ],
+        "evidence_assets": [
+          {
+            "asset_id": "fixture_actual_media_evidence",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ],
+        "required_slot_ids": [
+          "fixture_image_slot",
+          "fixture_video_slot"
+        ],
+        "outputs": [
+          {
+            "slot_id": "fixture_image_slot",
+            "asset_id": "fixture_image",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "slot_id": "fixture_video_slot",
+            "asset_id": "fixture_video",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "production_run_ids": [
+          "fixture_make",
+          "fixture_post"
+        ],
+        "production_thread_ids": [
+          "fixture_make_thread",
+          "fixture_post_thread"
+        ],
+        "production_process_refs": [
+          "fixture_make_process",
+          "fixture_post_process"
+        ],
+        "reports": [
+          {
+            "report_id": "fixture_report_0",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_0",
+            "thread_id": "fixture_make_thread",
+            "role": "REVIEW_FACTS",
+            "runtime_process_ref": "fixture_review_process_0",
+            "isolation_evidence_id": "fixture_isolation_evidence_0",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          },
+          {
+            "report_id": "fixture_report_1",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_1",
+            "thread_id": "fixture_review_thread_1",
+            "role": "REVIEW_STYLE",
+            "runtime_process_ref": "fixture_review_process_1",
+            "isolation_evidence_id": "fixture_isolation_evidence_1",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          }
+        ],
+        "deterministic_pass": true,
+        "evidence_complete": true,
+        "unknown_paid_calls": 0,
+        "publication_decision": "ALLOW"
+      },
+      "expected_valid": false,
+      "semantic_rule": "review_gate"
+    },
+    {
+      "name": "two_reviews_cannot_share_thread",
+      "schema": "review-packet",
+      "value": {
+        "packet_id": "fixture_packet",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "state": "PASSED",
+        "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+        "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+        "identity_lock_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "qc_policy_version": "fixture_qc",
+        "original_assets": [
+          {
+            "asset_id": "fixture_original_0",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "asset_id": "fixture_original_1",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "asset_id": "fixture_original_2",
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ],
+        "evidence_assets": [
+          {
+            "asset_id": "fixture_actual_media_evidence",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ],
+        "required_slot_ids": [
+          "fixture_image_slot",
+          "fixture_video_slot"
+        ],
+        "outputs": [
+          {
+            "slot_id": "fixture_image_slot",
+            "asset_id": "fixture_image",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "slot_id": "fixture_video_slot",
+            "asset_id": "fixture_video",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "production_run_ids": [
+          "fixture_make",
+          "fixture_post"
+        ],
+        "production_thread_ids": [
+          "fixture_make_thread",
+          "fixture_post_thread"
+        ],
+        "production_process_refs": [
+          "fixture_make_process",
+          "fixture_post_process"
+        ],
+        "reports": [
+          {
+            "report_id": "fixture_report_0",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_0",
+            "thread_id": "fixture_review_thread_0",
+            "role": "REVIEW_FACTS",
+            "runtime_process_ref": "fixture_review_process_0",
+            "isolation_evidence_id": "fixture_isolation_evidence_0",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          },
+          {
+            "report_id": "fixture_report_1",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_1",
+            "thread_id": "fixture_review_thread_0",
+            "role": "REVIEW_STYLE",
+            "runtime_process_ref": "fixture_review_process_1",
+            "isolation_evidence_id": "fixture_isolation_evidence_1",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          }
+        ],
+        "deterministic_pass": true,
+        "evidence_complete": true,
+        "unknown_paid_calls": 0,
+        "publication_decision": "ALLOW"
+      },
+      "expected_valid": false,
+      "semantic_rule": "review_gate"
+    },
+    {
+      "name": "two_reviews_cannot_share_run",
+      "schema": "review-packet",
+      "value": {
+        "packet_id": "fixture_packet",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "state": "PASSED",
+        "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+        "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+        "identity_lock_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "qc_policy_version": "fixture_qc",
+        "original_assets": [
+          {
+            "asset_id": "fixture_original_0",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "asset_id": "fixture_original_1",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "asset_id": "fixture_original_2",
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ],
+        "evidence_assets": [
+          {
+            "asset_id": "fixture_actual_media_evidence",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ],
+        "required_slot_ids": [
+          "fixture_image_slot",
+          "fixture_video_slot"
+        ],
+        "outputs": [
+          {
+            "slot_id": "fixture_image_slot",
+            "asset_id": "fixture_image",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "slot_id": "fixture_video_slot",
+            "asset_id": "fixture_video",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "production_run_ids": [
+          "fixture_make",
+          "fixture_post"
+        ],
+        "production_thread_ids": [
+          "fixture_make_thread",
+          "fixture_post_thread"
+        ],
+        "production_process_refs": [
+          "fixture_make_process",
+          "fixture_post_process"
+        ],
+        "reports": [
+          {
+            "report_id": "fixture_report_0",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_0",
+            "thread_id": "fixture_review_thread_0",
+            "role": "REVIEW_FACTS",
+            "runtime_process_ref": "fixture_review_process_0",
+            "isolation_evidence_id": "fixture_isolation_evidence_0",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          },
+          {
+            "report_id": "fixture_report_1",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_0",
+            "thread_id": "fixture_review_thread_1",
+            "role": "REVIEW_STYLE",
+            "runtime_process_ref": "fixture_review_process_1",
+            "isolation_evidence_id": "fixture_isolation_evidence_1",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          }
+        ],
+        "deterministic_pass": true,
+        "evidence_complete": true,
+        "unknown_paid_calls": 0,
+        "publication_decision": "ALLOW"
+      },
+      "expected_valid": false,
+      "semantic_rule": "review_gate"
+    },
+    {
+      "name": "two_reviews_cannot_share_process",
+      "schema": "review-packet",
+      "value": {
+        "packet_id": "fixture_packet",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "state": "PASSED",
+        "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+        "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+        "identity_lock_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "qc_policy_version": "fixture_qc",
+        "original_assets": [
+          {
+            "asset_id": "fixture_original_0",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "asset_id": "fixture_original_1",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "asset_id": "fixture_original_2",
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ],
+        "evidence_assets": [
+          {
+            "asset_id": "fixture_actual_media_evidence",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ],
+        "required_slot_ids": [
+          "fixture_image_slot",
+          "fixture_video_slot"
+        ],
+        "outputs": [
+          {
+            "slot_id": "fixture_image_slot",
+            "asset_id": "fixture_image",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "slot_id": "fixture_video_slot",
+            "asset_id": "fixture_video",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "production_run_ids": [
+          "fixture_make",
+          "fixture_post"
+        ],
+        "production_thread_ids": [
+          "fixture_make_thread",
+          "fixture_post_thread"
+        ],
+        "production_process_refs": [
+          "fixture_make_process",
+          "fixture_post_process"
+        ],
+        "reports": [
+          {
+            "report_id": "fixture_report_0",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_0",
+            "thread_id": "fixture_review_thread_0",
+            "role": "REVIEW_FACTS",
+            "runtime_process_ref": "fixture_review_process_0",
+            "isolation_evidence_id": "fixture_isolation_evidence_0",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          },
+          {
+            "report_id": "fixture_report_1",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_1",
+            "thread_id": "fixture_review_thread_1",
+            "role": "REVIEW_STYLE",
+            "runtime_process_ref": "fixture_review_process_0",
+            "isolation_evidence_id": "fixture_isolation_evidence_1",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          }
+        ],
+        "deterministic_pass": true,
+        "evidence_complete": true,
+        "unknown_paid_calls": 0,
+        "publication_decision": "ALLOW"
+      },
+      "expected_valid": false,
+      "semantic_rule": "review_gate"
+    },
+    {
+      "name": "producer_process_cannot_review",
+      "schema": "review-packet",
+      "value": {
+        "packet_id": "fixture_packet",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "state": "PASSED",
+        "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+        "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+        "identity_lock_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "qc_policy_version": "fixture_qc",
+        "original_assets": [
+          {
+            "asset_id": "fixture_original_0",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "asset_id": "fixture_original_1",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "asset_id": "fixture_original_2",
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ],
+        "evidence_assets": [
+          {
+            "asset_id": "fixture_actual_media_evidence",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ],
+        "required_slot_ids": [
+          "fixture_image_slot",
+          "fixture_video_slot"
+        ],
+        "outputs": [
+          {
+            "slot_id": "fixture_image_slot",
+            "asset_id": "fixture_image",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "slot_id": "fixture_video_slot",
+            "asset_id": "fixture_video",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "production_run_ids": [
+          "fixture_make",
+          "fixture_post"
+        ],
+        "production_thread_ids": [
+          "fixture_make_thread",
+          "fixture_post_thread"
+        ],
+        "production_process_refs": [
+          "fixture_make_process",
+          "fixture_post_process"
+        ],
+        "reports": [
+          {
+            "report_id": "fixture_report_0",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_0",
+            "thread_id": "fixture_review_thread_0",
+            "role": "REVIEW_FACTS",
+            "runtime_process_ref": "fixture_make_process",
+            "isolation_evidence_id": "fixture_isolation_evidence_0",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          },
+          {
+            "report_id": "fixture_report_1",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_1",
+            "thread_id": "fixture_review_thread_1",
+            "role": "REVIEW_STYLE",
+            "runtime_process_ref": "fixture_review_process_1",
+            "isolation_evidence_id": "fixture_isolation_evidence_1",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          }
+        ],
+        "deterministic_pass": true,
+        "evidence_complete": true,
+        "unknown_paid_calls": 0,
+        "publication_decision": "ALLOW"
+      },
+      "expected_valid": false,
+      "semantic_rule": "review_gate"
+    },
+    {
+      "name": "wrong_qc_policy_rejected",
+      "schema": "review-packet",
+      "value": {
+        "packet_id": "fixture_packet",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "state": "PASSED",
+        "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+        "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+        "identity_lock_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "qc_policy_version": "fixture_qc",
+        "original_assets": [
+          {
+            "asset_id": "fixture_original_0",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "asset_id": "fixture_original_1",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "asset_id": "fixture_original_2",
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ],
+        "evidence_assets": [
+          {
+            "asset_id": "fixture_actual_media_evidence",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ],
+        "required_slot_ids": [
+          "fixture_image_slot",
+          "fixture_video_slot"
+        ],
+        "outputs": [
+          {
+            "slot_id": "fixture_image_slot",
+            "asset_id": "fixture_image",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "slot_id": "fixture_video_slot",
+            "asset_id": "fixture_video",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "production_run_ids": [
+          "fixture_make",
+          "fixture_post"
+        ],
+        "production_thread_ids": [
+          "fixture_make_thread",
+          "fixture_post_thread"
+        ],
+        "production_process_refs": [
+          "fixture_make_process",
+          "fixture_post_process"
+        ],
+        "reports": [
+          {
+            "report_id": "fixture_report_0",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_0",
+            "thread_id": "fixture_review_thread_0",
+            "role": "REVIEW_FACTS",
+            "runtime_process_ref": "fixture_review_process_0",
+            "isolation_evidence_id": "fixture_isolation_evidence_0",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "other_policy"
+          },
+          {
+            "report_id": "fixture_report_1",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_1",
+            "thread_id": "fixture_review_thread_1",
+            "role": "REVIEW_STYLE",
+            "runtime_process_ref": "fixture_review_process_1",
+            "isolation_evidence_id": "fixture_isolation_evidence_1",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          }
+        ],
+        "deterministic_pass": true,
+        "evidence_complete": true,
+        "unknown_paid_calls": 0,
+        "publication_decision": "ALLOW"
+      },
+      "expected_valid": false,
+      "semantic_rule": "review_gate"
+    },
+    {
+      "name": "original_evidence_changed_rejected",
+      "schema": "review-packet",
+      "value": {
+        "packet_id": "fixture_packet",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "state": "PASSED",
+        "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+        "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+        "identity_lock_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "qc_policy_version": "fixture_qc",
+        "original_assets": [
+          {
+            "asset_id": "fixture_original_0",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          },
+          {
+            "asset_id": "fixture_original_1",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "asset_id": "fixture_original_2",
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ],
+        "evidence_assets": [
+          {
+            "asset_id": "fixture_actual_media_evidence",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ],
+        "required_slot_ids": [
+          "fixture_image_slot",
+          "fixture_video_slot"
+        ],
+        "outputs": [
+          {
+            "slot_id": "fixture_image_slot",
+            "asset_id": "fixture_image",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "slot_id": "fixture_video_slot",
+            "asset_id": "fixture_video",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "production_run_ids": [
+          "fixture_make",
+          "fixture_post"
+        ],
+        "production_thread_ids": [
+          "fixture_make_thread",
+          "fixture_post_thread"
+        ],
+        "production_process_refs": [
+          "fixture_make_process",
+          "fixture_post_process"
+        ],
+        "reports": [
+          {
+            "report_id": "fixture_report_0",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_0",
+            "thread_id": "fixture_review_thread_0",
+            "role": "REVIEW_FACTS",
+            "runtime_process_ref": "fixture_review_process_0",
+            "isolation_evidence_id": "fixture_isolation_evidence_0",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          },
+          {
+            "report_id": "fixture_report_1",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_1",
+            "thread_id": "fixture_review_thread_1",
+            "role": "REVIEW_STYLE",
+            "runtime_process_ref": "fixture_review_process_1",
+            "isolation_evidence_id": "fixture_isolation_evidence_1",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          }
+        ],
+        "deterministic_pass": true,
+        "evidence_complete": true,
+        "unknown_paid_calls": 0,
+        "publication_decision": "ALLOW"
+      },
+      "expected_valid": false,
+      "semantic_rule": "review_gate"
+    },
+    {
+      "name": "old_output_review_rejected",
+      "schema": "review-packet",
+      "value": {
+        "packet_id": "fixture_packet",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "state": "PASSED",
+        "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+        "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+        "identity_lock_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "qc_policy_version": "fixture_qc",
+        "original_assets": [
+          {
+            "asset_id": "fixture_original_0",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "asset_id": "fixture_original_1",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "asset_id": "fixture_original_2",
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ],
+        "evidence_assets": [
+          {
+            "asset_id": "fixture_actual_media_evidence",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ],
+        "required_slot_ids": [
+          "fixture_image_slot",
+          "fixture_video_slot"
+        ],
+        "outputs": [
+          {
+            "slot_id": "fixture_image_slot",
+            "asset_id": "fixture_image",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "slot_id": "fixture_video_slot",
+            "asset_id": "fixture_video",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "production_run_ids": [
+          "fixture_make",
+          "fixture_post"
+        ],
+        "production_thread_ids": [
+          "fixture_make_thread",
+          "fixture_post_thread"
+        ],
+        "production_process_refs": [
+          "fixture_make_process",
+          "fixture_post_process"
+        ],
+        "reports": [
+          {
+            "report_id": "fixture_report_0",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_0",
+            "thread_id": "fixture_review_thread_0",
+            "role": "REVIEW_FACTS",
+            "runtime_process_ref": "fixture_review_process_0",
+            "isolation_evidence_id": "fixture_isolation_evidence_0",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          },
+          {
+            "report_id": "fixture_report_1",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_1",
+            "thread_id": "fixture_review_thread_1",
+            "role": "REVIEW_STYLE",
+            "runtime_process_ref": "fixture_review_process_1",
+            "isolation_evidence_id": "fixture_isolation_evidence_1",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          }
+        ],
+        "deterministic_pass": true,
+        "evidence_complete": true,
+        "unknown_paid_calls": 0,
+        "publication_decision": "ALLOW"
+      },
+      "expected_valid": false,
+      "semantic_rule": "review_gate"
+    },
+    {
+      "name": "cross_tenant_review_rejected",
+      "schema": "review-packet",
+      "value": {
+        "packet_id": "fixture_packet",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "state": "PASSED",
+        "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+        "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+        "identity_lock_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "qc_policy_version": "fixture_qc",
+        "original_assets": [
+          {
+            "asset_id": "fixture_original_0",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "asset_id": "fixture_original_1",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "asset_id": "fixture_original_2",
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ],
+        "evidence_assets": [
+          {
+            "asset_id": "fixture_actual_media_evidence",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ],
+        "required_slot_ids": [
+          "fixture_image_slot",
+          "fixture_video_slot"
+        ],
+        "outputs": [
+          {
+            "slot_id": "fixture_image_slot",
+            "asset_id": "fixture_image",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "slot_id": "fixture_video_slot",
+            "asset_id": "fixture_video",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "production_run_ids": [
+          "fixture_make",
+          "fixture_post"
+        ],
+        "production_thread_ids": [
+          "fixture_make_thread",
+          "fixture_post_thread"
+        ],
+        "production_process_refs": [
+          "fixture_make_process",
+          "fixture_post_process"
+        ],
+        "reports": [
+          {
+            "report_id": "fixture_report_0",
+            "tenant_id": "other_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_0",
+            "thread_id": "fixture_review_thread_0",
+            "role": "REVIEW_FACTS",
+            "runtime_process_ref": "fixture_review_process_0",
+            "isolation_evidence_id": "fixture_isolation_evidence_0",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          },
+          {
+            "report_id": "fixture_report_1",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_1",
+            "thread_id": "fixture_review_thread_1",
+            "role": "REVIEW_STYLE",
+            "runtime_process_ref": "fixture_review_process_1",
+            "isolation_evidence_id": "fixture_isolation_evidence_1",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          }
+        ],
+        "deterministic_pass": true,
+        "evidence_complete": true,
+        "unknown_paid_calls": 0,
+        "publication_decision": "ALLOW"
+      },
+      "expected_valid": false,
+      "semantic_rule": "review_gate"
+    },
+    {
+      "name": "changed_asset_invalidates_review",
+      "schema": "review-packet",
+      "value": {
+        "packet_id": "fixture_packet",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "state": "PASSED",
+        "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+        "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+        "identity_lock_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "qc_policy_version": "fixture_qc",
+        "original_assets": [
+          {
+            "asset_id": "fixture_original_0",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "asset_id": "fixture_original_1",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "asset_id": "fixture_original_2",
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ],
+        "evidence_assets": [
+          {
+            "asset_id": "fixture_actual_media_evidence",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ],
+        "required_slot_ids": [
+          "fixture_image_slot",
+          "fixture_video_slot"
+        ],
+        "outputs": [
+          {
+            "slot_id": "fixture_image_slot",
+            "asset_id": "fixture_image",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          },
+          {
+            "slot_id": "fixture_video_slot",
+            "asset_id": "fixture_video",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "production_run_ids": [
+          "fixture_make",
+          "fixture_post"
+        ],
+        "production_thread_ids": [
+          "fixture_make_thread",
+          "fixture_post_thread"
+        ],
+        "production_process_refs": [
+          "fixture_make_process",
+          "fixture_post_process"
+        ],
+        "reports": [
+          {
+            "report_id": "fixture_report_0",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_0",
+            "thread_id": "fixture_review_thread_0",
+            "role": "REVIEW_FACTS",
+            "runtime_process_ref": "fixture_review_process_0",
+            "isolation_evidence_id": "fixture_isolation_evidence_0",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          },
+          {
+            "report_id": "fixture_report_1",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_1",
+            "thread_id": "fixture_review_thread_1",
+            "role": "REVIEW_STYLE",
+            "runtime_process_ref": "fixture_review_process_1",
+            "isolation_evidence_id": "fixture_isolation_evidence_1",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          }
+        ],
+        "deterministic_pass": true,
+        "evidence_complete": true,
+        "unknown_paid_calls": 0,
+        "publication_decision": "ALLOW"
+      },
+      "expected_valid": false,
+      "semantic_rule": "review_gate"
+    },
+    {
+      "name": "missing_slot_rejected",
+      "schema": "review-packet",
+      "value": {
+        "packet_id": "fixture_packet",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "state": "PASSED",
+        "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+        "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+        "identity_lock_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "qc_policy_version": "fixture_qc",
+        "original_assets": [
+          {
+            "asset_id": "fixture_original_0",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "asset_id": "fixture_original_1",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "asset_id": "fixture_original_2",
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ],
+        "evidence_assets": [
+          {
+            "asset_id": "fixture_actual_media_evidence",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ],
+        "required_slot_ids": [
+          "fixture_image_slot",
+          "fixture_video_slot",
+          "fixture_missing"
+        ],
+        "outputs": [
+          {
+            "slot_id": "fixture_image_slot",
+            "asset_id": "fixture_image",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "slot_id": "fixture_video_slot",
+            "asset_id": "fixture_video",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "production_run_ids": [
+          "fixture_make",
+          "fixture_post"
+        ],
+        "production_thread_ids": [
+          "fixture_make_thread",
+          "fixture_post_thread"
+        ],
+        "production_process_refs": [
+          "fixture_make_process",
+          "fixture_post_process"
+        ],
+        "reports": [
+          {
+            "report_id": "fixture_report_0",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_0",
+            "thread_id": "fixture_review_thread_0",
+            "role": "REVIEW_FACTS",
+            "runtime_process_ref": "fixture_review_process_0",
+            "isolation_evidence_id": "fixture_isolation_evidence_0",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          },
+          {
+            "report_id": "fixture_report_1",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_1",
+            "thread_id": "fixture_review_thread_1",
+            "role": "REVIEW_STYLE",
+            "runtime_process_ref": "fixture_review_process_1",
+            "isolation_evidence_id": "fixture_isolation_evidence_1",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          }
+        ],
+        "deterministic_pass": true,
+        "evidence_complete": true,
+        "unknown_paid_calls": 0,
+        "publication_decision": "ALLOW"
+      },
+      "expected_valid": false,
+      "semantic_rule": "review_gate"
+    },
+    {
+      "name": "unknown_paid_task_blocks_publish",
+      "schema": "review-packet",
+      "value": {
+        "packet_id": "fixture_packet",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "state": "PASSED",
+        "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+        "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+        "identity_lock_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "qc_policy_version": "fixture_qc",
+        "original_assets": [
+          {
+            "asset_id": "fixture_original_0",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "asset_id": "fixture_original_1",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "asset_id": "fixture_original_2",
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ],
+        "evidence_assets": [
+          {
+            "asset_id": "fixture_actual_media_evidence",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ],
+        "required_slot_ids": [
+          "fixture_image_slot",
+          "fixture_video_slot"
+        ],
+        "outputs": [
+          {
+            "slot_id": "fixture_image_slot",
+            "asset_id": "fixture_image",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "slot_id": "fixture_video_slot",
+            "asset_id": "fixture_video",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "production_run_ids": [
+          "fixture_make",
+          "fixture_post"
+        ],
+        "production_thread_ids": [
+          "fixture_make_thread",
+          "fixture_post_thread"
+        ],
+        "production_process_refs": [
+          "fixture_make_process",
+          "fixture_post_process"
+        ],
+        "reports": [
+          {
+            "report_id": "fixture_report_0",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_0",
+            "thread_id": "fixture_review_thread_0",
+            "role": "REVIEW_FACTS",
+            "runtime_process_ref": "fixture_review_process_0",
+            "isolation_evidence_id": "fixture_isolation_evidence_0",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          },
+          {
+            "report_id": "fixture_report_1",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_1",
+            "thread_id": "fixture_review_thread_1",
+            "role": "REVIEW_STYLE",
+            "runtime_process_ref": "fixture_review_process_1",
+            "isolation_evidence_id": "fixture_isolation_evidence_1",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          }
+        ],
+        "deterministic_pass": true,
+        "evidence_complete": true,
+        "unknown_paid_calls": 1,
+        "publication_decision": "ALLOW"
+      },
+      "expected_valid": false,
+      "semantic_rule": "review_gate"
+    },
+    {
+      "name": "detector_failure_blocks_publish",
+      "schema": "review-packet",
+      "value": {
+        "packet_id": "fixture_packet",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "state": "PASSED",
+        "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+        "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+        "identity_lock_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "qc_policy_version": "fixture_qc",
+        "original_assets": [
+          {
+            "asset_id": "fixture_original_0",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "asset_id": "fixture_original_1",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "asset_id": "fixture_original_2",
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ],
+        "evidence_assets": [
+          {
+            "asset_id": "fixture_actual_media_evidence",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ],
+        "required_slot_ids": [
+          "fixture_image_slot",
+          "fixture_video_slot"
+        ],
+        "outputs": [
+          {
+            "slot_id": "fixture_image_slot",
+            "asset_id": "fixture_image",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "slot_id": "fixture_video_slot",
+            "asset_id": "fixture_video",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "production_run_ids": [
+          "fixture_make",
+          "fixture_post"
+        ],
+        "production_thread_ids": [
+          "fixture_make_thread",
+          "fixture_post_thread"
+        ],
+        "production_process_refs": [
+          "fixture_make_process",
+          "fixture_post_process"
+        ],
+        "reports": [
+          {
+            "report_id": "fixture_report_0",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_0",
+            "thread_id": "fixture_review_thread_0",
+            "role": "REVIEW_FACTS",
+            "runtime_process_ref": "fixture_review_process_0",
+            "isolation_evidence_id": "fixture_isolation_evidence_0",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          },
+          {
+            "report_id": "fixture_report_1",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_1",
+            "thread_id": "fixture_review_thread_1",
+            "role": "REVIEW_STYLE",
+            "runtime_process_ref": "fixture_review_process_1",
+            "isolation_evidence_id": "fixture_isolation_evidence_1",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          }
+        ],
+        "deterministic_pass": false,
+        "evidence_complete": true,
+        "unknown_paid_calls": 0,
+        "publication_decision": "ALLOW"
+      },
+      "expected_valid": false,
+      "semantic_rule": "review_gate"
+    },
+    {
+      "name": "insufficient_audio_blocks_publish",
+      "schema": "review-packet",
+      "value": {
+        "packet_id": "fixture_packet",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "state": "PASSED",
+        "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+        "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+        "identity_lock_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "qc_policy_version": "fixture_qc",
+        "original_assets": [
+          {
+            "asset_id": "fixture_original_0",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "asset_id": "fixture_original_1",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "asset_id": "fixture_original_2",
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ],
+        "evidence_assets": [
+          {
+            "asset_id": "fixture_actual_media_evidence",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ],
+        "required_slot_ids": [
+          "fixture_image_slot",
+          "fixture_video_slot"
+        ],
+        "outputs": [
+          {
+            "slot_id": "fixture_image_slot",
+            "asset_id": "fixture_image",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "slot_id": "fixture_video_slot",
+            "asset_id": "fixture_video",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "production_run_ids": [
+          "fixture_make",
+          "fixture_post"
+        ],
+        "production_thread_ids": [
+          "fixture_make_thread",
+          "fixture_post_thread"
+        ],
+        "production_process_refs": [
+          "fixture_make_process",
+          "fixture_post_process"
+        ],
+        "reports": [
+          {
+            "report_id": "fixture_report_0",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_0",
+            "thread_id": "fixture_review_thread_0",
+            "role": "REVIEW_FACTS",
+            "runtime_process_ref": "fixture_review_process_0",
+            "isolation_evidence_id": "fixture_isolation_evidence_0",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": false,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          },
+          {
+            "report_id": "fixture_report_1",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_1",
+            "thread_id": "fixture_review_thread_1",
+            "role": "REVIEW_STYLE",
+            "runtime_process_ref": "fixture_review_process_1",
+            "isolation_evidence_id": "fixture_isolation_evidence_1",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          }
+        ],
+        "deterministic_pass": true,
+        "evidence_complete": true,
+        "unknown_paid_calls": 0,
+        "publication_decision": "ALLOW"
+      },
+      "expected_valid": false,
+      "semantic_rule": "review_gate"
+    },
+    {
+      "name": "review_disagreement_blocks_publish",
+      "schema": "review-packet",
+      "value": {
+        "packet_id": "fixture_packet",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "state": "PASSED",
+        "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+        "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+        "identity_lock_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "qc_policy_version": "fixture_qc",
+        "original_assets": [
+          {
+            "asset_id": "fixture_original_0",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "asset_id": "fixture_original_1",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "asset_id": "fixture_original_2",
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ],
+        "evidence_assets": [
+          {
+            "asset_id": "fixture_actual_media_evidence",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ],
+        "required_slot_ids": [
+          "fixture_image_slot",
+          "fixture_video_slot"
+        ],
+        "outputs": [
+          {
+            "slot_id": "fixture_image_slot",
+            "asset_id": "fixture_image",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "slot_id": "fixture_video_slot",
+            "asset_id": "fixture_video",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "production_run_ids": [
+          "fixture_make",
+          "fixture_post"
+        ],
+        "production_thread_ids": [
+          "fixture_make_thread",
+          "fixture_post_thread"
+        ],
+        "production_process_refs": [
+          "fixture_make_process",
+          "fixture_post_process"
+        ],
+        "reports": [
+          {
+            "report_id": "fixture_report_0",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_0",
+            "thread_id": "fixture_review_thread_0",
+            "role": "REVIEW_FACTS",
+            "runtime_process_ref": "fixture_review_process_0",
+            "isolation_evidence_id": "fixture_isolation_evidence_0",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          },
+          {
+            "report_id": "fixture_report_1",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_1",
+            "thread_id": "fixture_review_thread_1",
+            "role": "REVIEW_STYLE",
+            "runtime_process_ref": "fixture_review_process_1",
+            "isolation_evidence_id": "fixture_isolation_evidence_1",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "FAIL",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          }
+        ],
+        "deterministic_pass": true,
+        "evidence_complete": true,
+        "unknown_paid_calls": 0,
+        "publication_decision": "ALLOW"
+      },
+      "expected_valid": false,
+      "semantic_rule": "review_gate"
+    },
+    {
+      "name": "single_review_not_enough",
+      "schema": "review-packet",
+      "value": {
+        "packet_id": "fixture_packet",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "state": "PASSED",
+        "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+        "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+        "identity_lock_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+        "qc_policy_version": "fixture_qc",
+        "original_assets": [
+          {
+            "asset_id": "fixture_original_0",
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "asset_id": "fixture_original_1",
+            "sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+          },
+          {
+            "asset_id": "fixture_original_2",
+            "sha256": "2222222222222222222222222222222222222222222222222222222222222222"
+          }
+        ],
+        "evidence_assets": [
+          {
+            "asset_id": "fixture_actual_media_evidence",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        ],
+        "required_slot_ids": [
+          "fixture_image_slot",
+          "fixture_video_slot"
+        ],
+        "outputs": [
+          {
+            "slot_id": "fixture_image_slot",
+            "asset_id": "fixture_image",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "slot_id": "fixture_video_slot",
+            "asset_id": "fixture_video",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "production_run_ids": [
+          "fixture_make",
+          "fixture_post"
+        ],
+        "production_thread_ids": [
+          "fixture_make_thread",
+          "fixture_post_thread"
+        ],
+        "production_process_refs": [
+          "fixture_make_process",
+          "fixture_post_process"
+        ],
+        "reports": [
+          {
+            "report_id": "fixture_report_0",
+            "tenant_id": "fixture_tenant",
+            "order_id": "fixture_order",
+            "run_id": "fixture_review_0",
+            "thread_id": "fixture_review_thread_0",
+            "role": "REVIEW_FACTS",
+            "runtime_process_ref": "fixture_review_process_0",
+            "isolation_evidence_id": "fixture_isolation_evidence_0",
+            "packet_hash": "f0a6f22a818ccb3a115966b1e3cf48778ba6d22ac9f4f31125108a8d3cbd5a71",
+            "snapshot_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "output_set_hash": "91dcbd2f87461f481563a63c290edc124d332956c3de50e08cd95fb9f62f861c",
+            "verdict": "PASS",
+            "evidence_complete": true,
+            "findings": [],
+            "policy_version": "fixture_qc"
+          }
+        ],
+        "deterministic_pass": true,
+        "evidence_complete": true,
+        "unknown_paid_calls": 0,
+        "publication_decision": "ALLOW"
+      },
+      "expected_valid": false,
+      "semantic_rule": "review_gate"
+    },
+    {
+      "name": "release_preserves_delivery_and_reconciliation",
+      "schema": "cleanup-receipt",
+      "value": {
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "preview_session_id": null,
+        "cleanup_receipt_id": "fixture_cleanup",
+        "instance_id": "fixture_instance",
+        "fencing_token": 1,
+        "state": "RELEASED",
+        "release_reason": "DELIVERED",
+        "processes_stopped": true,
+        "capabilities_revoked": true,
+        "temporary_files_removed": true,
+        "runtime_history_removed": true,
+        "durable_artifacts_preserved": true,
+        "pending_submissions_detached": true,
+        "pending_provider_submission_ids": [
+          "fixture_unresolved_intent"
+        ],
+        "verified_at": "2026-10-27T00:00:00Z",
+        "evidence_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "error_codes": []
+      },
+      "expected_valid": true,
+      "semantic_rule": "cleanup_gate"
+    },
+    {
+      "name": "live_process_not_released",
+      "schema": "cleanup-receipt",
+      "value": {
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "preview_session_id": null,
+        "cleanup_receipt_id": "fixture_cleanup",
+        "instance_id": "fixture_instance",
+        "fencing_token": 1,
+        "state": "RELEASED",
+        "release_reason": "DELIVERED",
+        "processes_stopped": false,
+        "capabilities_revoked": true,
+        "temporary_files_removed": true,
+        "runtime_history_removed": true,
+        "durable_artifacts_preserved": true,
+        "pending_submissions_detached": true,
+        "pending_provider_submission_ids": [
+          "fixture_unresolved_intent"
+        ],
+        "verified_at": "2026-10-27T00:00:00Z",
+        "evidence_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "error_codes": []
+      },
+      "expected_valid": false,
+      "semantic_rule": "cleanup_gate"
+    },
+    {
+      "name": "live_capability_not_released",
+      "schema": "cleanup-receipt",
+      "value": {
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "preview_session_id": null,
+        "cleanup_receipt_id": "fixture_cleanup",
+        "instance_id": "fixture_instance",
+        "fencing_token": 1,
+        "state": "RELEASED",
+        "release_reason": "DELIVERED",
+        "processes_stopped": true,
+        "capabilities_revoked": false,
+        "temporary_files_removed": true,
+        "runtime_history_removed": true,
+        "durable_artifacts_preserved": true,
+        "pending_submissions_detached": true,
+        "pending_provider_submission_ids": [
+          "fixture_unresolved_intent"
+        ],
+        "verified_at": "2026-10-27T00:00:00Z",
+        "evidence_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "error_codes": []
+      },
+      "expected_valid": false,
+      "semantic_rule": "cleanup_gate"
+    },
+    {
+      "name": "private_history_not_released",
+      "schema": "cleanup-receipt",
+      "value": {
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "preview_session_id": null,
+        "cleanup_receipt_id": "fixture_cleanup",
+        "instance_id": "fixture_instance",
+        "fencing_token": 1,
+        "state": "RELEASED",
+        "release_reason": "DELIVERED",
+        "processes_stopped": true,
+        "capabilities_revoked": true,
+        "temporary_files_removed": true,
+        "runtime_history_removed": false,
+        "durable_artifacts_preserved": true,
+        "pending_submissions_detached": true,
+        "pending_provider_submission_ids": [
+          "fixture_unresolved_intent"
+        ],
+        "verified_at": "2026-10-27T00:00:00Z",
+        "evidence_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "error_codes": []
+      },
+      "expected_valid": false,
+      "semantic_rule": "cleanup_gate"
+    },
+    {
+      "name": "delivery_deleted_not_released",
+      "schema": "cleanup-receipt",
+      "value": {
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "preview_session_id": null,
+        "cleanup_receipt_id": "fixture_cleanup",
+        "instance_id": "fixture_instance",
+        "fencing_token": 1,
+        "state": "RELEASED",
+        "release_reason": "DELIVERED",
+        "processes_stopped": true,
+        "capabilities_revoked": true,
+        "temporary_files_removed": true,
+        "runtime_history_removed": true,
+        "durable_artifacts_preserved": false,
+        "pending_submissions_detached": true,
+        "pending_provider_submission_ids": [
+          "fixture_unresolved_intent"
+        ],
+        "verified_at": "2026-10-27T00:00:00Z",
+        "evidence_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "error_codes": []
+      },
+      "expected_valid": false,
+      "semantic_rule": "cleanup_gate"
+    },
+    {
+      "name": "unknown_intent_lost_not_released",
+      "schema": "cleanup-receipt",
+      "value": {
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "preview_session_id": null,
+        "cleanup_receipt_id": "fixture_cleanup",
+        "instance_id": "fixture_instance",
+        "fencing_token": 1,
+        "state": "RELEASED",
+        "release_reason": "DELIVERED",
+        "processes_stopped": true,
+        "capabilities_revoked": true,
+        "temporary_files_removed": true,
+        "runtime_history_removed": true,
+        "durable_artifacts_preserved": true,
+        "pending_submissions_detached": false,
+        "pending_provider_submission_ids": [
+          "fixture_unresolved_intent"
+        ],
+        "verified_at": "2026-10-27T00:00:00Z",
+        "evidence_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "error_codes": []
+      },
+      "expected_valid": false,
+      "semantic_rule": "cleanup_gate"
+    },
+    {
+      "name": "no_cleanup_evidence_not_released",
+      "schema": "cleanup-receipt",
+      "value": {
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "preview_session_id": null,
+        "cleanup_receipt_id": "fixture_cleanup",
+        "instance_id": "fixture_instance",
+        "fencing_token": 1,
+        "state": "RELEASED",
+        "release_reason": "DELIVERED",
+        "processes_stopped": true,
+        "capabilities_revoked": true,
+        "temporary_files_removed": true,
+        "runtime_history_removed": true,
+        "durable_artifacts_preserved": true,
+        "pending_submissions_detached": true,
+        "pending_provider_submission_ids": [
+          "fixture_unresolved_intent"
+        ],
+        "verified_at": "2026-10-27T00:00:00Z",
+        "evidence_hash": null,
+        "error_codes": []
+      },
+      "expected_valid": false,
+      "semantic_rule": "cleanup_gate"
+    }
+  ]
+}

@@ -1,0 +1,869 @@
+{
+  "baseline_id": "YPCC-DS-C-1.0.0",
+  "requirements_version": "3.0",
+  "requirement_count": 50,
+  "note": "Design responsibility mapping, not proof of backend or product acceptance.",
+  "requirements": [
+    {
+      "requirement": "P01-F01",
+      "title": "小程序身份、作品与草稿",
+      "priority": "P0",
+      "pages": [
+        "D01",
+        "D10",
+        "D22"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F02",
+      "title": "拍照、相册输入与检查",
+      "priority": "P0",
+      "pages": [
+        "D01",
+        "D02"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F03",
+      "title": "免填表与自动商品档案",
+      "priority": "P0",
+      "pages": [
+        "D03",
+        "D06"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F04",
+      "title": "官方与社区共用的版本化预设",
+      "priority": "P0",
+      "pages": [
+        "D04",
+        "D05",
+        "D17",
+        "D20"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F05",
+      "title": "基于识别档案的自动制作",
+      "priority": "P0",
+      "pages": [
+        "D03",
+        "D07",
+        "D09"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F06",
+      "title": "一键制作与版本一致性",
+      "priority": "P0",
+      "pages": [
+        "D05",
+        "D07"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F07",
+      "title": "按预设报价与冻结清单",
+      "priority": "P0",
+      "pages": [
+        "D07",
+        "D14"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F08",
+      "title": "分平台支付、订单与权益",
+      "priority": "P0",
+      "pages": [
+        "D08",
+        "D14"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F09",
+      "title": "持久自动生成与恢复",
+      "priority": "P0",
+      "pages": [
+        "D09",
+        "D10"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F10",
+      "title": "按清单验收与原子发布",
+      "priority": "P0",
+      "pages": [
+        "D09",
+        "D11"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F11",
+      "title": "体系化素材列表与领取权益",
+      "priority": "P0",
+      "pages": [
+        "D10",
+        "D11",
+        "D12",
+        "D13"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F12",
+      "title": "可选受限修改与识别纠错",
+      "priority": "P0",
+      "pages": [
+        "D06",
+        "D11",
+        "D15",
+        "D23"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F13",
+      "title": "取消、平台失败与退款",
+      "priority": "P0",
+      "pages": [
+        "D14",
+        "D15",
+        "D23"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F14",
+      "title": "预设与识别运营、故障补偿",
+      "priority": "P0",
+      "pages": [
+        "D14",
+        "D15",
+        "D19",
+        "D21"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": {
+        "requirement": 14,
+        "name": "内部运营审核与故障支持"
+      },
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F15",
+      "title": "商品隐私、权限与到期清理",
+      "priority": "P0",
+      "pages": [
+        "D02",
+        "D11",
+        "D13",
+        "D18",
+        "D22"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F16",
+      "title": "自助帮助与售后",
+      "priority": "P0",
+      "pages": [
+        "D10",
+        "D14",
+        "D15",
+        "D21"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F17",
+      "title": "识别、自助、社区与成本指标",
+      "priority": "P0",
+      "pages": [],
+      "design_responsibility": "CROSS_CUTTING_DESIGN_RULE",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": {
+        "requirement": 17,
+        "scope": "all_pages",
+        "note": "真实状态事件、最少必要数据、不得把开始保存当成功。"
+      },
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F18",
+      "title": "网页Plus进阶编辑与创作",
+      "priority": "P1",
+      "pages": [],
+      "design_responsibility": "FUTURE_EXTENSION_NOT_DESIGNED",
+      "future_context": {
+        "requirement": 18,
+        "priority": "P1",
+        "name": "网页Plus",
+        "entry_context": [],
+        "status": "FUTURE_NOT_PAGE_DESIGNED"
+      },
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F19",
+      "title": "核心生成式商品广告服务",
+      "priority": "P0",
+      "pages": [
+        "D05",
+        "D07",
+        "D09",
+        "D11",
+        "D12"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F20",
+      "title": "授权外部发布",
+      "priority": "P2",
+      "pages": [],
+      "design_responsibility": "FUTURE_EXTENSION_NOT_DESIGNED",
+      "future_context": {
+        "requirement": 20,
+        "priority": "P2",
+        "name": "授权外部发布",
+        "entry_context": [
+          "D11"
+        ],
+        "status": "FUTURE_NOT_PAGE_DESIGNED"
+      },
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F21",
+      "title": "预设详情、推荐与拍摄指引",
+      "priority": "P0",
+      "pages": [
+        "D01",
+        "D04",
+        "D05",
+        "D07"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F22",
+      "title": "用户触发的相册保存队列",
+      "priority": "P0",
+      "pages": [
+        "D11",
+        "D12",
+        "D13"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F23",
+      "title": "双小程序适配与发布能力",
+      "priority": "P0",
+      "pages": [
+        "D02",
+        "D13",
+        "D22"
+      ],
+      "design_responsibility": "CROSS_CUTTING_DESIGN_RULE",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": {
+        "requirement": 23,
+        "scope": "all_pages",
+        "note": "双端原生适配与四类真机验证。"
+      },
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F24",
+      "title": "合法账号绑定与Plus接续",
+      "priority": "P1",
+      "pages": [],
+      "design_responsibility": "FUTURE_EXTENSION_NOT_DESIGNED",
+      "future_context": {
+        "requirement": 24,
+        "priority": "P1",
+        "name": "主动跨端绑定",
+        "entry_context": [
+          "D22"
+        ],
+        "status": "FUTURE_NOT_PAGE_DESIGNED"
+      },
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F25",
+      "title": "输入充分性与真实内容降级",
+      "priority": "P0",
+      "pages": [
+        "D02",
+        "D03",
+        "D07"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F26",
+      "title": "多模态识别、证据与有界重试",
+      "priority": "P0",
+      "pages": [
+        "D03",
+        "D06",
+        "D15"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F27",
+      "title": "官方10套风格与节奏基线",
+      "priority": "P0",
+      "pages": [
+        "D04",
+        "D05"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F28",
+      "title": "社区创作、样例与审核发布",
+      "priority": "P0",
+      "pages": [
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F29",
+      "title": "社区发现、收藏与用同款",
+      "priority": "P0",
+      "pages": [
+        "D04",
+        "D10",
+        "D16"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F30",
+      "title": "派生、署名与版本权利",
+      "priority": "P0",
+      "pages": [
+        "D05",
+        "D16",
+        "D18",
+        "D20"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F31",
+      "title": "社区治理与数据隔离",
+      "priority": "P0",
+      "pages": [
+        "D04",
+        "D15",
+        "D16",
+        "D18",
+        "D19",
+        "D20",
+        "D21"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F32",
+      "title": "方案组件目录与语义规范",
+      "priority": "P0",
+      "pages": [
+        "D05",
+        "D17"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F33",
+      "title": "方案、执行变体与订单快照",
+      "priority": "P0",
+      "pages": [
+        "D05",
+        "D07",
+        "D14",
+        "D17",
+        "D20"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F34",
+      "title": "商品身份锁与包装结构约束",
+      "priority": "P0",
+      "pages": [
+        "D03",
+        "D06",
+        "D07"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F35",
+      "title": "有证据脚本与精确帧时间轴",
+      "priority": "P0",
+      "pages": [
+        "D07",
+        "D09",
+        "D17"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F36",
+      "title": "人物、场景与分镜参考帧",
+      "priority": "P0",
+      "pages": [
+        "D05",
+        "D07",
+        "D09",
+        "D17"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F37",
+      "title": "三条产线与逐镜混合执行",
+      "priority": "P0",
+      "pages": [
+        "D05",
+        "D07",
+        "D09",
+        "D17"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F38",
+      "title": "AI单镜商品讲解",
+      "priority": "P0",
+      "pages": [
+        "D05",
+        "D07",
+        "D09",
+        "D11",
+        "D17"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F39",
+      "title": "参考图驱动的原生连续多镜",
+      "priority": "P0",
+      "pages": [
+        "D05",
+        "D07",
+        "D09",
+        "D11",
+        "D17"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F40",
+      "title": "声音、字幕、配乐与后期兑现",
+      "priority": "P0",
+      "pages": [
+        "D05",
+        "D07",
+        "D09",
+        "D11",
+        "D12",
+        "D17"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F41",
+      "title": "跨帧商品、事实与声音质量门槛",
+      "priority": "P0",
+      "pages": [
+        "D09",
+        "D11",
+        "D12",
+        "D15"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F42",
+      "title": "模型能力注册与实际模型冻结",
+      "priority": "P0",
+      "pages": [
+        "D05",
+        "D07",
+        "D17",
+        "D19"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": {
+        "requirement": 42,
+        "name": "模型能力注册控制台"
+      },
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F43",
+      "title": "阶段幂等、供应商回执与恢复",
+      "priority": "P0",
+      "pages": [
+        "D08",
+        "D09",
+        "D14"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F44",
+      "title": "多语言讲解与字幕变体",
+      "priority": "P1",
+      "pages": [],
+      "design_responsibility": "FUTURE_EXTENSION_NOT_DESIGNED",
+      "future_context": {
+        "requirement": 44,
+        "priority": "P1",
+        "name": "多语言变体",
+        "entry_context": [
+          "D05",
+          "D07"
+        ],
+        "status": "FUTURE_NOT_PAGE_DESIGNED"
+      },
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F45",
+      "title": "同商品的A/B开头对照",
+      "priority": "P1",
+      "pages": [],
+      "design_responsibility": "FUTURE_EXTENSION_NOT_DESIGNED",
+      "future_context": {
+        "requirement": 45,
+        "priority": "P1",
+        "name": "A/B开头对照",
+        "entry_context": [
+          "D05",
+          "D07"
+        ],
+        "status": "FUTURE_NOT_PAGE_DESIGNED"
+      },
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F46",
+      "title": "按执行变体的成本、时限与修复预算",
+      "priority": "P0",
+      "pages": [
+        "D05",
+        "D07",
+        "D09",
+        "D14"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F47",
+      "title": "案例资产、来源证据与发布验证",
+      "priority": "P0",
+      "pages": [
+        "D05",
+        "D11",
+        "D18",
+        "D19"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F48",
+      "title": "条件化高级方案与事实型方案",
+      "priority": "P2",
+      "pages": [],
+      "design_responsibility": "FUTURE_EXTENSION_NOT_DESIGNED",
+      "future_context": {
+        "requirement": 48,
+        "priority": "P2",
+        "name": "条件化高级方案",
+        "entry_context": [
+          "D05",
+          "D17"
+        ],
+        "status": "FUTURE_NOT_PAGE_DESIGNED"
+      },
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F49",
+      "title": "无浏览器依赖的云端服务化",
+      "priority": "P0",
+      "pages": [
+        "D09"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": null,
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    },
+    {
+      "requirement": "P01-F50",
+      "title": "可观测性、能力停售与版本回滚",
+      "priority": "P0",
+      "pages": [
+        "D09",
+        "D14",
+        "D15",
+        "D19",
+        "D21"
+      ],
+      "design_responsibility": "PAGE_SPECIFIED_BACKEND_CONTRACT_REQUIRED",
+      "future_context": null,
+      "internal_surface_not_designed": {
+        "requirement": 50,
+        "name": "内部可观测与回滚控制台"
+      },
+      "cross_cutting_scope": null,
+      "implementation_status": "NOT_IMPLEMENTED",
+      "acceptance_execution_status": "NOT_RUN"
+    }
+  ]
+}

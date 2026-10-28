@@ -1,0 +1,31 @@
+{
+  "baseline_id": "YPCC-DEV-1.1.0",
+  "requirements_version": "3.1",
+  "checked_at": "2026-10-28T12:32:50.378655+00:00",
+  "status": "PASS",
+  "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
+  "counts": {
+    "requirements": 58,
+    "P0": 52,
+    "skills": 19,
+    "skill_bundles": 14,
+    "development_documents": 20,
+    "base_contract_checks": 3282,
+    "codex_checks": 1177,
+    "total_checks": 4459,
+    "codex_synthetic_examples": 39
+  },
+  "product_tests_executed": false,
+  "real_codex_runs_executed": false,
+  "real_provider_calls_executed": false,
+  "global_skills_installed": false,
+  "cloud_deployed": false,
+  "application_implementation_status": "IN_PROGRESS",
+  "implementation_evidence_manifest": "assets/implementation/current.json",
+  "limitations": [
+    "本检查只执行设计 / 契约 / 留存核验；应用源码和局部测试范围另见实现证据，尚未完成完整产品验收。",
+    "原生隔离、真实 Skill 行为、推理费用硬控制、独立质量与清理仍待G0实测。",
+    "内容哈希/合成门禁不构成真实文件或安全效果证明。"
+  ],
+  "errors": []
+}

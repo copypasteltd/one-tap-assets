@@ -1,0 +1,37 @@
+{
+  "type": "UPSTREAM_RESEARCH_THUMBNAILS_NOT_CUSTOMER_OUTPUT",
+  "upstream_commit": "1aab133dd75f4db57c3f62e6da2fdd121c5d509b",
+  "license_notice": "../LICENSE.upstream.txt and ../NOTICE.upstream.txt",
+  "files": [
+    {
+      "path": "assets/research/one-tap-ads/media/coffee-film/contact-sheet.jpg",
+      "bytes": 288067,
+      "sha256": "326671192b32667a23dd7c48347dd1867354e4affdf84a5b1a5622b8ec34a2ab",
+      "original_local_source": "runtime/repository-review/case-review-2026-10-27/coffee-film/contact-sheet.jpg"
+    },
+    {
+      "path": "assets/research/one-tap-ads/media/inputs-and-grid.jpg",
+      "bytes": 163985,
+      "sha256": "16e1e2dc967ef7685605137e71518027f2b6193e7062087c370a34d4181efef1",
+      "original_local_source": "runtime/repository-review/case-review-2026-10-27/inputs-and-grid.jpg"
+    },
+    {
+      "path": "assets/research/one-tap-ads/media/coffee-single/contact-sheet.jpg",
+      "bytes": 222125,
+      "sha256": "0865f472c243993dc19468f13e3c09eea124f52286b3886accc0252ffe259f81",
+      "original_local_source": "runtime/repository-review/case-review-2026-10-27/coffee-single/contact-sheet.jpg"
+    },
+    {
+      "path": "assets/research/one-tap-ads/media/blender-single/contact-sheet.jpg",
+      "bytes": 226972,
+      "sha256": "bb524768888735da6ba699b20395a6e2595faca9fb3ca2af8a99c59d48b67ae9",
+      "original_local_source": "runtime/repository-review/case-review-2026-10-27/blender-single/contact-sheet.jpg"
+    },
+    {
+      "path": "assets/research/one-tap-ads/media/tissue-showcase/contact-sheet.jpg",
+      "bytes": 302730,
+      "sha256": "db8d43d3fca2d9de98cd9d2fc47d1068078f06da6d1a97a7480651297924a689",
+      "original_local_source": "runtime/repository-review/case-review-2026-10-27/tissue-showcase/contact-sheet.jpg"
+    }
+  ]
+}

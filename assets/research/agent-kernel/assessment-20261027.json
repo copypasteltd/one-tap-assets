@@ -1,0 +1,148 @@
+{
+  "assessed_at": "2026-10-27T08:48:34.048532+00:00",
+  "status": "ASSESSMENT_COMPLETE_IMPLEMENTATION_NOT_STARTED",
+  "objective": "评估内容梳理/制作的负责主体与主题，以及是否已有Agent内核接入",
+  "project": {
+    "app_source_file_count": 0,
+    "app_source_files": [],
+    "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+    "actual_agent_kernel_integrated": false,
+    "assessment_basis": "No application implementation; documents define model calls and durable workflow, with no adopted Agent runtime"
+  },
+  "upstream": {
+    "commit": "1aab133dd75f4db57c3f62e6da2fdd121c5d509b",
+    "worktree_clean": true,
+    "llm_client_dependency": "^6.32.0",
+    "mcp_dependency": "^1.29.0",
+    "known_agent_runtime_dependencies_found": {},
+    "source_records": [
+      {
+        "path": "runtime/repository-review/one-tap-ads/package.json",
+        "sha256": "0f355756325e00d07fa2fbeac7e4b05449a9e619f2660f03a23aa59740e74b7c"
+      },
+      {
+        "path": "runtime/repository-review/one-tap-ads/mcp/package.json",
+        "sha256": "8319f205436dfad8261ead213f5b954ff0d4a54ed7aa1979367488157e4a0baf"
+      },
+      {
+        "path": "runtime/repository-review/one-tap-ads/mcp/clipforge-mcp.mjs",
+        "sha256": "c0ba53071b10eb36a30b03298c1be2c2c53f11ec91cd6db09a8d530781ca2957"
+      },
+      {
+        "path": "runtime/repository-review/one-tap-ads/src/lib/script-engine/generator.ts",
+        "sha256": "5b43b431e0e27a69fd1d45ae1aa81217ea4574b2a88c5a8dd4ec393a9ae77302"
+      },
+      {
+        "path": "runtime/repository-review/one-tap-ads/src/lib/script-judge.ts",
+        "sha256": "8ba9ef32ce1bf05b0a7ba2bcf0088350ff18f6f7c0252e006d23d018da0b4e14"
+      },
+      {
+        "path": "runtime/repository-review/one-tap-ads/src/app/api/project/[id]/script-judge/route.ts",
+        "sha256": "91571ad297c17cab33fce0521ea4dcf42e2d30d4f5988665398fa5f709828275"
+      },
+      {
+        "path": "runtime/repository-review/one-tap-ads/src/app/api/project/[id]/storyboard-film/route.ts",
+        "sha256": "204c0e8ec33b11dadebd56c02d8fa658fb2e7409df7202237d9f73d513790bd5"
+      }
+    ],
+    "script_generation": "Direct chat.completions with bounded JSON correction",
+    "judge_roles": [
+      "pace",
+      "voice",
+      "idea",
+      "structure",
+      "visual"
+    ],
+    "judge_transport_calls_per_attempt": 1,
+    "mcp_role": "Tool server for external agents; deterministic API handler pipeline",
+    "runtime_scan": {
+      "scope": "src and mcp production JS/TS, excluding tests",
+      "file_count": 332,
+      "literal_pattern_matches": {
+        "tool_calls": [],
+        "tool_choice": [],
+        "function_call": [],
+        "responses.create": [],
+        "ToolLoopAgent": [],
+        "@langchain/langgraph": [],
+        "@mastra/core": [],
+        "@openai/agents": []
+      },
+      "limitation": "Literal/dependency absence does not exclude every possible hand-written Agent; findings concern inspected core content paths"
+    }
+  },
+  "production_responsibility": [
+    {
+      "stage": "product_understanding",
+      "owner": "multimodal model + evidence/identity validation",
+      "state": "PLANNED"
+    },
+    {
+      "stage": "creative_planning",
+      "owner": "compiler + proposed bounded AgentRunner",
+      "state": "PROPOSED_AGENT_NOT_IMPLEMENTED"
+    },
+    {
+      "stage": "contract_validation",
+      "owner": "deterministic fact/frame/capability/version compiler",
+      "state": "PLANNED"
+    },
+    {
+      "stage": "media_generation",
+      "owner": "durable worker + image/video model adapters",
+      "state": "PLANNED"
+    },
+    {
+      "stage": "post_production",
+      "owner": "controlled media/audio/subtitle modules and native FFmpeg",
+      "state": "PLANNED"
+    },
+    {
+      "stage": "quality_and_delivery",
+      "owner": "independent QC + transactional full manifest",
+      "state": "PLANNED"
+    }
+  ],
+  "recommendation": {
+    "status": "PROPOSED_PENDING_G0",
+    "boundary": "Agent for creative plans inside business workflow; transactions/budget/side effects remain guarded",
+    "preferred_trial": "AI SDK Core ToolLoopAgent behind application-owned AgentRunner",
+    "alternatives": [
+      "LangGraph JavaScript",
+      "Mastra"
+    ],
+    "packages_installed": false,
+    "real_models_tested": false,
+    "new_architecture_adopted": false,
+    "scope_changed": false
+  },
+  "official_references": [
+    {
+      "url": "https://ai-sdk.dev/docs/agents/overview",
+      "topic": "Agent and workflow concepts"
+    },
+    {
+      "url": "https://ai-sdk.dev/docs/agents/loop-control",
+      "topic": "Explicit termination and per-step control"
+    },
+    {
+      "url": "https://ai-sdk.dev/providers/openai-compatible-providers",
+      "topic": "Provider adapters; actual tool/multimodal capabilities require validation"
+    },
+    {
+      "url": "https://docs.langchain.com/oss/javascript/langgraph/overview",
+      "topic": "Stateful deterministic and agentic orchestration"
+    },
+    {
+      "url": "https://mastra.ai/docs/agents/overview",
+      "topic": "Agent tools/structured output and workflow composition"
+    }
+  ],
+  "assessment_document": "docs/评估/内容生产主体与Agent内核评估-2026-10-27.md",
+  "document_sha256": "0178ee0461a34e3e968b6af79bc1df0513f54cb620a24d658632e5d258cedcb8",
+  "product_tests_executed": false,
+  "real_model_calls_executed": false,
+  "cloud_deployed": false,
+  "superseded_by": "docs/开发/14-Codex内核与分阶段编排.md",
+  "recommendation_status": "HISTORICAL_SUPERSEDED_BY_USER_CODEX_DIRECTION"
+}

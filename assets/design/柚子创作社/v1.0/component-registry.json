@@ -1,0 +1,28 @@
+{
+  "baseline_id": "YPCC-DS-C-1.0.0",
+  "status": "SPECIFIED_NOT_IMPLEMENTED",
+  "components": [
+    {"id": "K01", "name": "导航与页面壳", "states": ["root", "detail", "immersive"], "rule": "route_driven_active_tab_and_native_geometry"},
+    {"id": "K02", "name": "行动按钮", "states": ["enabled", "pressed", "busy", "disabled"], "rule": "one_primary_action_per_state_min_height_52"},
+    {"id": "K03", "name": "照片印样", "states": ["example", "actual", "loading", "error"], "rule": "decorative_rotation_only_no_rotated_hit_target"},
+    {"id": "K04", "name": "拍照与选片格", "states": ["local", "uploading", "uploaded", "invalid", "retry"], "rule": "preserve_successful_uploads_3_to_5_photos"},
+    {"id": "K05", "name": "商品识别摘要", "states": ["analyzing", "ready", "broad_category", "conflict", "failed"], "rule": "observed_features_only_optional_correction"},
+    {"id": "K06", "name": "方案作品卡", "states": ["available", "selected", "incompatible", "suspended", "error"], "rule": "sample_author_effect_deliverables_and_availability"},
+    {"id": "K07", "name": "发现筛选", "states": ["default", "selected", "empty", "loading"], "rule": "preserve_filters_and_scroll_position"},
+    {"id": "K08", "name": "来源与AI标签", "states": ["official", "community", "ai_scene", "ai_performance", "ai_presenter"], "rule": "source_and_ai_labels_have_separate_meanings"},
+    {"id": "K09", "name": "效果变体选择", "states": ["available", "selected", "needs_input", "unavailable"], "rule": "refresh_manifest_audio_and_quote_on_change"},
+    {"id": "K10", "name": "完整素材清单", "states": ["quoted", "producing", "delivered", "expired"], "rule": "ordered_contract_slots_no_hardcoded_counts"},
+    {"id": "K11", "name": "媒体预览", "states": ["loading", "ready", "playing", "paused", "error", "link_expired"], "rule": "contain_actual_frame_user_triggered_audio"},
+    {"id": "K12", "name": "制作阶段", "states": ["queued", "generating", "postprocessing", "checking", "repairing", "delivered", "failed"], "rule": "server_phase_no_fabricated_percentage"},
+    {"id": "K13", "name": "相册保存队列", "states": ["downloading", "pending_save", "saved", "failed", "unknown", "paused"], "rule": "unknown_is_not_success_retry_only_unfinished"},
+    {"id": "K14", "name": "空态与错误卡", "states": ["first_use", "no_results", "offline", "incompatible", "suspended", "expired"], "rule": "specific_reason_and_one_recovery_action"},
+    {"id": "K15", "name": "弹层与确认", "states": ["open", "destructive", "busy", "closed"], "rule": "single_task_no_nested_sheets_restore_focus"},
+    {"id": "K16", "name": "创作者受控编辑", "states": ["draft", "invalid", "previewing", "submitting"], "rule": "approved_components_no_arbitrary_code_or_buyer_assets"},
+    {"id": "K17", "name": "草稿订单作品卡", "states": ["draft", "unpaid", "payment_unknown", "producing", "delivered", "refund", "expired"], "rule": "truthful_order_state_and_contextual_recovery"},
+    {"id": "K18", "name": "报价与权益摘要", "states": ["planning", "valid", "expired", "verification_pending", "unavailable"], "rule": "server_quote_manifest_price_deadline_and_policy"},
+    {"id": "K19", "name": "文案复制", "states": ["ready", "copying", "copied", "failed"], "rule": "not_counted_as_album_media_or_external_publish"},
+    {"id": "K20", "name": "权限说明与恢复", "states": ["not_asked", "allowed", "denied", "unsupported", "revoked"], "rule": "contextual_native_permission_no_blanket_request"},
+    {"id": "K21", "name": "作者许可与派生", "states": ["official", "original", "derived", "restricted", "withdrawn"], "rule": "preserve_attribution_and_license_no_private_urls"},
+    {"id": "K22", "name": "即时反馈", "states": ["success", "failure", "pending_verification"], "rule": "critical_rights_use_persistent_status_not_toast_only"}
+  ]
+}

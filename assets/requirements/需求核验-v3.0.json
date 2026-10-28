@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-10-27T16:51:11.270710+08:00",
+  "status": "PASS",
+  "scope": "P01 v3需求文档/配置/来源引用一致性，不运行产品验收",
+  "primary_documents": 5,
+  "markdown_files": 47,
+  "requirements": 50,
+  "test_specifications": 50,
+  "priorities": {
+    "P0": 44,
+    "P1": 4,
+    "P2": 2
+  },
+  "official_presets": 10,
+  "execution_variants": 14,
+  "engines": {
+    "PHOTO_LAYOUT": 10,
+    "PER_SHOT_AI": 3,
+    "REFERENCE_FILM": 1
+  },
+  "minimum_full_pack_benchmark_runs_required_not_executed": 420,
+  "original_preset_names_and_output_slots_preserved": true,
+  "source_commit": "1aab133dd75f4db57c3f62e6da2fdd121c5d509b",
+  "upstream_worktree_clean": true,
+  "product_tests_executed": false,
+  "model_generation_executed": false,
+  "cloud_deployed": false,
+  "errors": []
+}

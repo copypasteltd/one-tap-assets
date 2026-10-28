@@ -1,0 +1,172 @@
+{
+  "type": "object",
+  "properties": {
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "order_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "preview_session_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "cleanup_receipt_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "instance_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "fencing_token": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "RELEASING",
+        "RELEASED",
+        "CLEANUP_FAILED"
+      ]
+    },
+    "release_reason": {
+      "type": "string",
+      "enum": [
+        "DELIVERED",
+        "FAILED",
+        "CANCELLED",
+        "SUSPEND",
+        "PREQUOTE_COMPLETE",
+        "EXPIRED"
+      ]
+    },
+    "processes_stopped": {
+      "type": "boolean"
+    },
+    "capabilities_revoked": {
+      "type": "boolean"
+    },
+    "temporary_files_removed": {
+      "type": "boolean"
+    },
+    "runtime_history_removed": {
+      "type": "boolean"
+    },
+    "durable_artifacts_preserved": {
+      "type": "boolean"
+    },
+    "pending_submissions_detached": {
+      "type": "boolean"
+    },
+    "pending_provider_submission_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+      },
+      "minItems": 0,
+      "maxItems": 1000,
+      "uniqueItems": true
+    },
+    "verified_at": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date-time",
+          "maxLength": 40,
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "evidence_hash": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "error_codes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+      },
+      "minItems": 0,
+      "maxItems": 30
+    }
+  },
+  "required": [
+    "tenant_id",
+    "order_id",
+    "preview_session_id",
+    "cleanup_receipt_id",
+    "instance_id",
+    "fencing_token",
+    "state",
+    "release_reason",
+    "processes_stopped",
+    "capabilities_revoked",
+    "temporary_files_removed",
+    "runtime_history_removed",
+    "durable_artifacts_preserved",
+    "pending_submissions_detached",
+    "pending_provider_submission_ids",
+    "verified_at",
+    "evidence_hash",
+    "error_codes"
+  ],
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "properties": {
+        "order_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        "preview_session_id": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "properties": {
+        "order_id": {
+          "type": "null"
+        },
+        "preview_session_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        }
+      }
+    }
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CleanupReceipt",
+  "x-implementation-status": "DESIGN_NOT_IMPLEMENTED"
+}

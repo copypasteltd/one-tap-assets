@@ -1,0 +1,84 @@
+{
+  "requirements_version": "3.1",
+  "design_baseline": "YPCC-DS-C-1.0.0",
+  "frozen_files_modified": false,
+  "status": "DESIGN_NOT_IMPLEMENTED",
+  "requirements": [
+    {
+      "requirement": "P01-F51",
+      "pages": [
+        "D03",
+        "D07",
+        "D09",
+        "D11"
+      ],
+      "note": "复用既有业务交互，后台角色/释放不新增技术必经页"
+    },
+    {
+      "requirement": "P01-F52",
+      "pages": [
+        "D05",
+        "D07",
+        "D17",
+        "D19"
+      ],
+      "note": "复用既有业务交互，后台角色/释放不新增技术必经页"
+    },
+    {
+      "requirement": "P01-F53",
+      "pages": [
+        "D03",
+        "D09",
+        "D22"
+      ],
+      "note": "复用既有业务交互，后台角色/释放不新增技术必经页"
+    },
+    {
+      "requirement": "P01-F54",
+      "pages": [
+        "D07",
+        "D09",
+        "D14"
+      ],
+      "note": "复用既有业务交互，后台角色/释放不新增技术必经页"
+    },
+    {
+      "requirement": "P01-F55",
+      "pages": [
+        "D09",
+        "D11",
+        "D15"
+      ],
+      "note": "复用既有业务交互，后台角色/释放不新增技术必经页"
+    },
+    {
+      "requirement": "P01-F56",
+      "pages": [
+        "D07",
+        "D09",
+        "D14"
+      ],
+      "note": "复用既有业务交互，后台角色/释放不新增技术必经页"
+    },
+    {
+      "requirement": "P01-F57",
+      "pages": [
+        "D09",
+        "D11",
+        "D13",
+        "D22",
+        "D23"
+      ],
+      "note": "复用既有业务交互，后台角色/释放不新增技术必经页"
+    },
+    {
+      "requirement": "P01-F58",
+      "pages": [
+        "D05",
+        "D09",
+        "D19"
+      ],
+      "note": "复用既有业务交互，后台角色/释放不新增技术必经页"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "checked_at": "2026-10-27T06:05:44.297348+08:00",
+  "scope": "一品成片：方案研究数据与文档；非产品运行验收",
+  "status": "PASS",
+  "commit": "1aab133dd75f4db57c3f62e6da2fdd121c5d509b",
+  "data_integrity_checks_previously_completed_in_this_run": {
+    "status": "PASS",
+    "unique_recipe_ids": 391,
+    "csv_recipe_rows": 391,
+    "markdown_recipe_records": 391,
+    "camera_ids": 22,
+    "look_ids": 14,
+    "all_camera_look_ids_exist": true,
+    "all_source_id_line_anchors_match": true,
+    "source_sha256_files_verified": 11,
+    "source_permalink_paths_and_line_bounds_verified": 404,
+    "source_video_sha256_files_verified": 4,
+    "official_output_contracts_unchanged": 10,
+    "execution_variants_design_only": 4,
+    "all_draft_sale_flags_false": true,
+    "upstream_git_worktree_clean": true
+  },
+  "project_document_check": {
+    "passed": true,
+    "markdown_files": 17,
+    "primary_documents": 5,
+    "requirements": 31,
+    "test_specifications": 31,
+    "errors": []
+  },
+  "workspace_check_observation": {
+    "passed_at_observed_run": false,
+    "issues_observed_in": "表格修复站",
+    "issues": "P07-F33至F42缺少验收用例，若干新增文档链接目标缺失；不属于本项目修改。",
+    "this_project_errors_reported": false,
+    "note": "其他项目可能正在修改；本字段记录本次已观察结果，不宣称当前全工作区通过。"
+  },
+  "product_acceptance_tests_executed": false,
+  "new_model_generation_executed": false,
+  "cloud_deployed": false,
+  "limits": [
+    "音频仅核验流存在；未执行ASR或口型同步量化",
+    "演示视频与具体AdTemplate ID未建立一一对应证据",
+    "391条配置未逐一做模型生成验证"
+  ]
+}

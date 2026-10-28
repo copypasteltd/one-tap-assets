@@ -1,0 +1,288 @@
+{
+  "project": "一品成片",
+  "requirements_version": "3.0",
+  "status": "DIRECTION_SELECTED_CURRENT_BASELINE_C",
+  "generator_skill": "sub2-image-gen",
+  "comparison": "同一蓝色示例榨汁杯，同一拍照/社区/领取流程，比较五种视觉与布局",
+  "designs": [
+    {
+      "id": "A",
+      "slug": "晴蓝工具箱",
+      "name": "晴蓝工具箱",
+      "positioning": "清晰、可信、低学习成本的商家工具",
+      "palette": {
+        "晴蓝": "#176FE6",
+        "冰白": "#F1F8FF",
+        "墨蓝": "#173149",
+        "纯白": "#FFFFFF",
+        "杏橙": "#FFAE62"
+      },
+      "type": {
+        "display": "宽字面中粗黑体，强调动词",
+        "body": "系统无衬线常规字重",
+        "utility": "等宽数字和清晰的状态短标签"
+      },
+      "signature": "取景框连接三张商品照与一套有序素材，照片成为主视觉",
+      "layout": "上部品牌与大标题，中部完整照片工作台，下部单一蓝色主按钮；社区双列卡片，成品按用途整齐排列。",
+      "wireframe": "标题/一句说明 → 三张照片工作台 → 拍照做素材 → 示例方案；识别摘要 → 双列方案 → 用这个方案；视频封面 → 四张图 → 保存整套素材。",
+      "strength": "较利于首用理解与双小程序一致性，适合作为商家工具方向。",
+      "tradeoff": "品牌张力较克制，需依靠优秀商品图片和拍照工作台形成记忆。",
+      "prompt_file": "assets/design/selection-2026-10-27/prompts/A-晴蓝工具箱.txt",
+      "image_file": "assets/design/selection-2026-10-27/A-晴蓝工具箱.png",
+      "model": "gpt-image-2.5",
+      "requested_size": "1536x1024",
+      "quality": "high",
+      "status": "GENERATED_VISUALLY_REVIEWED_CONCEPT",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "bytes": 1748388,
+      "sha256": "ba9b367f69fa44db1118167599a67d15e86d1f2b159276c47c77bf45e871a87d",
+      "review": {
+        "observation": "照片输入、方案双列卡、保存动作层级清晰，晴蓝主操作贯穿三页。",
+        "implementation_notes": [
+          "完成页的视频封面容器应按真实 9:16 素材适配或提供明确的完整预览入口。"
+        ]
+      },
+      "page_previews": [
+        "pages/A-拍照制作.png",
+        "pages/A-方案社区.png",
+        "pages/A-素材领取.png"
+      ],
+      "selected_by_user": false
+    },
+    {
+      "id": "B",
+      "slug": "片场手记",
+      "name": "片场手记",
+      "positioning": "把拍商品到成片的过程表达为轻量片场体验",
+      "palette": {
+        "雾白": "#F4F6FA",
+        "片场蓝": "#24324B",
+        "珊瑚红": "#EF645D",
+        "胶片灰": "#DDE3EB",
+        "暖白": "#FFFFFF"
+      },
+      "type": {
+        "display": "紧凑厚黑体，标题有片名字感",
+        "body": "现代无衬线，短句优先",
+        "utility": "等宽时码数字，仅用于视频时长"
+      },
+      "signature": "真实商品画面的胶片接触印样与叙事帧列",
+      "layout": "首页以横向三帧说明商品到生活场景，社区用宽幅剧照卡与作者行，成品页聚焦视频封面与章节缩略图。",
+      "wireframe": "片名式标题 → 三帧照片带 → 拍照做素材；识别条 → 剧照卡 → 用这个方案；大视频 → 图包/文案 → 保存整套素材。",
+      "strength": "与一品成片名称、AI连续多镜能力贴合，成片感与品牌识别突出。",
+      "tradeoff": "需要控制片场元素，不能让普通用户误以为要剪辑或配置分镜。",
+      "prompt_file": "assets/design/selection-2026-10-27/prompts/B-片场手记.txt",
+      "image_file": "assets/design/selection-2026-10-27/B-片场手记.png",
+      "model": "gpt-image-2.5",
+      "requested_size": "1536x1024",
+      "quality": "high",
+      "status": "GENERATED_VISUALLY_REVIEWED_CONCEPT",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "bytes": 1797314,
+      "sha256": "4bf7f5ae19da0b3f4aa77246c6618755e922dd26046c462f8b83fde3b2331f71",
+      "review": {
+        "observation": "胶片照片带和宽幅方案剧照形成独立视觉语言，红色行动入口清楚，与成片定位贴合。",
+        "implementation_notes": [
+          "视频封面按真实比例实现；片场装饰不转化为手动剪辑要求。",
+          "手写字只保留在作品封面，操作文字统一使用清晰的系统字体。"
+        ]
+      },
+      "page_previews": [
+        "pages/B-拍照制作.png",
+        "pages/B-方案社区.png",
+        "pages/B-素材领取.png"
+      ],
+      "selected_by_user": false
+    },
+    {
+      "id": "C",
+      "slug": "柚子创作社",
+      "name": "柚子创作社",
+      "positioning": "温暖、有活力、鼓励用同款和社区创作",
+      "palette": {
+        "果橙": "#FF7948",
+        "奶白": "#FFFAEE",
+        "深绿墨": "#263B32",
+        "浅薄荷": "#CFE9D6",
+        "柚黄": "#FFD766"
+      },
+      "type": {
+        "display": "圆润粗黑体，少量字形个性",
+        "body": "友好的系统无衬线",
+        "utility": "短标签和作者署名保持规整"
+      },
+      "signature": "商品照片卡像一套可取走的创作印样，作者印章作为社区标识",
+      "layout": "首页使用照片卡叠放和大橙色行动区，社区突出作者/用同款与错落卡片，成品像一套排好的印样。",
+      "wireframe": "友好标题 → 照片印样叠卡 → 大橙按钮；识别条 → 作者/方案照片卡 → 用这个方案；印样套装 → 复制文案/保存整套。",
+      "strength": "社区氛围鲜明、适合个体商家，容易形成有温度的品牌。",
+      "tradeoff": "装饰和颜色必须克制，避免遮盖商品或削弱专业质感。",
+      "prompt_file": "assets/design/selection-2026-10-27/prompts/C-柚子创作社.txt",
+      "image_file": "assets/design/selection-2026-10-27/C-柚子创作社.png",
+      "model": "gpt-image-2.5",
+      "requested_size": "1536x1024",
+      "quality": "high",
+      "status": "GENERATED_VISUALLY_REVIEWED_CONCEPT",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "bytes": 1895670,
+      "sha256": "b919b0de25c4bbab45bafa033f2990a2a40511d5010935815e2c4391a58e4a41",
+      "review": {
+        "observation": "橙色动作、照片印样和社区作者行有亲和感，方案卡包含产出缩略图。",
+        "implementation_notes": [
+          "纸张、印章和叠卡只用于有限的品牌区域，控制页面装饰密度。",
+          "视频封面按真实素材比例适配。"
+        ]
+      },
+      "page_previews": [
+        "pages/C-拍照制作.png",
+        "pages/C-方案社区.png",
+        "pages/C-素材领取.png"
+      ],
+      "selected_by_user": true
+    },
+    {
+      "id": "D",
+      "slug": "品物画廊",
+      "name": "品物画廊",
+      "positioning": "商品优先、安静精致的品牌内容工具",
+      "palette": {
+        "冷瓷白": "#FAFCFD",
+        "松墨": "#273B34",
+        "灰松绿": "#507A68",
+        "雾绿": "#E5EEEB",
+        "淡丁香": "#DDD5E6"
+      },
+      "type": {
+        "display": "克制使用现代宋体标题",
+        "body": "清楚的系统黑体操作文字",
+        "utility": "细小但高对比的图注与等宽数字"
+      },
+      "signature": "像画廊挂画一样展示商品主体，素材包具有统一的封面秩序",
+      "layout": "更大商品图与留白，社区单列大卡/局部下一张预览，领取页以视频封面和一组精致缩略图形成出版感。",
+      "wireframe": "短标题 → 大商品摄影 → 拍照做素材；识别摘要 → 大幅方案作品 → 用这个方案；成片封面 → 四张商品图 → 保存。",
+      "strength": "商品质感和高客单品牌适配突出，素材结果有可感知价值。",
+      "tradeoff": "同屏方案数量较少，社区浏览效率需要筛选和收藏补充。",
+      "prompt_file": "assets/design/selection-2026-10-27/prompts/D-品物画廊.txt",
+      "image_file": "assets/design/selection-2026-10-27/D-品物画廊.png",
+      "model": "gpt-image-2.5",
+      "requested_size": "1536x1024",
+      "quality": "high",
+      "status": "GENERATED_VISUALLY_REVIEWED_CONCEPT",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "bytes": 1875418,
+      "sha256": "c08fbd47f2160b5e16ca610cda50dd4c3a04198369be2f9b2031144f185ef0e4",
+      "review": {
+        "observation": "大幅商品摄影和克制的灰绿色突出商品质感，宋体短标题与其余方案形成区别。",
+        "implementation_notes": [
+          "大卡降低同屏方案数量，需完善筛选和连续浏览。",
+          "实现时补齐社区卡的作者、产出数量等元数据；视频预览按真实比例适配。"
+        ]
+      },
+      "page_previews": [
+        "pages/D-拍照制作.png",
+        "pages/D-方案社区.png",
+        "pages/D-素材领取.png"
+      ],
+      "selected_by_user": false
+    },
+    {
+      "id": "E",
+      "slug": "光谱实验室",
+      "name": "光谱实验室",
+      "positioning": "更大胆、适合AI创意内容的媒体工作室",
+      "palette": {
+        "夜紫": "#292143",
+        "纸紫白": "#F5F2FF",
+        "雾紫": "#B2A8F0",
+        "珊瑚粉": "#FF9FA7",
+        "冰青": "#B9E8E6"
+      },
+      "type": {
+        "display": "有张力的几何黑体，宽标题",
+        "body": "浅色系统无衬线，高对比优先",
+        "utility": "整齐的时长/媒体数量胶囊标签"
+      },
+      "signature": "同一商品的照片、场景和素材包像三层透明片页展开",
+      "layout": "深紫媒体画布、浅色文字与淡色主行动按钮；社区紧凑作品画廊，成品采用沉浸式视频和分层素材托盘。",
+      "wireframe": "浅色大标题 → 三层商品片页 → 拍照做素材；识别胶囊 → 深色作品画廊 → 用这个方案；沉浸视频 → 素材托盘 → 保存。",
+      "strength": "AI创意氛围强、视频预览沉浸、展示时辨识明显。",
+      "tradeoff": "需要测试明亮环境的可读性和保守商家的接受度，少用发光效果。",
+      "prompt_file": "assets/design/selection-2026-10-27/prompts/E-光谱实验室.txt",
+      "image_file": "assets/design/selection-2026-10-27/E-光谱实验室.png",
+      "model": "gpt-image-2.5",
+      "requested_size": "1536x1024",
+      "quality": "high",
+      "status": "GENERATED_VISUALLY_REVIEWED_CONCEPT",
+      "actual_size": [
+        1536,
+        1024
+      ],
+      "format": "PNG",
+      "bytes": 1893701,
+      "sha256": "c100cd429ef6d62dc4ed2ce8ac4cad02247c62d34e3628c131e5a50a495b70af",
+      "review": {
+        "observation": "深紫媒体画布和分层片页具有辨识度，浅紫按钮与商品图形成明显对比。",
+        "implementation_notes": [
+          "首页的底部导航选中状态需校正为拍照制作；其余页面按真实路由计算。",
+          "顶部一张商品图的概念文案应统一为拍摄 3–5 张商品照。",
+          "视频封面按真实比例适配，并验证日光下文字对比。"
+        ]
+      },
+      "page_previews": [
+        "pages/E-拍照制作.png",
+        "pages/E-方案社区.png",
+        "pages/E-素材领取.png"
+      ],
+      "selected_by_user": false
+    }
+  ],
+  "generated_count": 5,
+  "verified_at": "2026-10-27T00:11:02.711990+00:00",
+  "limitations": [
+    "图像生成的视觉概念，尚未组件化，不代表已实现功能。",
+    "正式实现须校正视频预览比例、导航状态与文字，并补齐确认、支付、生成进度、异常和授权等流程。",
+    "商品为虚构示例，各方向独立生成，未执行生产级商品身份一致性验收。"
+  ],
+  "selection": {
+    "project": "一品成片",
+    "baseline_id": "YPCC-DS-C-1.0.0",
+    "design_version": "1.0.0",
+    "requirements_version": "3.0",
+    "direction_id": "C",
+    "direction_name": "柚子创作社",
+    "product_name": "一品成片",
+    "status": "DIRECTION_CONFIRMED_SPEC_BASELINED",
+    "decision_date": "2026-10-27",
+    "user_decision": "选用方案 C",
+    "selection_source": "本会话用户明确指示",
+    "scope_note": "用户确认视觉方向；本轮形成详细规格，尚未实现或真机验收。",
+    "documentation": "docs/设计/定型/C-柚子创作社-v1.0/README.md",
+    "asset_root": "assets/design/柚子创作社/v1.0",
+    "tokens": "assets/design/柚子创作社/v1.0/design-tokens.json",
+    "manifest": "assets/design/柚子创作社/v1.0/baseline-manifest.json",
+    "reference_gallery": "assets/design/柚子创作社/v1.0/reference/index.html",
+    "implementation_status": "NOT_IMPLEMENTED",
+    "device_validation_status": "NOT_RUN"
+  },
+  "historical_recommendation": {
+    "primary": "B",
+    "alternative": "A",
+    "reason": "B 与一品成片的品牌和成片叙事贴合；A 更侧重操作清晰。属于设计判断，尚无用户实验数据。"
+  },
+  "publication_note": "Curated copy of the original five-style comparison; C baseline is unchanged. Original output retained locally."
+}

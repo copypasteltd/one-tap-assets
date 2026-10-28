@@ -1,0 +1,168 @@
+{
+  "commit": "1aab133dd75f4db57c3f62e6da2fdd121c5d509b",
+  "source": "ClipForge upstream bundled demo files; read-only research, no new model generation",
+  "samples": [
+    {
+      "id": "coffee-film",
+      "source": "runtime/repository-review/one-tap-ads/docs/videos/demo-coffee-film.mp4",
+      "sha256": "8155a345c9c08477fc82da2158dc53f0370cd1ef0d87766215fbdcb806de11fe",
+      "duration_seconds": 15.072,
+      "size_bytes": 1657167,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 720,
+          "height": 1280,
+          "r_frame_rate": "24/1",
+          "nb_frames": "361"
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "r_frame_rate": "0/0",
+          "nb_frames": "472"
+        }
+      ],
+      "fixed_window_analysis": "runtime/repository-review/case-review-2026-10-27/coffee-film/analysis.json",
+      "one_second_timestamps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "contact_sheet": "runtime/repository-review/case-review-2026-10-27/coffee-film/contact-sheet.jpg",
+      "sampling_is_not_automatic_shot_detection": true
+    },
+    {
+      "id": "coffee-single",
+      "source": "runtime/repository-review/one-tap-ads/docs/videos/demo-coffee.mp4",
+      "sha256": "f55530cca6a45b4aeea24fcdf69a197d892aa1874bf50dad6e66d1a00bc6638b",
+      "duration_seconds": 12.064,
+      "size_bytes": 1412814,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 720,
+          "height": 1278,
+          "r_frame_rate": "24/1",
+          "nb_frames": "289"
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "r_frame_rate": "0/0",
+          "nb_frames": "378"
+        }
+      ],
+      "fixed_window_analysis": "runtime/repository-review/case-review-2026-10-27/coffee-single/analysis.json",
+      "one_second_timestamps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "contact_sheet": "runtime/repository-review/case-review-2026-10-27/coffee-single/contact-sheet.jpg",
+      "sampling_is_not_automatic_shot_detection": true
+    },
+    {
+      "id": "blender-single",
+      "source": "runtime/repository-review/one-tap-ads/docs/videos/demo-blender-en.mp4",
+      "sha256": "c7c1a17385d78bb620a786ad755897143b73619ab7a191b716e60bed482d4a7f",
+      "duration_seconds": 12.064,
+      "size_bytes": 1703381,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 718,
+          "height": 1282,
+          "r_frame_rate": "24/1",
+          "nb_frames": "289"
+        },
+        {
+          "codec_type": "audio",
+          "codec_name": "aac",
+          "r_frame_rate": "0/0",
+          "nb_frames": "378"
+        }
+      ],
+      "fixed_window_analysis": "runtime/repository-review/case-review-2026-10-27/blender-single/analysis.json",
+      "one_second_timestamps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "contact_sheet": "runtime/repository-review/case-review-2026-10-27/blender-single/contact-sheet.jpg",
+      "sampling_is_not_automatic_shot_detection": true
+    },
+    {
+      "id": "tissue-showcase",
+      "source": "runtime/repository-review/one-tap-ads/public/examples/sample-tissue.mp4",
+      "sha256": "fed9971ca6752e0718cae3cff44be79cf6e4eeba92634d4fa941599ddfcd7198",
+      "duration_seconds": 17.0,
+      "size_bytes": 2094203,
+      "streams": [
+        {
+          "codec_type": "video",
+          "codec_name": "h264",
+          "width": 720,
+          "height": 1280,
+          "r_frame_rate": "30/1",
+          "nb_frames": "510"
+        }
+      ],
+      "fixed_window_analysis": "runtime/repository-review/case-review-2026-10-27/tissue-showcase/analysis.json",
+      "one_second_timestamps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "contact_sheet": "runtime/repository-review/case-review-2026-10-27/tissue-showcase/contact-sheet.jpg",
+      "sampling_is_not_automatic_shot_detection": true
+    }
+  ]
+}

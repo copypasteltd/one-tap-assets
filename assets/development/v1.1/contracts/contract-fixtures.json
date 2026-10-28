@@ -1,0 +1,1549 @@
+{
+  "status": "SYNTHETIC_CONTRACT_EXAMPLES_ONLY",
+  "note": "全部假数据，只检验设计schema/跨字段规则。不证明API、真实模型/交易/权限已实现。示例金额不是售价。",
+  "cases": [
+    {
+      "name": "no_product_form",
+      "schema": "ProductRequest",
+      "value": {},
+      "expected_valid": true,
+      "semantic_rule": null
+    },
+    {
+      "name": "reject_mandatory_form_fields",
+      "schema": "ProductRequest",
+      "value": {
+        "material": "invented"
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "three_photos",
+      "schema": "PhotoBindingRequest",
+      "value": {
+        "asset_ids": [
+          "fixture_photo_1",
+          "fixture_photo_2",
+          "fixture_photo_3"
+        ],
+        "expected_revision": 1
+      },
+      "expected_valid": true,
+      "semantic_rule": null
+    },
+    {
+      "name": "duplicate_photos",
+      "schema": "PhotoBindingRequest",
+      "value": {
+        "asset_ids": [
+          "fixture_photo_1",
+          "fixture_photo_1",
+          "fixture_photo_1"
+        ],
+        "expected_revision": 1
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "six_photos",
+      "schema": "PhotoBindingRequest",
+      "value": {
+        "asset_ids": [
+          "fixture_photo_0",
+          "fixture_photo_1",
+          "fixture_photo_2",
+          "fixture_photo_3",
+          "fixture_photo_4",
+          "fixture_photo_5"
+        ],
+        "expected_revision": 1
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "private_photo_upload",
+      "schema": "AssetRequest",
+      "value": {
+        "purpose": "PRODUCT_PHOTO",
+        "product_id": "fixture_product",
+        "file_name": "example.jpg",
+        "mime_type": "image/jpeg",
+        "size_bytes": 1000000
+      },
+      "expected_valid": true,
+      "semantic_rule": null
+    },
+    {
+      "name": "oversized_upload",
+      "schema": "AssetRequest",
+      "value": {
+        "purpose": "PRODUCT_PHOTO",
+        "product_id": "fixture_product",
+        "file_name": "example.jpg",
+        "mime_type": "image/jpeg",
+        "size_bytes": 10000001
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "photo_without_product",
+      "schema": "AssetRequest",
+      "value": {
+        "purpose": "PRODUCT_PHOTO",
+        "file_name": "example.jpg",
+        "mime_type": "image/jpeg",
+        "size_bytes": 1000000
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "rights_evidence_separate_purpose",
+      "schema": "AssetRequest",
+      "value": {
+        "purpose": "RIGHTS_EVIDENCE",
+        "file_name": "example.jpg",
+        "mime_type": "image/jpeg",
+        "size_bytes": 1000000
+      },
+      "expected_valid": true,
+      "semantic_rule": null
+    },
+    {
+      "name": "quote_no_client_price",
+      "schema": "QuoteRequest",
+      "value": {
+        "plan_id": "fixture_plan",
+        "plan_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "expected_valid": true,
+      "semantic_rule": null
+    },
+    {
+      "name": "reject_client_price",
+      "schema": "QuoteRequest",
+      "value": {
+        "plan_id": "fixture_plan",
+        "plan_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "amount_fen": 1234
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "reject_client_tenant",
+      "schema": "QuoteRequest",
+      "value": {
+        "plan_id": "fixture_plan",
+        "plan_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "tenant_id": "fixture_other_tenant"
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "existing_dotted_variant_id",
+      "schema": "InputCheckRequest",
+      "value": {
+        "product_id": "fixture_product",
+        "profile_id": "fixture_profile",
+        "variant_id": "portrait-social.ai-presenter-multi",
+        "variant_version": "3.0.0"
+      },
+      "expected_valid": true,
+      "semantic_rule": null
+    },
+    {
+      "name": "p0_does_not_route_plus_payment",
+      "schema": "OrderRequest",
+      "value": {
+        "quote_id": "fixture_quote",
+        "channel": "web"
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "observed_feature_has_provenance",
+      "schema": "Observation",
+      "value": {
+        "feature": "primary_color",
+        "value": "blue",
+        "status": "OBSERVED",
+        "source_asset_ids": [
+          "fixture_photo_1"
+        ],
+        "evidence_ids": [
+          "fixture_evidence"
+        ],
+        "note": "Synthetic visible color example",
+        "model_reported_confidence": null
+      },
+      "expected_valid": true,
+      "semantic_rule": null
+    },
+    {
+      "name": "reject_evidence_free_claim",
+      "schema": "Observation",
+      "value": {
+        "feature": "primary_color",
+        "value": "blue",
+        "status": "OBSERVED",
+        "source_asset_ids": [
+          "fixture_photo_1"
+        ],
+        "evidence_ids": [],
+        "note": "Synthetic visible color example",
+        "model_reported_confidence": null
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "uncertain_hypothesis",
+      "schema": "Hypothesis",
+      "value": {
+        "text": "perhaps cloth",
+        "evidence_ids": [
+          "fixture_evidence"
+        ],
+        "uncertain": true
+      },
+      "expected_valid": true,
+      "semantic_rule": null
+    },
+    {
+      "name": "cannot_mark_hypothesis_certain",
+      "schema": "Hypothesis",
+      "value": {
+        "text": "perhaps cloth",
+        "evidence_ids": [
+          "fixture_evidence"
+        ],
+        "uncertain": false
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "private_https_link",
+      "schema": "DownloadLink",
+      "value": {
+        "deliverable_id": "fixture_media",
+        "url": "https://media.example.invalid/synthetic",
+        "expires_at": "2026-10-27T00:05:00Z",
+        "ttl_seconds": 300
+      },
+      "expected_valid": true,
+      "semantic_rule": null
+    },
+    {
+      "name": "reject_long_lived_link",
+      "schema": "DownloadLink",
+      "value": {
+        "deliverable_id": "fixture_media",
+        "url": "https://media.example.invalid/synthetic",
+        "expires_at": "2026-10-27T00:05:00Z",
+        "ttl_seconds": 86400
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "reject_broken_time",
+      "schema": "DownloadLink",
+      "value": {
+        "deliverable_id": "fixture_media",
+        "url": "https://media.example.invalid/synthetic",
+        "expires_at": "yesterday",
+        "ttl_seconds": 300
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "reject_invalid_calendar_date",
+      "schema": "DownloadLink",
+      "value": {
+        "deliverable_id": "fixture_media",
+        "url": "https://media.example.invalid/synthetic",
+        "expires_at": "2026-02-30T00:05:00Z",
+        "ttl_seconds": 300
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "reject_executable_community_field",
+      "schema": "PresetConfig",
+      "value": {
+        "name": "example",
+        "description": "example",
+        "style_tags": [
+          "clean"
+        ],
+        "parent_preset_version": null,
+        "component_versions": [
+          "fixture_component"
+        ],
+        "variant_blueprint_ids": [
+          "fixture_blueprint"
+        ],
+        "resource_version_ids": [],
+        "fork_allowed": false,
+        "script": "forbidden"
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "cover_change_needs_selected_cover",
+      "schema": "RevisionRequest",
+      "value": {
+        "manifest_revision": 1,
+        "kind": "COVER"
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "delete_product_needs_product_scope",
+      "schema": "PrivacyDeletionRequest",
+      "value": {
+        "scope": "PRODUCT",
+        "acknowledge_inflight_contract": true
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "availability_does_not_admit_unverified_capability",
+      "schema": "AvailabilityRequest",
+      "value": {
+        "expected_revision": 1,
+        "action": "ADMIT",
+        "reason": "fixture",
+        "evidence_set_id": "fixture_evidence_set"
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "public_sample_cannot_be_private_projection",
+      "schema": "PublicSampleMedia",
+      "value": {
+        "sample_id": "fixture_sample",
+        "label": "PRIVATE_CREATOR_SAMPLE",
+        "items": [
+          {
+            "kind": "image",
+            "url": "https://media.example.invalid/synthetic",
+            "expires_at": "2026-10-27T00:05:00Z"
+          }
+        ]
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "persist_intent_before_post",
+      "schema": "provider-submission",
+      "value": {
+        "schema_version": "1.0.0",
+        "submission_id": "fixture_submission",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "plan_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "stage_run_id": "fixture_stage",
+        "shot_id": null,
+        "attempt": 1,
+        "intent_key": "fixture_intent",
+        "input_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "state": "INTENT",
+        "provider": "FIXTURE_NOT_A_PROVIDER",
+        "model_version_id": "fixture_model",
+        "provider_task_id": null,
+        "receipt_sha256": null,
+        "reservation_id": "fixture_reservation",
+        "reserved_cost_micro": 1000,
+        "budget_currency": "CNY",
+        "fencing_token": 1,
+        "created_at": "2026-10-27T00:00:00Z"
+      },
+      "expected_valid": true,
+      "semantic_rule": null
+    },
+    {
+      "name": "unknown_keeps_original_reservation",
+      "schema": "provider-submission",
+      "value": {
+        "schema_version": "1.0.0",
+        "submission_id": "fixture_submission",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "plan_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "stage_run_id": "fixture_stage",
+        "shot_id": null,
+        "attempt": 1,
+        "intent_key": "fixture_intent",
+        "input_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "state": "UNKNOWN",
+        "provider": "FIXTURE_NOT_A_PROVIDER",
+        "model_version_id": "fixture_model",
+        "provider_task_id": null,
+        "receipt_sha256": null,
+        "reservation_id": "fixture_reservation",
+        "reserved_cost_micro": 1000,
+        "budget_currency": "CNY",
+        "fencing_token": 1,
+        "created_at": "2026-10-27T00:00:00Z"
+      },
+      "expected_valid": true,
+      "semantic_rule": null
+    },
+    {
+      "name": "ack_requires_real_receipt",
+      "schema": "provider-submission",
+      "value": {
+        "schema_version": "1.0.0",
+        "submission_id": "fixture_submission",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "plan_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "stage_run_id": "fixture_stage",
+        "shot_id": null,
+        "attempt": 1,
+        "intent_key": "fixture_intent",
+        "input_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "state": "ACKNOWLEDGED",
+        "provider": "FIXTURE_NOT_A_PROVIDER",
+        "model_version_id": "fixture_model",
+        "provider_task_id": null,
+        "receipt_sha256": null,
+        "reservation_id": "fixture_reservation",
+        "reserved_cost_micro": 1000,
+        "budget_currency": "CNY",
+        "fencing_token": 1,
+        "created_at": "2026-10-27T00:00:00Z"
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "synchronous_result_can_have_receipt_without_task_id",
+      "schema": "provider-submission",
+      "value": {
+        "schema_version": "1.0.0",
+        "submission_id": "fixture_submission",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "plan_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "stage_run_id": "fixture_stage",
+        "shot_id": null,
+        "attempt": 1,
+        "intent_key": "fixture_intent",
+        "input_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "state": "SUCCEEDED",
+        "provider": "FIXTURE_NOT_A_PROVIDER",
+        "model_version_id": "fixture_model",
+        "provider_task_id": null,
+        "receipt_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "reservation_id": "fixture_reservation",
+        "reserved_cost_micro": 1000,
+        "budget_currency": "CNY",
+        "fencing_token": 1,
+        "created_at": "2026-10-27T00:00:00Z"
+      },
+      "expected_valid": true,
+      "semantic_rule": null
+    },
+    {
+      "name": "running_requires_real_task_id",
+      "schema": "provider-submission",
+      "value": {
+        "schema_version": "1.0.0",
+        "submission_id": "fixture_submission",
+        "tenant_id": "fixture_tenant",
+        "order_id": "fixture_order",
+        "plan_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "stage_run_id": "fixture_stage",
+        "shot_id": null,
+        "attempt": 1,
+        "intent_key": "fixture_intent",
+        "input_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "state": "RUNNING",
+        "provider": "FIXTURE_NOT_A_PROVIDER",
+        "model_version_id": "fixture_model",
+        "provider_task_id": null,
+        "receipt_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "reservation_id": "fixture_reservation",
+        "reserved_cost_micro": 1000,
+        "budget_currency": "CNY",
+        "fencing_token": 1,
+        "created_at": "2026-10-27T00:00:00Z"
+      },
+      "expected_valid": false,
+      "semantic_rule": null
+    },
+    {
+      "name": "frozen_execution_snapshot",
+      "schema": "execution-snapshot",
+      "value": {
+        "schema_version": "1.1.0",
+        "order_id": "fixture_order",
+        "tenant_id": "fixture_tenant",
+        "product_id": "fixture_product",
+        "photo_version": 1,
+        "photo_set_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "profile_id": "fixture_profile",
+        "profile_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "identity_lock_id": "fixture_lock",
+        "identity_lock_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "preset_id": "portrait-social",
+        "preset_version": "3.0.0",
+        "variant_id": "portrait-social.ai-presenter-single",
+        "variant_version": "3.0.0",
+        "engine": "PER_SHOT_AI",
+        "plan_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "canonicalization": "RFC8785",
+        "model_versions": [
+          {
+            "provider": "FIXTURE_NOT_A_PROVIDER",
+            "actual_model": "FIXTURE_VIDEO_NOT_REAL",
+            "registry_version": "fixture_only",
+            "roles": [
+              "VISION_ANALYSIS",
+              "VIDEO"
+            ],
+            "capability_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "rate_snapshot_id": "fixture_rate"
+          }
+        ],
+        "resource_versions": [],
+        "reference_policy": {
+          "max_images": 3,
+          "max_total_pixels": 3000000,
+          "mapping_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "audio_policy": {
+          "speech_mode": "NATIVE_ZH",
+          "language": "zh-CN",
+          "native_voice_id": "fixture_voice",
+          "preserve_native_speech": true,
+          "caption_alignment": "ACTUAL_AUDIO",
+          "music_license_ids": [],
+          "ducking_enabled": true
+        },
+        "timeline": {
+          "fps": 30,
+          "target_frames": 450,
+          "shots": [
+            {
+              "shot_id": "fixture_shot",
+              "start_frame": 0,
+              "end_frame": 450,
+              "overlap_frames": 0,
+              "evidence_ids": [
+                "fixture_evidence"
+              ],
+              "spoken_text": "这是一份测试文本。"
+            }
+          ]
+        },
+        "outputs": [
+          {
+            "slot_id": "fixture_video",
+            "kind": "video",
+            "count": 1,
+            "width": 1080,
+            "height": 1920,
+            "fps": 30,
+            "duration_frames": 450,
+            "format": "mp4-h264-yuv420p"
+          },
+          {
+            "slot_id": "fixture_image",
+            "kind": "image",
+            "count": 3,
+            "width": 1080,
+            "height": 1080,
+            "fps": null,
+            "duration_frames": null,
+            "format": "png"
+          },
+          {
+            "slot_id": "fixture_copy",
+            "kind": "copy",
+            "count": 1,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "duration_frames": null,
+            "format": "text"
+          }
+        ],
+        "pricing": {
+          "currency": "CNY",
+          "amount_fen": 1234,
+          "terms_version": "FIXTURE_NOT_FOR_SALE"
+        },
+        "budget": {
+          "currency": "CNY",
+          "ceiling_micro": 1000000,
+          "repair_ceiling_micro": 100000,
+          "extra_calls_limit": 1,
+          "max_repair_rounds": 1,
+          "retry_extends_deadline": false
+        },
+        "fulfillable_at": "2026-10-27T00:00:00Z",
+        "deadline_at": "2026-10-27T00:30:00Z",
+        "policy_version": "FIXTURE_ONLY",
+        "codex_contract": {
+          "runtime_kind": "CODEX_APP_SERVER",
+          "runtime_build_id": "fixture_build",
+          "runtime_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "protocol_version": "fixture-protocol",
+          "model_version_id": "fixture_codex_model",
+          "rate_version_id": "fixture_rate",
+          "skill_bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+          "skill_bundle_version": "1.0.0",
+          "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+          "role_prompt_version": "fixture_prompts",
+          "tool_policy_version": "fixture_tools",
+          "qc_policy_version": "fixture_qc",
+          "required_roles": [
+            "CONTENT",
+            "PRODUCTION",
+            "POST",
+            "REVIEW_FACTS",
+            "REVIEW_STYLE"
+          ],
+          "max_turns_per_role": 4,
+          "max_input_tokens": 100000,
+          "max_output_tokens": 10000,
+          "max_tool_calls": 30,
+          "agent_cost_ceiling_micro": 100000,
+          "inference_spend_control": "PRE_REQUEST_RESERVATION_AND_HARD_LIMIT",
+          "independent_reviewers": 2,
+          "review_context_policy": "FRESH_THREADS_NO_CREATOR_HISTORY",
+          "isolation": "NATIVE_RESTRICTED_IDENTITY",
+          "release_after_terminal": true,
+          "release_grace_seconds": 30,
+          "release_target_seconds": 300,
+          "repair_extends_deadline": false
+        }
+      },
+      "expected_valid": true,
+      "semantic_rule": "execution_snapshot"
+    },
+    {
+      "name": "cannot_overwrite_native_voice",
+      "schema": "execution-snapshot",
+      "value": {
+        "schema_version": "1.1.0",
+        "order_id": "fixture_order",
+        "tenant_id": "fixture_tenant",
+        "product_id": "fixture_product",
+        "photo_version": 1,
+        "photo_set_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "profile_id": "fixture_profile",
+        "profile_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "identity_lock_id": "fixture_lock",
+        "identity_lock_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "preset_id": "portrait-social",
+        "preset_version": "3.0.0",
+        "variant_id": "portrait-social.ai-presenter-single",
+        "variant_version": "3.0.0",
+        "engine": "PER_SHOT_AI",
+        "plan_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "canonicalization": "RFC8785",
+        "model_versions": [
+          {
+            "provider": "FIXTURE_NOT_A_PROVIDER",
+            "actual_model": "FIXTURE_VIDEO_NOT_REAL",
+            "registry_version": "fixture_only",
+            "roles": [
+              "VISION_ANALYSIS",
+              "VIDEO"
+            ],
+            "capability_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "rate_snapshot_id": "fixture_rate"
+          }
+        ],
+        "resource_versions": [],
+        "reference_policy": {
+          "max_images": 3,
+          "max_total_pixels": 3000000,
+          "mapping_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "audio_policy": {
+          "speech_mode": "NATIVE_ZH",
+          "language": "zh-CN",
+          "native_voice_id": "fixture_voice",
+          "preserve_native_speech": false,
+          "caption_alignment": "ACTUAL_AUDIO",
+          "music_license_ids": [],
+          "ducking_enabled": true
+        },
+        "timeline": {
+          "fps": 30,
+          "target_frames": 450,
+          "shots": [
+            {
+              "shot_id": "fixture_shot",
+              "start_frame": 0,
+              "end_frame": 450,
+              "overlap_frames": 0,
+              "evidence_ids": [
+                "fixture_evidence"
+              ],
+              "spoken_text": "这是一份测试文本。"
+            }
+          ]
+        },
+        "outputs": [
+          {
+            "slot_id": "fixture_video",
+            "kind": "video",
+            "count": 1,
+            "width": 1080,
+            "height": 1920,
+            "fps": 30,
+            "duration_frames": 450,
+            "format": "mp4-h264-yuv420p"
+          },
+          {
+            "slot_id": "fixture_image",
+            "kind": "image",
+            "count": 3,
+            "width": 1080,
+            "height": 1080,
+            "fps": null,
+            "duration_frames": null,
+            "format": "png"
+          },
+          {
+            "slot_id": "fixture_copy",
+            "kind": "copy",
+            "count": 1,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "duration_frames": null,
+            "format": "text"
+          }
+        ],
+        "pricing": {
+          "currency": "CNY",
+          "amount_fen": 1234,
+          "terms_version": "FIXTURE_NOT_FOR_SALE"
+        },
+        "budget": {
+          "currency": "CNY",
+          "ceiling_micro": 1000000,
+          "repair_ceiling_micro": 100000,
+          "extra_calls_limit": 1,
+          "max_repair_rounds": 1,
+          "retry_extends_deadline": false
+        },
+        "fulfillable_at": "2026-10-27T00:00:00Z",
+        "deadline_at": "2026-10-27T00:30:00Z",
+        "policy_version": "FIXTURE_ONLY",
+        "codex_contract": {
+          "runtime_kind": "CODEX_APP_SERVER",
+          "runtime_build_id": "fixture_build",
+          "runtime_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "protocol_version": "fixture-protocol",
+          "model_version_id": "fixture_codex_model",
+          "rate_version_id": "fixture_rate",
+          "skill_bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+          "skill_bundle_version": "1.0.0",
+          "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+          "role_prompt_version": "fixture_prompts",
+          "tool_policy_version": "fixture_tools",
+          "qc_policy_version": "fixture_qc",
+          "required_roles": [
+            "CONTENT",
+            "PRODUCTION",
+            "POST",
+            "REVIEW_FACTS",
+            "REVIEW_STYLE"
+          ],
+          "max_turns_per_role": 4,
+          "max_input_tokens": 100000,
+          "max_output_tokens": 10000,
+          "max_tool_calls": 30,
+          "agent_cost_ceiling_micro": 100000,
+          "inference_spend_control": "PRE_REQUEST_RESERVATION_AND_HARD_LIMIT",
+          "independent_reviewers": 2,
+          "review_context_policy": "FRESH_THREADS_NO_CREATOR_HISTORY",
+          "isolation": "NATIVE_RESTRICTED_IDENTITY",
+          "release_after_terminal": true,
+          "release_grace_seconds": 30,
+          "release_target_seconds": 300,
+          "repair_extends_deadline": false
+        }
+      },
+      "expected_valid": false,
+      "semantic_rule": "execution_snapshot"
+    },
+    {
+      "name": "timeline_must_match_contract",
+      "schema": "execution-snapshot",
+      "value": {
+        "schema_version": "1.1.0",
+        "order_id": "fixture_order",
+        "tenant_id": "fixture_tenant",
+        "product_id": "fixture_product",
+        "photo_version": 1,
+        "photo_set_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "profile_id": "fixture_profile",
+        "profile_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "identity_lock_id": "fixture_lock",
+        "identity_lock_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "preset_id": "portrait-social",
+        "preset_version": "3.0.0",
+        "variant_id": "portrait-social.ai-presenter-single",
+        "variant_version": "3.0.0",
+        "engine": "PER_SHOT_AI",
+        "plan_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "canonicalization": "RFC8785",
+        "model_versions": [
+          {
+            "provider": "FIXTURE_NOT_A_PROVIDER",
+            "actual_model": "FIXTURE_VIDEO_NOT_REAL",
+            "registry_version": "fixture_only",
+            "roles": [
+              "VISION_ANALYSIS",
+              "VIDEO"
+            ],
+            "capability_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "rate_snapshot_id": "fixture_rate"
+          }
+        ],
+        "resource_versions": [],
+        "reference_policy": {
+          "max_images": 3,
+          "max_total_pixels": 3000000,
+          "mapping_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "audio_policy": {
+          "speech_mode": "NATIVE_ZH",
+          "language": "zh-CN",
+          "native_voice_id": "fixture_voice",
+          "preserve_native_speech": true,
+          "caption_alignment": "ACTUAL_AUDIO",
+          "music_license_ids": [],
+          "ducking_enabled": true
+        },
+        "timeline": {
+          "fps": 30,
+          "target_frames": 450,
+          "shots": [
+            {
+              "shot_id": "fixture_shot",
+              "start_frame": 0,
+              "end_frame": 420,
+              "overlap_frames": 0,
+              "evidence_ids": [
+                "fixture_evidence"
+              ],
+              "spoken_text": "这是一份测试文本。"
+            }
+          ]
+        },
+        "outputs": [
+          {
+            "slot_id": "fixture_video",
+            "kind": "video",
+            "count": 1,
+            "width": 1080,
+            "height": 1920,
+            "fps": 30,
+            "duration_frames": 450,
+            "format": "mp4-h264-yuv420p"
+          },
+          {
+            "slot_id": "fixture_image",
+            "kind": "image",
+            "count": 3,
+            "width": 1080,
+            "height": 1080,
+            "fps": null,
+            "duration_frames": null,
+            "format": "png"
+          },
+          {
+            "slot_id": "fixture_copy",
+            "kind": "copy",
+            "count": 1,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "duration_frames": null,
+            "format": "text"
+          }
+        ],
+        "pricing": {
+          "currency": "CNY",
+          "amount_fen": 1234,
+          "terms_version": "FIXTURE_NOT_FOR_SALE"
+        },
+        "budget": {
+          "currency": "CNY",
+          "ceiling_micro": 1000000,
+          "repair_ceiling_micro": 100000,
+          "extra_calls_limit": 1,
+          "max_repair_rounds": 1,
+          "retry_extends_deadline": false
+        },
+        "fulfillable_at": "2026-10-27T00:00:00Z",
+        "deadline_at": "2026-10-27T00:30:00Z",
+        "policy_version": "FIXTURE_ONLY",
+        "codex_contract": {
+          "runtime_kind": "CODEX_APP_SERVER",
+          "runtime_build_id": "fixture_build",
+          "runtime_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "protocol_version": "fixture-protocol",
+          "model_version_id": "fixture_codex_model",
+          "rate_version_id": "fixture_rate",
+          "skill_bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+          "skill_bundle_version": "1.0.0",
+          "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+          "role_prompt_version": "fixture_prompts",
+          "tool_policy_version": "fixture_tools",
+          "qc_policy_version": "fixture_qc",
+          "required_roles": [
+            "CONTENT",
+            "PRODUCTION",
+            "POST",
+            "REVIEW_FACTS",
+            "REVIEW_STYLE"
+          ],
+          "max_turns_per_role": 4,
+          "max_input_tokens": 100000,
+          "max_output_tokens": 10000,
+          "max_tool_calls": 30,
+          "agent_cost_ceiling_micro": 100000,
+          "inference_spend_control": "PRE_REQUEST_RESERVATION_AND_HARD_LIMIT",
+          "independent_reviewers": 2,
+          "review_context_policy": "FRESH_THREADS_NO_CREATOR_HISTORY",
+          "isolation": "NATIVE_RESTRICTED_IDENTITY",
+          "release_after_terminal": true,
+          "release_grace_seconds": 30,
+          "release_target_seconds": 300,
+          "repair_extends_deadline": false
+        }
+      },
+      "expected_valid": false,
+      "semantic_rule": "execution_snapshot"
+    },
+    {
+      "name": "repair_cannot_exceed_total_budget",
+      "schema": "execution-snapshot",
+      "value": {
+        "schema_version": "1.1.0",
+        "order_id": "fixture_order",
+        "tenant_id": "fixture_tenant",
+        "product_id": "fixture_product",
+        "photo_version": 1,
+        "photo_set_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "profile_id": "fixture_profile",
+        "profile_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "identity_lock_id": "fixture_lock",
+        "identity_lock_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "preset_id": "portrait-social",
+        "preset_version": "3.0.0",
+        "variant_id": "portrait-social.ai-presenter-single",
+        "variant_version": "3.0.0",
+        "engine": "PER_SHOT_AI",
+        "plan_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "canonicalization": "RFC8785",
+        "model_versions": [
+          {
+            "provider": "FIXTURE_NOT_A_PROVIDER",
+            "actual_model": "FIXTURE_VIDEO_NOT_REAL",
+            "registry_version": "fixture_only",
+            "roles": [
+              "VISION_ANALYSIS",
+              "VIDEO"
+            ],
+            "capability_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "rate_snapshot_id": "fixture_rate"
+          }
+        ],
+        "resource_versions": [],
+        "reference_policy": {
+          "max_images": 3,
+          "max_total_pixels": 3000000,
+          "mapping_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "audio_policy": {
+          "speech_mode": "NATIVE_ZH",
+          "language": "zh-CN",
+          "native_voice_id": "fixture_voice",
+          "preserve_native_speech": true,
+          "caption_alignment": "ACTUAL_AUDIO",
+          "music_license_ids": [],
+          "ducking_enabled": true
+        },
+        "timeline": {
+          "fps": 30,
+          "target_frames": 450,
+          "shots": [
+            {
+              "shot_id": "fixture_shot",
+              "start_frame": 0,
+              "end_frame": 450,
+              "overlap_frames": 0,
+              "evidence_ids": [
+                "fixture_evidence"
+              ],
+              "spoken_text": "这是一份测试文本。"
+            }
+          ]
+        },
+        "outputs": [
+          {
+            "slot_id": "fixture_video",
+            "kind": "video",
+            "count": 1,
+            "width": 1080,
+            "height": 1920,
+            "fps": 30,
+            "duration_frames": 450,
+            "format": "mp4-h264-yuv420p"
+          },
+          {
+            "slot_id": "fixture_image",
+            "kind": "image",
+            "count": 3,
+            "width": 1080,
+            "height": 1080,
+            "fps": null,
+            "duration_frames": null,
+            "format": "png"
+          },
+          {
+            "slot_id": "fixture_copy",
+            "kind": "copy",
+            "count": 1,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "duration_frames": null,
+            "format": "text"
+          }
+        ],
+        "pricing": {
+          "currency": "CNY",
+          "amount_fen": 1234,
+          "terms_version": "FIXTURE_NOT_FOR_SALE"
+        },
+        "budget": {
+          "currency": "CNY",
+          "ceiling_micro": 1000000,
+          "repair_ceiling_micro": 2000000,
+          "extra_calls_limit": 1,
+          "max_repair_rounds": 1,
+          "retry_extends_deadline": false
+        },
+        "fulfillable_at": "2026-10-27T00:00:00Z",
+        "deadline_at": "2026-10-27T00:30:00Z",
+        "policy_version": "FIXTURE_ONLY",
+        "codex_contract": {
+          "runtime_kind": "CODEX_APP_SERVER",
+          "runtime_build_id": "fixture_build",
+          "runtime_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "protocol_version": "fixture-protocol",
+          "model_version_id": "fixture_codex_model",
+          "rate_version_id": "fixture_rate",
+          "skill_bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+          "skill_bundle_version": "1.0.0",
+          "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+          "role_prompt_version": "fixture_prompts",
+          "tool_policy_version": "fixture_tools",
+          "qc_policy_version": "fixture_qc",
+          "required_roles": [
+            "CONTENT",
+            "PRODUCTION",
+            "POST",
+            "REVIEW_FACTS",
+            "REVIEW_STYLE"
+          ],
+          "max_turns_per_role": 4,
+          "max_input_tokens": 100000,
+          "max_output_tokens": 10000,
+          "max_tool_calls": 30,
+          "agent_cost_ceiling_micro": 100000,
+          "inference_spend_control": "PRE_REQUEST_RESERVATION_AND_HARD_LIMIT",
+          "independent_reviewers": 2,
+          "review_context_policy": "FRESH_THREADS_NO_CREATOR_HISTORY",
+          "isolation": "NATIVE_RESTRICTED_IDENTITY",
+          "release_after_terminal": true,
+          "release_grace_seconds": 30,
+          "release_target_seconds": 300,
+          "repair_extends_deadline": false
+        }
+      },
+      "expected_valid": false,
+      "semantic_rule": "execution_snapshot"
+    },
+    {
+      "name": "deadline_must_follow_fulfillable_time",
+      "schema": "execution-snapshot",
+      "value": {
+        "schema_version": "1.1.0",
+        "order_id": "fixture_order",
+        "tenant_id": "fixture_tenant",
+        "product_id": "fixture_product",
+        "photo_version": 1,
+        "photo_set_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "profile_id": "fixture_profile",
+        "profile_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "identity_lock_id": "fixture_lock",
+        "identity_lock_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "preset_id": "portrait-social",
+        "preset_version": "3.0.0",
+        "variant_id": "portrait-social.ai-presenter-single",
+        "variant_version": "3.0.0",
+        "engine": "PER_SHOT_AI",
+        "plan_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "canonicalization": "RFC8785",
+        "model_versions": [
+          {
+            "provider": "FIXTURE_NOT_A_PROVIDER",
+            "actual_model": "FIXTURE_VIDEO_NOT_REAL",
+            "registry_version": "fixture_only",
+            "roles": [
+              "VISION_ANALYSIS",
+              "VIDEO"
+            ],
+            "capability_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "rate_snapshot_id": "fixture_rate"
+          }
+        ],
+        "resource_versions": [],
+        "reference_policy": {
+          "max_images": 3,
+          "max_total_pixels": 3000000,
+          "mapping_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "audio_policy": {
+          "speech_mode": "NATIVE_ZH",
+          "language": "zh-CN",
+          "native_voice_id": "fixture_voice",
+          "preserve_native_speech": true,
+          "caption_alignment": "ACTUAL_AUDIO",
+          "music_license_ids": [],
+          "ducking_enabled": true
+        },
+        "timeline": {
+          "fps": 30,
+          "target_frames": 450,
+          "shots": [
+            {
+              "shot_id": "fixture_shot",
+              "start_frame": 0,
+              "end_frame": 450,
+              "overlap_frames": 0,
+              "evidence_ids": [
+                "fixture_evidence"
+              ],
+              "spoken_text": "这是一份测试文本。"
+            }
+          ]
+        },
+        "outputs": [
+          {
+            "slot_id": "fixture_video",
+            "kind": "video",
+            "count": 1,
+            "width": 1080,
+            "height": 1920,
+            "fps": 30,
+            "duration_frames": 450,
+            "format": "mp4-h264-yuv420p"
+          },
+          {
+            "slot_id": "fixture_image",
+            "kind": "image",
+            "count": 3,
+            "width": 1080,
+            "height": 1080,
+            "fps": null,
+            "duration_frames": null,
+            "format": "png"
+          },
+          {
+            "slot_id": "fixture_copy",
+            "kind": "copy",
+            "count": 1,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "duration_frames": null,
+            "format": "text"
+          }
+        ],
+        "pricing": {
+          "currency": "CNY",
+          "amount_fen": 1234,
+          "terms_version": "FIXTURE_NOT_FOR_SALE"
+        },
+        "budget": {
+          "currency": "CNY",
+          "ceiling_micro": 1000000,
+          "repair_ceiling_micro": 100000,
+          "extra_calls_limit": 1,
+          "max_repair_rounds": 1,
+          "retry_extends_deadline": false
+        },
+        "fulfillable_at": "2026-10-27T00:00:00Z",
+        "deadline_at": "2026-10-26T23:59:59Z",
+        "policy_version": "FIXTURE_ONLY",
+        "codex_contract": {
+          "runtime_kind": "CODEX_APP_SERVER",
+          "runtime_build_id": "fixture_build",
+          "runtime_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "protocol_version": "fixture-protocol",
+          "model_version_id": "fixture_codex_model",
+          "rate_version_id": "fixture_rate",
+          "skill_bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+          "skill_bundle_version": "1.0.0",
+          "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+          "role_prompt_version": "fixture_prompts",
+          "tool_policy_version": "fixture_tools",
+          "qc_policy_version": "fixture_qc",
+          "required_roles": [
+            "CONTENT",
+            "PRODUCTION",
+            "POST",
+            "REVIEW_FACTS",
+            "REVIEW_STYLE"
+          ],
+          "max_turns_per_role": 4,
+          "max_input_tokens": 100000,
+          "max_output_tokens": 10000,
+          "max_tool_calls": 30,
+          "agent_cost_ceiling_micro": 100000,
+          "inference_spend_control": "PRE_REQUEST_RESERVATION_AND_HARD_LIMIT",
+          "independent_reviewers": 2,
+          "review_context_policy": "FRESH_THREADS_NO_CREATOR_HISTORY",
+          "isolation": "NATIVE_RESTRICTED_IDENTITY",
+          "release_after_terminal": true,
+          "release_grace_seconds": 30,
+          "release_target_seconds": 300,
+          "repair_extends_deadline": false
+        }
+      },
+      "expected_valid": false,
+      "semantic_rule": "execution_snapshot"
+    },
+    {
+      "name": "generative_route_requires_video_model",
+      "schema": "execution-snapshot",
+      "value": {
+        "schema_version": "1.1.0",
+        "order_id": "fixture_order",
+        "tenant_id": "fixture_tenant",
+        "product_id": "fixture_product",
+        "photo_version": 1,
+        "photo_set_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "profile_id": "fixture_profile",
+        "profile_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "identity_lock_id": "fixture_lock",
+        "identity_lock_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "preset_id": "portrait-social",
+        "preset_version": "3.0.0",
+        "variant_id": "portrait-social.ai-presenter-single",
+        "variant_version": "3.0.0",
+        "engine": "PER_SHOT_AI",
+        "plan_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "canonicalization": "RFC8785",
+        "model_versions": [
+          {
+            "provider": "FIXTURE_NOT_A_PROVIDER",
+            "actual_model": "FIXTURE_VIDEO_NOT_REAL",
+            "registry_version": "fixture_only",
+            "roles": [
+              "VISION_ANALYSIS"
+            ],
+            "capability_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "rate_snapshot_id": "fixture_rate"
+          }
+        ],
+        "resource_versions": [],
+        "reference_policy": {
+          "max_images": 3,
+          "max_total_pixels": 3000000,
+          "mapping_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "audio_policy": {
+          "speech_mode": "NATIVE_ZH",
+          "language": "zh-CN",
+          "native_voice_id": "fixture_voice",
+          "preserve_native_speech": true,
+          "caption_alignment": "ACTUAL_AUDIO",
+          "music_license_ids": [],
+          "ducking_enabled": true
+        },
+        "timeline": {
+          "fps": 30,
+          "target_frames": 450,
+          "shots": [
+            {
+              "shot_id": "fixture_shot",
+              "start_frame": 0,
+              "end_frame": 450,
+              "overlap_frames": 0,
+              "evidence_ids": [
+                "fixture_evidence"
+              ],
+              "spoken_text": "这是一份测试文本。"
+            }
+          ]
+        },
+        "outputs": [
+          {
+            "slot_id": "fixture_video",
+            "kind": "video",
+            "count": 1,
+            "width": 1080,
+            "height": 1920,
+            "fps": 30,
+            "duration_frames": 450,
+            "format": "mp4-h264-yuv420p"
+          },
+          {
+            "slot_id": "fixture_image",
+            "kind": "image",
+            "count": 3,
+            "width": 1080,
+            "height": 1080,
+            "fps": null,
+            "duration_frames": null,
+            "format": "png"
+          },
+          {
+            "slot_id": "fixture_copy",
+            "kind": "copy",
+            "count": 1,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "duration_frames": null,
+            "format": "text"
+          }
+        ],
+        "pricing": {
+          "currency": "CNY",
+          "amount_fen": 1234,
+          "terms_version": "FIXTURE_NOT_FOR_SALE"
+        },
+        "budget": {
+          "currency": "CNY",
+          "ceiling_micro": 1000000,
+          "repair_ceiling_micro": 100000,
+          "extra_calls_limit": 1,
+          "max_repair_rounds": 1,
+          "retry_extends_deadline": false
+        },
+        "fulfillable_at": "2026-10-27T00:00:00Z",
+        "deadline_at": "2026-10-27T00:30:00Z",
+        "policy_version": "FIXTURE_ONLY",
+        "codex_contract": {
+          "runtime_kind": "CODEX_APP_SERVER",
+          "runtime_build_id": "fixture_build",
+          "runtime_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "protocol_version": "fixture-protocol",
+          "model_version_id": "fixture_codex_model",
+          "rate_version_id": "fixture_rate",
+          "skill_bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+          "skill_bundle_version": "1.0.0",
+          "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+          "role_prompt_version": "fixture_prompts",
+          "tool_policy_version": "fixture_tools",
+          "qc_policy_version": "fixture_qc",
+          "required_roles": [
+            "CONTENT",
+            "PRODUCTION",
+            "POST",
+            "REVIEW_FACTS",
+            "REVIEW_STYLE"
+          ],
+          "max_turns_per_role": 4,
+          "max_input_tokens": 100000,
+          "max_output_tokens": 10000,
+          "max_tool_calls": 30,
+          "agent_cost_ceiling_micro": 100000,
+          "inference_spend_control": "PRE_REQUEST_RESERVATION_AND_HARD_LIMIT",
+          "independent_reviewers": 2,
+          "review_context_policy": "FRESH_THREADS_NO_CREATOR_HISTORY",
+          "isolation": "NATIVE_RESTRICTED_IDENTITY",
+          "release_after_terminal": true,
+          "release_grace_seconds": 30,
+          "release_target_seconds": 300,
+          "repair_extends_deadline": false
+        }
+      },
+      "expected_valid": false,
+      "semantic_rule": "execution_snapshot"
+    },
+    {
+      "name": "codex_ceiling_cannot_exceed_order_total",
+      "schema": "execution-snapshot",
+      "value": {
+        "schema_version": "1.1.0",
+        "order_id": "fixture_order",
+        "tenant_id": "fixture_tenant",
+        "product_id": "fixture_product",
+        "photo_version": 1,
+        "photo_set_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "profile_id": "fixture_profile",
+        "profile_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "identity_lock_id": "fixture_lock",
+        "identity_lock_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "preset_id": "portrait-social",
+        "preset_version": "3.0.0",
+        "variant_id": "portrait-social.ai-presenter-single",
+        "variant_version": "3.0.0",
+        "engine": "PER_SHOT_AI",
+        "plan_hash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "canonicalization": "RFC8785",
+        "model_versions": [
+          {
+            "provider": "FIXTURE_NOT_A_PROVIDER",
+            "actual_model": "FIXTURE_VIDEO_NOT_REAL",
+            "registry_version": "fixture_only",
+            "roles": [
+              "VISION_ANALYSIS",
+              "VIDEO"
+            ],
+            "capability_hash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "rate_snapshot_id": "fixture_rate"
+          }
+        ],
+        "resource_versions": [],
+        "reference_policy": {
+          "max_images": 3,
+          "max_total_pixels": 3000000,
+          "mapping_hash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "audio_policy": {
+          "speech_mode": "NATIVE_ZH",
+          "language": "zh-CN",
+          "native_voice_id": "fixture_voice",
+          "preserve_native_speech": true,
+          "caption_alignment": "ACTUAL_AUDIO",
+          "music_license_ids": [],
+          "ducking_enabled": true
+        },
+        "timeline": {
+          "fps": 30,
+          "target_frames": 450,
+          "shots": [
+            {
+              "shot_id": "fixture_shot",
+              "start_frame": 0,
+              "end_frame": 450,
+              "overlap_frames": 0,
+              "evidence_ids": [
+                "fixture_evidence"
+              ],
+              "spoken_text": "这是一份测试文本。"
+            }
+          ]
+        },
+        "outputs": [
+          {
+            "slot_id": "fixture_video",
+            "kind": "video",
+            "count": 1,
+            "width": 1080,
+            "height": 1920,
+            "fps": 30,
+            "duration_frames": 450,
+            "format": "mp4-h264-yuv420p"
+          },
+          {
+            "slot_id": "fixture_image",
+            "kind": "image",
+            "count": 3,
+            "width": 1080,
+            "height": 1080,
+            "fps": null,
+            "duration_frames": null,
+            "format": "png"
+          },
+          {
+            "slot_id": "fixture_copy",
+            "kind": "copy",
+            "count": 1,
+            "width": null,
+            "height": null,
+            "fps": null,
+            "duration_frames": null,
+            "format": "text"
+          }
+        ],
+        "pricing": {
+          "currency": "CNY",
+          "amount_fen": 1234,
+          "terms_version": "FIXTURE_NOT_FOR_SALE"
+        },
+        "budget": {
+          "currency": "CNY",
+          "ceiling_micro": 1000000,
+          "repair_ceiling_micro": 100000,
+          "extra_calls_limit": 1,
+          "max_repair_rounds": 1,
+          "retry_extends_deadline": false
+        },
+        "fulfillable_at": "2026-10-27T00:00:00Z",
+        "deadline_at": "2026-10-27T00:30:00Z",
+        "policy_version": "FIXTURE_ONLY",
+        "codex_contract": {
+          "runtime_kind": "CODEX_APP_SERVER",
+          "runtime_build_id": "fixture_build",
+          "runtime_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "protocol_version": "fixture-protocol",
+          "model_version_id": "fixture_codex_model",
+          "rate_version_id": "fixture_rate",
+          "skill_bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+          "skill_bundle_version": "1.0.0",
+          "skill_bundle_hash": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+          "role_prompt_version": "fixture_prompts",
+          "tool_policy_version": "fixture_tools",
+          "qc_policy_version": "fixture_qc",
+          "required_roles": [
+            "CONTENT",
+            "PRODUCTION",
+            "POST",
+            "REVIEW_FACTS",
+            "REVIEW_STYLE"
+          ],
+          "max_turns_per_role": 4,
+          "max_input_tokens": 100000,
+          "max_output_tokens": 10000,
+          "max_tool_calls": 30,
+          "agent_cost_ceiling_micro": 1000001,
+          "inference_spend_control": "PRE_REQUEST_RESERVATION_AND_HARD_LIMIT",
+          "independent_reviewers": 2,
+          "review_context_policy": "FRESH_THREADS_NO_CREATOR_HISTORY",
+          "isolation": "NATIVE_RESTRICTED_IDENTITY",
+          "release_after_terminal": true,
+          "release_grace_seconds": 30,
+          "release_target_seconds": 300,
+          "repair_extends_deadline": false
+        }
+      },
+      "expected_valid": false,
+      "semantic_rule": "execution_snapshot"
+    }
+  ]
+}

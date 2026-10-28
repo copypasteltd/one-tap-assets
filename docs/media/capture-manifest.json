@@ -1,0 +1,169 @@
+{
+  "captured_at": "2026-10-28T11:27:28.260Z",
+  "type": "ACTUAL_BROWSER_RECORDING_SHARED_MINI_PAGES",
+  "data_source": "SYNTHETIC_LOCAL_FIXTURES",
+  "native_mini_device_verified": false,
+  "real_generation_verified": false,
+  "real_payment_verified": false,
+  "browser_tabs_closed": true,
+  "browser_errors": [],
+  "external_network_requests": [],
+  "screenshots": [
+    {
+      "page": "01-home",
+      "path": "docs/media/screenshots/01-home.png"
+    },
+    {
+      "page": "02-photos",
+      "path": "docs/media/screenshots/02-photos.png"
+    },
+    {
+      "page": "03-analysis",
+      "path": "docs/media/screenshots/03-analysis.png"
+    },
+    {
+      "page": "04-community",
+      "path": "docs/media/screenshots/04-community.png"
+    },
+    {
+      "page": "05-preset",
+      "path": "docs/media/screenshots/05-preset.png"
+    },
+    {
+      "page": "06-checklist",
+      "path": "docs/media/screenshots/06-checklist.png"
+    },
+    {
+      "page": "07-order",
+      "path": "docs/media/screenshots/07-order.png"
+    },
+    {
+      "page": "08-pack",
+      "path": "docs/media/screenshots/08-pack.png"
+    },
+    {
+      "page": "09-library",
+      "path": "docs/media/screenshots/09-library.png"
+    },
+    {
+      "page": "10-creator",
+      "path": "docs/media/screenshots/10-creator.png"
+    }
+  ],
+  "recording": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 430,
+        "height": 932
+      }
+    ],
+    "format": {
+      "duration": "14.560000"
+    }
+  },
+  "files": [
+    {
+      "path": "docs/media/screenshots/01-home.png",
+      "bytes": 81603,
+      "sha256": "a19cabf80dc91ba2bc3883773a8ee031d0de1ef87ff73ec1988e5ba14b4c21a1"
+    },
+    {
+      "path": "docs/media/screenshots/02-photos.png",
+      "bytes": 58856,
+      "sha256": "d2e2f9589bdb24f66ae1e3a75bb1e80a0f05c656e8d14522cd773f9c77d4a47e"
+    },
+    {
+      "path": "docs/media/screenshots/03-analysis.png",
+      "bytes": 48182,
+      "sha256": "36f5eda8df188b975fe255b6213d7a70cb0e3df42bf040a1cbc9d43be4c3a7a6"
+    },
+    {
+      "path": "docs/media/screenshots/04-community.png",
+      "bytes": 81688,
+      "sha256": "276d8dc87acf3c0a8759de66073b9adbaf6c58d86eb916aedf2f2d41dc87696e"
+    },
+    {
+      "path": "docs/media/screenshots/05-preset.png",
+      "bytes": 55271,
+      "sha256": "7526b62d1d42057a7e6d5fb4429ef4d434c320cb4da9bfb721407ff56f0126b0"
+    },
+    {
+      "path": "docs/media/screenshots/06-checklist.png",
+      "bytes": 66450,
+      "sha256": "b6d547a33773eee383e2276f789e0ab840a0cac80ba3454f218b8a164f97a15e"
+    },
+    {
+      "path": "docs/media/screenshots/07-order.png",
+      "bytes": 52110,
+      "sha256": "42c193e082d890a542e274777b2d3aa47f9414b315fb4188c7208935f9be3044"
+    },
+    {
+      "path": "docs/media/screenshots/08-pack.png",
+      "bytes": 52540,
+      "sha256": "661c5f08b0c72c7d8447902254322113265a4429507a01cb606e1cfe9b9583be"
+    },
+    {
+      "path": "docs/media/screenshots/09-library.png",
+      "bytes": 41479,
+      "sha256": "71608f88d3ad2e3c3fd59767725939f6526a8b20202fb396063f82a282b98cd8"
+    },
+    {
+      "path": "docs/media/screenshots/10-creator.png",
+      "bytes": 57927,
+      "sha256": "db405172605e684eefe87063a5a347d514806aec3ddc284c7d12e6f83d5681d0"
+    },
+    {
+      "path": "docs/media/demo/product-card.png",
+      "bytes": 86842,
+      "sha256": "f791d4b6e6c6445365811b2f404b1bb24587c934b7e6c539239709a188dca145"
+    },
+    {
+      "path": "docs/media/demo/product-motion.mp4",
+      "bytes": 18398,
+      "sha256": "d5d02a3733a704a5f9117f490cfc86ed3c2bb7ec30be31bfca5252fdfbb6e3b0"
+    },
+    {
+      "path": "docs/media/demo/product.svg",
+      "bytes": 1693,
+      "sha256": "2c507fbbdd3fad7e9f99beb6faca1f9bd608d1148e49c1665c052b956e6ed313"
+    },
+    {
+      "path": "docs/media/demo/assets/example-0.png",
+      "bytes": 20355,
+      "sha256": "20392025fceaab450a37805d63cce766bdc8f619a96465b1386c44c32cff3138"
+    },
+    {
+      "path": "docs/media/demo/assets/example-1.png",
+      "bytes": 20355,
+      "sha256": "20392025fceaab450a37805d63cce766bdc8f619a96465b1386c44c32cff3138"
+    },
+    {
+      "path": "docs/media/demo/assets/example-2.png",
+      "bytes": 20355,
+      "sha256": "20392025fceaab450a37805d63cce766bdc8f619a96465b1386c44c32cff3138"
+    },
+    {
+      "path": "docs/media/overview.png",
+      "bytes": 405187,
+      "sha256": "c56bae70b9cb3db22f689d48bf3b215266790f130341d4043d0831894d35b72c"
+    },
+    {
+      "path": "docs/media/walkthrough.gif",
+      "bytes": 1796669,
+      "sha256": "16e4f7d96d0668866db57693869ed24e04fc9e84601d5aeaae3457eb43f635a3"
+    },
+    {
+      "path": "docs/media/walkthrough.mp4",
+      "bytes": 282842,
+      "sha256": "9a5665a97e64f95f1862429cf6a1b221daaff16ab07eb6295d561fc5e0031eb0"
+    },
+    {
+      "path": "docs/media/walkthrough.webm",
+      "bytes": 1176194,
+      "sha256": "81a8f9adaa8662041788c2621588f14f9a0b5eadff80c70f6c8cd60a5da84462"
+    }
+  ]
+}

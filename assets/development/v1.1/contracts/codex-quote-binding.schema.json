@@ -1,0 +1,201 @@
+{
+  "type": "object",
+  "properties": {
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "quote_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "preview_session_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "plan_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "codex_contract": {
+      "type": "object",
+      "properties": {
+        "runtime_kind": {
+          "const": "CODEX_APP_SERVER"
+        },
+        "runtime_build_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        "runtime_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "protocol_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "model_version_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        "rate_version_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        "skill_bundle_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        "skill_bundle_version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "skill_bundle_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "role_prompt_version": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        "tool_policy_version": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        "qc_policy_version": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        "required_roles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "CONTENT",
+              "PRODUCTION",
+              "POST",
+              "REVIEW_FACTS",
+              "REVIEW_STYLE"
+            ]
+          },
+          "minItems": 5,
+          "maxItems": 5,
+          "uniqueItems": true
+        },
+        "max_turns_per_role": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "max_input_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "max_output_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000000
+        },
+        "max_tool_calls": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10000
+        },
+        "agent_cost_ceiling_micro": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "inference_spend_control": {
+          "const": "PRE_REQUEST_RESERVATION_AND_HARD_LIMIT"
+        },
+        "independent_reviewers": {
+          "const": 2
+        },
+        "review_context_policy": {
+          "const": "FRESH_THREADS_NO_CREATOR_HISTORY"
+        },
+        "isolation": {
+          "const": "NATIVE_RESTRICTED_IDENTITY"
+        },
+        "release_after_terminal": {
+          "const": true
+        },
+        "release_grace_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        },
+        "release_target_seconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3600
+        },
+        "repair_extends_deadline": {
+          "const": false
+        }
+      },
+      "required": [
+        "runtime_kind",
+        "runtime_build_id",
+        "runtime_sha256",
+        "protocol_version",
+        "model_version_id",
+        "rate_version_id",
+        "skill_bundle_id",
+        "skill_bundle_version",
+        "skill_bundle_hash",
+        "role_prompt_version",
+        "tool_policy_version",
+        "qc_policy_version",
+        "required_roles",
+        "max_turns_per_role",
+        "max_input_tokens",
+        "max_output_tokens",
+        "max_tool_calls",
+        "agent_cost_ceiling_micro",
+        "inference_spend_control",
+        "independent_reviewers",
+        "review_context_policy",
+        "isolation",
+        "release_after_terminal",
+        "release_grace_seconds",
+        "release_target_seconds",
+        "repair_extends_deadline"
+      ],
+      "additionalProperties": false
+    },
+    "codex_contract_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "skill_bundle_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 40,
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$"
+    }
+  },
+  "required": [
+    "tenant_id",
+    "quote_id",
+    "preview_session_id",
+    "plan_hash",
+    "codex_contract",
+    "codex_contract_hash",
+    "skill_bundle_hash",
+    "expires_at"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CodexQuoteBinding",
+  "x-implementation-status": "DESIGN_NOT_IMPLEMENTED"
+}

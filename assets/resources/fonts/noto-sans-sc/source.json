@@ -1,0 +1,31 @@
+{
+  "resource_id": "font-noto-sans-sc",
+  "version": "a85815a42757630ce188fdad368c2dfc444d4773",
+  "family": "Noto Sans SC",
+  "license": "OFL-1.1",
+  "license_file": "OFL.txt",
+  "repository": "https://github.com/google/fonts",
+  "files": [
+    {
+      "path": "NotoSansSC[wght].ttf",
+      "sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+      "bytes": 17772300,
+      "source_url": "https://api.github.com/repos/google/fonts/contents/ofl/notosanssc/NotoSansSC%5Bwght%5D.ttf?ref=a85815a42757630ce188fdad368c2dfc444d4773",
+      "git_blob_sha": "fb0637bafbcd804fe32152370a1225990745b4bc"
+    },
+    {
+      "path": "OFL.txt",
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9",
+      "bytes": 4388,
+      "source_url": "https://api.github.com/repos/google/fonts/contents/ofl/notosanssc/OFL.txt?ref=a85815a42757630ce188fdad368c2dfc444d4773",
+      "git_blob_sha": "1c9f43281b8f216c5461fe9ac729afbade7724e4"
+    },
+    {
+      "path": "METADATA.pb",
+      "sha256": "c6c4bdb785793b2de1da177caeeffcd0c90d7680bdab2de8f88ab45007bc59bc",
+      "bytes": 1296,
+      "source_url": "https://api.github.com/repos/google/fonts/contents/ofl/notosanssc/METADATA.pb?ref=a85815a42757630ce188fdad368c2dfc444d4773",
+      "git_blob_sha": "2da7e54d742a000810c6ec99ffae919158d9d4d6"
+    }
+  ]
+}

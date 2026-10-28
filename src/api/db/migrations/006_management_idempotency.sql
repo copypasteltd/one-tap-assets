@@ -1,0 +1,1 @@
+CREATE TABLE management_idempotency_records (actor text NOT NULL, operation text NOT NULL, target_id text NOT NULL, key text NOT NULL, request_hash text NOT NULL, response jsonb NOT NULL, created_at timestamptz NOT NULL DEFAULT now(), PRIMARY KEY(actor,operation,target_id,key));

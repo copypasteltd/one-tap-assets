@@ -1,0 +1,1117 @@
+{
+  "schema_version": "1.1.0",
+  "status": "DESIGN_NOT_IMPLEMENTED",
+  "note": "状态图描述设计。合法边仍需权限/事务/证据守卫，不可只凭枚举更新。",
+  "machines": [
+    {
+      "id": "Analysis",
+      "initial": "QUEUED",
+      "states": [
+        "QUEUED",
+        "ANALYZING",
+        "VALIDATING",
+        "FAILED",
+        "READY",
+        "BLOCKED"
+      ],
+      "terminal_states": [
+        "READY",
+        "BLOCKED",
+        "FAILED"
+      ],
+      "transitions": [
+        {
+          "from": "QUEUED",
+          "to": "ANALYZING"
+        },
+        {
+          "from": "QUEUED",
+          "to": "FAILED"
+        },
+        {
+          "from": "ANALYZING",
+          "to": "VALIDATING"
+        },
+        {
+          "from": "ANALYZING",
+          "to": "FAILED"
+        },
+        {
+          "from": "VALIDATING",
+          "to": "READY"
+        },
+        {
+          "from": "VALIDATING",
+          "to": "BLOCKED"
+        },
+        {
+          "from": "VALIDATING",
+          "to": "FAILED"
+        }
+      ],
+      "guards": [
+        "真实视觉初次加最多一次重试保存在attempt，不伪造READY；证据只属于当前输入版本。"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "Plan",
+      "initial": "PLANNING",
+      "states": [
+        "PLANNING",
+        "VALIDATING",
+        "FAILED",
+        "READY",
+        "BLOCKED"
+      ],
+      "terminal_states": [
+        "READY",
+        "BLOCKED",
+        "FAILED"
+      ],
+      "transitions": [
+        {
+          "from": "PLANNING",
+          "to": "VALIDATING"
+        },
+        {
+          "from": "PLANNING",
+          "to": "FAILED"
+        },
+        {
+          "from": "VALIDATING",
+          "to": "READY"
+        },
+        {
+          "from": "VALIDATING",
+          "to": "BLOCKED"
+        },
+        {
+          "from": "VALIDATING",
+          "to": "FAILED"
+        }
+      ],
+      "guards": [
+        "READY须通过事实/帧/实际能力检查；不是媒体交付。输入变化创建新计划。"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "Asset",
+      "initial": "UPLOADING",
+      "states": [
+        "UPLOADING",
+        "VERIFYING",
+        "READY",
+        "EXPIRED",
+        "DELETED",
+        "REJECTED"
+      ],
+      "terminal_states": [
+        "REJECTED",
+        "DELETED"
+      ],
+      "transitions": [
+        {
+          "from": "UPLOADING",
+          "to": "VERIFYING"
+        },
+        {
+          "from": "UPLOADING",
+          "to": "EXPIRED"
+        },
+        {
+          "from": "UPLOADING",
+          "to": "DELETED"
+        },
+        {
+          "from": "VERIFYING",
+          "to": "READY"
+        },
+        {
+          "from": "VERIFYING",
+          "to": "REJECTED"
+        },
+        {
+          "from": "VERIFYING",
+          "to": "EXPIRED"
+        },
+        {
+          "from": "VERIFYING",
+          "to": "DELETED"
+        },
+        {
+          "from": "READY",
+          "to": "EXPIRED"
+        },
+        {
+          "from": "READY",
+          "to": "DELETED"
+        },
+        {
+          "from": "EXPIRED",
+          "to": "DELETED"
+        }
+      ],
+      "guards": [
+        "READY须后端核对象、解码/像素/大小/归属；到期先停授权，清理幂等。"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "Quote",
+      "initial": "OPEN",
+      "states": [
+        "OPEN",
+        "CONSUMED",
+        "EXPIRED",
+        "INVALIDATED"
+      ],
+      "terminal_states": [
+        "CONSUMED",
+        "EXPIRED",
+        "INVALIDATED"
+      ],
+      "transitions": [
+        {
+          "from": "OPEN",
+          "to": "CONSUMED"
+        },
+        {
+          "from": "OPEN",
+          "to": "EXPIRED"
+        },
+        {
+          "from": "OPEN",
+          "to": "INVALIDATED"
+        }
+      ],
+      "guards": [
+        "15分钟内同归属/输入/plan_hash且准入有效；建单锁定并唯一消费。"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "Payment",
+      "initial": "CREATED",
+      "states": [
+        "CREATED",
+        "PENDING",
+        "UNKNOWN",
+        "FAILED",
+        "CANCELLED",
+        "CONFIRMED"
+      ],
+      "terminal_states": [
+        "CONFIRMED"
+      ],
+      "transitions": [
+        {
+          "from": "CREATED",
+          "to": "PENDING"
+        },
+        {
+          "from": "CREATED",
+          "to": "UNKNOWN"
+        },
+        {
+          "from": "CREATED",
+          "to": "FAILED"
+        },
+        {
+          "from": "PENDING",
+          "to": "CONFIRMED"
+        },
+        {
+          "from": "PENDING",
+          "to": "UNKNOWN"
+        },
+        {
+          "from": "PENDING",
+          "to": "FAILED"
+        },
+        {
+          "from": "PENDING",
+          "to": "CANCELLED"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "PENDING"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "CONFIRMED"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "FAILED"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "CANCELLED"
+        },
+        {
+          "from": "FAILED",
+          "to": "CONFIRMED"
+        },
+        {
+          "from": "CANCELLED",
+          "to": "CONFIRMED"
+        }
+      ],
+      "guards": [
+        "CONFIRMED只由后端验签/查单确认，宿主回调不直接推进。UNKNOWN先查原单。",
+        "FAILED/CANCELLED到CONFIRMED仅接受迟到资金的真实对账证据，不表示重新发起付款。",
+        "晚到付款真实记账；不能履原合同时进入退款异常处理，不能丢弃资金事件。"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "Fulfillment",
+      "initial": "NOT_STARTED",
+      "states": [
+        "NOT_STARTED",
+        "QUEUED",
+        "IN_PROGRESS",
+        "FAILED",
+        "CANCELLED",
+        "DELIVERED"
+      ],
+      "terminal_states": [
+        "DELIVERED",
+        "FAILED",
+        "CANCELLED"
+      ],
+      "transitions": [
+        {
+          "from": "NOT_STARTED",
+          "to": "QUEUED"
+        },
+        {
+          "from": "NOT_STARTED",
+          "to": "FAILED"
+        },
+        {
+          "from": "NOT_STARTED",
+          "to": "CANCELLED"
+        },
+        {
+          "from": "QUEUED",
+          "to": "IN_PROGRESS"
+        },
+        {
+          "from": "QUEUED",
+          "to": "FAILED"
+        },
+        {
+          "from": "QUEUED",
+          "to": "CANCELLED"
+        },
+        {
+          "from": "IN_PROGRESS",
+          "to": "DELIVERED"
+        },
+        {
+          "from": "IN_PROGRESS",
+          "to": "FAILED"
+        },
+        {
+          "from": "IN_PROGRESS",
+          "to": "CANCELLED"
+        }
+      ],
+      "guards": [
+        "验付/任务/outbox同事务。发布与取消/退款锁同一订单，完整manifest才DELIVERED。"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "Refund",
+      "initial": "REQUESTED",
+      "states": [
+        "REQUESTED",
+        "PROCESSING",
+        "UNKNOWN",
+        "FAILED",
+        "REJECTED",
+        "REFUNDED"
+      ],
+      "terminal_states": [
+        "REFUNDED",
+        "REJECTED"
+      ],
+      "transitions": [
+        {
+          "from": "REQUESTED",
+          "to": "PROCESSING"
+        },
+        {
+          "from": "REQUESTED",
+          "to": "REJECTED"
+        },
+        {
+          "from": "PROCESSING",
+          "to": "REFUNDED"
+        },
+        {
+          "from": "PROCESSING",
+          "to": "UNKNOWN"
+        },
+        {
+          "from": "PROCESSING",
+          "to": "FAILED"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "PROCESSING"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "REFUNDED"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "FAILED"
+        },
+        {
+          "from": "FAILED",
+          "to": "PROCESSING"
+        }
+      ],
+      "guards": [
+        "退原通道，累计不超实付；UNKNOWN先查原退款，FAILED恢复沿原意图并留审计。"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "RenderJob",
+      "initial": "QUEUED",
+      "states": [
+        "QUEUED",
+        "PREPARING",
+        "GENERATING",
+        "POST_PROCESSING",
+        "QC",
+        "REPAIRING",
+        "FAILED",
+        "CANCELLED",
+        "DELIVERED"
+      ],
+      "terminal_states": [
+        "DELIVERED",
+        "FAILED",
+        "CANCELLED"
+      ],
+      "transitions": [
+        {
+          "from": "QUEUED",
+          "to": "PREPARING"
+        },
+        {
+          "from": "QUEUED",
+          "to": "FAILED"
+        },
+        {
+          "from": "QUEUED",
+          "to": "CANCELLED"
+        },
+        {
+          "from": "PREPARING",
+          "to": "GENERATING"
+        },
+        {
+          "from": "PREPARING",
+          "to": "FAILED"
+        },
+        {
+          "from": "PREPARING",
+          "to": "CANCELLED"
+        },
+        {
+          "from": "GENERATING",
+          "to": "POST_PROCESSING"
+        },
+        {
+          "from": "GENERATING",
+          "to": "FAILED"
+        },
+        {
+          "from": "GENERATING",
+          "to": "CANCELLED"
+        },
+        {
+          "from": "POST_PROCESSING",
+          "to": "QC"
+        },
+        {
+          "from": "POST_PROCESSING",
+          "to": "FAILED"
+        },
+        {
+          "from": "POST_PROCESSING",
+          "to": "CANCELLED"
+        },
+        {
+          "from": "QC",
+          "to": "DELIVERED"
+        },
+        {
+          "from": "QC",
+          "to": "REPAIRING"
+        },
+        {
+          "from": "QC",
+          "to": "FAILED"
+        },
+        {
+          "from": "QC",
+          "to": "CANCELLED"
+        },
+        {
+          "from": "REPAIRING",
+          "to": "PREPARING"
+        },
+        {
+          "from": "REPAIRING",
+          "to": "GENERATING"
+        },
+        {
+          "from": "REPAIRING",
+          "to": "POST_PROCESSING"
+        },
+        {
+          "from": "REPAIRING",
+          "to": "QC"
+        },
+        {
+          "from": "REPAIRING",
+          "to": "FAILED"
+        },
+        {
+          "from": "REPAIRING",
+          "to": "CANCELLED"
+        }
+      ],
+      "guards": [
+        "REPAIRING最多一轮；受影响节点额外一次且并发原子预算/原截止。",
+        "终态不回生成；小改/平台纠错建立关联新版本，不重置终态。"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "StageRun",
+      "initial": "READY",
+      "states": [
+        "READY",
+        "CLAIMED",
+        "RUNNING",
+        "UNKNOWN",
+        "CANCELLED",
+        "FAILED",
+        "SUCCEEDED"
+      ],
+      "terminal_states": [
+        "SUCCEEDED",
+        "FAILED",
+        "CANCELLED"
+      ],
+      "transitions": [
+        {
+          "from": "READY",
+          "to": "CLAIMED"
+        },
+        {
+          "from": "READY",
+          "to": "CANCELLED"
+        },
+        {
+          "from": "READY",
+          "to": "FAILED"
+        },
+        {
+          "from": "CLAIMED",
+          "to": "RUNNING"
+        },
+        {
+          "from": "CLAIMED",
+          "to": "READY"
+        },
+        {
+          "from": "CLAIMED",
+          "to": "FAILED"
+        },
+        {
+          "from": "CLAIMED",
+          "to": "CANCELLED"
+        },
+        {
+          "from": "RUNNING",
+          "to": "SUCCEEDED"
+        },
+        {
+          "from": "RUNNING",
+          "to": "UNKNOWN"
+        },
+        {
+          "from": "RUNNING",
+          "to": "FAILED"
+        },
+        {
+          "from": "RUNNING",
+          "to": "CANCELLED"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "RUNNING"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "SUCCEEDED"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "FAILED"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "CANCELLED"
+        }
+      ],
+      "guards": [
+        "CLAIMED回READY仅证实尚无外部副作用；否则恢复原intent。每次回写检查fencing_token。",
+        "租约到期不是重新购买依据；UNKNOWN转移须供应商查询/对账证据。"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "ProviderSubmission",
+      "initial": "INTENT",
+      "states": [
+        "INTENT",
+        "SUBMITTING",
+        "ACKNOWLEDGED",
+        "RUNNING",
+        "UNKNOWN",
+        "FAILED",
+        "SUCCEEDED"
+      ],
+      "terminal_states": [
+        "SUCCEEDED",
+        "FAILED"
+      ],
+      "transitions": [
+        {
+          "from": "INTENT",
+          "to": "SUBMITTING"
+        },
+        {
+          "from": "INTENT",
+          "to": "FAILED"
+        },
+        {
+          "from": "SUBMITTING",
+          "to": "ACKNOWLEDGED"
+        },
+        {
+          "from": "SUBMITTING",
+          "to": "UNKNOWN"
+        },
+        {
+          "from": "SUBMITTING",
+          "to": "FAILED"
+        },
+        {
+          "from": "ACKNOWLEDGED",
+          "to": "RUNNING"
+        },
+        {
+          "from": "ACKNOWLEDGED",
+          "to": "SUCCEEDED"
+        },
+        {
+          "from": "ACKNOWLEDGED",
+          "to": "FAILED"
+        },
+        {
+          "from": "RUNNING",
+          "to": "SUCCEEDED"
+        },
+        {
+          "from": "RUNNING",
+          "to": "UNKNOWN"
+        },
+        {
+          "from": "RUNNING",
+          "to": "FAILED"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "ACKNOWLEDGED"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "RUNNING"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "SUCCEEDED"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "FAILED"
+        }
+      ],
+      "guards": [
+        "先持久意图/预算再POST，ACK持久后轮询。UNKNOWN无到SUBMITTING边，不盲重购。",
+        "只有确定未发生/实际结算/对账解决才能释放UNKNOWN预留。"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "AlbumSaveItem",
+      "initial": "PENDING",
+      "states": [
+        "PENDING",
+        "DOWNLOADING",
+        "SAVING",
+        "FAILED",
+        "UNKNOWN",
+        "SAVED"
+      ],
+      "terminal_states": [
+        "SAVED"
+      ],
+      "transitions": [
+        {
+          "from": "PENDING",
+          "to": "DOWNLOADING"
+        },
+        {
+          "from": "DOWNLOADING",
+          "to": "SAVING"
+        },
+        {
+          "from": "DOWNLOADING",
+          "to": "FAILED"
+        },
+        {
+          "from": "SAVING",
+          "to": "SAVED"
+        },
+        {
+          "from": "SAVING",
+          "to": "FAILED"
+        },
+        {
+          "from": "SAVING",
+          "to": "UNKNOWN"
+        },
+        {
+          "from": "FAILED",
+          "to": "DOWNLOADING"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "SAVED"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "FAILED"
+        }
+      ],
+      "guards": [
+        "SAVED须宿主成功回调；UNKNOWN须实际证据或用户核对，不能自动重存。明确再存创建新attempt。",
+        "保存回执不改变付款/交付/退款。"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "Publication",
+      "initial": "DRAFT",
+      "states": [
+        "DRAFT",
+        "VALIDATING",
+        "UNDER_REVIEW",
+        "CHANGES_REQUESTED",
+        "APPROVED",
+        "PUBLISHED",
+        "SUSPENDED",
+        "REJECTED"
+      ],
+      "terminal_states": [
+        "REJECTED"
+      ],
+      "transitions": [
+        {
+          "from": "DRAFT",
+          "to": "VALIDATING"
+        },
+        {
+          "from": "VALIDATING",
+          "to": "UNDER_REVIEW"
+        },
+        {
+          "from": "VALIDATING",
+          "to": "CHANGES_REQUESTED"
+        },
+        {
+          "from": "UNDER_REVIEW",
+          "to": "APPROVED"
+        },
+        {
+          "from": "UNDER_REVIEW",
+          "to": "CHANGES_REQUESTED"
+        },
+        {
+          "from": "UNDER_REVIEW",
+          "to": "REJECTED"
+        },
+        {
+          "from": "CHANGES_REQUESTED",
+          "to": "VALIDATING"
+        },
+        {
+          "from": "APPROVED",
+          "to": "PUBLISHED"
+        },
+        {
+          "from": "PUBLISHED",
+          "to": "SUSPENDED"
+        },
+        {
+          "from": "SUSPENDED",
+          "to": "UNDER_REVIEW"
+        }
+      ],
+      "guards": [
+        "审核与准入独立，PUBLISHED不自动sale_enabled；发布/停售只允运营角色。",
+        "公开版本不可变；草稿修订建立新版本，旧订单仍读快照。"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "Admission",
+      "initial": "NOT_EVALUATED",
+      "states": [
+        "NOT_EVALUATED",
+        "EVALUATING",
+        "ADMITTED",
+        "REJECTED",
+        "SUSPENDED"
+      ],
+      "terminal_states": [],
+      "transitions": [
+        {
+          "from": "NOT_EVALUATED",
+          "to": "EVALUATING"
+        },
+        {
+          "from": "EVALUATING",
+          "to": "ADMITTED"
+        },
+        {
+          "from": "EVALUATING",
+          "to": "REJECTED"
+        },
+        {
+          "from": "ADMITTED",
+          "to": "SUSPENDED"
+        },
+        {
+          "from": "REJECTED",
+          "to": "EVALUATING"
+        },
+        {
+          "from": "SUSPENDED",
+          "to": "EVALUATING"
+        }
+      ],
+      "guards": [
+        "模型/价/权利/样例/基准齐备才ADMITTED；公开和准入同时成立才能新售。"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "PrivacyDeletion",
+      "initial": "REQUESTED",
+      "states": [
+        "REQUESTED",
+        "PROCESSING",
+        "PARTIAL_BLOCKED",
+        "COMPLETED"
+      ],
+      "terminal_states": [
+        "COMPLETED"
+      ],
+      "transitions": [
+        {
+          "from": "REQUESTED",
+          "to": "PROCESSING"
+        },
+        {
+          "from": "PROCESSING",
+          "to": "COMPLETED"
+        },
+        {
+          "from": "PROCESSING",
+          "to": "PARTIAL_BLOCKED"
+        },
+        {
+          "from": "PARTIAL_BLOCKED",
+          "to": "PROCESSING"
+        }
+      ],
+      "guards": [
+        "COMPLETED须受控范围删除回执齐备；不可控备份/供应商边界另列，不伪称手机已删除。"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "AgentInstance",
+      "initial": "REQUESTED",
+      "states": [
+        "REQUESTED",
+        "PREPARING",
+        "READY",
+        "ACTIVE",
+        "DRAINING",
+        "RELEASING",
+        "CLEANUP_FAILED",
+        "RELEASED"
+      ],
+      "terminal_states": [
+        "RELEASED"
+      ],
+      "transitions": [
+        {
+          "from": "REQUESTED",
+          "to": "PREPARING"
+        },
+        {
+          "from": "REQUESTED",
+          "to": "DRAINING"
+        },
+        {
+          "from": "PREPARING",
+          "to": "READY"
+        },
+        {
+          "from": "PREPARING",
+          "to": "DRAINING"
+        },
+        {
+          "from": "READY",
+          "to": "ACTIVE"
+        },
+        {
+          "from": "READY",
+          "to": "DRAINING"
+        },
+        {
+          "from": "ACTIVE",
+          "to": "DRAINING"
+        },
+        {
+          "from": "DRAINING",
+          "to": "RELEASING"
+        },
+        {
+          "from": "RELEASING",
+          "to": "RELEASED"
+        },
+        {
+          "from": "RELEASING",
+          "to": "CLEANUP_FAILED"
+        },
+        {
+          "from": "CLEANUP_FAILED",
+          "to": "RELEASING"
+        }
+      ],
+      "guards": [
+        "同单原生权限隔离；终态outbox触发回收；证据核实后才RELEASED，清理失败隔离重试；SUSPEND不取消外部任务。"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "AgentRun",
+      "initial": "QUEUED",
+      "states": [
+        "QUEUED",
+        "LOADING_SKILLS",
+        "RUNNING",
+        "UNKNOWN",
+        "FAILED",
+        "INTERRUPTED",
+        "SUCCEEDED",
+        "CHECKPOINTED"
+      ],
+      "terminal_states": [
+        "SUCCEEDED",
+        "FAILED",
+        "INTERRUPTED",
+        "CHECKPOINTED"
+      ],
+      "transitions": [
+        {
+          "from": "QUEUED",
+          "to": "LOADING_SKILLS"
+        },
+        {
+          "from": "QUEUED",
+          "to": "FAILED"
+        },
+        {
+          "from": "QUEUED",
+          "to": "INTERRUPTED"
+        },
+        {
+          "from": "LOADING_SKILLS",
+          "to": "RUNNING"
+        },
+        {
+          "from": "LOADING_SKILLS",
+          "to": "FAILED"
+        },
+        {
+          "from": "LOADING_SKILLS",
+          "to": "INTERRUPTED"
+        },
+        {
+          "from": "RUNNING",
+          "to": "SUCCEEDED"
+        },
+        {
+          "from": "RUNNING",
+          "to": "FAILED"
+        },
+        {
+          "from": "RUNNING",
+          "to": "INTERRUPTED"
+        },
+        {
+          "from": "RUNNING",
+          "to": "CHECKPOINTED"
+        },
+        {
+          "from": "RUNNING",
+          "to": "UNKNOWN"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "FAILED"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "INTERRUPTED"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "CHECKPOINTED"
+        },
+        {
+          "from": "UNKNOWN",
+          "to": "SUCCEEDED"
+        }
+      ],
+      "guards": [
+        "显式Skill注入和严格结果校验；事件/工具副作用持久化；断连接不重新购买，恢复用新run及原预算。"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "ReviewPacket",
+      "initial": "SEALED",
+      "states": [
+        "SEALED",
+        "REVIEWING",
+        "PASSED",
+        "STALE",
+        "FAILED",
+        "INSUFFICIENT_EVIDENCE"
+      ],
+      "terminal_states": [
+        "FAILED",
+        "INSUFFICIENT_EVIDENCE",
+        "STALE"
+      ],
+      "transitions": [
+        {
+          "from": "SEALED",
+          "to": "REVIEWING"
+        },
+        {
+          "from": "SEALED",
+          "to": "STALE"
+        },
+        {
+          "from": "REVIEWING",
+          "to": "PASSED"
+        },
+        {
+          "from": "REVIEWING",
+          "to": "FAILED"
+        },
+        {
+          "from": "REVIEWING",
+          "to": "INSUFFICIENT_EVIDENCE"
+        },
+        {
+          "from": "REVIEWING",
+          "to": "STALE"
+        },
+        {
+          "from": "PASSED",
+          "to": "STALE"
+        }
+      ],
+      "guards": [
+        "两份新上下文与确定性检测全通过；任何候选变动使旧包STALE，修复后新包重新复核，发布另受事务保护。"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "id": "SkillBundle",
+      "initial": "DRAFT_NOT_ADMITTED",
+      "states": [
+        "DRAFT_NOT_ADMITTED",
+        "VALIDATING",
+        "ADMITTED",
+        "REVOKED"
+      ],
+      "terminal_states": [
+        "REVOKED"
+      ],
+      "transitions": [
+        {
+          "from": "DRAFT_NOT_ADMITTED",
+          "to": "VALIDATING"
+        },
+        {
+          "from": "DRAFT_NOT_ADMITTED",
+          "to": "REVOKED"
+        },
+        {
+          "from": "VALIDATING",
+          "to": "ADMITTED"
+        },
+        {
+          "from": "VALIDATING",
+          "to": "DRAFT_NOT_ADMITTED"
+        },
+        {
+          "from": "VALIDATING",
+          "to": "REVOKED"
+        },
+        {
+          "from": "ADMITTED",
+          "to": "REVOKED"
+        }
+      ],
+      "guards": [
+        "文件摘要/权利/行为/成本及正式批准缺一不准入；撤销不覆盖历史快照，已付不可履约按退款政策处置。"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    }
+  ]
+}

@@ -1,0 +1,1312 @@
+{
+  "schema_version": "draft-1.0",
+  "date": "2026-10-27",
+  "status": "DESIGN_ONLY_NOT_IMPLEMENTED",
+  "sale_enabled": false,
+  "upstream_commit": "1aab133dd75f4db57c3f62e6da2fdd121c5d509b",
+  "source_data": "../research/one-tap-ads/方案完整目录-1aab133.json",
+  "official_baseline": "../presets/presets.v2.json",
+  "copyright_boundary": "创意来源保留ClipForge/xixihhhh及AGPL-3.0-only信息；本草案不授予额外权利。",
+  "official_mapping_count": 10,
+  "official_mappings": [
+    {
+      "official_preset_id": "minimal-clean",
+      "official_name": "极简纯净",
+      "baseline_version": "2.1.0",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED",
+      "sale_enabled": false,
+      "source_recipe_ids": [
+        "bullet_time_white",
+        "turntable_hero"
+      ],
+      "creative_transfer_note": "白底、留白、少字；原图动效不承诺未拍背面/真转台。",
+      "source_recipe_binding": "creative_reference_only_not_proven_demo_mapping",
+      "input_contract": {
+        "min_photos": 3,
+        "max_photos": 5,
+        "required_user_fields": [],
+        "shot_hints": [
+          "正面整体",
+          "斜侧角度",
+          "真实细节；不要求额外文字输入"
+        ]
+      },
+      "output_slots": [
+        {
+          "slot_id": "hero",
+          "kind": "image",
+          "role": "商品主图",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 1
+        },
+        {
+          "slot_id": "angle",
+          "kind": "image",
+          "role": "角度图",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 2
+        },
+        {
+          "slot_id": "detail",
+          "kind": "image",
+          "role": "可见细节图",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 3
+        },
+        {
+          "slot_id": "poster",
+          "kind": "image",
+          "role": "竖版海报",
+          "width": 1080,
+          "height": 1920,
+          "format": "png",
+          "required": true,
+          "sort_order": 4
+        },
+        {
+          "slot_id": "video",
+          "kind": "video",
+          "role": "商品短片",
+          "width": 1080,
+          "height": 1920,
+          "duration_seconds": 10,
+          "fps": 30,
+          "format": "mp4",
+          "codec": "h264",
+          "pixel_format": "yuv420p",
+          "required": true,
+          "sort_order": 5
+        }
+      ],
+      "required_auxiliary_outputs": [
+        "copy",
+        "manifest"
+      ],
+      "price_fen": null
+    },
+    {
+      "official_preset_id": "warm-handmade",
+      "official_name": "自然手作",
+      "baseline_version": "2.1.0",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED",
+      "sale_enabled": false,
+      "source_recipe_ids": [
+        "craft_hands",
+        "cottage_craft"
+      ],
+      "creative_transfer_note": "吸收暖光/慢节奏；无工艺证据时不生成假制作过程。",
+      "source_recipe_binding": "creative_reference_only_not_proven_demo_mapping",
+      "input_contract": {
+        "min_photos": 3,
+        "max_photos": 5,
+        "required_user_fields": [],
+        "shot_hints": [
+          "正面整体",
+          "斜侧角度",
+          "真实细节；不要求额外文字输入"
+        ]
+      },
+      "output_slots": [
+        {
+          "slot_id": "hero",
+          "kind": "image",
+          "role": "商品主图",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 1
+        },
+        {
+          "slot_id": "angle",
+          "kind": "image",
+          "role": "角度图",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 2
+        },
+        {
+          "slot_id": "detail-a",
+          "kind": "image",
+          "role": "细节图一",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 3
+        },
+        {
+          "slot_id": "detail-b",
+          "kind": "image",
+          "role": "细节图二",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 4
+        },
+        {
+          "slot_id": "poster",
+          "kind": "image",
+          "role": "竖版海报",
+          "width": 1080,
+          "height": 1920,
+          "format": "png",
+          "required": true,
+          "sort_order": 5
+        },
+        {
+          "slot_id": "video",
+          "kind": "video",
+          "role": "商品短片",
+          "width": 1080,
+          "height": 1920,
+          "duration_seconds": 15,
+          "fps": 30,
+          "format": "mp4",
+          "codec": "h264",
+          "pixel_format": "yuv420p",
+          "required": true,
+          "sort_order": 6
+        }
+      ],
+      "required_auxiliary_outputs": [
+        "copy",
+        "manifest"
+      ],
+      "price_fen": null
+    },
+    {
+      "official_preset_id": "quiet-luxury",
+      "official_name": "轻奢细节",
+      "baseline_version": "2.1.0",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED",
+      "sale_enabled": false,
+      "source_recipe_ids": [
+        "macro_texture",
+        "luxury_hero"
+      ],
+      "creative_transfer_note": "灰调/微距/克制字幕；商品颜色、材质、标识需保持。",
+      "source_recipe_binding": "creative_reference_only_not_proven_demo_mapping",
+      "input_contract": {
+        "min_photos": 3,
+        "max_photos": 5,
+        "required_user_fields": [],
+        "shot_hints": [
+          "正面整体",
+          "斜侧角度",
+          "真实细节；不要求额外文字输入"
+        ]
+      },
+      "output_slots": [
+        {
+          "slot_id": "hero",
+          "kind": "image",
+          "role": "商品主图",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 1
+        },
+        {
+          "slot_id": "angle",
+          "kind": "image",
+          "role": "角度图",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 2
+        },
+        {
+          "slot_id": "detail-a",
+          "kind": "image",
+          "role": "细节图一",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 3
+        },
+        {
+          "slot_id": "detail-b",
+          "kind": "image",
+          "role": "细节图二",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 4
+        },
+        {
+          "slot_id": "poster",
+          "kind": "image",
+          "role": "竖版海报",
+          "width": 1080,
+          "height": 1920,
+          "format": "png",
+          "required": true,
+          "sort_order": 5
+        },
+        {
+          "slot_id": "video",
+          "kind": "video",
+          "role": "商品短片",
+          "width": 1080,
+          "height": 1920,
+          "duration_seconds": 15,
+          "fps": 30,
+          "format": "mp4",
+          "codec": "h264",
+          "pixel_format": "yuv420p",
+          "required": true,
+          "sort_order": 6
+        }
+      ],
+      "required_auxiliary_outputs": [
+        "copy",
+        "manifest"
+      ],
+      "price_fen": null
+    },
+    {
+      "official_preset_id": "fresh-daily",
+      "official_name": "清新日常",
+      "baseline_version": "2.1.0",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED",
+      "sale_enabled": false,
+      "source_recipe_ids": [
+        "lifestyle_seed",
+        "day_in_life"
+      ],
+      "creative_transfer_note": "明亮生活情境；AI场景是单独验收的执行变体。",
+      "source_recipe_binding": "creative_reference_only_not_proven_demo_mapping",
+      "input_contract": {
+        "min_photos": 3,
+        "max_photos": 5,
+        "required_user_fields": [],
+        "shot_hints": [
+          "正面整体",
+          "斜侧角度",
+          "真实细节；不要求额外文字输入"
+        ]
+      },
+      "output_slots": [
+        {
+          "slot_id": "hero",
+          "kind": "image",
+          "role": "商品主图",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 1
+        },
+        {
+          "slot_id": "angle",
+          "kind": "image",
+          "role": "角度图",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 2
+        },
+        {
+          "slot_id": "detail",
+          "kind": "image",
+          "role": "可见细节图",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 3
+        },
+        {
+          "slot_id": "poster",
+          "kind": "image",
+          "role": "竖版海报",
+          "width": 1080,
+          "height": 1920,
+          "format": "png",
+          "required": true,
+          "sort_order": 4
+        },
+        {
+          "slot_id": "video",
+          "kind": "video",
+          "role": "商品短片",
+          "width": 1080,
+          "height": 1920,
+          "duration_seconds": 12,
+          "fps": 30,
+          "format": "mp4",
+          "codec": "h264",
+          "pixel_format": "yuv420p",
+          "required": true,
+          "sort_order": 5
+        }
+      ],
+      "required_auxiliary_outputs": [
+        "copy",
+        "manifest"
+      ],
+      "price_fen": null
+    },
+    {
+      "official_preset_id": "appetite-flash",
+      "official_name": "食欲快闪",
+      "baseline_version": "2.1.0",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED",
+      "sale_enabled": false,
+      "source_recipe_ids": [
+        "food_crave",
+        "pack_flatlay"
+      ],
+      "creative_transfer_note": "近景/俯拍/快节奏；只有包装图时不创造切面与配料。",
+      "source_recipe_binding": "creative_reference_only_not_proven_demo_mapping",
+      "input_contract": {
+        "min_photos": 3,
+        "max_photos": 5,
+        "required_user_fields": [],
+        "shot_hints": [
+          "正面整体",
+          "斜侧角度",
+          "真实细节；不要求额外文字输入"
+        ]
+      },
+      "output_slots": [
+        {
+          "slot_id": "hero",
+          "kind": "image",
+          "role": "商品主图",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 1
+        },
+        {
+          "slot_id": "angle",
+          "kind": "image",
+          "role": "角度图",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 2
+        },
+        {
+          "slot_id": "detail",
+          "kind": "image",
+          "role": "实拍细节图",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 3
+        },
+        {
+          "slot_id": "poster",
+          "kind": "image",
+          "role": "竖版海报",
+          "width": 1080,
+          "height": 1920,
+          "format": "png",
+          "required": true,
+          "sort_order": 4
+        },
+        {
+          "slot_id": "video",
+          "kind": "video",
+          "role": "商品短片",
+          "width": 1080,
+          "height": 1920,
+          "duration_seconds": 10,
+          "fps": 30,
+          "format": "mp4",
+          "codec": "h264",
+          "pixel_format": "yuv420p",
+          "required": true,
+          "sort_order": 5
+        }
+      ],
+      "required_auxiliary_outputs": [
+        "copy",
+        "manifest"
+      ],
+      "price_fen": null
+    },
+    {
+      "official_preset_id": "home-calm",
+      "official_name": "家居留白",
+      "baseline_version": "2.1.0",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED",
+      "sale_enabled": false,
+      "source_recipe_ids": [
+        "ambiance_mood",
+        "ai_room_preview"
+      ],
+      "creative_transfer_note": "氛围与慢停留；房间预览变体才需额外房间图。",
+      "source_recipe_binding": "creative_reference_only_not_proven_demo_mapping",
+      "input_contract": {
+        "min_photos": 3,
+        "max_photos": 5,
+        "required_user_fields": [],
+        "shot_hints": [
+          "正面整体",
+          "斜侧角度",
+          "真实细节；不要求额外文字输入"
+        ]
+      },
+      "output_slots": [
+        {
+          "slot_id": "hero",
+          "kind": "image",
+          "role": "商品主图",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 1
+        },
+        {
+          "slot_id": "angle",
+          "kind": "image",
+          "role": "角度或已有场景图",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 2
+        },
+        {
+          "slot_id": "detail-a",
+          "kind": "image",
+          "role": "细节图一",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 3
+        },
+        {
+          "slot_id": "detail-b",
+          "kind": "image",
+          "role": "细节图二",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 4
+        },
+        {
+          "slot_id": "poster",
+          "kind": "image",
+          "role": "竖版海报",
+          "width": 1080,
+          "height": 1920,
+          "format": "png",
+          "required": true,
+          "sort_order": 5
+        },
+        {
+          "slot_id": "video",
+          "kind": "video",
+          "role": "商品短片",
+          "width": 1080,
+          "height": 1920,
+          "duration_seconds": 18,
+          "fps": 30,
+          "format": "mp4",
+          "codec": "h264",
+          "pixel_format": "yuv420p",
+          "required": true,
+          "sort_order": 6
+        }
+      ],
+      "required_auxiliary_outputs": [
+        "copy",
+        "manifest"
+      ],
+      "price_fen": null
+    },
+    {
+      "official_preset_id": "feature-cards",
+      "official_name": "特征卡片",
+      "baseline_version": "2.1.0",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED",
+      "sale_enabled": false,
+      "source_recipe_ids": [
+        "three_reasons",
+        "slide_deck",
+        "clean_label"
+      ],
+      "creative_transfer_note": "一卡一点、标签有来源；卖点不足时不硬凑事实。",
+      "source_recipe_binding": "creative_reference_only_not_proven_demo_mapping",
+      "input_contract": {
+        "min_photos": 3,
+        "max_photos": 5,
+        "required_user_fields": [],
+        "shot_hints": [
+          "正面整体",
+          "斜侧角度",
+          "真实细节；不要求额外文字输入"
+        ]
+      },
+      "output_slots": [
+        {
+          "slot_id": "hero",
+          "kind": "image",
+          "role": "商品主图",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 1
+        },
+        {
+          "slot_id": "feature-a",
+          "kind": "image",
+          "role": "可见特征图一",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 2
+        },
+        {
+          "slot_id": "feature-b",
+          "kind": "image",
+          "role": "可见特征图二",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 3
+        },
+        {
+          "slot_id": "feature-c",
+          "kind": "image",
+          "role": "特征或角度图",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 4
+        },
+        {
+          "slot_id": "poster",
+          "kind": "image",
+          "role": "竖版海报",
+          "width": 1080,
+          "height": 1920,
+          "format": "png",
+          "required": true,
+          "sort_order": 5
+        },
+        {
+          "slot_id": "video",
+          "kind": "video",
+          "role": "商品短片",
+          "width": 1080,
+          "height": 1920,
+          "duration_seconds": 15,
+          "fps": 30,
+          "format": "mp4",
+          "codec": "h264",
+          "pixel_format": "yuv420p",
+          "required": true,
+          "sort_order": 6
+        }
+      ],
+      "required_auxiliary_outputs": [
+        "copy",
+        "manifest"
+      ],
+      "price_fen": null
+    },
+    {
+      "official_preset_id": "color-pop",
+      "official_name": "色彩撞击",
+      "baseline_version": "2.1.0",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED",
+      "sale_enabled": false,
+      "source_recipe_ids": [
+        "pack_flatlay",
+        "flash_sale"
+      ],
+      "creative_transfer_note": "明亮拼贴与快节奏；无活动证据时采用中性CTA。",
+      "source_recipe_binding": "creative_reference_only_not_proven_demo_mapping",
+      "input_contract": {
+        "min_photos": 3,
+        "max_photos": 5,
+        "required_user_fields": [],
+        "shot_hints": [
+          "正面整体",
+          "斜侧角度",
+          "真实细节；不要求额外文字输入"
+        ]
+      },
+      "output_slots": [
+        {
+          "slot_id": "hero",
+          "kind": "image",
+          "role": "商品主图",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 1
+        },
+        {
+          "slot_id": "detail",
+          "kind": "image",
+          "role": "可见细节图",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 2
+        },
+        {
+          "slot_id": "poster",
+          "kind": "image",
+          "role": "竖版海报",
+          "width": 1080,
+          "height": 1920,
+          "format": "png",
+          "required": true,
+          "sort_order": 3
+        },
+        {
+          "slot_id": "video",
+          "kind": "video",
+          "role": "商品短片",
+          "width": 1080,
+          "height": 1920,
+          "duration_seconds": 8,
+          "fps": 30,
+          "format": "mp4",
+          "codec": "h264",
+          "pixel_format": "yuv420p",
+          "required": true,
+          "sort_order": 4
+        }
+      ],
+      "required_auxiliary_outputs": [
+        "copy",
+        "manifest"
+      ],
+      "price_fen": null
+    },
+    {
+      "official_preset_id": "launch-story",
+      "official_name": "上新叙事",
+      "baseline_version": "2.1.0",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED",
+      "sale_enabled": false,
+      "source_recipe_ids": [
+        "new_drop",
+        "ritual_unboxing"
+      ],
+      "creative_transfer_note": "揭幕与细节顺序；无证据时不做旧款对比/虚构附件。",
+      "source_recipe_binding": "creative_reference_only_not_proven_demo_mapping",
+      "input_contract": {
+        "min_photos": 3,
+        "max_photos": 5,
+        "required_user_fields": [],
+        "shot_hints": [
+          "正面整体",
+          "斜侧角度",
+          "真实细节；不要求额外文字输入"
+        ]
+      },
+      "output_slots": [
+        {
+          "slot_id": "hero",
+          "kind": "image",
+          "role": "上新主图",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 1
+        },
+        {
+          "slot_id": "angle",
+          "kind": "image",
+          "role": "角度图",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 2
+        },
+        {
+          "slot_id": "detail-a",
+          "kind": "image",
+          "role": "细节图一",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 3
+        },
+        {
+          "slot_id": "detail-b",
+          "kind": "image",
+          "role": "细节图二",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 4
+        },
+        {
+          "slot_id": "poster",
+          "kind": "image",
+          "role": "竖版海报",
+          "width": 1080,
+          "height": 1920,
+          "format": "png",
+          "required": true,
+          "sort_order": 5
+        },
+        {
+          "slot_id": "video",
+          "kind": "video",
+          "role": "商品短片",
+          "width": 1080,
+          "height": 1920,
+          "duration_seconds": 20,
+          "fps": 30,
+          "format": "mp4",
+          "codec": "h264",
+          "pixel_format": "yuv420p",
+          "required": true,
+          "sort_order": 6
+        }
+      ],
+      "required_auxiliary_outputs": [
+        "copy",
+        "manifest"
+      ],
+      "price_fen": null
+    },
+    {
+      "official_preset_id": "portrait-social",
+      "official_name": "竖版种草",
+      "baseline_version": "2.1.0",
+      "status": "DESIGN_ONLY_NOT_IMPLEMENTED",
+      "sale_enabled": false,
+      "source_recipe_ids": [
+        "presenter_talk",
+        "ai_ugc_actor"
+      ],
+      "creative_transfer_note": "竖屏讲解与字幕；AI演员不是实际买家证言。",
+      "source_recipe_binding": "creative_reference_only_not_proven_demo_mapping",
+      "input_contract": {
+        "min_photos": 3,
+        "max_photos": 5,
+        "required_user_fields": [],
+        "shot_hints": [
+          "正面整体",
+          "斜侧角度",
+          "真实细节；不要求额外文字输入"
+        ]
+      },
+      "output_slots": [
+        {
+          "slot_id": "hero",
+          "kind": "image",
+          "role": "竖版封面",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 1
+        },
+        {
+          "slot_id": "angle",
+          "kind": "image",
+          "role": "竖版角度图",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 2
+        },
+        {
+          "slot_id": "detail",
+          "kind": "image",
+          "role": "竖版细节图",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 3
+        },
+        {
+          "slot_id": "video",
+          "kind": "video",
+          "role": "商品短片",
+          "width": 1080,
+          "height": 1920,
+          "duration_seconds": 15,
+          "fps": 30,
+          "format": "mp4",
+          "codec": "h264",
+          "pixel_format": "yuv420p",
+          "required": true,
+          "sort_order": 4
+        }
+      ],
+      "required_auxiliary_outputs": [
+        "copy",
+        "manifest"
+      ],
+      "price_fen": null
+    }
+  ],
+  "execution_examples": [
+    {
+      "variant_id": "photo-layout-pack",
+      "display_name": "快闪图文包",
+      "official_preset_id": "color-pop",
+      "baseline_version": "2.1.0",
+      "engine": "PHOTO_LAYOUT",
+      "status": "DESIGN_REQUIRES_IMPLEMENTATION_AND_VALIDATION",
+      "sale_enabled": false,
+      "source_recipe_ids": [
+        "pack_flatlay",
+        "slide_deck"
+      ],
+      "source_demo_evidence_ids": [
+        "tissue-showcase"
+      ],
+      "source_demo_proves_exact_recipe_id": false,
+      "required_capabilities": [
+        "photo_layout",
+        "deterministic_motion",
+        "caption_timeline",
+        "licensed_music_or_silent"
+      ],
+      "audio_policy": "licensed_music_or_silent",
+      "post_production_required": true,
+      "post_production_stages": [
+        "preserve_native_audio_if_present",
+        "caption_if_selected",
+        "approved_music_or_silent",
+        "required_labels",
+        "cover",
+        "encode_to_contract",
+        "whole_pack_qc"
+      ],
+      "output_slots": [
+        {
+          "slot_id": "hero",
+          "kind": "image",
+          "role": "商品主图",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 1
+        },
+        {
+          "slot_id": "detail",
+          "kind": "image",
+          "role": "可见细节图",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 2
+        },
+        {
+          "slot_id": "poster",
+          "kind": "image",
+          "role": "竖版海报",
+          "width": 1080,
+          "height": 1920,
+          "format": "png",
+          "required": true,
+          "sort_order": 3
+        },
+        {
+          "slot_id": "video",
+          "kind": "video",
+          "role": "商品短片",
+          "width": 1080,
+          "height": 1920,
+          "duration_seconds": 8,
+          "fps": 30,
+          "format": "mp4",
+          "codec": "h264",
+          "pixel_format": "yuv420p",
+          "required": true,
+          "sort_order": 4
+        }
+      ],
+      "video_contract": {
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "duration_seconds": 8,
+        "target_frames": 240,
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "duration_tolerance_frames": 1
+      },
+      "provider_model_snapshot": null,
+      "provider_rate_snapshot": null,
+      "price_fen": null,
+      "user_fills_product_form": false,
+      "mandatory_multimodal_analysis": true,
+      "requires_product_identity_lock": true,
+      "unknown_fact_policy": "omit_or_neutral_copy",
+      "silent_engine_fallback_allowed": false,
+      "execution_note": "只借鉴四段展示/信息卡结构，不继承示例的纸巾性能、价格或无音轨状态。"
+    },
+    {
+      "variant_id": "product-detail-ai",
+      "display_name": "商品微距展示包·生成变体",
+      "official_preset_id": "quiet-luxury",
+      "baseline_version": "2.1.0",
+      "engine": "PER_SHOT_AI",
+      "status": "DESIGN_REQUIRES_IMPLEMENTATION_AND_VALIDATION",
+      "sale_enabled": false,
+      "source_recipe_ids": [
+        "macro_texture",
+        "turntable_hero"
+      ],
+      "source_demo_evidence_ids": [],
+      "source_demo_proves_exact_recipe_id": false,
+      "required_capabilities": [
+        "product_locked_keyframes",
+        "image_to_video",
+        "cross_frame_product_qc",
+        "caption_timeline"
+      ],
+      "audio_policy": "licensed_music_or_silent",
+      "post_production_required": true,
+      "post_production_stages": [
+        "preserve_native_audio_if_present",
+        "caption_if_selected",
+        "approved_music_or_silent",
+        "required_labels",
+        "cover",
+        "encode_to_contract",
+        "whole_pack_qc"
+      ],
+      "output_slots": [
+        {
+          "slot_id": "hero",
+          "kind": "image",
+          "role": "商品主图",
+          "width": 1080,
+          "height": 1080,
+          "format": "png",
+          "required": true,
+          "sort_order": 1
+        },
+        {
+          "slot_id": "angle",
+          "kind": "image",
+          "role": "角度图",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 2
+        },
+        {
+          "slot_id": "detail-a",
+          "kind": "image",
+          "role": "细节图一",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 3
+        },
+        {
+          "slot_id": "detail-b",
+          "kind": "image",
+          "role": "细节图二",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 4
+        },
+        {
+          "slot_id": "poster",
+          "kind": "image",
+          "role": "竖版海报",
+          "width": 1080,
+          "height": 1920,
+          "format": "png",
+          "required": true,
+          "sort_order": 5
+        },
+        {
+          "slot_id": "video",
+          "kind": "video",
+          "role": "商品短片",
+          "width": 1080,
+          "height": 1920,
+          "duration_seconds": 15,
+          "fps": 30,
+          "format": "mp4",
+          "codec": "h264",
+          "pixel_format": "yuv420p",
+          "required": true,
+          "sort_order": 6
+        }
+      ],
+      "video_contract": {
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "duration_seconds": 15,
+        "target_frames": 450,
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "duration_tolerance_frames": 1
+      },
+      "provider_model_snapshot": null,
+      "provider_rate_snapshot": null,
+      "price_fen": null,
+      "user_fills_product_form": false,
+      "mandatory_multimodal_analysis": true,
+      "requires_product_identity_lock": true,
+      "unknown_fact_policy": "omit_or_neutral_copy",
+      "silent_engine_fallback_allowed": false,
+      "execution_note": "以真实细节为锚点，不能生成未拍背面/新材质；模型、成本与通过率均待实测。"
+    },
+    {
+      "variant_id": "ai-presenter-single",
+      "display_name": "AI单镜讲解包",
+      "official_preset_id": "portrait-social",
+      "baseline_version": "2.1.0",
+      "engine": "PER_SHOT_AI",
+      "status": "DESIGN_REQUIRES_IMPLEMENTATION_AND_VALIDATION",
+      "sale_enabled": false,
+      "source_recipe_ids": [
+        "presenter_talk",
+        "ai_ugc_actor"
+      ],
+      "source_demo_evidence_ids": [
+        "coffee-single",
+        "blender-single"
+      ],
+      "source_demo_proves_exact_recipe_id": false,
+      "required_capabilities": [
+        "approved_ai_presenter",
+        "correct_product_holding",
+        "native_speech",
+        "speech_alignment",
+        "product_identity_qc"
+      ],
+      "audio_policy": "native_speech_preserve_no_second_tts",
+      "post_production_required": true,
+      "post_production_stages": [
+        "preserve_native_audio_if_present",
+        "caption_if_selected",
+        "approved_music_or_silent",
+        "required_labels",
+        "cover",
+        "encode_to_contract",
+        "whole_pack_qc"
+      ],
+      "output_slots": [
+        {
+          "slot_id": "hero",
+          "kind": "image",
+          "role": "竖版封面",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 1
+        },
+        {
+          "slot_id": "angle",
+          "kind": "image",
+          "role": "竖版角度图",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 2
+        },
+        {
+          "slot_id": "detail",
+          "kind": "image",
+          "role": "竖版细节图",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 3
+        },
+        {
+          "slot_id": "video",
+          "kind": "video",
+          "role": "商品短片",
+          "width": 1080,
+          "height": 1920,
+          "duration_seconds": 15,
+          "fps": 30,
+          "format": "mp4",
+          "codec": "h264",
+          "pixel_format": "yuv420p",
+          "required": true,
+          "sort_order": 4
+        }
+      ],
+      "video_contract": {
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "duration_seconds": 15,
+        "target_frames": 450,
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "duration_tolerance_frames": 1
+      },
+      "provider_model_snapshot": null,
+      "provider_rate_snapshot": null,
+      "price_fen": null,
+      "user_fills_product_form": false,
+      "mandatory_multimodal_analysis": true,
+      "requires_product_identity_lock": true,
+      "unknown_fact_policy": "omit_or_neutral_copy",
+      "silent_engine_fallback_allowed": false,
+      "execution_note": "一个人物原声片段加后期；需对商品持握、可懂度、字幕和包装形态实测。"
+    },
+    {
+      "variant_id": "ai-presenter-multi",
+      "display_name": "AI连续多镜包",
+      "official_preset_id": "portrait-social",
+      "baseline_version": "2.1.0",
+      "engine": "REFERENCE_FILM",
+      "status": "DESIGN_REQUIRES_IMPLEMENTATION_AND_VALIDATION",
+      "sale_enabled": false,
+      "source_recipe_ids": [
+        "ai_ugc_actor",
+        "gift_story"
+      ],
+      "source_demo_evidence_ids": [
+        "coffee-film"
+      ],
+      "source_demo_proves_exact_recipe_id": false,
+      "required_capabilities": [
+        "consistent_reference_frames",
+        "multi_reference_video",
+        "native_multi_shot",
+        "native_speech",
+        "cross_shot_product_character_qc"
+      ],
+      "audio_policy": "native_speech_preserve_no_second_tts",
+      "post_production_required": true,
+      "post_production_stages": [
+        "preserve_native_audio_if_present",
+        "caption_if_selected",
+        "approved_music_or_silent",
+        "required_labels",
+        "cover",
+        "encode_to_contract",
+        "whole_pack_qc"
+      ],
+      "output_slots": [
+        {
+          "slot_id": "hero",
+          "kind": "image",
+          "role": "竖版封面",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 1
+        },
+        {
+          "slot_id": "angle",
+          "kind": "image",
+          "role": "竖版角度图",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 2
+        },
+        {
+          "slot_id": "detail",
+          "kind": "image",
+          "role": "竖版细节图",
+          "width": 1080,
+          "height": 1440,
+          "format": "png",
+          "required": true,
+          "sort_order": 3
+        },
+        {
+          "slot_id": "video",
+          "kind": "video",
+          "role": "商品短片",
+          "width": 1080,
+          "height": 1920,
+          "duration_seconds": 15,
+          "fps": 30,
+          "format": "mp4",
+          "codec": "h264",
+          "pixel_format": "yuv420p",
+          "required": true,
+          "sort_order": 4
+        }
+      ],
+      "video_contract": {
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "duration_seconds": 15,
+        "target_frames": 450,
+        "codec": "h264",
+        "pixel_format": "yuv420p",
+        "duration_tolerance_frames": 1
+      },
+      "provider_model_snapshot": null,
+      "provider_rate_snapshot": null,
+      "price_fen": null,
+      "user_fills_product_form": false,
+      "mandatory_multimodal_analysis": true,
+      "requires_product_identity_lock": true,
+      "unknown_fact_policy": "omit_or_neutral_copy",
+      "silent_engine_fallback_allowed": false,
+      "execution_note": "分镜参考/时间码一次整片加后期；咖啡演示的瓶装变杯装问题作为必须拦截的反例。"
+    }
+  ],
+  "release_gates": [
+    "implementation_complete",
+    "source_and_resource_rights_resolved",
+    "model_capabilities_verified",
+    "evidence_and_identity_quality_pass",
+    "sound_and_delivery_contract_pass",
+    "cost_time_distribution_measured",
+    "mini_program_real_device_flow_pass"
+  ]
+}

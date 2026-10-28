@@ -1,0 +1,175 @@
+{
+  "type": "object",
+  "properties": {
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "order_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "preview_session_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "intent_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "instance_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "role": {
+      "$ref": "#/$defs/AgentRole"
+    },
+    "tool_name": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "snapshot_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "request_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "fencing_token": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "reservation_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+    },
+    "reserved_cost_micro": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "currency": {
+      "const": "CNY"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "INTENT",
+        "SUBMITTING",
+        "ACKNOWLEDGED",
+        "UNKNOWN",
+        "SUCCEEDED",
+        "FAILED"
+      ]
+    },
+    "provider_submission_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "capability_expires_at": {
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 40,
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$"
+    },
+    "deadline_at": {
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 40,
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$"
+    }
+  },
+  "required": [
+    "tenant_id",
+    "order_id",
+    "preview_session_id",
+    "intent_id",
+    "instance_id",
+    "run_id",
+    "role",
+    "tool_name",
+    "snapshot_hash",
+    "request_hash",
+    "idempotency_key",
+    "fencing_token",
+    "reservation_id",
+    "reserved_cost_micro",
+    "currency",
+    "state",
+    "provider_submission_id",
+    "capability_expires_at",
+    "deadline_at"
+  ],
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "properties": {
+        "order_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        },
+        "preview_session_id": {
+          "type": "null"
+        }
+      }
+    },
+    {
+      "properties": {
+        "order_id": {
+          "type": "null"
+        },
+        "preview_session_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+        }
+      }
+    }
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ToolCallIntent",
+  "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+  "$defs": {
+    "AgentRole": {
+      "type": "string",
+      "enum": [
+        "CONTENT",
+        "PRODUCTION",
+        "POST",
+        "REVIEW_FACTS",
+        "REVIEW_STYLE"
+      ]
+    }
+  }
+}

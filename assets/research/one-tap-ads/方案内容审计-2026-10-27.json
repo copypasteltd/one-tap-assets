@@ -1,0 +1,50 @@
+{
+  "commit": "1aab133dd75f4db57c3f62e6da2fdd121c5d509b",
+  "recipes": 391,
+  "all_ids_unique": true,
+  "all_referenced_cameras_and_looks_exist": true,
+  "groups": {
+    "product_show": 66,
+    "lifestyle": 69,
+    "presenter": 95,
+    "story": 69,
+    "promo": 34,
+    "creative": 58
+  },
+  "ad_recipe_missing_explicit_total_duration": 391,
+  "ad_recipe_missing_explicit_quality": 344,
+  "unique_settings_canonical_keys_without_hint": 385,
+  "unique_settings_canonical_keys_with_hint": 391,
+  "reference_example_duration_checks": [
+    {
+      "id": "tpl-pain",
+      "declared_seconds": 28,
+      "shot_sum_seconds": 23
+    },
+    {
+      "id": "tpl-compare",
+      "declared_seconds": 30,
+      "shot_sum_seconds": 25
+    },
+    {
+      "id": "tpl-story",
+      "declared_seconds": 26,
+      "shot_sum_seconds": 21
+    }
+  ],
+  "showcase_declared_resolution": "1080p",
+  "showcase_actual_video_dimensions": [
+    720,
+    1280
+  ],
+  "showcase_actual_audio_stream_present": false,
+  "showcase_source_sha256": "fed9971ca6752e0718cae3cff44be79cf6e4eeba92634d4fa941599ddfcd7198",
+  "visual_observation": {
+    "source": "local input-coffee.jpg, grid-coffee.jpg and demo-coffee-film.mp4; contact sheets visually inspected",
+    "coffee_input_package": "single bottle",
+    "coffee_output_package": "small portion cup/capsule and gift box",
+    "package_form_changed": true,
+    "limits": "人工对照画面观察，未做新模型复现/ASR/音画同步定量验证；未证明演示与某个AdTemplate ID一一对应"
+  },
+  "product_acceptance_tests_executed": false
+}

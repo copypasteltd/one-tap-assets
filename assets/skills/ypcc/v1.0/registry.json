@@ -1,0 +1,2688 @@
+{
+  "schema_version": "1.0.0",
+  "requirements_version": "3.1",
+  "status": "DESIGN_NOT_IMPLEMENTED",
+  "installed_globally": false,
+  "production_admitted": false,
+  "skills": [
+    {
+      "name": "ypcc-core",
+      "version": "1.0.0",
+      "layer": "CORE",
+      "path": "assets/skills/ypcc/v1.0/ypcc-core/SKILL.md",
+      "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    },
+    {
+      "name": "ypcc-style-minimal-clean",
+      "version": "1.0.0",
+      "layer": "STYLE",
+      "path": "assets/skills/ypcc/v1.0/ypcc-style-minimal-clean/SKILL.md",
+      "sha256": "4d314637519ba5e8c65ff730b160a57c726bd70d052ce25ae967f2e109cf9b9a",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    },
+    {
+      "name": "ypcc-style-warm-handmade",
+      "version": "1.0.0",
+      "layer": "STYLE",
+      "path": "assets/skills/ypcc/v1.0/ypcc-style-warm-handmade/SKILL.md",
+      "sha256": "731183976a401a1273e961b74aa3ddf7d47640a91c7589cb3344bc57772d3632",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    },
+    {
+      "name": "ypcc-style-quiet-luxury",
+      "version": "1.0.0",
+      "layer": "STYLE",
+      "path": "assets/skills/ypcc/v1.0/ypcc-style-quiet-luxury/SKILL.md",
+      "sha256": "da47d4cdabc4e33899b1e1337d521006f1e4e8b57818cad2addc918d1f46ce02",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    },
+    {
+      "name": "ypcc-style-fresh-daily",
+      "version": "1.0.0",
+      "layer": "STYLE",
+      "path": "assets/skills/ypcc/v1.0/ypcc-style-fresh-daily/SKILL.md",
+      "sha256": "e17745b4c39b8380d743510c4503db879202ff709af0017e57ccb60c49e59340",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    },
+    {
+      "name": "ypcc-style-appetite-flash",
+      "version": "1.0.0",
+      "layer": "STYLE",
+      "path": "assets/skills/ypcc/v1.0/ypcc-style-appetite-flash/SKILL.md",
+      "sha256": "5675806b5f8852efc3a86d47e5237f0ce272558eaaa83df69c9f8769c5931130",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    },
+    {
+      "name": "ypcc-style-home-calm",
+      "version": "1.0.0",
+      "layer": "STYLE",
+      "path": "assets/skills/ypcc/v1.0/ypcc-style-home-calm/SKILL.md",
+      "sha256": "8e2e9c2985d940ed1d41a0bcc49fc0abf19e605be72aa8ff28ec67466ef70c5c",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    },
+    {
+      "name": "ypcc-style-feature-cards",
+      "version": "1.0.0",
+      "layer": "STYLE",
+      "path": "assets/skills/ypcc/v1.0/ypcc-style-feature-cards/SKILL.md",
+      "sha256": "b52ffe606d5ad7a6c6ecc8d4d131387b17e52764f0d40055ac601d24d1b983e1",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    },
+    {
+      "name": "ypcc-style-color-pop",
+      "version": "1.0.0",
+      "layer": "STYLE",
+      "path": "assets/skills/ypcc/v1.0/ypcc-style-color-pop/SKILL.md",
+      "sha256": "5f5b0cf65e8d19f9cf5b24b183742413a9055ea50f1723dcf0f0f77fee6a7a9d",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    },
+    {
+      "name": "ypcc-style-launch-story",
+      "version": "1.0.0",
+      "layer": "STYLE",
+      "path": "assets/skills/ypcc/v1.0/ypcc-style-launch-story/SKILL.md",
+      "sha256": "bbcfcf51a9a7315d64d4d6f10d2d03b3121a129539ba8050e71d23dec6fe9b7d",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    },
+    {
+      "name": "ypcc-style-portrait-social",
+      "version": "1.0.0",
+      "layer": "STYLE",
+      "path": "assets/skills/ypcc/v1.0/ypcc-style-portrait-social/SKILL.md",
+      "sha256": "5e24f216a23c40754dbaca3a599e016b048bbb774959d5d86a67feba63f2ae21",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    },
+    {
+      "name": "ypcc-target-images",
+      "version": "1.0.0",
+      "layer": "TARGET",
+      "path": "assets/skills/ypcc/v1.0/ypcc-target-images/SKILL.md",
+      "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    },
+    {
+      "name": "ypcc-target-video",
+      "version": "1.0.0",
+      "layer": "TARGET",
+      "path": "assets/skills/ypcc/v1.0/ypcc-target-video/SKILL.md",
+      "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    },
+    {
+      "name": "ypcc-target-copy",
+      "version": "1.0.0",
+      "layer": "TARGET",
+      "path": "assets/skills/ypcc/v1.0/ypcc-target-copy/SKILL.md",
+      "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    },
+    {
+      "name": "ypcc-plan",
+      "version": "1.0.0",
+      "layer": "ROLE",
+      "path": "assets/skills/ypcc/v1.0/ypcc-plan/SKILL.md",
+      "sha256": "d40a92dd93bbc17d4cda06f39f9e389576819fd0ed8d3ecf41672415b7eaf299",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    },
+    {
+      "name": "ypcc-produce",
+      "version": "1.0.0",
+      "layer": "ROLE",
+      "path": "assets/skills/ypcc/v1.0/ypcc-produce/SKILL.md",
+      "sha256": "a2a2d08de965fe70c03e291d697745a0b62e0b8cbb8d6026100cca05e89d202b",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    },
+    {
+      "name": "ypcc-post",
+      "version": "1.0.0",
+      "layer": "ROLE",
+      "path": "assets/skills/ypcc/v1.0/ypcc-post/SKILL.md",
+      "sha256": "28ca65e35707a1a4fdf5780c545edd88344a081741b2bcc4010618972f69a5c9",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    },
+    {
+      "name": "ypcc-review-facts",
+      "version": "1.0.0",
+      "layer": "ROLE",
+      "path": "assets/skills/ypcc/v1.0/ypcc-review-facts/SKILL.md",
+      "sha256": "aef04cc89ba1d1c199aeef45b1df0ab9f5d5fea5549845552ac091020d71da99",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    },
+    {
+      "name": "ypcc-review-style",
+      "version": "1.0.0",
+      "layer": "ROLE",
+      "path": "assets/skills/ypcc/v1.0/ypcc-review-style/SKILL.md",
+      "sha256": "4099debe0afebfa007042d97e7b2a0bdf9860626e8aa32886429a87dcc183604",
+      "trust": "OFFICIAL_DRAFT",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED",
+      "behavioral_evaluation": "NOT_RUN"
+    }
+  ],
+  "bundles": [
+    {
+      "bundle_id": "ypcc-bundle-minimal-clean.photo-layout",
+      "version": "1.0.0",
+      "sha256": "4b639d7e1c9e31603c9a84308d0b03752771236f7bd55ddc5bc117517f3fc903",
+      "hash_algorithm": "sha256-utf8-json-sortkeys-v1",
+      "payload": {
+        "preset_id": "minimal-clean",
+        "variant_id": "minimal-clean.photo-layout",
+        "engine": "PHOTO_LAYOUT",
+        "roles": {
+          "CONTENT": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-minimal-clean",
+              "version": "1.0.0",
+              "sha256": "4d314637519ba5e8c65ff730b160a57c726bd70d052ce25ae967f2e109cf9b9a"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-plan",
+              "version": "1.0.0",
+              "sha256": "d40a92dd93bbc17d4cda06f39f9e389576819fd0ed8d3ecf41672415b7eaf299"
+            }
+          ],
+          "PRODUCTION": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-minimal-clean",
+              "version": "1.0.0",
+              "sha256": "4d314637519ba5e8c65ff730b160a57c726bd70d052ce25ae967f2e109cf9b9a"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-produce",
+              "version": "1.0.0",
+              "sha256": "a2a2d08de965fe70c03e291d697745a0b62e0b8cbb8d6026100cca05e89d202b"
+            }
+          ],
+          "POST": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-minimal-clean",
+              "version": "1.0.0",
+              "sha256": "4d314637519ba5e8c65ff730b160a57c726bd70d052ce25ae967f2e109cf9b9a"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-post",
+              "version": "1.0.0",
+              "sha256": "28ca65e35707a1a4fdf5780c545edd88344a081741b2bcc4010618972f69a5c9"
+            }
+          ],
+          "REVIEW_FACTS": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-minimal-clean",
+              "version": "1.0.0",
+              "sha256": "4d314637519ba5e8c65ff730b160a57c726bd70d052ce25ae967f2e109cf9b9a"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-facts",
+              "version": "1.0.0",
+              "sha256": "aef04cc89ba1d1c199aeef45b1df0ab9f5d5fea5549845552ac091020d71da99"
+            }
+          ],
+          "REVIEW_STYLE": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-minimal-clean",
+              "version": "1.0.0",
+              "sha256": "4d314637519ba5e8c65ff730b160a57c726bd70d052ce25ae967f2e109cf9b9a"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-style",
+              "version": "1.0.0",
+              "sha256": "4099debe0afebfa007042d97e7b2a0bdf9860626e8aa32886429a87dcc183604"
+            }
+          ]
+        },
+        "policy_version": "YPCC-CODEX-POLICY-1.0.0"
+      },
+      "status": "DRAFT_NOT_ADMITTED",
+      "sale_enabled": false,
+      "release_signature": null
+    },
+    {
+      "bundle_id": "ypcc-bundle-warm-handmade.photo-layout",
+      "version": "1.0.0",
+      "sha256": "46992005a4031b6e64aeea34fa2773ed70484bbebd313b225a3c3b2f5f79c83b",
+      "hash_algorithm": "sha256-utf8-json-sortkeys-v1",
+      "payload": {
+        "preset_id": "warm-handmade",
+        "variant_id": "warm-handmade.photo-layout",
+        "engine": "PHOTO_LAYOUT",
+        "roles": {
+          "CONTENT": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-warm-handmade",
+              "version": "1.0.0",
+              "sha256": "731183976a401a1273e961b74aa3ddf7d47640a91c7589cb3344bc57772d3632"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-plan",
+              "version": "1.0.0",
+              "sha256": "d40a92dd93bbc17d4cda06f39f9e389576819fd0ed8d3ecf41672415b7eaf299"
+            }
+          ],
+          "PRODUCTION": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-warm-handmade",
+              "version": "1.0.0",
+              "sha256": "731183976a401a1273e961b74aa3ddf7d47640a91c7589cb3344bc57772d3632"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-produce",
+              "version": "1.0.0",
+              "sha256": "a2a2d08de965fe70c03e291d697745a0b62e0b8cbb8d6026100cca05e89d202b"
+            }
+          ],
+          "POST": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-warm-handmade",
+              "version": "1.0.0",
+              "sha256": "731183976a401a1273e961b74aa3ddf7d47640a91c7589cb3344bc57772d3632"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-post",
+              "version": "1.0.0",
+              "sha256": "28ca65e35707a1a4fdf5780c545edd88344a081741b2bcc4010618972f69a5c9"
+            }
+          ],
+          "REVIEW_FACTS": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-warm-handmade",
+              "version": "1.0.0",
+              "sha256": "731183976a401a1273e961b74aa3ddf7d47640a91c7589cb3344bc57772d3632"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-facts",
+              "version": "1.0.0",
+              "sha256": "aef04cc89ba1d1c199aeef45b1df0ab9f5d5fea5549845552ac091020d71da99"
+            }
+          ],
+          "REVIEW_STYLE": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-warm-handmade",
+              "version": "1.0.0",
+              "sha256": "731183976a401a1273e961b74aa3ddf7d47640a91c7589cb3344bc57772d3632"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-style",
+              "version": "1.0.0",
+              "sha256": "4099debe0afebfa007042d97e7b2a0bdf9860626e8aa32886429a87dcc183604"
+            }
+          ]
+        },
+        "policy_version": "YPCC-CODEX-POLICY-1.0.0"
+      },
+      "status": "DRAFT_NOT_ADMITTED",
+      "sale_enabled": false,
+      "release_signature": null
+    },
+    {
+      "bundle_id": "ypcc-bundle-quiet-luxury.photo-layout",
+      "version": "1.0.0",
+      "sha256": "506cf669460bc9edc32df2f99803988c106ff9cf1d33168e1cbca1c2d00c7569",
+      "hash_algorithm": "sha256-utf8-json-sortkeys-v1",
+      "payload": {
+        "preset_id": "quiet-luxury",
+        "variant_id": "quiet-luxury.photo-layout",
+        "engine": "PHOTO_LAYOUT",
+        "roles": {
+          "CONTENT": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-quiet-luxury",
+              "version": "1.0.0",
+              "sha256": "da47d4cdabc4e33899b1e1337d521006f1e4e8b57818cad2addc918d1f46ce02"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-plan",
+              "version": "1.0.0",
+              "sha256": "d40a92dd93bbc17d4cda06f39f9e389576819fd0ed8d3ecf41672415b7eaf299"
+            }
+          ],
+          "PRODUCTION": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-quiet-luxury",
+              "version": "1.0.0",
+              "sha256": "da47d4cdabc4e33899b1e1337d521006f1e4e8b57818cad2addc918d1f46ce02"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-produce",
+              "version": "1.0.0",
+              "sha256": "a2a2d08de965fe70c03e291d697745a0b62e0b8cbb8d6026100cca05e89d202b"
+            }
+          ],
+          "POST": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-quiet-luxury",
+              "version": "1.0.0",
+              "sha256": "da47d4cdabc4e33899b1e1337d521006f1e4e8b57818cad2addc918d1f46ce02"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-post",
+              "version": "1.0.0",
+              "sha256": "28ca65e35707a1a4fdf5780c545edd88344a081741b2bcc4010618972f69a5c9"
+            }
+          ],
+          "REVIEW_FACTS": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-quiet-luxury",
+              "version": "1.0.0",
+              "sha256": "da47d4cdabc4e33899b1e1337d521006f1e4e8b57818cad2addc918d1f46ce02"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-facts",
+              "version": "1.0.0",
+              "sha256": "aef04cc89ba1d1c199aeef45b1df0ab9f5d5fea5549845552ac091020d71da99"
+            }
+          ],
+          "REVIEW_STYLE": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-quiet-luxury",
+              "version": "1.0.0",
+              "sha256": "da47d4cdabc4e33899b1e1337d521006f1e4e8b57818cad2addc918d1f46ce02"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-style",
+              "version": "1.0.0",
+              "sha256": "4099debe0afebfa007042d97e7b2a0bdf9860626e8aa32886429a87dcc183604"
+            }
+          ]
+        },
+        "policy_version": "YPCC-CODEX-POLICY-1.0.0"
+      },
+      "status": "DRAFT_NOT_ADMITTED",
+      "sale_enabled": false,
+      "release_signature": null
+    },
+    {
+      "bundle_id": "ypcc-bundle-quiet-luxury.ai-detail",
+      "version": "1.0.0",
+      "sha256": "80a44a61c0d10cab0478aa6b850a6e01c39c91fe0b1c17d35f4d0a074079e135",
+      "hash_algorithm": "sha256-utf8-json-sortkeys-v1",
+      "payload": {
+        "preset_id": "quiet-luxury",
+        "variant_id": "quiet-luxury.ai-detail",
+        "engine": "PER_SHOT_AI",
+        "roles": {
+          "CONTENT": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-quiet-luxury",
+              "version": "1.0.0",
+              "sha256": "da47d4cdabc4e33899b1e1337d521006f1e4e8b57818cad2addc918d1f46ce02"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-plan",
+              "version": "1.0.0",
+              "sha256": "d40a92dd93bbc17d4cda06f39f9e389576819fd0ed8d3ecf41672415b7eaf299"
+            }
+          ],
+          "PRODUCTION": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-quiet-luxury",
+              "version": "1.0.0",
+              "sha256": "da47d4cdabc4e33899b1e1337d521006f1e4e8b57818cad2addc918d1f46ce02"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-produce",
+              "version": "1.0.0",
+              "sha256": "a2a2d08de965fe70c03e291d697745a0b62e0b8cbb8d6026100cca05e89d202b"
+            }
+          ],
+          "POST": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-quiet-luxury",
+              "version": "1.0.0",
+              "sha256": "da47d4cdabc4e33899b1e1337d521006f1e4e8b57818cad2addc918d1f46ce02"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-post",
+              "version": "1.0.0",
+              "sha256": "28ca65e35707a1a4fdf5780c545edd88344a081741b2bcc4010618972f69a5c9"
+            }
+          ],
+          "REVIEW_FACTS": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-quiet-luxury",
+              "version": "1.0.0",
+              "sha256": "da47d4cdabc4e33899b1e1337d521006f1e4e8b57818cad2addc918d1f46ce02"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-facts",
+              "version": "1.0.0",
+              "sha256": "aef04cc89ba1d1c199aeef45b1df0ab9f5d5fea5549845552ac091020d71da99"
+            }
+          ],
+          "REVIEW_STYLE": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-quiet-luxury",
+              "version": "1.0.0",
+              "sha256": "da47d4cdabc4e33899b1e1337d521006f1e4e8b57818cad2addc918d1f46ce02"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-style",
+              "version": "1.0.0",
+              "sha256": "4099debe0afebfa007042d97e7b2a0bdf9860626e8aa32886429a87dcc183604"
+            }
+          ]
+        },
+        "policy_version": "YPCC-CODEX-POLICY-1.0.0"
+      },
+      "status": "DRAFT_NOT_ADMITTED",
+      "sale_enabled": false,
+      "release_signature": null
+    },
+    {
+      "bundle_id": "ypcc-bundle-fresh-daily.photo-layout",
+      "version": "1.0.0",
+      "sha256": "a5a1fbd3321c4c0b4a4cb8c7759454cfac0884c569152f6c5e1c3f186ec0787e",
+      "hash_algorithm": "sha256-utf8-json-sortkeys-v1",
+      "payload": {
+        "preset_id": "fresh-daily",
+        "variant_id": "fresh-daily.photo-layout",
+        "engine": "PHOTO_LAYOUT",
+        "roles": {
+          "CONTENT": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-fresh-daily",
+              "version": "1.0.0",
+              "sha256": "e17745b4c39b8380d743510c4503db879202ff709af0017e57ccb60c49e59340"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-plan",
+              "version": "1.0.0",
+              "sha256": "d40a92dd93bbc17d4cda06f39f9e389576819fd0ed8d3ecf41672415b7eaf299"
+            }
+          ],
+          "PRODUCTION": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-fresh-daily",
+              "version": "1.0.0",
+              "sha256": "e17745b4c39b8380d743510c4503db879202ff709af0017e57ccb60c49e59340"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-produce",
+              "version": "1.0.0",
+              "sha256": "a2a2d08de965fe70c03e291d697745a0b62e0b8cbb8d6026100cca05e89d202b"
+            }
+          ],
+          "POST": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-fresh-daily",
+              "version": "1.0.0",
+              "sha256": "e17745b4c39b8380d743510c4503db879202ff709af0017e57ccb60c49e59340"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-post",
+              "version": "1.0.0",
+              "sha256": "28ca65e35707a1a4fdf5780c545edd88344a081741b2bcc4010618972f69a5c9"
+            }
+          ],
+          "REVIEW_FACTS": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-fresh-daily",
+              "version": "1.0.0",
+              "sha256": "e17745b4c39b8380d743510c4503db879202ff709af0017e57ccb60c49e59340"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-facts",
+              "version": "1.0.0",
+              "sha256": "aef04cc89ba1d1c199aeef45b1df0ab9f5d5fea5549845552ac091020d71da99"
+            }
+          ],
+          "REVIEW_STYLE": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-fresh-daily",
+              "version": "1.0.0",
+              "sha256": "e17745b4c39b8380d743510c4503db879202ff709af0017e57ccb60c49e59340"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-style",
+              "version": "1.0.0",
+              "sha256": "4099debe0afebfa007042d97e7b2a0bdf9860626e8aa32886429a87dcc183604"
+            }
+          ]
+        },
+        "policy_version": "YPCC-CODEX-POLICY-1.0.0"
+      },
+      "status": "DRAFT_NOT_ADMITTED",
+      "sale_enabled": false,
+      "release_signature": null
+    },
+    {
+      "bundle_id": "ypcc-bundle-fresh-daily.ai-scene",
+      "version": "1.0.0",
+      "sha256": "b07810e2eee129c8163119002d1801f6c1dbc1827dad53713f79c0d0e4524aef",
+      "hash_algorithm": "sha256-utf8-json-sortkeys-v1",
+      "payload": {
+        "preset_id": "fresh-daily",
+        "variant_id": "fresh-daily.ai-scene",
+        "engine": "PER_SHOT_AI",
+        "roles": {
+          "CONTENT": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-fresh-daily",
+              "version": "1.0.0",
+              "sha256": "e17745b4c39b8380d743510c4503db879202ff709af0017e57ccb60c49e59340"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-plan",
+              "version": "1.0.0",
+              "sha256": "d40a92dd93bbc17d4cda06f39f9e389576819fd0ed8d3ecf41672415b7eaf299"
+            }
+          ],
+          "PRODUCTION": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-fresh-daily",
+              "version": "1.0.0",
+              "sha256": "e17745b4c39b8380d743510c4503db879202ff709af0017e57ccb60c49e59340"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-produce",
+              "version": "1.0.0",
+              "sha256": "a2a2d08de965fe70c03e291d697745a0b62e0b8cbb8d6026100cca05e89d202b"
+            }
+          ],
+          "POST": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-fresh-daily",
+              "version": "1.0.0",
+              "sha256": "e17745b4c39b8380d743510c4503db879202ff709af0017e57ccb60c49e59340"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-post",
+              "version": "1.0.0",
+              "sha256": "28ca65e35707a1a4fdf5780c545edd88344a081741b2bcc4010618972f69a5c9"
+            }
+          ],
+          "REVIEW_FACTS": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-fresh-daily",
+              "version": "1.0.0",
+              "sha256": "e17745b4c39b8380d743510c4503db879202ff709af0017e57ccb60c49e59340"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-facts",
+              "version": "1.0.0",
+              "sha256": "aef04cc89ba1d1c199aeef45b1df0ab9f5d5fea5549845552ac091020d71da99"
+            }
+          ],
+          "REVIEW_STYLE": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-fresh-daily",
+              "version": "1.0.0",
+              "sha256": "e17745b4c39b8380d743510c4503db879202ff709af0017e57ccb60c49e59340"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-style",
+              "version": "1.0.0",
+              "sha256": "4099debe0afebfa007042d97e7b2a0bdf9860626e8aa32886429a87dcc183604"
+            }
+          ]
+        },
+        "policy_version": "YPCC-CODEX-POLICY-1.0.0"
+      },
+      "status": "DRAFT_NOT_ADMITTED",
+      "sale_enabled": false,
+      "release_signature": null
+    },
+    {
+      "bundle_id": "ypcc-bundle-appetite-flash.photo-layout",
+      "version": "1.0.0",
+      "sha256": "70270ed2e444d770c260e763bdac7f94810c56784c9ea8a58eea6b8c9940a65e",
+      "hash_algorithm": "sha256-utf8-json-sortkeys-v1",
+      "payload": {
+        "preset_id": "appetite-flash",
+        "variant_id": "appetite-flash.photo-layout",
+        "engine": "PHOTO_LAYOUT",
+        "roles": {
+          "CONTENT": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-appetite-flash",
+              "version": "1.0.0",
+              "sha256": "5675806b5f8852efc3a86d47e5237f0ce272558eaaa83df69c9f8769c5931130"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-plan",
+              "version": "1.0.0",
+              "sha256": "d40a92dd93bbc17d4cda06f39f9e389576819fd0ed8d3ecf41672415b7eaf299"
+            }
+          ],
+          "PRODUCTION": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-appetite-flash",
+              "version": "1.0.0",
+              "sha256": "5675806b5f8852efc3a86d47e5237f0ce272558eaaa83df69c9f8769c5931130"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-produce",
+              "version": "1.0.0",
+              "sha256": "a2a2d08de965fe70c03e291d697745a0b62e0b8cbb8d6026100cca05e89d202b"
+            }
+          ],
+          "POST": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-appetite-flash",
+              "version": "1.0.0",
+              "sha256": "5675806b5f8852efc3a86d47e5237f0ce272558eaaa83df69c9f8769c5931130"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-post",
+              "version": "1.0.0",
+              "sha256": "28ca65e35707a1a4fdf5780c545edd88344a081741b2bcc4010618972f69a5c9"
+            }
+          ],
+          "REVIEW_FACTS": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-appetite-flash",
+              "version": "1.0.0",
+              "sha256": "5675806b5f8852efc3a86d47e5237f0ce272558eaaa83df69c9f8769c5931130"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-facts",
+              "version": "1.0.0",
+              "sha256": "aef04cc89ba1d1c199aeef45b1df0ab9f5d5fea5549845552ac091020d71da99"
+            }
+          ],
+          "REVIEW_STYLE": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-appetite-flash",
+              "version": "1.0.0",
+              "sha256": "5675806b5f8852efc3a86d47e5237f0ce272558eaaa83df69c9f8769c5931130"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-style",
+              "version": "1.0.0",
+              "sha256": "4099debe0afebfa007042d97e7b2a0bdf9860626e8aa32886429a87dcc183604"
+            }
+          ]
+        },
+        "policy_version": "YPCC-CODEX-POLICY-1.0.0"
+      },
+      "status": "DRAFT_NOT_ADMITTED",
+      "sale_enabled": false,
+      "release_signature": null
+    },
+    {
+      "bundle_id": "ypcc-bundle-home-calm.photo-layout",
+      "version": "1.0.0",
+      "sha256": "16cc742c3bd7708d73684648263e614a31eb23b3740761e47105ba54c462bc0d",
+      "hash_algorithm": "sha256-utf8-json-sortkeys-v1",
+      "payload": {
+        "preset_id": "home-calm",
+        "variant_id": "home-calm.photo-layout",
+        "engine": "PHOTO_LAYOUT",
+        "roles": {
+          "CONTENT": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-home-calm",
+              "version": "1.0.0",
+              "sha256": "8e2e9c2985d940ed1d41a0bcc49fc0abf19e605be72aa8ff28ec67466ef70c5c"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-plan",
+              "version": "1.0.0",
+              "sha256": "d40a92dd93bbc17d4cda06f39f9e389576819fd0ed8d3ecf41672415b7eaf299"
+            }
+          ],
+          "PRODUCTION": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-home-calm",
+              "version": "1.0.0",
+              "sha256": "8e2e9c2985d940ed1d41a0bcc49fc0abf19e605be72aa8ff28ec67466ef70c5c"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-produce",
+              "version": "1.0.0",
+              "sha256": "a2a2d08de965fe70c03e291d697745a0b62e0b8cbb8d6026100cca05e89d202b"
+            }
+          ],
+          "POST": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-home-calm",
+              "version": "1.0.0",
+              "sha256": "8e2e9c2985d940ed1d41a0bcc49fc0abf19e605be72aa8ff28ec67466ef70c5c"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-post",
+              "version": "1.0.0",
+              "sha256": "28ca65e35707a1a4fdf5780c545edd88344a081741b2bcc4010618972f69a5c9"
+            }
+          ],
+          "REVIEW_FACTS": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-home-calm",
+              "version": "1.0.0",
+              "sha256": "8e2e9c2985d940ed1d41a0bcc49fc0abf19e605be72aa8ff28ec67466ef70c5c"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-facts",
+              "version": "1.0.0",
+              "sha256": "aef04cc89ba1d1c199aeef45b1df0ab9f5d5fea5549845552ac091020d71da99"
+            }
+          ],
+          "REVIEW_STYLE": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-home-calm",
+              "version": "1.0.0",
+              "sha256": "8e2e9c2985d940ed1d41a0bcc49fc0abf19e605be72aa8ff28ec67466ef70c5c"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-style",
+              "version": "1.0.0",
+              "sha256": "4099debe0afebfa007042d97e7b2a0bdf9860626e8aa32886429a87dcc183604"
+            }
+          ]
+        },
+        "policy_version": "YPCC-CODEX-POLICY-1.0.0"
+      },
+      "status": "DRAFT_NOT_ADMITTED",
+      "sale_enabled": false,
+      "release_signature": null
+    },
+    {
+      "bundle_id": "ypcc-bundle-feature-cards.photo-layout",
+      "version": "1.0.0",
+      "sha256": "370d7be2ef8a54087578b5094199c026e146d018b3dd474cfc312d342ed14226",
+      "hash_algorithm": "sha256-utf8-json-sortkeys-v1",
+      "payload": {
+        "preset_id": "feature-cards",
+        "variant_id": "feature-cards.photo-layout",
+        "engine": "PHOTO_LAYOUT",
+        "roles": {
+          "CONTENT": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-feature-cards",
+              "version": "1.0.0",
+              "sha256": "b52ffe606d5ad7a6c6ecc8d4d131387b17e52764f0d40055ac601d24d1b983e1"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-plan",
+              "version": "1.0.0",
+              "sha256": "d40a92dd93bbc17d4cda06f39f9e389576819fd0ed8d3ecf41672415b7eaf299"
+            }
+          ],
+          "PRODUCTION": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-feature-cards",
+              "version": "1.0.0",
+              "sha256": "b52ffe606d5ad7a6c6ecc8d4d131387b17e52764f0d40055ac601d24d1b983e1"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-produce",
+              "version": "1.0.0",
+              "sha256": "a2a2d08de965fe70c03e291d697745a0b62e0b8cbb8d6026100cca05e89d202b"
+            }
+          ],
+          "POST": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-feature-cards",
+              "version": "1.0.0",
+              "sha256": "b52ffe606d5ad7a6c6ecc8d4d131387b17e52764f0d40055ac601d24d1b983e1"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-post",
+              "version": "1.0.0",
+              "sha256": "28ca65e35707a1a4fdf5780c545edd88344a081741b2bcc4010618972f69a5c9"
+            }
+          ],
+          "REVIEW_FACTS": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-feature-cards",
+              "version": "1.0.0",
+              "sha256": "b52ffe606d5ad7a6c6ecc8d4d131387b17e52764f0d40055ac601d24d1b983e1"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-facts",
+              "version": "1.0.0",
+              "sha256": "aef04cc89ba1d1c199aeef45b1df0ab9f5d5fea5549845552ac091020d71da99"
+            }
+          ],
+          "REVIEW_STYLE": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-feature-cards",
+              "version": "1.0.0",
+              "sha256": "b52ffe606d5ad7a6c6ecc8d4d131387b17e52764f0d40055ac601d24d1b983e1"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-style",
+              "version": "1.0.0",
+              "sha256": "4099debe0afebfa007042d97e7b2a0bdf9860626e8aa32886429a87dcc183604"
+            }
+          ]
+        },
+        "policy_version": "YPCC-CODEX-POLICY-1.0.0"
+      },
+      "status": "DRAFT_NOT_ADMITTED",
+      "sale_enabled": false,
+      "release_signature": null
+    },
+    {
+      "bundle_id": "ypcc-bundle-color-pop.photo-layout",
+      "version": "1.0.0",
+      "sha256": "7804ff611a733d759da057bbb9739ed09fbd152fd5a192ea12da391f938836f8",
+      "hash_algorithm": "sha256-utf8-json-sortkeys-v1",
+      "payload": {
+        "preset_id": "color-pop",
+        "variant_id": "color-pop.photo-layout",
+        "engine": "PHOTO_LAYOUT",
+        "roles": {
+          "CONTENT": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-color-pop",
+              "version": "1.0.0",
+              "sha256": "5f5b0cf65e8d19f9cf5b24b183742413a9055ea50f1723dcf0f0f77fee6a7a9d"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-plan",
+              "version": "1.0.0",
+              "sha256": "d40a92dd93bbc17d4cda06f39f9e389576819fd0ed8d3ecf41672415b7eaf299"
+            }
+          ],
+          "PRODUCTION": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-color-pop",
+              "version": "1.0.0",
+              "sha256": "5f5b0cf65e8d19f9cf5b24b183742413a9055ea50f1723dcf0f0f77fee6a7a9d"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-produce",
+              "version": "1.0.0",
+              "sha256": "a2a2d08de965fe70c03e291d697745a0b62e0b8cbb8d6026100cca05e89d202b"
+            }
+          ],
+          "POST": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-color-pop",
+              "version": "1.0.0",
+              "sha256": "5f5b0cf65e8d19f9cf5b24b183742413a9055ea50f1723dcf0f0f77fee6a7a9d"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-post",
+              "version": "1.0.0",
+              "sha256": "28ca65e35707a1a4fdf5780c545edd88344a081741b2bcc4010618972f69a5c9"
+            }
+          ],
+          "REVIEW_FACTS": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-color-pop",
+              "version": "1.0.0",
+              "sha256": "5f5b0cf65e8d19f9cf5b24b183742413a9055ea50f1723dcf0f0f77fee6a7a9d"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-facts",
+              "version": "1.0.0",
+              "sha256": "aef04cc89ba1d1c199aeef45b1df0ab9f5d5fea5549845552ac091020d71da99"
+            }
+          ],
+          "REVIEW_STYLE": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-color-pop",
+              "version": "1.0.0",
+              "sha256": "5f5b0cf65e8d19f9cf5b24b183742413a9055ea50f1723dcf0f0f77fee6a7a9d"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-style",
+              "version": "1.0.0",
+              "sha256": "4099debe0afebfa007042d97e7b2a0bdf9860626e8aa32886429a87dcc183604"
+            }
+          ]
+        },
+        "policy_version": "YPCC-CODEX-POLICY-1.0.0"
+      },
+      "status": "DRAFT_NOT_ADMITTED",
+      "sale_enabled": false,
+      "release_signature": null
+    },
+    {
+      "bundle_id": "ypcc-bundle-launch-story.photo-layout",
+      "version": "1.0.0",
+      "sha256": "99889d0d1b7bda41f8b904996f387e363f02893f6aba4287cc8b8e0717a71f74",
+      "hash_algorithm": "sha256-utf8-json-sortkeys-v1",
+      "payload": {
+        "preset_id": "launch-story",
+        "variant_id": "launch-story.photo-layout",
+        "engine": "PHOTO_LAYOUT",
+        "roles": {
+          "CONTENT": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-launch-story",
+              "version": "1.0.0",
+              "sha256": "bbcfcf51a9a7315d64d4d6f10d2d03b3121a129539ba8050e71d23dec6fe9b7d"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-plan",
+              "version": "1.0.0",
+              "sha256": "d40a92dd93bbc17d4cda06f39f9e389576819fd0ed8d3ecf41672415b7eaf299"
+            }
+          ],
+          "PRODUCTION": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-launch-story",
+              "version": "1.0.0",
+              "sha256": "bbcfcf51a9a7315d64d4d6f10d2d03b3121a129539ba8050e71d23dec6fe9b7d"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-produce",
+              "version": "1.0.0",
+              "sha256": "a2a2d08de965fe70c03e291d697745a0b62e0b8cbb8d6026100cca05e89d202b"
+            }
+          ],
+          "POST": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-launch-story",
+              "version": "1.0.0",
+              "sha256": "bbcfcf51a9a7315d64d4d6f10d2d03b3121a129539ba8050e71d23dec6fe9b7d"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-post",
+              "version": "1.0.0",
+              "sha256": "28ca65e35707a1a4fdf5780c545edd88344a081741b2bcc4010618972f69a5c9"
+            }
+          ],
+          "REVIEW_FACTS": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-launch-story",
+              "version": "1.0.0",
+              "sha256": "bbcfcf51a9a7315d64d4d6f10d2d03b3121a129539ba8050e71d23dec6fe9b7d"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-facts",
+              "version": "1.0.0",
+              "sha256": "aef04cc89ba1d1c199aeef45b1df0ab9f5d5fea5549845552ac091020d71da99"
+            }
+          ],
+          "REVIEW_STYLE": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-launch-story",
+              "version": "1.0.0",
+              "sha256": "bbcfcf51a9a7315d64d4d6f10d2d03b3121a129539ba8050e71d23dec6fe9b7d"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-style",
+              "version": "1.0.0",
+              "sha256": "4099debe0afebfa007042d97e7b2a0bdf9860626e8aa32886429a87dcc183604"
+            }
+          ]
+        },
+        "policy_version": "YPCC-CODEX-POLICY-1.0.0"
+      },
+      "status": "DRAFT_NOT_ADMITTED",
+      "sale_enabled": false,
+      "release_signature": null
+    },
+    {
+      "bundle_id": "ypcc-bundle-portrait-social.photo-layout",
+      "version": "1.0.0",
+      "sha256": "972b86194748a52c6284d0093e30453aaab049cf94c05e4a95d3afe16f1d7103",
+      "hash_algorithm": "sha256-utf8-json-sortkeys-v1",
+      "payload": {
+        "preset_id": "portrait-social",
+        "variant_id": "portrait-social.photo-layout",
+        "engine": "PHOTO_LAYOUT",
+        "roles": {
+          "CONTENT": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-portrait-social",
+              "version": "1.0.0",
+              "sha256": "5e24f216a23c40754dbaca3a599e016b048bbb774959d5d86a67feba63f2ae21"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-plan",
+              "version": "1.0.0",
+              "sha256": "d40a92dd93bbc17d4cda06f39f9e389576819fd0ed8d3ecf41672415b7eaf299"
+            }
+          ],
+          "PRODUCTION": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-portrait-social",
+              "version": "1.0.0",
+              "sha256": "5e24f216a23c40754dbaca3a599e016b048bbb774959d5d86a67feba63f2ae21"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-produce",
+              "version": "1.0.0",
+              "sha256": "a2a2d08de965fe70c03e291d697745a0b62e0b8cbb8d6026100cca05e89d202b"
+            }
+          ],
+          "POST": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-portrait-social",
+              "version": "1.0.0",
+              "sha256": "5e24f216a23c40754dbaca3a599e016b048bbb774959d5d86a67feba63f2ae21"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-post",
+              "version": "1.0.0",
+              "sha256": "28ca65e35707a1a4fdf5780c545edd88344a081741b2bcc4010618972f69a5c9"
+            }
+          ],
+          "REVIEW_FACTS": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-portrait-social",
+              "version": "1.0.0",
+              "sha256": "5e24f216a23c40754dbaca3a599e016b048bbb774959d5d86a67feba63f2ae21"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-facts",
+              "version": "1.0.0",
+              "sha256": "aef04cc89ba1d1c199aeef45b1df0ab9f5d5fea5549845552ac091020d71da99"
+            }
+          ],
+          "REVIEW_STYLE": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-portrait-social",
+              "version": "1.0.0",
+              "sha256": "5e24f216a23c40754dbaca3a599e016b048bbb774959d5d86a67feba63f2ae21"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-style",
+              "version": "1.0.0",
+              "sha256": "4099debe0afebfa007042d97e7b2a0bdf9860626e8aa32886429a87dcc183604"
+            }
+          ]
+        },
+        "policy_version": "YPCC-CODEX-POLICY-1.0.0"
+      },
+      "status": "DRAFT_NOT_ADMITTED",
+      "sale_enabled": false,
+      "release_signature": null
+    },
+    {
+      "bundle_id": "ypcc-bundle-portrait-social.ai-presenter-single",
+      "version": "1.0.0",
+      "sha256": "251060be553e3f7fde152ed29361b69f28bc60373c20388917f64f5644cce3d0",
+      "hash_algorithm": "sha256-utf8-json-sortkeys-v1",
+      "payload": {
+        "preset_id": "portrait-social",
+        "variant_id": "portrait-social.ai-presenter-single",
+        "engine": "PER_SHOT_AI",
+        "roles": {
+          "CONTENT": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-portrait-social",
+              "version": "1.0.0",
+              "sha256": "5e24f216a23c40754dbaca3a599e016b048bbb774959d5d86a67feba63f2ae21"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-plan",
+              "version": "1.0.0",
+              "sha256": "d40a92dd93bbc17d4cda06f39f9e389576819fd0ed8d3ecf41672415b7eaf299"
+            }
+          ],
+          "PRODUCTION": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-portrait-social",
+              "version": "1.0.0",
+              "sha256": "5e24f216a23c40754dbaca3a599e016b048bbb774959d5d86a67feba63f2ae21"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-produce",
+              "version": "1.0.0",
+              "sha256": "a2a2d08de965fe70c03e291d697745a0b62e0b8cbb8d6026100cca05e89d202b"
+            }
+          ],
+          "POST": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-portrait-social",
+              "version": "1.0.0",
+              "sha256": "5e24f216a23c40754dbaca3a599e016b048bbb774959d5d86a67feba63f2ae21"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-post",
+              "version": "1.0.0",
+              "sha256": "28ca65e35707a1a4fdf5780c545edd88344a081741b2bcc4010618972f69a5c9"
+            }
+          ],
+          "REVIEW_FACTS": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-portrait-social",
+              "version": "1.0.0",
+              "sha256": "5e24f216a23c40754dbaca3a599e016b048bbb774959d5d86a67feba63f2ae21"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-facts",
+              "version": "1.0.0",
+              "sha256": "aef04cc89ba1d1c199aeef45b1df0ab9f5d5fea5549845552ac091020d71da99"
+            }
+          ],
+          "REVIEW_STYLE": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-portrait-social",
+              "version": "1.0.0",
+              "sha256": "5e24f216a23c40754dbaca3a599e016b048bbb774959d5d86a67feba63f2ae21"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-style",
+              "version": "1.0.0",
+              "sha256": "4099debe0afebfa007042d97e7b2a0bdf9860626e8aa32886429a87dcc183604"
+            }
+          ]
+        },
+        "policy_version": "YPCC-CODEX-POLICY-1.0.0"
+      },
+      "status": "DRAFT_NOT_ADMITTED",
+      "sale_enabled": false,
+      "release_signature": null
+    },
+    {
+      "bundle_id": "ypcc-bundle-portrait-social.ai-presenter-multi",
+      "version": "1.0.0",
+      "sha256": "469cc6197bf3203484693277216b835f182c1fd43d2b4e138070a2221f32280c",
+      "hash_algorithm": "sha256-utf8-json-sortkeys-v1",
+      "payload": {
+        "preset_id": "portrait-social",
+        "variant_id": "portrait-social.ai-presenter-multi",
+        "engine": "REFERENCE_FILM",
+        "roles": {
+          "CONTENT": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-portrait-social",
+              "version": "1.0.0",
+              "sha256": "5e24f216a23c40754dbaca3a599e016b048bbb774959d5d86a67feba63f2ae21"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-plan",
+              "version": "1.0.0",
+              "sha256": "d40a92dd93bbc17d4cda06f39f9e389576819fd0ed8d3ecf41672415b7eaf299"
+            }
+          ],
+          "PRODUCTION": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-portrait-social",
+              "version": "1.0.0",
+              "sha256": "5e24f216a23c40754dbaca3a599e016b048bbb774959d5d86a67feba63f2ae21"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-produce",
+              "version": "1.0.0",
+              "sha256": "a2a2d08de965fe70c03e291d697745a0b62e0b8cbb8d6026100cca05e89d202b"
+            }
+          ],
+          "POST": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-portrait-social",
+              "version": "1.0.0",
+              "sha256": "5e24f216a23c40754dbaca3a599e016b048bbb774959d5d86a67feba63f2ae21"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-post",
+              "version": "1.0.0",
+              "sha256": "28ca65e35707a1a4fdf5780c545edd88344a081741b2bcc4010618972f69a5c9"
+            }
+          ],
+          "REVIEW_FACTS": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-portrait-social",
+              "version": "1.0.0",
+              "sha256": "5e24f216a23c40754dbaca3a599e016b048bbb774959d5d86a67feba63f2ae21"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-facts",
+              "version": "1.0.0",
+              "sha256": "aef04cc89ba1d1c199aeef45b1df0ab9f5d5fea5549845552ac091020d71da99"
+            }
+          ],
+          "REVIEW_STYLE": [
+            {
+              "name": "ypcc-core",
+              "version": "1.0.0",
+              "sha256": "5fa927abe00debc54a5b8e43e2bbf72c9198af1856f81560097f5d52e4bf7e9c"
+            },
+            {
+              "name": "ypcc-style-portrait-social",
+              "version": "1.0.0",
+              "sha256": "5e24f216a23c40754dbaca3a599e016b048bbb774959d5d86a67feba63f2ae21"
+            },
+            {
+              "name": "ypcc-target-images",
+              "version": "1.0.0",
+              "sha256": "2f31763f4c2738c6e290611115543bd38782fcc70626803b34fb087c4abfb260"
+            },
+            {
+              "name": "ypcc-target-video",
+              "version": "1.0.0",
+              "sha256": "270aebe5156d7e9f0b2d3799e2e19ec385c9953a4c5319e9efcd7954e33f7404"
+            },
+            {
+              "name": "ypcc-target-copy",
+              "version": "1.0.0",
+              "sha256": "4445d47acb254472e9952f488bf21a4d89f30fd74d10515b5be96a3f3fc703c5"
+            },
+            {
+              "name": "ypcc-review-style",
+              "version": "1.0.0",
+              "sha256": "4099debe0afebfa007042d97e7b2a0bdf9860626e8aa32886429a87dcc183604"
+            }
+          ]
+        },
+        "policy_version": "YPCC-CODEX-POLICY-1.0.0"
+      },
+      "status": "DRAFT_NOT_ADMITTED",
+      "sale_enabled": false,
+      "release_signature": null
+    }
+  ],
+  "package_prewarm": "READ_ONLY_FILES_AND_INDEX_NO_CUSTOMER_DATA",
+  "activation": "EXPLICIT_SKILL_INPUT_EACH_ROLE",
+  "counts": {
+    "skills": 19,
+    "styles": 10,
+    "targets": 3,
+    "roles": 5,
+    "bundles": 14
+  }
+}

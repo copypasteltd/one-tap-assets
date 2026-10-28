@@ -1,0 +1,180 @@
+{
+  "baseline_id": "YPCC-DEV-1.1.0",
+  "date": "2026-10-27",
+  "status": "DESIGN_NOT_IMPLEMENTED",
+  "requirements_version": "3.1",
+  "design_baseline": "YPCC-DS-C-1.0.0",
+  "root": "E:/dev/sandbox/支付宝黑客松/一品成片",
+  "api_prefix": "/v1/p01",
+  "openapi_version": "3.1.1",
+  "json_schema_draft": "2020-12",
+  "recommended_stack": {
+    "mini": "Taro + React + TypeScript; G0 native compatibility pending",
+    "api": "Node.js 24 LTS + TypeScript + Fastify; exact versions pending",
+    "workers": "independent native processes + FFmpeg/ffprobe",
+    "database": "PostgreSQL + durable stage queue + outbox",
+    "storage": "private object storage, OSS adapter first; account/region pending",
+    "agent_kernel": "Codex app-server via stdio + native per-order instance + platform MCP; exact production build pending G0"
+  },
+  "engineering_constraints": [
+    {
+      "id": "EC-01",
+      "title": "项目内工作及runtime隔离"
+    },
+    {
+      "id": "EC-02",
+      "title": "禁本地Docker/WSL/虚拟化与间接启动"
+    },
+    {
+      "id": "EC-03",
+      "title": "浏览器无用标签及时关闭"
+    },
+    {
+      "id": "EC-04",
+      "title": "不以设计/mock冒充实现"
+    },
+    {
+      "id": "EC-05",
+      "title": "上游只读与生产许可准入"
+    },
+    {
+      "id": "EC-06",
+      "title": "C设计留存与tokens一致"
+    },
+    {
+      "id": "EC-07",
+      "title": "10套14变体三路线均P0"
+    },
+    {
+      "id": "EC-08",
+      "title": "照片识别免商品表"
+    },
+    {
+      "id": "EC-09",
+      "title": "租户隔离/作者无买家访问权"
+    },
+    {
+      "id": "EC-10",
+      "title": "未知模型价格权利禁售"
+    },
+    {
+      "id": "EC-11",
+      "title": "服务端验付与原单恢复"
+    },
+    {
+      "id": "EC-12",
+      "title": "持久意图/预算/UNKNOWN不重购"
+    },
+    {
+      "id": "EC-13",
+      "title": "整包QC原子发布与相册状态分离"
+    },
+    {
+      "id": "EC-14",
+      "title": "合同截止固定且不隐形加费"
+    },
+    {
+      "id": "EC-15",
+      "title": "密钥/日志/链接脱敏"
+    },
+    {
+      "id": "EC-16",
+      "title": "四阶段Codex真实工具与证据"
+    },
+    {
+      "id": "EC-17",
+      "title": "可信Skill版本冻结与按角色显式注入"
+    },
+    {
+      "id": "EC-18",
+      "title": "原生身份与ACL隔离、每单不复用上下文"
+    },
+    {
+      "id": "EC-19",
+      "title": "新上下文双复核与封存hash"
+    },
+    {
+      "id": "EC-20",
+      "title": "交付终态outbox与清理回执"
+    },
+    {
+      "id": "EC-21",
+      "title": "推理出口与工具共同预算、重启不清零"
+    }
+  ],
+  "input_policy": {
+    "photo_count_min": 3,
+    "photo_count_max": 5,
+    "file_max_bytes": 10000000,
+    "total_max_bytes": 50000000,
+    "short_edge_min_pixels": 640,
+    "decoded_max_pixels": 30000000,
+    "mime_types": [
+      "image/jpeg",
+      "image/png"
+    ],
+    "byte_unit_note": "API以十进制MB定义字节上限，像素/总量另由服务端校验"
+  },
+  "business_policies": {
+    "quote_ttl_seconds": 900,
+    "download_link_ttl_seconds": 300,
+    "delivery_retention_seconds": 604800,
+    "unpaid_input_retention_seconds": 86400,
+    "paid_input_retention_seconds": 604800,
+    "limited_revision_window_seconds": 172800,
+    "limited_revision_allowance": 1,
+    "max_repair_rounds": 1,
+    "repair_extends_deadline": false,
+    "sale_enabled": false,
+    "price_fen": null,
+    "actual_provider_model": null
+  },
+  "counts": {
+    "requirements": 58,
+    "P0": 52,
+    "P1": 4,
+    "P2": 2,
+    "official_presets": 10,
+    "execution_variants": 14,
+    "design_units": 23,
+    "design_components": 22,
+    "state_machines": 18,
+    "api_operations": 77,
+    "management_api_operations": 26,
+    "work_packages": 20,
+    "skills": 19,
+    "skill_bundles": 14
+  },
+  "product_verification": {
+    "implementation": "NOT_IMPLEMENTED",
+    "real_providers": "NOT_RUN",
+    "real_payments": "NOT_RUN",
+    "four_device_groups": "NOT_RUN",
+    "benchmark_420": "NOT_RUN",
+    "cloud_deployment": "NOT_DEPLOYED",
+    "codex_runtime": "NOT_INTEGRATED",
+    "skill_behavior": "NOT_RUN",
+    "instance_isolation": "NOT_RUN",
+    "cleanup_runtime": "NOT_RUN"
+  },
+  "generated_by": "scripts/生成Codex开发契约.py",
+  "codex_policy": {
+    "required_roles": [
+      "CONTENT",
+      "PRODUCTION",
+      "POST",
+      "REVIEW_FACTS",
+      "REVIEW_STYLE"
+    ],
+    "independent_reviewers": 2,
+    "max_repair_rounds": 1,
+    "exact_runtime_build": null,
+    "actual_model": null,
+    "model_rate": null,
+    "global_personal_login_allowed": false,
+    "release_grace_seconds": 30,
+    "release_target_seconds": 300,
+    "reaper_interval_seconds": 60,
+    "cleanup_alert_seconds": 600
+  }
+}

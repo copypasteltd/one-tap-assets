@@ -1,0 +1,19 @@
+# Runtime and local/private configuration. Preserve documented design assets.
+runtime/
+output/
+node_modules/
+.pnpm-store/
+dist/
+build/
+coverage/
+test-results/
+playwright-report/
+__pycache__/
+*.pyc
+*.log
+.env
+.env.*
+!.env.example
+*.local
+.DS_Store
+Thumbs.db

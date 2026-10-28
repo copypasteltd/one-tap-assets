@@ -1,0 +1,388 @@
+{
+  "status": "DESIGN_NOT_IMPLEMENTED",
+  "endpoints": [
+    {
+      "method": "GET",
+      "path": "/publications",
+      "operation_id": "listReviewQueue",
+      "summary": "查询预设审核队列",
+      "permission": "moderator:review",
+      "request_schema": null,
+      "response_schema": "PublicationList",
+      "requirements": [
+        "P01-F14",
+        "P01-F28",
+        "P01-F31"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/publications/{publication_id}/review-decisions",
+      "operation_id": "decidePublicationReview",
+      "summary": "留证据的内容与权利审核",
+      "permission": "moderator:review",
+      "request_schema": "ReviewDecisionRequest",
+      "response_schema": "Publication",
+      "requirements": [
+        "P01-F14",
+        "P01-F28",
+        "P01-F30",
+        "P01-F31",
+        "P01-F47"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/publications/{publication_id}/publish",
+      "operation_id": "publishApprovedPreset",
+      "summary": "仅在审核及准入齐备后发布",
+      "permission": "moderator:publish",
+      "request_schema": "ManagementActionRequest",
+      "response_schema": "Publication",
+      "requirements": [
+        "P01-F14",
+        "P01-F28",
+        "P01-F33",
+        "P01-F47"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/variants/{variant_id}/versions/{version}",
+      "operation_id": "getManagedVariantVersion",
+      "summary": "查询变体管理修订与准入证据索引",
+      "permission": "registry:read",
+      "request_schema": null,
+      "response_schema": "ManagedVersion",
+      "requirements": [
+        "P01-F14",
+        "P01-F33",
+        "P01-F42",
+        "P01-F46"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/model-versions/{model_version_id}",
+      "operation_id": "getManagedModelVersion",
+      "summary": "查询模型管理修订与能力证据索引",
+      "permission": "registry:read",
+      "request_schema": null,
+      "response_schema": "ManagedVersion",
+      "requirements": [
+        "P01-F42",
+        "P01-F50"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/variants/{variant_id}/versions/{version}/admission-decisions",
+      "operation_id": "decideVariantAdmission",
+      "summary": "按能力权利价格基准证据准入或拒绝",
+      "permission": "registry:admit",
+      "request_schema": "AdmissionDecisionRequest",
+      "response_schema": "ManagementResult",
+      "requirements": [
+        "P01-F14",
+        "P01-F33",
+        "P01-F42",
+        "P01-F46",
+        "P01-F47"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/variants/{variant_id}/versions/{version}/sale-status",
+      "operation_id": "changeVariantAvailability",
+      "summary": "精确停新售或经重验恢复",
+      "permission": "registry:availability",
+      "request_schema": "AvailabilityRequest",
+      "response_schema": "ManagementResult",
+      "requirements": [
+        "P01-F14",
+        "P01-F42",
+        "P01-F50"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/model-versions/{model_version_id}/availability",
+      "operation_id": "changeModelAvailability",
+      "summary": "模型能力版本停售或重验恢复",
+      "permission": "registry:availability",
+      "request_schema": "AvailabilityRequest",
+      "response_schema": "ManagementResult",
+      "requirements": [
+        "P01-F42",
+        "P01-F50"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/reports/{report_id}/decisions",
+      "operation_id": "decideGovernanceReport",
+      "summary": "审理举报并记录决定",
+      "permission": "moderator:govern",
+      "request_schema": "GovernanceDecisionRequest",
+      "response_schema": "Report",
+      "requirements": [
+        "P01-F31"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/orders/{order_id}/trace",
+      "operation_id": "readRedactedOrderTrace",
+      "summary": "按需审计读取原单脱敏事件",
+      "permission": "support:read_order_trace",
+      "request_schema": null,
+      "response_schema": "OrderTrace",
+      "requirements": [
+        "P01-F14",
+        "P01-F16",
+        "P01-F43",
+        "P01-F50"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/orders/{order_id}/platform-repairs",
+      "operation_id": "requestPlatformErrorRepair",
+      "summary": "平台错误关联免费纠错不耗小改额度",
+      "permission": "support:repair",
+      "request_schema": "ManagementActionRequest",
+      "response_schema": "Revision",
+      "requirements": [
+        "P01-F12",
+        "P01-F14",
+        "P01-F41"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/orders/{order_id}/compensations",
+      "operation_id": "requestOriginalOrderCompensation",
+      "summary": "原单退款或幂等补投原履约事件",
+      "permission": "finance:compensate",
+      "request_schema": "CompensationRequest",
+      "response_schema": "ManagementResult",
+      "requirements": [
+        "P01-F08",
+        "P01-F13",
+        "P01-F14",
+        "P01-F43"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/provider-submissions/{submission_id}/reconciliations",
+      "operation_id": "reconcileProviderSubmission",
+      "summary": "查原任务或消费有证据的对账记录",
+      "permission": "operator:reconcile_submission",
+      "request_schema": "ManagementActionRequest",
+      "response_schema": "ManagementResult",
+      "requirements": [
+        "P01-F14",
+        "P01-F43",
+        "P01-F46"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/metrics/summary",
+      "operation_id": "readOperationalSummary",
+      "summary": "按窗口读取聚合履约成本质量索引",
+      "permission": "metrics:read",
+      "request_schema": null,
+      "response_schema": "MetricsSummary",
+      "requirements": [
+        "P01-F17",
+        "P01-F50"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/privacy-deletions/{deletion_id}/reconcile",
+      "operation_id": "reconcilePrivacyDeletion",
+      "summary": "重试受控清理并更新边界回执",
+      "permission": "privacy:reconcile",
+      "request_schema": "ManagementActionRequest",
+      "response_schema": "PrivacyDeletion",
+      "requirements": [
+        "P01-F15",
+        "P01-F50"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/actions/{action_id}",
+      "operation_id": "getManagementAction",
+      "summary": "有权限的发起者查询管理动作进展",
+      "permission": "management:read_own_action",
+      "request_schema": null,
+      "response_schema": "ManagementResult",
+      "requirements": [
+        "P01-F14",
+        "P01-F50"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/agent-instances",
+      "operation_id": "listAgentInstances",
+      "summary": "查询受限实例",
+      "permission": "agent:read",
+      "request_schema": null,
+      "response_schema": "AgentInstanceList",
+      "requirements": [
+        "P01-F53",
+        "P01-F57"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/agent-instances/{instance_id}",
+      "operation_id": "getAgentInstance",
+      "summary": "查询实例状态与代次",
+      "permission": "agent:read",
+      "request_schema": null,
+      "response_schema": "AgentInstance",
+      "requirements": [
+        "P01-F53",
+        "P01-F56",
+        "P01-F57"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/agent-instances/{instance_id}/release",
+      "operation_id": "requestAgentRelease",
+      "summary": "核对状态后申请幂等回收",
+      "permission": "agent:release",
+      "request_schema": "AgentReleaseRequest",
+      "response_schema": "AgentInstance",
+      "requirements": [
+        "P01-F53",
+        "P01-F57"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/agent-runs/{run_id}",
+      "operation_id": "getAgentRun",
+      "summary": "查询角色运行的脱敏证据",
+      "permission": "agent:read",
+      "request_schema": null,
+      "response_schema": "AgentRun",
+      "requirements": [
+        "P01-F51",
+        "P01-F56"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/review-packets/{packet_id}",
+      "operation_id": "getReviewPacket",
+      "summary": "查询封存审查包和双报告",
+      "permission": "quality:read",
+      "request_schema": null,
+      "response_schema": "ReviewPacket",
+      "requirements": [
+        "P01-F55",
+        "P01-F58"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/skill-bundles",
+      "operation_id": "listSkillBundles",
+      "summary": "查询Skill包准入状态",
+      "permission": "skills:read",
+      "request_schema": null,
+      "response_schema": "SkillBundleList",
+      "requirements": [
+        "P01-F52",
+        "P01-F58"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/skill-bundles/{bundle_id}/revoke",
+      "operation_id": "revokeSkillBundle",
+      "summary": "撤销指定摘要版本并审计",
+      "permission": "skills:revoke",
+      "request_schema": "SkillBundleRevokeRequest",
+      "response_schema": "SkillBundleResource",
+      "requirements": [
+        "P01-F52",
+        "P01-F58"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/agent-instances/{instance_id}/cleanup-receipt",
+      "operation_id": "getCleanupReceipt",
+      "summary": "查询真实清理核验结果",
+      "permission": "agent:read",
+      "request_schema": null,
+      "response_schema": "CleanupReceipt",
+      "requirements": [
+        "P01-F57"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/preset-licenses",
+      "operation_id": "registerPresetLicense",
+      "summary": "登记不可变社区许可草案",
+      "permission": "moderator:review",
+      "request_schema": "PresetLicenseRegistration",
+      "response_schema": "PresetLicense",
+      "requirements": [
+        "P01-F28",
+        "P01-F29",
+        "P01-F30"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/preset-licenses/{license_id}/decision",
+      "operation_id": "decidePresetLicense",
+      "summary": "审核启用或退役指定许可版本",
+      "permission": "moderator:publish",
+      "request_schema": "PresetLicenseDecision",
+      "response_schema": "PresetLicense",
+      "requirements": [
+        "P01-F28",
+        "P01-F29",
+        "P01-F30"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    }
+  ]
+}

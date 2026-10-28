@@ -1,0 +1,31 @@
+{
+  "baseline_id": "YPCC-DS-C-1.0.0",
+  "product_name": "一品成片",
+  "direction_id": "C",
+  "direction_name": "柚子创作社",
+  "user_decision": "选用方案 C",
+  "decision_date": "2026-10-27",
+  "generator_skill": "sub2-image-gen",
+  "model": "gpt-image-2.5",
+  "quality": "high",
+  "requested_size": "1536x1024",
+  "actual_size": [
+    1536,
+    1024
+  ],
+  "original_source": "output/imagegen/2026-10-27-设计选型/C-柚子创作社.png",
+  "retained_original": "assets/design/柚子创作社/v1.0/reference/C-柚子创作社-原始设计稿.png",
+  "original_sha256": "b919b0de25c4bbab45bafa033f2990a2a40511d5010935815e2c4391a58e4a41",
+  "prompt_sha256": "2eab6f6401fe30856ec494ebd1647ebf8dbcaca17b4b76d4c6c07c6fccbf4844",
+  "page_previews": {
+    "拍照制作": "C-拍照制作.png",
+    "方案社区": "C-方案社区.png",
+    "素材领取": "C-素材领取.png"
+  },
+  "provenance_note": "Retained image and crops; no new model call in this baseline task. No gateway credentials stored.",
+  "limitations": [
+    "Generated concept, not implemented UI",
+    "Fictional example product",
+    "Typography/button contrast and video ratio corrected by specifications, original bytes unchanged"
+  ]
+}

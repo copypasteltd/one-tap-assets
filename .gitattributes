@@ -1,0 +1,5 @@
+# Evidence binds exact file bytes. Preserve them on add/checkout on every OS.
+# -text disables newline rewriting; Git still detects ordinary text diffs.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Preserve the upstream OFL notice exactly, including its original line spaces.
+assets/resources/fonts/noto-sans-sc/OFL.txt whitespace=-blank-at-eol

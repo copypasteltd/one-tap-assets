@@ -1,0 +1,5918 @@
+{
+  "baseline_id": "YPCC-DEV-1.1.0",
+  "requirements_version": "3.1",
+  "checked_at": "2026-10-28T12:32:50.378655+00:00",
+  "status": "PASS",
+  "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
+  "counts": {
+    "requirements": 58,
+    "P0": 52,
+    "skills": 19,
+    "skill_bundles": 14,
+    "development_documents": 20,
+    "base_contract_checks": 3282,
+    "codex_checks": 1177,
+    "total_checks": 4459,
+    "codex_synthetic_examples": 39
+  },
+  "product_tests_executed": false,
+  "real_codex_runs_executed": false,
+  "real_provider_calls_executed": false,
+  "global_skills_installed": false,
+  "cloud_deployed": false,
+  "application_implementation_status": "IN_PROGRESS",
+  "implementation_evidence_manifest": "assets/implementation/current.json",
+  "limitations": [
+    "本检查只执行设计 / 契约 / 留存核验；应用源码和局部测试范围另见实现证据，尚未完成完整产品验收。",
+    "原生隔离、真实 Skill 行为、推理费用硬控制、独立质量与清理仍待G0实测。",
+    "内容哈希/合成门禁不构成真实文件或安全效果证明。"
+  ],
+  "checks": [
+    {
+      "name": "existing_contract_and_development_checks",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "58_unique_continuous_features_and_cases",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "52_4_2_priorities",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F01",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F02",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F03",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F04",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F05",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F06",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F07",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F08",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F09",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F10",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F11",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F12",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F13",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F14",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F15",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F16",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F17",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F18",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F19",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F20",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F21",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F22",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F23",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F24",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F25",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F26",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F27",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F28",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F29",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F30",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F31",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F32",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F33",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F34",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F35",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F36",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F37",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F38",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F39",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F40",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F41",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F42",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F43",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F44",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F45",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F46",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F47",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F48",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F49",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F50",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F51",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F52",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F53",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F54",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F55",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F56",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F57",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "live_primary_requirement:P01-F58",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F01",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F02",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F03",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F04",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F05",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F06",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F07",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F08",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F09",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F10",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F11",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F12",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F13",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F14",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F15",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F16",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F17",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F18",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F19",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F20",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F21",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F22",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F23",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F24",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F25",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F26",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F27",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F28",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F29",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F30",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F31",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F32",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F33",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F34",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F35",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F36",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F37",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F38",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F39",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F40",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F41",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F42",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F43",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F44",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F45",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F46",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F47",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F48",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F49",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "original_feature_preserved:P01-F50",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "primary_version:01-产品需求PRD.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "primary_version:02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "primary_version:03-架构数据与接口.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "primary_version:04-计费交易与运营.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "primary_version:05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "19_unique_skills",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_layer_counts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-core",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-core",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-core",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-core",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-style-minimal-clean",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-style-minimal-clean",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-style-minimal-clean",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-style-minimal-clean",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-style-warm-handmade",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-style-warm-handmade",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-style-warm-handmade",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-style-warm-handmade",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-style-quiet-luxury",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-style-quiet-luxury",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-style-quiet-luxury",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-style-quiet-luxury",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-style-fresh-daily",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-style-fresh-daily",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-style-fresh-daily",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-style-fresh-daily",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-style-appetite-flash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-style-appetite-flash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-style-appetite-flash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-style-appetite-flash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-style-home-calm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-style-home-calm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-style-home-calm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-style-home-calm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-style-feature-cards",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-style-feature-cards",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-style-feature-cards",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-style-feature-cards",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-style-color-pop",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-style-color-pop",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-style-color-pop",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-style-color-pop",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-style-launch-story",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-style-launch-story",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-style-launch-story",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-style-launch-story",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-style-portrait-social",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-style-portrait-social",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-style-portrait-social",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-style-portrait-social",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-target-images",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-target-images",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-target-images",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-target-images",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-target-video",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-target-video",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-target-video",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-target-video",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-target-copy",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-target-copy",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-target-copy",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-target-copy",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-plan",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-plan",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-plan",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-plan",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-produce",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-produce",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-produce",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-produce",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-post",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-post",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-post",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-post",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-review-facts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-review-facts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-review-facts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-review-facts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "project_skill_path:ypcc-review-style",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_frontmatter_and_body:ypcc-review-style",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_content_hash:ypcc-review-style",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "skill_no_fake_admission:ypcc-review-style",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "10_styles_14_variants_bundles",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "new_preset_version_unsold",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "preset_outputs_preserved:minimal-clean",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "preset_outputs_preserved:warm-handmade",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "preset_outputs_preserved:quiet-luxury",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "preset_outputs_preserved:fresh-daily",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "preset_outputs_preserved:appetite-flash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "preset_outputs_preserved:home-calm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "preset_outputs_preserved:feature-cards",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "preset_outputs_preserved:color-pop",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "preset_outputs_preserved:launch-story",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "preset_outputs_preserved:portrait-social",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_hash_and_quote_binding:ypcc-bundle-minimal-clean.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_roles_and_fixed_engine:ypcc-bundle-minimal-clean.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_model_price_admission_pending:ypcc-bundle-minimal-clean.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-minimal-clean.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-minimal-clean.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-minimal-clean.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-minimal-clean.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-minimal-clean.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-minimal-clean.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-minimal-clean.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-minimal-clean.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-minimal-clean.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-minimal-clean.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_hash_and_quote_binding:ypcc-bundle-warm-handmade.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_roles_and_fixed_engine:ypcc-bundle-warm-handmade.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_model_price_admission_pending:ypcc-bundle-warm-handmade.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-warm-handmade.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-warm-handmade.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-warm-handmade.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-warm-handmade.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-warm-handmade.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-warm-handmade.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-warm-handmade.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-warm-handmade.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-warm-handmade.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-warm-handmade.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_hash_and_quote_binding:ypcc-bundle-quiet-luxury.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_roles_and_fixed_engine:ypcc-bundle-quiet-luxury.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_model_price_admission_pending:ypcc-bundle-quiet-luxury.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-quiet-luxury.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-quiet-luxury.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-quiet-luxury.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-quiet-luxury.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-quiet-luxury.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-quiet-luxury.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-quiet-luxury.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-quiet-luxury.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-quiet-luxury.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-quiet-luxury.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_hash_and_quote_binding:ypcc-bundle-quiet-luxury.ai-detail",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_roles_and_fixed_engine:ypcc-bundle-quiet-luxury.ai-detail",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_model_price_admission_pending:ypcc-bundle-quiet-luxury.ai-detail",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-quiet-luxury.ai-detail:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-quiet-luxury.ai-detail:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-quiet-luxury.ai-detail:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-quiet-luxury.ai-detail:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-quiet-luxury.ai-detail:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-quiet-luxury.ai-detail:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-quiet-luxury.ai-detail:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-quiet-luxury.ai-detail:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-quiet-luxury.ai-detail:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-quiet-luxury.ai-detail:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_hash_and_quote_binding:ypcc-bundle-fresh-daily.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_roles_and_fixed_engine:ypcc-bundle-fresh-daily.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_model_price_admission_pending:ypcc-bundle-fresh-daily.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-fresh-daily.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-fresh-daily.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-fresh-daily.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-fresh-daily.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-fresh-daily.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-fresh-daily.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-fresh-daily.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-fresh-daily.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-fresh-daily.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-fresh-daily.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_hash_and_quote_binding:ypcc-bundle-fresh-daily.ai-scene",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_roles_and_fixed_engine:ypcc-bundle-fresh-daily.ai-scene",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_model_price_admission_pending:ypcc-bundle-fresh-daily.ai-scene",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-fresh-daily.ai-scene:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-fresh-daily.ai-scene:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-fresh-daily.ai-scene:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-fresh-daily.ai-scene:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-fresh-daily.ai-scene:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-fresh-daily.ai-scene:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-fresh-daily.ai-scene:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-fresh-daily.ai-scene:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-fresh-daily.ai-scene:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-fresh-daily.ai-scene:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_hash_and_quote_binding:ypcc-bundle-appetite-flash.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_roles_and_fixed_engine:ypcc-bundle-appetite-flash.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_model_price_admission_pending:ypcc-bundle-appetite-flash.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-appetite-flash.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-appetite-flash.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-appetite-flash.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-appetite-flash.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-appetite-flash.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-appetite-flash.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-appetite-flash.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-appetite-flash.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-appetite-flash.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-appetite-flash.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_hash_and_quote_binding:ypcc-bundle-home-calm.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_roles_and_fixed_engine:ypcc-bundle-home-calm.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_model_price_admission_pending:ypcc-bundle-home-calm.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-home-calm.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-home-calm.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-home-calm.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-home-calm.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-home-calm.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-home-calm.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-home-calm.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-home-calm.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-home-calm.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-home-calm.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_hash_and_quote_binding:ypcc-bundle-feature-cards.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_roles_and_fixed_engine:ypcc-bundle-feature-cards.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_model_price_admission_pending:ypcc-bundle-feature-cards.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-feature-cards.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-feature-cards.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-feature-cards.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-feature-cards.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-feature-cards.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-feature-cards.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-feature-cards.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-feature-cards.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-feature-cards.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-feature-cards.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_hash_and_quote_binding:ypcc-bundle-color-pop.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_roles_and_fixed_engine:ypcc-bundle-color-pop.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_model_price_admission_pending:ypcc-bundle-color-pop.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-color-pop.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-color-pop.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-color-pop.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-color-pop.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-color-pop.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-color-pop.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-color-pop.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-color-pop.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-color-pop.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-color-pop.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_hash_and_quote_binding:ypcc-bundle-launch-story.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_roles_and_fixed_engine:ypcc-bundle-launch-story.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_model_price_admission_pending:ypcc-bundle-launch-story.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-launch-story.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-launch-story.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-launch-story.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-launch-story.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-launch-story.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-launch-story.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-launch-story.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-launch-story.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-launch-story.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-launch-story.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_hash_and_quote_binding:ypcc-bundle-portrait-social.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_roles_and_fixed_engine:ypcc-bundle-portrait-social.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_model_price_admission_pending:ypcc-bundle-portrait-social.photo-layout",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-portrait-social.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-portrait-social.photo-layout:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-portrait-social.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-portrait-social.photo-layout:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-portrait-social.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-portrait-social.photo-layout:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-portrait-social.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-portrait-social.photo-layout:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-portrait-social.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-portrait-social.photo-layout:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_hash_and_quote_binding:ypcc-bundle-portrait-social.ai-presenter-single",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_roles_and_fixed_engine:ypcc-bundle-portrait-social.ai-presenter-single",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_model_price_admission_pending:ypcc-bundle-portrait-social.ai-presenter-single",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-portrait-social.ai-presenter-single:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-portrait-social.ai-presenter-single:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-portrait-social.ai-presenter-single:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-portrait-social.ai-presenter-single:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-portrait-social.ai-presenter-single:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-portrait-social.ai-presenter-single:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-portrait-social.ai-presenter-single:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-portrait-social.ai-presenter-single:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-portrait-social.ai-presenter-single:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-portrait-social.ai-presenter-single:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_hash_and_quote_binding:ypcc-bundle-portrait-social.ai-presenter-multi",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_roles_and_fixed_engine:ypcc-bundle-portrait-social.ai-presenter-multi",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "bundle_model_price_admission_pending:ypcc-bundle-portrait-social.ai-presenter-multi",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-portrait-social.ai-presenter-multi:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-portrait-social.ai-presenter-multi:CONTENT",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-portrait-social.ai-presenter-multi:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-portrait-social.ai-presenter-multi:PRODUCTION",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-portrait-social.ai-presenter-multi:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-portrait-social.ai-presenter-multi:POST",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-portrait-social.ai-presenter-multi:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-portrait-social.ai-presenter-multi:REVIEW_FACTS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "one_matching_style:ypcc-bundle-portrait-social.ai-presenter-multi:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "role_skill_evidence_binding:ypcc-bundle-portrait-social.ai-presenter-multi:REVIEW_STYLE",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "no_global_install_or_production_claim",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "existing_slo_hard_deadlines_preserved",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "strict_codex_contract:codex-contract",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "strict_codex_contract:codex-quote-binding",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "strict_codex_contract:agent-stage-result",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "strict_codex_contract:review-packet",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "strict_codex_contract:cleanup-receipt",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "strict_codex_contract:tool-call-intent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:frozen_codex_contract",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:cannot_disable_review",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:cannot_reuse_creator_context",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:cannot_use_virtualization",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:cannot_use_soft_budget_as_hard",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:cannot_extend_deadline",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:freeze_codex_before_order_exists",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:changed_codex_quote_contract_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:prequote_tool_has_preview_scope",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:tool_cannot_mix_preview_order",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:style_reviewer_cannot_run_product_analysis",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:paid_scope",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:prequote_scope",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:cannot_mix_order_preview",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:two_fresh_reviews_allow_delivery",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:creator_cannot_sign_review",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:creator_thread_cannot_review",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:two_reviews_cannot_share_thread",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:two_reviews_cannot_share_run",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:two_reviews_cannot_share_process",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:producer_process_cannot_review",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:wrong_qc_policy_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:original_evidence_changed_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:old_output_review_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:cross_tenant_review_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:changed_asset_invalidates_review",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:missing_slot_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:unknown_paid_task_blocks_publish",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:detector_failure_blocks_publish",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:insufficient_audio_blocks_publish",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:review_disagreement_blocks_publish",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:single_review_not_enough",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:release_preserves_delivery_and_reconciliation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:live_process_not_released",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:live_capability_not_released",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:private_history_not_released",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:delivery_deleted_not_released",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:unknown_intent_lost_not_released",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_contract_example:no_cleanup_evidence_not_released",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "meaningful_negative_contract_scenarios",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "tool_and_inference_hard_budget_policy",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "unique_role_scoped_tools",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "reviewers_cannot_buy_video",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "no_virtualization_or_agent_financial_publish_authority",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "partial_implementation_not_full_product_claim",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "real_runtime_quality_isolation_cleanup_not_verified",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "codex_defaults_disabled_and_unconfigured",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "read_only_cli_help_record:runtime/codex-research/app-server-help.txt",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "read_only_cli_help_record:runtime/codex-research/cli-version.txt",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "read_only_cli_help_record:runtime/codex-research/exec-help.txt",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "research_not_a_live_integration",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/01-产品需求PRD.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/01-产品需求PRD.md->设计/定型/C-柚子创作社-v1.0/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/01-产品需求PRD.md->评估/方案案例与生成流程深析-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/01-产品需求PRD.md->评估/one-tap-ads全量方案目录-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/01-产品需求PRD.md->设计/方案组件与执行变体规格-v3.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/01-产品需求PRD.md->../assets/presets/presets.v3.1.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/01-产品需求PRD.md->设计/小程序优先与预设素材包-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/01-产品需求PRD.md->05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/01-产品需求PRD.md->实施/v3.0云端生成服务任务与里程碑.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/01-产品需求PRD.md->设计/需求变更记录-v3.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/01-产品需求PRD.md->开发/14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/01-产品需求PRD.md->开发/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/01-产品需求PRD.md->实施/社区公开样例独立持有与撤回-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/02-功能需求与用户流程.md->设计/方案组件与执行变体规格-v3.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/03-架构数据与接口.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/03-架构数据与接口.md->开发/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/03-架构数据与接口.md->开发/01-技术选型与架构决策.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/03-架构数据与接口.md->开发/04-接口契约与错误语义.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/03-架构数据与接口.md->开发/03-领域数据与数据库设计.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/03-架构数据与接口.md->开发/05-云端任务与生成管线.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/03-架构数据与接口.md->实施/一品成片架构与实现细则-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/03-架构数据与接口.md->设计/方案组件与执行变体规格-v3.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/03-架构数据与接口.md->../assets/presets/presets.v3.1.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/03-架构数据与接口.md->开发/14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/03-架构数据与接口.md->../assets/development/v1.1/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/03-架构数据与接口.md->../assets/development/v1.1/contracts/codex-quote-binding.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/04-计费交易与运营.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/04-计费交易与运营.md->../SECURITY.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/05-验收测试与实施计划.md->开发/09-测试策略与验收门禁.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/05-验收测试与实施计划.md->开发/10-部署运维与故障恢复.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/05-验收测试与实施计划.md->开发/11-开发计划与交付协作.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/05-验收测试与实施计划.md->../assets/development/v1.1/verification-report.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/05-验收测试与实施计划.md->开发/18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/05-验收测试与实施计划.md->评估/one-tap-ads仓库核查与差距评估-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/05-验收测试与实施计划.md->评估/one-tap-ads核查证据-2026-10-27.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/05-验收测试与实施计划.md->评估/方案案例与生成流程深析-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/05-验收测试与实施计划.md->开发/18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->../README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->../README.en.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->guides/QUICKSTART.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->guides/QUICKSTART.en.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->guides/ARCHITECTURE.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->guides/DEMO.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->guides/STATUS.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->verification/publication.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->01-产品需求PRD.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->03-架构数据与接口.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->04-计费交易与运营.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->设计/定型/C-柚子创作社-v1.0/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->设计/需求追踪矩阵-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->开发/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->../CONTRIBUTING.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->../SECURITY.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->实施/源码实现进度-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->实施/当前开发方案与技术骨架-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->实施/生成服务持久调用与媒体转存-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->实施/参考帧独立身份核验-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->实施/受限修改执行与新版本交付-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->评估/方案案例与生成流程深析-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->../assets/research/one-tap-ads/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->../CHANGELOG.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->../THIRD_PARTY_NOTICES.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/guides/ARCHITECTURE.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/ARCHITECTURE.md->../../README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/ARCHITECTURE.md->../../README.en.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/ARCHITECTURE.md->STATUS.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/ARCHITECTURE.md->STATUS.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/ARCHITECTURE.md->../实施/参考帧独立身份核验-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/ARCHITECTURE.md->../开发/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/guides/DEMO.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../../README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../../README.en.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/overview.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/screenshots/01-home.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/screenshots/02-photos.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/screenshots/03-analysis.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/screenshots/04-community.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/screenshots/05-preset.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/screenshots/06-checklist.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/screenshots/07-order.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/screenshots/08-pack.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/screenshots/09-library.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/screenshots/10-creator.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->QUICKSTART.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->QUICKSTART.en.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/guides/QUICKSTART.en.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/QUICKSTART.en.md->QUICKSTART.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/QUICKSTART.en.md->../../README.en.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/QUICKSTART.en.md->STATUS.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/QUICKSTART.en.md->../实施/数据库外删除日志与原生备份恢复-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/QUICKSTART.en.md->DEMO.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/QUICKSTART.en.md->../../CONTRIBUTING.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/guides/QUICKSTART.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/QUICKSTART.md->QUICKSTART.en.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/QUICKSTART.md->../../README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/QUICKSTART.md->STATUS.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/QUICKSTART.md->../实施/数据库外删除日志与原生备份恢复-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/QUICKSTART.md->DEMO.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/QUICKSTART.md->../../CONTRIBUTING.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/guides/STATUS.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/STATUS.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/STATUS.md->../verification/publication.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/STATUS.md->../media/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/verification/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->../media/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->publication.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->contracts.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->repository-audit.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->../../assets/design/柚子创作社/v1.0/baseline-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->../guides/QUICKSTART.en.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/Codex内容规划与受控运行接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/Codex内容规划与受控运行接入-v1.0.md->../../assets/config-examples/codex-runtime-admission.example.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/Codex内容规划与受控运行接入-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/v3.0云端生成服务任务与里程碑.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/v3.0云端生成服务任务与里程碑.md->../01-产品需求PRD.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/v3.0云端生成服务任务与里程碑.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/v3.0云端生成服务任务与里程碑.md->../设计/方案组件与执行变体规格-v3.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/v3.0云端生成服务任务与里程碑.md->开发任务与评估修订-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/Worker与视觉适配器接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/Worker与视觉适配器接入-v1.0.md->原图制作与后期阶段接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/Worker与视觉适配器接入-v1.0.md->文件验收与封存审查包接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/Worker与视觉适配器接入-v1.0.md->Codex内容规划与受控运行接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/Worker与视觉适配器接入-v1.0.md->../../assets/config-examples/vision-contract.example.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/Worker与视觉适配器接入-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/一品成片架构与实现细则-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/一品成片架构与实现细则-2026-10-27.md->../03-架构数据与接口.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/一品成片架构与实现细则-2026-10-27.md->../设计/方案组件与执行变体规格-v3.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/一品成片架构与实现细则-2026-10-27.md->v3.0云端生成服务任务与里程碑.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/一品成片架构与实现细则-2026-10-27.md->方案驱动的云端服务与小程序封装-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/一品成片架构与实现细则-2026-10-27.md->../../assets/presets/presets.v2.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/一品成片架构与实现细则-2026-10-27.md->../03-架构数据与接口.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/一品成片架构与实现细则-2026-10-27.md->开发任务与评估修订-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/主库私有内容脱敏与原回执对账-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/主库私有内容脱敏与原回执对账-v1.0.md->私有对象登记与媒体物理回收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/主库私有内容脱敏与原回执对账-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/主库私有内容脱敏与原回执对账-v1.0.md->数据库外删除日志与原生备份恢复-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/原图制作与后期阶段接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原图制作与后期阶段接入-v1.0.md->文件验收与封存审查包接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原图制作与后期阶段接入-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/参考帧独立身份核验-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/双小程序源码与构建-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/双小程序源码与构建-v1.0.md->社区界面与作者工作台接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/双小程序源码与构建-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/受限修改执行与新版本交付-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/受限修改执行与新版本交付-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/受限修改执行与新版本交付-v1.0.md->../../src/worker/revisions/context.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/受限修改执行与新版本交付-v1.0.md->../../src/worker/revisions/service.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/受限修改执行与新版本交付-v1.0.md->../../src/worker/revisions/media.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/受限修改执行与新版本交付-v1.0.md->../../src/worker/revisions/review.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/受限修改执行与新版本交付-v1.0.md->../../src/worker/revisions/budget.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/受限修改执行与新版本交付-v1.0.md->../../src/shared/ui/revision.tsx",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/受限修改执行与新版本交付-v1.0.md->../../src/worker/tool-gateway/traffic.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/开发任务与评估修订-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/开发任务与评估修订-2026-10-27.md->v3.0云端生成服务任务与里程碑.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/开发任务与评估修订-2026-10-27.md->方案驱动的云端服务与小程序封装-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/开发任务与评估修订-2026-10-27.md->../评估/one-tap-ads仓库核查与差距评估-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/开发任务与评估修订-2026-10-27.md->一品成片架构与实现细则-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/当前开发方案与技术骨架-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->../../package.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->生成服务持久调用与媒体转存-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->本人预览执行与私有恢复-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->受限修改执行与新版本交付-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->社区许可与发布申请接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->社区样例独立制作与复核接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->社区公开样例独立持有与撤回-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->源码实现进度-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->社区界面与作者工作台接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->原图制作与后期阶段接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->文件验收与封存审查包接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->独立视觉复核与原子交付接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->独立实例回收与冻结输入保留-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->私有对象登记与媒体物理回收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->主库私有内容脱敏与原回执对账-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->数据库外删除日志与原生备份恢复-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->../开发/01-技术选型与架构决策.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->../开发/14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->../开发/15-Skill预载与风格生产规范.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->../开发/16-实例隔离与释放协议.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->../开发/17-交叉核验与交付门禁.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/数据库外删除日志与原生备份恢复-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/数据库外删除日志与原生备份恢复-v1.0.md->主库私有内容脱敏与原回执对账-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/数据库外删除日志与原生备份恢复-v1.0.md->../../.env.example",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/数据库外删除日志与原生备份恢复-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/文件验收与封存审查包接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/方案驱动的云端服务与小程序封装-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/方案驱动的云端服务与小程序封装-2026-10-27.md->../03-架构数据与接口.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/方案驱动的云端服务与小程序封装-2026-10-27.md->../设计/方案组件与执行变体规格-v3.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/方案驱动的云端服务与小程序封装-2026-10-27.md->../评估/方案案例与生成流程深析-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/方案驱动的云端服务与小程序封装-2026-10-27.md->../../assets/blueprints/云端方案映射.v3.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/本人预览执行与私有恢复-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/源码实现进度-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->参考帧独立身份核验-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->生成服务持久调用与媒体转存-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->受限修改执行与新版本交付-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->本人预览执行与私有恢复-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../设计/需求追踪矩阵-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../../package.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../../README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->Worker与视觉适配器接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->Codex内容规划与受控运行接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->双小程序源码与构建-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../../src/api/main.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../../src/worker/main.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->独立视觉复核与原子交付接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->社区界面与作者工作台接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->独立实例回收与冻结输入保留-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->社区许可与发布申请接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->社区样例独立制作与复核接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->社区公开样例独立持有与撤回-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/独立实例回收与冻结输入保留-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/独立实例回收与冻结输入保留-v1.0.md->私有对象登记与媒体物理回收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/独立实例回收与冻结输入保留-v1.0.md->独立视觉复核与原子交付接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/独立实例回收与冻结输入保留-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/独立视觉复核与原子交付接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/独立视觉复核与原子交付接入-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/生成服务持久调用与媒体转存-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/社区公开样例独立持有与撤回-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区公开样例独立持有与撤回-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区公开样例独立持有与撤回-v1.0.md->../../src/api/modules/authorized-samples.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区公开样例独立持有与撤回-v1.0.md->../../src/worker/samples/publication.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区公开样例独立持有与撤回-v1.0.md->../../src/api/db/migrations/018_authorized_samples.sql",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区公开样例独立持有与撤回-v1.0.md->../../src/api/storage/private-objects.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区公开样例独立持有与撤回-v1.0.md->../../src/api/modules/support.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/社区样例独立制作与复核接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区样例独立制作与复核接入-v1.0.md->../../.env.example",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区样例独立制作与复核接入-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区样例独立制作与复核接入-v1.0.md->../../src/worker/samples/context.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区样例独立制作与复核接入-v1.0.md->../../src/worker/samples/service.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区样例独立制作与复核接入-v1.0.md->../../src/worker/samples/media.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区样例独立制作与复核接入-v1.0.md->../../src/worker/samples/review.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区样例独立制作与复核接入-v1.0.md->../../src/worker/samples/completion.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区样例独立制作与复核接入-v1.0.md->../../src/worker/tool-gateway/sample-tools.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/社区界面与作者工作台接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区界面与作者工作台接入-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区界面与作者工作台接入-v1.0.md->社区许可与发布申请接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/社区许可与发布申请接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区许可与发布申请接入-v1.0.md->社区界面与作者工作台接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区许可与发布申请接入-v1.0.md->社区样例独立制作与复核接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区许可与发布申请接入-v1.0.md->社区样例独立制作与复核接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/社区许可与发布申请接入-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/私有对象登记与媒体物理回收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/私有对象登记与媒体物理回收-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/私有对象登记与媒体物理回收-v1.0.md->主库私有内容脱敏与原回执对账-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/私有对象登记与媒体物理回收-v1.0.md->数据库外删除日志与原生备份恢复-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/00-当前方案与范围.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/00-当前方案与范围.md->../../package.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/00-当前方案与范围.md->08-安全隐私与依赖许可.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/00-当前方案与范围.md->../实施/社区界面与作者工作台接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/00-当前方案与范围.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/00-当前方案与范围.md->../实施/当前开发方案与技术骨架-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/00-当前方案与范围.md->../实施/独立视觉复核与原子交付接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/00-当前方案与范围.md->14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/00-当前方案与范围.md->18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/01-技术选型与架构决策.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/01-技术选型与架构决策.md->../../package.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/01-技术选型与架构决策.md->../实施/当前开发方案与技术骨架-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/01-技术选型与架构决策.md->14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/01-技术选型与架构决策.md->18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/02-工程结构与开发约束.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/02-工程结构与开发约束.md->../实施/源码实现进度-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/02-工程结构与开发约束.md->14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/02-工程结构与开发约束.md->18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/03-领域数据与数据库设计.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/03-领域数据与数据库设计.md->../../assets/development/v1.1/data-model.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/03-领域数据与数据库设计.md->../../assets/development/v1.1/state-machines.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/03-领域数据与数据库设计.md->../../assets/development/v1.1/contracts/product-identity-lock.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/03-领域数据与数据库设计.md->../../assets/development/v1.1/contracts/execution-snapshot.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/03-领域数据与数据库设计.md->../../assets/development/v1.1/contracts/provider-submission.schema.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/03-领域数据与数据库设计.md->14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/03-领域数据与数据库设计.md->18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/03-领域数据与数据库设计.md->../实施/社区许可与发布申请接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/04-接口契约与错误语义.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/04-接口契约与错误语义.md->../../assets/development/v1.1/contracts/openapi.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/04-接口契约与错误语义.md->../../assets/development/v1.1/contracts/endpoint-catalog.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/04-接口契约与错误语义.md->../实施/受限修改执行与新版本交付-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/04-接口契约与错误语义.md->../../assets/development/v1.1/contracts/management-openapi.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/04-接口契约与错误语义.md->14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/04-接口契约与错误语义.md->18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/04-接口契约与错误语义.md->../实施/社区许可与发布申请接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/05-云端任务与生成管线.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/05-云端任务与生成管线.md->../实施/本人预览执行与私有恢复-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/05-云端任务与生成管线.md->../实施/受限修改执行与新版本交付-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/05-云端任务与生成管线.md->../实施/社区样例独立制作与复核接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/05-云端任务与生成管线.md->../实施/社区公开样例独立持有与撤回-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/05-云端任务与生成管线.md->14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/05-云端任务与生成管线.md->18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/06-双小程序开发规范.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/06-双小程序开发规范.md->../设计/定型/C-柚子创作社-v1.0/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/06-双小程序开发规范.md->14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/06-双小程序开发规范.md->18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/06-双小程序开发规范.md->../实施/社区界面与作者工作台接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/06-双小程序开发规范.md->../实施/社区许可与发布申请接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/07-社区与内容发布开发.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/07-社区与内容发布开发.md->../实施/社区公开样例独立持有与撤回-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/07-社区与内容发布开发.md->14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/07-社区与内容发布开发.md->18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/07-社区与内容发布开发.md->../实施/社区界面与作者工作台接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/07-社区与内容发布开发.md->../实施/社区许可与发布申请接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/07-社区与内容发布开发.md->../实施/社区样例独立制作与复核接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/08-安全隐私与依赖许可.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/08-安全隐私与依赖许可.md->../../SECURITY.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/08-安全隐私与依赖许可.md->14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/08-安全隐私与依赖许可.md->18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/08-安全隐私与依赖许可.md->../实施/私有对象登记与媒体物理回收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/08-安全隐私与依赖许可.md->../实施/主库私有内容脱敏与原回执对账-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/08-安全隐私与依赖许可.md->../实施/数据库外删除日志与原生备份恢复-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/09-测试策略与验收门禁.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/09-测试策略与验收门禁.md->14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/09-测试策略与验收门禁.md->18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/10-部署运维与故障恢复.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/10-部署运维与故障恢复.md->../实施/独立实例回收与冻结输入保留-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/10-部署运维与故障恢复.md->../实施/私有对象登记与媒体物理回收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/10-部署运维与故障恢复.md->14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/10-部署运维与故障恢复.md->18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/10-部署运维与故障恢复.md->../实施/数据库外删除日志与原生备份恢复-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/11-开发计划与交付协作.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/11-开发计划与交付协作.md->../../assets/development/v1.1/work-packages.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/11-开发计划与交付协作.md->18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/11-开发计划与交付协作.md->../实施/v3.0云端生成服务任务与里程碑.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/11-开发计划与交付协作.md->14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/11-开发计划与交付协作.md->18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/12-配置环境与本地联调.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/12-配置环境与本地联调.md->../../.env.example",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/12-配置环境与本地联调.md->../实施/社区样例独立制作与复核接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/12-配置环境与本地联调.md->14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/12-配置环境与本地联调.md->18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/12-配置环境与本地联调.md->../实施/社区公开样例独立持有与撤回-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/13-技术依据与待验证事项.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/13-技术依据与待验证事项.md->../评估/one-tap-ads仓库核查与差距评估-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/13-技术依据与待验证事项.md->14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/13-技术依据与待验证事项.md->18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/14-Codex内核与分阶段编排.md->../实施/源码实现进度-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/14-Codex内核与分阶段编排.md->../实施/独立视觉复核与原子交付接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/14-Codex内核与分阶段编排.md->../实施/独立实例回收与冻结输入保留-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/14-Codex内核与分阶段编排.md->18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/15-Skill预载与风格生产规范.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/15-Skill预载与风格生产规范.md->../../assets/skills/ypcc/v1.0/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/15-Skill预载与风格生产规范.md->../../assets/skills/ypcc/v1.0/registry.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/16-实例隔离与释放协议.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/16-实例隔离与释放协议.md->../实施/独立实例回收与冻结输入保留-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/17-交叉核验与交付门禁.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/17-交叉核验与交付门禁.md->../实施/文件验收与封存审查包接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/17-交叉核验与交付门禁.md->../实施/独立视觉复核与原子交付接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/18-Codex接入验证与实施计划.md->../实施/独立实例回收与冻结输入保留-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/18-Codex接入验证与实施计划.md->../实施/源码实现进度-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/18-Codex接入验证与实施计划.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/18-Codex接入验证与实施计划.md->../实施/私有对象登记与媒体物理回收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/18-Codex接入验证与实施计划.md->../实施/数据库外删除日志与原生备份恢复-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/18-Codex接入验证与实施计划.md->../../assets/research/agent-kernel/codex-research-20261027.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/18-Codex接入验证与实施计划.md->../../assets/development/v1.1/work-packages.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/18-Codex接入验证与实施计划.md->../设计/C设计与Codex服务兼容说明-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/开发/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/当前开发方案与技术骨架-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/源码实现进度-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/生成服务持久调用与媒体转存-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/本人预览执行与私有恢复-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/受限修改执行与新版本交付-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->00-当前方案与范围.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->01-技术选型与架构决策.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->02-工程结构与开发约束.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->03-领域数据与数据库设计.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->04-接口契约与错误语义.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->05-云端任务与生成管线.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->06-双小程序开发规范.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->07-社区与内容发布开发.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->08-安全隐私与依赖许可.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->09-测试策略与验收门禁.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->10-部署运维与故障恢复.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->11-开发计划与交付协作.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->12-配置环境与本地联调.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->13-技术依据与待验证事项.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../../assets/development/v1.1/development-baseline.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../../assets/development/v1.1/contracts/openapi.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../../assets/development/v1.1/contracts/management-openapi.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../../assets/development/v1.1/state-machines.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../../assets/development/v1.1/data-model.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../../assets/development/v1.1/work-packages.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../../assets/development/v1.1/verification-report.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../../CONTRIBUTING.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../../SECURITY.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../../.env.example",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../01-产品需求PRD.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../03-架构数据与接口.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../04-计费交易与运营.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../设计/定型/C-柚子创作社-v1.0/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/私有对象登记与媒体物理回收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->15-Skill预载与风格生产规范.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->16-实例隔离与释放协议.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->17-交叉核验与交付门禁.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->18-Codex接入验证与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/主库私有内容脱敏与原回执对账-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/数据库外删除日志与原生备份恢复-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/社区界面与作者工作台接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/社区许可与发布申请接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/社区样例独立制作与复核接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/社区公开样例独立持有与撤回-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/背景/项目1-一品成片-详细方案-2026-10-26.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/设计/C设计与Codex服务兼容说明-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/C设计与Codex服务兼容说明-v3.1.md->../../assets/development/v1.1/design-compatibility.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/设计/五种视觉方向选型-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/五种视觉方向选型-2026-10-27.md->定型/C-柚子创作社-v1.0/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/五种视觉方向选型-2026-10-27.md->定型/C-柚子创作社-v1.0/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/五种视觉方向选型-2026-10-27.md->../../assets/design/selection-2026-10-27/designs.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/五种视觉方向选型-2026-10-27.md->../../assets/design/selection-2026-10-27/index.html",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/五种视觉方向选型-2026-10-27.md->../../assets/design/selection-2026-10-27/A-晴蓝工具箱.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/五种视觉方向选型-2026-10-27.md->../../assets/design/selection-2026-10-27/B-片场手记.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/五种视觉方向选型-2026-10-27.md->../../assets/design/selection-2026-10-27/C-柚子创作社.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/五种视觉方向选型-2026-10-27.md->../../assets/design/selection-2026-10-27/D-品物画廊.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/五种视觉方向选型-2026-10-27.md->../../assets/design/selection-2026-10-27/E-光谱实验室.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/设计/产品目标与交互说明-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/产品目标与交互说明-2026-10-27.md->小程序优先与预设素材包-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/设计/小程序优先与预设素材包-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/小程序优先与预设素材包-2026-10-27.md->定型/C-柚子创作社-v1.0/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/小程序优先与预设素材包-2026-10-27.md->方案组件与执行变体规格-v3.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/小程序优先与预设素材包-2026-10-27.md->../实施/v3.0云端生成服务任务与里程碑.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/小程序优先与预设素材包-2026-10-27.md->../../assets/presets/presets.v3.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/小程序优先与预设素材包-2026-10-27.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/设计/方案组件与执行变体规格-v3.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/方案组件与执行变体规格-v3.0.md->../01-产品需求PRD.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/方案组件与执行变体规格-v3.0.md->../../assets/presets/presets.v3.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/方案组件与执行变体规格-v3.0.md->../../assets/blueprints/云端方案映射.v3.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/设计/需求变更记录-v3.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求变更记录-v3.0.md->方案组件与执行变体规格-v3.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求变更记录-v3.0.md->../评估/方案案例与生成流程深析-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求变更记录-v3.0.md->../评估/one-tap-ads全量方案目录-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求变更记录-v3.0.md->../../assets/presets/presets.v3.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求变更记录-v3.0.md->../../assets/blueprints/云端方案映射.v3.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/设计/需求变更记录-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求变更记录-v3.1.md->C设计与Codex服务兼容说明-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求变更记录-v3.1.md->../开发/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求变更记录-v3.1.md->需求追踪矩阵-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求变更记录-v3.1.md->../../assets/skills/ypcc/v1.0/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/设计/需求追踪矩阵-v3.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../../assets/requirements/requirements.v3.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../../assets/requirements/需求核验-v3.0.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->需求变更记录-v3.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.0.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/设计/需求追踪矩阵-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.1.md->../../assets/requirements/requirements.v3.1.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/需求追踪矩阵-v3.1.md->../../assets/requirements/需求核验-v3.1.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/评估/one-tap-ads仓库核查与差距评估-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/one-tap-ads仓库核查与差距评估-2026-10-27.md->../01-产品需求PRD.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/one-tap-ads仓库核查与差距评估-2026-10-27.md->../设计/需求变更记录-v3.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/one-tap-ads仓库核查与差距评估-2026-10-27.md->方案案例与生成流程深析-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/one-tap-ads仓库核查与差距评估-2026-10-27.md->one-tap-ads全量方案目录-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/one-tap-ads仓库核查与差距评估-2026-10-27.md->../实施/方案驱动的云端服务与小程序封装-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/one-tap-ads仓库核查与差距评估-2026-10-27.md->../实施/一品成片架构与实现细则-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/one-tap-ads仓库核查与差距评估-2026-10-27.md->../实施/开发任务与评估修订-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/one-tap-ads仓库核查与差距评估-2026-10-27.md->one-tap-ads核查证据-2026-10-27.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/one-tap-ads仓库核查与差距评估-2026-10-27.md->../02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/one-tap-ads仓库核查与差距评估-2026-10-27.md->../05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/one-tap-ads仓库核查与差距评估-2026-10-27.md->../实施/开发任务与评估修订-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/评估/one-tap-ads全量方案目录-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/one-tap-ads全量方案目录-2026-10-27.md->方案案例与生成流程深析-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/one-tap-ads全量方案目录-2026-10-27.md->../实施/方案驱动的云端服务与小程序封装-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/one-tap-ads全量方案目录-2026-10-27.md->../../assets/research/one-tap-ads/方案完整目录-1aab133.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/one-tap-ads全量方案目录-2026-10-27.md->../../assets/research/one-tap-ads/方案筛选目录-1aab133.csv",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/one-tap-ads全量方案目录-2026-10-27.md->../../assets/research/one-tap-ads/LICENSE.upstream.txt",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/one-tap-ads全量方案目录-2026-10-27.md->../../assets/research/one-tap-ads/NOTICE.upstream.txt",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/评估/内容生产主体与Agent内核评估-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/内容生产主体与Agent内核评估-2026-10-27.md->../开发/14-Codex内核与分阶段编排.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/内容生产主体与Agent内核评估-2026-10-27.md->../../assets/research/agent-kernel/assessment-20261027.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/评估/方案案例与生成流程深析-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/方案案例与生成流程深析-2026-10-27.md->one-tap-ads全量方案目录-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/方案案例与生成流程深析-2026-10-27.md->../../assets/research/one-tap-ads/方案完整目录-1aab133.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/方案案例与生成流程深析-2026-10-27.md->../../assets/research/one-tap-ads/方案筛选目录-1aab133.csv",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/方案案例与生成流程深析-2026-10-27.md->../实施/方案驱动的云端服务与小程序封装-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/方案案例与生成流程深析-2026-10-27.md->../01-产品需求PRD.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/方案案例与生成流程深析-2026-10-27.md->../设计/方案组件与执行变体规格-v3.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/方案案例与生成流程深析-2026-10-27.md->../../assets/research/one-tap-ads/media/coffee-film/contact-sheet.jpg",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/方案案例与生成流程深析-2026-10-27.md->../../assets/research/one-tap-ads/media/inputs-and-grid.jpg",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/方案案例与生成流程深析-2026-10-27.md->../../assets/research/one-tap-ads/media/coffee-single/contact-sheet.jpg",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/方案案例与生成流程深析-2026-10-27.md->../../assets/research/one-tap-ads/media/blender-single/contact-sheet.jpg",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/方案案例与生成流程深析-2026-10-27.md->../../assets/research/one-tap-ads/media/tissue-showcase/contact-sheet.jpg",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/方案案例与生成流程深析-2026-10-27.md->../../assets/research/one-tap-ads/演示视频证据-2026-10-27.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/方案案例与生成流程深析-2026-10-27.md->../../assets/research/one-tap-ads/LICENSE.upstream.txt",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/评估/方案案例与生成流程深析-2026-10-27.md->../../assets/research/one-tap-ads/NOTICE.upstream.txt",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/设计/定型/C-柚子创作社-v1.0/00-设计定型总纲.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/00-设计定型总纲.md->../../../01-产品需求PRD.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/设计/定型/C-柚子创作社-v1.0/01-视觉与布局规范.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/01-视觉与布局规范.md->../../../../assets/design/柚子创作社/v1.0/design-tokens.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/01-视觉与布局规范.md->../../../../assets/design/柚子创作社/v1.0/contrast-report.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/设计/定型/C-柚子创作社-v1.0/02-组件与交互状态规范.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/02-组件与交互状态规范.md->../../../../assets/design/柚子创作社/v1.0/component-registry.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/设计/定型/C-柚子创作社-v1.0/03-页面与导航定型.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/03-页面与导航定型.md->../../../../assets/design/柚子创作社/v1.0/page-registry.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/设计/定型/C-柚子创作社-v1.0/04-全流程状态与文案.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/设计/定型/C-柚子创作社-v1.0/05-双端适配与无障碍规范.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/设计/定型/C-柚子创作社-v1.0/06-开发交付与设计验收.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/06-开发交付与设计验收.md->../../../../assets/design/柚子创作社/v1.0/verification-report.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/设计/定型/C-柚子创作社-v1.0/07-需求设计追踪与变更记录.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/07-需求设计追踪与变更记录.md->../../../../assets/design/柚子创作社/v1.0/requirements-design-map.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/设计/定型/C-柚子创作社-v1.0/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/README.md->00-设计定型总纲.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/README.md->01-视觉与布局规范.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/README.md->02-组件与交互状态规范.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/README.md->03-页面与导航定型.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/README.md->04-全流程状态与文案.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/README.md->05-双端适配与无障碍规范.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/README.md->06-开发交付与设计验收.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/README.md->07-需求设计追踪与变更记录.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/README.md->../../../../assets/design/柚子创作社/v1.0/reference/index.html",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/README.md->../../../../assets/design/柚子创作社/v1.0/reference/C-柚子创作社-原始设计稿.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/README.md->../../../../assets/design/柚子创作社/v1.0/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/README.md->../../../../assets/design/柚子创作社/v1.0/design-tokens.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/README.md->../../../../assets/design/柚子创作社/v1.0/page-registry.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/README.md->../../../../assets/design/柚子创作社/v1.0/component-registry.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/README.md->../../../../assets/design/柚子创作社/v1.0/baseline-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/README.md->../../../../assets/design/柚子创作社/v1.0/verification-report.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/设计/定型/C-柚子创作社-v1.0/README.md->../../../../assets/design/柚子创作社/archives/一品成片-C-设计定型-v1.0-20261027.zip",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->registry.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->../../../../docs/开发/15-Skill预载与风格生产规范.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-core/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-style-minimal-clean/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-style-warm-handmade/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-style-quiet-luxury/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-style-fresh-daily/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-style-appetite-flash/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-style-home-calm/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-style-feature-cards/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-style-color-pop/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-style-launch-story/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-style-portrait-social/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-target-images/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-target-video/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-target-copy/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-plan/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-produce/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-post/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-review-facts/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:assets/skills/ypcc/v1.0/README.md->ypcc-review-style/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-core/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-plan/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-post/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-produce/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-review-facts/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-review-style/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-style-appetite-flash/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-style-color-pop/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-style-feature-cards/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-style-fresh-daily/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-style-home-calm/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-style-launch-story/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-style-minimal-clean/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-style-portrait-social/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-style-quiet-luxury/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-style-warm-handmade/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-target-copy/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-target-images/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:assets/skills/ypcc/v1.0/ypcc-target-video/SKILL.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->README.en.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/guides/QUICKSTART.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/guides/STATUS.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->CHANGELOG.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/verification/publication.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/overview.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/guides/DEMO.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->assets/presets/presets.v3.1.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/设计/方案组件与执行变体规格-v3.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->assets/blueprints/云端方案映射.v3.1.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/guides/QUICKSTART.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->.env.example",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/01-产品需求PRD.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/04-计费交易与运营.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/05-验收测试与实施计划.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/设计/定型/C-柚子创作社-v1.0/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->assets/design/柚子创作社/v1.0/",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/设计/需求追踪矩阵-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/guides/ARCHITECTURE.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/开发/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/实施/源码实现进度-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->CONTRIBUTING.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->SECURITY.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/评估/one-tap-ads仓库核查与差距评估-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/评估/方案案例与生成流程深析-2026-10-27.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/guides/DEMO.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/guides/STATUS.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->CHANGELOG.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->THIRD_PARTY_NOTICES.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:AGENTS.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:AGENTS.md->docs/实施/受限修改执行与新版本交付-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:CONTRIBUTING.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:CONTRIBUTING.md->docs/实施/源码实现进度-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:CONTRIBUTING.md->docs/开发/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:CONTRIBUTING.md->docs/02-功能需求与用户流程.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:CONTRIBUTING.md->SECURITY.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:CONTRIBUTING.md->docs/开发/12-配置环境与本地联调.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:SECURITY.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:SECURITY.md->docs/开发/08-安全隐私与依赖许可.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "upstream_fixed_commit_remains_read_only",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "upstream_source_hash:src/lib/ad-templates.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "upstream_source_hash:src/lib/camera-presets.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "upstream_source_hash:src/lib/look-presets.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "upstream_source_hash:src/lib/style-packs.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "upstream_source_hash:src/lib/caption-presets.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "upstream_source_hash:src/lib/examples.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "upstream_source_hash:src/lib/script-engine/prompts.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "upstream_source_hash:src/lib/production-profiles.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "upstream_source_hash:src/lib/presenters.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "upstream_source_hash:src/lib/storyboard-grid.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "upstream_source_hash:src/lib/storyboard-film.ts",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "errors": []
+}

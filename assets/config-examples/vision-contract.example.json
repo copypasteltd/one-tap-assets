@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0.0",
+  "state": "NOT_EVALUATED",
+  "wire": "OPENAI_CHAT_COMPLETIONS",
+  "provider": "",
+  "actual_model": "",
+  "base_url": "",
+  "registry_version": "",
+  "rate_version": "",
+  "official_documentation": "https://developers.openai.com/api/docs/guides/images-vision",
+  "capability_evidence_sha256": "",
+  "valid_until": "",
+  "max_images": 5,
+  "max_image_edge": 1536,
+  "max_total_pixels": 11796480,
+  "max_request_bytes": 16000000,
+  "max_output_tokens": 6000,
+  "certified_max_input_tokens": null,
+  "input_micro_per_million": null,
+  "output_micro_per_million": null,
+  "per_request_ceiling_micro": null,
+  "no_charge_http_statuses": []
+}

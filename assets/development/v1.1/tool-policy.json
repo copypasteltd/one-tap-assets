@@ -1,0 +1,188 @@
+{
+  "version": "YPCC-TOOL-POLICY-1.0.0",
+  "status": "DESIGN_NOT_IMPLEMENTED",
+  "transport": "PLATFORM_MCP_REQUIRED",
+  "default_deny": true,
+  "tools": [
+    {
+      "name": "analyze_photos",
+      "allowed_roles": [
+        "CONTENT"
+      ],
+      "checks": [
+        "TENANT_ORDER_OR_PREVIEW_SCOPE",
+        "ROLE_STAGE",
+        "FENCING_TOKEN",
+        "SNAPSHOT_HASH",
+        "DEADLINE",
+        "ATOMIC_COST_RESERVATION"
+      ]
+    },
+    {
+      "name": "validate_content_plan",
+      "allowed_roles": [
+        "CONTENT"
+      ],
+      "checks": [
+        "TENANT_ORDER_OR_PREVIEW_SCOPE",
+        "ROLE_STAGE",
+        "FENCING_TOKEN",
+        "SNAPSHOT_HASH",
+        "DEADLINE",
+        "ATOMIC_COST_RESERVATION"
+      ]
+    },
+    {
+      "name": "render_photo_pack",
+      "allowed_roles": [
+        "PRODUCTION"
+      ],
+      "checks": [
+        "TENANT_ORDER_OR_PREVIEW_SCOPE",
+        "ROLE_STAGE",
+        "FENCING_TOKEN",
+        "SNAPSHOT_HASH",
+        "DEADLINE",
+        "ATOMIC_COST_RESERVATION"
+      ]
+    },
+    {
+      "name": "generate_reference_frames",
+      "allowed_roles": [
+        "PRODUCTION"
+      ],
+      "checks": [
+        "TENANT_ORDER_OR_PREVIEW_SCOPE",
+        "ROLE_STAGE",
+        "FENCING_TOKEN",
+        "SNAPSHOT_HASH",
+        "DEADLINE",
+        "ATOMIC_COST_RESERVATION"
+      ]
+    },
+    {
+      "name": "submit_video",
+      "allowed_roles": [
+        "PRODUCTION"
+      ],
+      "checks": [
+        "TENANT_ORDER_OR_PREVIEW_SCOPE",
+        "ROLE_STAGE",
+        "FENCING_TOKEN",
+        "SNAPSHOT_HASH",
+        "DEADLINE",
+        "ATOMIC_COST_RESERVATION"
+      ]
+    },
+    {
+      "name": "query_original_submission",
+      "allowed_roles": [
+        "PRODUCTION",
+        "POST"
+      ],
+      "checks": [
+        "TENANT_ORDER_OR_PREVIEW_SCOPE",
+        "ROLE_STAGE",
+        "FENCING_TOKEN",
+        "SNAPSHOT_HASH",
+        "DEADLINE",
+        "ATOMIC_COST_RESERVATION"
+      ]
+    },
+    {
+      "name": "inspect_actual_media",
+      "allowed_roles": [
+        "CONTENT",
+        "PRODUCTION",
+        "POST",
+        "REVIEW_FACTS",
+        "REVIEW_STYLE"
+      ],
+      "checks": [
+        "TENANT_ORDER_OR_PREVIEW_SCOPE",
+        "ROLE_STAGE",
+        "FENCING_TOKEN",
+        "SNAPSHOT_HASH",
+        "DEADLINE",
+        "ATOMIC_COST_RESERVATION"
+      ]
+    },
+    {
+      "name": "extract_review_evidence",
+      "allowed_roles": [
+        "REVIEW_FACTS",
+        "REVIEW_STYLE"
+      ],
+      "checks": [
+        "TENANT_ORDER_OR_PREVIEW_SCOPE",
+        "ROLE_STAGE",
+        "FENCING_TOKEN",
+        "SNAPSHOT_HASH",
+        "DEADLINE",
+        "ATOMIC_COST_RESERVATION"
+      ]
+    },
+    {
+      "name": "transcribe_actual_audio",
+      "allowed_roles": [
+        "POST",
+        "REVIEW_FACTS",
+        "REVIEW_STYLE"
+      ],
+      "checks": [
+        "TENANT_ORDER_OR_PREVIEW_SCOPE",
+        "ROLE_STAGE",
+        "FENCING_TOKEN",
+        "SNAPSHOT_HASH",
+        "DEADLINE",
+        "ATOMIC_COST_RESERVATION"
+      ]
+    },
+    {
+      "name": "execute_post_plan",
+      "allowed_roles": [
+        "POST"
+      ],
+      "checks": [
+        "TENANT_ORDER_OR_PREVIEW_SCOPE",
+        "ROLE_STAGE",
+        "FENCING_TOKEN",
+        "SNAPSHOT_HASH",
+        "DEADLINE",
+        "ATOMIC_COST_RESERVATION"
+      ]
+    },
+    {
+      "name": "persist_stage_result",
+      "allowed_roles": [
+        "CONTENT",
+        "PRODUCTION",
+        "POST",
+        "REVIEW_FACTS",
+        "REVIEW_STYLE"
+      ],
+      "checks": [
+        "TENANT_ORDER_OR_PREVIEW_SCOPE",
+        "ROLE_STAGE",
+        "FENCING_TOKEN",
+        "SNAPSHOT_HASH",
+        "DEADLINE",
+        "ATOMIC_COST_RESERVATION"
+      ]
+    }
+  ],
+  "forbidden": [
+    "arbitrary_shell",
+    "arbitrary_url",
+    "sql",
+    "payment",
+    "refund",
+    "publish_delivery",
+    "install_skill",
+    "browser",
+    "docker",
+    "wsl",
+    "virtual_machine"
+  ],
+  "inference_requests_also_require_reservation_and_hard_limit": true
+}

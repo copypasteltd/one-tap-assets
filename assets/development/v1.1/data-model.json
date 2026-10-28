@@ -1,0 +1,1978 @@
+{
+  "schema_version": "1.1.0",
+  "status": "DESIGN_NOT_IMPLEMENTED",
+  "database": "PostgreSQL",
+  "note": "逻辑实体/字段/关键唯一键和部分高风险外键目录；不是已执行DDL。迁移实现时补齐全部外键/类型/索引/check与兼容。",
+  "entities": [
+    {
+      "table": "tenants",
+      "primary_key": "tenant_id",
+      "scope": "root",
+      "fields": [
+        "tenant_id",
+        "created_at"
+      ],
+      "unique_key": [
+        "tenant_id"
+      ],
+      "ownership_unique_key": null,
+      "invariant": "tenant root",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "users",
+      "primary_key": "user_id",
+      "scope": "tenant",
+      "fields": [
+        "user_id",
+        "tenant_id",
+        "created_at"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "user_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "user_id"
+      ],
+      "invariant": "subject ownership",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "platform_identities",
+      "primary_key": "identity_id",
+      "scope": "tenant",
+      "fields": [
+        "identity_id",
+        "tenant_id",
+        "user_id",
+        "platform",
+        "app_id",
+        "subject_id"
+      ],
+      "unique_key": [
+        "platform",
+        "app_id",
+        "subject_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "identity_id"
+      ],
+      "invariant": "no nickname merge",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "sessions",
+      "primary_key": "session_id",
+      "scope": "tenant",
+      "fields": [
+        "session_id",
+        "tenant_id",
+        "user_id",
+        "token_hash",
+        "expires_at",
+        "revoked_at"
+      ],
+      "unique_key": [
+        "token_hash"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "session_id"
+      ],
+      "invariant": "hashed/revocable tokens",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "product_drafts",
+      "primary_key": "product_id",
+      "scope": "tenant",
+      "fields": [
+        "product_id",
+        "tenant_id",
+        "owner_id",
+        "revision",
+        "current_photo_version",
+        "current_profile_id"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "product_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "product_id"
+      ],
+      "invariant": "optimistic revision",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "assets",
+      "primary_key": "asset_id",
+      "scope": "tenant",
+      "fields": [
+        "asset_id",
+        "tenant_id",
+        "owner_id",
+        "product_id",
+        "purpose",
+        "state",
+        "object_key",
+        "sha256",
+        "size_bytes",
+        "width",
+        "height",
+        "expires_at"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "asset_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "asset_id"
+      ],
+      "invariant": "private verified object",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "product_photo_versions",
+      "primary_key": "photo_version_id",
+      "scope": "tenant",
+      "fields": [
+        "photo_version_id",
+        "tenant_id",
+        "product_id",
+        "revision",
+        "photo_set_hash"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "product_id",
+        "revision"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "photo_version_id"
+      ],
+      "invariant": "immutable ordered photo set",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "product_photo_items",
+      "primary_key": "photo_item_id",
+      "scope": "tenant",
+      "fields": [
+        "photo_item_id",
+        "tenant_id",
+        "photo_version_id",
+        "asset_id",
+        "position"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "photo_version_id",
+        "position"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "photo_item_id"
+      ],
+      "invariant": "composite tenant foreign keys to photo version and asset",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "analysis_jobs",
+      "primary_key": "analysis_id",
+      "scope": "tenant",
+      "fields": [
+        "analysis_id",
+        "tenant_id",
+        "product_id",
+        "photo_version_id",
+        "input_hash",
+        "state",
+        "model_version",
+        "deadline_at"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "analysis_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "analysis_id"
+      ],
+      "invariant": "bounded real-vision analysis",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "analysis_attempts",
+      "primary_key": "analysis_attempt_id",
+      "scope": "tenant",
+      "fields": [
+        "analysis_attempt_id",
+        "tenant_id",
+        "analysis_id",
+        "attempt",
+        "request_hash",
+        "receipt_ref"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "analysis_id",
+        "attempt"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "analysis_attempt_id"
+      ],
+      "invariant": "initial plus one retry",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "profile_versions",
+      "primary_key": "profile_id",
+      "scope": "tenant",
+      "fields": [
+        "profile_id",
+        "tenant_id",
+        "product_id",
+        "photo_version_id",
+        "revision",
+        "schema_version",
+        "evidence_json",
+        "profile_json",
+        "profile_hash"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "product_id",
+        "revision"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "profile_id"
+      ],
+      "invariant": "immutable observed/OCR/hypothesis/unknown",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "identity_locks",
+      "primary_key": "identity_lock_id",
+      "scope": "tenant",
+      "fields": [
+        "identity_lock_id",
+        "tenant_id",
+        "profile_id",
+        "lock_version",
+        "lock_json",
+        "hash"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "profile_id",
+        "lock_version"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "identity_lock_id"
+      ],
+      "invariant": "immutable packaging/shape/quantity lock",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "correction_versions",
+      "primary_key": "correction_id",
+      "scope": "tenant",
+      "fields": [
+        "correction_id",
+        "tenant_id",
+        "product_id",
+        "parent_profile_id",
+        "new_profile_id",
+        "source",
+        "actor"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "correction_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "correction_id"
+      ],
+      "invariant": "append-only correction provenance",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "source_recipes",
+      "primary_key": "source_recipe_id",
+      "scope": "catalog",
+      "fields": [
+        "source_recipe_id",
+        "repository",
+        "commit",
+        "path",
+        "license",
+        "source_hash"
+      ],
+      "unique_key": [
+        "repository",
+        "commit",
+        "source_recipe_id"
+      ],
+      "ownership_unique_key": null,
+      "invariant": "read-only provenance",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "component_versions",
+      "primary_key": "component_version_id",
+      "scope": "catalog",
+      "fields": [
+        "component_version_id",
+        "type",
+        "version",
+        "schema_ref",
+        "allowed_resources"
+      ],
+      "unique_key": [
+        "type",
+        "version"
+      ],
+      "ownership_unique_key": null,
+      "invariant": "platform-owned schemas, no executable author code",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "presets",
+      "primary_key": "preset_id",
+      "scope": "catalog",
+      "fields": [
+        "preset_id",
+        "author_id",
+        "source",
+        "current_version",
+        "visibility"
+      ],
+      "unique_key": [
+        "preset_id"
+      ],
+      "ownership_unique_key": null,
+      "invariant": "public content is not private buyer data",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "preset_versions",
+      "primary_key": "preset_version_id",
+      "scope": "catalog",
+      "fields": [
+        "preset_version_id",
+        "preset_id",
+        "version",
+        "parent_version_id",
+        "config_json",
+        "hash",
+        "license_version"
+      ],
+      "unique_key": [
+        "preset_id",
+        "version"
+      ],
+      "ownership_unique_key": null,
+      "invariant": "published immutable version",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "execution_variants",
+      "primary_key": "variant_version_id",
+      "scope": "catalog",
+      "fields": [
+        "variant_version_id",
+        "preset_version_id",
+        "variant_id",
+        "version",
+        "engine",
+        "admission_state",
+        "sale_enabled",
+        "price_fen",
+        "policy_json"
+      ],
+      "unique_key": [
+        "variant_id",
+        "version"
+      ],
+      "ownership_unique_key": null,
+      "invariant": "null prices/models cannot sell",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "resource_licenses",
+      "primary_key": "license_record_id",
+      "scope": "restricted",
+      "fields": [
+        "license_record_id",
+        "resource_id",
+        "version",
+        "scope",
+        "evidence_ref",
+        "expires_at",
+        "revoked_at"
+      ],
+      "unique_key": [
+        "resource_id",
+        "version",
+        "scope"
+      ],
+      "ownership_unique_key": null,
+      "invariant": "rights evidence access restricted",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "rights_records",
+      "primary_key": "rights_record_id",
+      "scope": "tenant",
+      "fields": [
+        "rights_record_id",
+        "tenant_id",
+        "author_id",
+        "scope",
+        "statement",
+        "evidence_asset_ids",
+        "state",
+        "decision_ref"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "rights_record_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "rights_record_id"
+      ],
+      "invariant": "private evidence, not author self-approval",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "preset_drafts",
+      "primary_key": "draft_id",
+      "scope": "tenant",
+      "fields": [
+        "draft_id",
+        "tenant_id",
+        "author_id",
+        "revision",
+        "config_json",
+        "parent_version_id"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "draft_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "draft_id"
+      ],
+      "invariant": "author-only mutable draft",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "publications",
+      "primary_key": "publication_id",
+      "scope": "tenant",
+      "fields": [
+        "publication_id",
+        "tenant_id",
+        "draft_id",
+        "draft_revision",
+        "review_state",
+        "admission_state",
+        "decision_actor",
+        "published_version_id"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "draft_id",
+        "draft_revision"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "publication_id"
+      ],
+      "invariant": "publish only by moderator",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "public_samples",
+      "primary_key": "sample_id",
+      "scope": "tenant",
+      "fields": [
+        "sample_id",
+        "tenant_id",
+        "draft_id",
+        "asset_refs",
+        "rights_record_ids",
+        "visibility",
+        "qc_ref"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "sample_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "sample_id"
+      ],
+      "invariant": "separate authorized public projection",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "favorites",
+      "primary_key": "favorite_id",
+      "scope": "tenant",
+      "fields": [
+        "favorite_id",
+        "tenant_id",
+        "user_id",
+        "preset_id"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "user_id",
+        "preset_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "favorite_id"
+      ],
+      "invariant": "intrinsically idempotent",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "forks",
+      "primary_key": "fork_id",
+      "scope": "tenant",
+      "fields": [
+        "fork_id",
+        "tenant_id",
+        "author_id",
+        "parent_version_id",
+        "draft_id",
+        "license_snapshot"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "draft_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "fork_id"
+      ],
+      "invariant": "preserve attribution/license chain",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "moderation_reports",
+      "primary_key": "report_id",
+      "scope": "tenant",
+      "fields": [
+        "report_id",
+        "tenant_id",
+        "reporter_id",
+        "preset_version_id",
+        "reason",
+        "evidence_refs",
+        "state",
+        "decision"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "report_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "report_id"
+      ],
+      "invariant": "private reporter evidence",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "moderation_appeals",
+      "primary_key": "appeal_id",
+      "scope": "tenant",
+      "fields": [
+        "appeal_id",
+        "tenant_id",
+        "report_id",
+        "appellant_id",
+        "evidence_refs",
+        "state"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "appeal_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "appeal_id"
+      ],
+      "invariant": "authorized party and moderator only",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "provider_model_versions",
+      "primary_key": "model_version_id",
+      "scope": "restricted",
+      "fields": [
+        "model_version_id",
+        "provider",
+        "actual_model",
+        "capabilities_json",
+        "rate_snapshot",
+        "status",
+        "credential_ref",
+        "version"
+      ],
+      "unique_key": [
+        "provider",
+        "actual_model",
+        "version"
+      ],
+      "ownership_unique_key": null,
+      "invariant": "credentials external, immutable capability/rates",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "character_versions",
+      "primary_key": "character_version_id",
+      "scope": "restricted",
+      "fields": [
+        "character_version_id",
+        "character_id",
+        "version",
+        "appearance_ref",
+        "voice_ref",
+        "license_record_ids"
+      ],
+      "unique_key": [
+        "character_id",
+        "version"
+      ],
+      "ownership_unique_key": null,
+      "invariant": "identity/voice rights frozen",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "scene_locks",
+      "primary_key": "scene_lock_id",
+      "scope": "tenant",
+      "fields": [
+        "scene_lock_id",
+        "tenant_id",
+        "plan_id",
+        "scene_json",
+        "hash"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "scene_lock_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "scene_lock_id"
+      ],
+      "invariant": "fixed look and scene constraints",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "plan_versions",
+      "primary_key": "plan_id",
+      "scope": "tenant",
+      "fields": [
+        "plan_id",
+        "tenant_id",
+        "product_id",
+        "photo_version_id",
+        "profile_id",
+        "identity_lock_id",
+        "variant_version_id",
+        "state",
+        "plan_json",
+        "plan_hash"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "plan_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "plan_id"
+      ],
+      "invariant": "immutable validated READY plan",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "shot_plans",
+      "primary_key": "shot_plan_id",
+      "scope": "tenant",
+      "fields": [
+        "shot_plan_id",
+        "tenant_id",
+        "plan_id",
+        "shot_id",
+        "start_frame",
+        "end_frame",
+        "overlap_frames",
+        "evidence_refs",
+        "dependency_ids"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "plan_id",
+        "shot_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "shot_plan_id"
+      ],
+      "invariant": "integer frame and factual speech constraints",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "reference_frame_sets",
+      "primary_key": "reference_set_id",
+      "scope": "tenant",
+      "fields": [
+        "reference_set_id",
+        "tenant_id",
+        "plan_id",
+        "shot_id",
+        "layout_json",
+        "asset_refs",
+        "mapping_json",
+        "quality_decision"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "reference_set_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "reference_set_id"
+      ],
+      "invariant": "grid/single crops count toward real limits",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "quotes",
+      "primary_key": "quote_id",
+      "scope": "tenant",
+      "fields": [
+        "quote_id",
+        "tenant_id",
+        "plan_id",
+        "plan_hash",
+        "amount_fen",
+        "currency",
+        "expires_at",
+        "state",
+        "consumed_order_id",
+        "snapshot_json",
+        "codex_contract_json",
+        "codex_contract_hash",
+        "skill_bundle_hash"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "quote_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "quote_id"
+      ],
+      "invariant": "15-minute, single consumption",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "optional_previews",
+      "primary_key": "preview_id",
+      "scope": "tenant",
+      "fields": [
+        "preview_id",
+        "tenant_id",
+        "owner_id",
+        "product_id",
+        "plan_id",
+        "plan_hash",
+        "state",
+        "object_key",
+        "expires_at",
+        "private_frozen_input",
+        "input_hash",
+        "renderer_version",
+        "original_output_checkpoint"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "preview_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "preview_id"
+      ],
+      "invariant": "same version as quote; explicit preview not final pack; 原计划/商品证据/资源及绝对到期冻结；先保存输出意图再登记一次性私有写入；UNKNOWN只核对原键；READY须实际字节校验；不延长输入或占用订单预算",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "quota_buckets",
+      "primary_key": "quota_bucket_id",
+      "scope": "tenant",
+      "fields": [
+        "quota_bucket_id",
+        "tenant_id",
+        "owner_id",
+        "kind",
+        "window_start",
+        "used_count",
+        "limit"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "owner_id",
+        "kind",
+        "window_start"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "quota_bucket_id"
+      ],
+      "invariant": "atomic new-preview quota; never blocks paid fulfillment",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "orders",
+      "primary_key": "order_id",
+      "scope": "tenant",
+      "fields": [
+        "order_id",
+        "tenant_id",
+        "owner_id",
+        "quote_id",
+        "channel",
+        "app_id",
+        "amount_fen",
+        "payment_state",
+        "fulfillment_state",
+        "payable_until"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "quote_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "order_id"
+      ],
+      "invariant": "same order lock for payment/cancel/publish/refund",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "execution_snapshots",
+      "primary_key": "execution_snapshot_id",
+      "scope": "tenant",
+      "fields": [
+        "execution_snapshot_id",
+        "tenant_id",
+        "order_id",
+        "snapshot_json",
+        "hash",
+        "policy_version",
+        "codex_contract_hash",
+        "skill_bundle_hash"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "order_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "execution_snapshot_id"
+      ],
+      "invariant": "immutable sold contract including cost/deadline",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "payments",
+      "primary_key": "payment_id",
+      "scope": "tenant",
+      "fields": [
+        "payment_id",
+        "tenant_id",
+        "order_id",
+        "provider",
+        "merchant_id",
+        "provider_order_id",
+        "state",
+        "amount_fen"
+      ],
+      "unique_key": [
+        "provider",
+        "merchant_id",
+        "provider_order_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "payment_id"
+      ],
+      "invariant": "original-channel reconciliation",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "payment_events",
+      "primary_key": "payment_event_id",
+      "scope": "restricted",
+      "fields": [
+        "payment_event_id",
+        "provider",
+        "merchant_id",
+        "event_key",
+        "payment_id",
+        "raw_hash",
+        "verified_at"
+      ],
+      "unique_key": [
+        "provider",
+        "merchant_id",
+        "event_key"
+      ],
+      "ownership_unique_key": null,
+      "invariant": "raw secrets not general logs",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "refunds",
+      "primary_key": "refund_id",
+      "scope": "tenant",
+      "fields": [
+        "refund_id",
+        "tenant_id",
+        "order_id",
+        "payment_id",
+        "refund_intent_key",
+        "state",
+        "amount_fen",
+        "provider_ref",
+        "provider",
+        "merchant_id"
+      ],
+      "unique_key": [
+        "provider",
+        "merchant_id",
+        "refund_intent_key"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "refund_id"
+      ],
+      "invariant": "atomic cumulative refund cap",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "ledger_entries",
+      "primary_key": "ledger_entry_id",
+      "scope": "tenant",
+      "fields": [
+        "ledger_entry_id",
+        "tenant_id",
+        "order_id",
+        "event_key",
+        "entry_type",
+        "amount_fen",
+        "currency"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "event_key",
+        "entry_type"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "ledger_entry_id"
+      ],
+      "invariant": "append only, no erasing old funds",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "render_jobs",
+      "primary_key": "job_id",
+      "scope": "tenant",
+      "fields": [
+        "job_id",
+        "tenant_id",
+        "order_id",
+        "execution_snapshot_id",
+        "state",
+        "fulfillable_at",
+        "deadline_at",
+        "repair_rounds"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "order_id",
+        "execution_snapshot_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "job_id"
+      ],
+      "invariant": "durable contract-bound lifecycle",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "stage_runs",
+      "primary_key": "stage_run_id",
+      "scope": "tenant",
+      "fields": [
+        "stage_run_id",
+        "tenant_id",
+        "job_id",
+        "stage_id",
+        "attempt",
+        "input_hash",
+        "state",
+        "lease_owner",
+        "lease_expires_at",
+        "fencing_token"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "job_id",
+        "stage_id",
+        "attempt"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "stage_run_id"
+      ],
+      "invariant": "short SQL claim, guarded results",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "provider_submissions",
+      "primary_key": "submission_id",
+      "scope": "tenant",
+      "fields": [
+        "submission_id",
+        "tenant_id",
+        "stage_run_id",
+        "intent_key",
+        "input_hash",
+        "state",
+        "provider_task_id",
+        "receipt_ref",
+        "budget_reservation_id"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "intent_key"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "submission_id"
+      ],
+      "invariant": "persist before paid POST; UNKNOWN no resubmit",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "budget_reservations",
+      "primary_key": "reservation_id",
+      "scope": "tenant",
+      "fields": [
+        "reservation_id",
+        "tenant_id",
+        "order_id",
+        "submission_id",
+        "amount_micro",
+        "currency",
+        "rate_snapshot",
+        "state"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "submission_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "reservation_id"
+      ],
+      "invariant": "atomic budget including unresolved UNKNOWN",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "outbox_events",
+      "primary_key": "outbox_event_id",
+      "scope": "tenant",
+      "fields": [
+        "outbox_event_id",
+        "tenant_id",
+        "aggregate_type",
+        "aggregate_id",
+        "event_key",
+        "payload",
+        "available_at",
+        "delivered_at"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "event_key"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "outbox_event_id"
+      ],
+      "invariant": "transactional event, dedup consumer",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "idempotency_records",
+      "primary_key": "idempotency_record_id",
+      "scope": "tenant",
+      "fields": [
+        "idempotency_record_id",
+        "tenant_id",
+        "subject_id",
+        "operation",
+        "target_id",
+        "key",
+        "request_hash",
+        "resource_id",
+        "expires_at"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "subject_id",
+        "operation",
+        "target_id",
+        "key"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "idempotency_record_id"
+      ],
+      "invariant": "same key different body conflict, no long-lived token response",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "artifacts",
+      "primary_key": "artifact_id",
+      "scope": "tenant",
+      "fields": [
+        "artifact_id",
+        "tenant_id",
+        "order_id",
+        "stage_run_id",
+        "slot_id",
+        "object_key",
+        "sha256",
+        "spec_json",
+        "expires_at"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "artifact_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "artifact_id"
+      ],
+      "invariant": "private intermediate or result",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "qc_decisions",
+      "primary_key": "qc_decision_id",
+      "scope": "tenant",
+      "fields": [
+        "qc_decision_id",
+        "tenant_id",
+        "order_id",
+        "artifact_id",
+        "ruleset_version",
+        "decision",
+        "evidence_ref"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "qc_decision_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "qc_decision_id"
+      ],
+      "invariant": "independent/versioned QC, immutable decision",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "delivery_manifests",
+      "primary_key": "manifest_id",
+      "scope": "tenant",
+      "fields": [
+        "manifest_id",
+        "tenant_id",
+        "order_id",
+        "revision",
+        "items_json",
+        "hash",
+        "qc_set_ref",
+        "delivered_at",
+        "expires_at"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "order_id",
+        "revision"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "manifest_id"
+      ],
+      "invariant": "atomic complete manifest",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "save_sessions",
+      "primary_key": "save_session_id",
+      "scope": "tenant",
+      "fields": [
+        "save_session_id",
+        "tenant_id",
+        "order_id",
+        "owner_id",
+        "installation_id",
+        "deliverable_ids"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "save_session_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "save_session_id"
+      ],
+      "invariant": "experience telemetry only",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "save_receipts",
+      "primary_key": "receipt_id",
+      "scope": "tenant",
+      "fields": [
+        "receipt_id",
+        "tenant_id",
+        "save_session_id",
+        "deliverable_id",
+        "attempt",
+        "state",
+        "occurred_at"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "save_session_id",
+        "deliverable_id",
+        "attempt",
+        "state"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "receipt_id"
+      ],
+      "invariant": "never changes funds/fulfillment",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "revision_requests",
+      "primary_key": "revision_id",
+      "scope": "tenant",
+      "fields": [
+        "revision_id",
+        "tenant_id",
+        "order_id",
+        "parent_manifest_revision",
+        "kind",
+        "state",
+        "consumes_user_allowance",
+        "result_manifest_id"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "revision_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "revision_id"
+      ],
+      "invariant": "48h optional allowance consumed only on success",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "support_tickets",
+      "primary_key": "ticket_id",
+      "scope": "tenant",
+      "fields": [
+        "ticket_id",
+        "tenant_id",
+        "order_id",
+        "owner_id",
+        "category",
+        "message",
+        "attachment_refs",
+        "state"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "ticket_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "ticket_id"
+      ],
+      "invariant": "platform error repair separate from optional revision",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "privacy_deletions",
+      "primary_key": "deletion_id",
+      "scope": "tenant",
+      "fields": [
+        "deletion_id",
+        "tenant_id",
+        "owner_id",
+        "scope",
+        "state",
+        "object_refs",
+        "receipts",
+        "limitations"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "deletion_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "deletion_id"
+      ],
+      "invariant": "restore must replay deletion markers",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "audit_events",
+      "primary_key": "audit_event_id",
+      "scope": "restricted",
+      "fields": [
+        "audit_event_id",
+        "tenant_id",
+        "actor",
+        "action",
+        "target",
+        "trace_id",
+        "payload_hash",
+        "occurred_at"
+      ],
+      "unique_key": [
+        "audit_event_id"
+      ],
+      "ownership_unique_key": null,
+      "invariant": "append-only minimal/redacted evidence",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "skill_versions",
+      "primary_key": "skill_version_id",
+      "scope": "platform",
+      "fields": [
+        "skill_version_id",
+        "name",
+        "version",
+        "content_hash",
+        "trust_state",
+        "license_ref"
+      ],
+      "unique_key": [
+        "name",
+        "version"
+      ],
+      "ownership_unique_key": null,
+      "invariant": "不可变内容摘要；未准入指令包无生产执行权",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "skill_bundles",
+      "primary_key": "bundle_id",
+      "scope": "platform",
+      "fields": [
+        "bundle_id",
+        "version",
+        "bundle_hash",
+        "skill_versions",
+        "state",
+        "evaluation_id",
+        "signature_ref"
+      ],
+      "unique_key": [
+        "bundle_id",
+        "version"
+      ],
+      "ownership_unique_key": null,
+      "invariant": "冻结实际Skill/角色/工具策略；撤销不覆盖旧单",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "agent_instances",
+      "primary_key": "instance_id",
+      "scope": "tenant",
+      "fields": [
+        "instance_id",
+        "tenant_id",
+        "order_id",
+        "preview_session_id",
+        "state",
+        "fencing_token",
+        "os_identity_ref",
+        "workspace_ref",
+        "lease_expires_at"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "instance_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "instance_id"
+      ],
+      "invariant": "订单或preview二选一；原生身份/ACL，终态回收不删成品",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "agent_runs",
+      "primary_key": "run_id",
+      "scope": "tenant",
+      "fields": [
+        "run_id",
+        "tenant_id",
+        "instance_id",
+        "role",
+        "thread_id",
+        "turn_id",
+        "runtime_process_ref",
+        "role_identity_ref",
+        "role_workspace_ref",
+        "state",
+        "input_hash",
+        "output_hash",
+        "checkpoint_hash",
+        "spent_micro"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "run_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "run_id"
+      ],
+      "invariant": "角色上下文/进程及目录权限隔离；检查点恢复不清零预算",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "skill_load_evidence",
+      "primary_key": "load_id",
+      "scope": "tenant",
+      "fields": [
+        "load_id",
+        "tenant_id",
+        "run_id",
+        "bundle_hash",
+        "skill_hashes",
+        "injection_request_hash",
+        "runtime_receipt_hash"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "run_id",
+        "bundle_hash"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "load_id"
+      ],
+      "invariant": "发现与全文注入分别记录，非行为服从证明",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "agent_tool_intents",
+      "primary_key": "intent_id",
+      "scope": "tenant",
+      "fields": [
+        "intent_id",
+        "tenant_id",
+        "order_id",
+        "run_id",
+        "idempotency_key",
+        "request_hash",
+        "reservation_id",
+        "state",
+        "provider_submission_id",
+        "preview_session_id",
+        "subject_ref"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "subject_ref",
+        "idempotency_key"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "intent_id"
+      ],
+      "invariant": "网关每次鉴权/原子预留，UNKNOWN查原任务",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "agent_cost_reservations",
+      "primary_key": "reservation_id",
+      "scope": "tenant",
+      "fields": [
+        "reservation_id",
+        "tenant_id",
+        "order_id",
+        "preview_session_id",
+        "subject_ref",
+        "run_id",
+        "idempotency_key",
+        "amount_micro",
+        "rate_snapshot",
+        "state",
+        "provider_reservation_id"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "subject_ref",
+        "idempotency_key"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "reservation_id"
+      ],
+      "invariant": "订单或preview成本域；重启沿同一意图，供应商包装预留关联后只计一次",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "review_packets",
+      "primary_key": "packet_id",
+      "scope": "tenant",
+      "fields": [
+        "packet_id",
+        "tenant_id",
+        "order_id",
+        "snapshot_hash",
+        "output_set_hash",
+        "packet_hash",
+        "state"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "order_id",
+        "packet_hash"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "packet_id"
+      ],
+      "invariant": "输入/候选封存，变动使旧报告失效",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "review_reports",
+      "primary_key": "report_id",
+      "scope": "tenant",
+      "fields": [
+        "report_id",
+        "tenant_id",
+        "packet_id",
+        "run_id",
+        "thread_id",
+        "role",
+        "verdict",
+        "evidence_hash"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "packet_id",
+        "role",
+        "run_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "report_id"
+      ],
+      "invariant": "事实与风格新上下文，制作方不可自签",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "cleanup_receipts",
+      "primary_key": "cleanup_receipt_id",
+      "scope": "tenant",
+      "fields": [
+        "cleanup_receipt_id",
+        "tenant_id",
+        "instance_id",
+        "fencing_token",
+        "state",
+        "evidence_hash",
+        "verified_at"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "instance_id",
+        "fencing_token"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "cleanup_receipt_id"
+      ],
+      "invariant": "能力/进程/临时文件核验后才RELEASED，失败重试保留审计",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "community_licenses",
+      "primary_key": "license_id",
+      "scope": "platform",
+      "fields": [
+        "license_id",
+        "version",
+        "state",
+        "content_hash",
+        "full_text",
+        "fork_allowed",
+        "attribution_required",
+        "review_reference"
+      ],
+      "unique_key": [
+        "license_id"
+      ],
+      "ownership_unique_key": null,
+      "invariant": "全文/摘要/派生条件不可改写；独立审核启用，退役停止新发布和新交易",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "authorized_samples",
+      "primary_key": "public_sample_id",
+      "scope": "tenant",
+      "fields": [
+        "public_sample_id",
+        "tenant_id",
+        "owner_id",
+        "publication_id",
+        "source_sample_id",
+        "source_product_id",
+        "input_hash",
+        "state",
+        "expires_at",
+        "media_hash"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "publication_id",
+        "source_sample_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "public_sample_id"
+      ],
+      "invariant": "独立公开副本与30天单独授权；撤回立即停止分发和新销售，原图自然到期不延长",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "revision_budgets",
+      "primary_key": "budget_id",
+      "scope": "tenant",
+      "fields": [
+        "budget_id",
+        "tenant_id",
+        "owner_id",
+        "order_id",
+        "policy_hash",
+        "ceiling_micro",
+        "spent_micro",
+        "reserved_micro"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "order_id"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "budget_id"
+      ],
+      "invariant": "售前冻结原订单内修改成本；制作预留扣除该额度，失败重试不重置",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "revision_cost_reservations",
+      "primary_key": "reservation_id",
+      "scope": "tenant",
+      "fields": [
+        "reservation_id",
+        "tenant_id",
+        "budget_id",
+        "revision_id",
+        "intent_key",
+        "amount_micro",
+        "settled_micro",
+        "state",
+        "rate_snapshot"
+      ],
+      "unique_key": [
+        "tenant_id",
+        "intent_key"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "reservation_id"
+      ],
+      "invariant": "UNKNOWN按原推理回执结算；所有修改尝试共享原订单账户",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    }
+  ],
+  "critical_composite_relations": [
+    {
+      "from": "product_photo_items",
+      "to": "assets",
+      "fields": [
+        "tenant_id",
+        "asset_id"
+      ]
+    },
+    {
+      "from": "product_photo_items",
+      "to": "product_photo_versions",
+      "fields": [
+        "tenant_id",
+        "photo_version_id"
+      ]
+    },
+    {
+      "from": "profile_versions",
+      "to": "product_drafts",
+      "fields": [
+        "tenant_id",
+        "product_id"
+      ]
+    },
+    {
+      "from": "identity_locks",
+      "to": "profile_versions",
+      "fields": [
+        "tenant_id",
+        "profile_id"
+      ]
+    },
+    {
+      "from": "quotes",
+      "to": "plan_versions",
+      "fields": [
+        "tenant_id",
+        "plan_id"
+      ]
+    },
+    {
+      "from": "orders",
+      "to": "quotes",
+      "fields": [
+        "tenant_id",
+        "quote_id"
+      ]
+    },
+    {
+      "from": "execution_snapshots",
+      "to": "orders",
+      "fields": [
+        "tenant_id",
+        "order_id"
+      ]
+    },
+    {
+      "from": "render_jobs",
+      "to": "orders",
+      "fields": [
+        "tenant_id",
+        "order_id"
+      ]
+    },
+    {
+      "from": "stage_runs",
+      "to": "render_jobs",
+      "fields": [
+        "tenant_id",
+        "job_id"
+      ]
+    },
+    {
+      "from": "provider_submissions",
+      "to": "stage_runs",
+      "fields": [
+        "tenant_id",
+        "stage_run_id"
+      ]
+    },
+    {
+      "from": "artifacts",
+      "to": "orders",
+      "fields": [
+        "tenant_id",
+        "order_id"
+      ]
+    },
+    {
+      "from": "delivery_manifests",
+      "to": "orders",
+      "fields": [
+        "tenant_id",
+        "order_id"
+      ]
+    },
+    {
+      "from": "save_sessions",
+      "to": "orders",
+      "fields": [
+        "tenant_id",
+        "order_id"
+      ]
+    },
+    {
+      "from": "save_receipts",
+      "to": "save_sessions",
+      "fields": [
+        "tenant_id",
+        "save_session_id"
+      ]
+    },
+    {
+      "from": "moderation_appeals",
+      "to": "moderation_reports",
+      "fields": [
+        "tenant_id",
+        "report_id"
+      ]
+    },
+    {
+      "from": "agent_runs",
+      "to": "agent_instances",
+      "fields": [
+        "tenant_id",
+        "instance_id"
+      ],
+      "target_fields": [
+        "tenant_id",
+        "instance_id"
+      ]
+    },
+    {
+      "from": "skill_load_evidence",
+      "to": "agent_runs",
+      "fields": [
+        "tenant_id",
+        "run_id"
+      ],
+      "target_fields": [
+        "tenant_id",
+        "run_id"
+      ]
+    },
+    {
+      "from": "agent_tool_intents",
+      "to": "agent_runs",
+      "fields": [
+        "tenant_id",
+        "run_id"
+      ],
+      "target_fields": [
+        "tenant_id",
+        "run_id"
+      ]
+    },
+    {
+      "from": "review_reports",
+      "to": "review_packets",
+      "fields": [
+        "tenant_id",
+        "packet_id"
+      ],
+      "target_fields": [
+        "tenant_id",
+        "packet_id"
+      ]
+    },
+    {
+      "from": "agent_tool_intents",
+      "to": "agent_cost_reservations",
+      "fields": [
+        "tenant_id",
+        "reservation_id"
+      ],
+      "target_fields": [
+        "tenant_id",
+        "reservation_id"
+      ]
+    },
+    {
+      "from": "cleanup_receipts",
+      "to": "agent_instances",
+      "fields": [
+        "tenant_id",
+        "instance_id"
+      ],
+      "target_fields": [
+        "tenant_id",
+        "instance_id"
+      ]
+    }
+  ],
+  "transactions": [
+    "consume_quote_and_create_order",
+    "verify_payment_create_job_and_outbox",
+    "claim_stage_with_fencing_token",
+    "reserve_budget_and_persist_intent",
+    "publish_complete_manifest_under_order_lock",
+    "cancel_refund_and_late_result_guard",
+    "freeze_codex_contract_with_quote",
+    "reserve_agent_and_inference_cost_without_double_counting",
+    "publish_reviews_manifest_and_release_outbox",
+    "claim_release_and_verify_cleanup_receipt"
+  ],
+  "immutable_records": [
+    "profile_versions",
+    "identity_locks",
+    "preset_versions",
+    "execution_snapshots",
+    "delivery_manifests",
+    "ledger_entries",
+    "skill_versions",
+    "review_reports"
+  ],
+  "immutable_payload_fields": {
+    "skill_bundles": [
+      "version",
+      "bundle_hash",
+      "skill_versions"
+    ],
+    "review_packets": [
+      "snapshot_hash",
+      "output_set_hash",
+      "packet_hash"
+    ]
+  }
+}
