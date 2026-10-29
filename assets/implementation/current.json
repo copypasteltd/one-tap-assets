@@ -3,7 +3,7 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-29T11:31:52.752Z",
+  "checked_at": "2026-10-29T12:44:31.659Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
@@ -15,24 +15,24 @@
       "command": "./scripts/run.ps1 typecheck",
       "status": "PASS",
       "log_path": "runtime/test-results/typecheck.log",
-      "log_sha256": "f51ae51155d78582946d1f2496de02acaa210c4293ba391ac179900d25be1f99"
+      "log_sha256": "bca8bf46cb50a9e59643ad1713611053030173b2fdafafc60477aeef37ef1462"
     },
     {
       "command": "./scripts/run.ps1 test",
       "status": "PASS",
       "log_path": "runtime/test-results/test.log",
-      "log_sha256": "e5d5352641c82270618c1757ab0679ab897f405a0843f062f7323da9e8bf91f2"
+      "log_sha256": "e63ff02fc7edebf7fdea3023f7b166fc30863098b7e78af6b64df3002e4357fe"
     },
     {
       "command": "./scripts/run.ps1 test:integration",
       "status": "FAIL",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "e3064fe1837f5192827788f434bc8643cdca15949286375b4ba82ec213517896"
+      "log_sha256": "a0feb8368b3fbf51397e961578b3bc379d41a8bf64e38cf74414ce1645bd8764"
     }
   ],
   "suites": [],
   "source_files": 341,
-  "source_set_hash": "d2077c215e38e5bcabafad559fcccd11571c08260a14f82623d442b7cb8eb2f3",
+  "source_set_hash": "e97950806da6c55dbf0fa67109a4269305814250c51f2077d9c03e0ed0c70a7b",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -960,7 +960,7 @@
     },
     {
       "path": "src/worker/tool-gateway/consumer.ts",
-      "sha256": "ed6759380154f526d0057cb69c3eb00c36afa77360220d571a851239a227a09d"
+      "sha256": "50f783cc035f191994bf180c7fefea81c932b6748cb9b8bdbac96e0413d4de2e"
     },
     {
       "path": "src/worker/tool-gateway/content-tools.ts",
@@ -1192,7 +1192,7 @@
     },
     {
       "path": "tests/integration/tool-consumer.test.ts",
-      "sha256": "1a11a3e15308cce7bf47590e4fd2eedb6c38640e35fdb00855580f102e23fc5d"
+      "sha256": "0445eb530fe8018fe70737e474c88ee30b4a6f711a3fdb59a0a1589f1a9c3892"
     },
     {
       "path": "tests/integration/vision-analysis.test.ts",

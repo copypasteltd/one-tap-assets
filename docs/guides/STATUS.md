@@ -1,5 +1,7 @@
 # 当前状态与后续顺序 / Status and next priorities
 
+最新[工具队列原子领取与并发租约](../实施/工具队列原子领取与并发租约-v1.0.md)减少空闲领取往返，保留原能力、恢复时间与代次；六消费者/独立行锁回归及64次空队列对照留存。此项不证明历史超时已根治。Latest: atomic durable tool claims with concurrent/lock controls, without a proven historical timeout cause.
+
 当前[完整展示文字与购买前排版校验](../实施/完整展示文字与购买前排版校验-v1.0.md)修正末尾丢字、实际字幕断言漏检与AI/章节/页脚重叠，接入规划、报价与制作入口。十套风格实际PNG与原操作版本变更阻断有专项；此项不代表自动修复或真实服务准入。Latest: complete measured text layout and original-operation version guards, not complete repair or production admission.
 
 最新[可见AI标识与逐帧验收](../实施/AI可见标识与逐帧文件验收-v1.0.md)增加原报价冻结、全图片/全部视频帧实际标识、恢复/QC/交付绑定。原生字幕已有的右上文字保留，统一可验标识放左上；真实宿主/法律标识准入未验。Baked disclosure is checked over actual images and every video frame; host/legal admission remains unverified.
@@ -14,14 +16,14 @@
 | --- | --- | --- | --- |
 | 01 | TypeScript | PASS | 当前类型检查 / Current type checking |
 | 02 | 单元 / Unit | 71 / 71 PASS | 领域、客户端、策略与适配器逻辑 / Domain, client and adapter logic |
-| 03 | 原生集成 / Native integration | FAIL：13 PASS / 1 TIMEOUT，余项未完成 / Remainder incomplete | 原生PG/实际媒体/HTTPS/MCP及显式合成角色、供应商、支付、宿主 / Actual database/media with synthetic external responses |
-| 04 | 服务端 / Server | PASS | 编译API、Worker、回收、媒体维护和删除日志入口 / Compiled native entries |
-| 05 | 双小程序 / Both mini-programs | PASS | Taro支付宝/抖音构建，不是宿主真机验收 / Compilation, not device certification |
+| 03 | 原生集成 / Native integration | FAIL: 14 PASS / 1 FAIL; remainder as reported | 原生PG/实际媒体/HTTPS/MCP及显式合成角色、供应商、支付、宿主 / Actual database/media with synthetic external responses |
+| 04 | 服务端 / Server | PASS | 同源码单独构建 / Separate same-source build |
+| 05 | 双小程序 / Both mini-programs | Alipay: TIMEOUT 600s; Douyin: PASS | 本轮实际结果，不沿用旧构建；不是真机验收 / Current actual builds, not device certification |
 | 06 | 浏览器回放 / Browser replay | PASS（原捕获 / prior capture） | 沿用原Vite构建、10页断言/截图与实际WebM/MP4/GIF来源；浏览器已关闭，本轮未重录页面 / Prior actual local capture; shared UI source unchanged |
 
 机器可读结果：[实现索引](../../assets/implementation/current.json)、[发布核验摘要](../verification/publication.json)、[媒体清单](../media/capture-manifest.json)。完整执行日志/测试JSON位于未提交的`runtime/test-results/`；公开摘要保留计数、命令结果与摘要引用，但不包含本地凭证或运行数据库。Source hashes and original local log hashes are recorded; private runtime files are excluded from Git. Static documentation checks validate contracts/links, not product execution.
 
-本轮固定341份源码/测试/配置、42份运行契约和4项资源：类型与71项单元通过；完整原生执行13项通过后，原文件写入授权撤销用例达到原120秒上限，整套未通过，其余未完成。服务端及支付宝/抖音构建随后按同一源码单独执行通过，不能把这些结果合并为六项全通过。完整执行失败、阶段耗时及精确来源见[验证说明](../verification/README.md)。未放宽断言/期限，未复用旧原生报告；真实语义、费用、授权、隔离与全产品/生产准入仍待验。 On the fixed 341 source/test/config, 42 runtime-contract and four resource snapshot, types and all 71 unit tests pass. The complete native run stops after 13 passes and one original-write revocation case exceeds its unchanged 120-second limit; the remainder is incomplete. Server and both mini builds pass separately on the same source. This is not six passing checks. See [validation provenance](../verification/README.md) for failed runs, phase observations and exact bindings. No assertions/deadlines were relaxed or old native report retained; full-product and real-service admission remain incomplete.
+本轮固定341份源码/测试/配置、42份运行契约和4项资源；类型与71项单元通过，当前完整原生执行14项通过、1项失败，同文件8项挂起，其他34文件未执行，整套未通过。拟验证声音许可撤销的用例在PRODUCTION工具出现WORKER_INTERNAL_ERROR，尚未走到该次撤权断言；原文件撤权用例本次通过。没有保留旧原生报告或放宽原断言/时限。当前源码5项队列专项与增加错误记录的夹具副本定向通过单独留存，未复现原内部错误，不证明根因。单独构建：build:server: PASS / build:alipay: TIMEOUT 600s / build:douyin: PASS；支付宝在原600秒内停于Webpack/Babel编译阶段，未返回具体源码错误，不能沿用旧构建通过。最新失败与来源见[验证说明](../verification/README.md)；真实语义、费用、授权、隔离、完整自动修复与全产品/生产准入仍待验。 On the fresh 341 source/test/config, 42 runtime-contract and four resource snapshot, types and 71 unit tests pass; the full native attempt records 14 passes and one failure, eight pending cases in that file and 34 other files unexecuted. The voice-revocation case fails in its PRODUCTION tool with WORKER_INTERNAL_ERROR before the intended revocation assertion; the original-write case passes. No old native report was retained or assertion/deadline relaxed. Five current-source queue tests and a separately instrumented fixture-copy diagnostic pass; the internal error is not reproduced and its cause remains unknown. Separate builds: build:server: PASS / build:alipay: TIMEOUT 600s / build:douyin: PASS. Alipay reaches the original 600-second cap during Webpack/Babel compilation without a specific source diagnostic; earlier successful builds are not relabeled. See [validation provenance](../verification/README.md). Real semantics, billing, rights, isolation, complete repair and full-product/production admission remain incomplete.
 
 [恢复指南](RECOVERY.md)与[发布同步指南](PUBLISHING.md)适用于持续更新；本轮已实际执行应用检查和适用标识媒体复录，完整原生未通过，不能沿用此前文档轮的旧通过结论。 Current source/media work has fresh execution records; the native failure remains blocking.
 
@@ -50,6 +52,7 @@
 
 | 顺序 / Priority | 待办 / Work | 完成条件 / Completion evidence |
 | --- | --- | --- |
+| 00 | 当前原生/构建失败与稳定性 / Current native/build failures and stability | 复现PRODUCTION内部错误与编译超时并确认修复；原断言/限额下重新完整通过，不能以夹具副本或历史通过替代 / Reproduce and fix current failures, then pass a fresh full run |
 | 01 | 生成式官方变体与真实服务验收 / Official generated variants and real-service acceptance | 在已有两条无声内部链路上验证真实模型、商品身份/风格质量、完整规格和原费用/恢复；不能用2秒夹具替代 / Real model/quality/specification evidence beyond short silent fixtures |
 | 02 | 原生有声与资源规格 / Native audio and resources | 在已有内部制作/ASR/POST/文件QC上验证真实授权/识别/OSS/费用，验证连续多镜人物/商品/声音绑定、完整输入容量及真实最终听音/双复核/交付质量 / Real rights/ASR/storage, multi-shot/full-input capacity and final listening/review/delivery quality |
 | 03 | 真实Codex与受限身份/释放 / Real Codex, restricted identity and cleanup | 服务凭证、真实推理计量、原生启动器、隔离/进程树/孤儿回收与G0证据 / Native verified operation |

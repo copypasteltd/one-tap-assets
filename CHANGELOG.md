@@ -1,5 +1,17 @@
 # 更新记录 / Changelog
 
+## 2026-10-29 · 工具队列原子领取 / Atomic durable tool claims
+
+- 将显式领取事务改为单条CTE，保留原顺序/白名单、UNKNOWN可用时间、SKIP LOCKED、45秒租约与代次；执行/提交授权和原预算/限制不变。 Claim and assign the original task atomically while preserving existing authority, recovery and limits.
+- 隔离原生数据库64次空轮询均返回null，语句实测192降为64；六并发者/独立行锁/过期接管等新增回归通过，原四项工具专项保留。 Record exact query-count controls and add native concurrency/lease regression without a statistical speed claim.
+- 当前完整检查：typecheck: PASS / test: PASS / test:integration: FAIL；原生实际14通过、1失败。全新341源码/42契约/4资源绑定，不保留旧原生报告，不放宽断言或时限。 Fresh current snapshot; preserve original assertions/deadlines and disclose actual full results.
+- 当前源码5项队列专项通过；原生失败出现在声音许可撤销测试的PRODUCTION工具，未到该撤权断言。增加错误记录的独立夹具副本约56.6秒通过，未复现WORKER_INTERNAL_ERROR，不当作已修复；三个单独构建以本轮来源记录。 Keep targeted evidence and separate builds distinct from the failed full run and unknown cause.
+- 单独构建实际结果：build:server: PASS / build:alipay: TIMEOUT 600s / build:douyin: PASS；原限制保留，支付宝超时停于Webpack/Babel编译且无具体源码报错，不沿用历史通过。 Record actual separate build exits under unchanged limits, without treating old successful builds as current.
+- 原撤权用例优化前后定向均在原120秒内通过；两次耗时差、查询等待和本轮结果均不能证明历史超时根因或生产稳定性。 Focused observations remain separate from historical failures and production stability.
+- 同步双语README、实现/状态/验证说明、逐命令日志归档与暂存字节核验；既有36份媒体/C设计原字节不变，未打开浏览器或调用虚拟化/外部模型。 Update bilingual source documentation and exact evidence; retain existing media/frozen design.
+- 完整自动修复、社区/官方全变体、真实Codex/模型/中文听感/计费/授权/隔离、真机、Plus及全产品/云端继续待验，全部禁售。 Full-product and real-service admission remain pending.
+
+
 ## 2026-10-29 · 完整文字与购买前校验 / Complete visible text and pre-purchase checks
 
 - 本轮整套未通过：类型/71单元通过，原生13通过/1原120秒超时，其余未完成；服务端/双小程序随后同源码单独构建通过。当前341源码/42契约/4资源前后摘要一致，保留失败及阶段观察，不做无修复整套重试，不把单项合并为完整通过。 Full native verification fails; separate successful builds do not replace it. Exact source bindings and failures are retained.

@@ -10,7 +10,7 @@ import { normalizeVision } from '../../src/worker/analysis/profile.js';
 import { enqueueStage } from '../../src/worker/queue/enqueue.js';
 import { claimStage } from '../../src/worker/queue/leases.js';
 import { basePlan, creativePlanHash } from '../../src/worker/compiler/plan.js';
-import { ToolConsumer } from '../../src/worker/tool-gateway/consumer.js';
+import { claimToolIntent, ToolConsumer } from '../../src/worker/tool-gateway/consumer.js';
 import { contentTools } from '../../src/worker/tool-gateway/content-tools.js';
 
 let db: TestDatabase; let app: FastifyInstance;
@@ -46,6 +46,48 @@ function call(capability: string, tool: string, args: unknown, key = id('request
 }
 async function stop(stageId: string) { await db.pool.query("UPDATE stage_runs SET state='CANCELLED' WHERE id=$1", [stageId]); }
 describe('durable scoped tool execution', () => {
+  it('claims once concurrently, skips locked work and preserves availability, handler and lease fences', async () => {
+    const f = await fixture(); const calls: string[] = [];
+    for (let i = 0; i < 3; i++) {
+      const response = await call(f.capability, 'analyze_photos', {}); expect(response.statusCode).toBe(202);
+      calls.push(response.json().intent_id as string);
+    }
+    const unsupported = await call(f.capability, 'validate_content_plan', { plan: basePlan(f.profile, f.source) });
+    expect(unsupported.statusCode).toBe(202); const otherId = unsupported.json().intent_id as string;
+    await db.pool.query(`UPDATE agent_tool_intents SET available_at=now()-interval '4 seconds' WHERE id=$1`, [calls[0]]);
+    await db.pool.query(`UPDATE agent_tool_intents SET available_at=now()+interval '1 hour',state='UNKNOWN' WHERE id=$1`, [calls[1]]);
+    await db.pool.query(`UPDATE agent_tool_intents SET available_at=now()-interval '3 seconds' WHERE id=$1`, [calls[2]]);
+    await db.pool.query(`UPDATE agent_tool_intents SET available_at=now()-interval '5 seconds' WHERE id=$1`, [otherId]);
+    const locked = await db.pool.connect();
+    try {
+      await locked.query('BEGIN');
+      await locked.query('SELECT id FROM agent_tool_intents WHERE id=$1 FOR UPDATE', [calls[0]]);
+      const owners = Array.from({ length: 6 }, () => id('tools'));
+      const concurrent = await Promise.all(owners.map(owner => claimToolIntent(db.pool, owner, ['analyze_photos'])));
+      const claimed = concurrent.filter(value => value !== null); expect(claimed).toHaveLength(1);
+      expect(claimed[0]!.id).toBe(calls[2]); expect(BigInt(claimed[0]!.fencing_token)).toBe(1n);
+      expect(claimed[0]!.lease_owner).toBe(owners[concurrent.findIndex(value => value !== null)]);
+      expect(await claimToolIntent(db.pool, id('tools'), ['analyze_photos'])).toBeNull();
+    } finally { await locked.query('ROLLBACK'); locked.release(); }
+    const first = await claimToolIntent(db.pool, id('tools'), ['analyze_photos']); expect(first?.id).toBe(calls[0]);
+    expect(await claimToolIntent(db.pool, id('tools'), ['analyze_photos'])).toBeNull();
+    const preserved = (await db.pool.query('SELECT id,state,fencing_token FROM agent_tool_intents WHERE id=ANY($1) ORDER BY id', [[calls[1], otherId]])).rows;
+    expect(preserved.find(row => row.id === calls[1])?.state).toBe('UNKNOWN');
+    expect(preserved.find(row => row.id === otherId)?.state).toBe('QUEUED');
+    expect(preserved.every(row => BigInt(row.fencing_token) === 0n)).toBe(true);
+    await db.pool.query(`UPDATE agent_tool_intents SET lease_expires_at=now()-interval '1 second' WHERE id=$1`, [first!.id]);
+    const replacement = await claimToolIntent(db.pool, id('replacement'), ['analyze_photos']); expect(replacement?.id).toBe(first!.id);
+    expect(BigInt(replacement!.fencing_token)).toBe(2n); expect(replacement!.lease_owner).not.toBe(first!.lease_owner);
+    const lease = (await db.pool.query(`SELECT state,extract(epoch FROM lease_expires_at-updated_at)::int AS duration
+      FROM agent_tool_intents WHERE id=$1`, [replacement!.id])).rows[0];
+    expect(lease).toEqual({ state: 'RUNNING', duration: 45 });
+    await db.pool.query(`UPDATE agent_tool_intents SET available_at=now()-interval '1 second' WHERE id=$1`, [calls[1]]);
+    expect((await claimToolIntent(db.pool, id('tools'), ['analyze_photos']))?.id).toBe(calls[1]);
+    expect((await claimToolIntent(db.pool, id('tools'), ['validate_content_plan']))?.id).toBe(otherId);
+    expect(await claimToolIntent(db.pool, id('tools'), [])).toBeNull();
+    await db.pool.query("UPDATE agent_tool_intents SET state='CANCELLED',lease_owner=NULL,lease_expires_at=NULL WHERE run_id=$1", [f.runId]);
+    await stop(f.stageId);
+  });
   it('validates and persists a real structured plan without advancing the parent stage', async () => {
     const f = await fixture(); const consumer = new ToolConsumer(db.pool, id('tools'), contentTools(db.pool));
     const plan = basePlan(f.profile, f.source);
