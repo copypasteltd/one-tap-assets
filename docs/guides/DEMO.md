@@ -7,6 +7,12 @@
 The media records the running browser adapter for shared mini-program screens with synthetic local transport. These are actual page captures, not repainted mockups or native-device evidence. The original product illustration and its FFmpeg motion clip are fixtures; recognition, orders, dates and delivery state are synthetic. No paid model or payment is invoked.
 
 
+最新订单操作 / Latest order actions: [操作与来源](../media/order-actions/README.md)
+
+![原订单取消与退款 / Original-order cancellation and refund](../media/order-actions/walkthrough.gif)
+
+[MP4](../media/order-actions/walkthrough.mp4) · [WebM](../media/order-actions/walkthrough.webm) · [截图及摘要 / Screens and hashes](../media/order-actions/capture-manifest.json)。实际共享页面录制，合成订单/金额/退款状态；不代表实际支付或退款到账。Actual UI recording with synthetic states; no live transaction or native-device claim.
+
 最新草稿恢复 / Latest draft recovery: [操作与来源](../media/draft-resume/README.md)
 
 ![草稿恢复与原规格 / Server draft recovery and original specification](../media/draft-resume/walkthrough.gif)

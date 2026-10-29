@@ -14,6 +14,7 @@ import { HELP_ARTICLES, createTicket, requestDeletion } from '../modules/support
 import * as community from '../modules/community.js';
 import { license, licenses } from '../modules/licenses.js';
 import { deletionJournal } from '../privacy/journal.js';
+import {originalPaymentAction} from '../modules/payment-actions.js';
 import { publicSampleMedia, withdrawPublicSamples } from '../modules/authorized-samples.js';
 import { getPreview } from '../modules/previews.js';
 
@@ -58,11 +59,7 @@ export const businessHandlers: Record<string, BusinessHandler> = {
   createOrder: async c => createOrder(c.db, c.cfg, principal(c), validate('OrderRequest', c.body)),
   listOrders: async c => listOwned(c.db, c.cfg, 'orders', principal(c), c.query),
   getOrder: async c => (await owned<DTO<'Order'>>(c.db, 'orders', param(c, 'order_id'), principal(c))).data,
-  getOrCreatePaymentAction: async c => {
-    const order = await owned<DTO<'Order'>>(c.db, 'orders', param(c, 'order_id'), principal(c));
-    requireThat(order.data.channel === principal(c).platform, 'PAYMENT_CHANNEL_MISMATCH', '请回到原小程序继续支付', 403);
-    const row = (await c.db.query<{ data: DTO<'PaymentAction'> }>('SELECT data FROM payments WHERE order_id=$1 AND tenant_id=$2', [order.id, principal(c).tenantId])).rows[0] ?? notFound(); return row.data;
-  },
+  getOrCreatePaymentAction: async c => originalPaymentAction(c.db,c.cfg,principal(c),param(c,'order_id')),
   getJob: async c => (await owned<DTO<'Job'>>(c.db, 'render_jobs', param(c, 'job_id'), principal(c))).data,
   listJobStages: async c => { const job = await owned(c.db, 'render_jobs', param(c, 'job_id'), principal(c)); const rows = await c.db.query<{ data: DTO<'Stage'> }>('SELECT data FROM stage_runs WHERE tenant_id=$1 AND job_id=$2 ORDER BY created_at,id', [principal(c).tenantId, job.id]); return { items: rows.rows.map(r => r.data), next_cursor: null }; },
   getDeliverables: async c => getDeliverables(c.db, principal(c), param(c, 'order_id')),

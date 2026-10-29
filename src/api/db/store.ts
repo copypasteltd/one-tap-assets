@@ -72,7 +72,9 @@ export async function idempotent<T>(db: Db, p: Principal, operation: string, tar
   if (old.rows[0]) {
     if (old.rows[0].revoked_at) throw new AppError('MEDIA_REVOKED', '原请求素材已删除，不能重放私有内容', 410);
     if (old.rows[0].request_hash !== requestHash) throw new AppError('IDEMPOTENCY_CONFLICT', '同一请求标识不能用于不同内容', 409);
-    if (operation === 'checkVariantInput') return fn(); // Pure eligibility must observe current input revocation.
+    // Pure eligibility and original-payment projections must observe current revocation/cancellation.
+    // This does not recreate a provider payment or change the saved financial response.
+    if (operation === 'checkVariantInput' || operation === 'getOrCreatePaymentAction') return fn();
     return old.rows[0].response;
   }
   const result = await fn();

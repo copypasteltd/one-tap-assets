@@ -1,0 +1,245 @@
+{
+  "numTotalTestSuites": 3,
+  "numPassedTestSuites": 3,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 17,
+  "numPassedTests": 17,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793313110009,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "reopens a returned native order without calling requestOrder again or declaring payment confirmed",
+          "status": "passed",
+          "title": "reopens a returned native order without calling requestOrder again or declaring payment confirmed",
+          "duration": 1.931699999999978,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps an ambiguous native creation durable across a restart without resubmitting",
+          "status": "passed",
+          "title": "keeps an ambiguous native creation durable across a restart without resubmitting",
+          "duration": 0.355700000000013,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "blocks an unadmitted protocol and a signed payload for a different original order",
+          "status": "passed",
+          "title": "blocks an unadmitted protocol and a signed payload for a different original order",
+          "duration": 1.5964999999999918,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793313110609,
+      "endTime": 1793313110613.5964,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/client-payment.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "hashes byte-boundaries and Unicode without requiring browser or Node globals in a mini-program",
+          "status": "passed",
+          "title": "hashes byte-boundaries and Unicode without requiring browser or Node globals in a mini-program",
+          "duration": 25.041999999999973,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects unsafe service URLs, requires the original intent and clears an expired identity",
+          "status": "passed",
+          "title": "rejects unsafe service URLs, requires the original intent and clears an expired identity",
+          "duration": 3.1607999999999947,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "does not retry unknown payment mutations and retains backpressure from the server",
+          "status": "passed",
+          "title": "does not retry unknown payment mutations and retains backpressure from the server",
+          "duration": 0.5319000000000074,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects an in-flight private response after an account switch instead of caching it for the next buyer",
+          "status": "passed",
+          "title": "rejects an in-flight private response after an account switch instead of caching it for the next buyer",
+          "duration": 0.561300000000017,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "uses the same intent-key boundaries as both published API domains before sending a mutation",
+          "status": "passed",
+          "title": "uses the same intent-key boundaries as both published API domains before sending a mutation",
+          "duration": 71.25979999999998,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793313110420,
+      "endTime": 1793313110520.2598,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/client.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "offers payment only before its window and keeps cancellation/refund separate from production and collection",
+          "status": "passed",
+          "title": "offers payment only before its window and keeps cancellation/refund separate from production and collection",
+          "duration": 2.3559000000000196,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "re-reads a stale order and never invokes native payment for cancellation or unknown payment",
+          "status": "passed",
+          "title": "re-reads a stale order and never invokes native payment for cancellation or unknown payment",
+          "duration": 1.414199999999994,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "uses the same original payment-action key and treats native return only as a return",
+          "status": "passed",
+          "title": "uses the same original payment-action key and treats native return only as a return",
+          "duration": 1.4639999999999986,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "blocks mismatched, expired, unknown and query-only payment actions before native invocation",
+          "status": "passed",
+          "title": "blocks mismatched, expired, unknown and query-only payment actions before native invocation",
+          "duration": 2.2246999999999844,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "recovers a lost cancellation ACK from the same original order without another cancellation POST",
+          "status": "passed",
+          "title": "recovers a lost cancellation ACK from the same original order without another cancellation POST",
+          "duration": 1.7615999999999872,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "stops cancellation after production starts and does not claim a refund for an unconfirmed payment",
+          "status": "passed",
+          "title": "stops cancellation after production starts and does not claim a refund for an unconfirmed payment",
+          "duration": 0.9706000000000472,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "queries an existing refund and preserves REQUESTED rather than presenting it as received",
+          "status": "passed",
+          "title": "queries an existing refund and preserves REQUESTED rather than presenting it as received",
+          "duration": 0.3416000000000281,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps the refund request key on network ambiguity and rejects a foreign amount",
+          "status": "passed",
+          "title": "keeps the refund request key on network ambiguity and rejects a foreign amount",
+          "duration": 0.807200000000023,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects a late native callback after an account switch",
+          "status": "passed",
+          "title": "rejects a late native callback after an account switch",
+          "duration": 2.0899,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793313110304,
+      "endTime": 1793313110318.0898,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/order-actions.test.ts"
+    }
+  ]
+}

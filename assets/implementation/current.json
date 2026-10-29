@@ -3,7 +3,7 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-29T22:14:36.033Z",
+  "checked_at": "2026-10-29T22:34:12.094Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
@@ -23,8 +23,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 23904,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/typecheck.log",
+      "elapsed_ms": 11736,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-33-32-435Z-2b6a0da6/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -40,29 +40,29 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 1001,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/server.log",
+      "elapsed_ms": 548,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-33-32-435Z-2b6a0da6/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T22-12-47-787Z-bae54ee0\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T22-33-32-435Z-2b6a0da6\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T22-12-47-787Z-bae54ee0\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T22-33-32-435Z-2b6a0da6\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 10285,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/preview.log",
-      "log_sha256": "4979a888422be55b66cc9a5fb08d8638cbf2024f40b39018bacebdaf0afc64b5"
+      "elapsed_ms": 918,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-33-32-435Z-2b6a0da6/preview.log",
+      "log_sha256": "a68e1efd226a20d1aca36e56fdff0a33dd3c0613166646de2a1e101898abe5b3"
     },
     {
       "task": "build:alipay",
@@ -76,9 +76,9 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 45885,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/alipay.log",
-      "log_sha256": "81590534e47d368ea554e1aaa7bc571cc81c20e018a3f4a4717e73b1b3ac4fe8"
+      "elapsed_ms": 12355,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-33-32-435Z-2b6a0da6/alipay.log",
+      "log_sha256": "2746595cac37690eed4073712973ce86df5d5d13b69d3f2cf101ace2c7614b4d"
     },
     {
       "task": "build:douyin",
@@ -92,14 +92,14 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 25924,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/douyin.log",
-      "log_sha256": "882a97e584d1e3438635fb7ad3376f000f422fa6563cfac1ce9ccd3b05530f76"
+      "elapsed_ms": 12952,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-33-32-435Z-2b6a0da6/douyin.log",
+      "log_sha256": "4cbc040facd2de57b01ed1dbae5ca1a2293180019474d58a3f9bccd9cf23929d"
     }
   ],
   "suites": [],
-  "source_files": 377,
-  "source_set_hash": "e398842c4ec9c5d2b77a95efec9fcc22999502385bc4fab514ccad73959b4afb",
+  "source_files": 383,
+  "source_set_hash": "aed288b2a470e9910fff6f4bc9ac4594babd268c96f95e12df19a372c62a11c2",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -239,7 +239,7 @@
     },
     {
       "path": "src/api/db/store.ts",
-      "sha256": "e278937109aca35d591061c1349f82b403fb36f92ba3b4eb9a3e679313943acc"
+      "sha256": "e913c588ee8c31de5496770033d8d8199a14d09db84fdfaf92a7ddfe9d6f109d"
     },
     {
       "path": "src/api/lib/crypto.ts",
@@ -302,6 +302,10 @@
       "sha256": "6ee66c5d639d5aae1b0c8c3e971f7b7994803744e220c220a241f58cfccd6cfc"
     },
     {
+      "path": "src/api/modules/payment-actions.ts",
+      "sha256": "a31c5d01ab1df6f3d0c2c8e3df164692fb23973e99c7bcef914b2c2fa64883f2"
+    },
+    {
       "path": "src/api/modules/plans.ts",
       "sha256": "78131c78e65323d6935a503955cf2607ecd4e83617528fc9ed6b4812c4d1c00c"
     },
@@ -335,7 +339,7 @@
     },
     {
       "path": "src/api/routes/business.ts",
-      "sha256": "19ed0ff8bdba1438982d7e71fe4617074d37b148e81edef44b696b829c3b1c5f"
+      "sha256": "dee4dad8992f56ed9df8f132a66bb134dd0f5dc762830a6dc510a28daa272153"
     },
     {
       "path": "src/api/routes/management.ts",
@@ -547,7 +551,7 @@
     },
     {
       "path": "src/preview/fixtures.ts",
-      "sha256": "9125608d8be8f856fbe19082bafb492f4f6fb821b3f4d94be09893a8f20e7f6f"
+      "sha256": "eb1bf01de9a3265e3b4d7cbc07a00feffe728a41f680283c2681c7ee52f735bd"
     },
     {
       "path": "src/preview/index.html",
@@ -584,6 +588,10 @@
     {
       "path": "src/shared/client/evidence.ts",
       "sha256": "f5148ddb74b7edcf5cfd069545db4c8d13f96686904487f6874fc58fa4e2e094"
+    },
+    {
+      "path": "src/shared/client/order-actions.ts",
+      "sha256": "f12c01826d8d0d05a527923f1997aaae17bca5067f6286d7af57a806768ad500"
     },
     {
       "path": "src/shared/client/photo-selection.ts",
@@ -662,8 +670,12 @@
       "sha256": "47ec5db09eb3903bfedd0661e7d70cf5a27baa64a923994f32753840ce454406"
     },
     {
+      "path": "src/shared/ui/order.tsx",
+      "sha256": "7034f6bd87243f239d36a538ae9ee9b83d00068d44e32736b9d6d9032a88a85f"
+    },
+    {
       "path": "src/shared/ui/pages.tsx",
-      "sha256": "33bb2e4e3bcf2247316acb47f76be72d7098f79d766fd0cd9b24c1906a482831"
+      "sha256": "aa48b172bb6d9a3a0345bdf5f2161a51efe6e7cb3dd47bf79063a8e0ef714b03"
     },
     {
       "path": "src/shared/ui/photos.tsx",
@@ -1286,6 +1298,10 @@
       "sha256": "427c8bb13cce7f112806b7c8bb6a557741eaaabb3ebe40d574ab128d34119f56"
     },
     {
+      "path": "tests/integration/order-actions.test.ts",
+      "sha256": "3a86b88140e76fa72bf3703a45bc68b2ba7df25513e923dd3c3c44597a8cea1c"
+    },
+    {
       "path": "tests/integration/order-budget-envelope.test.ts",
       "sha256": "c0bcca01403272e2b6aff117db6db662892f920ea607e98d6a8325148538b71d"
     },
@@ -1396,6 +1412,10 @@
     {
       "path": "tests/unit/native-review-audio.test.ts",
       "sha256": "ab1d1040e32313ca0787ec97e8fea72eac95da9ebda5c7d84ef6063a6bb6cfd9"
+    },
+    {
+      "path": "tests/unit/order-actions.test.ts",
+      "sha256": "c2f54cc27d4958741815d51056751ac93764b0350a50d9c6103d5eb1b111023c"
     },
     {
       "path": "tests/unit/oss-erasure.test.ts",
@@ -1556,6 +1576,10 @@
     {
       "path": "scripts/record-native-audio.ts",
       "sha256": "99f79439fffa5a9e4de7376255f1116128a38dad5b306e8375c57a55261bce0b"
+    },
+    {
+      "path": "scripts/record-order-actions.ts",
+      "sha256": "d26de69517a8a67b070061ad2e6dc1ef34763194ddba4a79c54202b48492a987"
     },
     {
       "path": "scripts/record-photo-capture.ts",
@@ -1922,7 +1946,9 @@
     "notes": "Seventeen shared screens include creator product/rights selection, private samples, separate license/public-copy consent, submission and withdrawal. SAMPLE has seven durable stages, independent frozen costs, five synthetic roles, native PHOTO media/post/QC and sealed double review. Actual produced PNG/MP4 samples also pass approval, independent registered public copying and public byte downloads without new inference. Other publication cases use explicit READY/QC fixtures only in APP_ENV=test. Public copies have frozen 30-day consent, revoke/expiry/rights/resource checks, fenced recovery and late-PUT cleanup; signed deletion replay preserves RETENTION while USER deletion ends distribution. Native UI, generated/audio/custom-resource samples, production Bundle admission and Plus remain incomplete.",
     "server_draft_list_implemented": true,
     "exact_preset_continuation_implemented": true,
-    "draft_recovery_fixture_verified": true
+    "draft_recovery_fixture_verified": false,
+    "order_cancellation_and_original_refund_implemented": true,
+    "order_actions_fixture_verified": true
   },
   "generation_implementation": {
     "provider": "VOLCENGINE_ARK",
@@ -2187,7 +2213,7 @@
     "evidence": "docs/verification/photo-capture-source.json",
     "historical_focused_verified": true,
     "evidence_source_set_hash": "86154e7ccdd39ee77ad5a2825936e6f31deb40464e8d596628967537c41ce008",
-    "api_upload_regression_rerun_this_round": true,
+    "api_upload_regression_rerun_this_round": false,
     "entire_photo_capture_suite_rerun_this_round": false
   },
   "draft_recovery": {
@@ -2204,10 +2230,35 @@
     "current_sale_and_input_gate_rechecked": true,
     "late_account_and_product_switch_blocked": true,
     "local_raw_photos_or_profile_persisted": false,
-    "focused_verified": true,
+    "focused_verified": false,
     "tests_passed": 20,
     "browser_checks_passed": 8,
     "native_device_verified": false,
-    "evidence": "docs/verification/draft-resume-source.json"
+    "evidence": "docs/verification/draft-resume-source.json",
+    "historical_focused_verified": true,
+    "evidence_source_set_hash": "e398842c4ec9c5d2b77a95efec9fcc22999502385bc4fab514ccad73959b4afb",
+    "rerun_current_order_round": false
+  },
+  "order_actions": {
+    "implemented": true,
+    "original_order_read_before_action": true,
+    "server_payment_action_revalidated_on_idempotent_read": true,
+    "original_app_subject_channel_bound": true,
+    "cancel_before_production_only": true,
+    "original_refund_intent_and_amount": true,
+    "unknown_payment_query_only": true,
+    "late_payment_single_original_refund": true,
+    "started_production_aftercare_only": true,
+    "lost_ack_original_state_recovery": true,
+    "sdk_return_never_confirms_payment": true,
+    "refund_request_never_confirms_arrival": true,
+    "row_lock_wait_revalidated": true,
+    "focused_verified": true,
+    "tests_passed": 23,
+    "browser_checks_passed": 9,
+    "native_device_verified": false,
+    "real_payment_verified": false,
+    "real_refund_verified": false,
+    "evidence": "docs/verification/order-actions-source.json"
   }
 }

@@ -13,8 +13,17 @@ const slots=(variant:any)=>[...variant.output_slots.map((s:any)=>({slot_id:s.slo
 const summaries=source.presets.map(p=>({preset_id:p.preset_id,version:p.version,name:p.name,author_name:'一品成片官方',source:'OFFICIAL',
   style_tags:[p.category,p.style.description.slice(0,45)],sample_id:null,sample_label:'AUTHORIZED_SAMPLE_NOT_YOUR_RESULT',sale_enabled:false}));
 const first=source.presets[0]!,firstSlots=slots(first.execution_variants[0]);
-const order={order_id:'demo_order',quote_id:'demo_quote',channel:'alipay',currency:'CNY',amount_fen:0,payment_state:'CONFIRMED',fulfillment_state:'DELIVERED',
+const order:DTO<'Order'>={order_id:'demo_order',quote_id:'demo_quote',channel:'alipay',currency:'CNY',amount_fen:0,payment_state:'CONFIRMED',fulfillment_state:'DELIVERED',
   payable_until:expires,job_id:'demo_job',refund_id:null,delivery_expires_at:expires,created_at:created};
+const orderScenario=new URLSearchParams(location.search).get('scenario')==='order-actions';
+const demoOrders:Record<string,DTO<'Order'>>={},demoRefunds:Record<string,DTO<'Refund'>>={};
+for(const [id,payment,fulfillment] of [['demo_pending','PENDING','NOT_STARTED'],['demo_unknown','UNKNOWN','NOT_STARTED'],['demo_queued','CONFIRMED','QUEUED'],['demo_failed','CONFIRMED','FAILED'],['demo_working','CONFIRMED','IN_PROGRESS'],['demo_refunded','CONFIRMED','CANCELLED']] as const)
+  demoOrders[id]={...order,order_id:id,amount_fen:100,payment_state:payment,fulfillment_state:fulfillment,job_id:null,delivery_expires_at:null};
+function demoRefund(original:DTO<'Order'>):DTO<'Refund'>{
+  const refund:DTO<'Refund'>={refund_id:`refund_${original.order_id}`,order_id:original.order_id,amount_fen:original.amount_fen,state:'REQUESTED',updated_at:created};
+  demoRefunds[refund.refund_id]=refund;original.refund_id=refund.refund_id;return refund;
+}
+demoRefund(demoOrders.demo_refunded!).state='REFUNDED';
 const session={access_token:'synthetic-browser-only',token_type:'Bearer' as const,expires_at:expires,user_id:'demo_user'};
 const profile={product_id:'demo_product',profile_id:'demo_profile',photo_version:1,identity_lock_id:'demo_lock',name:'柚香洗护 · 演示商品',
   summary:'透明琥珀色瓶身，白色泵头，正面可见演示标签。内容为合成回放，不代表真实多模态识别。',unknowns:['成分与功效','未经核实的品牌和认证'],
@@ -31,7 +40,14 @@ function response(operation:string,path:string,body:any):unknown{
       fork_allowed:true,parent_version:null,variants:p.execution_variants.map(v=>({variant_id:v.variant_id,version:v.version,name:v.name,engine:v.engine,
         sale_enabled:false,admission_state:'NOT_EVALUATED',price_fen:null,speech_mode:v.audio_policy.speech==='none'?'NONE':'NATIVE_ZH',output_slots:slots(v),input_guidance:v.input.shot_hints}))};}
     case 'listOrders':return {items:[order],next_cursor:null};
-    case 'getOrder':return order;
+    case 'getOrder':return orderScenario?demoOrders[path.split('/').at(-1)!]??order:order;
+    case 'getOrCreatePaymentAction':{if(!orderScenario)throw new Error('Synthetic order actions only');const id=path.split('/').at(-2)!;
+      return {payment_id:`payment_${id}`,order_id:id,channel:'alipay',state:demoOrders[id]!.payment_state,expires_at:expires,action:{kind:'QUERY_ORIGINAL_ORDER'}};}
+    case 'cancelOrder':{if(!orderScenario)throw new Error('Synthetic order actions only');const original=demoOrders[path.split('/').at(-2)!]!;
+      if(!['NOT_STARTED','QUEUED'].includes(original.fulfillment_state))throw new Error('Cancellation unavailable');original.fulfillment_state='CANCELLED';
+      if(original.payment_state==='CONFIRMED')demoRefund(original);return original;}
+    case 'requestRefund':{if(!orderScenario)throw new Error('Synthetic order actions only');return demoRefund(demoOrders[path.split('/').at(-2)!]!);}
+    case 'getRefund':{if(!orderScenario)throw new Error('Synthetic order actions only');return demoRefunds[path.split('/').at(-1)!];}
     case 'listJobStages':return {items:['PRODUCTION','POST','QC','REVIEW_FACTS','REVIEW_STYLE','DELIVER'].map((name,i)=>({stage_id:`demo_stage_${i}`,name,state:'SUCCEEDED'}))};
     case 'getPlan':return {plan_id:'demo_plan',product_id:product.product_id,profile_id:profile.profile_id,variant_id:first.execution_variants[0]!.variant_id,state:'READY',engine:'PHOTO_LAYOUT',plan_hash:'a'.repeat(64),summary:'演示清单：同一件商品，按极简净白方案制作配套图片、短片与文案。',output_slots:firstSlots};
     case 'createQuote':return {quote_id:'demo_quote',amount_fen:0,currency:'CNY',expires_at:expires,hard_deadline_seconds:600};

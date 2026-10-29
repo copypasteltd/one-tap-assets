@@ -1,0 +1,106 @@
+{
+  "numTotalTestSuites": 1,
+  "numPassedTestSuites": 1,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 6,
+  "numPassedTests": 6,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793313111418,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "revalidates a cached payment action after cancellation and refunds one late confirmed original payment",
+          "status": "passed",
+          "title": "revalidates a cached payment action after cancellation and refunds one late confirmed original payment",
+          "duration": 191.92680000000018,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "cancels a paid queued order, fences queued work and requests exactly the original refund once",
+          "status": "passed",
+          "title": "cancels a paid queued order, fences queued work and requests exactly the original refund once",
+          "duration": 43.23779999999988,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "recovers a committed refund after losing its ACK and keeps it private to its original buyer",
+          "status": "passed",
+          "title": "recovers a committed refund after losing its ACK and keeps it private to its original buyer",
+          "duration": 41.50330000000031,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects direct cancellation and refund requests after production starts or delivery succeeds",
+          "status": "passed",
+          "title": "rejects direct cancellation and refund requests after production starts or delivery succeeds",
+          "duration": 65.58899999999994,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps unknown, expired and disabled payment actions observational and binds the original app and subject",
+          "status": "passed",
+          "title": "keeps unknown, expired and disabled payment actions observational and binds the original app and subject",
+          "duration": 70.22699999999986,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rechecks cancellation after an actual original-order row-lock wait",
+          "status": "passed",
+          "title": "rechecks cancellation after an actual original-order row-lock wait",
+          "duration": 198.66669999999976,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793313114000,
+      "endTime": 1793313114611.6667,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/order-actions.test.ts"
+    }
+  ]
+}

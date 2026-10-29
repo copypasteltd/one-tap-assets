@@ -1,50 +1,50 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-29T22:18:11.718276+00:00",
+  "checked_at": "2026-10-29T22:39:30.945129+00:00",
   "status": "SOURCE_DELIVERY",
-  "scope": "FOCUSED_DRAFT_RECOVERY_AND_EXACT_SPEC_AVAILABLE_BUILDS",
+  "scope": "FOCUSED_ORIGINAL_ORDER_ACTIONS_AND_AVAILABLE_BUILDS",
   "reason": "USER_REQUESTED_FAST_DELIVERY_WITHOUT_FULL_GREEN_REQUIREMENT",
   "original_publication_checker_status": "NOT_RUN_FOCUSED_DELIVERY",
   "checker_weakened": false,
-  "source_set_hash": "e398842c4ec9c5d2b77a95efec9fcc22999502385bc4fab514ccad73959b4afb",
-  "source_files": 377,
+  "source_set_hash": "aed288b2a470e9910fff6f4bc9ac4594babd268c96f95e12df19a372c62a11c2",
+  "source_files": 383,
   "builds_passed": true,
   "selected_builds_passed": true,
   "checks": [
     {
       "task": "typecheck",
       "status": "PASS",
-      "elapsed_ms": 23904,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/typecheck.log",
+      "elapsed_ms": 11736,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-33-32-435Z-2b6a0da6/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "build:server",
       "status": "PASS",
-      "elapsed_ms": 1001,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/server.log",
+      "elapsed_ms": 548,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-33-32-435Z-2b6a0da6/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
       "status": "PASS",
-      "elapsed_ms": 10285,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/preview.log",
-      "log_sha256": "4979a888422be55b66cc9a5fb08d8638cbf2024f40b39018bacebdaf0afc64b5"
+      "elapsed_ms": 918,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-33-32-435Z-2b6a0da6/preview.log",
+      "log_sha256": "a68e1efd226a20d1aca36e56fdff0a33dd3c0613166646de2a1e101898abe5b3"
     },
     {
       "task": "build:alipay",
       "status": "PASS",
-      "elapsed_ms": 45885,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/alipay.log",
-      "log_sha256": "81590534e47d368ea554e1aaa7bc571cc81c20e018a3f4a4717e73b1b3ac4fe8"
+      "elapsed_ms": 12355,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-33-32-435Z-2b6a0da6/alipay.log",
+      "log_sha256": "2746595cac37690eed4073712973ce86df5d5d13b69d3f2cf101ace2c7614b4d"
     },
     {
       "task": "build:douyin",
       "status": "PASS",
-      "elapsed_ms": 25924,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/douyin.log",
-      "log_sha256": "882a97e584d1e3438635fb7ad3376f000f422fa6563cfac1ce9ccd3b05530f76"
+      "elapsed_ms": 12952,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-33-32-435Z-2b6a0da6/douyin.log",
+      "log_sha256": "4cbc040facd2de57b01ed1dbae5ca1a2293180019474d58a3f9bccd9cf23929d"
     }
   ],
   "local_checks": {
@@ -53,14 +53,14 @@
     "preview": "PASS"
   },
   "focused_tests": {
-    "passed": 20,
+    "passed": 23,
     "failed": 0
   },
-  "browser_checks": 8,
+  "browser_checks": 9,
   "full_suite_executed": false,
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "evidence": "docs/verification/draft-resume-source.json",
-  "historical_publication": "docs/verification/publication-48c7df7.json"
+  "evidence": "docs/verification/order-actions-source.json",
+  "historical_publication": "docs/verification/publication-5b9a1c6.json"
 }

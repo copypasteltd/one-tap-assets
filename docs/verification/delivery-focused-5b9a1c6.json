@@ -1,0 +1,454 @@
+{
+  "schema_version": "1.0",
+  "checked_at": "2026-10-29T22:18:11.718276+00:00",
+  "strategy": "USER_REQUESTED_FOCUSED_DRAFT_AND_EXACT_SPEC_DELIVERY",
+  "source_set_hash": "e398842c4ec9c5d2b77a95efec9fcc22999502385bc4fab514ccad73959b4afb",
+  "source_files": 377,
+  "runtime_contract_files": 42,
+  "resource_files": 4,
+  "build_report": "docs/delivery/current.json",
+  "build_checks": [
+    {
+      "task": "typecheck",
+      "status": "PASS",
+      "elapsed_ms": 23904,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/typecheck.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "build:server",
+      "status": "PASS",
+      "elapsed_ms": 1001,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/server.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "exec",
+      "status": "PASS",
+      "elapsed_ms": 10285,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/preview.log",
+      "log_sha256": "4979a888422be55b66cc9a5fb08d8638cbf2024f40b39018bacebdaf0afc64b5"
+    },
+    {
+      "task": "build:alipay",
+      "status": "PASS",
+      "elapsed_ms": 45885,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/alipay.log",
+      "log_sha256": "81590534e47d368ea554e1aaa7bc571cc81c20e018a3f4a4717e73b1b3ac4fe8"
+    },
+    {
+      "task": "build:douyin",
+      "status": "PASS",
+      "elapsed_ms": 25924,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/douyin.log",
+      "log_sha256": "882a97e584d1e3438635fb7ad3376f000f422fa6563cfac1ce9ccd3b05530f76"
+    }
+  ],
+  "components": [
+    {
+      "name": "server",
+      "status": "PASS"
+    },
+    {
+      "name": "preview",
+      "status": "PASS"
+    },
+    {
+      "name": "alipay",
+      "status": "PASS"
+    },
+    {
+      "name": "douyin",
+      "status": "PASS"
+    }
+  ],
+  "local_checks": {
+    "doctor": {
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_seconds": 90,
+      "elapsed_seconds": 1.81,
+      "log_path": "runtime/delivery/doctor-focused.log",
+      "log_sha256": "1c2b2aba184a7988cf6aa269a0ce8999c220a01ca82bae588448a99675a2c97c",
+      "report": {
+        "checked_at": "2026-10-29T22:16:00.073Z",
+        "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
+        "rows": [
+          {
+            "id": "node",
+            "status": "PASS",
+            "detail": "24.22.1"
+          },
+          {
+            "id": "runtime/tools/package-manager/node_modules/pnpm/bin/pnpm.cjs",
+            "status": "PASS",
+            "detail": "present"
+          },
+          {
+            "id": "assets/presets/presets.v3.1.json",
+            "status": "PASS",
+            "detail": "present"
+          },
+          {
+            "id": "configuration",
+            "status": "PASS",
+            "detail": "environment=development; private values omitted"
+          },
+          {
+            "id": "database",
+            "status": "PASS",
+            "detail": "connected; 27 migrations"
+          },
+          {
+            "id": "ffmpeg",
+            "status": "PASS",
+            "detail": "Native executable on PATH responds"
+          },
+          {
+            "id": "ffprobe",
+            "status": "PASS",
+            "detail": "Native executable on PATH responds"
+          },
+          {
+            "id": "generation",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "codex",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "payments",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "community-publishing",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "server",
+            "status": "PRESENT_NOT_CERTIFIED",
+            "detail": "Existing default output; delivery:build records fresh isolated outputs"
+          },
+          {
+            "id": "preview",
+            "status": "PRESENT_NOT_CERTIFIED",
+            "detail": "Existing default output; delivery:build records fresh isolated outputs"
+          },
+          {
+            "id": "alipay",
+            "status": "NOT_BUILT",
+            "detail": "Run delivery:build"
+          },
+          {
+            "id": "douyin",
+            "status": "PRESENT_NOT_CERTIFIED",
+            "detail": "Existing default output; delivery:build records fresh isolated outputs"
+          },
+          {
+            "id": "catalog",
+            "status": "PASS",
+            "detail": "10 official presets; 14 variants"
+          }
+        ],
+        "full_product_verified": false,
+        "production_admitted": false
+      }
+    },
+    "backend": {
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_seconds": 90,
+      "elapsed_seconds": 5.831,
+      "log_path": "runtime/delivery/backend-focused.log",
+      "log_sha256": "f628c716ef433dc1e29e4c6a329530ada930ee81327ee5746f6fe1b7a58b4ca7",
+      "local_stack_ready": true,
+      "preview_http_ready": false
+    },
+    "preview": {
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_seconds": 90,
+      "elapsed_seconds": 1.266,
+      "log_path": "runtime/delivery/preview-focused.log",
+      "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
+      "local_stack_ready": false,
+      "preview_http_ready": true
+    }
+  },
+  "focused_tests": {
+    "status": "PASS",
+    "passed": 20,
+    "failed": 0,
+    "unit_passed": 17,
+    "api_passed": 3,
+    "reported_files": 5,
+    "unit": "docs/verification/draft-resume-unit.json",
+    "api": "docs/verification/draft-resume-api.json",
+    "commands": [
+      {
+        "task": "typecheck",
+        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+        "argv": [
+          "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+          "--noEmit"
+        ],
+        "shell": false,
+        "status": "PASS",
+        "exit_code": 0,
+        "signal": null,
+        "timeout_ms": 180000,
+        "elapsed_ms": 9146,
+        "log_path": "runtime/test-results/draft-resume-2026-10-29T22-11-33-704Z/typecheck.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "task": "exec",
+        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.config.ts tests/unit/draft-selection.test.ts tests/unit/client.test.ts tests/unit/album.test.ts --outputFile.json=runtime/test-results/draft-resume-2026-10-29T22-11-33-704Z/unit.json",
+        "argv": [
+          "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+          "run",
+          "--config",
+          "vitest.config.ts",
+          "tests/unit/draft-selection.test.ts",
+          "tests/unit/client.test.ts",
+          "tests/unit/album.test.ts",
+          "--outputFile.json=runtime/test-results/draft-resume-2026-10-29T22-11-33-704Z/unit.json"
+        ],
+        "shell": false,
+        "status": "PASS",
+        "exit_code": 0,
+        "signal": null,
+        "timeout_ms": 180000,
+        "elapsed_ms": 5941,
+        "log_path": "runtime/test-results/draft-resume-2026-10-29T22-11-33-704Z/unit.log",
+        "log_sha256": "81e466e0d1902f6e416b2d299f8daeee504efdc91ecdc385109f29ed15b45c32"
+      },
+      {
+        "task": "exec",
+        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/client-drafts.test.ts tests/integration/client-photos.test.ts --outputFile.json=runtime/test-results/draft-resume-2026-10-29T22-11-33-704Z/api.json",
+        "argv": [
+          "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+          "run",
+          "--config",
+          "vitest.integration.config.ts",
+          "tests/integration/client-drafts.test.ts",
+          "tests/integration/client-photos.test.ts",
+          "--outputFile.json=runtime/test-results/draft-resume-2026-10-29T22-11-33-704Z/api.json"
+        ],
+        "shell": false,
+        "status": "PASS",
+        "exit_code": 0,
+        "signal": null,
+        "timeout_ms": 180000,
+        "elapsed_ms": 13441,
+        "log_path": "runtime/test-results/draft-resume-2026-10-29T22-11-33-704Z/api.log",
+        "log_sha256": "c4c19308f2edc2714edbdc60782f0f00856bf0f423606e0207546ca924391f31"
+      }
+    ],
+    "tested_source_snapshot": "docs/verification/draft-resume-tested-source.json",
+    "source_exact_match": true,
+    "coverage": [
+      "Exact second specification across capture/cold login; lost plan ACK keeps original key",
+      "Withdrawn/absent variant and missing input block before plan creation",
+      "Original analysis key resumes bound photos without new draft or upload",
+      "Ready profile without local analysis ID; only matching current plan restored",
+      "Expired draft and explicit logout; late account/product response guards",
+      "Real PostgreSQL/API owned live drafts and current profile/plan recovery",
+      "Real JPEG/multipart retry retains one draft, three uploads, one bound photo version; cold resume needs no reupload",
+      "Existing private API and album journal unit regressions"
+    ],
+    "native_host_login_and_photo_adapter": "SYNTHETIC_ONLY",
+    "actual_local_effects": [
+      "NATIVE_POSTGRESQL",
+      "REAL_API_AUTH_AND_SCOPE",
+      "REAL_MULTIPART_AND_SHARP_JPEG",
+      "OWNED_SERVICE_STARTUP"
+    ]
+  },
+  "initial_attempt": "docs/verification/draft-resume-initial-typecheck.json",
+  "browser_capture": {
+    "status": "PASS",
+    "manifest": "docs/media/draft-resume/capture-manifest.json",
+    "sha256": "a0c6a6bd94c23497fde2104b095b8afb5161f5c2e7940058c0bca0bf32f59dec",
+    "checks": [
+      "HOME_READS_LIVE_OWNED_DRAFT",
+      "RESUME_OPENS_ORIGINAL_MATCHING_PLAN",
+      "LIBRARY_LISTS_SERVER_DRAFTS",
+      "DRAFT_LIST_CONTINUES_EXISTING_PLAN",
+      "OBSERVED_FEATURES_ARE_DISPLAYED",
+      "RESTORED_SPEC_REMAINS_UNAVAILABLE_WHEN_NOT_ADMITTED",
+      "ORIGINAL_SPEC_REFERENCE_IS_INCLUDED_IN_NAVIGATION",
+      "NO_HORIZONTAL_OVERFLOW_AT_320PX"
+    ],
+    "screenshots": 4,
+    "media_files": 7,
+    "browser_tabs_closed": true,
+    "owned_preview_server_stopped": true,
+    "native_device_verified": false,
+    "real_generation_verified": false,
+    "real_payment_verified": false
+  },
+  "prior_delivery": {
+    "source_commit": "48c7df79a7da42948a46b1524b93e010e65b2dfd",
+    "path": "docs/verification/delivery-focused-48c7df7.json",
+    "sha256": "b28dfc12c3ba4808a1271303f6ae660e83143689b63c8b2fddd3fecd3b32d927"
+  },
+  "full_suite_executed": false,
+  "full_suite_required_for_packaging": false,
+  "original_publication_checker_executed": false,
+  "checker_weakened": false,
+  "historical_evidence_unchanged": [
+    {
+      "path": "docs/verification/text-layout-native-source.json",
+      "sha256": "8767b7a787dafb2a674936c926ea219db362bcb7fb3755c4f4b645db3749da07"
+    },
+    {
+      "path": "docs/verification/text-layout-attempts.json",
+      "sha256": "0ac527d0d8f5ddca909e094ed6c6431e1ac24069327d88a7c3d87237c18ea8ca"
+    },
+    {
+      "path": "docs/verification/disclosure-native-source.json",
+      "sha256": "0c7458f86eb561cb06fbc0486d2bb5a1273a1ea03e57520540f74d24f9552337"
+    },
+    {
+      "path": "docs/verification/disclosure-attempts.json",
+      "sha256": "b2b28daa1665be4d80e5fb6bbd8ce63e2bb03f521c4852d18f12f9da438193c5"
+    },
+    {
+      "path": "docs/verification/audio-review-native-source.json",
+      "sha256": "73f2c5ee3e832feba155b3cfb89bc362de626d231237ef0fd2bb501750a4191b"
+    },
+    {
+      "path": "docs/verification/audio-review-attempts.json",
+      "sha256": "55b3093994d0084b6f885a6e383e28b88fa5831219beab79eeed27fb5da892e3"
+    },
+    {
+      "path": "docs/verification/listening-native-source.json",
+      "sha256": "9d7df597dd604f746923a1238df80661336fe27d05fe13454ebeac4547926f13"
+    },
+    {
+      "path": "docs/verification/listening-attempts.json",
+      "sha256": "83c7214998cd6a74e819fea11c9cc772c19df057d90085a9284816f44bc00694"
+    },
+    {
+      "path": "docs/verification/tool-queue-native-source.json",
+      "sha256": "8f4b2a8e57bcda3016fbbd5a41c274b5173a7f919989386489b06c2313b9674c"
+    },
+    {
+      "path": "docs/verification/worker-failure-native-source.json",
+      "sha256": "fbf919d88e4b3bb6b2e1ff5993fb62a4dacfd78c559bd7232f0c780b28b41846"
+    },
+    {
+      "path": "docs/verification/order-budget-native-source.json",
+      "sha256": "167ba9ad0536b66305129060143a37a70424f93134334b76ffa95696163278df"
+    },
+    {
+      "path": "docs/verification/mcp-observation-native-source.json",
+      "sha256": "de9583465a2dc719d499e07ba32f6377851daaad331f9ba8cbaf07e47f71ab2d"
+    },
+    {
+      "path": "docs/verification/repair-cost-native-source.json",
+      "sha256": "d206192f519e620ec7690171c81eb0973c91f81e82989c21b4d11bdf15d125c6"
+    },
+    {
+      "path": "docs/verification/native-order-attempts.json",
+      "sha256": "482dec916c59c6fdb465f9291619bf138548ec13e6d3e89406a152abb6753483"
+    },
+    {
+      "path": "docs/verification/native-qc-attempts.json",
+      "sha256": "f9a19248cdcd21ec6855770cb67a256469d8b9c4dbe0a806eb685ef3176e9365"
+    },
+    {
+      "path": "docs/verification/repair-candidate-source.json",
+      "sha256": "d38d9f59dbc4c8733b27f3774dfbd62bbf25b6605a2d84906650b6902533a7a9"
+    },
+    {
+      "path": "docs/verification/repair-candidate-tested-source.json",
+      "sha256": "02c9a357eef923fa78546faea70d4f4ecdc750cdc29e697716e4cbd709f2d945"
+    },
+    {
+      "path": "docs/verification/repair-candidate-tests.json",
+      "sha256": "d1dd2a4357607025577f56e686f0c224389d1984ef4d62a93ab0f20f83c31b0f"
+    },
+    {
+      "path": "docs/verification/repair-candidate-attempts.json",
+      "sha256": "364b9b231a81a6d947358193e50d780c5361feb27fcac8541a4a4acdf664f355"
+    },
+    {
+      "path": "docs/verification/generated-repair-source.json",
+      "sha256": "3a24027f69d797aa52272805fb59339226ee7383a16f05d1f2b7ebf02ce2f4e6"
+    },
+    {
+      "path": "docs/verification/generated-repair-tested-source.json",
+      "sha256": "1044830f0c248660e951ef0bdd06a0677909d5926257495eb4a46c368b8a6f4c"
+    },
+    {
+      "path": "docs/verification/generated-repair-tests.json",
+      "sha256": "a446104bb54334cc347ca1684277096608793cb5dd2685c358d837d7e70c7c1b"
+    },
+    {
+      "path": "docs/verification/generated-repair-attempts.json",
+      "sha256": "f15fa61cecb36e8c13b9c199920fc7cd1eff67148c8c3ba4017fa2d7ae4d5fb7"
+    },
+    {
+      "path": "docs/verification/generated-repair-initial-role-failure-source.json",
+      "sha256": "dad343e5c252a01e470eee8642a749eda56b8e0357e95a49b0ef04cab05b35a4"
+    },
+    {
+      "path": "docs/verification/generated-repair-initial-role-failure.json",
+      "sha256": "4eb4bafaa90269de6ba2039040549adf04efbef7a7c10f86db01aeb53742e030"
+    },
+    {
+      "path": "docs/verification/generated-repair-initial-timeout-source.json",
+      "sha256": "18eedccffe414887be2a50cde102f3759a373dfd3280041d3a367e01fa5c4e2c"
+    },
+    {
+      "path": "docs/verification/generated-repair-initial-timeout.json",
+      "sha256": "1170bbddbcd7827c90e7e74557ff5bda4e1cba4f07e2049f03ee77f6078541bc"
+    },
+    {
+      "path": "docs/verification/photo-capture-source.json",
+      "sha256": "0a3a5adb102b59dec7808e74283a0c3e508e84445d9527e30f6d42b9aa85a5bf"
+    },
+    {
+      "path": "docs/verification/photo-capture-tested-source.json",
+      "sha256": "0c6d8e0cdf93835f3dc1f92589aca77366d20738b20ef5203843fdecc41b1e28"
+    },
+    {
+      "path": "docs/verification/photo-capture-unit.json",
+      "sha256": "5d582f3a3205c7bff72e99b2b22e605d6bd9df085a472171217efa9bbe3743d2"
+    },
+    {
+      "path": "docs/verification/photo-capture-api.json",
+      "sha256": "7dc5e65b0cc9f6057c538b88fd4cb7e5545df0e6c5303bd27c4295c750e895a8"
+    }
+  ],
+  "frozen_c_files": 25,
+  "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
+  "existing_media_files_verified": 43,
+  "new_media_files_verified": 7,
+  "functional_scope": {
+    "requirements": 58,
+    "p0": 52,
+    "routes": 3,
+    "official_styles": 10,
+    "minimum_variants": 14
+  },
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false,
+  "limitations": [
+    "Browser data is synthetic; official presets remain unavailable",
+    "Native platform login, camera, payment and album behavior require device evidence",
+    "Real Codex/providers, billing/isolation, native-audio repair, complete community/aftercare/Plus and cloud remain incomplete",
+    "Unbound incomplete photos need reselection; no raw photos, profile contents or local photo paths are persisted in client recovery",
+    "Historical generated/repair/photo-picker checks are retained at their original source; unrelated comprehensive suites were not rerun",
+    "Mini builds use loopback development API; rebuild with verified service origin for devices"
+  ],
+  "canonical_draft_resume_provenance": "docs/verification/draft-resume-source.json"
+}

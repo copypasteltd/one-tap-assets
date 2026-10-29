@@ -14,12 +14,10 @@ import {Photos} from './photos';
 import {Analysis} from './analysis';
 import {ResumeDraft,ProductDrafts} from './drafts';
 import {selectedPreset,usePreset} from '../client/preset-selection';
+import {Order,paymentText,fulfillmentText} from './order';
 export { navigate } from './base';
 
 const title = { home: '一品成片', catalog: '方案社区', library: '我的素材', photos: '拍下你的商品', analysis: '整理商品信息', preset: '方案详情', confirm: '确认素材清单', order: '我的订单', pack: '领取素材', settings: '账户与隐私', help: '帮助与反馈', favorites: '我的收藏', creator: '我的方案', draft: '编辑方案', rights: '授权资料', publication: '发布记录', moderation: '举报与申诉' };
-const paymentText: Record<string, string> = { CREATED: '等待付款', PENDING: '正在确认付款', UNKNOWN: '付款结果待确认', CONFIRMED: '已确认付款', FAILED: '付款未完成', CANCELLED: '付款已取消' };
-const fulfillmentText: Record<string, string> = { NOT_STARTED: '尚未开始制作', QUEUED: '等待制作', IN_PROGRESS: '正在制作', FAILED: '制作未完成', CANCELLED: '制作已取消', DELIVERED: '素材已交付' };
-const stageText: Record<string, string> = { ANALYZE: '整理商品信息', PLAN: '梳理素材内容', REPAIR_PLAN: '根据检查结果优化素材', PRODUCTION: '制作画面', POST: '后期制作', QC: '检查文件规格', REVIEW_FACTS: '核验商品与内容', REVIEW_STYLE: '检查风格与体验', DELIVER: '整理完整素材包' };
 function Home() {
   const resource = useResource(() => client().api.call('listPresets', { query: { source: 'OFFICIAL', limit: 3 } }));
   return <><View className='hero'><Text className='eyebrow'>让商品的好，被看见</Text><Text className='hero-title'>拍下商品，{<Text className='marked'>成套出片</Text>}</Text>
@@ -72,27 +70,6 @@ function Library() {
     {resource.loaded && !resource.items.length && <><Notice>还没有素材包。拍下商品，开始你的第一套。</Notice><Action onClick={() => navigate('photos')}>拍照做素材</Action></>}
     {resource.items.map(order => <Panel key={order.order_id}><Text className='card-title'>{fulfillmentText[order.fulfillment_state]}</Text><Text className='secondary'>{paymentText[order.payment_state]} · ¥{(order.amount_fen / 100).toFixed(2)}</Text><Text className='caption'>{new Date(order.created_at).toLocaleString()}</Text><Action secondary onClick={() => navigate(order.fulfillment_state === 'DELIVERED' ? 'pack' : 'order', { order_id: order.order_id })}>{order.fulfillment_state === 'DELIVERED' ? '查看素材包' : '查看原订单'}</Action></Panel>)}<More {...resource} /><ProductDrafts/>
   </>;
-}
-function Order() {
-  const route = useRouter(); const action = useAction(); const [returned, setReturned] = useState('');
-  const resource = useResource(async () => { await client().login(); const order = await client().api.call('getOrder', { params: { order_id: route.params.order_id ?? client().recover().orderId ?? '' } });
-    const stages = order.job_id ? await client().api.call('listJobStages', { params: { job_id: order.job_id } }) : null;
-    const refund = order.refund_id ? await client().api.call('getRefund', { params: { refund_id: order.refund_id } }) : null; return { order, stages, refund };
-  }, d => ['CREATED', 'PENDING', 'UNKNOWN'].includes(d.order.payment_state) || ['QUEUED', 'IN_PROGRESS'].includes(d.order.fulfillment_state) || Boolean(d.refund && ['REQUESTED', 'PROCESSING', 'UNKNOWN'].includes(d.refund.state)));
-  const order = resource.data?.order;
-  return <><ResourceState {...resource} retry={resource.reload} />{order && <><Text className='page-headline'>{order.fulfillment_state === 'NOT_STARTED' ? paymentText[order.payment_state] : fulfillmentText[order.fulfillment_state]}</Text><Text className='price'>¥{(order.amount_fen / 100).toFixed(2)}</Text><Text className='caption'>订单 {order.order_id}</Text>
-    {order.payment_state !== 'CONFIRMED' && <Notice>付款结果以服务端核验为准。返回或网络中断后，继续查询这笔原订单。</Notice>}
-    {returned && <Notice>{returned}</Notice>}
-    {order.fulfillment_state === 'NOT_STARTED' && ['CREATED', 'PENDING'].includes(order.payment_state) && Date.parse(order.payable_until) > Date.now() && <Action disabled={action.busy} onClick={() => void action.run(async () => {
-      const payment = await client().api.call('getOrCreatePaymentAction', { params: { order_id: order.order_id }, key: client().intent('payment-status', { order: order.order_id, nonce: Date.now() }) });
-      if (payment.action.kind === 'QUERY_ORIGINAL_ORDER') setReturned('正在准备或核验这笔原订单，请稍后查询。');
-      else { const result = await client().host.pay(payment); setReturned(result === 'CANCELLED' ? '已返回原订单，可继续查看付款结果。' : '已返回，正在等待服务端确认付款结果。'); } resource.reload();
-    })}>{action.busy ? '正在查询原单…' : '继续原单付款'}</Action>}
-    {resource.data?.stages && <Panel>{resource.data.stages.items.map(stage => <View className={`stage ${stage.state === 'SUCCEEDED' ? 'stage-complete' : ''}`} key={stage.stage_id}><Text>{stage.state === 'SUCCEEDED' ? '✓' : stage.state === 'RUNNING' ? '◉' : '○'}　{stageText[stage.name] ?? '整理素材'}</Text><Text className='secondary'>{stage.state === 'FAILED' ? '未完成' : stage.state === 'SUCCEEDED' ? '完成' : stage.state === 'RUNNING' ? '进行中' : '等待'}</Text></View>)}</Panel>}
-    {resource.data?.refund && <Notice>{resource.data.refund.state === 'REFUNDED' ? '原路退款已确认' : '退款正在按原单处理，具体结果请持续查询。'}</Notice>}
-    {order.fulfillment_state === 'DELIVERED' && <Action onClick={() => navigate('pack', { order_id: order.order_id })}>查看完整素材包</Action>}
-    {action.error && <Notice error>{action.error}</Notice>}<Action secondary onClick={resource.reload}>查询原单最新状态</Action><Action secondary onClick={() => navigate('help', { order_id: order.order_id })}>订单问题反馈</Action>
-  </>}</>;
 }
 function Pack() {
   const route = useRouter(); const action = useAction(); const [links, setLinks] = useState<Record<string, string>>({}); const [items, setItems] = useState<AlbumItem[]>([]); const queue = useRef<AlbumQueue>();

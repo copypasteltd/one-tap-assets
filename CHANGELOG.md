@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · 原订单取消与退款 / Original-order cancellation and refunds
+
+- 双小程序共享订单页增加明确确认的取消、已付款排队取消、失败/取消订单原路退款和逐态进度；已开始制作进入售后。 Shared order self-service uses original order state and explicit confirmation.
+- 旧支付动作幂等命中仍锁原订单重验；取消/UNKNOWN/过期/付款关闭只查单，不改写原财务意图，不创建新交易。 Revalidate cached original actions without replacing the financial record.
+- 原键重试/丢失回执从原单恢复、退款编号与金额/渠道绑定、取消后迟到付款仅一次原路退款；宿主返回和申请受理不当资金成功。 Lost acknowledgements never authorize another payment or refund.
+- 类型、17单元/6原生API及9浏览器操作通过，覆盖真实数据库行锁等待后拒绝已开始制作的取消。四目标构建及本地启动PASS；未运行全面测试。 Bound: 383 source files / 42 contracts / 4 resources; aed288b2。
+- 新增4PNG和MP4/WebM/GIF，本次浏览器/服务关闭；旧50媒体、C25文件/归档及36历史来源保留。 Live transactions, providers/isolation, devices, audio repair, full community/aftercare/Plus and cloud remain pending.
+
 ## 2026-10-30 · 草稿恢复与方案规格续选 / Server drafts and exact-spec continuation
 
 - 首页按先前登录线索恢复身份并读取本人有效草稿；素材页新增服务端草稿分页，主动退出关闭自动恢复。 Restore owned drafts after reopening; explicit logout clears the restore hint.

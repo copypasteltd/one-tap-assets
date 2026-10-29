@@ -1,3 +1,7 @@
+当前来源：[原订单取消与退款](order-actions-source.json)。绑定 383 source files / 42 contracts / 4 resources; aed288b2；类型、17单元/6原生API、9浏览器检查与四构建/本地启动PASS。真实数据库/会话/行锁和合成付款退款分开记录；全面测试、原发布检查器、真机和真实服务未验。
+
+Current focused source delivery preserves all original requirements and historical evidence. Earlier “current” paragraphs below refer only to their own source snapshots.
+
 当前来源：[草稿恢复与方案规格续选](draft-resume-source.json)。绑定 377 source files / 42 contracts / 4 resources; e398842c；类型、17单元/3原生API、8浏览器检查与四构建/本地启动PASS。首次类型错误记录见[初次尝试](draft-resume-initial-typecheck.json)，没有重写历史结果。全面测试、原发布检查器和真实服务/真机未验。
 
 Current focused source delivery preserves all original requirements and historical evidence. The following earlier “current” paragraphs refer only to their own source snapshots.

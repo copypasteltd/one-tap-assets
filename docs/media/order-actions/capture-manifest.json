@@ -1,0 +1,128 @@
+{
+  "captured_at": "2026-10-29T22:37:21.834Z",
+  "type": "ACTUAL_BROWSER_RECORDING_SHARED_MINI_ORDER_ACTIONS",
+  "data_source": "SYNTHETIC_ORDERS_REFUNDS_AND_PAYMENT_STATES",
+  "source_set_hash": "aed288b2a470e9910fff6f4bc9ac4594babd268c96f95e12df19a372c62a11c2",
+  "build_root": "runtime/delivery-builds/2026-10-29T22-33-32-435Z-2b6a0da6/runtime/build",
+  "native_mini_device_verified": false,
+  "real_generation_verified": false,
+  "real_payment_verified": false,
+  "browser_tabs_closed": true,
+  "owned_preview_server_stopped": true,
+  "browser_errors": [],
+  "external_network_requests": [],
+  "checks": [
+    "PENDING_ORDER_HAS_ORIGINAL_PAYMENT_AND_CANCEL_ACTIONS",
+    "DISMISSED_CONFIRMATION_PRESERVES_ORDER",
+    "CONFIRMED_CANCEL_REMOVES_PAYMENT_AND_CANCEL_ACTIONS",
+    "UNKNOWN_PAYMENT_NEVER_OFFERS_ANOTHER_PAYMENT",
+    "QUEUED_PAID_CANCEL_SHOWS_REQUESTED_NOT_RECEIVED_REFUND",
+    "FAILED_ORDER_REFUND_IS_QUERIED_WITHOUT_ANOTHER_REQUEST",
+    "STARTED_PRODUCTION_ROUTES_TO_AFTERCARE",
+    "ONLY_CONFIRMED_REFUND_DISPLAYS_RECEIVED",
+    "NO_HORIZONTAL_OVERFLOW_AT_320PX"
+  ],
+  "screenshots": [
+    {
+      "page": "01-original-order",
+      "path": "docs/media/order-actions/01-original-order.png"
+    },
+    {
+      "page": "02-cancelled",
+      "path": "docs/media/order-actions/02-cancelled.png"
+    },
+    {
+      "page": "03-refund-requested",
+      "path": "docs/media/order-actions/03-refund-requested.png"
+    },
+    {
+      "page": "04-production-support",
+      "path": "docs/media/order-actions/04-production-support.png"
+    }
+  ],
+  "recording": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 430,
+        "height": 932
+      }
+    ],
+    "format": {
+      "duration": "3.480000"
+    }
+  },
+  "files": [
+    {
+      "path": "docs/media/order-actions/01-original-order.png",
+      "bytes": 47560,
+      "sha256": "b384f54fa56f8122c07a9c13c9d2c13a0642a113097c1b19492a50184c3d99e0"
+    },
+    {
+      "path": "docs/media/order-actions/02-cancelled.png",
+      "bytes": 46233,
+      "sha256": "6d25ca4ef7001e9a99e27ff4ef2045bfef5e44d6af781fabd4406519b8e5c033"
+    },
+    {
+      "path": "docs/media/order-actions/03-refund-requested.png",
+      "bytes": 50713,
+      "sha256": "9c40342730fcf1a976af5292b38032dbdeaef560d557db89f60ba3150c5e27fe"
+    },
+    {
+      "path": "docs/media/order-actions/04-production-support.png",
+      "bytes": 29475,
+      "sha256": "3232deb043da8784f156b47a000c8d22608a74ef3b3aa42f91f5f03a8a453f1c"
+    },
+    {
+      "path": "docs/media/order-actions/walkthrough.webm",
+      "bytes": 296528,
+      "sha256": "4d1a07eaf079311bf5e1cd842b4f9968523cc8160c36c8a0532b5324fa29a72f"
+    },
+    {
+      "path": "docs/media/order-actions/walkthrough.mp4",
+      "bytes": 84536,
+      "sha256": "0b0c941ae00e1d417ef7e19beda1968ba2a7d870c76e8cabbf5a8884d50ea301"
+    },
+    {
+      "path": "docs/media/order-actions/walkthrough.gif",
+      "bytes": 422035,
+      "sha256": "2baf0c833f927ea97d455b8eda5d1492e06233f0125b1241fef4693f83ef9fa5"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/record-order-actions.ts",
+      "sha256": "d26de69517a8a67b070061ad2e6dc1ef34763194ddba4a79c54202b48492a987"
+    },
+    {
+      "path": "src/shared/ui/order.tsx",
+      "sha256": "7034f6bd87243f239d36a538ae9ee9b83d00068d44e32736b9d6d9032a88a85f"
+    },
+    {
+      "path": "src/shared/ui/pages.tsx",
+      "sha256": "aa48b172bb6d9a3a0345bdf5f2161a51efe6e7cb3dd47bf79063a8e0ef714b03"
+    },
+    {
+      "path": "src/shared/client/order-actions.ts",
+      "sha256": "f12c01826d8d0d05a527923f1997aaae17bca5067f6286d7af57a806768ad500"
+    },
+    {
+      "path": "src/api/modules/payment-actions.ts",
+      "sha256": "a31c5d01ab1df6f3d0c2c8e3df164692fb23973e99c7bcef914b2c2fa64883f2"
+    },
+    {
+      "path": "src/api/routes/business.ts",
+      "sha256": "dee4dad8992f56ed9df8f132a66bb134dd0f5dc762830a6dc510a28daa272153"
+    },
+    {
+      "path": "src/api/db/store.ts",
+      "sha256": "e913c588ee8c31de5496770033d8d8199a14d09db84fdfaf92a7ddfe9d6f109d"
+    },
+    {
+      "path": "src/preview/fixtures.ts",
+      "sha256": "eb1bf01de9a3265e3b4d7cbc07a00feffe728a41f680283c2681c7ee52f735bd"
+    }
+  ]
+}
