@@ -1,5 +1,9 @@
 # 验证与发布证据 / Verification and publication evidence
 
+2026-10-29最新仓库整理仅更新恢复/发布指南与说明。应用源码、运行契约、资源、C原件及36份媒体保持原摘要；应用六项结果仍来自下述可见标识源码的原执行，本次未重跑应用或录制。文档与契约核验现为4722项PASS，当前摘要及暂存审计分别记录文档发布与原应用来源，不能混为一次新的产品验收。
+
+The latest repository organization changes documentation only. Source, runtime contracts, resources, frozen C design and all 36 media files retain their original hashes. The six application checks below belong to the original disclosure-source run; they were not rerun or recaptured in this docs round. Current documentation/contract checks pass 4,722 assertions and remain separate from application and production acceptance.
+
 2026-10-29可见AI标识与逐帧验收源码：**70单元 / 350原生集成**通过，35个集成文件，完整原生报告跨度约1805.4秒。源码/测试/配置339份、运行契约42份、资源4份。本轮源码全新执行六项检查：类型、70项单元、350项完整原生集成、服务端及支付宝/抖音构建全部通过。完整运行前后的339份源码/测试/配置、42份运行契约和4份资源摘要一致，没有保留旧原生报告。AI标识检查使用实际RGBA字形、不透明Alpha与全部视频帧；声音正向语义仍为刻意构造的控制响应，不代表真实生成质量、中文听感、计费或商业准入。
 
 This source snapshot freshly passes all six checks: types, 70 unit tests, 350 complete native integration tests, server and both mini builds. All 339 source/test/config, 42 runtime-contract and four resource hashes match the complete run; no old integration report is retained. Disclosure checks use actual RGBA glyphs, opaque alpha and every video frame. Positive listening semantics remain fabricated controls, not real generation quality, Chinese hearing, billing or commercial admission. Mode: `FRESH_FULL`. Native PostgreSQL/FFmpeg/media and HTTPS/stdio/MCP execute locally. Model observations, authorizations, usage, payments and isolation responses remain synthetic.
@@ -10,7 +14,7 @@ This source snapshot freshly passes all six checks: types, 70 unit tests, 350 co
 | 02 | 平台冻结规则 | 新增5项单元 PASS | 四个官方原规格、作者不能关闭、历史缺合同阻断、篡改拒绝、原图字节保留 |
 | 03 | 实际字形/Alpha/全部视频帧 | 新增3项原生 PASS | 实际RGBA及不透明Alpha；1080×1920/15秒/450帧视频，空白/透明和帧索引225（从0计）单帧缺失拒绝；取消/截止/回收 |
 | 04 | 生成无声/有声整包 | 原7项/23项原生全部 PASS | 制作、POST、恢复、QC与封存输入绑定最终策略SHA/实际文件SHA/完整帧数 |
-| 05 | 文档与契约 | 4680项 PASS | [报告摘要](contracts.json)，不代替功能运行 |
+| 05 | 文档与契约 | 最新4722项 PASS | [报告摘要](contracts.json)，不代替功能运行 |
 | 06 | 浏览器页面媒体 | 原20文件SHA | 10截图、概览、WebM/MP4/GIF，[来源](../media/capture-manifest.json) |
 | 07 | 声音媒体 | 原12文件SHA | 合成提示音与四样式MP4/PNG/GIF，[来源](../media/native-audio/capture-manifest.json) |
 | 08 | AI标识示例 | 新4媒体文件 | 自绘商品PNG、15秒原生静帧MP4、帧索引225（从0计）与GIF，[来源/复录](../media/ai-disclosure/README.md) |

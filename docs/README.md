@@ -13,6 +13,8 @@
 | 本地运行 / Run locally | [中文快速启动](guides/QUICKSTART.md) · [English quick start](guides/QUICKSTART.en.md) |
 | 技术结构、恢复与费用 / Architecture, recovery and costs | [双语架构指南 / Bilingual architecture](guides/ARCHITECTURE.md) |
 | 页面、录屏、GIF与复录 / Screens, recording and recapture | [演示与媒体 / Demo and media](guides/DEMO.md) |
+| 故障恢复、原任务与修复边界 / Original-task recovery and repair boundaries | [双语恢复指南 / Recovery guide](guides/RECOVERY.md) |
+| 后续更新、媒体和Git同步 / Ongoing documentation, media and Git synchronization | [双语发布指南 / Publishing guide](guides/PUBLISHING.md) |
 | 完成范围与下一步 / Status and next work | [当前状态 / Status](guides/STATUS.md) · [公开核验 / Public verification](verification/publication.json) |
 | 需求与流程 / Requirements and journeys | [PRD](01-产品需求PRD.md) · [功能/流程](02-功能需求与用户流程.md) · [架构数据/API](03-架构数据与接口.md) |
 | 交易与验收 / Transactions and acceptance | [计费交易](04-计费交易与运营.md) · [测试计划](05-验收测试与实施计划.md) |

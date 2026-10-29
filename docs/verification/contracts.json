@@ -4,9 +4,9 @@
   "reports": [
     {
       "path": "assets/development/v1.1/verification-report.json",
-      "sha256": "8f1c7db4df4643869a39ab8f17b274f86b80f2656f110fb00b8079d5f225ca8f",
+      "sha256": "c97c611cd75e2b19dae8b58aff3825989df02984bddf49b972dc7f0eb1c8b0c5",
       "baseline_id": "YPCC-DEV-1.1.0",
-      "checked_at": "2026-10-29T07:04:34.816416+00:00",
+      "checked_at": "2026-10-29T07:27:18.662483+00:00",
       "status": "PASS",
       "scope": "开发文档、官方OpenAPI结构、JSON Schema/合成正负例、状态图、实体/需求/设计/工作包追踪及C留存一致性",
       "counts": {
@@ -22,9 +22,9 @@
         "requirements": 58,
         "work_packages": 20,
         "frozen_design_files": 25,
-        "checks": 3303
+        "checks": 3310
       },
-      "passed": 3303,
+      "passed": 3310,
       "failed": 0,
       "product_tests_executed": false,
       "real_model_calls_executed": false,
@@ -34,10 +34,10 @@
     },
     {
       "path": "assets/development/v1.1/codex-verification-report.json",
-      "sha256": "0a42c2d417102b8019e07c176ad1917d997ef44c00d860af2343564d7c7a0f29",
+      "sha256": "1b51184bd512e48cba1a1f3f44870ce24e4770decc09ad6b4b3659468d24e8e9",
       "baseline_id": "YPCC-DEV-1.1.0",
       "requirements_version": "3.1",
-      "checked_at": "2026-10-29T07:04:40.333411+00:00",
+      "checked_at": "2026-10-29T07:27:19.324476+00:00",
       "status": "PASS",
       "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
       "counts": {
@@ -46,9 +46,9 @@
         "skills": 19,
         "skill_bundles": 14,
         "development_documents": 20,
-        "base_contract_checks": 3303,
-        "codex_checks": 1377,
-        "total_checks": 4680,
+        "base_contract_checks": 3310,
+        "codex_checks": 1412,
+        "total_checks": 4722,
         "codex_synthetic_examples": 39
       },
       "product_tests_executed": false,

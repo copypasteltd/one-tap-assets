@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 2026-10-29 · 恢复与仓库同步文档整理 / Recovery and publishing documentation
+
+- 新增双语恢复指南，区分离页/原供应商任务恢复、候选修复、交付后修改和相册续存；依据当前源码记录错误码、独立原生进程、隐私/备份及退款/释放边界。 Add a bilingual recovery guide grounded in current source and distinct business/financial/cleanup states.
+- 明确F09/F46/F55完整自动修复仍未接通；冻结预算/截止、新候选/新包/两份新复核是后续验收目标，不把字段、原任务恢复或有限售后写成修复完成。 Explicitly retain incomplete automatic repair instead of treating existing fields/checkpoints/revisions as implementation.
+- 新增双语仓库发布指南，规定变更对应文档/媒体、核验、原测试来源、正常提交推送与远端SHA复查；同步中英README、文档目录、状态与协作约束。 Document ongoing source/docs/media synchronization and verified normal Git publication.
+- 本轮仅文档/发布核验，应用源码、运行契约、资源、C25原件/归档及36份媒体不变；保留原70单元/350原生集成及构建来源，不冒称当轮重跑。 Documentation-only; retain original test/build provenance and unchanged source/design/media hashes. Full product/production/cloud and all sales remain unadmitted.
+- 文档与契约4722项PASS，发布检查重新核对全部36份媒体和原339份源码；全库Markdown链接与暂存字节另行审计。 Documentation/contract checks pass 4,722 assertions; publication rechecks unchanged source/media and separately audits Markdown links and staged bytes.
+
 ## 2026-10-29 · 可见AI标识与逐帧验收 / Baked AI disclosure and full-frame verification
 
 - 验证：70单元 / 350完整原生集成、类型/服务端/双小程序全新通过；文档契约4680项。FRESH_FULL，339份源码前后字节一致；36份媒体（原20页面+12声音+新4标识）校验。真实服务与全部销售仍未准入。 Fresh full verification passes without retained native evidence.

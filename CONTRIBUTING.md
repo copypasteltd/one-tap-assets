@@ -1,6 +1,6 @@
 # 一品成片 · 开发协作约束
 
-声音QC更新约束 / Native-audio QC: [文件验收与封存](docs/实施/原生声音文件验收与审查封存-v1.0.md)区分实际PCM/混音/字幕文件检查和未来独立听音。新证据须绑定原ASR与完整双声道、原费用/许可/快照及私有写入；提交重验，保持最终听音/交付与公开声音订单门禁。Technical QC must not waive independent listening or final delivery admission.
+声音QC更新约束 / Native-audio QC: [文件验收与封存](docs/实施/原生声音文件验收与审查封存-v1.0.md)区分实际PCM/混音/字幕文件检查和独立听音；[最终双复核与事务交付](docs/实施/原生声音最终双复核与事务交付-v1.0.md)已连接内部原听音与有声发布，真实听感/计费与公开订单仍未准入。新证据须绑定原ASR与完整双声道、原费用/许可/快照及私有写入；提交重验，不得用技术QC或合成语义替代独立听音及生产准入。Technical QC cannot waive independent listening; private fixture integration does not certify production.
 
 当前为需求v3.1、C设计v1.0、开发设计v1.1；应用正在实现，实际源码/测试范围见[源码进度](docs/实施/源码实现进度-v3.1.md)。开发入口见[docs/开发](docs/开发/README.md)，范围优先级见[功能需求](docs/02-功能需求与用户流程.md)，安全见[SECURITY.md](SECURITY.md)。
 
@@ -21,6 +21,8 @@
 提交排除真实.env/密钥、个人照片/媒体、数据库、供应商/支付原报文和缓存；脱敏证据留索引。用户已于2026-10-28授权创建并持续同步`git@github.com:copypasteltd/one-tap-assets.git`，每轮完成后执行正常提交和推送，核对远端提交；无需重复确认。远端有新增工作时先获取并审查，禁止强制覆盖。该授权不包含向他人发送消息或发布其他外部服务。
 
 ## 文档与远端同步 / Documentation and remote synchronization
+
+具体执行顺序见[发布与同步](docs/guides/PUBLISHING.md)；故障处理与尚未接通的有限自动修复见[恢复边界](docs/guides/RECOVERY.md)。文档独立更新核对原源码摘要并保留应用测试的原执行时间，不能将旧结果写成当轮重跑。See the publishing/recovery guides; documentation-only changes retain original application-test provenance.
 
 每轮功能变化同步中文`README.md`、英文`README.en.md`和双语`CHANGELOG.md`；启动、接口、配置或状态变化同步`docs/guides/`与契约。影响界面时，用`dev:preview`与`docs:media`更新实际截图/录屏/GIF及媒体清单，保留合成数据标识，录制后关闭浏览器。源码变化重新生成适用实现证据，执行`verify:publication`和`git diff --cached --check`后提交并正常推送，报告提交号、远端核对结果和未完成范围。不得把截图、编译或测试替身写成真实服务验收。
 
