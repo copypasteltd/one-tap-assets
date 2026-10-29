@@ -1,5 +1,7 @@
 # 源码交付与快速启动 / Source delivery and quick start
 
+2026-10-30新增[原图候选修复与重新验收](../实施/原图候选修复与重新验收-v1.0.md)：失败证据定位、CONTENT受限改稿、实际新文件、新封存包、双新复核及交付已接通，2项定向原生集成用例通过。原订单预算/截止/调用上限保持冻结；生成式及原生口播修复、真实服务和真机仍待完成。
+
 2026-10-30。按用户最新要求，以主要功能收口和可运行交付包为本轮目标；全面测试和全面绿灯不作为打包前置条件。需求仍为 v3.1 的 58 项，C「柚子创作社」设计保持原版。当前包用于开发接手、演示和服务配置，完整产品验收、真实服务与云端部署分别记录。
 
 This delivery follows the user's request to prioritize working main flows and packaging. A complete green test suite is not required to create the package. All 58 requirements and the frozen C design remain in scope. Source delivery, external-service admission and production deployment are separate states.
@@ -73,6 +75,8 @@ $env:TARO_APP_API_BASE = 'https://your-api.example'
 
 Without an explicit origin, delivery builds use `https://localhost:3100` for local development. Device builds must be rebuilt with a reachable host-approved origin. Douyin payments additionally require `TARO_APP_DOUYIN_TRADE_CONTRACT`. Import successful mini-program outputs into the corresponding official developer tools and configure application IDs, domains and permissions.
 
+`delivery:build --server-only`仅进行类型与服务端构建，其他目标记为NOT_RUN；适用于后端专项收口。该模式的成功只代表所选服务端构建，完整构建状态仍单独保留。The server-only mode explicitly leaves other build targets NOT_RUN.
+
 `delivery:build`直接调用已安装的固定工具，输出到新的独立目录。执行类型检查、服务端、共享页面、支付宝和抖音构建，每个命令最多180秒；一个目标失败后仍记录其他目标。`--smoke`仅选照片上传/恢复及原图素材完整双复核交付相关文件，最多180秒；不运行全套。所有状态和日志摘要写入[current.json](current.json)，完整日志留在忽略目录。打包不要求全部检查通过，包清单会显示实际缺项。
 
 `delivery:build` directly invokes installed pinned tools into a fresh isolated directory. Type/server/replay/Alipay/Douyin commands each have a 180-second delivery-check cap, and failures do not hide other targets. Optional `--smoke` selects photo upload/recovery and photo-pack review/delivery cases, with its own 180-second cap; it does not run the full suite. [current.json](current.json) records exact results and local log hashes. Packaging does not require all checks to pass, and missing components remain explicit.
@@ -89,7 +93,7 @@ The intended main flow remains photos → multimodal product profile → communi
 
 | 编号 / No. | 交付后的剩余工作 / Remaining work |
 | --- | --- |
-| 01 | 自动问题定位、实际修复候选、新封存包及双新复核完整调度；现有费用授权不等于修复完成 / Complete bounded repair orchestration |
+| 01 | 生成式/原生口播的选择性重制、新参考/音轨与新包复核；原图已接通 / Generated and native-audio repair; photo repair connected |
 | 02 | 真实Codex原生隔离/清理、模型质量/计费、语音授权及连续多镜变体 / Real runtime, providers, speech and official variants |
 | 03 | 支付宝/抖音真机登录、支付/退款、下载/相册和服务域名配置 / Native device and host integrations |
 | 04 | 完整社区商业发布、生成式售后、Plus管理界面及云端部署 / Remaining community, aftercare, Plus and deployment |

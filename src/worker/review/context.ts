@@ -13,8 +13,8 @@ import { verifySealedEvidence } from './qc.js';
 export async function currentReviewPacket(db: Db, context: ExecutionContext): Promise<DTO<'ReviewPacket'>> {
   const row = (await db.query<{ data: DTO<'ReviewPacket'> }>(`SELECT p.data FROM review_packets p JOIN stage_runs s
     ON s.id=p.qc_stage_id AND s.tenant_id=p.tenant_id WHERE p.tenant_id=$1 AND p.order_id=$2 AND p.snapshot_hash=$3
-    AND s.stage_name='QC' AND s.state='SUCCEEDED' ORDER BY s.attempt DESC,p.created_at DESC LIMIT 1`,
-  [context.tenantId, context.orderId, context.snapshotHash])).rows[0];
+    AND s.stage_name='QC' AND s.state='SUCCEEDED' AND ($4::int IS NULL OR s.attempt=$4) ORDER BY s.attempt DESC,p.created_at DESC LIMIT 1`,
+  [context.tenantId, context.orderId, context.snapshotHash,context.repair?2:null])).rows[0];
   requireThat(row, 'REVIEW_PACKET_MISSING', '缺少已完成文件验收的封存材料', 409);
   const packet = row.data; assertSealedPacket(packet);
   requireThat(packet.tenant_id === context.tenantId && packet.order_id === context.orderId && packet.snapshot_hash === context.snapshotHash

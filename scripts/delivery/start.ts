@@ -1,4 +1,5 @@
 import {spawn,type ChildProcess} from 'node:child_process';
+import './local-env.js';
 import {readFile} from 'node:fs/promises';
 import {get} from 'node:https';
 import {get as getHttp} from 'node:http';

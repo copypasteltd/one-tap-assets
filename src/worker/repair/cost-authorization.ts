@@ -15,6 +15,7 @@ export interface RepairGenerationNode {
 export interface RepairCostRequest {
   tenantId: string; orderId: string; snapshotHash: string; sourcePacketId: string;
   stageIds: string[]; generationNodes: RepairGenerationNode[];
+  preparationStageIds?:string[];
 }
 const phaseOrder = ['PRODUCTION', 'POST', 'QC', 'REVIEW_FACTS', 'REVIEW_STYLE', 'DELIVER'];
 
@@ -39,6 +40,9 @@ export async function authorizeRepairCosts(db: Db, cfg: Config, request: RepairC
   requireThat(request.stageIds.length === 6 && new Set(request.stageIds).size === 6,
     'REPAIR_STAGES_INVALID', '修复需要新制作、后期、文件验收、双独立复核和交付阶段', 422);
   const stageIds = [...request.stageIds].sort();
+  const preparationIds=[...(request.preparationStageIds??[])];
+  requireThat(preparationIds.length<=1&&new Set([...preparationIds,...stageIds]).size===preparationIds.length+6,
+    'REPAIR_STAGES_INVALID','修复准备阶段必须唯一且不同于六个候选阶段',422);
   const nodes = [...request.generationNodes].sort((a, b) => `${a.kind}:${a.operation_key}`.localeCompare(`${b.kind}:${b.operation_key}`));
   requireThat(nodes.length <= budget.extra_calls_limit && nodes.every(n => ['IMAGE','VIDEO'].includes(n.kind)
     && /^[A-Za-z0-9][A-Za-z0-9_.:-]{0,159}$/.test(n.operation_key))
@@ -46,7 +50,8 @@ export async function authorizeRepairCosts(db: Db, cfg: Config, request: RepairC
   'REPAIR_NODES_INVALID', '修复生成节点必须唯一并在原调用上限内', 422);
   const binding = { order_id: request.orderId, snapshot_hash: context.snapshotHash, source_packet_id: request.sourcePacketId,
     ceiling_micro: budget.repair_ceiling_micro, extra_calls_limit: budget.extra_calls_limit,
-    deadline_at: context.snapshot.deadline_at, stage_ids: stageIds, generation_nodes: nodes };
+    deadline_at: context.snapshot.deadline_at, stage_ids: stageIds, generation_nodes: nodes,
+    ...(preparationIds.length?{preparation_stage_ids:preparationIds}:{}) };
   const prior = (await db.query<{ id: string; binding_hash: string }>(
     'SELECT id,binding_hash FROM repair_cost_authorizations WHERE tenant_id=$1 AND order_id=$2', [request.tenantId, request.orderId])).rows[0];
   if (prior) {
@@ -84,8 +89,13 @@ export async function authorizeRepairCosts(db: Db, cfg: Config, request: RepairC
   requireThat(hash(stages.map(s => s.stage_name).sort()) === hash([...phaseOrder].sort())
     && phaseOrder.every((name, index) => {
       const current = stages.find(s => s.stage_name === name), previous = stages.find(s => s.stage_name === phaseOrder[index - 1]);
-      return current && hash(current.dependencies) === hash(index ? [previous!.id] : []);
+      return current && hash(current.dependencies) === hash(index ? [previous!.id] : preparationIds);
     }), 'REPAIR_STAGES_INVALID', '新候选阶段必须按原快照串行依赖，并重新经过完整双复核', 409);
+  if(preparationIds.length)requireThat((await db.query(`SELECT id FROM stage_runs WHERE tenant_id=$1 AND id=$2
+    AND job_id=$3 AND scope_type='ORDER' AND scope_id=$4 AND input_hash=$5 AND attempt=2 AND stage_name='REPAIR_PLAN'
+    AND state='READY' AND fencing_token=0 AND lease_owner IS NULL AND dependencies='{}'::text[] AND deadline_at=$6::timestamptz`,
+  [request.tenantId,preparationIds[0],job.id,request.orderId,context.snapshotHash,context.snapshot.deadline_at])).rowCount===1,
+  'REPAIR_STAGES_INVALID','修复准备阶段必须保留原快照和截止，并先于新候选执行',409);
   for (const node of nodes) {
     requireThat((await db.query(`SELECT p.id FROM provider_submissions p JOIN stage_runs s ON s.tenant_id=p.tenant_id AND s.id=p.stage_run_id
       WHERE p.tenant_id=$1 AND p.order_id=$2 AND p.id=$3 AND p.generation_kind=$4 AND p.operation_key=$5 AND p.state='SUCCEEDED'
@@ -97,7 +107,7 @@ export async function authorizeRepairCosts(db: Db, cfg: Config, request: RepairC
   await insert(db, 'repair_cost_authorizations', { id: authorizationId, tenant_id: request.tenantId, order_id: request.orderId,
     job_id: job.id, source_packet_id: packet.packet_id, source_packet_hash: packet.packet_hash, snapshot_hash: context.snapshotHash,
     binding_hash: hash(binding), ceiling_micro: budget.repair_ceiling_micro, extra_calls_limit: budget.extra_calls_limit,
-    deadline_at: context.snapshot.deadline_at, stage_ids: stageIds, generation_nodes: JSON.stringify(nodes) });
+    deadline_at: context.snapshot.deadline_at, stage_ids: stageIds, generation_nodes: JSON.stringify(nodes),preparation_stage_ids:preparationIds });
   const changed = await db.query(`UPDATE render_jobs SET repair_rounds=1,data=data||'{"repair_rounds":1}'::jsonb,updated_at=now()
     WHERE tenant_id=$1 AND id=$2 AND repair_rounds=0 AND deadline_at>clock_timestamp()`, [request.tenantId, job.id]);
   requireThat(changed.rowCount === 1, 'REPAIR_NOT_EXECUTABLE', '修复授权提交前原截止或轮次已失效', 409);

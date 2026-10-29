@@ -65,7 +65,7 @@ export function productionTools(pool: pg.Pool, cfg: Config, store: ObjectStorage
     :context.snapshot.audio_policy.speech_mode==='NATIVE_ZH'?new NativeOrderMediaPipeline(pool,cfg,store,gateway,speech):new GeneratedMediaPipeline(pool,cfg,store,gateway);
   const render = (phase: MediaPhase,generatedOnly?:boolean): ToolHandler => async (scope, args, intent, signal) => {
     requireThat(args.snapshot_hash===scope.snapshot_hash,'INPUT_HASH_MISMATCH','制作参数与原冻结输入不一致',422);
-    const context=await executionContext(pool,scope.tenant_id,scope.order_id!,scope.snapshot_hash);
+    const context=await executionContext(pool,scope.tenant_id,scope.order_id!,scope.snapshot_hash,scope.stage_run_id);
     if(phase==='PRODUCTION')requireThat((context.snapshot.engine!=='PHOTO_LAYOUT')===generatedOnly,
       'MEDIA_ROUTE_UNAVAILABLE','制作工具与原冻结路线不一致',503);
     const pipeline=pipelineFor(context);
@@ -81,7 +81,7 @@ export function productionTools(pool: pg.Pool, cfg: Config, store: ObjectStorage
     },
     inspect_actual_media: async (scope, args, intent, signal) => {
       requireThat(scope.order_id && (scope.role === 'PRODUCTION' || scope.role === 'POST'), 'MEDIA_SCOPE_INVALID', '此检查入口只接受制作或后期角色', 409);
-      const context = await executionContext(pool, scope.tenant_id, scope.order_id, scope.snapshot_hash); const ids = args.asset_ids as string[];
+      const context = await executionContext(pool, scope.tenant_id, scope.order_id, scope.snapshot_hash,scope.stage_run_id); const ids = args.asset_ids as string[];
       const rows = (await pool.query<{ media_operation_id: string }>(`SELECT a.media_operation_id FROM artifacts a JOIN media_operations m ON m.id=a.media_operation_id AND m.tenant_id=a.tenant_id
         WHERE a.tenant_id=$1 AND a.order_id=$2 AND a.id=ANY($3) AND m.state='READY' AND m.phase=$4`, [scope.tenant_id, scope.order_id, ids, scope.role])).rows;
       requireThat(rows.length === ids.length && new Set(rows.map(r => r.media_operation_id)).size === 1, 'MEDIA_SELECTION_INVALID', '检查清单包含其他订单或阶段的产物', 422);
@@ -96,10 +96,10 @@ export function productionTools(pool: pg.Pool, cfg: Config, store: ObjectStorage
     },
     persist_stage_result: async (scope, args) => {
       requireThat(scope.order_id && (scope.role === 'PRODUCTION' || scope.role === 'POST'), 'MEDIA_SCOPE_INVALID', '此结果入口只接受制作或后期角色', 409);
-      const context = await executionContext(pool, scope.tenant_id, scope.order_id, scope.snapshot_hash);
+      const context = await executionContext(pool, scope.tenant_id, scope.order_id, scope.snapshot_hash,scope.stage_run_id);
       const { result } = await validateMediaStageResult(pool, context, scope.stage_run_id, scope.run_id, scope.role, args.result); const resultHash = hash(result);
       return { result: { persisted: true, result_hash: resultHash }, commit: async db => {
-        const latest = await executionContext(db, scope.tenant_id, scope.order_id!, scope.snapshot_hash);
+        const latest = await executionContext(db, scope.tenant_id, scope.order_id!, scope.snapshot_hash,scope.stage_run_id);
         await validateMediaStageResult(db, latest, scope.stage_run_id, scope.run_id, scope.role as MediaPhase, result);
         const written = await db.query(`UPDATE agent_runs SET output_hash=$3,private=private||jsonb_build_object('stage_result',$4::jsonb),updated_at=now()
           WHERE tenant_id=$1 AND id=$2 AND state='RUNNING'`, [scope.tenant_id, scope.run_id, resultHash, JSON.stringify(result)]);

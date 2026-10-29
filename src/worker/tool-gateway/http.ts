@@ -50,7 +50,7 @@ async function loadToolScope(db: Db, field: 'token_hash' | 'id', value: string, 
       WHEN s.scope_type='SAMPLE' AND s.stage_name IN ('SAMPLE_PRODUCTION','SAMPLE_POST','SAMPLE_REVIEW_FACTS','SAMPLE_REVIEW_STYLE') THEN substr(s.stage_name,8)
       WHEN s.scope_type='REVISION' AND s.stage_name='REVISION' THEN 'POST'
       WHEN s.scope_type='REVISION' AND s.stage_name IN ('REVISION_REVIEW_FACTS','REVISION_REVIEW_STYLE') THEN substr(s.stage_name,10)
-      WHEN s.stage_name IN ('ANALYZE','PLAN') THEN 'CONTENT'
+      WHEN s.stage_name IN ('ANALYZE','PLAN','REPAIR_PLAN') THEN 'CONTENT'
       WHEN s.stage_name IN ('PRODUCTION','POST','REVIEW_FACTS','REVIEW_STYLE') THEN s.stage_name ELSE NULL END
       OR (s.scope_type='ORDER' AND s.stage_name='PRODUCTION' AND r.role='REVIEW_FACTS'
         AND r.private->'review_input'->>'purpose'='REFERENCE_IDENTITY'

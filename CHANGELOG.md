@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · 原图失败修复与可启动候选 / Photo repair and runnable server candidate
+
+- 接通失败证据定位、原预算一次授权、CONTENT改稿、实际新文件、新QC、双新复核和事务交付；旧PASS不能批准新候选。 Connect bounded photo repair to changed bytes and fresh consensus.
+- 修复快捷启动漏读本地配置的问题；原环境变量优先，默认收费/模型/发布关闭。 Fix project-local configuration loading without changing sold-order limits.
+- 类型/服务端构建PASS，两个定向原生集成用例通过，doctor与四服务启动PASS；首轮就绪失败及早期夹具失败如实保留。 Full suite and current preview/mini builds were not run.
+- 绑定 / Bound: 365 source files / 42 contracts / 4 resources; 7889efdb。中英README、恢复/状态/交付文档与候选包同步；C冻结25文件、归档及36媒体保持原字节。
+- 生成式/原生口播修复、真实Codex/模型/授权/计费、真机、完整社区/售后及云端仍待完成。 No complete-product or production admission is claimed.
+
 ## 2026-10-30 · 快速源码交付与原生启动 / Focused source delivery and native startup
 
 - 新增原生一键初始化、环境自检、四服务成组启停与共享页面服务。 Add native setup/doctor, owned API-worker-maintenance startup and static shared-screen replay.

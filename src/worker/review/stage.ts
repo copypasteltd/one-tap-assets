@@ -28,10 +28,10 @@ export class ReviewStageService {
   async handle(lease: StageLease, signal: AbortSignal): Promise<StageCommit> {
     requireThat(lease.scope_type === 'ORDER' && (lease.stage_name === 'REVIEW_FACTS' || lease.stage_name === 'REVIEW_STYLE'),
       'REVIEW_STAGE_INVALID', '独立复核阶段无效', 500);
-    const context = await executionContext(this.pool, lease.tenant_id, lease.scope_id, lease.input_hash);
+    const context = await executionContext(this.pool, lease.tenant_id, lease.scope_id, lease.input_hash,lease.id);
     requireAudioReviewAdmission(context);
     const packet = await currentReviewPacket(this.pool, context);
-    requireThat(['SEALED', 'REVIEWING', 'PASSED'].includes(packet.state) && packet.publication_decision === 'PENDING',
+    requireThat(reviewMayContinue(packet,lease.stage_name),
       'REVIEW_PACKET_BLOCKED', '当前封存材料已阻断或不可复核', 409);
     if(context.snapshot.audio_policy.speech_mode!=='NONE'&&lease.stage_name==='REVIEW_FACTS')await this.listening.review(lease,signal);
     const nativeListening=await reviewListening(this.pool,this.cfg,context,packet);
@@ -67,8 +67,8 @@ export class ReviewStageService {
     const report = await validateReviewReport(this.pool, this.cfg, context, packet, completed.runId, completed.result);
     requireThat(hash(report) === completed.resultHash, 'CODEX_RESULT_NOT_PERSISTED', '复核持久报告与角色返回不一致', 503);
     return async db => {
-      const current = await executionContext(db, lease.tenant_id, lease.scope_id, lease.input_hash); const latest = await currentReviewPacket(db, current);
-      requireThat(latest.packet_hash === packet.packet_hash && latest.publication_decision === 'PENDING', 'REVIEW_PACKET_STALE', '当前封存材料已变化或阻断', 409);
+      const current = await executionContext(db, lease.tenant_id, lease.scope_id, lease.input_hash,lease.id); const latest = await currentReviewPacket(db, current);
+      requireThat(latest.packet_hash === packet.packet_hash && reviewMayContinue(latest,lease.stage_name), 'REVIEW_PACKET_STALE', '当前封存材料已变化或阻断', 409);
       await validateReviewReport(db, this.cfg, current, latest, completed.runId, report);
       await db.query(`UPDATE stage_runs SET private=private||jsonb_build_object('review_packet_id',$3::text,'report_id',$4::text,'role_run_id',$5::text,'result_hash',$6::text)
         WHERE tenant_id=$1 AND id=$2`, [lease.tenant_id, lease.id, packet.packet_id, report.report_id, completed.runId, completed.resultHash]);
@@ -82,4 +82,12 @@ export class ReviewStageService {
       await db.query('UPDATE review_packets SET state=$3,data=$4 WHERE tenant_id=$1 AND id=$2', [lease.tenant_id, packet.packet_id, latest.state, JSON.stringify(latest)]);
     };
   }
+}
+
+function reviewMayContinue(packet:import('../../shared/contracts/types.js').DTO<'ReviewPacket'>,stage:string):boolean{
+  if(['SEALED','REVIEWING','PASSED'].includes(packet.state)&&packet.publication_decision==='PENDING')return true;
+  // Complete the second independent opinion even after the first report
+  // blocks publication. This grants no permission to publish or repair.
+  return stage==='REVIEW_STYLE'&&['FAILED','INSUFFICIENT_EVIDENCE'].includes(packet.state)
+    &&packet.publication_decision==='BLOCK'&&packet.reports.length===1&&packet.reports[0]?.role==='REVIEW_FACTS';
 }

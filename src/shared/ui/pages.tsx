@@ -17,7 +17,7 @@ export { navigate } from './base';
 const title = { home: '一品成片', catalog: '方案社区', library: '我的素材', photos: '拍下你的商品', analysis: '整理商品信息', preset: '方案详情', confirm: '确认素材清单', order: '我的订单', pack: '领取素材', settings: '账户与隐私', help: '帮助与反馈', favorites: '我的收藏', creator: '我的方案', draft: '编辑方案', rights: '授权资料', publication: '发布记录', moderation: '举报与申诉' };
 const paymentText: Record<string, string> = { CREATED: '等待付款', PENDING: '正在确认付款', UNKNOWN: '付款结果待确认', CONFIRMED: '已确认付款', FAILED: '付款未完成', CANCELLED: '付款已取消' };
 const fulfillmentText: Record<string, string> = { NOT_STARTED: '尚未开始制作', QUEUED: '等待制作', IN_PROGRESS: '正在制作', FAILED: '制作未完成', CANCELLED: '制作已取消', DELIVERED: '素材已交付' };
-const stageText: Record<string, string> = { ANALYZE: '整理商品信息', PLAN: '梳理素材内容', PRODUCTION: '制作画面', POST: '后期制作', QC: '检查文件规格', REVIEW_FACTS: '核验商品与内容', REVIEW_STYLE: '检查风格与体验', DELIVER: '整理完整素材包' };
+const stageText: Record<string, string> = { ANALYZE: '整理商品信息', PLAN: '梳理素材内容', REPAIR_PLAN: '根据检查结果优化素材', PRODUCTION: '制作画面', POST: '后期制作', QC: '检查文件规格', REVIEW_FACTS: '核验商品与内容', REVIEW_STYLE: '检查风格与体验', DELIVER: '整理完整素材包' };
 function Home() {
   const resource = useResource(() => client().api.call('listPresets', { query: { source: 'OFFICIAL', limit: 3 } }));
   const [resume, setResume] = useState(false); useDidShow(() => setResume(Boolean(client().recover().productId)));

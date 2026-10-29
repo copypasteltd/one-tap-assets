@@ -37,6 +37,11 @@ export async function reviewIdentity(db: Db, cfg: Config, context: ExecutionCont
     && run.input_hash === context.snapshotHash && run.data.skill_bundle_hash === packet.skill_bundle_hash
     && !packet.production_run_ids.includes(run.id) && !packet.production_thread_ids.includes(run.thread_id)
     && !packet.production_process_refs.includes(run.data.runtime_process_ref), 'REVIEW_RUN_INVALID', '独立复核缺少本单全新执行身份', 409);
+  if(context.repair)requireThat((await db.query(`SELECT r.id FROM agent_runs r JOIN agent_instances i
+    ON i.tenant_id=r.tenant_id AND i.id=r.instance_id WHERE r.tenant_id=$1 AND i.order_id=$2 AND r.id<>$3
+      AND (r.thread_id=$4 OR r.data->>'runtime_process_ref'=$5) LIMIT 1`,
+    [context.tenantId,context.orderId,run.id,run.thread_id,run.data.runtime_process_ref])).rowCount===0,
+    'REVIEW_REPAIR_IDENTITY_REUSED','新候选复核不能复用原制作、原复核或修复规划身份',409);
   const admission = checkAdmission(cfg, run.private.runtime_admission);
   requireThat(admission.review_vision && context.contract.runtime_binding
     && hash(admission) === hash(context.contract.runtime_binding.admission)

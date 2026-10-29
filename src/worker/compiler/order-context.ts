@@ -8,14 +8,16 @@ import type { FrozenContract, Snapshot } from './snapshot.js';
 import {frozenNativeAudio,verifyNativeAudioLive} from '../audio/contract.js';
 import {frozenOrderListening} from '../audio/listening-contract.js';
 import {frozenAiDisclosure} from './disclosure.js';
+import {repairExecutionContext,type RepairContext} from '../repair/context.js';
 
 export interface ExecutionContext {
   tenantId: string; orderId: string; ownerId: string; snapshotHash: string;
   snapshot: Snapshot; contract: FrozenContract; photoVersionId: string;
+  repair?:RepairContext;
 }
 /** Sold inputs are read from immutable versions, never the buyer's latest
  * profile or the author's current preset. Revocation still stops every tool. */
-export async function executionContext(db: pg.Pool | pg.PoolClient, tenantId: string, orderId: string, snapshotHash: string): Promise<ExecutionContext> {
+export async function executionContext(db: pg.Pool | pg.PoolClient, tenantId: string, orderId: string, snapshotHash: string,stageId?:string): Promise<ExecutionContext> {
   const order = (await db.query<{ owner_id: string; deadline_at: Date; private: { contract: FrozenContract; contract_hash: string } }>(
     `SELECT owner_id,deadline_at,private FROM orders WHERE tenant_id=$1 AND id=$2 AND payment_state='CONFIRMED'
      AND fulfillment_state IN ('QUEUED','IN_PROGRESS') AND deadline_at>now() AND NOT (private ? 'media_revoked')`, [tenantId, orderId])).rows[0];
@@ -58,5 +60,6 @@ export async function executionContext(db: pg.Pool | pg.PoolClient, tenantId: st
     [tenantId, snapshot.identity_lock_id, snapshot.profile_id])).rows[0];
   requireThat(profile && hash(profile.data) === hash(contract.profile) && lock?.hash === snapshot.identity_lock_hash,
     'EXECUTION_EVIDENCE_MISMATCH', '已售商品证据或身份锁不一致', 503);
-  return { tenantId, orderId, ownerId: order.owner_id, snapshotHash, snapshot, contract, photoVersionId: photo.id };
+  const context={ tenantId, orderId, ownerId: order.owner_id, snapshotHash, snapshot, contract, photoVersionId: photo.id };
+  return stageId?repairExecutionContext(db,context,stageId):context;
 }

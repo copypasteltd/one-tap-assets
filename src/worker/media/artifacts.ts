@@ -17,6 +17,7 @@ export interface ArtifactSpec {
   ai_disclosure?:import('./disclosure.js').AiDisclosureProof;
   native_audio?:import('../audio/order-proof.js').NativeOrderAudio;
   generation_sources?:import('../generation/outputs.js').GenerationSource[];reference_approval_hash?:string;
+  repair_plan_hash?:string;
   phase: MediaPhase; kind: 'image' | 'video' | 'copy'; snapshot_hash: string; plan_hash: string;
   identity_lock_hash: string; renderer_version: string; source_asset_ids: string[]; source_artifact_ids: string[];
   resource_bindings: ResourceBinding[];
@@ -92,6 +93,7 @@ export async function originalMediaReceipt(store: ObjectStorage, operation: Medi
     requireThat(artifact && /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/.test(artifact.id) && typeof artifact.slot_id === 'string'
       && !seen.has(artifact.slot_id) && /^[a-f0-9]{64}$/.test(artifact.sha256) && artifact.spec?.phase === operation.phase
       && artifact.spec.snapshot_hash === context.snapshotHash && artifact.spec.plan_hash === context.snapshot.plan_hash
+      && artifact.spec.repair_plan_hash === (context.repair?.plan_hash??undefined)
       && artifact.spec.identity_lock_hash === context.snapshot.identity_lock_hash
       && typeof artifact.object_key === 'string'
       && validObjectKey(artifact.object_key).startsWith(`${context.tenantId}/media/${context.orderId}/${operation.id}/`),
@@ -101,7 +103,8 @@ export async function originalMediaReceipt(store: ObjectStorage, operation: Medi
   return receipt;
 }
 export async function commitMediaOperation(db: pg.PoolClient, context: ExecutionContext, operation: MediaOperation, receipt: MediaReceipt): Promise<void> {
-  await executionContext(db, context.tenantId, context.orderId, context.snapshotHash);
+  const live=await executionContext(db, context.tenantId, context.orderId, context.snapshotHash,operation.stage_run_id);
+  requireThat(hash(live.contract.creative)===hash(context.contract.creative),'REPAIR_PLAN_CHANGED','提交时原候选计划已变化',409);
   const current = (await db.query<MediaOperation>('SELECT * FROM media_operations WHERE tenant_id=$1 AND id=$2 FOR UPDATE', [context.tenantId, operation.id])).rows[0];
   requireThat(current?.generation === operation.generation && current.manifest_key === operation.manifest_key,
     'MEDIA_GENERATION_LOST', '媒体执行代次已被接管', 409);
@@ -122,7 +125,7 @@ export async function commitMediaOperation(db: pg.PoolClient, context: Execution
 export async function operationArtifacts(db: pg.Pool | pg.PoolClient, context: ExecutionContext, phase: MediaPhase): Promise<{ operation: MediaOperation; receipt: MediaReceipt }> {
   const row = (await db.query<MediaOperation>(`SELECT m.* FROM media_operations m JOIN stage_runs s ON s.id=m.stage_run_id AND s.tenant_id=m.tenant_id
     WHERE m.tenant_id=$1 AND m.order_id=$2 AND m.phase=$3 AND m.state='READY' AND s.input_hash=$4
-    AND s.state='SUCCEEDED' ORDER BY s.attempt DESC,m.created_at DESC LIMIT 1`, [context.tenantId, context.orderId, phase, context.snapshotHash])).rows[0];
+    AND s.state='SUCCEEDED' AND ($5::int IS NULL OR s.attempt=$5) ORDER BY s.attempt DESC,m.created_at DESC LIMIT 1`, [context.tenantId, context.orderId, phase, context.snapshotHash,context.repair?2:null])).rows[0];
   requireThat(row, 'MEDIA_PREREQUISITE_MISSING', '前置媒体阶段尚未形成完整检查点', 409);
   return { operation: row, receipt: await receiptFromArtifacts(db, context, row) };
 }
@@ -133,5 +136,7 @@ export async function receiptFromArtifacts(db: pg.Pool | pg.PoolClient, context:
   const receipt: MediaReceipt = { version: 'YPCC-MEDIA-1', operation_id: operation.id, phase: operation.phase, snapshot_hash: context.snapshotHash,
     input_hash: operation.input_hash, artifacts: rows.map(({ spec_json, ...a }) => ({ ...a, spec: spec_json })).sort((a, b) => a.slot_id.localeCompare(b.slot_id)) };
   requireThat(rows.length > 0 && hash(receipt) === operation.manifest_hash, 'MEDIA_RECEIPT_MISMATCH', '持久媒体清单不符合原始检查点', 503);
+  if(context.repair)requireThat(rows.every(a=>a.spec_json.repair_plan_hash===context.repair!.plan_hash),
+    'REPAIR_PLAN_CHANGED','候选媒体未绑定已提交的修复计划',503);
   return receipt;
 }

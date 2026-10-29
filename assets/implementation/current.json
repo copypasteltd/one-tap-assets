@@ -3,7 +3,7 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-29T20:13:41.926Z",
+  "checked_at": "2026-10-29T20:57:04.643Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
@@ -19,12 +19,12 @@
         "--noEmit"
       ],
       "shell": false,
-      "status": "TIMEOUT",
-      "exit_code": 1,
+      "status": "PASS",
+      "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 182058,
-      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/typecheck.log",
+      "elapsed_ms": 35788,
+      "log_path": "runtime/delivery-builds/2026-10-29T20-56-24-306Z-809aceba/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -40,88 +40,14 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 57253,
-      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/server.log",
+      "elapsed_ms": 1526,
+      "log_path": "runtime/delivery-builds/2026-10-29T20-56-24-306Z-809aceba/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
-      "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T19-53-44-951Z-0cf981ca\\runtime\\build\\preview",
-      "argv": [
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
-        "build",
-        "--config",
-        "src/preview/vite.config.ts",
-        "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T19-53-44-951Z-0cf981ca\\runtime\\build\\preview"
-      ],
-      "shell": false,
-      "status": "TIMEOUT",
-      "exit_code": 1,
-      "signal": null,
-      "timeout_ms": 180000,
-      "elapsed_ms": 180269,
-      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/preview.log",
-      "log_sha256": "e524d94fbdaf0261b3ffb806276277f6451b841694c7e2ed4559be879ebf30fe"
-    },
-    {
-      "task": "build:alipay",
-      "command": "node scripts/build-mini.cjs alipay",
-      "argv": [
-        "scripts/build-mini.cjs",
-        "alipay"
-      ],
-      "shell": false,
-      "status": "TIMEOUT",
-      "exit_code": 1,
-      "signal": null,
-      "timeout_ms": 180000,
-      "elapsed_ms": 180546,
-      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/alipay.log",
-      "log_sha256": "4a9e92cd872267b7c666f951719a287ff73311b07039818969e11a9cece88b33"
-    },
-    {
-      "task": "build:douyin",
-      "command": "node scripts/build-mini.cjs tt",
-      "argv": [
-        "scripts/build-mini.cjs",
-        "tt"
-      ],
-      "shell": false,
-      "status": "TIMEOUT",
-      "exit_code": 1,
-      "signal": null,
-      "timeout_ms": 180000,
-      "elapsed_ms": 187678,
-      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/douyin.log",
-      "log_sha256": "be8acd37f9a168d611c59e635a786a131a25cf7bd7ee2d242a23c5565ffc7a12"
-    },
-    {
-      "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/client-photos.test.ts tests/integration/multipart-upload.test.ts tests/integration/review-delivery.test.ts --outputFile.json=runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/smoke.json",
-      "argv": [
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
-        "run",
-        "--config",
-        "vitest.integration.config.ts",
-        "tests/integration/client-photos.test.ts",
-        "tests/integration/multipart-upload.test.ts",
-        "tests/integration/review-delivery.test.ts",
-        "--outputFile.json=runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/smoke.json"
-      ],
-      "shell": false,
-      "status": "TIMEOUT",
-      "exit_code": 1,
-      "signal": null,
-      "timeout_ms": 180000,
-      "elapsed_ms": 180472,
-      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/smoke.log",
-      "log_sha256": "a7b28d265f2e16e5613bacbca37bf5a2e978558ff51c7646476cf85d0684c4f2"
     }
   ],
   "suites": [],
-  "source_files": 358,
-  "source_set_hash": "655aa4cecdac0cf4a05fd1e9e28e8f44786c9eac2a2fa163bde5e1e0a6cced92",
+  "source_files": 365,
+  "source_set_hash": "7889efdb5c018641e90fecd7e5c12b4bb40404b008e895b5942a8e969f68442f",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -246,6 +172,10 @@
     {
       "path": "src/api/db/migrations/026_repair_cost_authorizations.sql",
       "sha256": "ea971796965669d4db5a3814ce396169e7b348caa4c9d229d95e164a2f3fffc4"
+    },
+    {
+      "path": "src/api/db/migrations/027_repair_planning.sql",
+      "sha256": "e3b46eaa243019105bc6bf1f0ee3533c9e73f3bfdae88b2bd6bf0a013eeff25e"
     },
     {
       "path": "src/api/db/pool.ts",
@@ -661,7 +591,7 @@
     },
     {
       "path": "src/shared/ui/pages.tsx",
-      "sha256": "1aaada7e0624ac40a9523a84a056387d14e71b73a76b62437d53e5fc4ed04c12"
+      "sha256": "bdd11bd58b4e0cd55ce6692bbe3e0873f9fba3f69ca49e32b890117aa674ad16"
     },
     {
       "path": "src/shared/ui/preview.tsx",
@@ -713,7 +643,7 @@
     },
     {
       "path": "src/worker/budget/reservations.ts",
-      "sha256": "85fa8fff78ca8baddb255ee87d4300b5d36f1c794c3379c91ae530e75c919979"
+      "sha256": "564e422ce2b9f96432d7b657b112c74da8eb627d5eef49b5666c6ac0181cc3e2"
     },
     {
       "path": "src/worker/codex/admission.ts",
@@ -729,7 +659,7 @@
     },
     {
       "path": "src/worker/codex/media-stage.ts",
-      "sha256": "1ccd8dac7b667754e9181ea1845ea20ff0414fc42b9fddb1f36895db2e1b54de"
+      "sha256": "3b9105a2757c63398850ca0f1cf8c17598f129efb83b2c8f02cc4f2a9a3268f6"
     },
     {
       "path": "src/worker/codex/planning.ts",
@@ -757,7 +687,7 @@
     },
     {
       "path": "src/worker/compiler/order-context.ts",
-      "sha256": "db19fb6bc12016541fe6b0d315f8654d08ce1c9d33ab91c348c854c12a1dadd2"
+      "sha256": "2d9788ff0d7492a5f7e99e886a6646e250a1b9ebc680224a7eee964abcdc9b6c"
     },
     {
       "path": "src/worker/compiler/plan.ts",
@@ -857,11 +787,11 @@
     },
     {
       "path": "src/worker/main.ts",
-      "sha256": "da9162008b97e47fda51d2a93893a1995a444dc1cc6646e1244a0160c958b63a"
+      "sha256": "abd406ecebd17f4aba454910896860f5e5aa39b242fa4888c84550a9f5ed0f9e"
     },
     {
       "path": "src/worker/media/artifacts.ts",
-      "sha256": "358ecbf226d075befaf9ea41db6870ea293ca61f4dbf5fa8018c7a662433ae72"
+      "sha256": "5d5a105b5bd416a4f12254dc06119cfca7dda3c4d0590601c10104fbf3569554"
     },
     {
       "path": "src/worker/media/disclosure.ts",
@@ -905,7 +835,7 @@
     },
     {
       "path": "src/worker/media/photo-pipeline.ts",
-      "sha256": "806f99e306e12b49b8f8938f23eac98bed092b7781096a10f5774e73b4c177e2"
+      "sha256": "d00b050549136a1959a474193f88ca9439b6363a85cc6dc546790f4baa91e4f4"
     },
     {
       "path": "src/worker/media/photo-video.ts",
@@ -953,19 +883,35 @@
     },
     {
       "path": "src/worker/queue/leases.ts",
-      "sha256": "c9306cfd769eaf94abb64adb94a2b0fb7bd1fcf6fe9ce31c93febb60c0c8dd18"
+      "sha256": "3da63d2bb7b26fd5078bf3b7557eeeccf901fec7694fc669b8389458b6dfb6e5"
     },
     {
       "path": "src/worker/queue/outbox.ts",
       "sha256": "aaa382b8236d21f11382e94b0adab8ebd9ef3e4a6faa850981d75d6ee54a4f6c"
     },
     {
+      "path": "src/worker/repair/context.ts",
+      "sha256": "f30d447a34b995f0216b93f6cc13d20858d83c80bfcc16ad7631256cea0cee4a"
+    },
+    {
+      "path": "src/worker/repair/coordinator.ts",
+      "sha256": "f958b69f801e33de7f3f20a28e823c6666b19d37e25f12dd841dda2c3f9a9a4f"
+    },
+    {
       "path": "src/worker/repair/cost-authorization.ts",
-      "sha256": "f0241cda39311c0126c0ef0606d97879129093ce88bb03a3b94936adf307aca3"
+      "sha256": "2c566359114ecf3c671f573a09a9e2924ab954482b2bf7407edad0dd9a5b7999"
+    },
+    {
+      "path": "src/worker/repair/planning.ts",
+      "sha256": "339d48861da6723beda541b1c3d50fe79e9a8e628fd52f5c13ea2fbc3309497b"
+    },
+    {
+      "path": "src/worker/repair/targets.ts",
+      "sha256": "2b6b8f87a6035d53d91febd766f7f61818c17bfa44c29c4db593cd5383e0de18"
     },
     {
       "path": "src/worker/review/context.ts",
-      "sha256": "3adee8c75665830504b62fba4737e3854cdbec7b77836ca00c2ffacde0f06df0"
+      "sha256": "a69b2436ac2e3e274571f19d18607fae2322d44a895c09cb7e42a1a30e9dfef9"
     },
     {
       "path": "src/worker/review/evidence.ts",
@@ -985,19 +931,19 @@
     },
     {
       "path": "src/worker/review/publication.ts",
-      "sha256": "e46b4b7777c510252b8e169791acd85d71581efbacb5d69014417a9ec06cdda4"
+      "sha256": "426e7f74ec0cfdbafc674b9ec47ee6741bbb24df7256ec1ac22f0d228922483e"
     },
     {
       "path": "src/worker/review/qc.ts",
-      "sha256": "c8879ba0058b30c47518f7e76bda523e118e05a311f10a48c1459c984cf96520"
+      "sha256": "e27e77d81e0792f19b41195613080b5ea6096c796a8f1b39a0e15d2ac964c097"
     },
     {
       "path": "src/worker/review/reports.ts",
-      "sha256": "11476e70a03a7feceae6406fbec7311deebdf2fffb0344609bfc46bc52b21044"
+      "sha256": "9e30d426a0ee62c088bcf702e0cffe4510333697affc0a82533b40ab202c4959"
     },
     {
       "path": "src/worker/review/stage.ts",
-      "sha256": "201e185bc25b59af917426ed833f6fc8aa184a73c0f98494216a2f4ea126062b"
+      "sha256": "6dddafc3b1ea8147a681a8d0002fd8a0c95328cf3d40e7f35c7f058462633885"
     },
     {
       "path": "src/worker/revisions/budget.ts",
@@ -1025,7 +971,7 @@
     },
     {
       "path": "src/worker/runtime.ts",
-      "sha256": "1b9e4b8bd022b9df895826886460f989db4b1a21076beaf2bd3ff9037f09921e"
+      "sha256": "de0e80fbc8a777317a5c01293337f0ef16cc6b095d2ef1e74594f0cbaaa3dc0a"
     },
     {
       "path": "src/worker/samples/completion.ts",
@@ -1077,7 +1023,7 @@
     },
     {
       "path": "src/worker/tool-gateway/http.ts",
-      "sha256": "4fef03722c2391243f9a752235458372590b1908807d898c1103bff985cce89e"
+      "sha256": "f97798654c113ca05fffc7d278055b8ec518c695bd85efdedec4e3b0538f2d53"
     },
     {
       "path": "src/worker/tool-gateway/mcp-main.ts",
@@ -1089,7 +1035,7 @@
     },
     {
       "path": "src/worker/tool-gateway/production-tools.ts",
-      "sha256": "29fa3b43f6ddf95e38293e139756e4265afd60e4d9d07c7b67138cb1652f9a5a"
+      "sha256": "768a9f2e6f0d360cf5c6ce83255e10345815667bbfcee06ea3f5d4594edc0c9a"
     },
     {
       "path": "src/worker/tool-gateway/reference-tools.ts",
@@ -1097,7 +1043,7 @@
     },
     {
       "path": "src/worker/tool-gateway/review-tools.ts",
-      "sha256": "5037279dd303f2dcdb9870c60c03895f60475b950312787173295b4ab87592e6"
+      "sha256": "76aaf96bcb0d0206a7fb6064ef5672adb0aef00916bcbe24da949caa429125b4"
     },
     {
       "path": "src/worker/tool-gateway/revision-tools.ts",
@@ -1117,7 +1063,7 @@
     },
     {
       "path": "tests/fixtures/codex-role.cjs",
-      "sha256": "4d264cca465e9fc5692bdea2003258249a4ef9dd0d3eec51afba8ee32e728b1a"
+      "sha256": "5b53f08fcb68b704741c5a470f8ec998d582a696575674c3879345b041bc3643"
     },
     {
       "path": "tests/helpers/audio.ts",
@@ -1292,6 +1238,10 @@
       "sha256": "574406732b05eaf2413fc18730b01953080375f33db6464f119c6cdd14f30fd4"
     },
     {
+      "path": "tests/integration/repair-candidate.test.ts",
+      "sha256": "c0e86432731e0b60cd7835961776d568c81cc6f0a8cfc4ad878e6b3cda75e2d3"
+    },
+    {
       "path": "tests/integration/repair-costs.test.ts",
       "sha256": "c3a44087d237685d7b5e02155b3ba20fe3b53b77570b98bd2aa605ce3dfdfa5f"
     },
@@ -1453,7 +1403,7 @@
     },
     {
       "path": "scripts/delivery/build.ts",
-      "sha256": "2aad1664e93f89b554a247ee8f1b1e10f6864b513b21f28293c43021c867d63d"
+      "sha256": "8c7e593dd51d537be8c97c26dc4c8c3f321d89c9d909fb3223abaa37018995a3"
     },
     {
       "path": "scripts/delivery/common.ts",
@@ -1461,7 +1411,11 @@
     },
     {
       "path": "scripts/delivery/doctor.ts",
-      "sha256": "19fe08d5b5a207dde4a650df81a7ed7332144395dcc7abfd8139cfc5046e051a"
+      "sha256": "256d11b60b5da7ca7fe5d00f2d1d1c1a9389c863637a216bf85f3889cd1e95d7"
+    },
+    {
+      "path": "scripts/delivery/local-env.ts",
+      "sha256": "511ba80068d6b12f4a564a7349ad976df2ae6a7cb40992d8e831c727ad342e6c"
     },
     {
       "path": "scripts/delivery/package.ts",
@@ -1473,7 +1427,7 @@
     },
     {
       "path": "scripts/delivery/start.ts",
-      "sha256": "3cbf33270e69ac73b6a00ef3e54ccf32f70b3ca332e45468d67ee3aa5250ec3d"
+      "sha256": "e184bf9ed2b6158f933c1d458973413076418b4899e53a1c0ba0c1bf900dc322"
     },
     {
       "path": "scripts/dev-setup.ts",
@@ -1513,7 +1467,7 @@
     },
     {
       "path": "scripts/run.ps1",
-      "sha256": "e621fd2010a8f6349dd3b80e08e53f8323583d5c308d98c95c310e9c067d3cbc"
+      "sha256": "6d1f64bef24f092b5ff7bc27de78625d3d584ee1f7f6603c5acf64da4462ed98"
     },
     {
       "path": "scripts/seed.ts",
@@ -2088,5 +2042,21 @@
   "source_license": "Independently written project source; upstream AGPL clone remains research-only; no upstream production implementation copied.",
   "historical_full_chain": "docs/verification/repair-cost-native-source.json",
   "delivery_builds_passed": false,
-  "full_suite_executed": false
+  "full_suite_executed": false,
+  "repair_candidate": {
+    "photo_connected": true,
+    "generated_connected": false,
+    "native_audio_connected": false,
+    "focused_verified": true,
+    "evidence": "docs/verification/repair-candidate-source.json",
+    "tests_passed": 2,
+    "original_budget_deadline_and_quotas_preserved": true,
+    "fresh_actual_bytes_and_reviews_required": true
+  },
+  "local_configuration_loading": {
+    "implemented": true,
+    "doctor": "PASS",
+    "grouped_startup": "PASS",
+    "initial_grouped_readiness_failure_retained": true
+  }
 }

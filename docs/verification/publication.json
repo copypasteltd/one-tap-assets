@@ -1,74 +1,44 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-29T20:14:22.670871+00:00",
+  "checked_at": "2026-10-29T21:01:47.445951+00:00",
   "status": "SOURCE_DELIVERY",
-  "scope": "FOCUSED_SOURCE_AND_AVAILABLE_BUILDS",
+  "scope": "FOCUSED_PHOTO_REPAIR_AND_SERVER_SOURCE",
   "reason": "USER_REQUESTED_FAST_DELIVERY_WITHOUT_FULL_GREEN_REQUIREMENT",
   "original_publication_checker_status": "NOT_RUN_FOCUSED_DELIVERY",
   "checker_weakened": false,
-  "source_set_hash": "655aa4cecdac0cf4a05fd1e9e28e8f44786c9eac2a2fa163bde5e1e0a6cced92",
-  "source_files": 358,
+  "source_set_hash": "7889efdb5c018641e90fecd7e5c12b4bb40404b008e895b5942a8e969f68442f",
+  "source_files": 365,
   "builds_passed": false,
+  "selected_server_build_passed": true,
   "checks": [
     {
       "task": "typecheck",
-      "status": "TIMEOUT",
-      "elapsed_ms": 182058,
-      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/typecheck.log",
+      "status": "PASS",
+      "elapsed_ms": 35788,
+      "log_path": "runtime/delivery-builds/2026-10-29T20-56-24-306Z-809aceba/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "build:server",
       "status": "PASS",
-      "elapsed_ms": 57253,
-      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/server.log",
+      "elapsed_ms": 1526,
+      "log_path": "runtime/delivery-builds/2026-10-29T20-56-24-306Z-809aceba/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
-      "task": "exec",
-      "status": "TIMEOUT",
-      "elapsed_ms": 180269,
-      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/preview.log",
-      "log_sha256": "e524d94fbdaf0261b3ffb806276277f6451b841694c7e2ed4559be879ebf30fe"
-    },
-    {
-      "task": "build:alipay",
-      "status": "TIMEOUT",
-      "elapsed_ms": 180546,
-      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/alipay.log",
-      "log_sha256": "4a9e92cd872267b7c666f951719a287ff73311b07039818969e11a9cece88b33"
-    },
-    {
-      "task": "build:douyin",
-      "status": "TIMEOUT",
-      "elapsed_ms": 187678,
-      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/douyin.log",
-      "log_sha256": "be8acd37f9a168d611c59e635a786a131a25cf7bd7ee2d242a23c5565ffc7a12"
-    },
-    {
-      "task": "exec",
-      "status": "TIMEOUT",
-      "elapsed_ms": 180472,
-      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/smoke.log",
-      "log_sha256": "a7b28d265f2e16e5613bacbca37bf5a2e978558ff51c7646476cf85d0684c4f2"
     }
   ],
   "local_checks": {
-    "doctor": "FAIL",
-    "backend": "FAIL",
-    "preview": "FAIL",
-    "static-server-fixture": "PASS"
+    "doctor": "PASS",
+    "backend": "PASS",
+    "preview": "NOT_RUN"
+  },
+  "focused_tests": {
+    "passed": 2,
+    "failed": 0
   },
   "full_suite_executed": false,
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "evidence": "docs/verification/delivery-focused-source.json",
-  "historical_publication": {
-    "source_commit": "6b494cedaa33884840b492840a3762973e261f25",
-    "record_sha256": "77a3f82dd9ad91f466a5e254a85e1f4260279dab7d3a1fce997ecd469c7a8b46",
-    "status": "BLOCKED",
-    "actual_checker_exit_code": 1,
-    "source_set_hash": "346c8c21b939d8bd6390788ef42ae859d5a80dfaca84a38eaa10aa3b45b2c0bf"
-  }
+  "evidence": "docs/verification/repair-candidate-source.json",
+  "historical_publication": "docs/verification/publication-83bd7ee.json"
 }

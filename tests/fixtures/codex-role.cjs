@@ -122,6 +122,13 @@ async function dispatch(message) {
       if (mode === 'REFERENCE_FAKE_PASS') output.frames[0].anchors[0].verdict = 'UNCERTAIN';
       if (mode === 'REFERENCE_WRONG_IDENTITY') output.thread_id = 'invented-thread';
       if (mode !== 'SKIP_PERSIST') await tool('persist_stage_result', { result: output });
+    } else if (input.original_plan && input.failed_reports && input.target_slot_ids) {
+      output = structuredClone(input.original_plan);
+      const slot = output.image_slots.find(s => input.target_slot_ids.includes(s.slot_id));
+      if (!slot) throw new Error('Synthetic repair requires a located image');
+      slot.title = mode === 'REPAIR_UNCHANGED' ? slot.title : '细节实拍';
+      await tool('validate_content_plan', { plan: output });
+      if (mode !== 'SKIP_PERSIST') await tool('persist_stage_result', { result: output });
     } else if (input.phase === 'REVIEW_FACTS' || input.phase === 'REVIEW_STYLE') {
       const evidence = JSON.parse((await tool('extract_review_evidence', { packet_hash: input.packet_hash })).content[0].text);
       output = { ...evidence.report_template, verdict: mode === 'REVIEW_FAIL' ? 'FAIL' : mode === 'REVIEW_INSUFFICIENT' ? 'INSUFFICIENT_EVIDENCE' : 'PASS',
@@ -129,6 +136,13 @@ async function dispatch(message) {
       if (evidence.report_requirements) output = { ...evidence.report_requirements,
         verdict: mode === 'REVIEW_FAIL' ? 'FAIL' : 'PASS', issues: mode === 'REVIEW_FAIL'
           ? [{ asset_id: evidence.report_requirements.checked_asset_ids[0], code: 'QUALITY', message: 'Synthetic negative review only.' }] : [] };
+      if (mode === 'REVIEW_LOCATED_FAIL') {
+        const contract = JSON.parse(input.material.text_evidence.find(e => e.kind === 'CONTRACT').content);
+        const image = contract.outputs.find(o => o.spec.kind === 'image');
+        output.verdict = 'FAIL';
+        output.findings = [{ category: 'STYLE', severity: 'MAJOR', evidence_ids: [image.artifact_id],
+          time_ms: null, detail: 'Synthetic acceptance defect: revise the first image title.' }];
+      }
       if (mode === 'REVIEW_NEGATIVE_PROBES') {
         for (const bad of [{ ...output, thread_id: 'invented-thread' }, { ...output,
           findings: [{ category: 'EVIDENCE', severity: 'MAJOR', evidence_ids: ['invented-evidence'], time_ms: null, detail: 'Synthetic wrong reference' }] }]) {

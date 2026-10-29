@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "created_at": "2026-10-29T20:20:26.081Z",
-  "id": "2026-10-29T19-53-44-951Z-0cf981ca",
-  "source_set_hash": "655aa4cecdac0cf4a05fd1e9e28e8f44786c9eac2a2fa163bde5e1e0a6cced92",
-  "archive_path": "runtime/releases/one-tap-assets-2026-10-29T19-53-44-951Z-0cf981ca/one-tap-assets-source-and-builds.zip",
-  "archive_sha256": "9db367caa48a2e22ce518d121d0d38ae51fd80a63028bf52b1cb603e119a019d",
-  "archive_bytes": 53216755,
-  "source_files": 679,
+  "created_at": "2026-10-29T21:03:42.884Z",
+  "id": "2026-10-29T20-56-24-306Z-809aceba",
+  "source_set_hash": "7889efdb5c018641e90fecd7e5c12b4bb40404b008e895b5942a8e969f68442f",
+  "archive_path": "runtime/releases/one-tap-assets-2026-10-29T20-56-24-306Z-809aceba/one-tap-assets-source-and-builds.zip",
+  "archive_sha256": "37084c0613ee62816c9117e4baa501be9034304469809865607a6ecc193a9671",
+  "archive_bytes": 53311542,
+  "source_files": 694,
   "build_files": 12,
   "components": [
     {
@@ -15,34 +15,52 @@
     },
     {
       "name": "preview",
-      "status": "TIMEOUT"
+      "status": "NOT_RUN"
     },
     {
       "name": "alipay",
-      "status": "TIMEOUT"
+      "status": "NOT_RUN"
     },
     {
       "name": "douyin",
-      "status": "TIMEOUT"
+      "status": "NOT_RUN"
     }
   ],
-  "manifest_path": "runtime/releases/one-tap-assets-2026-10-29T19-53-44-951Z-0cf981ca/manifest.json",
+  "manifest_path": "runtime/releases/one-tap-assets-2026-10-29T20-56-24-306Z-809aceba/manifest.json",
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
   "full_product_verified": false,
   "production_admitted": false,
   "independent_archive_verification": {
     "status": "PASS",
-    "checked_at": "2026-10-29T20:20:55.663484+00:00",
+    "checked_at": "2026-10-29T21:05:09.149685+00:00",
     "method": "INDEPENDENT_PYTHON_ZIPFILE_CRC_AND_SHA256",
-    "archive_sha256": "9db367caa48a2e22ce518d121d0d38ae51fd80a63028bf52b1cb603e119a019d",
-    "payload_files_verified": 691,
-    "archive_entries": 692,
+    "archive_sha256": "37084c0613ee62816c9117e4baa501be9034304469809865607a6ecc193a9671",
+    "payload_files_verified": 706,
+    "archive_entries": 707,
     "workspace_payload_bytes_matched": true,
     "successful_build_components_verified": [
       "server"
     ],
     "private_runtime_and_credentials_excluded": true,
     "full_product_verified": false
+  },
+  "repository_source_verification": {
+    "status": "PASS",
+    "git_index_and_package_source_files_matched": 695,
+    "unchanged_repository_metadata_excluded_from_zip": [
+      ".editorconfig",
+      ".github/pull_request_template.md"
+    ],
+    "source_set_hash": "7889efdb5c018641e90fecd7e5c12b4bb40404b008e895b5942a8e969f68442f",
+    "archive_sha256": "37084c0613ee62816c9117e4baa501be9034304469809865607a6ecc193a9671",
+    "ignored_runtime_not_staged": true,
+    "staged_whitespace_check": {
+      "status": "WARNING",
+      "nonfunctional_blank_eof_lines": [
+        "src/worker/repair/context.ts",
+        "src/worker/repair/targets.ts"
+      ]
+    }
   }
 }

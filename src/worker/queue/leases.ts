@@ -81,7 +81,8 @@ export async function heartbeatStage(pool: pg.Pool, lease: StageLease): Promise<
     WHERE id=$1 AND tenant_id=$2 AND fencing_token=$3 AND lease_owner=$4 AND state='RUNNING'
     AND lease_expires_at>now() AND deadline_at>now() RETURNING id`, [lease.id, lease.tenant_id, lease.fencing_token, lease.lease_owner, LEASE_SECONDS])).rowCount === 1;
 }
-export async function completeStage<T>(pool: pg.Pool, lease: StageLease, mutation: (db: pg.PoolClient) => Promise<T>): Promise<T> {
+export async function completeStage<T>(pool: pg.Pool, lease: StageLease, mutation: (db: pg.PoolClient) => Promise<T>,
+  afterCommit?:(db:pg.PoolClient,lease:StageLease)=>Promise<void>): Promise<T> {
   return transaction(pool, async db => {
     await assertLease(db, lease); const result = await mutation(db);
     const completed = await db.query(`UPDATE stage_runs SET state='SUCCEEDED',lease_owner=NULL,lease_expires_at=NULL,updated_at=now(),
@@ -89,6 +90,7 @@ export async function completeStage<T>(pool: pg.Pool, lease: StageLease, mutatio
       WHERE id=$1 AND tenant_id=$3 AND fencing_token=$4 AND lease_owner=$5 AND state='RUNNING'
       AND lease_expires_at>clock_timestamp() AND deadline_at>clock_timestamp()`, [lease.id, iso(), lease.tenant_id, lease.fencing_token, lease.lease_owner]);
     requireThat(completed.rowCount === 1, 'LEASE_LOST', '提交期间租约已过期，回滚本次阶段结果', 409);
+    await afterCommit?.(db,lease);
     if (lease.job_id) await db.query(`UPDATE render_jobs j SET updated_at=now(),data=j.data||jsonb_build_object(
       'completed_stage_count',(SELECT count(*)::int FROM stage_runs WHERE job_id=j.id AND state='SUCCEEDED'),'updated_at',$2::text) WHERE j.id=$1`, [lease.job_id, iso()]);
     return result;

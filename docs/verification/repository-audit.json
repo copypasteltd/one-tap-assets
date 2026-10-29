@@ -1,15 +1,15 @@
 {
-  "checked_at": "2026-10-29T20:14:22.670871+00:00",
+  "checked_at": "2026-10-29T21:01:47.445951+00:00",
   "status": "PASS_SOURCE_INTEGRITY",
-  "verification_mode": "FOCUSED_DELIVERY",
+  "verification_mode": "FOCUSED_PHOTO_REPAIR_AND_DELIVERY",
   "repository_integrity": "PASS",
   "application_checks": "SEE_EXPLICIT_FOCUSED_RESULTS",
-  "source_set_hash": "655aa4cecdac0cf4a05fd1e9e28e8f44786c9eac2a2fa163bde5e1e0a6cced92",
-  "source_files": 358,
+  "source_set_hash": "7889efdb5c018641e90fecd7e5c12b4bb40404b008e895b5942a8e969f68442f",
+  "source_files": 365,
   "runtime_contract_files": 42,
   "resource_files": 4,
-  "markdown_files": 137,
-  "local_links_verified": 1160,
+  "markdown_files": 138,
+  "local_links_verified": 1169,
   "nonportable_or_template_links_skipped": 0,
   "media_files": 36,
   "frozen_c_files": 25,
@@ -37,5 +37,5 @@
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "note": "Source/contract/resource bytes, local links, retained media, frozen C files and historical evidence checked. Focused checks do not certify complete behavior. Excludes own hash and the later external archive pointer."
+  "note": "Source/contract/resource bytes, src/test continuity, local links, retained media, frozen C files and historical evidence verified; excludes own hash and later archive pointer."
 }

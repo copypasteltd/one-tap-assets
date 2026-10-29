@@ -73,6 +73,7 @@ export class PhotoMediaPipeline {
   }
   protected spec(context: ExecutionContext, phase: MediaPhase, kind: ArtifactSpec['kind'], inspection: ArtifactSpec['inspection'], sourceAssets: string[], sourceArtifacts: string[] = []): ArtifactSpec {
     return { phase, kind, snapshot_hash: context.snapshotHash, plan_hash: context.snapshot.plan_hash,
+      ...(context.repair?.plan_hash?{repair_plan_hash:context.repair.plan_hash}:{}),
       identity_lock_hash: context.snapshot.identity_lock_hash, renderer_version: this.rendererVersion,
       source_asset_ids: [...new Set(sourceAssets)].sort(), source_artifact_ids: [...new Set(sourceArtifacts)].sort(),
       resource_bindings: context.snapshot.resource_versions, inspection };
@@ -96,6 +97,7 @@ export class PhotoMediaPipeline {
       requireThat(sha256(bytes) === artifact.sha256, 'ARTIFACT_HASH_MISMATCH', '私有产物字节与检查点不一致', 503);
       const slot = context.snapshot.outputs.find(s => s.slot_id === artifact.slot_id)!;
       requireThat(artifact.spec.snapshot_hash === context.snapshotHash && artifact.spec.plan_hash === context.snapshot.plan_hash
+        && artifact.spec.repair_plan_hash === (context.repair?.plan_hash??undefined)
         && artifact.spec.identity_lock_hash === context.snapshot.identity_lock_hash && artifact.spec.renderer_version === this.rendererVersion
         && hash(artifact.spec.resource_bindings) === hash(context.snapshot.resource_versions),
         'MEDIA_RECEIPT_MISMATCH', '产物来源不属于冻结合同或执行器版本', 503);
@@ -167,7 +169,7 @@ export class PhotoMediaPipeline {
   async execute(scope: ToolScope, intent: ToolLease, phase: MediaPhase, signal: AbortSignal): Promise<ToolResult & { receipt: MediaReceipt; commit: (db: pg.PoolClient) => Promise<void> }> {
     requireThat(scope.order_id && scope.scope_type === 'ORDER' && scope.scope_id === scope.order_id && scope.role === phase && scope.stage_name === phase,
       'MEDIA_SCOPE_INVALID', '媒体工具只接受本单对应的制作阶段', 409);
-    const context = await executionContext(this.pool, scope.tenant_id, scope.order_id, scope.snapshot_hash);
+    const context = await executionContext(this.pool, scope.tenant_id, scope.order_id, scope.snapshot_hash,scope.stage_run_id);
     await verifyResourceLicenses(this.pool, context.snapshot.resource_versions);
     this.assertRoute(context);
     assertMediaAlive(context, signal);

@@ -27,6 +27,8 @@ import { OptionalPreviewService } from './previews/service.js';
 import {RevisionService} from './revisions/service.js';
 import {REVISION_STAGES} from './revisions/contract.js';
 import {revisionTools} from './tool-gateway/revision-tools.js';
+import {RepairCoordinator} from './repair/coordinator.js';
+import {RepairPlanningService,repairPlanningTools} from './repair/planning.js';
 
 const cfg = config(); const pool = createPool(cfg); const controller = new AbortController();
 const workerId = id('worker');
@@ -41,6 +43,7 @@ try {
   const analysis = new VisionAnalysisService(pool, cfg, storage(cfg));
   const stages: Record<string, StageHandler> = {};
   const events: Record<string, EventHandler> = {};
+  const repairs=new RepairCoordinator(cfg);
   if (cfg.publishingEnabled) {
     const samples = new PublicSamplePreparationService(pool,cfg,storage(cfg));
     stages.PUBLIC_SAMPLE_PREPARE = (lease,signal)=>samples.handle(lease,signal);
@@ -49,6 +52,8 @@ try {
   if (cfg.generationEnabled) { const previews=new OptionalPreviewService(pool,cfg,storage(cfg)); stages.PREVIEW=(lease,signal)=>previews.handle(lease,signal); }
   if (cfg.codex.enabled) { const planning = new ContentPlanningService(pool, cfg); stages.PLAN = (lease, signal) => planning.handle(lease, signal); }
   if (cfg.codex.enabled && cfg.generationEnabled) {
+    const repairPlanning=new RepairPlanningService(pool,cfg);
+    stages.REPAIR_PLAN=(lease,signal)=>repairPlanning.handle(lease,signal);
     const media = new MediaStageService(pool, cfg);
     stages.PRODUCTION = (lease, signal) => media.handle(lease, signal);
     stages.POST = (lease, signal) => media.handle(lease, signal);
@@ -69,7 +74,7 @@ try {
     events.PaymentQueryRequested = event => payments.query(event.tenant_id, event.aggregate_id);
     events.RefundRequested = event => payments.refund(event.tenant_id, event.aggregate_id);
   }
-  const required = ['ANALYZE', 'PLAN', 'PRODUCTION', 'POST', 'QC', 'REVIEW_FACTS', 'REVIEW_STYLE', 'DELIVER', 'PREVIEW', ...REVISION_STAGES, ...SAMPLE_STAGES];
+  const required = ['ANALYZE', 'PLAN', 'REPAIR_PLAN', 'PRODUCTION', 'POST', 'QC', 'REVIEW_FACTS', 'REVIEW_STYLE', 'DELIVER', 'PREVIEW', ...REVISION_STAGES, ...SAMPLE_STAGES];
   const missing = required.filter(name => !stages[name]);
   // An operational recovery worker is useful during development. Production
   // generation must not start while any required product stage is missing.
@@ -81,14 +86,16 @@ try {
       : scope.role === 'REVIEW_FACTS' || scope.role === 'REVIEW_STYLE' ? reviews : mediaTools).persist_stage_result!(scope, args, intent, signal) };
   const samples = sampleTools(pool, cfg, storage(cfg));
   const revisions=revisionTools(pool,cfg,storage(cfg));
+  const repairTools=repairPlanningTools(pool);
   const handlers: Record<string, ToolHandler> = {};
   for (const name of new Set([...Object.keys(orderTools), ...Object.keys(samples)])) handlers[name] = (scope, args, intent, signal) => {
-    const handler = (scope.scope_type==='REVISION'?revisions:scope.scope_type === 'SAMPLE' ? samples : orderTools)[name];
+    const handler = (scope.scope_type==='ORDER'&&scope.stage_name==='REPAIR_PLAN'?repairTools:scope.scope_type==='REVISION'?revisions:scope.scope_type === 'SAMPLE' ? samples : orderTools)[name];
     if (!handler) throw new Error('Tool is unavailable in this scope');
     return handler(scope, args, intent, signal);
   };
   const tools = new ToolConsumer(pool, `${workerId}-tools`, handlers, log, admissionGuard);
   const runtime = new WorkerRuntime({ pool, workerId, stages, events, log,
+    afterStageCommit:(db,lease)=>repairs.afterStageCommit(db,lease),
     scheduleReconciliation: () => payments.scheduleReconciliation(), admissionGuard });
   log({ event: 'worker_ready', worker_id: workerId, skill_cache: skills, stage_handlers: Object.keys(stages),
     event_handlers: Object.keys(events), incomplete_stages: missing, stage_registry_complete: missing.length === 0 });

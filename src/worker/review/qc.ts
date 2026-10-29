@@ -81,7 +81,7 @@ export class QualityControlService {
   async handle(lease: StageLease, signal: AbortSignal): Promise<StageCommit> {
     requireThat(lease.stage_name === 'QC' && lease.scope_type === 'ORDER', 'QC_STAGE_INVALID', '文件验收阶段无效', 500);
     await assertLease(this.pool, lease, false);
-    const context = await executionContext(this.pool, lease.tenant_id, lease.scope_id, lease.input_hash);
+    const context = await executionContext(this.pool, lease.tenant_id, lease.scope_id, lease.input_hash,lease.id);
     const policy=mediaQcPolicy(context);
     await loadProductionFont(this.cfg.projectRoot); await verifyResourceLicenses(this.pool, context.snapshot.resource_versions);
     if (await unsettledOrderCalls(this.pool, context)) throw new PendingExternal(5, 'QC_PAID_CALL_UNRESOLVED');
@@ -90,6 +90,14 @@ export class QualityControlService {
     const identities = await Promise.all([productionIdentity(this.pool, context, production.operation), productionIdentity(this.pool, context, post.operation)]);
     requireThat(['run_id', 'thread_id', 'process_ref'].every(key => new Set(identities.map(i => i[key as keyof ProductionIdentity])).size === 2),
       'REVIEW_PROVENANCE_REUSED', '制作与后期缺少不同的运行身份', 503);
+    if(context.repair){
+      const source=(await this.pool.query<{data:DTO<'ReviewPacket'>}>(
+        "SELECT data FROM review_packets WHERE tenant_id=$1 AND id=$2 AND state='FAILED'",
+        [context.tenantId,context.repair.source_packet_id])).rows[0]?.data;
+      requireThat(source?.packet_hash===context.repair.source_packet_hash&&post.receipt.artifacts.some(a=>
+        context.repair!.target_slot_ids.includes(a.slot_id)&&source.outputs.some(o=>o.slot_id===a.slot_id&&o.sha256!==a.sha256)),
+        'REPAIR_CANDIDATE_UNCHANGED','修复必须生成至少一份问题素材实际字节已改变的新候选',422);
+    }
     const packetId = `review_${hash({ stage: lease.id, production: production.operation.manifest_hash, post: post.operation.manifest_hash, policy }).slice(0, 40)}`;
     const directory = inside(this.cfg.runtimeRoot, `review-work/${packetId}/${id('attempt')}`); await mkdir(directory, { recursive: true });
     try {
@@ -137,6 +145,9 @@ export class QualityControlService {
         {audio_contract_hash:audio.audio_contract_hash,asr_submission_id:audio.asr_submission_id},null,item.mime_type);
       await save('CONTRACT', Buffer.from(JSON.stringify({ version: policy, snapshot: context.snapshot, profile: context.contract.profile,
         creative_plan: context.contract.creative, resources: context.snapshot.resource_versions, sampling_policy: FRAME_SAMPLING_POLICY,
+        ...(context.repair?{repair_binding:{authorization_id:context.repair.authorization_id,source_packet_id:context.repair.source_packet_id,
+          source_packet_hash:context.repair.source_packet_hash,planning_stage_id:context.repair.planning_stage_id,
+          plan_hash:context.repair.plan_hash,target_slot_ids:context.repair.target_slot_ids}}:{}),
         ...(context.contract.ai_disclosure_contract?{ai_disclosure_contract:context.contract.ai_disclosure_contract}:{}),
         outputs: post.receipt.artifacts.map(a => ({ artifact_id: a.id, slot_id: a.slot_id, sha256: a.sha256, spec: a.spec })) })), null, { snapshot_hash: context.snapshotHash });
       const outputs = post.receipt.artifacts.map(a => ({ slot_id: a.slot_id, asset_id: a.id, sha256: a.sha256 }));
@@ -152,7 +163,7 @@ export class QualityControlService {
       if(nativeBytes)verifyNativeAudioEvidence(packet,evidence,nativeBytes);
       return async db => {
         await lockMediaOwner(db,context.tenantId,context.ownerId);
-        await executionContext(db, context.tenantId, context.orderId, context.snapshotHash);
+        await executionContext(db, context.tenantId, context.orderId, context.snapshotHash,lease.id);
         await verifyResourceLicenses(db, context.snapshot.resource_versions);
         if(audio){
           await nativeQcResources(db,this.store,context);

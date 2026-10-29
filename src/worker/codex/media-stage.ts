@@ -31,7 +31,7 @@ export class MediaStageService {
     requireThat(lease.scope_type === 'ORDER' && (lease.stage_name === 'PRODUCTION' || lease.stage_name === 'POST'),
       'MEDIA_STAGE_INVALID', '媒体执行阶段无效', 500);
     const phase = lease.stage_name as MediaPhase;
-    const context = await executionContext(this.pool, lease.tenant_id, lease.scope_id, lease.input_hash);
+    const context = await executionContext(this.pool, lease.tenant_id, lease.scope_id, lease.input_hash,lease.id);
     await validatePlanLayout(context.contract.creative,context.contract.source,context.snapshot.preset_id,await loadProductionFont(this.cfg.projectRoot),context.contract.ai_disclosure_contract);
     const native=context.snapshot.audio_policy.speech_mode==='NATIVE_ZH';
     if(context.snapshot.engine!=='PHOTO_LAYOUT')validateGenerationExecution(context.contract,native);
@@ -74,7 +74,7 @@ export class MediaStageService {
     const checked = await validateMediaStageResult(this.pool, context, lease.id, completed.runId, phase, completed.result);
     requireThat(hash(checked.result) === completed.resultHash, 'CODEX_RESULT_NOT_PERSISTED', '媒体角色结果摘要不一致', 503);
     return async db => {
-      const current = await executionContext(db, lease.tenant_id, lease.scope_id, lease.input_hash);
+      const current = await executionContext(db, lease.tenant_id, lease.scope_id, lease.input_hash,lease.id);
       await validateMediaStageResult(db, current, lease.id, completed.runId, phase, checked.result);
       const run = (await db.query<{ state: string; output_hash: string }>('SELECT state,output_hash FROM agent_runs WHERE tenant_id=$1 AND id=$2', [lease.tenant_id, completed.runId])).rows[0];
       requireThat(run?.state === 'SUCCEEDED' && run.output_hash === completed.resultHash, 'CODEX_RESULT_NOT_PERSISTED', '媒体阶段缺少已完成角色的持久结果', 503);

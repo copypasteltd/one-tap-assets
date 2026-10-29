@@ -1,17 +1,19 @@
+当前来源：[原图新候选修复](repair-candidate-source.json)，2项定向原生集成通过；类型/服务端、doctor及四服务启动PASS。第一轮就绪失败与初期夹具失败留存，生成式/原生口播修复和真实服务未准入。当前只重建服务端，其他产物NOT_RUN；全面测试未执行。Current focused evidence replaces no historical full-suite failures.
+
 # 当前快速交付证据 / Current focused delivery evidence
 
-按用户最新要求，本轮不运行全面测试、不等待全部绿灯。当前绑定：358 source files / 42 contracts / 4 resources; 655aa4ce。原完整检查器保持源码，未在本轮执行；`SOURCE_DELIVERY`表示源码候选打包状态，不代表完整产品或商用验收。
+按用户最新要求，本轮不运行全面测试、不等待全部绿灯。当前绑定：365 source files / 42 contracts / 4 resources; 7889efdb。原完整检查器保持源码，未在本轮执行；`SOURCE_DELIVERY`表示源码候选打包状态，不代表完整产品或商用验收。
 
 The full suite and original publication checker were deliberately not run. Focused packaging records actual statuses, preserves failures and never promotes historical passes to current acceptance.
 
 | 编号 / No. | 检查 / Check | 实际结果 / Actual |
 | --- | --- | --- |
-| 01 | `typecheck` | TIMEOUT |
+| 01 | `typecheck` | PASS |
 | 02 | `build:server` | PASS |
-| 03 | Preview build | TIMEOUT |
-| 04 | `build:alipay` | TIMEOUT |
-| 05 | `build:douyin` | TIMEOUT |
-| 06 | Focused smoke | TIMEOUT |
+| 03 | Preview build | NOT_RUN |
+| 04 | `build:alipay` | NOT_RUN |
+| 05 | `build:douyin` | NOT_RUN |
+| 06 | Focused repair cases | 2 PASS / 0 FAIL |
 
 环境/启动：doctor FAIL，backend FAIL，preview FAIL。见[来源](delivery-focused-source.json)、[构建记录](../delivery/current.json)、[当前发布状态](publication.json)、[文件与媒体核验](repository-audit.json)和[交付指南](../delivery/README.md)。完整日志、数据库和私有配置留在忽略目录。既有媒体36项、C冻结25文件及原归档保留；本轮未打开浏览器。
 

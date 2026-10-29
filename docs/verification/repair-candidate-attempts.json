@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "scope": "FOCUSED_PHOTO_REPAIR_ONLY",
+  "earlier_attempts": [
+    {
+      "result": "FAIL",
+      "stage": "UNRESOLVED_IN_INITIAL_OUTPUT",
+      "error_code": "CODEX_TURN_FAILED",
+      "synthetic_sold_repair_ceiling_micro": 100,
+      "full_report_retained": false,
+      "source_binding": "NOT_CAPTURED"
+    },
+    {
+      "result": "FAIL",
+      "stage": "REVIEW_FACTS_ATTEMPT_2",
+      "error_code": "CODEX_TURN_FAILED",
+      "synthetic_sold_repair_ceiling_micro": 25000,
+      "full_report_retained": false,
+      "source_binding": "NOT_CAPTURED"
+    }
+  ],
+  "diagnosis": "Synthetic contract limits were configured before creating the final fixture. Earlier generic role errors do not independently establish an exact billing or token cause. No production limit was changed.",
+  "final_report": "docs/verification/repair-candidate-tests.json",
+  "final_report_sha256": "d1dd2a4357607025577f56e686f0c224389d1984ef4d62a93ab0f20f83c31b0f",
+  "full_suite_executed": false,
+  "full_product_verified": false
+}

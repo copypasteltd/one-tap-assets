@@ -24,12 +24,12 @@ export async function reserveStageCost(db: Db, lease: StageLease, intentKey: str
   requireThat(stage, 'COST_STAGE_INVALID', '费用租约与数据库中的原订单、任务、快照或阶段不一致', 409);
   const scope = { tenantId: lease.tenant_id, orderId: lease.scope_id };
   if (stage.attempt === 1) return reserve(db, scope, intentKey, amountMicro, rateSnapshot);
-  requireThat(stage.attempt === 2 && (cost.kind === 'INFERENCE' && ['PRODUCTION','POST','REVIEW_FACTS','REVIEW_STYLE'].includes(stage.stage_name)
+  requireThat(stage.attempt === 2 && (cost.kind === 'INFERENCE' && ['REPAIR_PLAN','PRODUCTION','POST','REVIEW_FACTS','REVIEW_STYLE'].includes(stage.stage_name)
     || ['IMAGE','VIDEO'].includes(cost.kind) && stage.stage_name === 'PRODUCTION'
     || cost.kind === 'ASR' && stage.stage_name === 'POST' || cost.kind === 'LISTENING' && stage.stage_name === 'REVIEW_FACTS'),
   'REPAIR_COST_STAGE_INVALID', '该修复阶段无权创建此类付费调用', 409);
   const authorization = (await db.query<{ id: string; generation_nodes: RepairGenerationNode[] }>(`SELECT a.id,a.generation_nodes
-    FROM repair_cost_authorizations a JOIN stage_runs s ON s.tenant_id=a.tenant_id AND s.job_id=a.job_id AND s.id=ANY(a.stage_ids)
+    FROM repair_cost_authorizations a JOIN stage_runs s ON s.tenant_id=a.tenant_id AND s.job_id=a.job_id AND s.id=ANY(a.stage_ids||a.preparation_stage_ids)
     JOIN render_jobs j ON j.tenant_id=a.tenant_id AND j.id=a.job_id
     WHERE a.tenant_id=$1 AND a.order_id=$2 AND s.id=$3 AND s.scope_type='ORDER' AND s.scope_id=a.order_id
       AND s.input_hash=a.snapshot_hash AND s.deadline_at=a.deadline_at AND j.repair_rounds=1`,

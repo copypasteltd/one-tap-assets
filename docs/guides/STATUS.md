@@ -1,6 +1,8 @@
 # 当前交付与功能状态 / Delivery and functional status
 
-2026-10-30：按用户要求加速主要功能收口，采用有界构建、核心冒烟和交付包核验，不等待全面测试绿灯。58项需求/52项P0、三路线、10风格/最少14变体和C设计继续保留。当前为源码与实际成功构建候选交付，完整自动修复、真实服务、真机及云端仍有缺口。
+2026-10-30新增[原图候选修复与重新验收](../实施/原图候选修复与重新验收-v1.0.md)：失败证据定位、CONTENT受限改稿、实际新文件、新封存包、双新复核及交付已接通，2项定向原生集成用例通过。原订单预算/截止/调用上限保持冻结；生成式及原生口播修复、真实服务和真机仍待完成。
+
+2026-10-30：按用户要求加速主要功能收口，采用有界构建、核心冒烟和交付包核验，不等待全面测试绿灯。58项需求/52项P0、三路线、10风格/最少14变体和C设计继续保留。当前为源码与实际成功构建候选交付，生成式/原生口播修复、真实服务、真机及云端仍有缺口。
 
 The user requested focused delivery without a full green suite. Functional scope and the frozen design remain; this source/build candidate does not certify the complete product or production.
 
@@ -14,25 +16,18 @@ The user requested focused delivery without a full green suite. Functional scope
 | 04 | 独立构建和逐项日志 / Isolated builds and exact logs | `delivery:build --smoke`, bounded per command |
 | 05 | 源码、文档、媒体及成功产物ZIP / Source and available outputs | `delivery:package`, per-file SHA-256 |
 
-当前绑定 / Current binding: 358 source files / 42 contracts / 4 resources; 655aa4ce。
+当前绑定 / Current binding: 365 source files / 42 contracts / 4 resources; 7889efdb。
 
 | 编号 / No. | 检查 / Check | 实际结果 / Actual |
 | --- | --- | --- |
-| 01 | `typecheck` | TIMEOUT |
-| 02 | `build:server` | PASS |
-| 03 | Preview build | TIMEOUT |
-| 04 | `build:alipay` | TIMEOUT |
-| 05 | `build:douyin` | TIMEOUT |
-| 06 | Focused smoke | TIMEOUT |
+| 01 | 类型与服务端 / Typecheck and server | PASS / PASS |
+| 02 | 新候选修复与原费用授权 / Two focused integration files | 2 PASS / 0 FAIL |
+| 03 | 环境自检 / Doctor | PASS |
+| 04 | 四服务启动及停止 / Grouped startup and owned shutdown | PASS; initial readiness failure retained |
+| 05 | 预览、支付宝、抖音构建 / Replay and mini-program builds | NOT_RUN |
+| 06 | 全面测试、真机与真实服务 / Comprehensive/device/live service | NOT_RUN / NOT_ADMITTED |
 
-| 编号 / No. | 启动自检 / Startup | 实际结果 / Actual |
-| --- | --- | --- |
-| 01 | doctor | FAIL |
-| 02 | backend | FAIL |
-| 03 | preview | FAIL |
-| 04 | static-server-fixture | PASS |
-
-只有本轮成功目标纳入构建交付目录，超时/失败目标保留源码及重建命令；不使用旧产物补位。完整测试及原发布检查本轮未执行，历史失败仍见[原费用来源](../verification/repair-cost-native-source.json)。本轮没有修改页面，不重录既有媒体，36份原媒体及C定型稿按原摘要核对。
+只有本轮成功目标纳入构建交付目录，超时/失败目标保留源码及重建命令；不使用旧产物补位。完整测试及原发布检查本轮未执行，历史失败仍见[原费用来源](../verification/repair-cost-native-source.json)。本轮新增修复进度文字，未重录既有媒体，36份原媒体及C定型稿按原摘要核对。
 
 Only successful current builds enter the package; failed/timed-out targets retain source and rebuild instructions. The original full checker was not run this round. Historical failures remain unchanged, and the existing demonstration media is retained with its original synthetic-data scope.
 
@@ -55,11 +50,11 @@ Only successful current builds enter the package; failed/timed-out targets retai
 | 11 | 声音合同与费用 / Audio contract and costs | 23项专项，人物/声音/许可/预算/一次整轨ASR/撤权退款；内部制作/ASR/POST/QC/听音/最终双复核/事务交付已消费，公开有声订单和真实服务仍关闭 / Private pipeline connected; public and real-provider admission closed |
 | 12 | 有声制作与后期 / Native production and POST | 当前23项订单专项含原12项文件链路、6项听音基础和5项最终复核；两路线完整原声/ALAC、一次ASR、字幕/许可配乐、原清单恢复与事务撤权核验 / Actual private pipeline; synthetic model, usage and authorization responses |
 | 13 | 最终声音双复核与交付 / Final native-audio review and publication | 同一原听音完整输入/推理/工具/不可变报告绑定，有声事务交付/下载与释放关联；新增5项控制回归包含于上述23项，正向中文语义刻意构造 / Private integration with fabricated semantic controls, no real-listening or production certification |
-| 14 | 自动修复 / Automatic repair | F09/F46/F55完整新候选→新包→双新复核链路未接通；字段/租约恢复不是修复功能 / Complete new-candidate/reseal/fresh-review chain remains unimplemented |
+| 14 | 自动修复 / Automatic repair | 原图已有定位→受限改稿→新文件→新包→双新复核→交付；生成式/原生口播仍待完成 / Photo chain connected; generated/audio repair incomplete |
 | 15 | Worker内部故障与日志 / Private worker diagnostics | 固定分类/允许原生码/执行位置、公开错误不变，隔离同步/异步日志故障；尽力输出，生产日志链路未验 / Fixed private fields and non-authoritative sinks; durable production logging unverified |
 | 16 | MCP原任务查询 / Original MCP observations | 已确认编号的暂时性读故障有界恢复，第三次连续失败停止；原20秒HTTP/角色截止、授权/限流/TLS保留，输入关闭只停本桥I/O / Bounded original reads and owned shutdown; not complete media repair |
 
-首轮费用保护与内部修复费用授权已实现；首轮不能占用修复保留额，只有原失败证据及新阶段绑定通过后，内部费用端口才允许使用修复域。完整自动修复仍未接通。First-pass holds and internal repair cost admission are implemented; the complete repair workflow in row 14 remains unfinished.
+首轮费用保护与内部修复费用授权已实现；首轮不能占用修复保留额，只有原失败证据及新阶段绑定通过后，内部费用端口才允许使用修复域。原图候选修复已接通，生成式/原生口播仍待完成。Photo repair uses these original limits; generated/audio repair is unfinished.
 
 ## 待完成优先顺序 / Remaining priorities
 
@@ -78,7 +73,7 @@ Only successful current builds enter the package; failed/timed-out targets retai
 
 全部58项需求持续保留，不能以局部通过缩成仅原图MVP。所有官方方案维持`sale_enabled=false`；完整准入前不启售。Keep all 58 requirements; partial coverage does not reduce the scope to a photo-only MVP. All official variants remain unavailable for sale.
 
-本轮费用组件：原失败报告重验、唯一核算授权、六新阶段绑定及四个付费入口；完整自动修复仍未接通。See [implementation and limits](../实施/修复费用授权与原订单额度-v1.0.md).
+当前原图修复：两份原失败意见、唯一核算授权、CONTENT准备加六新阶段和新文件/双新复核；生成式/原生口播仍待完成。See [implementation and limits](../实施/修复费用授权与原订单额度-v1.0.md).
 
 ## 更新与交付 / Updates
 

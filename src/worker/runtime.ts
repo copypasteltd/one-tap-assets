@@ -19,6 +19,7 @@ interface RuntimeOptions {
   scheduleReconciliation?: () => Promise<void>;
   admissionGuard?: () => Promise<void>;
   heartbeatMs?: number;
+  afterStageCommit?:(db:pg.PoolClient,lease:StageLease)=>Promise<void>;
 }
 export class WorkerRuntime {
   private options: RuntimeOptions; private lastMaintenance = -Infinity;
@@ -99,7 +100,7 @@ export class WorkerRuntime {
       const commit = await this.withHeartbeat(() => heartbeatStage(this.options.pool, lease), signal, s => handler(lease, s));
       if (signal.aborted) throw new AppError('WORKER_INTERRUPTED', '执行已停止，将从持久检查点恢复', 409);
       phase = 'COMMIT';
-      await completeStage(this.options.pool, lease, commit);
+      await completeStage(this.options.pool, lease, commit,this.options.afterStageCommit);
       this.emit({ event: 'stage_succeeded', resource_id: lease.id });
     } catch (error) {
       const code = errorCode(error);

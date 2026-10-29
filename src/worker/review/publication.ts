@@ -62,7 +62,7 @@ export class PublicationService {
   }
   async handle(lease: StageLease, signal: AbortSignal): Promise<StageCommit> {
     requireThat(lease.scope_type === 'ORDER' && lease.stage_name === 'DELIVER', 'PUBLICATION_STAGE_INVALID', '交付阶段无效', 500);
-    const context = await executionContext(this.pool, lease.tenant_id, lease.scope_id, lease.input_hash);
+    const context = await executionContext(this.pool, lease.tenant_id, lease.scope_id, lease.input_hash,lease.id);
     const {packet,nativeListening} = await this.ready(this.pool, context); const post = await operationArtifacts(this.pool, context, 'POST');
     const directory = join(this.cfg.runtimeRoot, 'publication-work', id('attempt')); await mkdir(directory, { recursive: true });
     try {
@@ -83,7 +83,7 @@ export class PublicationService {
         text: copy ? new TextDecoder('utf-8', { fatal: true }).decode(copies.get(artifact.id)!) : null, sha256: artifact.sha256 }, true);
     });
     return async db => {
-      const current = await executionContext(db, lease.tenant_id, lease.scope_id, lease.input_hash);
+      const current = await executionContext(db, lease.tenant_id, lease.scope_id, lease.input_hash,lease.id);
       const {packet:latest,nativeListening:currentListening} = await this.ready(db, current, true);
       requireThat(hash(currentListening)===hash(nativeListening),'REVIEW_LISTENING_INPUT_INVALID','发布时原听音审批已变化',409);
       requireThat(latest.packet_hash === packet.packet_hash, 'REVIEW_PACKET_STALE', '发布时封存材料已经变化', 409);

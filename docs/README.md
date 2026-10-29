@@ -1,18 +1,20 @@
 # 文档目录 / Documentation index
 
+2026-10-30新增[原图候选修复与重新验收](实施/原图候选修复与重新验收-v1.0.md)：失败证据定位、CONTENT受限改稿、实际新文件、新封存包、双新复核及交付已接通，2项定向原生集成用例通过。原订单预算/截止/调用上限保持冻结；生成式及原生口播修复、真实服务和真机仍待完成。
+
 当前快速交付：[源码交付与启动](delivery/README.md)，包含一键初始化、环境检查、四服务启停、独立构建及ZIP打包；本轮按用户要求不运行全面测试。Current: focused source delivery, native startup and packaging without a full-suite requirement.
 
-最新费用基础：[修复费用授权与原订单额度](实施/修复费用授权与原订单额度-v1.0.md)。失败独立报告重验、唯一授权、六个新阶段绑定与四个付费入口已有源码；自动问题定位、实际新候选和双新复核仍待接通。Latest: internal repair cost admission, without a complete automatic repair pipeline.
+最新费用基础：[修复费用授权与原订单额度](实施/修复费用授权与原订单额度-v1.0.md)。失败独立报告重验、唯一授权、六个新阶段绑定与四个付费入口已有源码；原图候选修复现已接通，生成式与原生口播仍待完成。Photo repair is connected; generated/native-audio repair remains incomplete.
 
 最新工具恢复：[MCP原工具查询恢复与桥接回收](实施/MCP原工具查询恢复与桥接回收-v1.0.md)。暂时性读故障只查原编号，保留原时限/授权/限流与未知创建规则，输入关闭取消桥自身I/O。Latest: bounded original-intent observations and owned bridge shutdown, without confirmed historical ASR causation.
 
-最新实现：[首轮制作费用隔离与原费用回执](实施/首轮制作费用隔离与原费用回执-v1.0.md)。原总预算内同时保护修复与售后额度，UNKNOWN和原费用归属/费率不可重置；完整自动修复仍待接通。Latest: protected repair/aftercare holds and original accounting, distinct from the unfinished repair workflow.
+最新实现：[首轮制作费用隔离与原费用回执](实施/首轮制作费用隔离与原费用回执-v1.0.md)。原总预算内同时保护修复与售后额度，UNKNOWN和原费用归属/费率不可重置；生成式及原生口播修复仍待完成。Latest: protected repair/aftercare holds and original accounting, distinct from the unfinished repair workflow.
 
 当前Worker约束：[脱敏故障诊断与日志隔离](实施/Worker脱敏故障诊断与日志隔离-v1.0.md)。固定内部分类与执行位置、原公开错误码及日志非权威边界；完整结果另见验证索引。Latest worker behavior: fixed private failure categories and non-authoritative logging, with actual verification reported separately.
 
 当前工具队列约束：[工具队列原子领取与并发租约](实施/工具队列原子领取与并发租约-v1.0.md)。单语句领取与真实数据库并发/锁定/到期回归，保留原恢复和授权门禁；完整结果见实现与验证索引。Latest tool queue: atomic claims with native concurrency/lock/expiry controls, preserving existing authority and recovery rules.
 
-当前文字制作约束：[完整展示文字与购买前排版校验](实施/完整展示文字与购买前排版校验-v1.0.md)。实际字形测宽/完整换行、intent断言、购买前预检和原版本恢复门禁已有源码；完整自动修复仍待实现。Latest: lossless measured layout and pre-purchase text gates, distinct from incomplete automatic repair.
+当前文字制作约束：[完整展示文字与购买前排版校验](实施/完整展示文字与购买前排版校验-v1.0.md)。实际字形测宽/完整换行、intent断言、购买前预检和原版本恢复门禁已有源码；生成式及原生口播修复仍待实现。Latest: lossless measured layout and pre-purchase text gates, distinct from incomplete automatic repair.
 
 最新文件制作约束：[AI可见标识与逐帧验收](实施/AI可见标识与逐帧文件验收-v1.0.md)，[实际标识媒体](media/ai-disclosure/README.md)。官方multi解释为连续多镜；完整功能与生产仍在实施中。
 

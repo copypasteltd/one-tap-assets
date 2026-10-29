@@ -33,3 +33,4 @@ row('catalog','PASS',`${presets.presets.length} official presets; ${presets.pres
 const report={checked_at:new Date().toISOString(),scope:'LOCAL_SETUP_NOT_PRODUCTION_ADMISSION',rows,full_product_verified:false,production_admitted:false};
 await json('runtime/delivery/doctor.json',report);console.log(JSON.stringify(report,null,2));
 if(rows.some(r=>r.status==='MISSING'))process.exitCode=1;
+import './local-env.js';
