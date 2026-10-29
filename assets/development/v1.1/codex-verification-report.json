@@ -1,7 +1,7 @@
 {
   "baseline_id": "YPCC-DEV-1.1.0",
   "requirements_version": "3.1",
-  "checked_at": "2026-10-29T13:16:24.285911+00:00",
+  "checked_at": "2026-10-29T14:58:51.057607+00:00",
   "status": "PASS",
   "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
   "counts": {
@@ -10,9 +10,9 @@
     "skills": 19,
     "skill_bundles": 14,
     "development_documents": 20,
-    "base_contract_checks": 3312,
-    "codex_checks": 1441,
-    "total_checks": 4753,
+    "base_contract_checks": 3314,
+    "codex_checks": 1451,
+    "total_checks": 4765,
     "codex_synthetic_examples": 39
   },
   "product_tests_executed": false,
@@ -2464,6 +2464,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/README.md->实施/Worker脱敏故障诊断与日志隔离-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/README.md->实施/工具队列原子领取与并发租约-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3059,6 +3064,16 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/RECOVERY.md->../实施/Worker脱敏故障诊断与日志隔离-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/RECOVERY.md->../实施/Worker脱敏故障诊断与日志隔离-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/guides/RECOVERY.md->QUICKSTART.md",
       "status": "PASS",
       "detail": ""
@@ -3104,6 +3119,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/STATUS.md->../实施/Worker脱敏故障诊断与日志隔离-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/guides/STATUS.md->../实施/工具队列原子领取与并发租约-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3139,12 +3159,12 @@
       "detail": ""
     },
     {
-      "name": "document_link:docs/guides/STATUS.md->../verification/README.md",
+      "name": "document_link:docs/guides/STATUS.md->../verification/worker-failure-native-source.json",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "document_link:docs/guides/STATUS.md->../verification/README.md",
+      "name": "document_link:docs/guides/STATUS.md->../verification/worker-failure-native-source.json",
       "status": "PASS",
       "detail": ""
     },
@@ -3164,12 +3184,12 @@
       "detail": ""
     },
     {
-      "name": "document_link:docs/verification/README.md->tool-queue-native-source.json",
+      "name": "document_link:docs/verification/README.md->worker-failure-native-source.json",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "document_link:docs/verification/README.md->tool-queue-native-source.json",
+      "name": "document_link:docs/verification/README.md->worker-failure-native-source.json",
       "status": "PASS",
       "detail": ""
     },
@@ -3189,12 +3209,12 @@
       "detail": ""
     },
     {
-      "name": "document_link:docs/verification/README.md->tool-queue-native-source.json",
+      "name": "document_link:docs/verification/README.md->../实施/Worker脱敏故障诊断与日志隔离-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "document_link:docs/verification/README.md->../实施/工具队列原子领取与并发租约-v1.0.md",
+      "name": "document_link:docs/verification/README.md->../实施/Worker脱敏故障诊断与日志隔离-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -3325,6 +3345,21 @@
     },
     {
       "name": "document_link:docs/实施/Worker与视觉适配器接入-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/Worker脱敏故障诊断与日志隔离-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/Worker脱敏故障诊断与日志隔离-v1.0.md->../verification/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/Worker脱敏故障诊断与日志隔离-v1.0.md->../verification/README.md",
       "status": "PASS",
       "detail": ""
     },
@@ -4129,6 +4164,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->Worker脱敏故障诊断与日志隔离-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/实施/源码实现进度-v3.1.md->工具队列原子领取与并发租约-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -4139,7 +4179,7 @@
       "detail": ""
     },
     {
-      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../verification/README.md",
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../verification/worker-failure-native-source.json",
       "status": "PASS",
       "detail": ""
     },
@@ -6850,6 +6890,16 @@
     },
     {
       "name": "document_link:README.md->docs/实施/完整展示文字与购买前排版校验-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/实施/Worker脱敏故障诊断与日志隔离-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/verification/README.md",
       "status": "PASS",
       "detail": ""
     },

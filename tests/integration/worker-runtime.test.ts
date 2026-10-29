@@ -64,6 +64,19 @@ describe('durable worker execution and expiry', () => {
     } }, events: {} });
     await runtime.processStage(signal()); expect(observedAbort).toBe(true); expect(committed).toBe(false);
   });
+  it('commits a successful stage once even when its success log sink throws', async () => {
+    const { principal: p } = await account(db);
+    const stageId = await enqueueStage(db.pool, { tenantId: p.tenantId, scopeType: 'PLAN', scopeId: id('plan'),
+      name: 'LOG_FAILURE_TEST', inputHash: 'e'.repeat(64), deadlineAt: addSeconds(90) });
+    let commits = 0;
+    const runtime = new WorkerRuntime({ pool: db.pool, workerId: 'worker-log-failure', events: {},
+      stages: { LOG_FAILURE_TEST: async () => async () => { commits++; } },
+      log: () => { throw new Error('synthetic diagnostic sink unavailable'); } });
+    await expect(runtime.processStage(signal())).resolves.toBe(true);
+    expect(commits).toBe(1); expect(await runtime.processStage(signal())).toBe(false);
+    expect((await db.pool.query('SELECT state,data FROM stage_runs WHERE id=$1', [stageId])).rows[0])
+      .toMatchObject({ state: 'SUCCEEDED' });
+  });
   it('ends an expired unpaid window without fabricating a payment failure or a refund', async () => {
     const { principal: p, orderId } = await orderFixture(db);
     await db.pool.query(`UPDATE orders SET payment_state='PENDING',fulfillment_state='NOT_STARTED',deadline_at=NULL,payable_until=now()-interval '1 second',

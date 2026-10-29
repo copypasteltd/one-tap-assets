@@ -26,6 +26,18 @@ A refund request is distinct from a completed financial refund. A release event 
 
 ## 2. 本地运行与观察 / Native operation and observation
 
+新增[Worker脱敏故障诊断与日志隔离](../实施/Worker脱敏故障诊断与日志隔离-v1.0.md)。平台内部可按受控任务ID、`failure_phase`、固定分类及允许原生码定位问题；客户端保持原错误码。日志回调的同步/异步故障不能改变事务。日志是尽力输出，缺失日志不证明成功，也不提供重购权限；仍须核对原租约、原回执和原费用。
+
+The [private diagnostic contract](../实施/Worker脱敏故障诊断与日志隔离-v1.0.md) correlates an internal task ID, phase, fixed category and allowlisted native code. Client errors keep their existing contract. Sync/async sink failures cannot change transactions. Best-effort logs are not proof of success or permission to repurchase; reconcile the original lease, receipts and costs.
+
+本地数据库启动调用到时后，原生PostgreSQL可能仍在执行自身恢复。本轮曾出现启动包装器60秒到时、原实例随后恢复就绪的实际记录。先确认本项目数据目录及原实例，再查询就绪；不要因包装器返回就重复初始化数据库或启动第二个实例。就绪探测不运行迁移、不读取凭证：
+
+A startup wrapper can time out while the original native PostgreSQL instance is still recovering, as observed in this round. Confirm the project data directory and original instance before checking readiness. Do not reinitialize the database or start a second instance based solely on the wrapper exit. This probe does not migrate data or read credentials:
+
+```powershell
+.\runtime\tools\pgsql\bin\pg_isready.exe -h 127.0.0.1 -p 55432 -t 3
+```
+
 完成[快速启动](QUICKSTART.md)后，在项目根目录的独立PowerShell终端按需要运行：
 
 After following the [English quick start](QUICKSTART.en.md), use separate PowerShell terminals at the checkout root:

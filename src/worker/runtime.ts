@@ -9,7 +9,8 @@ import { claimEvent, heartbeatEvent, finishEvent, type OutboxLease } from './que
 export type StageCommit = (db: pg.PoolClient) => Promise<void>;
 export type StageHandler = (lease: StageLease, signal: AbortSignal) => Promise<StageCommit>;
 export type EventHandler = (event: OutboxLease, signal: AbortSignal) => Promise<void>;
-export type WorkerLog = (event: { event: string; code?: string; resource_id?: string }) => void;
+import { emitWorkerLog, failureMetadata, type WorkerLog, type WorkerFailurePhase } from './observability.js';
+export type { WorkerLog } from './observability.js';
 export const errorCode = (error: unknown): string => error instanceof AppError && /^[A-Z][A-Z0-9_]{1,79}$/.test(error.code) ? error.code : 'WORKER_INTERNAL_ERROR';
 
 interface RuntimeOptions {
@@ -28,7 +29,7 @@ export class WorkerRuntime {
     if (options.heartbeatMs !== undefined && (options.heartbeatMs < 10 || options.heartbeatMs > 15000)) throw new Error('Invalid heartbeat interval');
     this.options = options;
   }
-  private emit(event: Parameters<WorkerLog>[0]): void { this.options.log?.(event); }
+  private emit(event: Parameters<WorkerLog>[0]): void { emitWorkerLog(this.options.log, event); }
   private async withHeartbeat<T>(pulse: () => Promise<boolean>, signal: AbortSignal, action: (signal: AbortSignal) => Promise<T>): Promise<T> {
     const controller = new AbortController(); const abort = (): void => controller.abort(signal.reason);
     signal.addEventListener('abort', abort, { once: true }); if (signal.aborted) abort();
@@ -75,8 +76,15 @@ export class WorkerRuntime {
       await this.withHeartbeat(() => heartbeatEvent(this.options.pool, event), signal, s => handler(event, s));
       await finishEvent(this.options.pool, event);
     } catch (error) {
-      const code = errorCode(error); await finishEvent(this.options.pool, event, code);
-      this.emit({ event: 'outbox_deferred', code, resource_id: event.id });
+      const code = errorCode(error);
+      try { await finishEvent(this.options.pool, event, code); }
+      catch (settleError) {
+        this.emit({ event: 'outbox_settlement_deferred', code: errorCode(settleError), resource_id: event.id,
+          failure: failureMetadata(settleError), failure_phase: 'SETTLEMENT' });
+        throw settleError;
+      } finally {
+        this.emit({ event: 'outbox_deferred', code, resource_id: event.id, failure: failureMetadata(error) });
+      }
     }
     return true;
   }
@@ -86,15 +94,17 @@ export class WorkerRuntime {
     const lease = await claimStage(this.options.pool, this.options.workerId, Object.keys(this.options.stages));
     if (!lease) return false;
     const handler = this.options.stages[lease.stage_name]!;
+    let phase: WorkerFailurePhase = 'HANDLER';
     try {
       const commit = await this.withHeartbeat(() => heartbeatStage(this.options.pool, lease), signal, s => handler(lease, s));
       if (signal.aborted) throw new AppError('WORKER_INTERRUPTED', '执行已停止，将从持久检查点恢复', 409);
+      phase = 'COMMIT';
       await completeStage(this.options.pool, lease, commit);
       this.emit({ event: 'stage_succeeded', resource_id: lease.id });
     } catch (error) {
       const code = errorCode(error);
       if (signal.aborted || ['LEASE_LOST', 'LEASE_HEARTBEAT_FAILED', 'WORKER_INTERRUPTED', 'ORDER_NO_LONGER_EXECUTABLE'].includes(code)) {
-        this.emit({ event: 'stage_interrupted', code, resource_id: lease.id }); return true;
+        this.emit({ event: 'stage_interrupted', code, resource_id: lease.id, failure: failureMetadata(error), failure_phase: phase }); return true;
       }
       try {
         if (error instanceof PendingExternal) await deferStage(this.options.pool, lease, code, error.delaySeconds);
@@ -102,9 +112,11 @@ export class WorkerRuntime {
       } catch (settleError) {
         // A deadline sweep/takeover can legitimately win this race. The stale
         // handler must not force any terminal state or release unknown costs.
-        this.emit({ event: 'stage_settlement_deferred', code: errorCode(settleError), resource_id: lease.id });
+        this.emit({ event: 'stage_settlement_deferred', code: errorCode(settleError), resource_id: lease.id,
+          failure: failureMetadata(settleError), failure_phase: 'SETTLEMENT' });
       }
-      this.emit({ event: error instanceof PendingExternal ? 'stage_deferred' : 'stage_failed', code, resource_id: lease.id });
+      this.emit({ event: error instanceof PendingExternal ? 'stage_deferred' : 'stage_failed', code, resource_id: lease.id,
+        failure: failureMetadata(error), failure_phase: phase });
     }
     return true;
   }
@@ -115,12 +127,12 @@ export class WorkerRuntime {
     finally { this.ticking = false; }
   }
   async run(signal: AbortSignal): Promise<void> {
-    const maintenanceTimer = setInterval(() => { void this.maintain().catch(error => this.emit({ event: 'maintenance_failed', code: errorCode(error) })); }, 5000);
+    const maintenanceTimer = setInterval(() => { void this.maintain().catch(error => this.emit({ event: 'maintenance_failed', code: errorCode(error), failure: failureMetadata(error) })); }, 5000);
     maintenanceTimer.unref();
     try {
       while (!signal.aborted) {
         try { if (await this.tick(signal)) continue; }
-        catch (error) { this.emit({ event: 'worker_tick_failed', code: errorCode(error) }); }
+        catch (error) { this.emit({ event: 'worker_tick_failed', code: errorCode(error), failure: failureMetadata(error) }); }
         try { await delay(750, undefined, { signal }); } catch { if (!signal.aborted) throw new Error('Worker wait failed'); }
       }
     } finally {

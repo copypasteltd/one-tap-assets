@@ -4,6 +4,7 @@ import { migrate } from '../api/db/migrate.js';
 import { storage } from '../api/storage/storage.js';
 import { id } from '../api/lib/crypto.js';
 import { WorkerRuntime, errorCode, type StageHandler, type EventHandler } from './runtime.js';
+import { failureMetadata } from './observability.js';
 import { PaymentReconciler } from './payments/reconcile.js';
 import { VisionAnalysisService } from './analysis/service.js';
 import { prewarmSkills } from './codex/skills.js';
@@ -94,7 +95,7 @@ try {
   if (process.argv.includes('--once')) { await runtime.tick(controller.signal); await tools.process(controller.signal); }
   else await Promise.all([runtime.run(controller.signal), tools.run(controller.signal)]);
 } catch (error) {
-  log({ event: 'worker_stopped_with_error', code: errorCode(error) }); process.exitCode = 1;
+  log({ event: 'worker_stopped_with_error', code: errorCode(error), failure: failureMetadata(error), failure_phase: 'STARTUP' }); process.exitCode = 1;
 } finally {
   controller.abort();
   await pool.query(`UPDATE worker_heartbeats SET last_seen_at=now(),data=data||'{"state":"STOPPED"}'::jsonb WHERE id=$1`, [workerId]).catch(() => {});

@@ -5,6 +5,7 @@ import { AppError, requireThat } from '../../api/lib/errors.js';
 import { hash } from '../../api/lib/crypto.js';
 import { toolScopeById, checkScopedTool, type ToolScope } from './http.js';
 import { errorCode, type WorkerLog } from '../runtime.js';
+import { emitWorkerLog, failureMetadata, type WorkerFailurePhase } from '../observability.js';
 import { PendingExternal } from '../queue/leases.js';
 
 export interface ToolLease {
@@ -54,13 +55,17 @@ export class ToolConsumer {
         if (!row.rowCount) controller.abort();
       })().catch(() => controller.abort()).finally(() => { heartbeat = null; });
     }, 10000); pulse.unref();
+    let phase: WorkerFailurePhase = 'AUTHORIZE';
     try {
       await this.admissionGuard?.();
       const scope = await this.scope(this.pool, intent);
+      phase = 'HANDLER';
       const output = await this.handlers[intent.tool_name]!(scope, intent.data.arguments, intent, controller.signal);
       requireThat(!controller.signal.aborted, 'TOOL_EXECUTION_INTERRUPTED', '工具执行已停止', 409);
+      phase = 'RESULT';
       const encoded = JSON.stringify(output.result);
       requireThat(typeof encoded === 'string' && Buffer.byteLength(encoded) <= 128000, 'TOOL_RESULT_LIMIT', '工具结果超过允许大小', 422);
+      phase = 'COMMIT';
       await transaction(this.pool, async db => {
         await this.scope(db, intent, true);
         const current = await db.query(`SELECT id FROM agent_tool_intents WHERE id=$1 AND fencing_token=$2 AND lease_owner=$3
@@ -73,17 +78,24 @@ export class ToolConsumer {
     } catch (error) {
       const code = errorCode(error); const pending = error instanceof PendingExternal;
       const cancelled = controller.signal.aborted || ['TOOL_CAPABILITY_REVOKED', 'TOOL_SCOPE_ENDED', 'TOOL_BINDING_CHANGED', 'TOOL_EXECUTION_INTERRUPTED'].includes(code);
-      await this.pool.query(`UPDATE agent_tool_intents SET state=$4,lease_owner=NULL,lease_expires_at=NULL,updated_at=now(),
+      try { await this.pool.query(`UPDATE agent_tool_intents SET state=$4,lease_owner=NULL,lease_expires_at=NULL,updated_at=now(),
         available_at=now()+$5::int*interval '1 second',data=data||jsonb_build_object('error_code',$6::text)
         WHERE id=$1 AND fencing_token=$2 AND lease_owner=$3 AND lease_expires_at>now() AND state='RUNNING'`,
       [intent.id, intent.fencing_token, intent.lease_owner, pending ? 'UNKNOWN' : cancelled ? 'CANCELLED' : 'FAILED', pending ? Math.min(60, Math.max(1, error.delaySeconds)) : 1, code]);
-      this.log?.({ event: 'tool_execution_deferred', code, resource_id: intent.id });
+      } catch (settleError) {
+        emitWorkerLog(this.log, { event: 'tool_settlement_deferred', code: errorCode(settleError), resource_id: intent.id,
+          failure: failureMetadata(settleError), failure_phase: 'SETTLEMENT' });
+        throw settleError;
+      } finally {
+        emitWorkerLog(this.log, { event: 'tool_execution_deferred', code, resource_id: intent.id,
+          failure: failureMetadata(error), failure_phase: phase });
+      }
     } finally { clearInterval(pulse); if (heartbeat) await heartbeat; signal.removeEventListener('abort', abort); }
     return true;
   }
   async run(signal: AbortSignal): Promise<void> {
     while (!signal.aborted) {
-      try { if (await this.process(signal)) continue; } catch (error) { this.log?.({ event: 'tool_consumer_failed', code: errorCode(error) }); }
+      try { if (await this.process(signal)) continue; } catch (error) { emitWorkerLog(this.log, { event: 'tool_consumer_failed', code: errorCode(error), failure: failureMetadata(error) }); }
       try { await delay(250, undefined, { signal }); } catch { if (!signal.aborted) throw new Error('Tool queue wait failed'); }
     }
   }

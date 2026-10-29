@@ -33,6 +33,7 @@ import {nativeAudioQc,verifyNativeAudioEvidence,NATIVE_QC_KINDS} from '../../src
 import {ReviewStageService} from '../../src/worker/review/stage.js';
 import {PublicationService} from '../../src/worker/review/publication.js';
 import {ToolConsumer,type ToolHandler} from '../../src/worker/tool-gateway/consumer.js';
+import type {WorkerLogEvent} from '../../src/worker/observability.js';
 import {productionTools} from '../../src/worker/tool-gateway/production-tools.js';
 import {reviewTools} from '../../src/worker/tool-gateway/review-tools.js';
 import type {ToolScope} from '../../src/worker/tool-gateway/http.js';
@@ -108,14 +109,17 @@ async function setup(options:{engine?:'PER_SHOT_AI'|'REFERENCE_FILM';music?:bool
       if(options.crashPostCommit&&postCommits===1)throw new PendingExternal(1,'SYNTHETIC_POST_COMMIT_LOST');
     }};
   };
+  const toolEvents:WorkerLogEvent[]=[];
   active.push({app,controller,task:new ToolConsumer(db.pool,id('native_tools'),{...media,...review,execute_post_plan:post,
     extract_review_evidence:async(...args)=>{const output=await review.extract_review_evidence!(...args);
       if(options.dropListeningProof&&['REVIEW_FACTS','REVIEW_STYLE'].includes(args[0].stage_name)){
         const {native_listening_hash:_,native_listening:__,...result}=output.result as Record<string,unknown>;
         return {...output,result};
       }return output;},
-    persist_stage_result:(scope,...args)=>(scope.role.startsWith('REVIEW_')?review:media).persist_stage_result!(scope,...args)}).run(controller.signal)});
-  return {...f,app,controller,launcher,gateway,speech,generationRequests,providerCalls:()=>providerCalls,asrPosts:()=>asrPosts,postCommits:()=>postCommits,inferences:()=>inferences,
+    persist_stage_result:(scope,...args)=>(scope.role.startsWith('REVIEW_')?review:media).persist_stage_result!(scope,...args)},event=>{
+      toolEvents.push(event);if(toolEvents.length>64)toolEvents.shift();
+    }).run(controller.signal)});
+  return {...f,app,controller,launcher,gateway,speech,toolEvents,generationRequests,providerCalls:()=>providerCalls,asrPosts:()=>asrPosts,postCommits:()=>postCommits,inferences:()=>inferences,
     pipeline:new NativeOrderMediaPipeline(db.pool,f.cfg,f.store,gateway,speech),service:new MediaStageService(db.pool,f.cfg,executor,{gateway,store:f.store})};
 }
 type Fixture=Awaited<ReturnType<typeof setup>>;
@@ -126,7 +130,7 @@ async function stage(f:Fixture,lease:StageLease){
       if(error instanceof Error)await writeFile(inside(db.cfg.runtimeRoot,`test-results/${id('native-order-stage-failure')}.json`),
         JSON.stringify({stage:lease.stage_name,name:error.name,message:error.message,code:(error as Error&{code?:unknown}).code,stack:error.stack}),{flag:'wx'}).catch(()=>undefined);
       const tools=(await db.pool.query("SELECT tool_name,state,data->>'error_code' AS error_code FROM agent_tool_intents WHERE tenant_id=$1 AND stage_run_id=$2 ORDER BY created_at",[f.p.tenantId,lease.id])).rows;
-      if(error instanceof Error)error.message+=`; synthetic native tool states: ${JSON.stringify(tools)}`;throw error;
+      if(error instanceof Error)error.message+=`; synthetic native tool states: ${JSON.stringify(tools)}; safe worker failures: ${JSON.stringify(f.toolEvents)}`;throw error;
     }
       await db.pool.query("UPDATE provider_submissions SET next_query_at=now() WHERE tenant_id=$1 AND order_id=$2 AND generation_kind IN ('IMAGE','VIDEO')",[f.p.tenantId,f.orderId]);}
   }

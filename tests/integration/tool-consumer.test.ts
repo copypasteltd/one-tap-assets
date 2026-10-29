@@ -12,6 +12,7 @@ import { claimStage } from '../../src/worker/queue/leases.js';
 import { basePlan, creativePlanHash } from '../../src/worker/compiler/plan.js';
 import { claimToolIntent, ToolConsumer } from '../../src/worker/tool-gateway/consumer.js';
 import { contentTools } from '../../src/worker/tool-gateway/content-tools.js';
+import type { WorkerLogEvent } from '../../src/worker/observability.js';
 
 let db: TestDatabase; let app: FastifyInstance;
 beforeAll(async () => { db = await testDatabase(); app = await buildApp({ cfg: db.cfg, pool: db.pool, tls: false }); await app.ready(); });
@@ -125,6 +126,44 @@ describe('durable scoped tool execution', () => {
       return { result: { stale: true }, commit: async () => { committed = true; } };
     } }).process(new AbortController().signal);
     expect(committed).toBe(false); expect((await db.pool.query('SELECT state FROM agent_tool_intents WHERE id=$1', [submitted.json().intent_id])).rows[0].state).toBe('CANCELLED');
+    await stop(f.stageId);
+  });
+  it('keeps native database failures private and rolls back failed tool commits', async () => {
+    for (const phase of ['HANDLER', 'COMMIT'] as const) {
+      const f = await fixture(); const secret = `synthetic-private-${id('value')}`;
+      const submitted = await call(f.capability, 'analyze_photos', {}); expect(submitted.statusCode).toBe(202);
+      const logs: WorkerLogEvent[] = [];
+      const consumer = new ToolConsumer(db.pool, id('tools'), { analyze_photos: async () => {
+        if (phase === 'HANDLER') await db.pool.query('SELECT $1::integer', [secret]);
+        return { result: { private_result: secret }, commit: async tx => {
+          await tx.query(`UPDATE agent_runs SET private=private||'{"must_rollback":true}'::jsonb WHERE id=$1`, [f.runId]);
+          await tx.query('SELECT $1::integer', [secret]);
+        } };
+      } }, event => logs.push(event));
+      expect(await consumer.process(new AbortController().signal)).toBe(true);
+      const state = (await db.pool.query('SELECT state,data FROM agent_tool_intents WHERE id=$1', [submitted.json().intent_id])).rows[0];
+      expect(state.state).toBe('FAILED'); expect(state.data.error_code).toBe('WORKER_INTERNAL_ERROR');
+      expect(state.data.result).toBeUndefined();
+      expect((await db.pool.query('SELECT private FROM agent_runs WHERE id=$1', [f.runId])).rows[0].private.must_rollback).toBeUndefined();
+      const status = await app.inject({ method: 'GET', url: `/v1/internal/p01/agent-tools/calls/${submitted.json().intent_id}`,
+        headers: { authorization: `Bearer ${f.capability}` } });
+      expect(status.statusCode).toBe(200);
+      expect(status.json()).toMatchObject({ state: 'FAILED', error_code: 'WORKER_INTERNAL_ERROR', result: null });
+      expect(logs).toContainEqual({ event: 'tool_execution_deferred', code: 'WORKER_INTERNAL_ERROR', resource_id: submitted.json().intent_id,
+        failure: { kind: 'DATABASE', native_code: '22P02' }, failure_phase: phase });
+      expect(JSON.stringify({ state, logs, response: status.json() })).not.toContain(secret);
+      expect(status.body).not.toContain('22P02'); expect(status.body).not.toContain('failure_phase');
+      await stop(f.stageId);
+    }
+  });
+  it('settles a failed tool even when the diagnostic sink throws', async () => {
+    const f = await fixture(); const submitted = await call(f.capability, 'analyze_photos', {});
+    const consumer = new ToolConsumer(db.pool, id('tools'), { analyze_photos: async () => {
+      throw new TypeError('synthetic private failure');
+    } }, () => { throw new Error('synthetic sink failure'); });
+    await expect(consumer.process(new AbortController().signal)).resolves.toBe(true);
+    expect((await db.pool.query('SELECT state,data FROM agent_tool_intents WHERE id=$1', [submitted.json().intent_id])).rows[0])
+      .toMatchObject({ state: 'FAILED', data: { error_code: 'WORKER_INTERNAL_ERROR' } });
     await stop(f.stageId);
   });
   it('enforces one run-wide call quota across concurrent capabilities', async () => {

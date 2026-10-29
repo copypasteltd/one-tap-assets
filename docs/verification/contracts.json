@@ -4,9 +4,9 @@
   "reports": [
     {
       "path": "assets/development/v1.1/verification-report.json",
-      "sha256": "07b655f70b76db2e66514155e3798d0a45d7fc2094fea6b502e7e08ee0f2afe8",
+      "sha256": "1fe3411b874cee3cbf324da02d2570f147a1cbec5701465df219c64e0d1a19e0",
       "baseline_id": "YPCC-DEV-1.1.0",
-      "checked_at": "2026-10-29T13:16:13.880630+00:00",
+      "checked_at": "2026-10-29T14:58:20.409515+00:00",
       "status": "PASS",
       "scope": "开发文档、官方OpenAPI结构、JSON Schema/合成正负例、状态图、实体/需求/设计/工作包追踪及C留存一致性",
       "counts": {
@@ -22,9 +22,9 @@
         "requirements": 58,
         "work_packages": 20,
         "frozen_design_files": 25,
-        "checks": 3312
+        "checks": 3314
       },
-      "passed": 3312,
+      "passed": 3314,
       "failed": 0,
       "limitations": [
         "本检查仅核验文档与契约，不运行应用测试；已实现源码和局部测试证据另见 assets/implementation/current.json。",
@@ -39,10 +39,10 @@
     },
     {
       "path": "assets/development/v1.1/codex-verification-report.json",
-      "sha256": "a0ad44964ff437432664b28764fe6faafe938d1ef109772df858b386207f4858",
+      "sha256": "907390a41a1716e8505fc7981a4e61945af20270dc8fa9d9f72d97c770fea41f",
       "baseline_id": "YPCC-DEV-1.1.0",
       "requirements_version": "3.1",
-      "checked_at": "2026-10-29T13:16:24.285911+00:00",
+      "checked_at": "2026-10-29T14:58:51.057607+00:00",
       "status": "PASS",
       "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
       "counts": {
@@ -51,9 +51,9 @@
         "skills": 19,
         "skill_bundles": 14,
         "development_documents": 20,
-        "base_contract_checks": 3312,
-        "codex_checks": 1441,
-        "total_checks": 4753,
+        "base_contract_checks": 3314,
+        "codex_checks": 1451,
+        "total_checks": 4765,
         "codex_synthetic_examples": 39
       },
       "product_tests_executed": false,
@@ -71,5 +71,5 @@
       "errors": []
     }
   ],
-  "local_log_sha256": "a9418218a914d66f07b908b8d50f231c6c8b2b06bbc2ac83746b64d531e63ece"
+  "local_log_sha256": "ee7c9d6b2061d2cece5194ae70634aca1676991a765e9c4259e41b41c098104e"
 }

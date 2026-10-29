@@ -3,7 +3,7 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-29T12:44:31.659Z",
+  "checked_at": "2026-10-29T14:35:42.206Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
@@ -15,24 +15,24 @@
       "command": "./scripts/run.ps1 typecheck",
       "status": "PASS",
       "log_path": "runtime/test-results/typecheck.log",
-      "log_sha256": "bca8bf46cb50a9e59643ad1713611053030173b2fdafafc60477aeef37ef1462"
+      "log_sha256": "f7febcff0858d107a645c8e3f5089254923af12095739b59fdf2d69b25d7ca5d"
     },
     {
       "command": "./scripts/run.ps1 test",
       "status": "PASS",
       "log_path": "runtime/test-results/test.log",
-      "log_sha256": "e63ff02fc7edebf7fdea3023f7b166fc30863098b7e78af6b64df3002e4357fe"
+      "log_sha256": "cd87aa7d6618b1434323bd87668bec94dde9d3646fb739f2e9abc2f0eeb07b71"
     },
     {
       "command": "./scripts/run.ps1 test:integration",
       "status": "FAIL",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "a0feb8368b3fbf51397e961578b3bc379d41a8bf64e38cf74414ce1645bd8764"
+      "log_sha256": "23d0dfcbc4eef9244b5c2fc020d5c57b26e72657fc0b8989e34d9b82ce1ab065"
     }
   ],
   "suites": [],
-  "source_files": 341,
-  "source_set_hash": "e97950806da6c55dbf0fa67109a4269305814250c51f2077d9c03e0ed0c70a7b",
+  "source_files": 343,
+  "source_set_hash": "01227dd8392b052c71675162b82744f0f6ad4e8788f435f7d88e03648b235ec8",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -760,7 +760,7 @@
     },
     {
       "path": "src/worker/main.ts",
-      "sha256": "60da3009792f8c47127633bef7b3d0d50d83bce65d767989d9307f52d81b5474"
+      "sha256": "da9162008b97e47fda51d2a93893a1995a444dc1cc6646e1244a0160c958b63a"
     },
     {
       "path": "src/worker/media/artifacts.ts",
@@ -821,6 +821,10 @@
     {
       "path": "src/worker/media/text-layout.ts",
       "sha256": "88152ad0417e504e6be24affb49359a0ef60b232123b6ef4a40db871d7901fc9"
+    },
+    {
+      "path": "src/worker/observability.ts",
+      "sha256": "b9e381b654a117a213cb631559b8e53d5a5c09b5a3ece0064b92eb33dccb0b13"
     },
     {
       "path": "src/worker/payments/reconcile.ts",
@@ -920,7 +924,7 @@
     },
     {
       "path": "src/worker/runtime.ts",
-      "sha256": "00762738259f24a090acb1d15c032ca9b2712c17eaf74bd560d97574ac09aa60"
+      "sha256": "1b9e4b8bd022b9df895826886460f989db4b1a21076beaf2bd3ff9037f09921e"
     },
     {
       "path": "src/worker/samples/completion.ts",
@@ -960,7 +964,7 @@
     },
     {
       "path": "src/worker/tool-gateway/consumer.ts",
-      "sha256": "50f783cc035f191994bf180c7fefea81c932b6748cb9b8bdbac96e0413d4de2e"
+      "sha256": "c0ee2456ee02546dee6fda6b6804caf598b8695ff7f10dde990641392c9edcd6"
     },
     {
       "path": "src/worker/tool-gateway/content-tools.ts",
@@ -1140,7 +1144,7 @@
     },
     {
       "path": "tests/integration/native-order.test.ts",
-      "sha256": "d9ad5110e5c6a710cc531fa1efe85715a621fbc320f9308a37ef9660af39ddf8"
+      "sha256": "960a122b8b10842071c8cf4cfcbe167028a090159241bf9a4ea093044ca6f368"
     },
     {
       "path": "tests/integration/optional-preview.test.ts",
@@ -1192,7 +1196,7 @@
     },
     {
       "path": "tests/integration/tool-consumer.test.ts",
-      "sha256": "0445eb530fe8018fe70737e474c88ee30b4a6f711a3fdb59a0a1589f1a9c3892"
+      "sha256": "af5eb539dac2766f19a47f7b83eef8afe7ba3a55d7e0caf277f0d867d16e57a0"
     },
     {
       "path": "tests/integration/vision-analysis.test.ts",
@@ -1200,7 +1204,7 @@
     },
     {
       "path": "tests/integration/worker-runtime.test.ts",
-      "sha256": "9f5d27c75010332ad96d09f0e783b54ddfd8ef947e54e563042bdbc28f9fb8ba"
+      "sha256": "0ce646367dc9c092aafa5ca8ced674618ba0b6fdd9a643f4cd6b3f569018d25d"
     },
     {
       "path": "tests/unit/album.test.ts",
@@ -1261,6 +1265,10 @@
     {
       "path": "tests/unit/vision-wire.test.ts",
       "sha256": "95aa1d03ec76b83b677db2ee1873dd31e7059b03f1b704d386219f06a090a562"
+    },
+    {
+      "path": "tests/unit/worker-observability.test.ts",
+      "sha256": "076571520a96fd5bad0f83de50a818a33901e684ec9ea03ffe442c9ff656f384"
     },
     {
       "path": "scripts/更新Codex需求与Skill草案.py",
@@ -1368,7 +1376,7 @@
     },
     {
       "path": "scripts/verify-implementation.ts",
-      "sha256": "aca5d5021030da6c7c1c6b0c1601e2dda9e7851586541fb445720faac3b56e46"
+      "sha256": "0ad0b349e2a6f6255d6dfa20d04e6765f0b3dd1b97df18a2712f854914bd5704"
     },
     {
       "path": "scripts/verify-publication.ts",
@@ -1588,6 +1596,18 @@
       "sha256": "2b543755c8bc721507c9d9dbc3da537bd4486db425dd032524aeeabff4df76d0"
     }
   ],
+  "worker_failure_diagnostics": {
+    "fixed_private_categories": true,
+    "raw_error_fields_logged": false,
+    "public_error_code_unchanged": true,
+    "log_sinks_non_authoritative": true,
+    "tool_failure_phase_recorded": true,
+    "settlement_and_original_failure_recorded": true,
+    "fixture_verified": false,
+    "durable_log_delivery_verified": false,
+    "historical_fault_root_cause_confirmed": false,
+    "production_admitted": false
+  },
   "visible_text_layout": {
     "drawn_shot_intent_claim_guard": true,
     "actual_pinned_font_measurement": true,

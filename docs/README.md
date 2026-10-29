@@ -1,5 +1,7 @@
 # 文档目录 / Documentation index
 
+当前Worker约束：[脱敏故障诊断与日志隔离](实施/Worker脱敏故障诊断与日志隔离-v1.0.md)。固定内部分类与执行位置、原公开错误码及日志非权威边界；完整结果另见验证索引。Latest worker behavior: fixed private failure categories and non-authoritative logging, with actual verification reported separately.
+
 当前工具队列约束：[工具队列原子领取与并发租约](实施/工具队列原子领取与并发租约-v1.0.md)。单语句领取与真实数据库并发/锁定/到期回归，保留原恢复和授权门禁；完整结果见实现与验证索引。Latest tool queue: atomic claims with native concurrency/lock/expiry controls, preserving existing authority and recovery rules.
 
 当前文字制作约束：[完整展示文字与购买前排版校验](实施/完整展示文字与购买前排版校验-v1.0.md)。实际字形测宽/完整换行、intent断言、购买前预检和原版本恢复门禁已有源码；完整自动修复仍待实现。Latest: lossless measured layout and pre-purchase text gates, distinct from incomplete automatic repair.

@@ -1,5 +1,17 @@
 # 更新记录 / Changelog
 
+## 2026-10-29 · Worker故障诊断与日志隔离 / Private worker diagnostics
+
+- 实际核验 / Actual verification: 343 sources, 73 units PASS; FAIL: 60 PASS / 1 FAIL / 3 pending; 30 empty files; build:server: PASS / build:alipay: PASS / build:douyin: PASS. 完整命令未通过；源码进展与独立构建不升级为完整通过。 The full command chain fails; source progress and separate builds do not replace it.
+- 为工具、阶段、维护和启动增加固定脱敏分类/允许原生码，工具区分授权、执行、结果与提交；客户端/任务公开错误保持原契约。 Add private fixed classifications and execution phases without raw error fields or changed public errors.
+- 修正同步/异步日志回调失败影响执行结果；成功事务不进入失败处理，原故障和收尾故障分别留存，租约/费用/UNKNOWN/授权和时限保持原规则。 Isolate failing sinks and preserve both original and settlement failures without changing work authority or recovery.
+- 新增真实PG处理器/提交错误、私有参数隔离/实际回滚、工具故障和成功阶段日志回调回归及秘密/访问器/异步拒绝单元检查。 Add native database rollback/privacy and non-authoritative sink regressions.
+- 原生有声夹具有界记录最近64条脱敏事件，原断言和期限不变；完整实际结果见实现/验证索引。 Native-order fixtures retain bounded safe diagnostics; assertions and deadlines remain unchanged.
+- 原e979源码支付宝诊断保留600秒上限，停于92%资源压缩；两段CPU采样主要为依赖加载/文件读取，不能证明历史超时原因或替代普通构建通过。 Preserve the timed-out instrumented compiler diagnostic separately from ordinary build acceptance.
+- 更新中英README、实施/状态/验证与更新记录，原36媒体和C设计来源继续绑定；全产品与真实服务/生产/云端未准入。 Update bilingual publication documents while retaining media/design provenance and incomplete admission flags.
+
+
+
 ## 2026-10-29 · 工具队列原子领取 / Atomic durable tool claims
 
 - 将显式领取事务改为单条CTE，保留原顺序/白名单、UNKNOWN可用时间、SKIP LOCKED、45秒租约与代次；执行/提交授权和原预算/限制不变。 Claim and assign the original task atomically while preserving existing authority, recovery and limits.

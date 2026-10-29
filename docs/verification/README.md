@@ -1,23 +1,31 @@
 # 验证与发布证据 / Verification and publication evidence
 
-本轮固定341份源码/测试/配置、42份运行契约和4项资源；类型与71项单元通过，当前完整原生执行14项通过、1项失败，同文件8项挂起，其他34文件未执行，整套未通过。拟验证声音许可撤销的用例在PRODUCTION工具出现WORKER_INTERNAL_ERROR，尚未走到该次撤权断言；原文件撤权用例本次通过。没有保留旧原生报告或放宽原断言/时限。当前源码5项队列专项与增加错误记录的夹具副本定向通过单独留存，未复现原内部错误，不证明根因。单独构建：build:server: PASS / build:alipay: TIMEOUT 600s / build:douyin: PASS；支付宝在原600秒内停于Webpack/Babel编译阶段，未返回具体源码错误，不能沿用旧构建通过。最新失败与来源见[验证说明](tool-queue-native-source.json)；真实语义、费用、授权、隔离、完整自动修复与全产品/生产准入仍待验。
+本轮固定343份源码/测试/配置、42份运行契约和4项资源，源码摘要01227dd；类型和73项单元通过。全新完整原生结果为 FAIL: 60 PASS / 1 FAIL / 3 pending; 30 empty files，完整命令记录为 typecheck: PASS / test: PASS / test:integration: FAIL。23项有声订单夹具均通过，新的失败位于pg_restore返回空状态的断言，原30秒调用上限保留；原执行未记录error/signal，不能断定根因。增加退出信息的独立副本约18.48秒通过，其中dump约0.64秒、restore约8.74秒，未复现原失败，不替代整套。
 
-On the fresh 341 source/test/config, 42 runtime-contract and four resource snapshot, types and 71 unit tests pass; the full native attempt records 14 passes and one failure, eight pending cases in that file and 34 other files unexecuted. The voice-revocation case fails in its PRODUCTION tool with WORKER_INTERNAL_ERROR before the intended revocation assertion; the original-write case passes. No old native report was retained or assertion/deadline relaxed. Five current-source queue tests and a separately instrumented fixture-copy diagnostic pass; the internal error is not reproduced and its cause remains unknown. Separate builds: build:server: PASS / build:alipay: TIMEOUT 600s / build:douyin: PASS. Alipay reaches the original 600-second cap during Webpack/Babel compilation without a specific source diagnostic; earlier successful builds are not relabeled. See [validation provenance](tool-queue-native-source.json). Real semantics, billing, rights, isolation, complete repair and full-product/production admission remain incomplete.
+构建记录：build:server: PASS / build:alipay: PASS / build:douyin: PASS；单独构建不替代完整原生结果。不保留旧原生报告，不放宽断言/时限。此前专项工具7项通过，另一文件初始化达到原60秒上限、6项未执行；随后同源码独立阶段6项通过，原记录保留。
+
+旧e979源码支付宝CPU诊断在原600秒停于92%资源压缩，采样以依赖加载/文件读取为主；不替代当前普通构建或证明根因。最新实际来源见[验证说明](worker-failure-native-source.json)。历史泛化制作故障、真实语义/费用/授权/隔离、完整自动修复与全产品/生产/云端准入仍待验。
+
+The fresh 343 source/test/config, 42 runtime-contract and four-resource snapshot is 01227dd. Types and all 73 unit tests pass. Full native result: FAIL: 60 PASS / 1 FAIL / 3 pending; 30 empty files. Fresh command record: typecheck: PASS / test: PASS / test:integration: FAIL. All 23 native-order fixtures pass. The new failure observes a null pg_restore status under the original 30-second cap; its original error/signal was not recorded, so the cause remains unknown. A separately instrumented copy passes in about 18.48 seconds, with dump/restore taking about 0.64/8.74 seconds, without reproducing or replacing the full failure.
+
+Build record: build:server: PASS / build:alipay: PASS / build:douyin: PASS; separate builds do not replace native verification. No previous native result is retained and no assertion/deadline is relaxed. An earlier focused run passes seven tool cases while its worker file reaches the original 60-second setup cap with six cases unexecuted; a subsequent isolated run passes all six worker cases on the same source.
+
+The old e979 Alipay CPU diagnostic reaches its original 600-second cap at 92% asset processing, with module/file reads dominating samples; it neither replaces a current ordinary build nor establishes a cause. See [actual provenance](worker-failure-native-source.json). The earlier generic production fault, real semantics/billing/rights/isolation, complete repair and full-product/production/cloud admission remain unresolved.
 
 | 编号 / No. | 当前检查 / Current check | 实际结果 / Actual result |
 | --- | --- | --- |
 | 01 | 类型 / Types | PASS |
-| 02 | 单元 / Units | 71 / 71 PASS |
-| 03 | 完整原生 / Full native | FAIL: 14 PASS / 1 FAIL; remainder as reported |
-| 04 | 服务端与双小程序 / Server and mini builds | build:server: PASS / build:alipay: TIMEOUT 600s / build:douyin: PASS；不替代03 / Does not replace 03 |
+| 02 | 单元 / Units | 73 / 73 PASS |
+| 03 | 完整原生 / Full native | FAIL: 60 PASS / 1 FAIL / 3 pending; 30 empty files |
+| 04 | 服务端与双小程序 / Server and mini builds | build:server: PASS / build:alipay: PASS / build:douyin: PASS；不替代03 / Does not replace 03 |
 | 05 | 文档与契约 / Docs and contracts | [实际报告](contracts.json) |
 | 06 | 媒体 / Media | 36份原来源文件；本轮未改界面/媒体 / Original provenance, no recapture this round |
 | 07 | 发布候选/暂存完整性 / Publication and staged integrity | [检查器](publication.json) · [独立字节审计](repository-audit.json) |
-| 08 | 当前源码队列专项 / Current-source queue tests | 5 / 5 PASS；独立输出，不替代03 / Separate report, not a replacement for 03 |
+| 08 | 当前工具/阶段专项 / Current tool and worker cases | 7 / 7 tools PASS；随后独立6 / 6 workers PASS；早期初始化失败保留，不替代03 / Isolated results, earlier setup failure retained; not a replacement for 03 |
 
-空队列64次对照：原192条、现64条数据库语句，全部返回null。六并发者、独立持行锁、白名单、UNKNOWN到时恢复、45秒租约和原代次在原生回归中验证。原文件撤权定向诊断优化前/后约95.9/49.8秒，两次记录142次原生命令；快照不是终止时完整进程转储，查询耗时可并发，不能作为完整墙钟分解、统计基准或历史超时根因。拟撤销声音许可的失败用例只在忽略目录生成副本，为处理器/提交增加错误记录并原样抛错，原源码/断言/120秒上限不变；副本单项约56.6秒通过，没有复现原内部错误。另一次独立只读数据库观察达到自己的原3秒SQL上限，不是应用测试结果或已证实根因。详见[源码与原始记录SHA](tool-queue-native-source.json)和[实现说明](../实施/工具队列原子领取与并发租约-v1.0.md)。
+本轮实现说明：[Worker脱敏故障诊断与日志隔离](../实施/Worker脱敏故障诊断与日志隔离-v1.0.md)。真实PG处理器和提交错误的秘密隔离/事务回滚、成功阶段及故障工具的日志异常边界详见新来源；此前e979队列来源与八次文字失败保持各自原始字节。
 
-The empty-queue control records 192 versus 64 queries for 64 null claims. Native regression covers concurrent ownership, locked candidates, handler filtering, original UNKNOWN availability and lease fences. Focused original-write diagnostics pass before/after within the original cap; snapshots are not complete terminal dumps and query durations can overlap. A fixture copy adds handler/commit error recording and rethrows unchanged errors, preserving original assertions and the 120-second cap; it passes without reproducing the internal error. A separate read-only observer hits its own three-second SQL cap. None establishes the failure cause or replaces the full native result.
+Current implementation: [private failure diagnostics and log isolation](../实施/Worker脱敏故障诊断与日志隔离-v1.0.md). New provenance covers native database privacy/rollback and non-authoritative sinks. Earlier queue and text-layout failure records remain unchanged historical evidence.
 
 ## 历史文字专项 / Historical text-layout attempts
 
