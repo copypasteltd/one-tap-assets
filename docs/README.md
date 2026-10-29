@@ -1,5 +1,7 @@
 # 文档目录 / Documentation index
 
+最新工具恢复：[MCP原工具查询恢复与桥接回收](实施/MCP原工具查询恢复与桥接回收-v1.0.md)。暂时性读故障只查原编号，保留原时限/授权/限流与未知创建规则，输入关闭取消桥自身I/O。Latest: bounded original-intent observations and owned bridge shutdown, without confirmed historical ASR causation.
+
 最新实现：[首轮制作费用隔离与原费用回执](实施/首轮制作费用隔离与原费用回执-v1.0.md)。原总预算内同时保护修复与售后额度，UNKNOWN和原费用归属/费率不可重置；完整自动修复仍待接通。Latest: protected repair/aftercare holds and original accounting, distinct from the unfinished repair workflow.
 
 当前Worker约束：[脱敏故障诊断与日志隔离](实施/Worker脱敏故障诊断与日志隔离-v1.0.md)。固定内部分类与执行位置、原公开错误码及日志非权威边界；完整结果另见验证索引。Latest worker behavior: fixed private failure categories and non-authoritative logging, with actual verification reported separately.

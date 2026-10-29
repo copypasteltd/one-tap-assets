@@ -1,5 +1,7 @@
 # 当前状态与后续顺序 / Status and next priorities
 
+最新[MCP原工具查询恢复与桥接回收](../实施/MCP原工具查询恢复与桥接回收-v1.0.md)只恢复已确认原编号的有界状态查询，输入关闭停止本桥I/O；不是完整自动素材修复或历史ASR根因证明。Latest: bounded original-intent observations and bridge-owned shutdown.
+
 最新[首轮制作费用隔离与原费用回执](../实施/首轮制作费用隔离与原费用回执-v1.0.md)接通原总额内的首轮/修复/售后费用边界；同一意图绑定原归属、金额与规范费率，实际锁等待后重查原截止。完整自动修复仍待实现。Latest: protected repair/aftercare holds, immutable cost replay and post-lock wall-clock deadlines, not a completed repair workflow.
 
 最新[Worker脱敏故障诊断与日志隔离](../实施/Worker脱敏故障诊断与日志隔离-v1.0.md)增加固定内部分类和执行位置，隔离日志回调故障，保留原事务与公开错误码；历史内部错误根因尚未确认。Latest: private failure categories and log-sink isolation, without a confirmed cause for the earlier production failure.
@@ -12,28 +14,28 @@
 
 最新[原生声音最终双复核与事务交付](../实施/原生声音最终双复核与事务交付-v1.0.md)已连接内部两路线原听音、两个最终角色、完整推理/工具/报告绑定和事务交付。正向中文/语义为刻意构造的控制响应，不是实际提示音的识别结果。Private final audio review/publication is connected with synthetic semantic control responses, not real listening or production certification.
 
-2026-10-29｜需求v3.1 / 开发契约v1.1 / C设计v1.0。整体 **IN_PROGRESS**，完整产品、生产准入与云端部署均未完成。The complete product, production admission and cloud deployment are not verified.
+2026-10-30｜需求v3.1 / 开发契约v1.1 / C设计v1.0。整体 **IN_PROGRESS**，完整产品、生产准入与云端部署均未完成。The complete product, production admission and cloud deployment are not verified.
 
 ## 已执行验证 / Executed validation
 
 | 编号 / No. | 检查 / Check | 结果 / Result | 证明范围 / Scope |
 | --- | --- | --- | --- |
-| 01 | TypeScript | PASS | 当前类型检查 / Current type checking |
-| 02 | 单元 / Unit | 73 / 73 PASS | 领域、客户端、策略与适配器逻辑 / Domain, client and adapter logic |
-| 03 | 原生集成 / Native integration | FAIL: 3 PASS / 1 FAIL / 19 pending; 35 empty files | 原生PG/实际媒体/HTTPS/MCP及显式合成外部响应；完整范围按本轮来源 / Native database/media with explicit synthetic external responses |
-| 04 | 服务端 / Server | PASS | 本轮实际源码构建 / Actual current-source build |
-| 05 | 双小程序 / Both mini-programs | Alipay: PASS; Douyin: PASS | 本轮实际构建，不是真机 / Current actual builds, not device certification |
+| 01 | TypeScript | Full: TIMEOUT 180s; separate diagnostic: PASS | 原上限与断言不变，单项不替代整套 / Original limits, no replacement of full result |
+| 02 | 单元 / Unit | 73 / 73 PASS（单独 / separate） | 本轮独立原单元命令 / Independent current-source command |
+| 03 | 原生集成 / Native integration | FAIL: 7 passed, 1 failed, 15 pending; 36 empty/unexecuted files（单独 / standalone） | 原生PG/媒体/HTTPS/MCP与显式合成外部响应；不替代整套 / Native fixtures, not full-chain replacement |
+| 04 | 服务端 / Server | PASS | 本轮预构建绑定实际MCP文件摘要 / Current pre-build binds the actual MCP binary |
+| 05 | 双小程序 / Both mini-programs | Alipay: TIMEOUT; Douyin: PASS | 单独实际构建，不是真机 / Separate current builds, not devices |
 | 06 | 浏览器回放 / Browser replay | PASS（原捕获 / prior capture） | 沿用原Vite构建、10页断言/截图与实际WebM/MP4/GIF来源；浏览器已关闭，本轮未重录页面 / Prior actual local capture; shared UI source unchanged |
 
-费用/队列11项专项通过；旧费用代码真实锁等待对照1项按预期失败，另5项未选执行；均不替代整套结果。Eleven current-source focused checks pass; one selected legacy negative control fails as expected, with five unselected cases. Neither replaces the full run.
+MCP/原工具消费者22项专项通过；旧桥原编号查询断连对照1项按预期失败、14项未选；不替代完整命令。22 focused MCP/consumer checks pass; the legacy control fails as expected, independently.
 
 机器可读结果：[实现索引](../../assets/implementation/current.json)、[发布核验摘要](../verification/publication.json)、[媒体清单](../media/capture-manifest.json)。完整执行日志/测试JSON位于未提交的`runtime/test-results/`；公开摘要保留计数、命令结果与摘要引用，但不包含本地凭证或运行数据库。Source hashes and original local log hashes are recorded; private runtime files are excluded from Git. Static documentation checks validate contracts/links, not product execution.
 
-本轮源码摘要a26c133（345份源码/测试/配置、42份运行契约、4项资源）：类型、73项单元和11项费用/队列专项通过。全新完整原生结果为FAIL: 3 PASS / 1 FAIL / 19 pending; 35 empty files；命令链为typecheck: PASS / test: PASS / test:integration: FAIL。构建记录：build:server: PASS / build:alipay: PASS / build:douyin: PASS。本轮有声REFERENCE_FILM最终交付用例在POST阶段失败：原合成ASR仍待恢复，Codex阶段结束时工具保持RUNNING，保留ASR_ORIGINAL_TASK_PENDING；底层原因未确认。 同源码原上限下单独用例1通过/0失败/22未选，不替代整套。 旧费用代码真实行锁等待对照按预期失败，当前代码拒绝过期预留；一次初步整套为加强断言主动中止，记录独立保留，不算完整通过。全部原断言/时限保留，来源见[验证说明](../verification/order-budget-native-source.json)。历史pg_restore空状态及制作/编译异常仍未确认根因；完整自动修复、真实服务与全产品/生产/云端仍待完成。
+本轮源码摘要fdddb4e（346份源码/测试/配置、42份运行契约、4项资源）：MCP/工具消费者22项专项通过；旧桥原编号首次查询断连对照1项按预期失败、14项未选。原完整命令在类型检查180秒上限超时，未进入单元/原生阶段；单独增加统计的类型诊断PASS，单元73 / 73 PASS，构建build:server: PASS / build:alipay: TIMEOUT / build:douyin: PASS。随后首次单独执行本轮原生整套，实际为FAIL: 7 passed, 1 failed, 15 pending; 36 empty/unexecuted files。这些单独记录不替代失败的完整命令。新桥只恢复原任务读查询，不重发未知POST，不放宽原请求/角色时限、权限、限流或TLS；输入关闭只停止桥自身I/O。历史ASR、pg_restore、制作/编译及本轮类型超时根因未确认。完整自动修复、58项需求验收与真实服务/产品/生产/云端仍未完成。 本轮独立原生失败发生在生成参考素材时：private_object_writes状态更新触发数据库语句超时，尚未到该用例的听音恢复断言；超时原因未确认。 来源见[本轮验证](../verification/mcp-observation-native-source.json)。
 
-Current snapshot a26c133 contains 345 source/test/config files, 42 runtime contracts and four resources. Types, 73 units and 11 focused cost/queue checks pass. Fresh native result: FAIL: 3 PASS / 1 FAIL / 19 pending; 35 empty files. Command chain: typecheck: PASS / test: PASS / test:integration: FAIL. Builds: build:server: PASS / build:alipay: PASS / build:douyin: PASS. The native REFERENCE_FILM final-delivery case fails during POST while the original synthetic ASR remains pending. The tool is still RUNNING with ASR_ORIGINAL_TASK_PENDING when the role ends; the underlying cause is unconfirmed. An isolated unchanged-source run has 1 passed, 0 failed and 22 unselected cases; it does not replace the full run. The previous cost code fails the observed lock-wait control as expected; current code rejects the expired reservation. A preliminary full attempt was explicitly cancelled to strengthen that assertion and retains its own evidence. Original limits and assertions remain. See [exact provenance](../verification/order-budget-native-source.json). Historical restore/production/compiler causes, complete repair and real-service/product/production/cloud admission remain unresolved.
+Current snapshot fdddb4e contains 346 source/test/config files, 42 runtime contracts and four resources. All 22 focused MCP/consumer checks pass; the previous bridge fails the first-reset-after-acknowledgement control as expected, with 14 unselected cases. The original full command times out at the unchanged 180-second type-check cap, before units/native tests. A separate type diagnostic reports PASS; independent units: 73 / 73 PASS; builds: build:server: PASS / build:alipay: TIMEOUT / build:douyin: PASS. The subsequent first standalone native suite for this source reports FAIL: 7 passed, 1 failed, 15 pending; 36 empty/unexecuted files. These separate records do not replace the failed full chain. The bridge resumes only original read observations, never repeats an uncertain POST, retains authority/rate/TLS and HTTP/role limits, and aborts only owned I/O on stdin closure. Historical ASR/restore/production/compiler faults and this round's type timeout have no confirmed cause. Complete repair, all 58 requirements and real-service/product/production/cloud admission remain unfinished. The standalone native failure occurs while preparing generated references: a private_object_writes state update hits the original database statement timeout before the listening-recovery assertions. The timeout cause is unconfirmed. See [exact provenance](../verification/mcp-observation-native-source.json).
 
-[恢复指南](RECOVERY.md)与[发布同步指南](PUBLISHING.md)适用于持续更新；本轮已实际执行应用检查和适用标识媒体复录，完整原生未通过，不能沿用此前文档轮的旧通过结论。 Current source/media work has fresh execution records; the native failure remains blocking.
+[恢复指南](RECOVERY.md)与[发布同步指南](PUBLISHING.md)适用于持续更新；本轮执行应用检查并沿用未变的原媒体，未打开浏览器；完整命令失败及独立原生结果如表，不能沿用旧通过。 Current source checks retain original unchanged media; the failed full command and standalone native outcome are reported separately.
 
 ## 当前实现边界 / Implementation boundary
 
@@ -54,6 +56,7 @@ Current snapshot a26c133 contains 345 source/test/config files, 42 runtime contr
 | 13 | 最终声音双复核与交付 / Final native-audio review and publication | 同一原听音完整输入/推理/工具/不可变报告绑定，有声事务交付/下载与释放关联；新增5项控制回归包含于上述23项，正向中文语义刻意构造 / Private integration with fabricated semantic controls, no real-listening or production certification |
 | 14 | 自动修复 / Automatic repair | F09/F46/F55完整新候选→新包→双新复核链路未接通；字段/租约恢复不是修复功能 / Complete new-candidate/reseal/fresh-review chain remains unimplemented |
 | 15 | Worker内部故障与日志 / Private worker diagnostics | 固定分类/允许原生码/执行位置、公开错误不变，隔离同步/异步日志故障；尽力输出，生产日志链路未验 / Fixed private fields and non-authoritative sinks; durable production logging unverified |
+| 16 | MCP原任务查询 / Original MCP observations | 已确认编号的暂时性读故障有界恢复，第三次连续失败停止；原20秒HTTP/角色截止、授权/限流/TLS保留，输入关闭只停本桥I/O / Bounded original reads and owned shutdown; not complete media repair |
 
 首轮费用保护已实现，不改变上表第14项的未完成状态；修复保留额目前不能由现有首轮调用花费。First-pass hold protection does not complete row 14 or authorize repair spending.
 
@@ -63,7 +66,7 @@ Current snapshot a26c133 contains 345 source/test/config files, 42 runtime contr
 
 | 顺序 / Priority | 待办 / Work | 完成条件 / Completion evidence |
 | --- | --- | --- |
-| 00 | 原任务恢复及运行稳定性 / Original-operation recovery and stability | 定位本轮有声POST中原ASR待恢复时角色结束；确认历史pg_restore空状态等原因，保持原限额完成全套。单项未复现不代替整套 / Diagnose pending-ASR role termination and historical restore failures; pass the original full suite without relaxed limits |
+| 00 | 原任务恢复及运行稳定性 / Original-operation recovery and stability | 定位本轮原类型180秒与支付宝600秒超时、私有对象更新语句超时及历史ASR/pg_restore等异常，保持原限额完成完整命令；MCP读恢复对照和单项通过不能证明历史根因 / Diagnose current type/Alipay timeouts, the native private-object statement timeout, and historical ASR/restore faults; standalone checks do not replace full verification |
 | 01 | 生成式官方变体与真实服务验收 / Official generated variants and real-service acceptance | 在已有两条无声内部链路上验证真实模型、商品身份/风格质量、完整规格和原费用/恢复；不能用2秒夹具替代 / Real model/quality/specification evidence beyond short silent fixtures |
 | 02 | 原生有声与资源规格 / Native audio and resources | 在已有内部制作/ASR/POST/文件QC上验证真实授权/识别/OSS/费用，验证连续多镜人物/商品/声音绑定、完整输入容量及真实最终听音/双复核/交付质量 / Real rights/ASR/storage, multi-shot/full-input capacity and final listening/review/delivery quality |
 | 03 | 真实Codex与受限身份/释放 / Real Codex, restricted identity and cleanup | 服务凭证、真实推理计量、原生启动器、隔离/进程树/孤儿回收与G0证据 / Native verified operation |

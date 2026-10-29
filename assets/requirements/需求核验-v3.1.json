@@ -1,7 +1,7 @@
 {
   "baseline_id": "YPCC-DEV-1.1.0",
   "requirements_version": "3.1",
-  "checked_at": "2026-10-29T16:27:52.150516+00:00",
+  "checked_at": "2026-10-29T17:56:18.286232+00:00",
   "status": "PASS",
   "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
   "counts": {
@@ -10,9 +10,9 @@
     "skills": 19,
     "skill_bundles": 14,
     "development_documents": 20,
-    "base_contract_checks": 3315,
-    "codex_checks": 1461,
-    "total_checks": 4776,
+    "base_contract_checks": 3316,
+    "codex_checks": 1472,
+    "total_checks": 4788,
     "codex_synthetic_examples": 39
   },
   "product_tests_executed": false,

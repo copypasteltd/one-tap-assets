@@ -114,6 +114,11 @@ const report = {
     payment_revocation_and_wall_clock_deadline_guard:true,historical_obligations_preserved:true,
     fixture_verified:verifiedCases('order-budget-envelope.test.ts',6)&&verifiedCases('queue-budget.test.ts',5),
     automatic_media_repair_implemented:false,real_provider_billing_verified:false,production_admitted:false},
+  mcp_observation_recovery:{acknowledged_original_intent_only:true,creation_post_never_retried:true,
+    transient_get_failures_bounded:true,max_consecutive_observation_failures:3,http_cap_ms:20000,
+    original_role_deadline_unchanged:true,authority_rate_limit_and_tls_failures_not_retried:true,
+    stdin_close_aborts_owned_http:true,fixture_verified:verifiedCases('mcp-observation.test.ts',15),
+    historical_native_asr_failure_root_cause_confirmed:false,production_admitted:false},
   worker_failure_diagnostics:{fixed_private_categories:true,raw_error_fields_logged:false,public_error_code_unchanged:true,
     log_sinks_non_authoritative:true,tool_failure_phase_recorded:true,settlement_and_original_failure_recorded:true,
     fixture_verified:verifiedCases('worker-runtime.test.ts',6)&&verifiedCases('tool-consumer.test.ts',7)

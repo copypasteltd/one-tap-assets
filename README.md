@@ -8,6 +8,8 @@
 
 新增[首轮制作费用隔离与原费用回执](docs/实施/首轮制作费用隔离与原费用回执-v1.0.md)：修复、售后保留额同时从原总预算的首轮可用部分扣除；并发及 UNKNOWN 不会吞掉保留额，同一费用意图不能更换归属或费率。新增费用检查已付款、撤权及等待锁后的原截止。该费用保护是自动修复的前置条件；新候选制作、新审查包和双新复核仍待接通。
 
+新增[MCP原工具查询恢复与桥接回收](docs/实施/MCP原工具查询恢复与桥接回收-v1.0.md)：已收到编号的任务遇到暂时性查询故障时，只恢复查询原任务；连续第三次失败停止，原20秒请求上限与角色截止不变。授权/限流/TLS错误不重试，创建回执未知不重发；输入关闭会取消桥自身的网络等待。历史ASR故障根因仍待确认。
+
 当前增加[完整展示文字与购买前排版校验](docs/实施/完整展示文字与购买前排版校验-v1.0.md)：照片分析后生成的标题、配套文字与原图短片字幕按固定字体实际测宽，完整换行或明确拒绝；不会静默丢掉末尾。字幕中的高风险商品断言同样查证据。规划、报价及制作购买前都检查，原媒体任务的版本变化保持阻断；交付前完整自动修复仍待实现。
 
 Worker新增[脱敏故障诊断与日志隔离](docs/实施/Worker脱敏故障诊断与日志隔离-v1.0.md)：内部只记录固定异常分类、允许的原生错误码及执行位置，客户端保持原有错误码；原始异常/SQL/路径/客户内容不进入该诊断。日志回调的同步或异步失败不能改变原任务事务，工具收尾失败仍保留原租约恢复规则。最新核验见[验证说明](docs/verification/README.md)，历史制作故障和构建超时的根因尚未确认。
@@ -225,7 +227,7 @@ runtime/           私有运行数据/工具/构建/日志（不提交）
 
 UI 回放/媒体更新先启动 `dev:preview`，再执行 `docs:media`（`test:ui` 为同一脚本）；需要 Edge、原生 FFmpeg/ffprobe 与项目内 Playwright 录制组件，详见 [演示指南](docs/guides/DEMO.md)。
 
-本轮源码摘要a26c133（345份源码/测试/配置、42份运行契约、4项资源）：类型、73项单元和11项费用/队列专项通过。全新完整原生结果为FAIL: 3 PASS / 1 FAIL / 19 pending; 35 empty files；命令链为typecheck: PASS / test: PASS / test:integration: FAIL。构建记录：build:server: PASS / build:alipay: PASS / build:douyin: PASS。本轮有声REFERENCE_FILM最终交付用例在POST阶段失败：原合成ASR仍待恢复，Codex阶段结束时工具保持RUNNING，保留ASR_ORIGINAL_TASK_PENDING；底层原因未确认。 同源码原上限下单独用例1通过/0失败/22未选，不替代整套。 旧费用代码真实行锁等待对照按预期失败，当前代码拒绝过期预留；一次初步整套为加强断言主动中止，记录独立保留，不算完整通过。全部原断言/时限保留，来源见[验证说明](docs/verification/order-budget-native-source.json)。历史pg_restore空状态及制作/编译异常仍未确认根因；完整自动修复、真实服务与全产品/生产/云端仍待完成。
+本轮源码摘要fdddb4e（346份源码/测试/配置、42份运行契约、4项资源）：MCP/工具消费者22项专项通过；旧桥原编号首次查询断连对照1项按预期失败、14项未选。原完整命令在类型检查180秒上限超时，未进入单元/原生阶段；单独增加统计的类型诊断PASS，单元73 / 73 PASS，构建build:server: PASS / build:alipay: TIMEOUT / build:douyin: PASS。随后首次单独执行本轮原生整套，实际为FAIL: 7 passed, 1 failed, 15 pending; 36 empty/unexecuted files。这些单独记录不替代失败的完整命令。新桥只恢复原任务读查询，不重发未知POST，不放宽原请求/角色时限、权限、限流或TLS；输入关闭只停止桥自身I/O。历史ASR、pg_restore、制作/编译及本轮类型超时根因未确认。完整自动修复、58项需求验收与真实服务/产品/生产/云端仍未完成。 本轮独立原生失败发生在生成参考素材时：private_object_writes状态更新触发数据库语句超时，尚未到该用例的听音恢复断言；超时原因未确认。 来源见[本轮验证](docs/verification/mcp-observation-native-source.json)。
 
 完整命令未通过；源码进展与独立构建不升级为完整通过。 The full command chain fails; source progress and separate builds do not replace it.
 

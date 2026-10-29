@@ -3,7 +3,7 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-29T16:03:47.666Z",
+  "checked_at": "2026-10-29T16:57:01.359Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
@@ -13,26 +13,14 @@
   "commands": [
     {
       "command": "./scripts/run.ps1 typecheck",
-      "status": "PASS",
-      "log_path": "runtime/test-results/typecheck.log",
-      "log_sha256": "134f4840548b7cfc02e13a333f1c02d18bb6daf5c932c56b97c8084a41a157be"
-    },
-    {
-      "command": "./scripts/run.ps1 test",
-      "status": "PASS",
-      "log_path": "runtime/test-results/test.log",
-      "log_sha256": "b80016bcbd098ce15062324fd0e133a582d77ba17b09dd0f3544257772c2a00e"
-    },
-    {
-      "command": "./scripts/run.ps1 test:integration",
       "status": "FAIL",
-      "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "62ef74676359725530bba920006ba2be01b9aa8ca8fc7fc8c12989bc5127b5c0"
+      "log_path": "runtime/test-results/typecheck.log",
+      "log_sha256": "337e7137d74573b65193337fff43b274798c7f1e03d965cf7bfeee20454fdb83"
     }
   ],
   "suites": [],
-  "source_files": 345,
-  "source_set_hash": "a26c133891757321e50e1aa7629d66f61e4c816b42b85d515ac753bac78d1247",
+  "source_files": 346,
+  "source_set_hash": "fdddb4e442bf416e301da9cb68d502923ce4e0fbf784765d50bac543e1e1f11f",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -984,7 +972,7 @@
     },
     {
       "path": "src/worker/tool-gateway/mcp-main.ts",
-      "sha256": "00e856f041628892b2c70d3c55d3c3406660b140225fc6099ef6e8902970e012"
+      "sha256": "279b716d007a4c0120e8614a8f1442809b1e9440539540e0267ddd05ec38b7a2"
     },
     {
       "path": "src/worker/tool-gateway/policy.ts",
@@ -1125,6 +1113,10 @@
     {
       "path": "tests/integration/limited-revision.test.ts",
       "sha256": "0e59c2364bbc61583871e07ad0623991f14a6d51b4ee49057dd93bf67daec11f"
+    },
+    {
+      "path": "tests/integration/mcp-observation.test.ts",
+      "sha256": "299283b648b66fe4d72973293348bc44423a5ca922a81bf35e906f5699f5508d"
     },
     {
       "path": "tests/integration/media-erasure.test.ts",
@@ -1384,7 +1376,7 @@
     },
     {
       "path": "scripts/verify-implementation.ts",
-      "sha256": "75f5dcab2f4b1e05d023159d20ded60ab9c1708b3e1d5380597d13d62df6eaf1"
+      "sha256": "317017dedfb165bd30d79d7e04d9f907de4a5dcf2b9212b62958477cd72dde7e"
     },
     {
       "path": "scripts/verify-publication.ts",
@@ -1615,6 +1607,19 @@
     "fixture_verified": false,
     "automatic_media_repair_implemented": false,
     "real_provider_billing_verified": false,
+    "production_admitted": false
+  },
+  "mcp_observation_recovery": {
+    "acknowledged_original_intent_only": true,
+    "creation_post_never_retried": true,
+    "transient_get_failures_bounded": true,
+    "max_consecutive_observation_failures": 3,
+    "http_cap_ms": 20000,
+    "original_role_deadline_unchanged": true,
+    "authority_rate_limit_and_tls_failures_not_retried": true,
+    "stdin_close_aborts_owned_http": true,
+    "fixture_verified": false,
+    "historical_native_asr_failure_root_cause_confirmed": false,
     "production_admitted": false
   },
   "worker_failure_diagnostics": {

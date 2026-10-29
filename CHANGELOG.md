@@ -1,5 +1,15 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · MCP原工具查询恢复 / Original MCP observations
+
+- 已确认编号的暂时性GET故障只恢复原任务；连续第三次失败停止，20秒HTTP/原角色截止不变。 Resume only original acknowledged reads, with bounded failures and unchanged limits.
+- 未知创建不重发POST；授权/限流/TLS/重定向和错误回执拒绝，输入关闭只中断桥自身I/O。 No automatic creation replay or widened authority; stdin closure does not cancel durable work.
+- 当前22项专项通过，旧桥首次查询断连负向对照1项按预期失败、14未选；实际20秒超时与退出均覆盖。 Record current and legacy controls separately.
+- 原完整命令类型检查180秒超时；独立类型诊断PASS、单元73 / 73 PASS、构建build:server: PASS / build:alipay: TIMEOUT / build:douyin: PASS、单独原生FAIL: 7 passed, 1 failed, 15 pending; 36 empty/unexecuted files，不替代原FAIL，不确认历史根因。 Preserve exact source/log provenance and original caps.
+- 本轮独立原生失败发生在生成参考素材时：private_object_writes状态更新触发数据库语句超时，尚未到该用例的听音恢复断言；超时原因未确认。 The standalone native failure occurs while preparing generated references: a private_object_writes state update hits the original database statement timeout before the listening-recovery assertions. The timeout cause is unconfirmed.
+- 修正归档器报告变量遮蔽，只整理同一次原报告，不重跑应用或捏造丢失耗时。 Correct archive-only bookkeeping without a test rerun or invented timing.
+- 双语README、恢复/实施/状态和验证文档同步；36媒体/C归档原字节保留；完整修复、真实服务、58需求和生产/云端仍未完成。 Update documentation without claiming full product admission.
+
 ## 2026-10-30 · 首轮费用保留与原意图恢复 / Protected first-pass costs
 
 - 实际检查 / Actual checks: FAIL: 3 PASS / 1 FAIL / 19 pending; 35 empty files; typecheck: PASS / test: PASS / test:integration: FAIL; build:server: PASS / build:alipay: PASS / build:douyin: PASS. Types/73 units and 11 focused cost/queue cases pass. 完整命令是否通过以原记录为准，不用专项或单独构建替代。

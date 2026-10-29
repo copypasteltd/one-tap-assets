@@ -1,7 +1,7 @@
 {
   "baseline_id": "YPCC-DEV-1.1.0",
   "requirements_version": "3.1",
-  "checked_at": "2026-10-29T16:27:52.150516+00:00",
+  "checked_at": "2026-10-29T17:56:18.286232+00:00",
   "status": "PASS",
   "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
   "counts": {
@@ -10,9 +10,9 @@
     "skills": 19,
     "skill_bundles": 14,
     "development_documents": 20,
-    "base_contract_checks": 3315,
-    "codex_checks": 1461,
-    "total_checks": 4776,
+    "base_contract_checks": 3316,
+    "codex_checks": 1472,
+    "total_checks": 4788,
     "codex_synthetic_examples": 39
   },
   "product_tests_executed": false,
@@ -2469,6 +2469,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/README.md->实施/MCP原工具查询恢复与桥接回收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/README.md->实施/首轮制作费用隔离与原费用回执-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3049,6 +3054,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/RECOVERY.md->../实施/MCP原工具查询恢复与桥接回收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/guides/RECOVERY.md->../实施/首轮制作费用隔离与原费用回执-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3134,6 +3144,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/STATUS.md->../实施/MCP原工具查询恢复与桥接回收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/guides/STATUS.md->../实施/首轮制作费用隔离与原费用回执-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3179,12 +3194,12 @@
       "detail": ""
     },
     {
-      "name": "document_link:docs/guides/STATUS.md->../verification/order-budget-native-source.json",
+      "name": "document_link:docs/guides/STATUS.md->../verification/mcp-observation-native-source.json",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "document_link:docs/guides/STATUS.md->../verification/order-budget-native-source.json",
+      "name": "document_link:docs/guides/STATUS.md->../verification/mcp-observation-native-source.json",
       "status": "PASS",
       "detail": ""
     },
@@ -3204,12 +3219,12 @@
       "detail": ""
     },
     {
-      "name": "document_link:docs/verification/README.md->../实施/首轮制作费用隔离与原费用回执-v1.0.md",
+      "name": "document_link:docs/verification/README.md->../实施/MCP原工具查询恢复与桥接回收-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "document_link:docs/verification/README.md->order-budget-native-source.json",
+      "name": "document_link:docs/verification/README.md->mcp-observation-native-source.json",
       "status": "PASS",
       "detail": ""
     },
@@ -3229,6 +3244,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/verification/README.md->order-budget-native-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/verification/README.md->worker-failure-native-source.json",
       "status": "PASS",
       "detail": ""
@@ -3240,11 +3260,6 @@
     },
     {
       "name": "document_link:docs/verification/README.md->text-layout-native-source.json",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:docs/verification/README.md->text-layout-attempts.json",
       "status": "PASS",
       "detail": ""
     },
@@ -3295,6 +3310,31 @@
     },
     {
       "name": "document_link:docs/实施/Codex内容规划与受控运行接入-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/MCP原工具查询恢复与桥接回收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/MCP原工具查询恢复与桥接回收-v1.0.md->../verification/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/MCP原工具查询恢复与桥接回收-v1.0.md->../guides/QUICKSTART.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/MCP原工具查询恢复与桥接回收-v1.0.md->../../src/worker/tool-gateway/mcp-main.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/MCP原工具查询恢复与桥接回收-v1.0.md->../../tests/integration/mcp-observation.test.ts",
       "status": "PASS",
       "detail": ""
     },
@@ -3944,6 +3984,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->MCP原工具查询恢复与桥接回收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->首轮制作费用隔离与原费用回执-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -4174,6 +4219,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->MCP原工具查询恢复与桥接回收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/实施/源码实现进度-v3.1.md->首轮制作费用隔离与原费用回执-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -4194,7 +4244,7 @@
       "detail": ""
     },
     {
-      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../verification/order-budget-native-source.json",
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../verification/mcp-observation-native-source.json",
       "status": "PASS",
       "detail": ""
     },
@@ -6939,6 +6989,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:README.md->docs/实施/MCP原工具查询恢复与桥接回收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:README.md->docs/实施/完整展示文字与购买前排版校验-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -7179,7 +7234,7 @@
       "detail": ""
     },
     {
-      "name": "document_link:README.md->docs/verification/order-budget-native-source.json",
+      "name": "document_link:README.md->docs/verification/mcp-observation-native-source.json",
       "status": "PASS",
       "detail": ""
     },
