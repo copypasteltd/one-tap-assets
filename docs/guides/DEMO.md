@@ -7,6 +7,12 @@
 The media records the running browser adapter for shared mini-program screens with synthetic local transport. These are actual page captures, not repainted mockups or native-device evidence. The original product illustration and its FFmpeg motion clip are fixtures; recognition, orders, dates and delivery state are synthetic. No paid model or payment is invoked.
 
 
+最新草稿恢复 / Latest draft recovery: [操作与来源](../media/draft-resume/README.md)
+
+![草稿恢复与原规格 / Server draft recovery and original specification](../media/draft-resume/walkthrough.gif)
+
+[MP4](../media/draft-resume/walkthrough.mp4) · [WebM](../media/draft-resume/walkthrough.webm) · [截图及摘要 / Screens and hashes](../media/draft-resume/capture-manifest.json)。实际共享页面录制，合成数据，官方方案仍禁售。Actual UI recording with synthetic metadata; no real recognition, payment or native-device claim.
+
 最新拍照交互 / Latest capture flow: [逐张拍照说明](../media/photo-capture/README.md)
 
 ![逐张拍照、重拍与补图 / Sequential capture, retake and album additions](../media/photo-capture/walkthrough.gif)

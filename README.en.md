@@ -1,5 +1,7 @@
 # One Tap Assets · 一品成片
 
+New: [server draft recovery and exact-spec continuation](docs/实施/草稿恢复与方案规格续选-v1.0.md) restores live owned drafts, ready profiles and matching original plans after reopening. All four preset/variant references survive capture; missing or withdrawn versions never fall back to another variant. Seventeen unit and three native API cases plus eight browser checks pass; real login, providers and devices remain unverified.
+
 New: [sequential capture and original upload batches](docs/实施/逐张拍照与原上传批次-v1.0.md) adds one-photo camera capture, album additions, targeted retake/removal and cancellation recovery. A valid 3–5-photo set starts recognition; changed batches cannot overwrite original uploads. Ten focused cases and six shared-page checks pass. Native-device permissions still require acceptance.
 
 New: [bounded generated repair and paid-source reuse](docs/实施/生成式受限修复与原素材复用-v1.0.md) connects both silent routes to selective purchases, verified original files, fresh reference review, changed bytes, new final consensus and delivery. Two focused cases pass; seven older cases were not selected. External models/metering are synthetic. Original sold limits remain frozen; native-audio repair and live/device acceptance remain incomplete.
@@ -14,10 +16,16 @@ This repository is under active development: requirements **v3.1**, development 
 
 Quick delivery: see the [handover and startup guide](docs/delivery/README.md). Run `.\scripts\setup-local.ps1`, then `doctor`, `local:start` or `preview:serve`. `delivery:build --smoke` runs bounded builds and focused smoke checks; `delivery:package` creates a ZIP with source and successful outputs. A fully green comprehensive suite is not a packaging prerequisite.
 
-Current candidate: typecheck, ten focused cases, six browser checks, doctor and service startup PASS. Builds: server: PASS, preview: PASS, alipay: PASS, douyin: PASS. The ZIP contains complete source and this run's successful outputs. No comprehensive suite was run. Bound: 370 source files / 42 contracts / 4 resources; 86154e7c. See [delivery records](docs/delivery/current.json) and [focused provenance](docs/verification/photo-capture-source.json).
+Current candidate: typecheck, 20 focused tests, eight browser checks, doctor and owned startup PASS. Builds: server: PASS, preview: PASS, alipay: PASS, douyin: PASS. No comprehensive suite was run. Bound: 377 source files / 42 contracts / 4 resources; e398842c. See [delivery records](docs/delivery/current.json) and [focused provenance](docs/verification/draft-resume-source.json).
 
 ## Screens and recorded interaction
 
+
+最新草稿恢复 / Latest draft recovery: [操作与来源](docs/media/draft-resume/README.md)
+
+![草稿恢复与原规格 / Server draft recovery and original specification](docs/media/draft-resume/walkthrough.gif)
+
+[MP4](docs/media/draft-resume/walkthrough.mp4) · [WebM](docs/media/draft-resume/walkthrough.webm) · [截图及摘要 / Screens and hashes](docs/media/draft-resume/capture-manifest.json)。实际共享页面录制，合成数据，官方方案仍禁售。Actual UI recording with synthetic metadata; no real recognition, payment or native-device claim.
 
 最新拍照交互 / Latest capture flow: [逐张拍照说明](docs/media/photo-capture/README.md)
 

@@ -1,19 +1,18 @@
 {
-  "checked_at": "2026-10-29T21:55:13.771164+00:00",
+  "checked_at": "2026-10-29T22:18:11.718276+00:00",
   "status": "PASS_SOURCE_INTEGRITY",
-  "verification_mode": "FOCUSED_MOBILE_PHOTO_DELIVERY",
+  "verification_mode": "FOCUSED_DRAFT_AND_EXACT_SPEC_DELIVERY",
   "repository_integrity": "PASS",
   "application_checks": "SEE_EXPLICIT_FOCUSED_RESULTS",
-  "source_set_hash": "86154e7ccdd39ee77ad5a2825936e6f31deb40464e8d596628967537c41ce008",
-  "source_files": 370,
+  "source_set_hash": "e398842c4ec9c5d2b77a95efec9fcc22999502385bc4fab514ccad73959b4afb",
+  "source_files": 377,
   "runtime_contract_files": 42,
   "resource_files": 4,
-  "markdown_files": 141,
-  "local_links_verified": 1211,
+  "markdown_files": 143,
+  "local_links_verified": 1252,
   "nonportable_or_template_links_skipped": 0,
-  "media_files": 43,
-  "historical_media_files": 36,
-  "new_photo_capture_files": 7,
+  "media_files": 50,
+  "historical_media_files": 43,
   "frozen_c_files": 25,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
   "historical_evidence_unchanged": [
@@ -43,7 +42,11 @@
     "docs/verification/generated-repair-initial-role-failure-source.json",
     "docs/verification/generated-repair-initial-role-failure.json",
     "docs/verification/generated-repair-initial-timeout-source.json",
-    "docs/verification/generated-repair-initial-timeout.json"
+    "docs/verification/generated-repair-initial-timeout.json",
+    "docs/verification/photo-capture-source.json",
+    "docs/verification/photo-capture-tested-source.json",
+    "docs/verification/photo-capture-unit.json",
+    "docs/verification/photo-capture-api.json"
   ],
   "private_runtime_and_credentials_excluded": true,
   "new_browser_used": true,
@@ -53,5 +56,6 @@
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "note": "Exact source/contracts/resources, focused tests, actual shared-page screenshots/video and closed browser, historical evidence/media, local links and frozen C verified. ZIP verified separately after packaging."
+  "note": "Exact current source and builds, focused tests, recorded shared UI, closed browser, historical evidence/media, local links and C verified. ZIP verified independently after packaging.",
+  "new_draft_resume_files": 7
 }

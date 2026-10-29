@@ -1,5 +1,7 @@
 # 一品成片 · One Tap Assets
 
+2026-10-30新增[草稿恢复与方案规格续选](docs/实施/草稿恢复与方案规格续选-v1.0.md)：首页恢复本人有效草稿，素材页列出服务端草稿；已有档案无需本地分析编号。先选方案后拍照保留方案/规格的四版本引用，可继续原清单或原规格，禁售/失效不换版；17项单元和3项原生API检查、8项浏览器操作通过。真实登录/模型与真机仍待验收。
+
 2026-10-30更新[逐张拍照与原上传批次](docs/实施/逐张拍照与原上传批次-v1.0.md)：支持逐张拍摄、相册补图、单张重拍和移除，保留取消前照片；凑齐3–5张后开始识别。同批次换图禁止覆盖原上传，新照片组清除过期的本地跳转引用。10项定向检查、6项共享页面操作检查通过；真机授权仍待验收。
 
 2026-10-30新增[生成式受限修复与原素材复用](docs/实施/生成式受限修复与原素材复用-v1.0.md)：两条无声生成路线已连接选择性重制、已结算原素材复用、新参考身份核验、新文件与双新复核交付。2项定向用例通过，7项旧用例本轮未选；外部模型与计量为合成响应。原订单限制保持冻结，原生口播修复、真实服务与真机验收仍待完成。
@@ -14,8 +16,14 @@
 
 快速交付入口：[交付与启动指南](docs/delivery/README.md)。执行`.\scripts\setup-local.ps1`初始化，再用`doctor`自检、`local:start`启动后端、`preview:serve`查看共享页面。`delivery:build --smoke`只做有界构建和核心冒烟，`delivery:package`生成源码与实际成功产物ZIP；按本轮要求不等待全面测试绿灯。
 
-当前候选：类型检查、10项定向检查、6项浏览器操作、自检及服务启动通过；构建结果 server: PASS, preview: PASS, alipay: PASS, douyin: PASS。完整源码及本轮成功构建产物纳入ZIP，未运行全面测试。绑定 370 source files / 42 contracts / 4 resources; 86154e7c。见[交付记录](docs/delivery/current.json)、[本轮来源](docs/verification/photo-capture-source.json)。
+当前候选：类型检查、20项定向测试、8项浏览器操作、自检及服务启动通过；构建结果 server: PASS, preview: PASS, alipay: PASS, douyin: PASS。未运行全面测试。绑定 377 source files / 42 contracts / 4 resources; e398842c。见[交付记录](docs/delivery/current.json)、[本轮来源](docs/verification/draft-resume-source.json)。
 
+
+最新草稿恢复 / Latest draft recovery: [操作与来源](docs/media/draft-resume/README.md)
+
+![草稿恢复与原规格 / Server draft recovery and original specification](docs/media/draft-resume/walkthrough.gif)
+
+[MP4](docs/media/draft-resume/walkthrough.mp4) · [WebM](docs/media/draft-resume/walkthrough.webm) · [截图及摘要 / Screens and hashes](docs/media/draft-resume/capture-manifest.json)。实际共享页面录制，合成数据，官方方案仍禁售。Actual UI recording with synthetic metadata; no real recognition, payment or native-device claim.
 
 最新拍照交互 / Latest capture flow: [逐张拍照说明](docs/media/photo-capture/README.md)
 

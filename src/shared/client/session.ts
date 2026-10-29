@@ -2,7 +2,7 @@ import type { HostPort } from '../platform/ports.js';
 import type { DTO } from '../contracts/types.js';
 import { ApiClient, ClientError } from './api.js';
 import { fingerprint } from './sha256.js';
-export interface RecoveryIds { productId?: string; analysisId?: string; planId?: string; previewId?: string; quoteId?: string; orderId?: string; presetId?: string; presetVersion?: string; batchId?: string; photoSetHash?: string }
+export interface RecoveryIds { productId?: string; analysisId?: string; planId?: string; previewId?: string; quoteId?: string; orderId?: string; presetId?: string; presetVersion?: string; variantId?:string; variantVersion?:string; batchId?: string; photoSetHash?: string }
 export class ClientSession {
   readonly api: ApiClient; private loginPromise: Promise<void> | null = null; private account: string | null = null; private identityEpoch = 0;
   constructor(readonly host: HostPort, base: string, allowLocal = false) { this.api = new ApiClient(base, host.transport, () => { this.account = null; }, allowLocal); }
@@ -21,7 +21,8 @@ export class ClientSession {
     if (previous && previous !== session.user_id) this.host.storage.remove(`ypcc:${this.host.platform}:${previous}:recovery`);
     this.account = session.user_id; this.api.setSession(session); this.host.storage.set('ypcc:last-user', session.user_id);
   }
-  logout(): void { this.identityEpoch++; if (this.account) this.host.storage.remove(this.key('recovery')); this.api.setSession(null); this.account = null; }
+  logout(): void { this.identityEpoch++; if (this.account) this.host.storage.remove(this.key('recovery')); this.host.storage.remove('ypcc:last-user'); this.api.setSession(null); this.account = null; }
+  hasPreviousAccount():boolean {return Boolean(this.account||this.host.storage.get<string>('ypcc:last-user'));}
   private key(name: string): string { if (!this.account) throw new Error('Login required'); return `ypcc:${this.host.platform}:${this.account}:${name}`; }
   recover(): RecoveryIds { return this.account ? this.host.storage.get<RecoveryIds>(this.key('recovery')) ?? {} : {}; }
   remember(ids: {[K in keyof RecoveryIds]?:string|undefined}): void {

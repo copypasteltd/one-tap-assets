@@ -1,50 +1,50 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-29T21:55:13.771164+00:00",
+  "checked_at": "2026-10-29T22:18:11.718276+00:00",
   "status": "SOURCE_DELIVERY",
-  "scope": "FOCUSED_MOBILE_PHOTO_FLOW_AND_AVAILABLE_BUILDS",
+  "scope": "FOCUSED_DRAFT_RECOVERY_AND_EXACT_SPEC_AVAILABLE_BUILDS",
   "reason": "USER_REQUESTED_FAST_DELIVERY_WITHOUT_FULL_GREEN_REQUIREMENT",
   "original_publication_checker_status": "NOT_RUN_FOCUSED_DELIVERY",
   "checker_weakened": false,
-  "source_set_hash": "86154e7ccdd39ee77ad5a2825936e6f31deb40464e8d596628967537c41ce008",
-  "source_files": 370,
+  "source_set_hash": "e398842c4ec9c5d2b77a95efec9fcc22999502385bc4fab514ccad73959b4afb",
+  "source_files": 377,
   "builds_passed": true,
   "selected_builds_passed": true,
   "checks": [
     {
       "task": "typecheck",
       "status": "PASS",
-      "elapsed_ms": 32319,
-      "log_path": "runtime/delivery-builds/2026-10-29T21-47-44-362Z-e8a5b2f6/typecheck.log",
+      "elapsed_ms": 23904,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "build:server",
       "status": "PASS",
-      "elapsed_ms": 1881,
-      "log_path": "runtime/delivery-builds/2026-10-29T21-47-44-362Z-e8a5b2f6/server.log",
+      "elapsed_ms": 1001,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
       "status": "PASS",
-      "elapsed_ms": 4674,
-      "log_path": "runtime/delivery-builds/2026-10-29T21-47-44-362Z-e8a5b2f6/preview.log",
-      "log_sha256": "d453dcdfa39882d2310931f9742745b187f9497165c875224c5132371e9f20ab"
+      "elapsed_ms": 10285,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/preview.log",
+      "log_sha256": "4979a888422be55b66cc9a5fb08d8638cbf2024f40b39018bacebdaf0afc64b5"
     },
     {
       "task": "build:alipay",
       "status": "PASS",
-      "elapsed_ms": 148095,
-      "log_path": "runtime/delivery-builds/2026-10-29T21-47-44-362Z-e8a5b2f6/alipay.log",
-      "log_sha256": "d5363196f2ee5ff46231f53949ec71570cadfc290e1bc0a709baed19c88e32e7"
+      "elapsed_ms": 45885,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/alipay.log",
+      "log_sha256": "81590534e47d368ea554e1aaa7bc571cc81c20e018a3f4a4717e73b1b3ac4fe8"
     },
     {
       "task": "build:douyin",
       "status": "PASS",
-      "elapsed_ms": 106553,
-      "log_path": "runtime/delivery-builds/2026-10-29T21-47-44-362Z-e8a5b2f6/douyin.log",
-      "log_sha256": "ebfd835bb5776c9f6cb452a1ccb678bb481e6c0080a92cd6787495a6a200e579"
+      "elapsed_ms": 25924,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/douyin.log",
+      "log_sha256": "882a97e584d1e3438635fb7ad3376f000f422fa6563cfac1ce9ccd3b05530f76"
     }
   ],
   "local_checks": {
@@ -53,14 +53,14 @@
     "preview": "PASS"
   },
   "focused_tests": {
-    "passed": 10,
+    "passed": 20,
     "failed": 0
   },
-  "browser_checks": 6,
+  "browser_checks": 8,
   "full_suite_executed": false,
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "evidence": "docs/verification/photo-capture-source.json",
-  "historical_publication": "docs/verification/publication-3533cb4.json"
+  "evidence": "docs/verification/draft-resume-source.json",
+  "historical_publication": "docs/verification/publication-48c7df7.json"
 }

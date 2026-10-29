@@ -1,0 +1,245 @@
+{
+  "numTotalTestSuites": 3,
+  "numPassedTestSuites": 3,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 17,
+  "numPassedTests": 17,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793311907509,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "resumes only failed media and never mistakes downloaded bytes or a lost receipt for a failed native save",
+          "status": "passed",
+          "title": "resumes only failed media and never mistakes downloaded bytes or a lost receipt for a failed native save",
+          "duration": 8.387699999999995,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "requires explicit confirmation before repeating a save whose callback was interrupted",
+          "status": "passed",
+          "title": "requires explicit confirmation before repeating a save whose callback was interrupted",
+          "duration": 3.5609000000000037,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "fences an existing local save queue when the buyer changes",
+          "status": "passed",
+          "title": "fences an existing local save queue when the buyer changes",
+          "duration": 1.9002000000000407,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793311908801,
+      "endTime": 1793311908814.9001,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/album.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "hashes byte-boundaries and Unicode without requiring browser or Node globals in a mini-program",
+          "status": "passed",
+          "title": "hashes byte-boundaries and Unicode without requiring browser or Node globals in a mini-program",
+          "duration": 22.509599999999864,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects unsafe service URLs, requires the original intent and clears an expired identity",
+          "status": "passed",
+          "title": "rejects unsafe service URLs, requires the original intent and clears an expired identity",
+          "duration": 3.6192000000000917,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "does not retry unknown payment mutations and retains backpressure from the server",
+          "status": "passed",
+          "title": "does not retry unknown payment mutations and retains backpressure from the server",
+          "duration": 0.6574000000000524,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects an in-flight private response after an account switch instead of caching it for the next buyer",
+          "status": "passed",
+          "title": "rejects an in-flight private response after an account switch instead of caching it for the next buyer",
+          "duration": 0.6240000000000236,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "uses the same intent-key boundaries as both published API domains before sending a mutation",
+          "status": "passed",
+          "title": "uses the same intent-key boundaries as both published API domains before sending a mutation",
+          "duration": 62.8116,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793311909215,
+      "endTime": 1793311909305.8115,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/client.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "preserves the second specification across capture, cold login and an unknown plan ACK using one original intent",
+          "status": "passed",
+          "title": "preserves the second specification across capture, cold login and an unknown plan ACK using one original intent",
+          "duration": 10.094799999999964,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "blocks a withdrawn or missing exact variant instead of choosing the first or latest one",
+          "status": "passed",
+          "title": "blocks a withdrawn or missing exact variant instead of choosing the first or latest one",
+          "duration": 0.9257000000000062,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "preserves capture guidance and creates no plan when the current product is ineligible",
+          "status": "passed",
+          "title": "preserves capture guidance and creates no plan when the current product is ineligible",
+          "duration": 0.6822000000000799,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "resumes bound server photos with the original analysis key and no draft creation or upload",
+          "status": "passed",
+          "title": "resumes bound server photos with the original analysis key and no draft creation or upload",
+          "duration": 1.2913999999999533,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "opens a ready server profile without a local analysis ID and resumes only a matching current plan",
+          "status": "passed",
+          "title": "opens a ready server profile without a local analysis ID and resumes only a matching current plan",
+          "duration": 0.696399999999926,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "drops an expired current draft on explicit preset use while retaining the selected specification",
+          "status": "passed",
+          "title": "drops an expired current draft on explicit preset use while retaining the selected specification",
+          "duration": 0.42590000000006967,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects an account switch during public preset lookup before private calls or recovery writes",
+          "status": "passed",
+          "title": "rejects an account switch during public preset lookup before private calls or recovery writes",
+          "duration": 10.30880000000002,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects a same-account product switch while input checking before creating a plan",
+          "status": "passed",
+          "title": "rejects a same-account product switch while input checking before creating a plan",
+          "duration": 3.3396999999999935,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "explicit logout prevents automatic login restoration and discards the account recovery reference",
+          "status": "passed",
+          "title": "explicit logout prevents automatic login restoration and discards the account recovery reference",
+          "duration": 1.265800000000013,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793311908331,
+      "endTime": 1793311908360.2659,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/draft-selection.test.ts"
+    }
+  ]
+}

@@ -17,10 +17,14 @@ const order={order_id:'demo_order',quote_id:'demo_quote',channel:'alipay',curren
   payable_until:expires,job_id:'demo_job',refund_id:null,delivery_expires_at:expires,created_at:created};
 const session={access_token:'synthetic-browser-only',token_type:'Bearer' as const,expires_at:expires,user_id:'demo_user'};
 const profile={product_id:'demo_product',profile_id:'demo_profile',photo_version:1,identity_lock_id:'demo_lock',name:'柚香洗护 · 演示商品',
-  summary:'透明琥珀色瓶身，白色泵头，正面可见演示标签。内容为合成回放，不代表真实多模态识别。',unknowns:['成分与功效','未经核实的品牌和认证']};
+  summary:'透明琥珀色瓶身，白色泵头，正面可见演示标签。内容为合成回放，不代表真实多模态识别。',unknowns:['成分与功效','未经核实的品牌和认证'],
+  observations:[{feature:'瓶身',value:'透明琥珀色',status:'OBSERVED'},{feature:'结构',value:'白色按压泵头',status:'OBSERVED'}]};
+const product={product_id:'demo_product',revision:1,photo_version:1,profile_id:'demo_profile',created_at:created};
 function response(operation:string,path:string,body:any):unknown{
   switch(operation){
     case 'createPlatformSession':return session;
+    case 'listProducts':return {items:[product],next_cursor:null};
+    case 'getProduct':return product;
     case 'listPresets':return {items:summaries,next_cursor:null};
     case 'getPresetVersion':{const p=source.presets.find(p=>path.includes(`/${p.preset_id}/`))??first;return {
       preset:summaries.find(s=>s.preset_id===p.preset_id),description:`${p.style.description}；${p.rhythm.description}。`,license_summary:'官方规格仍禁售；预览不发起真实订单或付费调用。',
@@ -29,7 +33,7 @@ function response(operation:string,path:string,body:any):unknown{
     case 'listOrders':return {items:[order],next_cursor:null};
     case 'getOrder':return order;
     case 'listJobStages':return {items:['PRODUCTION','POST','QC','REVIEW_FACTS','REVIEW_STYLE','DELIVER'].map((name,i)=>({stage_id:`demo_stage_${i}`,name,state:'SUCCEEDED'}))};
-    case 'getPlan':return {plan_id:'demo_plan',state:'READY',engine:'PHOTO_LAYOUT',plan_hash:'a'.repeat(64),summary:'演示清单：同一件商品，按极简净白方案制作配套图片、短片与文案。',output_slots:firstSlots};
+    case 'getPlan':return {plan_id:'demo_plan',product_id:product.product_id,profile_id:profile.profile_id,variant_id:first.execution_variants[0]!.variant_id,state:'READY',engine:'PHOTO_LAYOUT',plan_hash:'a'.repeat(64),summary:'演示清单：同一件商品，按极简净白方案制作配套图片、短片与文案。',output_slots:firstSlots};
     case 'createQuote':return {quote_id:'demo_quote',amount_fen:0,currency:'CNY',expires_at:expires,hard_deadline_seconds:600};
     case 'createOrder':return order;
     case 'getProductProfile':return profile;
@@ -71,4 +75,8 @@ export const previewHost:HostPort={platform:'alipay',transport,storage:{get:<T>(
   download:async link=>link.url,save:async()=> 'UNKNOWN',copy:async text=>{await navigator.clipboard.writeText(text);}};
 export function attachPreview(client:{attach(session:DTO<'Session'>):void;remember(ids:Record<string,string>):void}){
   client.attach(session as DTO<'Session'>);client.remember({productId:'demo_product',analysisId:'demo_analysis',planId:'demo_plan',orderId:'demo_order'});
+  if(new URLSearchParams(location.search).get('scenario')==='draft-resume'){
+    const variant=first.execution_variants[0]!;
+    client.remember({presetId:first.preset_id,presetVersion:first.version,variantId:variant.variant_id,variantVersion:variant.version});
+  }
 }

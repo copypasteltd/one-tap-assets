@@ -1,5 +1,7 @@
 # 当前交付与功能状态 / Delivery and functional status
 
+2026-10-30新增[草稿恢复与方案规格续选](../实施/草稿恢复与方案规格续选-v1.0.md)：首页恢复本人有效草稿，素材页列出服务端草稿；已有档案无需本地分析编号。先选方案后拍照保留方案/规格的四版本引用，可继续原清单或原规格，禁售/失效不换版；17项单元和3项原生API检查、8项浏览器操作通过。真实登录/模型与真机仍待验收。
+
 2026-10-30更新[逐张拍照与原上传批次](../实施/逐张拍照与原上传批次-v1.0.md)：支持逐张拍摄、相册补图、单张重拍和移除，保留取消前照片；凑齐3–5张后开始识别。同批次换图禁止覆盖原上传，新照片组清除过期的本地跳转引用。10项定向检查、6项共享页面操作检查通过；真机授权仍待验收。
 
 2026-10-30新增[生成式受限修复与原素材复用](../实施/生成式受限修复与原素材复用-v1.0.md)：两条无声生成路线已连接选择性重制、已结算原素材复用、新参考身份核验、新文件与双新复核交付。2项定向用例通过，7项旧用例本轮未选；外部模型与计量为合成响应。原订单限制保持冻结，原生口播修复、真实服务与真机验收仍待完成。
@@ -20,21 +22,21 @@ The user requested focused delivery without a full green suite. Functional scope
 | 04 | 独立构建和逐项日志 / Isolated builds and exact logs | `delivery:build --smoke`, bounded per command |
 | 05 | 源码、文档、媒体及成功产物ZIP / Source and available outputs | `delivery:package`, per-file SHA-256 |
 
-当前绑定 / Current binding: 370 source files / 42 contracts / 4 resources; 86154e7c。
+当前绑定 / Current binding: 377 source files / 42 contracts / 4 resources; e398842c。
 
 | 编号 / No. | 检查 / Check | 实际结果 / Actual |
 | --- | --- | --- |
 | 01 | 类型 / Typecheck | PASS |
-| 02 | 照片/账户保存队列及原生API / Focused unit and API | 10 PASS / 0 FAIL |
-| 03 | 共享拍照页面实际操作 / Browser photo flow | 6 PASS; 4 PNG + MP4/WebM/GIF; native device unverified |
-| 04 | 自检/后端/共享页面服务 / Doctor/backend/replay serving | PASS / PASS / PASS |
+| 02 | 草稿/选择/原生API / Focused unit and API | 17 unit + 3 API PASS / 0 FAIL |
+| 03 | 共享草稿恢复页面 / Browser draft flow | 8 PASS; 4 PNG + MP4/WebM/GIF; native device unverified |
+| 04 | 自检/后端/页面服务 / Doctor/backend/replay | PASS / PASS / PASS |
 | 05 | server build | PASS |
 | 06 | preview build | PASS |
 | 07 | alipay build | PASS |
 | 08 | douyin build | PASS |
 | 09 | 全面测试/真机/真实服务 / Comprehensive/device/live | NOT_RUN / NOT_ADMITTED |
 
-只有本轮成功目标纳入构建交付目录，超时/失败目标保留源码及重建命令；不使用旧产物补位。完整测试及原发布检查本轮未执行，历史失败仍见[原费用来源](../verification/repair-cost-native-source.json)。本轮补录逐张拍照页面4张截图和MP4/WebM/GIF，新增7份媒体；36份原媒体及C定型稿按原摘要保留，共核对43份媒体。
+只有本轮成功目标纳入构建交付目录，超时/失败目标保留源码及重建命令；不使用旧产物补位。完整测试及原发布检查本轮未执行，历史失败仍见[原费用来源](../verification/repair-cost-native-source.json)。本轮补录草稿恢复页面4张截图和MP4/WebM/GIF，新增7份媒体；43份既有媒体及C定型稿按原摘要保留，共核对50份媒体。
 
 Only successful current builds enter the package; failed/timed-out targets retain source and rebuild instructions. The original full checker was not run this round. Historical failures remain unchanged, and the existing demonstration media is retained with its original synthetic-data scope.
 

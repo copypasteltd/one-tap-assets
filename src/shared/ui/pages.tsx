@@ -11,6 +11,9 @@ import { Favorites, Creator, DraftEditor, Rights, Publication, Moderation, Prese
 import { OptionalPreview } from './preview';
 import {LimitedRevision} from './revision';
 import {Photos} from './photos';
+import {Analysis} from './analysis';
+import {ResumeDraft,ProductDrafts} from './drafts';
+import {selectedPreset,usePreset} from '../client/preset-selection';
 export { navigate } from './base';
 
 const title = { home: '一品成片', catalog: '方案社区', library: '我的素材', photos: '拍下你的商品', analysis: '整理商品信息', preset: '方案详情', confirm: '确认素材清单', order: '我的订单', pack: '领取素材', settings: '账户与隐私', help: '帮助与反馈', favorites: '我的收藏', creator: '我的方案', draft: '编辑方案', rights: '授权资料', publication: '发布记录', moderation: '举报与申诉' };
@@ -19,11 +22,10 @@ const fulfillmentText: Record<string, string> = { NOT_STARTED: '尚未开始制�
 const stageText: Record<string, string> = { ANALYZE: '整理商品信息', PLAN: '梳理素材内容', REPAIR_PLAN: '根据检查结果优化素材', PRODUCTION: '制作画面', POST: '后期制作', QC: '检查文件规格', REVIEW_FACTS: '核验商品与内容', REVIEW_STYLE: '检查风格与体验', DELIVER: '整理完整素材包' };
 function Home() {
   const resource = useResource(() => client().api.call('listPresets', { query: { source: 'OFFICIAL', limit: 3 } }));
-  const [resume, setResume] = useState(false); useDidShow(() => setResume(Boolean(client().recover().productId)));
   return <><View className='hero'><Text className='eyebrow'>让商品的好，被看见</Text><Text className='hero-title'>拍下商品，{<Text className='marked'>成套出片</Text>}</Text>
     <Text className='hero-subtitle'>拍3–5张，自动识别商品与特点</Text>
     <View className='photo-guides'>{['整体', '角度', '细节'].map((label, i) => <View className={`photo-print print-${i}`} key={label}><Image src={`/assets/example-${i}.png`} mode='aspectFill' className='guide-photo' /><Text className='photo-label'>{label}</Text></View>)}</View><Text className='caption'>示例商品照片 · 你的照片仅用于本次制作</Text>
-    <Action onClick={() => navigate('photos')}>拍照做素材　↗</Action>{resume && <Action secondary onClick={() => navigate(client().recover().analysisId ? 'analysis' : 'photos')}>继续上次草稿</Action>}</View>
+    <Action onClick={() => navigate('photos')}>拍照做素材　↗</Action><ResumeDraft/></View>
     <View className='section-title'><Text>试试这些方案</Text><Text className='link' onClick={() => navigate('catalog')}>更多方案 →</Text></View>
     <ResourceState {...resource} retry={resource.reload} />{resource.data?.items.map(preset => <PresetCard preset={preset} key={preset.preset_id} />)}
   </>;
@@ -38,19 +40,8 @@ function Catalog() {
     {resource.items.map(preset => <PresetCard preset={preset} key={preset.preset_id} />)}<More {...resource} />
   </>;
 }
-function Analysis() {
-  const resource = useResource(async () => { await client().login(); const recovery = client().recover();
-    if (!recovery.analysisId || !recovery.productId) throw new ClientError('DRAFT_MISSING', '请选择照片后开始整理');
-    const analysis = await client().api.call('getAnalysis', { params: { analysis_id: recovery.analysisId } });
-    const profile = analysis.state === 'READY' ? await client().api.call('getProductProfile', { params: { product_id: recovery.productId } }) : null; return { analysis, profile };
-  }, value => ['QUEUED', 'ANALYZING', 'VALIDATING'].includes(value.analysis.state));
-  return <><Text className='page-headline'>{resource.data?.profile ? '已经认识你的商品' : '正在看看你的商品'}</Text><ResourceState {...resource} retry={resource.reload} />
-    {resource.data?.profile ? <><Panel><Text className='card-title'>{resource.data.profile.name ?? '你的商品'}</Text><Text>{resource.data.profile.summary}</Text><Text className='secondary'>暂不能确认：{resource.data.profile.unknowns.join('、') || '未发现需要补充的属性'}</Text></Panel><Action onClick={() => navigate('catalog')}>挑选一套方案</Action></>
-      : resource.data && ['FAILED', 'BLOCKED'].includes(resource.data.analysis.state) ? <><Notice error>这些照片暂时无法支持完整制作，请补拍整体和清晰细节。</Notice><Action onClick={() => navigate('photos')}>重新拍照</Action></> : <Notice>正在整理可见特点和照片用途。你可以离开页面，稍后从草稿继续。</Notice>}
-  </>;
-}
 function Preset() {
-  const route = useRouter(); const action = useAction(); const [selected, setSelected] = useState<string>('');
+  const route = useRouter(); const action = useAction(); const [selected, setSelected] = useState<string>(()=>{const previous=selectedPreset(client().recover());return route.params.variant_id??(previous&&previous.presetId===route.params.preset_id&&previous.presetVersion===route.params.version?previous.variantId:'');});
   const resource = useResource(() => client().api.call('getPresetVersion', { params: { preset_id: route.params.preset_id ?? '', version: route.params.version ?? '' } }));
   const detail = resource.data; const variant = detail?.variants.find(v => v.variant_id === selected) ?? detail?.variants[0];
   return <><ResourceState {...resource} retry={resource.reload} />{detail && variant && <><Text className='page-headline'>{detail.preset.name}</Text><Text className='author'>{detail.preset.source === 'OFFICIAL' ? '官方' : '社区'} · {detail.preset.author_name}</Text><Text>{detail.description}</Text>
@@ -58,13 +49,7 @@ function Preset() {
     <Panel><Text className='card-title'>这一套，将为你制作</Text><Slots slots={variant.output_slots} /><Text className='secondary'>{variant.speech_mode === 'NATIVE_ZH' ? '中文原声讲解，按实际音轨对齐字幕' : '无讲解配音'} · 成品领取期7天</Text></Panel>
     <Notice>{variant.input_guidance.join('；')}</Notice><Text className='caption'>{detail.license_summary}</Text><PresetCommunityActions detail={detail} />
     {!variant.sale_enabled || variant.admission_state !== 'ADMITTED' || variant.price_fen === null ? <Notice>这套方案还在准备中，开放后可拍照制作。</Notice> : <Action disabled={action.busy} onClick={() => void action.run(async () => {
-      await client().login(); const recovery = client().recover(); client().remember({ presetId: detail.preset.preset_id, presetVersion: detail.preset.version });
-      if (!recovery.productId) { navigate('photos'); return; }
-      const profile = await client().api.call('getProductProfile', { params: { product_id: recovery.productId } });
-      const request = { product_id: profile.product_id, photo_version: profile.photo_version, profile_id: profile.profile_id, identity_lock_id: profile.identity_lock_id, preset_id: detail.preset.preset_id, preset_version: detail.preset.version, variant_id: variant.variant_id, variant_version: variant.version };
-      const check = await client().api.call('checkVariantInput', { body: { product_id: profile.product_id, profile_id: profile.profile_id, variant_id: variant.variant_id, variant_version: variant.version }, key: client().intent('input-check', request) });
-      if (!check.eligible) throw new ClientError('MORE_PHOTOS_REQUIRED', check.capture_guidance.join('；') || '请补充商品照片');
-      const plan = await client().api.call('createPlan', { body: request, key: client().intent('plan', request) }); client().remember({ planId: plan.plan_id }); navigate('confirm', { plan_id: plan.plan_id });
+      const next=await usePreset(client(),detail,variant.variant_id);navigate(next.page,next.params);
     })}>{action.busy ? '正在整理素材清单…' : '用这个方案'}</Action>}{action.error && <Notice error>{action.error}</Notice>}
   </>}</>;
 }
@@ -85,7 +70,7 @@ function Library() {
   return <><View className='section-title'><Text>我的素材与订单</Text><Text className='link' onClick={() => navigate('settings')}>账户设置</Text></View><ResourceState {...resource} retry={resource.reload} />
     <View className='community-actions'><Button className='filter' onClick={() => navigate('favorites')}>我的收藏</Button><Button className='filter' onClick={() => navigate('creator')}>我的方案</Button><Button className='filter' onClick={() => navigate('moderation')}>举报与申诉</Button></View>
     {resource.loaded && !resource.items.length && <><Notice>还没有素材包。拍下商品，开始你的第一套。</Notice><Action onClick={() => navigate('photos')}>拍照做素材</Action></>}
-    {resource.items.map(order => <Panel key={order.order_id}><Text className='card-title'>{fulfillmentText[order.fulfillment_state]}</Text><Text className='secondary'>{paymentText[order.payment_state]} · ¥{(order.amount_fen / 100).toFixed(2)}</Text><Text className='caption'>{new Date(order.created_at).toLocaleString()}</Text><Action secondary onClick={() => navigate(order.fulfillment_state === 'DELIVERED' ? 'pack' : 'order', { order_id: order.order_id })}>{order.fulfillment_state === 'DELIVERED' ? '查看素材包' : '查看原订单'}</Action></Panel>)}<More {...resource} />
+    {resource.items.map(order => <Panel key={order.order_id}><Text className='card-title'>{fulfillmentText[order.fulfillment_state]}</Text><Text className='secondary'>{paymentText[order.payment_state]} · ¥{(order.amount_fen / 100).toFixed(2)}</Text><Text className='caption'>{new Date(order.created_at).toLocaleString()}</Text><Action secondary onClick={() => navigate(order.fulfillment_state === 'DELIVERED' ? 'pack' : 'order', { order_id: order.order_id })}>{order.fulfillment_state === 'DELIVERED' ? '查看素材包' : '查看原订单'}</Action></Panel>)}<More {...resource} /><ProductDrafts/>
   </>;
 }
 function Order() {

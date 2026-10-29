@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · 草稿恢复与方案规格续选 / Server drafts and exact-spec continuation
+
+- 首页按先前登录线索恢复身份并读取本人有效草稿；素材页新增服务端草稿分页，主动退出关闭自动恢复。 Restore owned drafts after reopening; explicit logout clears the restore hint.
+- 已有档案无需本地analysisId，已绑定照片以原分析键继续；只有商品/档案/规格一致的原清单可恢复。 Server input is authoritative; local photos are never treated as uploaded media.
+- 保留方案及规格四版本引用；资格/禁售复查、失效不换版、规划ACK丢失原键重试和账户/商品迟到保护。 Keep exact selected versions and original planning intent without creating an order or payment.
+- 类型、17单元/3原生API及8浏览器操作通过；4PNG/MP4/WebM/GIF留存，浏览器与本次服务关闭。服务端/预览/双小程序均PASS；未跑全面测试。 Bound: 377 source files / 42 contracts / 4 resources; e398842c。
+- 首次类型检查的空值错误和修正后结果分别保留；旧43媒体、C25文件/归档及历史验证不改写。 Native login/providers/billing/isolation/devices, audio repair, complete community/aftercare/Plus and cloud acceptance remain pending.
+
 ## 2026-10-30 · 逐张拍照与移动端交付 / Sequential capture and mobile delivery
 
 - 修复相机单张返回被3张门槛拒绝的问题，支持逐张累计、相册按空位补图、单张重拍、移除与取消保留。 Accept single camera returns without weakening the final 3–5-photo requirement.

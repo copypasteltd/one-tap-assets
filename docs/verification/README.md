@@ -1,3 +1,7 @@
+当前来源：[草稿恢复与方案规格续选](draft-resume-source.json)。绑定 377 source files / 42 contracts / 4 resources; e398842c；类型、17单元/3原生API、8浏览器检查与四构建/本地启动PASS。首次类型错误记录见[初次尝试](draft-resume-initial-typecheck.json)，没有重写历史结果。全面测试、原发布检查器和真实服务/真机未验。
+
+Current focused source delivery preserves all original requirements and historical evidence. The following earlier “current” paragraphs refer only to their own source snapshots.
+
 当前来源：[逐张拍照与原上传批次](photo-capture-source.json)。10项定向检查、6项浏览器操作及本地启动通过；本轮构建 server: PASS, preview: PASS, alipay: PASS, douyin: PASS。旧修复证据只证明其各自源码；全面测试未执行。Current focused checks do not supersede historical failures.
 
 以下段落属于此前各轮历史说明，当前结果以上述来源与交付记录为准。

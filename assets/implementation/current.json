@@ -3,7 +3,7 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-29T21:52:41.503Z",
+  "checked_at": "2026-10-29T22:14:36.033Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
@@ -23,8 +23,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 32319,
-      "log_path": "runtime/delivery-builds/2026-10-29T21-47-44-362Z-e8a5b2f6/typecheck.log",
+      "elapsed_ms": 23904,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -40,29 +40,29 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 1881,
-      "log_path": "runtime/delivery-builds/2026-10-29T21-47-44-362Z-e8a5b2f6/server.log",
+      "elapsed_ms": 1001,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T21-47-44-362Z-e8a5b2f6\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T22-12-47-787Z-bae54ee0\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T21-47-44-362Z-e8a5b2f6\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T22-12-47-787Z-bae54ee0\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 4674,
-      "log_path": "runtime/delivery-builds/2026-10-29T21-47-44-362Z-e8a5b2f6/preview.log",
-      "log_sha256": "d453dcdfa39882d2310931f9742745b187f9497165c875224c5132371e9f20ab"
+      "elapsed_ms": 10285,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/preview.log",
+      "log_sha256": "4979a888422be55b66cc9a5fb08d8638cbf2024f40b39018bacebdaf0afc64b5"
     },
     {
       "task": "build:alipay",
@@ -76,9 +76,9 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 148095,
-      "log_path": "runtime/delivery-builds/2026-10-29T21-47-44-362Z-e8a5b2f6/alipay.log",
-      "log_sha256": "d5363196f2ee5ff46231f53949ec71570cadfc290e1bc0a709baed19c88e32e7"
+      "elapsed_ms": 45885,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/alipay.log",
+      "log_sha256": "81590534e47d368ea554e1aaa7bc571cc81c20e018a3f4a4717e73b1b3ac4fe8"
     },
     {
       "task": "build:douyin",
@@ -92,14 +92,14 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 106553,
-      "log_path": "runtime/delivery-builds/2026-10-29T21-47-44-362Z-e8a5b2f6/douyin.log",
-      "log_sha256": "ebfd835bb5776c9f6cb452a1ccb678bb481e6c0080a92cd6787495a6a200e579"
+      "elapsed_ms": 25924,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-12-47-787Z-bae54ee0/douyin.log",
+      "log_sha256": "882a97e584d1e3438635fb7ad3376f000f422fa6563cfac1ce9ccd3b05530f76"
     }
   ],
   "suites": [],
-  "source_files": 370,
-  "source_set_hash": "86154e7ccdd39ee77ad5a2825936e6f31deb40464e8d596628967537c41ce008",
+  "source_files": 377,
+  "source_set_hash": "e398842c4ec9c5d2b77a95efec9fcc22999502385bc4fab514ccad73959b4afb",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -547,7 +547,7 @@
     },
     {
       "path": "src/preview/fixtures.ts",
-      "sha256": "dbd79f62272ae2684fe3dbee464c7062541eae191c136153ba49b31539cc0028"
+      "sha256": "9125608d8be8f856fbe19082bafb492f4f6fb821b3f4d94be09893a8f20e7f6f"
     },
     {
       "path": "src/preview/index.html",
@@ -578,6 +578,10 @@
       "sha256": "c881a86cba25bf101b69092f89b2d6e233fc9e5328d116fa0faae7f70ad9479c"
     },
     {
+      "path": "src/shared/client/drafts.ts",
+      "sha256": "60333a98ec2f0dc3a9de9c1c3ffb3cc697d3077a04963339d4903a1f3387816d"
+    },
+    {
       "path": "src/shared/client/evidence.ts",
       "sha256": "f5148ddb74b7edcf5cfd069545db4c8d13f96686904487f6874fc58fa4e2e094"
     },
@@ -590,8 +594,12 @@
       "sha256": "548a215a863dd3c929901d3d76fc8cde26d24a2616d7e0138d732db12368cf16"
     },
     {
+      "path": "src/shared/client/preset-selection.ts",
+      "sha256": "4a55f14857548d316fe7fa1adf2775615a1c8e964069e8ac72bbb70cff2c1201"
+    },
+    {
       "path": "src/shared/client/session.ts",
-      "sha256": "78c1037810f97236c5a2ef6d5d18528329550f36955132d3705d0e65b04bc5f2"
+      "sha256": "208c95fd7d2bab0f7a555458d0d1d2394dbdacaceafb38790ec63919d4a28ccf"
     },
     {
       "path": "src/shared/client/sha256.ts",
@@ -634,6 +642,10 @@
       "sha256": "72946b9897e6013dbcb878accb7ffd62a8d350874d263f86f2b8c0f1aa4f4814"
     },
     {
+      "path": "src/shared/ui/analysis.tsx",
+      "sha256": "bc379ceb54a2b41b02d01eb9a5ef677a1544b23ed117412f1a93c85fb8b69def"
+    },
+    {
       "path": "src/shared/ui/base.tsx",
       "sha256": "08270940650785ce4a5e1a26e8c03282e25e6431e61fac252b4bfe10b3b50fbf"
     },
@@ -646,8 +658,12 @@
       "sha256": "fbe86c8abd9b972b67ca4a3ce38ea0cdbf45353ba58b4f2f9cbf5725a988a84b"
     },
     {
+      "path": "src/shared/ui/drafts.tsx",
+      "sha256": "47ec5db09eb3903bfedd0661e7d70cf5a27baa64a923994f32753840ce454406"
+    },
+    {
       "path": "src/shared/ui/pages.tsx",
-      "sha256": "59f46fb11302983388a2a28bf38a4825f74fdc8e8ab2432ee27336e9dfc77bc6"
+      "sha256": "33bb2e4e3bcf2247316acb47f76be72d7098f79d766fd0cd9b24c1906a482831"
     },
     {
       "path": "src/shared/ui/photos.tsx",
@@ -1194,8 +1210,12 @@
       "sha256": "1c68723354e4d073bb3011524dbdec3941e12f1521dc59db0a9237af248d732f"
     },
     {
+      "path": "tests/integration/client-drafts.test.ts",
+      "sha256": "658cf6e7f36395b2fba5e4ee788ed8580ba7e303aedfefaf05fa944a919dbcb0"
+    },
+    {
       "path": "tests/integration/client-photos.test.ts",
-      "sha256": "33a69291089946aca011c4238a6e1763955fc08fdb9c0c24751faf30d6f909b9"
+      "sha256": "00111a537e323f543991d9c896a4541137c3d0b8c8dd36f0bf6fa166e1888d21"
     },
     {
       "path": "tests/integration/codex-inference.test.ts",
@@ -1366,6 +1386,10 @@
       "sha256": "65f5fd38f2bd676b42b4c051a056667a4d5d5aa3f964b60bdaa1c6c11c105b57"
     },
     {
+      "path": "tests/unit/draft-selection.test.ts",
+      "sha256": "f58ffb8f5a3c6b8f2015ecfaa6edd066ea40b2997a894c561c50d6b08a6b0d4b"
+    },
+    {
       "path": "tests/unit/listening.test.ts",
       "sha256": "de134edeac24d65b54b66a432ff605f66a0cd609736acf849777a2bf487413df"
     },
@@ -1524,6 +1548,10 @@
     {
       "path": "scripts/record-disclosure.ts",
       "sha256": "df2cd889c83c1504a7aab4669bc369092759dd17ce87b178a7608a7f3e1f14ae"
+    },
+    {
+      "path": "scripts/record-draft-resume.ts",
+      "sha256": "a4ab2bd75b7aaf2bc37d3f03e11b09bca5f817dc274c1586a203db4678ea9eb5"
     },
     {
       "path": "scripts/record-native-audio.ts",
@@ -1891,7 +1919,10 @@
     "native_device_ui_verified": false,
     "complete_creator_publication_flow_verified": false,
     "plus_web_implemented": false,
-    "notes": "Seventeen shared screens include creator product/rights selection, private samples, separate license/public-copy consent, submission and withdrawal. SAMPLE has seven durable stages, independent frozen costs, five synthetic roles, native PHOTO media/post/QC and sealed double review. Actual produced PNG/MP4 samples also pass approval, independent registered public copying and public byte downloads without new inference. Other publication cases use explicit READY/QC fixtures only in APP_ENV=test. Public copies have frozen 30-day consent, revoke/expiry/rights/resource checks, fenced recovery and late-PUT cleanup; signed deletion replay preserves RETENTION while USER deletion ends distribution. Native UI, generated/audio/custom-resource samples, production Bundle admission and Plus remain incomplete."
+    "notes": "Seventeen shared screens include creator product/rights selection, private samples, separate license/public-copy consent, submission and withdrawal. SAMPLE has seven durable stages, independent frozen costs, five synthetic roles, native PHOTO media/post/QC and sealed double review. Actual produced PNG/MP4 samples also pass approval, independent registered public copying and public byte downloads without new inference. Other publication cases use explicit READY/QC fixtures only in APP_ENV=test. Public copies have frozen 30-day consent, revoke/expiry/rights/resource checks, fenced recovery and late-PUT cleanup; signed deletion replay preserves RETENTION while USER deletion ends distribution. Native UI, generated/audio/custom-resource samples, production Bundle admission and Plus remain incomplete.",
+    "server_draft_list_implemented": true,
+    "exact_preset_continuation_implemented": true,
+    "draft_recovery_fixture_verified": true
   },
   "generation_implementation": {
     "provider": "VOLCENGINE_ARK",
@@ -2150,9 +2181,33 @@
     "original_batch_bound": true,
     "stale_local_navigation_cleared": true,
     "native_device_verified": false,
-    "focused_verified": true,
+    "focused_verified": false,
     "tests_passed": 10,
     "browser_checks_passed": 6,
-    "evidence": "docs/verification/photo-capture-source.json"
+    "evidence": "docs/verification/photo-capture-source.json",
+    "historical_focused_verified": true,
+    "evidence_source_set_hash": "86154e7ccdd39ee77ad5a2825936e6f31deb40464e8d596628967537c41ce008",
+    "api_upload_regression_rerun_this_round": true,
+    "entire_photo_capture_suite_rerun_this_round": false
+  },
+  "draft_recovery": {
+    "implemented": true,
+    "server_owned_active_draft_list": true,
+    "cold_login_hint_is_not_authorization": true,
+    "explicit_logout_removes_restore_hint": true,
+    "ready_profile_without_local_analysis_id": true,
+    "bound_photos_resume_original_analysis_intent": true,
+    "exact_matching_plan_restore": true,
+    "four_preset_and_variant_references_preserved": true,
+    "no_first_or_latest_variant_fallback": true,
+    "original_plan_intent_after_ack_loss": true,
+    "current_sale_and_input_gate_rechecked": true,
+    "late_account_and_product_switch_blocked": true,
+    "local_raw_photos_or_profile_persisted": false,
+    "focused_verified": true,
+    "tests_passed": 20,
+    "browser_checks_passed": 8,
+    "native_device_verified": false,
+    "evidence": "docs/verification/draft-resume-source.json"
   }
 }

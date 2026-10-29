@@ -8,6 +8,7 @@ import { LocalStorage } from '../../src/api/storage/storage';
 import { sha256, id } from '../../src/api/lib/crypto';
 import { ClientSession } from '../../src/shared/client/session';
 import { analyzePhotos } from '../../src/shared/client/photos';
+import {resumeDraft} from '../../src/shared/client/drafts';
 import type { HostPort, LocalPhoto } from '../../src/shared/platform/ports';
 let db: TestDatabase; let folder: string;
 beforeAll(async () => { db = await testDatabase(); });
@@ -37,6 +38,11 @@ it('replays a real API photo batch after analysis is unavailable without duplica
     const originalRequests=requests;
     await expect(analyzePhotos(session,[...photos].reverse(),'original-photo-batch')).rejects.toMatchObject({code:'PHOTO_BATCH_CHANGED'});
     expect(requests).toBe(originalRequests);expect(puts).toBe(3);
+    // A cold session can recover bound server photos without reopening or reuploading local files.
+    const restored=new ClientSession(host,cfg.publicBaseUrl);restored.attach({access_token:user.accessToken,user_id:user.principal.userId,token_type:'Bearer',expires_at:'2099-01-01T00:00:00Z'});
+    const productId=session.recover().productId!;
+    await expect(resumeDraft(restored,productId)).rejects.toMatchObject({code:'VISION_NOT_CONFIGURED'});
+    expect(restored.recover().productId).toBe(productId);expect(puts).toBe(3);
     for (const [table, count] of [['product_drafts', 1], ['assets', 3], ['product_photo_versions', 1]] as const) expect((await db.pool.query(`SELECT count(*)::int AS count FROM ${table} WHERE tenant_id=$1`, [user.principal.tenantId])).rows[0].count).toBe(count);
   } finally { await app.close(); }
 });
