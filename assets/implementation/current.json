@@ -3,7 +3,7 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-29T16:57:01.359Z",
+  "checked_at": "2026-10-29T19:17:32.381Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
@@ -13,14 +13,26 @@
   "commands": [
     {
       "command": "./scripts/run.ps1 typecheck",
-      "status": "FAIL",
+      "status": "PASS",
       "log_path": "runtime/test-results/typecheck.log",
-      "log_sha256": "337e7137d74573b65193337fff43b274798c7f1e03d965cf7bfeee20454fdb83"
+      "log_sha256": "baee83b0dfaf199c5fc9d717129758c4a9ee82054d3aa99f3c05b48f678721a8"
+    },
+    {
+      "command": "./scripts/run.ps1 test",
+      "status": "PASS",
+      "log_path": "runtime/test-results/test.log",
+      "log_sha256": "60b508e6514ed9140047756680d8d16801c1f2e61b8b093136a3a8ef6c558c2a"
+    },
+    {
+      "command": "./scripts/run.ps1 test:integration",
+      "status": "FAIL",
+      "log_path": "runtime/test-results/test-integration.log",
+      "log_sha256": "453ea45c9cfdab7cddadba8a0d2dc1985585ba57b0f44ef259a6b70329d8d3c9"
     }
   ],
   "suites": [],
-  "source_files": 346,
-  "source_set_hash": "fdddb4e442bf416e301da9cb68d502923ce4e0fbf784765d50bac543e1e1f11f",
+  "source_files": 350,
+  "source_set_hash": "346c8c21b939d8bd6390788ef42ae859d5a80dfaca84a38eaa10aa3b45b2c0bf",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -141,6 +153,10 @@
     {
       "path": "src/api/db/migrations/025_listening_submissions.sql",
       "sha256": "ee5eebe9a5c947685b4050c9a6cae791d6085a4980e6b82b0ed96a74ac854899"
+    },
+    {
+      "path": "src/api/db/migrations/026_repair_cost_authorizations.sql",
+      "sha256": "ea971796965669d4db5a3814ce396169e7b348caa4c9d229d95e164a2f3fffc4"
     },
     {
       "path": "src/api/db/pool.ts",
@@ -592,7 +608,7 @@
     },
     {
       "path": "src/worker/audio/listening-gateway.ts",
-      "sha256": "19280d87e4a34b83825819a695e62e39b3b1e22f93533adb6a8ea520106df365"
+      "sha256": "fa61f7d01090519426d9a20dbd93d8cdd76d6e4a15765131631487bd9509e234"
     },
     {
       "path": "src/worker/audio/order-proof.ts",
@@ -608,7 +624,7 @@
     },
     {
       "path": "src/worker/budget/reservations.ts",
-      "sha256": "b5b7041c13e072b67b93421c0fc8fb37651763c90656b4a956b91707b93cb6a3"
+      "sha256": "85fa8fff78ca8baddb255ee87d4300b5d36f1c794c3379c91ae530e75c919979"
     },
     {
       "path": "src/worker/codex/admission.ts",
@@ -616,7 +632,7 @@
     },
     {
       "path": "src/worker/codex/inference.ts",
-      "sha256": "8dea2d94cac0e49c1291f750a933860b23196cefe1f67a76a96dbd464e51cfcc"
+      "sha256": "b378626599f5d6285eb8fa709110b3d92e7579370a0f4afeb422fa9cc7aa7f75"
     },
     {
       "path": "src/worker/codex/launcher.ts",
@@ -676,7 +692,7 @@
     },
     {
       "path": "src/worker/generation/gateway.ts",
-      "sha256": "4bec72bb045c2f423e1678b79dd7a01c7fdb4ca9c33342538af10335d403544f"
+      "sha256": "6263f8f5d7b0a278212754f69f19140ac190ab9757d7a8af1362dc05199aa6f4"
     },
     {
       "path": "src/worker/generation/outputs.ts",
@@ -855,6 +871,10 @@
       "sha256": "aaa382b8236d21f11382e94b0adab8ebd9ef3e4a6faa850981d75d6ee54a4f6c"
     },
     {
+      "path": "src/worker/repair/cost-authorization.ts",
+      "sha256": "f0241cda39311c0126c0ef0606d97879129093ce88bb03a3b94936adf307aca3"
+    },
+    {
       "path": "src/worker/review/context.ts",
       "sha256": "3adee8c75665830504b62fba4737e3854cdbec7b77836ca00c2ffacde0f06df0"
     },
@@ -948,7 +968,7 @@
     },
     {
       "path": "src/worker/speech/gateway.ts",
-      "sha256": "33076c60818dc9190bfb94380ab5dbda0e958873049db55cb2bae26798e13185"
+      "sha256": "184c5b657049f45263947a84941391376b614bd869ee30debf489706a487bbcf"
     },
     {
       "path": "src/worker/speech/input.ts",
@@ -1020,7 +1040,7 @@
     },
     {
       "path": "tests/helpers/database.ts",
-      "sha256": "51b737d83152004d67f76f0a7795c60065ddbf50afe327599d42c516933d0b17"
+      "sha256": "e443b67ab33aed984d68386c1600eb99c416bc25d1c057891d34b0544b5dbe27"
     },
     {
       "path": "tests/helpers/fixtures.ts",
@@ -1177,6 +1197,14 @@
     {
       "path": "tests/integration/reference-identity.test.ts",
       "sha256": "9731da4b692faf62cf5650bc243dda5271caf3e981c5375db0e101e1f0eea9f5"
+    },
+    {
+      "path": "tests/integration/repair-authorization.test.ts",
+      "sha256": "574406732b05eaf2413fc18730b01953080375f33db6464f119c6cdd14f30fd4"
+    },
+    {
+      "path": "tests/integration/repair-costs.test.ts",
+      "sha256": "c3a44087d237685d7b5e02155b3ba20fe3b53b77570b98bd2aa605ce3dfdfa5f"
     },
     {
       "path": "tests/integration/review-delivery.test.ts",
@@ -1376,7 +1404,7 @@
     },
     {
       "path": "scripts/verify-implementation.ts",
-      "sha256": "317017dedfb165bd30d79d7e04d9f907de4a5dcf2b9212b62958477cd72dde7e"
+      "sha256": "9884d074ae31c0b3449070817a2bdd727a2940f32374716f50b362e7e6fb1075"
     },
     {
       "path": "scripts/verify-publication.ts",
@@ -1605,6 +1633,26 @@
     "payment_revocation_and_wall_clock_deadline_guard": true,
     "historical_obligations_preserved": true,
     "fixture_verified": false,
+    "automatic_media_repair_implemented": false,
+    "real_provider_billing_verified": false,
+    "production_admitted": false
+  },
+  "repair_cost_authorization": {
+    "internal_coordinator_port_only": true,
+    "original_failed_report_revalidated": true,
+    "immutable_single_order_authorization": true,
+    "new_six_stage_bindings_required": true,
+    "original_snapshot_models_deadline_and_quotas_unchanged": true,
+    "original_total_and_aftercare_hold_preserved": true,
+    "extra_paid_calls_count_released_and_zero_cost": true,
+    "affected_generation_node_max_extra_calls": 1,
+    "unknown_holds_retained": true,
+    "paid_gateways_stage_bound": true,
+    "strict_database_scope_before_spending": true,
+    "fixture_verified": false,
+    "automatic_repair_coordinator_connected": false,
+    "changed_candidate_production_implemented": false,
+    "complete_two_fresh_reviews_verified": false,
     "automatic_media_repair_implemented": false,
     "real_provider_billing_verified": false,
     "production_admitted": false

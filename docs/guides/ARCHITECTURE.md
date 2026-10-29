@@ -1,5 +1,7 @@
 # 技术结构与执行逻辑 / Architecture and execution
 
+最新费用结构：[修复费用授权与原订单额度](../实施/修复费用授权与原订单额度-v1.0.md)。新增迁移026及不可变核算授权，四个付费入口按实际阶段和租约选择费用用途；不增加模型或客户财务权限。新表只含ID/哈希/核算节点，不复制媒体、提示词或报告正文。原一次性预付许可分摊仍取原记录。Automatic repair orchestration and changed-candidate production remain unconnected.
+
 最新[原生声音最终双复核与事务交付](../实施/原生声音最终双复核与事务交付-v1.0.md)把完整双声道/全画面、原请求/响应/费用、两个独立角色和推理/工具/报告证据连接到有声事务发布。FACTS 唯一平台准备，STYLE 只读；每个消费边界重验原件、费用、授权和原截止。正向语义是刻意构造的控制响应，不代表真实模型听对。Public ordering/sales, real Chinese listening/billing/rights, native isolation and device admission remain closed. 以下历史“未接最终阶段”按本条区分内部接通与生产准入。
 
 2026-10-29增补：[异步转写与原任务回执](../实施/异步音频转写与原任务回执-v1.0.md)已实现内部POST服务：实际视频/PCM→私有单声道WAV→原任务/原费用/回执恢复→实际字级转写。`provider_submissions`增加ASR类型且与Ark分流，媒体维护器只核对已存回执。17项原生专项使用合成供应商，不代表真实中文ASR/OSS、独立听音或正式有声交付已准入。后文历史“持久ASR待实现”按本条区分内部实现与真实服务准入；原有声销售门禁保留。
@@ -69,7 +71,7 @@ Register private writes before I/O; reconcile original unknown bytes before eras
 
 业务77/管理26接口、229业务schema及71逻辑实体以`assets/development/v1.1/`及生成源为准；当前数据库25个迁移。修改契约同步生成源、产物、客户端、迁移与恢复测试，不能破坏已售快照。C设计25个基线文件与原始归档保持原字节，界面从tokens派生。[开发规范](../开发/README.md)有完整细则。
 
-The versioned development assets define 77 business/26 management endpoints, 229 business schemas and 71 logical entities; the current database has 25 migrations. Changes update generators, generated contracts, callers, migrations and recovery tests while retaining sold snapshots. The 25-file C baseline and archive remain byte-preserved; implementation uses its tokens.
+The versioned development assets define 77 business/26 management endpoints, 229 business schemas and 71 logical entities; the current database has 26 migrations. Changes update generators, generated contracts, callers, migrations and recovery tests while retaining sold snapshots. The 25-file C baseline and archive remain byte-preserved; implementation uses its tokens.
 
 ## 原生声音内核 / Native audio kernel
 

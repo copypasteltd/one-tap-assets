@@ -1,5 +1,7 @@
 # 文档目录 / Documentation index
 
+最新费用基础：[修复费用授权与原订单额度](实施/修复费用授权与原订单额度-v1.0.md)。失败独立报告重验、唯一授权、六个新阶段绑定与四个付费入口已有源码；自动问题定位、实际新候选和双新复核仍待接通。Latest: internal repair cost admission, without a complete automatic repair pipeline.
+
 最新工具恢复：[MCP原工具查询恢复与桥接回收](实施/MCP原工具查询恢复与桥接回收-v1.0.md)。暂时性读故障只查原编号，保留原时限/授权/限流与未知创建规则，输入关闭取消桥自身I/O。Latest: bounded original-intent observations and owned bridge shutdown, without confirmed historical ASR causation.
 
 最新实现：[首轮制作费用隔离与原费用回执](实施/首轮制作费用隔离与原费用回执-v1.0.md)。原总预算内同时保护修复与售后额度，UNKNOWN和原费用归属/费率不可重置；完整自动修复仍待接通。Latest: protected repair/aftercare holds and original accounting, distinct from the unfinished repair workflow.

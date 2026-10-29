@@ -6,16 +6,6 @@
 
 This repository is under active development: requirements **v3.1**, development contracts **v1.1**, and frozen **C “Yuzu Creative Studio” design v1.0**. The complete product and production admission have **not** passed; every official preset remains unavailable for sale. Shared screens, the native backend, silent packs for all three routes and private audio delivery for both generated routes are implemented. Real Codex operation, audio quality, official variants, native devices and commercial operation remain incomplete. See [implementation evidence](assets/implementation/current.json) and the [public verification summary](docs/verification/publication.json).
 
-[First-pass cost protection and original accounting](docs/实施/首轮制作费用隔离与原费用回执-v1.0.md) now protect both frozen repair and aftercare holds within the original order total. Concurrent work and UNKNOWN recovery cannot consume those holds; an original intent cannot change ownership or rates. New spending rechecks payment, revocation and the original deadline after waiting for the lock. This is a prerequisite for automatic repair; new-candidate production, resealing and two fresh reviews remain unfinished.
-
-[Original MCP observation recovery and bridge shutdown](docs/实施/MCP原工具查询恢复与桥接回收-v1.0.md) now resume only acknowledged original intents after transient read failures. The third consecutive failure stops; the existing 20-second HTTP cap and role deadline remain. Authority/rate/TLS failures are not retried, an uncertain creation POST is not repeated, and stdin closure aborts bridge-owned I/O. The historical ASR failure still has no confirmed cause.
-
-The worker adds [private failure diagnostics and log isolation](docs/实施/Worker脱敏故障诊断与日志隔离-v1.0.md). Internal events use fixed categories, allowlisted native codes and execution phases while client errors keep their existing contract. Raw errors, SQL, paths and customer content are excluded. Synchronous or asynchronous sink failures cannot change work transactions; settlement failures retain original lease recovery. See [actual verification](docs/verification/README.md). The earlier production failure and build timeout remain unresolved.
-
-The tool worker now uses [atomic claims and concurrent leases](docs/实施/工具队列原子领取与并发租约-v1.0.md). One database statement claims the original task while retaining handler filtering, UNKNOWN availability, the 45-second lease, fences and revocation checks. A controlled 64-poll empty-queue run used 64 statements instead of 192. This does not establish the cause of earlier timeouts; current full verification is reported separately.
-
-Rendered titles, copy and photo-video subtitles now receive [complete-text and pre-purchase layout checks](docs/实施/完整展示文字与购买前排版校验-v1.0.md). The pinned font is measured in actual pixels: text wraps in full or is rejected without dropping its suffix. Visible shot-intent claims share the evidence gate. Content, quotes and production purchases are preflighted; changed renderer inputs cannot replace an original media operation. Complete bounded automatic repair remains unfinished.
-
 ## Screens and recorded interaction
 
 ![Shared screens: photos, presets, production and collection](docs/media/overview.png)
@@ -137,7 +127,7 @@ flowchart LR
 | Mini-programs | Taro 4.3.1, React 18.3.1, TypeScript 5.9.3; 17 shared screens and platform ports |
 | Browser replay | Vite 8.3.5 and React DOM adapters with local fixtures |
 | Backend | Node.js 24, tested with 24.22.1; Fastify 5.12.7; worker/reaper/maintenance CLIs |
-| Persistence | Native PostgreSQL, local 17.6-1; durable stages/outbox, lease fencing and immutable receipts; 25 migrations |
+| Persistence | Native PostgreSQL, local 17.6-1; durable stages/outbox, lease fencing and immutable receipts; 26 migrations |
 | Media | Sharp 0.35.5, native FFmpeg/ffprobe, private storage and local development storage |
 | Agent | Codex app-server, bounded stdio/MCP, metered inference and style SkillBundles |
 | Verification | Vitest 5.0.5, Playwright 1.64.1, native PG/actual media and explicit synthetic provider/host fixtures |
@@ -195,10 +185,24 @@ Persist a one-time intent and atomically reserve the original order’s total bu
 
 Resuming a client session, recovering an original provider task, repairing candidate media and revising a delivery are separate flows. **The complete automatic repair pipeline is not connected.** A `repair_rounds` field or lease takeover does not produce a new candidate, new sealed packet and two fresh reviews. Rejected work remains blocked; failure, refund and release have separate states. Never force PASS or recreate an order to bypass them. Limited photo aftercare does not implement generated revisions or free platform correction. See [recovery and repair boundaries](docs/guides/RECOVERY.md) for actual handling, error codes and remaining acceptance conditions.
 
+### Implemented server constraints
+
+[First-pass cost protection and original accounting](docs/实施/首轮制作费用隔离与原费用回执-v1.0.md) now protect both frozen repair and aftercare holds within the original order total. Concurrent work and UNKNOWN recovery cannot consume those holds; an original intent cannot change ownership or rates. New spending rechecks payment, revocation and the original deadline after waiting for the lock. This is a prerequisite for automatic repair; new-candidate production, resealing and two fresh reviews remain unfinished.
+
+[Original MCP observation recovery and bridge shutdown](docs/实施/MCP原工具查询恢复与桥接回收-v1.0.md) now resume only acknowledged original intents after transient read failures. The third consecutive failure stops; the existing 20-second HTTP cap and role deadline remain. Authority/rate/TLS failures are not retried, an uncertain creation POST is not repeated, and stdin closure aborts bridge-owned I/O. The historical ASR failure still has no confirmed cause.
+
+The worker adds [private failure diagnostics and log isolation](docs/实施/Worker脱敏故障诊断与日志隔离-v1.0.md). Internal events use fixed categories, allowlisted native codes and execution phases while client errors keep their existing contract. Raw errors, SQL, paths and customer content are excluded. Synchronous or asynchronous sink failures cannot change work transactions; settlement failures retain original lease recovery. See [actual verification](docs/verification/README.md). The earlier production failure and build timeout remain unresolved.
+
+The tool worker now uses [atomic claims and concurrent leases](docs/实施/工具队列原子领取与并发租约-v1.0.md). One database statement claims the original task while retaining handler filtering, UNKNOWN availability, the 45-second lease, fences and revocation checks. A controlled 64-poll empty-queue run used 64 statements instead of 192. This does not establish the cause of earlier timeouts; current full verification is reported separately.
+
+Rendered titles, copy and photo-video subtitles now receive [complete-text and pre-purchase layout checks](docs/实施/完整展示文字与购买前排版校验-v1.0.md). The pinned font is measured in actual pixels: text wraps in full or is rejected without dropping its suffix. Visible shot-intent claims share the evidence gate. Content, quotes and production purchases are preflighted; changed renderer inputs cannot replace an original media operation. Complete bounded automatic repair remains unfinished.
+
+New: [repair cost authorization within the original order](docs/实施/修复费用授权与原订单额度-v1.0.md). The platform revalidates a failed independent report and binds one immutable authorization to six fresh candidate stages. Generation, inference, ASR and listening derive cost purpose from the actual platform stage. Original total/repair/aftercare holds, extra-call limits, deadlines and provider/role quotas remain; UNKNOWN stays occupied, released/zero-cost calls still count, and each authorized generation node permits one extra purchase. Automatic diagnosis, changed-candidate production, two fresh reviews and complete repair delivery remain unfinished.
+
 ## Repository map and docs
 
 ```text
-src/api/            API, auth, domain services, 25 SQL migrations
+src/api/            API, auth, domain services, 26 SQL migrations
 src/worker/         Durable stages, Codex, MCP, media/review/reaping/privacy
 src/shared/         Shared screens, platform ports, recovery and generated contracts
 src/mini-alipay/    Alipay shell
@@ -230,7 +234,7 @@ Root READMEs and operational guides are bilingual. Detailed historical requireme
 
 For UI evidence, start `dev:preview` and run `docs:media` in another terminal. `test:ui` invokes the same capture/assertion script. Local Edge, native FFmpeg/ffprobe and project-local Playwright recording components are required; see the [demo guide](docs/guides/DEMO.md).
 
-Current snapshot fdddb4e contains 346 source/test/config files, 42 runtime contracts and four resources. All 22 focused MCP/consumer checks pass; the previous bridge fails the first-reset-after-acknowledgement control as expected, with 14 unselected cases. The original full command times out at the unchanged 180-second type-check cap, before units/native tests. A separate type diagnostic reports PASS; independent units: 73 / 73 PASS; builds: build:server: PASS / build:alipay: TIMEOUT / build:douyin: PASS. The subsequent first standalone native suite for this source reports FAIL: 7 passed, 1 failed, 15 pending; 36 empty/unexecuted files. These separate records do not replace the failed full chain. The bridge resumes only original read observations, never repeats an uncertain POST, retains authority/rate/TLS and HTTP/role limits, and aborts only owned I/O on stdin closure. Historical ASR/restore/production/compiler faults and this round's type timeout have no confirmed cause. Complete repair, all 58 requirements and real-service/product/production/cloud admission remain unfinished. The standalone native failure occurs while preparing generated references: a private_object_writes state update hits the original database statement timeout before the listening-recovery assertions. The timeout cause is unconfirmed. See [exact provenance](docs/verification/mcp-observation-native-source.json).
+Current snapshot 346c8c21 contains 350 source/test/config files, 42 runtime contracts and four resources. All 22 focused cost/queue and failed-report admission checks pass. The initial implementation from this round fails the scope-denial control as expected (one selected failure, nine other assertions unselected in that file; other imported/unexecuted entries remain in its raw report). Native migration rehearsal from 25 to 26 preserves old UNKNOWN, actual bills, counters and the original deadline. Final original full chain: FAIL; type: PASS; units: 73 passed; native: 7 passed, 1 failed, 15 pending; 38 empty/unexecuted files. Server pre-build: PASS; mini builds: Alipay: NOT_EXECUTED; Douyin: NOT_EXECUTED. Preliminary JSONB failure, the intentionally cancelled initial full run, same-user fixture correction and diagnostic Date normalization remain separately archived. These are internal repair cost foundations; diagnosis, changed candidates, new sealed packets and two fresh reviews remain unconnected. All 58 requirements/52 P0, disabled sales and product/production/cloud false flags remain. See [exact provenance](docs/verification/repair-cost-native-source.json).
 
 完整命令未通过；源码进展与独立构建不升级为完整通过。 The full command chain fails; source progress and separate builds do not replace it.
 

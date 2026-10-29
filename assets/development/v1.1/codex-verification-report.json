@@ -1,7 +1,7 @@
 {
   "baseline_id": "YPCC-DEV-1.1.0",
   "requirements_version": "3.1",
-  "checked_at": "2026-10-29T17:56:18.286232+00:00",
+  "checked_at": "2026-10-29T19:21:02.269697+00:00",
   "status": "PASS",
   "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
   "counts": {
@@ -10,9 +10,9 @@
     "skills": 19,
     "skill_bundles": 14,
     "development_documents": 20,
-    "base_contract_checks": 3316,
-    "codex_checks": 1472,
-    "total_checks": 4788,
+    "base_contract_checks": 3319,
+    "codex_checks": 1489,
+    "total_checks": 4808,
     "codex_synthetic_examples": 39
   },
   "product_tests_executed": false,
@@ -2469,6 +2469,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/README.md->实施/修复费用授权与原订单额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/README.md->实施/MCP原工具查询恢复与桥接回收-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -2710,6 +2715,11 @@
     },
     {
       "name": "document_encoding_fences:docs/guides/ARCHITECTURE.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/ARCHITECTURE.md->../实施/修复费用授权与原订单额度-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -3054,6 +3064,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/RECOVERY.md->../实施/修复费用授权与原订单额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/guides/RECOVERY.md->../实施/MCP原工具查询恢复与桥接回收-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3144,6 +3159,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/STATUS.md->../实施/修复费用授权与原订单额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/guides/STATUS.md->../实施/MCP原工具查询恢复与桥接回收-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3194,12 +3214,12 @@
       "detail": ""
     },
     {
-      "name": "document_link:docs/guides/STATUS.md->../verification/mcp-observation-native-source.json",
+      "name": "document_link:docs/guides/STATUS.md->../verification/repair-cost-native-source.json",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "document_link:docs/guides/STATUS.md->../verification/mcp-observation-native-source.json",
+      "name": "document_link:docs/guides/STATUS.md->../verification/repair-cost-native-source.json",
       "status": "PASS",
       "detail": ""
     },
@@ -3214,17 +3234,22 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/STATUS.md->../实施/修复费用授权与原订单额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/verification/README.md",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "document_link:docs/verification/README.md->../实施/MCP原工具查询恢复与桥接回收-v1.0.md",
+      "name": "document_link:docs/verification/README.md->../实施/修复费用授权与原订单额度-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "document_link:docs/verification/README.md->mcp-observation-native-source.json",
+      "name": "document_link:docs/verification/README.md->repair-cost-native-source.json",
       "status": "PASS",
       "detail": ""
     },
@@ -3240,6 +3265,16 @@
     },
     {
       "name": "document_link:docs/verification/README.md->repository-audit.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->contracts.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->mcp-observation-native-source.json",
       "status": "PASS",
       "detail": ""
     },
@@ -3465,6 +3500,36 @@
     },
     {
       "name": "document_link:docs/实施/主库私有内容脱敏与原回执对账-v1.0.md->数据库外删除日志与原生备份恢复-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/修复费用授权与原订单额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/修复费用授权与原订单额度-v1.0.md->../../src/worker/repair/cost-authorization.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/修复费用授权与原订单额度-v1.0.md->../../src/api/db/migrations/026_repair_cost_authorizations.sql",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/修复费用授权与原订单额度-v1.0.md->../../src/worker/budget/reservations.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/修复费用授权与原订单额度-v1.0.md->../verification/repair-cost-native-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/修复费用授权与原订单额度-v1.0.md->../verification/README.md",
       "status": "PASS",
       "detail": ""
     },
@@ -4219,6 +4284,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->修复费用授权与原订单额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/实施/源码实现进度-v3.1.md->MCP原工具查询恢复与桥接回收-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -4244,7 +4314,7 @@
       "detail": ""
     },
     {
-      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../verification/mcp-observation-native-source.json",
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../verification/repair-cost-native-source.json",
       "status": "PASS",
       "detail": ""
     },
@@ -4924,6 +4994,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/开发/05-云端任务与生成管线.md->../实施/修复费用授权与原订单额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/开发/05-云端任务与生成管线.md->../实施/本人预览执行与私有恢复-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -5230,6 +5305,11 @@
     },
     {
       "name": "document_encoding_fences:docs/开发/17-交叉核验与交付门禁.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/17-交叉核验与交付门禁.md->../实施/修复费用授权与原订单额度-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -6984,36 +7064,6 @@
       "detail": ""
     },
     {
-      "name": "document_link:README.md->docs/实施/首轮制作费用隔离与原费用回执-v1.0.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:README.md->docs/实施/MCP原工具查询恢复与桥接回收-v1.0.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:README.md->docs/实施/完整展示文字与购买前排版校验-v1.0.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:README.md->docs/实施/Worker脱敏故障诊断与日志隔离-v1.0.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:README.md->docs/verification/README.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:README.md->docs/实施/工具队列原子领取与并发租约-v1.0.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
       "name": "document_link:README.md->docs/media/overview.png",
       "status": "PASS",
       "detail": ""
@@ -7149,6 +7199,41 @@
       "detail": ""
     },
     {
+      "name": "document_link:README.md->docs/实施/修复费用授权与原订单额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/实施/首轮制作费用隔离与原费用回执-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/实施/MCP原工具查询恢复与桥接回收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/实施/完整展示文字与购买前排版校验-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/实施/Worker脱敏故障诊断与日志隔离-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/verification/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/实施/工具队列原子领取与并发租约-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:README.md->docs/01-产品需求PRD.md",
       "status": "PASS",
       "detail": ""
@@ -7234,7 +7319,7 @@
       "detail": ""
     },
     {
-      "name": "document_link:README.md->docs/verification/mcp-observation-native-source.json",
+      "name": "document_link:README.md->docs/verification/repair-cost-native-source.json",
       "status": "PASS",
       "detail": ""
     },

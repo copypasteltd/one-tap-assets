@@ -7,7 +7,7 @@ import {AppError,requireThat} from '../../api/lib/errors.js';
 import {lockMediaOwner} from '../../api/modules/media-access.js';
 import {writePrivateObject,type PrivateObjectScope} from '../../api/storage/private-objects.js';
 import type {ObjectStorage} from '../../api/storage/storage.js';
-import {reserve,settle} from '../budget/reservations.js';
+import {reserveStageCost,settle} from '../budget/reservations.js';
 import {executionContext,type ExecutionContext} from '../compiler/order-context.js';
 import {assertLease,PendingExternal,type StageLease} from '../queue/leases.js';
 import {currentReviewPacket,packetImages} from '../review/context.js';
@@ -202,8 +202,8 @@ export class NativeListeningGateway extends NativeListeningReader {
         &&prior.private.contract_hash===hash(c),'LISTENING_ORIGINAL_CHANGED','同一封存包不能换输入、阶段或重新购买听音',409);return prior;}
       const count=(await db.query<{n:string}>(`SELECT count(*)::text AS n FROM provider_submissions WHERE tenant_id=$1 AND order_id=$2 AND generation_kind='LISTENING'`,[context.tenantId,context.orderId])).rows[0]!;
       requireThat(Number(count.n)<c.max_packets,'LISTENING_CALL_LIMIT','原订单听音次数已达冻结上限，不能新增购买',422);
-      const intent=`${context.tenantId}:${context.orderId}:${operation}`,reservation=await reserve(db,{tenantId:context.tenantId,orderId:context.orderId},intent,
-        c.per_request_ceiling_micro,{type:'INDEPENDENT_LISTENING',contract:c,packet_hash:prepared.summary.packet_hash});
+      const intent=`${context.tenantId}:${context.orderId}:${operation}`,reservation=await reserveStageCost(db,lease,intent,
+        c.per_request_ceiling_micro,{type:'INDEPENDENT_LISTENING',contract:c,packet_hash:prepared.summary.packet_hash},{kind:'LISTENING'});
       const submissionId=id('listening'),prefix=`${context.tenantId}/listening/${context.orderId}/${submissionId}`;
       await insert(db,'provider_submissions',{id:submissionId,tenant_id:context.tenantId,order_id:context.orderId,stage_run_id:lease.id,intent_key:intent,
         input_hash:prepared.requestHash,state:'SUBMITTING',reservation_id:reservation,generation_kind:'LISTENING',model_version_id:c.model_version_id,operation_key:operation,

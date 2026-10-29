@@ -1,6 +1,6 @@
 {
   "baseline_id": "YPCC-DEV-1.1.0",
-  "checked_at": "2026-10-29T17:56:16.364455+00:00",
+  "checked_at": "2026-10-29T19:20:54.241198+00:00",
   "status": "PASS",
   "scope": "开发文档、官方OpenAPI结构、JSON Schema/合成正负例、状态图、实体/需求/设计/工作包追踪及C留存一致性",
   "counts": {
@@ -16,9 +16,9 @@
     "requirements": 58,
     "work_packages": 20,
     "frozen_design_files": 25,
-    "checks": 3316
+    "checks": 3319
   },
-  "passed": 3316,
+  "passed": 3319,
   "failed": 0,
   "limitations": [
     "本检查仅核验文档与契约，不运行应用测试；已实现源码和局部测试证据另见 assets/implementation/current.json。",
@@ -15361,6 +15361,11 @@
       "detail": ""
     },
     {
+      "check": "local_link:docs\\开发\\05-云端任务与生成管线.md->../实施/修复费用授权与原订单额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "check": "local_link:docs\\开发\\05-云端任务与生成管线.md->../实施/本人预览执行与私有恢复-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -15727,6 +15732,11 @@
     },
     {
       "check": "balanced_fences:17-交叉核验与交付门禁.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:docs\\开发\\17-交叉核验与交付门禁.md->../实施/修复费用授权与原订单额度-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -16106,36 +16116,6 @@
       "detail": ""
     },
     {
-      "check": "local_link:README.md->docs/实施/首轮制作费用隔离与原费用回执-v1.0.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "check": "local_link:README.md->docs/实施/MCP原工具查询恢复与桥接回收-v1.0.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "check": "local_link:README.md->docs/实施/完整展示文字与购买前排版校验-v1.0.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "check": "local_link:README.md->docs/实施/Worker脱敏故障诊断与日志隔离-v1.0.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "check": "local_link:README.md->docs/verification/README.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "check": "local_link:README.md->docs/实施/工具队列原子领取与并发租约-v1.0.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
       "check": "local_link:README.md->docs/media/overview.png",
       "status": "PASS",
       "detail": ""
@@ -16271,6 +16251,41 @@
       "detail": ""
     },
     {
+      "check": "local_link:README.md->docs/实施/修复费用授权与原订单额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/实施/首轮制作费用隔离与原费用回执-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/实施/MCP原工具查询恢复与桥接回收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/实施/完整展示文字与购买前排版校验-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/实施/Worker脱敏故障诊断与日志隔离-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/verification/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/实施/工具队列原子领取与并发租约-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "check": "local_link:README.md->docs/01-产品需求PRD.md",
       "status": "PASS",
       "detail": ""
@@ -16356,7 +16371,7 @@
       "detail": ""
     },
     {
-      "check": "local_link:README.md->docs/verification/mcp-observation-native-source.json",
+      "check": "local_link:README.md->docs/verification/repair-cost-native-source.json",
       "status": "PASS",
       "detail": ""
     },

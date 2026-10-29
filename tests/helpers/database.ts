@@ -25,8 +25,8 @@ export async function account(db: TestDatabase, subject = id('testsubject')): Pr
   const session = await issueSession(db.pool, { platform: 'alipay', appId: 'dev-alipay', subjectId: subject });
   return { principal: await authenticate(db.pool, `Bearer ${session.access_token}`, db.cfg), accessToken: session.access_token };
 }
-export async function orderFixture(db: TestDatabase, ceilingMicro = 100): Promise<{ principal: Principal; orderId: string }> {
-  const { principal: p } = await account(db); const product = await createProduct(db.pool, p); const photoId = id('photos'); const profileId = id('profile'); const lockId = id('lock'); const planId = id('plan'); const quoteId = id('quote'); const orderId = id('order');
+export async function orderFixture(db: TestDatabase, ceilingMicro = 100, principal?: Principal): Promise<{ principal: Principal; orderId: string }> {
+  const p = principal ?? (await account(db)).principal; const product = await createProduct(db.pool, p); const photoId = id('photos'); const profileId = id('profile'); const lockId = id('lock'); const planId = id('plan'); const quoteId = id('quote'); const orderId = id('order');
   await insert(db.pool, 'product_photo_versions', { id: photoId, tenant_id: p.tenantId, product_id: product.product_id, revision: 1, photo_set_hash: 'a'.repeat(64), data: {} });
   await insert(db.pool, 'profile_versions', { id: profileId, tenant_id: p.tenantId, owner_id: p.userId, product_id: product.product_id, photo_version_id: photoId, revision: 1, profile_hash: 'b'.repeat(64), data: {} });
   await insert(db.pool, 'identity_locks', { id: lockId, tenant_id: p.tenantId, profile_id: profileId, hash: 'c'.repeat(64), data: {} });

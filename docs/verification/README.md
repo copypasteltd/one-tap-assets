@@ -1,37 +1,35 @@
 # 验证与发布证据 / Verification and publication evidence
 
-本轮[MCP原工具查询恢复与桥接回收](../实施/MCP原工具查询恢复与桥接回收-v1.0.md)只恢复原工具状态查询，不重发未知创建、不放宽权限/限流/TLS或原时限，并在输入关闭后停止本桥I/O。固定346份源码、42份契约和4项资源，摘要fdddb4e；原断言、配置、预算与截止保留。
+本轮[修复费用授权与原订单额度](../实施/修复费用授权与原订单额度-v1.0.md)绑定最终350份源码、42份运行契约、4项资源，摘要346c8c21。只增加内部费用基础，完整自动修复、真实服务/设备、全产品、生产与云端均未准入；官方方案全部禁售。
 
-This round adds bounded original-intent observations and owned bridge shutdown, pinned to 346 sources, 42 contracts and four resources. Original assertions, configuration, budgets and deadlines remain. Synthetic protocol responses are not real-service or production evidence.
+The final 350-source snapshot adds internal repair cost admission, with original budgets/deadlines/quotas and disabled sales. It does not certify changed-candidate repair, real providers/devices or product/production/cloud admission.
 
 | 编号 / No. | 检查 / Check | 实际结果 / Actual result |
 | --- | --- | --- |
-| 01 | 原完整命令 / Original full chain | FAIL: typecheck TIMEOUT 180s; subsequent commands not attempted |
-| 02 | 单独类型统计诊断 / Separate type diagnostic | PASS; 17001ms, original 180s cap |
-| 03 | 单独单元 / Separate units | 73 / 73 PASS |
-| 04 | 单独原生整套 / Standalone native suite | FAIL: 7 passed, 1 failed, 15 pending; 36 empty/unexecuted files |
-| 05 | 服务端/双小程序构建 / Server and both mini builds | build:server: PASS / build:alipay: TIMEOUT / build:douyin: PASS |
-| 06 | 当前MCP/工具消费者专项 / Focused current MCP/consumer | 22 / 22 PASS |
-| 07 | 旧桥断连负向对照 / Legacy reset control | EXPECTED FAIL: 1; unselected: 14 |
+| 01 | 最终原完整命令 / Final original full chain | FAIL |
+| 02 | 类型 / TypeScript | PASS |
+| 03 | 单元 / Units | 73 passed |
+| 04 | 原生整套 / Native full suite | 7 passed, 1 failed, 15 pending; 38 empty/unexecuted files |
+| 05 | 服务端预构建 / Server pre-build | PASS |
+| 06 | 双小程序构建 / Mini builds in full chain | Alipay: NOT_EXECUTED; Douyin: NOT_EXECUTED |
+| 07 | 费用/队列/失败报告授权 / Focused cost/queue/admission | 22 / 22 PASS |
+| 08 | 本轮初版归属对照 / Initial-round scope control | EXPECTED FAIL: 1; selected file: 9 unselected; raw report also retains other imported/unexecuted entries |
+| 09 | 第25→26版迁移复演 / Native migration rehearsal | PASS; old UNKNOWN/actual bills/counters/deadline retained; owned test schema removed |
 
-原完整命令在类型180秒上限处超时，未生成本轮完整命令的单元/原生报告。随后单独类型统计通过没有复现该超时；不能用它覆盖原FAIL或确认根因。独立命令与其首个本轮原生整套分别绑定同一源码和已预构建桥的实际摘要，没有复用旧原生报告。
+最终原生未通过的首个用例：`recovers only the saved original independent listening response after UNKNOWN without a second purchase`（POSTGRESQL_STATEMENT_TIMEOUT）；根因尚未确认，原断言、配置和时限保留。来源仅公开固定分类/源位置与原错误摘要，原日志留在忽略目录。
 
-The original full chain times out at its unchanged type-check cap before units/native tests. A separate diagnostic does not reproduce it, but cannot replace the FAIL or prove its cause. Independent checks and the subsequent first current-source standalone native suite retain their own evidence. No previous native report is reused.
+The first failing native case is `recovers only the saved original independent listening response after UNKNOWN without a second purchase` (POSTGRESQL_STATEMENT_TIMEOUT). Its underlying cause is unconfirmed; assertions, configuration and limits remain unchanged. Raw local diagnostics stay excluded.
 
-本轮独立原生失败发生在生成参考素材时：private_object_writes状态更新触发数据库语句超时，尚未到该用例的听音恢复断言；超时原因未确认。
+费用专项直接使用合成授权核对真实PG费用约束；独立授权用例另走实际PNG/MP4/封存包/HTTPS/stdio/MCP与原失败报告的全绑定重验。所有角色判断、用量和隔离身份都是合成控制响应，测试止于费用授权，不制作修复候选或发布素材。
 
-The standalone native failure occurs while preparing generated references: a private_object_writes state update hits the original database statement timeout before the listening-recovery assertions. The timeout cause is unconfirmed.
+Focused tests use native PostgreSQL and actual private media/protocols with deliberately synthetic roles, usage and isolation. The failed-report admission case ends at a cost grant; it does not produce or publish a repaired candidate. Focused results never replace the final original full chain.
 
-独立原生报告以逐条断言状态统计未执行项；bail停止后原Vitest顶层pending为0，不能把它当作全部执行。归档器在测试、原日志写入和源码复核完成后发生报告路径变量遮蔽错误；仅修正归档，从同一次原报告逐字节补齐记录，没有重新执行测试，丢失的整条命令耗时保持null。源文件/编译桥再次复核，原包装器摘要和恢复依据保留在来源JSON。
+初步JSONB数组绑定失败、加强归属检查而主动取消的整套、同用户多订单夹具设置错误、迁移诊断Date规范化分别保留。取消的整套只证明当次类型与73项单元通过，没有新的完整原生报告；不会混同最终346c8c21的结果。旧入口对照只重定位导入，原逻辑SHA与本轮初版快照核对；其配置合并导入了其他文件，未选/空文件按原报告记录。bail后的顶层pending不能代替逐条断言统计。
 
-Standalone counts retain actual assertion states, including pending assertions omitted by Vitest's top-level pending count after bail. A wrapper report-path shadowing error occurred after testing, log persistence and source checks. Archive-only recovery copies the same original report byte for byte without rerunning tests; unavailable total command timing stays null. Original wrapper hashes and recovery provenance are explicit.
+Preliminary failures and the intentionally cancelled run remain archived separately. That cancelled run has passing type/73-unit observations but no fresh final native report. The control verifies original initial-round source bytes and only rebases imports. Its raw skipped/empty counts remain explicit. Assertion states remain authoritative when bail makes top-level counts incomplete.
 
-来源：[本轮原工具验证](mcp-observation-native-source.json)、[实现索引](../../assets/implementation/current.json)、[实际发布检查](publication.json)、[暂存字节与媒体核验](repository-audit.json)。原日志和报告在忽略的runtime目录，公开来源保留摘要；外部模型、付款、隔离和真实用户素材不参与这些合成协议测试。
+来源：[本轮精确来源](repair-cost-native-source.json)、[实现索引](../../assets/implementation/current.json)、[实际发布检查](publication.json)、[暂存/媒体/历史留存核验](repository-audit.json)、[文档与契约](contracts.json)。原日志、报告、隔离库和诊断脚本留在忽略的runtime；Git不包含真实环境、客户媒体、凭证或数据库。
 
-Evidence links bind original local logs/reports and actual source bytes. Private runtime data remains excluded. Fixtures, separate checks and builds do not certify real providers, devices, complete repair or production.
+历史来源保持原字节：[MCP原查询](mcp-observation-native-source.json)、[首轮费用](order-budget-native-source.json)、[Worker诊断](worker-failure-native-source.json)、[原子工具队列](tool-queue-native-source.json)、[完整文字](text-layout-native-source.json)、[AI标识](disclosure-native-source.json)、[最终声音复核](audio-review-native-source.json)、[独立听音](listening-native-source.json)。它们各自绑定旧源码，不能升级为本轮完整通过。
 
-历史[费用来源](order-budget-native-source.json)保留345源码a26c133上的3通过/1失败/19挂起及35空文件、原ASR待恢复时角色结束与未复现单项；[Worker来源](worker-failure-native-source.json)、[队列来源](tool-queue-native-source.json)、[文字来源](text-layout-native-source.json)、[标识来源](disclosure-native-source.json)、[声音来源](audio-review-native-source.json)、[听音来源](listening-native-source.json)均保持原字节。新桥旧代码对照证明确定的恢复缺口，不能证明历史ASR/恢复/制作/编译异常的根因。
-
-Earlier evidence remains immutable. The controlled old-bridge failure establishes an observation-recovery gap; it does not establish the cause of historical faults.
-
-原36媒体与C25文件/归档不变；本轮无页面变更、浏览器、虚拟化或真实外部付费调用。完整自动修复、全部58需求/52P0、产品/生产/云端未完成，所有方案禁售。Original media/design bytes remain; full-product/production/cloud admission stays false.
+The repository checker runs unchanged. Any failure blocks the corresponding publication claim; authorized source progress is synchronized with the exact failed/pending results. The frozen C design and existing 36 demonstration media files remain unchanged.

@@ -1,5 +1,7 @@
 # 一品成片工作约定
 
+- 2026-10-30修复费用增补：以`docs/实施/修复费用授权与原订单额度-v1.0.md`及`repair-cost-native-source.json`为准。350源码/42契约/4资源摘要346c8c21，22费用/队列/失败报告授权专项及25→26原生迁移复演通过；本轮初版归属对照按预期失败，合并导入的其他未选/空文件按原报告留存。最终完整命令FAIL：typecheck PASS / unit 73 passed / native 7 passed, 1 failed, 15 pending; 38 empty/unexecuted files；服务端预构建PASS，双端Alipay: NOT_EXECUTED; Douyin: NOT_EXECUTED。唯一内部费用授权绑定新六阶段，实际阶段/租约/原总额/修复与售后保留/调用次数/截止不可重置，UNKNOWN及历史账单不改写；没有自动问题定位/候选重制/新包双新复核，全部58需求/52P0、禁售与产品/生产/云端false保留。初步JSONB/夹具错误、主动取消和Date诊断修正分别归档，不混同最终结果；无实际修复不得反复整套或放宽检查。正常源码提交推送持续授权。
+
 - 2026-10-30原工具恢复增补：以`docs/实施/MCP原工具查询恢复与桥接回收-v1.0.md`及`mcp-observation-native-source.json`为准。346源码/42契约/4资源摘要fdddb4e；22项MCP/消费者专项通过，旧桥对照1项按预期失败/14未选。原完整命令类型180秒超时、后续未执行；独立类型PASS、单元73 / 73 PASS、构建build:server: PASS / build:alipay: TIMEOUT / build:douyin: PASS、首次单独本轮原生FAIL: 7 passed, 1 failed, 15 pending; 36 empty/unexecuted files，单项不能覆盖完整FAIL。只恢复原编号GET、第三次连续失败停止；未知创建POST不重发，原权限/限流/TLS/HTTP20秒/角色截止保留，关闭stdin只停本桥I/O。历史根因未确认、完整修复未实现，全部58需求/52P0及禁售/产品/生产/云端false保留；无修复不得重复整套或放宽检查。
 
 - 历史2026-10-30费用边界增补：以`docs/实施/首轮制作费用隔离与原费用回执-v1.0.md`及`order-budget-native-source.json`为准。345源码/42契约/4资源摘要a26c133，类型/73单元及11费用队列专项通过；完整原生FAIL: 3 PASS / 1 FAIL / 19 pending; 35 empty files，构建build:server: PASS / build:alipay: PASS / build:douyin: PASS，完整链typecheck: PASS / test: PASS / test:integration: FAIL。原总额内修复/售后保护、原归属/金额/规范费率重放和实际锁等待截止核验已接入；历史UNKNOWN/实际账单不得改写或当免费。旧费用源码真实行锁等待对照1项按预期失败，初步整套主动取消保留，不混同最新结果。完整自动修复仍未实现，全部58项/52P0、禁售和全产品/生产/云端false保留；不得放宽断言/限额或无修复重跑整套。

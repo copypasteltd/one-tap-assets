@@ -1,33 +1,23 @@
 {
   "status": "PARTIAL_BLOCKED",
-  "checked_at": "2026-10-29T18:03:52.737861+00:00",
+  "checked_at": "2026-10-29T19:26:01.076912+00:00",
   "repository_integrity": "PASS",
   "application_checks": "FAIL",
   "publication_checker": "BLOCKED",
-  "publication_kind": "SOURCE_PROGRESS_WITH_EXPLICIT_FAILED_CHECKS",
-  "source_set_hash": "fdddb4e442bf416e301da9cb68d502923ce4e0fbf784765d50bac543e1e1f11f",
-  "source_files": 346,
+  "publication_kind": "SOURCE_PROGRESS_NOT_PRODUCTION",
+  "source_set_hash": "346c8c21b939d8bd6390788ef42ae859d5a80dfaca84a38eaa10aa3b45b2c0bf",
+  "source_files": 350,
   "runtime_contract_files": 42,
   "resource_files": 4,
-  "original_full_chain_type_timeout_ms": 180000,
-  "original_full_units_native_not_executed": true,
-  "separate_type_diagnostic": "PASS",
-  "separate_unit_tests_passed": 73,
-  "current_source_targeted_mcp_consumer_tests_passed": 22,
-  "legacy_observation_control_expected_failure_verified": true,
-  "standalone_native_complete": false,
-  "standalone_native_counts": {
-    "total": 23,
-    "passed": 7,
-    "failed": 1,
-    "pending": 0
-  },
-  "standalone_native_replaces_full_chain": false,
-  "separate_builds_passed": 2,
-  "markdown_files": 135,
-  "local_links_verified": 1125,
-  "bound_staged_files": 580,
+  "full_chain_status": "FAIL",
+  "current_source_targeted_cost_admission_tests_passed": 22,
+  "legacy_scope_control_expected_failure_verified": true,
+  "native_migration_rehearsal": "PASS",
+  "markdown_files": 136,
+  "local_links_verified": 1142,
+  "bound_staged_files": 669,
   "media_files": 36,
+  "new_browser_used": false,
   "frozen_c_files": 25,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
   "historical_evidence_unchanged": [
@@ -41,19 +31,12 @@
     "docs/verification/listening-attempts.json",
     "docs/verification/tool-queue-native-source.json",
     "docs/verification/worker-failure-native-source.json",
-    "docs/verification/order-budget-native-source.json"
+    "docs/verification/order-budget-native-source.json",
+    "docs/verification/mcp-observation-native-source.json"
   ],
   "private_runtime_and_credentials_excluded": true,
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "note": "Independent staged-byte/link/media/source integrity. The original full type timeout remains blocking; separate checks never replace it. Full repair, real-service and product admission are not inferred. The audit excludes its own hash.",
-  "standalone_native_assertion_states": {
-    "passed": 7,
-    "failed": 1,
-    "pending": 15
-  },
-  "standalone_native_empty_unexecuted_files": 36,
-  "native_archive_only_recovery": true,
-  "native_command_elapsed_ms_available": false
+  "note": "Independent staged-byte/source/link/media integrity. Fresh focused controls and migration rehearsal do not replace the original full chain. Complete automatic repair and real-service/device admission remain incomplete. This audit excludes its own hash."
 }

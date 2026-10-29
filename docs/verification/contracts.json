@@ -4,9 +4,9 @@
   "reports": [
     {
       "path": "assets/development/v1.1/verification-report.json",
-      "sha256": "58095281e8ed9b091e8cb09def9c9f3691a07c610c4cd840bd82bd3340831803",
+      "sha256": "c3b07e9594e91971b47ab7b4b22f92d6d209613ca73d06459d47465a1c361424",
       "baseline_id": "YPCC-DEV-1.1.0",
-      "checked_at": "2026-10-29T17:56:16.364455+00:00",
+      "checked_at": "2026-10-29T19:20:54.241198+00:00",
       "status": "PASS",
       "scope": "开发文档、官方OpenAPI结构、JSON Schema/合成正负例、状态图、实体/需求/设计/工作包追踪及C留存一致性",
       "counts": {
@@ -22,9 +22,9 @@
         "requirements": 58,
         "work_packages": 20,
         "frozen_design_files": 25,
-        "checks": 3316
+        "checks": 3319
       },
-      "passed": 3316,
+      "passed": 3319,
       "failed": 0,
       "limitations": [
         "本检查仅核验文档与契约，不运行应用测试；已实现源码和局部测试证据另见 assets/implementation/current.json。",
@@ -39,10 +39,10 @@
     },
     {
       "path": "assets/development/v1.1/codex-verification-report.json",
-      "sha256": "db8dd6f3453284bc4a52df1da45919881c23719e17e8d7b1330e4488d9038956",
+      "sha256": "c3569fd575865e62f061ee42ea40f579501bc7ada50ff8cf0357668cadde424e",
       "baseline_id": "YPCC-DEV-1.1.0",
       "requirements_version": "3.1",
-      "checked_at": "2026-10-29T17:56:18.286232+00:00",
+      "checked_at": "2026-10-29T19:21:02.269697+00:00",
       "status": "PASS",
       "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
       "counts": {
@@ -51,9 +51,9 @@
         "skills": 19,
         "skill_bundles": 14,
         "development_documents": 20,
-        "base_contract_checks": 3316,
-        "codex_checks": 1472,
-        "total_checks": 4788,
+        "base_contract_checks": 3319,
+        "codex_checks": 1489,
+        "total_checks": 4808,
         "codex_synthetic_examples": 39
       },
       "product_tests_executed": false,
@@ -71,5 +71,7 @@
       "errors": []
     }
   ],
-  "local_log_sha256": "90b14413b7e1fa5f26249196b8ff40174fdafe26eb3d357cf573ad50f03c6a21"
+  "local_log_sha256": "14e0d5b0c03826a1ed930426efa64c0fcf584b8deffbdc1dd8b641a4d4ddb648",
+  "local_log_path": "runtime/test-results/repair-costs-docs-final.log",
+  "source_set_hash": "346c8c21b939d8bd6390788ef42ae859d5a80dfaca84a38eaa10aa3b45b2c0bf"
 }

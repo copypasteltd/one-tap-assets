@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · 修复费用授权与原订单额度 / Repair cost authorization
+
+- 实际核验 / Actual: 350 sources (346c8c21), focused 22 PASS, migration rehearsal PASS, initial scope control EXPECTED FAIL; final original full chain FAIL: type PASS, units 73 passed, native 7 passed, 1 failed, 15 pending; 38 empty/unexecuted files. Server pre-build PASS; mini builds Alipay: NOT_EXECUTED; Douyin: NOT_EXECUTED. 单项不替代整套 / Focused checks do not replace the full chain.
+- 平台重验原失败包/独立报告，唯一授权绑定六个新候选阶段、原生成节点、修复额/额外调用上限和截止；原阶段未结束、证据不足、UNKNOWN或历史超占均阻断。 Revalidate failed evidence and bind immutable original-order cost admission; unresolved or unavailable obligations remain blocked.
+- 四个付费入口从实际数据库阶段和租约选费用用途；首轮/修复/售后仍共享原总额，每节点最多一次额外生成，释放或零金额不重置次数。 Derive purpose from the actual stage; preserve original holds and one extra purchase per authorized generation node.
+- 迁移026保留旧FIRST_PASS账单，增加不可变授权/用途/原关联与修复结算保护；本轮初版、取消和诊断修正分别归档。 Keep historical accounting and exact preliminary provenance.
+- 同步双语README、开发/恢复/状态/验证文档；原36媒体、C25文件/归档与历史来源不变。自动问题定位、新候选、新封存包和双新复核仍未接通；58需求/52P0、全部禁售和产品/生产/云端false保留。 Synchronize documentation; complete repair and product admission remain unfinished.
+
 ## 2026-10-30 · MCP原工具查询恢复 / Original MCP observations
 
 - 已确认编号的暂时性GET故障只恢复原任务；连续第三次失败停止，20秒HTTP/原角色截止不变。 Resume only original acknowledged reads, with bounded failures and unchanged limits.

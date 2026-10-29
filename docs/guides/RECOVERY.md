@@ -1,5 +1,7 @@
 # 故障恢复与修复边界 / Recovery and repair boundaries
 
+新增[修复费用授权与原订单额度](../实施/修复费用授权与原订单额度-v1.0.md)：REPAIR_COST_NOT_AUTHORIZED / REPAIR_NODE_NOT_AUTHORIZED / REPAIR_COST_LIMIT / REPAIR_NODE_CALL_EXHAUSTED均在购买前阻断；不能改用途、另开意图、释放UNKNOWN或重置轮次绕过。原订单/租约/实际锁后截止继续校验，修复和首轮各守原保留边界。The internal cost port does not recover an unknown provider purchase by buying again, nor execute a complete repair pipeline.
+
 工具查询新增[MCP原工具恢复与桥接回收](../实施/MCP原工具查询恢复与桥接回收-v1.0.md)：只有已取得编号的原工具查询可以从明确的暂时性故障恢复，连续第三次失败停止；原20秒请求/角色截止、授权/限流和TLS门禁保留。创建ACK未知不自动POST重试，桥输入关闭不取消后台任务或释放UNKNOWN费用。Acknowledged original reads may recover bounded transient failures; uncertain creation and durable accounting remain unchanged.
 
 费用恢复新增[首轮制作费用隔离与原费用回执](../实施/首轮制作费用隔离与原费用回执-v1.0.md)：首轮不能占用原修复/售后保留额，UNKNOWN仍占用原额度；旧执行超占时保留原账目并阻止新购买，不补高额度。Original accounting preserves UNKNOWN obligations and protected repair/aftercare holds. Historical over-commitment stops new purchases; it does not replenish the budget or implement automatic repair.

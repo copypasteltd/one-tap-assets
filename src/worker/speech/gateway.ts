@@ -8,7 +8,7 @@ import type {HttpResponse} from '../../api/lib/http.js';
 import type {ObjectStorage} from '../../api/storage/storage.js';
 import {writePrivateObject} from '../../api/storage/private-objects.js';
 import {lockMediaOwner} from '../../api/modules/media-access.js';
-import {reserve,settle} from '../budget/reservations.js';
+import {reserveStageCost,settle} from '../budget/reservations.js';
 import {PendingExternal,type StageLease} from '../queue/leases.js';
 import type {NativeTranscript} from '../media/native-captions.js';
 import {SpeechClient,actualSpeechTranscript,admitSpeechContract,frozenSpeechContract,speechCost,speechRequest,speechTask,type SpeechContract} from '../providers/dashscope-asr.js';
@@ -204,7 +204,7 @@ export class SpeechGateway {
       }
       requireThat((await db.query(`SELECT id FROM provider_model_versions WHERE id=$1 AND status='ADMITTED' AND data->>'capability_hash'=$2
         AND private->'speech_contract'=$3::jsonb FOR SHARE`,[c.model_version_id,hash(c),JSON.stringify(c)])).rowCount===1,'ASR_NOT_ADMITTED','原转写模型已撤销准入',503);
-      const reservation=await reserve(db,{tenantId:lease.tenant_id,orderId:lease.scope_id},intent,c.rate.ceiling_micro,{contract_hash:hash(c),rate_snapshot_id:c.rate_snapshot_id,rate:c.rate});
+      const reservation=await reserveStageCost(db,lease,intent,c.rate.ceiling_micro,{contract_hash:hash(c),rate_snapshot_id:c.rate_snapshot_id,rate:c.rate},{kind:'ASR'});
       const submissionId=id('speech'),prefix=`${lease.tenant_id}/speech/${lease.scope_id}/${submissionId}`,wavKey=`${prefix}/source.wav`;
       const url=this.store.signedReadUrl!(wavKey,new Date(Math.min(lease.deadline_at.getTime(),Date.now()+7200000))),body=speechRequest(c,url);
       await insert(db,'provider_submissions',{id:submissionId,tenant_id:lease.tenant_id,order_id:lease.scope_id,stage_run_id:lease.id,generation_kind:'ASR',model_version_id:c.model_version_id,

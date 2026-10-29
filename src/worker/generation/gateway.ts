@@ -12,7 +12,7 @@ import {writePrivateObject} from '../../api/storage/private-objects.js';
 import type {ObjectStorage} from '../../api/storage/storage.js';
 import type {HttpResponse} from '../../api/lib/http.js';
 import {object} from '../../shared/domain/json.js';
-import {reserve,settle} from '../budget/reservations.js';
+import {reserveStageCost,settle} from '../budget/reservations.js';
 import type {ExecutionContext} from '../compiler/order-context.js';
 import {inspectVideo,nativeCommand,type MediaInspection} from '../media/native.js';
 import {PendingExternal,type StageLease} from '../queue/leases.js';
@@ -294,7 +294,8 @@ export class GenerationGateway {
       requireThat((await db.query(`SELECT id FROM provider_model_versions WHERE id=$1 AND status='ADMITTED'
         AND data->>'capability_hash'=$2 AND private->'ark_contract'=$3::jsonb FOR SHARE`,[c.model_version_id,hash(c),JSON.stringify(c)])).rowCount===1,
         'GENERATION_MODEL_NOT_ADMITTED','原生成模型已撤销准入，不能发起新购买',503);
-      const reservation=await reserve(db,{tenantId:lease.tenant_id,orderId:lease.scope_id},intent,c.rate.ceiling_micro,{contract_hash:hash(c),rate_snapshot_id:c.rate_snapshot_id,rate:c.rate});
+      const reservation=await reserveStageCost(db,lease,intent,c.rate.ceiling_micro,{contract_hash:hash(c),rate_snapshot_id:c.rate_snapshot_id,rate:c.rate},
+        {kind:request.kind,operationKey:request.operation_key});
       const submissionId=id('submission'),prefix=`${lease.tenant_id}/generation/${lease.scope_id}/${submissionId}`;
       const pointer:ReceiptPointer={ordinal:0,kind:'SUBMIT',key:`${prefix}/submit.json`};
       await insert(db,'provider_submissions',{id:submissionId,tenant_id:lease.tenant_id,order_id:lease.scope_id,stage_run_id:lease.id,

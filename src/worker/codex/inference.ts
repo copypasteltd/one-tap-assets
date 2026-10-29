@@ -11,13 +11,14 @@ import { hash, id, sha256 } from '../../api/lib/crypto.js';
 import { safeHttp, type HttpResponse } from '../../api/lib/http.js';
 import { object } from '../../shared/domain/json.js';
 import { reservePlatform, settlePlatform } from '../budget/platform.js';
-import { reserve, settle } from '../budget/reservations.js';
+import { reserveStageCost, settle } from '../budget/reservations.js';
 import { authorizeTool, type ToolScope } from '../tool-gateway/http.js';
 import { toolsForRole } from '../tool-gateway/policy.js';
 import { admissionHash, checkAdmission, inferenceCost, type CodexAdmission } from './admission.js';
 import { authorizeReviewImages } from './review-images.js';
 import {reserveRevisionCost,settleRevisionCost} from '../revisions/budget.js';
 import {scopeReviewListening} from '../review/listening.js';
+import type { StageLease } from '../queue/leases.js';
 
 export interface InferenceLimits {
   max_requests: number; max_input_tokens: number; max_output_tokens: number;
@@ -206,7 +207,11 @@ export class InferenceGateway {
       const amount = Math.max(1, inferenceCost(binding.admission, inputBound, output));
       requireThat(Number(totals.cost) + amount <= binding.limits.ceiling_micro, 'CODEX_INFERENCE_BUDGET', '该推理将超过冻结的费用上限', 422);
       const requestId = id('infer'); const intentKey = `inference:${requestId}`;
-      const reservation = type === 'ORDER' ? await reserve(db, { tenantId: scope.tenant_id, orderId: scopeId }, intentKey, amount, binding.admission)
+      const costStage = type === 'ORDER' ? (await db.query<StageLease>(`SELECT * FROM stage_runs WHERE tenant_id=$1 AND id=$2
+        AND scope_type='ORDER' AND scope_id=$3 AND fencing_token=$4 AND input_hash=$5`,
+      [scope.tenant_id, scope.stage_run_id, scopeId, scope.stage_fencing_token, scope.snapshot_hash])).rows[0] : null;
+      requireThat(type !== 'ORDER' || costStage, 'COST_STAGE_INVALID', '推理费用缺少当前原订单阶段绑定', 409);
+      const reservation = type === 'ORDER' ? await reserveStageCost(db, costStage!, intentKey, amount, binding.admission, { kind: 'INFERENCE' })
         : type==='REVISION' ? await reserveRevisionCost(db,scope.tenant_id,scopeId,intentKey,amount,binding.admission)
         : await reservePlatform(db, { tenantId: scope.tenant_id, ownerId: binding.limits.owner_id, category: scope.scope_type === 'SAMPLE' ? 'CODEX_SAMPLE' : 'CODEX_PLANNING', dailyCeilingMicro: binding.limits.daily_ceiling_micro }, intentKey, amount, binding.admission);
       await insert(db, 'inference_requests', { id: requestId, tenant_id: scope.tenant_id, run_id: scope.run_id, stage_run_id: scope.stage_run_id,

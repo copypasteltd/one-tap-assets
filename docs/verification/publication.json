@@ -1,41 +1,89 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-29T17:59:33.108Z",
+  "checked_at": "2026-10-29T19:22:19.385Z",
   "status": "BLOCKED",
   "scope": "SOURCE_PROGRESS_NOT_PRODUCTION_PUBLICATION",
   "reason": "LATEST_COMMAND_CHAIN_FAILED",
   "actual_checker_exit_code": 1,
-  "actual_checker_log_path": "runtime/test-results/mcp-observation-publication.log",
-  "actual_checker_log_sha256": "906171bab80b86a47777e374254c481d50081a054721ac5c10f01b1d47480339",
-  "actual_checker_result_sha256": "43288e25eb2abae72f576ee91c6833d39715d9e650344a4d39a17ce9997e176a",
+  "actual_checker_log_path": "runtime/test-results/repair-costs-publication.log",
+  "actual_checker_log_sha256": "4e9aaf97a2a11026b889d83d0a180d8c66d89f244eeb208eb0cd866844dcb010",
+  "actual_checker_result_sha256": "c8d302c78468039fc17417c94adaccedc105729861eb41924e2eb4854a35c047",
   "actual_checker_error": "Current scope/evidence invalid",
   "checker_weakened": false,
-  "source_set_hash": "fdddb4e442bf416e301da9cb68d502923ce4e0fbf784765d50bac543e1e1f11f",
-  "implementation_evidence_sha256": "ce63d636d4811066dd56f86d3ad62197e6a3eea5f76404c5623a98ce56f7153f",
-  "source_files": 346,
+  "source_set_hash": "346c8c21b939d8bd6390788ef42ae859d5a80dfaca84a38eaa10aa3b45b2c0bf",
+  "implementation_evidence_sha256": "c59eb784088694b028ae9510e94559aab59769224d78d5503023723f34eb433a",
+  "source_files": 350,
   "runtime_contract_files": 42,
   "resource_files": 4,
   "command_checks_passed": false,
-  "original_full_chain_type_timeout_ms": 180000,
-  "full_chain_units_native_executed": false,
-  "current_source_targeted_mcp_consumer_tests_passed": 22,
-  "legacy_observation_control_expected_failure_verified": true,
-  "separate_type_diagnostic": "PASS",
-  "separate_unit_tests_passed": 73,
-  "separate_builds_passed": 2,
-  "standalone_native_complete": false,
-  "standalone_native_counts": {
-    "total": 23,
-    "passed": 7,
-    "failed": 1,
-    "pending": 0
+  "current_source_targeted_cost_admission_tests_passed": 22,
+  "legacy_scope_control_expected_failure_verified": true,
+  "native_migration_rehearsal": "PASS",
+  "full_chain_status": "FAIL",
+  "full_chain_suites": {
+    "unit": {
+      "report": {
+        "path": "runtime/test-results/repair-costs-final-full-unit.json",
+        "sha256": "c28918acd7feb458ca1cb77b88238864756a184ddb11d3fe654b890ea72ec67f"
+      },
+      "success": true,
+      "start_time_ms": 1793300140306,
+      "raw_counts": {
+        "numTotalTests": 73,
+        "numPassedTests": 73,
+        "numFailedTests": 0,
+        "numPendingTests": 0
+      },
+      "assertion_statuses": {
+        "passed": 73
+      },
+      "reported_files": 16,
+      "empty_unexecuted_files": 0,
+      "failed_cases": []
+    },
+    "integration": {
+      "report": {
+        "path": "runtime/test-results/repair-costs-final-full-integration.json",
+        "sha256": "fdf43a945abfd998738bb9234775c478d013c01e74c3c7163c2c47f18dd1812a"
+      },
+      "success": false,
+      "start_time_ms": 1793300146597,
+      "raw_counts": {
+        "numTotalTests": 23,
+        "numPassedTests": 7,
+        "numFailedTests": 1,
+        "numPendingTests": 0
+      },
+      "assertion_statuses": {
+        "passed": 7,
+        "failed": 1,
+        "pending": 15
+      },
+      "reported_files": 39,
+      "empty_unexecuted_files": 38,
+      "failed_cases": [
+        {
+          "title": "recovers only the saved original independent listening response after UNKNOWN without a second purchase",
+          "suite": "native-order.test.ts",
+          "duration_ms": 122999.96380000003,
+          "message_sha256": "a04d503ac95c0a4e065e42de3ecac3bc89b7b9a14b0e7adbc7b458f3f38f45f3",
+          "source_locations": [
+            "src/api/db/pool.ts:9",
+            "src/api/db/store.ts:50",
+            "src/worker/queue/leases.ts:86",
+            "src/worker/review/qc.ts:180"
+          ],
+          "category": "POSTGRESQL_STATEMENT_TIMEOUT",
+          "underlying_cause_confirmed": false
+        }
+      ]
+    }
   },
-  "standalone_native_replaces_full_chain": false,
   "media_files": 36,
   "integrity_verified_separately": "docs/verification/repository-audit.json",
-  "documentation_and_contract_checks": 4788,
+  "documentation_and_contract_checks": 4808,
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "note": "The unchanged publication checker rejects the failed current full chain. Separate checks and the first standalone native suite for this source retain their own results, never replacing that failure. This is source synchronization, not an approval-review rejection or production admission."
+  "note": "The unchanged checker rejects the failed final full chain. Targeted controls and migration rehearsal do not replace it. Authorized source synchronization does not certify production or complete automatic repair."
 }
