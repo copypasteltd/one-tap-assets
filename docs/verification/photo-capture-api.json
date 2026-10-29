@@ -1,0 +1,51 @@
+{
+  "numTotalTestSuites": 1,
+  "numPassedTestSuites": 1,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 1,
+  "numPassedTests": 1,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793310473172,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "replays a real API photo batch after analysis is unavailable without duplicate drafts, uploads or versions",
+          "status": "passed",
+          "title": "replays a real API photo batch after analysis is unavailable without duplicate drafts, uploads or versions",
+          "duration": 3018.280300000002,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793310493939,
+      "endTime": 1793310496957.2803,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/client-photos.test.ts"
+    }
+  ]
+}

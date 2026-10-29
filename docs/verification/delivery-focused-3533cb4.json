@@ -1,0 +1,298 @@
+{
+  "schema_version": "1.0",
+  "checked_at": "2026-10-29T21:30:09.502230+00:00",
+  "strategy": "USER_REQUESTED_FOCUSED_GENERATED_REPAIR_DELIVERY",
+  "source_set_hash": "6e73b796c8a0da1e9f1b63f0dccafb6fd40964be341305c9616dddfe6c6799e8",
+  "source_files": 366,
+  "runtime_contract_files": 42,
+  "resource_files": 4,
+  "build_report": "docs/delivery/current.json",
+  "build_checks": [
+    {
+      "task": "typecheck",
+      "status": "PASS",
+      "elapsed_ms": 12920,
+      "log_path": "runtime/delivery-builds/2026-10-29T21-25-53-130Z-b9404173/typecheck.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "build:server",
+      "status": "PASS",
+      "elapsed_ms": 671,
+      "log_path": "runtime/delivery-builds/2026-10-29T21-25-53-130Z-b9404173/server.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "components": [
+    {
+      "name": "server",
+      "status": "PASS"
+    },
+    {
+      "name": "preview",
+      "status": "NOT_RUN"
+    },
+    {
+      "name": "alipay",
+      "status": "NOT_RUN"
+    },
+    {
+      "name": "douyin",
+      "status": "NOT_RUN"
+    }
+  ],
+  "local_checks": {
+    "doctor": {
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_seconds": 90,
+      "elapsed_seconds": 4.31,
+      "log_path": "runtime/delivery/doctor-focused.log",
+      "log_sha256": "23de83965d60217c021d1effa952794f38bc4cc1854eacd591c0e69885e35a88",
+      "report": {
+        "checked_at": "2026-10-29T21:27:33.852Z",
+        "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
+        "rows": [
+          {
+            "id": "node",
+            "status": "PASS",
+            "detail": "24.22.1"
+          },
+          {
+            "id": "runtime/tools/package-manager/node_modules/pnpm/bin/pnpm.cjs",
+            "status": "PASS",
+            "detail": "present"
+          },
+          {
+            "id": "assets/presets/presets.v3.1.json",
+            "status": "PASS",
+            "detail": "present"
+          },
+          {
+            "id": "configuration",
+            "status": "PASS",
+            "detail": "environment=development; private values omitted"
+          },
+          {
+            "id": "database",
+            "status": "PASS",
+            "detail": "connected; 27 migrations"
+          },
+          {
+            "id": "ffmpeg",
+            "status": "PASS",
+            "detail": "Native executable on PATH responds"
+          },
+          {
+            "id": "ffprobe",
+            "status": "PASS",
+            "detail": "Native executable on PATH responds"
+          },
+          {
+            "id": "generation",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "codex",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "payments",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "community-publishing",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "server",
+            "status": "PRESENT_NOT_CERTIFIED",
+            "detail": "Existing default output; delivery:build records fresh isolated outputs"
+          },
+          {
+            "id": "preview",
+            "status": "PRESENT_NOT_CERTIFIED",
+            "detail": "Existing default output; delivery:build records fresh isolated outputs"
+          },
+          {
+            "id": "alipay",
+            "status": "NOT_BUILT",
+            "detail": "Run delivery:build"
+          },
+          {
+            "id": "douyin",
+            "status": "PRESENT_NOT_CERTIFIED",
+            "detail": "Existing default output; delivery:build records fresh isolated outputs"
+          },
+          {
+            "id": "catalog",
+            "status": "PASS",
+            "detail": "10 official presets; 14 variants"
+          }
+        ],
+        "full_product_verified": false,
+        "production_admitted": false
+      }
+    },
+    "backend": {
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_seconds": 90,
+      "elapsed_seconds": 3.408,
+      "log_path": "runtime/delivery/backend-focused.log",
+      "log_sha256": "31146e53bea32bde324a5c8133d4d0f4e1d170732061c15d522781bf0e2161fc",
+      "local_stack_ready": true,
+      "preview_http_ready": false
+    }
+  },
+  "compiled_bridge": {
+    "candidate_sha256": "a8b3d90fd9743d2f7f04d27829fa00ccf0460920b660c0d5cf64094da753a297",
+    "fixture_bridge_same_bytes": true
+  },
+  "focused_tests": {
+    "status": "PASS",
+    "passed": 2,
+    "failed": 0,
+    "unselected": 7,
+    "reported_files": 1,
+    "path": "docs/verification/generated-repair-tests.json",
+    "sha256": "a446104bb54334cc347ca1684277096608793cb5dd2685c358d837d7e70c7c1b",
+    "tested_source_snapshot": "docs/verification/generated-repair-tested-source.json",
+    "source_exact_match": true,
+    "coverage": [
+      "PER_SHOT_AI: selectively repair one image; reuse paid references/videos/other images",
+      "REFERENCE_FILM: regenerate reference and film; reuse other images",
+      "Reject modified prompts for unaffected sources without purchases",
+      "Fresh reference/dual reviews, actual changed bytes, immutable sold contract, once-only budget and instance release"
+    ],
+    "external_roles_and_metering": "SYNTHETIC_ONLY",
+    "actual_local_effects": [
+      "NATIVE_POSTGRESQL",
+      "HTTPS_STDIO_MCP",
+      "SHARP_PNG",
+      "FFMPEG_MP4",
+      "COST_RESERVATIONS",
+      "SEALED_PACKETS",
+      "TRANSACTIONAL_DELIVERY",
+      "INSTANCE_RELEASE"
+    ]
+  },
+  "initial_attempts": "docs/verification/generated-repair-attempts.json",
+  "prior_photo_evidence": "docs/verification/repair-candidate-source.json",
+  "prior_delivery": {
+    "source_commit": "723a727e6e4877c06bef6c99457c9b2f12cb3737",
+    "path": "docs/verification/delivery-focused-723a727.json",
+    "sha256": "4c12a82ddf8c7409ac325fab6086528bad95cd6080c3a6fda963e9b6076e98c6"
+  },
+  "full_suite_executed": false,
+  "full_suite_required_for_packaging": false,
+  "original_publication_checker_executed": false,
+  "checker_weakened": false,
+  "historical_evidence_unchanged": [
+    {
+      "path": "docs/verification/text-layout-native-source.json",
+      "sha256": "8767b7a787dafb2a674936c926ea219db362bcb7fb3755c4f4b645db3749da07"
+    },
+    {
+      "path": "docs/verification/text-layout-attempts.json",
+      "sha256": "0ac527d0d8f5ddca909e094ed6c6431e1ac24069327d88a7c3d87237c18ea8ca"
+    },
+    {
+      "path": "docs/verification/disclosure-native-source.json",
+      "sha256": "0c7458f86eb561cb06fbc0486d2bb5a1273a1ea03e57520540f74d24f9552337"
+    },
+    {
+      "path": "docs/verification/disclosure-attempts.json",
+      "sha256": "b2b28daa1665be4d80e5fb6bbd8ce63e2bb03f521c4852d18f12f9da438193c5"
+    },
+    {
+      "path": "docs/verification/audio-review-native-source.json",
+      "sha256": "73f2c5ee3e832feba155b3cfb89bc362de626d231237ef0fd2bb501750a4191b"
+    },
+    {
+      "path": "docs/verification/audio-review-attempts.json",
+      "sha256": "55b3093994d0084b6f885a6e383e28b88fa5831219beab79eeed27fb5da892e3"
+    },
+    {
+      "path": "docs/verification/listening-native-source.json",
+      "sha256": "9d7df597dd604f746923a1238df80661336fe27d05fe13454ebeac4547926f13"
+    },
+    {
+      "path": "docs/verification/listening-attempts.json",
+      "sha256": "83c7214998cd6a74e819fea11c9cc772c19df057d90085a9284816f44bc00694"
+    },
+    {
+      "path": "docs/verification/tool-queue-native-source.json",
+      "sha256": "8f4b2a8e57bcda3016fbbd5a41c274b5173a7f919989386489b06c2313b9674c"
+    },
+    {
+      "path": "docs/verification/worker-failure-native-source.json",
+      "sha256": "fbf919d88e4b3bb6b2e1ff5993fb62a4dacfd78c559bd7232f0c780b28b41846"
+    },
+    {
+      "path": "docs/verification/order-budget-native-source.json",
+      "sha256": "167ba9ad0536b66305129060143a37a70424f93134334b76ffa95696163278df"
+    },
+    {
+      "path": "docs/verification/mcp-observation-native-source.json",
+      "sha256": "de9583465a2dc719d499e07ba32f6377851daaad331f9ba8cbaf07e47f71ab2d"
+    },
+    {
+      "path": "docs/verification/repair-cost-native-source.json",
+      "sha256": "d206192f519e620ec7690171c81eb0973c91f81e82989c21b4d11bdf15d125c6"
+    },
+    {
+      "path": "docs/verification/native-order-attempts.json",
+      "sha256": "482dec916c59c6fdb465f9291619bf138548ec13e6d3e89406a152abb6753483"
+    },
+    {
+      "path": "docs/verification/native-qc-attempts.json",
+      "sha256": "f9a19248cdcd21ec6855770cb67a256469d8b9c4dbe0a806eb685ef3176e9365"
+    },
+    {
+      "path": "docs/verification/repair-candidate-source.json",
+      "sha256": "d38d9f59dbc4c8733b27f3774dfbd62bbf25b6605a2d84906650b6902533a7a9"
+    },
+    {
+      "path": "docs/verification/repair-candidate-tested-source.json",
+      "sha256": "02c9a357eef923fa78546faea70d4f4ecdc750cdc29e697716e4cbd709f2d945"
+    },
+    {
+      "path": "docs/verification/repair-candidate-tests.json",
+      "sha256": "d1dd2a4357607025577f56e686f0c224389d1984ef4d62a93ab0f20f83c31b0f"
+    },
+    {
+      "path": "docs/verification/repair-candidate-attempts.json",
+      "sha256": "364b9b231a81a6d947358193e50d780c5361feb27fcac8541a4a4acdf664f355"
+    }
+  ],
+  "frozen_c_files": 25,
+  "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
+  "existing_media_files_verified": 36,
+  "new_browser_used": false,
+  "functional_scope": {
+    "requirements": 58,
+    "p0": 52,
+    "routes": 3,
+    "official_styles": 10,
+    "minimum_variants": 14
+  },
+  "photo_repair_connected": true,
+  "generated_silent_repair_connected": true,
+  "native_audio_repair_connected": false,
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false,
+  "limitations": [
+    "Native-audio repair requires a sold additional-ASR allowance and remains blocked",
+    "Live providers/Codex isolation/devices/official full variants/production not admitted",
+    "Preview and both mini-program builds not rerun; no stale outputs packaged",
+    "Comprehensive suite and seven unselected generated-production cases not rerun",
+    "Initial timeout and generic role failure retained; exact timeout cause not established"
+  ],
+  "canonical_generated_repair_provenance": "docs/verification/generated-repair-source.json"
+}

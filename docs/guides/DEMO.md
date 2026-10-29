@@ -6,6 +6,13 @@
 
 The media records the running browser adapter for shared mini-program screens with synthetic local transport. These are actual page captures, not repainted mockups or native-device evidence. The original product illustration and its FFmpeg motion clip are fixtures; recognition, orders, dates and delivery state are synthetic. No paid model or payment is invoked.
 
+
+最新拍照交互 / Latest capture flow: [逐张拍照说明](../media/photo-capture/README.md)
+
+![逐张拍照、重拍与补图 / Sequential capture, retake and album additions](../media/photo-capture/walkthrough.gif)
+
+[MP4](../media/photo-capture/walkthrough.mp4) · [WebM](../media/photo-capture/walkthrough.webm) · [实际截图与来源](../media/photo-capture/capture-manifest.json)。实际共享页面录制，使用自绘合成商品，非宿主真机或真实识别/付款证明。Actual shared-page recording with synthetic photos; native-device and live-service acceptance remain separate.
+
 ![四页总览 / Four-screen overview](../media/overview.png)
 
 ![操作GIF / Interaction GIF](../media/walkthrough.gif)

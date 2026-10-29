@@ -2,7 +2,7 @@ import type { HostPort } from '../platform/ports.js';
 import type { DTO } from '../contracts/types.js';
 import { ApiClient, ClientError } from './api.js';
 import { fingerprint } from './sha256.js';
-export interface RecoveryIds { productId?: string; analysisId?: string; planId?: string; previewId?: string; quoteId?: string; orderId?: string; presetId?: string; presetVersion?: string; batchId?: string }
+export interface RecoveryIds { productId?: string; analysisId?: string; planId?: string; previewId?: string; quoteId?: string; orderId?: string; presetId?: string; presetVersion?: string; batchId?: string; photoSetHash?: string }
 export class ClientSession {
   readonly api: ApiClient; private loginPromise: Promise<void> | null = null; private account: string | null = null; private identityEpoch = 0;
   constructor(readonly host: HostPort, base: string, allowLocal = false) { this.api = new ApiClient(base, host.transport, () => { this.account = null; }, allowLocal); }
@@ -24,7 +24,13 @@ export class ClientSession {
   logout(): void { this.identityEpoch++; if (this.account) this.host.storage.remove(this.key('recovery')); this.api.setSession(null); this.account = null; }
   private key(name: string): string { if (!this.account) throw new Error('Login required'); return `ypcc:${this.host.platform}:${this.account}:${name}`; }
   recover(): RecoveryIds { return this.account ? this.host.storage.get<RecoveryIds>(this.key('recovery')) ?? {} : {}; }
-  remember(ids: RecoveryIds): void { this.host.storage.set(this.key('recovery'), { ...this.recover(), ...ids }); }
+  remember(ids: {[K in keyof RecoveryIds]?:string|undefined}): void {
+    const next={...this.recover()};
+    for(const [name,value] of Object.entries(ids)){
+      const key=name as keyof RecoveryIds;if(value===undefined)delete next[key];else next[key]=value;
+    }
+    this.host.storage.set(this.key('recovery'),next);
+  }
   // Deterministic within the original logical action, including after a transport timeout or process restart.
   intent(action: string, input: unknown): string { return `ui:${fingerprint(`${this.host.platform}:${this.account}:${action}:${JSON.stringify(input)}`)}`; }
   installation(): string {

@@ -3,7 +3,7 @@ import {endpoints} from '../shared/contracts/endpoints.generated';
 import type {Transport} from '../shared/client/api';
 import type {HostPort} from '../shared/platform/ports';
 import type {DTO} from '../shared/contracts/types';
-import {fingerprint} from '../shared/client/sha256';
+import {digest} from '../shared/client/sha256';
 
 const expires='2030-10-28T12:00:00.000Z',created='2026-10-28T08:00:00.000Z';
 const memory=new Map<string,unknown>();
@@ -51,8 +51,22 @@ const transport:Transport=async request=>{
   try{return {status:200,headers:{},data:{data:response(found[0],path,request.body?JSON.parse(String(request.body)):null)}};}
   catch{return {status:409,headers:{},data:{error:{code:'PREVIEW_ONLY',message:'该操作需要真实服务，本回放不执行'}}};}
 };
+let photoSequence=0;
 export const previewHost:HostPort={platform:'alipay',transport,storage:{get:<T>(key:string)=>(memory.get(key)??null) as T|null,set:(k,v)=>{memory.set(k,v);},remove:k=>{memory.delete(k);}},
-  login:async()=> 'synthetic-browser-code',choosePhotos:async()=>{const bytes=await (await fetch('/product-card.png')).arrayBuffer();return [0,1,2].map(i=>({path:`/product-card.png?view=${i}`,bytes,width:1080,height:1440,mime:'image/png' as const,sha256:fingerprint(`synthetic-${i}`)}));},
+  login:async()=> 'synthetic-browser-code',choosePhotos:async options=>{
+    const bitmap=await createImageBitmap(await(await fetch('/product-card.png')).blob());
+    try{
+      const photos=[],count=options?.source==='camera'?1:Math.min(options?.count??3,3);
+      for(let i=0;i<count;i++){
+        const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=1440;
+        const paint=canvas.getContext('2d')!;paint.drawImage(bitmap,0,0,canvas.width,canvas.height);
+        paint.fillStyle='#CFE9D6';paint.fillRect(24,1340,400,70);paint.fillStyle='#263B32';paint.font='32px sans-serif';
+        paint.fillText(`演示照片 ${++photoSequence}`,40,1386);
+        const blob=await new Promise<Blob>(resolve=>canvas.toBlob(value=>resolve(value!),'image/png')),bytes=await blob.arrayBuffer();
+        photos.push({path:canvas.toDataURL('image/png'),bytes,width:1080,height:1440,mime:'image/png' as const,sha256:digest(new Uint8Array(bytes))});
+      }return photos;
+    }finally{bitmap.close();}
+  },
   upload:async()=>{throw new Error('Browser replay cannot upload private photos');},pay:async()=>{throw new Error('Browser replay cannot perform payments');},
   download:async link=>link.url,save:async()=> 'UNKNOWN',copy:async text=>{await navigator.clipboard.writeText(text);}};
 export function attachPreview(client:{attach(session:DTO<'Session'>):void;remember(ids:Record<string,string>):void}){

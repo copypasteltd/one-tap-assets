@@ -2,9 +2,7 @@ import React, { useCallback, useEffect, useRef, useState, type ReactNode } from 
 import Taro, { useDidShow, useDidHide, useRouter } from '@tarojs/taro';
 import { View, Text, Button, Image, Video, Switch, Textarea } from '@tarojs/components';
 import type { DTO } from '../contracts/types';
-import type { LocalPhoto } from '../platform/ports';
 import { ClientError } from '../client/api';
-import { analyzePhotos } from '../client/photos';
 import { AlbumQueue, type AlbumItem } from '../client/album';
 import { client } from './runtime';
 import './theme.css';
@@ -12,6 +10,7 @@ import { Action, Notice, Panel, useAction, useResource, usePagedResource, Resour
 import { Favorites, Creator, DraftEditor, Rights, Publication, Moderation, PresetCommunityActions } from './community';
 import { OptionalPreview } from './preview';
 import {LimitedRevision} from './revision';
+import {Photos} from './photos';
 export { navigate } from './base';
 
 const title = { home: '一品成片', catalog: '方案社区', library: '我的素材', photos: '拍下你的商品', analysis: '整理商品信息', preset: '方案详情', confirm: '确认素材清单', order: '我的订单', pack: '领取素材', settings: '账户与隐私', help: '帮助与反馈', favorites: '我的收藏', creator: '我的方案', draft: '编辑方案', rights: '授权资料', publication: '发布记录', moderation: '举报与申诉' };
@@ -37,15 +36,6 @@ function Catalog() {
     <View className='community-actions'><Button className='filter' onClick={() => navigate('favorites')}>我的收藏</Button><Button className='filter' onClick={() => navigate('creator')}>我的方案</Button></View>
     <ResourceState {...resource} retry={resource.reload} />{resource.loaded && !resource.items.length && <Notice>还没有这一类方案，先看看官方方案。</Notice>}
     {resource.items.map(preset => <PresetCard preset={preset} key={preset.preset_id} />)}<More {...resource} />
-  </>;
-}
-function Photos() {
-  const [photos, setPhotos] = useState<LocalPhoto[]>([]); const [batch, setBatch] = useState(''); const action = useAction();
-  return <><Text className='page-headline'>把商品拍清楚，<Text className='marked'>剩下的交给我们。</Text></Text><Notice>整体、侧面和细节各拍一张。保持同一件商品，颜色和包装尽量清晰。</Notice>
-    <View className='selected-photos'>{photos.map(photo => <Image key={photo.sha256} src={photo.path} mode='aspectFit' className='selected-photo' />)}</View>
-    <Action disabled={action.busy} secondary={photos.length > 0} onClick={() => void action.run(async () => { const chosen = await client().host.choosePhotos(); setPhotos(chosen); setBatch(`batch-${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`); })}>{photos.length ? '重新选择照片' : '拍照或从相册选择'}</Action>
-    {photos.length > 0 && <Action disabled={action.busy} onClick={() => void action.run(async () => { await analyzePhotos(client(), photos, batch); navigate('analysis'); })}>{action.busy ? '正在上传并整理…' : `用这${photos.length}张照片开始`}</Action>}
-    {action.error && <Notice error>{action.error}</Notice>}<Text className='caption'>支持JPG / PNG，单张不超过10MB。无需填写商品表单。</Text>
   </>;
 }
 function Analysis() {

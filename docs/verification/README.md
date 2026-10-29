@@ -1,3 +1,7 @@
+当前来源：[逐张拍照与原上传批次](photo-capture-source.json)。10项定向检查、6项浏览器操作及本地启动通过；本轮构建 server: PASS, preview: PASS, alipay: PASS, douyin: PASS。旧修复证据只证明其各自源码；全面测试未执行。Current focused checks do not supersede historical failures.
+
+以下段落属于此前各轮历史说明，当前结果以上述来源与交付记录为准。
+
 当前来源：[无声生成修复](generated-repair-source.json)，2项定向用例通过、7项未选；类型/服务端、doctor与四服务启动PASS。原图验证见上一轮保留证据；本轮未跑全面测试或重建小程序。初始超时/角色失败见[记录](generated-repair-attempts.json)。Current focused evidence replaces no historical full-suite failures.
 
 历史原图轮说明（以下至“当前快速交付证据”之前）：

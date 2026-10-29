@@ -2,6 +2,7 @@ import Taro from '@tarojs/taro';
 import type { HostPort, LocalPhoto } from './ports';
 import { ClientError } from '../client/api';
 import { digest } from '../client/sha256';
+import {validatePhotos} from '../client/photo-selection';
 
 export function taroHost(native: Pick<HostPort, 'platform' | 'login' | 'pay' | 'save'>): HostPort {
   const transport: HostPort['transport'] = async input => {
@@ -17,9 +18,17 @@ export function taroHost(native: Pick<HostPort, 'platform' | 'login' | 'pay' | '
     get: <T,>(key: string): T | null => { const value: unknown = Taro.getStorageSync(key); return value === '' || value === undefined ? null : value as T; },
     set: <T,>(key: string, value: T): void => Taro.setStorageSync(key, value), remove: (key: string): void => Taro.removeStorageSync(key),
   },
-  async choosePhotos() {
-    const selected = await Taro.chooseImage({ count: 5, sizeType: ['original'], sourceType: ['camera', 'album'] });
-    if (selected.tempFilePaths.length < 3 || selected.tempFilePaths.length > 5) throw new ClientError('PHOTO_COUNT', '请选择3–5张不同角度的商品照片');
+  async choosePhotos(options) {
+    const count=options?.source==='camera'?1:options?.count??5;
+    if(!Number.isInteger(count)||count<1||count>5)throw new ClientError('PHOTO_COUNT','本次最多选择5张照片');
+    let selected:Awaited<ReturnType<typeof Taro.chooseImage>>;
+    try{selected=await Taro.chooseImage({count,sizeType:['original'],sourceType:options?[options.source]:['camera','album']});}
+    catch(error){
+      const message=error&&typeof error==='object'&&'errMsg' in error?String(error.errMsg):'';
+      if(/\bcancel\b/i.test(message))return [];
+      throw new ClientError('PHOTO_PICKER_FAILED','未能打开相机或相册，请检查授权后重试');
+    }
+    if(!selected.tempFilePaths.length||selected.tempFilePaths.length>count)throw new ClientError('PHOTO_COUNT','本次照片数量不符合选择范围，请重新选择');
     const photos: LocalPhoto[] = []; let total = 0;
     for (const path of selected.tempFilePaths) {
       const manager = Taro.getFileSystemManager();
@@ -33,7 +42,7 @@ export function taroHost(native: Pick<HostPort, 'platform' | 'login' | 'pay' | '
       const sha256 = digest(u8); if (photos.some(p => p.sha256 === sha256)) throw new ClientError('DUPLICATE_PHOTO', '发现重复照片，请换一个角度拍摄');
       photos.push({ path, bytes, width: info.width, height: info.height, mime, sha256 });
     }
-    return photos;
+    validatePhotos(photos,1);return photos;
   },
   async upload(grant, photo) {
     if (!/^https:\/\//.test(grant.upload_url) || Date.parse(grant.expires_at) <= Date.now()) throw new ClientError('UPLOAD_EXPIRED', '上传授权已过期，请重试当前照片');

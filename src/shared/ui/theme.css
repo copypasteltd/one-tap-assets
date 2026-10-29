@@ -26,6 +26,15 @@ button::after { border: 0; } button { color: inherit; font-family: inherit; }
 .filter { border: 1px solid #D8E0D8; border-radius: 999px; background: transparent; font-size: 14px; line-height: 22px; padding: 10px 14px; margin: 0; min-height: 44px; } .filter.active { background: #FFF0E8; border-color: #C04420; }
 .notice { background: #EAF5ED; color: #236449; border-radius: 12px; padding: 16px; margin: 16px 0; font-size: 14px; line-height: 23px; }
 .notice-error { color: #B83232; background: #FFF0EE; } .selected-photos { display: flex; flex-wrap: wrap; gap: 12px; } .selected-photo { width: 140px; height: 170px; border-radius: 12px; background: white; }
+.capture-guidance { display: flex; gap: 8px; margin: 20px 0; } .capture-guide { display: flex; flex: 1; gap: 6px; align-items: center; font-size: 12px; line-height: 18px; }
+.capture-guide-number { display: flex; align-items: center; justify-content: center; min-width: 24px; height: 24px; border-radius: 50%; background: #FFD766; font-weight: 800; }
+.capture-progress { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin: 16px 0; } .capture-progress .caption { max-width: 54%; margin: 0; text-align: right; }
+.capture-grid { align-items: flex-start; } .capture-photo { width: calc((100% - 12px) / 2); min-width: 0; background: #FFFFFF; border-radius: 12px; overflow: hidden; }
+.capture-photo .selected-photo { display: block; width: 100%; height: 144px; border-radius: 0; } .capture-photo-label { display: block; padding: 6px 12px 0; font-size: 12px; color: #5A6A61; }
+.capture-photo-actions { display: flex; padding: 0 4px; } .capture-edit { flex: 1; min-height: 44px; margin: 0; padding: 10px 8px; border-radius: 0; background: #FFFFFF; color: #C04420; font-size: 14px; line-height: 24px; }
+.capture-edit[disabled] { color: #5A6A61; } .capture-actions { display: flex; gap: 12px; } .capture-actions .action { flex: 1; padding: 14px 8px; font-size: 14px; }
+.capture-submit { position: sticky; bottom: 0; padding: 2px 0 calc(8px + env(safe-area-inset-bottom)); background: #FFFAEE; } .capture-submit .action { margin: 10px 0 0; }
+.capture-edit:focus-visible { outline: 2px solid #C04420; outline-offset: -4px; }
 .slots { width: 100%; } .slot { padding: 12px 0; border-bottom: 1px solid #D8E0D8; } .slot-kind { display: block; font-weight: 700; }
 .price { display: block; font-size: 28px; line-height: 38px; font-weight: 900; margin: 12px 0; } .consent { display: flex; align-items: center; gap: 12px; margin: 16px 0; font-size: 14px; }
 .stage,.save-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; gap: 12px; } .stage-complete { color: #236449; }

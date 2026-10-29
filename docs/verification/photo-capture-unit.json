@@ -1,0 +1,148 @@
+{
+  "numTotalTestSuites": 2,
+  "numPassedTestSuites": 2,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 9,
+  "numPassedTests": 9,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793310470606,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "resumes only failed media and never mistakes downloaded bytes or a lost receipt for a failed native save",
+          "status": "passed",
+          "title": "resumes only failed media and never mistakes downloaded bytes or a lost receipt for a failed native save",
+          "duration": 18.0458000000001,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "requires explicit confirmation before repeating a save whose callback was interrupted",
+          "status": "passed",
+          "title": "requires explicit confirmation before repeating a save whose callback was interrupted",
+          "duration": 5.823899999999867,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "fences an existing local save queue when the buyer changes",
+          "status": "passed",
+          "title": "fences an existing local save queue when the buyer changes",
+          "duration": 3.3638999999998305,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793310471922,
+      "endTime": 1793310471949.364,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/album.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "accepts one native camera photo and requests only the camera with count one",
+          "status": "passed",
+          "title": "accepts one native camera photo and requests only the camera with count one",
+          "duration": 7.764300000000048,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "limits an album addition to the remaining slots and preserves a cancellation",
+          "status": "passed",
+          "title": "limits an album addition to the remaining slots and preserves a cancellation",
+          "duration": 2.556600000000117,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps selected photos after denied camera access without exposing native errors",
+          "status": "passed",
+          "title": "keeps selected photos after denied camera access without exposing native errors",
+          "duration": 2.820199999999886,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "builds a complete set one photo at a time and retakes only the selected position",
+          "status": "passed",
+          "title": "builds a complete set one photo at a time and retakes only the selected position",
+          "duration": 2.945499999999811,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects duplicate additions, duplicate retakes and a sixth photo while preserving the current set",
+          "status": "passed",
+          "title": "rejects duplicate additions, duplicate retakes and a sixth photo while preserving the current set",
+          "duration": 1.8460999999999785,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "blocks an incomplete or invalid set before login, draft creation or upload",
+          "status": "passed",
+          "title": "blocks an incomplete or invalid set before login, draft creation or upload",
+          "duration": 1.053000000000111,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793310471954,
+      "endTime": 1793310471973.053,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/photo-capture.test.ts"
+    }
+  ]
+}

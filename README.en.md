@@ -1,5 +1,7 @@
 # One Tap Assets · 一品成片
 
+New: [sequential capture and original upload batches](docs/实施/逐张拍照与原上传批次-v1.0.md) adds one-photo camera capture, album additions, targeted retake/removal and cancellation recovery. A valid 3–5-photo set starts recognition; changed batches cannot overwrite original uploads. Ten focused cases and six shared-page checks pass. Native-device permissions still require acceptance.
+
 New: [bounded generated repair and paid-source reuse](docs/实施/生成式受限修复与原素材复用-v1.0.md) connects both silent routes to selective purchases, verified original files, fresh reference review, changed bytes, new final consensus and delivery. Two focused cases pass; seven older cases were not selected. External models/metering are synthetic. Original sold limits remain frozen; native-audio repair and live/device acceptance remain incomplete.
 
 Previous round: [bounded photo-candidate repair](docs/实施/原图候选修复与重新验收-v1.0.md) connects located failures to a CONTENT revision, changed files, a new sealed packet, fresh dual review and delivery. Two focused native integration cases pass with synthetic external roles and metering. Original order limits remain frozen; native-audio repair, live providers and device acceptance remain unfinished.
@@ -12,9 +14,16 @@ This repository is under active development: requirements **v3.1**, development 
 
 Quick delivery: see the [handover and startup guide](docs/delivery/README.md). Run `.\scripts\setup-local.ps1`, then `doctor`, `local:start` or `preview:serve`. `delivery:build --smoke` runs bounded builds and focused smoke checks; `delivery:package` creates a ZIP with source and successful outputs. A fully green comprehensive suite is not a packaging prerequisite.
 
-Current candidate: typecheck PASS, server build PASS, two generated-repair cases PASS (seven unselected), doctor and grouped startup PASS. Initial timeout/role failures are retained. Preview/Alipay/Douyin builds were not rerun; the ZIP contains complete source and current server outputs. Bound: 366 source files / 42 contracts / 4 resources; 6e73b796. See [delivery records](docs/delivery/current.json) and [focused provenance](docs/verification/generated-repair-source.json).
+Current candidate: typecheck, ten focused cases, six browser checks, doctor and service startup PASS. Builds: server: PASS, preview: PASS, alipay: PASS, douyin: PASS. The ZIP contains complete source and this run's successful outputs. No comprehensive suite was run. Bound: 370 source files / 42 contracts / 4 resources; 86154e7c. See [delivery records](docs/delivery/current.json) and [focused provenance](docs/verification/photo-capture-source.json).
 
 ## Screens and recorded interaction
+
+
+最新拍照交互 / Latest capture flow: [逐张拍照说明](docs/media/photo-capture/README.md)
+
+![逐张拍照、重拍与补图 / Sequential capture, retake and album additions](docs/media/photo-capture/walkthrough.gif)
+
+[MP4](docs/media/photo-capture/walkthrough.mp4) · [WebM](docs/media/photo-capture/walkthrough.webm) · [实际截图与来源](docs/media/photo-capture/capture-manifest.json)。实际共享页面录制，使用自绘合成商品，非宿主真机或真实识别/付款证明。Actual shared-page recording with synthetic photos; native-device and live-service acceptance remain separate.
 
 ![Shared screens: photos, presets, production and collection](docs/media/overview.png)
 

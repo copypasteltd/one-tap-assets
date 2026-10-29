@@ -1,0 +1,121 @@
+{
+  "captured_at": "2026-10-29T21:54:12.691Z",
+  "type": "ACTUAL_BROWSER_RECORDING_SHARED_MINI_PHOTO_PAGE",
+  "data_source": "SYNTHETIC_SELF_DRAWN_PRODUCT_AND_CAMERA_RETURNS",
+  "source_set_hash": "86154e7ccdd39ee77ad5a2825936e6f31deb40464e8d596628967537c41ce008",
+  "build_root": "runtime/delivery-builds/2026-10-29T21-47-44-362Z-e8a5b2f6/runtime/build",
+  "native_mini_device_verified": false,
+  "real_generation_verified": false,
+  "real_payment_verified": false,
+  "browser_tabs_closed": true,
+  "owned_preview_server_stopped": true,
+  "browser_errors": [],
+  "external_network_requests": [],
+  "checks": [
+    "EMPTY_SET_CANNOT_START",
+    "THREE_SEQUENTIAL_CAMERA_RETURNS_ACCUMULATE",
+    "RETAKE_REPLACES_ONLY_ONE_POSITION",
+    "ALBUM_RESPECTS_REMAINING_TWO_SLOTS",
+    "REMOVE_BELOW_THREE_BLOCKS_START_AGAIN",
+    "NO_HORIZONTAL_OVERFLOW_AT_320PX"
+  ],
+  "screenshots": [
+    {
+      "page": "01-empty",
+      "path": "docs/media/photo-capture/01-empty.png"
+    },
+    {
+      "page": "02-three-photos",
+      "path": "docs/media/photo-capture/02-three-photos.png"
+    },
+    {
+      "page": "03-five-photos",
+      "path": "docs/media/photo-capture/03-five-photos.png"
+    },
+    {
+      "page": "04-narrow",
+      "path": "docs/media/photo-capture/04-narrow.png"
+    }
+  ],
+  "recording": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 430,
+        "height": 932
+      }
+    ],
+    "format": {
+      "duration": "5.640000"
+    }
+  },
+  "files": [
+    {
+      "path": "docs/media/photo-capture/01-empty.png",
+      "bytes": 55289,
+      "sha256": "e9d436e9859b2c3ad87d37d8466cb759ba9a03b741842f0618015d2ef1939e52"
+    },
+    {
+      "path": "docs/media/photo-capture/02-three-photos.png",
+      "bytes": 68387,
+      "sha256": "00a37c908794393488fe35070103586b28f6ace8962f65b73ac9bca1aab94d1f"
+    },
+    {
+      "path": "docs/media/photo-capture/03-five-photos.png",
+      "bytes": 60599,
+      "sha256": "a06d67d09aeb62f6becd7e553fc357de18ca967b7315d9c9a94ea4884d7ea2ab"
+    },
+    {
+      "path": "docs/media/photo-capture/04-narrow.png",
+      "bytes": 53826,
+      "sha256": "36c7558aba205da75f224d30f5aa6b57f91f5ffd4a37bd911eaf0f2c95399d0a"
+    },
+    {
+      "path": "docs/media/photo-capture/walkthrough.webm",
+      "bytes": 600560,
+      "sha256": "9d815c7ed2dde0cd370e4c55b4d8ba0ba487adafb0df0a31f0060496c032504e"
+    },
+    {
+      "path": "docs/media/photo-capture/walkthrough.mp4",
+      "bytes": 141933,
+      "sha256": "7c0114ae5302792371c9675285efea429d08d6d134d6a98d3e3ee70cfaf9ebc6"
+    },
+    {
+      "path": "docs/media/photo-capture/walkthrough.gif",
+      "bytes": 620064,
+      "sha256": "9fd3389ecde82044fc43545faa5750a844bf7639c8fc27668cbabe81b10e514c"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/record-photo-capture.ts",
+      "sha256": "5cdf001b628c05df2e844c54982c23bce22505f7785de49151ed39d1f0bc8ac9"
+    },
+    {
+      "path": "src/shared/ui/photos.tsx",
+      "sha256": "559030c4bd86b184b36555585ce782427ed4f135e72ccbd98b7a3354849d46f5"
+    },
+    {
+      "path": "src/shared/ui/theme.css",
+      "sha256": "9b4412454474bc20fe68dcebf2a8aabe16683a317402397673aaa5dc9e75d18e"
+    },
+    {
+      "path": "src/shared/client/photo-selection.ts",
+      "sha256": "4b85a1e52b1a31427d3af11ef0ecd7d4133f67bc8d6b681ac22597c9904f3d83"
+    },
+    {
+      "path": "src/shared/platform/taro-host.ts",
+      "sha256": "72946b9897e6013dbcb878accb7ffd62a8d350874d263f86f2b8c0f1aa4f4814"
+    },
+    {
+      "path": "src/preview/fixtures.ts",
+      "sha256": "dbd79f62272ae2684fe3dbee464c7062541eae191c136153ba49b31539cc0028"
+    },
+    {
+      "path": "src/preview/components.tsx",
+      "sha256": "2b07ca420ceda654605bcbc6a7de032df2810cacd84874cd680e25f3a462929d"
+    }
+  ]
+}

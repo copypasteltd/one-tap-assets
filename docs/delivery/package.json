@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "created_at": "2026-10-29T21:32:12.367Z",
-  "id": "2026-10-29T21-25-53-130Z-b9404173",
-  "source_set_hash": "6e73b796c8a0da1e9f1b63f0dccafb6fd40964be341305c9616dddfe6c6799e8",
-  "archive_path": "runtime/releases/one-tap-assets-2026-10-29T21-25-53-130Z-b9404173/one-tap-assets-source-and-builds.zip",
-  "archive_sha256": "b33a3569a3ac527db326c7bd3b9862777ea91b31a21fb527061b688ffde0b377",
-  "archive_bytes": 53420859,
-  "source_files": 707,
-  "build_files": 12,
+  "created_at": "2026-10-29T21:57:14.214Z",
+  "id": "2026-10-29T21-47-44-362Z-e8a5b2f6",
+  "source_set_hash": "86154e7ccdd39ee77ad5a2825936e6f31deb40464e8d596628967537c41ce008",
+  "archive_path": "runtime/releases/one-tap-assets-2026-10-29T21-47-44-362Z-e8a5b2f6/one-tap-assets-source-and-builds.zip",
+  "archive_sha256": "0849bf28801840ed0d4b2d2d78225a72022d5417cbff15b9ef7b6cb47e6ae4bf",
+  "archive_bytes": 73599649,
+  "source_files": 728,
+  "build_files": 159,
   "components": [
     {
       "name": "server",
@@ -15,32 +15,35 @@
     },
     {
       "name": "preview",
-      "status": "NOT_RUN"
+      "status": "PASS"
     },
     {
       "name": "alipay",
-      "status": "NOT_RUN"
+      "status": "PASS"
     },
     {
       "name": "douyin",
-      "status": "NOT_RUN"
+      "status": "PASS"
     }
   ],
-  "manifest_path": "runtime/releases/one-tap-assets-2026-10-29T21-25-53-130Z-b9404173/manifest.json",
+  "manifest_path": "runtime/releases/one-tap-assets-2026-10-29T21-47-44-362Z-e8a5b2f6/manifest.json",
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
   "full_product_verified": false,
   "production_admitted": false,
   "independent_archive_verification": {
     "status": "PASS",
-    "checked_at": "2026-10-29T21:33:16.778033+00:00",
+    "checked_at": "2026-10-29T21:58:16.381454+00:00",
     "method": "INDEPENDENT_PYTHON_ZIPFILE_CRC_AND_SHA256",
-    "archive_sha256": "b33a3569a3ac527db326c7bd3b9862777ea91b31a21fb527061b688ffde0b377",
-    "payload_files_verified": 719,
-    "archive_entries": 720,
+    "archive_sha256": "0849bf28801840ed0d4b2d2d78225a72022d5417cbff15b9ef7b6cb47e6ae4bf",
+    "payload_files_verified": 887,
+    "archive_entries": 888,
     "workspace_payload_bytes_matched": true,
     "successful_build_components_verified": [
-      "server"
+      "server",
+      "preview",
+      "alipay",
+      "douyin"
     ],
     "private_runtime_and_credentials_excluded": true,
     "full_product_verified": false

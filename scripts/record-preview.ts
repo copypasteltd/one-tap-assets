@@ -29,7 +29,7 @@ try{
   const shot=async(name:string)=>{await page.waitForTimeout(700);const path=`docs/media/screenshots/${name}.png`;await mkdir(resolve(media,'screenshots'),{recursive:true});await page.screenshot({path,fullPage:false});screenshots.push({page:name,path});};
   await shot('01-home');
   await page.getByRole('button',{name:'拍照做素材'}).click();
-  await page.getByRole('button',{name:'拍照或从相册选择'}).click();await expect(page.locator('.selected-photo')).toHaveCount(3);await shot('02-photos');
+  await page.getByRole('button',{name:'从相册补充'}).click();await expect(page.locator('.selected-photo')).toHaveCount(3);await shot('02-photos');
   const scene=async(value:string)=>{await page.getByLabel('演示场景').selectOption(value);await page.waitForTimeout(700);};
   await scene('analysis');await expect(page.getByText('已经认识你的商品')).toBeVisible();await shot('03-analysis');
   await page.getByRole('button',{name:'挑选一套方案'}).click();await expect(page.locator('.preset-card')).toHaveCount(10);await shot('04-community');

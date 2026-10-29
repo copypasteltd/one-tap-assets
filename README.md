@@ -1,5 +1,7 @@
 # 一品成片 · One Tap Assets
 
+2026-10-30更新[逐张拍照与原上传批次](docs/实施/逐张拍照与原上传批次-v1.0.md)：支持逐张拍摄、相册补图、单张重拍和移除，保留取消前照片；凑齐3–5张后开始识别。同批次换图禁止覆盖原上传，新照片组清除过期的本地跳转引用。10项定向检查、6项共享页面操作检查通过；真机授权仍待验收。
+
 2026-10-30新增[生成式受限修复与原素材复用](docs/实施/生成式受限修复与原素材复用-v1.0.md)：两条无声生成路线已连接选择性重制、已结算原素材复用、新参考身份核验、新文件与双新复核交付。2项定向用例通过，7项旧用例本轮未选；外部模型与计量为合成响应。原订单限制保持冻结，原生口播修复、真实服务与真机验收仍待完成。
 
 上一轮原图专项（保留原验证来源）：[原图候选修复与重新验收](docs/实施/原图候选修复与重新验收-v1.0.md)：失败证据定位、CONTENT受限改稿、实际新文件、新封存包、双新复核及交付已接通，2项定向原生集成用例通过。原订单预算/截止/调用上限保持冻结；原生口播修复、真实服务和真机仍待完成。
@@ -12,7 +14,14 @@
 
 快速交付入口：[交付与启动指南](docs/delivery/README.md)。执行`.\scripts\setup-local.ps1`初始化，再用`doctor`自检、`local:start`启动后端、`preview:serve`查看共享页面。`delivery:build --smoke`只做有界构建和核心冒烟，`delivery:package`生成源码与实际成功产物ZIP；按本轮要求不等待全面测试绿灯。
 
-当前候选：类型检查 PASS、服务端构建 PASS、2项生成式修复定向用例通过（7项未选）；环境自检及四服务启动 PASS。初始超时和角色失败记录保留。本轮未重建预览/支付宝/抖音，ZIP包含完整源码和当前服务端产物。绑定 366 source files / 42 contracts / 4 resources; 6e73b796。详见[交付记录](docs/delivery/current.json)与[本轮来源](docs/verification/generated-repair-source.json)。
+当前候选：类型检查、10项定向检查、6项浏览器操作、自检及服务启动通过；构建结果 server: PASS, preview: PASS, alipay: PASS, douyin: PASS。完整源码及本轮成功构建产物纳入ZIP，未运行全面测试。绑定 370 source files / 42 contracts / 4 resources; 86154e7c。见[交付记录](docs/delivery/current.json)、[本轮来源](docs/verification/photo-capture-source.json)。
+
+
+最新拍照交互 / Latest capture flow: [逐张拍照说明](docs/media/photo-capture/README.md)
+
+![逐张拍照、重拍与补图 / Sequential capture, retake and album additions](docs/media/photo-capture/walkthrough.gif)
+
+[MP4](docs/media/photo-capture/walkthrough.mp4) · [WebM](docs/media/photo-capture/walkthrough.webm) · [实际截图与来源](docs/media/photo-capture/capture-manifest.json)。实际共享页面录制，使用自绘合成商品，非宿主真机或真实识别/付款证明。Actual shared-page recording with synthetic photos; native-device and live-service acceptance remain separate.
 
 ## 界面与操作演示
 

@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · 逐张拍照与移动端交付 / Sequential capture and mobile delivery
+
+- 修复相机单张返回被3张门槛拒绝的问题，支持逐张累计、相册按空位补图、单张重拍、移除与取消保留。 Accept single camera returns without weakening the final 3–5-photo requirement.
+- 完整集合在登录/建草稿/上传前验证；同批次摘要绑定、新组清除旧本地业务引用，异步账户切换重验，原上传幂等逻辑保留。 Preserve original upload recovery and prevent changed-batch overwrite.
+- 9项单元/保存队列及1项原生API专项通过；6项实际浏览器交互检查、4截图和MP4/WebM/GIF留存，所有本次浏览器/预览服务关闭。 Native camera/album effects are synthetic until device acceptance.
+- 类型与构建 / Type and builds: server: PASS, preview: PASS, alipay: PASS, douyin: PASS。自检/后端/页面服务PASS；未跑全面测试。绑定 / Bound: 370 source files / 42 contracts / 4 resources; 86154e7c。
+- 双语README、需求实施、恢复、状态及交付证据同步，旧36媒体/C25文件/归档及既有修复证据保留。口播修复、真实服务/真机、社区/售后/Plus及云端继续待完成。
+
 ## 2026-10-30 · 无声生成式修复与交付包 / Silent generated repair and delivery
 
 - 按旧封存素材实际来源授权选择性重购，未变节点核验原费用、参考与字节后复用；新参考核验和双新最终复核后事务交付。 Selective purchases, paid-source reuse and fresh independent consensus.

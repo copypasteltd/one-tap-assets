@@ -3,7 +3,7 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-29T21:26:07.283Z",
+  "checked_at": "2026-10-29T21:52:41.503Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
@@ -23,8 +23,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 12920,
-      "log_path": "runtime/delivery-builds/2026-10-29T21-25-53-130Z-b9404173/typecheck.log",
+      "elapsed_ms": 32319,
+      "log_path": "runtime/delivery-builds/2026-10-29T21-47-44-362Z-e8a5b2f6/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -40,14 +40,66 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 671,
-      "log_path": "runtime/delivery-builds/2026-10-29T21-25-53-130Z-b9404173/server.log",
+      "elapsed_ms": 1881,
+      "log_path": "runtime/delivery-builds/2026-10-29T21-47-44-362Z-e8a5b2f6/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T21-47-44-362Z-e8a5b2f6\\runtime\\build\\preview",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
+        "build",
+        "--config",
+        "src/preview/vite.config.ts",
+        "--outDir",
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T21-47-44-362Z-e8a5b2f6\\runtime\\build\\preview"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 4674,
+      "log_path": "runtime/delivery-builds/2026-10-29T21-47-44-362Z-e8a5b2f6/preview.log",
+      "log_sha256": "d453dcdfa39882d2310931f9742745b187f9497165c875224c5132371e9f20ab"
+    },
+    {
+      "task": "build:alipay",
+      "command": "node scripts/build-mini.cjs alipay",
+      "argv": [
+        "scripts/build-mini.cjs",
+        "alipay"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 148095,
+      "log_path": "runtime/delivery-builds/2026-10-29T21-47-44-362Z-e8a5b2f6/alipay.log",
+      "log_sha256": "d5363196f2ee5ff46231f53949ec71570cadfc290e1bc0a709baed19c88e32e7"
+    },
+    {
+      "task": "build:douyin",
+      "command": "node scripts/build-mini.cjs tt",
+      "argv": [
+        "scripts/build-mini.cjs",
+        "tt"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 106553,
+      "log_path": "runtime/delivery-builds/2026-10-29T21-47-44-362Z-e8a5b2f6/douyin.log",
+      "log_sha256": "ebfd835bb5776c9f6cb452a1ccb678bb481e6c0080a92cd6787495a6a200e579"
     }
   ],
   "suites": [],
-  "source_files": 366,
-  "source_set_hash": "6e73b796c8a0da1e9f1b63f0dccafb6fd40964be341305c9616dddfe6c6799e8",
+  "source_files": 370,
+  "source_set_hash": "86154e7ccdd39ee77ad5a2825936e6f31deb40464e8d596628967537c41ce008",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -491,11 +543,11 @@
     },
     {
       "path": "src/preview/components.tsx",
-      "sha256": "0171b3dbc1baf190b2f2725734b57affc83f7c8805fb103e3e9da6423c59a5ee"
+      "sha256": "2b07ca420ceda654605bcbc6a7de032df2810cacd84874cd680e25f3a462929d"
     },
     {
       "path": "src/preview/fixtures.ts",
-      "sha256": "90174be8d3a693f44d989cfc5da200a6afbd758c94e9882ec5f1f033b79ef89a"
+      "sha256": "dbd79f62272ae2684fe3dbee464c7062541eae191c136153ba49b31539cc0028"
     },
     {
       "path": "src/preview/index.html",
@@ -530,12 +582,16 @@
       "sha256": "f5148ddb74b7edcf5cfd069545db4c8d13f96686904487f6874fc58fa4e2e094"
     },
     {
+      "path": "src/shared/client/photo-selection.ts",
+      "sha256": "4b85a1e52b1a31427d3af11ef0ecd7d4133f67bc8d6b681ac22597c9904f3d83"
+    },
+    {
       "path": "src/shared/client/photos.ts",
-      "sha256": "dacba6d3dc4e54bae8b6065cca1820ece166bdcd57a708d75c45d340ff9c033f"
+      "sha256": "548a215a863dd3c929901d3d76fc8cde26d24a2616d7e0138d732db12368cf16"
     },
     {
       "path": "src/shared/client/session.ts",
-      "sha256": "049047a0119cb4e8898fc6e2686ae3165e1d34dccc31f0b5c80b4c13f7fabb0b"
+      "sha256": "78c1037810f97236c5a2ef6d5d18528329550f36955132d3705d0e65b04bc5f2"
     },
     {
       "path": "src/shared/client/sha256.ts",
@@ -571,11 +627,11 @@
     },
     {
       "path": "src/shared/platform/ports.ts",
-      "sha256": "b9e8806e223acff3505aa8f837ed256cc0d05dd51ab25df75a94e7496c1c478e"
+      "sha256": "c2460944f37c12ac8f634c00e0e8a61f0c5379b172d686028cbbab48b7dbc5e2"
     },
     {
       "path": "src/shared/platform/taro-host.ts",
-      "sha256": "c6beb171fc2a8b1046d4c03037c3e147564677121a5fb96432e3f1985f7861c0"
+      "sha256": "72946b9897e6013dbcb878accb7ffd62a8d350874d263f86f2b8c0f1aa4f4814"
     },
     {
       "path": "src/shared/ui/base.tsx",
@@ -591,7 +647,11 @@
     },
     {
       "path": "src/shared/ui/pages.tsx",
-      "sha256": "bdd11bd58b4e0cd55ce6692bbe3e0873f9fba3f69ca49e32b890117aa674ad16"
+      "sha256": "59f46fb11302983388a2a28bf38a4825f74fdc8e8ab2432ee27336e9dfc77bc6"
+    },
+    {
+      "path": "src/shared/ui/photos.tsx",
+      "sha256": "559030c4bd86b184b36555585ce782427ed4f135e72ccbd98b7a3354849d46f5"
     },
     {
       "path": "src/shared/ui/preview.tsx",
@@ -607,7 +667,7 @@
     },
     {
       "path": "src/shared/ui/theme.css",
-      "sha256": "aad447ff1e8dfb38b5f55636d92397775ad6ca3d5a046f4e20c112ff986141d4"
+      "sha256": "9b4412454474bc20fe68dcebf2a8aabe16683a317402397673aaa5dc9e75d18e"
     },
     {
       "path": "src/worker/analysis/profile.ts",
@@ -1135,7 +1195,7 @@
     },
     {
       "path": "tests/integration/client-photos.test.ts",
-      "sha256": "46a1f42a69f3382ce6c59596fdad272abe413b9022949b2f28bb317bb7b0efac"
+      "sha256": "33a69291089946aca011c4238a6e1763955fc08fdb9c0c24751faf30d6f909b9"
     },
     {
       "path": "tests/integration/codex-inference.test.ts",
@@ -1322,6 +1382,10 @@
       "sha256": "06c8805832fa45622c7e083d9159f351c72fe5b083bf7b764ac3e2ae3e17299d"
     },
     {
+      "path": "tests/unit/photo-capture.test.ts",
+      "sha256": "c420c60e9155d7715fc2c733349d1855564305c734bfccde6a55383df8fffc5d"
+    },
+    {
       "path": "tests/unit/profile-plan.test.ts",
       "sha256": "e4192931adc08bdd64ac8c142ccaec2bd472dcce0acac88d23a7151a33fdf1f1"
     },
@@ -1466,8 +1530,12 @@
       "sha256": "99f79439fffa5a9e4de7376255f1116128a38dad5b306e8375c57a55261bce0b"
     },
     {
+      "path": "scripts/record-photo-capture.ts",
+      "sha256": "5cdf001b628c05df2e844c54982c23bce22505f7785de49151ed39d1f0bc8ac9"
+    },
+    {
       "path": "scripts/record-preview.ts",
-      "sha256": "1f43465b42a4778f692f7950e2f10d82a0f3bf1aae102d98431537de832eef48"
+      "sha256": "c3167d1e5cfcc86f0310b4ce4fe5fa4a7f36ae10cb8d66e984dbb76ce297ea03"
     },
     {
       "path": "scripts/run.ps1",
@@ -2045,26 +2113,46 @@
   ],
   "source_license": "Independently written project source; upstream AGPL clone remains research-only; no upstream production implementation copied.",
   "historical_full_chain": "docs/verification/repair-cost-native-source.json",
-  "delivery_builds_passed": false,
+  "delivery_builds_passed": true,
   "full_suite_executed": false,
   "repair_candidate": {
     "photo_connected": true,
     "generated_silent_connected": true,
     "generated_connected": true,
     "native_audio_connected": false,
-    "focused_verified": true,
+    "focused_verified": false,
     "evidence": "docs/verification/generated-repair-source.json",
     "tests_passed": 2,
     "tests_unselected": 7,
     "photo_regression_rerun_this_round": false,
     "historical_photo_evidence": "docs/verification/repair-candidate-source.json",
     "original_budget_deadline_and_quotas_preserved": true,
-    "fresh_actual_bytes_and_reviews_required": true
+    "fresh_actual_bytes_and_reviews_required": true,
+    "historical_focused_verified": true,
+    "evidence_source_set_hash": "6e73b796c8a0da1e9f1b63f0dccafb6fd40964be341305c9616dddfe6c6799e8",
+    "rerun_current_photo_round": false
   },
   "local_configuration_loading": {
     "implemented": true,
     "doctor": "PASS",
     "grouped_startup": "PASS",
-    "historical_startup_failure_retained": true
+    "preview": "PASS",
+    "historical_failures_retained": true
+  },
+  "photo_capture": {
+    "implemented": true,
+    "sequential_camera": true,
+    "append_album": true,
+    "targeted_retake": true,
+    "remove": true,
+    "cancel_preserves": true,
+    "group_validation_before_upload": true,
+    "original_batch_bound": true,
+    "stale_local_navigation_cleared": true,
+    "native_device_verified": false,
+    "focused_verified": true,
+    "tests_passed": 10,
+    "browser_checks_passed": 6,
+    "evidence": "docs/verification/photo-capture-source.json"
   }
 }
