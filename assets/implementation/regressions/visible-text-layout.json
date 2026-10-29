@@ -1,0 +1,181 @@
+{
+  "scope": "BOUNDED_CONTROLS_WITH_FAILED_COMPLETE_NATIVE_RUN",
+  "pre_fix_control": {
+    "type": "SYNTHETIC_LOCAL_PRE_FIX_CONTROL",
+    "source_commit": "6cd0319ed1ba7209cafc32830456fa28b9e86996",
+    "source_files": [
+      {
+        "path": "src/worker/compiler/plan.ts",
+        "sha256": "3d116cdf1771d5749ceea8ac26999424b6883637a56227347befd91cbd9e4e59"
+      },
+      {
+        "path": "src/worker/media/layout.ts",
+        "sha256": "6116076f04f58550de1d21c53fe19d9eca99e3dcecfa4aef5edeb7e8f1a72647"
+      }
+    ],
+    "unsupported_drawn_intent_accepted": true,
+    "title_suffix_lost": true,
+    "subtitle_suffix_lost": true,
+    "title_png_sha256": "9680821920bb6bedda8f1944b492ef76815248cdf3e21c6636dcaa91432cc6bd",
+    "subtitle_png_sha256": "6bfe4440e4484b75b75e884d82781c085e9300c55c4603f1cf8a435ec12c8487",
+    "browser_used": false,
+    "external_provider_used": false
+  },
+  "current_source_set_hash": "d2077c215e38e5bcabafad559fcccd11571c08260a14f82623d442b7cb8eb2f3",
+  "current_complete_native_pass": false,
+  "current_implementation_metadata": {
+    "drawn_shot_intent_claim_guard": true,
+    "actual_pinned_font_measurement": true,
+    "grapheme_wrapping": true,
+    "silent_truncation_allowed": false,
+    "quote_and_pre_purchase_preflight": true,
+    "ai_chapter_footer_safe_areas": true,
+    "renderer_version_bound": true,
+    "original_media_input_change_blocked": true,
+    "fixture_verified": false,
+    "automatic_media_repair_implemented": false,
+    "real_model_semantics_verified": false,
+    "production_admitted": false
+  },
+  "actual_font_module_controls": {
+    "calls": 28,
+    "source_sha256": "88152ad0417e504e6be24affb49359a0ef60b232123b6ef4a40db871d7901fc9",
+    "exact_outputs_and_errors_preserved": true,
+    "cases": [
+      {
+        "sample": {
+          "text": "蓝色带盖杯",
+          "size": 56,
+          "width": 964,
+          "max": 2,
+          "bold": true
+        },
+        "repetition": 0,
+        "lines": [
+          {
+            "text": "蓝色带盖杯",
+            "width": 278,
+            "height": 54,
+            "png_sha256": "6301e663515f997add82910b5bd7d553ee96381046e71bc05c365edbb90fe737"
+          }
+        ]
+      },
+      {
+        "sample": {
+          "text": "可见蓝色 · 带杯盖",
+          "size": 30,
+          "width": 964,
+          "max": 2
+        },
+        "repetition": 0,
+        "lines": [
+          {
+            "text": "可见蓝色 · 带杯盖",
+            "width": 253,
+            "height": 29,
+            "png_sha256": "04c295c722952673cb0aeac450e381ed1a596e8e6fecbba22e88efcaa4f341d9"
+          }
+        ]
+      },
+      {
+        "sample": {
+          "text": "蓝色杯 <A&B> 原图",
+          "size": 30,
+          "width": 964,
+          "max": 3
+        },
+        "repetition": 0,
+        "lines": [
+          {
+            "text": "蓝色杯 <A&B> 原图",
+            "width": 253,
+            "height": 29,
+            "png_sha256": "5d3054d18d3dfecc35029027f9877d7612d3594d72c81a296b3da481b9d5e067"
+          }
+        ]
+      },
+      {
+        "sample": {
+          "text": "合成示例商品的完整外观与细节",
+          "size": 56,
+          "width": 964,
+          "max": 2,
+          "bold": true
+        },
+        "repetition": 0,
+        "lines": [
+          {
+            "text": "合成示例商品的完整外观与细节",
+            "width": 781,
+            "height": 56,
+            "png_sha256": "e853d4947bb3335c996ef4e530e62b5560e304d01c85f32ccf20309d6ae22f7a"
+          }
+        ]
+      },
+      {
+        "sample": {
+          "text": "完整保留外观、角度与细节，末字甲",
+          "size": 30,
+          "width": 964,
+          "max": 3
+        },
+        "repetition": 0,
+        "lines": [
+          {
+            "text": "完整保留外观、角度与细节，末字甲",
+            "width": 476,
+            "height": 30,
+            "png_sha256": "f987e2dee8b045332986c567cbc64c13774aee681d039e644ad5a2dd20ab887b"
+          }
+        ]
+      },
+      {
+        "sample": {
+          "text": "蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯蓝色带盖杯甲",
+          "size": 56,
+          "width": 964,
+          "max": 2
+        },
+        "repetition": 0,
+        "error_code": "LAYOUT_TEXT_OVERFLOW"
+      },
+      {
+        "sample": {
+          "text": "蓝色带盖杯🧑",
+          "size": 30,
+          "width": 964,
+          "max": 3
+        },
+        "repetition": 0,
+        "error_code": "FONT_GLYPH_UNAVAILABLE"
+      }
+    ],
+    "statistical_benchmark": false
+  },
+  "earlier_selected_test_results": [
+    {
+      "file": "native-media.test.ts",
+      "tests": 4,
+      "status": "PASS",
+      "source_set_hash": "e99abc83d7d2a99a5a79561805cdb5ead0c24af0a1b786b92aa0a473a0379296"
+    },
+    {
+      "file": "codex-planning.test.ts",
+      "tests": 12,
+      "status": "PASS",
+      "source_set_hash": "e99abc83d7d2a99a5a79561805cdb5ead0c24af0a1b786b92aa0a473a0379296"
+    },
+    {
+      "file": "media-stages.test.ts",
+      "tests": 12,
+      "status": "PASS",
+      "source_set_hash": "e99abc83d7d2a99a5a79561805cdb5ead0c24af0a1b786b92aa0a473a0379296"
+    }
+  ],
+  "earlier_selected_tests_are_not_current_full_verification": true,
+  "browser_used": false,
+  "external_provider_used": false,
+  "automatic_media_repair_implemented": false,
+  "full_product_verified": false,
+  "production_admitted": false
+}

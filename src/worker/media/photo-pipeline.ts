@@ -15,10 +15,11 @@ import { inspectVideo, nativeCommand, type MediaInspection } from './native.js';
 import { renderLayout } from './layout.js';
 import { renderPhotoVideo } from './photo-video.js';
 import { loadProductionFont, verifyResourceLicenses } from './font.js';
+import {validatePlanLayout} from './plan-layout.js';
 import { artifactSetHash, claimMediaGeneration, commitMediaOperation, operationArtifacts, operationFor, originalMediaReceipt,
   type ArtifactSpec, type MediaOperation, type MediaPhase, type MediaReceipt, type PrivateArtifact } from './artifacts.js';
 
-export const PHOTO_PIPELINE_VERSION = 'YPCC-PHOTO-PIPELINE-1.1.0';
+export const PHOTO_PIPELINE_VERSION = 'YPCC-PHOTO-PIPELINE-1.2.0';
 export function assertMediaAlive(context: ExecutionContext, signal: AbortSignal): void {
   requireThat(!signal.aborted, 'TOOL_EXECUTION_INTERRUPTED', '媒体执行已停止', 409);
   requireThat(Date.parse(context.snapshot.deadline_at) > Date.now(), 'ORDER_DEADLINE_EXCEEDED', '原订单制作期限已结束', 409);
@@ -170,6 +171,7 @@ export class PhotoMediaPipeline {
     await verifyResourceLicenses(this.pool, context.snapshot.resource_versions);
     this.assertRoute(context);
     assertMediaAlive(context, signal);
+    await validatePlanLayout(context.contract.creative,context.contract.source,context.snapshot.preset_id,await loadProductionFont(this.cfg.projectRoot),context.contract.ai_disclosure_contract);
     const previous = phase === 'POST' ? await operationArtifacts(this.pool, context, 'PRODUCTION') : null;
     const inputHash = hash({ renderer_version: this.rendererVersion, phase, snapshot_hash: context.snapshotHash,
       creative: context.contract.creative, production_set_hash: previous ? artifactSetHash(previous.receipt.artifacts) : null });

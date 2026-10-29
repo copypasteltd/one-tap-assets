@@ -30,7 +30,7 @@ import {renderNativeAudioPost} from './native-audio-post.js';
 import {frozenAiDisclosure} from '../compiler/disclosure.js';
 import {disclosureRaster} from './disclosure.js';
 
-export const NATIVE_ORDER_PIPELINE_VERSION='YPCC-NATIVE-ORDER-PIPELINE-1';
+export const NATIVE_ORDER_PIPELINE_VERSION='YPCC-NATIVE-ORDER-PIPELINE-2';
 type Material=Awaited<ReturnType<typeof generatedOutputs>>;
 /** Internal native ORDER production, POST and publication verification.
  * Public quotes remain separately closed; silent executors reject audio. */

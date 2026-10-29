@@ -4,9 +4,9 @@
   "reports": [
     {
       "path": "assets/development/v1.1/verification-report.json",
-      "sha256": "c97c611cd75e2b19dae8b58aff3825989df02984bddf49b972dc7f0eb1c8b0c5",
+      "sha256": "6018175909232f39107c227acd2227944235a1d0f48be5160a91592e565b3eef",
       "baseline_id": "YPCC-DEV-1.1.0",
-      "checked_at": "2026-10-29T07:27:18.662483+00:00",
+      "checked_at": "2026-10-29T11:44:48.283844+00:00",
       "status": "PASS",
       "scope": "开发文档、官方OpenAPI结构、JSON Schema/合成正负例、状态图、实体/需求/设计/工作包追踪及C留存一致性",
       "counts": {
@@ -22,10 +22,15 @@
         "requirements": 58,
         "work_packages": 20,
         "frozen_design_files": 25,
-        "checks": 3310
+        "checks": 3311
       },
-      "passed": 3310,
+      "passed": 3311,
       "failed": 0,
+      "limitations": [
+        "本检查仅核验文档与契约，不运行应用测试；已实现源码和局部测试证据另见 assets/implementation/current.json。",
+        "真实供应商/支付原生协议、账户/价格与生产依赖准入仍待G0，开发版本锁定不代表生产验证通过。",
+        "合成契约例只证明指定设计约束，不能替代真实模型/媒体/支付/真机或420次基准。"
+      ],
       "product_tests_executed": false,
       "real_model_calls_executed": false,
       "real_payments_executed": false,
@@ -34,10 +39,10 @@
     },
     {
       "path": "assets/development/v1.1/codex-verification-report.json",
-      "sha256": "1b51184bd512e48cba1a1f3f44870ce24e4770decc09ad6b4b3659468d24e8e9",
+      "sha256": "ca1dd3ee774e1d86421047b07d3b2924a10854ddc821bba0c6f3308370071168",
       "baseline_id": "YPCC-DEV-1.1.0",
       "requirements_version": "3.1",
-      "checked_at": "2026-10-29T07:27:19.324476+00:00",
+      "checked_at": "2026-10-29T11:44:53.354622+00:00",
       "status": "PASS",
       "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
       "counts": {
@@ -46,9 +51,9 @@
         "skills": 19,
         "skill_bundles": 14,
         "development_documents": 20,
-        "base_contract_checks": 3310,
-        "codex_checks": 1412,
-        "total_checks": 4722,
+        "base_contract_checks": 3311,
+        "codex_checks": 1433,
+        "total_checks": 4744,
         "codex_synthetic_examples": 39
       },
       "product_tests_executed": false,
@@ -58,8 +63,13 @@
       "cloud_deployed": false,
       "application_implementation_status": "IN_PROGRESS",
       "implementation_evidence_manifest": "assets/implementation/current.json",
+      "limitations": [
+        "本检查只执行设计 / 契约 / 留存核验；应用源码和局部测试范围另见实现证据，尚未完成完整产品验收。",
+        "原生隔离、真实 Skill 行为、推理费用硬控制、独立质量与清理仍待G0实测。",
+        "内容哈希/合成门禁不构成真实文件或安全效果证明。"
+      ],
       "errors": []
     }
   ],
-  "local_log_sha256": "3b5da7ef3e410a6de555bbc62e8358955a0957ac05f17d16c4fd80fe068d0b58"
+  "local_log_sha256": "e9da58a56b586dbafd38896825c8d703b0b3c68d2d4b145c232a859f27dd3452"
 }

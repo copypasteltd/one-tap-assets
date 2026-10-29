@@ -82,3 +82,11 @@ The native media kernel and scoped ORDER pipeline now connect full-track product
 ## 可见AI标识 / Visible AI disclosure
 
 平台在既有私有报价合同冻结标识策略，生成式制作/POST实际绘制，完整PNG字形及不透明Alpha/所有视频帧检查并绑定产物清单。QC封存策略与真实文件证明，最终双角色及事务交付消费同一原包；原图与旧媒体字节保留。[完整约束](../实施/AI可见标识与逐帧文件验收-v1.0.md)。The original private contract binds platform-owned disclosure; real glyph/all-frame checks precede immutable review and publication. Missing historical policies block without new model purchases.
+
+## 完整文字与购买前排版 / Complete text and pre-purchase layout
+
+实际短片字幕的 intent 与标题、配套文案共用原商品断言门禁。固定字体按真实字形测宽、按 grapheme 完整换行，验证全部后缀/缺字及标题、章节、页脚和 AI 标识的安全区；容量不足明确拒绝，不截断或缩字。相同排版器在规划、报价、制作角色/参考购买前及媒体工具内预检；社区风格来自原冻结映射或真实保存的选择，历史选择缺失返回 `PLAN_INPUT_CHANGED`。
+
+制作器版本参与媒体输入摘要；同一阶段/phase 的原操作若输入不同，返回 `MEDIA_INPUT_CHANGED`，不替换操作或再次购买。这些门禁与完整自动素材修复、历史迁移和真实语义验收分别跟踪。[实现与验证细则](../实施/完整展示文字与购买前排版校验-v1.0.md)。
+
+Visible shot intent shares the existing product-claim gate. The pinned font is measured using actual glyphs, preserving complete graphemes and suffixes within text/disclosure safe areas. Overflow is rejected. The same renderer preflights content, quotes and execution before new production/reference purchases. Missing original selections and changed original media inputs fail explicitly; neither guard implements automatic media repair or historical migration.

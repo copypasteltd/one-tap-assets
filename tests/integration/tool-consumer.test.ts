@@ -24,9 +24,12 @@ async function fixture(maxCalls = 8) {
   await insert(db.pool, 'identity_locks', { id: identityLock.identity_lock_id, tenant_id: p.tenantId, profile_id: profile.profile_id, hash: identityLock.content_hash, data: identityLock });
   await db.pool.query('UPDATE product_drafts SET current_profile_id=$1,current_photo_version=1 WHERE id=$2', [profile.profile_id, product.product_id]);
   const planId = id('plan'); const source = variant();
+  const request = { product_id: product.product_id, photo_version: 1, profile_id: profile.profile_id,
+    identity_lock_id: identityLock.identity_lock_id, preset_id: 'minimal-clean', preset_version: '3.1.0',
+    variant_id: source.variant_id, variant_version: source.version };
   await insert(db.pool, 'plan_versions', { id: planId, tenant_id: p.tenantId, owner_id: p.userId, product_id: product.product_id,
-    photo_version_id: photoId, profile_id: profile.profile_id, identity_lock_id: identityLock.identity_lock_id, variant_version_id: 'minimal-clean.photo-layout.3.1.0', state: 'PLANNING', data: {}, private: { source } });
-  const inputHash = hash({ profile: profile.profile_hash, source: source.variant_id });
+    photo_version_id: photoId, profile_id: profile.profile_id, identity_lock_id: identityLock.identity_lock_id, variant_version_id: 'minimal-clean.photo-layout.3.1.0', state: 'PLANNING', data: {}, private: { source, request } });
+  const inputHash = hash({ profile: profile.profile_hash, source: source.variant_id, request });
   const stageId = await enqueueStage(db.pool, { tenantId: p.tenantId, scopeType: 'PLAN', scopeId: planId, name: 'PLAN', inputHash, deadlineAt: addSeconds(300) });
   const lease = (await claimStage(db.pool, id('parent'), ['PLAN']))!; expect(lease.id).toBe(stageId);
   const instanceId = id('instance'); const runId = id('run');
@@ -49,10 +52,19 @@ describe('durable scoped tool execution', () => {
     for (const [tool, args] of [['analyze_photos', {}], ['validate_content_plan', { plan }], ['persist_stage_result', { result: plan }]] as const) {
       const submitted = await call(f.capability, tool, args); expect(submitted.statusCode).toBe(202);
       expect(await consumer.process(new AbortController().signal)).toBe(true);
-      const row = (await db.pool.query('SELECT state,data FROM agent_tool_intents WHERE id=$1', [submitted.json().intent_id])).rows[0]; expect(row.state).toBe('SUCCEEDED');
+      const row = (await db.pool.query('SELECT state,data FROM agent_tool_intents WHERE id=$1', [submitted.json().intent_id])).rows[0]; expect(row.state,`tool ${tool}: ${JSON.stringify(row.data)}`).toBe('SUCCEEDED');
     }
     const run = (await db.pool.query('SELECT output_hash,private FROM agent_runs WHERE id=$1', [f.runId])).rows[0];
     expect(run.output_hash).toBe(creativePlanHash(plan)); expect(run.private.stage_result).toEqual(plan);
+    expect((await db.pool.query('SELECT state FROM stage_runs WHERE id=$1', [f.stageId])).rows[0].state).toBe('RUNNING');
+    // Historical incomplete inputs must fail explicitly without replacing the
+    // original plan or guessing a style from a variant identifier.
+    await db.pool.query("UPDATE plan_versions SET private=private-'request' WHERE id=$1", [f.planId]);
+    const missingInput = await call(f.capability, 'analyze_photos', {}); expect(missingInput.statusCode).toBe(202);
+    expect(await consumer.process(new AbortController().signal)).toBe(true);
+    const rejected = (await db.pool.query('SELECT state,data FROM agent_tool_intents WHERE id=$1', [missingInput.json().intent_id])).rows[0];
+    expect(rejected.state).toBe('FAILED'); expect(rejected.data.error_code).toBe('PLAN_INPUT_CHANGED');
+    expect((await db.pool.query('SELECT output_hash,private FROM agent_runs WHERE id=$1', [f.runId])).rows[0]).toEqual(run);
     expect((await db.pool.query('SELECT state FROM stage_runs WHERE id=$1', [f.stageId])).rows[0].state).toBe('RUNNING');
     await stop(f.stageId);
   });

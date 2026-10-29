@@ -1,7 +1,7 @@
 {
   "baseline_id": "YPCC-DEV-1.1.0",
   "requirements_version": "3.1",
-  "checked_at": "2026-10-29T07:27:19.324476+00:00",
+  "checked_at": "2026-10-29T11:44:53.354622+00:00",
   "status": "PASS",
   "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
   "counts": {
@@ -10,9 +10,9 @@
     "skills": 19,
     "skill_bundles": 14,
     "development_documents": 20,
-    "base_contract_checks": 3310,
-    "codex_checks": 1412,
-    "total_checks": 4722,
+    "base_contract_checks": 3311,
+    "codex_checks": 1433,
+    "total_checks": 4744,
     "codex_synthetic_examples": 39
   },
   "product_tests_executed": false,
@@ -2464,6 +2464,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/README.md->实施/完整展示文字与购买前排版校验-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/README.md->实施/AI可见标识与逐帧文件验收-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -2730,6 +2735,11 @@
     },
     {
       "name": "document_link:docs/guides/ARCHITECTURE.md->../实施/AI可见标识与逐帧文件验收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/ARCHITECTURE.md->../实施/完整展示文字与购买前排版校验-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -3019,6 +3029,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/RECOVERY.md->../实施/完整展示文字与购买前排版校验-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/guides/RECOVERY.md->../../README.md",
       "status": "PASS",
       "detail": ""
@@ -3084,6 +3099,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/STATUS.md->../实施/完整展示文字与购买前排版校验-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/guides/STATUS.md->../实施/AI可见标识与逐帧文件验收-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3114,6 +3134,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/STATUS.md->../verification/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/guides/STATUS.md->RECOVERY.md",
       "status": "PASS",
       "detail": ""
@@ -3129,7 +3154,22 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/verification/README.md->text-layout-native-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->text-layout-native-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/verification/README.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->text-layout-native-source.json",
       "status": "PASS",
       "detail": ""
     },
@@ -3149,7 +3189,7 @@
       "detail": ""
     },
     {
-      "name": "document_link:docs/verification/README.md->../media/ai-disclosure/README.md",
+      "name": "document_link:docs/verification/README.md->../media/ai-disclosure/capture-manifest.json",
       "status": "PASS",
       "detail": ""
     },
@@ -3164,6 +3204,16 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/verification/README.md->../../assets/implementation/regressions/visible-text-layout.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->text-layout-attempts.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/verification/README.md->disclosure-native-source.json",
       "status": "PASS",
       "detail": ""
@@ -3174,22 +3224,22 @@
       "detail": ""
     },
     {
-      "name": "document_link:docs/verification/README.md->audio-review-attempts.json",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
       "name": "document_link:docs/verification/README.md->audio-review-native-source.json",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "document_link:docs/verification/README.md->listening-attempts.json",
+      "name": "document_link:docs/verification/README.md->audio-review-attempts.json",
       "status": "PASS",
       "detail": ""
     },
     {
       "name": "document_link:docs/verification/README.md->listening-native-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->listening-attempts.json",
       "status": "PASS",
       "detail": ""
     },
@@ -3729,6 +3779,31 @@
       "detail": ""
     },
     {
+      "name": "document_encoding_fences:docs/实施/完整展示文字与购买前排版校验-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/完整展示文字与购买前排版校验-v1.0.md->../../assets/implementation/regressions/visible-text-layout.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/完整展示文字与购买前排版校验-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/完整展示文字与购买前排版校验-v1.0.md->../verification/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/完整展示文字与购买前排版校验-v1.0.md->../media/ai-disclosure/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/实施/开发任务与评估修订-2026-10-27.md",
       "status": "PASS",
       "detail": ""
@@ -4025,6 +4100,31 @@
     },
     {
       "name": "document_encoding_fences:docs/实施/源码实现进度-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../verification/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->完整展示文字与购买前排版校验-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../guides/STATUS.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../verification/README.md",
       "status": "PASS",
       "detail": ""
     },
@@ -6710,6 +6810,11 @@
     },
     {
       "name": "document_link:README.md->docs/verification/publication.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/实施/完整展示文字与购买前排版校验-v1.0.md",
       "status": "PASS",
       "detail": ""
     },

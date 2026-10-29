@@ -1,5 +1,20 @@
 # 更新记录 / Changelog
 
+## 2026-10-29 · 完整文字与购买前校验 / Complete visible text and pre-purchase checks
+
+- 本轮整套未通过：类型/71单元通过，原生13通过/1原120秒超时，其余未完成；服务端/双小程序随后同源码单独构建通过。当前341源码/42契约/4资源前后摘要一致，保留失败及阶段观察，不做无修复整套重试，不把单项合并为完整通过。 Full native verification fails; separate successful builds do not replace it. Exact source bindings and failures are retained.
+
+- 修正原图短片实际字幕intent遗漏商品断言检查，以及达到最大行数后静默丢弃后缀；原版本实际PNG对照与源码SHA留存。 Include visible intent in the existing evidence gate and replace lossy approximate wrapping with complete pinned-font measurement.
+- 按实际字形扩展安全区，检查十套风格方图/竖图的标题、字幕、章节、页脚与AI标识；超长/缺字明确拒绝，原UTF-8配套文件保留。 Check actual glyph pixels and complete suffixes instead of silently shortening output.
+- 短文案先实测整行并复用可容纳的PNG，减少重复栅格化；28次原生对照的PNG、文字、尺寸及错误码不变。单次计时不作为统计性能或历史超时根因证明。 Reuse measured complete short-copy rasters; exact native outputs and rejections remain unchanged, without a statistical speed claim.
+- 同一排版器接规划验证、报价和制作购买前；更新制作器/预览版本，已有媒体操作输入不同保持原记录并阻断，不新建原任务。 Preflight content/quotes/production and block changed original-operation inputs without replacement or rebuy.
+- 补齐旧工具测试夹具漏存的原方案选择；历史规划缺少该信息明确返回PLAN_INPUT_CHANGED，保留原输出与父阶段，不猜测风格。 Align the manual fixture with real creation inputs and explicitly reject missing original selections while preserving the existing result.
+- 同步中英README、实现/恢复/状态说明及适用媒体；实际重录4份标识示例，图片显示完整长文案。原页面与音频示例沿用来源，C原件/归档不变。 Update bilingual docs and regenerate applicable self-drawn disclosure media; unchanged UI/audio and frozen C retain their provenance.
+- 一次定向原生进程0xC0000374异常，原样复查通过；保留失败，完整结果以公开核验与实现索引为准。 A focused native crash and unchanged retry remain separate from full verification; no established root cause or production-stability claim.
+- 另保留参考未持久化、原类型超时、交付后未释放及原120秒QC用例超时；定向复查通过不证明原失败根因。释放断言只增加角色/状态/清理码诊断，原限制保留。 Retain incomplete runs and original limits; richer release diagnostics do not establish production stability.
+- 短文案复用后仍保留第七次整套13通过/1超时；定向阶段诊断也在进入QC前达到原120秒上限，记录准备/制作/后期约9.5/42.4/68.5秒，另一个所选用例未执行。测试仅增加耗时、内存和缓存记录，未削减媒体帧数或断言，未认定超时根因。 Retain the failed seventh run and a failed focused phase profile; timing-only diagnostics preserve actual frames, assertions and limits without claiming a root cause.
+- 完整自动修复、真实模型/中文听感/授权/计费/Codex隔离、官方全变体、宿主真机和全58需求继续待验，全部禁售。 Complete repair, real services, device/full-variant and full-product acceptance remain pending.
+
 ## 2026-10-29 · 恢复与仓库同步文档整理 / Recovery and publishing documentation
 
 - 新增双语恢复指南，区分离页/原供应商任务恢复、候选修复、交付后修改和相册续存；依据当前源码记录错误码、独立原生进程、隐私/备份及退款/释放边界。 Add a bilingual recovery guide grounded in current source and distinct business/financial/cleanup states.

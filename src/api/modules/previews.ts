@@ -10,7 +10,7 @@ import { validateCreativePlan, type CreativePlan } from '../../worker/compiler/p
 import { verifyResourceLicenses } from '../../worker/media/font.js';
 import type { ResourceBinding } from '../../worker/compiler/snapshot.js';
 
-export const PREVIEW_RENDERER_VERSION = 'YPCC-OPTIONAL-PHOTO-PREVIEW-1.0';
+export const PREVIEW_RENDERER_VERSION = 'YPCC-OPTIONAL-PHOTO-PREVIEW-1.1';
 export interface PreviewInput {
   renderer_version: typeof PREVIEW_RENDERER_VERSION; product_id: string; plan_id: string; plan_hash: string;
   photo_version_id: string; photo_version: number; photo_set_hash: string; profile_id: string; profile_hash: string;

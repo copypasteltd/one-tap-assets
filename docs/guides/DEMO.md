@@ -68,4 +68,6 @@ Recapture affected screens and the walkthrough/manifest when UI behavior changes
 
 ## 文件内AI标识 / Disclosure baked into files
 
+最新排版专项实际重录本节4份文件与清单，PNG显示完整长文案后缀，来源还绑定固定字体测宽模块。静帧视频输入未变，实际复录可得到同SHA的视频/取帧/GIF；原浏览器/声音示例没有重录。The latest disclosure recapture shows complete multiline text in PNG; unchanged static-video inputs can reproduce identical media bytes. Browser/audio captures retain their original provenance.
+
 另有[4份实际PNG/MP4/取帧/GIF](../media/ai-disclosure/README.md)，来源为项目自绘SVG和原生静帧视频，完整15秒/450帧经过实际标识区域检查。它不是浏览器截图或模型生成广告质量证明。复录使用`docs:disclosure`，不启动浏览器；原10页截图、录屏、原音频示例及C原件保留。Four additional self-drawn/native pixel fixtures demonstrate baked disclosure, separately from the unchanged ten-screen browser recording and original synthetic audio.

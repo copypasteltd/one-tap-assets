@@ -25,7 +25,7 @@ import type {NativeOrderAudio} from '../audio/order-proof.js';
 import {frozenAiDisclosure} from '../compiler/disclosure.js';
 import {disclosureRaster,markDisclosureImage,inspectDisclosure,type AiDisclosureProof} from './disclosure.js';
 
-export const GENERATED_PIPELINE_VERSION='YPCC-GENERATED-SILENT-1.0.0';
+export const GENERATED_PIPELINE_VERSION='YPCC-GENERATED-SILENT-1.1.0';
 /** Actual generated PNG/MP4 inputs only; no still-animation substitution. */
 export class GeneratedMediaPipeline extends PhotoMediaPipeline {
   protected override readonly rendererVersion:string=GENERATED_PIPELINE_VERSION;
@@ -94,7 +94,8 @@ export class GeneratedMediaPipeline extends PhotoMediaPipeline {
       const planned=context.contract.creative.image_slots.find(s=>s.slot_id===slot.slot_id)!;
       const input=material.outputs.get(`image:${slot.slot_id}`)!;
       const layout=await renderLayout(input.bytes,{presetId:style,width:slot.width!,height:slot.height!,title:planned.title,
-        subtitle:context.contract.creative.copy,sequence:index+1,total:context.contract.creative.image_slots.length,font,aiLabel:true});
+        subtitle:context.contract.creative.copy,sequence:index+1,total:context.contract.creative.image_slots.length,font,aiLabel:true,
+        disclosure:frozenAiDisclosure(context.contract)!});
       const bytes=await markDisclosureImage(layout,await disclosureRaster(this.cfg,frozenAiDisclosure(context.contract)!,slot.width!,slot.height!));
       const spec=this.spec(context,'PRODUCTION','image',await inspectImage(bytes),[planned.asset_id]);
       spec.generation_sources=sourcesForSlot(material,'image',slot.slot_id);spec.reference_approval_hash=hash(material.approval);

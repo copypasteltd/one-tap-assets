@@ -1,5 +1,7 @@
 # 当前状态与后续顺序 / Status and next priorities
 
+当前[完整展示文字与购买前排版校验](../实施/完整展示文字与购买前排版校验-v1.0.md)修正末尾丢字、实际字幕断言漏检与AI/章节/页脚重叠，接入规划、报价与制作入口。十套风格实际PNG与原操作版本变更阻断有专项；此项不代表自动修复或真实服务准入。Latest: complete measured text layout and original-operation version guards, not complete repair or production admission.
+
 最新[可见AI标识与逐帧验收](../实施/AI可见标识与逐帧文件验收-v1.0.md)增加原报价冻结、全图片/全部视频帧实际标识、恢复/QC/交付绑定。原生字幕已有的右上文字保留，统一可验标识放左上；真实宿主/法律标识准入未验。Baked disclosure is checked over actual images and every video frame; host/legal admission remains unverified.
 
 最新[原生声音最终双复核与事务交付](../实施/原生声音最终双复核与事务交付-v1.0.md)已连接内部两路线原听音、两个最终角色、完整推理/工具/报告绑定和事务交付。正向中文/语义为刻意构造的控制响应，不是实际提示音的识别结果。Private final audio review/publication is connected with synthetic semantic control responses, not real listening or production certification.
@@ -11,17 +13,17 @@
 | 编号 / No. | 检查 / Check | 结果 / Result | 证明范围 / Scope |
 | --- | --- | --- | --- |
 | 01 | TypeScript | PASS | 当前类型检查 / Current type checking |
-| 02 | 单元 / Unit | 70 / 70 PASS | 领域、客户端、策略与适配器逻辑 / Domain, client and adapter logic |
-| 03 | 原生集成 / Native integration | 350 / 350 PASS | 原生PG/实际媒体/HTTPS/MCP及显式合成角色、供应商、支付、宿主 / Actual database/media with synthetic external responses |
+| 02 | 单元 / Unit | 71 / 71 PASS | 领域、客户端、策略与适配器逻辑 / Domain, client and adapter logic |
+| 03 | 原生集成 / Native integration | FAIL：13 PASS / 1 TIMEOUT，余项未完成 / Remainder incomplete | 原生PG/实际媒体/HTTPS/MCP及显式合成角色、供应商、支付、宿主 / Actual database/media with synthetic external responses |
 | 04 | 服务端 / Server | PASS | 编译API、Worker、回收、媒体维护和删除日志入口 / Compiled native entries |
 | 05 | 双小程序 / Both mini-programs | PASS | Taro支付宝/抖音构建，不是宿主真机验收 / Compilation, not device certification |
-| 06 | 浏览器回放 / Browser replay | PASS | Vite构建、10页断言/截图、实际WebM/MP4/GIF；无外部请求，浏览器已关闭 / Actual local capture |
+| 06 | 浏览器回放 / Browser replay | PASS（原捕获 / prior capture） | 沿用原Vite构建、10页断言/截图与实际WebM/MP4/GIF来源；浏览器已关闭，本轮未重录页面 / Prior actual local capture; shared UI source unchanged |
 
 机器可读结果：[实现索引](../../assets/implementation/current.json)、[发布核验摘要](../verification/publication.json)、[媒体清单](../media/capture-manifest.json)。完整执行日志/测试JSON位于未提交的`runtime/test-results/`；公开摘要保留计数、命令结果与摘要引用，但不包含本地凭证或运行数据库。Source hashes and original local log hashes are recorded; private runtime files are excluded from Git. Static documentation checks validate contracts/links, not product execution.
 
-最近一次源码全套执行六项检查：类型、70项单元、350项完整原生集成、服务端及支付宝/抖音构建全部通过。完整运行前后的339份源码/测试/配置、42份运行契约和4份资源摘要一致，没有保留旧原生报告。AI标识检查使用实际RGBA字形、不透明Alpha与全部视频帧；声音正向语义仍为刻意构造的控制响应，不代表真实生成质量、中文听感、计费或商业准入。 This source snapshot freshly passes all six checks: types, 70 unit tests, 350 complete native integration tests, server and both mini builds. All 339 source/test/config, 42 runtime-contract and four resource hashes match the complete run; no old integration report is retained. Disclosure checks use actual RGBA glyphs, opaque alpha and every video frame. Positive listening semantics remain fabricated controls, not real generation quality, Chinese hearing, billing or commercial admission. [验证来源](../verification/README.md)。
+本轮固定341份源码/测试/配置、42份运行契约和4项资源：类型与71项单元通过；完整原生执行13项通过后，原文件写入授权撤销用例达到原120秒上限，整套未通过，其余未完成。服务端及支付宝/抖音构建随后按同一源码单独执行通过，不能把这些结果合并为六项全通过。完整执行失败、阶段耗时及精确来源见[验证说明](../verification/README.md)。未放宽断言/期限，未复用旧原生报告；真实语义、费用、授权、隔离与全产品/生产准入仍待验。 On the fixed 341 source/test/config, 42 runtime-contract and four resource snapshot, types and all 71 unit tests pass. The complete native run stops after 13 passes and one original-write revocation case exceeds its unchanged 120-second limit; the remainder is incomplete. Server and both mini builds pass separately on the same source. This is not six passing checks. See [validation provenance](../verification/README.md) for failed runs, phase observations and exact bindings. No assertions/deadlines were relaxed or old native report retained; full-product and real-service admission remain incomplete.
 
-最新[恢复指南](RECOVERY.md)与[发布同步指南](PUBLISHING.md)为文档整理：重新核对源码/契约/资源与媒体摘要，保留上次应用测试的真实时间和来源，本次不重跑应用测试或录制媒体。The latest recovery/publishing additions are documentation-only and retain the prior application's actual test provenance; hash/link checks are rerun without claiming new application execution or capture.
+[恢复指南](RECOVERY.md)与[发布同步指南](PUBLISHING.md)适用于持续更新；本轮已实际执行应用检查和适用标识媒体复录，完整原生未通过，不能沿用此前文档轮的旧通过结论。 Current source/media work has fresh execution records; the native failure remains blocking.
 
 ## 当前实现边界 / Implementation boundary
 

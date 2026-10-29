@@ -3,75 +3,36 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-29T07:03:46.853Z",
+  "checked_at": "2026-10-29T11:31:52.752Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
   "verification_mode": "FRESH_FULL",
   "retained_integration": null,
-  "command_checks_passed": true,
+  "command_checks_passed": false,
   "commands": [
     {
       "command": "./scripts/run.ps1 typecheck",
       "status": "PASS",
       "log_path": "runtime/test-results/typecheck.log",
-      "log_sha256": "9e1d8b15b2004484587fd804fe8b8e6663db73fcf8d458b2c6cd24c91cafd57b"
+      "log_sha256": "f51ae51155d78582946d1f2496de02acaa210c4293ba391ac179900d25be1f99"
     },
     {
       "command": "./scripts/run.ps1 test",
       "status": "PASS",
       "log_path": "runtime/test-results/test.log",
-      "log_sha256": "a6ab2904addabde2c36c77505122eae694c3b026b394f139c76aa5b832b9dd54"
+      "log_sha256": "e5d5352641c82270618c1757ab0679ab897f405a0843f062f7323da9e8bf91f2"
     },
     {
       "command": "./scripts/run.ps1 test:integration",
-      "status": "PASS",
+      "status": "FAIL",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "650022a0576975641fb13bed51db20752e1a1fcbfd3843119008df0b10f9e6eb"
-    },
-    {
-      "command": "./scripts/run.ps1 build:server",
-      "status": "PASS",
-      "log_path": "runtime/test-results/build-server.log",
-      "log_sha256": "2b17ba176db004356a131f6d44d0517efa6400c725893099071c47573f7215bd"
-    },
-    {
-      "command": "./scripts/run.ps1 build:alipay",
-      "status": "PASS",
-      "log_path": "runtime/test-results/build-alipay.log",
-      "log_sha256": "dd19a69c1352bf70bcc412c17b076a6bce497b6378e85f2b629f18f83bdd4dc7"
-    },
-    {
-      "command": "./scripts/run.ps1 build:douyin",
-      "status": "PASS",
-      "log_path": "runtime/test-results/build-douyin.log",
-      "log_sha256": "16613426bc2a019414f5c8ce66c3963f4b2533d84b185c9dd05d6af9d2983b44"
+      "log_sha256": "e3064fe1837f5192827788f434bc8643cdca15949286375b4ba82ec213517896"
     }
   ],
-  "suites": [
-    {
-      "kind": "unit",
-      "status": "PASS",
-      "tests": 70,
-      "passed": 70,
-      "failed": 0,
-      "executed_at": "2026-10-29T06:30:34.149Z",
-      "report_path": "runtime/test-results/unit.json",
-      "report_sha256": "a641296209e3c27882b31f51555a73a6ab017a5af98c913fb01f754154b29845"
-    },
-    {
-      "kind": "integration",
-      "status": "PASS",
-      "tests": 350,
-      "passed": 350,
-      "failed": 0,
-      "executed_at": "2026-10-29T06:30:59.541Z",
-      "report_path": "runtime/test-results/integration.json",
-      "report_sha256": "fa3d7a097bebcf5ea826da4df3be4a6cdbee7cbdc3e063c045b1fa10c8d22aca"
-    }
-  ],
-  "source_files": 339,
-  "source_set_hash": "c37c85eab1e30fb7502ae4ba0a307034c3cf063614ddb6c39d624f6e8d38027a",
+  "suites": [],
+  "source_files": 341,
+  "source_set_hash": "d2077c215e38e5bcabafad559fcccd11571c08260a14f82623d442b7cb8eb2f3",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -243,7 +204,7 @@
     },
     {
       "path": "src/api/modules/commerce.ts",
-      "sha256": "6b380e2ad1685b929ffdbf97578e502bbfd34f10649a05b2d4bae3d6140196af"
+      "sha256": "abef438f4764fe291d8e42955b299b39cb98c6f7c81a496ab8c82ca75b2dcb14"
     },
     {
       "path": "src/api/modules/community.ts",
@@ -271,7 +232,7 @@
     },
     {
       "path": "src/api/modules/previews.ts",
-      "sha256": "6a6d6ce2a5e8d4661f4bddc20b0ee4bfc26eb46cd275fa552f013965a1820fc6"
+      "sha256": "2e26384da04b3b429de0ac993fe0e21db326263652d287700589eb897eb59f28"
     },
     {
       "path": "src/api/modules/products.ts",
@@ -671,7 +632,7 @@
     },
     {
       "path": "src/worker/codex/media-stage.ts",
-      "sha256": "d470f61f6ce3e65d5e06d01cd9313abd837b40f9c5e80572f517f0667333d62f"
+      "sha256": "1ccd8dac7b667754e9181ea1845ea20ff0414fc42b9fddb1f36895db2e1b54de"
     },
     {
       "path": "src/worker/codex/planning.ts",
@@ -703,7 +664,7 @@
     },
     {
       "path": "src/worker/compiler/plan.ts",
-      "sha256": "3d116cdf1771d5749ceea8ac26999424b6883637a56227347befd91cbd9e4e59"
+      "sha256": "d1155b53b94040a7247d0c4d8fbd1abf3fadf30a10912693e345f47484d6f00f"
     },
     {
       "path": "src/worker/compiler/snapshot.ts",
@@ -803,7 +764,7 @@
     },
     {
       "path": "src/worker/media/artifacts.ts",
-      "sha256": "a07de4f32d2565ae5a2119e5076407648023787da3d4b902df68e7cd433ca74b"
+      "sha256": "358ecbf226d075befaf9ea41db6870ea293ca61f4dbf5fa8018c7a662433ae72"
     },
     {
       "path": "src/worker/media/disclosure.ts",
@@ -815,11 +776,11 @@
     },
     {
       "path": "src/worker/media/generated-pipeline.ts",
-      "sha256": "ab1f29f99f27e23491e02655e0006d7f9896e5a9407bbce2f28c0efc52092228"
+      "sha256": "1a5aa4c5326a8f32c50198c93bd3aa9d996152509d40ada6f10eab31257c78e8"
     },
     {
       "path": "src/worker/media/layout.ts",
-      "sha256": "6116076f04f58550de1d21c53fe19d9eca99e3dcecfa4aef5edeb7e8f1a72647"
+      "sha256": "4b6ec94f0d05239b44173d60ddbd94cb5f4c1803fd568345918212f3b3a22338"
     },
     {
       "path": "src/worker/media/native-audio-assembly.ts",
@@ -839,7 +800,7 @@
     },
     {
       "path": "src/worker/media/native-order-pipeline.ts",
-      "sha256": "d8f848f9e8cc0ba569a92e1fc0b291d77f2c5826f5a9c38dfec48a89e4ccc4dd"
+      "sha256": "cbcb30ee7a11d8c48121adbc801df1761515e54b76836d90ade22ee1c9c2d55f"
     },
     {
       "path": "src/worker/media/native.ts",
@@ -847,11 +808,19 @@
     },
     {
       "path": "src/worker/media/photo-pipeline.ts",
-      "sha256": "a6a2b58063cc403abf9a5ac3095cfae1254c0318335c6e7b59888625105954b5"
+      "sha256": "806f99e306e12b49b8f8938f23eac98bed092b7781096a10f5774e73b4c177e2"
     },
     {
       "path": "src/worker/media/photo-video.ts",
       "sha256": "85d88074572445b62216dbbbda7b52a8d79a88ff28d945293eed4f42d3bc1b2a"
+    },
+    {
+      "path": "src/worker/media/plan-layout.ts",
+      "sha256": "549c8f21890a9104236edf4391d2ea64afe75125ee37d740b3a5d281055aa1ea"
+    },
+    {
+      "path": "src/worker/media/text-layout.ts",
+      "sha256": "88152ad0417e504e6be24affb49359a0ef60b232123b6ef4a40db871d7901fc9"
     },
     {
       "path": "src/worker/payments/reconcile.ts",
@@ -995,7 +964,7 @@
     },
     {
       "path": "src/worker/tool-gateway/content-tools.ts",
-      "sha256": "6b11831ebe643862cd4c8ed7f72acaa3d6f6bfbf85ed3bdb4c70c1c6a2bd92f1"
+      "sha256": "04a54f047af8b058a8264e9ef350952d5aa3f8223736c1471414c62b1a236ff7"
     },
     {
       "path": "src/worker/tool-gateway/generation-tools.ts",
@@ -1119,7 +1088,7 @@
     },
     {
       "path": "tests/integration/codex-planning.test.ts",
-      "sha256": "be49de392a52299d767b0ee6e57eccdc1d5547f92df901bb01ceb601bfeb1c98"
+      "sha256": "efca4c207a4f679c606e11bfe74364622315e4c14eb2d5e0e6a1ec3f9c42a106"
     },
     {
       "path": "tests/integration/community.test.ts",
@@ -1155,7 +1124,7 @@
     },
     {
       "path": "tests/integration/media-stages.test.ts",
-      "sha256": "25d5e5ca31b3674d571f181dcc324755922f5b4715561f0fe5ff4b4e667dd817"
+      "sha256": "3e6336847b335c29638f0b34385a69bb3e04584cb89ef054636acd908fde00c1"
     },
     {
       "path": "tests/integration/multipart-upload.test.ts",
@@ -1167,11 +1136,11 @@
     },
     {
       "path": "tests/integration/native-media.test.ts",
-      "sha256": "7b055593a27780bb6ddfb9470125ee48486a47c0a9f5c33ce7f11dfc81b21c4e"
+      "sha256": "4453373a2f8c59669cb3556a9e4529c3fbd069b06cf6858f15d12453142a00f2"
     },
     {
       "path": "tests/integration/native-order.test.ts",
-      "sha256": "f2d99f2d4f1ed3ef6029b4d1ce240d94f02564bb860aa26446cbc4db781590ed"
+      "sha256": "d9ad5110e5c6a710cc531fa1efe85715a621fbc320f9308a37ef9660af39ddf8"
     },
     {
       "path": "tests/integration/optional-preview.test.ts",
@@ -1223,7 +1192,7 @@
     },
     {
       "path": "tests/integration/tool-consumer.test.ts",
-      "sha256": "d8b93ede46f8e08c059b875b192f4cb6f5aba5a751841f31c7420c16df548c06"
+      "sha256": "1a11a3e15308cce7bf47590e4fd2eedb6c38640e35fdb00855580f102e23fc5d"
     },
     {
       "path": "tests/integration/vision-analysis.test.ts",
@@ -1279,7 +1248,7 @@
     },
     {
       "path": "tests/unit/profile-plan.test.ts",
-      "sha256": "03787d0f586e898b3c4d7a49ad24c583a364ef70a977b468cf7199f5e057b7a8"
+      "sha256": "e4192931adc08bdd64ac8c142ccaec2bd472dcce0acac88d23a7151a33fdf1f1"
     },
     {
       "path": "tests/unit/review-packet.test.ts",
@@ -1379,7 +1348,7 @@
     },
     {
       "path": "scripts/record-disclosure.ts",
-      "sha256": "64d0bfb3c4e59220c503d720aa980106cd07aad25eb385f08d560dc69929dc95"
+      "sha256": "df2cd889c83c1504a7aab4669bc369092759dd17ce87b178a7608a7f3e1f14ae"
     },
     {
       "path": "scripts/record-native-audio.ts",
@@ -1399,7 +1368,7 @@
     },
     {
       "path": "scripts/verify-implementation.ts",
-      "sha256": "7e169cdff67bcf256257668cd9aae81a5bf237113aca89006d062489070323f3"
+      "sha256": "aca5d5021030da6c7c1c6b0c1601e2dda9e7851586541fb445720faac3b56e46"
     },
     {
       "path": "scripts/verify-publication.ts",
@@ -1619,13 +1588,27 @@
       "sha256": "2b543755c8bc721507c9d9dbc3da537bd4486db425dd032524aeeabff4df76d0"
     }
   ],
+  "visible_text_layout": {
+    "drawn_shot_intent_claim_guard": true,
+    "actual_pinned_font_measurement": true,
+    "grapheme_wrapping": true,
+    "silent_truncation_allowed": false,
+    "quote_and_pre_purchase_preflight": true,
+    "ai_chapter_footer_safe_areas": true,
+    "renderer_version_bound": true,
+    "original_media_input_change_blocked": true,
+    "fixture_verified": false,
+    "automatic_media_repair_implemented": false,
+    "real_model_semantics_verified": false,
+    "production_admitted": false
+  },
   "ai_disclosure": {
     "private_contract_frozen": true,
     "actual_image_glyph_check": true,
     "actual_image_alpha_check": true,
     "all_video_frames_checked": true,
     "generated_and_native_pipeline_connected": true,
-    "fixture_verified": true,
+    "fixture_verified": false,
     "official_multi_means": "CONTINUOUS_MULTI_SHOT_NOT_REQUIRED_MULTI_SPEAKER",
     "real_generated_content_quality_verified": false,
     "host_or_legal_marking_admitted": false,
@@ -1651,18 +1634,18 @@
   "client_implementation": {
     "mini_shared_pages": 17,
     "community_pages_implemented": true,
-    "community_api_recovery_fixture_verified": true,
+    "community_api_recovery_fixture_verified": false,
     "creator_publication_form_implemented": true,
-    "creator_publication_api_fixture_verified": true,
+    "creator_publication_api_fixture_verified": false,
     "sample_worker_implemented": true,
-    "sample_photo_pipeline_fixture_verified": true,
+    "sample_photo_pipeline_fixture_verified": false,
     "public_sample_lifecycle_implemented": true,
-    "public_sample_lifecycle_fixture_verified": true,
+    "public_sample_lifecycle_fixture_verified": false,
     "optional_photo_preview_implemented": true,
-    "optional_photo_preview_fixture_verified": true,
+    "optional_photo_preview_fixture_verified": false,
     "generated_preview_implemented": false,
     "limited_revision_worker_implemented": true,
-    "limited_revision_photo_pipeline_fixture_verified": true,
+    "limited_revision_photo_pipeline_fixture_verified": false,
     "limited_revision_all_routes_verified": false,
     "native_device_ui_verified": false,
     "complete_creator_publication_flow_verified": false,
@@ -1678,20 +1661,20 @@
     "quote_contract_and_budget_guards_implemented": true,
     "original_order_cost_ledger_implemented": true,
     "durable_original_submission_recovery_implemented": true,
-    "native_media_fixture_verified": true,
-    "original_stage_binding_fixture_verified": true,
+    "native_media_fixture_verified": false,
+    "original_stage_binding_fixture_verified": false,
     "unsettled_generation_receipts_retained": true,
     "absolute_purchase_deadline_propagated": true,
     "production_tools_registered": true,
     "generated_reference_semantic_gate_implemented": true,
-    "production_tools_fixture_verified": true,
-    "reference_purchase_gate_fixture_verified": true,
+    "production_tools_fixture_verified": false,
+    "reference_purchase_gate_fixture_verified": false,
     "reference_identity_service_implemented": true,
-    "reference_identity_service_fixture_verified": true,
+    "reference_identity_service_fixture_verified": false,
     "silent_generated_pack_implemented": true,
-    "silent_generated_pack_fixture_verified": true,
+    "silent_generated_pack_fixture_verified": false,
     "generated_post_qc_final_review_delivery_implemented": true,
-    "generated_original_role_recovery_fixture_verified": true,
+    "generated_original_role_recovery_fixture_verified": false,
     "silent_qc_policy": "YPCC-QC-GENERATED-SILENT-1.0.0",
     "all_generated_routes_verified": false,
     "native_audio_verified": false,
@@ -1700,7 +1683,7 @@
   },
   "native_audio_kernel": {
     "implemented": true,
-    "native_fixture_verified": true,
+    "native_fixture_verified": false,
     "policy": "YPCC-NATIVE-AUDIO-KERNEL-1.0.0",
     "caption_styles": [
       "standard",
@@ -1722,7 +1705,7 @@
   },
   "speech_transcription": {
     "implemented": true,
-    "native_fixture_verified": true,
+    "native_fixture_verified": false,
     "provider": "ALIYUN_DASHSCOPE",
     "wire": "QWEN3_ASR_FLASH_FILETRANS_ASYNC",
     "original_intent_receipts_and_budget": true,
@@ -1742,7 +1725,7 @@
   },
   "native_audio_contract": {
     "implemented": true,
-    "native_fixture_verified": true,
+    "native_fixture_verified": false,
     "version": "YPCC-NATIVE-AUDIO-CONTRACT-1",
     "frozen_character_voice_video_binding": true,
     "frozen_captions_and_music": true,
@@ -1761,7 +1744,7 @@
   },
   "native_order_media": {
     "implemented": true,
-    "native_fixture_verified": true,
+    "native_fixture_verified": false,
     "version": "YPCC-NATIVE-ORDER-PIPELINE-1",
     "routes": [
       "PER_SHOT_AI",
@@ -1788,8 +1771,8 @@
   },
   "native_audio_qc": {
     "implemented": true,
-    "native_fixture_verified": true,
-    "unit_fixture_verified": true,
+    "native_fixture_verified": false,
+    "unit_fixture_verified": false,
     "policy": "YPCC-QC-GENERATED-NATIVE-AUDIO-1.0.0",
     "evidence_version": "YPCC-NATIVE-AUDIO-QC-EVIDENCE-1",
     "full_stereo_review_wav": true,
@@ -1809,8 +1792,8 @@
   "native_listening": {
     "implemented": true,
     "wire": "QWEN_OMNI_STEREO_CHAT_SSE_1",
-    "unit_fixture_verified": true,
-    "native_fixture_verified": true,
+    "unit_fixture_verified": false,
+    "native_fixture_verified": false,
     "complete_original_and_final_stereo_wav": true,
     "all_sealed_images": true,
     "original_contract_and_budget": true,
@@ -1824,7 +1807,7 @@
     "final_review_reports_connected": true,
     "final_review_reports_admitted": false,
     "audio_delivery_connected": true,
-    "final_review_publication_fixture_verified": true,
+    "final_review_publication_fixture_verified": false,
     "synthetic_semantic_pass_only": true,
     "real_model_listening_verified": false,
     "real_usage_cache_billing_verified": false,
@@ -1839,10 +1822,10 @@
     "native_isolation_verified": false,
     "certified_token_cost_bound_verified": false,
     "independent_reaper_implemented": true,
-    "independent_reaper_fixture_verified": true,
-    "review_publication_fixture_verified": true,
-    "scoped_internal_traffic_fixture_verified": true,
-    "role_lease_heartbeat_fixture_verified": true,
+    "independent_reaper_fixture_verified": false,
+    "review_publication_fixture_verified": false,
+    "scoped_internal_traffic_fixture_verified": false,
+    "role_lease_heartbeat_fixture_verified": false,
     "limited_revision_notes": "Five durable REVISION stages produce a new linked PHOTO_LAYOUT/no-speech manifest for existing-image cover selection, full-pack display order or actual replacement copy bytes. Three new synthetic roles review a new sealed packet; original expiry and original delivery remain intact. Pre-sale frozen aftercare costs share the original total budget across failed retries; UNKNOWN holds are not reset. Stage fencing, recovery, late writes and private role graph are exercised. Generated/audio revisions and real Codex/isolation/device verification remain incomplete. Internal traffic is bounded per live run across all four tool/inference routes; invalid/revoked tokens use the shared IP bucket, and durable cost/tool limits still apply.",
     "notes": "Real HTTPS/MCP, synthetic native stdio roles, persisted planning/photo media and complete sealed visual/text review inputs, original receipt recovery, immutable independent reports, fenced atomic publication and authorized hash-checked downloads are exercised. Independent durable reaping uses registered real Node children and test-only cleanup ports; claims, expired-owner rejection, immutable retries and actual directory guards are exercised. All model judgments, token usage and native isolation assertions remain fixtures. Real Codex, restricted OS identity/process-tree cleanup, certified image cost, semantic quality, official generated/audio variants and bounded repair remain incomplete; both short silent generated pack fixtures have separate native coverage."
   },
@@ -1852,20 +1835,20 @@
     "cleanup_evidence": "IMMUTABLE_PER_GENERATION",
     "cleanup_ports_test_only": true,
     "real_native_cleanup_verified": false,
-    "frozen_input_retention_fixture_verified": true,
+    "frozen_input_retention_fixture_verified": false,
     "physical_privacy_deletion_verified": false,
     "media_maintenance_entry": "src/worker/lifecycle/media-maintenance-main.ts",
     "controlled_object_erasure_implemented": true,
-    "controlled_object_erasure_fixture_verified": true,
-    "oss_version_erasure_fixture_verified": true,
-    "uncertain_object_recovery_fixture_verified": true,
-    "retired_receipt_reconciliation_fixture_verified": true,
+    "controlled_object_erasure_fixture_verified": false,
+    "oss_version_erasure_fixture_verified": false,
+    "uncertain_object_recovery_fixture_verified": false,
+    "retired_receipt_reconciliation_fixture_verified": false,
     "private_database_redaction_implemented": true,
-    "private_database_redaction_fixture_verified": true,
+    "private_database_redaction_fixture_verified": false,
     "external_deletion_journal_implemented": true,
     "restore_admission_gate_implemented": true,
-    "backup_deletion_replay_fixture_verified": true,
-    "privacy_journal_cli_fixture_verified": true,
+    "backup_deletion_replay_fixture_verified": false,
+    "privacy_journal_cli_fixture_verified": false,
     "journal_production_durability_verified": false,
     "financial_restore_verified": false,
     "real_oss_version_erasure_verified": false,

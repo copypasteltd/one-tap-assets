@@ -7,15 +7,16 @@ import type { VariantSource } from '../../api/modules/catalog.js';
 import { validateCreativePlan, creativePlanHash, type CreativePlan } from '../compiler/plan.js';
 import type { ToolScope } from './http.js';
 import type { ToolHandler } from './consumer.js';
+import {validatePlanLayout} from '../media/plan-layout.js';
 
-export interface PlanContext { profile: DTO<'Profile'>; source: VariantSource; planId: string }
+export interface PlanContext { profile: DTO<'Profile'>; source: VariantSource; presetId:string; planId: string }
 async function context(db: pg.Pool | pg.PoolClient, scope: ToolScope): Promise<PlanContext> {
   requireThat(scope.role === 'CONTENT' && scope.scope_type === 'PLAN' && scope.preview_session_id === scope.scope_id,
     'CONTENT_TOOL_SCOPE_INVALID', '内容工具只接受本次规划的商品上下文', 409);
   return planningContext(db, scope.tenant_id, scope.scope_id);
 }
 export async function planningContext(db: pg.Pool | pg.PoolClient, tenantId: string, planId: string): Promise<PlanContext> {
-  const plan = (await db.query<{ id: string; profile_id: string; product_id: string; photo_version_id: string; private: { source: VariantSource } }>(
+  const plan = (await db.query<{ id: string; profile_id: string; product_id: string; photo_version_id: string; private: { source: VariantSource;request:DTO<'PlanRequest'> } }>(
     "SELECT id,profile_id,product_id,photo_version_id,private FROM plan_versions WHERE tenant_id=$1 AND id=$2 AND state='PLANNING'", [tenantId, planId])).rows[0] ?? notFound();
   const profile = (await db.query<{ data: DTO<'Profile'> }>('SELECT data FROM profile_versions WHERE tenant_id=$1 AND id=$2 AND product_id=$3 AND photo_version_id=$4',
     [tenantId, plan.profile_id, plan.product_id, plan.photo_version_id])).rows[0] ?? notFound();
@@ -24,13 +25,16 @@ export async function planningContext(db: pg.Pool | pg.PoolClient, tenantId: str
   requireThat(product.rowCount === 1, 'INPUT_VERSION_CHANGED', '当前商品输入已更新或删除', 409);
   validate('Profile', profile.data, true);
   const { profile_hash, ...body } = profile.data; requireThat(hash(body) === profile_hash, 'PROFILE_HASH_MISMATCH', '商品证据摘要不一致', 503);
-  return { profile: profile.data, source: plan.private.source, planId: plan.id };
+  requireThat(typeof plan.private.request?.preset_id === 'string' && plan.private.request.preset_id.length > 0,
+    'PLAN_INPUT_CHANGED', '原方案选择信息不完整，请重新选择方案', 409);
+  return { profile: profile.data, source: plan.private.source, presetId:plan.private.request.preset_id, planId: plan.id };
 }
 async function checkedPlan(db: pg.Pool | pg.PoolClient, scope: ToolScope, raw: unknown): Promise<CreativePlan> {
   await context(db, scope); return validatePlanningResult(db, scope.tenant_id, scope.scope_id, raw);
 }
 export async function validatePlanningResult(db: pg.Pool | pg.PoolClient, tenantId: string, planId: string, raw: unknown): Promise<CreativePlan> {
   const value = raw as CreativePlan; const source = await planningContext(db, tenantId, planId); validateCreativePlan(value, source.profile, source.source);
+  await validatePlanLayout(value,source.source,source.presetId);
   if (source.source.audio_policy.speech !== 'none') {
     const character = (await db.query<{ data: { admission_state?: string; native_voice_ids?: string[] } }>('SELECT data FROM character_versions WHERE id=$1', [value.character_version_id])).rows[0];
     requireThat(character?.data.admission_state === 'ADMITTED' && character.data.native_voice_ids?.includes(value.native_voice_id!),

@@ -7,7 +7,8 @@ import { CodexRuntimeAdapter, refreshRoleInstanceLease } from '../../src/worker/
 import { ContentPlanningService } from '../../src/worker/codex/planning.js';
 import { FixtureLauncher } from '../helpers/role-launcher.js';
 import { ToolConsumer } from '../../src/worker/tool-gateway/consumer.js';
-import { contentTools } from '../../src/worker/tool-gateway/content-tools.js';
+import { contentTools,validatePlanningResult } from '../../src/worker/tool-gateway/content-tools.js';
+import {basePlan} from '../../src/worker/compiler/plan.js';
 import { claimStage, completeStage } from '../../src/worker/queue/leases.js';
 import { validate } from '../../src/api/lib/validation.js';
 import { id } from '../../src/api/lib/crypto.js';
@@ -21,6 +22,21 @@ afterEach(async () => {
   await db.pool.query("UPDATE stage_runs SET state='CANCELLED' WHERE state NOT IN ('SUCCEEDED','FAILED')");
 });
 afterAll(async () => { await db?.close(); });
+
+it('rejects overlong painted copy before READY without creating a quote, role or paid submission',async()=>{
+  const f=await planningFixture(db),plan=basePlan(f.profile,f.source);
+  const rejected=[structuredClone(plan),structuredClone(plan),structuredClone(plan)];
+  rejected[0]!.copy='蓝色带盖杯'.repeat(30);rejected[1]!.shots[0]!.intent='蓝色带盖杯'.repeat(30);
+  rejected[2]!.shots[0]!.intent='治疗失眠';
+  for(const [i,value] of rejected.entries()){
+    await expect(validatePlanningResult(db.pool,f.p.tenantId,f.plan.plan_id,value)).rejects
+      .toMatchObject({code:i===2?'UNSUPPORTED_CLAIM':'LAYOUT_TEXT_OVERFLOW'});
+  }
+  expect((await db.pool.query('SELECT state FROM plan_versions WHERE id=$1',[f.plan.plan_id])).rows[0].state).toBe('PLANNING');
+  expect((await db.pool.query('SELECT id FROM quotes WHERE plan_id=$1',[f.plan.plan_id])).rowCount).toBe(0);
+  expect((await db.pool.query('SELECT r.id FROM agent_runs r JOIN agent_instances i ON i.id=r.instance_id WHERE i.preview_session_id=$1',[f.plan.plan_id])).rowCount).toBe(0);
+  expect((await db.pool.query('SELECT id FROM provider_submissions WHERE stage_run_id=$1',[f.lease.id])).rowCount).toBe(0);
+});
 
 it('renews the actual native instance lease within its bound parent and rejects takeover, expiry or release', async () => {
   const f = await planningFixture(db), instanceId = id('instance');

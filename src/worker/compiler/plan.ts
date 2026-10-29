@@ -68,7 +68,9 @@ export function validateCreativePlan(plan: CreativePlan, profile: DTO<'Profile'>
   requireThat(slots.length === plan.image_slots.length && new Set(plan.image_slots.map(s => s.slot_id)).size === slots.length && plan.image_slots.every(s => slots.some(x => x.slot_id === s.slot_id) && photos.has(s.asset_id) && s.evidence_ids.every(e => evidence.has(e))), 'PLAN_OUTPUT_INVALID', '图片计划与交付清单不一致', 422);
   if (source.audio_policy.speech !== 'none') requireThat(plan.native_voice_id && plan.character_version_id && plan.shots.some(s => s.spoken_text.trim()), 'NATIVE_SPEECH_REQUIRED', '口播方案需要已准入的人物、声音和中文台词', 422);
   const knownText = profile.observations.filter(o => o.status === 'OBSERVED').map(o => o.value).join(' ');
-  const claims = `${plan.title} ${plan.copy} ${plan.image_slots.map(s => s.title).join(' ')} ${plan.shots.map(s => s.spoken_text).join(' ')}`;
+  // Shot intent is also painted into PHOTO_LAYOUT frames. It is not a private
+  // director note exempt from the same evidence gate as titles and speech.
+  const claims = `${plan.title} ${plan.copy} ${plan.image_slots.map(s => s.title).join(' ')} ${plan.shots.map(s => `${s.intent} ${s.spoken_text}`).join(' ')}`;
   const highRisk = claims.match(/(?:\d+(?:\.\d+)?\s*(?:元|折|%|毫升|ml|克|kg|厘米|cm|小时)|治愈|治疗|根治|全网最低|第一名|保证有效)/gi) ?? [];
   requireThat(highRisk.every(c => knownText.includes(c)), 'UNSUPPORTED_CLAIM', '文案包含照片证据无法支持的价格、规格或效果表述', 422);
   requireThat(plan.title.length <= 200 && plan.copy.length <= 10000 && plan.shots.every(s => s.spoken_text.length <= 3000), 'PLAN_TEXT_TOO_LONG', '文案长度超过限制', 422);

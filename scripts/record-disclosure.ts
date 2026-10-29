@@ -24,8 +24,9 @@ try{
     resource_versions:[{...FONT_BINDING}],creative:{target_frames:450}} as FrozenContract;
   freezeAiDisclosure(contract);const policy=contract.ai_disclosure_contract!,font=await loadProductionFont(cfg.projectRoot);
   const photo=await sharp(Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1440"><rect width="1080" height="1440" fill="#F6E5CE"/><ellipse cx="540" cy="1130" rx="240" ry="44" fill="#DECBB4"/><rect x="365" y="440" width="350" height="660" rx="66" fill="#E58A37"/><rect x="350" y="400" width="380" height="115" rx="40" fill="#263B32"/><path d="M715 580 Q960 560 900 840 Q860 940 715 870" fill="none" stroke="#C86F2E" stroke-width="64"/><rect x="420" y="630" width="240" height="240" rx="20" fill="#FFFAEE"/></svg>')).png().toBuffer();
-  const image=await markDisclosureImage(await renderLayout(photo,{presetId:'portrait-social',width:1080,height:1440,title:'合成示例商品',
-    subtitle:'自绘素材 · 可见标识像素检查',sequence:1,total:1,aiLabel:true,font}),await disclosureRaster(cfg,policy,1080,1440));
+  const image=await markDisclosureImage(await renderLayout(photo,{presetId:'portrait-social',width:1080,height:1440,title:'合成示例商品的完整外观与细节',
+    subtitle:'自绘素材用于实际文字排版检查与可见标识像素检查，长文案完整换行保留，末字甲',
+    sequence:1,total:1,aiLabel:true,font,disclosure:policy}),await disclosureRaster(cfg,policy,1080,1440));
   const imageProof=await inspectDisclosure(cfg,policy,image,{kind:'image',width:1080,height:1440,frames:1,directory,deadline_at:addSeconds(120),signal:new AbortController().signal});
   const canvas=await sharp(photo).resize(1080,1920,{fit:'contain',background:'#FFFAEE'}).png().toBuffer();
   const mark=await disclosureRaster(cfg,policy,1080,1920);await writeFile(join(directory,'source.png'),canvas,{flag:'wx'});await writeFile(join(directory,'mark.png'),mark.png,{flag:'wx'});
@@ -45,7 +46,8 @@ try{
   for(const [name,bytes] of [['image.png',image],['video.mp4',videoBytes],['frame.png',await readFile(join(directory,'frame.png'))],['preview.gif',await readFile(join(directory,'preview.gif'))]] as const){
     const path=`${target}/${name}`;await writeFile(path,bytes);files.push({path,bytes:bytes.length,sha256:sha256(bytes)});
   }
-  const sourceFiles=['scripts/record-disclosure.ts','src/worker/compiler/disclosure.ts','src/worker/media/disclosure.ts','src/worker/media/layout.ts'];
+  const sourceFiles=['scripts/record-disclosure.ts','src/worker/compiler/disclosure.ts','src/worker/media/disclosure.ts',
+    'src/worker/media/layout.ts','src/worker/media/text-layout.ts'];
   const manifest={type:'SYNTHETIC_DISCLOSURE_PIXEL_FIXTURE',created_at:new Date().toISOString(),data_source:'PROJECT_SELF_DRAWN_SVG_AND_STATIC_NATIVE_VIDEO',
     browser_used:false,external_model_used:false,real_generation_verified:false,real_speech_verified:false,host_or_legal_marking_admitted:false,
     full_product_verified:false,production_admitted:false,frames:450,contract:policy,image_proof:imageProof,video_proof:videoProof,inspection,

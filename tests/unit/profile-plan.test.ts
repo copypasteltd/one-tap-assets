@@ -34,6 +34,15 @@ describe('multimodal evidence and deterministic creative contract', () => {
     const p = profile(); const v = variant('portrait-social.ai-presenter-single'); const plan = basePlan(p, v);
     expect(() => validateCreativePlan(plan, p, v)).toThrow();
   });
+  it('checks the shot intent actually drawn as a subtitle against observed product claims', () => {
+    const p=profile(),v=variant(),bad=basePlan(p,v);
+    bad.shots[0]!.intent='治疗失眠';
+    expect(()=>validateCreativePlan(bad,p,v)).toThrow(expect.objectContaining({code:'UNSUPPORTED_CLAIM'}));
+    bad.shots[0]!.intent='容量500ml';
+    expect(()=>validateCreativePlan(bad,p,v)).toThrow(expect.objectContaining({code:'UNSUPPORTED_CLAIM'}));
+    p.observations.push({...p.observations[0]!,feature:'规格',value:'500ml',status:'OBSERVED'});
+    expect(()=>validateCreativePlan(bad,p,v)).not.toThrow();
+  });
   it('remaps hypothesis evidence and rejects references absent from the current photos', () => {
     const raw = rawProfile(); raw.hypotheses = [{ text: '可能适合随身携带', evidence_ids: ['ev-a'], uncertain: true }];
     const result = normalizeVision(raw, scope);

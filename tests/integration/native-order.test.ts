@@ -1,5 +1,5 @@
 import {beforeAll,afterAll,afterEach,it,expect} from 'vitest';
-import {mkdir,readFile,rm,writeFile} from 'node:fs/promises';
+import {mkdir,readFile,rm,writeFile,appendFile} from 'node:fs/promises';
 import {join} from 'node:path';
 import type {FastifyInstance} from 'fastify';
 import sharp from 'sharp';
@@ -258,7 +258,10 @@ it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('binds synthetic native final
   const downloaded=await f.app.inject({method:'GET',url:url.pathname+url.search});expect(downloaded.statusCode).toBe(200);expect(sha256(downloaded.rawPayload)).toBe(video.sha256);
   const manifest=(await db.pool.query('SELECT private FROM delivery_manifests WHERE order_id=$1',[f.orderId])).rows[0]!;
   expect(manifest.private.native_listening_hash).toBe(bindingHash);expect(manifest.private.native_listening_submission_id).toBe(listening.submission_id);
-  expect((await db.pool.query("SELECT id FROM agent_instances WHERE order_id=$1 AND state<>'RELEASED'",[f.orderId])).rowCount).toBe(0);
+  const unreleased=(await db.pool.query(`SELECT i.id,i.state,i.cleanup_generation,r.role,
+    (SELECT c.data->'error_codes' FROM cleanup_receipts c WHERE c.instance_id=i.id ORDER BY c.verified_at DESC LIMIT 1) AS cleanup_errors
+    FROM agent_instances i LEFT JOIN agent_runs r ON r.instance_id=i.id WHERE i.order_id=$1 AND i.state<>'RELEASED'`,[f.orderId])).rows;
+  expect(unreleased,`Unreleased native delivery instances: ${JSON.stringify(unreleased)}`).toEqual([]);
   expect((await db.pool.query("SELECT id FROM outbox_events WHERE aggregate_id=$1 AND event_key=$2",[f.orderId,`release:delivered:${f.orderId}`])).rowCount).toBe(1);
   const post=await operationArtifacts(db.pool,f.context,'POST');
   expect(post.receipt.artifacts.find(a=>a.spec.kind==='video')!.spec.native_audio!.post!.kernel.semantic_review).toBe('NOT_PERFORMED');
@@ -390,11 +393,20 @@ it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('seals private %s native prod
 },240_000);
 
 it.each(['original-write','voice-license'] as const)('refuses native QC sealing after %s is revoked between preparation and commit',async revoked=>{
-  const f=await setup();await stage(f,f.lease);const post=await postLease(f);await stage(f,post);
+  const trace=inside(db.cfg.runtimeRoot,`test-results/${id('native-qc-timing')}.jsonl`);
+  async function timed<T>(phase:string,action:()=>Promise<T>):Promise<T>{
+    const started=performance.now();
+    const record=async(event:string)=>appendFile(trace,JSON.stringify({revoked,phase,event,at:new Date().toISOString(),
+      elapsed_ms:performance.now()-started,memory:process.memoryUsage(),sharp_cache:sharp.cache()})+'\n');
+    await record('START');try{return await action();}finally{await record('END');}
+  }
+  const f=await timed('SETUP',()=>setup());await timed('PRODUCTION',()=>stage(f,f.lease));
+  const post=await timed('CLAIM_POST',()=>postLease(f));await timed('POST',()=>stage(f,post));
   const qcId=await enqueueStage(db.pool,{tenantId:f.p.tenantId,scopeType:'ORDER',scopeId:f.orderId,name:'QC',inputHash:f.snapshotHash,
     deadlineAt:f.snapshot.deadline_at,jobId:f.lease.job_id!,dependencies:[post.id]});
   const qc=(await claimStage(db.pool,id('native_revoke_qc'),['QC']))!;expect(qc.id).toBe(qcId);
-  const commit=await withFixtureLease(db.pool,qc,s=>new QualityControlService(db.pool,f.cfg,f.store).handle(qc,s));
+  const commit=await timed('QC_PREPARE',()=>withFixtureLease(db.pool,qc,s=>new QualityControlService(db.pool,f.cfg,f.store).handle(qc,s)));
+  await timed('REVOKE_AND_CHECK',async()=>{
   if(revoked==='original-write'){
     const context=await executionContext(db.pool,f.p.tenantId,f.orderId,f.snapshotHash),receipt=await operationArtifacts(db.pool,context,'POST');
     const sourceWrite=receipt.receipt.artifacts.find(a=>a.spec.kind==='video')!.spec.native_audio!.post!.source_write_id;
@@ -404,6 +416,7 @@ it.each(['original-write','voice-license'] as const)('refuses native QC sealing 
     await db.pool.query('UPDATE resource_licenses SET revoked_at=now() WHERE id=$1',[f.character.voice_binding.license_record_id]);
     await expect(completeStage(db.pool,qc,commit)).rejects.toMatchObject({code:'AUDIO_LICENSE_UNAVAILABLE'});
   }
+  });
   expect((await db.pool.query('SELECT id FROM review_packets WHERE order_id=$1',[f.orderId])).rowCount).toBe(0);
   expect((await db.pool.query('SELECT id FROM qc_decisions WHERE order_id=$1',[f.orderId])).rowCount).toBe(0);expect(f.asrPosts()).toBe(1);
 });

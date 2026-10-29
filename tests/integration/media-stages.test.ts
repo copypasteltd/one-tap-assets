@@ -133,6 +133,20 @@ async function submit(capability: string, snapshotHash: string) {
   return app!.inject({ method: 'POST', url: '/v1/internal/p01/agent-tools/calls', headers: { authorization: `Bearer ${capability}` },
     payload: { tool: 'render_photo_pack', arguments: { snapshot_hash: snapshotHash }, idempotency_key: id('call') } });
 }
+it('blocks a changed renderer input without replacing the original media operation or buying a role',async()=>{
+  const f=await mediaFixture(db),run=await scopedRun(f),operationId=id('old_media'),oldHash=hash('original-renderer-input');
+  await insert(db.pool,'media_operations',{id:operationId,tenant_id:f.p.tenantId,order_id:f.orderId,stage_run_id:f.lease.id,
+    phase:'PRODUCTION',input_hash:oldHash,state:'PREPARING'});
+  app=await buildApp({cfg:f.cfg,pool:db.pool});
+  const response=await submit(run.capability,f.snapshotHash);expect(response.statusCode).toBe(202);
+  await new ToolConsumer(db.pool,id('tools'),productionTools(db.pool,f.cfg,f.store)).process(new AbortController().signal);
+  expect((await db.pool.query('SELECT state,data FROM agent_tool_intents WHERE id=$1',[response.json().intent_id])).rows[0])
+    .toMatchObject({state:'FAILED',data:{error_code:'MEDIA_INPUT_CHANGED'}});
+  expect((await db.pool.query('SELECT id,input_hash,generation FROM media_operations WHERE order_id=$1',[f.orderId])).rows)
+    .toEqual([{id:operationId,input_hash:oldHash,generation:0}]);
+  expect((await db.pool.query('SELECT id FROM artifacts WHERE order_id=$1',[f.orderId])).rowCount).toBe(0);
+  expect((await db.pool.query('SELECT id FROM provider_submissions WHERE order_id=$1',[f.orderId])).rowCount).toBe(0);
+});
 it('recovers the original private receipt after storage succeeded but the tool transaction did not', async () => {
   const f = await mediaFixture(db); const run = await scopedRun(f); app = await buildApp({ cfg: f.cfg, pool: db.pool });
   let failOnce = true; let videoWrites = 0;

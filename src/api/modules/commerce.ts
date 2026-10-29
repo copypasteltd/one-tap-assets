@@ -6,7 +6,8 @@ import { id, hash, iso, addSeconds } from '../lib/crypto.js';
 import { AppError, requireThat, notFound } from '../lib/errors.js';
 import { getVariant } from './catalog.js';
 import { validateInternal } from '../lib/validation.js';
-import type { CreativePlan } from '../../worker/compiler/plan.js';
+import {validateCreativePlan,creativePlanHash,type CreativePlan} from '../../worker/compiler/plan.js';
+import {validatePlanLayout} from '../../worker/media/plan-layout.js';
 import { bindSnapshot, type FrozenContract, type ModelBinding, type ResourceBinding } from '../../worker/compiler/snapshot.js';
 import { enqueueStage } from '../../worker/queue/enqueue.js';
 import {freezeGenerationContracts,validateGenerationExecution,type GenerationModelRow} from '../../worker/generation/contracts.js';
@@ -50,7 +51,7 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
   const profile = await owned<DTO<'Profile'>>(db, 'profile_versions', String(plan.profile_id), p);
   const lock = await scoped(db, 'identity_locks', profile.data.identity_lock_id, p.tenantId);
   const photo = (await db.query<{ photo_set_hash: string }>('SELECT photo_set_hash FROM product_photo_versions WHERE id=$1 AND tenant_id=$2', [plan.photo_version_id, p.tenantId])).rows[0] ?? notFound();
-  await loadProductionFont(cfg.projectRoot);
+  const font=await loadProductionFont(cfg.projectRoot);
   const resources = bindProductionFont(privateData.resource_versions ?? []);
   await verifyResourceLicenses(db, resources);
   const contract: FrozenContract = { product: product.data, profile: profile.data, photo_set_hash: photo.photo_set_hash, identity_lock_hash: String(lock.hash),
@@ -63,6 +64,9 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
       daily_ceiling_micro: codexContract.agent_cost_ceiling_micro } } };
   contract.revision_policy=freezeRevisionPolicy(contract);
   freezeAiDisclosure(contract);
+  requireThat(creativePlanHash(contract.creative)===contract.plan_hash,'PLAN_CHANGED','报价的完整文案与原规划摘要不一致',409);
+  validateCreativePlan(contract.creative,contract.profile,contract.source);
+  await validatePlanLayout(contract.creative,contract.source,contract.request.preset_id,font,contract.ai_disclosure_contract);
   if(contract.source.engine!=='PHOTO_LAYOUT'){
     contract.generation_contracts=freezeGenerationContracts(cfg,models.rows);
   }

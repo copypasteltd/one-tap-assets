@@ -47,9 +47,11 @@ async function assertIntent(db: pg.PoolClient, scope: ToolScope, intent: ToolLea
 export async function operationFor(pool: pg.Pool, scope: ToolScope, intent: ToolLease, phase: MediaPhase, inputHash: string): Promise<MediaOperation> {
   return transaction(pool, async db => {
     await assertIntent(db, scope, intent);
-    await db.query('SELECT pg_advisory_xact_lock(hashtextextended($1,0))', [`media:${scope.stage_run_id}:${phase}:${inputHash}`]);
-    const old = (await db.query<MediaOperation>(`SELECT * FROM media_operations WHERE stage_run_id=$1 AND phase=$2 AND input_hash=$3 FOR UPDATE`,
-      [scope.stage_run_id, phase, inputHash])).rows[0];
+    await db.query('SELECT pg_advisory_xact_lock(hashtextextended($1,0))', [`media:${scope.stage_run_id}:${phase}`]);
+    const previous=(await db.query<MediaOperation>(`SELECT * FROM media_operations WHERE stage_run_id=$1 AND phase=$2 FOR UPDATE`,
+      [scope.stage_run_id,phase])).rows;
+    requireThat(previous.every(row=>row.input_hash===inputHash),'MEDIA_INPUT_CHANGED','原媒体执行输入或制作版本已变化，不可重建原任务',503);
+    const old=previous[0];
     if (old) return old;
     const operationId = id('media');
     await insert(db, 'media_operations', { id: operationId, tenant_id: scope.tenant_id, order_id: scope.order_id,

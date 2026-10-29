@@ -109,6 +109,12 @@ const report = {
   resource_files: await Promise.all(['NotoSansSC[wght].ttf', 'OFL.txt', 'METADATA.pb', 'source.json'].map(async name => {
     const path = `assets/resources/fonts/noto-sans-sc/${name}`; return { path, sha256: sha256(await readFile(path)) };
   })),
+  visible_text_layout:{drawn_shot_intent_claim_guard:true,actual_pinned_font_measurement:true,grapheme_wrapping:true,
+    silent_truncation_allowed:false,quote_and_pre_purchase_preflight:true,ai_chapter_footer_safe_areas:true,
+    renderer_version_bound:true,original_media_input_change_blocked:true,
+    fixture_verified:verifiedCases('profile-plan.test.ts',7,'unit')&&verifiedCases('native-media.test.ts',4)
+      &&verifiedCases('codex-planning.test.ts',12)&&verifiedCases('media-stages.test.ts',12),
+    automatic_media_repair_implemented:false,real_model_semantics_verified:false,production_admitted:false},
   ai_disclosure:{private_contract_frozen:true,actual_image_glyph_check:true,actual_image_alpha_check:true,all_video_frames_checked:true,
     generated_and_native_pipeline_connected:true,
     fixture_verified:verifiedCases('disclosure.test.ts',3)&&verifiedCases('disclosure.test.ts',5,'unit')

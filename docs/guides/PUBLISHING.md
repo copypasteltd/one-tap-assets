@@ -54,6 +54,10 @@ Page captures show shared mini-program screens with synthetic data. The script c
 
 ## 3. 正常提交与推送 / Commit and push
 
+完整检查失败时，仍可依用户持续授权同步明确标注为未通过的源码进度；必须保留实际失败、原断言/时限、未完成范围和对应源码/日志摘要。`publication.json`及暂存审计应明确应用阻塞，不能沿用旧PASS或为了推送放宽发布检查。Git同步不解除生产/启售/小程序发布门禁。
+
+When complete checks fail, ongoing authorization still permits pushing source progress with explicit limits. Preserve actual failures, original assertions/deadlines, incomplete scope and source/log bindings. Publication and staged-audit records must show the application block; do not retain an old PASS or weaken the checker to permit a push. Git synchronization does not admit production, sales or a mini-program release.
+
 先检查远端，若有未知提交，获取并审查后整合；不要强制覆盖。运行以下只读检查，并确认当前分支和远端：
 
 Inspect remote changes and integrate unfamiliar commits before publishing. Do not force-push. Review the current branch, remote and local diff:

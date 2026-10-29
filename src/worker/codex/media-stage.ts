@@ -16,6 +16,8 @@ import {GenerationGateway} from '../generation/gateway.js';
 import {prepareGeneratedReferences} from '../generation/prepare.js';
 import {validateGenerationExecution} from '../generation/contracts.js';
 import {NativeOrderMediaPipeline} from '../media/native-order-pipeline.js';
+import {validatePlanLayout} from '../media/plan-layout.js';
+import {loadProductionFont} from '../media/font.js';
 
 export class MediaStageService {
   private executor: RoleExecutor;
@@ -30,6 +32,7 @@ export class MediaStageService {
       'MEDIA_STAGE_INVALID', '媒体执行阶段无效', 500);
     const phase = lease.stage_name as MediaPhase;
     const context = await executionContext(this.pool, lease.tenant_id, lease.scope_id, lease.input_hash);
+    await validatePlanLayout(context.contract.creative,context.contract.source,context.snapshot.preset_id,await loadProductionFont(this.cfg.projectRoot),context.contract.ai_disclosure_contract);
     const native=context.snapshot.audio_policy.speech_mode==='NATIVE_ZH';
     if(context.snapshot.engine!=='PHOTO_LAYOUT')validateGenerationExecution(context.contract,native);
     const binding = context.contract.runtime_binding; const cc = context.snapshot.codex_contract;
