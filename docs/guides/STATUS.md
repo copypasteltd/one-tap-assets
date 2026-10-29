@@ -1,5 +1,7 @@
 # 当前状态与后续顺序 / Status and next priorities
 
+最新[首轮制作费用隔离与原费用回执](../实施/首轮制作费用隔离与原费用回执-v1.0.md)接通原总额内的首轮/修复/售后费用边界；同一意图绑定原归属、金额与规范费率，实际锁等待后重查原截止。完整自动修复仍待实现。Latest: protected repair/aftercare holds, immutable cost replay and post-lock wall-clock deadlines, not a completed repair workflow.
+
 最新[Worker脱敏故障诊断与日志隔离](../实施/Worker脱敏故障诊断与日志隔离-v1.0.md)增加固定内部分类和执行位置，隔离日志回调故障，保留原事务与公开错误码；历史内部错误根因尚未确认。Latest: private failure categories and log-sink isolation, without a confirmed cause for the earlier production failure.
 
 最新[工具队列原子领取与并发租约](../实施/工具队列原子领取与并发租约-v1.0.md)减少空闲领取往返，保留原能力、恢复时间与代次；六消费者/独立行锁回归及64次空队列对照留存。此项不证明历史超时已根治。Latest: atomic durable tool claims with concurrent/lock controls, without a proven historical timeout cause.
@@ -18,16 +20,18 @@
 | --- | --- | --- | --- |
 | 01 | TypeScript | PASS | 当前类型检查 / Current type checking |
 | 02 | 单元 / Unit | 73 / 73 PASS | 领域、客户端、策略与适配器逻辑 / Domain, client and adapter logic |
-| 03 | 原生集成 / Native integration | FAIL: 60 PASS / 1 FAIL / 3 pending; 30 empty files | 原生PG/实际媒体/HTTPS/MCP及显式合成角色、供应商、支付、宿主 / Actual database/media with synthetic external responses |
-| 04 | 服务端 / Server | PASS | 同源码单独构建 / Separate same-source build |
-| 05 | 双小程序 / Both mini-programs | Alipay: PASS; Douyin: PASS | 本轮实际结果，不沿用旧构建；不是真机验收 / Current actual builds, not device certification |
+| 03 | 原生集成 / Native integration | FAIL: 3 PASS / 1 FAIL / 19 pending; 35 empty files | 原生PG/实际媒体/HTTPS/MCP及显式合成外部响应；完整范围按本轮来源 / Native database/media with explicit synthetic external responses |
+| 04 | 服务端 / Server | PASS | 本轮实际源码构建 / Actual current-source build |
+| 05 | 双小程序 / Both mini-programs | Alipay: PASS; Douyin: PASS | 本轮实际构建，不是真机 / Current actual builds, not device certification |
 | 06 | 浏览器回放 / Browser replay | PASS（原捕获 / prior capture） | 沿用原Vite构建、10页断言/截图与实际WebM/MP4/GIF来源；浏览器已关闭，本轮未重录页面 / Prior actual local capture; shared UI source unchanged |
+
+费用/队列11项专项通过；旧费用代码真实锁等待对照1项按预期失败，另5项未选执行；均不替代整套结果。Eleven current-source focused checks pass; one selected legacy negative control fails as expected, with five unselected cases. Neither replaces the full run.
 
 机器可读结果：[实现索引](../../assets/implementation/current.json)、[发布核验摘要](../verification/publication.json)、[媒体清单](../media/capture-manifest.json)。完整执行日志/测试JSON位于未提交的`runtime/test-results/`；公开摘要保留计数、命令结果与摘要引用，但不包含本地凭证或运行数据库。Source hashes and original local log hashes are recorded; private runtime files are excluded from Git. Static documentation checks validate contracts/links, not product execution.
 
-本轮源码摘要01227dd（343份源码/测试/配置、42份运行契约、4项资源）：类型和73项单元通过；工具7项及独立阶段6项专项通过；服务端、支付宝和抖音分别构建通过。全新完整原生为60项通过、1项失败、同文件3项挂起，另30个文件未执行；整套未通过。23项有声订单夹具本次均通过，当前失败为pg_restore返回空状态。原30秒调用上限不变，独立诊断副本通过但未复现故障，根因未确认。不保留旧原生报告，不放宽断言或时限；专项和单独构建不替代整套。完整来源、早期初始化失败与CPU诊断见[验证说明](../verification/worker-failure-native-source.json)。真实服务、完整自动修复及全产品/生产/云端准入继续待验。
+本轮源码摘要a26c133（345份源码/测试/配置、42份运行契约、4项资源）：类型、73项单元和11项费用/队列专项通过。全新完整原生结果为FAIL: 3 PASS / 1 FAIL / 19 pending; 35 empty files；命令链为typecheck: PASS / test: PASS / test:integration: FAIL。构建记录：build:server: PASS / build:alipay: PASS / build:douyin: PASS。本轮有声REFERENCE_FILM最终交付用例在POST阶段失败：原合成ASR仍待恢复，Codex阶段结束时工具保持RUNNING，保留ASR_ORIGINAL_TASK_PENDING；底层原因未确认。 同源码原上限下单独用例1通过/0失败/22未选，不替代整套。 旧费用代码真实行锁等待对照按预期失败，当前代码拒绝过期预留；一次初步整套为加强断言主动中止，记录独立保留，不算完整通过。全部原断言/时限保留，来源见[验证说明](../verification/order-budget-native-source.json)。历史pg_restore空状态及制作/编译异常仍未确认根因；完整自动修复、真实服务与全产品/生产/云端仍待完成。
 
-Current snapshot 01227dd contains 343 source/test/config files, 42 runtime contracts and four resources. Types, 73 units, seven tool cases and six isolated worker cases pass. Server, Alipay and Douyin builds pass separately. The fresh full native run records 60 passes, one failure, three pending cases and 30 unexecuted files; it fails as a whole. All 23 native-order fixtures pass, but pg_restore returns a null status in the backup-recovery case. The original 30-second cap remains; an instrumented copy passes without reproducing the fault or establishing its cause. No previous native result is retained or assertion/deadline relaxed. Targeted results and separate builds do not replace the full run. See [detailed provenance](../verification/worker-failure-native-source.json) for original failures and diagnostics. Real services, complete repair and full-product/production/cloud admission remain incomplete.
+Current snapshot a26c133 contains 345 source/test/config files, 42 runtime contracts and four resources. Types, 73 units and 11 focused cost/queue checks pass. Fresh native result: FAIL: 3 PASS / 1 FAIL / 19 pending; 35 empty files. Command chain: typecheck: PASS / test: PASS / test:integration: FAIL. Builds: build:server: PASS / build:alipay: PASS / build:douyin: PASS. The native REFERENCE_FILM final-delivery case fails during POST while the original synthetic ASR remains pending. The tool is still RUNNING with ASR_ORIGINAL_TASK_PENDING when the role ends; the underlying cause is unconfirmed. An isolated unchanged-source run has 1 passed, 0 failed and 22 unselected cases; it does not replace the full run. The previous cost code fails the observed lock-wait control as expected; current code rejects the expired reservation. A preliminary full attempt was explicitly cancelled to strengthen that assertion and retains its own evidence. Original limits and assertions remain. See [exact provenance](../verification/order-budget-native-source.json). Historical restore/production/compiler causes, complete repair and real-service/product/production/cloud admission remain unresolved.
 
 [恢复指南](RECOVERY.md)与[发布同步指南](PUBLISHING.md)适用于持续更新；本轮已实际执行应用检查和适用标识媒体复录，完整原生未通过，不能沿用此前文档轮的旧通过结论。 Current source/media work has fresh execution records; the native failure remains blocking.
 
@@ -51,13 +55,15 @@ Current snapshot 01227dd contains 343 source/test/config files, 42 runtime contr
 | 14 | 自动修复 / Automatic repair | F09/F46/F55完整新候选→新包→双新复核链路未接通；字段/租约恢复不是修复功能 / Complete new-candidate/reseal/fresh-review chain remains unimplemented |
 | 15 | Worker内部故障与日志 / Private worker diagnostics | 固定分类/允许原生码/执行位置、公开错误不变，隔离同步/异步日志故障；尽力输出，生产日志链路未验 / Fixed private fields and non-authoritative sinks; durable production logging unverified |
 
+首轮费用保护已实现，不改变上表第14项的未完成状态；修复保留额目前不能由现有首轮调用花费。First-pass hold protection does not complete row 14 or authorize repair spending.
+
 ## 待完成优先顺序 / Remaining priorities
 
 完整原听音、最终双角色/推理/工具/报告与有声事务交付已有内部接入。需要真实中文听感、缓存账单、授权、跨镜人物/商品一致性及完整输入容量准入；控制测试不替代这些证据。Private integration exists; real listening, billing, rights, multi-shot and full-input capacity still require admission.
 
 | 顺序 / Priority | 待办 / Work | 完成条件 / Completion evidence |
 | --- | --- | --- |
-| 00 | 当前备份恢复失败与运行稳定性 / Backup-recovery failure and stability | 定位pg_restore空状态；原30秒及整套原断言/限额下完整通过。副本通过未复现，历史制作/编译根因仍未确认；本轮三构建通过 / Diagnose the null restore status and pass a fresh full run without relaxing limits |
+| 00 | 原任务恢复及运行稳定性 / Original-operation recovery and stability | 定位本轮有声POST中原ASR待恢复时角色结束；确认历史pg_restore空状态等原因，保持原限额完成全套。单项未复现不代替整套 / Diagnose pending-ASR role termination and historical restore failures; pass the original full suite without relaxed limits |
 | 01 | 生成式官方变体与真实服务验收 / Official generated variants and real-service acceptance | 在已有两条无声内部链路上验证真实模型、商品身份/风格质量、完整规格和原费用/恢复；不能用2秒夹具替代 / Real model/quality/specification evidence beyond short silent fixtures |
 | 02 | 原生有声与资源规格 / Native audio and resources | 在已有内部制作/ASR/POST/文件QC上验证真实授权/识别/OSS/费用，验证连续多镜人物/商品/声音绑定、完整输入容量及真实最终听音/双复核/交付质量 / Real rights/ASR/storage, multi-shot/full-input capacity and final listening/review/delivery quality |
 | 03 | 真实Codex与受限身份/释放 / Real Codex, restricted identity and cleanup | 服务凭证、真实推理计量、原生启动器、隔离/进程树/孤儿回收与G0证据 / Native verified operation |

@@ -1,5 +1,14 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · 首轮费用保留与原意图恢复 / Protected first-pass costs
+
+- 实际检查 / Actual checks: FAIL: 3 PASS / 1 FAIL / 19 pending; 35 empty files; typecheck: PASS / test: PASS / test:integration: FAIL; build:server: PASS / build:alipay: PASS / build:douyin: PASS. Types/73 units and 11 focused cost/queue cases pass. 完整命令是否通过以原记录为准，不用专项或单独构建替代。
+- 首轮扣费同时保护原总额内冻结的修复与售后保留额；并发及UNKNOWN不占用保留部分，不增预算或延长截止。 Protect frozen repair/aftercare holds without replenishing the original total or deadline.
+- 原意图严格绑定客户/订单、金额和规范化费率；撤权、未确认付款或实际截止到达禁止新费用。 Bind original ownership/rates and reject new spending after revocation, payment withdrawal or expiry.
+- 原生PG确认真实行锁等待后让订单过期；旧代码隔离副本按预期失败，新代码通过。初步整套为加强断言主动取消，保留原记录，不算完整验收。 Preserve the expected-failing legacy control and cancelled preliminary attempt independently.
+- 旧UNKNOWN和实际账单不改写；历史超占阻止新购买，无数据库迁移。 Historical obligations remain; over-commitment blocks new purchases without ledger rewriting.
+- 中英README、费用/恢复/状态/实现及验证索引同步；36媒体与C25文件/归档不变。完整自动修复、真实服务、全产品/生产/云端仍未准入，全部禁售。 Update bilingual docs and exact provenance; complete repair and real-service admission remain unfinished.
+
 ## 2026-10-29 · Worker故障诊断与日志隔离 / Private worker diagnostics
 
 - 实际核验 / Actual verification: 343 sources, 73 units PASS; FAIL: 60 PASS / 1 FAIL / 3 pending; 30 empty files; build:server: PASS / build:alipay: PASS / build:douyin: PASS. 完整命令未通过；源码进展与独立构建不升级为完整通过。 The full command chain fails; source progress and separate builds do not replace it.

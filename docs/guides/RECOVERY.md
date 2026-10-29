@@ -1,5 +1,7 @@
 # 故障恢复与修复边界 / Recovery and repair boundaries
 
+费用恢复新增[首轮制作费用隔离与原费用回执](../实施/首轮制作费用隔离与原费用回执-v1.0.md)：首轮不能占用原修复/售后保留额，UNKNOWN仍占用原额度；旧执行超占时保留原账目并阻止新购买，不补高额度。Original accounting preserves UNKNOWN obligations and protected repair/aftercare holds. Historical over-commitment stops new purchases; it does not replenish the budget or implement automatic repair.
+
 排版专项新增[完整展示文字与购买前校验](../实施/完整展示文字与购买前排版校验-v1.0.md)。`LAYOUT_TEXT_OVERFLOW`/缺字/实际重叠拒绝制作；已有媒体phase输入或版本变化返回`MEDIA_INPUT_CHANGED`，不新建媒体操作、改键重做或补写旧证明。原规划缺少用户选择返回`PLAN_INPUT_CHANGED`，需重新选择，不推断历史风格。这是原操作保护；完整自动素材修复与历史迁移仍未实现。Measured layout rejects incomplete output, and changed media inputs preserve/block the original operation. Missing original selections fail explicitly with PLAN_INPUT_CHANGED. These guards do not implement bounded automatic repair or historical migration.
 
 [中文 README](../../README.md) · [English README](../../README.en.md) · [启动 / Quick start](QUICKSTART.md) · [当前状态 / Status](STATUS.md)

@@ -3,7 +3,7 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-29T14:35:42.206Z",
+  "checked_at": "2026-10-29T16:03:47.666Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
@@ -15,24 +15,24 @@
       "command": "./scripts/run.ps1 typecheck",
       "status": "PASS",
       "log_path": "runtime/test-results/typecheck.log",
-      "log_sha256": "f7febcff0858d107a645c8e3f5089254923af12095739b59fdf2d69b25d7ca5d"
+      "log_sha256": "134f4840548b7cfc02e13a333f1c02d18bb6daf5c932c56b97c8084a41a157be"
     },
     {
       "command": "./scripts/run.ps1 test",
       "status": "PASS",
       "log_path": "runtime/test-results/test.log",
-      "log_sha256": "cd87aa7d6618b1434323bd87668bec94dde9d3646fb739f2e9abc2f0eeb07b71"
+      "log_sha256": "b80016bcbd098ce15062324fd0e133a582d77ba17b09dd0f3544257772c2a00e"
     },
     {
       "command": "./scripts/run.ps1 test:integration",
       "status": "FAIL",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "23d0dfcbc4eef9244b5c2fc020d5c57b26e72657fc0b8989e34d9b82ce1ab065"
+      "log_sha256": "62ef74676359725530bba920006ba2be01b9aa8ca8fc7fc8c12989bc5127b5c0"
     }
   ],
   "suites": [],
-  "source_files": 343,
-  "source_set_hash": "01227dd8392b052c71675162b82744f0f6ad4e8788f435f7d88e03648b235ec8",
+  "source_files": 345,
+  "source_set_hash": "a26c133891757321e50e1aa7629d66f61e4c816b42b85d515ac753bac78d1247",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -611,12 +611,16 @@
       "sha256": "b52626f81bbc39c97b8d76b7bf16d09672e6420502700942cc8ac25ed8790a25"
     },
     {
+      "path": "src/worker/budget/envelope.ts",
+      "sha256": "6156fa343ff969483f3afe67674003bd386900e830fc2c0d3e07d4297ac2961f"
+    },
+    {
       "path": "src/worker/budget/platform.ts",
       "sha256": "0a966b6bd867670b4d992a336e156e44d05422fb2448632398b24c7a642035d1"
     },
     {
       "path": "src/worker/budget/reservations.ts",
-      "sha256": "d603a74d1793e5cefe3412b3766a1559db9d9b574812bba2f7e35b1a9ff1d3a9"
+      "sha256": "b5b7041c13e072b67b93421c0fc8fb37651763c90656b4a956b91707b93cb6a3"
     },
     {
       "path": "src/worker/codex/admission.ts",
@@ -1151,6 +1155,10 @@
       "sha256": "427c8bb13cce7f112806b7c8bb6a557741eaaabb3ebe40d574ab128d34119f56"
     },
     {
+      "path": "tests/integration/order-budget-envelope.test.ts",
+      "sha256": "c0bcca01403272e2b6aff117db6db662892f920ea607e98d6a8325148538b71d"
+    },
+    {
       "path": "tests/integration/payment-recovery.test.ts",
       "sha256": "0595705bcd6d15f7faa0beb38b2a72f817dbc70457a4295990cad79293425b69"
     },
@@ -1376,7 +1384,7 @@
     },
     {
       "path": "scripts/verify-implementation.ts",
-      "sha256": "0ad0b349e2a6f6255d6dfa20d04e6765f0b3dd1b97df18a2712f854914bd5704"
+      "sha256": "75f5dcab2f4b1e05d023159d20ded60ab9c1708b3e1d5380597d13d62df6eaf1"
     },
     {
       "path": "scripts/verify-publication.ts",
@@ -1596,6 +1604,19 @@
       "sha256": "2b543755c8bc721507c9d9dbc3da537bd4486db425dd032524aeeabff4df76d0"
     }
   ],
+  "order_cost_envelope": {
+    "repair_hold_protected_from_first_pass": true,
+    "aftercare_hold_protected_from_first_pass": true,
+    "original_total_budget_unchanged": true,
+    "unknown_holds_retained": true,
+    "canonical_rate_and_owner_replay_guard": true,
+    "payment_revocation_and_wall_clock_deadline_guard": true,
+    "historical_obligations_preserved": true,
+    "fixture_verified": false,
+    "automatic_media_repair_implemented": false,
+    "real_provider_billing_verified": false,
+    "production_admitted": false
+  },
   "worker_failure_diagnostics": {
     "fixed_private_categories": true,
     "raw_error_fields_logged": false,

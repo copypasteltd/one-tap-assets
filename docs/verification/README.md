@@ -1,55 +1,33 @@
 # 验证与发布证据 / Verification and publication evidence
 
-本轮固定343份源码/测试/配置、42份运行契约和4项资源，源码摘要01227dd；类型和73项单元通过。全新完整原生结果为 FAIL: 60 PASS / 1 FAIL / 3 pending; 30 empty files，完整命令记录为 typecheck: PASS / test: PASS / test:integration: FAIL。23项有声订单夹具均通过，新的失败位于pg_restore返回空状态的断言，原30秒调用上限保留；原执行未记录error/signal，不能断定根因。增加退出信息的独立副本约18.48秒通过，其中dump约0.64秒、restore约8.74秒，未复现原失败，不替代整套。
+本轮[首轮制作费用隔离与原费用回执](../实施/首轮制作费用隔离与原费用回执-v1.0.md)保护原总预算内的修复与售后保留额。固定345份源码/测试/配置、42份运行契约和4项资源，源码摘要a26c133。全部断言和上限保持原值；未保留旧原生报告。
 
-构建记录：build:server: PASS / build:alipay: PASS / build:douyin: PASS；单独构建不替代完整原生结果。不保留旧原生报告，不放宽断言/时限。此前专项工具7项通过，另一文件初始化达到原60秒上限、6项未执行；随后同源码独立阶段6项通过，原记录保留。
+This round protects original repair/aftercare holds and original cost-intent accounting. The fresh snapshot contains 345 source/test/config files, 42 contracts and four resources, pinned to a26c133. Assertions and limits are unchanged; no old native report is retained.
 
-旧e979源码支付宝CPU诊断在原600秒停于92%资源压缩，采样以依赖加载/文件读取为主；不替代当前普通构建或证明根因。最新实际来源见[验证说明](worker-failure-native-source.json)。历史泛化制作故障、真实语义/费用/授权/隔离、完整自动修复与全产品/生产/云端准入仍待验。
-
-The fresh 343 source/test/config, 42 runtime-contract and four-resource snapshot is 01227dd. Types and all 73 unit tests pass. Full native result: FAIL: 60 PASS / 1 FAIL / 3 pending; 30 empty files. Fresh command record: typecheck: PASS / test: PASS / test:integration: FAIL. All 23 native-order fixtures pass. The new failure observes a null pg_restore status under the original 30-second cap; its original error/signal was not recorded, so the cause remains unknown. A separately instrumented copy passes in about 18.48 seconds, with dump/restore taking about 0.64/8.74 seconds, without reproducing or replacing the full failure.
-
-Build record: build:server: PASS / build:alipay: PASS / build:douyin: PASS; separate builds do not replace native verification. No previous native result is retained and no assertion/deadline is relaxed. An earlier focused run passes seven tool cases while its worker file reaches the original 60-second setup cap with six cases unexecuted; a subsequent isolated run passes all six worker cases on the same source.
-
-The old e979 Alipay CPU diagnostic reaches its original 600-second cap at 92% asset processing, with module/file reads dominating samples; it neither replaces a current ordinary build nor establishes a cause. See [actual provenance](worker-failure-native-source.json). The earlier generic production fault, real semantics/billing/rights/isolation, complete repair and full-product/production/cloud admission remain unresolved.
-
-| 编号 / No. | 当前检查 / Current check | 实际结果 / Actual result |
+| 编号 / No. | 检查 / Check | 实际结果 / Actual result |
 | --- | --- | --- |
 | 01 | 类型 / Types | PASS |
 | 02 | 单元 / Units | 73 / 73 PASS |
-| 03 | 完整原生 / Full native | FAIL: 60 PASS / 1 FAIL / 3 pending; 30 empty files |
-| 04 | 服务端与双小程序 / Server and mini builds | build:server: PASS / build:alipay: PASS / build:douyin: PASS；不替代03 / Does not replace 03 |
-| 05 | 文档与契约 / Docs and contracts | [实际报告](contracts.json) |
-| 06 | 媒体 / Media | 36份原来源文件；本轮未改界面/媒体 / Original provenance, no recapture this round |
-| 07 | 发布候选/暂存完整性 / Publication and staged integrity | [检查器](publication.json) · [独立字节审计](repository-audit.json) |
-| 08 | 当前工具/阶段专项 / Current tool and worker cases | 7 / 7 tools PASS；随后独立6 / 6 workers PASS；早期初始化失败保留，不替代03 / Isolated results, earlier setup failure retained; not a replacement for 03 |
+| 03 | 完整原生 / Full native | FAIL: 3 PASS / 1 FAIL / 19 pending; 35 empty files |
+| 04 | 完整命令记录 / Full command record | typecheck: PASS / test: PASS / test:integration: FAIL |
+| 05 | 构建 / Builds | build:server: PASS / build:alipay: PASS / build:douyin: PASS |
+| 06 | 当前费用/队列专项 / Focused current costs/queue | 11 / 11 PASS |
+| 07 | 旧费用代码真实锁等待 / Legacy observed lock-wait control | EXPECTED FAIL: 1; unselected/skipped: 5 |
 
-本轮实现说明：[Worker脱敏故障诊断与日志隔离](../实施/Worker脱敏故障诊断与日志隔离-v1.0.md)。真实PG处理器和提交错误的秘密隔离/事务回滚、成功阶段及故障工具的日志异常边界详见新来源；此前e979队列来源与八次文字失败保持各自原始字节。
+本轮有声REFERENCE_FILM最终交付用例在POST阶段失败：原合成ASR仍待恢复，Codex阶段结束时工具保持RUNNING，保留ASR_ORIGINAL_TASK_PENDING；底层原因未确认。 同源码原上限下单独用例1通过/0失败/22未选，不替代整套。
 
-Current implementation: [private failure diagnostics and log isolation](../实施/Worker脱敏故障诊断与日志隔离-v1.0.md). New provenance covers native database privacy/rollback and non-authoritative sinks. Earlier queue and text-layout failure records remain unchanged historical evidence.
+The native REFERENCE_FILM final-delivery case fails during POST while the original synthetic ASR remains pending. The tool is still RUNNING with ASR_ORIGINAL_TASK_PENDING when the role ends; the underlying cause is unconfirmed. An isolated unchanged-source run has 1 passed, 0 failed and 22 unselected cases; it does not replace the full run.
 
-## 历史文字专项 / Historical text-layout attempts
+旧费用实现经过真实行锁等待后仍允许已过期订单预留，新实现拒绝；负向对照使用提交前源码的隔离副本，不能替代新源码测试。初步整套在类型/73单元通过后，为加强这个断言由本轮主动停止；原生未形成完整报告，取消记录和原日志独立保留，不计成功或应用测试失败。随后执行的本轮完整检查才是表中来源。
 
-以下八次失败属于各自原源码快照；最近一次为d2077c2，341文件、71单元、13原生通过/1原120秒超时，另三项构建单独通过。[当时来源](text-layout-native-source.json)和[原尝试记录](text-layout-attempts.json)保持原字节；原通用runtime日志路径可能在后续执行中轮转。当前来源新增按本轮前缀归档的每命令日志、完整报告与源码起始摘要。
+The legacy isolated control accepts a reservation after an observed lock wait and expiry; current code rejects it. A preliminary attempt was explicitly cancelled after types/73 units to strengthen that assertion. Its incomplete native run is retained as cancelled, with no full pass or application failure inferred. The table reports the subsequent complete attempt's actual outcome.
 
-These failures retain their original snapshots. The latest previous snapshot d2077c2 is not relabeled as the current run. Generic runtime log paths can rotate; the new provenance also archives individual command logs and complete reports under the current run prefix.
+最新来源：[原费用验证来源](order-budget-native-source.json)、[实现清单](../../assets/implementation/current.json)、[实际发布检查](publication.json)、[独立暂存字节/链接/媒体核验](repository-audit.json)。日志、原报告和负向对照副本放在忽略的runtime目录，公开来源保留其摘要；不是外部服务、真机或完整修复证明。
 
-| 编号 / No. | 完整尝试 / Full attempt | 实际结果 / Actual result |
-| --- | --- | --- |
-| 01 | 1 | 14 PASS / 1 FAIL · REFERENCE_RESULT_NOT_PERSISTED |
-| 02 | 2 | 类型原180秒超时 / Typecheck timeout · TYPECHECK_180S_TIMEOUT |
-| 03 | 3 | 342 PASS / 1 FAIL · LEGACY_FIXTURE_MISSING_PLAN_REQUEST |
-| 04 | 4 | 3 PASS / 1 FAIL · ONE_UNRELEASED_REFERENCE_FILM_INSTANCE |
-| 05 | 5 | 类型原180秒超时 / Typecheck timeout · TYPECHECK_180S_TIMEOUT |
-| 06 | 6 | 14 PASS / 1 FAIL · REVOKED_VOICE_QC_120S_TIMEOUT |
-| 07 | 7 | 13 PASS / 1 FAIL · REVOKED_ORIGINAL_WRITE_QC_120S_TIMEOUT |
-| 08 | 8 | 13 PASS / 1 FAIL · REVOKED_ORIGINAL_WRITE_QC_120S_TIMEOUT |
+Current evidence links bind source bytes and original local report/log hashes. Private runtime files remain excluded. A passing source check does not certify complete repair, real services, devices or production.
 
-第三次失败已确认旧手工夹具漏存原PlanRequest，现已补齐真实输入并明确拒绝缺失选择；其他失败根因未确认。参考结果缺失、交付后未释放、原生进程0xC0000374及定向复查各自保留，单例通过不改写历史失败。
+历史[Worker诊断来源](worker-failure-native-source.json)保留343源码上的60通过/1失败/3挂起及30空文件、原30秒pg_restore空状态与未复现副本。更早的[队列来源](tool-queue-native-source.json)、[文字来源](text-layout-native-source.json)及[尝试记录](text-layout-attempts.json)、[标识来源](disclosure-native-source.json)、[声音复核来源](audio-review-native-source.json)、[听音来源](listening-native-source.json)保持原字节。历史错误根因未确认，不能用本轮结果声称已根治。
 
-Attempt 3 identifies a missing original PlanRequest in the manual fixture. The fixture now matches real creation input and missing historical selections explicitly reject without replacing stored results. Other root causes remain unconfirmed; focused retries never rewrite failed attempts.
+Earlier verification remains immutable historical evidence. The previous restore failure and earlier production/compiler failures have no confirmed root cause; current results do not establish a root-cause fix.
 
-历史通过证据只适用于原快照 / Historical passing evidence applies to its original snapshot: [可见标识](disclosure-native-source.json) · [标识历史尝试](disclosure-attempts.json) · [最终声音复核](audio-review-native-source.json) · [声音复核尝试](audio-review-attempts.json) · [原听音](listening-native-source.json) · [原听音尝试](listening-attempts.json)。
-
-上一轮实际重录的4份标识示例及原页面/声音媒体本轮保持原字节，C25原件与归档不变。测试模型语义、授权、计量/支付和隔离为合成控制；真实服务、完整修复/社区/变体/真机、全58需求和完整产品/生产/云端均未完成。
-
-Existing browser/audio/disclosure media and frozen C retain their bytes and provenance. Synthetic semantics, rights, metering/payments and isolation do not certify real services or complete product admission.
+36份原截图/录屏/GIF及声音、标识媒体与C的25文件/归档保持原字节；本轮无页面改动、无浏览器调用、无虚拟化或真实外部付费服务。全产品、生产准入及云端部署仍为false，全部方案禁售。All original media/design bytes remain unchanged. No browser, virtualization or real paid service is used; product/production/cloud admission remains false.
