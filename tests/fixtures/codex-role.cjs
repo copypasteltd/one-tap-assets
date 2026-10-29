@@ -155,9 +155,9 @@ async function dispatch(message) {
 const lines = readline.createInterface({ input: process.stdin });
 lines.on('line', line => {
   const message = JSON.parse(line); if (message.id === undefined || message.id === 'synthetic-forbidden-shell') return;
-  if (message.method === 'turn/start' && ['PRODUCTION','POST'].includes(input.phase)) {
-    // Start acknowledges the turn; native rendering completes asynchronously.
-    // Other phases retain completion-before-ACK coverage for the RPC buffer.
+  if (message.method === 'turn/start') {
+    // All role starts acknowledge immediately; bounded tool work is async.
+    // app-server.cjs independently exercises completion before the start ACK.
     send({ id: message.id, result: { turn: { id: 'synthetic-turn', status: 'inProgress' } } });
     void dispatch(message).catch(() => send({ method: 'turn/completed', params: {
       threadId: message.params.threadId, turn: { id: 'synthetic-turn', status: 'failed' }

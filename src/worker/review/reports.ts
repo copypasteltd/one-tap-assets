@@ -10,6 +10,7 @@ import { admissionHash, checkAdmission, type CodexAdmission } from '../codex/adm
 import type { ReviewInput } from '../codex/review-images.js';
 import { packetImageRefs } from './context.js';
 import { assertSealedPacket } from './packet.js';
+import {requireAudioReviewAdmission} from './native-audio.js';
 
 const packetSchema = JSON.parse(readFileSync('assets/development/v1.1/contracts/review-packet.schema.json', 'utf8')) as {
   properties: { reports: { items: object } };
@@ -24,6 +25,7 @@ export async function reviewIdentity(db: Db, cfg: Config, context: ExecutionCont
   run: ReviewRun; template: Omit<DTO<'ReviewReport'>, 'verdict' | 'evidence_complete' | 'findings'>;
 }> {
   assertSealedPacket(packet);
+  requireAudioReviewAdmission(context);
   const run = (await db.query<ReviewRun>(`SELECT r.* FROM agent_runs r JOIN agent_instances i ON i.id=r.instance_id AND i.tenant_id=r.tenant_id
     JOIN stage_runs s ON s.id=r.private->>'stage_run_id' AND s.tenant_id=r.tenant_id WHERE r.id=$1 AND r.tenant_id=$2
     AND i.order_id=$3 AND r.role IN ('REVIEW_FACTS','REVIEW_STYLE') AND s.stage_name=r.role AND s.scope_type='ORDER'

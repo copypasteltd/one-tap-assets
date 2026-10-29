@@ -1,5 +1,27 @@
 # 更新记录 / Changelog
 
+## 2026-10-29 · 原生声音文件QC与审查封存 / Native-audio technical QC and sealed evidence
+
+- 本轮最终58项单元、336项完整原生集成及服务端/双小程序构建通过；文档契约4627项。Final validation: 58 unit / 336 native integration cases and all native builds PASS; 4627 document/contract checks. 本轮声音文件QC源码先全新执行完整336项原生集成；小程序180秒超时后受限重试，仅验证脚本的小程序整套窗口改600秒；原生报告对应应用/测试/契约/资源完全未变，原验证脚本留存并逐字节核对构建窗口、注释与专项单元报告分类三处差异。保留本轮原始336项报告并重跑其余五项，未沿用上一轮334项。
+
+- 完整336项原生报告后仅验证脚本的小程序命令上限180→600秒、一行注释与专项单元报告分类变化，按已有白名单保留原报告；逐字节核对原验证脚本和唯一差异，其他应用/测试/契约/资源不变。After the full native run, only the verifier’s mini-build timeout/comment and correct unit-report selection change; preserve and byte-check the original verifier and retain this round’s report under the existing whitelist.
+
+- 主机负载下的类型/单元外层超时独立保留；单元整套命令360秒、单例30秒，原生整套2400秒；通常原生单例120秒，两项完整往返240秒、POST撤权180秒，类型/服务端180秒、小程序600秒、RPC30秒与业务限制不变。Retain type/unit timeout attempts; allow 360s for unit startup/full command and 2400s for serial native suites, with per-case, RPC and business limits preserved except the three documented long native fixtures; mini build commands use a 600s window.
+
+- 首次完整执行达1800秒外层超时，原生订单两项失败；单独复测两项均通过，原失败保留。角色替身统一先ACK启动、再异步完成，专用协议夹具仍覆盖提前完成通知；原生订单失败即时保存，套件首失败提前结束，完整通过标准及生产时限不变；随后将单独POST撤权故障用例测试上限设180秒覆盖原45秒回收，增强实际撤权和工具错误码断言，通常单例仍120秒。The failed full run remains a failure; role fixtures now acknowledge all starts asynchronously, while dedicated transport tests retain early-completion coverage. Focused retries do not certify the full suite.
+
+- 代码复核发现新增撤权断言误用通用资源许可错误码，主动中止首次全量并保留原日志摘要；改为执行上下文首先返回的AUDIO_LICENSE_UNAVAILABLE，生产门禁不变，专项确认后重新全量。An aborted attempt remains recorded; only an incorrect test error-code expectation is corrected before fresh full validation.
+
+- 两条内部生成路线从原生制作/原ASR/POST接通文件QC，重新解码实际原整轨与最终AAC、独立重算原声/许可配乐混音并比较编码；原声单位增益不变。Connected actual private file QC without another inference or ASR purchase.
+- 封存完整双声道源/成片WAV、原转写精确JSON、实际ASS与有界技术报告，补取字幕句词起止/中点实际帧；材料绑定原合同、全部视频槽位和不可变SHA。Sealed private full stereo and original text evidence with actual caption-timecode frames.
+- 提交事务锁定主人并重验原文件、许可/配乐、原转写/费用、私有副本与实际字节；篡改/撤权回滚不留QC PASS。Commit-time revocation and byte checks prevent stale sealing.
+- 迁移024扩展已有不可变证据kind；新增四项WAV/字幕时点单元，原生订单专项由十项扩为十二项，包含封存前后篡改、撤权和绕过最终阶段的拒绝。Expanded actual database/media fixtures; all external recognition/rights/model/usage/isolation responses remain synthetic.
+- 独立听音、最终事实/风格角色及报告、交付继续INDEPENDENT_AUDIO_REVIEW_REQUIRED；公开有声订单NATIVE_AUDIO_NOT_ADMITTED、全部禁售保留。Technical QC never certifies real speech quality or final delivery.
+- 完整334项原生回归此前约1064秒，本轮先将整套命令外层上限1200秒增至1800秒，首轮30分钟仅完成20/34文件后调至2400秒；首失败提前结束仍保留；通常单例/hook/RPC/构建上限、原费用/截止/配额不变；POST撤权故障用例单独180秒。Only the serial integration command cap grows; business limits and assertions remain unchanged.
+- 同步中英README、实施/架构/启动/状态及验证来源；本轮未改UI、录制脚本或独立声音内核媒体，原截图/录屏/GIF与C设计/归档原字节保留。Retained unchanged demonstration media and design provenance; no browser opened.
+
+
+
 ## 2026-10-29 · 原生有声订单制作与后期 / Private native-audio production and POST
 
 - 最终54项单元、334项完整原生集成通过。支付宝首次构建180秒超时后，以源码/契约/资源完全未变的受限重试保留本轮原始原生通过报告，其余五项重新执行全部通过；首次样例失败与构建超时均保留原摘要。Final validation passes 54 unit and 334 complete native integration cases. A strictly unchanged-source build retry retains this round's native report and passes the other five checks; failed attempts remain recorded.

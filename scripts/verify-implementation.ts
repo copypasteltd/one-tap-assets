@@ -50,9 +50,15 @@ for (const command of commands) {
   const result = spawnSync(process.execPath, [pnpm, command], { cwd: root, windowsHide: true, encoding: 'utf8', env: process.env,
     // Native media and Codex protocol fixtures execute serially; preserve their
     // assertions and per-test limits while allowing the growing suite to finish.
-    // The observed 269-case run took 700s even with incomplete SAMPLE work;
-    // allow the complete native SAMPLE regression and process/file I/O overhead.
-    timeout: command === 'test:integration' ? 1200000 : 180000 });
+    // The previous 334-case run took 1064s; the current 1800s attempt completed
+    // only 20/34 files under host load. Fail-fast preserves actual failures;
+    // only the serial command cap grows to allow the remaining native suites.
+    // Test assertions, RPC, purchase deadlines and quotas stay fixed; mini builds allow 600s.
+    // Unit process/module startup exhausted 180s after 44 passing cases under
+    // host load; permit the full command 360s, retaining each case's 30s limit.
+    // Two full native QC round trips allow 240s; one POST-revocation fixture
+    // allows its existing bounded cleanup in 180s. Other native cases use 120s.
+    timeout: command === 'test:integration' ? 2400000 : command === 'test' ? 360000 : command === 'build:alipay' || command === 'build:douyin' ? 600000 : 180000 });
   const diagnostic = { exit_code: result.status, signal: result.signal, error_code: (result.error as NodeJS.ErrnoException | undefined)?.code ?? null, elapsed_ms: Date.now() - started };
   const log = (result.stdout ?? '') + (result.stderr ?? '') + `\nVerification process: ${JSON.stringify(diagnostic)}\n`; const path = `runtime/test-results/${command.replaceAll(':', '-')}.log`;
   await writeFile(path, log); const passed = result.status === 0; results.push({ command: `./scripts/run.ps1 ${command}`, status: passed ? 'PASS' : 'FAIL', log_path: path, log_sha256: sha256(log) });
@@ -145,21 +151,28 @@ const report = {
     provider:'ALIYUN_DASHSCOPE',wire:'QWEN3_ASR_FLASH_FILETRANS_ASYNC',original_intent_receipts_and_budget:true,
     private_mono_wav:true,legacy_distinct_stereo_rejected:true,frozen_mean_stereo_derivative:true,phase_cancellation_guard:true,actual_word_timestamps_required:true,stored_receipt_maintenance:true,
     order_tool_registered:true,production_post_connected:true,order_pipeline_connected:false,real_provider_verified:false,real_chinese_speech_verified:false,native_speech_order_admitted:false,
-    notes:'Native PostgreSQL/FFmpeg/AAC/PCM/private files with synthetic HTTPS transport and transcript/usage responses. Original intent, send marker, task ID, append-only ACK/query/result, source/PCM/WAV hashes and original cost reservation persist. Missing ACK/usage never permits another purchase. Legacy contracts require identical stereo; an explicitly frozen MEAN_STEREO_V1 derivative uses both channels, rejects destructive cancellation and leaves production stereo unchanged. The scoped private POST tool is connected; independent listening, QC, public orders and audio delivery remain closed.'},
+    notes:'Native PostgreSQL/FFmpeg/AAC/PCM/private files with synthetic HTTPS transport and transcript/usage responses. Original intent, send marker, task ID, append-only ACK/query/result, source/PCM/WAV hashes and original cost reservation persist. Missing ACK/usage never permits another purchase. Legacy contracts require identical stereo; an explicitly frozen MEAN_STEREO_V1 derivative uses both channels, rejects destructive cancellation and leaves production stereo unchanged. Scoped private POST and file-level QC are connected; independent listening, final semantic reviews, public orders and audio delivery remain closed.'},
   native_audio_contract: {implemented:true,native_fixture_verified:verifiedCases('audio-contract.test.ts',23),
     version:'YPCC-NATIVE-AUDIO-CONTRACT-1',frozen_character_voice_video_binding:true,frozen_captions_and_music:true,
     original_order_budget_and_once_only_prepaid_allocation:true,one_assembled_track_asr_intent:true,live_rights_on_payment_and_resume:true,
     immutable_license_and_character_evidence:true,native_quotes_admitted:false,order_tool_registered:true,production_post_connected:true,order_pipeline_connected:false,
     independent_audio_review_implemented:false,real_authorizations_verified:false,real_provider_verified:false,
     notes:'Native PostgreSQL/FFmpeg/actual AAC plus synthetic character/voice/music authorization, ASR transport/transcript/usage and payment facts. Contract compilation, snapshot hashes, revoked-rights payment refund intent, original budget and concurrent full-track ASR limits are exercised. Fixed prepaid allocation is internal accounting, not proof of an external license purchase. The primary character/voice binding does not certify official multi-presenter support. NATIVE_AUDIO_NOT_ADMITTED and all sales-disabled gates remain.'},
-  native_order_media: {implemented:true,native_fixture_verified:verifiedCases('native-order.test.ts',10),
+  native_order_media: {implemented:true,native_fixture_verified:verifiedCases('native-order.test.ts',12),
     version:'YPCC-NATIVE-ORDER-PIPELINE-1',routes:['PER_SHOT_AI','REFERENCE_FILM'],production_post_connected:true,
     actual_full_track_pcm_assembly:true,lossless_intermediate_codec:'ALAC',final_audio_codec:'AAC',canonical_original_source_only:true,
     scoped_asr_tool:true,once_only_original_asr:true,stored_post_receipt_restore:true,licensed_music_bytes_preflight:true,
-    frozen_mono_derivative:'MEAN_STEREO_V1',independent_audio_review_implemented:false,audio_qc_connected:false,
+    frozen_mono_derivative:'MEAN_STEREO_V1',independent_audio_review_implemented:false,audio_qc_connected:true,
     audio_delivery_connected:false,native_quotes_admitted:false,official_multi_presenter_verified:false,real_provider_verified:false,
-    notes:'Ten native PostgreSQL/actual AAC-ALAC-PCM/media/HTTPS-stdio-MCP cases with synthetic external model, authorizations, ASR/usage and isolation. Both private production/POST routes, licensed music, original-task recovery after lost ACK, stored POST transaction rollback recovery, forged or replaced sources, missing/replaced licensed bytes, commit-time revocation and public-order rejection are exercised. Four unit cases cover equal stereo weights, immutable PCM, legacy behavior and silence/phase-cancellation rejection. No real Chinese listening, official multi-presenter, public audio ordering, QC or delivery admission.'},
-  codex_implementation: { scope: 'CONTENT PLAN, silent PHOTO_LAYOUT/PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST and private native-audio PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST with scoped original-track ASR, independent generated-reference facts review and fresh final visual REVIEW_FACTS/REVIEW_STYLE runtime adapters, metered Responses gateway, atomic silent pack publication, independent seven-stage photo creator SAMPLE pipeline',
+    notes:'Twelve native PostgreSQL/actual AAC-ALAC-PCM/media/HTTPS-stdio-MCP cases with synthetic external model, authorizations, ASR/usage and isolation. Both private production/POST routes and file-level QC now seal complete stereo originals/finals, original settled ASR, actual caption-timecode frames and independently reconstructed music mixes. Replaced bytes, lost ACKs, stored POST rollback, commit-time source/license revocation and bypassed final review/delivery are rejected. Four additional unit cases cover canonical stereo review WAV and caption frame boundaries. No real Chinese listening, official multi-presenter, public audio ordering, final semantic review or delivery admission.'},
+  native_audio_qc: {implemented:true,native_fixture_verified:verifiedCases('native-order.test.ts',12),
+    unit_fixture_verified:verifiedCases('native-review-audio.test.ts',4,'unit'),policy:'YPCC-QC-GENERATED-NATIVE-AUDIO-1.0.0',
+    evidence_version:'YPCC-NATIVE-AUDIO-QC-EVIDENCE-1',full_stereo_review_wav:true,original_settled_asr_only:true,
+    independent_mix_reconstruction:true,caption_timecode_frames:true,commit_time_source_license_and_bytes_recheck:true,
+    immutable_sealed_evidence:true,semantic_review:'PENDING',independent_listening:'REQUIRED',
+    independent_listening_implemented:false,final_reviews_admitted:false,audio_delivery_connected:false,
+    notes:'Technical file QC only. Complete original/final stereo WAV, original ASR JSON, actual ASS and bounded QC JSON are private hash-bound evidence. Actual FFmpeg media and native PostgreSQL are used with synthetic speech/model/rights/usage. The original three production/POST roles and single ASR are not repurchased during QC. Final listening, factual/style review and delivery require future independently bound listening results; a visual report or ASR transcript cannot waive this guard.'},
+  codex_implementation: { scope: 'CONTENT PLAN, silent PHOTO_LAYOUT/PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST and private native-audio PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST/QC with scoped original-track ASR and sealed full stereo evidence, independent generated-reference facts review and fresh final visual REVIEW_FACTS/REVIEW_STYLE runtime adapters, metered Responses gateway, atomic silent pack publication, independent seven-stage photo creator SAMPLE pipeline',
     fixture_tests_only: true, real_codex_turn_verified: false, native_launcher_executable_provided: false,
     native_isolation_verified: false, certified_token_cost_bound_verified: false, independent_reaper_implemented: true,
     independent_reaper_fixture_verified: verifiedCases('instance-reaper.test.ts', 11) && verifiedCases('built-worker.test.ts', 3),

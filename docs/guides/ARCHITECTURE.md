@@ -1,10 +1,12 @@
 # 技术结构与执行逻辑 / Architecture and execution
 
-2026-10-29原生订单增补 / Native ORDER update: [内部制作与后期](../实施/原生有声订单制作与后期接入-v1.0.md)连接两条生成路线、原整轨PCM/ALAC、受控一次ASR、字幕/许可配乐以及原清单恢复；`transcribe_actual_audio`仅授予本订单POST。显式冻结双声道均值仅用于ASR副本，交付保持原声。Public audio order creation, listening/QC, independent final audio review and delivery remain closed. Synthetic external responses do not verify real speech quality or multi-presenter support. 以下历史“订单工具未接入”按本增补区分内部PRODUCTION/POST与完整有声产线。
+2026-10-29声音文件QC增补 / Native file-QC update: [实际音轨与私有封存](../实施/原生声音文件验收与审查封存-v1.0.md)接通内部两路线制作/POST/QC；独立重算冻结混音、比较实际AAC、封存完整双声道音轨/原ASR/ASS/技术报告及字幕句词时点帧，提交重查原文件/许可/配乐/字节。独立听音、最终事实/风格报告与交付仍阻断，不能由波形或视觉报告替代。Technical file QC is connected; independent listening/final semantic reviews and audio delivery remain closed. 以下历史QC未接入描述仅适用于最终听音准入或旧阶段。
+
+2026-10-29原生订单增补 / Native ORDER update: [内部制作与后期](../实施/原生有声订单制作与后期接入-v1.0.md)连接两条生成路线、原整轨PCM/ALAC、受控一次ASR、字幕/许可配乐以及原清单恢复；`transcribe_actual_audio`仅授予本订单POST。显式冻结双声道均值仅用于ASR副本，交付保持原声。Public audio order creation, independent listening/final semantic review and delivery remain closed; technical file QC is connected as described above. Synthetic external responses do not verify real speech quality or multi-presenter support. 以下历史“订单工具未接入”按本增补区分内部PRODUCTION/POST与完整有声产线。
 
 2026-10-29增补：[异步转写与原任务回执](../实施/异步音频转写与原任务回执-v1.0.md)已实现内部POST服务：实际视频/PCM→私有单声道WAV→原任务/原费用/回执恢复→实际字级转写。`provider_submissions`增加ASR类型且与Ark分流，媒体维护器只核对已存回执。17项原生专项使用合成供应商，不代表真实中文ASR/OSS、独立听音或正式有声交付已准入。后文历史“持久ASR待实现”按本条区分内部实现与真实服务准入；原有声销售门禁保留。
 
-The internal POST transcription service reuses the original ledger and private-object scope. Its seventeen native fixtures use synthetic provider responses. Frozen audio contracts and scoped private production/POST tools are now connected as described above; real ASR/storage admission, independent listening/QC, final audio reviews and atomic audio delivery remain incomplete.
+The internal POST transcription service reuses the original ledger and private-object scope. Its seventeen native fixtures use synthetic provider responses. Frozen audio contracts and scoped private production/POST tools are now connected as described above; real ASR/storage admission, independent listening, final audio reviews and atomic audio delivery remain incomplete; technical file QC is connected.
 
 [中文README](../../README.md) · [English README](../../README.en.md) · [状态 / Status](STATUS.md)
 
@@ -67,12 +69,14 @@ Register private writes before I/O; reconcile original unknown bytes before eras
 
 ## 契约和设计 / Contracts and design
 
-业务77/管理26接口、229业务schema及71逻辑实体以`assets/development/v1.1/`及生成源为准；当前数据库23个迁移。修改契约同步生成源、产物、客户端、迁移与恢复测试，不能破坏已售快照。C设计25个基线文件与原始归档保持原字节，界面从tokens派生。[开发规范](../开发/README.md)有完整细则。
+业务77/管理26接口、229业务schema及71逻辑实体以`assets/development/v1.1/`及生成源为准；当前数据库24个迁移。修改契约同步生成源、产物、客户端、迁移与恢复测试，不能破坏已售快照。C设计25个基线文件与原始归档保持原字节，界面从tokens派生。[开发规范](../开发/README.md)有完整细则。
 
-The versioned development assets define 77 business/26 management endpoints, 229 business schemas and 71 logical entities; the current database has 23 migrations. Changes update generators, generated contracts, callers, migrations and recovery tests while retaining sold snapshots. The 25-file C baseline and archive remain byte-preserved; implementation uses its tokens.
+The versioned development assets define 77 business/26 management endpoints, 229 business schemas and 71 logical entities; the current database has 24 migrations. Changes update generators, generated contracts, callers, migrations and recovery tests while retaining sold snapshots. The 25-file C baseline and archive remain byte-preserved; implementation uses its tokens.
 
 ## 原生声音内核 / Native audio kernel
 
-`src/worker/media/native-audio.ts`提取有界实际PCM与信号证据；`native-captions.ts`检查转写来源/时间码并编译四字幕；`native-audio-post.ts`核对许可、保留原声单位增益、仅配乐压低、实际字幕烧录和编码后波形复验。这些接口仍属于独立服务端内核，尚未注册有声订单/MCP，原有声禁售门禁继续有效。[转写网关](../实施/异步音频转写与原任务回执-v1.0.md)已有原POST租约、原费用意图及异步回执恢复；[声音合同](../实施/原生声音合同与原订单费用-v1.0.md)冻结主人物/声音/视频模型组合、许可摘要、一次整轨ASR、字幕/配乐及原总预算，绑定执行快照；迁移022/023保护原ASR与授权记录。合成授权/识别/用量证明内部边界，真实服务、多人逐镜绑定、独立听音、QC封存及事务交付继续待验。
+`src/worker/media/native-audio.ts`提取有界实际PCM与信号证据；`native-captions.ts`检查转写来源/时间码并编译四字幕；`native-audio-post.ts`核对许可、保持原声单位增益、仅压低配乐、实际字幕烧录和编码后波形。`native-order-pipeline.ts`通过受控订单MCP包装制作、原整轨ASR和POST，完整PCM用ALAC无损中间片保持，最终输出AAC。原合同冻结人物/声音/视频模型、许可、一次ASR、字幕/配乐及原预算；迁移022/023保护原请求和授权记录。
 
-The independent server kernel performs bounded PCM decoding, four caption styles, rights checks, unit-gain original-voice mixing, music-only ducking, actual burn-in and encoded waveform checks. The durable ASR gateway preserves the original POST lease, cost intent and asynchronous receipts. The private audio contract binds the primary character/voice/video-model admission, license digests, one complete-track ASR, captions/music and original budget to the execution snapshot; migrations022/023 protect ASR and authorization records. These fixtures use synthetic authorizations, recognition and usage. Audible order tools, real services, multi-presenter routing, independent listening, sealed QC and atomic audio publication remain incomplete; native speech admission stays closed.
+`review/native-audio.ts`独立重建混音并比较实际AAC，保存完整原声/成片双声道WAV、精确原ASR JSON、ASS和技术JSON；`review/qc.ts`补字幕句词时点实际帧，封存时复查来源/授权/配乐/私有写入/实际字节。迁移024只扩展已有不可变证据kind。全部材料私有、只读原成功转写，不新增识别或推理购买。技术QC包仍为SEALED/PENDING；独立听音、最终事实/风格报告与交付须后续接通，不能由ASR或图像报告替代。公开声音订单继续禁售。
+
+The native media kernel and scoped ORDER pipeline now connect full-track production/ASR/POST and technical QC. Actual PCM is preserved in an ALAC intermediate before AAC POST. QC reconstructs the frozen mix and seals complete source/final stereo WAV, original settled transcript, ASS and technical JSON, plus actual caption-timecode frames. Commit revalidates ownership, original files, licenses, music and evidence bytes. Migration024 extends existing immutable evidence kinds. No second ASR or inference is purchased. Independent listening/final semantic reviews, multi-presenter support, real providers and atomic audio delivery remain incomplete; public native speech admission stays closed.

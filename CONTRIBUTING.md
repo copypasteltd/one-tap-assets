@@ -1,5 +1,7 @@
 # 一品成片 · 开发协作约束
 
+声音QC更新约束 / Native-audio QC: [文件验收与封存](docs/实施/原生声音文件验收与审查封存-v1.0.md)区分实际PCM/混音/字幕文件检查和未来独立听音。新证据须绑定原ASR与完整双声道、原费用/许可/快照及私有写入；提交重验，保持最终听音/交付与公开声音订单门禁。Technical QC must not waive independent listening or final delivery admission.
+
 当前为需求v3.1、C设计v1.0、开发设计v1.1；应用正在实现，实际源码/测试范围见[源码进度](docs/实施/源码实现进度-v3.1.md)。开发入口见[docs/开发](docs/开发/README.md)，范围优先级见[功能需求](docs/02-功能需求与用户流程.md)，安全见[SECURITY.md](SECURITY.md)。
 
 ## 工作区与工具

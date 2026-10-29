@@ -1,5 +1,7 @@
 # 文档目录 / Documentation index
 
+当前新增[原生声音文件验收与审查封存](实施/原生声音文件验收与审查封存-v1.0.md)：内部两路线实际音轨/混音/字幕帧及私有封存已有，独立听音、最终双复核和有声交付仍关闭。New: private native-audio technical QC and complete stereo evidence; independent listening/final review/delivery remain unadmitted.
+
 新增专项 / New implementation: [原生有声订单制作与后期 / Private native-audio production and POST](实施/原生有声订单制作与后期接入-v1.0.md)：内部两生成路线、受控原整轨 ASR、实际 PCM/ALAC、字幕/许可配乐及原清单恢复；十项整链/四项声道回归。公开有声订单、听音/QC/交付继续阻断，真实外部服务未准入。
 
 [中文入口](../README.md) · [English entry](../README.en.md)

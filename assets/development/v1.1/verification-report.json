@@ -1,6 +1,6 @@
 {
   "baseline_id": "YPCC-DEV-1.1.0",
-  "checked_at": "2026-10-28T20:51:45.856373+00:00",
+  "checked_at": "2026-10-28T23:56:09.110939+00:00",
   "status": "PASS",
   "scope": "开发文档、官方OpenAPI结构、JSON Schema/合成正负例、状态图、实体/需求/设计/工作包追踪及C留存一致性",
   "counts": {
@@ -16,9 +16,9 @@
     "requirements": 58,
     "work_packages": 20,
     "frozen_design_files": 25,
-    "checks": 3293
+    "checks": 3296
   },
-  "passed": 3293,
+  "passed": 3296,
   "failed": 0,
   "limitations": [
     "本检查仅核验文档与契约，不运行应用测试；已实现源码和局部测试证据另见 assets/implementation/current.json。",
@@ -15801,6 +15801,11 @@
       "detail": ""
     },
     {
+      "check": "local_link:docs\\开发\\README.md->../实施/原生声音文件验收与审查封存-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "check": "local_link:docs\\开发\\README.md->../实施/当前开发方案与技术骨架-v3.1.md",
       "status": "PASS",
       "detail": ""
@@ -16136,6 +16141,11 @@
       "detail": ""
     },
     {
+      "check": "local_link:README.md->docs/实施/原生声音文件验收与审查封存-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "check": "local_link:README.md->docs/media/native-audio/preview.gif",
       "status": "PASS",
       "detail": ""
@@ -16307,6 +16317,11 @@
     },
     {
       "check": "balanced_fences:CONTRIBUTING.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:CONTRIBUTING.md->docs/实施/原生声音文件验收与审查封存-v1.0.md",
       "status": "PASS",
       "detail": ""
     },

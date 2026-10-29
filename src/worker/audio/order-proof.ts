@@ -40,5 +40,6 @@ export async function originalNativeTranscript(db:Db,store:ObjectStorage,context
   const transcript=JSON.parse(bytes.toString('utf8')) as NativeTranscript;
   requireThat(transcript.source_sha256===p.prepared.source.source_sha256&&transcript.pcm_sha256===p.prepared.source.audio.pcm_sha256
     &&transcript.audio_evidence_hash===hash(p.prepared.source.audio),'AUDIO_ASR_PROOF_INVALID','转写不属于原整轨和实际PCM',503);
-  return {transcript,file_sha256:p.output.sha256,source_sha256:p.prepared.source.source_sha256,audio:p.prepared.source.audio,stage_run_id:row.stage_run_id};
+  return {transcript,transcript_bytes:bytes,object_key:p.output.object_key,file_sha256:p.output.sha256,
+    source_sha256:p.prepared.source.source_sha256,audio:p.prepared.source.audio,stage_run_id:row.stage_run_id};
 }

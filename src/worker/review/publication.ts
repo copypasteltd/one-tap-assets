@@ -23,10 +23,12 @@ import { currentReviewPacket, packetImages } from './context.js';
 import { assertReviewConsensus } from './packet.js';
 import { packetReports } from './reports.js';
 import { mediaQcPolicy, unsettledOrderCalls, verifySealedEvidence } from './qc.js';
+import {requireAudioReviewAdmission} from './native-audio.js';
 
 export class PublicationService {
   constructor(private pool: pg.Pool, private cfg: Config, private store: ObjectStorage) {}
   private async ready(db: Db, context: ExecutionContext, lockResources = false): Promise<DTO<'ReviewPacket'>> {
+    requireAudioReviewAdmission(context);
     const packet = await currentReviewPacket(db, context);
     requireThat(packet.qc_policy_version===mediaQcPolicy(context),'PUBLICATION_ROUTE_UNAVAILABLE','原订单验收与发布规则不一致',503);
     if(context.snapshot.engine!=='PHOTO_LAYOUT'){

@@ -27,7 +27,11 @@ import {operationArtifacts} from '../../src/worker/media/artifacts.js';
 import {nativeCommand,inspectVideo} from '../../src/worker/media/native.js';
 import {CodexRuntimeAdapter} from '../../src/worker/codex/runtime.js';
 import {MediaStageService} from '../../src/worker/codex/media-stage.js';
-import {QualityControlService} from '../../src/worker/review/qc.js';
+import {QualityControlService,verifySealedEvidence} from '../../src/worker/review/qc.js';
+import {currentReviewPacket,packetMaterial} from '../../src/worker/review/context.js';
+import {nativeAudioQc,verifyNativeAudioEvidence,NATIVE_QC_KINDS} from '../../src/worker/review/native-audio.js';
+import {ReviewStageService} from '../../src/worker/review/stage.js';
+import {PublicationService} from '../../src/worker/review/publication.js';
 import {ToolConsumer,type ToolHandler} from '../../src/worker/tool-gateway/consumer.js';
 import {productionTools} from '../../src/worker/tool-gateway/production-tools.js';
 import {reviewTools} from '../../src/worker/tool-gateway/review-tools.js';
@@ -50,7 +54,12 @@ beforeAll(async()=>{
   const path=join(root,'licensed-test-tone.wav');await nativeCommand(db.cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-f','lavfi','-i','sine=frequency=220:sample_rate=48000:duration=1',
     '-af','volume=0.1','-ac','2','-c:a','pcm_s16le','-y',path],{cwd:root,timeoutMs:30000});music=await readFile(path);
 });
-afterEach(async()=>{
+afterEach(async context=>{
+  // Preserve the original failure before a long serial suite or teardown ends.
+  // Test-only diagnostics stay in ignored runtime, never in published media.
+  const task=context.task as {name:string;result?:{errors?:{name?:string;message?:string;stack?:string;code?:unknown}[]}};
+  if(task.result?.errors?.length&&db?.cfg)await writeFile(inside(db.cfg.runtimeRoot,`test-results/${id('native-order-failure')}.json`),
+    JSON.stringify({test:task.name,errors:task.result.errors.map(e=>({name:e.name,message:e.message,code:e.code,stack:e.stack}))}),{flag:'wx'});
   for(const item of active.splice(0)){item.controller.abort();await item.task;await item.app.close();}
   await db.pool.query("UPDATE stage_runs SET state='CANCELLED' WHERE state NOT IN ('SUCCEEDED','FAILED')");
   await db.pool.query("UPDATE agent_tool_intents SET state='CANCELLED' WHERE state IN ('QUEUED','UNKNOWN','RUNNING')");
@@ -103,6 +112,8 @@ async function stage(f:Fixture,lease:StageLease){
   for(let attempt=0;attempt<12;attempt++){
     try{const commit=await withFixtureLease(db.pool,lease,s=>f.service.handle(lease,s),f.controller.signal);await completeStage(db.pool,lease,commit);return;}
     catch(error){if(!(error instanceof PendingExternal)){
+      if(error instanceof Error)await writeFile(inside(db.cfg.runtimeRoot,`test-results/${id('native-order-stage-failure')}.json`),
+        JSON.stringify({stage:lease.stage_name,name:error.name,message:error.message,code:(error as Error&{code?:unknown}).code,stack:error.stack}),{flag:'wx'}).catch(()=>undefined);
       const tools=(await db.pool.query("SELECT tool_name,state,data->>'error_code' AS error_code FROM agent_tool_intents WHERE tenant_id=$1 AND stage_run_id=$2 ORDER BY created_at",[f.p.tenantId,lease.id])).rows;
       if(error instanceof Error)error.message+=`; synthetic native tool states: ${JSON.stringify(tools)}`;throw error;
     }
@@ -117,7 +128,7 @@ function directPost(f:Fixture,lease:StageLease):ToolScope{
     expires_at:lease.deadline_at,scope_type:'ORDER',scope_id:f.orderId,stage_name:'POST'};
 }
 
-it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('runs the private %s native production/ASR/POST through real HTTPS/MCP and keeps audio QC closed',async engine=>{
+it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('seals private %s native production/ASR/POST/QC through real HTTPS/MCP while independent listening and delivery stay closed',async engine=>{
   const f=await setup({engine,music:engine==='REFERENCE_FILM'});await stage(f,f.lease);expect(f.asrPosts()).toBe(0);
   const context=await executionContext(db.pool,f.p.tenantId,f.orderId,f.snapshotHash),production=await operationArtifacts(db.pool,context,'PRODUCTION');
   const original=production.receipt.artifacts.find(a=>a.spec.kind==='video')!;
@@ -135,8 +146,70 @@ it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('runs the private %s native p
   const qcId=await enqueueStage(db.pool,{tenantId:f.p.tenantId,scopeType:'ORDER',scopeId:f.orderId,name:'QC',inputHash:f.snapshotHash,
     deadlineAt:f.snapshot.deadline_at,jobId:f.lease.job_id!,dependencies:[post.id]});
   const qc=(await claimStage(db.pool,id('native_qc'),['QC']))!;expect(qc.id).toBe(qcId);
-  await expect(new QualityControlService(db.pool,f.cfg,f.store).handle(qc,new AbortController().signal)).rejects.toMatchObject({code:'QC_POLICY_UNAVAILABLE'});
+  const commit=await withFixtureLease(db.pool,qc,s=>new QualityControlService(db.pool,f.cfg,f.store).handle(qc,s));
+  if(engine==='PER_SHOT_AI'){
+    const bytes=await f.store.get(final.object_key,512_000_000);await f.store.put(final.object_key,Buffer.from('replaced final video'),'video/mp4');
+    await expect(completeStage(db.pool,qc,commit)).rejects.toMatchObject({code:'REVIEW_EVIDENCE_CHANGED'});
+    await f.store.put(final.object_key,bytes,'video/mp4');
+  }else{
+    const right=frozenNativeAudio(f.contract)!.rights.find(r=>r.kind==='MUSIC')!;
+    await f.store.put(right.media!.object_key,Buffer.from('replaced licensed music'),'audio/wav');
+    await expect(completeStage(db.pool,qc,commit)).rejects.toMatchObject({code:'AUDIO_MUSIC_MEDIA_CHANGED'});
+    await f.store.put(right.media!.object_key,music,'audio/wav');
+  }
+  await completeStage(db.pool,qc,commit);
+  const packet=await currentReviewPacket(db.pool,context),rows=await verifySealedEvidence(db.pool,f.store,packet);
+  expect(packet).toMatchObject({state:'SEALED',deterministic_pass:true,evidence_complete:true,reports:[],publication_decision:'PENDING'});
+  expect(rows.filter(r=>(NATIVE_QC_KINDS as readonly string[]).includes(r.kind)).map(r=>r.kind).sort()).toEqual([...NATIVE_QC_KINDS].sort());
+  const material=await packetMaterial(db.pool,f.store,packet) as {audio_evidence:{kind:string;semantic_review:string}[];text_evidence:{kind:string}[]};
+  expect(material.audio_evidence.map(r=>r.kind).sort()).toEqual(['FINAL_AUDIO','NATIVE_AUDIO']);
+  expect(material.audio_evidence.every(r=>r.semantic_review==='PENDING')).toBe(true);
+  expect(material.text_evidence.map(r=>r.kind)).toEqual(expect.arrayContaining(['TRANSCRIPT','CAPTION_SCRIPT','AUDIO_QC']));
+  const files=new Map(await Promise.all(rows.map(async r=>[r.id,await f.store.get(r.object_key,30_000_000)] as const)));
+  const finalAudio=rows.find(r=>r.kind==='FINAL_AUDIO')!,rawAudio=rows.find(r=>r.kind==='NATIVE_AUDIO')!;
+  expect(files.get(rawAudio.id)!.length).toBe(44+48000*2*4);
+  expect(files.get(rawAudio.id)!.readUInt16LE(22)).toBe(2);
+  expect(()=>verifyNativeAudioEvidence(packet,rows.filter(r=>r.id!==finalAudio.id),files)).toThrowError(expect.objectContaining({code:'REVIEW_AUDIO_EVIDENCE_INCOMPLETE'}));
+  const captionFrame=rows.find(r=>r.kind==='VIDEO_FRAME'&&r.frame_index===3&&r.artifact_id===finalAudio.artifact_id)!;
+  expect(captionFrame).toBeDefined();
+  expect(()=>verifyNativeAudioEvidence(packet,rows.filter(r=>r.id!==captionFrame.id),files)).toThrowError(expect.objectContaining({code:'REVIEW_AUDIO_EVIDENCE_INCOMPLETE'}));
+  await f.store.put(finalAudio.object_key,Buffer.from('replaced review audio'),'audio/wav');
+  await expect(verifySealedEvidence(db.pool,f.store,packet)).rejects.toMatchObject({code:'REVIEW_EVIDENCE_CHANGED'});
+  await f.store.put(finalAudio.object_key,files.get(finalAudio.id)!,'audio/wav');
+  const fake=structuredClone(made.receipt);for(const artifact of fake.artifacts.filter(a=>a.spec.kind==='video'))artifact.spec.native_audio!.post!.kernel.mix_pcm_sha256='0'.repeat(64);
+  await expect(nativeAudioQc(db.pool,f.cfg,f.store,context,production.receipt,fake,join(root,id('independent-mix')),new AbortController().signal))
+    .rejects.toMatchObject({code:'REVIEW_AUDIO_MIX_INVALID'});
+  const paidCalls=f.providerCalls(),inferences=f.inferences();
+  for(const name of ['REVIEW_FACTS','REVIEW_STYLE','DELIVER']){
+    const next=await enqueueStage(db.pool,{tenantId:f.p.tenantId,scopeType:'ORDER',scopeId:f.orderId,name,inputHash:f.snapshotHash,
+      deadlineAt:f.snapshot.deadline_at,jobId:f.lease.job_id!,dependencies:[qc.id]});
+    const lease=(await claimStage(db.pool,id('native_final_guard'),[name]))!;expect(lease.id).toBe(next);
+    const service=name==='DELIVER'?new PublicationService(db.pool,f.cfg,f.store):new ReviewStageService(db.pool,f.cfg);
+    await expect(service.handle(lease,new AbortController().signal)).rejects.toMatchObject({code:'INDEPENDENT_AUDIO_REVIEW_REQUIRED'});
+  }
+  expect(f.providerCalls()).toBe(paidCalls);expect(f.inferences()).toBe(inferences);expect(f.asrPosts()).toBe(1);expect(f.launcher.launches).toBe(3);
   expect((await db.pool.query('SELECT id FROM delivery_manifests WHERE order_id=$1',[f.orderId])).rowCount).toBe(0);
+  // Both round trips now execute full media/ASR/POST/QC plus tamper and final
+  // admission checks; retain their individual RPC and frozen business limits.
+},240_000);
+
+it.each(['original-write','voice-license'] as const)('refuses native QC sealing after %s is revoked between preparation and commit',async revoked=>{
+  const f=await setup();await stage(f,f.lease);const post=await postLease(f);await stage(f,post);
+  const qcId=await enqueueStage(db.pool,{tenantId:f.p.tenantId,scopeType:'ORDER',scopeId:f.orderId,name:'QC',inputHash:f.snapshotHash,
+    deadlineAt:f.snapshot.deadline_at,jobId:f.lease.job_id!,dependencies:[post.id]});
+  const qc=(await claimStage(db.pool,id('native_revoke_qc'),['QC']))!;expect(qc.id).toBe(qcId);
+  const commit=await withFixtureLease(db.pool,qc,s=>new QualityControlService(db.pool,f.cfg,f.store).handle(qc,s));
+  if(revoked==='original-write'){
+    const context=await executionContext(db.pool,f.p.tenantId,f.orderId,f.snapshotHash),receipt=await operationArtifacts(db.pool,context,'POST');
+    const sourceWrite=receipt.receipt.artifacts.find(a=>a.spec.kind==='video')!.spec.native_audio!.post!.source_write_id;
+    await db.pool.query('UPDATE private_object_writes SET delete_requested=true WHERE id=$1',[sourceWrite]);
+    await expect(completeStage(db.pool,qc,commit)).rejects.toMatchObject({code:'REVIEW_AUDIO_SOURCE_REVOKED'});
+  }else{
+    await db.pool.query('UPDATE resource_licenses SET revoked_at=now() WHERE id=$1',[f.character.voice_binding.license_record_id]);
+    await expect(completeStage(db.pool,qc,commit)).rejects.toMatchObject({code:'AUDIO_LICENSE_UNAVAILABLE'});
+  }
+  expect((await db.pool.query('SELECT id FROM review_packets WHERE order_id=$1',[f.orderId])).rowCount).toBe(0);
+  expect((await db.pool.query('SELECT id FROM qc_decisions WHERE order_id=$1',[f.orderId])).rowCount).toBe(0);expect(f.asrPosts()).toBe(1);
 });
 it('restores the stored POST receipt after its transaction rolls back without another ASR or render generation',async()=>{
   const f=await setup({crashPostCommit:true});await stage(f,f.lease);await stage(f,await postLease(f));
@@ -170,9 +243,15 @@ it('rejects a different artifact, invented assembly proof and changed original b
 it('rejects native POST commit after voice revocation and exposes no READY post checkpoint',async()=>{
   const f=await setup({revokePostCommit:true});await stage(f,f.lease);const lease=await postLease(f);
   await expect(withFixtureLease(db.pool,lease,s=>f.service.handle(lease,s))).rejects.toThrow();expect(f.asrPosts()).toBe(1);
+  expect(f.postCommits()).toBe(1);
+  expect((await db.pool.query('SELECT revoked_at FROM resource_licenses WHERE id=$1',[f.character.voice_binding.license_record_id])).rows[0].revoked_at).not.toBeNull();
+  expect((await db.pool.query("SELECT state,data->>'error_code' AS code FROM agent_tool_intents WHERE order_id=$1 AND tool_name='execute_post_plan'",[f.orderId])).rows)
+    .toEqual([{state:'FAILED',code:'AUDIO_LICENSE_UNAVAILABLE'}]);
   expect((await db.pool.query("SELECT id FROM media_operations WHERE order_id=$1 AND phase='POST' AND state='READY'",[f.orderId])).rowCount).toBe(0);
   expect((await db.pool.query("SELECT id FROM artifacts WHERE order_id=$1 AND spec_json->>'phase'='POST'",[f.orderId])).rowCount).toBe(0);
-});
+// A failed role also awaits the unchanged 45s independent reaper. This one
+// integration harness cap covers both real media and that bounded cleanup.
+},180_000);
 it('keeps public order creation closed for a structurally valid internal native contract',async()=>{
   const f=await setup(),quote=id('private_quote'),expires=addSeconds(600);
   await insert(db.pool,'quotes',{id:quote,tenant_id:f.p.tenantId,owner_id:f.p.userId,plan_id:f.plan.plan_id,plan_hash:f.contract.plan_hash,amount_fen:100,expires_at:expires,state:'OPEN',

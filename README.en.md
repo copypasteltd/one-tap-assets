@@ -18,13 +18,15 @@ These are **actual browser captures at 430 × 932**, reusing shared mini-program
 
 ## Native audio and POST integration
 
-An independently runnable native kernel extracts actual audio, binds transcript timestamps to PCM evidence, burns four Chinese caption styles, and mixes licensed music with music-only ducking. It checks encoded waveforms, caption timing/pixels, license revocation, the original deadline and cancellation cleanup. **Private native-audio production/POST is connected; public audio orders, listening/QC and delivery remain closed.**
+An independently runnable native kernel extracts actual audio, binds transcript timestamps to PCM evidence, burns four Chinese caption styles, and mixes licensed music with music-only ducking. It checks encoded waveforms, caption timing/pixels, license revocation, the original deadline and cancellation cleanup. **Private native-audio production/POST/file QC is connected; independent listening, final semantic reviews, public audio orders and delivery remain closed.**
 
 The [durable asynchronous transcription service](docs/实施/异步音频转写与原任务回执-v1.0.md) derives a private WAV from a registered order video, freezes its model/rate and original budget, stores raw submit/query/result receipts, and binds supplier word timestamps to the source video/PCM. Missing ACKs never authorize another purchase; legacy contracts reject distinct stereo channels, while an explicitly frozen mean-stereo ASR derivative checks cancellation risk without replacing the delivery stereo track. Results require approved HTTPS URLs. Seventeen native database/media cases use **synthetic recognition and usage responses**, not real-provider recognition evidence. ASR configuration defaults to disabled.
 
 The new [native audio contract and original-order accounting](docs/实施/原生声音合同与原订单费用-v1.0.md) freezes the character/voice/video-model combination, authorization versions and text digests, four caption styles and a fixed font, explicit no-bed or licensed-music gain/ducking/looping, original unit gain, and **one ASR request over the complete assembled track**. The execution snapshot binds this contract. Once-only prepaid-license allocations and the ASR ceiling share the original total while preserving aftercare funds; changing source videos or resuming instances cannot replenish the ASR allowance. Revocation stops execution; an original payment received after revocation is recorded and produces one refund intent. Twenty-three native cases use **synthetic authorizations, recognition/usage and payment facts**, not commercial-rights or real speech certification. Multi-presenter binding, independent listening and audio QC/delivery remain incomplete; `NATIVE_AUDIO_NOT_ADMITTED` and all sales-disabled gates remain.
 
 The new [private native-audio order integration](docs/实施/原生有声订单制作与后期接入-v1.0.md) connects both generated routes through scoped HTTPS/stdio/MCP tools: actual complete-track assembly, once-only durable ASR, and captions/licensed-music POST. An ALAC intermediate preserves original decoded PCM byte-for-byte; final POST outputs AAC. Original tasks and stored POST manifests survive lost ACKs and transaction rollback. Missing/replaced music blocks paid generation; source, settled transcription, rights and fencing are rechecked at commit. Ten native integration cases and four channel-policy unit cases use synthetic external responses. **They do not certify real speech quality, official multi-presenter support or complete audio delivery.** Public quotes and order creation retain `NATIVE_AUDIO_NOT_ADMITTED`.
+
+The new [native-audio file QC and sealed review evidence](docs/实施/原生声音文件验收与审查封存-v1.0.md) independently reconstructs the original/licensed mix, compares actual AAC and seals complete source/final stereo WAV, original settled transcript, ASS and technical JSON. Actual frames also cover caption phrase/word timestamps. Commit rechecks original files, music, licenses and private copies. Reports remain `semantic_review=PENDING` and `independent_listening=REQUIRED`; final fact/style roles, report admission and delivery reject `INDEPENDENT_AUDIO_REVIEW_REQUIRED`. Four unit regressions and twelve expanded native-order cases use synthetic tones, recognition and rights, without certifying real listening quality. Public audio orders stay closed.
 
 ![Actual subtitle processing with synthetic tones and manual timecodes](docs/media/native-audio/preview.gif)
 
@@ -48,7 +50,7 @@ A preset is a versioned declarative specification: inputs, product evidence, sho
 | Route | Behavior and use | Current boundary |
 | --- | --- | --- |
 | `PHOTO_LAYOUT` | Original photos, deterministic motion, rapid cuts, product cards and companion video | Actual media plus synthetic-role coverage for silent production/post/QC/double review/delivery |
-| `PER_SHOT_AI` | Per-shot references and clips for premium details, lifestyle scenes and single-shot presentations | Silent packs through delivery have native-media/synthetic-role coverage. Private audio production/ASR/POST is connected; listening/QC/audio delivery, official variants and real operation remain unverified |
+| `PER_SHOT_AI` | Per-shot references and clips for premium details, lifestyle scenes and single-shot presentations | Silent packs through delivery have native-media/synthetic-role coverage. Private audio production/ASR/POST/file QC is connected; independent listening/final semantic review/audio delivery, official variants and real operation remain unverified |
 | `REFERENCE_FILM` | Unified references/timecodes for continuous multi-shot ads, preserving contracted native audio | Silent film uses the complete pack chain. Private native-audio production/ASR/POST is connected; complete audio delivery, official variants and real operation remain unverified |
 
 The paid route cannot silently fall back to photo layout. Moving a still is not a real turntable shot. One approved reference cannot replace complete-pack review. Audio is contracted separately: silent tests do not prove native sound, music or subtitles.
@@ -111,7 +113,7 @@ flowchart LR
 | Mini-programs | Taro 4.3.1, React 18.3.1, TypeScript 5.9.3; 17 shared screens and platform ports |
 | Browser replay | Vite 8.3.5 and React DOM adapters with local fixtures |
 | Backend | Node.js 24, tested with 24.22.1; Fastify 5.12.7; worker/reaper/maintenance CLIs |
-| Persistence | Native PostgreSQL, local 17.6-1; durable stages/outbox, lease fencing and immutable receipts; 23 migrations |
+| Persistence | Native PostgreSQL, local 17.6-1; durable stages/outbox, lease fencing and immutable receipts; 24 migrations |
 | Media | Sharp 0.35.5, native FFmpeg/ffprobe, private storage and local development storage |
 | Agent | Codex app-server, bounded stdio/MCP, metered inference and style SkillBundles |
 | Verification | Vitest 5.0.5, Playwright 1.64.1, native PG/actual media and explicit synthetic provider/host fixtures |
@@ -170,7 +172,7 @@ Persist a one-time intent and atomically reserve the original order’s total bu
 ## Repository map and docs
 
 ```text
-src/api/            API, auth, domain services, 23 SQL migrations
+src/api/            API, auth, domain services, 24 SQL migrations
 src/worker/         Durable stages, Codex, MCP, media/review/reaping/privacy
 src/shared/         Shared screens, platform ports, recovery and generated contracts
 src/mini-alipay/    Alipay shell
@@ -201,9 +203,9 @@ Root READMEs and operational guides are bilingual. Detailed historical requireme
 
 For UI evidence, start `dev:preview` and run `docs:media` in another terminal. `test:ui` invokes the same capture/assertion script. Local Edge, native FFmpeg/ffprobe and project-local Playwright recording components are required; see the [demo guide](docs/guides/DEMO.md).
 
-For this 2026-10-29 snapshot, type checking, **54/54 unit tests, 334/334 native integration tests**, server and both mini-program builds passed. The unchanged UI retains its previously verified replay build and ten-screen capture, with identical media hashes. Exact results live in the implementation JSON. Public summaries distinguish actual database/media processing from synthetic models/payments/isolation.
+For this 2026-10-29 snapshot, type checking, **58/58 unit tests, 336/336 native integration tests**, server and both mini-program builds passed. The unchanged UI retains its previously verified replay build and ten-screen capture, with identical media hashes. Exact results live in the implementation JSON. Public summaries distinguish actual database/media processing from synthetic models/payments/isolation.
 
-This native production/POST source first executes the complete native suite freshly. Following a build timeout, a strictly unchanged-source/contracts/resources retry retains this round's original native report and repeats the other five checks; the previous 324-case report is not reused. See [validation provenance](docs/verification/README.md).
+This native file-QC source first freshly executes all 336 native cases. A restricted retry changes only the verifier’s mini-build command window from 180s to 600s; application, tests, contracts and resources match the original native run. The four-case scope flag also selects the correct unit report. The original verifier is retained and the exact timeout/comment/report-kind delta checked. This round’s native report is retained and the other five checks repeat; no prior-round 334-case report is reused. See [validation provenance](docs/verification/README.md).
 
 Remaining work includes official-variant and real-service acceptance of both generative routes, native audio, real Codex/isolation/cleanup, provider/payment/storage admission, four device groups, 14 variants × 30 full-pack benchmarks, complete community/aftercare, Plus/management UI and acceptance of all **58 requirements / 52 P0 requirements**. Follow [status and priorities](docs/guides/STATUS.md).
 

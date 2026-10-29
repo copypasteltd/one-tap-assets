@@ -13,6 +13,7 @@ import { currentReviewPacket, packetImages, packetMaterial } from './context.js'
 import { assertReviewConsensus } from './packet.js';
 import { packetReports, reviewReportSchema, validateReviewReport } from './reports.js';
 import { unsettledOrderCalls } from './qc.js';
+import {requireAudioReviewAdmission} from './native-audio.js';
 
 export class ReviewStageService {
   private executor: RoleExecutor;
@@ -24,6 +25,7 @@ export class ReviewStageService {
     requireThat(lease.scope_type === 'ORDER' && (lease.stage_name === 'REVIEW_FACTS' || lease.stage_name === 'REVIEW_STYLE'),
       'REVIEW_STAGE_INVALID', '独立复核阶段无效', 500);
     const context = await executionContext(this.pool, lease.tenant_id, lease.scope_id, lease.input_hash);
+    requireAudioReviewAdmission(context);
     const packet = await currentReviewPacket(this.pool, context);
     requireThat(['SEALED', 'REVIEWING', 'PASSED'].includes(packet.state) && packet.publication_decision === 'PENDING',
       'REVIEW_PACKET_BLOCKED', '当前封存材料已阻断或不可复核', 409);

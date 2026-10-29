@@ -3,22 +3,24 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-28T20:56:03.836Z",
+  "checked_at": "2026-10-28T23:54:36.140Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
   "verification_mode": "MINI_BUILD_RETRY_WITH_RETAINED_NATIVE_INTEGRATION",
   "retained_integration": {
-    "checked_at": "2026-10-28T20:52:46.784Z",
-    "previous_source_set_hash": "a61ef78878baddc1e41405dbe686cacaa13e22285ab49525379815ab1124fbfb",
-    "validated_source_set_hash": "a61ef78878baddc1e41405dbe686cacaa13e22285ab49525379815ab1124fbfb",
-    "allowed_changed_files": [],
-    "report_sha256": "1a9c7cb9b5bfa0767a7fdcb915b9fc0b77bfc155d247521582287f07adf897a6",
+    "checked_at": "2026-10-28T23:50:55.845Z",
+    "previous_source_set_hash": "d2e81c35a2038a869ae8339e644de3041a73fc3c73eaf67c966e970547e2a13c",
+    "validated_source_set_hash": "25ec642fe663ccaf2d7a6de2ea62a880ac2ce46c8d2cac99647033f197dd64a0",
+    "allowed_changed_files": [
+      "scripts/verify-implementation.ts"
+    ],
+    "report_sha256": "1cf7e56b3e8095c50dcde8d612b81519214a3546a7cf24d101aae1fa52c1acdb",
     "command": {
       "command": "./scripts/run.ps1 test:integration",
       "status": "PASS",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "2c034697c989f407e40bd3a1828fb95d86d8fbde31ed1121990159744b5ee72f"
+      "log_sha256": "a828a90dde4554834761f8c6570bca39a96f25aaefe271c2c85621dedfaeb566"
     }
   },
   "command_checks_passed": true,
@@ -27,63 +29,63 @@
       "command": "./scripts/run.ps1 typecheck",
       "status": "PASS",
       "log_path": "runtime/test-results/typecheck.log",
-      "log_sha256": "87303d5f3f34c4bb664e1377cf7b16ec723473a9684db864c071f4e45254e16f"
+      "log_sha256": "e3140373f63b8a5663103f1a6800bc86224d1ef9cf552db594541217e2b7d4e2"
     },
     {
       "command": "./scripts/run.ps1 test",
       "status": "PASS",
       "log_path": "runtime/test-results/test.log",
-      "log_sha256": "ff54ef854993f8d1ded68b33330781dd6a1aa49bfa65a55f570dfca4865a48d0"
+      "log_sha256": "cfdf874d083b513d441b80eac728d107126f5d7bb9c589d59b31fdd93b2844a0"
     },
     {
       "command": "./scripts/run.ps1 test:integration",
       "status": "PASS",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "2c034697c989f407e40bd3a1828fb95d86d8fbde31ed1121990159744b5ee72f"
+      "log_sha256": "a828a90dde4554834761f8c6570bca39a96f25aaefe271c2c85621dedfaeb566"
     },
     {
       "command": "./scripts/run.ps1 build:server",
       "status": "PASS",
       "log_path": "runtime/test-results/build-server.log",
-      "log_sha256": "eeaacd22033f0e3142f4fa99bdad9034a784095f3a8f65d7735b1351a12037ad"
+      "log_sha256": "d1bef49b74c46976a08e901da4468bb4cc6c40ce279b86300b48e0002fc17c05"
     },
     {
       "command": "./scripts/run.ps1 build:alipay",
       "status": "PASS",
       "log_path": "runtime/test-results/build-alipay.log",
-      "log_sha256": "e673b4052d19dd0ad49ccdefe32e2779304c5042e7e5b84847a80b56351006be"
+      "log_sha256": "948bfb9574685bb11f8c0f72a8643460d3fdd09634c2fab049cc591a493a9c60"
     },
     {
       "command": "./scripts/run.ps1 build:douyin",
       "status": "PASS",
       "log_path": "runtime/test-results/build-douyin.log",
-      "log_sha256": "5528f314933d7e731a001246d2893f8a19c3da00e17eb7ae899857e3700e5056"
+      "log_sha256": "f234a3dd7a23fc10975028e00f5b5364cdd7f1fa2b2293fce58f3ee7457ecf9f"
     }
   ],
   "suites": [
     {
       "kind": "unit",
       "status": "PASS",
-      "tests": 54,
-      "passed": 54,
+      "tests": 58,
+      "passed": 58,
       "failed": 0,
-      "executed_at": "2026-10-28T20:54:45.443Z",
+      "executed_at": "2026-10-28T23:53:56.513Z",
       "report_path": "runtime/test-results/unit.json",
-      "report_sha256": "a1e4e19ed560a7cedd55faf5ada3e0dbde043b1d7648fe1be335b08485770394"
+      "report_sha256": "af36c4061d7899edc5b552c447d921684e5890755f46de4a851ad1a1eabe5cc0"
     },
     {
       "kind": "integration",
       "status": "PASS",
-      "tests": 334,
-      "passed": 334,
+      "tests": 336,
+      "passed": 336,
       "failed": 0,
-      "executed_at": "2026-10-28T20:31:55.079Z",
+      "executed_at": "2026-10-28T22:53:31.302Z",
       "report_path": "runtime/test-results/integration.json",
-      "report_sha256": "1a9c7cb9b5bfa0767a7fdcb915b9fc0b77bfc155d247521582287f07adf897a6"
+      "report_sha256": "1cf7e56b3e8095c50dcde8d612b81519214a3546a7cf24d101aae1fa52c1acdb"
     }
   ],
-  "source_files": 324,
-  "source_set_hash": "a61ef78878baddc1e41405dbe686cacaa13e22285ab49525379815ab1124fbfb",
+  "source_files": 327,
+  "source_set_hash": "25ec642fe663ccaf2d7a6de2ea62a880ac2ce46c8d2cac99647033f197dd64a0",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -196,6 +198,10 @@
     {
       "path": "src/api/db/migrations/023_native_audio_rights.sql",
       "sha256": "1adaa124b1b66205b87302e9d67871308170a6f162745956dc8e8fdee7569811"
+    },
+    {
+      "path": "src/api/db/migrations/024_native_audio_review_evidence.sql",
+      "sha256": "1080dbe98c8977779aff30ddbef6e941f037db7bfff4eb45a0a4e0dacdca72d1"
     },
     {
       "path": "src/api/db/pool.ts",
@@ -643,7 +649,7 @@
     },
     {
       "path": "src/worker/audio/order-proof.ts",
-      "sha256": "228c30ac26d2510e87c0831dd04cce8467a4f0b34187698dd3e261c1cd4cca30"
+      "sha256": "b52626f81bbc39c97b8d76b7bf16d09672e6420502700942cc8ac25ed8790a25"
     },
     {
       "path": "src/worker/budget/platform.ts",
@@ -875,11 +881,15 @@
     },
     {
       "path": "src/worker/review/context.ts",
-      "sha256": "c93039ee96e803f562a253d3c162e3d378ed8cb29185f46484faa5fc1709eeed"
+      "sha256": "3adee8c75665830504b62fba4737e3854cdbec7b77836ca00c2ffacde0f06df0"
     },
     {
       "path": "src/worker/review/evidence.ts",
       "sha256": "92f176fdf0e4ed0e9c9c7f609122ad45b243b29cc2f936e7de9777bcdaa1f0af"
+    },
+    {
+      "path": "src/worker/review/native-audio.ts",
+      "sha256": "5a492b1e125c1d6b6274aa100614adbe39031834c6d5f48e509a71cc08c4672c"
     },
     {
       "path": "src/worker/review/packet.ts",
@@ -887,19 +897,19 @@
     },
     {
       "path": "src/worker/review/publication.ts",
-      "sha256": "7628d82b60652c29a67dd27a43b38285695bd938477732af7b40f02d9321a29d"
+      "sha256": "40743f1f9bb11e0519554bf076bf07ae29097e126fab56cb336931242abb3175"
     },
     {
       "path": "src/worker/review/qc.ts",
-      "sha256": "bee1d1c0ab5a16ab8f715873530ef38992724660e955d8a7b180bc94775510e0"
+      "sha256": "bf25121c751a591c30380a23d335a0934b4801f08395fd65fdd155ab9c1f3bd4"
     },
     {
       "path": "src/worker/review/reports.ts",
-      "sha256": "a778d42b07aebbf29e6f1674de4c76d138ca618c521c19a6b074e9da3dbc117f"
+      "sha256": "fb9dd750e46370019a149615bade8e269d2a4f5b3d30dd8f73ec80ce24b1bcc9"
     },
     {
       "path": "src/worker/review/stage.ts",
-      "sha256": "4eab928f9d83d1085e13a71d9e0a1b8da3400f428b9061dd5e0e45e1c05892d1"
+      "sha256": "f4fbfcd54b04364005e97db1ab87886355b2227388b9c1f210f1ccdf8cfc0071"
     },
     {
       "path": "src/worker/revisions/budget.ts",
@@ -1019,7 +1029,7 @@
     },
     {
       "path": "tests/fixtures/codex-role.cjs",
-      "sha256": "c697d5b25eeca7b11f804c4651db9ca83067e09c5d793a2a38ac26e9d98a6a8a"
+      "sha256": "4d264cca465e9fc5692bdea2003258249a4ef9dd0d3eec51afba8ee32e728b1a"
     },
     {
       "path": "tests/helpers/audio.ts",
@@ -1139,7 +1149,7 @@
     },
     {
       "path": "tests/integration/native-order.test.ts",
-      "sha256": "f0ed7e1a89b233ff3d458ffbc8b5a2dcc426c23d98f6ef298d89563d3929099b"
+      "sha256": "f891ecd1aa64b45a46bc1e42593e720c2b86bfef3430ce0d3c946bf7047b66eb"
     },
     {
       "path": "tests/integration/optional-preview.test.ts",
@@ -1224,6 +1234,10 @@
     {
       "path": "tests/unit/contracts-security.test.ts",
       "sha256": "463b11a387beef46cf2eab614dd0d924f9242508504ef2282db5c4f418bd6c67"
+    },
+    {
+      "path": "tests/unit/native-review-audio.test.ts",
+      "sha256": "ab1d1040e32313ca0787ec97e8fea72eac95da9ebda5c7d84ef6063a6bb6cfd9"
     },
     {
       "path": "tests/unit/oss-erasure.test.ts",
@@ -1351,7 +1365,7 @@
     },
     {
       "path": "scripts/verify-implementation.ts",
-      "sha256": "22516655367eceb7da705817ddde8a0af563af9e33c76d022d459860b279f372"
+      "sha256": "cfe01ddfbd44a2ab0015a804a00d9159c6a505e7c11677a88196adf985c6f4cf"
     },
     {
       "path": "scripts/verify-publication.ts",
@@ -1379,7 +1393,7 @@
     },
     {
       "path": "vitest.integration.config.ts",
-      "sha256": "57206d1351254e826bfe64b1cc674d5c6b7b67e6016276b7d9cf62fb533bb11b"
+      "sha256": "4d0fae482ef18530710c5714af57356955ae1a2a32e6be2f661e3acb679aff78"
     }
   ],
   "runtime_contract_files": [
@@ -1678,7 +1692,7 @@
     "real_provider_verified": false,
     "real_chinese_speech_verified": false,
     "native_speech_order_admitted": false,
-    "notes": "Native PostgreSQL/FFmpeg/AAC/PCM/private files with synthetic HTTPS transport and transcript/usage responses. Original intent, send marker, task ID, append-only ACK/query/result, source/PCM/WAV hashes and original cost reservation persist. Missing ACK/usage never permits another purchase. Legacy contracts require identical stereo; an explicitly frozen MEAN_STEREO_V1 derivative uses both channels, rejects destructive cancellation and leaves production stereo unchanged. The scoped private POST tool is connected; independent listening, QC, public orders and audio delivery remain closed."
+    "notes": "Native PostgreSQL/FFmpeg/AAC/PCM/private files with synthetic HTTPS transport and transcript/usage responses. Original intent, send marker, task ID, append-only ACK/query/result, source/PCM/WAV hashes and original cost reservation persist. Missing ACK/usage never permits another purchase. Legacy contracts require identical stereo; an explicitly frozen MEAN_STEREO_V1 derivative uses both channels, rejects destructive cancellation and leaves production stereo unchanged. Scoped private POST and file-level QC are connected; independent listening, final semantic reviews, public orders and audio delivery remain closed."
   },
   "native_audio_contract": {
     "implemented": true,
@@ -1718,15 +1732,34 @@
     "licensed_music_bytes_preflight": true,
     "frozen_mono_derivative": "MEAN_STEREO_V1",
     "independent_audio_review_implemented": false,
-    "audio_qc_connected": false,
+    "audio_qc_connected": true,
     "audio_delivery_connected": false,
     "native_quotes_admitted": false,
     "official_multi_presenter_verified": false,
     "real_provider_verified": false,
-    "notes": "Ten native PostgreSQL/actual AAC-ALAC-PCM/media/HTTPS-stdio-MCP cases with synthetic external model, authorizations, ASR/usage and isolation. Both private production/POST routes, licensed music, original-task recovery after lost ACK, stored POST transaction rollback recovery, forged or replaced sources, missing/replaced licensed bytes, commit-time revocation and public-order rejection are exercised. Four unit cases cover equal stereo weights, immutable PCM, legacy behavior and silence/phase-cancellation rejection. No real Chinese listening, official multi-presenter, public audio ordering, QC or delivery admission."
+    "notes": "Twelve native PostgreSQL/actual AAC-ALAC-PCM/media/HTTPS-stdio-MCP cases with synthetic external model, authorizations, ASR/usage and isolation. Both private production/POST routes and file-level QC now seal complete stereo originals/finals, original settled ASR, actual caption-timecode frames and independently reconstructed music mixes. Replaced bytes, lost ACKs, stored POST rollback, commit-time source/license revocation and bypassed final review/delivery are rejected. Four additional unit cases cover canonical stereo review WAV and caption frame boundaries. No real Chinese listening, official multi-presenter, public audio ordering, final semantic review or delivery admission."
+  },
+  "native_audio_qc": {
+    "implemented": true,
+    "native_fixture_verified": true,
+    "unit_fixture_verified": true,
+    "policy": "YPCC-QC-GENERATED-NATIVE-AUDIO-1.0.0",
+    "evidence_version": "YPCC-NATIVE-AUDIO-QC-EVIDENCE-1",
+    "full_stereo_review_wav": true,
+    "original_settled_asr_only": true,
+    "independent_mix_reconstruction": true,
+    "caption_timecode_frames": true,
+    "commit_time_source_license_and_bytes_recheck": true,
+    "immutable_sealed_evidence": true,
+    "semantic_review": "PENDING",
+    "independent_listening": "REQUIRED",
+    "independent_listening_implemented": false,
+    "final_reviews_admitted": false,
+    "audio_delivery_connected": false,
+    "notes": "Technical file QC only. Complete original/final stereo WAV, original ASR JSON, actual ASS and bounded QC JSON are private hash-bound evidence. Actual FFmpeg media and native PostgreSQL are used with synthetic speech/model/rights/usage. The original three production/POST roles and single ASR are not repurchased during QC. Final listening, factual/style review and delivery require future independently bound listening results; a visual report or ASR transcript cannot waive this guard."
   },
   "codex_implementation": {
-    "scope": "CONTENT PLAN, silent PHOTO_LAYOUT/PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST and private native-audio PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST with scoped original-track ASR, independent generated-reference facts review and fresh final visual REVIEW_FACTS/REVIEW_STYLE runtime adapters, metered Responses gateway, atomic silent pack publication, independent seven-stage photo creator SAMPLE pipeline",
+    "scope": "CONTENT PLAN, silent PHOTO_LAYOUT/PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST and private native-audio PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST/QC with scoped original-track ASR and sealed full stereo evidence, independent generated-reference facts review and fresh final visual REVIEW_FACTS/REVIEW_STYLE runtime adapters, metered Responses gateway, atomic silent pack publication, independent seven-stage photo creator SAMPLE pipeline",
     "fixture_tests_only": true,
     "real_codex_turn_verified": false,
     "native_launcher_executable_provided": false,

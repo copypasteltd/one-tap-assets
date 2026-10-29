@@ -7,6 +7,7 @@ import type { Db } from '../../api/db/pool.js';
 import { insert } from '../../api/db/store.js';
 import { hash, id, sha256 } from '../../api/lib/crypto.js';
 import { requireThat } from '../../api/lib/errors.js';
+import {lockMediaOwner} from '../../api/modules/media-access.js';
 import type { ObjectStorage } from '../../api/storage/storage.js';
 import type { DTO } from '../../shared/contracts/types.js';
 import { executionContext, type ExecutionContext } from '../compiler/order-context.js';
@@ -14,22 +15,28 @@ import { operationArtifacts, type MediaOperation, type MediaReceipt } from '../m
 import { loadProductionFont, verifyResourceLicenses } from '../media/font.js';
 import { PhotoMediaPipeline, assertMediaAlive, inspectImage } from '../media/photo-pipeline.js';
 import {GeneratedMediaPipeline} from '../media/generated-pipeline.js';
-import {GENERATED_QC_POLICY} from '../generation/contracts.js';
+import {NativeOrderMediaPipeline} from '../media/native-order-pipeline.js';
+import {GENERATED_QC_POLICY,NATIVE_AUDIO_QC_POLICY,validateGenerationExecution} from '../generation/contracts.js';
+import {originalNativeTranscript} from '../audio/order-proof.js';
 import { assertLease, PendingExternal, type StageLease } from '../queue/leases.js';
 import type { StageCommit } from '../runtime.js';
 import { validateMediaStageResult } from '../tool-gateway/production-tools.js';
 import { extractEvidenceFrames, FRAME_SAMPLING_POLICY } from './evidence.js';
 import { assertSealedPacket, packetHash, reviewHash, REVIEW_HASH_ALGORITHM } from './packet.js';
+import {nativeAudioQc,nativeQcWrites,nativeQcResources,verifyNativeAudioEvidence,type NativeQcBundle} from './native-audio.js';
 
 export const PHOTO_QC_POLICY = 'YPCC-QC-PHOTO-1.0.0';
 export function mediaQcPolicy(context:ExecutionContext):string{
+  if(context.snapshot.audio_policy.speech_mode==='NATIVE_ZH'){
+    validateGenerationExecution(context.contract,true);return NATIVE_AUDIO_QC_POLICY;
+  }
   const policy=context.snapshot.engine==='PHOTO_LAYOUT'?PHOTO_QC_POLICY:GENERATED_QC_POLICY;
   requireThat(context.snapshot.audio_policy.speech_mode==='NONE'&&!context.snapshot.audio_policy.music_license_ids.length
     &&context.snapshot.codex_contract.qc_policy_version===policy,'QC_POLICY_UNAVAILABLE','原订单没有冻结对应路线的无声验收规则',503);
   return policy;
 }
 export interface ReviewEvidence {
-  id: string; kind: 'CANDIDATE_IMAGE' | 'VIDEO_FRAME' | 'CONTRACT' | 'COPY'; artifact_id: string | null;
+  id: string; kind: 'CANDIDATE_IMAGE' | 'VIDEO_FRAME' | 'CONTRACT' | 'COPY' | 'NATIVE_AUDIO' | 'FINAL_AUDIO' | 'TRANSCRIPT' | 'CAPTION_SCRIPT' | 'AUDIO_QC'; artifact_id: string | null;
   object_key: string; sha256: string; mime_type: string; frame_index: number | null; time_ms: number | null; data: Record<string, unknown>;
 }
 interface ProductionIdentity { run_id: string; thread_id: string; process_ref: string }
@@ -60,8 +67,13 @@ export async function verifySealedEvidence(db: Db, store: ObjectStorage, packet:
   requireThat(rows.length === packet.evidence_assets.length && rows.every(row => packet.evidence_assets.some(e => e.asset_id === row.id && e.sha256 === row.sha256)
     && row.object_key.startsWith(`${packet.tenant_id}/review/${packet.order_id}/${packet.packet_id}/`)),
   'REVIEW_EVIDENCE_INCOMPLETE', '持久审查证据与封存清单不一致', 503);
-  for (const row of rows) requireThat(sha256(await store.get(row.object_key, 30_000_000)) === row.sha256,
-    'REVIEW_EVIDENCE_CHANGED', '封存审查证据字节已变化', 503);
+  const nativeBytes=new Map<string,Buffer>();
+  for (const row of rows){
+    const bytes=await store.get(row.object_key,30_000_000);
+    requireThat(sha256(bytes)===row.sha256,'REVIEW_EVIDENCE_CHANGED','封存审查证据字节已变化',503);
+    if(packet.qc_policy_version===NATIVE_AUDIO_QC_POLICY)nativeBytes.set(row.id,bytes);
+  }
+  if(packet.qc_policy_version===NATIVE_AUDIO_QC_POLICY)verifyNativeAudioEvidence(packet,rows,nativeBytes);
   return rows;
 }
 export class QualityControlService {
@@ -81,18 +93,22 @@ export class QualityControlService {
     const packetId = `review_${hash({ stage: lease.id, production: production.operation.manifest_hash, post: post.operation.manifest_hash, policy }).slice(0, 40)}`;
     const directory = inside(this.cfg.runtimeRoot, `review-work/${packetId}/${id('attempt')}`); await mkdir(directory, { recursive: true });
     try {
-      const pipeline = context.snapshot.engine==='PHOTO_LAYOUT'?new PhotoMediaPipeline(this.pool,this.cfg,this.store):new GeneratedMediaPipeline(this.pool,this.cfg,this.store);
+      const native=policy===NATIVE_AUDIO_QC_POLICY;
+      const pipeline = context.snapshot.engine==='PHOTO_LAYOUT'?new PhotoMediaPipeline(this.pool,this.cfg,this.store)
+        :native?new NativeOrderMediaPipeline(this.pool,this.cfg,this.store):new GeneratedMediaPipeline(this.pool,this.cfg,this.store);
       const photos = await pipeline.photos(context);
       for (const [phase, receipt] of [['production', production.receipt], ['post', post.receipt]] as const) {
         const verify = join(directory, phase); await mkdir(verify); await pipeline.verify(context, receipt, verify, signal);
       }
       this.checkSources(context, production.receipt, post.receipt);
+      const audio:NativeQcBundle|undefined=native?await nativeAudioQc(this.pool,this.cfg,this.store,context,production.receipt,post.receipt,join(directory,'audio'),signal):undefined;
       const evidence: ReviewEvidence[] = [];
-      const save = async (kind: ReviewEvidence['kind'], bytes: Buffer, artifactId: string | null, data: Record<string, unknown>, frame: number | null = null): Promise<void> => {
+      const nativeBytes=native?new Map<string,Buffer>():null;
+      const save = async (kind: ReviewEvidence['kind'], bytes: Buffer, artifactId: string | null, data: Record<string, unknown>, frame: number | null = null,mimeType?:string): Promise<void> => {
         assertMediaAlive(context, signal);
         requireThat(evidence.length < 1000, 'REVIEW_EVIDENCE_LIMIT', '完整审查材料超过容量', 422);
         const digest = sha256(bytes); const evidenceId = `evidence_${hash({ packetId, kind, artifactId, frame, digest }).slice(0, 40)}`;
-        const mime = kind === 'CONTRACT' ? 'application/json' : kind === 'COPY' ? 'text/plain; charset=utf-8' : 'image/png';
+        const mime = mimeType??(kind === 'CONTRACT' ? 'application/json' : kind === 'COPY' ? 'text/plain; charset=utf-8' : 'image/png');
         const key = `${context.tenantId}/review/${context.orderId}/${packetId}/${evidenceId}`;
         if (await this.store.exists(key)) requireThat(sha256(await this.store.get(key, 30_000_000)) === digest,
           'REVIEW_EVIDENCE_CHANGED', '已有封存证据不能覆盖重建', 503);
@@ -100,6 +116,7 @@ export class QualityControlService {
           productId: context.snapshot.product_id, orderId: context.orderId, kind: 'QC' }, key, bytes, mime);
         evidence.push({ id: evidenceId, kind, artifact_id: artifactId, object_key: key, sha256: digest, mime_type: mime,
           frame_index: frame, time_ms: frame === null ? null : Math.round(frame * 1000 / 30), data });
+        nativeBytes?.set(evidenceId,bytes);
       };
       for (const artifact of post.receipt.artifacts) {
         const bytes = await this.store.get(artifact.object_key, artifact.spec.kind === 'video' ? 512_000_000 : 30_000_000);
@@ -108,7 +125,7 @@ export class QualityControlService {
           const path = join(directory, `${artifact.id}.mp4`); await writeFile(path, bytes, { flag: 'wx' });
           const inspection = artifact.spec.inspection;
           requireThat('frames' in inspection && inspection.frames, 'REVIEW_VIDEO_INVALID', '缺少实际视频帧数', 503);
-          const boundaries = context.snapshot.timeline.shots.flatMap(s => [s.start_frame, s.end_frame - 1]);
+          const boundaries = [...context.snapshot.timeline.shots.flatMap(s => [s.start_frame, s.end_frame - 1]),...(audio?.caption_frames??[])];
           const frames = await extractEvidenceFrames(this.cfg, path, join(directory, artifact.id), inspection.frames, boundaries, context.snapshot.deadline_at, signal);
           for (const frame of frames) {
             await inspectImage(frame.bytes);
@@ -116,6 +133,8 @@ export class QualityControlService {
           }
         } else await save(artifact.spec.kind === 'image' ? 'CANDIDATE_IMAGE' : 'COPY', bytes, artifact.id, { slot_id: artifact.slot_id });
       }
+      if(audio)for(const item of audio.files)await save(item.kind,item.bytes,item.artifact_id,
+        {audio_contract_hash:audio.audio_contract_hash,asr_submission_id:audio.asr_submission_id},null,item.mime_type);
       await save('CONTRACT', Buffer.from(JSON.stringify({ version: policy, snapshot: context.snapshot, profile: context.contract.profile,
         creative_plan: context.contract.creative, resources: context.snapshot.resource_versions, sampling_policy: FRAME_SAMPLING_POLICY,
         outputs: post.receipt.artifacts.map(a => ({ artifact_id: a.id, slot_id: a.slot_id, sha256: a.sha256, spec: a.spec })) })), null, { snapshot_hash: context.snapshotHash });
@@ -129,9 +148,21 @@ export class QualityControlService {
         production_thread_ids: identities.map(i => i.thread_id), production_process_refs: identities.map(i => i.process_ref),
         reports: [], deterministic_pass: true, evidence_complete: true, unknown_paid_calls: 0, publication_decision: 'PENDING' };
       packet.packet_hash = packetHash(packet); assertSealedPacket(packet); assertMediaAlive(context, signal);
+      if(nativeBytes)verifyNativeAudioEvidence(packet,evidence,nativeBytes);
       return async db => {
+        await lockMediaOwner(db,context.tenantId,context.ownerId);
         await executionContext(db, context.tenantId, context.orderId, context.snapshotHash);
         await verifyResourceLicenses(db, context.snapshot.resource_versions);
+        if(audio){
+          await nativeQcResources(db,this.store,context);
+          await nativeQcWrites(db,context,[...production.receipt.artifacts,...post.receipt.artifacts,...evidence,
+            {object_key:audio.transcript_object_key,sha256:audio.transcript_sha256}]);
+          const transcript=await originalNativeTranscript(db,this.store,context,audio.asr_submission_id,audio.source_write_id);
+          requireThat(transcript.file_sha256===audio.transcript_sha256,'REVIEW_AUDIO_SOURCE_REVOKED','提交时原转写已变化',410);
+          for(const item of [...production.receipt.artifacts,...post.receipt.artifacts,...evidence])
+            requireThat(sha256(await this.store.get(item.object_key,512_000_000))===item.sha256,
+            'REVIEW_EVIDENCE_CHANGED','声音审查文件在封存前已变化',503);
+        }
         requireThat(await unsettledOrderCalls(db, context) === 0, 'QC_PAID_CALL_UNRESOLVED', '提交时仍有未决付费调用', 409);
         for (const old of [production, post]) {
           const current = await operationArtifacts(db, context, old.operation.phase);
@@ -149,7 +180,9 @@ export class QualityControlService {
           for (const artifact of post.receipt.artifacts) await insert(db, 'qc_decisions', { id: id('qc'), tenant_id: context.tenantId,
             order_id: context.orderId, artifact_id: artifact.id, ruleset_version: policy, decision: 'PASS',
             data: { packet_id: packetId, packet_hash: packet.packet_hash, sha256: artifact.sha256, inspection: artifact.spec.inspection,
-              checked: ['FULL_DECODE', 'EXACT_SLOTS', 'SPEC', 'SOLD_PROVENANCE', 'RESOURCE_LICENSE', 'FULL_TIMELINE_EVIDENCE'], semantic_review: 'PENDING' } });
+              checked: ['FULL_DECODE', 'EXACT_SLOTS', 'SPEC', 'SOLD_PROVENANCE', 'RESOURCE_LICENSE', 'FULL_TIMELINE_EVIDENCE',
+                ...(audio?['FULL_NATIVE_TRACK','ORIGINAL_SETTLED_ASR','RECONSTRUCTED_NATIVE_MIX','CAPTION_TIMECODE_FRAMES']:[])],
+              semantic_review: 'PENDING',...(audio?{independent_listening:'REQUIRED'}:{}) } });
         }
         await db.query(`UPDATE stage_runs SET private=private||jsonb_build_object('review_packet_id',$3::text,'packet_hash',$4::text)
           WHERE tenant_id=$1 AND id=$2`, [context.tenantId, lease.id, packetId, packet.packet_hash]);

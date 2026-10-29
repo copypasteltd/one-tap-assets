@@ -1,5 +1,7 @@
 # 当前状态与后续顺序 / Status and next priorities
 
+本轮[声音文件验收与封存](../实施/原生声音文件验收与审查封存-v1.0.md)补齐内部技术QC；完整听音/语义/最终双复核/交付继续待验。Private native file QC is connected; independent listening/final review/delivery remain closed.
+
 2026-10-29｜需求v3.1 / 开发契约v1.1 / C设计v1.0。整体 **IN_PROGRESS**，完整产品、生产准入与云端部署均未完成。The complete product, production admission and cloud deployment are not verified.
 
 ## 已执行验证 / Executed validation
@@ -7,15 +9,15 @@
 | 编号 / No. | 检查 / Check | 结果 / Result | 证明范围 / Scope |
 | --- | --- | --- | --- |
 | 01 | TypeScript | PASS | 当前类型检查 / Current type checking |
-| 02 | 单元 / Unit | 54 / 54 PASS | 领域、客户端、策略与适配器逻辑 / Domain, client and adapter logic |
-| 03 | 原生集成 / Native integration | 334 / 334 PASS | 原生PG/实际媒体/HTTPS/MCP及显式合成角色、供应商、支付、宿主 / Actual database/media with synthetic external responses |
+| 02 | 单元 / Unit | 58 / 58 PASS | 领域、客户端、策略与适配器逻辑 / Domain, client and adapter logic |
+| 03 | 原生集成 / Native integration | 336 / 336 PASS | 原生PG/实际媒体/HTTPS/MCP及显式合成角色、供应商、支付、宿主 / Actual database/media with synthetic external responses |
 | 04 | 服务端 / Server | PASS | 编译API、Worker、回收、媒体维护和删除日志入口 / Compiled native entries |
 | 05 | 双小程序 / Both mini-programs | PASS | Taro支付宝/抖音构建，不是宿主真机验收 / Compilation, not device certification |
 | 06 | 浏览器回放 / Browser replay | PASS | Vite构建、10页断言/截图、实际WebM/MP4/GIF；无外部请求，浏览器已关闭 / Actual local capture |
 
 机器可读结果：[实现索引](../../assets/implementation/current.json)、[发布核验摘要](../verification/publication.json)、[媒体清单](../media/capture-manifest.json)。完整执行日志/测试JSON位于未提交的`runtime/test-results/`；公开摘要保留计数、命令结果与摘要引用，但不包含本地凭证或运行数据库。Source hashes and original local log hashes are recorded; private runtime files are excluded from Git. Static documentation checks validate contracts/links, not product execution.
 
-本轮原生订单制作/后期源码先全新执行完整原生集成；构建超时后，仅在源码/契约/资源完全未变时受限重试，保留本轮原始通过报告并重新执行其余五项。未沿用上一轮324项。 This native production/POST source first executes the complete native suite freshly. Following a build timeout, a strictly unchanged-source/contracts/resources retry retains this round's original native report and repeats the other five checks; the previous 324-case report is not reused. [验证来源](../verification/README.md)。
+本轮声音文件QC源码先全新执行完整336项原生集成；小程序180秒超时后受限重试，仅验证脚本的小程序整套窗口改600秒；原生报告对应应用/测试/契约/资源完全未变，原验证脚本留存并逐字节核对构建窗口、注释与专项单元报告分类三处差异。保留本轮原始336项报告并重跑其余五项，未沿用上一轮334项。 This native file-QC source first freshly executes all 336 native cases. A restricted retry changes only the verifier’s mini-build command window from 180s to 600s; application, tests, contracts and resources match the original native run. The four-case scope flag also selects the correct unit report. The original verifier is retained and the exact timeout/comment/report-kind delta checked. This round’s native report is retained and the other five checks repeat; no prior-round 334-case report is reused. [验证来源](../verification/README.md)。
 
 ## 当前实现边界 / Implementation boundary
 
@@ -31,15 +33,15 @@
 | 08 | 设计与文档 / Design and docs | C基线保留、双语README/操作指南、真实浏览器媒体、源码证据 / Frozen baseline, bilingual operational docs and actual replay media |
 | 09 | 原生声音内核 / Native audio kernel | 实际PCM/四字幕/许可配乐与压低/编码后检查，15项专项；内部订单POST现已包装接入，独立听音未验 / Actual kernel and private POST wrapper, no listening admission |
 | 10 | 持久转写 / Durable ASR | 17项专项，原任务/费用/私有WAV和实际字级时间码；POST受控工具、显式均值副本与相消检查已接入，真实服务未验 / Scoped private POST service; real provider unverified |
-| 11 | 声音合同与费用 / Audio contract and costs | 23项专项，人物/声音/许可/预算/一次整轨ASR/撤权退款；内部制作/POST已消费，公开有声订单/听音/QC/交付仍拒绝 / Frozen original contract, partial internal integration, no public audio admission |
-| 12 | 有声制作与后期 / Native production and POST | 十项原生整链/四项声道回归；两路线完整原声/ALAC、一次ASR、字幕/许可配乐、原清单恢复与事务撤权校验；外部响应合成，完整有声交付仍关闭 / Actual private pipeline, synthetic external responses, no audio QC/delivery |
+| 11 | 声音合同与费用 / Audio contract and costs | 23项专项，人物/声音/许可/预算/一次整轨ASR/撤权退款；内部制作/POST已消费，技术文件QC已接入，公开有声订单/听音/最终双复核/交付仍拒绝 / Frozen original contract, partial internal integration, no public audio admission |
+| 12 | 有声制作与后期 / Native production and POST | 十二项原生整链/四项声道回归/四项封存回归；两路线完整原声/ALAC、一次ASR、字幕/许可配乐、原清单恢复与事务撤权校验；外部响应合成，完整有声交付仍关闭 / Actual private pipeline, synthetic external responses, technical file QC connected; no independent listening/final review/delivery |
 
 ## 待完成优先顺序 / Remaining priorities
 
 | 顺序 / Priority | 待办 / Work | 完成条件 / Completion evidence |
 | --- | --- | --- |
 | 01 | 生成式官方变体与真实服务验收 / Official generated variants and real-service acceptance | 在已有两条无声内部链路上验证真实模型、商品身份/风格质量、完整规格和原费用/恢复；不能用2秒夹具替代 / Real model/quality/specification evidence beyond short silent fixtures |
-| 02 | 原生有声与资源规格 / Native audio and resources | 在已有内部制作/ASR/POST上验证真实授权/识别/OSS/费用，补多人逐镜绑定、独立听音/QC封存/最终双复核，再接事务交付 / Real rights/ASR/storage, multi-presenter binding, independent listening/QC/final reviews and audio delivery |
+| 02 | 原生有声与资源规格 / Native audio and resources | 在已有内部制作/ASR/POST/文件QC上验证真实授权/识别/OSS/费用，补多人逐镜绑定、独立听音/最终语义双复核，再接事务交付 / Real rights/ASR/storage, multi-presenter binding, independent listening/final semantic reviews and audio delivery |
 | 03 | 真实Codex与受限身份/释放 / Real Codex, restricted identity and cleanup | 服务凭证、真实推理计量、原生启动器、隔离/进程树/孤儿回收与G0证据 / Native verified operation |
 | 04 | 支付/模型/对象存储与四组真机 / Live integrations and four device groups | 宿主登录/照片/付款/退款/下载/相册，真实费用及OSS/隐私边界 / Live platform and device evidence |
 | 05 | 完整社区与售后 / Community and aftercare | 生成式/有声/资源样例、发布准入、许可撤销、完整修改与平台纠错 / End-to-end eligible capabilities |

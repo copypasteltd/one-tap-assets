@@ -1,7 +1,7 @@
 {
   "baseline_id": "YPCC-DEV-1.1.0",
   "requirements_version": "3.1",
-  "checked_at": "2026-10-28T20:51:54.769591+00:00",
+  "checked_at": "2026-10-28T23:56:49.496074+00:00",
   "status": "PASS",
   "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
   "counts": {
@@ -10,9 +10,9 @@
     "skills": 19,
     "skill_bundles": 14,
     "development_documents": 20,
-    "base_contract_checks": 3293,
-    "codex_checks": 1307,
-    "total_checks": 4600,
+    "base_contract_checks": 3296,
+    "codex_checks": 1331,
+    "total_checks": 4627,
     "codex_synthetic_examples": 39
   },
   "product_tests_executed": false,
@@ -2464,6 +2464,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/README.md->实施/原生声音文件验收与审查封存-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/README.md->实施/原生有声订单制作与后期接入-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -2644,6 +2649,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/ARCHITECTURE.md->../实施/原生声音文件验收与审查封存-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/guides/ARCHITECTURE.md->../实施/原生有声订单制作与后期接入-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -2685,16 +2695,6 @@
     },
     {
       "name": "document_link:docs/guides/ARCHITECTURE.md->../开发/README.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:docs/guides/ARCHITECTURE.md->../实施/异步音频转写与原任务回执-v1.0.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:docs/guides/ARCHITECTURE.md->../实施/原生声音合同与原订单费用-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -2814,6 +2814,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/QUICKSTART.en.md->../实施/原生声音文件验收与审查封存-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/guides/QUICKSTART.en.md->../实施/原生有声订单制作与后期接入-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -2864,6 +2869,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/QUICKSTART.md->../实施/原生声音文件验收与审查封存-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/guides/QUICKSTART.md->../实施/原生有声订单制作与后期接入-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -2910,6 +2920,11 @@
     },
     {
       "name": "document_encoding_fences:docs/guides/STATUS.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/STATUS.md->../实施/原生声音文件验收与审查封存-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -2969,17 +2984,12 @@
       "detail": ""
     },
     {
-      "name": "document_link:docs/verification/README.md->../../assets/implementation/current.json",
+      "name": "document_link:docs/verification/README.md->native-qc-attempts.json",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "document_link:docs/verification/README.md->../../assets/implementation/regressions/reference-video-gate.json",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:docs/verification/README.md->../guides/QUICKSTART.en.md",
+      "name": "document_link:docs/verification/README.md->native-order-attempts.json",
       "status": "PASS",
       "detail": ""
     },
@@ -3134,6 +3144,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/实施/原生声音合同与原订单费用-v1.0.md->原生声音文件验收与审查封存-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/实施/原生声音合同与原订单费用-v1.0.md->异步音频转写与原任务回执-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3184,7 +3199,87 @@
       "detail": ""
     },
     {
+      "name": "document_encoding_fences:docs/实施/原生声音文件验收与审查封存-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生声音文件验收与审查封存-v1.0.md->../../src/worker/review/native-audio.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生声音文件验收与审查封存-v1.0.md->../../src/worker/review/qc.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生声音文件验收与审查封存-v1.0.md->../../src/worker/review/context.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生声音文件验收与审查封存-v1.0.md->../../src/worker/review/stage.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生声音文件验收与审查封存-v1.0.md->../../src/worker/review/reports.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生声音文件验收与审查封存-v1.0.md->../../src/worker/review/publication.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生声音文件验收与审查封存-v1.0.md->../../src/api/db/migrations/024_native_audio_review_evidence.sql",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生声音文件验收与审查封存-v1.0.md->../../tests/integration/native-order.test.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生声音文件验收与审查封存-v1.0.md->../../tests/unit/native-review-audio.test.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生声音文件验收与审查封存-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生声音文件验收与审查封存-v1.0.md->../verification/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生声音文件验收与审查封存-v1.0.md->../guides/QUICKSTART.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生声音文件验收与审查封存-v1.0.md->../media/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生声音文件验收与审查封存-v1.0.md->../media/native-audio/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/实施/原生有声订单制作与后期接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生有声订单制作与后期接入-v1.0.md->原生声音文件验收与审查封存-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -3469,6 +3564,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->原生声音文件验收与审查封存-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->../../assets/implementation/current.json",
       "status": "PASS",
       "detail": ""
@@ -3665,6 +3765,11 @@
     },
     {
       "name": "document_encoding_fences:docs/实施/源码实现进度-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->原生声音文件验收与审查封存-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -4615,6 +4720,11 @@
     },
     {
       "name": "document_encoding_fences:docs/开发/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/原生声音文件验收与审查封存-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -6304,6 +6414,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:README.md->docs/实施/原生声音文件验收与审查封存-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:README.md->docs/media/native-audio/preview.gif",
       "status": "PASS",
       "detail": ""
@@ -6465,6 +6580,11 @@
     },
     {
       "name": "document_encoding_fences:CONTRIBUTING.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:CONTRIBUTING.md->docs/实施/原生声音文件验收与审查封存-v1.0.md",
       "status": "PASS",
       "detail": ""
     },

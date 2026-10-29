@@ -1,0 +1,145 @@
+{
+  "scope": "NATIVE_FILE_QC_NOT_LISTENING_OR_AUDIO_DELIVERY",
+  "local_attempt_files": [
+    {
+      "path": "runtime/test-results/native-qc-source-start.json",
+      "sha256": "c2f0ae0d8d4172bf821007ab8f4dafa61f2827dad1435c8b3a4b483930da9059"
+    },
+    {
+      "path": "runtime/test-results/native-qc-complete-integration.json",
+      "sha256": "1cf7e56b3e8095c50dcde8d612b81519214a3546a7cf24d101aae1fa52c1acdb"
+    },
+    {
+      "path": "runtime/test-results/native-qc-complete-native.log",
+      "sha256": "a828a90dde4554834761f8c6570bca39a96f25aaefe271c2c85621dedfaeb566"
+    },
+    {
+      "path": "runtime/test-results/native-qc-aborted-assertion.log",
+      "sha256": "e6957314c2d267fdc5aa7fac9e2261bbf0ce1569c4558999e3cc3b6bdf591d07"
+    },
+    {
+      "path": "runtime/test-results/native-qc-aborted-assertion.json",
+      "sha256": "8e9533e8251bf209610ae837a24bccc93c172fcffb48da08d782cc43fa267803"
+    },
+    {
+      "path": "runtime/test-results/native-qc-full-first.log",
+      "sha256": "66117d564db6745ff77a1d81c67145789a6410bd57bc7c694a512367480e9f1c"
+    },
+    {
+      "path": "runtime/test-results/native-qc-full-first-native.log",
+      "sha256": "555fe63a3d0f80b9944c851854fb70a098ececc535276230309cd0c12fc15e5d"
+    },
+    {
+      "path": "runtime/test-results/native-qc-full-first-evidence.json",
+      "sha256": "360861d3ebb9d6f09795402e47771e091c26a34af884ca64000b0acac3fcf0c3"
+    },
+    {
+      "path": "runtime/test-results/native-qc-failed-cases.log",
+      "sha256": "9ae786208cce10142eb1ab1aedbfb1e83c5e90638cfa5beedbdbaf4686a42d4c"
+    },
+    {
+      "path": "runtime/test-results/native-qc-focused-async-first.log",
+      "sha256": "9a662f279f9b1ca11e64c07ed3895f179c2d103e9c59c237d91f855b0371e71b"
+    },
+    {
+      "path": "runtime/test-results/native-qc-focused-async-first-integration.json",
+      "sha256": "c6f5b0f4756e107f2e0e60b456ae8f074b50b7d8b9f05eb46c368b446a4f7745"
+    },
+    {
+      "path": "runtime/test-results/native-qc-revoked-post.log",
+      "sha256": "5165a91af575b6f313611e50b049b1f6b1a445fa79cfa1ab6c99631dab10904a"
+    },
+    {
+      "path": "runtime/test-results/native-qc-typecheck-timeout.log",
+      "sha256": "8a72ecd16eff1887885beee1c64e51ffe28931172854d64917e5cc507a9e284b"
+    },
+    {
+      "path": "runtime/test-results/native-qc-typecheck-timeout-typecheck.log",
+      "sha256": "4e0936061aba1f24ba054ed8c146ab1dbfde0f49ba41203761ab49d44893cf3d"
+    },
+    {
+      "path": "runtime/test-results/native-qc-typecheck-timeout-evidence.json",
+      "sha256": "059041445437b766104399659a428e6e743b783d7066e3697399e9dd5e5f5341"
+    },
+    {
+      "path": "runtime/test-results/native-qc-unit-timeout.log",
+      "sha256": "01cacf88e97d2048b445772df4fe9cc94e354f8e080da912497db5b092fe1639"
+    },
+    {
+      "path": "runtime/test-results/native-qc-unit-timeout-test.log",
+      "sha256": "d72c645c722c5dc6249cd8154c47942568c6ea34281b7c4f81a5efdebae02a21"
+    },
+    {
+      "path": "runtime/test-results/native-qc-unit-timeout-evidence.json",
+      "sha256": "d08b52b5780e0bd8f63ac790f13fa8210f3501d33b6cd2e2255c22c777613cb2"
+    },
+    {
+      "path": "runtime/test-results/native-qc-native-happy-timeout.log",
+      "sha256": "80910466bf81090c4c6583d82f15dcd44f6d4ec08f2a12d125692c77340474bd"
+    },
+    {
+      "path": "runtime/test-results/native-qc-native-happy-timeout-native.log",
+      "sha256": "402212ff0130092f64b39ec80153d3937bb105cfef4347719859d2da5e772441"
+    },
+    {
+      "path": "runtime/test-results/native-qc-native-happy-timeout-integration.json",
+      "sha256": "a9e786f744d072afcbe6df9b53f55a54ee28edbd3bc3dc75dcd0d2b8e43994f1"
+    },
+    {
+      "path": "runtime/test-results/native-qc-native-happy-timeout-evidence.json",
+      "sha256": "dac42767a2d119d97d145b39abd8db4633a88c9e5a791a8a3e33a51422e52a9b"
+    },
+    {
+      "path": "runtime/test-results/native-qc-build-timeout.log",
+      "sha256": "defb85c49ee9e45d6086b8248cec189fd04c37c6f4656cc41ec430fe94767fdd"
+    },
+    {
+      "path": "runtime/test-results/native-qc-build-timeout-evidence.json",
+      "sha256": "e6848b650b04fe0a0bd12dc2573bf1170219ea1fe00a19bfd4561a5523689863"
+    },
+    {
+      "path": "runtime/test-results/native-qc-build-retry-first.log",
+      "sha256": "4e1f81cb170d8d89bdd479fc9bc92279da365a88b4dafa2d0e0b22d20f1c3d54"
+    },
+    {
+      "path": "runtime/test-results/native-qc-build-retry-first-evidence.json",
+      "sha256": "80e5a3cefa104a6bb3766bf7275f04ef0ff7b39c1e70411d526ecbabdf30ea36"
+    },
+    {
+      "path": "runtime/test-results/native-qc-build-priority-timeout.log",
+      "sha256": "01a12d94f1200d08c62797a1b19e1c79ef8422c50201ccc9c57ec2cd24fd7cb4"
+    },
+    {
+      "path": "runtime/test-results/native-qc-build-priority-timeout-evidence.json",
+      "sha256": "a1c2d274f05d88541a4bfc5998c56f48753b1eb364e43edcbf0396078c5ef880"
+    },
+    {
+      "path": "runtime/test-results/native-qc-native-verified-verifier.ts",
+      "sha256": "0da76601b6c395b924bb0aa190fdea0ec99dc2e8c1cf43d78d83d9f2c053f75d"
+    },
+    {
+      "path": "runtime/test-results/native-qc-priority.jsonl",
+      "sha256": "aa7363d61465c9741cd15d9150e807be88418104115a57fab568a5ffc7f358b9"
+    },
+    {
+      "path": "runtime/test-results/native-qc-metadata-first-pass.log",
+      "sha256": "5f13def831300d4cee6679e082316f1fd6b950f30b3efb2475ea264929846e65"
+    },
+    {
+      "path": "runtime/test-results/native-qc-metadata-first-pass-evidence.json",
+      "sha256": "c90506656644ef9075a6aff146f0736627df4309eea4b642d7f2b2098e83c70f"
+    }
+  ],
+  "verification_mode": "MINI_BUILD_RETRY_WITH_RETAINED_NATIVE_INTEGRATION",
+  "final_source_set_hash": "25ec642fe663ccaf2d7a6de2ea62a880ac2ce46c8d2cac99647033f197dd64a0",
+  "native_report_source_set_hash": "9614d1f8cba9879951a1086092a027f6c6f139bd503765df3593c291d10d1a46",
+  "native_report_source_delta_files": [
+    "scripts/verify-implementation.ts"
+  ],
+  "verifier_delta_exactly_checked": true,
+  "complete_native_tests": 336,
+  "complete_native_report_sha256": "1cf7e56b3e8095c50dcde8d612b81519214a3546a7cf24d101aae1fa52c1acdb",
+  "previous_round_attempts": "docs/verification/native-order-attempts.json",
+  "full_product_verified": false,
+  "production_admitted": false
+}

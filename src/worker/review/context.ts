@@ -59,12 +59,15 @@ export async function packetImages(db: Db, store: ObjectStorage, context: Execut
 export async function packetMaterial(db: Db, store: ObjectStorage, packet: DTO<'ReviewPacket'>): Promise<unknown> {
   const rows = await verifySealedEvidence(db, store, packet);
   const texts: { asset_id: string; sha256: string; kind: string; content: string }[] = [];
-  for (const row of rows.filter(r => r.kind === 'CONTRACT' || r.kind === 'COPY')) {
+  for (const row of rows.filter(r => ['CONTRACT','COPY','TRANSCRIPT','CAPTION_SCRIPT','AUDIO_QC'].includes(r.kind))) {
     const bytes = await store.get(row.object_key, 1_000_000);
     requireThat(sha256(bytes) === row.sha256, 'REVIEW_EVIDENCE_CHANGED', '复核文本与封存内容不一致', 503);
     texts.push({ asset_id: row.id, sha256: row.sha256, kind: row.kind, content: new TextDecoder('utf-8', { fatal: true }).decode(bytes) });
   }
   requireThat(texts.filter(t => t.kind === 'CONTRACT').length === 1, 'REVIEW_CONTRACT_MISSING', '复核需要唯一的封存合同', 503);
-  return { packet, text_evidence: texts, visual_evidence: rows.filter(r => r.kind === 'CANDIDATE_IMAGE' || r.kind === 'VIDEO_FRAME')
+  return { packet, text_evidence: texts,
+    audio_evidence:rows.filter(r=>r.kind==='NATIVE_AUDIO'||r.kind==='FINAL_AUDIO').map(r=>({asset_id:r.id,sha256:r.sha256,kind:r.kind,
+      artifact_id:r.artifact_id,mime_type:r.mime_type,semantic_review:'PENDING'})),
+    visual_evidence: rows.filter(r => r.kind === 'CANDIDATE_IMAGE' || r.kind === 'VIDEO_FRAME')
     .map(r => ({ asset_id: r.id, sha256: r.sha256, kind: r.kind, artifact_id: r.artifact_id, frame_index: r.frame_index, time_ms: r.time_ms })) };
 }
