@@ -1,0 +1,76 @@
+{
+  "scope": "PRIVATE_INDEPENDENT_LISTENING_FOUNDATION_NOT_FINAL_AUDIO_REVIEW_OR_DELIVERY",
+  "verification_mode": "MINI_BUILD_RETRY_WITH_RETAINED_NATIVE_INTEGRATION",
+  "local_attempt_files": [
+    {
+      "path": "runtime/test-results/listening-docs-final.log",
+      "sha256": "76b8610c42da41fd4782f473f29ceb4c29d1d4e0e112f55f4e720d90d5bc5c30"
+    },
+    {
+      "path": "runtime/test-results/listening-docs.log",
+      "sha256": "9c33a99c8835727bfa3e3656944156724745dc61696daa927d589db6a6223c2d"
+    },
+    {
+      "path": "runtime/test-results/listening-focused-integration.json",
+      "sha256": "f6541ffcbdc748b1488a136b7e8b750f5b2ccb22460375b18c5a38dbdc0e3857"
+    },
+    {
+      "path": "runtime/test-results/listening-focused.log",
+      "sha256": "15426382724322f7903f86ad17c045057bb0bd29b8a671fd30509e05b083856b"
+    },
+    {
+      "path": "runtime/test-results/listening-full-attempt1-alipay.log",
+      "sha256": "6f1deeee2d81bb50bd0184fa769cb004efb0308d95986bd19586969bd1df838d"
+    },
+    {
+      "path": "runtime/test-results/listening-full-attempt1-implementation.json",
+      "sha256": "ed485ce009472042a0b2870b427653283ea9db722e80d7e4e641d0ab34bd8b6c"
+    },
+    {
+      "path": "runtime/test-results/listening-full-attempt1-integration.json",
+      "sha256": "52fc3df1d4403b9b0e92fdc2947e34a914d03455678650856c35e28ddb11ca33"
+    },
+    {
+      "path": "runtime/test-results/listening-full-attempt1-unit.json",
+      "sha256": "651fa2bff64e13b3a5efdb9fc8acaee1842ff28be9ad2c4efaa59a2d2bf56dd3"
+    },
+    {
+      "path": "runtime/test-results/listening-full.log",
+      "sha256": "839a5c29198f237f95f9f93f6a27bc8e08d7ae4c39c33629935d444c80f6aeb4"
+    },
+    {
+      "path": "runtime/test-results/listening-migrate.log",
+      "sha256": "e164871af5b7417ef15b8c3669c5b2318b6475a013bc33d95f4d67aae481df6d"
+    },
+    {
+      "path": "runtime/test-results/listening-mini-retry.log",
+      "sha256": "3712229983be2ddf1801a127f3c5de2c4508c113976acd229a35ccfddcb18535"
+    },
+    {
+      "path": "runtime/test-results/listening-original-mini-config.cjs",
+      "sha256": "2182becd95024b96e5ce21132d6f77deb44b468a4e119a7b675e652ebbac57c1"
+    },
+    {
+      "path": "runtime/test-results/listening-source-start.json",
+      "sha256": "914e0484492bdccbbb45451a77c7d20a6b45160050b2b91f266bd28b562572e3"
+    },
+    {
+      "path": "runtime/test-results/listening-static.log",
+      "sha256": "cbc23b56e5b6c53a45c105385f29584d63a6156dc5e8e40c1dca7c39d4be0bb1"
+    }
+  ],
+  "source_set_hash": "caeb6c578cfb52e4479f04316f90c73aec8965fc3b67262c47471323beaff71f",
+  "complete_native_tests": 342,
+  "native_source_set_hash": "80bab71b64f527867fabbe49a81ccef403ffade37ff9834a13fb4a941a8e1969",
+  "allowed_changed_files": [
+    "scripts/mini-config.cjs"
+  ],
+  "original_mini_config_sha256": "2182becd95024b96e5ce21132d6f77deb44b468a4e119a7b675e652ebbac57c1",
+  "final_mini_config_sha256": "1eb37f79c1d5132ac51135e268a849010d1010f11be1f4479406f683cd6c862b",
+  "source_delta": "Exact reviewed CSSO setup only; no application/test/verifier/contract/resource delta",
+  "focused_scope": "8 passed and 10 skipped; exploratory before final source edits, not final-source acceptance",
+  "complete_native_report_sha256": "52fc3df1d4403b9b0e92fdc2947e34a914d03455678650856c35e28ddb11ca33",
+  "prior_file_qc_attempts": "docs/verification/native-qc-attempts.json",
+  "full_product_verified": false,
+  "production_admitted": false
+}

@@ -9,12 +9,15 @@ import type { InferenceLimits } from '../codex/inference.js';
 import type {RevisionPolicy} from '../revisions/contract.js';
 import type {ArkContract} from '../providers/ark.js';
 import {frozenNativeAudio,type NativeAudioContract} from '../audio/contract.js';
+import {frozenOrderListening} from '../audio/listening-contract.js';
+import type {ListeningContract} from '../providers/omni-listening.js';
 
 export interface ModelBinding { provider: string; actual_model: string; registry_version: string; roles: ('VISION_ANALYSIS' | 'IMAGE' | 'VIDEO' | 'SPEECH' | 'QC')[]; capability_hash: string; rate_snapshot_id: string }
 export interface ResourceBinding { resource_version_id: string; license_record_id: string; hash: string }
 export interface Snapshot {
   revision_policy_hash?:string;
   native_audio_contract_hash?:string;
+  listening_contract_hash?:string;
   schema_version: '1.1.0'; order_id: string; tenant_id: string; product_id: string; photo_version: number; photo_set_hash: string;
   profile_id: string; profile_hash: string; identity_lock_id: string; identity_lock_hash: string; preset_id: string; preset_version: string;
   variant_id: string; variant_version: string; engine: DTO<'Engine'>; plan_hash: string; canonicalization: 'RFC8785';
@@ -29,6 +32,7 @@ export interface Snapshot {
 }
 export interface FrozenContract {
   native_audio_contract?:NativeAudioContract;
+  listening_contract?:ListeningContract;
   speech_contract?:import('../providers/dashscope-asr.js').SpeechContract;
   generation_contracts?:ArkContract[];
   revision_policy?:RevisionPolicy;
@@ -40,6 +44,7 @@ export interface FrozenContract {
 }
 export function bindSnapshot(order: DTO<'Order'>, tenantId: string, contract: FrozenContract, now: string): Snapshot {
   const audio=frozenNativeAudio(contract);
+  const listening=frozenOrderListening(contract);
   const speech = contract.source.audio_policy.speech !== 'none';
   const deadline = new Date(Date.parse(now) + Number(contract.source.slo_policy && (contract.source.slo_policy as { hard_deadline_seconds: number }).hard_deadline_seconds) * 1000).toISOString();
   const snapshot: Snapshot = {
@@ -58,6 +63,7 @@ export function bindSnapshot(order: DTO<'Order'>, tenantId: string, contract: Fr
     fulfillable_at: now, deadline_at: deadline, policy_version: 'YPCC-EXECUTION-3.1', codex_contract: contract.codex_contract,
   };
   snapshot.outputs.push({ slot_id: 'copy', kind: 'copy', count: 1, width: null, height: null, fps: null, duration_frames: null, format: 'text' });
+  if(listening)snapshot.listening_contract_hash=hash(listening);
   if(contract.revision_policy)snapshot.revision_policy_hash=hash(contract.revision_policy);
   if(audio)snapshot.native_audio_contract_hash=hash(audio);
   validateInternal('execution-snapshot', snapshot);

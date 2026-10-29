@@ -692,6 +692,10 @@
     "native_audio_contract_hash": {
       "type": "string",
       "pattern": "^[a-f0-9]{64}$"
+    },
+    "listening_contract_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
     }
   },
   "required": [

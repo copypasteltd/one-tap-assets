@@ -1,4 +1,6 @@
 const path = require('node:path');
+const { createRequire } = require('node:module');
+const CssMinimizerPlugin = createRequire(require.resolve('@tarojs/webpack5-runner'))('css-minimizer-webpack-plugin');
 module.exports = function miniConfig(platform) {
   const root = path.resolve(__dirname, '..');
   return {
@@ -11,9 +13,12 @@ module.exports = function miniConfig(platform) {
     mini: { compile: { include: [path.join(root, 'src/shared')] },
       webpackChain(chain) {
         chain.cache(false); chain.resolve.set('extensionAlias', { '.js': ['.ts', '.tsx', '.js'] });
-        // Keep CSS minification in the native build process. Worker startup
-        // stalled in CssMinimizerPlugin on this Windows host.
-        chain.optimization.minimizer('cssoWebpackPlugin').tap(args => { args[0].parallel = false; return args; });
+        // Taro's "csso" slot defaults to cssnano. Use the installed CSSO
+        // compressor in-process and preserve rule order on this Windows host.
+        chain.optimization.minimizer('cssoWebpackPlugin').tap(args => {
+          args[0].parallel = false; args[0].minify = CssMinimizerPlugin.cssoMinify;
+          args[0].minimizerOptions = { restructure: false }; return args;
+        });
         chain.module.rule('script').use('babelLoader').tap(options => ({ ...options, configFile: path.join(root, 'src', platform === 'alipay' ? 'mini-alipay' : 'mini-douyin', 'babel.config.js') }));
       },
       postcss: { pxtransform: { enable: true, config: { designWidth: 375 } }, url: { enable: true, config: { limit: 1024 } } } },

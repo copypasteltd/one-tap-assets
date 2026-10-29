@@ -11,17 +11,20 @@ import type {TestDatabase} from './database.js';
 import {mediaFixture} from './media.js';
 import {syntheticArkContract} from './generation.js';
 import {syntheticSpeechContract} from './speech.js';
+import {syntheticListeningContract} from './listening.js';
 
 /** A complete private ORDER input, with synthetic authorization/model/price
  * registrations. This never changes public sales or real-provider admission. */
-export async function nativeOrderFixture(db:TestDatabase,root:string,options:{engine:'PER_SHOT_AI'|'REFERENCE_FILM';music?:Buffer;style?:'standard'|'bold'|'minimal'|'karaoke'}={engine:'PER_SHOT_AI'}){
+export async function nativeOrderFixture(db:TestDatabase,root:string,options:{engine:'PER_SHOT_AI'|'REFERENCE_FILM';music?:Buffer;style?:'standard'|'bold'|'minimal'|'karaoke';listening?:boolean}={engine:'PER_SHOT_AI'}){
   if(db.cfg.env!=='test')throw new Error('Native order fixture requires APP_ENV=test');
   const directory=inside(db.cfg.runtimeRoot,root);await mkdir(directory,{recursive:true});
   const image=syntheticArkContract('IMAGE'),video=syntheticArkContract('VIDEO'),speech=syntheticSpeechContract(2);
+  const listening=options.listening?syntheticListeningContract():undefined;
   speech.channel_policy='MEAN_STEREO_V1';
   video.video={...video.video!,native_audio:true,durations:[1,2],ratios:['9:16'],dimensions:[{resolution:'480p',ratio:'9:16',width:360,height:640}]};
   const cfg=config({...db.cfg,generationEnabled:true,provider:{...db.cfg.provider,apiKey:'SYNTHETIC-NOT-REAL',baseUrl:image.base_url,
     imageModel:image.request_model,videoModel:video.request_model,allowedHosts:['generation.example.test','media.example.test'],
+    ...(listening?{listening:{enabled:true,baseUrl:listening.base_url,apiKey:'SYNTHETIC-NOT-REAL',allowedHosts:['listening.example.test']}}:{}),
     speech:{enabled:true,baseUrl:speech.base_url,apiKey:'SYNTHETIC-NOT-REAL',allowedHosts:['speech.example.test','input.example.test','result.example.test']}}});
   let musicBinding:ResourceBinding|undefined,character:CharacterVoiceAdmission|undefined;
   const fixture=await mediaFixture({...db,cfg},{speech,generation:{engine:options.engine,contracts:[image,video],twoShots:true,
@@ -50,11 +53,16 @@ export async function nativeOrderFixture(db:TestDatabase,root:string,options:{en
       await insert(db.pool,'character_versions',{id:character.character_version_id,character_id:id('synthetic_character_id'),version:'SYNTHETIC-1',data:{
         admission_state:'ADMITTED',native_voice_ids:[character.native_voice_id],native_audio_admissions:[character]}});
       c.codex_contract.qc_policy_version=NATIVE_AUDIO_QC_POLICY;
-      const models=(await db.pool.query<SpeechModelRow>('SELECT id,status,data,private FROM provider_model_versions WHERE id=$1',[speech.model_version_id])).rows;
+      if(listening){const binding={provider:listening.provider,actual_model:listening.actual_model,registry_version:listening.registry_version,
+        roles:['QC' as const],capability_hash:hash(listening),rate_snapshot_id:listening.rate_snapshot_id};
+        c.model_versions.push(binding);
+        await insert(db.pool,'provider_model_versions',{id:listening.model_version_id,provider:listening.provider,actual_model:listening.actual_model,
+          status:'ADMITTED',version:listening.registry_version,data:binding,private:{listening_contract:listening}});}
+      const models=(await db.pool.query<SpeechModelRow>('SELECT id,status,data,private FROM provider_model_versions WHERE id=ANY($1)',[[speech.model_version_id,...(listening?[listening.model_version_id]:[])]] )).rows;
       await transaction(db.pool,q=>freezeNativeAudio(q,cfg,c,models));
     }});
   fixture.cfg.provider.allowedHosts.push('generation.example.test','media.example.test');
   const store:ObjectStorage={put:fixture.store.put.bind(fixture.store),get:fixture.store.get.bind(fixture.store),delete:fixture.store.delete.bind(fixture.store),exists:fixture.store.exists.bind(fixture.store),
     signedReadUrl:(key,expiry)=>`https://input.example.test/${key}?Expires=${Math.floor(expiry.getTime()/1000)}&Signature=SYNTHETIC`};
-  return {...fixture,store,models:{image,video,speech},character:character!,musicBinding};
+  return {...fixture,store,models:{image,video,speech,...(listening?{listening}:{})},character:character!,musicBinding};
 }

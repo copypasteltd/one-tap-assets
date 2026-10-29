@@ -1,5 +1,7 @@
 # 当前状态与后续顺序 / Status and next priorities
 
+最新[独立听音基础](../实施/独立听音协议与原订单回执-v1.0.md)已实现完整双声道/全部画面请求、冻结原订单费用、精确响应与UNKNOWN恢复；最终Codex双复核及有声交付未连接。Private listening protocol/accounting/receipt components are implemented; final Codex audio review and delivery are not connected.
+
 本轮[声音文件验收与封存](../实施/原生声音文件验收与审查封存-v1.0.md)补齐内部技术QC；完整听音/语义/最终双复核/交付继续待验。Private native file QC is connected; independent listening/final review/delivery remain closed.
 
 2026-10-29｜需求v3.1 / 开发契约v1.1 / C设计v1.0。整体 **IN_PROGRESS**，完整产品、生产准入与云端部署均未完成。The complete product, production admission and cloud deployment are not verified.
@@ -9,15 +11,15 @@
 | 编号 / No. | 检查 / Check | 结果 / Result | 证明范围 / Scope |
 | --- | --- | --- | --- |
 | 01 | TypeScript | PASS | 当前类型检查 / Current type checking |
-| 02 | 单元 / Unit | 58 / 58 PASS | 领域、客户端、策略与适配器逻辑 / Domain, client and adapter logic |
-| 03 | 原生集成 / Native integration | 336 / 336 PASS | 原生PG/实际媒体/HTTPS/MCP及显式合成角色、供应商、支付、宿主 / Actual database/media with synthetic external responses |
+| 02 | 单元 / Unit | 64 / 64 PASS | 领域、客户端、策略与适配器逻辑 / Domain, client and adapter logic |
+| 03 | 原生集成 / Native integration | 342 / 342 PASS | 原生PG/实际媒体/HTTPS/MCP及显式合成角色、供应商、支付、宿主 / Actual database/media with synthetic external responses |
 | 04 | 服务端 / Server | PASS | 编译API、Worker、回收、媒体维护和删除日志入口 / Compiled native entries |
 | 05 | 双小程序 / Both mini-programs | PASS | Taro支付宝/抖音构建，不是宿主真机验收 / Compilation, not device certification |
 | 06 | 浏览器回放 / Browser replay | PASS | Vite构建、10页断言/截图、实际WebM/MP4/GIF；无外部请求，浏览器已关闭 / Actual local capture |
 
 机器可读结果：[实现索引](../../assets/implementation/current.json)、[发布核验摘要](../verification/publication.json)、[媒体清单](../media/capture-manifest.json)。完整执行日志/测试JSON位于未提交的`runtime/test-results/`；公开摘要保留计数、命令结果与摘要引用，但不包含本地凭证或运行数据库。Source hashes and original local log hashes are recorded; private runtime files are excluded from Git. Static documentation checks validate contracts/links, not product execution.
 
-本轮声音文件QC源码先全新执行完整336项原生集成；小程序180秒超时后受限重试，仅验证脚本的小程序整套窗口改600秒；原生报告对应应用/测试/契约/资源完全未变，原验证脚本留存并逐字节核对构建窗口、注释与专项单元报告分类三处差异。保留本轮原始336项报告并重跑其余五项，未沿用上一轮334项。 This native file-QC source first freshly executes all 336 native cases. A restricted retry changes only the verifier’s mini-build command window from 180s to 600s; application, tests, contracts and resources match the original native run. The four-case scope flag also selects the correct unit report. The original verifier is retained and the exact timeout/comment/report-kind delta checked. This round’s native report is retained and the other five checks repeat; no prior-round 334-case report is reused. [验证来源](../verification/README.md)。
+本轮听音源码先全新通过342项完整原生集成；支付宝CSS压缩600秒超时后，仅修改小程序压缩配置为CSSO（保留压缩与规则顺序），逐字节确认应用、测试、验证脚本、运行契约及资源未变，保留本轮完整原生报告并重跑其余五项；最终类型、64项单元、服务端及双小程序构建通过。未复用上一轮336项或定向跳过报告。 This round freshly passes all 342 native cases. After Alipay CSS processing times out at 600s, only mini CSS minimization changes to installed CSSO with rule order preserved. Application, tests, verifier, contracts and resources match the native run byte-for-byte; its original report is retained while the other five checks repeat. Types, 64 units and all builds pass. No prior-round 336-case or focused skipped report is reused. [验证来源](../verification/README.md)。
 
 ## 当前实现边界 / Implementation boundary
 
@@ -37,6 +39,8 @@
 | 12 | 有声制作与后期 / Native production and POST | 十二项原生整链/四项声道回归/四项封存回归；两路线完整原声/ALAC、一次ASR、字幕/许可配乐、原清单恢复与事务撤权校验；外部响应合成，完整有声交付仍关闭 / Actual private pipeline, synthetic external responses, technical file QC connected; no independent listening/final review/delivery |
 
 ## 待完成优先顺序 / Remaining priorities
+
+独立听音的新组件已有6项协议单元和6项新增原生场景：完整两音轨/全部画面、原订单预算与回执、UNKNOWN不重购及保存响应恢复。尚未接最终Codex输入/推理/工具/报告和交付，真实语义、缓存账单及授权未验。The private listening foundation is separate from final Codex review/delivery admission and real-provider verification.
 
 | 顺序 / Priority | 待办 / Work | 完成条件 / Completion evidence |
 | --- | --- | --- |

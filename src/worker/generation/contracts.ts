@@ -5,7 +5,7 @@ import type {FrozenContract,ModelBinding} from '../compiler/snapshot.js';
 import {admitArkContract,frozenArkContract,type ArkContract} from '../providers/ark.js';
 import {frozenNativeAudio} from '../audio/contract.js';
 
-export interface GenerationModelRow {id:string;status:string;data:ModelBinding;private?:{ark_contract?:unknown;speech_contract?:unknown}}
+export interface GenerationModelRow {id:string;status:string;data:ModelBinding;private?:{ark_contract?:unknown;speech_contract?:unknown;listening_contract?:unknown}}
 export const GENERATED_QC_POLICY='YPCC-QC-GENERATED-SILENT-1.0.0';
 // A private production/POST contract, not admission of listening/QC or sales.
 export const NATIVE_AUDIO_QC_POLICY='YPCC-QC-GENERATED-NATIVE-AUDIO-1.0.0';

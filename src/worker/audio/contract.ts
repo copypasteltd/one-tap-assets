@@ -4,6 +4,7 @@ import type {Config} from '../../api/config.js';
 import {hash,sha256} from '../../api/lib/crypto.js';
 import {requireThat} from '../../api/lib/errors.js';
 import type {FrozenContract,ModelBinding,ResourceBinding} from '../compiler/snapshot.js';
+import {freezeOrderListening} from './listening-contract.js';
 import {FONT_BINDING,verifyResourceLicenses} from '../media/font.js';
 import {NATIVE_AUDIO_POLICY} from '../media/native-audio.js';
 import {DUCKING_POLICY} from '../media/native-audio-post.js';
@@ -32,7 +33,7 @@ export interface NativeAudioContract {
   processing_policy:string;ducking_policy_hash:string;
   cost:{asr_ceiling_micro:number;license_allocation_micro:number;ceiling_micro:number};
 }
-export interface SpeechModelRow {id:string;status:string;data:ModelBinding;private?:{speech_contract?:unknown}}
+export interface SpeechModelRow {id:string;status:string;data:ModelBinding;private?:{speech_contract?:unknown;listening_contract?:unknown}}
 const text={type:'string',minLength:1,maxLength:200},digest={type:'string',pattern:'^[a-f0-9]{64}$'};
 const integer=(minimum:number,maximum:number)=>({type:'integer',minimum,maximum});
 const exact=(properties:Record<string,unknown>)=>({type:'object',properties,required:Object.keys(properties),additionalProperties:false});
@@ -164,7 +165,7 @@ export async function freezeNativeAudio(db:Db,cfg:Config,contract:FrozenContract
     caption_style:c.caption_preset as NativeAudioContract['caption_style'],font:{...FONT_BINDING},character,character_admission_hash:hash(character),rights,music,
     asr:{contract:structuredClone(asr),contract_hash:hash(asr),input_strategy:'ASSEMBLED_NATIVE_TRACK',max_calls:1,seconds:Math.ceil(contract.creative.target_frames/30)},
     processing_policy:NATIVE_AUDIO_POLICY,ducking_policy_hash:hash(DUCKING_POLICY),cost:{asr_ceiling_micro:asr.rate.ceiling_micro,license_allocation_micro:allocation,ceiling_micro:allocation+asr.rate.ceiling_micro}};
-  frozenNativeAudio(contract);await verifyResourceLicenses(db,contract.resource_versions,true);
+  frozenNativeAudio(contract);freezeOrderListening(cfg,contract,models);await verifyResourceLicenses(db,contract.resource_versions,true);
 }
 export async function verifyNativeAudioLive(db:Db,contract:FrozenContract,lock=false):Promise<void>{
   const audio=frozenNativeAudio(contract);if(!audio)return;

@@ -1,5 +1,7 @@
 # Native quick start
 
+The optional [private listening protocol](../实施/独立听音协议与原订单回执-v1.0.md) defaults to `LISTENING_SERVICE_ENABLED=false` with an empty endpoint/key/host allowlist. It additionally requires frozen model/capability/rate registration and original sold-contract binding. Environment values alone do not enable sales or final audio reviews. Maintenance reconciles saved original receipts; UNKNOWN never purchases again.
+
 Native file QC now follows both private production/POST routes; [implementation, sealed evidence and reproduction](../实施/原生声音文件验收与审查封存-v1.0.md). Migration024 extends private evidence kinds. Twelve native-order cases and four review-audio unit cases use actual media with synthetic external responses. Independent listening/final semantic reviews, public audio orders and delivery remain closed.
 
 Private audio production/POST now connects both generated routes, full-track PCM/ALAC assembly, scoped once-only ASR, captions/licensed music and stored-manifest recovery. See the [implementation and reproducible commands](../实施/原生有声订单制作与后期接入-v1.0.md). Tests use native database/media with synthetic external responses. Public audio orders, independent listening/final semantic reviews and delivery remain closed; ASR configuration defaults to disabled.

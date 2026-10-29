@@ -1,7 +1,7 @@
 {
   "baseline_id": "YPCC-DEV-1.1.0",
   "requirements_version": "3.1",
-  "checked_at": "2026-10-28T23:56:49.496074+00:00",
+  "checked_at": "2026-10-29T01:34:08.774302+00:00",
   "status": "PASS",
   "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
   "counts": {
@@ -10,9 +10,9 @@
     "skills": 19,
     "skill_bundles": 14,
     "development_documents": 20,
-    "base_contract_checks": 3296,
-    "codex_checks": 1331,
-    "total_checks": 4627,
+    "base_contract_checks": 3298,
+    "codex_checks": 1343,
+    "total_checks": 4641,
     "codex_synthetic_examples": 39
   },
   "product_tests_executed": false,
@@ -2464,6 +2464,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/README.md->实施/独立听音协议与原订单回执-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/README.md->实施/原生声音文件验收与审查封存-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -2649,6 +2654,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/ARCHITECTURE.md->../实施/独立听音协议与原订单回执-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/guides/ARCHITECTURE.md->../实施/原生声音文件验收与审查封存-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -2814,6 +2824,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/QUICKSTART.en.md->../实施/独立听音协议与原订单回执-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/guides/QUICKSTART.en.md->../实施/原生声音文件验收与审查封存-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -2869,6 +2884,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/QUICKSTART.md->../实施/独立听音协议与原订单回执-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/guides/QUICKSTART.md->../实施/原生声音文件验收与审查封存-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -2920,6 +2940,11 @@
     },
     {
       "name": "document_encoding_fences:docs/guides/STATUS.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/STATUS.md->../实施/独立听音协议与原订单回执-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -2984,12 +3009,17 @@
       "detail": ""
     },
     {
-      "name": "document_link:docs/verification/README.md->native-qc-attempts.json",
+      "name": "document_link:docs/verification/README.md->listening-attempts.json",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "document_link:docs/verification/README.md->native-order-attempts.json",
+      "name": "document_link:docs/verification/README.md->listening-native-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->native-qc-attempts.json",
       "status": "PASS",
       "detail": ""
     },
@@ -3769,6 +3799,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->独立听音协议与原订单回执-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/实施/源码实现进度-v3.1.md->原生声音文件验收与审查封存-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3895,6 +3930,21 @@
     },
     {
       "name": "document_link:docs/实施/源码实现进度-v3.1.md->社区公开样例独立持有与撤回-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/独立听音协议与原订单回执-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/独立听音协议与原订单回执-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/独立听音协议与原订单回执-v1.0.md->../verification/README.md",
       "status": "PASS",
       "detail": ""
     },
@@ -4660,6 +4710,11 @@
     },
     {
       "name": "document_encoding_fences:docs/开发/17-交叉核验与交付门禁.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/17-交叉核验与交付门禁.md->../实施/独立听音协议与原订单回执-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -6395,6 +6450,11 @@
     },
     {
       "name": "document_link:README.md->docs/media/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/实施/独立听音协议与原订单回执-v1.0.md",
       "status": "PASS",
       "detail": ""
     },

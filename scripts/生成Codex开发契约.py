@@ -604,6 +604,7 @@ def main() -> None:
     snapshot["properties"]["codex_contract"] = copy.deepcopy(extra["CodexContract"])
     snapshot["properties"]["revision_policy_hash"] = HASH
     snapshot["properties"]["native_audio_contract_hash"] = HASH
+    snapshot["properties"]["listening_contract_hash"] = HASH
     snapshot["required"].append("codex_contract")
     save("contracts/execution-snapshot.schema.json", snapshot)
     fixtures = read(OLD / "contracts/contract-fixtures.json")

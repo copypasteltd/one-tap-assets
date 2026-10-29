@@ -6,6 +6,7 @@ import { validate, validateInternal } from '../../api/lib/validation.js';
 import { creativePlanHash, validateCreativePlan } from './plan.js';
 import type { FrozenContract, Snapshot } from './snapshot.js';
 import {frozenNativeAudio,verifyNativeAudioLive} from '../audio/contract.js';
+import {frozenOrderListening} from '../audio/listening-contract.js';
 
 export interface ExecutionContext {
   tenantId: string; orderId: string; ownerId: string; snapshotHash: string;
@@ -36,6 +37,9 @@ export async function executionContext(db: pg.Pool | pg.PoolClient, tenantId: st
   requireThat(hash(body) === profile_hash, 'PROFILE_HASH_MISMATCH', '商品档案摘要不一致', 503);
   validateCreativePlan(contract.creative, contract.profile, contract.source);
   const audio=frozenNativeAudio(contract);
+  const listening=frozenOrderListening(contract);
+  requireThat(snapshot.listening_contract_hash===(listening?hash(listening):undefined),
+    'EXECUTION_LISTENING_MISMATCH','独立听音快照与原订单合同不一致',503);
   requireThat(snapshot.native_audio_contract_hash===(audio?hash(audio):undefined)
     &&hash(snapshot.audio_policy)===hash({speech_mode:audio?'NATIVE_ZH':'NONE',language:audio?'zh-CN':null,
       native_voice_id:audio?audio.character.native_voice_id:contract.creative.native_voice_id,preserve_native_speech:!!audio,

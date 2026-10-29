@@ -4,9 +4,9 @@
   "reports": [
     {
       "path": "assets/development/v1.1/verification-report.json",
-      "sha256": "491246ac14c47010384414fbfb7cf52ab973fd5b22ec48040ae0d6e9bdacd585",
+      "sha256": "fd57f8e92f97527e3ab2a7c67be8bbd1717de75462dde07070db592eba1bceea",
       "baseline_id": "YPCC-DEV-1.1.0",
-      "checked_at": "2026-10-28T23:56:09.110939+00:00",
+      "checked_at": "2026-10-29T01:34:03.661259+00:00",
       "status": "PASS",
       "scope": "开发文档、官方OpenAPI结构、JSON Schema/合成正负例、状态图、实体/需求/设计/工作包追踪及C留存一致性",
       "counts": {
@@ -22,9 +22,9 @@
         "requirements": 58,
         "work_packages": 20,
         "frozen_design_files": 25,
-        "checks": 3296
+        "checks": 3298
       },
-      "passed": 3296,
+      "passed": 3298,
       "failed": 0,
       "product_tests_executed": false,
       "real_model_calls_executed": false,
@@ -34,10 +34,10 @@
     },
     {
       "path": "assets/development/v1.1/codex-verification-report.json",
-      "sha256": "514ae5e45dad87420524a13e52283781024539996892ee7d5fcddd17af684ece",
+      "sha256": "8993d64245dd16f2349d4be3312156684cde3c0f516651fba431e776267380ef",
       "baseline_id": "YPCC-DEV-1.1.0",
       "requirements_version": "3.1",
-      "checked_at": "2026-10-28T23:56:49.496074+00:00",
+      "checked_at": "2026-10-29T01:34:08.774302+00:00",
       "status": "PASS",
       "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
       "counts": {
@@ -46,9 +46,9 @@
         "skills": 19,
         "skill_bundles": 14,
         "development_documents": 20,
-        "base_contract_checks": 3296,
-        "codex_checks": 1331,
-        "total_checks": 4627,
+        "base_contract_checks": 3298,
+        "codex_checks": 1343,
+        "total_checks": 4641,
         "codex_synthetic_examples": 39
       },
       "product_tests_executed": false,
@@ -61,5 +61,5 @@
       "errors": []
     }
   ],
-  "local_log_sha256": "429ebeb47c1c7694991d3cf0c37d9178365f7b985f776833671dd66d2cd286c2"
+  "local_log_sha256": "76b8610c42da41fd4782f473f29ceb4c29d1d4e0e112f55f4e720d90d5bc5c30"
 }

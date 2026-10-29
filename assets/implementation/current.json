@@ -3,24 +3,24 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-28T23:54:36.140Z",
+  "checked_at": "2026-10-29T01:32:51.843Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
   "verification_mode": "MINI_BUILD_RETRY_WITH_RETAINED_NATIVE_INTEGRATION",
   "retained_integration": {
-    "checked_at": "2026-10-28T23:50:55.845Z",
-    "previous_source_set_hash": "d2e81c35a2038a869ae8339e644de3041a73fc3c73eaf67c966e970547e2a13c",
-    "validated_source_set_hash": "25ec642fe663ccaf2d7a6de2ea62a880ac2ce46c8d2cac99647033f197dd64a0",
+    "checked_at": "2026-10-29T01:27:02.087Z",
+    "previous_source_set_hash": "80bab71b64f527867fabbe49a81ccef403ffade37ff9834a13fb4a941a8e1969",
+    "validated_source_set_hash": "caeb6c578cfb52e4479f04316f90c73aec8965fc3b67262c47471323beaff71f",
     "allowed_changed_files": [
-      "scripts/verify-implementation.ts"
+      "scripts/mini-config.cjs"
     ],
-    "report_sha256": "1cf7e56b3e8095c50dcde8d612b81519214a3546a7cf24d101aae1fa52c1acdb",
+    "report_sha256": "52fc3df1d4403b9b0e92fdc2947e34a914d03455678650856c35e28ddb11ca33",
     "command": {
       "command": "./scripts/run.ps1 test:integration",
       "status": "PASS",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "a828a90dde4554834761f8c6570bca39a96f25aaefe271c2c85621dedfaeb566"
+      "log_sha256": "60946e9119568399cb7cec0daffd325a8424e04fe4bccba6e50c326ce2d80e3b"
     }
   },
   "command_checks_passed": true,
@@ -29,63 +29,63 @@
       "command": "./scripts/run.ps1 typecheck",
       "status": "PASS",
       "log_path": "runtime/test-results/typecheck.log",
-      "log_sha256": "e3140373f63b8a5663103f1a6800bc86224d1ef9cf552db594541217e2b7d4e2"
+      "log_sha256": "e2d4454e59216e42292edf8c1f89b6f073a30db1f01368b545376e1028ff2243"
     },
     {
       "command": "./scripts/run.ps1 test",
       "status": "PASS",
       "log_path": "runtime/test-results/test.log",
-      "log_sha256": "cfdf874d083b513d441b80eac728d107126f5d7bb9c589d59b31fdd93b2844a0"
+      "log_sha256": "3ed30ef3ab7a8c0cff48bf92f3c6112728d8c1210412e1192f79379b476f1170"
     },
     {
       "command": "./scripts/run.ps1 test:integration",
       "status": "PASS",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "a828a90dde4554834761f8c6570bca39a96f25aaefe271c2c85621dedfaeb566"
+      "log_sha256": "60946e9119568399cb7cec0daffd325a8424e04fe4bccba6e50c326ce2d80e3b"
     },
     {
       "command": "./scripts/run.ps1 build:server",
       "status": "PASS",
       "log_path": "runtime/test-results/build-server.log",
-      "log_sha256": "d1bef49b74c46976a08e901da4468bb4cc6c40ce279b86300b48e0002fc17c05"
+      "log_sha256": "15067429f1e4e4424de00051ff0e141330687e57798551768905644938424e85"
     },
     {
       "command": "./scripts/run.ps1 build:alipay",
       "status": "PASS",
       "log_path": "runtime/test-results/build-alipay.log",
-      "log_sha256": "948bfb9574685bb11f8c0f72a8643460d3fdd09634c2fab049cc591a493a9c60"
+      "log_sha256": "cc850494822598272bae02890357ef67bc0aa9a03b6d9fe008829926a27071d8"
     },
     {
       "command": "./scripts/run.ps1 build:douyin",
       "status": "PASS",
       "log_path": "runtime/test-results/build-douyin.log",
-      "log_sha256": "f234a3dd7a23fc10975028e00f5b5364cdd7f1fa2b2293fce58f3ee7457ecf9f"
+      "log_sha256": "d0b29c0835db663fcca0b7c50c618e5bafeb5b67f1ac1f5f9795ad64f76b91ee"
     }
   ],
   "suites": [
     {
       "kind": "unit",
       "status": "PASS",
-      "tests": 58,
-      "passed": 58,
+      "tests": 64,
+      "passed": 64,
       "failed": 0,
-      "executed_at": "2026-10-28T23:53:56.513Z",
+      "executed_at": "2026-10-29T01:31:11.185Z",
       "report_path": "runtime/test-results/unit.json",
-      "report_sha256": "af36c4061d7899edc5b552c447d921684e5890755f46de4a851ad1a1eabe5cc0"
+      "report_sha256": "004c62071fc0599dbdb4752bcd90fd09f88c4630c33121aa038394f0d70e1bc3"
     },
     {
       "kind": "integration",
       "status": "PASS",
-      "tests": 336,
-      "passed": 336,
+      "tests": 342,
+      "passed": 342,
       "failed": 0,
-      "executed_at": "2026-10-28T22:53:31.302Z",
+      "executed_at": "2026-10-29T00:42:50.976Z",
       "report_path": "runtime/test-results/integration.json",
-      "report_sha256": "1cf7e56b3e8095c50dcde8d612b81519214a3546a7cf24d101aae1fa52c1acdb"
+      "report_sha256": "52fc3df1d4403b9b0e92fdc2947e34a914d03455678650856c35e28ddb11ca33"
     }
   ],
-  "source_files": 327,
-  "source_set_hash": "25ec642fe663ccaf2d7a6de2ea62a880ac2ce46c8d2cac99647033f197dd64a0",
+  "source_files": 333,
+  "source_set_hash": "caeb6c578cfb52e4479f04316f90c73aec8965fc3b67262c47471323beaff71f",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -101,7 +101,7 @@
     },
     {
       "path": "src/api/config.ts",
-      "sha256": "67555d8707e248e930b5d79a51912674ecf4f6cb3803a7bf3d04eb5b7f7f7ae5"
+      "sha256": "973ca3e115a081567c112b9cf539c68bc3e9f7c6d348174002cfeacb94769194"
     },
     {
       "path": "src/api/db/migrate.ts",
@@ -202,6 +202,10 @@
     {
       "path": "src/api/db/migrations/024_native_audio_review_evidence.sql",
       "sha256": "1080dbe98c8977779aff30ddbef6e941f037db7bfff4eb45a0a4e0dacdca72d1"
+    },
+    {
+      "path": "src/api/db/migrations/025_listening_submissions.sql",
+      "sha256": "ee5eebe9a5c947685b4050c9a6cae791d6085a4980e6b82b0ed96a74ac854899"
     },
     {
       "path": "src/api/db/pool.ts",
@@ -645,7 +649,15 @@
     },
     {
       "path": "src/worker/audio/contract.ts",
-      "sha256": "5fb0ed42403778a855c3839d47fe083453b288951a48dfc5c09ff3a4a89f8e44"
+      "sha256": "416d36693278ecebd771cbd1549b14154eb35094bc42f99eb5f99435e9963db5"
+    },
+    {
+      "path": "src/worker/audio/listening-contract.ts",
+      "sha256": "b1396ab82815ae1f0d09c475084f5d502abe4232e4da84a292445f0b9f90e7d9"
+    },
+    {
+      "path": "src/worker/audio/listening-gateway.ts",
+      "sha256": "17f3b8e25c600168c77b33930ae669f59bf9dbf87516097ea3932e50b94be7cf"
     },
     {
       "path": "src/worker/audio/order-proof.ts",
@@ -697,7 +709,7 @@
     },
     {
       "path": "src/worker/compiler/order-context.ts",
-      "sha256": "5c341f502eb5b18a8a216cbf9dd50a4d683c7e73a93796e8b0c42a52526625cd"
+      "sha256": "32e766e7ad1d57df7e2d94dedd78b6c6b69d794e28a489539d1f1857cc8f339b"
     },
     {
       "path": "src/worker/compiler/plan.ts",
@@ -705,7 +717,7 @@
     },
     {
       "path": "src/worker/compiler/snapshot.ts",
-      "sha256": "3304d606f4a54dd647e51ab47a969be3828c8c3b8916d568336585702a5ced52"
+      "sha256": "bf0e5d63e9a61e05141677b0930c8e1bd11cc17e1635bcfb5259656d70042d11"
     },
     {
       "path": "src/worker/generation/context.ts",
@@ -713,7 +725,7 @@
     },
     {
       "path": "src/worker/generation/contracts.ts",
-      "sha256": "69b90c108d52ffad9894db1a12a5f2abcd25d4bdc0a6f10c1c6608f5587fdb9e"
+      "sha256": "3c25813c7b23bd01afb5b110cb8f961e589feaa9aed1905ac459fc64323d9951"
     },
     {
       "path": "src/worker/generation/execute.ts",
@@ -769,7 +781,7 @@
     },
     {
       "path": "src/worker/lifecycle/media-maintenance-main.ts",
-      "sha256": "d77997c39ccbe5b367a8fd6bada5d1456f5366900237a64e69bd98ae1fabae50"
+      "sha256": "139610648d9737c3371714d5d507440fcd3fc59a2fb922875331b39082c05aae"
     },
     {
       "path": "src/worker/lifecycle/privacy-journal-main.ts",
@@ -862,6 +874,10 @@
     {
       "path": "src/worker/providers/dashscope-asr.ts",
       "sha256": "a0e1da8b5f9935c722f7beb6c13ff5cbf172b5c3adf88a59d3b2dd7def4e3ccf"
+    },
+    {
+      "path": "src/worker/providers/omni-listening.ts",
+      "sha256": "41dec9eb200630a72ab2f947f46c4fe4ca0da35e86ee7af2a6a54f857e96f2c7"
     },
     {
       "path": "src/worker/providers/vision.ts",
@@ -1056,12 +1072,16 @@
       "sha256": "6d80c9967d4a6674fb8bf84c63a74b85f31b40c8b051624ba1c4d513d762824e"
     },
     {
+      "path": "tests/helpers/listening.ts",
+      "sha256": "32f3ae67e547334762e167efe0555ccd0845dd6492df9bcc9ccf11e20470f812"
+    },
+    {
       "path": "tests/helpers/media.ts",
       "sha256": "f96600fff9b07452fde36199aadaeb4cc33c957257e4ced0937b4232b47bd2dc"
     },
     {
       "path": "tests/helpers/native-order.ts",
-      "sha256": "aa6302bc02b865235e577d8d4601e3aee9241fb9174af495757116f1768481a1"
+      "sha256": "8189dc78a5cd24edb4ef39ec9e08c28cdb566c05f212b93255da8f06a6d54a6f"
     },
     {
       "path": "tests/helpers/reference.ts",
@@ -1149,7 +1169,7 @@
     },
     {
       "path": "tests/integration/native-order.test.ts",
-      "sha256": "f891ecd1aa64b45a46bc1e42593e720c2b86bfef3430ce0d3c946bf7047b66eb"
+      "sha256": "d0e31541d6af9233f963967f965edd5b88a89d24f84486ce9c4583e52c75264d"
     },
     {
       "path": "tests/integration/optional-preview.test.ts",
@@ -1236,6 +1256,10 @@
       "sha256": "463b11a387beef46cf2eab614dd0d924f9242508504ef2282db5c4f418bd6c67"
     },
     {
+      "path": "tests/unit/listening.test.ts",
+      "sha256": "75d928dd906e3de36905a657a7553f259b0cfe6eb042bdd8a71fbcf4de612f79"
+    },
+    {
       "path": "tests/unit/native-review-audio.test.ts",
       "sha256": "ab1d1040e32313ca0787ec97e8fea72eac95da9ebda5c7d84ef6063a6bb6cfd9"
     },
@@ -1305,7 +1329,7 @@
     },
     {
       "path": "scripts/生成Codex开发契约.py",
-      "sha256": "9a65600b293184c0b4527e7adf9c6e32c45e5a63536f06b878b4d747bad90544"
+      "sha256": "b918158149e52902bf26f59f6bcd8d56e3e1824117fa226f1b122906f1ba1430"
     },
     {
       "path": "scripts/生成v3需求配置.py",
@@ -1345,7 +1369,7 @@
     },
     {
       "path": "scripts/mini-config.cjs",
-      "sha256": "2182becd95024b96e5ce21132d6f77deb44b468a4e119a7b675e652ebbac57c1"
+      "sha256": "1eb37f79c1d5132ac51135e268a849010d1010f11be1f4479406f683cd6c862b"
     },
     {
       "path": "scripts/record-native-audio.ts",
@@ -1365,7 +1389,7 @@
     },
     {
       "path": "scripts/verify-implementation.ts",
-      "sha256": "cfe01ddfbd44a2ab0015a804a00d9159c6a505e7c11677a88196adf985c6f4cf"
+      "sha256": "036556d71749885baf5e4f6660daba12a4739324dfc8c90467555ceaed8630da"
     },
     {
       "path": "scripts/verify-publication.ts",
@@ -1431,7 +1455,7 @@
     },
     {
       "path": "assets/development/v1.1/contracts/execution-snapshot.schema.json",
-      "sha256": "c7aec535e7b2de72540fd7d92fdd71882f69d79f32b0a5e13e913c837d139076"
+      "sha256": "ef67ca6ca12128cd7be9b0961ba0562074597d4564bf224efed43673a70af46f"
     },
     {
       "path": "assets/development/v1.1/contracts/management-endpoints.json",
@@ -1566,7 +1590,7 @@
       "sha256": "00da44c3cecb74ca9b34a746bddb4e83c18d1358dfca206157a104425ad1177e"
     }
   ],
-  "runtime_contract_set_hash": "316ce01cd1fa8a6556575c677e87313f89bac94cfd757d6d5ed6a5a7388c0e74",
+  "runtime_contract_set_hash": "9a84d206912ca3af489acb2a972152cd53588fc0a1109b9994412a1b2e358abf",
   "resource_files": [
     {
       "path": "assets/resources/fonts/noto-sans-sc/NotoSansSC[wght].ttf",
@@ -1737,7 +1761,7 @@
     "native_quotes_admitted": false,
     "official_multi_presenter_verified": false,
     "real_provider_verified": false,
-    "notes": "Twelve native PostgreSQL/actual AAC-ALAC-PCM/media/HTTPS-stdio-MCP cases with synthetic external model, authorizations, ASR/usage and isolation. Both private production/POST routes and file-level QC now seal complete stereo originals/finals, original settled ASR, actual caption-timecode frames and independently reconstructed music mixes. Replaced bytes, lost ACKs, stored POST rollback, commit-time source/license revocation and bypassed final review/delivery are rejected. Four additional unit cases cover canonical stereo review WAV and caption frame boundaries. No real Chinese listening, official multi-presenter, public audio ordering, final semantic review or delivery admission."
+    "notes": "Eighteen native PostgreSQL/actual AAC-ALAC-PCM/media/HTTPS-stdio-MCP cases with synthetic external model, authorizations, ASR/usage and isolation. Twelve production/POST/file-QC cases seal complete stereo originals/finals, original settled ASR, actual caption frames and reconstructed music mixes. Six additional cases exercise the private independent listening foundation, original cost and uncertainty/UNKNOWN/revocation; it is not called by final Codex reviews. Four unit cases cover canonical stereo WAV and caption boundaries. No real Chinese listening, official multi-presenter, public audio ordering, final semantic review or delivery admission."
   },
   "native_audio_qc": {
     "implemented": true,
@@ -1758,8 +1782,30 @@
     "audio_delivery_connected": false,
     "notes": "Technical file QC only. Complete original/final stereo WAV, original ASR JSON, actual ASS and bounded QC JSON are private hash-bound evidence. Actual FFmpeg media and native PostgreSQL are used with synthetic speech/model/rights/usage. The original three production/POST roles and single ASR are not repurchased during QC. Final listening, factual/style review and delivery require future independently bound listening results; a visual report or ASR transcript cannot waive this guard."
   },
+  "native_listening": {
+    "implemented": true,
+    "wire": "QWEN_OMNI_STEREO_CHAT_SSE_1",
+    "unit_fixture_verified": true,
+    "native_fixture_verified": true,
+    "complete_original_and_final_stereo_wav": true,
+    "all_sealed_images": true,
+    "original_contract_and_budget": true,
+    "exact_original_request_response": true,
+    "unknown_never_repurchased": true,
+    "saved_receipt_maintenance": true,
+    "reasoning_output_metered": true,
+    "cached_usage_policy": "REQUIRE_ZERO_OR_HOLD",
+    "uncertain_observations_retained": true,
+    "final_codex_stages_connected": false,
+    "final_review_reports_admitted": false,
+    "audio_delivery_connected": false,
+    "real_model_listening_verified": false,
+    "real_usage_cache_billing_verified": false,
+    "native_speech_order_admitted": false,
+    "notes": "Private platform preparation only. Six new native route/UNKNOWN/saved-response/invalid-result/cached-usage/revocation cases plus six protocol units. Full actual stereo WAV and every sealed original/output/frame cross the synthetic transport; semantic output remains INSUFFICIENT for synthetic tones. Original order reserves at most two packet calls including repair, within the sold total and original deadline. Saved original SSE settles after new calls are disabled; missing usage remains a financial hold. Final Codex input/report/tool binding and atomic audio delivery are not connected, and public sales remain disabled."
+  },
   "codex_implementation": {
-    "scope": "CONTENT PLAN, silent PHOTO_LAYOUT/PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST and private native-audio PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST/QC with scoped original-track ASR and sealed full stereo evidence, independent generated-reference facts review and fresh final visual REVIEW_FACTS/REVIEW_STYLE runtime adapters, metered Responses gateway, atomic silent pack publication, independent seven-stage photo creator SAMPLE pipeline",
+    "scope": "CONTENT PLAN, silent PHOTO_LAYOUT/PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST and private native-audio PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST/QC with scoped original-track ASR and sealed full stereo evidence, private independent listening foundation with original cost/receipts (not final-role admission), independent generated-reference facts review and fresh final visual REVIEW_FACTS/REVIEW_STYLE runtime adapters, metered Responses gateway, atomic silent pack publication, independent seven-stage photo creator SAMPLE pipeline",
     "fixture_tests_only": true,
     "real_codex_turn_verified": false,
     "native_launcher_executable_provided": false,

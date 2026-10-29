@@ -1,5 +1,20 @@
 # 更新记录 / Changelog
 
+## 2026-10-29 · 独立听音协议与原回执 / Independent listening and original receipts
+
+- 本轮最终64项单元、342项完整原生集成、服务端及双小程序构建通过；文档契约4641项。Final validation: 64 unit / 342 native cases and all builds PASS. 本轮听音源码先全新通过342项完整原生集成；支付宝CSS压缩600秒超时后，仅修改小程序压缩配置为CSSO（保留压缩与规则顺序），逐字节确认应用、测试、验证脚本、运行契约及资源未变，保留本轮完整原生报告并重跑其余五项；最终类型、64项单元、服务端及双小程序构建通过。未复用上一轮336项或定向跳过报告。
+
+- 构建故障：本轮完整原生测试通过后，支付宝 CSS 压缩 600 秒超时；仅将小程序 cssnano 改为安装已有的 CSSO、保留规则顺序和压缩，按冻结源码受限重跑其余五项。完整原生报告保留本轮原件，不沿用上一轮 336 项。Build recovery: a 600s cssnano timeout is preserved; only mini CSS configuration changes to installed CSSO, with compression and rule order retained. Other five checks repeat against otherwise identical source; this round's complete native report is retained.
+
+- 新增内部平台听音准备服务：完整原声与成片双声道WAV、全部封存画面与原商品事实进入千问Omni混合请求；ASR与计划口播不作为听音原文。Added complete stereo/audio-visual input with original packet hashes; no ASR-as-listening substitution.
+- 冻结实际模型/能力/费率、输入容量、原预算与最多两包上限；执行快照绑定可选听音合同SHA。迁移025沿用原表/账本/隐私对象，原包跨阶段唯一。Frozen optional listening capability and original-order accounting; no replacement budget or deadline.
+- 保存精确原请求、不可变发送标记与原SSE响应，计入全部思考token；缺失用量或无法分摊缓存保持UNKNOWN；语义无效仍核对已发生费用，响应未知不重复购买。Raw receipts and original rates govern recovery and financial holds.
+- 维护扫描恢复已保存的原响应，新调用关闭后仍按原费率核对；撤权、换字节、旧快照与原截止阻止继续使用结果。Saved original response reconciliation remains separate from admission of new calls.
+- 新增6项协议单元及6项原生专项，复用实际PG/FFmpeg/双声道封存与HTTPS-stdio-MCP链路；合成提示音的语义观察明确INSUFFICIENT，模型/授权/计量/隔离均未当作真实服务。Synthetic semantics never certify actual Chinese listening.
+- 最终Codex材料/推理/工具证明/报告、有声事务交付尚未连接，原INDEPENDENT_AUDIO_REVIEW_REQUIRED/NATIVE_AUDIO_NOT_ADMITTED和全部禁售保留；58需求/三路线/10风格14变体/Plus继续保留。Full product remains in progress.
+- 同步中英README、架构/启动/状态/实施说明和验证证据；UI及录制来源未变，截图、WebM/MP4/GIF、独立音频样片和C原设计/归档保留原字节。Documentation stays synchronized; original media provenance is retained.
+- 原336项串行回归约1646秒；本轮听音/QC定向组含6个新用例与2个既有完整往返，整套342项命令外层窗口设3600秒，单项/角色RPC/业务预算/原截止/次数和首失败停止不放宽。Only the full serial verification command window grows; individual cases and business guards retain their limits.
+
 ## 2026-10-29 · 原生声音文件QC与审查封存 / Native-audio technical QC and sealed evidence
 
 - 本轮最终58项单元、336项完整原生集成及服务端/双小程序构建通过；文档契约4627项。Final validation: 58 unit / 336 native integration cases and all native builds PASS; 4627 document/contract checks. 本轮声音文件QC源码先全新执行完整336项原生集成；小程序180秒超时后受限重试，仅验证脚本的小程序整套窗口改600秒；原生报告对应应用/测试/契约/资源完全未变，原验证脚本留存并逐字节核对构建窗口、注释与专项单元报告分类三处差异。保留本轮原始336项报告并重跑其余五项，未沿用上一轮334项。

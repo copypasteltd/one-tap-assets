@@ -13,7 +13,8 @@ export interface Config {
   douyin: { appId: string; secret: string; merchantId: string; paymentKey: string; privateKey: string; keyVersion: string; tradeContractPath: string; salt: string; gateway: string };
   provider: { baseUrl: string; apiKey: string; allowedHosts: string[]; visionModel: string; imageModel: string; videoModel: string; rateVersion: string; visionContractPath: string; visionDailyBudgetMicro: number;
     generation?:{baseUrl:string;apiKey:string;allowedHosts:string[]};
-    speech?:{enabled:boolean;baseUrl:string;apiKey:string;allowedHosts:string[]} };
+    speech?:{enabled:boolean;baseUrl:string;apiKey:string;allowedHosts:string[]};
+    listening?:{enabled:boolean;baseUrl:string;apiKey:string;allowedHosts:string[]} };
   managementTokens: string;
   samples: { dailyBudgetMicro: number; costCeilingMicro: number; maxConcurrent: number; deadlineSeconds: number };
   privacyJournal: { enabled: boolean; directory: string; sourceId: string; keyId: string; hmacKey: string };
@@ -45,6 +46,8 @@ export function config(overrides: Partial<Config> = {}): Config {
     provider: { baseUrl: text('PROVIDER_BASE_URL'), apiKey: text('PROVIDER_API_KEY'), allowedHosts: text('PROVIDER_ALLOWED_HOSTS', 'api.openai.com').split(',').map(s => s.trim()).filter(Boolean), visionModel: text('VISION_MODEL_ID'), imageModel: text('IMAGE_MODEL_ID'), videoModel: text('VIDEO_MODEL_ID'), rateVersion: text('MODEL_REGISTRY_VERSION'), visionContractPath: text('VISION_CONTRACT_PATH'), visionDailyBudgetMicro: num('VISION_DAILY_BUDGET_MICRO', 0),
       ...(text('GENERATION_BASE_URL')?{generation:{baseUrl:text('GENERATION_BASE_URL'),apiKey:text('GENERATION_API_KEY'),
         allowedHosts:text('GENERATION_ALLOWED_HOSTS').split(',').map(s=>s.trim()).filter(Boolean)}}:{}),
+      ...(text('LISTENING_BASE_URL')?{listening:{enabled:enabled('LISTENING_SERVICE_ENABLED'),baseUrl:text('LISTENING_BASE_URL'),apiKey:text('LISTENING_API_KEY'),
+        allowedHosts:text('LISTENING_ALLOWED_HOSTS').split(',').map(s=>s.trim()).filter(Boolean)}}:{}),
       ...(text('ASR_BASE_URL')?{speech:{enabled:enabled('ASR_SERVICE_ENABLED'),baseUrl:text('ASR_BASE_URL'),apiKey:text('ASR_API_KEY'),
         allowedHosts:text('ASR_ALLOWED_HOSTS').split(',').map(s=>s.trim()).filter(Boolean)}}:{}) },
     managementTokens: text('MANAGEMENT_TOKENS_JSON'),

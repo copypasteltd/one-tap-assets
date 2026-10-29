@@ -1,28 +1,28 @@
 # 验证与发布证据 / Verification and publication evidence
 
-2026-10-29声音文件QC源码：**58单元 / 336原生集成**通过，34个集成文件，完整原生报告跨度约1645.51秒。源码/测试/配置摘要327份，运行契约42份，资源4份。本轮声音文件QC源码先全新执行完整336项原生集成；小程序180秒超时后受限重试，仅验证脚本的小程序整套窗口改600秒；原生报告对应应用/测试/契约/资源完全未变，原验证脚本留存并逐字节核对构建窗口、注释与专项单元报告分类三处差异。保留本轮原始336项报告并重跑其余五项，未沿用上一轮334项。
+2026-10-29独立听音基础源码：**64单元 / 342原生集成**通过，34个集成文件，完整原生报告跨度约1957.89秒。源码/测试/配置摘要333份、运行契约42份、资源4份。本轮听音源码先全新通过342项完整原生集成；支付宝CSS压缩600秒超时后，仅修改小程序压缩配置为CSSO（保留压缩与规则顺序），逐字节确认应用、测试、验证脚本、运行契约及资源未变，保留本轮完整原生报告并重跑其余五项；最终类型、64项单元、服务端及双小程序构建通过。未复用上一轮336项或定向跳过报告。
 
-This native file-QC source first freshly executes all 336 native cases. A restricted retry changes only the verifier’s mini-build command window from 180s to 600s; application, tests, contracts and resources match the original native run. The four-case scope flag also selects the correct unit report. The original verifier is retained and the exact timeout/comment/report-kind delta checked. This round’s native report is retained and the other five checks repeat; no prior-round 334-case report is reused. Mode: `MINI_BUILD_RETRY_WITH_RETAINED_NATIVE_INTEGRATION`. Native PostgreSQL, HTTPS/stdio/MCP, FFmpeg and actual media execute locally. Model, recognition, authorization, usage, payment and isolation responses are explicitly synthetic.
+This round freshly passes all 342 native cases. After Alipay CSS processing times out at 600s, only mini CSS minimization changes to installed CSSO with rule order preserved. Application, tests, verifier, contracts and resources match the native run byte-for-byte; its original report is retained while the other five checks repeat. Types, 64 units and all builds pass. No prior-round 336-case or focused skipped report is reused. Mode: `MINI_BUILD_RETRY_WITH_RETAINED_NATIVE_INTEGRATION`. Actual native PostgreSQL/FFmpeg/media and HTTPS/stdio/MCP execute locally. Model, semantic observations, authorization, usage, payment and isolation responses remain explicitly synthetic.
 
 | 编号 / No. | 检查 / Check | 结果 / Result | 证明范围 / Scope |
 | --- | --- | --- | --- |
-| 01 | 类型/单元/完整原生集成/服务端/双小程序 / Types, tests and builds | 六项PASS | [实现索引](../../assets/implementation/current.json)，不等于真机或生产准入 |
-| 02 | 有声制作/POST/文件QC / Private audio production/POST/file QC | 12项原生PASS | 实际整轨/ALAC/AAC、一次原ASR、混音重算、完整私有封存、篡改/撤权/最终阶段拒绝；外部响应合成 |
-| 03 | 完整声音审查文件 / Complete stereo review files | 4项单元PASS | 规范WAV/原双声道PCM、非法长度、字幕句/词实际帧和时间轴拒绝 |
-| 04 | 声音原有基础 / Original audio foundations | 23 / 17 / 15项原生及4项声道单元PASS | 原合同/费用/许可、持久ASR和独立后期内核；真实中文语音/听感未验 |
-| 05 | 文档与契约 / Documentation and contracts | 4627项PASS | [摘要](contracts.json)，不代替功能执行 |
-| 06 | 页面媒体 / UI media | 20文件原SHA | 10截图、概览、WebM/MP4/GIF和说明，[来源](../media/capture-manifest.json) |
-| 07 | 声音媒体 / Audio media | 12文件原SHA | 四样式MP4/PNG、源MP4/合成WAV/概览/GIF，[来源](../media/native-audio/capture-manifest.json) |
-| 08 | 发布/暂存 / Publication and staging | 独立核验 | [发布摘要](publication.json)、[暂存审计](repository-audit.json) |
+| 01 | 类型/单元/完整原生集成/服务端/双小程序 | 六项PASS，原生保留本轮完整报告 | [实现索引](../../assets/implementation/current.json)，不是生产准入 |
+| 02 | 独立听音基础 / Listening foundation | 6项单元与6项新增原生PASS | 双完整音轨/全部画面、原费用/请求/SSE、UNKNOWN不重买、保存响应恢复、缺证/缓存/撤权 |
+| 03 | 有声制作/POST/文件QC | 原12项原生及4项封存单元PASS | 实际原整轨/ALAC/AAC、原ASR、混音重算、实际字幕帧和私有封存；与6项新增共同组成18项订单专项 |
+| 04 | 原声音基础 | 23 / 17 / 15项原生及4项声道单元PASS | 合同/许可/原费用、持久ASR和独立后期内核，真实中文未验 |
+| 05 | 文档与契约 | 4641项PASS | [报告摘要](contracts.json)，不代替功能执行 |
+| 06 | 页面媒体 | 20文件原SHA | 10截图、概览、WebM/MP4/GIF和说明，[来源](../media/capture-manifest.json) |
+| 07 | 声音媒体 | 12文件原SHA | 四样式MP4/PNG、源视频/合成WAV/概览/GIF，[来源](../media/native-audio/capture-manifest.json) |
+| 08 | 发布与暂存 | 独立核验 | [发布摘要](publication.json)、[暂存审计](repository-audit.json) |
 
-声音文件技术验收后的包为SEALED/PENDING，没有独立听音或最终语义PASS。两条有声路线的最终事实/风格角色、报告身份和交付入口仍拒绝INDEPENDENT_AUDIO_REVIEW_REQUIRED；公开声音订单继续NATIVE_AUDIO_NOT_ADMITTED。实际字幕帧和ASR文字不能替代听音，信号比较不证明文字被说出、口型或商品事实正确。
+本轮测试的听音语义明确为INSUFFICIENT：合成提示音不能伪称中文口播。模型和用量响应为合成，实际请求中的完整双声道和画面字节由原封存SHA核对。新组件尚未被最终Codex阶段调用；材料/推理/工具证明/双报告和有声事务交付仍待接入。最终事实/风格报告及交付继续INDEPENDENT_AUDIO_REVIEW_REQUIRED，公开声音订单继续NATIVE_AUDIO_NOT_ADMITTED，全部禁售。
 
-Technical QC seals actual complete stereo and text evidence; it does not certify independent listening or semantic quality. Final fact/style roles, report identity and publication retain the listening guard. Public audible order creation remains closed.
+Synthetic tones explicitly yield insufficient listening observations. The private protocol/receipt/ledger foundation is not final semantic approval or an integrated audio-delivery chain. Cached usage without accurate allocation stays UNKNOWN; it is never treated as free or a replacement purchase.
 
-本轮[验证来源摘要](native-qc-attempts.json)记录本轮原日志/报告SHA及完整报告来源。首次全量在代码复核发现新增撤权断言误用通用资源错误码后主动中止，未计为通过；修正为执行上下文先返回的AUDIO_LICENSE_UNAVAILABLE，专项确认后重新全量执行，生产门禁未改。随后完整执行达1800秒且原生订单两项失败，保留失败；两项单独复测通过，尚未稳定复现。另将所有角色替身改为先ACK后异步完成，专用协议测试继续覆盖提前完成，新增首失败停止及私有诊断；生产时限/断言不变。随后专项9通过/1超时/2未执行仍记失败，单独POST撤权故障用例改180秒以容纳原45秒回收，并加强实际撤权/ASR唯一/工具错误码检查。随后一次全量在类型检查阶段180秒超时，没有类型诊断且未进入单元/集成，原日志和失败索引保留；检查时主机CPU99%、可用内存约4.6GB，只清理本次遗留类型检查进程。再一次类型检查通过，但单元整套在180秒外层超时，仅44项有通过日志，不能算完整通过；进程启动/模块加载占主要耗时，将单元整套命令改360秒，单例30秒不变。再一次类型及58单元通过，原生逐镜完整往返通过，参考整片完整往返在120秒测试外层超时，10项未执行，未计完整通过；两项现包含实际制作/ASR/POST/QC/篡改和最终门禁检查，单独使用240秒测试窗口，其他工具/业务上限及断言不变。完整336项通过后的支付宝构建在CSS压缩阶段180秒超时，第一次源码不变的受限重试在模块加载阶段180秒超时，两次均无编译错误；原日志/索引保留。随后只将本轮验证/构建进程临时设为AboveNormal调度优先级，保持源码/契约/资源、构建180秒与断言不变，其他应用及系统持久配置不改。优先级重试也在CSS压缩阶段180秒超时，第三次失败继续保留；随后仅验证脚本将两个小程序整套窗口改600秒，原应用/测试/契约/资源不变，完整旧验证脚本留存且逐字节确认只有窗口表达式及一行注释变化，使用已有白名单重试规则。源集合因此存在显式验证脚本差异，不能声称所有源码摘要未变。六项命令随后通过；发布汇总发现专项单元标志误查集成报告，四项用例本身全部通过，修正为显式unit报告后按同一白名单重新验证。最终与原验证脚本的精确差异为窗口表达式、注释和报告类别三处；应用与测试及原生报告不变。上方完整结果独立记录，局部通过不拼接为全量。[上一轮失败记录](native-order-attempts.json)继续按历史保留，不与本轮局部结果拼接为通过。Windows原生异常0xC0000374的长期稳定性仍待验。整套串行原生命令上限2400秒、单元整套360秒/单例30秒，通常原生单例120秒、完整往返两项240秒、POST撤权一项180秒/hook60秒/RPC30秒/类型/服务端180秒、小程序整套600秒和业务预算/截止/配额保持原约束。
+本轮局部运行、完整运行和构建失败/重试的私有日志仅发布[来源摘要](listening-attempts.json)。定向探索运行8项通过/10项跳过，发生在最后应用源码修订之前，不作为最终版本验收。完整342项运行前的[333文件原始摘要](listening-native-source.json)与原失败实现记录一致；最后源码相较原生运行仅有 `scripts/mini-config.cjs` 的已核对CSSO设置变化，其余332文件、验证脚本及全部运行契约/资源完全未变。原生JSON与原日志逐字节保留，其他五项重新执行；没有增加600秒窗口、关闭CSS压缩或复用上一轮336项。
 
-Prior failed attempts remain historical records. Partial/focused reports and prior-round suites are not combined into full acceptance. Raw logs, JSON, database, credentials and working media remain in ignored runtime; published records contain counts, commands and hashes only.
+旧声音文件QC的失败、超时和受限构建重试保留在[历史来源](native-qc-attempts.json)及其Git历史说明。完整串行原生命令上限3600秒；单元整套360秒/单例30秒、通常原生单例120秒、完整往返/新增听音整链240秒、POST撤权180秒/hook60秒/RPC30秒/类型与服务端180秒、小程序整套600秒和业务预算/截止/配额保持约束。
 
-本轮未改前端、录制脚本或独立后期内核媒体，没有打开浏览器。原共享页面截图/录屏/GIF与声音演示保留来源和SHA；声音仍是合成提示音/人工时间码，不改标为此次ASR或真实中文样片。C设计25份及冻结归档原字节不变。
+无浏览器调用；前端页面/录制来源与声音内核未变，仅小程序CSS构建压缩器改变，宿主真机仍待验。原截图/录屏/GIF、声音媒体及C设计25文件/归档原字节保留。私有日志、数据库、密钥及媒体缓存保持忽略。
 
-真实中文ASR/费用/授权、独立听音/语义/口型及最终有声双复核/交付、多人绑定、真实Codex/OS隔离/清理、宿主真机、完整社区/修改与全变体基准、Plus仍未完成。完整58项/52P0、三路线、10风格/14变体保留；全部方案禁售，完整产品/生产准入为false。
+真实中文/口型/模型/账单缓存/授权、多人、最终音频双复核与事务交付、Codex受限运行/清理、支付与OSS、四组真机、完整社区/售后、全变体基准及Plus仍待完成。58需求/52P0、三路线、10风格/14变体继续保留；完整产品及生产准入为false。

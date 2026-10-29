@@ -1,5 +1,7 @@
 # 技术结构与执行逻辑 / Architecture and execution
 
+新增[独立听音平台准备组件](../实施/独立听音协议与原订单回执-v1.0.md)：完整原声/成片双声道和全部封存画面共同输入，原订单最多两包预算、精确SSE回执和存储恢复；维护扫描只核对原响应。该组件还未接最终Codex材料/报告/工具证明及有声事务交付。Private listening preparation and original receipt accounting are separate from the still-closed final audio review/delivery gates.
+
 2026-10-29声音文件QC增补 / Native file-QC update: [实际音轨与私有封存](../实施/原生声音文件验收与审查封存-v1.0.md)接通内部两路线制作/POST/QC；独立重算冻结混音、比较实际AAC、封存完整双声道音轨/原ASR/ASS/技术报告及字幕句词时点帧，提交重查原文件/许可/配乐/字节。独立听音、最终事实/风格报告与交付仍阻断，不能由波形或视觉报告替代。Technical file QC is connected; independent listening/final semantic reviews and audio delivery remain closed. 以下历史QC未接入描述仅适用于最终听音准入或旧阶段。
 
 2026-10-29原生订单增补 / Native ORDER update: [内部制作与后期](../实施/原生有声订单制作与后期接入-v1.0.md)连接两条生成路线、原整轨PCM/ALAC、受控一次ASR、字幕/许可配乐以及原清单恢复；`transcribe_actual_audio`仅授予本订单POST。显式冻结双声道均值仅用于ASR副本，交付保持原声。Public audio order creation, independent listening/final semantic review and delivery remain closed; technical file QC is connected as described above. Synthetic external responses do not verify real speech quality or multi-presenter support. 以下历史“订单工具未接入”按本增补区分内部PRODUCTION/POST与完整有声产线。
