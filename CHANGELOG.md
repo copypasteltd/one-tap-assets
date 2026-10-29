@@ -1,5 +1,15 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · 订单反馈与售后记录 / Order feedback and aftercare records
+
+- 六类问题、可选最多5张私有证明图片、本人分页记录、订单筛选与最新处理状态；无订单参数也可恢复本账户记录。 Shared help screen with owned order feedback and paged history.
+- 原账户/订单/页面边界、原提交冻结、并发合并、丢失ACK原键/正文及已完成图片复用；不把描述、字节和私有链接写入本地存储。 Recover original requests without repeated upload or ticket creation.
+- 服务端拒绝错误用途、外人和撤销附件；受理不代表退款/纠错完成，也不消耗一次成功小修改。 Actual generated PNGs pass local upload, object write and image validation.
+- 本地启动改为单次30秒页面/45秒后端就绪预算，同时要求API/Worker/回收器/媒体维护就绪；首次延迟根因未确认，原失败记录保留，不改变订单截止或能力开关。
+- 类型、28单元/4原生API与10浏览器操作通过；四目标构建及自检/启动PASS，未运行全面测试。 Bound: 395 source files / 42 contracts / 4 resources; 487ce077。
+- 初版getOrder夹具缺字段被响应契约拒绝，1失败/3未执行及修正后结果独立留存。新增4PNG/MP4/WebM/GIF，本次浏览器/服务关闭，旧64媒体、C25文件/归档及44历史证据保留。
+- Staff processing/replies, live refunds/repairs, cloud storage, real services/devices, native-audio repair, complete community/Plus and cloud remain pending. All official presets remain unavailable.
+
 ## 2026-10-30 · 分类保存与相册进度恢复 / Selective album saving and recovery
 
 - 共享领取页提供整套/图片/视频与单项重试，明确部分成功和UNKNOWN；返回恢复原安装记录，不重新生成或收费。 Restore original progress and retry only unfinished selected items.

@@ -1,0 +1,129 @@
+{
+  "captured_at": "2026-10-29T23:26:12.111Z",
+  "type": "ACTUAL_BROWSER_RECORDING_SHARED_MINI_SUPPORT",
+  "data_source": "SYNTHETIC_SUPPORT_STATE_AND_UPLOAD_CALLBACKS_NO_STAFF_OR_DEVICE_CLAIM",
+  "source_set_hash": "487ce07715d5685df6392c4a87070a5ef21dde2eb0ef13dda56d628072d96c3d",
+  "build_root": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build",
+  "native_mini_device_verified": false,
+  "real_generation_verified": false,
+  "real_payment_verified": false,
+  "browser_tabs_closed": true,
+  "owned_preview_server_stopped": true,
+  "browser_errors": [],
+  "external_network_requests": [],
+  "checks": [
+    "OWNED_ORDER_FEEDBACK_WITH_NO_AUTOMATIC_MUTATION",
+    "CLASSIFIED_FEEDBACK_AND_PLATFORM_ERROR_GUIDANCE",
+    "OPTIONAL_LOCAL_EVIDENCE_SELECTION_AND_REMOVAL_BEFORE_UPLOAD",
+    "LOST_COMMITTED_ACK_PRESERVES_ORIGINAL_FEEDBACK_AND_LOCKS_EDITS",
+    "ORIGINAL_KEY_BODY_AND_COMPLETED_UPLOAD_REUSED_AFTER_ACK_LOSS",
+    "CURRENT_ORDER_AND_ALL_OWNED_RECORDS_FILTERS",
+    "LATEST_TICKET_GET_DISPLAYS_CURRENT_PROCESSING_STATE",
+    "REOPENED_ACCOUNT_HISTORY_WITHOUT_RESUBMISSION_OR_ORDER_REQUIRED",
+    "FEEDBACK_ACCEPTANCE_NEVER_IMPLIES_PAYMENT_REFUND_OR_REPAIR",
+    "NO_HORIZONTAL_OVERFLOW_AT_320PX"
+  ],
+  "screenshots": [
+    {
+      "page": "01-feedback-form",
+      "path": "docs/media/support/01-feedback-form.png"
+    },
+    {
+      "page": "02-original-request-pending",
+      "path": "docs/media/support/02-original-request-pending.png"
+    },
+    {
+      "page": "03-feedback-accepted",
+      "path": "docs/media/support/03-feedback-accepted.png"
+    },
+    {
+      "page": "04-reopened-history",
+      "path": "docs/media/support/04-reopened-history.png"
+    }
+  ],
+  "recording": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 430,
+        "height": 932
+      }
+    ],
+    "format": {
+      "duration": "5.200000"
+    }
+  },
+  "files": [
+    {
+      "path": "docs/media/support/01-feedback-form.png",
+      "bytes": 77928,
+      "sha256": "aea2d3824f41fcd62d1317c9f5816502b96678ac55999054829fe1faac0fa9e2"
+    },
+    {
+      "path": "docs/media/support/02-original-request-pending.png",
+      "bytes": 80718,
+      "sha256": "35dd27b299aeadcecc01ad5166f84eaf187cffb056af21484f92fc065d0b9561"
+    },
+    {
+      "path": "docs/media/support/03-feedback-accepted.png",
+      "bytes": 71500,
+      "sha256": "5a8e40c0561fcfeb136f5861f4e4bfc49f229a35bff27dc8053ca139aaa06826"
+    },
+    {
+      "path": "docs/media/support/04-reopened-history.png",
+      "bytes": 72097,
+      "sha256": "a4081256c6eeaa2770df84b780a80881ac863d09410b71a0a0ee9c9604444753"
+    },
+    {
+      "path": "docs/media/support/walkthrough.webm",
+      "bytes": 859014,
+      "sha256": "0681e1ce1ec30482ffce5124ce4697150a3c871c61d63fcaca60e9383c1d7478"
+    },
+    {
+      "path": "docs/media/support/walkthrough.mp4",
+      "bytes": 236377,
+      "sha256": "652ab3bcb4fee17cb58c6c3699f71d15c0ba2845df0ff5345ef0ad94d0f9955f"
+    },
+    {
+      "path": "docs/media/support/walkthrough.gif",
+      "bytes": 834864,
+      "sha256": "80a67b7ba3f396e8ffe1185f2069e21541942269ce5bf1aa2129c4d9169f257a"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/record-support.ts",
+      "sha256": "5f52d0d995c7244cbeb0e37827a2c208425be2829e9d1505a66c9963f93615aa"
+    },
+    {
+      "path": "src/shared/ui/help.tsx",
+      "sha256": "daff98c6991d6c58b58f640a45287036e079628f9ddbd90ffcb2dc01743b84b8"
+    },
+    {
+      "path": "src/shared/ui/pages.tsx",
+      "sha256": "d0cc60478de96c9dd137b1f5207c679d43d1f8c430289abb0bc81f024e1d25ff"
+    },
+    {
+      "path": "src/shared/client/support.ts",
+      "sha256": "c5a554bb1bb72d26025c7fed1e9bc4556139fb66fd2a11a3253922e153a2d87a"
+    },
+    {
+      "path": "src/shared/client/evidence.ts",
+      "sha256": "2f59ce595ca4e02b011bc22f36f19a20f8a7cc3bc00f62b926232dd3b59b42dc"
+    },
+    {
+      "path": "src/api/modules/support.ts",
+      "sha256": "209f28569e50fdcffeb06ba44fb913158b3a1f8bcc5a14e92605415790361c30"
+    },
+    {
+      "path": "src/shared/ui/theme.css",
+      "sha256": "a85ebce8b9e972d973e2c46935058d676ab005cd5b210cd9cbe8f231ba5b9433"
+    },
+    {
+      "path": "src/preview/fixtures.ts",
+      "sha256": "3b070175a0ad5ee2c93e50064fb8595754675274c21fea6f07943bea18604c70"
+    }
+  ]
+}

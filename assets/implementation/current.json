@@ -3,7 +3,7 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-29T22:58:05.209Z",
+  "checked_at": "2026-10-29T23:25:22.216Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
@@ -23,8 +23,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 6558,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-57-24-224Z-12b74ca2/typecheck.log",
+      "elapsed_ms": 7160,
+      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -40,29 +40,29 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 274,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-57-24-224Z-12b74ca2/server.log",
+      "elapsed_ms": 7417,
+      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T22-57-24-224Z-12b74ca2\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T23-24-00-670Z-376313d1\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T22-57-24-224Z-12b74ca2\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T23-24-00-670Z-376313d1\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 1044,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-57-24-224Z-12b74ca2/preview.log",
-      "log_sha256": "a28f910e4599b92584635664babd9cf89cd8b248318d97475981d3d87f74c924"
+      "elapsed_ms": 2477,
+      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/preview.log",
+      "log_sha256": "22a31e36073f773fa848b07993f4214e966eda8c425c7fd76aaefa41f90d455c"
     },
     {
       "task": "build:alipay",
@@ -76,9 +76,9 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 21672,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-57-24-224Z-12b74ca2/alipay.log",
-      "log_sha256": "b3ba00bfc37ca7ad2dff5c594aa473ed63059d0d003145abaf248855767c3cc8"
+      "elapsed_ms": 44510,
+      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/alipay.log",
+      "log_sha256": "8efd51629ddab1c5d9171efb0406a6f2fd9016a76c0fbaf7c4e92a6fa705fc06"
     },
     {
       "task": "build:douyin",
@@ -92,14 +92,14 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 10524,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-57-24-224Z-12b74ca2/douyin.log",
-      "log_sha256": "6c3608f8eb6af008b9ae362983a9f8765faf75cce3c0e417c5cfc6c7405b8409"
+      "elapsed_ms": 14555,
+      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/douyin.log",
+      "log_sha256": "09dea7f2b9f288ccb6266a49473fa228aeaaea2a122ac3f0670c5bb69502ecc9"
     }
   ],
   "suites": [],
-  "source_files": 388,
-  "source_set_hash": "d467b91565e8f583d4d0f7919404d05f98347adf3c8b6edd0679cf513e8e5efc",
+  "source_files": 395,
+  "source_set_hash": "487ce07715d5685df6392c4a87070a5ef21dde2eb0ef13dda56d628072d96c3d",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -331,7 +331,7 @@
     },
     {
       "path": "src/api/modules/support.ts",
-      "sha256": "2f6b5924e16516f1d796d85a2bbecddf193e98a7a6729fbeb86c53159361d708"
+      "sha256": "209f28569e50fdcffeb06ba44fb913158b3a1f8bcc5a14e92605415790361c30"
     },
     {
       "path": "src/api/privacy/journal.ts",
@@ -551,7 +551,7 @@
     },
     {
       "path": "src/preview/fixtures.ts",
-      "sha256": "8a1ef5b9f262f9a2eb4e22515d45722a1b1a1ed1680603f67cdd0a5e15f43dea"
+      "sha256": "3b070175a0ad5ee2c93e50064fb8595754675274c21fea6f07943bea18604c70"
     },
     {
       "path": "src/preview/index.html",
@@ -587,7 +587,7 @@
     },
     {
       "path": "src/shared/client/evidence.ts",
-      "sha256": "f5148ddb74b7edcf5cfd069545db4c8d13f96686904487f6874fc58fa4e2e094"
+      "sha256": "2f59ce595ca4e02b011bc22f36f19a20f8a7cc3bc00f62b926232dd3b59b42dc"
     },
     {
       "path": "src/shared/client/order-actions.ts",
@@ -612,6 +612,10 @@
     {
       "path": "src/shared/client/sha256.ts",
       "sha256": "f3c0828471c5f1d620fe719ea61bab7f6ba5231ca22ed7d9022695199cbae179"
+    },
+    {
+      "path": "src/shared/client/support.ts",
+      "sha256": "c5a554bb1bb72d26025c7fed1e9bc4556139fb66fd2a11a3253922e153a2d87a"
     },
     {
       "path": "src/shared/contracts/api.generated.ts",
@@ -674,6 +678,10 @@
       "sha256": "47ec5db09eb3903bfedd0661e7d70cf5a27baa64a923994f32753840ce454406"
     },
     {
+      "path": "src/shared/ui/help.tsx",
+      "sha256": "daff98c6991d6c58b58f640a45287036e079628f9ddbd90ffcb2dc01743b84b8"
+    },
+    {
       "path": "src/shared/ui/order.tsx",
       "sha256": "7034f6bd87243f239d36a538ae9ee9b83d00068d44e32736b9d6d9032a88a85f"
     },
@@ -683,7 +691,7 @@
     },
     {
       "path": "src/shared/ui/pages.tsx",
-      "sha256": "15ae421992ced7563b2a5ecd92155dbbb70c677f63a16de43cf8642f83581b2e"
+      "sha256": "d0cc60478de96c9dd137b1f5207c679d43d1f8c430289abb0bc81f024e1d25ff"
     },
     {
       "path": "src/shared/ui/photos.tsx",
@@ -703,7 +711,7 @@
     },
     {
       "path": "src/shared/ui/theme.css",
-      "sha256": "9cab31f1deb03ac6e436600009c1db2990a0c1e75f9aab4a6339236f7ed5cd50"
+      "sha256": "a85ebce8b9e972d973e2c46935058d676ab005cd5b210cd9cbe8f231ba5b9433"
     },
     {
       "path": "src/worker/analysis/profile.ts",
@@ -1374,6 +1382,10 @@
       "sha256": "98706bd991e12fb4fbbb4f2881240af4c923e12ecd495cb59e53c5ed7e5295f5"
     },
     {
+      "path": "tests/integration/support-flow.test.ts",
+      "sha256": "468fd343c9bb566e2632508653108242109c877f48cff3c8758e32530cf61272"
+    },
+    {
       "path": "tests/integration/tool-consumer.test.ts",
       "sha256": "af5eb539dac2766f19a47f7b83eef8afe7ba3a55d7e0caf277f0d867d16e57a0"
     },
@@ -1426,6 +1438,10 @@
       "sha256": "de134edeac24d65b54b66a432ff605f66a0cd609736acf849777a2bf487413df"
     },
     {
+      "path": "tests/unit/local-readiness.test.ts",
+      "sha256": "c0823631a5c4c25e419e59f8803253dfd989915225ee28b5d688147d704b0516"
+    },
+    {
       "path": "tests/unit/native-review-audio.test.ts",
       "sha256": "ab1d1040e32313ca0787ec97e8fea72eac95da9ebda5c7d84ef6063a6bb6cfd9"
     },
@@ -1456,6 +1472,10 @@
     {
       "path": "tests/unit/speech-channel.test.ts",
       "sha256": "e1915a87059b63299e59df93e4553dc429d296e6a5991e0d78016eff8851b6ef"
+    },
+    {
+      "path": "tests/unit/support.test.ts",
+      "sha256": "61df1dafe3ee4b11102a175f173b0541b801bffc37f6b02c7cba4314a86f5452"
     },
     {
       "path": "tests/unit/vision-wire.test.ts",
@@ -1550,12 +1570,16 @@
       "sha256": "420a9918d2920f13c4b5e43f7a73f162785dc0e41373e1e94649529e47550dc3"
     },
     {
+      "path": "scripts/delivery/readiness.ts",
+      "sha256": "ca4cb039bb1f3ccbb68bd89c3661d3f248d2ab64a1afb9a2e743790885ace572"
+    },
+    {
       "path": "scripts/delivery/serve-preview.ts",
       "sha256": "de98ae58b8bcc79a661156a21c722bc7787a9cf63faf4fdd73e2f18ac75dae02"
     },
     {
       "path": "scripts/delivery/start.ts",
-      "sha256": "e184bf9ed2b6158f933c1d458973413076418b4899e53a1c0ba0c1bf900dc322"
+      "sha256": "c681ceec315632cf07ac8ed7d90ea31e204fc01603e850f5fe778c45ba27de70"
     },
     {
       "path": "scripts/dev-setup.ts",
@@ -1608,6 +1632,10 @@
     {
       "path": "scripts/record-preview.ts",
       "sha256": "c3167d1e5cfcc86f0310b4ce4fe5fa4a7f36ae10cb8d66e984dbb76ce297ea03"
+    },
+    {
+      "path": "scripts/record-support.ts",
+      "sha256": "5f52d0d995c7244cbeb0e37827a2c208425be2829e9d1505a66c9963f93615aa"
     },
     {
       "path": "scripts/run.ps1",
@@ -1970,7 +1998,9 @@
     "order_cancellation_and_original_refund_implemented": true,
     "order_actions_fixture_verified": false,
     "album_selective_save_implemented": true,
-    "native_album_callback_fixture_verified": true
+    "native_album_callback_fixture_verified": false,
+    "order_feedback_and_history_implemented": true,
+    "support_original_request_fixture_verified": true
   },
   "generation_implementation": {
     "provider": "VOLCENGINE_ARK",
@@ -2301,11 +2331,35 @@
     "callback_timeout_unknown_and_overlap_blocked": true,
     "lost_ack_original_state_recovery": true,
     "copy_separate_from_album": true,
-    "focused_verified": true,
+    "focused_verified": false,
     "tests_passed": 27,
     "browser_checks_passed": 10,
     "native_device_verified": false,
     "actual_album_file_verified": false,
-    "evidence": "docs/verification/album-save-source.json"
+    "evidence": "docs/verification/album-save-source.json",
+    "historical_focused_verified": true,
+    "evidence_source_set_hash": "d467b91565e8f583d4d0f7919404d05f98347adf3c8b6edd0679cf513e8e5efc",
+    "rerun_current_support_round": false
+  },
+  "support_center": {
+    "implemented": true,
+    "six_feedback_categories": true,
+    "optional_private_evidence_up_to_five": true,
+    "original_order_account_and_visible_page_binding": true,
+    "original_key_body_and_completed_upload_recovery": true,
+    "pending_edits_locked": true,
+    "concurrent_submit_coalesced": true,
+    "owned_paged_history_and_order_filter": true,
+    "latest_ticket_status_query": true,
+    "wrong_purpose_foreign_and_revoked_evidence_rejected": true,
+    "private_form_not_persisted": true,
+    "feedback_never_implies_refund_or_repair": true,
+    "focused_verified": true,
+    "tests_passed": 32,
+    "browser_checks_passed": 10,
+    "native_login_verified": false,
+    "real_staff_workflow_implemented": false,
+    "real_refund_or_repair_verified": false,
+    "evidence": "docs/verification/support-source.json"
   }
 }

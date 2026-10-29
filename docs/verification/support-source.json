@@ -1,0 +1,529 @@
+{
+  "schema_version": "1.0",
+  "checked_at": "2026-10-29T23:27:04.625962+00:00",
+  "strategy": "USER_REQUESTED_FOCUSED_ORDER_SUPPORT_DELIVERY",
+  "source_set_hash": "487ce07715d5685df6392c4a87070a5ef21dde2eb0ef13dda56d628072d96c3d",
+  "source_files": 395,
+  "runtime_contract_files": 42,
+  "resource_files": 4,
+  "build_report": "docs/delivery/current.json",
+  "build_checks": [
+    {
+      "task": "typecheck",
+      "status": "PASS",
+      "elapsed_ms": 7160,
+      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/typecheck.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "build:server",
+      "status": "PASS",
+      "elapsed_ms": 7417,
+      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/server.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "exec",
+      "status": "PASS",
+      "elapsed_ms": 2477,
+      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/preview.log",
+      "log_sha256": "22a31e36073f773fa848b07993f4214e966eda8c425c7fd76aaefa41f90d455c"
+    },
+    {
+      "task": "build:alipay",
+      "status": "PASS",
+      "elapsed_ms": 44510,
+      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/alipay.log",
+      "log_sha256": "8efd51629ddab1c5d9171efb0406a6f2fd9016a76c0fbaf7c4e92a6fa705fc06"
+    },
+    {
+      "task": "build:douyin",
+      "status": "PASS",
+      "elapsed_ms": 14555,
+      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/douyin.log",
+      "log_sha256": "09dea7f2b9f288ccb6266a49473fa228aeaaea2a122ac3f0670c5bb69502ecc9"
+    }
+  ],
+  "components": [
+    {
+      "name": "server",
+      "status": "PASS"
+    },
+    {
+      "name": "preview",
+      "status": "PASS"
+    },
+    {
+      "name": "alipay",
+      "status": "PASS"
+    },
+    {
+      "name": "douyin",
+      "status": "PASS"
+    }
+  ],
+  "local_checks": {
+    "doctor": {
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_seconds": 90,
+      "elapsed_seconds": 2.352,
+      "log_path": "runtime/delivery/doctor-focused.log",
+      "log_sha256": "0df1c6a51fc49a93cefa1ca411ef1fb29059eaa5b70f28ca11d1b5e7c72639a3",
+      "report": {
+        "checked_at": "2026-10-29T23:17:26.803Z",
+        "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
+        "rows": [
+          {
+            "id": "node",
+            "status": "PASS",
+            "detail": "24.22.1"
+          },
+          {
+            "id": "runtime/tools/package-manager/node_modules/pnpm/bin/pnpm.cjs",
+            "status": "PASS",
+            "detail": "present"
+          },
+          {
+            "id": "assets/presets/presets.v3.1.json",
+            "status": "PASS",
+            "detail": "present"
+          },
+          {
+            "id": "configuration",
+            "status": "PASS",
+            "detail": "environment=development; private values omitted"
+          },
+          {
+            "id": "database",
+            "status": "PASS",
+            "detail": "connected; 27 migrations"
+          },
+          {
+            "id": "ffmpeg",
+            "status": "PASS",
+            "detail": "Native executable on PATH responds"
+          },
+          {
+            "id": "ffprobe",
+            "status": "PASS",
+            "detail": "Native executable on PATH responds"
+          },
+          {
+            "id": "generation",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "codex",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "payments",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "community-publishing",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "server",
+            "status": "PRESENT_NOT_CERTIFIED",
+            "detail": "Existing default output; delivery:build records fresh isolated outputs"
+          },
+          {
+            "id": "preview",
+            "status": "PRESENT_NOT_CERTIFIED",
+            "detail": "Existing default output; delivery:build records fresh isolated outputs"
+          },
+          {
+            "id": "alipay",
+            "status": "NOT_BUILT",
+            "detail": "Run delivery:build"
+          },
+          {
+            "id": "douyin",
+            "status": "PRESENT_NOT_CERTIFIED",
+            "detail": "Existing default output; delivery:build records fresh isolated outputs"
+          },
+          {
+            "id": "catalog",
+            "status": "PASS",
+            "detail": "10 official presets; 14 variants"
+          }
+        ],
+        "full_product_verified": false,
+        "production_admitted": false
+      }
+    },
+    "backend": {
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_seconds": 90,
+      "elapsed_seconds": 5.214,
+      "log_path": "runtime/delivery/backend-focused.log",
+      "log_sha256": "0777daf4849bc8964ed896a0ec530c328629fe64b63c8b0cb27e573eb5cbafcf",
+      "local_stack_ready": true,
+      "preview_http_ready": false,
+      "observed_ready_services": [
+        "api/main.js",
+        "worker/main.js",
+        "worker/lifecycle/reaper-main.js",
+        "worker/lifecycle/media-maintenance-main.js"
+      ],
+      "paid_service_switches_enabled": false
+    },
+    "preview": {
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_seconds": 90,
+      "elapsed_seconds": 1.255,
+      "log_path": "runtime/delivery/preview-focused.log",
+      "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
+      "local_stack_ready": false,
+      "preview_http_ready": true
+    }
+  },
+  "focused_tests": {
+    "status": "PASS",
+    "passed": 32,
+    "failed": 0,
+    "unit_passed": 28,
+    "api_passed": 4,
+    "reported_files": 5,
+    "unit": "docs/verification/support-unit.json",
+    "api": "docs/verification/support-api.json",
+    "commands": [
+      {
+        "task": "typecheck",
+        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+        "argv": [
+          "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+          "--noEmit"
+        ],
+        "shell": false,
+        "status": "PASS",
+        "exit_code": 0,
+        "signal": null,
+        "timeout_ms": 180000,
+        "elapsed_ms": 6316,
+        "log_path": "runtime/test-results/support-2026-10-29T23-23-21-774Z/typecheck.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "task": "exec",
+        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.config.ts tests/unit/album.test.ts tests/unit/support.test.ts tests/unit/client.test.ts tests/unit/local-readiness.test.ts --outputFile.json=runtime/test-results/support-2026-10-29T23-23-21-774Z/unit.json",
+        "argv": [
+          "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+          "run",
+          "--config",
+          "vitest.config.ts",
+          "tests/unit/album.test.ts",
+          "tests/unit/support.test.ts",
+          "tests/unit/client.test.ts",
+          "tests/unit/local-readiness.test.ts",
+          "--outputFile.json=runtime/test-results/support-2026-10-29T23-23-21-774Z/unit.json"
+        ],
+        "shell": false,
+        "status": "PASS",
+        "exit_code": 0,
+        "signal": null,
+        "timeout_ms": 180000,
+        "elapsed_ms": 3896,
+        "log_path": "runtime/test-results/support-2026-10-29T23-23-21-774Z/unit.log",
+        "log_sha256": "6398fed81fc21d3ccc3990aa0b07af3d06d800d21a7b2e0807bd631285911128"
+      },
+      {
+        "task": "exec",
+        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/support-flow.test.ts --outputFile.json=runtime/test-results/support-2026-10-29T23-23-21-774Z/api.json",
+        "argv": [
+          "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+          "run",
+          "--config",
+          "vitest.integration.config.ts",
+          "tests/integration/support-flow.test.ts",
+          "--outputFile.json=runtime/test-results/support-2026-10-29T23-23-21-774Z/api.json"
+        ],
+        "shell": false,
+        "status": "PASS",
+        "exit_code": 0,
+        "signal": null,
+        "timeout_ms": 180000,
+        "elapsed_ms": 26682,
+        "log_path": "runtime/test-results/support-2026-10-29T23-23-21-774Z/api.log",
+        "log_sha256": "9def24fa66afa4f3ce81c423355a25c18a9bad7a3373c5504b7c66a8aa4a72d7"
+      }
+    ],
+    "tested_source_snapshot": "docs/verification/support-tested-source.json",
+    "source_exact_match": true,
+    "coverage": [
+      "Six feedback categories, trimmed input, optional private evidence and original-order binding",
+      "Actual generated PNG upload, local object write, image validation and private support association",
+      "Concurrent submissions share one original operation; confirmed success does not create another ticket",
+      "Committed ticket ACK loss reuses original key/body and original completed evidence upload",
+      "Changed input rejected until pending original submission is resolved",
+      "Hidden page or changed account stops new upload completion/writes and ticket creation",
+      "Owned paged history, buyer-bound cursor and forbidden foreign order/ticket reads",
+      "Wrong-purpose, foreign and revoked proof assets rejected",
+      "Latest stored processing state read independently of original OPEN creation receipt",
+      "Local launcher elapsed-time readiness budget rejects late success and stops on shutdown",
+      "Retained album queue and private API/account-scoped client regressions"
+    ],
+    "native_login_and_staff_state_transitions": "SYNTHETIC_OR_EXCLUDED",
+    "payment_or_generation_called": false,
+    "actual_local_effects": [
+      "NATIVE_POSTGRESQL",
+      "REAL_API_AUTH_AND_SCOPE",
+      "ACTUAL_PNG_UPLOAD_AND_LOCAL_OBJECT_WRITE",
+      "PRIVATE_TICKET_ASSOCIATION_AND_ORIGINAL_KEY",
+      "OWNED_SERVICE_STARTUP"
+    ]
+  },
+  "browser_capture": {
+    "status": "PASS",
+    "manifest": "docs/media/support/capture-manifest.json",
+    "sha256": "1ced5657f299292aa941318f5421ea13ceabfe8d2c0a435bc3d4474a5b021667",
+    "checks": [
+      "OWNED_ORDER_FEEDBACK_WITH_NO_AUTOMATIC_MUTATION",
+      "CLASSIFIED_FEEDBACK_AND_PLATFORM_ERROR_GUIDANCE",
+      "OPTIONAL_LOCAL_EVIDENCE_SELECTION_AND_REMOVAL_BEFORE_UPLOAD",
+      "LOST_COMMITTED_ACK_PRESERVES_ORIGINAL_FEEDBACK_AND_LOCKS_EDITS",
+      "ORIGINAL_KEY_BODY_AND_COMPLETED_UPLOAD_REUSED_AFTER_ACK_LOSS",
+      "CURRENT_ORDER_AND_ALL_OWNED_RECORDS_FILTERS",
+      "LATEST_TICKET_GET_DISPLAYS_CURRENT_PROCESSING_STATE",
+      "REOPENED_ACCOUNT_HISTORY_WITHOUT_RESUBMISSION_OR_ORDER_REQUIRED",
+      "FEEDBACK_ACCEPTANCE_NEVER_IMPLIES_PAYMENT_REFUND_OR_REPAIR",
+      "NO_HORIZONTAL_OVERFLOW_AT_320PX"
+    ],
+    "screenshots": 4,
+    "media_files": 7,
+    "browser_tabs_closed": true,
+    "owned_preview_server_stopped": true,
+    "native_device_verified": false,
+    "real_generation_verified": false,
+    "real_payment_verified": false,
+    "real_refund_verified": false
+  },
+  "prior_delivery": {
+    "source_commit": "c7bbf395a4bb86d3f48c97a948566119f929a247",
+    "path": "docs/verification/delivery-focused-c7bbf39.json",
+    "sha256": "4608a183349519e2a377dd44867d56bdb495c0a8edd109273752f7279becd248"
+  },
+  "full_suite_executed": false,
+  "full_suite_required_for_packaging": false,
+  "original_publication_checker_executed": false,
+  "checker_weakened": false,
+  "historical_evidence_unchanged": [
+    {
+      "path": "docs/verification/text-layout-native-source.json",
+      "sha256": "8767b7a787dafb2a674936c926ea219db362bcb7fb3755c4f4b645db3749da07"
+    },
+    {
+      "path": "docs/verification/text-layout-attempts.json",
+      "sha256": "0ac527d0d8f5ddca909e094ed6c6431e1ac24069327d88a7c3d87237c18ea8ca"
+    },
+    {
+      "path": "docs/verification/disclosure-native-source.json",
+      "sha256": "0c7458f86eb561cb06fbc0486d2bb5a1273a1ea03e57520540f74d24f9552337"
+    },
+    {
+      "path": "docs/verification/disclosure-attempts.json",
+      "sha256": "b2b28daa1665be4d80e5fb6bbd8ce63e2bb03f521c4852d18f12f9da438193c5"
+    },
+    {
+      "path": "docs/verification/audio-review-native-source.json",
+      "sha256": "73f2c5ee3e832feba155b3cfb89bc362de626d231237ef0fd2bb501750a4191b"
+    },
+    {
+      "path": "docs/verification/audio-review-attempts.json",
+      "sha256": "55b3093994d0084b6f885a6e383e28b88fa5831219beab79eeed27fb5da892e3"
+    },
+    {
+      "path": "docs/verification/listening-native-source.json",
+      "sha256": "9d7df597dd604f746923a1238df80661336fe27d05fe13454ebeac4547926f13"
+    },
+    {
+      "path": "docs/verification/listening-attempts.json",
+      "sha256": "83c7214998cd6a74e819fea11c9cc772c19df057d90085a9284816f44bc00694"
+    },
+    {
+      "path": "docs/verification/tool-queue-native-source.json",
+      "sha256": "8f4b2a8e57bcda3016fbbd5a41c274b5173a7f919989386489b06c2313b9674c"
+    },
+    {
+      "path": "docs/verification/worker-failure-native-source.json",
+      "sha256": "fbf919d88e4b3bb6b2e1ff5993fb62a4dacfd78c559bd7232f0c780b28b41846"
+    },
+    {
+      "path": "docs/verification/order-budget-native-source.json",
+      "sha256": "167ba9ad0536b66305129060143a37a70424f93134334b76ffa95696163278df"
+    },
+    {
+      "path": "docs/verification/mcp-observation-native-source.json",
+      "sha256": "de9583465a2dc719d499e07ba32f6377851daaad331f9ba8cbaf07e47f71ab2d"
+    },
+    {
+      "path": "docs/verification/repair-cost-native-source.json",
+      "sha256": "d206192f519e620ec7690171c81eb0973c91f81e82989c21b4d11bdf15d125c6"
+    },
+    {
+      "path": "docs/verification/native-order-attempts.json",
+      "sha256": "482dec916c59c6fdb465f9291619bf138548ec13e6d3e89406a152abb6753483"
+    },
+    {
+      "path": "docs/verification/native-qc-attempts.json",
+      "sha256": "f9a19248cdcd21ec6855770cb67a256469d8b9c4dbe0a806eb685ef3176e9365"
+    },
+    {
+      "path": "docs/verification/repair-candidate-source.json",
+      "sha256": "d38d9f59dbc4c8733b27f3774dfbd62bbf25b6605a2d84906650b6902533a7a9"
+    },
+    {
+      "path": "docs/verification/repair-candidate-tested-source.json",
+      "sha256": "02c9a357eef923fa78546faea70d4f4ecdc750cdc29e697716e4cbd709f2d945"
+    },
+    {
+      "path": "docs/verification/repair-candidate-tests.json",
+      "sha256": "d1dd2a4357607025577f56e686f0c224389d1984ef4d62a93ab0f20f83c31b0f"
+    },
+    {
+      "path": "docs/verification/repair-candidate-attempts.json",
+      "sha256": "364b9b231a81a6d947358193e50d780c5361feb27fcac8541a4a4acdf664f355"
+    },
+    {
+      "path": "docs/verification/generated-repair-source.json",
+      "sha256": "3a24027f69d797aa52272805fb59339226ee7383a16f05d1f2b7ebf02ce2f4e6"
+    },
+    {
+      "path": "docs/verification/generated-repair-tested-source.json",
+      "sha256": "1044830f0c248660e951ef0bdd06a0677909d5926257495eb4a46c368b8a6f4c"
+    },
+    {
+      "path": "docs/verification/generated-repair-tests.json",
+      "sha256": "a446104bb54334cc347ca1684277096608793cb5dd2685c358d837d7e70c7c1b"
+    },
+    {
+      "path": "docs/verification/generated-repair-attempts.json",
+      "sha256": "f15fa61cecb36e8c13b9c199920fc7cd1eff67148c8c3ba4017fa2d7ae4d5fb7"
+    },
+    {
+      "path": "docs/verification/generated-repair-initial-role-failure-source.json",
+      "sha256": "dad343e5c252a01e470eee8642a749eda56b8e0357e95a49b0ef04cab05b35a4"
+    },
+    {
+      "path": "docs/verification/generated-repair-initial-role-failure.json",
+      "sha256": "4eb4bafaa90269de6ba2039040549adf04efbef7a7c10f86db01aeb53742e030"
+    },
+    {
+      "path": "docs/verification/generated-repair-initial-timeout-source.json",
+      "sha256": "18eedccffe414887be2a50cde102f3759a373dfd3280041d3a367e01fa5c4e2c"
+    },
+    {
+      "path": "docs/verification/generated-repair-initial-timeout.json",
+      "sha256": "1170bbddbcd7827c90e7e74557ff5bda4e1cba4f07e2049f03ee77f6078541bc"
+    },
+    {
+      "path": "docs/verification/photo-capture-source.json",
+      "sha256": "0a3a5adb102b59dec7808e74283a0c3e508e84445d9527e30f6d42b9aa85a5bf"
+    },
+    {
+      "path": "docs/verification/photo-capture-tested-source.json",
+      "sha256": "0c6d8e0cdf93835f3dc1f92589aca77366d20738b20ef5203843fdecc41b1e28"
+    },
+    {
+      "path": "docs/verification/photo-capture-unit.json",
+      "sha256": "5d582f3a3205c7bff72e99b2b22e605d6bd9df085a472171217efa9bbe3743d2"
+    },
+    {
+      "path": "docs/verification/photo-capture-api.json",
+      "sha256": "7dc5e65b0cc9f6057c538b88fd4cb7e5545df0e6c5303bd27c4295c750e895a8"
+    },
+    {
+      "path": "docs/verification/draft-resume-source.json",
+      "sha256": "606090ef4db3d9b1710adf1623a4fa23c138d06cda64ff833d888ca2d0d027e5"
+    },
+    {
+      "path": "docs/verification/draft-resume-tested-source.json",
+      "sha256": "d70e27043a25f5cea2b2e8b6457fcf4ce57701753c362b1c9eb88e927309059e"
+    },
+    {
+      "path": "docs/verification/draft-resume-unit.json",
+      "sha256": "51ead16fa990ca316d9fe12040ce87b19746281d8a0c8ff6164397d97f64ed6a"
+    },
+    {
+      "path": "docs/verification/draft-resume-api.json",
+      "sha256": "5fc9c3860b52efd57f8a9a83d65c0514830de67966bc62c7ca10332bc3821dbc"
+    },
+    {
+      "path": "docs/verification/draft-resume-initial-typecheck.json",
+      "sha256": "5581f71542fd2dc0a287b4b7d31db1163633fc4142a711acf323e172d79d062d"
+    },
+    {
+      "path": "docs/verification/order-actions-source.json",
+      "sha256": "ebf6e6634e735a2e3d914b28b56852d9bbe53abf9f3530e8400eff6817c98126"
+    },
+    {
+      "path": "docs/verification/order-actions-tested-source.json",
+      "sha256": "5b253b59688116b9b8efd4c38a2d91352355f6bccd69a79fa24a97cadf546a2d"
+    },
+    {
+      "path": "docs/verification/order-actions-unit.json",
+      "sha256": "30a2264d2115ad63839622a7988540490b984f882911ab42c0d303cee9217211"
+    },
+    {
+      "path": "docs/verification/order-actions-api.json",
+      "sha256": "b56089dbdc0f3c036934132ab082f1cf260dc37cbc8ea642a3a50abbaab6f2a0"
+    },
+    {
+      "path": "docs/verification/album-save-source.json",
+      "sha256": "1a72e236dc3c4bda8aefae9a0d8cf2dd1b8ec810f0c338ee7d2161abaa048748"
+    },
+    {
+      "path": "docs/verification/album-save-tested-source.json",
+      "sha256": "aa23a41b6e5f974e98fc407edd219b782ee1a3303b78682a92d6da1315d174d9"
+    },
+    {
+      "path": "docs/verification/album-save-unit.json",
+      "sha256": "a49cd9ba3b42b7b41c639c113bc90368fca147ea1e235460debcb9710a05a27f"
+    },
+    {
+      "path": "docs/verification/album-save-api.json",
+      "sha256": "32d109467ffab4e51998730b417299e1b68031728bc2da7d13f49df611708e7a"
+    }
+  ],
+  "frozen_c_files": 25,
+  "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
+  "existing_media_files_verified": 64,
+  "new_media_files_verified": 7,
+  "functional_scope": {
+    "requirements": 58,
+    "p0": 52,
+    "routes": 3,
+    "official_styles": 10,
+    "minimum_variants": 14
+  },
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false,
+  "limitations": [
+    "Browser uploads, ACK loss and processing transitions are synthetic; official presets remain unavailable",
+    "API checks use actual generated PNGs and local uploads; staff transitions are explicit SQL fixtures, not a staff workflow or live refund/repair",
+    "Unsent text/photos are held only in page memory; reopening reads owned ticket records and does not restore private form drafts",
+    "Native login/photo authorization, real cloud object storage, customer service and payment/refund outcomes require separate evidence",
+    "Real Codex/providers, billing/isolation, native-audio repair, complete community/staff aftercare/Plus and cloud remain incomplete",
+    "Historical album/order/draft/photo/generated/repair checks retain their exact original sources; comprehensive suites were not rerun",
+    "Mini builds use loopback development API; rebuild with verified service origin for devices"
+  ],
+  "initial_attempt": "docs/verification/support-initial-attempt.json",
+  "initial_startup_attempt": "docs/verification/support-startup-initial.json",
+  "local_readiness": {
+    "preview_budget_ms": 30000,
+    "backend_budget_ms": 45000,
+    "all_four_services_required": true,
+    "order_deadlines_or_gates_changed": false,
+    "original_delay_root_cause_confirmed": false
+  }
+}

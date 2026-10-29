@@ -1,0 +1,375 @@
+{
+  "numTotalTestSuites": 4,
+  "numPassedTestSuites": 4,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 28,
+  "numPassedTests": 28,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793316210756,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "resumes only failed media and never mistakes downloaded bytes or a lost receipt for a failed native save",
+          "status": "passed",
+          "title": "resumes only failed media and never mistakes downloaded bytes or a lost receipt for a failed native save",
+          "duration": 16.139400000000023,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "requires explicit confirmation before repeating a save whose callback was interrupted",
+          "status": "passed",
+          "title": "requires explicit confirmation before repeating a save whose callback was interrupted",
+          "duration": 2.9675000000000296,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "fences an existing local save queue when the buyer changes",
+          "status": "passed",
+          "title": "fences an existing local save queue when the buyer changes",
+          "duration": 2.444999999999993,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "saves only the selected media kind and reuses one original session without resaving success",
+          "status": "passed",
+          "title": "saves only the selected media kind and reuses one original session without resaving success",
+          "duration": 2.3274000000000115,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "restores the exact local journal before any API or native call and detects duplicate media entries",
+          "status": "passed",
+          "title": "restores the exact local journal before any API or native call and detects duplicate media entries",
+          "duration": 4.126800000000003,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "stops while the original save-session response is pending and never resets that stop after opening",
+          "status": "passed",
+          "title": "stops while the original save-session response is pending and never resets that stop after opening",
+          "duration": 1.7730999999999995,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rechecks pause after the SAVING receipt resolves and before invoking the native album",
+          "status": "passed",
+          "title": "rechecks pause after the SAVING receipt resolves and before invoking the native album",
+          "duration": 1.5464000000000055,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "fences an account change while a local download completes, before the native write",
+          "status": "passed",
+          "title": "fences an account change while a local download completes, before the native write",
+          "duration": 1.4314999999999714,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "retries one explicitly missing UNKNOWN item without invoking unrelated failed media",
+          "status": "passed",
+          "title": "retries one explicitly missing UNKNOWN item without invoking unrelated failed media",
+          "duration": 1.3567000000000462,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects a mismatched download link before fetching or saving any bytes",
+          "status": "passed",
+          "title": "rejects a mismatched download link before fetching or saving any bytes",
+          "duration": 1.7726000000000113,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "never writes FAILED when local persistence fails after a confirmed native save",
+          "status": "passed",
+          "title": "never writes FAILED when local persistence fails after a confirmed native save",
+          "duration": 2.154799999999966,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "merges late original success after reopening instead of repeating a stale UNKNOWN native save",
+          "status": "passed",
+          "title": "merges late original success after reopening instead of repeating a stale UNKNOWN native save",
+          "duration": 1.1123000000000047,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793316211381,
+      "endTime": 1793316211421.1123,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/album.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "hashes byte-boundaries and Unicode without requiring browser or Node globals in a mini-program",
+          "status": "passed",
+          "title": "hashes byte-boundaries and Unicode without requiring browser or Node globals in a mini-program",
+          "duration": 23.326400000000035,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects unsafe service URLs, requires the original intent and clears an expired identity",
+          "status": "passed",
+          "title": "rejects unsafe service URLs, requires the original intent and clears an expired identity",
+          "duration": 5.541000000000054,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "does not retry unknown payment mutations and retains backpressure from the server",
+          "status": "passed",
+          "title": "does not retry unknown payment mutations and retains backpressure from the server",
+          "duration": 1.8237000000000307,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects an in-flight private response after an account switch instead of caching it for the next buyer",
+          "status": "passed",
+          "title": "rejects an in-flight private response after an account switch instead of caching it for the next buyer",
+          "duration": 0.9294000000001006,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "uses the same intent-key boundaries as both published API domains before sending a mutation",
+          "status": "passed",
+          "title": "uses the same intent-key boundaries as both published API domains before sending a mutation",
+          "duration": 192.75530000000003,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793316211538,
+      "endTime": 1793316211762.7554,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/client.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps observing fast refusals until actual readiness within one elapsed-time budget",
+          "status": "passed",
+          "title": "keeps observing fast refusals until actual readiness within one elapsed-time budget",
+          "duration": 4.0767999999999915,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "does not accept a late positive result and passes only the remaining probe budget",
+          "status": "passed",
+          "title": "does not accept a late positive result and passes only the remaining probe budget",
+          "duration": 1.2284999999999968,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "does not probe after stop and rejects a successful response if shutdown happened while waiting",
+          "status": "passed",
+          "title": "does not probe after stop and rejects a successful response if shutdown happened while waiting",
+          "duration": 0.338799999999992,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "stops at the original deadline instead of granting another budget after each failed probe",
+          "status": "passed",
+          "title": "stops at the original deadline instead of granting another budget after each failed probe",
+          "duration": 0.26659999999998263,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793316212312,
+      "endTime": 1793316212317.3389,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/local-readiness.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "validates support input before any API call and never stores descriptions, bytes or links",
+          "status": "passed",
+          "title": "validates support input before any API call and never stores descriptions, bytes or links",
+          "duration": 4.893700000000024,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "freezes one original submission, shares concurrent calls and skips another mutation after success",
+          "status": "passed",
+          "title": "freezes one original submission, shares concurrent calls and skips another mutation after success",
+          "duration": 3.6503999999999905,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "retries the original key and body after a committed ACK is lost without allowing edited content",
+          "status": "passed",
+          "title": "retries the original key and body after a committed ACK is lost without allowing edited content",
+          "duration": 2.2223000000000184,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "reuses the original upload grant and completed asset when retrying a support request",
+          "status": "passed",
+          "title": "reuses the original upload grant and completed asset when retrying a support request",
+          "duration": 3.519900000000007,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "stops after a grant resolves if the page was hidden and does not upload or create a ticket",
+          "status": "passed",
+          "title": "stops after a grant resolves if the page was hidden and does not upload or create a ticket",
+          "duration": 1.431600000000003,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects an account switch during order lookup and a response bound to another order",
+          "status": "passed",
+          "title": "rejects an account switch during order lookup and a response bound to another order",
+          "duration": 1.2192000000000007,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps a mismatched ticket result unresolved instead of displaying it as accepted",
+          "status": "passed",
+          "title": "keeps a mismatched ticket result unresolved instead of displaying it as accepted",
+          "duration": 0.5283999999999196,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793316211999,
+      "endTime": 1793316212017.5283,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/support.test.ts"
+    }
+  ]
+}

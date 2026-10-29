@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "checked_at": "2026-10-29T23:03:24.940118+00:00",
+  "status": "SOURCE_DELIVERY",
+  "scope": "FOCUSED_SELECTIVE_ALBUM_SAVE_AND_AVAILABLE_BUILDS",
+  "reason": "USER_REQUESTED_FAST_DELIVERY_WITHOUT_FULL_GREEN_REQUIREMENT",
+  "original_publication_checker_status": "NOT_RUN_FOCUSED_DELIVERY",
+  "checker_weakened": false,
+  "source_set_hash": "d467b91565e8f583d4d0f7919404d05f98347adf3c8b6edd0679cf513e8e5efc",
+  "source_files": 388,
+  "builds_passed": true,
+  "selected_builds_passed": true,
+  "checks": [
+    {
+      "task": "typecheck",
+      "status": "PASS",
+      "elapsed_ms": 6558,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-57-24-224Z-12b74ca2/typecheck.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "build:server",
+      "status": "PASS",
+      "elapsed_ms": 274,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-57-24-224Z-12b74ca2/server.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "exec",
+      "status": "PASS",
+      "elapsed_ms": 1044,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-57-24-224Z-12b74ca2/preview.log",
+      "log_sha256": "a28f910e4599b92584635664babd9cf89cd8b248318d97475981d3d87f74c924"
+    },
+    {
+      "task": "build:alipay",
+      "status": "PASS",
+      "elapsed_ms": 21672,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-57-24-224Z-12b74ca2/alipay.log",
+      "log_sha256": "b3ba00bfc37ca7ad2dff5c594aa473ed63059d0d003145abaf248855767c3cc8"
+    },
+    {
+      "task": "build:douyin",
+      "status": "PASS",
+      "elapsed_ms": 10524,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-57-24-224Z-12b74ca2/douyin.log",
+      "log_sha256": "6c3608f8eb6af008b9ae362983a9f8765faf75cce3c0e417c5cfc6c7405b8409"
+    }
+  ],
+  "local_checks": {
+    "doctor": "PASS",
+    "backend": "PASS",
+    "preview": "PASS"
+  },
+  "focused_tests": {
+    "passed": 27,
+    "failed": 0
+  },
+  "browser_checks": 10,
+  "full_suite_executed": false,
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false,
+  "evidence": "docs/verification/album-save-source.json",
+  "historical_publication": "docs/verification/publication-660400a.json"
+}

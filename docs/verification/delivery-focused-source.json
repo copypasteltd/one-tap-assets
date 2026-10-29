@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-29T23:03:24.940118+00:00",
-  "strategy": "USER_REQUESTED_FOCUSED_SELECTIVE_ALBUM_SAVE_DELIVERY",
-  "source_set_hash": "d467b91565e8f583d4d0f7919404d05f98347adf3c8b6edd0679cf513e8e5efc",
-  "source_files": 388,
+  "checked_at": "2026-10-29T23:27:04.625962+00:00",
+  "strategy": "USER_REQUESTED_FOCUSED_ORDER_SUPPORT_DELIVERY",
+  "source_set_hash": "487ce07715d5685df6392c4a87070a5ef21dde2eb0ef13dda56d628072d96c3d",
+  "source_files": 395,
   "runtime_contract_files": 42,
   "resource_files": 4,
   "build_report": "docs/delivery/current.json",
@@ -11,37 +11,37 @@
     {
       "task": "typecheck",
       "status": "PASS",
-      "elapsed_ms": 6558,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-57-24-224Z-12b74ca2/typecheck.log",
+      "elapsed_ms": 7160,
+      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "build:server",
       "status": "PASS",
-      "elapsed_ms": 274,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-57-24-224Z-12b74ca2/server.log",
+      "elapsed_ms": 7417,
+      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
       "status": "PASS",
-      "elapsed_ms": 1044,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-57-24-224Z-12b74ca2/preview.log",
-      "log_sha256": "a28f910e4599b92584635664babd9cf89cd8b248318d97475981d3d87f74c924"
+      "elapsed_ms": 2477,
+      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/preview.log",
+      "log_sha256": "22a31e36073f773fa848b07993f4214e966eda8c425c7fd76aaefa41f90d455c"
     },
     {
       "task": "build:alipay",
       "status": "PASS",
-      "elapsed_ms": 21672,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-57-24-224Z-12b74ca2/alipay.log",
-      "log_sha256": "b3ba00bfc37ca7ad2dff5c594aa473ed63059d0d003145abaf248855767c3cc8"
+      "elapsed_ms": 44510,
+      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/alipay.log",
+      "log_sha256": "8efd51629ddab1c5d9171efb0406a6f2fd9016a76c0fbaf7c4e92a6fa705fc06"
     },
     {
       "task": "build:douyin",
       "status": "PASS",
-      "elapsed_ms": 10524,
-      "log_path": "runtime/delivery-builds/2026-10-29T22-57-24-224Z-12b74ca2/douyin.log",
-      "log_sha256": "6c3608f8eb6af008b9ae362983a9f8765faf75cce3c0e417c5cfc6c7405b8409"
+      "elapsed_ms": 14555,
+      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/douyin.log",
+      "log_sha256": "09dea7f2b9f288ccb6266a49473fa228aeaaea2a122ac3f0670c5bb69502ecc9"
     }
   ],
   "components": [
@@ -67,11 +67,11 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 0.682,
+      "elapsed_seconds": 2.352,
       "log_path": "runtime/delivery/doctor-focused.log",
-      "log_sha256": "2ae12c8534bc88543d6e9d551cda88db66c639bc5e5b9c5af3d4125cf38c28b6",
+      "log_sha256": "0df1c6a51fc49a93cefa1ca411ef1fb29059eaa5b70f28ca11d1b5e7c72639a3",
       "report": {
-        "checked_at": "2026-10-29T22:58:38.064Z",
+        "checked_at": "2026-10-29T23:17:26.803Z",
         "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
         "rows": [
           {
@@ -163,17 +163,24 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 2.841,
+      "elapsed_seconds": 5.214,
       "log_path": "runtime/delivery/backend-focused.log",
-      "log_sha256": "389cfe4d7aed4006504fc6266867af6bc00c56dc110f471923f3aab73a96ac17",
+      "log_sha256": "0777daf4849bc8964ed896a0ec530c328629fe64b63c8b0cb27e573eb5cbafcf",
       "local_stack_ready": true,
-      "preview_http_ready": false
+      "preview_http_ready": false,
+      "observed_ready_services": [
+        "api/main.js",
+        "worker/main.js",
+        "worker/lifecycle/reaper-main.js",
+        "worker/lifecycle/media-maintenance-main.js"
+      ],
+      "paid_service_switches_enabled": false
     },
     "preview": {
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 1.059,
+      "elapsed_seconds": 1.255,
       "log_path": "runtime/delivery/preview-focused.log",
       "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
       "local_stack_ready": false,
@@ -182,13 +189,13 @@
   },
   "focused_tests": {
     "status": "PASS",
-    "passed": 27,
+    "passed": 32,
     "failed": 0,
-    "unit_passed": 23,
+    "unit_passed": 28,
     "api_passed": 4,
-    "reported_files": 4,
-    "unit": "docs/verification/album-save-unit.json",
-    "api": "docs/verification/album-save-api.json",
+    "reported_files": 5,
+    "unit": "docs/verification/support-unit.json",
+    "api": "docs/verification/support-api.json",
     "commands": [
       {
         "task": "typecheck",
@@ -202,90 +209,93 @@
         "exit_code": 0,
         "signal": null,
         "timeout_ms": 180000,
-        "elapsed_ms": 7860,
-        "log_path": "runtime/test-results/album-save-2026-10-29T22-56-10-240Z/typecheck.log",
+        "elapsed_ms": 6316,
+        "log_path": "runtime/test-results/support-2026-10-29T23-23-21-774Z/typecheck.log",
         "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
       },
       {
         "task": "exec",
-        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.config.ts tests/unit/album.test.ts tests/unit/album-save.test.ts tests/unit/client.test.ts --outputFile.json=runtime/test-results/album-save-2026-10-29T22-56-10-240Z/unit.json",
+        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.config.ts tests/unit/album.test.ts tests/unit/support.test.ts tests/unit/client.test.ts tests/unit/local-readiness.test.ts --outputFile.json=runtime/test-results/support-2026-10-29T23-23-21-774Z/unit.json",
         "argv": [
           "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
           "run",
           "--config",
           "vitest.config.ts",
           "tests/unit/album.test.ts",
-          "tests/unit/album-save.test.ts",
+          "tests/unit/support.test.ts",
           "tests/unit/client.test.ts",
-          "--outputFile.json=runtime/test-results/album-save-2026-10-29T22-56-10-240Z/unit.json"
+          "tests/unit/local-readiness.test.ts",
+          "--outputFile.json=runtime/test-results/support-2026-10-29T23-23-21-774Z/unit.json"
         ],
         "shell": false,
         "status": "PASS",
         "exit_code": 0,
         "signal": null,
         "timeout_ms": 180000,
-        "elapsed_ms": 1202,
-        "log_path": "runtime/test-results/album-save-2026-10-29T22-56-10-240Z/unit.log",
-        "log_sha256": "ca95c829aa5044e4f3ec1a2620c3c9d46ab677c88eb2c53c970de17ff2887c81"
+        "elapsed_ms": 3896,
+        "log_path": "runtime/test-results/support-2026-10-29T23-23-21-774Z/unit.log",
+        "log_sha256": "6398fed81fc21d3ccc3990aa0b07af3d06d800d21a7b2e0807bd631285911128"
       },
       {
         "task": "exec",
-        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/client-album.test.ts --outputFile.json=runtime/test-results/album-save-2026-10-29T22-56-10-240Z/api.json",
+        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/support-flow.test.ts --outputFile.json=runtime/test-results/support-2026-10-29T23-23-21-774Z/api.json",
         "argv": [
           "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
           "run",
           "--config",
           "vitest.integration.config.ts",
-          "tests/integration/client-album.test.ts",
-          "--outputFile.json=runtime/test-results/album-save-2026-10-29T22-56-10-240Z/api.json"
+          "tests/integration/support-flow.test.ts",
+          "--outputFile.json=runtime/test-results/support-2026-10-29T23-23-21-774Z/api.json"
         ],
         "shell": false,
         "status": "PASS",
         "exit_code": 0,
         "signal": null,
         "timeout_ms": 180000,
-        "elapsed_ms": 3959,
-        "log_path": "runtime/test-results/album-save-2026-10-29T22-56-10-240Z/api.log",
-        "log_sha256": "d60916a245d454f163d95fb9b5da2244133f41c6a692f6a445ff7afafbb1e9cc"
+        "elapsed_ms": 26682,
+        "log_path": "runtime/test-results/support-2026-10-29T23-23-21-774Z/api.log",
+        "log_sha256": "9def24fa66afa4f3ce81c423355a25c18a9bad7a3373c5504b7c66a8aa4a72d7"
       }
     ],
-    "tested_source_snapshot": "docs/verification/album-save-tested-source.json",
+    "tested_source_snapshot": "docs/verification/support-tested-source.json",
     "source_exact_match": true,
     "coverage": [
-      "Image-only, video-only and selected-item save through one original installation session",
-      "Local restore without a new session; saved items and ambiguous UNKNOWN items skipped",
-      "Native image/video filePath selection; success and fail wait for complete before serial progress",
-      "Missing or thrown callback becomes UNKNOWN and blocks overlapping native writes until original completion",
-      "Pause after save-session/link/SAVING receipt waits and before native invocation",
-      "Changed account after local download cannot invoke native write or send new-buyer receipts",
-      "Late original success merges into reopened UNKNOWN journal without a repeated save",
-      "Lost session and saved-receipt ACK recover the original key and one session",
-      "Real API ownership/current-delivery/copy rejection and monotonic saved receipt",
-      "Existing private API, hashing and account-scoped client regressions"
+      "Six feedback categories, trimmed input, optional private evidence and original-order binding",
+      "Actual generated PNG upload, local object write, image validation and private support association",
+      "Concurrent submissions share one original operation; confirmed success does not create another ticket",
+      "Committed ticket ACK loss reuses original key/body and original completed evidence upload",
+      "Changed input rejected until pending original submission is resolved",
+      "Hidden page or changed account stops new upload completion/writes and ticket creation",
+      "Owned paged history, buyer-bound cursor and forbidden foreign order/ticket reads",
+      "Wrong-purpose, foreign and revoked proof assets rejected",
+      "Latest stored processing state read independently of original OPEN creation receipt",
+      "Local launcher elapsed-time readiness budget rejects late success and stops on shutdown",
+      "Retained album queue and private API/account-scoped client regressions"
     ],
-    "delivered_manifest_and_native_sdk": "SYNTHETIC_ONLY",
+    "native_login_and_staff_state_transitions": "SYNTHETIC_OR_EXCLUDED",
     "payment_or_generation_called": false,
     "actual_local_effects": [
       "NATIVE_POSTGRESQL",
       "REAL_API_AUTH_AND_SCOPE",
-      "ORIGINAL_SAVE_SESSION_AND_RECEIPTS",
+      "ACTUAL_PNG_UPLOAD_AND_LOCAL_OBJECT_WRITE",
+      "PRIVATE_TICKET_ASSOCIATION_AND_ORIGINAL_KEY",
       "OWNED_SERVICE_STARTUP"
     ]
   },
   "browser_capture": {
     "status": "PASS",
-    "manifest": "docs/media/album-save/capture-manifest.json",
-    "sha256": "41e406cb1cbbd7f68e8f7a989f79691d9a6596f37e8319c34047937500315808",
+    "manifest": "docs/media/support/capture-manifest.json",
+    "sha256": "1ced5657f299292aa941318f5421ea13ceabfe8d2c0a435bc3d4474a5b021667",
     "checks": [
-      "ALL_IMAGE_AND_VIDEO_ACTIONS_WITH_NO_AUTOMATIC_NATIVE_SAVE",
-      "IMAGE_ONLY_PRESERVES_PARTIAL_SUCCESS_AND_DOES_NOT_SAVE_VIDEO_OR_COPY",
-      "ITEM_RETRY_SKIPS_CONFIRMED_SUCCESS_AND_UNRELATED_MEDIA",
-      "UNKNOWN_CALLBACK_IS_NOT_SAVED",
-      "WHOLE_PACK_RETRY_SKIPS_SAVED_AND_UNCONFIRMED_UNKNOWN_ITEMS",
-      "REOPEN_RESTORES_ORIGINAL_INSTALLATION_JOURNAL_WITHOUT_NEW_SESSION_OR_NATIVE_WRITE",
-      "DISMISSED_MISSING_CONFIRMATION_NEVER_REPEATS_NATIVE_SAVE",
-      "EXPLICIT_MISSING_CONFIRMATION_RETRIES_ONLY_ORIGINAL_UNKNOWN_VIDEO",
-      "COPY_SEPARATE_FROM_ALBUM_WITH_NO_REGENERATION_OR_PAYMENT",
+      "OWNED_ORDER_FEEDBACK_WITH_NO_AUTOMATIC_MUTATION",
+      "CLASSIFIED_FEEDBACK_AND_PLATFORM_ERROR_GUIDANCE",
+      "OPTIONAL_LOCAL_EVIDENCE_SELECTION_AND_REMOVAL_BEFORE_UPLOAD",
+      "LOST_COMMITTED_ACK_PRESERVES_ORIGINAL_FEEDBACK_AND_LOCKS_EDITS",
+      "ORIGINAL_KEY_BODY_AND_COMPLETED_UPLOAD_REUSED_AFTER_ACK_LOSS",
+      "CURRENT_ORDER_AND_ALL_OWNED_RECORDS_FILTERS",
+      "LATEST_TICKET_GET_DISPLAYS_CURRENT_PROCESSING_STATE",
+      "REOPENED_ACCOUNT_HISTORY_WITHOUT_RESUBMISSION_OR_ORDER_REQUIRED",
+      "FEEDBACK_ACCEPTANCE_NEVER_IMPLIES_PAYMENT_REFUND_OR_REPAIR",
       "NO_HORIZONTAL_OVERFLOW_AT_320PX"
     ],
     "screenshots": 4,
@@ -298,9 +308,9 @@
     "real_refund_verified": false
   },
   "prior_delivery": {
-    "source_commit": "660400a714b85209b3b62d2f4e11f4e771a25c9e",
-    "path": "docs/verification/delivery-focused-660400a.json",
-    "sha256": "043d036a1c1314f6f9bb8216d4373ddd44917d2527a9979e40c979cbc54d6855"
+    "source_commit": "c7bbf395a4bb86d3f48c97a948566119f929a247",
+    "path": "docs/verification/delivery-focused-c7bbf39.json",
+    "sha256": "4608a183349519e2a377dd44867d56bdb495c0a8edd109273752f7279becd248"
   },
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
@@ -466,11 +476,27 @@
     {
       "path": "docs/verification/order-actions-api.json",
       "sha256": "b56089dbdc0f3c036934132ab082f1cf260dc37cbc8ea642a3a50abbaab6f2a0"
+    },
+    {
+      "path": "docs/verification/album-save-source.json",
+      "sha256": "1a72e236dc3c4bda8aefae9a0d8cf2dd1b8ec810f0c338ee7d2161abaa048748"
+    },
+    {
+      "path": "docs/verification/album-save-tested-source.json",
+      "sha256": "aa23a41b6e5f974e98fc407edd219b782ee1a3303b78682a92d6da1315d174d9"
+    },
+    {
+      "path": "docs/verification/album-save-unit.json",
+      "sha256": "a49cd9ba3b42b7b41c639c113bc90368fca147ea1e235460debcb9710a05a27f"
+    },
+    {
+      "path": "docs/verification/album-save-api.json",
+      "sha256": "32d109467ffab4e51998730b417299e1b68031728bc2da7d13f49df611708e7a"
     }
   ],
   "frozen_c_files": 25,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
-  "existing_media_files_verified": 57,
+  "existing_media_files_verified": 64,
   "new_media_files_verified": 7,
   "functional_scope": {
     "requirements": 58,
@@ -483,14 +509,22 @@
   "production_admitted": false,
   "cloud_deployed": false,
   "limitations": [
-    "Browser album outcomes and delivered metadata are synthetic; official presets remain unavailable",
-    "API fixtures seed delivered manifests without generating files or exercising production QC; native download paths and SDK callbacks are synthetic",
-    "Already issued native album writes cannot be remotely cancelled; late original callbacks remain authoritative for that installation",
-    "Real dual-platform iOS/Android permissions, disk capacity, interrupted processes and actual saved files require device evidence",
-    "Real Codex/providers, billing/isolation, native-audio repair, complete community/aftercare/Plus and cloud remain incomplete",
-    "Historical order/draft/photo/generated/repair checks retain their exact original sources; comprehensive suites were not rerun",
+    "Browser uploads, ACK loss and processing transitions are synthetic; official presets remain unavailable",
+    "API checks use actual generated PNGs and local uploads; staff transitions are explicit SQL fixtures, not a staff workflow or live refund/repair",
+    "Unsent text/photos are held only in page memory; reopening reads owned ticket records and does not restore private form drafts",
+    "Native login/photo authorization, real cloud object storage, customer service and payment/refund outcomes require separate evidence",
+    "Real Codex/providers, billing/isolation, native-audio repair, complete community/staff aftercare/Plus and cloud remain incomplete",
+    "Historical album/order/draft/photo/generated/repair checks retain their exact original sources; comprehensive suites were not rerun",
     "Mini builds use loopback development API; rebuild with verified service origin for devices"
   ],
-  "initial_attempt": "docs/verification/album-save-initial-attempt.json",
-  "canonical_album_save_provenance": "docs/verification/album-save-source.json"
+  "initial_attempt": "docs/verification/support-initial-attempt.json",
+  "initial_startup_attempt": "docs/verification/support-startup-initial.json",
+  "local_readiness": {
+    "preview_budget_ms": 30000,
+    "backend_budget_ms": 45000,
+    "all_four_services_required": true,
+    "order_deadlines_or_gates_changed": false,
+    "original_delay_root_cause_confirmed": false
+  },
+  "canonical_support_provenance": "docs/verification/support-source.json"
 }

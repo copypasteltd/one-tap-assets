@@ -1,0 +1,83 @@
+{
+  "numTotalTestSuites": 1,
+  "numPassedTestSuites": 0,
+  "numFailedTestSuites": 1,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 4,
+  "numPassedTests": 0,
+  "numFailedTests": 1,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793315512725,
+  "success": false,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "uploads actual PNG evidence once and recovers one original ticket after a committed ACK is lost",
+          "status": "failed",
+          "title": "uploads actual PNG evidence once and recovers one original ticket after a committed ACK is lost",
+          "duration": 1034.1715000000004,
+          "failureMessages": [
+            "Error: expected ClientError: 服务端响应校验失败 { …(4) } to match object { code: 'NETWORK_UNKNOWN' }\n(4 matching properties omitted from actual)\n    at _Assertion.__VITEST_REJECTS__ (file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/node_modules/.pnpm/vitest@5.0.5_@types+node@24_074c366c144b624165a2ee5270d15630/node_modules/vitest/dist/chunks/index.aTZaPVhf.js:2480:33)\n    at _Assertion.propertyGetter (file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/node_modules/.pnpm/chai@6.3.0/node_modules/chai/index.js:1607:27)\n    at Reflect.get (<anonymous>)\n    at Object.proxyGetter [as get] (file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/node_modules/.pnpm/chai@6.3.0/node_modules/chai/index.js:1696:22)\n    at E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/support-flow.test.ts:31:32\n    at async file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/node_modules/.pnpm/vitest@5.0.5_@types+node@24_074c366c144b624165a2ee5270d15630/node_modules/vitest/dist/chunks/run.BPv-BBRv.js:2801:20"
+          ],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "scopes paged support history and ticket reads to the buyer, including cursor binding",
+          "status": "pending",
+          "title": "scopes paged support history and ticket reads to the buyer, including cursor binding",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects wrong-purpose, foreign and revoked evidence even when an asset ID is known",
+          "status": "pending",
+          "title": "rejects wrong-purpose, foreign and revoked evidence even when an asset ID is known",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "reads the current stored processing state without replaying the original OPEN creation response",
+          "status": "pending",
+          "title": "reads the current stored processing state without replaying the original OPEN creation response",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793315525046,
+      "endTime": 1793315526080.1714,
+      "status": "failed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/support-flow.test.ts"
+    }
+  ]
+}

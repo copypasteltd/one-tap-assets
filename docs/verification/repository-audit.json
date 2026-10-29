@@ -1,18 +1,18 @@
 {
-  "checked_at": "2026-10-29T23:03:24.940118+00:00",
+  "checked_at": "2026-10-29T23:27:04.625962+00:00",
   "status": "PASS_SOURCE_INTEGRITY",
-  "verification_mode": "FOCUSED_SELECTIVE_ALBUM_SAVE_DELIVERY",
+  "verification_mode": "FOCUSED_ORDER_SUPPORT_DELIVERY",
   "repository_integrity": "PASS",
   "application_checks": "SEE_EXPLICIT_FOCUSED_RESULTS",
-  "source_set_hash": "d467b91565e8f583d4d0f7919404d05f98347adf3c8b6edd0679cf513e8e5efc",
-  "source_files": 388,
+  "source_set_hash": "487ce07715d5685df6392c4a87070a5ef21dde2eb0ef13dda56d628072d96c3d",
+  "source_files": 395,
   "runtime_contract_files": 42,
   "resource_files": 4,
-  "markdown_files": 147,
-  "local_links_verified": 1333,
+  "markdown_files": 149,
+  "local_links_verified": 1376,
   "nonportable_or_template_links_skipped": 0,
-  "media_files": 64,
-  "historical_media_files": 57,
+  "media_files": 71,
+  "historical_media_files": 64,
   "frozen_c_files": 25,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
   "historical_evidence_unchanged": [
@@ -55,7 +55,11 @@
     "docs/verification/order-actions-source.json",
     "docs/verification/order-actions-tested-source.json",
     "docs/verification/order-actions-unit.json",
-    "docs/verification/order-actions-api.json"
+    "docs/verification/order-actions-api.json",
+    "docs/verification/album-save-source.json",
+    "docs/verification/album-save-tested-source.json",
+    "docs/verification/album-save-unit.json",
+    "docs/verification/album-save-api.json"
   ],
   "private_runtime_and_credentials_excluded": true,
   "new_browser_used": true,
@@ -65,6 +69,6 @@
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "note": "Exact source/builds, focused selective-save/native-callback checks, recorded shared UI, closed browser, historical evidence/media, links and C verified. ZIP verified independently after packaging.",
-  "new_album_save_files": 7
+  "note": "Exact source/builds, focused feedback/upload/owned-history checks, recorded shared UI, closed browser, historical evidence/media, links and C verified. ZIP verified independently after packaging.",
+  "new_support_files": 7
 }

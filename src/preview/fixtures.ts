@@ -17,6 +17,13 @@ const order:DTO<'Order'>={order_id:'demo_order',quote_id:'demo_quote',channel:'a
   payable_until:expires,job_id:'demo_job',refund_id:null,delivery_expires_at:expires,created_at:created};
 const orderScenario=new URLSearchParams(location.search).get('scenario')==='order-actions';
 const albumScenario=new URLSearchParams(location.search).get('scenario')==='album-save';
+const supportScenario=new URLSearchParams(location.search).get('scenario')==='support';
+const supportTrace={operations:[] as string[],posts:[] as {key:string;body:unknown}[],uploads:0};
+if(supportScenario)Object.assign(window,{__YPCC_SUPPORT_REPLAY__:supportTrace});
+const supportAssets=new Map<string,boolean>(),supportTickets:DTO<'Ticket'>[]=[
+  {ticket_id:'demo_earlier',order_id:'demo_order',state:'CLOSED',category:'SAVE',updated_at:created},
+  {ticket_id:'demo_other',order_id:'demo_other_order',state:'PROCESSING',category:'REFUND',updated_at:created}];
+const supportKeys=new Map<string,DTO<'Ticket'>>();let supportAckLost=false;
 const albumTrace={operations:[] as string[],saves:[] as string[]};
 if(albumScenario)Object.assign(window,{__YPCC_ALBUM_REPLAY__:albumTrace});
 const albumAttempts=new Map<string,number>();
@@ -67,6 +74,15 @@ function response(operation:string,path:string,body:any):unknown{
     case 'createDownloadLink':return {deliverable_id:path.split('/').at(-2),url:path.includes('demo_video')?'/product-motion.mp4':'/product-card.png',expires_at:expires,ttl_seconds:300};
     case 'createSaveSession':if(!albumScenario)throw new Error('Synthetic album scenario only');return {save_session_id:'demo_save',...body,created_at:created};
     case 'recordSaveReceipt':if(!albumScenario)throw new Error('Synthetic album scenario only');return {receipt_id:`demo_receipt_${body.deliverable_id}_${body.attempt}`,accepted:true};
+    case 'createUploadGrant':{if(!supportScenario||body.purpose!=='SUPPORT_EVIDENCE')throw new Error('Synthetic support uploads only');
+      const asset_id=`support_${body.sha256}`;if(!supportAssets.has(asset_id))supportAssets.set(asset_id,false);
+      return {asset_id,upload_url:'/synthetic-support-upload',headers:{},expires_at:expires};}
+    case 'completeAssetUpload':{if(!supportScenario)throw new Error('Synthetic support uploads only');const asset_id=path.split('/').at(-2)!;
+      if(!supportAssets.get(asset_id))throw new Error('UPLOAD_NOT_COMPLETE');return {asset_id,state:'READY'};}
+    case 'createSupportTicket':{if(!supportScenario)throw new Error('Synthetic support only');const ticket:DTO<'Ticket'>={ticket_id:'demo_feedback',order_id:path.split('/').at(-2)!,state:'OPEN',category:body.category,updated_at:created};supportTickets.unshift(ticket);return ticket;}
+    case 'listSupportTickets':return {items:supportScenario?supportTickets:[],next_cursor:null};
+    case 'getSupportTicket':{if(!supportScenario)throw new Error('Synthetic support only');const ticket=supportTickets.find(t=>t.ticket_id===path.split('/').at(-1))!;
+      if(ticket.ticket_id==='demo_feedback')ticket.state='PROCESSING';return ticket;}
     case 'listRevisions':case 'listFavorites':case 'listPresetDrafts':case 'listPublications':case 'listModerationCases':return {items:[],next_cursor:null};
     case 'listHelpArticles':return {items:[{article_id:'demo_help',title:'浏览器预览与真机有什么区别？',body:'这里复用共享小程序页面，但数据、商品和订单均为合成回放。支付、相册、真实生成及宿主授权仍需分别验收。'}]};
     default:throw new Error(`PREVIEW_OPERATION_UNAVAILABLE: ${operation}`);
@@ -77,8 +93,15 @@ const transport:Transport=async request=>{
   const found=Object.entries(endpoints).find(([,e])=>e.method===request.method&&new RegExp(`^${e.path.replace(/\{[^}]+\}/g,'[^/]+')}$`).test(path));
   if(!found)return {status:404,headers:{},data:{error:{code:'PREVIEW_ONLY',message:'该操作不在浏览器演示范围内'}}};
   if(albumScenario)albumTrace.operations.push(found[0]);
+  if(supportScenario)supportTrace.operations.push(found[0]);
+  if(supportScenario&&found[0]==='createSupportTicket'){
+    const key=request.headers['Idempotency-Key']!;supportTrace.posts.push({key,body:JSON.parse(String(request.body))});
+    let ticket=supportKeys.get(key);if(!ticket){ticket=response(found[0],path,JSON.parse(String(request.body))) as DTO<'Ticket'>;supportKeys.set(key,ticket);}
+    if(!supportAckLost){supportAckLost=true;throw new Error('Synthetic committed ACK lost');}
+    return {status:200,headers:{},data:{data:ticket}};
+  }
   try{return {status:200,headers:{},data:{data:response(found[0],path,request.body?JSON.parse(String(request.body)):null)}};}
-  catch{return {status:409,headers:{},data:{error:{code:'PREVIEW_ONLY',message:'该操作需要真实服务，本回放不执行'}}};}
+  catch(error){return {status:409,headers:{},data:{code:error instanceof Error&&error.message==='UPLOAD_NOT_COMPLETE'?'UPLOAD_NOT_COMPLETE':'PREVIEW_ONLY',message:'该操作需要真实服务，本回放不执行'}};}
 };
 let photoSequence=0;
 export const previewHost:HostPort={platform:'alipay',transport,storage:{get:<T>(key:string)=>(memory.get(key)??null) as T|null,set:(k,v)=>{memory.set(k,v);},remove:k=>{memory.delete(k);}},
@@ -96,7 +119,7 @@ export const previewHost:HostPort={platform:'alipay',transport,storage:{get:<T>(
       }return photos;
     }finally{bitmap.close();}
   },
-  upload:async()=>{throw new Error('Browser replay cannot upload private photos');},pay:async()=>{throw new Error('Browser replay cannot perform payments');},
+  upload:async grant=>{if(!supportScenario||!supportAssets.has(grant.asset_id))throw new Error('Browser replay cannot upload private photos');supportTrace.uploads++;supportAssets.set(grant.asset_id,true);},pay:async()=>{throw new Error('Browser replay cannot perform payments');},
   download:async link=>albumScenario?link.deliverable_id:link.url,save:async(path)=>{
     if(!albumScenario)return 'UNKNOWN';albumTrace.saves.push(path);const attempt=(albumAttempts.get(path)??0)+1;albumAttempts.set(path,attempt);
     await new Promise(done=>setTimeout(done,120));

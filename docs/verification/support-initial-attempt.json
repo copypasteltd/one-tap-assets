@@ -1,0 +1,73 @@
+{
+  "base": "runtime/test-results/support-2026-10-29T23-11-04-580Z",
+  "source_set_hash": "15ea4268435c1f57fe98a33889adabe9fdcbfabbdd499849f1d0aade72064e03",
+  "commands": [
+    {
+      "task": "typecheck",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+        "--noEmit"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 28733,
+      "log_path": "runtime/test-results/support-2026-10-29T23-11-04-580Z/typecheck.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.config.ts tests/unit/album.test.ts tests/unit/support.test.ts tests/unit/client.test.ts --outputFile.json=runtime/test-results/support-2026-10-29T23-11-04-580Z/unit.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.config.ts",
+        "tests/unit/album.test.ts",
+        "tests/unit/support.test.ts",
+        "tests/unit/client.test.ts",
+        "--outputFile.json=runtime/test-results/support-2026-10-29T23-11-04-580Z/unit.json"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 9736,
+      "log_path": "runtime/test-results/support-2026-10-29T23-11-04-580Z/unit.log",
+      "log_sha256": "e2ca93f1fa1bb383eea29b69697e36c259cf02b1a33661a1df7acba3a9eb1e41"
+    },
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/support-flow.test.ts --outputFile.json=runtime/test-results/support-2026-10-29T23-11-04-580Z/api.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.integration.config.ts",
+        "tests/integration/support-flow.test.ts",
+        "--outputFile.json=runtime/test-results/support-2026-10-29T23-11-04-580Z/api.json"
+      ],
+      "shell": false,
+      "status": "FAIL",
+      "exit_code": 1,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 16037,
+      "log_path": "runtime/test-results/support-2026-10-29T23-11-04-580Z/api.log",
+      "log_sha256": "28c634054313ca306ce54df89d277935f1d675b1ad8b6652227c9e78c34fd8e2"
+    }
+  ],
+  "reason": "Initial synthetic order fixture lacked required getOrder response fields; RESPONSE_CONTRACT_ERROR correctly rejected it before the support upload/ACK scenario. Added canonical order response fields to the fixture without changing response validation; remaining three API cases were not executed in that failed attempt.",
+  "raw_aggregate_pending_tests": 0,
+  "assertion_status_counts": {
+    "failed": 1,
+    "pending": 3
+  },
+  "tested_source": "docs/verification/support-initial-source.json",
+  "api": "docs/verification/support-initial-api.json",
+  "unit": "docs/verification/support-initial-unit.json"
+}

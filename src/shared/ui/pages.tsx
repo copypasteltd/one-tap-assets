@@ -1,6 +1,6 @@
 import React, { useRef, useState, type ReactNode } from 'react';
 import Taro, { useRouter } from '@tarojs/taro';
-import { View, Text, Button, Image, Switch, Textarea } from '@tarojs/components';
+import { View, Text, Button, Image, Switch } from '@tarojs/components';
 import type { DTO } from '../contracts/types';
 import { client } from './runtime';
 import './theme.css';
@@ -13,6 +13,7 @@ import {Analysis} from './analysis';
 import {ResumeDraft,ProductDrafts} from './drafts';
 import {selectedPreset,usePreset} from '../client/preset-selection';
 import {Order,paymentText,fulfillmentText} from './order';
+import {Help} from './help';
 export { navigate } from './base';
 
 const title = { home: '一品成片', catalog: '方案社区', library: '我的素材', photos: '拍下你的商品', analysis: '整理商品信息', preset: '方案详情', confirm: '确认素材清单', order: '我的订单', pack: '领取素材', settings: '账户与隐私', help: '帮助与反馈', favorites: '我的收藏', creator: '我的方案', draft: '编辑方案', rights: '授权资料', publication: '发布记录', moderation: '举报与申诉' };
@@ -75,12 +76,6 @@ function Settings() {
     <Action disabled={action.busy} secondary onClick={() => void action.run(async () => { await client().login(); const answer = await Taro.showModal({ title: '删除本账户的媒体资料？', content: '进行中的制作将受影响，领取链接会撤销。已保存到手机的文件不会被远程删除。', confirmText: '确认申请', confirmColor: '#B83232' });
       if (answer.confirm) setDeletion(await client().api.call('requestPrivacyDeletion', { body: { scope: 'ACCOUNT_MEDIA', acknowledge_inflight_contract: true }, key: client().intent('privacy-deletion', { nonce: Date.now() }) })); })}>申请删除媒体资料</Action>
     {deletion && <Notice>删除申请已受理，正在处理。清理结果确认后才算完成。</Notice>}{action.error && <Notice error>{action.error}</Notice>}<Action secondary onClick={() => { client().logout(); navigate('home'); }}>退出当前会话</Action><Action secondary onClick={() => navigate('help')}>查看帮助</Action>
-  </>;
-}
-function Help() {
-  const route = useRouter(); const [text, setText] = useState(''); const [sent, setSent] = useState(''); const action = useAction(); const resource = useResource(() => client().api.call('listHelpArticles'));
-  return <><Text className='page-headline'>我们一起解决</Text><ResourceState {...resource} retry={resource.reload} />{resource.data?.items.map(article => <Panel key={article.article_id}><Text className='card-title'>{article.title}</Text><Text>{article.body}</Text></Panel>)}
-    {route.params.order_id && <Panel><Text className='card-title'>反馈这笔订单的问题</Text><Textarea className='feedback-input' maxlength={2000} value={text} onInput={e => setText(e.detail.value)} placeholder='描述遇到的问题，请勿填写密码或支付凭证' /><Action disabled={action.busy || !text.trim()} onClick={() => void action.run(async () => { await client().login(); const ticket = await client().api.call('createSupportTicket', { params: { order_id: route.params.order_id! }, body: { category: 'OTHER', message: text.trim() }, key: client().intent('ticket', { order: route.params.order_id, text: text.trim() }) }); setSent(ticket.ticket_id); })}>提交问题</Action>{sent && <Notice>已受理，反馈编号：{sent}</Notice>}</Panel>}{action.error && <Notice error>{action.error}</Notice>}
   </>;
 }
 const screens: Record<PageName, () => ReactNode> = { home: Home, catalog: Catalog, library: Library, photos: Photos, analysis: Analysis, preset: Preset, confirm: Confirm, order: Order, pack: Pack, settings: Settings, help: Help, favorites: Favorites, creator: Creator, draft: DraftEditor, rights: Rights, publication: Publication, moderation: Moderation };

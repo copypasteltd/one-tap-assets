@@ -12,7 +12,7 @@ export async function validateEvidenceAssets(db: Db, p: Principal, ids: string[]
   requireThat(rows.rowCount === new Set(ids).size, 'EVIDENCE_SCOPE_INVALID', '附件不属于当前用户或已失效', 422);
 }
 export async function createTicket(db: Db, p: Principal, orderId: string, request: DTO<'TicketRequest'>): Promise<DTO<'Ticket'>> {
-  await owned(db, 'orders', orderId, p); await validateEvidenceAssets(db, p, request.attachment_asset_ids ?? []);
+  await owned(db, 'orders', orderId, p); await validateEvidenceAssets(db, p, request.attachment_asset_ids ?? [], 'SUPPORT_EVIDENCE');
   const data: DTO<'Ticket'> = { ticket_id: id('ticket'), order_id: orderId, state: 'OPEN', category: request.category, updated_at: iso() };
   await insert(db, 'support_tickets', { id: data.ticket_id, tenant_id: p.tenantId, owner_id: p.userId, order_id: orderId, category: request.category, state: data.state, data, private: request }); return data;
 }
@@ -103,4 +103,5 @@ export const HELP_ARTICLES: DTO<'HelpArticle'>[] = [
   { article_id: 'payment-and-delivery', title: '付款后怎样领取素材', body: '以订单页面的服务端付款状态为准。整包制作和验收完成后可保存到相册。领取期为7天；关闭小程序不会中断云端制作。' },
   { article_id: 'save-permission', title: '相册授权被拒绝怎么办', body: '打开小程序设置并允许相册权限，再回到素材页面重试失败项。下载完成不代表已保存到相册。' },
   { article_id: 'revision', title: '一次小修改包含什么', body: '交付后48小时内，可成功修改一次封面、素材展示顺序或允许的展示文字。重新生成声音不在范围内。平台制作错误请通过订单售后处理。' },
+  { article_id: 'feedback-records', title: '怎样继续查看问题反馈', body: '在原订单或素材领取页打开问题反馈，选择问题类型并说明情况，可选上传证明图片。已提交记录保留在本账户的帮助页；受理不代表已经退款或修复，退款以原订单状态为准。无需升级Plus或分享。' },
 ];

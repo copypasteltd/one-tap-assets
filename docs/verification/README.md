@@ -1,3 +1,7 @@
+当前来源：[订单反馈与售后记录](support-source.json)。绑定 395 source files / 42 contracts / 4 resources; 487ce077；类型、28单元/4原生API、10浏览器检查与四构建/本地启动PASS。API实际PNG上传与本地对象/文件验证，客服状态和浏览器上传/ACK为显式合成；不证明真实客服、退款、云存储或宿主权限。初版getOrder夹具缺字段被契约拒绝见[初次尝试](support-initial-attempt.json)，当次1失败/3未执行及源码/原报告保留；未放宽响应校验。全面测试、原发布检查器、真机和真实服务未验。
+
+Current focused source delivery preserves all original requirements and historical evidence. Earlier “current” paragraphs below refer only to their own source snapshots.
+
 当前来源：[分类保存与相册恢复](album-save-source.json)。绑定 388 source files / 42 contracts / 4 resources; d467b915；类型、23单元/4原生API、10浏览器检查与四构建/本地启动PASS。原生数据库/API及显式合成清单/宿主回调分开记录；没有实际制作或手机相册证据。初版PG夹具参数冲突见[初次尝试](album-save-initial-attempt.json)，当次1失败/3未执行及源码/原报告保留。全面测试、原发布检查器、真机和真实服务未验。
 
 Current focused source delivery preserves all original requirements and historical evidence. Earlier “current” paragraphs below refer only to their own source snapshots.
