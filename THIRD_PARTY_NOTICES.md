@@ -29,6 +29,10 @@ Upstream production implementation was not copied into this project’s runtime 
 
 The user-selected C design remains a preserved project reference, with provenance and baseline hashes. It is not a customer output. The public demo product illustration is original; Sharp/FFmpeg produce its image/motion fixtures, and Playwright captures the running UI. No customer photographs or downloaded third-party videos were used for this public replay.
 
+新增[AI标识示例](docs/media/ai-disclosure/README.md)使用[复录源码](scripts/record-disclosure.ts)内本项目自绘的杯子SVG及原生静帧视频，来源、实际文件SHA和450帧检查见独立清单。它与[合成提示音示例](docs/media/native-audio/README.md)均不含客户媒体或真实模型产物。
+
+The [AI disclosure fixture](docs/media/ai-disclosure/README.md) uses the original cup SVG embedded in its [capture source](scripts/record-disclosure.ts) and a native static video. Its separate manifest records provenance, file hashes and all 450 checked frames. Neither this fixture nor the [synthetic audio fixture](docs/media/native-audio/README.md) contains customer media or actual model outputs.
+
 ## 工具与依赖 / Tools and dependencies
 
 Node、PostgreSQL、FFmpeg、Codex及npm依赖保留各自许可和商标；依赖精确版本见[package.json](package.json)与[pnpm-lock.yaml](pnpm-lock.yaml)。运行工具/数据库二进制不随仓库提交，使用者自行准备原生运行环境。与外部平台连接所需的账号、合同、配额和资源许可不包含在本仓库中。

@@ -62,7 +62,7 @@ export class PhotoMediaPipeline {
     }
     return photos;
   }
-  protected async artifact(context: ExecutionContext, operation: MediaOperation, slotId: string, bytes: Buffer, spec: ArtifactSpec): Promise<PrivateArtifact> {
+  protected async artifact(context: ExecutionContext, operation: MediaOperation, slotId: string, bytes: Buffer, spec: ArtifactSpec, _signal?:AbortSignal): Promise<PrivateArtifact> {
     const artifactId = id('artifact'); const extension = spec.kind === 'image' ? 'png' : spec.kind === 'video' ? 'mp4' : 'txt';
     const objectKey = `${context.tenantId}/media/${context.orderId}/${operation.id}/generation-${operation.generation}/${artifactId}.${extension}`;
     await writePrivateObject(this.pool, this.store, { tenantId: context.tenantId, ownerId: context.ownerId,
@@ -140,7 +140,7 @@ export class PhotoMediaPipeline {
       if (slot.kind === 'copy') {
         const bytes = Buffer.from(context.contract.creative.copy, 'utf8');
         artifacts.push(await this.artifact(context, operation, slot.slot_id, bytes, this.spec(context, 'POST', 'copy',
-          { kind: 'copy', bytes: bytes.length, encoding: 'utf-8' }, []))); continue;
+          { kind: 'copy', bytes: bytes.length, encoding: 'utf-8' }, []),signal)); continue;
       }
       const original = source.artifacts.find(a => a.slot_id === slot.slot_id)!;
       const input = await this.store.get(original.object_key, slot.kind === 'video' ? 512_000_000 : 30_000_000);
@@ -159,7 +159,7 @@ export class PhotoMediaPipeline {
         inspection = await this.videoInspection(context, outputPath, signal); bytes = await readFile(outputPath);
       }
       artifacts.push(await this.artifact(context, operation, slot.slot_id, bytes,
-        this.spec(context, 'POST', slot.kind, inspection, original.spec.source_asset_ids, [original.id])));
+        this.spec(context, 'POST', slot.kind, inspection, original.spec.source_asset_ids, [original.id]),signal));
     }
     return artifacts;
   }

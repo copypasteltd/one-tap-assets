@@ -125,6 +125,8 @@ it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('delivers the actual silent %
   const context=await executionContext(db.pool,f.p.tenantId,f.orderId,f.snapshotHash),postPack=await operationArtifacts(db.pool,context,'POST');
   for(const a of postPack.receipt.artifacts.filter(a=>a.spec.kind!=='copy')){
     expect(a.spec.generation_sources!.length).toBeGreaterThan(0);expect(a.spec.reference_approval_hash).toMatch(/^[a-f0-9]{64}$/);
+    expect(a.spec.ai_disclosure).toMatchObject({contract_hash:hash(f.contract.ai_disclosure_contract),output_sha256:a.sha256,
+      frames_checked:a.spec.kind==='video'?60:1});
   }
   const commit=await publisher.handle(delivery,signal);
   // Publication repeats source authorization in its transaction, including a

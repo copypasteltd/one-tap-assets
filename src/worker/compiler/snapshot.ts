@@ -11,6 +11,7 @@ import type {ArkContract} from '../providers/ark.js';
 import {frozenNativeAudio,type NativeAudioContract} from '../audio/contract.js';
 import {frozenOrderListening} from '../audio/listening-contract.js';
 import type {ListeningContract} from '../providers/omni-listening.js';
+import {frozenAiDisclosure} from './disclosure.js';
 
 export interface ModelBinding { provider: string; actual_model: string; registry_version: string; roles: ('VISION_ANALYSIS' | 'IMAGE' | 'VIDEO' | 'SPEECH' | 'QC')[]; capability_hash: string; rate_snapshot_id: string }
 export interface ResourceBinding { resource_version_id: string; license_record_id: string; hash: string }
@@ -31,6 +32,7 @@ export interface Snapshot {
   fulfillable_at: string; deadline_at: string; policy_version: string; codex_contract: DTO<'CodexContract'>;
 }
 export interface FrozenContract {
+  ai_disclosure_contract?:import('./disclosure.js').AiDisclosureContract;
   native_audio_contract?:NativeAudioContract;
   listening_contract?:ListeningContract;
   speech_contract?:import('../providers/dashscope-asr.js').SpeechContract;
@@ -43,6 +45,7 @@ export interface FrozenContract {
   runtime_binding?: { admission: CodexAdmission; limits: InferenceLimits };
 }
 export function bindSnapshot(order: DTO<'Order'>, tenantId: string, contract: FrozenContract, now: string): Snapshot {
+  frozenAiDisclosure(contract);
   const audio=frozenNativeAudio(contract);
   const listening=frozenOrderListening(contract);
   const speech = contract.source.audio_policy.speech !== 'none';

@@ -3,7 +3,7 @@ import {join} from 'node:path';
 import type pg from 'pg';
 import type {Config} from '../../api/config.js';
 import type {ObjectStorage} from '../../api/storage/storage.js';
-import {hash} from '../../api/lib/crypto.js';
+import {hash,sha256} from '../../api/lib/crypto.js';
 import {requireThat} from '../../api/lib/errors.js';
 import type {Db} from '../../api/db/pool.js';
 import {executionContext,type ExecutionContext} from '../compiler/order-context.js';
@@ -17,11 +17,13 @@ import {PendingExternal,type StageLease} from '../queue/leases.js';
 import type {ToolScope} from '../tool-gateway/http.js';
 import type {ToolLease} from '../tool-gateway/consumer.js';
 import {PhotoMediaPipeline,assertMediaAlive,inspectImage} from './photo-pipeline.js';
-import {operationArtifacts,type MediaOperation,type MediaPhase,type MediaReceipt,type PrivateArtifact} from './artifacts.js';
+import {operationArtifacts,type ArtifactSpec,type MediaOperation,type MediaPhase,type MediaReceipt,type PrivateArtifact} from './artifacts.js';
 import {loadProductionFont} from './font.js';
 import {renderLayout} from './layout.js';
 import {nativeCommand,inspectVideo,type MediaInspection} from './native.js';
 import type {NativeOrderAudio} from '../audio/order-proof.js';
+import {frozenAiDisclosure} from '../compiler/disclosure.js';
+import {disclosureRaster,markDisclosureImage,inspectDisclosure,type AiDisclosureProof} from './disclosure.js';
 
 export const GENERATED_PIPELINE_VERSION='YPCC-GENERATED-SILENT-1.0.0';
 /** Actual generated PNG/MP4 inputs only; no still-animation substitution. */
@@ -47,6 +49,30 @@ export class GeneratedMediaPipeline extends PhotoMediaPipeline {
   override async verify(context:ExecutionContext,receipt:MediaReceipt,directory:string,signal:AbortSignal,selected?:ReadonlySet<string>):Promise<void>{
     this.assertRoute(context);checkGeneratedSources(receipt,await this.material(this.pool,context,receipt));
     await super.verify(context,receipt,directory,signal,selected);
+    const policy=frozenAiDisclosure(context.contract)!;const checked=new Map<string,AiDisclosureProof>();
+    for(const artifact of receipt.artifacts.filter(a=>!selected||selected.has(a.id))){
+      if(artifact.spec.kind==='copy'){requireThat(!artifact.spec.ai_disclosure,'AI_DISCLOSURE_PROOF_INVALID','文案不能伪装成媒体像素检查',503);continue;}
+      const raw=await this.store.get(artifact.object_key,artifact.spec.kind==='video'?512_000_000:30_000_000);
+      requireThat(sha256(raw)===artifact.sha256,'ARTIFACT_HASH_MISMATCH','标识检查时实际媒体字节已变化',503);
+      let proof=checked.get(artifact.sha256);
+      if(!proof){const inspection=artifact.spec.inspection;
+        requireThat('width' in inspection&&inspection.width&&inspection.height,'AI_DISCLOSURE_PROOF_INVALID','缺少原实际媒体尺寸',503);
+        proof=await inspectDisclosure(this.cfg,policy,raw,{kind:artifact.spec.kind,width:inspection.width,height:inspection.height,
+          frames:context.snapshot.timeline.target_frames,directory,deadline_at:context.snapshot.deadline_at,signal});checked.set(artifact.sha256,proof);}
+      requireThat(artifact.spec.ai_disclosure&&hash(artifact.spec.ai_disclosure)===hash(proof),
+        'AI_DISCLOSURE_PROOF_INVALID','AI标识实际像素、完整帧数或原证明不一致',503);
+    }
+  }
+  protected override async artifact(context:ExecutionContext,operation:MediaOperation,slotId:string,bytes:Buffer,spec:ArtifactSpec,signal?:AbortSignal):Promise<PrivateArtifact>{
+    const policy=frozenAiDisclosure(context.contract)!;
+    if(spec.kind!=='copy'){
+      requireThat(signal,'AI_DISCLOSURE_SIGNAL_REQUIRED','标识制作必须传播原执行取消信号',500);
+      const inspection=spec.inspection;requireThat('width' in inspection&&inspection.width&&inspection.height,
+        'AI_DISCLOSURE_PROOF_INVALID','缺少标识实际媒体尺寸',503);
+      spec.ai_disclosure=await inspectDisclosure(this.cfg,policy,bytes,{kind:spec.kind,width:inspection.width,height:inspection.height,
+        frames:context.snapshot.timeline.target_frames,directory:join(this.cfg.runtimeRoot,'tmp'),deadline_at:context.snapshot.deadline_at,signal});
+    }
+    return super.artifact(context,operation,slotId,bytes,spec);
   }
   protected async alternateGeneratedVideo(_context:ExecutionContext,_material:Awaited<ReturnType<typeof generatedOutputs>>,_directory:string,_signal:AbortSignal):
     Promise<{bytes:Buffer;inspection:MediaInspection;native_audio:NativeOrderAudio}|undefined>{return undefined;}
@@ -67,28 +93,33 @@ export class GeneratedMediaPipeline extends PhotoMediaPipeline {
     for(const [index,slot] of context.snapshot.outputs.filter(s=>s.kind==='image').entries()){
       const planned=context.contract.creative.image_slots.find(s=>s.slot_id===slot.slot_id)!;
       const input=material.outputs.get(`image:${slot.slot_id}`)!;
-      const bytes=await renderLayout(input.bytes,{presetId:style,width:slot.width!,height:slot.height!,title:planned.title,
-        subtitle:context.contract.creative.copy,sequence:index+1,total:context.contract.creative.image_slots.length,font});
+      const layout=await renderLayout(input.bytes,{presetId:style,width:slot.width!,height:slot.height!,title:planned.title,
+        subtitle:context.contract.creative.copy,sequence:index+1,total:context.contract.creative.image_slots.length,font,aiLabel:true});
+      const bytes=await markDisclosureImage(layout,await disclosureRaster(this.cfg,frozenAiDisclosure(context.contract)!,slot.width!,slot.height!));
       const spec=this.spec(context,'PRODUCTION','image',await inspectImage(bytes),[planned.asset_id]);
       spec.generation_sources=sourcesForSlot(material,'image',slot.slot_id);spec.reference_approval_hash=hash(material.approval);
-      artifacts.push(await this.artifact(context,operation,slot.slot_id,bytes,spec));
+      artifacts.push(await this.artifact(context,operation,slot.slot_id,bytes,spec,signal));
     }
     const alternate=await this.alternateGeneratedVideo(context,material,directory,signal);
     if(alternate){
       for(const slot of context.snapshot.outputs.filter(s=>s.kind==='video')){
         const spec=this.spec(context,'PRODUCTION','video',alternate.inspection,context.contract.creative.shots.map(s=>s.asset_id));
         spec.generation_sources=sourcesForSlot(material,'video',slot.slot_id);spec.reference_approval_hash=hash(material.approval);spec.native_audio=alternate.native_audio;
-        artifacts.push(await this.artifact(context,operation,slot.slot_id,alternate.bytes,spec));
+        artifacts.push(await this.artifact(context,operation,slot.slot_id,alternate.bytes,spec,signal));
       }
       return artifacts;
     }
     const clips=join(directory,'generated-clips');await mkdir(clips);
+    const mark=await disclosureRaster(this.cfg,frozenAiDisclosure(context.contract)!,1080,1920);
+    await writeFile(join(clips,'disclosure.png'),mark.png,{flag:'wx'});
     for(const [index,key] of material.videoKeys.entries()){
       const input=join(clips,`input${index}.mp4`),output=join(clips,`segment${index}.mp4`);
       const shot=context.contract.creative.shots[index],frames=context.snapshot.engine==='REFERENCE_FILM'?context.snapshot.timeline.target_frames:shot!.end_frame-shot!.start_frame;
       await writeFile(input,material.outputs.get(key)!.bytes,{flag:'wx'});
       await nativeCommand(this.cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-nostdin','-threads','2','-filter_threads','1',
-        '-protocol_whitelist','file,pipe','-i',input,'-map','0:v:0','-an','-vf','fps=30,scale=1080:1920:flags=lanczos,setsar=1',
+        '-filter_complex_threads','1','-protocol_whitelist','file,pipe','-i',input,'-i',join(clips,'disclosure.png'),
+        '-filter_complex',`[0:v]fps=30,scale=1080:1920:flags=lanczos,setsar=1[base];[base][1:v]overlay=${mark.left}:${mark.top}:eof_action=repeat:format=auto[marked]`,
+        '-map','[marked]','-an',
         '-frames:v',String(frames),'-map_metadata','-1','-map_chapters','-1','-c:v','libx264','-threads','2','-preset','veryfast',
         '-crf','20','-pix_fmt','yuv420p',output],{cwd:clips,timeoutMs:Math.max(1,Math.min(180000,Date.parse(context.snapshot.deadline_at)-Date.now())),signal});
       const actual=await inspectVideo(this.cfg,output,signal);
@@ -103,7 +134,7 @@ export class GeneratedMediaPipeline extends PhotoMediaPipeline {
     for(const slot of context.snapshot.outputs.filter(s=>s.kind==='video')){
       const spec=this.spec(context,'PRODUCTION','video',inspection,context.contract.creative.shots.map(s=>s.asset_id));
       spec.generation_sources=sourcesForSlot(material,'video',slot.slot_id);spec.reference_approval_hash=hash(material.approval);
-      artifacts.push(await this.artifact(context,operation,slot.slot_id,bytes,spec));
+      artifacts.push(await this.artifact(context,operation,slot.slot_id,bytes,spec,signal));
     }
     return artifacts;
   }
@@ -121,6 +152,10 @@ export class GeneratedMediaPipeline extends PhotoMediaPipeline {
     const result=await super.execute(scope,intent,phase,signal);
     return {...result,commit:async(db:pg.PoolClient)=>{
       const context=await executionContext(db,scope.tenant_id,scope.order_id!,scope.snapshot_hash);
+      const policy=frozenAiDisclosure(context.contract)!;
+      for(const a of result.receipt.artifacts.filter(a=>a.spec.kind!=='copy'))requireThat(a.spec.ai_disclosure?.contract_hash===hash(policy)
+        &&a.spec.ai_disclosure.output_sha256===a.sha256&&sha256(await this.store.get(a.object_key,a.spec.kind==='video'?512_000_000:30_000_000))===a.sha256,
+        'AI_DISCLOSURE_PROOF_INVALID','事务提交时AI标识证明或实际文件已变化',503);
       checkGeneratedSources(result.receipt,await this.material(db,context,result.receipt));await result.commit(db);
     }};
   }

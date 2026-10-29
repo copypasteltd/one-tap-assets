@@ -1,5 +1,7 @@
 # 文档目录 / Documentation index
 
+最新文件制作约束：[AI可见标识与逐帧验收](实施/AI可见标识与逐帧文件验收-v1.0.md)，[实际标识媒体](media/ai-disclosure/README.md)。官方multi解释为连续多镜；完整功能与生产仍在实施中。
+
 最新实现：[原生声音最终双复核与事务交付](实施/原生声音最终双复核与事务交付-v1.0.md)。内部两路线原听音、双角色/推理/工具/报告同源绑定与有声事务交付已连接；正向语义为合成控制响应，真实服务/商业/真机未准入，全部禁售。Latest: private final audio review and publication integration, not real-listening or production certification. 早期组件状态按此及最新实现索引理解。
 
 [中文入口](../README.md) · [English entry](../README.en.md)

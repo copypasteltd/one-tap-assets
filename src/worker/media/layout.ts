@@ -67,8 +67,7 @@ export async function renderLayout(input: Buffer, options: { presetId: string; w
   };
   for (const [i, value] of title.entries()) await text(value, titleSize, margin, top - (title.length - i - 1) * titleSize * 1.2 - 50 * unit, style.ink, true);
   for (const [i, value] of subtitle.entries()) await text(value, 30 * unit, margin + (style.layout === 'CARDS' ? 24 * unit : 0), h - bottom + (72 + i * 42) * unit);
-  await text(`${options.sequence} / ${options.total} · 商品实拍`, 22 * unit, w - margin, h - 48 * unit, style.ink, false, true);
-  if (style.layout === 'STORY') await text(`CHAPTER ${String(options.sequence).padStart(2, '0')}`, 30 * unit, margin, 90 * unit, style.accent);
-  if (options.aiLabel) await text('AI 演绎', 24 * unit, margin, 48 * unit);
+  await text(`${options.sequence} / ${options.total} · ${options.aiLabel?'AI 生成素材':'商品实拍'}`, 22 * unit, w - margin, h - 48 * unit, style.ink, false, true);
+  if (style.layout === 'STORY') await text(`CHAPTER ${String(options.sequence).padStart(2, '0')}`, 30 * unit, margin, (options.aiLabel?150:90) * unit, style.accent);
   return sharp(Buffer.from(head)).composite(overlays).png().toBuffer();
 }

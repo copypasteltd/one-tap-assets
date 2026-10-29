@@ -65,3 +65,7 @@ Recapture affected screens and the walkthrough/manifest when UI behavior changes
 [四种字幕视频、取帧和GIF](../media/native-audio/README.md)使用另一套明确标注的正弦音/人工时间码夹具，展示实际后期处理，不是页面录屏、中文识别或讲解订单。复录命令为`.\scripts\run.ps1 docs:audio`，使用独立原生测试库，不打开浏览器、不访问外部模型。源音轨/编码后波形、字幕时点、许可压低和来源SHA见独立清单。
 
 [Four caption videos, extracted frames and GIF](../media/native-audio/README.md) demonstrate native post-processing using synthetic tones and manual timestamps. They are not UI recordings, Chinese ASR or presenter orders. Run `.\scripts\run.ps1 docs:audio` to reproduce with an isolated native test schema and no browser or external model. Its separate manifest binds actual media and processing evidence.
+
+## 文件内AI标识 / Disclosure baked into files
+
+另有[4份实际PNG/MP4/取帧/GIF](../media/ai-disclosure/README.md)，来源为项目自绘SVG和原生静帧视频，完整15秒/450帧经过实际标识区域检查。它不是浏览器截图或模型生成广告质量证明。复录使用`docs:disclosure`，不启动浏览器；原10页截图、录屏、原音频示例及C原件保留。Four additional self-drawn/native pixel fixtures demonstrate baked disclosure, separately from the unchanged ten-screen browser recording and original synthetic audio.

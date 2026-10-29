@@ -15,7 +15,8 @@ export class FixtureLauncher implements RoleLauncher {
     const child = spawn(process.execPath, [resolve('tests/fixtures/codex-role.cjs')], { cwd: manifest.cwd, shell: false, windowsHide: true,
       env: { ...manifest.environment, YPCC_SYNTHETIC_MODE: this.mode, YPCC_SYNTHETIC_BRIDGE: resolve('runtime/build/worker/tool-gateway/mcp-main.js') }, stdio: ['pipe', 'pipe', 'pipe'] });
     const receipt: NativeLaunchReceipt = { version: manifest.version, nonce: manifest.nonce, instance_id: manifest.instance_id, run_id: manifest.run_id,
-      process_ref: `SYNTHETIC-ONLY:${child.pid}`, os_identity_ref: 'SYNTHETIC-NOT-RESTRICTED', isolation: 'NATIVE_RESTRICTED_IDENTITY',
+      // A PID can be reused after exit; bind this synthetic creation to its original launch nonce.
+      process_ref: `SYNTHETIC-ONLY:${child.pid}:${manifest.nonce}`, os_identity_ref: 'SYNTHETIC-NOT-RESTRICTED', isolation: 'NATIVE_RESTRICTED_IDENTITY',
       virtualization: 'FORBIDDEN', shell_tools: 'DISABLED', process_tree_bound: true };
     return { child, receipt, stop: async (): Promise<NativeCleanupReceipt> => {
       if (child.exitCode === null && child.signalCode === null) {

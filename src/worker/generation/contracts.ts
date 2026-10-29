@@ -4,6 +4,7 @@ import {requireThat} from '../../api/lib/errors.js';
 import type {FrozenContract,ModelBinding} from '../compiler/snapshot.js';
 import {admitArkContract,frozenArkContract,type ArkContract} from '../providers/ark.js';
 import {frozenNativeAudio} from '../audio/contract.js';
+import {frozenAiDisclosure} from '../compiler/disclosure.js';
 
 export interface GenerationModelRow {id:string;status:string;data:ModelBinding;private?:{ark_contract?:unknown;speech_contract?:unknown;listening_contract?:unknown}}
 export const GENERATED_QC_POLICY='YPCC-QC-GENERATED-SILENT-1.0.0';
@@ -32,6 +33,7 @@ export function generationContract(contract:FrozenContract,kind:'IMAGE'|'VIDEO')
 }
 export function validateGenerationBudget(contract:FrozenContract,nativeOrder=false):void{
   if(contract.source.engine==='PHOTO_LAYOUT')return;
+  frozenAiDisclosure(contract);
   const image=generationContract(contract,'IMAGE'),video=generationContract(contract,'VIDEO');
   const shots=contract.creative.shots.length;
   const imageCalls=contract.source.output_slots.filter(slot=>slot.kind==='image').length+(contract.source.engine==='PER_SHOT_AI'?shots:1);

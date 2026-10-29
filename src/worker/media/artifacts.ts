@@ -14,6 +14,7 @@ import type { ResourceBinding } from '../compiler/snapshot.js';
 
 export type MediaPhase = 'PRODUCTION' | 'POST';
 export interface ArtifactSpec {
+  ai_disclosure?:import('./disclosure.js').AiDisclosureProof;
   native_audio?:import('../audio/order-proof.js').NativeOrderAudio;
   generation_sources?:import('../generation/outputs.js').GenerationSource[];reference_approval_hash?:string;
   phase: MediaPhase; kind: 'image' | 'video' | 'copy'; snapshot_hash: string; plan_hash: string;

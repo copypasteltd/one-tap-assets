@@ -13,7 +13,8 @@ export interface NativeAssemblyProof {
   segments:{node_key:string;start_frame:number;end_frame:number;source_sha256:string;pcm_sha256:string}[];
   assembled_pcm_sha256:string;output_sha256:string;native_audio:NativeAudioEvidence;
 }
-export interface NativeAssemblyInput extends AudioExecution {target_frames:number;segments:NativeSegment[]}
+export interface NativeAssemblyInput extends AudioExecution {target_frames:number;segments:NativeSegment[];
+  disclosure?:{png:Buffer;left:number;top:number}}
 function segmentsValid(input:NativeAssemblyInput):void{
   audioFrames(input.target_frames);let position=0;
   requireThat(input.segments.length>0&&input.segments.length<=30&&new Set(input.segments.map(s=>s.node_key)).size===input.segments.length,
@@ -39,15 +40,23 @@ async function decodeSegments(cfg:Config,input:NativeAssemblyInput,directory:str
 /** Lossless production intermediate: decoded original samples are concatenated
  * at unit gain. AAC is encoded only by the separate caption/music POST step. */
 export async function assembleNativeAudio(cfg:Config,raw:NativeAssemblyInput):Promise<{bytes:Buffer;inspection:MediaInspection;proof:NativeAssemblyProof}>{
-  const input={...raw,segments:raw.segments.map(s=>({...s,bytes:Buffer.from(s.bytes)}))};segmentsValid(input);
+  const input={...raw,segments:raw.segments.map(s=>({...s,bytes:Buffer.from(s.bytes)})),
+    ...(raw.disclosure?{disclosure:{...raw.disclosure,png:Buffer.from(raw.disclosure.png)}}:{})};segmentsValid(input);
   return withAudioDeadline(input,async execution=>{
     const parent=inside(cfg.runtimeRoot,execution.directory);await mkdir(parent,{recursive:true});const directory=await mkdtemp(join(parent,'native-assembly-'));
     try{
       const decoded=await decodeSegments(cfg,execution,directory);
+      if(execution.disclosure){
+        requireThat(Number.isSafeInteger(execution.disclosure.left)&&execution.disclosure.left>=0&&Number.isSafeInteger(execution.disclosure.top)&&execution.disclosure.top>=0,
+          'AI_DISCLOSURE_SPEC_INVALID','标识位置必须是平台整数坐标',422);
+        await writeFile(join(directory,'disclosure.png'),execution.disclosure.png,{flag:'wx'});
+      }
       for(const [index,s] of execution.segments.entries()){
         await nativeCommand(cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-xerror','-nostdin','-n','-threads','2','-filter_threads','1',
-          '-protocol_whitelist','file,pipe','-i',join(directory,`input-${index}.mp4`),'-map','0:v:0','-an',
-          '-vf','fps=30,scale=1080:1920:flags=lanczos,setsar=1','-frames:v',String(s.end_frame-s.start_frame),
+          '-filter_complex_threads','1','-protocol_whitelist','file,pipe','-i',join(directory,`input-${index}.mp4`),
+          ...(execution.disclosure?['-i',join(directory,'disclosure.png'),'-filter_complex',
+            `[0:v]fps=30,scale=1080:1920:flags=lanczos,setsar=1[base];[base][1:v]overlay=${execution.disclosure.left}:${execution.disclosure.top}:eof_action=repeat:format=auto[marked]`,
+            '-map','[marked]']:['-map','0:v:0','-vf','fps=30,scale=1080:1920:flags=lanczos,setsar=1']),'-an','-frames:v',String(s.end_frame-s.start_frame),
           '-map_metadata','-1','-map_chapters','-1','-c:v','libx264','-threads','2','-preset','veryfast','-crf','20','-pix_fmt','yuv420p',join(directory,`video-${index}.mp4`)],
         {cwd:directory,timeoutMs:audioTimeout(execution,180000),signal:execution.signal});
       }

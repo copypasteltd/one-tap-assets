@@ -137,6 +137,7 @@ export class QualityControlService {
         {audio_contract_hash:audio.audio_contract_hash,asr_submission_id:audio.asr_submission_id},null,item.mime_type);
       await save('CONTRACT', Buffer.from(JSON.stringify({ version: policy, snapshot: context.snapshot, profile: context.contract.profile,
         creative_plan: context.contract.creative, resources: context.snapshot.resource_versions, sampling_policy: FRAME_SAMPLING_POLICY,
+        ...(context.contract.ai_disclosure_contract?{ai_disclosure_contract:context.contract.ai_disclosure_contract}:{}),
         outputs: post.receipt.artifacts.map(a => ({ artifact_id: a.id, slot_id: a.slot_id, sha256: a.sha256, spec: a.spec })) })), null, { snapshot_hash: context.snapshotHash });
       const outputs = post.receipt.artifacts.map(a => ({ slot_id: a.slot_id, asset_id: a.id, sha256: a.sha256 }));
       const packet: DTO<'ReviewPacket'> = { packet_id: packetId, tenant_id: context.tenantId, order_id: context.orderId,

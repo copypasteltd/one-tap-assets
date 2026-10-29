@@ -1,5 +1,18 @@
 # 更新记录 / Changelog
 
+## 2026-10-29 · 可见AI标识与逐帧验收 / Baked AI disclosure and full-frame verification
+
+- 验证：70单元 / 350完整原生集成、类型/服务端/双小程序全新通过；文档契约4680项。FRESH_FULL，339份源码前后字节一致；36份媒体（原20页面+12声音+新4标识）校验。真实服务与全部销售仍未准入。 Fresh full verification passes without retained native evidence.
+
+- 合成测试启动器的进程引用补绑原启动nonce；重复PID控制由碰撞转为可区分，样例完整13项通过。保留原偶发角色证据失败及原样复查，未认定实际PID复用为原根因；生产门禁、断言和超时不变。 Bind synthetic creation references to the original launch nonce; retain intermittent-failure provenance without claiming observed OS PID reuse or production isolation.
+
+- 首次完整回归POST恢复120秒超时，原版定向48.563秒通过；第二次350项原生及服务端通过后，专项实际复现透明Alpha绕过RGB检查，主动中止未完成的双小程序构建。修复为RGBA完整比较并增加透明负向断言；保留原上限、失败/中止与修复前后来源，最终源码重新执行全部六项。 Initial timeout and abandoned pre-fix native-pass evidence remain separate from fresh final RGBA verification.
+- 原报价私有合同冻结平台固定文字、C色/字体许可、区域与原计划/清单；作者不能关闭，历史缺策略合同阻断且不重购。 Freeze platform-owned policy in original private contracts; block missing historical policies without replacement purchases.
+- 生成式制作和POST的实际图片/视频带标识，生成图页脚明确AI来源；实际PNG字形逐字节、视频全帧灰度区域检查，原始音轨/ASS/混音保留。 Check actual glyph pixels and every video frame, preserving native audio and captions.
+- 整包专项捕获旧右上ASS与新标识重叠，统一标识改在左上；保留原阈值与字幕内核。 Full-pipeline regression catches an actual overlay collision; fix placement without weakening checks.
+- 新增四官方规格/作者关闭/历史合同/策略篡改/原图不变单元，以及完整1080p/15秒/450帧、单帧缺标识、空白字形、取消和回收专项；已有两无声/两有声整包验证最终证明。 New controls cover original specifications, real glyphs/full video, missing frames and lifecycle boundaries.
+- 明确官方multi是连续多镜；同步双语README、实际PNG/MP4/取帧/GIF及SHA、架构/运行/状态/实施和验证记录。 Official multi means multi-shot. Real model/rights/host/legal/full-product admission remains unverified and all sales stay disabled.
+
 ## 2026-10-29 · 最终声音双复核与事务交付 / Final native-audio review and publication
 
 - 验证：65单元 / 347完整原生集成、服务端/双小程序与类型检查全新通过；文档契约4649项。FRESH_FULL，334份源码前后字节一致；真实服务与全部销售仍未准入。 Fresh full verification passes, without retained integration evidence.

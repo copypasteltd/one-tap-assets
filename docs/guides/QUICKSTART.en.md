@@ -97,3 +97,5 @@ Local self-signed TLS and loopback addresses are not automatically a phone-acces
 `verify:implementation` runs six sequential checks: types, units, native integration, server and both mini-program builds, then records source/contract/resource hashes. Individual commands are for targeted checks; do not repeat the full suite without a reason. Integration needs the native database and media binaries. Role/provider/host responses are explicit fixtures. Local logs stay in ignored `runtime/test-results/`; public summaries are in `docs/verification/`.
 
 For recording, start `dev:preview` and follow the [demo guide](DEMO.md) to run `docs:media`. Refresh source evidence after code changes, applicable media after UI changes, and links after documentation changes. Commit/push normally and verify the remote under the [contribution rules](../../CONTRIBUTING.md).
+
+Recreate the visible-disclosure fixture with `.\scripts\run.ps1 docs:disclosure`. Self-drawn media and native static video require no external model; actual image pixels/all 450 frames are checked, connections closed and temporary directories removed. See [media and scope](../media/ai-disclosure/README.md).

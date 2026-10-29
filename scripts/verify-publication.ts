@@ -2,7 +2,7 @@ import {execFileSync} from 'node:child_process';
 import {readFile,writeFile,mkdir,stat} from 'node:fs/promises';
 import {resolve,dirname,relative,isAbsolute} from 'node:path';
 import {existsSync} from 'node:fs';
-import {sha256} from '../src/api/lib/crypto.js';
+import {sha256,hash} from '../src/api/lib/crypto.js';
 import sharp from 'sharp';
 
 const root=process.cwd();
@@ -58,6 +58,27 @@ for(const style of audio.styles)check(style.semantic_review==='NOT_PERFORMED'&&!
   &&audio.files.some(f=>f.path===`docs/media/native-audio/${style.style}.mp4`&&f.sha256===style.output_sha256),'Audio fixture style evidence mismatch');
 const audioGif=await sharp('docs/media/native-audio/preview.gif',{animated:true}).metadata();
 check((audioGif.pages??0)>1&&audioGif.pages===audio.gif_frames,'Audio fixture GIF frame count mismatch');
+const disclosure=JSON.parse(await readFile('docs/media/ai-disclosure/capture-manifest.json','utf8')) as {
+  type:string;data_source:string;browser_used:boolean;external_model_used:boolean;real_generation_verified:boolean;real_speech_verified:boolean;
+  host_or_legal_marking_admitted:boolean;full_product_verified:boolean;production_admitted:boolean;frames:number;
+  contract:unknown;image_proof:{contract_hash:string;output_sha256:string;frames_checked:number};
+  video_proof:{contract_hash:string;output_sha256:string;frames_checked:number};
+  files:{path:string;bytes:number;sha256:string}[];source_files:{path:string;sha256:string}[];
+};
+check(disclosure.type==='SYNTHETIC_DISCLOSURE_PIXEL_FIXTURE'&&disclosure.data_source==='PROJECT_SELF_DRAWN_SVG_AND_STATIC_NATIVE_VIDEO'
+  &&disclosure.frames===450&&disclosure.files.length===4,'Disclosure pixel fixture provenance missing');
+check(!['browser_used','external_model_used','real_generation_verified','real_speech_verified','host_or_legal_marking_admitted','full_product_verified','production_admitted']
+  .some(k=>disclosure[k as keyof typeof disclosure]),'Disclosure fixture cannot certify generation, speech or host/legal admission');
+for(const f of disclosure.files){
+  check(f.path.startsWith('docs/media/ai-disclosure/')&&!f.path.includes('..'),'Unsafe disclosure fixture path');
+  const bytes=await readFile(f.path);check(bytes.length===f.bytes&&sha256(bytes)===f.sha256,`Changed disclosure media: ${f.path}`);
+}
+for(const f of disclosure.source_files)check(sha256(await readFile(f.path))===f.sha256,`Stale disclosure capture source: ${f.path}`);
+for(const [name,proof,frames] of [['image.png',disclosure.image_proof,1],['video.mp4',disclosure.video_proof,450]] as const)
+  check(proof.contract_hash===hash(disclosure.contract)&&proof.frames_checked===frames
+    &&disclosure.files.some(f=>f.path===`docs/media/ai-disclosure/${name}`&&f.sha256===proof.output_sha256),'Disclosure full-file proof mismatch');
+const disclosureGif=await sharp('docs/media/ai-disclosure/preview.gif',{animated:true}).metadata();
+check((disclosureGif.pages??0)>1,'Disclosure GIF is not animated');
 const raw=execFileSync('git',['ls-files','--cached','--others','--exclude-standard','-z'],{encoding:'utf8',windowsHide:true});
 const candidates=[...new Set(raw.split('\0').filter(Boolean))];
 let bytes=0;
@@ -83,7 +104,8 @@ for(const f of [...implementation.files,...implementation.runtime_contract_files
   check(sha256(await readFile(f.path))===f.sha256,`Stale implementation evidence: ${f.path}`);
 const report={schema_version:'1.0',checked_at:new Date().toISOString(),status:'PASS',
   scope:'Repository documentation/media/source snapshot checks; not real provider, payment, native device or production admission',
-  documentation_files:guides.length,local_links:links,media_files:manifest.files.length+audio.files.length,screenshots:manifest.screenshots.length,
+  documentation_files:guides.length,local_links:links,media_files:manifest.files.length+audio.files.length+disclosure.files.length,screenshots:manifest.screenshots.length,
+  disclosure_fixture_files:disclosure.files.length,disclosure_fixture_frames:disclosure.frames,disclosure_fixture_gif_frames:disclosureGif.pages,
   audio_fixture_files:audio.files.length,audio_fixture_styles:audio.styles.length,audio_fixture_gif_frames:audioGif.pages,
   gif_frames:gif.pages,candidate_files:candidates.length,candidate_bytes:bytes,browser_closed:true,
   credential_check:'No private-key blocks or long OpenAI-style key strings in candidate text; not a guarantee for every possible secret format',

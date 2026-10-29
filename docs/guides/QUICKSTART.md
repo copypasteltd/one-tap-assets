@@ -97,3 +97,5 @@ $env:TARO_APP_API_BASE = 'https://your-admitted-api.example'
 `verify:implementation`集中顺序运行类型、单元、原生集成、服务端和双小程序六项，并刷新源码/契约/资源摘要；其他逐项命令用于有针对性的检查，不必无变化重复全套。集成测试需要上述数据库与原生FFmpeg/ffprobe，角色/供应商/宿主为显式合成夹具。日志在忽略的`runtime/test-results/`，公开摘要在`docs/verification/`。
 
 回放录屏需先启动`dev:preview`，再按[演示指南](DEMO.md)执行`docs:media`。源码变化要刷新实现证据；UI变化要更新对应截图、录屏、GIF及清单，文档变化要核对链接。发布时正常提交推送并核对远端，遵循[贡献约束](../../CONTRIBUTING.md)。
+
+可见标识可独立复录：`.\scripts\run.ps1 docs:disclosure`。它使用自绘素材和原生静帧视频，不调用外部模型；检查实际图片及完整450帧，关闭连接并回收目录。见[标识媒体与范围](../media/ai-disclosure/README.md)。

@@ -1,7 +1,7 @@
 {
   "baseline_id": "YPCC-DEV-1.1.0",
   "requirements_version": "3.1",
-  "checked_at": "2026-10-29T03:13:36.612524+00:00",
+  "checked_at": "2026-10-29T07:04:40.333411+00:00",
   "status": "PASS",
   "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
   "counts": {
@@ -10,9 +10,9 @@
     "skills": 19,
     "skill_bundles": 14,
     "development_documents": 20,
-    "base_contract_checks": 3299,
-    "codex_checks": 1350,
-    "total_checks": 4649,
+    "base_contract_checks": 3303,
+    "codex_checks": 1377,
+    "total_checks": 4680,
     "codex_synthetic_examples": 39
   },
   "product_tests_executed": false,
@@ -2464,6 +2464,16 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/README.md->实施/AI可见标识与逐帧文件验收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->media/ai-disclosure/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/README.md->实施/原生声音最终双复核与事务交付-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -2709,6 +2719,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/ARCHITECTURE.md->../实施/AI可见标识与逐帧文件验收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/guides/DEMO.md",
       "status": "PASS",
       "detail": ""
@@ -2819,6 +2834,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/DEMO.md->../media/ai-disclosure/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/guides/QUICKSTART.en.md",
       "status": "PASS",
       "detail": ""
@@ -2865,6 +2885,11 @@
     },
     {
       "name": "document_link:docs/guides/QUICKSTART.en.md->../../CONTRIBUTING.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/QUICKSTART.en.md->../media/ai-disclosure/README.md",
       "status": "PASS",
       "detail": ""
     },
@@ -2919,7 +2944,17 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/QUICKSTART.md->../media/ai-disclosure/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/guides/STATUS.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/STATUS.md->../实施/AI可见标识与逐帧文件验收-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -2974,6 +3009,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/verification/README.md->../media/ai-disclosure/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/verification/README.md->publication.json",
       "status": "PASS",
       "detail": ""
@@ -2984,12 +3024,22 @@
       "detail": ""
     },
     {
-      "name": "document_link:docs/verification/README.md->audio-review-native-source.json",
+      "name": "document_link:docs/verification/README.md->disclosure-native-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->disclosure-attempts.json",
       "status": "PASS",
       "detail": ""
     },
     {
       "name": "document_link:docs/verification/README.md->audio-review-attempts.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->audio-review-native-source.json",
       "status": "PASS",
       "detail": ""
     },
@@ -3000,6 +3050,26 @@
     },
     {
       "name": "document_link:docs/verification/README.md->listening-native-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/AI可见标识与逐帧文件验收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/AI可见标识与逐帧文件验收-v1.0.md->../verification/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/AI可见标识与逐帧文件验收-v1.0.md->../../assets/implementation/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/AI可见标识与逐帧文件验收-v1.0.md->../media/ai-disclosure/README.md",
       "status": "PASS",
       "detail": ""
     },
@@ -3594,6 +3664,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->AI可见标识与逐帧文件验收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/实施/当前开发方案与技术骨架-v3.1.md->原生声音最终双复核与事务交付-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3810,6 +3885,11 @@
     },
     {
       "name": "document_encoding_fences:docs/实施/源码实现进度-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->AI可见标识与逐帧文件验收-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -4755,6 +4835,11 @@
     },
     {
       "name": "document_link:docs/开发/17-交叉核验与交付门禁.md->../实施/独立视觉复核与原子交付接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/17-交叉核验与交付门禁.md->../实施/AI可见标识与逐帧文件验收-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -6119,6 +6204,41 @@
       "detail": ""
     },
     {
+      "name": "document_encoding_fences:docs/media/ai-disclosure/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/ai-disclosure/README.md->image.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/ai-disclosure/README.md->preview.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/ai-disclosure/README.md->video.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/ai-disclosure/README.md->frame.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/ai-disclosure/README.md->capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/ai-disclosure/README.md->../../实施/AI可见标识与逐帧文件验收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/media/native-audio/README.md",
       "status": "PASS",
       "detail": ""
@@ -6480,6 +6600,21 @@
     },
     {
       "name": "document_link:README.md->docs/media/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/ai-disclosure/image.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/ai-disclosure/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/实施/AI可见标识与逐帧文件验收-v1.0.md",
       "status": "PASS",
       "detail": ""
     },

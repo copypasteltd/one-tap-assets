@@ -7,6 +7,7 @@ import { insert } from '../../src/api/db/store.js';
 import { id, iso, hash, sha256, addSeconds } from '../../src/api/lib/crypto.js';
 import { storage } from '../../src/api/storage/storage.js';
 import { basePlan } from '../../src/worker/compiler/plan.js';
+import {freezeAiDisclosure} from '../../src/worker/compiler/disclosure.js';
 import { bindSnapshot, type FrozenContract } from '../../src/worker/compiler/snapshot.js';
 import { enqueueStage } from '../../src/worker/queue/enqueue.js';
 import { claimStage } from '../../src/worker/queue/leases.js';
@@ -81,6 +82,8 @@ export async function mediaFixture(db: TestDatabase,options:{principal?:Principa
     if(db.cfg.env!=='test')throw new Error('Synthetic contract configuration requires APP_ENV=test');
     await options.configureContract(contract);
   }
+  if(contract.source.engine!=='PHOTO_LAYOUT')contract.source.ai_disclosure_required=true;
+  freezeAiDisclosure(contract);
   const quoteId = id('quote'); const orderId = id('order'); const jobId = id('job'); const snapshotId = id('snapshot');
   await insert(db.pool, 'quotes', { id: quoteId, tenant_id: f.p.tenantId, owner_id: f.p.userId, plan_id: f.plan.plan_id,
     plan_hash: contract.plan_hash, amount_fen: 100, expires_at: addSeconds(900), state: 'CONSUMED', data: {}, private: {} });

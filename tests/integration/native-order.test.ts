@@ -262,6 +262,8 @@ it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('binds synthetic native final
   expect((await db.pool.query("SELECT id FROM outbox_events WHERE aggregate_id=$1 AND event_key=$2",[f.orderId,`release:delivered:${f.orderId}`])).rowCount).toBe(1);
   const post=await operationArtifacts(db.pool,f.context,'POST');
   expect(post.receipt.artifacts.find(a=>a.spec.kind==='video')!.spec.native_audio!.post!.kernel.semantic_review).toBe('NOT_PERFORMED');
+  for(const a of post.receipt.artifacts.filter(a=>a.spec.kind!=='copy'))expect(a.spec.ai_disclosure)
+    .toMatchObject({contract_hash:hash(f.contract.ai_disclosure_contract),output_sha256:a.sha256,frames_checked:a.spec.kind==='video'?60:1});
 },300000);
 
 it('blocks synthetic native final review publication after durable voice revocation before commit',async()=>{

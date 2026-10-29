@@ -27,6 +27,8 @@ import {decodeNativeAudio} from './native-audio.js';
 import {compileNativeCaptions} from './native-captions.js';
 import {loadProductionFont} from './font.js';
 import {renderNativeAudioPost} from './native-audio-post.js';
+import {frozenAiDisclosure} from '../compiler/disclosure.js';
+import {disclosureRaster} from './disclosure.js';
 
 export const NATIVE_ORDER_PIPELINE_VERSION='YPCC-NATIVE-ORDER-PIPELINE-1';
 type Material=Awaited<ReturnType<typeof generatedOutputs>>;
@@ -71,7 +73,8 @@ export class NativeOrderMediaPipeline extends GeneratedMediaPipeline {
   }
   protected override async alternateGeneratedVideo(context:ExecutionContext,material:Material,directory:string,signal:AbortSignal){
     const made=await assembleNativeAudio(this.cfg,{directory,deadline_at:context.snapshot.deadline_at,signal,
-      target_frames:context.snapshot.timeline.target_frames,segments:this.segments(context,material)});
+      target_frames:context.snapshot.timeline.target_frames,segments:this.segments(context,material),
+      disclosure:await disclosureRaster(this.cfg,frozenAiDisclosure(context.contract)!,1080,1920)});
     return {bytes:made.bytes,inspection:made.inspection,native_audio:{version:NATIVE_ORDER_MEDIA_VERSION,
       audio_contract_hash:hash(frozenNativeAudio(context.contract)),assembly:made.proof} satisfies NativeOrderAudio};
   }
@@ -127,7 +130,7 @@ export class NativeOrderMediaPipeline extends GeneratedMediaPipeline {
       assertMediaAlive(context,signal);
       if(slot.kind==='copy'){
         const bytes=Buffer.from(context.contract.creative.copy,'utf8');artifacts.push(await this.artifact(context,operation,slot.slot_id,bytes,
-          this.spec(context,'POST','copy',{kind:'copy',bytes:bytes.length,encoding:'utf-8'},[])));continue;
+          this.spec(context,'POST','copy',{kind:'copy',bytes:bytes.length,encoding:'utf-8'},[]),signal));continue;
       }
       const input=source.artifacts.find(a=>a.slot_id===slot.slot_id)!,raw=await this.store.get(input.object_key,slot.kind==='video'?512_000_000:30_000_000);
       requireThat(sha256(raw)===input.sha256,'ARTIFACT_HASH_MISMATCH','原制作文件在有声后期期间发生变化',503);
@@ -135,7 +138,7 @@ export class NativeOrderMediaPipeline extends GeneratedMediaPipeline {
       const spec=this.spec(context,'POST',slot.kind,slot.kind==='video'?final.inspection:await inspectImage(bytes),input.spec.source_asset_ids,[input.id]);
       requireThat(input.spec.generation_sources&&input.spec.reference_approval_hash,'GENERATED_PACK_SOURCE_INVALID','有声后期缺少原生成来源与参考核验',503);
       spec.generation_sources=input.spec.generation_sources;spec.reference_approval_hash=input.spec.reference_approval_hash;
-      if(slot.kind==='video')spec.native_audio=native;artifacts.push(await this.artifact(context,operation,slot.slot_id,bytes,spec));
+      if(slot.kind==='video')spec.native_audio=native;artifacts.push(await this.artifact(context,operation,slot.slot_id,bytes,spec,signal));
     }
     return artifacts;
   }

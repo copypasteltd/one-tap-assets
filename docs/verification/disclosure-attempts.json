@@ -1,0 +1,462 @@
+{
+  "scope": "ACTUAL_GLYPH_AND_ALL_FRAME_PIXEL_CHECKS_WITH_SYNTHETIC_PRODUCT_MEDIA_AND_EXTERNAL_CONTROLS",
+  "verification_mode": "FRESH_FULL",
+  "local_attempt_files": [
+    {
+      "path": "runtime/test-results/disclosure-alpha-attempt1.log",
+      "sha256": "05c97348559bfb20196ae74fc482a0a6bfc463ef52dcef8e766972b41d12be7c"
+    },
+    {
+      "path": "runtime/test-results/disclosure-alpha-fixed.log",
+      "sha256": "b5e3975a1619c0fe885202811dcbc44310e59bae711e4b90f8930217a66218dd"
+    },
+    {
+      "path": "runtime/test-results/disclosure-alpha-probe.log",
+      "sha256": "05c97348559bfb20196ae74fc482a0a6bfc463ef52dcef8e766972b41d12be7c"
+    },
+    {
+      "path": "runtime/test-results/disclosure-capture-final.log",
+      "sha256": "db1076cfd06403d56545b367332df38943cdd5217bfa3a1926cb44938e171996"
+    },
+    {
+      "path": "runtime/test-results/disclosure-capture.log",
+      "sha256": "db1076cfd06403d56545b367332df38943cdd5217bfa3a1926cb44938e171996"
+    },
+    {
+      "path": "runtime/test-results/disclosure-docs-final.log",
+      "sha256": "3b5da7ef3e410a6de555bbc62e8358955a0957ac05f17d16c4fd80fe068d0b58"
+    },
+    {
+      "path": "runtime/test-results/disclosure-docs.log",
+      "sha256": "3929bb6edb687b764aaf8294d896f3b02fb38f0c581d270f522b1e03ba5e50eb"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt1-implementation.json",
+      "sha256": "8fd5d7907a8ba498572a73903b74dc568fe7f4875fdf63ea0270c1f0e920c849"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt1-integration.json",
+      "sha256": "4184f6f6a083a6db467df059b1c75031c8ea43d5e9c859cfad394098db7786a5"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt1-source-start.json",
+      "sha256": "8f66e12f4b9e5943cf55cfec4e46d2fa5e42a1a6faf722966e27c0be9dc680d1"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt1-test-integration.log",
+      "sha256": "4cea07fd317b4c9c0d77b18e491fea319b2e50205346469ba26f5ad0cd214d2e"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt1-test.log",
+      "sha256": "1a0a0ceb28d29ad715fa706bf80585e116898eefa8143fdd0f6e6d2ffec3a4e4"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt1-typecheck.log",
+      "sha256": "85e1809e8a6af53a552c1935d040c15ecf5d9f3297a430aea27e337823c0bc42"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt1-unit.json",
+      "sha256": "8d2cb2036ffdaf2a1b073a1bc597e5473868186571882db5461caa68bc074a18"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt1-verifier.log",
+      "sha256": "5b575d96cde7c10f636ec59690d4e7feb2250b2d6917424a487c138517af72fd"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt2-abandoned.json",
+      "sha256": "f5e63e304ca8732fbe25d39d803c175eb8f3eda6c5a792dceceef9b340b9ee57"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt2-integration.json",
+      "sha256": "6d73961a3e4775657bde9caee3380eef0a3f600edcffa6545699ac6d8e25daf8"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt2-source-start.json",
+      "sha256": "6141682a97fccea88a0eb3a600ec13dd5da3a618a36455cc356716dc9ab64241"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt2-test-integration.log",
+      "sha256": "a937a75ad69fd69226af1a8006c12684b2199e5a501d7ced6cc705a9018cc48a"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt2-unit.json",
+      "sha256": "fd443cd6b76ab9544986b0df808d536e72a69c1642859b2a6127c6284290d438"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt2-verifier.log",
+      "sha256": "557a4da2572e2cd8c91b2994090a84f2e1983c3469432ffc639b77809ac7eac1"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt3-implementation.json",
+      "sha256": "b166885f1eaab2edefcd8f904919e56748fba8b284aad10f6c0da32397f77308"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt3-source-start.json",
+      "sha256": "0918b84e5e41ae7b493431d8d3eb92271b33358d8fbf92777770819c9559f1d1"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt3-typecheck.log",
+      "sha256": "b8f935fec420617dd93a8e7c42bf9f045058784e42f20cabca63f8b4e878f91a"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt3-verifier.log",
+      "sha256": "57c39411b2c7058d024f359880de17cac169baaa380cdad92209144f5633c251"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt4-implementation.json",
+      "sha256": "05468ba015bbc836c8f8318f031b651a7965b05396517ed80b86e345a4ac108a"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt4-integration.json",
+      "sha256": "3f2e9ae892ee65b5c774d4a6f86efe2e84979df208dfe7565d5624e7187073e4"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt4-log-retention.json",
+      "sha256": "0beb255a6cef40c20761116e7aecbf89541d83bb52584b1a4b5786193d28fdda"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt4-source-start.json",
+      "sha256": "0918b84e5e41ae7b493431d8d3eb92271b33358d8fbf92777770819c9559f1d1"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt4-test-integration.log",
+      "sha256": "05ccbc7d0cf7bd28bedc357fb6cee88c1da9594c3ecb8460d5c073319d84d2eb"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt4-test.log",
+      "sha256": "38274a47c476e5a068cfd953b675ea3eff9109f080f55865da95908302cf2838"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt4-typecheck.log",
+      "sha256": "06eb0166f27ba4bbc34eae6b4bac7f6f8a9a33325690ffe4c7b9e2748f9b1f51"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt4-unit.json",
+      "sha256": "c4e7f26af4ce8b0aefbaa64a94e9929676a6a7d539a6a48a0f7afc15665c9783"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt4-verifier.log",
+      "sha256": "8cc943875a002502ee91740fddeb3083a9900a33b076e7e024035ec246d5c5df"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt5-implementation.json",
+      "sha256": "9f1b2e5f4b566b4b3bb43b178b1eb1cd26cc8475dc1e9711a139d7b9118b27a2"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt5-integration.json",
+      "sha256": "3547719f0eaa78816b8caf36bf038eba9137b66cc8613393980a0356423373e9"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt5-source-start.json",
+      "sha256": "19a672aa6b419813cb8e54bd835a8d8b596c6d43e180bb12aec225a33339eb63"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt5-test-integration.log",
+      "sha256": "34074818d2758cec2d1fd04f35e66e1c7403741ffc8bb45378490257c64ad79a"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt5-test.log",
+      "sha256": "c29f65375758f1a27d4cb9b35a0295bf4392164f5dfa3862f7065196afbcb639"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt5-typecheck.log",
+      "sha256": "3b979f830482e6d8ce668d09321487c6e944e6472f5c1db707a2ecd9185a374a"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt5-unit.json",
+      "sha256": "6dbcbd36e6d9462b5903ebe8bac4869338e125c3fa5317ed0c4ccbed7a31c89d"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt5-verifier.log",
+      "sha256": "f0d0c1bf72ca1c5d9f9b6b388495103ffbc16e29c7393a9282674c4344f7e2e9"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt6-implementation.json",
+      "sha256": "d67d6d4b00aced6cfe45793bf19713def64670979678e786901c367b74b04ae9"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt6-integration.json",
+      "sha256": "dfc8d0952238a4510208454b447812a0b6f7251835583edb15c014d9ef3cd2cf"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt6-source-start.json",
+      "sha256": "19a672aa6b419813cb8e54bd835a8d8b596c6d43e180bb12aec225a33339eb63"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt6-test-integration.log",
+      "sha256": "bc1f54a97f9c4ec2147a2dc6893e329f5a8043b9182e648694f75b11a310e6fe"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt6-test.log",
+      "sha256": "5e0329487ea9cff555dc2c7a01cfbc17669e394ccfd5b0e0ba856791441fca59"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt6-typecheck.log",
+      "sha256": "e1a518db37e466da0f69a193a73feadf11f281a2a9bded44588f887c5dd28521"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt6-unit.json",
+      "sha256": "ecabeab7051bce71b3ed22defe3a3f0c0179f5d104fc33b8413845ef4468557a"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-attempt6-verifier.log",
+      "sha256": "f2e60a7e38aef1f35ab8b56e35588524677722fd49f2d3b0342cecf4db6f8bad"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-build-alipay.log",
+      "sha256": "dd19a69c1352bf70bcc412c17b076a6bce497b6378e85f2b629f18f83bdd4dc7"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-build-douyin.log",
+      "sha256": "16613426bc2a019414f5c8ce66c3963f4b2533d84b185c9dd05d6af9d2983b44"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-build-server.log",
+      "sha256": "2b17ba176db004356a131f6d44d0517efa6400c725893099071c47573f7215bd"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-implementation.json",
+      "sha256": "eb079e1e2507f655d94b654d6423399e228ea671dc876193b4c7d79f987f6ad1"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-integration.json",
+      "sha256": "fa3d7a097bebcf5ea826da4df3be4a6cdbee7cbdc3e063c045b1fa10c8d22aca"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-test-integration.log",
+      "sha256": "650022a0576975641fb13bed51db20752e1a1fcbfd3843119008df0b10f9e6eb"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-test.log",
+      "sha256": "a6ab2904addabde2c36c77505122eae694c3b026b394f139c76aa5b832b9dd54"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-typecheck.log",
+      "sha256": "9e1d8b15b2004484587fd804fe8b8e6663db73fcf8d458b2c6cd24c91cafd57b"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-unit.json",
+      "sha256": "a641296209e3c27882b31f51555a73a6ab017a5af98c913fb01f754154b29845"
+    },
+    {
+      "path": "runtime/test-results/disclosure-full-verifier.log",
+      "sha256": "fdfcaae8652a90236c8be95913cb6ebb1e90f8653c52931c53e4f2c1bcf5169f"
+    },
+    {
+      "path": "runtime/test-results/disclosure-native-final-focused.json",
+      "sha256": "6d6ef63031ef6a295913ba528c09ab65cce8ebdb180624215d39a477a9cbd556"
+    },
+    {
+      "path": "runtime/test-results/disclosure-native-stress.log",
+      "sha256": "a731a5862099f0a568026557e8f8a82200da72ed9882a9dcbd0ca506bb296383"
+    },
+    {
+      "path": "runtime/test-results/disclosure-pipeline-attempt1.json",
+      "sha256": "558ed98297ac25e3699517a05815622af9d343f094fa45cccb9f73c606493679"
+    },
+    {
+      "path": "runtime/test-results/disclosure-pipeline-focused-final.log",
+      "sha256": "c681821e87342c63a1038768dfae3c1d08cdc0b27038ec6c0f6585d8d96fed5d"
+    },
+    {
+      "path": "runtime/test-results/disclosure-pipeline-focused.log",
+      "sha256": "5f5978e22dcde6782d049d6b1fdb1b50656cd5a23076773949a7d822e235f6e6"
+    },
+    {
+      "path": "runtime/test-results/disclosure-pixels-final.json",
+      "sha256": "a90184b7fd2f54c385fc496d0030c3523c723f044a3959d139980dee267f5830"
+    },
+    {
+      "path": "runtime/test-results/disclosure-pixels-final.log",
+      "sha256": "4f579b67ff6b9c842c2a5095ad894a54f3549ac47347e2b5f0078715b7f4abd6"
+    },
+    {
+      "path": "runtime/test-results/disclosure-pixels-focused.log",
+      "sha256": "8a8260c8f973ae8e1a886e06107467ea00e8d5aaeacf4696fa8cb75aa3917888"
+    },
+    {
+      "path": "runtime/test-results/disclosure-pixels-rgba-attempt1.json",
+      "sha256": "cc7b44d03f6d0fbe4568a2db6217314212391ae2dcd785106c8ed141f9f8aa31"
+    },
+    {
+      "path": "runtime/test-results/disclosure-pixels-rgba-attempt1.log",
+      "sha256": "81670b123a469e6cb6591e648621aa2c5aa84b0a502fd5bcfa468de8cb0964ab"
+    },
+    {
+      "path": "runtime/test-results/disclosure-post-probe-state.log",
+      "sha256": "0ca5b0e12938a2732ce0338b38aaec3f63b8afec59e79014c19c2773a247537a"
+    },
+    {
+      "path": "runtime/test-results/disclosure-post-recovery-probe.json",
+      "sha256": "0eb124f6c3cb46db5044c2e5174acb4e63436a4dc76e28660cc5d37b1d50aed7"
+    },
+    {
+      "path": "runtime/test-results/disclosure-post-recovery-probe.log",
+      "sha256": "c40de045958d933b19dbdfc3052ebb07297f631e5912bf4e0cb81bbf596f8b87"
+    },
+    {
+      "path": "runtime/test-results/disclosure-process-ref-green.log",
+      "sha256": "152daae8c059edb0957e749a22763896db42b976cb5f9234d057d58dd915c7f4"
+    },
+    {
+      "path": "runtime/test-results/disclosure-process-ref-red.log",
+      "sha256": "ea8c22ea90042083b5a3bf24b82af322905c84d6e8229fb574d7b4aada6737e1"
+    },
+    {
+      "path": "runtime/test-results/disclosure-publication.log",
+      "sha256": "48a36ac4d6dfd297f3e2dccbf74bdc944ebd36df4705b5d84af3cc23ea262d0d"
+    },
+    {
+      "path": "runtime/test-results/disclosure-qc-revocation-probe.json",
+      "sha256": "33e5092028d763ca24db82b8cd4fcad10d15d0284b19bfd96df374a2a7c11f40"
+    },
+    {
+      "path": "runtime/test-results/disclosure-qc-revocation-probe.log",
+      "sha256": "5ced15dc056399c4c8b80f8215220b227ce414902d8a4a2c73b1c791605e9218"
+    },
+    {
+      "path": "runtime/test-results/disclosure-retry-progress.log",
+      "sha256": "bca0b360ab8290ec2e5baaaa871d8ab70d5c5691ef4f8c66b9cf2b3f7bbf1c8a"
+    },
+    {
+      "path": "runtime/test-results/disclosure-sample-final.json",
+      "sha256": "b4a06a5b74a100226a315654069d60e5394921557480a8e266d6edef265d90c4"
+    },
+    {
+      "path": "runtime/test-results/disclosure-sample-final.log",
+      "sha256": "54e9912a708eda41902fff49afd7788f5d4394998f5add8ce0faa5d8c894c938"
+    },
+    {
+      "path": "runtime/test-results/disclosure-sample-probe.json",
+      "sha256": "dee7faa27aa5d5a65b46117ce14bc5f8282f0f75965eaca404eabc7f28c15d7c"
+    },
+    {
+      "path": "runtime/test-results/disclosure-sample-probe.log",
+      "sha256": "ba0957f08016155a6bf40b2b21604b74a0b1b0ed2ec84e612f58a6acceba2df9"
+    },
+    {
+      "path": "runtime/test-results/disclosure-silent-focused.json",
+      "sha256": "1e5907b74c05a4737220e0a94d7c8a142c8c001384744bd18ab193e55c4233bb"
+    },
+    {
+      "path": "runtime/test-results/disclosure-silent-focused.log",
+      "sha256": "de9988bf22ed3622e06a387c33d36fd046cf70f7129ae488723d786db6d9942a"
+    },
+    {
+      "path": "runtime/test-results/disclosure-source-delta.json",
+      "sha256": "dc4acc3d3915b2ee98f1663f07c62718cce4c35cfdffbbeeada44542ba358319"
+    },
+    {
+      "path": "runtime/test-results/disclosure-source-start.json",
+      "sha256": "19a672aa6b419813cb8e54bd835a8d8b596c6d43e180bb12aec225a33339eb63"
+    },
+    {
+      "path": "runtime/test-results/disclosure-typecheck.log",
+      "sha256": "3cec72146466f47bd1a5bfe036dda4c7bc7fd2245c611902d52cc6b5ddb6fec3"
+    },
+    {
+      "path": "runtime/test-results/disclosure-unit-attempt1.json",
+      "sha256": "8e1889a9272b0b92f4c692346f26cb3d26fd8c08deff7fe0fe21972275279d07"
+    },
+    {
+      "path": "runtime/test-results/disclosure-unit-final.log",
+      "sha256": "c93afb54beaa846e1d467bc1815441417e70a445ad9d01bc98ed1db138554e1d"
+    },
+    {
+      "path": "runtime/test-results/disclosure-unit-focused.json",
+      "sha256": "1038afd0211d39327e38e7b30587a88c4ef054a4233411aacf8d8b2084cce48e"
+    },
+    {
+      "path": "runtime/test-results/disclosure-unit-focused.log",
+      "sha256": "fee79eca47230572acedc4ca609c7adb9942a713c8cf85e6d4f257c846d6266f"
+    }
+  ],
+  "source_set_hash": "c37c85eab1e30fb7502ae4ba0a307034c3cf063614ddb6c39d624f6e8d38027a",
+  "complete_native_tests": 350,
+  "complete_unit_tests": 70,
+  "source_changed_during_complete_run": false,
+  "complete_native_report_sha256": "fa3d7a097bebcf5ea826da4df3be4a6cdbee7cbdc3e063c045b1fa10c8d22aca",
+  "failed_full_source_set_hash": "7b6046a2c8f20a14c621598f43018aa5a88591ca56a166e486f75048019a8615",
+  "source_changed_after_failed_full": [
+    "scripts/record-disclosure.ts",
+    "scripts/verify-implementation.ts",
+    "src/worker/media/disclosure.ts",
+    "tests/helpers/role-launcher.ts",
+    "tests/integration/disclosure.test.ts"
+  ],
+  "failed_full_scope": "First complete attempt stopped in native-order.test.ts: 15 passed, one POST-receipt-recovery timeout at its unchanged 120-second cap, seven unexecuted in that file; other native files did not run. The same unmodified recovery case then passed in 48.563 seconds with 22 skipped. High host disk queue pressure was observed, without proving a root cause. The second unchanged-source attempt passes 350 native cases and the server build, then is abandoned during mini builds after an independent probe proves that transparent alpha can hide an RGB-identical mark. Four RGBA source changes add its negative assertion, explicit evidence and database-independent pixel/capture configuration. A subsequent sample failure and isolated fixture identity correction are recorded separately. No test or SQL timeout is widened. The final complete run freshly restarts all six checks; no pre-fix native report is retained as final acceptance.",
+  "alpha_red_green": {
+    "before": "runtime/test-results/disclosure-alpha-attempt1.log",
+    "after": "runtime/test-results/disclosure-alpha-fixed.log",
+    "probe_source_path": "runtime/tmp/disclosure-alpha-probe.mjs",
+    "probe_source_sha256": "5ed1c6b2e476d33c1d0a1f888ce188bed0b855320888fb1e234473ef648d312a",
+    "before_accepted_invisible_mark": true,
+    "after_rejection": "AI_DISCLOSURE_PIXELS_MISSING"
+  },
+  "rgba_focus_setup_failure": "The first RGBA-focused attempt failed in the unnecessary PostgreSQL migration at its existing 15-second statement cap; all three media checks were skipped. The media-only test/capture now use actual project configuration without opening a database. Application database tests and all timeouts remain unchanged.",
+  "sample_fixture_failure": {
+    "failed_source_set_hash": "169134f93d8b1462d29a602b0c08c9848fd82b44dc397d861da7d98878d9919f",
+    "passed": 95,
+    "failed": 1,
+    "pending_in_failed_file": 11,
+    "unexecuted_files": 28,
+    "original_error": "SAMPLE_ROLE_EVIDENCE_INCOMPLETE",
+    "unchanged_focus_passed": 1,
+    "unchanged_focus_skipped": 12,
+    "corrected_full_file_passed": 13,
+    "source_delta_after_failure": [
+      "tests/helpers/role-launcher.ts"
+    ],
+    "repeated_pid_control": {
+      "before": "runtime/test-results/disclosure-process-ref-red.log",
+      "after": "runtime/test-results/disclosure-process-ref-green.log",
+      "probe_source_path": "runtime/tmp/disclosure-process-ref-probe.mjs",
+      "probe_source_sha256": "225c9cdcd88410269e5d11fe014ab9710f3e9f8678bfdc66949da4897d2f36ce",
+      "real_os_children": 0,
+      "old_duplicate": true,
+      "nonce_bound_duplicate": false
+    },
+    "scope": "The original sample failure is intermittent and its exact failed subcondition was not retained after test-schema cleanup; do not claim actual PID reuse caused it. Independent synthetic repeated-PID control proves the fixture PID-only identifier collides across distinct launches. Bind the existing launch nonce without weakening any production five-role guard, assertion, limit or timeout. The corrected complete sample file passes all 13 real-process cases before the final fresh six-check run. This control is not production process-creation or isolation evidence."
+  },
+  "unchanged_source_qc_timeout": {
+    "source_set_hash": "c37c85eab1e30fb7502ae4ba0a307034c3cf063614ddb6c39d624f6e8d38027a",
+    "passed_before_failure": 13,
+    "failed": 1,
+    "case": "refuses native QC sealing after original-write is revoked between preparation and commit",
+    "original_timeout_ms": 120000,
+    "unchanged_focus_passed": 1,
+    "unchanged_focus_skipped": 22,
+    "unchanged_focus_ms": 109381.6101,
+    "source_changed_before_final_complete_retry": false,
+    "scope": "The first nonce-bound-source full attempt stops at the original QC-revocation 120-second cap. The exact unmodified case then passes in approximately 109.382 seconds with 22 skipped. Do not claim a verified environmental root cause or use the focus as full-suite acceptance. Additional file scans and transcodes stop during the final fresh complete retry. Production guards, assertions, limits and all timeouts remain unchanged."
+  },
+  "unchanged_source_worker_crash": {
+    "source_set_hash": "c37c85eab1e30fb7502ae4ba0a307034c3cf063614ddb6c39d624f6e8d38027a",
+    "complete_run_passed": false,
+    "exit_code": 3221226356,
+    "windows_status": "0xC0000374",
+    "reported_passed": 113,
+    "reported_failed": 1,
+    "reported_pending": 27,
+    "partial_report_not_accepted": true,
+    "additional_sql_setup_or_migration_timeouts": true,
+    "standalone_actual_raster_stress_calls": 200,
+    "stress_status": "PASS",
+    "stress_probe_source_path": "runtime/tmp/disclosure-native-stress.mjs",
+    "stress_probe_source_sha256": "4e6e26c9c7f2655d04acd6c8755879d2efcca90916ca5ba3f80da63f7b66d44e",
+    "stress_ms": 10620,
+    "specific_faulting_library_or_environment_cause_verified": false,
+    "scope": "A full retry on unchanged source has a native worker exit, SQL timeouts and an unhandled pool error; its partial report warns that tests are still running. A native-order result labeled passed contains 23 pending cases and certifies no native-order pass. Independent actual raster stress passes 200 calls without reproducing the crash. No Sharp/font/library or environmental cause is established; no speculative application fix or timeout widening is applied. The final full retry is fresh, and production/native stability admission remains false.",
+    "status_reference": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/troubleshoot-application-service-crashing-behavior"
+  },
+  "final_source_type_timeout": "The first complete final-RGBA-source attempt stopped at the original 180-second typecheck wrapper cap without a TypeScript diagnostic; no unit/native/build check executed in that attempt. A residual TSC descendant was observed afterward and had exited before the next attempt. Source and caps stayed unchanged. The final successful attempt freshly restarts all six checks; the wrapper timeout is not evidence of whole-process-tree cleanup.",
+  "focused_exploration": "First unit focus failed one test because its fixture used nonexistent fresh-daily.ai-life instead of actual ai-scene and assumed 15s instead of the actual 12s specification. The final five unit cases pass. The initial native pipeline focus correctly rejected actual POST pixels: the new top-right mark collided with the original ASS top-right AI label. The new uniform mark moved to top-left; the original caption/audio kernel and all thresholds remain unchanged. Corrected native final focus passes five cases with 25 skipped; silent focus passes two with five skipped; pixel focus passes three. Focused/skipped runs are not complete-suite acceptance. The final six-check run freshly executes all 70 unit and 350 native cases against the frozen final source.",
+  "actual_pixel_fixture_frames": 450,
+  "real_generated_content_quality_verified": false,
+  "host_or_legal_marking_admitted": false,
+  "synthetic_listening_semantic_pass_only": true,
+  "real_chinese_listening_verified": false,
+  "prior_audio_review_provenance": "docs/verification/audio-review-attempts.json",
+  "full_product_verified": false,
+  "production_admitted": false
+}

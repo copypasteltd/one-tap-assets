@@ -7,6 +7,7 @@ import { creativePlanHash, validateCreativePlan } from './plan.js';
 import type { FrozenContract, Snapshot } from './snapshot.js';
 import {frozenNativeAudio,verifyNativeAudioLive} from '../audio/contract.js';
 import {frozenOrderListening} from '../audio/listening-contract.js';
+import {frozenAiDisclosure} from './disclosure.js';
 
 export interface ExecutionContext {
   tenantId: string; orderId: string; ownerId: string; snapshotHash: string;
@@ -36,6 +37,7 @@ export async function executionContext(db: pg.Pool | pg.PoolClient, tenantId: st
   const { profile_hash, ...body } = contract.profile;
   requireThat(hash(body) === profile_hash, 'PROFILE_HASH_MISMATCH', '商品档案摘要不一致', 503);
   validateCreativePlan(contract.creative, contract.profile, contract.source);
+  frozenAiDisclosure(contract);
   const audio=frozenNativeAudio(contract);
   const listening=frozenOrderListening(contract);
   requireThat(snapshot.listening_contract_hash===(listening?hash(listening):undefined),

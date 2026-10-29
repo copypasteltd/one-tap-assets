@@ -19,6 +19,7 @@ import { POLICIES } from '../../shared/domain/policies.js';
 import { lockMediaOwner } from './media-access.js';
 import {freezeRevisionPolicy,ensureRevisionBudget} from '../../worker/revisions/contract.js';
 import {freezeNativeAudio,verifyNativeAudioLive} from '../../worker/audio/contract.js';
+import {freezeAiDisclosure,frozenAiDisclosure} from '../../worker/compiler/disclosure.js';
 export { requestRefundInternal } from './refunds.js';
 
 export async function createQuote(db: Db, cfg: Config, p: Principal, request: DTO<'QuoteRequest'>): Promise<DTO<'Quote'>> {
@@ -61,6 +62,7 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
       max_output_tokens: codexContract.max_output_tokens, ceiling_micro: codexContract.agent_cost_ceiling_micro,
       daily_ceiling_micro: codexContract.agent_cost_ceiling_micro } } };
   contract.revision_policy=freezeRevisionPolicy(contract);
+  freezeAiDisclosure(contract);
   if(contract.source.engine!=='PHOTO_LAYOUT'){
     contract.generation_contracts=freezeGenerationContracts(cfg,models.rows);
   }
@@ -84,6 +86,7 @@ export async function createOrder(db: Db, cfg: Config, p: Principal, request: DT
   }
   requireThat(quote.state === 'OPEN' && Date.parse(quote.data.expires_at) > Date.now(), 'QUOTE_EXPIRED', '报价已过期，请重新确认清单和费用', 410);
   const contract = quote.private!.contract as FrozenContract;
+  frozenAiDisclosure(contract);
   requireThat(hash(contract)===quote.private!.contract_hash,'QUOTE_CONTRACT_MISMATCH','原报价合同摘要不一致',503);
   requireThat(contract.source.audio_policy.speech==='none','NATIVE_AUDIO_NOT_ADMITTED','有声订单的独立听音、QC和交付尚未准入',503);
   await verifyNativeAudioLive(db,contract,true);
