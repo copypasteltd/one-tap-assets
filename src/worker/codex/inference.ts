@@ -17,6 +17,7 @@ import { toolsForRole } from '../tool-gateway/policy.js';
 import { admissionHash, checkAdmission, inferenceCost, type CodexAdmission } from './admission.js';
 import { authorizeReviewImages } from './review-images.js';
 import {reserveRevisionCost,settleRevisionCost} from '../revisions/budget.js';
+import {scopeReviewListening} from '../review/listening.js';
 
 export interface InferenceLimits {
   max_requests: number; max_input_tokens: number; max_output_tokens: number;
@@ -165,6 +166,7 @@ export class InferenceGateway {
     const prepared = await transaction(this.pool, async db => {
       const scope = await authorizeTool(db, authorization); const binding = await this.binding(db, scope);
       const input = checkInferenceInput(raw, scope, binding.admission); const requestHash = hash(input);
+      const listeningHash=await scopeReviewListening(db,this.cfg,this.store,scope);
       const visual = await authorizeReviewImages(db, scope, input.input, binding.admission);
       const type = scope.scope_type==='REVISION'?'REVISION':scope.order_id ? 'ORDER' : 'PLATFORM'; const scopeId = scope.order_id ?? scope.preview_session_id!;
       await db.query('SELECT pg_advisory_xact_lock(hashtextextended($1,0))', [`inference:${scope.tenant_id}:${type}:${scopeId}`]);
@@ -211,7 +213,7 @@ export class InferenceGateway {
         intent_key: intentKey, request_hash: requestHash, state: 'SUBMITTING', reserved_micro: amount, scope_type: type, scope_id: scopeId,
         reserved_input_tokens: inputBound, reserved_output_tokens: output, response_key: `${scope.tenant_id}/inference/${requestId}.sse`,
         data: { body_sha256: sha256(body), admission_hash: admissionHash(binding.admission), review_packet_hash: scope.packet_hash,
-          review_image_hashes: visual.image_hashes, review_image_binding_hash: visual.binding_hash },
+          review_image_hashes: visual.image_hashes, review_image_binding_hash: visual.binding_hash,review_listening_hash:listeningHash },
         private: { reservation_id: reservation, admission: binding.admission, scope_binding_hash: hash(binding) } });
       await db.query(`UPDATE agent_runs SET data=data||jsonb_build_object('spend_reserved_micro',COALESCE((SELECT sum(reserved_micro)
         FROM inference_requests WHERE run_id=$1 AND state IN ('SUBMITTING','UNKNOWN')),0)),updated_at=now() WHERE id=$1 AND tenant_id=$2`, [scope.run_id, scope.tenant_id]);

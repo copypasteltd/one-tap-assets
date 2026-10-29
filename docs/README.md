@@ -1,14 +1,8 @@
 # 文档目录 / Documentation index
 
-最新实现增补：[独立听音协议与原订单回执](实施/独立听音协议与原订单回执-v1.0.md)。内部双声道请求、原费用/回执与恢复已有组件；最终 Codex 双复核与有声交付仍关闭。Latest: private independent listening foundation, original order costs and receipt recovery; final audio review/delivery remain closed.
-
-当前新增[原生声音文件验收与审查封存](实施/原生声音文件验收与审查封存-v1.0.md)：内部两路线实际音轨/混音/字幕帧及私有封存已有，独立听音、最终双复核和有声交付仍关闭。New: private native-audio technical QC and complete stereo evidence; independent listening/final review/delivery remain unadmitted.
-
-新增专项 / New implementation: [原生有声订单制作与后期 / Private native-audio production and POST](实施/原生有声订单制作与后期接入-v1.0.md)：内部两生成路线、受控原整轨 ASR、实际 PCM/ALAC、字幕/许可配乐及原清单恢复；十项整链/四项声道回归。公开有声订单、听音/QC/交付继续阻断，真实外部服务未准入。
+最新实现：[原生声音最终双复核与事务交付](实施/原生声音最终双复核与事务交付-v1.0.md)。内部两路线原听音、双角色/推理/工具/报告同源绑定与有声事务交付已连接；正向语义为合成控制响应，真实服务/商业/真机未准入，全部禁售。Latest: private final audio review and publication integration, not real-listening or production certification. 早期组件状态按此及最新实现索引理解。
 
 [中文入口](../README.md) · [English entry](../README.en.md)
-
-新增专项 / New implementation: [原生声音合同与原订单费用 / Frozen audio contract and original-order accounting](实施/原生声音合同与原订单费用-v1.0.md)，23项原生专项；[持久异步转写 / Durable ASR](实施/异步音频转写与原任务回执-v1.0.md)17项专项。使用合成授权/识别/用量，真实服务与有声整包未准入。
 
 当前需求v3.1、开发契约v1.1、C设计v1.0。应用整体IN_PROGRESS，源码与演示的范围由当前实现索引决定。Current requirements are v3.1, engineering contracts v1.1 and frozen design C v1.0. The complete product remains in progress.
 
@@ -23,6 +17,7 @@
 | 设计基线 / Frozen design | [C定型文档](设计/定型/C-柚子创作社-v1.0/README.md) · [追踪矩阵](设计/需求追踪矩阵-v3.1.md) |
 | 开发规范 / Engineering specifications | [开发00–18](开发/README.md) · [CONTRIBUTING](../CONTRIBUTING.md) · [SECURITY](../SECURITY.md) |
 | 实际源码状态 / Implemented source | [源码进度](实施/源码实现进度-v3.1.md) · [技术骨架](实施/当前开发方案与技术骨架-v3.1.md) · [实现索引](../assets/implementation/current.json) |
+| 有声流程 / Native audio pipeline | [冻结合同/原费用](实施/原生声音合同与原订单费用-v1.0.md) · [持久ASR](实施/异步音频转写与原任务回执-v1.0.md) · [制作/POST](实施/原生有声订单制作与后期接入-v1.0.md) · [文件QC/封存](实施/原生声音文件验收与审查封存-v1.0.md) · [原听音协议](实施/独立听音协议与原订单回执-v1.0.md) · [最终双复核/交付](实施/原生声音最终双复核与事务交付-v1.0.md) |
 | 最近专项 / Recent implementation | [原生声音/字幕/配乐内核](实施/原生音轨字幕与配乐后期内核-v1.0.md) · [音频实验媒体](media/native-audio/README.md) · [生成调用/转存](实施/生成服务持久调用与媒体转存-v1.0.md) · [参考帧身份核验](实施/参考帧独立身份核验-v1.0.md) · [购买门禁与MCP](实施/生成式购买门禁与MCP工具接入-v1.0.md) · [无声整包编排](实施/生成式无声整包与阶段编排-v1.0.md) · [受限修改](实施/受限修改执行与新版本交付-v1.0.md) |
 | 上游研究 / Upstream research | [案例深析](评估/方案案例与生成流程深析-2026-10-27.md) · [研究数据](../assets/research/one-tap-ads/README.md) |
 | 版本与来源 / Changes and attribution | [CHANGELOG](../CHANGELOG.md) · [THIRD_PARTY_NOTICES](../THIRD_PARTY_NOTICES.md) |

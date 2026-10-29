@@ -30,8 +30,8 @@ import {renderNativeAudioPost} from './native-audio-post.js';
 
 export const NATIVE_ORDER_PIPELINE_VERSION='YPCC-NATIVE-ORDER-PIPELINE-1';
 type Material=Awaited<ReturnType<typeof generatedOutputs>>;
-/** Internal ORDER PRODUCTION/POST only. Public quotes and QC/listening/delivery
- * remain separately closed; silent executors never consume these receipts. */
+/** Internal native ORDER production, POST and publication verification.
+ * Public quotes remain separately closed; silent executors reject audio. */
 export class NativeOrderMediaPipeline extends GeneratedMediaPipeline {
   protected override readonly rendererVersion:string=NATIVE_ORDER_PIPELINE_VERSION;
   private speech:SpeechGateway;
@@ -139,7 +139,7 @@ export class NativeOrderMediaPipeline extends GeneratedMediaPipeline {
     }
     return artifacts;
   }
-  private async bindings(db:Db,context:ExecutionContext,receipt:MediaReceipt,lock=false){
+  async verifyBindings(db:Db,context:ExecutionContext,receipt:MediaReceipt,lock=false){
     const audio=frozenNativeAudio(context.contract)!;await verifyNativeAudioLive(db,context.contract,lock);
     const source=receipt.phase==='POST'?await this.productionSource(db,context,undefined,lock):undefined;
     for(const a of receipt.artifacts){
@@ -162,7 +162,7 @@ export class NativeOrderMediaPipeline extends GeneratedMediaPipeline {
     return source;
   }
   override async verify(context:ExecutionContext,receipt:MediaReceipt,directory:string,signal:AbortSignal,selected?:ReadonlySet<string>):Promise<void>{
-    await super.verify(context,receipt,directory,signal,selected);const source=await this.bindings(this.pool,context,receipt);
+    await super.verify(context,receipt,directory,signal,selected);const source=await this.verifyBindings(this.pool,context,receipt);
     const material=await this.material(this.pool,context,receipt),segments=this.segments(context,material),verified=new Set<string>();
     for(const a of receipt.artifacts.filter(a=>a.spec.kind==='video'&&(!selected||selected.has(a.id)))){
       const proof=a.spec.native_audio!,input=source?.canonical??a,token=hash({sha:input.sha256,assembly:proof.assembly});
@@ -183,7 +183,7 @@ export class NativeOrderMediaPipeline extends GeneratedMediaPipeline {
   override async execute(scope:ToolScope,intent:ToolLease,phase:'PRODUCTION'|'POST',signal:AbortSignal){
     const output=await super.execute(scope,intent,phase,signal);
     return {...output,commit:async(db:pg.PoolClient)=>{
-      const context=await executionContext(db,scope.tenant_id,scope.order_id!,scope.snapshot_hash);await this.bindings(db,context,output.receipt,true);await output.commit(db);
+      const context=await executionContext(db,scope.tenant_id,scope.order_id!,scope.snapshot_hash);await this.verifyBindings(db,context,output.receipt,true);await output.commit(db);
     }};
   }
 }

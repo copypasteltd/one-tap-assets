@@ -36,11 +36,12 @@ import {ToolConsumer,type ToolHandler} from '../../src/worker/tool-gateway/consu
 import {productionTools} from '../../src/worker/tool-gateway/production-tools.js';
 import {reviewTools} from '../../src/worker/tool-gateway/review-tools.js';
 import type {ToolScope} from '../../src/worker/tool-gateway/http.js';
-import {claimStage,completeStage,PendingExternal,type StageLease} from '../../src/worker/queue/leases.js';
+import {claimStage,completeStage,deferStage,PendingExternal,type StageLease} from '../../src/worker/queue/leases.js';
 import {enqueueStage} from '../../src/worker/queue/enqueue.js';
 import {NativeListeningGateway} from '../../src/worker/audio/listening-gateway.js';
 import {ListeningClient,type PreparedListening} from '../../src/worker/providers/omni-listening.js';
-import {syntheticListeningResult,listeningSse} from '../helpers/listening.js';
+import {syntheticListeningResult,syntheticControlListeningPass,listeningSse} from '../helpers/listening.js';
+import {createDownloadLink,getDeliverables} from '../../src/api/modules/delivery.js';
 import {writePrivateObject} from '../../src/api/storage/private-objects.js';
 import {frozenOrderListening} from '../../src/worker/audio/listening-contract.js';
 
@@ -72,7 +73,7 @@ afterEach(async context=>{
 });
 afterAll(async()=>{await db?.close();if(root)await rm(inside(db.cfg.runtimeRoot,root),{recursive:true,force:true});});
 
-async function setup(options:{engine?:'PER_SHOT_AI'|'REFERENCE_FILM';music?:boolean;lostAsrAck?:boolean;crashPostCommit?:boolean;revokePostCommit?:boolean;listening?:boolean}={}){
+async function setup(options:{engine?:'PER_SHOT_AI'|'REFERENCE_FILM';music?:boolean;lostAsrAck?:boolean;crashPostCommit?:boolean;revokePostCommit?:boolean;listening?:boolean;dropListeningProof?:boolean}={}){
   const f=await nativeOrderFixture(db,join(root,id('order')),{engine:options.engine??'PER_SHOT_AI',...(options.music?{music}:{}),style:options.engine==='REFERENCE_FILM'?'minimal':'karaoke',...(options.listening?{listening:true}:{})});
   const {image:ic,video:vc}=f.models,tasks=new Map<string,string>(),generationRequests:Record<string,unknown>[]=[];
   let providerCalls=0,asrPosts=0,inputUrl='',postCommits=0,inferences=0;const taskId=id('synthetic_asr_task');
@@ -108,6 +109,11 @@ async function setup(options:{engine?:'PER_SHOT_AI'|'REFERENCE_FILM';music?:bool
     }};
   };
   active.push({app,controller,task:new ToolConsumer(db.pool,id('native_tools'),{...media,...review,execute_post_plan:post,
+    extract_review_evidence:async(...args)=>{const output=await review.extract_review_evidence!(...args);
+      if(options.dropListeningProof&&['REVIEW_FACTS','REVIEW_STYLE'].includes(args[0].stage_name)){
+        const {native_listening_hash:_,native_listening:__,...result}=output.result as Record<string,unknown>;
+        return {...output,result};
+      }return output;},
     persist_stage_result:(scope,...args)=>(scope.role.startsWith('REVIEW_')?review:media).persist_stage_result!(scope,...args)}).run(controller.signal)});
   return {...f,app,controller,launcher,gateway,speech,generationRequests,providerCalls:()=>providerCalls,asrPosts:()=>asrPosts,postCommits:()=>postCommits,inferences:()=>inferences,
     pipeline:new NativeOrderMediaPipeline(db.pool,f.cfg,f.store,gateway,speech),service:new MediaStageService(db.pool,f.cfg,executor,{gateway,store:f.store})};
@@ -133,8 +139,8 @@ function directPost(f:Fixture,lease:StageLease):ToolScope{
     expires_at:lease.deadline_at,scope_type:'ORDER',scope_id:f.orderId,stage_name:'POST'};
 }
 
-async function listeningReady(engine:'PER_SHOT_AI'|'REFERENCE_FILM'='PER_SHOT_AI'){
-  const f=await setup({engine,listening:true,music:engine==='REFERENCE_FILM'});await stage(f,f.lease);
+async function listeningReady(engine:'PER_SHOT_AI'|'REFERENCE_FILM'='PER_SHOT_AI',options:{dropListeningProof?:boolean}={}){
+  const f=await setup({engine,listening:true,music:engine==='REFERENCE_FILM',...options});await stage(f,f.lease);
   const post=await postLease(f);await stage(f,post);
   await enqueueStage(db.pool,{tenantId:f.p.tenantId,scopeType:'ORDER',scopeId:f.orderId,name:'QC',inputHash:f.snapshotHash,
     deadlineAt:f.snapshot.deadline_at,jobId:f.lease.job_id!,dependencies:[post.id]});
@@ -147,7 +153,7 @@ async function listeningReady(engine:'PER_SHOT_AI'|'REFERENCE_FILM'='PER_SHOT_AI
   return {...f,review,context,packet};
 }
 type ListeningFixture=Awaited<ReturnType<typeof listeningReady>>;
-function listeningClient(f:ListeningFixture,mode:'NORMAL'|'UNKNOWN'|'BAD_RESULT'|'CACHED'|'REVOKE'='NORMAL'){
+function listeningClient(f:ListeningFixture,mode:'NORMAL'|'UNKNOWN'|'BAD_RESULT'|'CACHED'|'REVOKE'|'SYNTHETIC_PASS'='NORMAL'){
   let posts=0,last:Buffer|undefined;
   const client=new ListeningClient(f.cfg,async(_url,_hosts,opt={})=>{
     posts++;const request=JSON.parse(String(opt.body));expect(request.use_multichannel).toBe(true);
@@ -157,7 +163,8 @@ function listeningClient(f:ListeningFixture,mode:'NORMAL'|'UNKNOWN'|'BAD_RESULT'
     expect(parts.filter(p=>p.type==='input_audio').map(p=>sha256(Buffer.from(p.input_audio!.data.split(',')[1]!,'base64'))))
       .toEqual(summary.audios.map(a=>a.sha256));
     expect(parts.filter(p=>p.type==='image_url')).toHaveLength(summary.images.length);
-    const result=syntheticListeningResult(summary);if(mode==='BAD_RESULT')result.tracks[0]!.segments[0]!.start_ms=1;
+    const result=mode==='SYNTHETIC_PASS'?syntheticControlListeningPass(summary):syntheticListeningResult(summary);
+    if(mode==='BAD_RESULT')result.tracks[0]!.segments[0]!.start_ms=1;
     const bytes=listeningSse(f.models.listening!,result,mode==='CACHED'?u=>{(u.prompt_tokens_details as Record<string,unknown>).cached_tokens=1;}:undefined);last=bytes;
     if(mode==='UNKNOWN')throw new Error('Synthetic original HTTP response lost');
     if(mode==='REVOKE')await db.pool.query("UPDATE provider_model_versions SET status='REVOKED' WHERE id=$1",[f.models.listening!.model_version_id]);
@@ -173,7 +180,7 @@ it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('persists original independen
   const row=(await db.pool.query("SELECT s.*,b.state AS budget_state,b.settled_micro FROM provider_submissions s JOIN budget_reservations b ON b.id=s.reservation_id WHERE s.order_id=$1 AND s.generation_kind='LISTENING'",[f.orderId])).rows[0]!;
   expect(row).toMatchObject({state:'SUCCEEDED',budget_state:'SETTLED',settled_micro:'2'});expect(row.private.prepared.contract_hash).toBe(f.snapshot.listening_contract_hash);
   const raw=await f.store.get(row.private.request_key,32000000);expect(sha256(raw)).toBe(row.input_hash);
-  await expect(new ReviewStageService(db.pool,f.cfg).handle(f.review,new AbortController().signal)).rejects.toMatchObject({code:'INDEPENDENT_AUDIO_REVIEW_REQUIRED'});
+  await expect(new ReviewStageService(db.pool,f.cfg).handle(f.review,new AbortController().signal)).rejects.toMatchObject({code:'INDEPENDENT_AUDIO_NOT_PASSED'});
   await expect(db.pool.query("UPDATE provider_submissions SET input_hash=$2 WHERE id=$1",[row.id,'f'.repeat(64)])).rejects.toThrow('immutable');
   await expect(db.pool.query("UPDATE provider_submissions SET private=jsonb_set(private,'{output,result,verdict}','\"PASS\"') WHERE id=$1",[row.id])).rejects.toThrow('immutable');
   const post=await operationArtifacts(db.pool,f.context,'POST'),video=post.receipt.artifacts.find(a=>a.spec.kind==='video')!;
@@ -186,6 +193,110 @@ it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('persists original independen
   await db.pool.query('UPDATE private_object_writes SET delete_requested=true WHERE object_key=$1',[audio.object_key]);
   await expect(run()).rejects.toMatchObject({code:'REVIEW_AUDIO_SOURCE_REVOKED'});expect(g.posts()).toBe(1);
 },240000);
+
+async function finalStage(f:ListeningFixture,name:'REVIEW_STYLE'|'DELIVER',parent?:StageLease){
+  const stageId=await enqueueStage(db.pool,{tenantId:f.p.tenantId,scopeType:'ORDER',scopeId:f.orderId,name,inputHash:f.snapshotHash,
+    deadlineAt:f.snapshot.deadline_at,jobId:f.lease.job_id!,dependencies:parent?[parent.id]:[]});
+  const lease=(await claimStage(db.pool,id('native_final'),[name]))!;expect(lease.id).toBe(stageId);return lease;
+}
+it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('binds synthetic native final review and delivery for %s to one original listening receipt',async engine=>{
+  // Actual tone/video bytes; semantic PASS/Chinese text is deliberately
+  // fabricated to exercise control bindings, never real hearing certification.
+  const f=await listeningReady(engine),g=listeningClient(f,'SYNTHETIC_PASS');
+  const executor=new CodexRuntimeAdapter(db.pool,f.cfg,f.launcher),service=new ReviewStageService(db.pool,f.cfg,executor,g.gateway);
+  const beforeLaunches=f.launcher.launches,beforeInference=f.inferences();
+  const premature=await finalStage(f,'REVIEW_STYLE');
+  await expect(withFixtureLease(db.pool,premature,s=>service.handle(premature,s))).rejects.toBeInstanceOf(PendingExternal);
+  await deferStage(db.pool,premature,'LISTENING_ORIGINAL_UNRESOLVED',1);
+  expect(g.posts()).toBe(0);expect(f.inferences()).toBe(beforeInference);expect(f.launcher.launches).toBe(beforeLaunches);
+  let facts=f.review;
+  const factsCommit=await withFixtureLease(db.pool,facts,s=>service.handle(facts,s));
+  if(engine==='PER_SHOT_AI'){
+    await db.pool.query("UPDATE stage_runs SET lease_expires_at=now()-interval '1 second' WHERE id=$1",[facts.id]);
+    const old=facts;facts=(await claimStage(db.pool,id('native_takeover'),['REVIEW_FACTS']))!;
+    await expect(completeStage(db.pool,old,factsCommit)).rejects.toMatchObject({code:'LEASE_LOST'});
+    const recovered=await withFixtureLease(db.pool,facts,s=>service.handle(facts,s));
+    await completeStage(db.pool,facts,recovered);
+  }else await completeStage(db.pool,facts,factsCommit);
+  const style=(await claimStage(db.pool,id('native_final'),['REVIEW_STYLE']))!;expect(style.id).toBe(premature.id);
+  const styleCommit=await withFixtureLease(db.pool,style,s=>service.handle(style,s));
+  await completeStage(db.pool,style,styleCommit);
+  expect(g.posts()).toBe(1);expect(f.launcher.launches).toBe(beforeLaunches+2);expect(f.inferences()).toBe(beforeInference+2);
+  const listening=await g.gateway.evidence(f.context),bindingHash=hash(listening);
+  const packet=await currentReviewPacket(db.pool,f.context);expect(packet.state).toBe('PASSED');expect(packet.reports).toHaveLength(2);
+  expect(new Set(packet.reports.map(r=>r.thread_id)).size).toBe(2);
+  expect(new Set(packet.reports.map(r=>r.runtime_process_ref)).size).toBe(2);
+  const runs=(await db.pool.query("SELECT r.* FROM agent_runs r JOIN stage_runs s ON s.id=r.private->>'stage_run_id' AND s.tenant_id=r.tenant_id WHERE s.scope_id=$1 AND s.stage_name IN ('REVIEW_FACTS','REVIEW_STYLE')",[f.orderId])).rows;
+  expect(runs).toHaveLength(2);
+  for(const run of runs){
+    expect(hash(run.private.review_input.native_listening)).toBe(bindingHash);
+    const tools=(await db.pool.query("SELECT data->'result' AS result FROM agent_tool_intents WHERE run_id=$1 AND tool_name='extract_review_evidence' AND state='SUCCEEDED'",[run.id])).rows;
+    expect(tools).toHaveLength(1);expect(tools[0]!.result.native_listening_hash).toBe(bindingHash);
+    const inference=(await db.pool.query('SELECT data FROM inference_requests WHERE run_id=$1',[run.id])).rows;
+    expect(inference).toHaveLength(1);expect(inference[0]!.data.review_listening_hash).toBe(bindingHash);
+    expect(inference[0]!.data.review_image_binding_hash).toBe(hash(run.private.review_input));
+    const report=(await db.pool.query('SELECT evidence_hash FROM review_reports WHERE run_id=$1',[run.id])).rows[0]!;
+    expect(report.evidence_hash).toBe(hash(run.private.review_input));
+  }
+  const delivery=await finalStage(f,'DELIVER',style),publisher=new PublicationService(db.pool,f.cfg,f.store);
+  const original=(await db.pool.query("SELECT * FROM provider_submissions WHERE order_id=$1 AND generation_kind='LISTENING'",[f.orderId])).rows[0]!;
+  if(engine==='PER_SHOT_AI'){
+    const key=original.private.receipts[0].key,bytes=await f.store.get(key,4000000);
+    await f.store.put(key,Buffer.from('changed original paid response'),'application/json');
+    await expect(publisher.handle(delivery,f.controller.signal)).rejects.toMatchObject({code:'LISTENING_RECEIPT_CHANGED'});
+    await f.store.put(key,bytes,'application/json');
+    await db.pool.query("UPDATE budget_reservations SET state='UNKNOWN' WHERE id=$1",[original.reservation_id]);
+    await expect(publisher.handle(delivery,f.controller.signal)).rejects.toMatchObject({code:'LISTENING_BILLING_UNVERIFIED'});
+    await db.pool.query("UPDATE budget_reservations SET state='SETTLED' WHERE id=$1",[original.reservation_id]);
+  }
+  const paid={provider:f.providerCalls(),asr:f.asrPosts(),listening:g.posts(),inference:f.inferences()};
+  const deliveryCommit=await withFixtureLease(db.pool,delivery,s=>publisher.handle(delivery,s));
+  await completeStage(db.pool,delivery,deliveryCommit);
+  expect({provider:f.providerCalls(),asr:f.asrPosts(),listening:g.posts(),inference:f.inferences()}).toEqual(paid);
+  const pack=await getDeliverables(db.pool,f.p,f.orderId),video=pack.items.find(i=>i.kind==='video')!;
+  const link=await createDownloadLink(db.pool,f.cfg,f.p,video.deliverable_id),url=new URL(link.url);
+  const downloaded=await f.app.inject({method:'GET',url:url.pathname+url.search});expect(downloaded.statusCode).toBe(200);expect(sha256(downloaded.rawPayload)).toBe(video.sha256);
+  const manifest=(await db.pool.query('SELECT private FROM delivery_manifests WHERE order_id=$1',[f.orderId])).rows[0]!;
+  expect(manifest.private.native_listening_hash).toBe(bindingHash);expect(manifest.private.native_listening_submission_id).toBe(listening.submission_id);
+  expect((await db.pool.query("SELECT id FROM agent_instances WHERE order_id=$1 AND state<>'RELEASED'",[f.orderId])).rowCount).toBe(0);
+  expect((await db.pool.query("SELECT id FROM outbox_events WHERE aggregate_id=$1 AND event_key=$2",[f.orderId,`release:delivered:${f.orderId}`])).rowCount).toBe(1);
+  const post=await operationArtifacts(db.pool,f.context,'POST');
+  expect(post.receipt.artifacts.find(a=>a.spec.kind==='video')!.spec.native_audio!.post!.kernel.semantic_review).toBe('NOT_PERFORMED');
+},300000);
+
+it('blocks synthetic native final review publication after durable voice revocation before commit',async()=>{
+  const f=await listeningReady('REFERENCE_FILM'),g=listeningClient(f,'SYNTHETIC_PASS');
+  const service=new ReviewStageService(db.pool,f.cfg,new CodexRuntimeAdapter(db.pool,f.cfg,f.launcher),g.gateway);
+  const factsCommit=await withFixtureLease(db.pool,f.review,s=>service.handle(f.review,s));
+  await completeStage(db.pool,f.review,factsCommit);
+  const style=await finalStage(f,'REVIEW_STYLE',f.review);
+  const styleCommit=await withFixtureLease(db.pool,style,s=>service.handle(style,s));
+  await completeStage(db.pool,style,styleCommit);
+  const delivery=await finalStage(f,'DELIVER',style),publisher=new PublicationService(db.pool,f.cfg,f.store);
+  const paid={provider:f.providerCalls(),asr:f.asrPosts(),listening:g.posts(),inference:f.inferences()};
+  const commit=await withFixtureLease(db.pool,delivery,s=>publisher.handle(delivery,s)),license=f.character.voice_binding.license_record_id;
+  await db.pool.query('UPDATE resource_licenses SET revoked_at=now() WHERE id=$1',[license]);
+  await expect(completeStage(db.pool,delivery,commit)).rejects.toMatchObject({code:'AUDIO_LICENSE_UNAVAILABLE'});
+  // A sold license is irreversibly revoked. Never undo it to force delivery.
+  await expect(db.pool.query('UPDATE resource_licenses SET revoked_at=NULL WHERE id=$1',[license])).rejects.toThrow('revocation cannot be undone');
+  expect({provider:f.providerCalls(),asr:f.asrPosts(),listening:g.posts(),inference:f.inferences()}).toEqual(paid);
+  expect((await db.pool.query('SELECT id FROM delivery_manifests WHERE order_id=$1',[f.orderId])).rowCount).toBe(0);
+  expect((await db.pool.query("SELECT id FROM orders WHERE id=$1 AND fulfillment_state='DELIVERED'",[f.orderId])).rowCount).toBe(0);
+},300000);
+
+it.each(['OMIT_ROLE_LISTENING','OMIT_TOOL_LISTENING'] as const)('blocks synthetic native final review when %s is missing',async mode=>{
+  const f=await listeningReady('PER_SHOT_AI',{dropListeningProof:mode==='OMIT_TOOL_LISTENING'}),g=listeningClient(f,'SYNTHETIC_PASS');
+  const runtime=new CodexRuntimeAdapter(db.pool,f.cfg,f.launcher),before=f.inferences();
+  const executor=mode==='OMIT_ROLE_LISTENING'?{execute:(request:Parameters<typeof runtime.execute>[0],signal:AbortSignal)=>{
+    const {native_listening:_,...review}=request.review!;return runtime.execute({...request,review},signal);
+  }}:runtime;
+  await expect(withFixtureLease(db.pool,f.review,s=>new ReviewStageService(db.pool,f.cfg,executor,g.gateway).handle(f.review,s))).rejects.toThrow();
+  expect(g.posts()).toBe(1);expect(f.inferences()-before).toBe(mode==='OMIT_ROLE_LISTENING'?0:1);
+  expect((await db.pool.query('SELECT id FROM review_reports WHERE tenant_id=$1',[f.p.tenantId])).rowCount).toBe(0);
+  expect((await db.pool.query('SELECT id FROM delivery_manifests WHERE order_id=$1',[f.orderId])).rowCount).toBe(0);
+  if(mode==='OMIT_TOOL_LISTENING')expect((await db.pool.query("SELECT data->>'error_code' AS code FROM agent_tool_intents WHERE stage_run_id=$1 AND tool_name='persist_stage_result'",[f.review.id])).rows)
+    .toEqual([{code:'REVIEW_TOOL_PROOF_MISSING'}]);
+},300000);
 
 it('recovers only the saved original independent listening response after UNKNOWN without a second purchase',async()=>{
   const f=await listeningReady(),g=listeningClient(f,'UNKNOWN'),run=()=>withFixtureLease(db.pool,f.review,s=>g.gateway.review(f.review,s));

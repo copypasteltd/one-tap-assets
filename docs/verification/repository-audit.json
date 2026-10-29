@@ -1,38 +1,38 @@
 {
   "status": "PASS",
-  "checked_at": "2026-10-29T01:36:53.764531+00:00",
-  "markdown_files": 125,
-  "published_local_links": 986,
+  "checked_at": "2026-10-29T03:14:47.892152+00:00",
+  "markdown_files": 126,
+  "published_local_links": 993,
   "unpublished_local_links": 0,
-  "staged_hash_bound_files": 439,
-  "source_snapshot_files": 333,
+  "staged_hash_bound_files": 442,
+  "source_snapshot_files": 334,
   "runtime_contract_files": 42,
   "resource_files": 4,
   "capture_files": 32,
   "browser_capture_files": 20,
   "audio_fixture_files": 12,
-  "audio_fixture_scope": "Synthetic tones/manual timecodes; no real ASR, listening review or audio order admission",
-  "native_order_scope": "Private generated ORDER PRODUCTION/POST/technical QC and independent listening protocol/original-cost/receipt foundation; actual complete stereo and visual bytes with synthetic insufficient observations; final Codex audio review and delivery remain disconnected, public audio orders closed",
-  "native_listening_source_start_hash": "80bab71b64f527867fabbe49a81ccef403ffade37ff9834a13fb4a941a8e1969",
-  "native_unchanged_source_files": 332,
-  "native_original_source_files": 333,
-  "native_build_only_delta": [
-    "scripts/mini-config.cjs"
-  ],
-  "verification_mode": "MINI_BUILD_RETRY_WITH_RETAINED_NATIVE_INTEGRATION",
+  "audio_fixture_scope": "Unchanged synthetic tones/manual timecodes; no real Chinese speech, ASR, listening or public-order certification",
+  "native_order_scope": "Private complete generated native-audio ORDER, original paid listening, final facts/style input/inference/tool/report bindings, native transactional delivery and authorized downloads. Positive Chinese semantics deliberately fabricated for control tests; real quality/billing/rights/public audio admission remain false",
+  "native_final_review_source_start_hash": "2dbef11ff14409fea547711873cfd3f627fefbc60ab4c5b553a1a2d346086c61",
+  "native_unchanged_source_files": 334,
+  "native_original_source_files": 334,
+  "native_source_delta": [],
+  "verification_mode": "FRESH_FULL",
   "frozen_design_files": 25,
   "design_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
-  "contract_document_checks": 4641,
+  "contract_document_checks": 4649,
   "preview_build": {
     "status": "PASS",
     "local_log_sha256": "8f7d8da10273897976c04f19ebb42335837a9cf1b146504dc20e7b48ffab6d4c"
   },
-  "staged_whitespace_check": "PASS; CRLF accepted; upstream OFL notice original whitespace preserved by a file-specific attribute",
-  "credential_patterns": "OpenAI-style/private-key patterns in verify:publication, plus GitHub/AWS key patterns; not an exhaustive secret audit",
+  "staged_whitespace_check": "PASS; original OFL notice whitespace preserved by file-specific attributes",
+  "credential_patterns": "Private-key/OpenAI-style patterns in verify:publication plus GitHub/AWS patterns, not exhaustive",
   "reference_purchase_red_green_record": {
     "path": "assets/implementation/regressions/reference-video-gate.json",
     "sha256": "56665f50fe3c382ad3d83649d92cf8a61db00fd83dd555a0aec2a08c5fe6899c"
   },
+  "synthetic_semantic_pass_only": true,
   "full_product_verified": false,
-  "production_admitted": false
+  "production_admitted": false,
+  "cloud_deployed": false
 }

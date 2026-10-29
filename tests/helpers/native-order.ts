@@ -53,6 +53,9 @@ export async function nativeOrderFixture(db:TestDatabase,root:string,options:{en
       await insert(db.pool,'character_versions',{id:character.character_version_id,character_id:id('synthetic_character_id'),version:'SYNTHETIC-1',data:{
         admission_state:'ADMITTED',native_voice_ids:[character.native_voice_id],native_audio_admissions:[character]}});
       c.codex_contract.qc_policy_version=NATIVE_AUDIO_QC_POLICY;
+      // Synthetic full audio material has a larger original, pre-sale context
+      // ceiling. This never refills a sold order or certifies a real model.
+      if(listening){c.codex_contract.max_input_tokens=600000;c.runtime_binding!.limits.max_input_tokens=600000;}
       if(listening){const binding={provider:listening.provider,actual_model:listening.actual_model,registry_version:listening.registry_version,
         roles:['QC' as const],capability_hash:hash(listening),rate_snapshot_id:listening.rate_snapshot_id};
         c.model_versions.push(binding);

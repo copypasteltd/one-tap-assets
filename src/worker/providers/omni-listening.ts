@@ -115,7 +115,8 @@ export function validateListeningResult(raw:unknown,summary:PreparedListening['s
     &&raw.findings.every(f=>summary.audios.some(a=>a.asset_id===f.audio_asset_id)&&f.start_ms<f.end_ms&&f.end_ms<=duration
       &&f.evidence_ids.every(id=>ids.has(id))), 'LISTENING_COVERAGE_INVALID','听音必须覆盖两条完整音轨，问题须引用包内证据及有效时间',422);
   requireThat(raw.verdict!=='PASS'||(Object.values(raw.checks).every(v=>v==='PASS')&&raw.findings.length===0
-    &&raw.tracks.every(t=>t.segments.every(s=>s.kind!=='UNCERTAIN'))),'LISTENING_FALSE_PASS','缺证、不可判断或存在问题的听音不能通过',422);
+    &&raw.tracks.every(t=>t.segments.every(s=>s.kind!=='UNCERTAIN')&&t.segments.some(s=>s.kind==='SPEECH'&&/[\u3400-\u9fff]/.test(s.heard_text)))),
+  'LISTENING_FALSE_PASS','缺证、不可判断、没有实际中文口播或存在问题的听音不能通过',422);
   return raw;
 }
 export interface ParsedListening {provider_request_id:string;content:string;usage:Record<string,unknown>;finish_reason:string}

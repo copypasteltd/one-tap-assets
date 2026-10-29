@@ -16,6 +16,7 @@ import { operationArtifacts, type MediaReceipt } from '../media/artifacts.js';
 import { loadProductionFont, verifyResourceLicenses } from '../media/font.js';
 import { PhotoMediaPipeline } from '../media/photo-pipeline.js';
 import {GeneratedMediaPipeline} from '../media/generated-pipeline.js';
+import {NativeOrderMediaPipeline} from '../media/native-order-pipeline.js';
 import {generatedOutputs} from '../generation/outputs.js';
 import { assertLease, PendingExternal, type StageLease } from '../queue/leases.js';
 import type { StageCommit } from '../runtime.js';
@@ -24,12 +25,17 @@ import { assertReviewConsensus } from './packet.js';
 import { packetReports } from './reports.js';
 import { mediaQcPolicy, unsettledOrderCalls, verifySealedEvidence } from './qc.js';
 import {requireAudioReviewAdmission} from './native-audio.js';
+import {reviewListening} from './listening.js';
+import type {ListeningEvidence} from '../audio/listening-gateway.js';
 
 export class PublicationService {
   constructor(private pool: pg.Pool, private cfg: Config, private store: ObjectStorage) {}
-  private async ready(db: Db, context: ExecutionContext, lockResources = false): Promise<DTO<'ReviewPacket'>> {
+  private async ready(db: Db, context: ExecutionContext, lockResources = false): Promise<{packet:DTO<'ReviewPacket'>;nativeListening:ListeningEvidence|null}> {
     requireAudioReviewAdmission(context);
     const packet = await currentReviewPacket(db, context);
+    const nativeListening=await reviewListening(db,this.cfg,context,packet,this.store);
+    if(nativeListening){const post=await operationArtifacts(db,context,'POST');
+      await new NativeOrderMediaPipeline(this.pool,this.cfg,this.store).verifyBindings(db,context,post.receipt,lockResources);}
     requireThat(packet.qc_policy_version===mediaQcPolicy(context),'PUBLICATION_ROUTE_UNAVAILABLE','原订单验收与发布规则不一致',503);
     if(context.snapshot.engine!=='PHOTO_LAYOUT'){
       const production=await operationArtifacts(db,context,'PRODUCTION');
@@ -43,7 +49,7 @@ export class PublicationService {
     const refunds = await db.query("SELECT id FROM refunds WHERE tenant_id=$1 AND order_id=$2 AND state NOT IN ('FAILED','CANCELLED')", [context.tenantId, context.orderId]);
     requireThat(refunds.rowCount === 0, 'PUBLICATION_REFUND_PENDING', '订单已进入退款处置，不能发布', 409);
     await loadProductionFont(this.cfg.projectRoot); await verifyResourceLicenses(db, context.snapshot.resource_versions, lockResources);
-    return packet;
+    return {packet,nativeListening};
   }
   private async bytes(receipt: MediaReceipt): Promise<Map<string, Buffer>> {
     const copies = new Map<string, Buffer>();
@@ -57,10 +63,11 @@ export class PublicationService {
   async handle(lease: StageLease, signal: AbortSignal): Promise<StageCommit> {
     requireThat(lease.scope_type === 'ORDER' && lease.stage_name === 'DELIVER', 'PUBLICATION_STAGE_INVALID', '交付阶段无效', 500);
     const context = await executionContext(this.pool, lease.tenant_id, lease.scope_id, lease.input_hash);
-    const packet = await this.ready(this.pool, context); const post = await operationArtifacts(this.pool, context, 'POST');
+    const {packet,nativeListening} = await this.ready(this.pool, context); const post = await operationArtifacts(this.pool, context, 'POST');
     const directory = join(this.cfg.runtimeRoot, 'publication-work', id('attempt')); await mkdir(directory, { recursive: true });
     try {
-      const pipeline = context.snapshot.engine==='PHOTO_LAYOUT'?new PhotoMediaPipeline(this.pool,this.cfg,this.store):new GeneratedMediaPipeline(this.pool,this.cfg,this.store);
+      const pipeline = nativeListening?new NativeOrderMediaPipeline(this.pool,this.cfg,this.store):
+        context.snapshot.engine==='PHOTO_LAYOUT'?new PhotoMediaPipeline(this.pool,this.cfg,this.store):new GeneratedMediaPipeline(this.pool,this.cfg,this.store);
       await pipeline.photos(context); await pipeline.verify(context, post.receipt, directory, signal);
       await packetImages(this.pool, this.store, context, packet);
     } finally { await rm(directory, { recursive: true, force: true }); }
@@ -76,7 +83,9 @@ export class PublicationService {
         text: copy ? new TextDecoder('utf-8', { fatal: true }).decode(copies.get(artifact.id)!) : null, sha256: artifact.sha256 }, true);
     });
     return async db => {
-      const current = await executionContext(db, lease.tenant_id, lease.scope_id, lease.input_hash); const latest = await this.ready(db, current, true);
+      const current = await executionContext(db, lease.tenant_id, lease.scope_id, lease.input_hash);
+      const {packet:latest,nativeListening:currentListening} = await this.ready(db, current, true);
+      requireThat(hash(currentListening)===hash(nativeListening),'REVIEW_LISTENING_INPUT_INVALID','发布时原听音审批已变化',409);
       requireThat(latest.packet_hash === packet.packet_hash, 'REVIEW_PACKET_STALE', '发布时封存材料已经变化', 409);
       const actual = await operationArtifacts(db, current, 'POST');
       requireThat(hash(actual.receipt) === hash(post.receipt), 'REVIEW_OUTPUTS_CHANGED', '发布时候选媒体已变化', 409);
@@ -95,7 +104,10 @@ export class PublicationService {
         manifest_revision: 1, expires_at: expiresAt, items }, true);
       await insert(db, 'delivery_manifests', { id: manifest.manifest_id, tenant_id: context.tenantId, owner_id: context.ownerId,
         order_id: context.orderId, revision: 1, hash: hash(manifest), data: manifest, expires_at: expiresAt, delivered_at: deliveredAt,
-        private: { packet_id: packet.packet_id, packet_hash: packet.packet_hash, snapshot_hash: context.snapshotHash, report_ids: latest.reports.map(r => r.report_id) } });
+        private: { packet_id: packet.packet_id, packet_hash: packet.packet_hash, snapshot_hash: context.snapshotHash, report_ids: latest.reports.map(r => r.report_id),
+          ...(currentListening?{native_listening_hash:hash(currentListening),native_listening_submission_id:currentListening.submission_id,
+            native_listening_request_sha256:currentListening.request_sha256,native_listening_response_sha256:currentListening.response_sha256,
+            native_listening_result_hash:currentListening.result_hash}:{}) } });
       await db.query('UPDATE artifacts SET expires_at=$3 WHERE tenant_id=$1 AND order_id=$2 AND media_operation_id=$4',
         [context.tenantId, context.orderId, expiresAt, post.operation.id]);
       await db.query(`UPDATE private_object_writes SET expires_at=GREATEST(expires_at,$3::timestamptz)

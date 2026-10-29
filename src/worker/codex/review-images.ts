@@ -4,10 +4,11 @@ import { hash, sha256 } from '../../api/lib/crypto.js';
 import { requireThat } from '../../api/lib/errors.js';
 import type { ToolScope } from '../tool-gateway/http.js';
 import type { CodexAdmission } from './admission.js';
+import type {ListeningEvidence} from '../audio/listening-gateway.js';
 
 export interface ReviewImageBinding { asset_id: string; sha256: string; width: number; height: number }
 export interface ReviewImage extends ReviewImageBinding { bytes: Buffer }
-export interface ReviewInput { packet_hash: string; context_text: string; images: ReviewImageBinding[]; purpose?: 'REFERENCE_IDENTITY' }
+export interface ReviewInput { packet_hash: string; context_text: string; images: ReviewImageBinding[]; purpose?: 'REFERENCE_IDENTITY'; native_listening?:ListeningEvidence }
 export async function checkReviewImage(image: ReviewImage, admission: CodexAdmission): Promise<void> {
   const policy = admission.review_vision;
   requireThat(policy && image.bytes.length <= policy.max_image_bytes && sha256(image.bytes) === image.sha256,

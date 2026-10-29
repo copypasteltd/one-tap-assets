@@ -1,0 +1,160 @@
+{
+  "scope": "PRIVATE_NATIVE_FINAL_REVIEW_PUBLICATION_WITH_FABRICATED_SEMANTIC_PASS_CONTROL_RESPONSES",
+  "verification_mode": "FRESH_FULL",
+  "local_attempt_files": [
+    {
+      "path": "runtime/test-results/audio-review-complete-native.json",
+      "sha256": "0e2a32949fcbd3f03007c4fa839afc627be3ed0503b2799d988dbb344bd1f3fa"
+    },
+    {
+      "path": "runtime/test-results/audio-review-docs-final.log",
+      "sha256": "234d528b0ce0126d34abbb4ebbeec8fa9dd748e614d9f6be401d2cd8e6aafd79"
+    },
+    {
+      "path": "runtime/test-results/audio-review-docs-preflight.log",
+      "sha256": "4919ee445f304c7714cf3680dbdfb210bc4719ae1e29528e0f5e1d39144c6726"
+    },
+    {
+      "path": "runtime/test-results/audio-review-focused-attempt1.json",
+      "sha256": "f43acafdb7b7fefcf3e848155c0d4c8a7161b1db9130bf2842382260c353cc80"
+    },
+    {
+      "path": "runtime/test-results/audio-review-focused-attempt1.log",
+      "sha256": "77082a17e58bdf583075d9cbc61a67ef531f5229ce7327dc6e6f7641d5e6a9e6"
+    },
+    {
+      "path": "runtime/test-results/audio-review-focused-attempt2.json",
+      "sha256": "0e75c819a73edda3afcc82982f54f53c58c00927f73900f94805b9852371d9af"
+    },
+    {
+      "path": "runtime/test-results/audio-review-focused-attempt2.log",
+      "sha256": "703c2bffde5c0e63ad520cdda063fa94007114a765304e00e348f899ebfab0a1"
+    },
+    {
+      "path": "runtime/test-results/audio-review-focused-attempt3.json",
+      "sha256": "1c5d17ae40a56471ad05c0a632bfb9ea1e6e6e19e20473fb69bc3589e8f40c62"
+    },
+    {
+      "path": "runtime/test-results/audio-review-focused-attempt3.log",
+      "sha256": "4a606e94e54359dd0e43398a1f55ca61960652a9d286a95a5f9b05aa805995b9"
+    },
+    {
+      "path": "runtime/test-results/audio-review-focused.log",
+      "sha256": "4a606e94e54359dd0e43398a1f55ca61960652a9d286a95a5f9b05aa805995b9"
+    },
+    {
+      "path": "runtime/test-results/audio-review-full-attempt1-implementation.json",
+      "sha256": "f30d3da1185dedbcfeed0e1a5c527e137747d95b66b97d30e2453bba1d328b08"
+    },
+    {
+      "path": "runtime/test-results/audio-review-full-attempt1-integration.json",
+      "sha256": "7abb9a90550712365385de9b9f68065ae5550f8b898453438fd9dff313735d68"
+    },
+    {
+      "path": "runtime/test-results/audio-review-full-attempt1-source-start.json",
+      "sha256": "b54d0259279d855ecc273924f6b4a0793906198a7d13819a3e990527862e5c8a"
+    },
+    {
+      "path": "runtime/test-results/audio-review-full-attempt1-test-integration.log",
+      "sha256": "4b7c8a85335e06ebcc0139ba286140d755e972cf8a8995f1dd77e371fda57e2c"
+    },
+    {
+      "path": "runtime/test-results/audio-review-full-attempt1-test.log",
+      "sha256": "a035704145f0ca66cfda9f696878c0a260c18eaa5122b8b5ca0ddce97f7d1148"
+    },
+    {
+      "path": "runtime/test-results/audio-review-full-attempt1-typecheck.log",
+      "sha256": "084f8bc57cb20a7f1ec40906a0ea350840a11dd8dacab97018c3ac25dcd42e1d"
+    },
+    {
+      "path": "runtime/test-results/audio-review-full-attempt1-unit.json",
+      "sha256": "5d90060e564a53fa42578dac1a5fa9e9c16c5ecd85f1c89aff766be14e17a793"
+    },
+    {
+      "path": "runtime/test-results/audio-review-full-attempt1.log",
+      "sha256": "039a5e351302dd83138483bc588db0e9601e86342da34d09d8bb1f72b2cd9eed"
+    },
+    {
+      "path": "runtime/test-results/audio-review-full-build-alipay.log",
+      "sha256": "1ec321cb1d82f3af8703650013323fe6bac5d2966de76e9fa07815aeea0bfbc6"
+    },
+    {
+      "path": "runtime/test-results/audio-review-full-build-douyin.log",
+      "sha256": "3f1b0ec07fd3595288af07549852c0bd7ed247fc024b1553e11a7bf577de0724"
+    },
+    {
+      "path": "runtime/test-results/audio-review-full-build-server.log",
+      "sha256": "ccdaa9541f7774a7fe1acbc50c537450c30d3932f1133ec238b90a39fac17142"
+    },
+    {
+      "path": "runtime/test-results/audio-review-full-implementation.json",
+      "sha256": "ab5862c7450de538688bbe76ba69601ac84cab4fc9ca25de72df3fd9260d12ee"
+    },
+    {
+      "path": "runtime/test-results/audio-review-full-integration.json",
+      "sha256": "0e2a32949fcbd3f03007c4fa839afc627be3ed0503b2799d988dbb344bd1f3fa"
+    },
+    {
+      "path": "runtime/test-results/audio-review-full-test-integration.log",
+      "sha256": "f14f4616f0243d78ad4e8e3642f0f9d0026cba4e4a9590551d1bf8dc1fa4d5f3"
+    },
+    {
+      "path": "runtime/test-results/audio-review-full-test.log",
+      "sha256": "fcb2aaa5b14be3c0d13574d8eb2a067d3f1acdf8c2520f251b8d366afc6d4fd7"
+    },
+    {
+      "path": "runtime/test-results/audio-review-full-typecheck.log",
+      "sha256": "64459e9bec1fbe00536ecec5911a31155a1362a7f6e6da031e58d3631a45491c"
+    },
+    {
+      "path": "runtime/test-results/audio-review-full-unit.json",
+      "sha256": "f6947506ba7452d6d766ccd8983dea62369e77c9abece698787e52a1630e213f"
+    },
+    {
+      "path": "runtime/test-results/audio-review-full-verifier.log",
+      "sha256": "31d0a011f5e201c7c28a6e53228b9467d9a98d641c5c2c0e99d8354f496328c0"
+    },
+    {
+      "path": "runtime/test-results/audio-review-lease-regression.json",
+      "sha256": "5a9a46c864eb600d02f243662112fbca353b7ddf934d2b45937394c5a9c86ebc"
+    },
+    {
+      "path": "runtime/test-results/audio-review-lease-regression.log",
+      "sha256": "c6bd999fb39393935a9f89990514fcd1ea75f14751c0684f919b513e9e7ce008"
+    },
+    {
+      "path": "runtime/test-results/audio-review-media-check.log",
+      "sha256": "118e4f7dab7f7ae877cb5c8bbd7610e3e2ca99f30293dbc5a9086011b3ffb247"
+    },
+    {
+      "path": "runtime/test-results/audio-review-publication.log",
+      "sha256": "b303150320af1802386368457edfd36ee1ca6f16188fb4a0bb93a91864a959a7"
+    },
+    {
+      "path": "runtime/test-results/audio-review-source-start.json",
+      "sha256": "85297b67985d9997e5cde0041fa723d418617f4a9bb5aefd3c2e67669f8ad462"
+    },
+    {
+      "path": "runtime/test-results/audio-review-typecheck.log",
+      "sha256": "3cec72146466f47bd1a5bfe036dda4c7bc7fd2245c611902d52cc6b5ddb6fec3"
+    },
+    {
+      "path": "runtime/test-results/audio-review-unit.log",
+      "sha256": "5da18b7a1860ae7cb76cde9869c2589f7e3d27e7820b83d3585db9b808a4930d"
+    }
+  ],
+  "source_set_hash": "2dbef11ff14409fea547711873cfd3f627fefbc60ab4c5b553a1a2d346086c61",
+  "complete_native_tests": 347,
+  "source_changed_during_complete_run": false,
+  "complete_native_report_sha256": "0e2a32949fcbd3f03007c4fa839afc627be3ed0503b2799d988dbb344bd1f3fa",
+  "focused_exploration": "First run: duplicate test stage creation rejected. Second: irreversible license revocation correctly refused test restoration. Corrected focused run: five passed, eighteen skipped. First full run stopped after four passed and one fixture heartbeat/commit-boundary failure. New tests now stop heartbeat before fenced commit as the real Worker does; the targeted revocation regression passes with twenty-two skipped. The final complete suite is fresh, not retained from either focused or failed runs.",
+  "failed_full_source_set_hash": "dcb074f87bc4704f025627033acf1a2420017d6741ee11fa3d3610af69454050",
+  "source_changed_after_failed_full": [
+    "tests/integration/native-order.test.ts"
+  ],
+  "synthetic_semantic_pass_only": true,
+  "real_chinese_listening_verified": false,
+  "prior_listening_foundation_provenance": "docs/verification/listening-attempts.json",
+  "full_product_verified": false,
+  "production_admitted": false
+}

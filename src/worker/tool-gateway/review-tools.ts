@@ -22,6 +22,7 @@ export function reviewTools(pool: pg.Pool, cfg: Config, store: ObjectStorage): R
       const images = await packetImages(pool, store, context, packet); const identity = await reviewIdentity(pool, cfg, context, packet, scope.run_id);
       return { result: { packet_hash: packet.packet_hash, output_set_hash: packet.output_set_hash,
         image_count: images.length, allowed_evidence_ids: [...packet.original_assets, ...packet.evidence_assets, ...packet.outputs.map(o => ({ asset_id: o.asset_id }))].map(e => e.asset_id),
+        ...(identity.nativeListening?{native_listening_hash:hash(identity.nativeListening),native_listening:identity.nativeListening}:{}),
         report_template: identity.template } };
     },
     persist_stage_result: async (scope, args, intent, signal) => {

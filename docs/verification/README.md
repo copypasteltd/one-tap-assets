@@ -1,28 +1,26 @@
 # 验证与发布证据 / Verification and publication evidence
 
-2026-10-29独立听音基础源码：**64单元 / 342原生集成**通过，34个集成文件，完整原生报告跨度约1957.89秒。源码/测试/配置摘要333份、运行契约42份、资源4份。本轮听音源码先全新通过342项完整原生集成；支付宝CSS压缩600秒超时后，仅修改小程序压缩配置为CSSO（保留压缩与规则顺序），逐字节确认应用、测试、验证脚本、运行契约及资源未变，保留本轮完整原生报告并重跑其余五项；最终类型、64项单元、服务端及双小程序构建通过。未复用上一轮336项或定向跳过报告。
+2026-10-29最终声音双复核与事务交付源码：**65单元 / 347原生集成**通过，34个集成文件，完整原生报告跨度约1745.02秒。源码/测试/配置334份、运行契约42份、资源4份。本轮源码全新执行六项检查：类型、65项单元、347项完整原生集成、服务端及支付宝/抖音构建全部通过。完整运行前后的334份源码/测试/配置、42份运行契约和4份资源摘要一致，没有保留旧原生报告。听音正向语义为刻意构造的控制响应，不代表真实中文听感、计费或商业准入。
 
-This round freshly passes all 342 native cases. After Alipay CSS processing times out at 600s, only mini CSS minimization changes to installed CSSO with rule order preserved. Application, tests, verifier, contracts and resources match the native run byte-for-byte; its original report is retained while the other five checks repeat. Types, 64 units and all builds pass. No prior-round 336-case or focused skipped report is reused. Mode: `MINI_BUILD_RETRY_WITH_RETAINED_NATIVE_INTEGRATION`. Actual native PostgreSQL/FFmpeg/media and HTTPS/stdio/MCP execute locally. Model, semantic observations, authorization, usage, payment and isolation responses remain explicitly synthetic.
+This source snapshot freshly passes all six checks: types, 65 unit tests, 347 complete native integration tests, server and both mini builds. All 334 source/test/config, 42 runtime-contract and four resource hashes match the complete run; no old integration report is retained. Positive listening semantics are deliberately fabricated controls, not real Chinese hearing, billing or commercial admission. Mode: `FRESH_FULL`. Actual native PostgreSQL/FFmpeg/media and HTTPS/stdio/MCP execute locally. Model observations, authorizations, usage, payments and isolation responses remain synthetic.
 
 | 编号 / No. | 检查 / Check | 结果 / Result | 证明范围 / Scope |
 | --- | --- | --- | --- |
-| 01 | 类型/单元/完整原生集成/服务端/双小程序 | 六项PASS，原生保留本轮完整报告 | [实现索引](../../assets/implementation/current.json)，不是生产准入 |
-| 02 | 独立听音基础 / Listening foundation | 6项单元与6项新增原生PASS | 双完整音轨/全部画面、原费用/请求/SSE、UNKNOWN不重买、保存响应恢复、缺证/缓存/撤权 |
-| 03 | 有声制作/POST/文件QC | 原12项原生及4项封存单元PASS | 实际原整轨/ALAC/AAC、原ASR、混音重算、实际字幕帧和私有封存；与6项新增共同组成18项订单专项 |
-| 04 | 原声音基础 | 23 / 17 / 15项原生及4项声道单元PASS | 合同/许可/原费用、持久ASR和独立后期内核，真实中文未验 |
-| 05 | 文档与契约 | 4641项PASS | [报告摘要](contracts.json)，不代替功能执行 |
-| 06 | 页面媒体 | 20文件原SHA | 10截图、概览、WebM/MP4/GIF和说明，[来源](../media/capture-manifest.json) |
-| 07 | 声音媒体 | 12文件原SHA | 四样式MP4/PNG、源视频/合成WAV/概览/GIF，[来源](../media/native-audio/capture-manifest.json) |
+| 01 | 类型/单元/完整原生集成/服务端/双小程序 | 六项全新 PASS | [实现索引](../../assets/implementation/current.json)，不是生产准入 |
+| 02 | 最终声音复核/交付 | 新增5项原生控制回归 PASS | 两路线交付/下载、原角色接管、原回执篡改/费用未决、永久撤权、缺角色/工具听音输入 |
+| 03 | 听音/制作/POST/文件QC | 全部23项订单专项 PASS | 原18项加5项最终链路；完整双声道/全画面/原ASR、字幕帧、混音/原响应和费用 |
+| 04 | 协议及声音基础 | 7听音单元、4封存单元、23/17/15原生 PASS | 中文语音 PASS 格式、声音合同/ASR/独立内核；真实听感和账单未验 |
+| 05 | 文档与契约 | 4649项 PASS | [报告摘要](contracts.json)，不代替功能运行 |
+| 06 | 浏览器页面媒体 | 20文件原SHA | 10截图、概览、WebM/MP4/GIF和说明，[来源](../media/capture-manifest.json) |
+| 07 | 声音媒体 | 12文件原SHA | 四样式MP4/PNG、合成WAV/概览/GIF，[来源](../media/native-audio/capture-manifest.json) |
 | 08 | 发布与暂存 | 独立核验 | [发布摘要](publication.json)、[暂存审计](repository-audit.json) |
 
-本轮测试的听音语义明确为INSUFFICIENT：合成提示音不能伪称中文口播。模型和用量响应为合成，实际请求中的完整双声道和画面字节由原封存SHA核对。新组件尚未被最终Codex阶段调用；材料/推理/工具证明/双报告和有声事务交付仍待接入。最终事实/风格报告及交付继续INDEPENDENT_AUDIO_REVIEW_REQUIRED，公开声音订单继续NATIVE_AUDIO_NOT_ADMITTED，全部禁售。
+正向用例刻意构造中文/语义 PASS 响应，音频实际仍为合成提示音，只验证同源证据、原计费和事务授权控制，不证明模型听对。原提示音负向用例继续返回 INSUFFICIENT。生产没有人工写入 PASS 的公开接口。缓存不能精确分摊则保持 UNKNOWN；不按免费、不替换购买。公开声音报价/订单继续 NATIVE_AUDIO_NOT_ADMITTED，全部禁售。
 
-Synthetic tones explicitly yield insufficient listening observations. The private protocol/receipt/ledger foundation is not final semantic approval or an integrated audio-delivery chain. Cached usage without accurate allocation stays UNKNOWN; it is never treated as free or a replacement purchase.
+Positive control fixtures deliberately fabricate Chinese semantic PASS over actual synthetic tones. They do not certify Chinese audio, recognition, listening, true usage, rights or production isolation. Negative tone cases remain insufficient. Private final-review/report/publication integration is separate from public commercial admission.
 
-本轮局部运行、完整运行和构建失败/重试的私有日志仅发布[来源摘要](listening-attempts.json)。定向探索运行8项通过/10项跳过，发生在最后应用源码修订之前，不作为最终版本验收。完整342项运行前的[333文件原始摘要](listening-native-source.json)与原失败实现记录一致；最后源码相较原生运行仅有 `scripts/mini-config.cjs` 的已核对CSSO设置变化，其余332文件、验证脚本及全部运行契约/资源完全未变。原生JSON与原日志逐字节保留，其他五项重新执行；没有增加600秒窗口、关闭CSS压缩或复用上一轮336项。
+本轮初次探索因测试重复创建同阶段被唯一约束拒绝；第二次因试图恢复已永久撤销许可被数据库拒绝。修正后定向5项通过/18项跳过。首次完整运行在4项通过后遇到测试把提交包入心跳导致的时序误判；新增用例改为真实 Worker 的先停续租再提交边界，保持45秒原租约/代次/超时/断言。撤权定向回归1项通过/22项跳过。上述运行均不计完整验收，失败原日志与原334文件摘要保留；仅订单测试改变，没有应用源码变化。最后全新执行347项完整原生回归和其余五项；[运行前334文件摘要](audio-review-native-source.json)与最终实现索引一致，源码/运行契约/资源无变化。[私有日志来源摘要](audio-review-attempts.json)只发布SHA和范围，不发布原日志、凭证、数据库或测试媒体。
 
-旧声音文件QC的失败、超时和受限构建重试保留在[历史来源](native-qc-attempts.json)及其Git历史说明。完整串行原生命令上限3600秒；单元整套360秒/单例30秒、通常原生单例120秒、完整往返/新增听音整链240秒、POST撤权180秒/hook60秒/RPC30秒/类型与服务端180秒、小程序整套600秒和业务预算/截止/配额保持约束。
+历史听音基础342项与CSS构建受限重试见[原来源](listening-attempts.json)及[原源码清单](listening-native-source.json)，本轮未复用该报告。完整原生命令仍上限3600秒，单元360秒/单例30秒；既有原生120/180/240秒不变，新增含两个最终角色和实际发布的完整场景300秒；hook60秒/RPC30秒/类型与服务端180秒/小程序600秒保持约束。压缩仍用已安装CSSO，保留压缩与规则顺序。
 
-无浏览器调用；前端页面/录制来源与声音内核未变，仅小程序CSS构建压缩器改变，宿主真机仍待验。原截图/录屏/GIF、声音媒体及C设计25文件/归档原字节保留。私有日志、数据库、密钥及媒体缓存保持忽略。
-
-真实中文/口型/模型/账单缓存/授权、多人、最终音频双复核与事务交付、Codex受限运行/清理、支付与OSS、四组真机、完整社区/售后、全变体基准及Plus仍待完成。58需求/52P0、三路线、10风格/14变体继续保留；完整产品及生产准入为false。
+本轮没有浏览器/UI操作；原截图/录屏/GIF、声音媒体及C设计25文件/归档原字节保留。真实中文/口型/模型/账单缓存/商业授权、多人/完整输入容量、Codex受限运行/清理、支付与OSS、四组真机、完整社区/售后、全变体基准及Plus仍待验。58需求/52P0、三路线、10风格/14变体保留；完整产品/生产/云端为false。

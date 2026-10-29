@@ -29,16 +29,14 @@ export interface ListeningEvidence {submission_id:string;packet_hash:string;cont
 interface Receipt {version:'YPCC-LISTENING-RECEIPT-1';submission_id:string;request_sha256:string;status:number;
   content_type:string;response_sha256:string;body_base64:string}
 
-/** Platform preparation only. It does not grant a Codex role a purchase tool,
- * admit an audio review report, or publish an order. */
-export class NativeListeningGateway {
-  constructor(private pool:pg.Pool,private cfg:Config,private store:ObjectStorage,private client=new ListeningClient(cfg)){}
-  private scope(r:ListeningRow):PrivateObjectScope{return {tenantId:r.tenant_id,ownerId:r.private.owner_id,productId:r.private.product_id,orderId:r.order_id,kind:'RECEIPT'};}
-  private async row(tenantId:string,submissionId:string,db:Db=this.pool,lock=false):Promise<ListeningRow>{
+/** Reads original, settled evidence without purchase or settlement methods. */
+class NativeListeningReader {
+  constructor(protected database:Db,protected cfg:Config,protected store:ObjectStorage){}
+  protected async row(tenantId:string,submissionId:string,db:Db=this.database,lock=false):Promise<ListeningRow>{
     const r=(await db.query<ListeningRow>(`SELECT * FROM provider_submissions WHERE tenant_id=$1 AND id=$2 AND generation_kind='LISTENING'${lock?' FOR UPDATE':''}`,[tenantId,submissionId])).rows[0];
     requireThat(r,'LISTENING_ORIGINAL_MISSING','独立听音原请求不存在',409);return r;
   }
-  private async sources(db:Db,context:ExecutionContext):Promise<void>{
+  protected async sources(db:Db,context:ExecutionContext):Promise<void>{
     const production=await operationArtifacts(db,context,'PRODUCTION'),post=await operationArtifacts(db,context,'POST');
     const artifacts=[...production.receipt.artifacts,...post.receipt.artifacts];
     const proof=post.receipt.artifacts.find(a=>a.spec.kind==='video')?.spec.native_audio?.post;
@@ -50,54 +48,42 @@ export class NativeListeningGateway {
     for(const artifact of artifacts){const bytes=await this.store.get(artifact.object_key,artifact.spec.kind==='video'?512000000:30000000);
       requireThat(sha256(bytes)===artifact.sha256,'LISTENING_MEDIA_CHANGED','原制作或实际成片字节已变化，不能使用旧听音包',503);}
   }
-  private async object(r:ListeningRow,key:string,max:number):Promise<Buffer|null>{
-    const w=(await this.pool.query<{sha256:string;state:string}>(`SELECT sha256,state FROM private_object_writes WHERE tenant_id=$1
-      AND owner_id=$2 AND product_id=$3 AND order_id=$4 AND object_key=$5 AND kind='RECEIPT'`,
+  protected async object(r:ListeningRow,key:string,max:number,db:Db=this.database,live=false):Promise<Buffer|null>{
+    const w=(await db.query<{sha256:string;state:string}>(`SELECT sha256,state FROM private_object_writes WHERE tenant_id=$1
+      AND owner_id=$2 AND product_id=$3 AND order_id=$4 AND object_key=$5 AND kind='RECEIPT'
+      ${live?'AND NOT delete_requested AND expires_at>clock_timestamp() FOR SHARE':''}`,
     [r.tenant_id,r.private.owner_id,r.private.product_id,r.order_id,key])).rows[0];
     if(!w)return null;
     if(w.state==='WRITING'||w.state==='UNKNOWN')throw new PendingExternal(5,'LISTENING_RECEIPT_PENDING');
     requireThat(w.state==='STORED','LISTENING_RECEIPT_PENDING','原听音对象仍待写入核对或已删除',503);
     const bytes=await this.store.get(key,max);requireThat(sha256(bytes)===w.sha256,'LISTENING_RECEIPT_CHANGED','原听音回执实际字节已改变',503);return bytes;
   }
-  private async prepared(lease:StageLease):Promise<{context:ExecutionContext;c:ListeningContract;prepared:PreparedListening}>{
-    requireThat(lease.scope_type==='ORDER'&&lease.stage_name==='REVIEW_FACTS','LISTENING_SCOPE_INVALID','听音仅能为原订单最终事实复核准备',403);
-    const context=await executionContext(this.pool,lease.tenant_id,lease.scope_id,lease.input_hash);
-    const c=await verifyListeningLive(this.pool,this.cfg,context.contract),packet=await currentReviewPacket(this.pool,context);
-    requireThat(packet.state==='SEALED'||packet.state==='PASSED','LISTENING_PACKET_INVALID','听音需要当前封存的完整审查包',409);
-    const rows=await verifySealedEvidence(this.pool,this.store,packet);
-    await this.sources(this.pool,context);
-    await nativeQcResources(this.pool,this.store,context);await nativeQcWrites(this.pool,context,rows);
+  protected async compiled(db:Db,context:ExecutionContext):Promise<{c:ListeningContract;prepared:PreparedListening}>{
+    const c=await verifyListeningLive(db,this.cfg,context.contract,true),packet=await currentReviewPacket(db,context);
+    requireThat(['SEALED','REVIEWING','PASSED'].includes(packet.state)&&packet.publication_decision==='PENDING',
+      'LISTENING_PACKET_INVALID','听音需要当前封存且未阻断的完整审查包',409);
+    const rows=await verifySealedEvidence(db,this.store,packet);
+    await this.sources(db,context);
+    await nativeQcResources(db,this.store,context);await nativeQcWrites(db,context,rows);
     const audios:ListeningAudio[]=[];
     for(const row of rows)if(row.kind==='NATIVE_AUDIO'||row.kind==='FINAL_AUDIO'){
       const bytes=await this.store.get(row.object_key,10000000);audios.push({asset_id:row.id,sha256:row.sha256,kind:row.kind,bytes});
     }
-    const images=await packetImages(this.pool,this.store,context,packet);
+    const images=await packetImages(db,this.store,context,packet);
     const facts={profile:context.contract.profile,identity_lock_hash:context.snapshot.identity_lock_hash,
       caption_style:context.contract.native_audio_contract!.caption_style,music:context.contract.native_audio_contract!.music,
       frames:rows.filter(r=>r.kind==='VIDEO_FRAME').map(r=>({asset_id:r.id,artifact_id:r.artifact_id,frame_index:r.frame_index,time_ms:r.time_ms}))};
-    return {context,c,prepared:prepareListening(c,{packet_hash:packet.packet_hash,snapshot_hash:context.snapshotHash,output_set_hash:packet.output_set_hash,
+    return {c,prepared:prepareListening(c,{packet_hash:packet.packet_hash,snapshot_hash:context.snapshotHash,output_set_hash:packet.output_set_hash,
       target_frames:context.snapshot.timeline.target_frames,audios,images,facts})};
   }
-  private async authorize(db:Db,lease:StageLease,expected:PreparedListening['summary']):Promise<ExecutionContext>{
-    const context=await executionContext(db,lease.tenant_id,lease.scope_id,lease.input_hash);
-    await lockMediaOwner(db,context.tenantId,context.ownerId);await assertLease(db,lease);
-    const c=await verifyListeningLive(db,this.cfg,context.contract,true),packet=await currentReviewPacket(db,context);
-    requireThat(hash(c)===expected.contract_hash&&packet.packet_hash===expected.packet_hash&&packet.output_set_hash===expected.output_set_hash
-      &&context.snapshotHash===expected.snapshot_hash,'LISTENING_INPUT_CHANGED','原订单、听音协议或封存包已变化',409);
-    const rows=await verifySealedEvidence(db,this.store,packet);await nativeQcResources(db,this.store,context);await nativeQcWrites(db,context,rows);
-    await this.sources(db,context);
-    const images=await packetImages(db,this.store,context,packet);
-    requireThat(hash(images.map(({bytes:_,...image})=>image))===hash(expected.images),
-      'LISTENING_INPUT_CHANGED','听音原照片或完整实际画面绑定已变化',503);
-    await assertLease(db,lease,false);
-    return context;
-  }
-  private async finish(r:ListeningRow):Promise<ListeningRow>{
+  protected async decoded(r:ListeningRow,db:Db=this.database,live=false):Promise<{
+    cost:number|null;noCharge:boolean;billingError:string|undefined;resultError:string|undefined;output:ListeningEvidence|undefined
+  }|null>{
     const c=frozenListeningContract(r.private.wire_contract);
     requireThat(hash(c)===r.private.contract_hash&&r.private.prepared.contract_hash===r.private.contract_hash,
       'LISTENING_CONTRACT_CHANGED','原听音费用合同摘要变化',503);
-    const bytes=await this.object(r,r.private.receipts[0]!.key,4000000);if(!bytes)return r;
-    const original=await this.object(r,r.private.request_key,32000000);
+    const bytes=await this.object(r,r.private.receipts[0]!.key,4000000,db,live);if(!bytes)return null;
+    const original=await this.object(r,r.private.request_key,32000000,db,live);
     requireThat(original&&sha256(original)===r.private.request_sha256&&r.input_hash===r.private.request_sha256,
       'LISTENING_ORIGINAL_CHANGED','听音原请求文件、原输入摘要或私有登记已变化',503);
     const receipt=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes)) as Receipt;
@@ -120,6 +106,71 @@ export class NativeListeningGateway {
         }catch(error){resultError=error instanceof AppError?error.code:'LISTENING_RESULT_INVALID';}
       }catch(error){billingError=error instanceof AppError?error.code:'LISTENING_STREAM_INVALID';cost=null;}
     }else {resultError='LISTENING_PROVIDER_REJECTED';if(!noCharge)billingError='LISTENING_BILLING_UNKNOWN';}
+    return {cost,noCharge,billingError,resultError,output};
+  }
+  protected async sealed(context:ExecutionContext,db:Db,requirePass:boolean):Promise<ListeningEvidence>{
+    await lockMediaOwner(db,context.tenantId,context.ownerId);
+    const {c,prepared}=await this.compiled(db,context),operation=`listening:${prepared.summary.packet_hash}`;
+    const r=(await db.query<ListeningRow>(`SELECT p.* FROM provider_submissions p JOIN stage_runs s
+      ON s.tenant_id=p.tenant_id AND s.id=p.stage_run_id WHERE p.tenant_id=$1 AND p.order_id=$2
+      AND p.generation_kind='LISTENING' AND p.operation_key=$3 AND s.scope_type='ORDER' AND s.scope_id=$2
+      AND s.stage_name='REVIEW_FACTS' AND s.input_hash=$4 FOR SHARE OF p,s`,
+    [context.tenantId,context.orderId,operation,context.snapshotHash])).rows[0];
+    if(!r||['SUBMITTING','UNKNOWN'].includes(r.state))throw new PendingExternal(5,'LISTENING_ORIGINAL_UNRESOLVED');
+    requireThat(r.state==='SUCCEEDED'&&r.private.sending_started_at&&r.private.billing_valid&&!r.private.privacy_deleted&&r.private.output
+      &&r.private.owner_id===context.ownerId&&r.private.product_id===context.snapshot.product_id
+      &&r.model_version_id===c.model_version_id&&r.private.contract_hash===hash(c)&&r.input_hash===prepared.requestHash
+      &&hash(r.private.prepared)===hash(prepared.summary)&&hash(r.private.wire_contract)===hash(c),
+    'LISTENING_ORIGINAL_CHANGED','原听音、完整材料、模型或原合同绑定无效',503);
+    const decoded=await this.decoded(r,db,true);
+    requireThat(decoded?.output&&!decoded.billingError&&!decoded.resultError&&decoded.cost!==null&&!decoded.noCharge
+      &&hash(decoded.output)===hash(r.private.output),'LISTENING_RESULT_CHANGED','听音原始响应与已结算的持久结果不一致',503);
+    const budget=(await db.query<{state:string;amount_micro:string;settled_micro:string;rate_snapshot:unknown;intent_key:string}>(
+      `SELECT state,amount_micro,settled_micro,rate_snapshot,intent_key FROM budget_reservations
+       WHERE id=$1 AND tenant_id=$2 AND order_id=$3 FOR SHARE`,[r.reservation_id,context.tenantId,context.orderId])).rows[0];
+    requireThat(budget?.state==='SETTLED'&&Number(budget.amount_micro)===c.per_request_ceiling_micro&&Number(budget.settled_micro)===decoded.cost
+      &&budget.intent_key===`${context.tenantId}:${context.orderId}:${operation}`
+      &&hash(budget.rate_snapshot)===hash({type:'INDEPENDENT_LISTENING',contract:c,packet_hash:prepared.summary.packet_hash}),
+    'LISTENING_BILLING_UNVERIFIED','听音缺少原订单、原费率与实际用量对应的已结算费用',503);
+    requireThat(!requirePass||decoded.output.result.verdict==='PASS','INDEPENDENT_AUDIO_NOT_PASSED','独立听音仍有问题或证据不足，不能执行最终复核与交付',422);
+    await verifyListeningLive(db,this.cfg,context.contract,true);
+    requireThat(Date.parse(context.snapshot.deadline_at)>Date.now(),'LISTENING_INTERRUPTED','听音证据已超过原订单截止',409);
+    return decoded.output;
+  }
+  /** Read only: recompile the complete current input and reparse exact original
+   * request/response bytes and cost. Never submit, repair or settle here. */
+  async evidence(context:ExecutionContext,db:Db=this.database):Promise<ListeningEvidence>{return this.sealed(context,db,true);}
+}
+export function readNativeListening(db:Db,cfg:Config,store:ObjectStorage,context:ExecutionContext):Promise<ListeningEvidence>{
+  return new NativeListeningReader(db,cfg,store).evidence(context);
+}
+
+/** Platform preparation. Codex roles receive only read-only evidence tools. */
+export class NativeListeningGateway extends NativeListeningReader {
+  constructor(private pool:pg.Pool,cfg:Config,store:ObjectStorage,private client=new ListeningClient(cfg)){super(pool,cfg,store);}
+  private scope(r:ListeningRow):PrivateObjectScope{return {tenantId:r.tenant_id,ownerId:r.private.owner_id,productId:r.private.product_id,orderId:r.order_id,kind:'RECEIPT'};}
+  private async prepared(lease:StageLease):Promise<{context:ExecutionContext;c:ListeningContract;prepared:PreparedListening}>{
+    requireThat(lease.scope_type==='ORDER'&&lease.stage_name==='REVIEW_FACTS','LISTENING_SCOPE_INVALID','听音仅能为原订单最终事实复核准备',403);
+    const context=await executionContext(this.pool,lease.tenant_id,lease.scope_id,lease.input_hash);
+    return {context,...await this.compiled(this.pool,context)};
+  }
+  private async authorize(db:Db,lease:StageLease,expected:PreparedListening['summary']):Promise<ExecutionContext>{
+    const context=await executionContext(db,lease.tenant_id,lease.scope_id,lease.input_hash);
+    await lockMediaOwner(db,context.tenantId,context.ownerId);await assertLease(db,lease);
+    const c=await verifyListeningLive(db,this.cfg,context.contract,true),packet=await currentReviewPacket(db,context);
+    requireThat(hash(c)===expected.contract_hash&&packet.packet_hash===expected.packet_hash&&packet.output_set_hash===expected.output_set_hash
+      &&context.snapshotHash===expected.snapshot_hash,'LISTENING_INPUT_CHANGED','原订单、听音协议或封存包已变化',409);
+    const rows=await verifySealedEvidence(db,this.store,packet);await nativeQcResources(db,this.store,context);await nativeQcWrites(db,context,rows);
+    await this.sources(db,context);
+    const images=await packetImages(db,this.store,context,packet);
+    requireThat(hash(images.map(({bytes:_,...image})=>image))===hash(expected.images),
+      'LISTENING_INPUT_CHANGED','听音原照片或完整实际画面绑定已变化',503);
+    await assertLease(db,lease,false);
+    return context;
+  }
+  private async finish(r:ListeningRow):Promise<ListeningRow>{
+    const decoded=await this.decoded(r);if(!decoded)return r;
+    const {cost,noCharge,billingError,resultError,output}=decoded;
     return transaction(this.pool,async db=>{
       await lockMediaOwner(db,r.tenant_id,r.private.owner_id);
       await db.query('SELECT id FROM orders WHERE tenant_id=$1 AND id=$2 FOR UPDATE',[r.tenant_id,r.order_id]);
@@ -197,7 +248,7 @@ export class NativeListeningGateway {
     await transaction(this.pool,db=>this.authorize(db,lease,prepared.summary));
     if(!['SUCCEEDED','FAILED'].includes(r.state))throw new PendingExternal(5,'LISTENING_ORIGINAL_UNRESOLVED');
     requireThat(r.state==='SUCCEEDED'&&r.private.billing_valid&&r.private.output,'LISTENING_NOT_PASSED','听音缺少有效原结果或费用回执',503);
-    return r.private.output;
+    return transaction(this.pool,db=>this.sealed(context,db,false));
   }
   /** Reconcile only a saved original HTTP response. This synchronous provider
    * has no certified query API; UNKNOWN never creates a replacement POST. */

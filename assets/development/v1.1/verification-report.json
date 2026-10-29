@@ -1,6 +1,6 @@
 {
   "baseline_id": "YPCC-DEV-1.1.0",
-  "checked_at": "2026-10-29T01:34:03.661259+00:00",
+  "checked_at": "2026-10-29T03:13:35.789062+00:00",
   "status": "PASS",
   "scope": "开发文档、官方OpenAPI结构、JSON Schema/合成正负例、状态图、实体/需求/设计/工作包追踪及C留存一致性",
   "counts": {
@@ -16,9 +16,9 @@
     "requirements": 58,
     "work_packages": 20,
     "frozen_design_files": 25,
-    "checks": 3298
+    "checks": 3299
   },
-  "passed": 3298,
+  "passed": 3299,
   "failed": 0,
   "limitations": [
     "本检查仅核验文档与契约，不运行应用测试；已实现源码和局部测试证据另见 assets/implementation/current.json。",
@@ -15731,7 +15731,7 @@
       "detail": ""
     },
     {
-      "check": "local_link:docs\\开发\\17-交叉核验与交付门禁.md->../实施/独立听音协议与原订单回执-v1.0.md",
+      "check": "local_link:docs\\开发\\17-交叉核验与交付门禁.md->../实施/原生声音最终双复核与事务交付-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -16127,6 +16127,11 @@
     },
     {
       "check": "local_link:README.md->docs/media/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/实施/原生声音最终双复核与事务交付-v1.0.md",
       "status": "PASS",
       "detail": ""
     },

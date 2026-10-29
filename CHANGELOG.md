@@ -1,5 +1,16 @@
 # 更新记录 / Changelog
 
+## 2026-10-29 · 最终声音双复核与事务交付 / Final native-audio review and publication
+
+- 验证：65单元 / 347完整原生集成、服务端/双小程序与类型检查全新通过；文档契约4649项。FRESH_FULL，334份源码前后字节一致；真实服务与全部销售仍未准入。 Fresh full verification passes, without retained integration evidence.
+
+- 新增完整测试按真实 Worker 在提交前停止续租，提交继续校验原45秒租约/代次/截止；修正首次全量运行发现的测试心跳时序误判，不扩大执行窗口。 New fixtures match the real Worker's heartbeat/commit boundary while retaining fencing and deadlines.
+
+- 两个私有生成路线接入 FACTS 唯一原听音、STYLE 只读及完整观察/全画面。推理、受控工具和不可变双报告绑定同一原结果；恢复不重买。 Both private routes bind full original listening/visual evidence across fresh final roles, inference, tools and reports without replacement purchases.
+- 有声发布使用对应媒体检查器，事务重验原文件、原响应/实际费用、资源许可和租约，manifest 关联原证据后授权领取并写释放事件。 Native publication revalidates actual bytes, original receipts/costs, rights and fencing before collection/release.
+- 增加两路线正向控制、永久撤权及缺失角色/工具听音证明的拒绝回归；正向中文语义刻意构造，实际音频为提示音，不能作为真实听感、收费或商业授权证据。 Positive semantic responses are deliberately fabricated controls over tone fixtures, not real listening certification.
+- 同步双语 README、配置/状态/架构、实现与验证记录；既有截图/录屏/GIF、声音样片及 C25 文件/归档保留原字节。 All sales, public audio order and full-product/production/cloud gates remain closed.
+
 ## 2026-10-29 · 独立听音协议与原回执 / Independent listening and original receipts
 
 - 本轮最终64项单元、342项完整原生集成、服务端及双小程序构建通过；文档契约4641项。Final validation: 64 unit / 342 native cases and all builds PASS. 本轮听音源码先全新通过342项完整原生集成；支付宝CSS压缩600秒超时后，仅修改小程序压缩配置为CSSO（保留压缩与规则顺序），逐字节确认应用、测试、验证脚本、运行契约及资源未变，保留本轮完整原生报告并重跑其余五项；最终类型、64项单元、服务端及双小程序构建通过。未复用上一轮336项或定向跳过报告。

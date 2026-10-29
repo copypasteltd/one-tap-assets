@@ -18,6 +18,16 @@ export function syntheticListeningResult(summary:PreparedListening['summary']):L
     tracks:summary.audios.map(a=>({audio_asset_id:a.asset_id,segments:[{start_ms:0,end_ms:summary.duration_ms,kind:'UNCERTAIN',heard_text:''}]})),
     checks:{native_preservation:'INSUFFICIENT',intelligibility:'INSUFFICIENT',music_masking:'INSUFFICIENT',caption_agreement:'INSUFFICIENT',spoken_facts:'INSUFFICIENT'},findings:[]};
 }
+/** Deliberately fabricated positive semantic response for authorization and
+ * delivery-control tests ONLY. The actual fixture is a tone, not this text.
+ * Never publish this as evidence of real listening, speech or Chinese quality. */
+export function syntheticControlListeningPass(summary:PreparedListening['summary']):ListeningResult{
+  const result=syntheticListeningResult(summary);result.verdict='PASS';
+  for(const key of Object.keys(result.checks) as (keyof typeof result.checks)[])result.checks[key]='PASS';
+  for(const track of result.tracks)track.segments=[{start_ms:0,end_ms:summary.duration_ms,kind:'SPEECH',
+    heard_text:'合成控制流程批准响应，并非实际音频识别结果。'}];
+  return result;
+}
 export function listeningSse(c:ListeningContract,result:ListeningResult,change?:(usage:Record<string,unknown>)=>void):Buffer{
   const usage:Record<string,unknown>={prompt_tokens:1000,completion_tokens:200,total_tokens:1200,
     prompt_tokens_details:{audio_tokens:400,text_tokens:600,cached_tokens:0},completion_tokens_details:{reasoning_tokens:120,text_tokens:80}};

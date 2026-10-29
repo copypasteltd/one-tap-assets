@@ -3,89 +3,75 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-29T01:32:51.843Z",
+  "checked_at": "2026-10-29T03:07:34.228Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "verification_mode": "MINI_BUILD_RETRY_WITH_RETAINED_NATIVE_INTEGRATION",
-  "retained_integration": {
-    "checked_at": "2026-10-29T01:27:02.087Z",
-    "previous_source_set_hash": "80bab71b64f527867fabbe49a81ccef403ffade37ff9834a13fb4a941a8e1969",
-    "validated_source_set_hash": "caeb6c578cfb52e4479f04316f90c73aec8965fc3b67262c47471323beaff71f",
-    "allowed_changed_files": [
-      "scripts/mini-config.cjs"
-    ],
-    "report_sha256": "52fc3df1d4403b9b0e92fdc2947e34a914d03455678650856c35e28ddb11ca33",
-    "command": {
-      "command": "./scripts/run.ps1 test:integration",
-      "status": "PASS",
-      "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "60946e9119568399cb7cec0daffd325a8424e04fe4bccba6e50c326ce2d80e3b"
-    }
-  },
+  "verification_mode": "FRESH_FULL",
+  "retained_integration": null,
   "command_checks_passed": true,
   "commands": [
     {
       "command": "./scripts/run.ps1 typecheck",
       "status": "PASS",
       "log_path": "runtime/test-results/typecheck.log",
-      "log_sha256": "e2d4454e59216e42292edf8c1f89b6f073a30db1f01368b545376e1028ff2243"
+      "log_sha256": "64459e9bec1fbe00536ecec5911a31155a1362a7f6e6da031e58d3631a45491c"
     },
     {
       "command": "./scripts/run.ps1 test",
       "status": "PASS",
       "log_path": "runtime/test-results/test.log",
-      "log_sha256": "3ed30ef3ab7a8c0cff48bf92f3c6112728d8c1210412e1192f79379b476f1170"
+      "log_sha256": "fcb2aaa5b14be3c0d13574d8eb2a067d3f1acdf8c2520f251b8d366afc6d4fd7"
     },
     {
       "command": "./scripts/run.ps1 test:integration",
       "status": "PASS",
       "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "60946e9119568399cb7cec0daffd325a8424e04fe4bccba6e50c326ce2d80e3b"
+      "log_sha256": "f14f4616f0243d78ad4e8e3642f0f9d0026cba4e4a9590551d1bf8dc1fa4d5f3"
     },
     {
       "command": "./scripts/run.ps1 build:server",
       "status": "PASS",
       "log_path": "runtime/test-results/build-server.log",
-      "log_sha256": "15067429f1e4e4424de00051ff0e141330687e57798551768905644938424e85"
+      "log_sha256": "ccdaa9541f7774a7fe1acbc50c537450c30d3932f1133ec238b90a39fac17142"
     },
     {
       "command": "./scripts/run.ps1 build:alipay",
       "status": "PASS",
       "log_path": "runtime/test-results/build-alipay.log",
-      "log_sha256": "cc850494822598272bae02890357ef67bc0aa9a03b6d9fe008829926a27071d8"
+      "log_sha256": "1ec321cb1d82f3af8703650013323fe6bac5d2966de76e9fa07815aeea0bfbc6"
     },
     {
       "command": "./scripts/run.ps1 build:douyin",
       "status": "PASS",
       "log_path": "runtime/test-results/build-douyin.log",
-      "log_sha256": "d0b29c0835db663fcca0b7c50c618e5bafeb5b67f1ac1f5f9795ad64f76b91ee"
+      "log_sha256": "3f1b0ec07fd3595288af07549852c0bd7ed247fc024b1553e11a7bf577de0724"
     }
   ],
   "suites": [
     {
       "kind": "unit",
       "status": "PASS",
-      "tests": 64,
-      "passed": 64,
+      "tests": 65,
+      "passed": 65,
       "failed": 0,
-      "executed_at": "2026-10-29T01:31:11.185Z",
+      "executed_at": "2026-10-29T02:25:46.953Z",
       "report_path": "runtime/test-results/unit.json",
-      "report_sha256": "004c62071fc0599dbdb4752bcd90fd09f88c4630c33121aa038394f0d70e1bc3"
+      "report_sha256": "f6947506ba7452d6d766ccd8983dea62369e77c9abece698787e52a1630e213f"
     },
     {
       "kind": "integration",
       "status": "PASS",
-      "tests": 342,
-      "passed": 342,
+      "tests": 347,
+      "passed": 347,
       "failed": 0,
-      "executed_at": "2026-10-29T00:42:50.976Z",
+      "executed_at": "2026-10-29T02:26:00.031Z",
       "report_path": "runtime/test-results/integration.json",
-      "report_sha256": "52fc3df1d4403b9b0e92fdc2947e34a914d03455678650856c35e28ddb11ca33"
+      "report_sha256": "0e2a32949fcbd3f03007c4fa839afc627be3ed0503b2799d988dbb344bd1f3fa"
     }
   ],
-  "source_files": 333,
-  "source_set_hash": "caeb6c578cfb52e4479f04316f90c73aec8965fc3b67262c47471323beaff71f",
+  "source_files": 334,
+  "source_set_hash": "2dbef11ff14409fea547711873cfd3f627fefbc60ab4c5b553a1a2d346086c61",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -657,7 +643,7 @@
     },
     {
       "path": "src/worker/audio/listening-gateway.ts",
-      "sha256": "17f3b8e25c600168c77b33930ae669f59bf9dbf87516097ea3932e50b94be7cf"
+      "sha256": "19280d87e4a34b83825819a695e62e39b3b1e22f93533adb6a8ea520106df365"
     },
     {
       "path": "src/worker/audio/order-proof.ts",
@@ -677,7 +663,7 @@
     },
     {
       "path": "src/worker/codex/inference.ts",
-      "sha256": "8ac754b68f38d0b8b0c630dedafb80189a91f0fd24314a85a3bd098368865d88"
+      "sha256": "8dea2d94cac0e49c1291f750a933860b23196cefe1f67a76a96dbd464e51cfcc"
     },
     {
       "path": "src/worker/codex/launcher.ts",
@@ -693,7 +679,7 @@
     },
     {
       "path": "src/worker/codex/review-images.ts",
-      "sha256": "e5cdc66c57f4b746e22cca1e5792a5223208580b9e25a638af85fc938c089605"
+      "sha256": "e91ca679f29febcaefdb75e784529e702a25e4a0b866a1c4f02f07382d5c6b4d"
     },
     {
       "path": "src/worker/codex/rpc.ts",
@@ -701,7 +687,7 @@
     },
     {
       "path": "src/worker/codex/runtime.ts",
-      "sha256": "1480d2d32d4ad5f51debcefd42b86a8e28c5f03e9a17ddd3c7b414da8568e0b6"
+      "sha256": "1fce24b21b5db2cb52391bccab228ab7094ecbe63e5e27170d65862f8f1a38ff"
     },
     {
       "path": "src/worker/codex/skills.ts",
@@ -845,7 +831,7 @@
     },
     {
       "path": "src/worker/media/native-order-pipeline.ts",
-      "sha256": "1494035ca3a397a73617368459208086663794a846bef27d3a4cf20b3f2c3e77"
+      "sha256": "c24f44f31ce5e93b4c554fce877195fb82591bbb56416879a9470464c16ca434"
     },
     {
       "path": "src/worker/media/native.ts",
@@ -877,7 +863,7 @@
     },
     {
       "path": "src/worker/providers/omni-listening.ts",
-      "sha256": "41dec9eb200630a72ab2f947f46c4fe4ca0da35e86ee7af2a6a54f857e96f2c7"
+      "sha256": "335d6ab02227132f52bc8fec56b89717689fbcd82640abf7e9a488bd3c0820c8"
     },
     {
       "path": "src/worker/providers/vision.ts",
@@ -904,8 +890,12 @@
       "sha256": "92f176fdf0e4ed0e9c9c7f609122ad45b243b29cc2f936e7de9777bcdaa1f0af"
     },
     {
+      "path": "src/worker/review/listening.ts",
+      "sha256": "6953b62880b881db0ee8250a58883494c0c0acbaad195074710e32fc4e9a2758"
+    },
+    {
       "path": "src/worker/review/native-audio.ts",
-      "sha256": "5a492b1e125c1d6b6274aa100614adbe39031834c6d5f48e509a71cc08c4672c"
+      "sha256": "9174bf381a2323e5a97ea5acc6dc093c22f40e6801e3891be7c88eed67d1056a"
     },
     {
       "path": "src/worker/review/packet.ts",
@@ -913,7 +903,7 @@
     },
     {
       "path": "src/worker/review/publication.ts",
-      "sha256": "40743f1f9bb11e0519554bf076bf07ae29097e126fab56cb336931242abb3175"
+      "sha256": "e46b4b7777c510252b8e169791acd85d71581efbacb5d69014417a9ec06cdda4"
     },
     {
       "path": "src/worker/review/qc.ts",
@@ -921,11 +911,11 @@
     },
     {
       "path": "src/worker/review/reports.ts",
-      "sha256": "fb9dd750e46370019a149615bade8e269d2a4f5b3d30dd8f73ec80ce24b1bcc9"
+      "sha256": "11476e70a03a7feceae6406fbec7311deebdf2fffb0344609bfc46bc52b21044"
     },
     {
       "path": "src/worker/review/stage.ts",
-      "sha256": "f4fbfcd54b04364005e97db1ab87886355b2227388b9c1f210f1ccdf8cfc0071"
+      "sha256": "201e185bc25b59af917426ed833f6fc8aa184a73c0f98494216a2f4ea126062b"
     },
     {
       "path": "src/worker/revisions/budget.ts",
@@ -1025,7 +1015,7 @@
     },
     {
       "path": "src/worker/tool-gateway/review-tools.ts",
-      "sha256": "1ccbafb3bd76c3340962711b26d98b2957b46f3d68ed62543474eb7aa9352eda"
+      "sha256": "5037279dd303f2dcdb9870c60c03895f60475b950312787173295b4ab87592e6"
     },
     {
       "path": "src/worker/tool-gateway/revision-tools.ts",
@@ -1073,7 +1063,7 @@
     },
     {
       "path": "tests/helpers/listening.ts",
-      "sha256": "32f3ae67e547334762e167efe0555ccd0845dd6492df9bcc9ccf11e20470f812"
+      "sha256": "05bcd9acf5155cb46591b47c317aeae932cc16c23964181fc98c9a27698b6de6"
     },
     {
       "path": "tests/helpers/media.ts",
@@ -1081,7 +1071,7 @@
     },
     {
       "path": "tests/helpers/native-order.ts",
-      "sha256": "8189dc78a5cd24edb4ef39ec9e08c28cdb566c05f212b93255da8f06a6d54a6f"
+      "sha256": "7767a70e9045f8d1af182660bece8ed57d56153c42c8abb499b21d9c4537402c"
     },
     {
       "path": "tests/helpers/reference.ts",
@@ -1169,7 +1159,7 @@
     },
     {
       "path": "tests/integration/native-order.test.ts",
-      "sha256": "d0e31541d6af9233f963967f965edd5b88a89d24f84486ce9c4583e52c75264d"
+      "sha256": "ee5b6eee44201e0b4762ef73a8d0d18de0a375376ca27435828c66fb736c2c75"
     },
     {
       "path": "tests/integration/optional-preview.test.ts",
@@ -1257,7 +1247,7 @@
     },
     {
       "path": "tests/unit/listening.test.ts",
-      "sha256": "75d928dd906e3de36905a657a7553f259b0cfe6eb042bdd8a71fbcf4de612f79"
+      "sha256": "de134edeac24d65b54b66a432ff605f66a0cd609736acf849777a2bf487413df"
     },
     {
       "path": "tests/unit/native-review-audio.test.ts",
@@ -1389,7 +1379,7 @@
     },
     {
       "path": "scripts/verify-implementation.ts",
-      "sha256": "036556d71749885baf5e4f6660daba12a4739324dfc8c90467555ceaed8630da"
+      "sha256": "5228f00e46c9832a3f508d4bef3b3fcacf9f53e07f95c219fa778d0b6664db22"
     },
     {
       "path": "scripts/verify-publication.ts",
@@ -1692,7 +1682,7 @@
     "licensed_bed_ducking": true,
     "original_deadline_and_cancellation": true,
     "durable_asr_implemented": true,
-    "independent_audio_review_implemented": false,
+    "independent_audio_review_implemented": true,
     "order_tool_registered": true,
     "native_speech_order_admitted": false,
     "real_chinese_speech_verified": false,
@@ -1712,11 +1702,11 @@
     "stored_receipt_maintenance": true,
     "order_tool_registered": true,
     "production_post_connected": true,
-    "order_pipeline_connected": false,
+    "order_pipeline_connected": true,
     "real_provider_verified": false,
     "real_chinese_speech_verified": false,
     "native_speech_order_admitted": false,
-    "notes": "Native PostgreSQL/FFmpeg/AAC/PCM/private files with synthetic HTTPS transport and transcript/usage responses. Original intent, send marker, task ID, append-only ACK/query/result, source/PCM/WAV hashes and original cost reservation persist. Missing ACK/usage never permits another purchase. Legacy contracts require identical stereo; an explicitly frozen MEAN_STEREO_V1 derivative uses both channels, rejects destructive cancellation and leaves production stereo unchanged. Scoped private POST and file-level QC are connected; independent listening, final semantic reviews, public orders and audio delivery remain closed."
+    "notes": "Native PostgreSQL/FFmpeg/AAC/PCM/private files with synthetic HTTPS transport and transcript/usage responses. Original intent, send marker, task ID, append-only ACK/query/result, source/PCM/WAV hashes and original cost reservation persist. Missing ACK/usage never permits another purchase. Legacy contracts require identical stereo; an explicitly frozen MEAN_STEREO_V1 derivative uses both channels, rejects destructive cancellation and leaves production stereo unchanged. Private POST/QC, original listening, final roles and publication are connected; real recognition/listening/billing and public audio admission remain closed."
   },
   "native_audio_contract": {
     "implemented": true,
@@ -1731,8 +1721,8 @@
     "native_quotes_admitted": false,
     "order_tool_registered": true,
     "production_post_connected": true,
-    "order_pipeline_connected": false,
-    "independent_audio_review_implemented": false,
+    "order_pipeline_connected": true,
+    "independent_audio_review_implemented": true,
     "real_authorizations_verified": false,
     "real_provider_verified": false,
     "notes": "Native PostgreSQL/FFmpeg/actual AAC plus synthetic character/voice/music authorization, ASR transport/transcript/usage and payment facts. Contract compilation, snapshot hashes, revoked-rights payment refund intent, original budget and concurrent full-track ASR limits are exercised. Fixed prepaid allocation is internal accounting, not proof of an external license purchase. The primary character/voice binding does not certify official multi-presenter support. NATIVE_AUDIO_NOT_ADMITTED and all sales-disabled gates remain."
@@ -1755,13 +1745,13 @@
     "stored_post_receipt_restore": true,
     "licensed_music_bytes_preflight": true,
     "frozen_mono_derivative": "MEAN_STEREO_V1",
-    "independent_audio_review_implemented": false,
+    "independent_audio_review_implemented": true,
     "audio_qc_connected": true,
-    "audio_delivery_connected": false,
+    "audio_delivery_connected": true,
     "native_quotes_admitted": false,
     "official_multi_presenter_verified": false,
     "real_provider_verified": false,
-    "notes": "Eighteen native PostgreSQL/actual AAC-ALAC-PCM/media/HTTPS-stdio-MCP cases with synthetic external model, authorizations, ASR/usage and isolation. Twelve production/POST/file-QC cases seal complete stereo originals/finals, original settled ASR, actual caption frames and reconstructed music mixes. Six additional cases exercise the private independent listening foundation, original cost and uncertainty/UNKNOWN/revocation; it is not called by final Codex reviews. Four unit cases cover canonical stereo WAV and caption boundaries. No real Chinese listening, official multi-presenter, public audio ordering, final semantic review or delivery admission."
+    "notes": "Twenty-three native PostgreSQL/actual AAC-ALAC-PCM/media/HTTPS-stdio-MCP cases with synthetic external model, authorizations, ASR/usage and isolation. Twelve original production/POST/file-QC cases seal complete stereo tracks, original settled ASR and actual caption frames; six foundation cases preserve uncertainty/UNKNOWN and original receipts/costs. Five final-review cases exercise both route deliveries, original-role recovery, exact receipt and billing holds, durable irreversible voice revocation and missing role/tool listening inputs. Positive Chinese/semantic PASS is deliberately fabricated over tone fixtures for control testing, never real hearing certification. No public audio, official multi-presenter or real-provider admission."
   },
   "native_audio_qc": {
     "implemented": true,
@@ -1777,10 +1767,11 @@
     "immutable_sealed_evidence": true,
     "semantic_review": "PENDING",
     "independent_listening": "REQUIRED",
-    "independent_listening_implemented": false,
+    "independent_listening_implemented": true,
+    "final_reviews_connected": true,
     "final_reviews_admitted": false,
-    "audio_delivery_connected": false,
-    "notes": "Technical file QC only. Complete original/final stereo WAV, original ASR JSON, actual ASS and bounded QC JSON are private hash-bound evidence. Actual FFmpeg media and native PostgreSQL are used with synthetic speech/model/rights/usage. The original three production/POST roles and single ASR are not repurchased during QC. Final listening, factual/style review and delivery require future independently bound listening results; a visual report or ASR transcript cannot waive this guard."
+    "audio_delivery_connected": true,
+    "notes": "Technical file QC retains its original PENDING/REQUIRED historical fields. Complete source/final stereo WAV, original ASR JSON, actual ASS and QC JSON stay immutable. A separate original listening response and fresh final facts/style reports now authorize private publication, with original bytes/rights/costs rechecked at every consumption boundary. Positive semantics are fabricated control fixtures; real-model quality and commercial final-review admission remain false. ASR or a visual report cannot replace the original listening approval."
   },
   "native_listening": {
     "implemented": true,
@@ -1796,16 +1787,19 @@
     "reasoning_output_metered": true,
     "cached_usage_policy": "REQUIRE_ZERO_OR_HOLD",
     "uncertain_observations_retained": true,
-    "final_codex_stages_connected": false,
+    "final_codex_stages_connected": true,
+    "final_review_reports_connected": true,
     "final_review_reports_admitted": false,
-    "audio_delivery_connected": false,
+    "audio_delivery_connected": true,
+    "final_review_publication_fixture_verified": true,
+    "synthetic_semantic_pass_only": true,
     "real_model_listening_verified": false,
     "real_usage_cache_billing_verified": false,
     "native_speech_order_admitted": false,
-    "notes": "Private platform preparation only. Six new native route/UNKNOWN/saved-response/invalid-result/cached-usage/revocation cases plus six protocol units. Full actual stereo WAV and every sealed original/output/frame cross the synthetic transport; semantic output remains INSUFFICIENT for synthetic tones. Original order reserves at most two packet calls including repair, within the sold total and original deadline. Saved original SSE settles after new calls are disabled; missing usage remains a financial hold. Final Codex input/report/tool binding and atomic audio delivery are not connected, and public sales remain disabled."
+    "notes": "Private platform preparation plus final-role/report/publication integration. FACTS alone prepares or recovers one original request per packet; STYLE, metered inference, report validation and publication read exact original bytes/usage/settlement and complete current stereo/visual material. Both fresh roles receive the full same observation object; inference and controlled tool proofs bind its hash, immutable reports cover the full input and the private manifest links original receipt/result hashes. Original tones remain INSUFFICIENT in negative cases. Positive Chinese PASS is deliberately fabricated to test control bindings, not a speech/listening/billing claim. Seven protocol units and twenty-three order cases include five new final-review/revocation/missing-proof scenarios. All public sales, real listening/cache billing and official variants remain unadmitted."
   },
   "codex_implementation": {
-    "scope": "CONTENT PLAN, silent PHOTO_LAYOUT/PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST and private native-audio PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST/QC with scoped original-track ASR and sealed full stereo evidence, private independent listening foundation with original cost/receipts (not final-role admission), independent generated-reference facts review and fresh final visual REVIEW_FACTS/REVIEW_STYLE runtime adapters, metered Responses gateway, atomic silent pack publication, independent seven-stage photo creator SAMPLE pipeline",
+    "scope": "CONTENT PLAN, silent PHOTO_LAYOUT/PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST, private native-audio PER_SHOT_AI/REFERENCE_FILM PRODUCTION/POST/QC with scoped original-track ASR, complete stereo evidence and original paid listening bound through final REVIEW_FACTS/REVIEW_STYLE inputs/inference/tools/immutable reports and transactional native publication, independent generated-reference facts review, metered Responses gateway, atomic silent pack publication, independent seven-stage photo creator SAMPLE pipeline",
     "fixture_tests_only": true,
     "real_codex_turn_verified": false,
     "native_launcher_executable_provided": false,

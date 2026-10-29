@@ -11,6 +11,8 @@ import type { ReviewInput } from '../codex/review-images.js';
 import { packetImageRefs } from './context.js';
 import { assertSealedPacket } from './packet.js';
 import {requireAudioReviewAdmission} from './native-audio.js';
+import {reviewListening} from './listening.js';
+import type {ListeningEvidence} from '../audio/listening-gateway.js';
 
 const packetSchema = JSON.parse(readFileSync('assets/development/v1.1/contracts/review-packet.schema.json', 'utf8')) as {
   properties: { reports: { items: object } };
@@ -23,6 +25,7 @@ interface ReviewRun {
 }
 export async function reviewIdentity(db: Db, cfg: Config, context: ExecutionContext, packet: DTO<'ReviewPacket'>, runId: string): Promise<{
   run: ReviewRun; template: Omit<DTO<'ReviewReport'>, 'verdict' | 'evidence_complete' | 'findings'>;
+  nativeListening:ListeningEvidence|null;
 }> {
   assertSealedPacket(packet);
   requireAudioReviewAdmission(context);
@@ -58,14 +61,17 @@ export async function reviewIdentity(db: Db, cfg: Config, context: ExecutionCont
   requireThat(input?.packet_hash === packet.packet_hash
     && hash(input.images.map(({ asset_id, sha256 }) => ({ asset_id, sha256 }))) === hash(refs),
   'REVIEW_IMAGE_INPUT_INCOMPLETE', '复核未绑定原图和全部候选画面', 503);
-  return { run, template: { report_id: `report_${hash({ runId, packet: packet.packet_hash }).slice(0, 40)}`,
+  const nativeListening=await reviewListening(db,cfg,context,packet);
+  requireThat(nativeListening?Boolean(input.native_listening)&&hash(input.native_listening)===hash(nativeListening):!input.native_listening,
+    'REVIEW_LISTENING_INPUT_INVALID','最终复核未绑定完整、已结算的同包原听音',503);
+  return { run,nativeListening, template: { report_id: `report_${hash({ runId, packet: packet.packet_hash }).slice(0, 40)}`,
     tenant_id: context.tenantId, order_id: context.orderId, run_id: runId, thread_id: run.thread_id,
     runtime_process_ref: run.data.runtime_process_ref, isolation_evidence_id: isolation.id, role: run.role,
     packet_hash: packet.packet_hash, snapshot_hash: packet.snapshot_hash, output_set_hash: packet.output_set_hash, policy_version: packet.qc_policy_version } };
 }
 export async function validateReviewReport(db: Db, cfg: Config, context: ExecutionContext, packet: DTO<'ReviewPacket'>,
   runId: string, raw: unknown, allowRunning = false): Promise<DTO<'ReviewReport'>> {
-  const report = validate('ReviewReport', raw, true); const { run, template } = await reviewIdentity(db, cfg, context, packet, runId);
+  const report = validate('ReviewReport', raw, true); const { run, template,nativeListening } = await reviewIdentity(db, cfg, context, packet, runId);
   requireThat((run.state === 'SUCCEEDED' || allowRunning && run.state === 'RUNNING')
     && Object.entries(template).every(([key, value]) => report[key as keyof DTO<'ReviewReport'>] === value),
   'REVIEW_REPORT_BINDING_INVALID', '复核报告身份、摘要或规则不符合实际运行', 422);
@@ -73,14 +79,17 @@ export async function validateReviewReport(db: Db, cfg: Config, context: Executi
   requireThat(report.findings.every(f => f.evidence_ids.every(e => allowed.has(e))
     && (f.time_ms === null || f.time_ms <= Math.ceil(context.snapshot.timeline.target_frames * 1000 / 30)))
     && (report.verdict !== 'PASS' || report.evidence_complete), 'REVIEW_FINDING_INVALID', '问题引用了包外证据、无效时间码或不完整PASS', 422);
-  const proof = (await db.query(`SELECT id FROM agent_tool_intents WHERE tenant_id=$1 AND run_id=$2 AND state='SUCCEEDED'
+  const proof = (await db.query<{result:{native_listening_hash?:string;native_listening?:ListeningEvidence}}>(
+    `SELECT data->'result' AS result FROM agent_tool_intents WHERE tenant_id=$1 AND run_id=$2 AND state='SUCCEEDED'
     AND tool_name='extract_review_evidence' AND data->'result'->>'packet_hash'=$3 AND data->'result'->>'output_set_hash'=$4`,
   [context.tenantId, runId, packet.packet_hash, packet.output_set_hash])).rows;
-  requireThat(proof.length > 0, 'REVIEW_TOOL_PROOF_MISSING', '复核没有读取本包原始封存证据', 422);
-  const requests = (await db.query<{ state: string; data: { review_packet_hash: string; review_image_binding_hash: string; review_image_hashes: string[] } }>(
+  requireThat(proof.some(p=>!nativeListening||Boolean(p.result.native_listening)&&p.result.native_listening_hash===hash(nativeListening)
+    &&hash(p.result.native_listening)===hash(nativeListening)), 'REVIEW_TOOL_PROOF_MISSING', '复核没有读取本包原始封存证据和同一听音版本', 422);
+  const requests = (await db.query<{ state: string; data: { review_packet_hash: string; review_image_binding_hash: string; review_image_hashes: string[];review_listening_hash?:string|null } }>(
     'SELECT state,data FROM inference_requests WHERE tenant_id=$1 AND run_id=$2', [context.tenantId, runId])).rows;
   requireThat(requests.length > 0 && requests.every(q => q.state === 'SUCCEEDED' && q.data.review_packet_hash === packet.packet_hash
     && q.data.review_image_binding_hash === hash(run.private.review_input)
+    &&(!nativeListening||q.data.review_listening_hash===hash(nativeListening))
     && hash(q.data.review_image_hashes) === hash(run.private.review_input.images.map(i => i.sha256))),
   'REVIEW_VISUAL_INFERENCE_UNVERIFIED', '复核没有全部实际画面的已结算推理回执', 503);
   if (!allowRunning) {

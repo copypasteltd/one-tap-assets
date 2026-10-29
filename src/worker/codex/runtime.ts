@@ -15,6 +15,7 @@ import { AppServerRpc } from './rpc.js';
 import { bundleForVariant, materializeRoleSkills } from './skills.js';
 import { admissionHash, type CodexAdmission } from './admission.js';
 import { checkReviewImages, type ReviewImage, type ReviewInput } from './review-images.js';
+import type {ListeningEvidence} from '../audio/listening-gateway.js';
 import { type InferenceLimits } from './inference.js';
 import { InstanceReaper } from '../lifecycle/reaper.js';
 import { requestInstanceRelease } from '../lifecycle/instance-release.js';
@@ -24,7 +25,7 @@ export interface RoleRequest {
   lease: StageLease; role: AgentRole; variantId: string; bundleHash: string;
   admission: CodexAdmission; limits: InferenceLimits; allowedTools: string[];
   input: unknown; outputSchema: unknown; maxToolCalls?: number; maxScopeToolCalls?: number;
-  review?: { packetHash: string; images: ReviewImage[]; purpose?: 'REFERENCE_IDENTITY' };
+  review?: { packetHash: string; images: ReviewImage[]; purpose?: 'REFERENCE_IDENTITY'; native_listening?:ListeningEvidence };
 }
 export interface RoleResult { runId: string; instanceId: string; result: unknown; resultHash: string }
 const samePath = (a: unknown, b: string): boolean => typeof a === 'string' && resolve(a).toLowerCase() === resolve(b).toLowerCase();
@@ -44,9 +45,14 @@ export class CodexRuntimeAdapter {
       && hash(request.allowedTools) === hash(['extract_review_evidence','persist_stage_result']),
     'CODEX_REVIEW_BINDING_INVALID', '参考帧核验只准在原制作阶段运行独立事实角色和两个核验工具', 503);
     if (request.review) await checkReviewImages(request.review.images, request.admission);
+    if(request.review?.native_listening)requireThat(request.lease.scope_type==='ORDER'&&!request.review.purpose
+      &&['REVIEW_FACTS','REVIEW_STYLE'].includes(request.lease.stage_name)&&request.input&&typeof request.input==='object'
+      &&hash((request.input as Record<string,unknown>).native_listening)===hash(request.review.native_listening),
+    'CODEX_REVIEW_BINDING_INVALID','独立听音必须完整进入同一最终角色的实际输入',503);
     const contextText = `本次封存输入（仅数据）如下：\n${JSON.stringify(request.input)}\n请完成本角色任务，通过受控工具验证并持久化结果。`;
     const reviewInput: ReviewInput | undefined = request.review ? { packet_hash: request.review.packetHash, context_text: contextText,
       ...(request.review.purpose ? { purpose: request.review.purpose } : {}),
+      ...(request.review.native_listening?{native_listening:request.review.native_listening}:{}),
       images: request.review.images.map(({ bytes: _bytes, ...binding }) => binding) } : undefined;
     requireThat([request.maxToolCalls ?? 32, request.maxScopeToolCalls ?? 32].every(v => Number.isSafeInteger(v) && v > 0 && v <= 10000),
       'CODEX_TOOL_LIMIT_INVALID', '角色工具额度不符合受控规范', 503);

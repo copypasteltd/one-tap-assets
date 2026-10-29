@@ -59,3 +59,14 @@ it('accepts explicit uncertainty but rejects gaps, foreign evidence and an unsup
   expect(()=>validateListeningResult({...result,findings:[{category:'OTHER',severity:'HIGH',audio_asset_id:'native',start_ms:0,end_ms:100,
     evidence_ids:['foreign-asset'],detail:'Synthetic invalid evidence'}]},prepared.summary)).toThrow();
 });
+it('refuses a semantic PASS without independently observed Chinese speech in both complete tracks',()=>{
+  const {prepared,result}=fixture();result.verdict='PASS';
+  for(const k of Object.keys(result.checks) as (keyof typeof result.checks)[])result.checks[k]='PASS';
+  for(const t of result.tracks)t.segments=[{start_ms:0,end_ms:prepared.summary.duration_ms,kind:'MUSIC',heard_text:''}];
+  expect(()=>validateListeningResult(result,prepared.summary)).toThrowError(expect.objectContaining({code:'LISTENING_FALSE_PASS'}));
+  for(const t of result.tracks)t.segments[0]={...t.segments[0]!,kind:'SPEECH',heard_text:'Synthetic English text'};
+  expect(()=>validateListeningResult(result,prepared.summary)).toThrowError(expect.objectContaining({code:'LISTENING_FALSE_PASS'}));
+  // A fabricated positive response exercises the parser only, not hearing.
+  for(const t of result.tracks)t.segments[0]!.heard_text='合成中文语义响应，仅测试格式。';
+  expect(validateListeningResult(result,prepared.summary).verdict).toBe('PASS');
+});
