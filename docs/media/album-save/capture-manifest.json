@@ -1,0 +1,133 @@
+{
+  "captured_at": "2026-10-29T22:58:46.047Z",
+  "type": "ACTUAL_BROWSER_RECORDING_SHARED_MINI_ALBUM_SAVE",
+  "data_source": "SYNTHETIC_ALBUM_CALLBACKS_NO_DEVICE_WRITES",
+  "source_set_hash": "d467b91565e8f583d4d0f7919404d05f98347adf3c8b6edd0679cf513e8e5efc",
+  "build_root": "runtime/delivery-builds/2026-10-29T22-57-24-224Z-12b74ca2/runtime/build",
+  "native_mini_device_verified": false,
+  "real_generation_verified": false,
+  "real_payment_verified": false,
+  "browser_tabs_closed": true,
+  "owned_preview_server_stopped": true,
+  "browser_errors": [],
+  "external_network_requests": [],
+  "checks": [
+    "ALL_IMAGE_AND_VIDEO_ACTIONS_WITH_NO_AUTOMATIC_NATIVE_SAVE",
+    "IMAGE_ONLY_PRESERVES_PARTIAL_SUCCESS_AND_DOES_NOT_SAVE_VIDEO_OR_COPY",
+    "ITEM_RETRY_SKIPS_CONFIRMED_SUCCESS_AND_UNRELATED_MEDIA",
+    "UNKNOWN_CALLBACK_IS_NOT_SAVED",
+    "WHOLE_PACK_RETRY_SKIPS_SAVED_AND_UNCONFIRMED_UNKNOWN_ITEMS",
+    "REOPEN_RESTORES_ORIGINAL_INSTALLATION_JOURNAL_WITHOUT_NEW_SESSION_OR_NATIVE_WRITE",
+    "DISMISSED_MISSING_CONFIRMATION_NEVER_REPEATS_NATIVE_SAVE",
+    "EXPLICIT_MISSING_CONFIRMATION_RETRIES_ONLY_ORIGINAL_UNKNOWN_VIDEO",
+    "COPY_SEPARATE_FROM_ALBUM_WITH_NO_REGENERATION_OR_PAYMENT",
+    "NO_HORIZONTAL_OVERFLOW_AT_320PX"
+  ],
+  "screenshots": [
+    {
+      "page": "01-save-options",
+      "path": "docs/media/album-save/01-save-options.png"
+    },
+    {
+      "page": "02-partial-save",
+      "path": "docs/media/album-save/02-partial-save.png"
+    },
+    {
+      "page": "03-restored-progress",
+      "path": "docs/media/album-save/03-restored-progress.png"
+    },
+    {
+      "page": "04-confirmed-completion",
+      "path": "docs/media/album-save/04-confirmed-completion.png"
+    }
+  ],
+  "recording": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 430,
+        "height": 932
+      }
+    ],
+    "format": {
+      "duration": "4.200000"
+    }
+  },
+  "files": [
+    {
+      "path": "docs/media/album-save/01-save-options.png",
+      "bytes": 66676,
+      "sha256": "08048f4025368ff9c5172b3a2039201bf4d3ee4f7bf7d5cb492b0ae18e0890c7"
+    },
+    {
+      "path": "docs/media/album-save/02-partial-save.png",
+      "bytes": 72899,
+      "sha256": "0fa1f3362ca4971a74a15448be1e6bf578cc49584453c71ed227cb78f2c03275"
+    },
+    {
+      "path": "docs/media/album-save/03-restored-progress.png",
+      "bytes": 68168,
+      "sha256": "60ebe7c903a5fb2b25b01e3c600b9e9e38f31ecf04cd1be641f36a630818783e"
+    },
+    {
+      "path": "docs/media/album-save/04-confirmed-completion.png",
+      "bytes": 65830,
+      "sha256": "2a5adc92ac036f7afafe70dc8437f0aaa4be35a6d818af414e326db9b39ca71b"
+    },
+    {
+      "path": "docs/media/album-save/walkthrough.webm",
+      "bytes": 428439,
+      "sha256": "61b7afa70fc86ee5a720884320826e4a0353800dcdf5971fc84aed0637eedd85"
+    },
+    {
+      "path": "docs/media/album-save/walkthrough.mp4",
+      "bytes": 97104,
+      "sha256": "9c863740ca92d23751f20009f74cd39639ea271409bd8a3bb19feb7e083854a8"
+    },
+    {
+      "path": "docs/media/album-save/walkthrough.gif",
+      "bytes": 479087,
+      "sha256": "ec5d8e4fedf5de488d9d46ad87d06eb45d366fe984cc09a432c6e784c6c6bfbc"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/record-album-save.ts",
+      "sha256": "26b7ec404d7349af56d3331a48db1e799815cf04c925e219e256e9f148236c71"
+    },
+    {
+      "path": "src/shared/ui/pack.tsx",
+      "sha256": "411d48ef0fba9e4abf97fcdb63b0d9ca968614e5e753e60479d28ed6b6274eb6"
+    },
+    {
+      "path": "src/shared/ui/pages.tsx",
+      "sha256": "15ae421992ced7563b2a5ecd92155dbbb70c677f63a16de43cf8642f83581b2e"
+    },
+    {
+      "path": "src/shared/client/album.ts",
+      "sha256": "be72be7c4214a4617e2986f5a323e1b2e87f7a255d57cfa1b3904e6a14e0d3df"
+    },
+    {
+      "path": "src/shared/platform/album-save.ts",
+      "sha256": "92f3c671f5e7ceedc5943753ee18684523316415be2fedbfa641b5613ab19774"
+    },
+    {
+      "path": "src/mini-alipay/host.ts",
+      "sha256": "b63b64ebd9314ae32f3fab3d08e60e2406471d7736ca9a5d1cb4741eda4e96ec"
+    },
+    {
+      "path": "src/mini-douyin/host.ts",
+      "sha256": "e538caa932a38387f1952b4b39f7c569677a8674166c678a97e2e0c1155d65b8"
+    },
+    {
+      "path": "src/shared/ui/theme.css",
+      "sha256": "9cab31f1deb03ac6e436600009c1db2990a0c1e75f9aab4a6339236f7ed5cd50"
+    },
+    {
+      "path": "src/preview/fixtures.ts",
+      "sha256": "8a1ef5b9f262f9a2eb4e22515d45722a1b1a1ed1680603f67cdd0a5e15f43dea"
+    }
+  ]
+}

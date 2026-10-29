@@ -16,6 +16,10 @@ const first=source.presets[0]!,firstSlots=slots(first.execution_variants[0]);
 const order:DTO<'Order'>={order_id:'demo_order',quote_id:'demo_quote',channel:'alipay',currency:'CNY',amount_fen:0,payment_state:'CONFIRMED',fulfillment_state:'DELIVERED',
   payable_until:expires,job_id:'demo_job',refund_id:null,delivery_expires_at:expires,created_at:created};
 const orderScenario=new URLSearchParams(location.search).get('scenario')==='order-actions';
+const albumScenario=new URLSearchParams(location.search).get('scenario')==='album-save';
+const albumTrace={operations:[] as string[],saves:[] as string[]};
+if(albumScenario)Object.assign(window,{__YPCC_ALBUM_REPLAY__:albumTrace});
+const albumAttempts=new Map<string,number>();
 const demoOrders:Record<string,DTO<'Order'>>={},demoRefunds:Record<string,DTO<'Refund'>>={};
 for(const [id,payment,fulfillment] of [['demo_pending','PENDING','NOT_STARTED'],['demo_unknown','UNKNOWN','NOT_STARTED'],['demo_queued','CONFIRMED','QUEUED'],['demo_failed','CONFIRMED','FAILED'],['demo_working','CONFIRMED','IN_PROGRESS'],['demo_refunded','CONFIRMED','CANCELLED']] as const)
   demoOrders[id]={...order,order_id:id,amount_fen:100,payment_state:payment,fulfillment_state:fulfillment,job_id:null,delivery_expires_at:null};
@@ -29,6 +33,11 @@ const profile={product_id:'demo_product',profile_id:'demo_profile',photo_version
   summary:'透明琥珀色瓶身，白色泵头，正面可见演示标签。内容为合成回放，不代表真实多模态识别。',unknowns:['成分与功效','未经核实的品牌和认证'],
   observations:[{feature:'瓶身',value:'透明琥珀色',status:'OBSERVED'},{feature:'结构',value:'白色按压泵头',status:'OBSERVED'}]};
 const product={product_id:'demo_product',revision:1,photo_version:1,profile_id:'demo_profile',created_at:created};
+const demoPack:DTO<'Deliverables'>={manifest_id:'demo_manifest',order_id:order.order_id,expires_at:expires,cover_deliverable_id:'demo_image',manifest_revision:1,
+  items:[['demo_image','image','商品主图'],...(albumScenario?[['demo_image_detail','image','商品细节']]:[]),['demo_video','video','商品短片'],['demo_copy','copy','商品文案']].map(([id,kind,label])=>({
+    deliverable_id:id!,slot_id:id!,kind:kind as 'image'|'video'|'copy',file_name:label!,mime_type:kind==='image'?'image/png':kind==='video'?'video/mp4':null,
+    size_bytes:null,width:kind==='copy'?null:1080,height:kind==='image'?1440:kind==='video'?1920:null,fps:kind==='video'?30:null,duration_frames:kind==='video'?60:null,
+    text:kind==='copy'?'让日常多一点清新的仪式感。白色泵头，琥珀色瓶身。此为合成演示文案，不包含功效承诺。':null,sha256:'a'.repeat(64)}))};
 function response(operation:string,path:string,body:any):unknown{
   switch(operation){
     case 'createPlatformSession':return session;
@@ -54,11 +63,10 @@ function response(operation:string,path:string,body:any):unknown{
     case 'createOrder':return order;
     case 'getProductProfile':return profile;
     case 'getAnalysis':return {analysis_id:'demo_analysis',state:'READY'};
-    case 'getDeliverables':return {manifest_id:'demo_manifest',order_id:order.order_id,expires_at:expires,cover_deliverable_id:'demo_image',revision:1,
-      items:[{deliverable_id:'demo_image',kind:'image',width:1080,height:1440,text:null},
-        {deliverable_id:'demo_video',kind:'video',width:1080,height:1920,text:null},
-        {deliverable_id:'demo_copy',kind:'copy',width:null,height:null,text:'让日常多一点清新的仪式感。白色泵头，琥珀色瓶身。此为合成演示文案，不包含功效承诺。'}]};
-    case 'createDownloadLink':return {url:path.includes('demo_video')?'/product-motion.mp4':'/product-card.png',expires_at:expires};
+    case 'getDeliverables':return demoPack;
+    case 'createDownloadLink':return {deliverable_id:path.split('/').at(-2),url:path.includes('demo_video')?'/product-motion.mp4':'/product-card.png',expires_at:expires,ttl_seconds:300};
+    case 'createSaveSession':if(!albumScenario)throw new Error('Synthetic album scenario only');return {save_session_id:'demo_save',...body,created_at:created};
+    case 'recordSaveReceipt':if(!albumScenario)throw new Error('Synthetic album scenario only');return {receipt_id:`demo_receipt_${body.deliverable_id}_${body.attempt}`,accepted:true};
     case 'listRevisions':case 'listFavorites':case 'listPresetDrafts':case 'listPublications':case 'listModerationCases':return {items:[],next_cursor:null};
     case 'listHelpArticles':return {items:[{article_id:'demo_help',title:'浏览器预览与真机有什么区别？',body:'这里复用共享小程序页面，但数据、商品和订单均为合成回放。支付、相册、真实生成及宿主授权仍需分别验收。'}]};
     default:throw new Error(`PREVIEW_OPERATION_UNAVAILABLE: ${operation}`);
@@ -68,6 +76,7 @@ const transport:Transport=async request=>{
   const url=new URL(request.url),path=url.pathname.replace(/^\/v1\/p01/,'');
   const found=Object.entries(endpoints).find(([,e])=>e.method===request.method&&new RegExp(`^${e.path.replace(/\{[^}]+\}/g,'[^/]+')}$`).test(path));
   if(!found)return {status:404,headers:{},data:{error:{code:'PREVIEW_ONLY',message:'该操作不在浏览器演示范围内'}}};
+  if(albumScenario)albumTrace.operations.push(found[0]);
   try{return {status:200,headers:{},data:{data:response(found[0],path,request.body?JSON.parse(String(request.body)):null)}};}
   catch{return {status:409,headers:{},data:{error:{code:'PREVIEW_ONLY',message:'该操作需要真实服务，本回放不执行'}}};}
 };
@@ -88,7 +97,12 @@ export const previewHost:HostPort={platform:'alipay',transport,storage:{get:<T>(
     }finally{bitmap.close();}
   },
   upload:async()=>{throw new Error('Browser replay cannot upload private photos');},pay:async()=>{throw new Error('Browser replay cannot perform payments');},
-  download:async link=>link.url,save:async()=> 'UNKNOWN',copy:async text=>{await navigator.clipboard.writeText(text);}};
+  download:async link=>albumScenario?link.deliverable_id:link.url,save:async(path)=>{
+    if(!albumScenario)return 'UNKNOWN';albumTrace.saves.push(path);const attempt=(albumAttempts.get(path)??0)+1;albumAttempts.set(path,attempt);
+    await new Promise(done=>setTimeout(done,120));
+    if(path==='demo_image_detail'&&attempt===1){const {ClientError}=await import('../shared/client/api');throw new ClientError('ALBUM_PERMISSION_DENIED','Synthetic permission rejection');}
+    return path==='demo_video'&&attempt===1?'UNKNOWN':'SAVED';
+  },copy:async text=>{await navigator.clipboard.writeText(text);}};
 export function attachPreview(client:{attach(session:DTO<'Session'>):void;remember(ids:Record<string,string>):void}){
   client.attach(session as DTO<'Session'>);client.remember({productId:'demo_product',analysisId:'demo_analysis',planId:'demo_plan',orderId:'demo_order'});
   if(new URLSearchParams(location.search).get('scenario')==='draft-resume'){

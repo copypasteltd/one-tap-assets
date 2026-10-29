@@ -1,0 +1,73 @@
+{
+  "base": "runtime/test-results/album-save-2026-10-29T22-53-51-167Z",
+  "source_set_hash": "f12ca5b490a6ea8cf94c75fa797ab44088c938ccfe55d80cd243e6f10843a4c6",
+  "commands": [
+    {
+      "task": "typecheck",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+        "--noEmit"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 12042,
+      "log_path": "runtime/test-results/album-save-2026-10-29T22-53-51-167Z/typecheck.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.config.ts tests/unit/album.test.ts tests/unit/album-save.test.ts tests/unit/client.test.ts --outputFile.json=runtime/test-results/album-save-2026-10-29T22-53-51-167Z/unit.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.config.ts",
+        "tests/unit/album.test.ts",
+        "tests/unit/album-save.test.ts",
+        "tests/unit/client.test.ts",
+        "--outputFile.json=runtime/test-results/album-save-2026-10-29T22-53-51-167Z/unit.json"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 1211,
+      "log_path": "runtime/test-results/album-save-2026-10-29T22-53-51-167Z/unit.log",
+      "log_sha256": "54a5b37e9662bd875dc0b0a53988709a378b1e1490c2bb52cb7e800214cea129"
+    },
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/client-album.test.ts --outputFile.json=runtime/test-results/album-save-2026-10-29T22-53-51-167Z/api.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.integration.config.ts",
+        "tests/integration/client-album.test.ts",
+        "--outputFile.json=runtime/test-results/album-save-2026-10-29T22-53-51-167Z/api.json"
+      ],
+      "shell": false,
+      "status": "FAIL",
+      "exit_code": 1,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 4858,
+      "log_path": "runtime/test-results/album-save-2026-10-29T22-53-51-167Z/api.log",
+      "log_sha256": "c7881e9a6bc833c77d5f9f98c92841ac1c8e92bd331f5c9f3bebb3a6b2e7c717"
+    }
+  ],
+  "reason": "Initial synthetic delivered-manifest fixture reused one PostgreSQL parameter as timestamptz and text, causing inconsistent types deduced for parameter $2 before the first API scenario. Fixed the fixture with explicit timestamptz and a separate JSON patch; remaining three API cases were not executed in that failed attempt.",
+  "raw_aggregate_pending_tests": 0,
+  "assertion_status_counts": {
+    "failed": 1,
+    "pending": 3
+  },
+  "tested_source": "docs/verification/album-save-initial-source.json",
+  "api": "docs/verification/album-save-initial-api.json",
+  "unit": "docs/verification/album-save-initial-unit.json"
+}

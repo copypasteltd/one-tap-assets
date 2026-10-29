@@ -1,18 +1,18 @@
 {
-  "checked_at": "2026-10-29T22:39:30.945129+00:00",
+  "checked_at": "2026-10-29T23:03:24.940118+00:00",
   "status": "PASS_SOURCE_INTEGRITY",
-  "verification_mode": "FOCUSED_ORDER_CANCELLATION_AND_REFUND_DELIVERY",
+  "verification_mode": "FOCUSED_SELECTIVE_ALBUM_SAVE_DELIVERY",
   "repository_integrity": "PASS",
   "application_checks": "SEE_EXPLICIT_FOCUSED_RESULTS",
-  "source_set_hash": "aed288b2a470e9910fff6f4bc9ac4594babd268c96f95e12df19a372c62a11c2",
-  "source_files": 383,
+  "source_set_hash": "d467b91565e8f583d4d0f7919404d05f98347adf3c8b6edd0679cf513e8e5efc",
+  "source_files": 388,
   "runtime_contract_files": 42,
   "resource_files": 4,
-  "markdown_files": 145,
-  "local_links_verified": 1291,
+  "markdown_files": 147,
+  "local_links_verified": 1333,
   "nonportable_or_template_links_skipped": 0,
-  "media_files": 57,
-  "historical_media_files": 50,
+  "media_files": 64,
+  "historical_media_files": 57,
   "frozen_c_files": 25,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
   "historical_evidence_unchanged": [
@@ -51,7 +51,11 @@
     "docs/verification/draft-resume-tested-source.json",
     "docs/verification/draft-resume-unit.json",
     "docs/verification/draft-resume-api.json",
-    "docs/verification/draft-resume-initial-typecheck.json"
+    "docs/verification/draft-resume-initial-typecheck.json",
+    "docs/verification/order-actions-source.json",
+    "docs/verification/order-actions-tested-source.json",
+    "docs/verification/order-actions-unit.json",
+    "docs/verification/order-actions-api.json"
   ],
   "private_runtime_and_credentials_excluded": true,
   "new_browser_used": true,
@@ -61,6 +65,6 @@
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "note": "Exact source/builds, focused original-order checks, recorded shared UI, closed browser, historical evidence/media, links and C verified. ZIP verified independently after packaging.",
-  "new_order_action_files": 7
+  "note": "Exact source/builds, focused selective-save/native-callback checks, recorded shared UI, closed browser, historical evidence/media, links and C verified. ZIP verified independently after packaging.",
+  "new_album_save_files": 7
 }

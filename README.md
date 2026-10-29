@@ -1,5 +1,7 @@
 # 一品成片 · One Tap Assets
 
+2026-10-30新增[分类保存与相册恢复](docs/实施/相册分类保存与宿主回调-v1.0.md)：支持整套、只存图片/视频及单项重试，返回恢复原进度，明确成功不重复保存，UNKNOWN先核对相册。双端真实接口适配等待complete串行，支付宝视频不再固定拒绝；27项定向检查和10项页面操作通过，真实手机相册仍待验收。
+
 2026-10-30新增[原订单取消与退款](docs/实施/订单取消与原支付动作-v1.0.md)：订单页支持付款前取消、已付款排队取消及原路退款进度，制作开始后转售后。旧支付动作每次重验原单，UNKNOWN只查单；取消后迟到付款只记一次并申请一次退款。17单元/6原生API和9项浏览器操作通过，真实交易与真机仍待验收。
 
 2026-10-30新增[草稿恢复与方案规格续选](docs/实施/草稿恢复与方案规格续选-v1.0.md)：首页恢复本人有效草稿，素材页列出服务端草稿；已有档案无需本地分析编号。先选方案后拍照保留方案/规格的四版本引用，可继续原清单或原规格，禁售/失效不换版；17项单元和3项原生API检查、8项浏览器操作通过。真实登录/模型与真机仍待验收。
@@ -18,8 +20,14 @@
 
 快速交付入口：[交付与启动指南](docs/delivery/README.md)。执行`.\scripts\setup-local.ps1`初始化，再用`doctor`自检、`local:start`启动后端、`preview:serve`查看共享页面。`delivery:build --smoke`只做有界构建和核心冒烟，`delivery:package`生成源码与实际成功产物ZIP；按本轮要求不等待全面测试绿灯。
 
-当前候选：类型检查、23项定向测试、9项浏览器操作、自检及服务启动通过；构建结果 server: PASS, preview: PASS, alipay: PASS, douyin: PASS。未运行全面测试。绑定 383 source files / 42 contracts / 4 resources; aed288b2。见[交付记录](docs/delivery/current.json)、[本轮来源](docs/verification/order-actions-source.json)。
+当前候选：类型检查、27项定向测试、10项浏览器操作、自检及服务启动通过；构建结果 server: PASS, preview: PASS, alipay: PASS, douyin: PASS。未运行全面测试。绑定 388 source files / 42 contracts / 4 resources; d467b915。见[交付记录](docs/delivery/current.json)、[本轮来源](docs/verification/album-save-source.json)。
 
+
+最新相册保存 / Latest album saving: [操作与来源](docs/media/album-save/README.md)
+
+![分类保存与原进度 / Selective album saving and original progress](docs/media/album-save/walkthrough.gif)
+
+[MP4](docs/media/album-save/walkthrough.mp4) · [WebM](docs/media/album-save/walkthrough.webm) · [截图及摘要 / Screens and hashes](docs/media/album-save/capture-manifest.json)。实际共享页面录制，合成相册回调与清单；没有写入真实手机相册。Actual UI recording with synthetic callbacks and no native device writes.
 
 最新订单操作 / Latest order actions: [操作与来源](docs/media/order-actions/README.md)
 

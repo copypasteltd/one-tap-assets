@@ -1,5 +1,14 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · 分类保存与相册进度恢复 / Selective album saving and recovery
+
+- 共享领取页提供整套/图片/视频与单项重试，明确部分成功和UNKNOWN；返回恢复原安装记录，不重新生成或收费。 Restore original progress and retry only unfinished selected items.
+- 支付宝接入saveImageToPhotosAlbum/saveVideoToPhotosAlbum，抖音共用complete串行门；缺失回调为UNKNOWN，原回调未结束前拒绝重叠写入。 Actual native adapters are implemented; device writes remain unverified.
+- 会话/链接/SAVING回执等待后重查暂停；换号保护、迟到成功合并、回执丢失原键恢复及保存后本地记录故障不降为FAILED。 Late success never authorizes automatic resaving.
+- 类型、23单元/4原生API与10浏览器操作通过，四目标构建和自检/启动PASS；未运行全面测试。 Bound: 388 source files / 42 contracts / 4 resources; d467b915。
+- 初次合成清单夹具的PG参数类型冲突、当次1失败/3未执行及修正后结果分别留存。新4PNG/MP4/WebM/GIF，本次浏览器/服务关闭，旧57媒体、C25文件/归档及40历史证据保留。
+- Real dual-platform albums, providers/billing/isolation, audio repair, complete community/aftercare/Plus and cloud remain pending. All official presets remain unavailable.
+
 ## 2026-10-30 · 原订单取消与退款 / Original-order cancellation and refunds
 
 - 双小程序共享订单页增加明确确认的取消、已付款排队取消、失败/取消订单原路退款和逐态进度；已开始制作进入售后。 Shared order self-service uses original order state and explicit confirmation.

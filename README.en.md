@@ -1,5 +1,7 @@
 # One Tap Assets · 一品成片
 
+New: [selective album saving and recovery](docs/实施/相册分类保存与宿主回调-v1.0.md) adds whole-pack, image-only, video-only and individual retry actions. Original progress restores on reopening; confirmed success is skipped and UNKNOWN requires manual inspection. Both adapters wait for complete before advancing. Twenty-seven focused cases and ten browser checks pass; actual phone album writes remain unverified.
+
 New: [original-order cancellation and refunds](docs/实施/订单取消与原支付动作-v1.0.md) adds explicit cancellation before production, paid-queue cancellation and original-refund progress. Cached payment actions recheck current state; UNKNOWN only queries the original order, and late payment creates one original refund intent. Seventeen unit, six native API and nine browser cases pass; live payments/refunds and devices remain unverified.
 
 New: [server draft recovery and exact-spec continuation](docs/实施/草稿恢复与方案规格续选-v1.0.md) restores live owned drafts, ready profiles and matching original plans after reopening. All four preset/variant references survive capture; missing or withdrawn versions never fall back to another variant. Seventeen unit and three native API cases plus eight browser checks pass; real login, providers and devices remain unverified.
@@ -18,10 +20,16 @@ This repository is under active development: requirements **v3.1**, development 
 
 Quick delivery: see the [handover and startup guide](docs/delivery/README.md). Run `.\scripts\setup-local.ps1`, then `doctor`, `local:start` or `preview:serve`. `delivery:build --smoke` runs bounded builds and focused smoke checks; `delivery:package` creates a ZIP with source and successful outputs. A fully green comprehensive suite is not a packaging prerequisite.
 
-Current candidate: typecheck, 23 focused tests, nine browser checks, doctor and owned startup PASS. Builds: server: PASS, preview: PASS, alipay: PASS, douyin: PASS. No comprehensive suite was run. Bound: 383 source files / 42 contracts / 4 resources; aed288b2. See [delivery records](docs/delivery/current.json) and [focused provenance](docs/verification/order-actions-source.json).
+Current candidate: typecheck, 27 focused tests, ten browser checks, doctor and owned startup PASS. Builds: server: PASS, preview: PASS, alipay: PASS, douyin: PASS. No comprehensive suite was run. Bound: 388 source files / 42 contracts / 4 resources; d467b915. See [delivery records](docs/delivery/current.json) and [focused provenance](docs/verification/album-save-source.json).
 
 ## Screens and recorded interaction
 
+
+最新相册保存 / Latest album saving: [操作与来源](docs/media/album-save/README.md)
+
+![分类保存与原进度 / Selective album saving and original progress](docs/media/album-save/walkthrough.gif)
+
+[MP4](docs/media/album-save/walkthrough.mp4) · [WebM](docs/media/album-save/walkthrough.webm) · [截图及摘要 / Screens and hashes](docs/media/album-save/capture-manifest.json)。实际共享页面录制，合成相册回调与清单；没有写入真实手机相册。Actual UI recording with synthetic callbacks and no native device writes.
 
 最新订单操作 / Latest order actions: [操作与来源](docs/media/order-actions/README.md)
 

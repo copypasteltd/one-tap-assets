@@ -1,3 +1,7 @@
+当前来源：[分类保存与相册恢复](album-save-source.json)。绑定 388 source files / 42 contracts / 4 resources; d467b915；类型、23单元/4原生API、10浏览器检查与四构建/本地启动PASS。原生数据库/API及显式合成清单/宿主回调分开记录；没有实际制作或手机相册证据。初版PG夹具参数冲突见[初次尝试](album-save-initial-attempt.json)，当次1失败/3未执行及源码/原报告保留。全面测试、原发布检查器、真机和真实服务未验。
+
+Current focused source delivery preserves all original requirements and historical evidence. Earlier “current” paragraphs below refer only to their own source snapshots.
+
 当前来源：[原订单取消与退款](order-actions-source.json)。绑定 383 source files / 42 contracts / 4 resources; aed288b2；类型、17单元/6原生API、9浏览器检查与四构建/本地启动PASS。真实数据库/会话/行锁和合成付款退款分开记录；全面测试、原发布检查器、真机和真实服务未验。
 
 Current focused source delivery preserves all original requirements and historical evidence. Earlier “current” paragraphs below refer only to their own source snapshots.

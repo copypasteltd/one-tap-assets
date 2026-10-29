@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "checked_at": "2026-10-29T22:39:30.945129+00:00",
+  "status": "SOURCE_DELIVERY",
+  "scope": "FOCUSED_ORIGINAL_ORDER_ACTIONS_AND_AVAILABLE_BUILDS",
+  "reason": "USER_REQUESTED_FAST_DELIVERY_WITHOUT_FULL_GREEN_REQUIREMENT",
+  "original_publication_checker_status": "NOT_RUN_FOCUSED_DELIVERY",
+  "checker_weakened": false,
+  "source_set_hash": "aed288b2a470e9910fff6f4bc9ac4594babd268c96f95e12df19a372c62a11c2",
+  "source_files": 383,
+  "builds_passed": true,
+  "selected_builds_passed": true,
+  "checks": [
+    {
+      "task": "typecheck",
+      "status": "PASS",
+      "elapsed_ms": 11736,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-33-32-435Z-2b6a0da6/typecheck.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "build:server",
+      "status": "PASS",
+      "elapsed_ms": 548,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-33-32-435Z-2b6a0da6/server.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "exec",
+      "status": "PASS",
+      "elapsed_ms": 918,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-33-32-435Z-2b6a0da6/preview.log",
+      "log_sha256": "a68e1efd226a20d1aca36e56fdff0a33dd3c0613166646de2a1e101898abe5b3"
+    },
+    {
+      "task": "build:alipay",
+      "status": "PASS",
+      "elapsed_ms": 12355,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-33-32-435Z-2b6a0da6/alipay.log",
+      "log_sha256": "2746595cac37690eed4073712973ce86df5d5d13b69d3f2cf101ace2c7614b4d"
+    },
+    {
+      "task": "build:douyin",
+      "status": "PASS",
+      "elapsed_ms": 12952,
+      "log_path": "runtime/delivery-builds/2026-10-29T22-33-32-435Z-2b6a0da6/douyin.log",
+      "log_sha256": "4cbc040facd2de57b01ed1dbae5ca1a2293180019474d58a3f9bccd9cf23929d"
+    }
+  ],
+  "local_checks": {
+    "doctor": "PASS",
+    "backend": "PASS",
+    "preview": "PASS"
+  },
+  "focused_tests": {
+    "passed": 23,
+    "failed": 0
+  },
+  "browser_checks": 9,
+  "full_suite_executed": false,
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false,
+  "evidence": "docs/verification/order-actions-source.json",
+  "historical_publication": "docs/verification/publication-5b9a1c6.json"
+}

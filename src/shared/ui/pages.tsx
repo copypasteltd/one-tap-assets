@@ -1,15 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
-import Taro, { useDidShow, useDidHide, useRouter } from '@tarojs/taro';
-import { View, Text, Button, Image, Video, Switch, Textarea } from '@tarojs/components';
+import React, { useRef, useState, type ReactNode } from 'react';
+import Taro, { useRouter } from '@tarojs/taro';
+import { View, Text, Button, Image, Switch, Textarea } from '@tarojs/components';
 import type { DTO } from '../contracts/types';
-import { ClientError } from '../client/api';
-import { AlbumQueue, type AlbumItem } from '../client/album';
 import { client } from './runtime';
 import './theme.css';
 import { Action, Notice, Panel, useAction, useResource, usePagedResource, ResourceState, Slots, PresetCard, More, navigate, roots, type PageName } from './base';
 import { Favorites, Creator, DraftEditor, Rights, Publication, Moderation, PresetCommunityActions } from './community';
 import { OptionalPreview } from './preview';
-import {LimitedRevision} from './revision';
+import {Pack} from './pack';
 import {Photos} from './photos';
 import {Analysis} from './analysis';
 import {ResumeDraft,ProductDrafts} from './drafts';
@@ -70,24 +68,6 @@ function Library() {
     {resource.loaded && !resource.items.length && <><Notice>还没有素材包。拍下商品，开始你的第一套。</Notice><Action onClick={() => navigate('photos')}>拍照做素材</Action></>}
     {resource.items.map(order => <Panel key={order.order_id}><Text className='card-title'>{fulfillmentText[order.fulfillment_state]}</Text><Text className='secondary'>{paymentText[order.payment_state]} · ¥{(order.amount_fen / 100).toFixed(2)}</Text><Text className='caption'>{new Date(order.created_at).toLocaleString()}</Text><Action secondary onClick={() => navigate(order.fulfillment_state === 'DELIVERED' ? 'pack' : 'order', { order_id: order.order_id })}>{order.fulfillment_state === 'DELIVERED' ? '查看素材包' : '查看原订单'}</Action></Panel>)}<More {...resource} /><ProductDrafts/>
   </>;
-}
-function Pack() {
-  const route = useRouter(); const action = useAction(); const [links, setLinks] = useState<Record<string, string>>({}); const [items, setItems] = useState<AlbumItem[]>([]); const queue = useRef<AlbumQueue>();
-  const resource = useResource(async () => { await client().login(); return client().api.call('getDeliverables', { params: { order_id: route.params.order_id ?? '' } }); });
-  useEffect(()=>{queue.current?.stop();queue.current=undefined;setItems([]);setLinks({});},[resource.data?.manifest_id]);
-  useDidHide(() => queue.current?.stop()); useEffect(() => () => queue.current?.stop(), []);
-  const openQueue = async (): Promise<AlbumQueue> => { if (!queue.current) { queue.current = new AlbumQueue(client(), resource.data!, setItems); await queue.current.open(); } return queue.current; };
-  return <><ResourceState {...resource} retry={resource.reload} />{resource.data && <><View className='pack-heading'><Text className='page-headline'>你的整套素材，做好了。</Text><Text>领取至 {new Date(resource.data.expires_at).toLocaleString()}</Text></View>
-    {resource.data.items.map(item => <Panel key={item.deliverable_id}><View className='section-title'><Text>{item.kind === 'image' ? '商品图片' : item.kind === 'video' ? '商品短片' : '商品文案'}{resource.data?.cover_deliverable_id===item.deliverable_id?' · 素材包封面':''}</Text><Text className='caption'>{item.width ? `${item.width} × ${item.height}` : ''}</Text></View>
-      {item.kind === 'copy' ? <><Text selectable>{item.text}</Text><Action secondary onClick={() => void action.run(async () => { await client().host.copy(item.text ?? ''); await Taro.showToast({ title: '文案已复制', icon: 'none' }); })}>复制文案</Action></>
-        : <>{links[item.deliverable_id] ? item.kind === 'image' ? <Image src={links[item.deliverable_id]!} mode='widthFix' className='pack-image' /> : <Video src={links[item.deliverable_id]!} controls objectFit='contain' className='pack-video' /> : <View className='media-placeholder'><Text>{item.kind === 'image' ? '点击查看这张图片' : '点击查看完整竖屏短片'}</Text></View>}
-          <Action secondary onClick={() => void action.run(async () => { const link = await client().api.call('createDownloadLink', { params: { deliverable_id: item.deliverable_id }, key: client().intent('view-link', { id: item.deliverable_id, nonce: Date.now() }) }); setLinks(old => ({ ...old, [item.deliverable_id]: link.url })); })}>{links[item.deliverable_id] ? '重新获取查看链接' : '查看素材'}</Action></>}
-    </Panel>)}
-    <LimitedRevision key={resource.data.manifest_id} pack={resource.data} onDelivered={resource.reload}/>
-    <Action disabled={action.busy} onClick={() => void action.run(async () => { await (await openQueue()).run(); })}>{action.busy ? '正在逐项保存…' : '保存素材到相册'}</Action>
-    {items.map(item => <View className='save-row' key={item.id}><Text>{item.kind === 'image' ? '图片' : '短片'} · {({ PENDING: '等待', DOWNLOADING: '下载中', SAVING: '正在写入相册', SAVED: '已保存', FAILED: '保存未完成', UNKNOWN: '需要核对相册' })[item.state]}</Text>{item.state === 'UNKNOWN' && <Button className='filter' disabled={action.busy} onClick={() => void action.run(async () => { const answer = await Taro.showModal({ title: '先查看手机相册', content: '如果这份素材已经保存，请取消。仅在确认相册中没有它时重试，以免重复。', confirmText: '确认未保存' }); if (answer.confirm) await (await openQueue()).run([item.id]); })}>已核对，重试</Button>}</View>)}
-    {action.error && <Notice error>{action.error}</Notice>}<Text className='caption'>已明确成功的文件会跳过。下载完成不代表已写入相册。</Text><Action secondary onClick={() => navigate('help', { order_id: resource.data!.order_id })}>素材问题反馈</Action>
-  </>}</>;
 }
 function Settings() {
   const action = useAction(); const [deletion, setDeletion] = useState<DTO<'PrivacyDeletion'>>();
