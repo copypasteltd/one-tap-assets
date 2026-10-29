@@ -23,6 +23,7 @@ import {nativeCommand,inspectVideo} from '../../src/worker/media/native.js';
 import {CodexRuntimeAdapter} from '../../src/worker/codex/runtime.js';
 import {MediaStageService} from '../../src/worker/codex/media-stage.js';
 import {ToolConsumer} from '../../src/worker/tool-gateway/consumer.js';
+import type {ToolHandler} from '../../src/worker/tool-gateway/consumer.js';
 import {productionTools} from '../../src/worker/tool-gateway/production-tools.js';
 import {reviewTools} from '../../src/worker/tool-gateway/review-tools.js';
 import {claimStage,completeStage,PendingExternal,type StageLease} from '../../src/worker/queue/leases.js';
@@ -30,15 +31,21 @@ import {enqueueStage} from '../../src/worker/queue/enqueue.js';
 import {QualityControlService} from '../../src/worker/review/qc.js';
 import {ReviewStageService} from '../../src/worker/review/stage.js';
 import {PublicationService} from '../../src/worker/review/publication.js';
+import {RepairCoordinator} from '../../src/worker/repair/coordinator.js';
+import {RepairPlanningService,repairPlanningTools} from '../../src/worker/repair/planning.js';
+import {currentReviewPacket} from '../../src/worker/review/context.js';
+import {validateReviewReport} from '../../src/worker/review/reports.js';
+import {imageRequest} from '../../src/worker/generation/requests.js';
 
 // Real PostgreSQL/HTTPS/stdio/MCP/PNG/MP4; synthetic model and OS identity.
 // These small silent contracts do not certify the official generated variants.
-let db:TestDatabase,root:string,image:Buffer;
+let db:TestDatabase,root:string,image:Buffer,repairedImage:Buffer;
 const clips=new Map<string,Buffer>();
 const active:{app:FastifyInstance;controller:AbortController;task:Promise<void>}[]=[];
 beforeAll(async()=>{
   db=await testDatabase();root=inside(db.cfg.runtimeRoot,`tests/generated-pack/${id('media')}`);await mkdir(root,{recursive:true});
   image=await sharp({create:{width:640,height:800,channels:3,background:'#284E73'}}).jpeg().toBuffer();
+  repairedImage=await sharp({create:{width:640,height:800,channels:3,background:'#736028'}}).jpeg().toBuffer();
   for(const color of ['red','blue']){
     const path=join(root,`${color}.mp4`);
     await nativeCommand(db.cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-f','lavfi','-i',`color=c=${color}:s=360x640:r=24`,
@@ -48,6 +55,9 @@ beforeAll(async()=>{
   await writeFile(join(root,'concat.txt'),"file 'red.mp4'\nfile 'blue.mp4'\n");
   await nativeCommand(db.cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-f','concat','-safe','1','-i',join(root,'concat.txt'),
     '-an','-c','copy',join(root,'film.mp4')],{cwd:root,timeoutMs:30000});clips.set('film',await readFile(join(root,'film.mp4')));
+  await writeFile(join(root,'reverse.txt'),"file 'blue.mp4'\nfile 'red.mp4'\n");
+  await nativeCommand(db.cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-f','concat','-safe','1','-i',join(root,'reverse.txt'),
+    '-an','-c','copy',join(root,'repaired-film.mp4')],{cwd:root,timeoutMs:30000});clips.set('repaired-film',await readFile(join(root,'repaired-film.mp4')));
 });
 afterEach(async()=>{
   for(const a of active.splice(0)){a.controller.abort();await a.task;await a.app.close();}
@@ -55,13 +65,19 @@ afterEach(async()=>{
 });
 afterAll(async()=>{await db?.close();if(root)await rm(root,{recursive:true,force:true});});
 type Engine='PER_SHOT_AI'|'REFERENCE_FILM';
-async function setup(engine:Engine,options:{mode?:string;wrongAspect?:boolean;unknownReference?:boolean;loseFirstQuery?:boolean}={}){
+async function setup(engine:Engine,options:{mode?:string;wrongAspect?:boolean;unknownReference?:boolean;loseFirstQuery?:boolean;repair?:boolean}={}){
   const ic=syntheticArkContract('IMAGE'),vc=syntheticArkContract('VIDEO');vc.video!.durations=[1,2];
   if(!options.wrongAspect){vc.video!.ratios=['9:16'];vc.video!.dimensions=[{resolution:'480p',ratio:'9:16',width:360,height:640}];}
   const cfg=config({...db.cfg,generationEnabled:true,provider:{...db.cfg.provider,apiKey:'synthetic-not-real',baseUrl:ic.base_url,
     imageModel:ic.request_model,videoModel:vc.request_model,allowedHosts:['generation.example.test','media.example.test']}});
   const f=await mediaFixture({...db,cfg},{generation:{engine,contracts:[ic,vc],twoShots:true,
-    variantId:engine==='PER_SHOT_AI'?'quiet-luxury.ai-detail':'portrait-social.ai-presenter-multi'}});
+    variantId:engine==='PER_SHOT_AI'?'quiet-luxury.ai-detail':'portrait-social.ai-presenter-multi'},
+    ...(options.repair?{configureContract:async(c:import('../../src/worker/compiler/snapshot.js').FrozenContract)=>{
+      // Pre-sold synthetic allowance, never an in-flight limit increase.
+      c.repair_ceiling_micro=1000000;c.codex_contract.max_turns_per_role=4;c.codex_contract.max_tool_calls=32;
+      c.codex_contract.max_input_tokens=400000;c.runtime_binding!.limits.max_input_tokens=400000;
+      c.runtime_binding!.limits.max_requests=16;c.runtime_binding!.limits.max_requests_per_role=4;
+    }}:{})});
   f.cfg.provider.allowedHosts.push('generation.example.test','media.example.test');
   const calls:{url:string;method:string;body?:Record<string,unknown>}[]=[],tasks=new Map<string,string>(),images:number[]=[];let queryLost=false;
   const gateway=new GenerationGateway(db.pool,f.cfg,f.store,new ArkClient(f.cfg,async(url,_hosts,optionsHttp={})=>{
@@ -70,11 +86,13 @@ async function setup(engine:Engine,options:{mode?:string;wrongAspect?:boolean;un
     let value:unknown;
     if(url.includes('/images/generations')){
       if(options.unknownReference)throw new AppError('REMOTE_UNKNOWN','Synthetic lost acknowledgement',503);
-      value={model:ic.actual_model,data:[{b64_json:image.toString('base64')}],usage:{generated_images:1}};
+      const bytes=String(body!.prompt).startsWith('修复以下封存复核定位的问题')?repairedImage:image;
+      value={model:ic.actual_model,data:[{b64_json:bytes.toString('base64')}],usage:{generated_images:1}};
     }else if(optionsHttp.method==='POST'){
       const task=id('synthetic_video'),content=body!.content as {type:string;text?:string}[];
       const plan=JSON.parse(content.find(i=>i.type==='text')!.text!.split('\n').at(-1)!) as {shots:{shot_id:string}[]};
-      tasks.set(task,engine==='REFERENCE_FILM'?'film':plan.shots[0]!.shot_id==='shot-1'?'red':'blue');value={id:task};
+      const repairing=content.find(i=>i.type==='text')!.text!.startsWith('修复以下封存复核定位的问题');
+      tasks.set(task,engine==='REFERENCE_FILM'?(repairing?'repaired-film':'film'):plan.shots[0]!.shot_id==='shot-1'?'red':'blue');value={id:task};
     }else if(url.startsWith('https://media.example.test/'))value=clips.get(tasks.get(url.split('/').at(-1)!.replace('.mp4',''))!)!;
     else {if(options.loseFirstQuery&&!queryLost){queryLost=true;throw new AppError('REMOTE_UNKNOWN','Synthetic original status timeout',503);}
       const task=url.split('/').at(-1)!;value={id:task,model:vc.actual_model,status:'succeeded',
@@ -87,17 +105,31 @@ async function setup(engine:Engine,options:{mode?:string;wrongAspect?:boolean;un
     images.push(Array.isArray(input)?input.filter(c=>c.type==='input_image').length:0);
     return {status:200,headers:{'content-type':'text/event-stream'},bytes:syntheticSse(f.admission),json:()=>null};
   }});
+  if(options.repair)app.addHook('onSend',async(_request,reply,payload)=>{
+    if(reply.statusCode>=400&&typeof payload==='string'){
+      try{const body=JSON.parse(payload),code=body.error?.code??body.code;
+        if(typeof code==='string'&&/^[A-Z][A-Z0-9_]{1,79}$/.test(code))console.log(`Synthetic HTTP gate: ${reply.statusCode}/${code}`);
+      }catch{/* Diagnostic output never includes response bodies. */}
+    }return payload;
+  });
   await app.listen({host:'127.0.0.1',port:0});const address=app.server.address();if(!address||typeof address==='string')throw new Error('Missing HTTPS');
   f.cfg.publicBaseUrl=`https://localhost:${address.port}`;
   const controller=new AbortController(),launcher=new FixtureLauncher(options.mode),executor=new CodexRuntimeAdapter(db.pool,f.cfg,launcher);
   const media=productionTools(db.pool,f.cfg,f.store,gateway),review=reviewTools(db.pool,f.cfg,f.store);
-  active.push({app,controller,task:new ToolConsumer(db.pool,id('generated_tools'),{...media,...review,
-    persist_stage_result:(scope,...args)=>(scope.role.startsWith('REVIEW_')?review:media).persist_stage_result!(scope,...args)}).run(controller.signal)});
+  const repair=repairPlanningTools(db.pool),handlers:Record<string,ToolHandler>={};
+  for(const name of new Set([...Object.keys(media),...Object.keys(review),...Object.keys(repair)]))handlers[name]=(scope,...args)=>{
+    const selected=scope.stage_name==='REPAIR_PLAN'?repair:scope.role.startsWith('REVIEW_')?review:media;
+    return selected[name]!(scope,...args);
+  };
+  active.push({app,controller,task:new ToolConsumer(db.pool,id('generated_tools'),handlers).run(controller.signal)});
   return {...f,app,controller,launcher,executor,gateway,calls,images,
     service:new MediaStageService(db.pool,f.cfg,executor,{gateway,store:f.store})};
 }
-async function finish(lease:StageLease,handle:()=>Promise<(db:import('pg').PoolClient)=>Promise<void>>){
-  const commit=await withFixtureLease(db.pool,lease,handle);await completeStage(db.pool,lease,commit);
+async function finish(lease:StageLease,handle:()=>Promise<(db:import('pg').PoolClient)=>Promise<void>>,coordinator?:RepairCoordinator){
+  if(coordinator)console.log(`Synthetic repair stage ${lease.stage_name}/${lease.attempt}: START`);
+  const commit=await withFixtureLease(db.pool,lease,handle);
+  await completeStage(db.pool,lease,commit,coordinator?(client,current)=>coordinator.afterStageCommit(client,current):undefined);
+  if(coordinator)console.log(`Synthetic repair stage ${lease.stage_name}/${lease.attempt}: COMMITTED`);
 }
 async function next(f:Awaited<ReturnType<typeof setup>>,name:string,parent:StageLease){
   const stageId=await enqueueStage(db.pool,{tenantId:f.p.tenantId,scopeType:'ORDER',scopeId:f.orderId,name,inputHash:f.snapshotHash,
@@ -195,4 +227,70 @@ it('retains an unknown reference purchase and its original hold without resubmit
   expect(f.calls.filter(c=>c.method==='POST')).toHaveLength(1);expect(f.launcher.launches).toBe(0);
   const rows=(await db.pool.query('SELECT state FROM provider_submissions WHERE order_id=$1',[f.orderId])).rows;expect(rows).toEqual([{state:'UNKNOWN'}]);
   expect((await db.pool.query('SELECT reserved_micro::int AS n FROM orders WHERE id=$1',[f.orderId])).rows[0].n).toBe(100);
+});
+
+it.each([
+  {engine:'PER_SHOT_AI' as const,kind:'image',nodes:1},
+  {engine:'REFERENCE_FILM' as const,kind:'video',nodes:2}
+])('repairs the actual silent $engine $kind candidate using only authorized purchases and fresh reviews',async({engine,kind,nodes})=>{
+  const f=await setup(engine,{repair:true}),signal=f.controller.signal,coordinator=new RepairCoordinator(f.cfg);
+  const qcService=new QualityControlService(db.pool,f.cfg,f.store),review=new ReviewStageService(db.pool,f.cfg,f.executor);
+  const failing=new ReviewStageService(db.pool,f.cfg,new CodexRuntimeAdapter(db.pool,f.cfg,
+    new FixtureLauncher(kind==='image'?'REVIEW_LOCATED_FAIL':'REVIEW_VIDEO_FAIL')));
+  let parent=(await db.pool.query("SELECT id FROM stage_runs WHERE job_id=$1 AND stage_name='POST'",[f.lease.job_id])).rows[0].id;
+  for(const name of ['QC','REVIEW_FACTS','REVIEW_STYLE','DELIVER'])parent=await enqueueStage(db.pool,{tenantId:f.p.tenantId,
+    scopeType:'ORDER',scopeId:f.orderId,name,inputHash:f.snapshotHash,deadlineAt:f.snapshot.deadline_at,jobId:f.lease.job_id!,dependencies:[parent]});
+  await finish(f.lease,()=>f.service.handle(f.lease,signal),coordinator);
+  for(const name of ['POST','QC','REVIEW_FACTS','REVIEW_STYLE']){
+    const lease=(await claimStage(db.pool,id('first'),[name]))!;
+    await finish(lease,()=>name==='POST'?f.service.handle(lease,signal):name==='QC'?qcService.handle(lease,signal)
+      :name==='REVIEW_FACTS'?failing.handle(lease,signal):review.handle(lease,signal),coordinator);
+  }
+  const base=await executionContext(db.pool,f.p.tenantId,f.orderId,f.snapshotHash),old=await currentReviewPacket(db.pool,base);
+  expect(old.state).toBe('FAILED');expect(old.reports).toHaveLength(2);
+  expect(await claimStage(db.pool,id('blocked'),['DELIVER'])).toBeNull();
+  const grant=(await db.pool.query('SELECT generation_nodes FROM repair_cost_authorizations WHERE order_id=$1',[f.orderId])).rows[0];
+  expect(grant.generation_nodes).toHaveLength(nodes);
+  const purchases=f.calls.filter(c=>c.method==='POST').length;
+  const prep=(await claimStage(db.pool,id('repair'),['REPAIR_PLAN']))!;
+  await finish(prep,()=>new RepairPlanningService(db.pool,f.cfg,f.executor).handle(prep,signal),coordinator);
+  const production=(await claimStage(db.pool,id('repair'),['PRODUCTION']))!;
+  const repair=await executionContext(db.pool,f.p.tenantId,f.orderId,f.snapshotHash,production.id);
+  const untouched=repair.snapshot.outputs.find(s=>s.kind==='image'&&!repair.repair!.target_slot_ids.includes(s.slot_id))!;
+  const changed=imageRequest(repair,untouched.slot_id);changed.prompt+=' unauthorized change';
+  await expect(f.gateway.submit(production,changed,signal)).rejects.toMatchObject({code:'REPAIR_REUSE_INPUT_CHANGED'});
+  expect(f.calls.filter(c=>c.method==='POST')).toHaveLength(purchases);
+  await finish(production,()=>f.service.handle(production,signal),coordinator);
+  expect(f.calls.filter(c=>c.method==='POST')).toHaveLength(purchases+nodes);
+  const rows=(await db.pool.query(`SELECT operation_key,stage_run_id,state FROM provider_submissions WHERE order_id=$1
+    AND generation_kind IN ('IMAGE','VIDEO') ORDER BY created_at`,[f.orderId])).rows;
+  expect(rows.filter(r=>r.stage_run_id===production.id)).toHaveLength(nodes);
+  expect(rows.every(r=>r.state==='SUCCEEDED')).toBe(true);
+  for(const name of ['POST','QC','REVIEW_FACTS','REVIEW_STYLE']){
+    const lease=(await claimStage(db.pool,id('repair'),[name]))!;expect(lease.attempt).toBe(2);
+    await finish(lease,()=>name==='POST'?f.service.handle(lease,signal):name==='QC'?qcService.handle(lease,signal):review.handle(lease,signal),coordinator);
+  }
+  const delivery=(await claimStage(db.pool,id('repair'),['DELIVER']))!;
+  const candidateContext=await executionContext(db.pool,f.p.tenantId,f.orderId,f.snapshotHash,delivery.id);
+  const candidate=await currentReviewPacket(db.pool,candidateContext);
+  expect(candidate.state).toBe('PASSED');expect(candidate.packet_hash).not.toBe(old.packet_hash);
+  for(const target of candidateContext.repair!.target_slot_ids)
+    expect(candidate.outputs.find(o=>o.slot_id===target)!.sha256).not.toBe(old.outputs.find(o=>o.slot_id===target)!.sha256);
+  expect(new Set([...old.reports,...candidate.reports].map(r=>r.runtime_process_ref)).size).toBe(4);
+  await expect(validateReviewReport(db.pool,f.cfg,candidateContext,candidate,old.reports[1]!.run_id,old.reports[1])).rejects.toThrow();
+  const referenceRuns=(await db.pool.query(`SELECT r.thread_id,r.data->>'runtime_process_ref' AS runtime_process_ref
+    FROM agent_runs r JOIN agent_instances i ON i.tenant_id=r.tenant_id AND i.id=r.instance_id WHERE i.order_id=$1
+    AND r.private->'review_input'->>'purpose'='REFERENCE_IDENTITY'`,[f.orderId])).rows;
+  expect(referenceRuns).toHaveLength(2);expect(new Set(referenceRuns.map(r=>r.runtime_process_ref)).size).toBe(2);
+  const publisher=new PublicationService(db.pool,f.cfg,f.store);
+  await finish(delivery,()=>publisher.handle(delivery,signal),coordinator);
+  const pack=await getDeliverables(db.pool,f.p,f.orderId);expect(pack.items).toHaveLength(f.snapshot.outputs.length);
+  const costs=(await db.pool.query(`SELECT purpose,state,count(*)::int AS n FROM budget_reservations WHERE order_id=$1
+    GROUP BY purpose,state`,[f.orderId])).rows;
+  expect(costs.find(c=>c.purpose==='REPAIR')).toMatchObject({state:'SETTLED',n:6+nodes});
+  expect((await db.pool.query('SELECT repair_rounds FROM render_jobs WHERE order_id=$1',[f.orderId])).rows[0].repair_rounds).toBe(1);
+  expect((await db.pool.query("SELECT id FROM agent_instances WHERE order_id=$1 AND state<>'RELEASED'",[f.orderId])).rowCount).toBe(0);
+  const order=(await db.pool.query('SELECT private,budget_micro,deadline_at,fulfillment_state FROM orders WHERE id=$1',[f.orderId])).rows[0];
+  expect(hash(order.private.contract)).toBe(hash(f.contract));expect(Number(order.budget_micro)).toBe(f.contract.budget_micro);
+  expect(order.deadline_at.toISOString()).toBe(f.snapshot.deadline_at);expect(order.fulfillment_state).toBe('DELIVERED');
 });

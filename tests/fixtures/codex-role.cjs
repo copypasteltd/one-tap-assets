@@ -125,8 +125,9 @@ async function dispatch(message) {
     } else if (input.original_plan && input.failed_reports && input.target_slot_ids) {
       output = structuredClone(input.original_plan);
       const slot = output.image_slots.find(s => input.target_slot_ids.includes(s.slot_id));
-      if (!slot) throw new Error('Synthetic repair requires a located image');
-      slot.title = mode === 'REPAIR_UNCHANGED' ? slot.title : '细节实拍';
+      if (slot) slot.title = mode === 'REPAIR_UNCHANGED' ? slot.title : '细节实拍';
+      else if (input.generation_nodes?.some(n => n.kind === 'VIDEO')) output.shots[0].intent = '商品整体与细节';
+      else throw new Error('Synthetic repair requires a located image or authorized video');
       await tool('validate_content_plan', { plan: output });
       if (mode !== 'SKIP_PERSIST') await tool('persist_stage_result', { result: output });
     } else if (input.phase === 'REVIEW_FACTS' || input.phase === 'REVIEW_STYLE') {
@@ -136,9 +137,9 @@ async function dispatch(message) {
       if (evidence.report_requirements) output = { ...evidence.report_requirements,
         verdict: mode === 'REVIEW_FAIL' ? 'FAIL' : 'PASS', issues: mode === 'REVIEW_FAIL'
           ? [{ asset_id: evidence.report_requirements.checked_asset_ids[0], code: 'QUALITY', message: 'Synthetic negative review only.' }] : [] };
-      if (mode === 'REVIEW_LOCATED_FAIL') {
+      if (mode === 'REVIEW_LOCATED_FAIL' || mode === 'REVIEW_VIDEO_FAIL') {
         const contract = JSON.parse(input.material.text_evidence.find(e => e.kind === 'CONTRACT').content);
-        const image = contract.outputs.find(o => o.spec.kind === 'image');
+        const image = contract.outputs.find(o => o.spec.kind === (mode === 'REVIEW_VIDEO_FAIL' ? 'video' : 'image'));
         output.verdict = 'FAIL';
         output.findings = [{ category: 'STYLE', severity: 'MAJOR', evidence_ids: [image.artifact_id],
           time_ms: null, detail: 'Synthetic acceptance defect: revise the first image title.' }];

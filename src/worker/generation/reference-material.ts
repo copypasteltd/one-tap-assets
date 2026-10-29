@@ -8,6 +8,7 @@ import type {IdentityLock} from '../analysis/profile.js';
 import type {ExecutionContext} from '../compiler/order-context.js';
 import {checkReviewImages,type ReviewImage,type ReviewImageBinding} from '../codex/review-images.js';
 import {generationContract} from './contracts.js';
+import {generationSourceStage} from '../repair/generation.js';
 
 export const REFERENCE_IDENTITY_POLICY='YPCC-REFERENCE-IDENTITY-1.0.0';
 export interface ReferenceFrame extends ReviewImageBinding {operation_key:string}
@@ -48,10 +49,14 @@ export async function referenceMaterial(db:Db,store:ObjectStorage,context:Execut
     &&hash([...identity.source_asset_ids].sort())===hash(originals.map(a=>a.id).sort()),
   'REFERENCE_ORIGINALS_CHANGED','原商品照片集或身份依据不完整',503);
   const operations=referenceOperations(context),model=generationContract(context.contract,'IMAGE');
-  const frames=(await db.query<{id:string;operation_key:string;model_version_id:string;state:string;input_hash:string;private:{prepared:{contract_hash:string};output?:{
-    object_key:string;sha256:string;inspection:{kind:string;width:number;height:number;codec:string}}}}>(`SELECT id,operation_key,model_version_id,state,input_hash,private
-    FROM provider_submissions WHERE tenant_id=$1 AND order_id=$2 AND stage_run_id=$3 AND generation_kind='IMAGE' AND operation_key=ANY($4)`,
-  [context.tenantId,context.orderId,stageId,operations])).rows;
+  const frames=(await db.query<{id:string;stage_run_id:string;operation_key:string;model_version_id:string;state:string;input_hash:string;cost_confirmed:boolean;
+    private:{billing_valid?:boolean;provider_terminal?:boolean;prepared:{contract_hash:string};output?:{
+    object_key:string;sha256:string;inspection:{kind:string;width:number;height:number;codec:string}}}}>(`SELECT id,stage_run_id,operation_key,model_version_id,state,input_hash,private,
+    EXISTS(SELECT 1 FROM budget_reservations b WHERE b.tenant_id=s.tenant_id AND b.order_id=s.order_id
+      AND b.id=s.reservation_id AND b.submission_id=s.id AND b.state='SETTLED') AS cost_confirmed
+    FROM provider_submissions s WHERE tenant_id=$1 AND order_id=$2 AND stage_run_id=ANY($3::text[]) AND generation_kind='IMAGE' AND operation_key=ANY($4)`,
+  [context.tenantId,context.orderId,[stageId,...(context.repair?[context.repair.source_production_stage_id]:[])],operations])).rows
+    .filter(row=>row.stage_run_id===generationSourceStage(context,stageId,'IMAGE',row.operation_key));
   requireThat(frames.length===operations.length&&new Set(frames.map(f=>f.operation_key)).size===operations.length,
     'REFERENCE_FRAMES_INCOMPLETE','完整参考帧尚未持久生成，不得购买视频',409);
   requireThat(originals.length+frames.length<=policy.max_images,'REFERENCE_VISION_NOT_ADMITTED','完整原图和参考帧超出冻结视觉能力',503);
@@ -66,7 +71,8 @@ export async function referenceMaterial(db:Db,store:ObjectStorage,context:Execut
   for(const photo of originals)images.push(await load(photo.id,photo.object_key,photo.sha256,photo.width,photo.height));
   for(const operation of operations){
     const frame=frames.find(row=>row.operation_key===operation)!,output=frame.private.output;
-    requireThat(frame.state==='SUCCEEDED'&&frame.model_version_id===model.model_version_id&&frame.private.prepared.contract_hash===hash(model)
+    requireThat(frame.state==='SUCCEEDED'&&frame.cost_confirmed&&frame.private.billing_valid&&frame.private.provider_terminal
+      &&frame.model_version_id===model.model_version_id&&frame.private.prepared.contract_hash===hash(model)
       &&output?.inspection.kind==='image'&&output.inspection.codec==='png','REFERENCE_FRAMES_INCOMPLETE','参考帧未成功或生成模型与原合同不同',409);
     requireThat((await db.query(`SELECT id FROM private_object_writes WHERE tenant_id=$1 AND owner_id=$2 AND order_id=$3 AND product_id=$4
       AND object_key=$5 AND kind='MEDIA' AND state='STORED' AND sha256=$6 AND NOT delete_requested AND expires_at>now()`,

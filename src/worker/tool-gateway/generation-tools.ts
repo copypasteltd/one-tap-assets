@@ -27,7 +27,7 @@ export function generationTools(pool:pg.Pool,cfg:Config,store:ObjectStorage,inje
     const lease=(await db.query<StageLease>('SELECT * FROM stage_runs WHERE tenant_id=$1 AND id=$2',[current.tenant_id,current.stage_run_id])).rows[0]??notFound();
     requireThat(lease.scope_id===current.order_id&&lease.input_hash===current.snapshot_hash
       &&String(lease.fencing_token)===String(current.stage_fencing_token),'GENERATION_SCOPE_INVALID','工具与当前阶段代次不一致',403);
-    const context=await executionContext(db,current.tenant_id,current.order_id,current.snapshot_hash);
+    const context=await executionContext(db,current.tenant_id,current.order_id,current.snapshot_hash,current.stage_run_id);
     requireThat(context.snapshot.engine!=='PHOTO_LAYOUT','GENERATION_ROUTE_INVALID','原图路线不能调用生成式工具',422);
     return {lease,context};
   });

@@ -1,6 +1,8 @@
 # 故障恢复与修复边界 / Recovery and repair boundaries
 
-2026-10-30新增[原图候选修复与重新验收](../实施/原图候选修复与重新验收-v1.0.md)：失败证据定位、CONTENT受限改稿、实际新文件、新封存包、双新复核及交付已接通，2项定向原生集成用例通过。原订单预算/截止/调用上限保持冻结；生成式及原生口播修复、真实服务和真机仍待完成。
+2026-10-30新增[生成式受限修复与原素材复用](../实施/生成式受限修复与原素材复用-v1.0.md)：两条无声生成路线已连接选择性重制、已结算原素材复用、新参考身份核验、新文件与双新复核交付。2项定向用例通过，7项旧用例本轮未选；外部模型与计量为合成响应。原订单限制保持冻结，原生口播修复、真实服务与真机验收仍待完成。
+
+上一轮原图专项（保留原验证来源）：[原图候选修复与重新验收](../实施/原图候选修复与重新验收-v1.0.md)：失败证据定位、CONTENT受限改稿、实际新文件、新封存包、双新复核及交付已接通，2项定向原生集成用例通过。原订单预算/截止/调用上限保持冻结；原生口播修复、真实服务和真机仍待完成。
 
 新增[修复费用授权与原订单额度](../实施/修复费用授权与原订单额度-v1.0.md)：REPAIR_COST_NOT_AUTHORIZED / REPAIR_NODE_NOT_AUTHORIZED / REPAIR_COST_LIMIT / REPAIR_NODE_CALL_EXHAUSTED均在购买前阻断；不能改用途、另开意图、释放UNKNOWN或重置轮次绕过。原订单/租约/实际锁后截止继续校验，修复和首轮各守原保留边界。The internal cost port does not recover an unknown provider purchase by buying again, nor execute a complete repair pipeline.
 
@@ -12,9 +14,9 @@
 
 [中文 README](../../README.md) · [English README](../../README.en.md) · [启动 / Quick start](QUICKSTART.md) · [当前状态 / Status](STATUS.md)
 
-本指南对应当前已提交源码。它区分“继续原任务”“重做候选素材”和“交付后修改”：三者使用不同的身份、预算与交付证据。原图路线已接通一次受限修复，生成式及原生口播仍待接通；不能通过改数据库状态或重建订单模拟完成。
+本指南对应当前已提交源码。它区分“继续原任务”“重做候选素材”和“交付后修改”：三者使用不同的身份、预算与交付证据。原图路线已接通一次受限修复，原生口播仍待接通；不能通过改数据库状态或重建订单模拟完成。
 
-This guide describes the committed implementation. Resuming an original operation, repairing candidate media and revising an existing delivery are separate operations with different identities, budgets and evidence. The photo repair pipeline is connected; generated/native-audio repair remains unfinished. Editing database states or recreating an order does not implement it.
+This guide describes the committed implementation. Resuming an original operation, repairing candidate media and revising an existing delivery are separate operations with different identities, budgets and evidence. The photo repair pipeline is connected; native-audio repair remains unfinished. Editing database states or recreating an order does not implement it.
 
 ## 1. 哪种情况恢复什么 / What resumes
 
@@ -93,7 +95,7 @@ Resolve incidents against the original order, provider task and current implemen
 
 需求P01-F09、F46与F55仍要求最多一轮自动修复，任何受影响节点至多一次额外尝试，且不延长原截止或费用上限。原图已由实际新文件和新包双复核用例验证；生成式及原生口播还需选择性来源复用、参考帧核验和符合原合同的音轨审查额度。
 
-Requirements P01-F09, F46 and F55 require at most one repair round, at most one extra attempt per affected node, and the original deadline/cost ceiling. Photo repair now exercises changed files and fresh consensus; generated/audio repair still requires admitted selective reuse and fresh reference/audio evidence.
+Requirements P01-F09, F46 and F55 require at most one repair round, at most one extra attempt per affected node, and the original deadline/cost ceiling. Photo repair now exercises changed files and fresh consensus; native-audio repair still requires admitted selective reuse and fresh reference/audio evidence.
 
 ```mermaid
 flowchart TD

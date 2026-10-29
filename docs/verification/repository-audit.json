@@ -1,15 +1,15 @@
 {
-  "checked_at": "2026-10-29T21:01:47.445951+00:00",
+  "checked_at": "2026-10-29T21:30:09.502230+00:00",
   "status": "PASS_SOURCE_INTEGRITY",
-  "verification_mode": "FOCUSED_PHOTO_REPAIR_AND_DELIVERY",
+  "verification_mode": "FOCUSED_GENERATED_REPAIR_AND_DELIVERY",
   "repository_integrity": "PASS",
   "application_checks": "SEE_EXPLICIT_FOCUSED_RESULTS",
-  "source_set_hash": "7889efdb5c018641e90fecd7e5c12b4bb40404b008e895b5942a8e969f68442f",
-  "source_files": 365,
+  "source_set_hash": "6e73b796c8a0da1e9f1b63f0dccafb6fd40964be341305c9616dddfe6c6799e8",
+  "source_files": 366,
   "runtime_contract_files": 42,
   "resource_files": 4,
-  "markdown_files": 138,
-  "local_links_verified": 1169,
+  "markdown_files": 139,
+  "local_links_verified": 1179,
   "nonportable_or_template_links_skipped": 0,
   "media_files": 36,
   "frozen_c_files": 25,
@@ -29,7 +29,11 @@
     "docs/verification/mcp-observation-native-source.json",
     "docs/verification/repair-cost-native-source.json",
     "docs/verification/native-order-attempts.json",
-    "docs/verification/native-qc-attempts.json"
+    "docs/verification/native-qc-attempts.json",
+    "docs/verification/repair-candidate-source.json",
+    "docs/verification/repair-candidate-tested-source.json",
+    "docs/verification/repair-candidate-tests.json",
+    "docs/verification/repair-candidate-attempts.json"
   ],
   "private_runtime_and_credentials_excluded": true,
   "new_browser_used": false,
@@ -37,5 +41,5 @@
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "note": "Source/contract/resource bytes, src/test continuity, local links, retained media, frozen C files and historical evidence verified; excludes own hash and later archive pointer."
+  "note": "Exact source/contracts/resources, compiled bridge, historical/photo evidence, local links, media and frozen C verified. Archive independently verified after packaging."
 }

@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · 无声生成式修复与交付包 / Silent generated repair and delivery
+
+- 按旧封存素材实际来源授权选择性重购，未变节点核验原费用、参考与字节后复用；新参考核验和双新最终复核后事务交付。 Selective purchases, paid-source reuse and fresh independent consensus.
+- 保留原总额/保留额、角色/token/工具/调用上限与截止；UNKNOWN只恢复原任务；原生口播修复继续阻断。 Original limits and unresolved obligations stay intact.
+- 类型/服务端、doctor和四服务启动PASS；生成式2项定向用例通过，7项旧用例未选。初始120秒超时及泛化角色失败留存；最终合成夹具在购买前冻结足够额度，未修改运行中的合同。 Comprehensive testing and mini-program builds were not rerun.
+- 绑定 / Bound: 366 source files / 42 contracts / 4 resources; 6e73b796。双语README、恢复/状态/实现和交付证据同步；原图证据、C25文件/归档和36项媒体保持原字节。
+- 原生口播修复、真实Codex/模型/计费/隔离、官方全变体、真机、社区/Plus及云端仍待完成。 Full-product/production/cloud admission remains false.
+
 ## 2026-10-30 · 原图失败修复与可启动候选 / Photo repair and runnable server candidate
 
 - 接通失败证据定位、原预算一次授权、CONTENT改稿、实际新文件、新QC、双新复核和事务交付；旧PASS不能批准新候选。 Connect bounded photo repair to changed bytes and fresh consensus.

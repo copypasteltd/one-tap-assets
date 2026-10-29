@@ -152,7 +152,7 @@ export class GeneratedMediaPipeline extends PhotoMediaPipeline {
   override async execute(scope:ToolScope,intent:ToolLease,phase:MediaPhase,signal:AbortSignal){
     const result=await super.execute(scope,intent,phase,signal);
     return {...result,commit:async(db:pg.PoolClient)=>{
-      const context=await executionContext(db,scope.tenant_id,scope.order_id!,scope.snapshot_hash);
+      const context=await executionContext(db,scope.tenant_id,scope.order_id!,scope.snapshot_hash,scope.stage_run_id);
       const policy=frozenAiDisclosure(context.contract)!;
       for(const a of result.receipt.artifacts.filter(a=>a.spec.kind!=='copy'))requireThat(a.spec.ai_disclosure?.contract_hash===hash(policy)
         &&a.spec.ai_disclosure.output_sha256===a.sha256&&sha256(await this.store.get(a.object_key,a.spec.kind==='video'?512_000_000:30_000_000))===a.sha256,

@@ -12,12 +12,14 @@ export interface RepairContext {
   source_production_stage_id:string; planning_stage_id:string; stage_ids:string[];
   generation_nodes:RepairGenerationNode[]; target_slot_ids:string[];
   original_plan:CreativePlan; plan_hash:string|null;
+  findings:DTO<'ReviewReport'>['findings'];
 }
 export function checkedRepairPlan(context:ExecutionContext,raw:unknown):CreativePlan {
   const plan=raw as CreativePlan,original=context.repair?.original_plan;
   requireThat(original&&context.repair,'REPAIR_PLAN_NOT_AUTHORIZED','当前运行没有修复计划权限',409);
   validateCreativePlan(plan,context.contract.profile,context.contract.source);
-  requireThat(hash(plan)!==hash(original),'REPAIR_PLAN_UNCHANGED','修复必须形成实际修改的候选计划',422);
+  requireThat(hash(plan)!==hash(original)||context.snapshot.engine!=='PHOTO_LAYOUT'&&context.repair.generation_nodes.length>0,
+    'REPAIR_PLAN_UNCHANGED','修复需要修改计划或依据原失败证据重制获准生成节点',422);
   const fixed=(p:CreativePlan)=>({identity_lock_id:p.identity_lock_id,profile_hash:p.profile_hash,variant_id:p.variant_id,
     fps:p.fps,target_frames:p.target_frames,native_voice_id:p.native_voice_id,character_version_id:p.character_version_id,
     shots:p.shots.map(s=>({shot_id:s.shot_id,start_frame:s.start_frame,end_frame:s.end_frame,overlap_frames:s.overlap_frames,spoken_text:s.spoken_text})),
@@ -29,6 +31,17 @@ export function checkedRepairPlan(context:ExecutionContext,raw:unknown):Creative
     &&plan.image_slots.every((s,i)=>hash(s)===hash(original.image_slots[i])||targets.has(s.slot_id))
     &&(hash(plan.shots)===hash(original.shots)||context.snapshot.outputs.filter(s=>s.kind==='video').every(s=>targets.has(s.slot_id))),
   'REPAIR_PLAN_OUTSIDE_FINDINGS','修复只能修改已定位的问题素材及其共享内容',422);
+  if(context.snapshot.engine!=='PHOTO_LAYOUT'){
+    const allowed=new Set(context.repair.generation_nodes.map(n=>`${n.kind}:${n.operation_key}`));
+    const sceneChanged=plan.scene!==original.scene;
+    requireThat(plan.image_slots.every((slot,i)=>!sceneChanged&&hash(slot)===hash(original.image_slots[i])||allowed.has(`IMAGE:image:${slot.slot_id}`))
+      &&plan.shots.every((shot,i)=>{
+        if(!sceneChanged&&hash(shot)===hash(original.shots[i]))return true;
+        return context.snapshot.engine==='REFERENCE_FILM'?allowed.has('IMAGE:reference:film')&&allowed.has('VIDEO:film:original')
+          :allowed.has(`IMAGE:reference:${shot.shot_id}`)&&allowed.has(`VIDEO:video:${shot.shot_id}`);
+      }),
+      'REPAIR_NODE_NOT_AUTHORIZED','计划修改超出了原失败素材获准重制的生成节点',422);
+  }
   return structuredClone(plan);
 }
 
@@ -66,7 +79,8 @@ export async function repairExecutionContext(db:Db,base:ExecutionContext,stageId
     'REPAIR_SOURCE_CHANGED','原失败证据或问题素材定位已变化',409);
   const repair:RepairContext={authorization_id:grant.id,source_packet_id:grant.source_packet_id,source_packet_hash:grant.source_packet_hash,
     source_production_stage_id:'',planning_stage_id:grant.preparation_stage_ids[0]!,stage_ids:grant.stage_ids,
-    generation_nodes:grant.generation_nodes,target_slot_ids:planning.private.target_slot_ids,original_plan:base.contract.creative,plan_hash:null};
+    generation_nodes:grant.generation_nodes,target_slot_ids:planning.private.target_slot_ids,original_plan:base.contract.creative,plan_hash:null,
+    findings:source.reports.flatMap(r=>r.findings)};
   const original=(await db.query<{id:string}>(`SELECT id FROM stage_runs WHERE tenant_id=$1 AND job_id=$2
     AND scope_id=$3 AND scope_type='ORDER' AND stage_name='PRODUCTION' AND attempt=1 AND state='SUCCEEDED' AND input_hash=$4`,
   [base.tenantId,stage.job_id,base.orderId,base.snapshotHash])).rows;
@@ -83,4 +97,3 @@ export async function repairExecutionContext(db:Db,base:ExecutionContext,stageId
   repair.plan_hash=hash(plan);
   return {...context,contract:{...base.contract,creative:plan}};
 }
-

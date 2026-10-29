@@ -20,6 +20,8 @@ import {ArkClient,admitArkContract,arkUsage,frozenArkContract,prepareArkImage,pr
 import {generationContract} from './contracts.js';
 import {generationContext} from './context.js';
 import {readReferenceApproval,type ReferenceApproval} from './reference-approval.js';
+import {generationSourceStage,originalRepairContext} from '../repair/generation.js';
+import {imageRequest,referenceRequest,videoRequest} from './requests.js';
 
 export interface GenerationRequest {
   kind:'IMAGE'|'VIDEO';operation_key:string;prompt:string;reference_asset_ids:string[];
@@ -272,6 +274,14 @@ export class GenerationGateway {
     requireThat(!signal.aborted&&/^[A-Za-z0-9][A-Za-z0-9_.:-]{0,159}$/.test(request.operation_key),'GENERATION_REQUEST_INVALID','生成操作标识无效或执行已取消',422);
     requireThat((request.kind==='IMAGE'&&!request.video)||(request.kind==='VIDEO'&&request.video),'GENERATION_REQUEST_INVALID','生成请求类型与视频参数不匹配',422);
     const context=await transaction(this.pool,db=>this.live(lease,db));this.validateNode(context,request);
+    const sourceStage=generationSourceStage(context,lease.id,request.kind,request.operation_key);
+    if(sourceStage!==lease.id){
+      const sources=(await this.pool.query<{id:string}>(`SELECT id FROM provider_submissions WHERE tenant_id=$1 AND order_id=$2
+        AND stage_run_id=$3 AND generation_kind=$4 AND operation_key=$5`,
+        [context.tenantId,context.orderId,sourceStage,request.kind,request.operation_key])).rows;
+      requireThat(sources.length===1,'REPAIR_REUSE_SOURCE_INVALID','未变节点必须引用唯一原生成任务',409);
+      return this.reuse(lease,context,await this.row(context.tenantId,sources[0]!.id),signal,request);
+    }
     const c=generationContract(context.contract,request.kind);
     const checked=request.kind==='VIDEO'?await this.videoInputs(context,lease.id,request.operation_key,request.reference_asset_ids):null;
     const images=checked?.images??await this.images(context,request.reference_asset_ids);
@@ -326,6 +336,8 @@ export class GenerationGateway {
   }
   async resume(lease:StageLease,submissionId:string,signal:AbortSignal):Promise<GenerationResult>{
     const context=await transaction(this.pool,db=>this.live(lease,db));let row=await this.row(lease.tenant_id,submissionId);
+    if(context.repair&&row.stage_run_id===context.repair.source_production_stage_id)
+      return this.reuse(lease,context,row,signal);
     requireThat(row.order_id===lease.scope_id&&row.stage_run_id===lease.id,'GENERATION_SCOPE_INVALID','原生成任务不属于当前阶段',403);
     requireThat(hash(generationContract(context.contract,row.generation_kind))===hash(this.contract(row)),
       'GENERATION_CONTRACT_CHANGED','原生成协议不属于已售订单',503);
@@ -343,16 +355,51 @@ export class GenerationGateway {
       throw error;
     }finally{await this.release(claimed);}
   }
+  private async reuse(lease:StageLease,context:ExecutionContext,row:Submission,signal:AbortSignal,request?:GenerationRequest):Promise<GenerationResult>{
+    requireThat(context.repair&&row.order_id===context.orderId&&row.stage_run_id===context.repair.source_production_stage_id
+      &&generationSourceStage(context,lease.id,row.generation_kind,row.operation_key)===row.stage_run_id
+      &&row.private.owner_id===context.ownerId&&row.private.product_id===context.snapshot.product_id
+      &&row.state==='SUCCEEDED'&&row.private.billing_valid&&row.private.provider_terminal,
+      'REPAIR_REUSE_SOURCE_INVALID','只能复用本单未受影响且已完成的原生成节点',409);
+    requireThat((await this.pool.query(`SELECT id FROM budget_reservations WHERE tenant_id=$1 AND order_id=$2
+      AND id=$3 AND submission_id=$4 AND purpose='FIRST_PASS' AND state='SETTLED'`,
+      [context.tenantId,context.orderId,row.reservation_id,row.id])).rowCount===1,
+      'REPAIR_REUSE_COST_UNRESOLVED','原生成来源未核对费用，禁止复用或补购',409);
+    const original=originalRepairContext(context);
+    let expected:GenerationRequest;
+    if(row.generation_kind==='VIDEO'){
+      const {approval}=await readReferenceApproval(this.pool,this.cfg,this.store,original,row.stage_run_id);
+      expected=videoRequest(original,approval,row.operation_key==='film:original'?null:row.operation_key.slice(6));
+    }else expected=row.operation_key.startsWith('image:')?imageRequest(original,row.operation_key.slice(6))
+      :referenceRequest(original,row.operation_key.slice(10));
+    requireThat(!request||hash(request)===hash(expected),'REPAIR_REUSE_INPUT_CHANGED','未变节点不能携带新提示词或更换参考',409);
+    const result=await this.describe(original,row.id,signal);
+    await transaction(this.pool,async db=>{
+      const live=await this.live(lease,db);
+      requireThat(generationSourceStage(live,lease.id,row.generation_kind,row.operation_key)===row.stage_run_id,
+        'REPAIR_REUSE_SOURCE_INVALID','复用提交前原授权已变化',409);
+    });
+    return result;
+  }
   /** Read-only completed input for an already-authorized POST role. Unresolved
    * supplier tasks stay in PRODUCTION and cannot be polled through this path. */
   async describe(context:ExecutionContext,submissionId:string,signal:AbortSignal):Promise<GenerationResult>{
     requireThat(!signal.aborted,'TOOL_EXECUTION_INTERRUPTED','原生成结果读取已停止',409);
     const row=await this.row(context.tenantId,submissionId);
+    if(context.repair&&row.stage_run_id===context.repair.source_production_stage_id){
+      requireThat(!context.repair.generation_nodes.some(n=>n.kind===row.generation_kind&&n.operation_key===row.operation_key),
+        'REPAIR_REUSE_SOURCE_INVALID','受影响节点必须读取本次修复的新结果',409);
+      context=originalRepairContext(context);
+    }
     requireThat(row.order_id===context.orderId&&(await this.pool.query(`SELECT id FROM stage_runs
       WHERE tenant_id=$1 AND id=$2 AND scope_type='ORDER' AND scope_id=$3 AND stage_name='PRODUCTION'
       AND input_hash=$4 AND state='SUCCEEDED'`,[context.tenantId,row.stage_run_id,context.orderId,context.snapshotHash])).rowCount===1,
     'GENERATION_SCOPE_INVALID','后期只能读取原订单已完成制作阶段的生成结果',403);
-    requireThat(row.state==='SUCCEEDED'&&row.private.output,'GENERATION_OUTPUT_MISSING','后期输入尚未完成，不能另购任务',409);
+    requireThat(row.state==='SUCCEEDED'&&row.private.output&&row.private.billing_valid&&row.private.provider_terminal,
+      'GENERATION_OUTPUT_MISSING','后期输入或原费用尚未完成，不能另购任务',409);
+    requireThat((await this.pool.query(`SELECT id FROM budget_reservations WHERE tenant_id=$1 AND order_id=$2
+      AND id=$3 AND submission_id=$4 AND state='SETTLED'`,[context.tenantId,context.orderId,row.reservation_id,row.id])).rowCount===1,
+      'REPAIR_REUSE_COST_UNRESOLVED','原生成费用尚未确认，不能读取或补购',409);
     requireThat(hash(generationContract(context.contract,row.generation_kind))===hash(this.contract(row)),
       'GENERATION_CONTRACT_CHANGED','原生成模型与订单不同',503);
     await this.videoAuthorization(row,context);

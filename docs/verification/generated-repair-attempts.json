@@ -1,0 +1,160 @@
+{
+  "checked_at": "2026-10-29T21:30:09.502230+00:00",
+  "attempts": [
+    {
+      "label": "initial-timeout",
+      "status": "FAIL",
+      "source_set_hash": "15bd52d79d1563a2a051b402beb6a8fe8cbc9acbf75e3be017965bb5a3f67d25",
+      "source": "docs/verification/generated-repair-initial-timeout-source.json",
+      "report": "docs/verification/generated-repair-initial-timeout.json",
+      "commands": [
+        {
+          "task": "build:server",
+          "command": "node --import tsx scripts/build-server.ts",
+          "argv": [
+            "--import",
+            "tsx",
+            "scripts/build-server.ts"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 180000,
+          "elapsed_ms": 1316,
+          "log_path": "runtime/test-results/generated-repair-2026-10-29T21-19-00-477Z/server.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/generated-production.test.ts -t repairs the actual silent --outputFile.json=runtime/test-results/generated-repair-2026-10-29T21-19-00-477Z/tests.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/generated-production.test.ts",
+            "-t",
+            "repairs the actual silent",
+            "--outputFile.json=runtime/test-results/generated-repair-2026-10-29T21-19-00-477Z/tests.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 180000,
+          "elapsed_ms": 136912,
+          "log_path": "runtime/test-results/generated-repair-2026-10-29T21-19-00-477Z/focused.log",
+          "log_sha256": "e6cf7def9858f81f77cca2e3e0515b6fcea93197705f474010feda788cd3ba60"
+        }
+      ],
+      "passed": 0,
+      "failed": 1,
+      "note": "120-second test timeout; original limit retained; exact cause not established."
+    },
+    {
+      "label": "initial-role-failure",
+      "status": "FAIL",
+      "source_set_hash": "96a4a839c0cf0a077a139c39e723b71c9759341d64a7311def0f335d95b8f90d",
+      "source": "docs/verification/generated-repair-initial-role-failure-source.json",
+      "report": "docs/verification/generated-repair-initial-role-failure.json",
+      "commands": [
+        {
+          "task": "build:server",
+          "command": "node --import tsx scripts/build-server.ts",
+          "argv": [
+            "--import",
+            "tsx",
+            "scripts/build-server.ts"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 180000,
+          "elapsed_ms": 534,
+          "log_path": "runtime/test-results/generated-repair-2026-10-29T21-22-39-181Z/server.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/generated-production.test.ts -t repairs the actual silent --outputFile.json=runtime/test-results/generated-repair-2026-10-29T21-22-39-181Z/tests.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/generated-production.test.ts",
+            "-t",
+            "repairs the actual silent",
+            "--outputFile.json=runtime/test-results/generated-repair-2026-10-29T21-22-39-181Z/tests.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 180000,
+          "elapsed_ms": 64036,
+          "log_path": "runtime/test-results/generated-repair-2026-10-29T21-22-39-181Z/focused.log",
+          "log_sha256": "22566bfbc0f40823f8d0eb2502e9a7a9d41391e29c3d547abd1caea278c98d11"
+        }
+      ],
+      "passed": 0,
+      "failed": 1,
+      "note": "Generic CODEX_TURN_FAILED at second STYLE. Fixture sold 24 tools, while 11 roles need at least 26 normal tool calls. Final fixture freezes 32 tools before sale; original runtime limits are never raised. Generic error alone does not identify an exact HTTP cause."
+    },
+    {
+      "label": "final",
+      "status": "PASS",
+      "source_set_hash": "6e73b796c8a0da1e9f1b63f0dccafb6fd40964be341305c9616dddfe6c6799e8",
+      "source": "docs/verification/generated-repair-tested-source.json",
+      "report": "docs/verification/generated-repair-tests.json",
+      "commands": [
+        {
+          "task": "build:server",
+          "command": "node --import tsx scripts/build-server.ts",
+          "argv": [
+            "--import",
+            "tsx",
+            "scripts/build-server.ts"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 180000,
+          "elapsed_ms": 403,
+          "log_path": "runtime/test-results/generated-repair-2026-10-29T21-25-26-007Z/server.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/generated-production.test.ts -t repairs the actual silent --outputFile.json=runtime/test-results/generated-repair-2026-10-29T21-25-26-007Z/tests.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/generated-production.test.ts",
+            "-t",
+            "repairs the actual silent",
+            "--outputFile.json=runtime/test-results/generated-repair-2026-10-29T21-25-26-007Z/tests.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 180000,
+          "elapsed_ms": 153924,
+          "log_path": "runtime/test-results/generated-repair-2026-10-29T21-25-26-007Z/focused.log",
+          "log_sha256": "bb47e14d60ce2ee2b1f69f76c587146f24b460bc95e8a7d50207b364f9e0cb9b"
+        }
+      ],
+      "passed": 2,
+      "failed": 0,
+      "unselected": 7,
+      "note": "Synthetic contract sold from outset with R=1000000, 4 turns per role/16 total inference requests, 400000 input tokens, 32 tools. No live sold-order limit change. Original 120-second per-test and 180-second command caps retained."
+    }
+  ],
+  "full_suite_executed": false
+}

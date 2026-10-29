@@ -44,6 +44,10 @@ export async function referenceReviewIdentity(db:Db,cfg:Config,context:Execution
     &&run.input_hash===context.snapshotHash&&run.data.skill_bundle_hash===packet.skill_bundle_hash
     &&run.private.input_payload_hash===hash(referenceRoleInput(packet)),
   'REFERENCE_REVIEW_RUN_INVALID','参考帧核验缺少原订单全新运行或冻结输入',409);
+  if(context.repair)requireThat((await db.query(`SELECT r.id FROM agent_runs r JOIN agent_instances i ON i.tenant_id=r.tenant_id AND i.id=r.instance_id
+    WHERE r.tenant_id=$1 AND i.order_id=$2 AND r.id<>$3 AND (r.thread_id=$4 OR r.data->>'runtime_process_ref'=$5) LIMIT 1`,
+    [context.tenantId,context.orderId,run.id,run.thread_id,run.data.runtime_process_ref])).rowCount===0,
+    'REFERENCE_REPAIR_IDENTITY_REUSED','新候选的参考帧核验不能复用原运行身份',409);
   const admission=checkAdmission(cfg,run.private.runtime_admission),binding=context.contract.runtime_binding;
   requireThat(binding&&admission.review_vision&&hash(admission)===hash(binding.admission)
     &&hash(run.private.inference_limits)===hash(binding.limits),'REFERENCE_REVIEW_RUNTIME_CHANGED','参考核验的模型或计费合同不一致',503);

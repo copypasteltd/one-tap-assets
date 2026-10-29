@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-29T21:01:47.445951+00:00",
-  "strategy": "USER_REQUESTED_FOCUSED_REPAIR_AND_DELIVERY",
-  "source_set_hash": "7889efdb5c018641e90fecd7e5c12b4bb40404b008e895b5942a8e969f68442f",
-  "source_files": 365,
+  "checked_at": "2026-10-29T21:30:09.502230+00:00",
+  "strategy": "USER_REQUESTED_FOCUSED_GENERATED_REPAIR_DELIVERY",
+  "source_set_hash": "6e73b796c8a0da1e9f1b63f0dccafb6fd40964be341305c9616dddfe6c6799e8",
+  "source_files": 366,
   "runtime_contract_files": 42,
   "resource_files": 4,
   "build_report": "docs/delivery/current.json",
@@ -11,15 +11,15 @@
     {
       "task": "typecheck",
       "status": "PASS",
-      "elapsed_ms": 35788,
-      "log_path": "runtime/delivery-builds/2026-10-29T20-56-24-306Z-809aceba/typecheck.log",
+      "elapsed_ms": 12920,
+      "log_path": "runtime/delivery-builds/2026-10-29T21-25-53-130Z-b9404173/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "build:server",
       "status": "PASS",
-      "elapsed_ms": 1526,
-      "log_path": "runtime/delivery-builds/2026-10-29T20-56-24-306Z-809aceba/server.log",
+      "elapsed_ms": 671,
+      "log_path": "runtime/delivery-builds/2026-10-29T21-25-53-130Z-b9404173/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
   ],
@@ -46,11 +46,11 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 8.787,
+      "elapsed_seconds": 4.31,
       "log_path": "runtime/delivery/doctor-focused.log",
-      "log_sha256": "6f0d2e5b69cc8fa8e8f327ea855fad89b57325e221c09056974e65b008c61033",
+      "log_sha256": "23de83965d60217c021d1effa952794f38bc4cc1854eacd591c0e69885e35a88",
       "report": {
-        "checked_at": "2026-10-29T20:55:51.106Z",
+        "checked_at": "2026-10-29T21:27:33.852Z",
         "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
         "rows": [
           {
@@ -76,7 +76,7 @@
           {
             "id": "database",
             "status": "PASS",
-            "detail": "connected; 26 migrations"
+            "detail": "connected; 27 migrations"
           },
           {
             "id": "ffmpeg",
@@ -142,26 +142,33 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 7.944,
+      "elapsed_seconds": 3.408,
       "log_path": "runtime/delivery/backend-focused.log",
-      "log_sha256": "10b62c6a6d15847ec4cf6eab122e1b1913361e7ff36fd22781c13725bd2646a0",
+      "log_sha256": "31146e53bea32bde324a5c8133d4d0f4e1d170732061c15d522781bf0e2161fc",
       "local_stack_ready": true,
       "preview_http_ready": false
-    },
-    "preview": {
-      "status": "NOT_RUN",
-      "reason": "Server-only focused delivery; no new preview output"
     }
+  },
+  "compiled_bridge": {
+    "candidate_sha256": "a8b3d90fd9743d2f7f04d27829fa00ccf0460920b660c0d5cf64094da753a297",
+    "fixture_bridge_same_bytes": true
   },
   "focused_tests": {
     "status": "PASS",
     "passed": 2,
     "failed": 0,
-    "reported_files": 2,
-    "path": "docs/verification/repair-candidate-tests.json",
-    "sha256": "d1dd2a4357607025577f56e686f0c224389d1984ef4d62a93ab0f20f83c31b0f",
-    "tested_source_snapshot": "docs/verification/repair-candidate-tested-source.json",
-    "tested_src_and_tests_match_final": true,
+    "unselected": 7,
+    "reported_files": 1,
+    "path": "docs/verification/generated-repair-tests.json",
+    "sha256": "a446104bb54334cc347ca1684277096608793cb5dd2685c358d837d7e70c7c1b",
+    "tested_source_snapshot": "docs/verification/generated-repair-tested-source.json",
+    "source_exact_match": true,
+    "coverage": [
+      "PER_SHOT_AI: selectively repair one image; reuse paid references/videos/other images",
+      "REFERENCE_FILM: regenerate reference and film; reuse other images",
+      "Reject modified prompts for unaffected sources without purchases",
+      "Fresh reference/dual reviews, actual changed bytes, immutable sold contract, once-only budget and instance release"
+    ],
     "external_roles_and_metering": "SYNTHETIC_ONLY",
     "actual_local_effects": [
       "NATIVE_POSTGRESQL",
@@ -174,28 +181,17 @@
       "INSTANCE_RELEASE"
     ]
   },
-  "initial_attempts": "docs/verification/repair-candidate-attempts.json",
-  "startup_initial_observation": {
-    "status": "FAIL",
-    "exit_code": 1,
-    "timeout_seconds": 90,
-    "elapsed_seconds": 29.624,
-    "log_path": "runtime/delivery/backend-focused.log",
-    "log_sha256": "e4ed2b90dd31e763d0f2084b54f6e6160d355d12b0a8a2419592bbdaa8c4dd36",
-    "local_stack_ready": false,
-    "preview_http_ready": false,
-    "interpretation": "First grouped readiness check failed. Exact cause not established. Independent API and a later same-source grouped run passed; readiness limits were not increased."
-  },
+  "initial_attempts": "docs/verification/generated-repair-attempts.json",
+  "prior_photo_evidence": "docs/verification/repair-candidate-source.json",
   "prior_delivery": {
-    "source_commit": "83bd7ee836e5c1b99020c4ceeb74052aef042bd3",
-    "path": "docs/verification/delivery-focused-83bd7ee.json",
-    "sha256": "de980354c266fad8fe00fdd66a710d987c6345b3f2391c023dc6d71c4672dc2c"
+    "source_commit": "723a727e6e4877c06bef6c99457c9b2f12cb3737",
+    "path": "docs/verification/delivery-focused-723a727.json",
+    "sha256": "4c12a82ddf8c7409ac325fab6086528bad95cd6080c3a6fda963e9b6076e98c6"
   },
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
   "original_publication_checker_executed": false,
   "checker_weakened": false,
-  "historical_full_chain": "docs/verification/repair-cost-native-source.json",
   "historical_evidence_unchanged": [
     {
       "path": "docs/verification/text-layout-native-source.json",
@@ -256,6 +252,22 @@
     {
       "path": "docs/verification/native-qc-attempts.json",
       "sha256": "f9a19248cdcd21ec6855770cb67a256469d8b9c4dbe0a806eb685ef3176e9365"
+    },
+    {
+      "path": "docs/verification/repair-candidate-source.json",
+      "sha256": "d38d9f59dbc4c8733b27f3774dfbd62bbf25b6605a2d84906650b6902533a7a9"
+    },
+    {
+      "path": "docs/verification/repair-candidate-tested-source.json",
+      "sha256": "02c9a357eef923fa78546faea70d4f4ecdc750cdc29e697716e4cbd709f2d945"
+    },
+    {
+      "path": "docs/verification/repair-candidate-tests.json",
+      "sha256": "d1dd2a4357607025577f56e686f0c224389d1984ef4d62a93ab0f20f83c31b0f"
+    },
+    {
+      "path": "docs/verification/repair-candidate-attempts.json",
+      "sha256": "364b9b231a81a6d947358193e50d780c5361feb27fcac8541a4a4acdf664f355"
     }
   ],
   "frozen_c_files": 25,
@@ -270,17 +282,17 @@
     "minimum_variants": 14
   },
   "photo_repair_connected": true,
-  "generated_repair_connected": false,
+  "generated_silent_repair_connected": true,
   "native_audio_repair_connected": false,
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
   "limitations": [
-    "Generated and native-audio repair still blocked",
-    "Live providers/Codex isolation/devices/production not admitted",
+    "Native-audio repair requires a sold additional-ASR allowance and remains blocked",
+    "Live providers/Codex isolation/devices/official full variants/production not admitted",
     "Preview and both mini-program builds not rerun; no stale outputs packaged",
-    "First grouped readiness failure retained; exact cause not established",
-    "Comprehensive suite deliberately not rerun"
+    "Comprehensive suite and seven unselected generated-production cases not rerun",
+    "Initial timeout and generic role failure retained; exact timeout cause not established"
   ],
-  "canonical_repair_provenance": "docs/verification/repair-candidate-source.json"
+  "canonical_generated_repair_provenance": "docs/verification/generated-repair-source.json"
 }

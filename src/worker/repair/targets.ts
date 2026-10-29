@@ -25,4 +25,3 @@ export async function repairTargets(db:Db,packet:DTO<'ReviewPacket'>,reports:DTO
   }
   return [...targets].sort();
 }
-

@@ -8,31 +8,38 @@ import type {MediaReceipt} from '../media/artifacts.js';
 import type {GenerationOutput} from './gateway.js';
 import {generationContract} from './contracts.js';
 import {readReferenceApproval} from './reference-approval.js';
+import {generationSourceStage,originalRepairContext} from '../repair/generation.js';
 
 export interface GenerationSource {submission_id:string;operation_key:string;sha256:string}
 export async function generatedOutputs(db:Db,cfg:Config,store:ObjectStorage,context:ExecutionContext,stageId:string){
   const {approval}=await readReferenceApproval(db,cfg,store,context,stageId);
   const videoKeys=context.snapshot.engine==='PER_SHOT_AI'?context.contract.creative.shots.map(s=>`video:${s.shot_id}`):['film:original'];
   const required=[...approval.frames.map(f=>f.operation_key),...context.snapshot.outputs.filter(s=>s.kind==='image').map(s=>`image:${s.slot_id}`),...videoKeys];
-  const rows=(await db.query<{id:string;operation_key:string;generation_kind:'IMAGE'|'VIDEO';model_version_id:string;input_hash:string;state:string;
+  const rows=(await db.query<{id:string;stage_run_id:string;operation_key:string;generation_kind:'IMAGE'|'VIDEO';model_version_id:string;input_hash:string;state:string;cost_confirmed:boolean;
     private:{owner_id:string;product_id:string;contract_hash:string;wire_contract:unknown;request_sha256:string;billing_valid?:boolean;provider_terminal?:boolean;
       prepared:{request_hash:string;contract_hash:string;reference_approval?:unknown;references:{id:string;sha256:string}[]};output?:GenerationOutput}}>(
-    `SELECT id,operation_key,generation_kind,model_version_id,input_hash,state,private FROM provider_submissions
-    WHERE tenant_id=$1 AND order_id=$2 AND stage_run_id=$3 AND operation_key=ANY($4) AND generation_kind IN ('IMAGE','VIDEO')`,
-    [context.tenantId,context.orderId,stageId,required])).rows;
+    `SELECT id,stage_run_id,operation_key,generation_kind,model_version_id,input_hash,state,private,
+    EXISTS(SELECT 1 FROM budget_reservations b WHERE b.tenant_id=s.tenant_id AND b.order_id=s.order_id
+      AND b.id=s.reservation_id AND b.submission_id=s.id AND b.state='SETTLED') AS cost_confirmed FROM provider_submissions s
+    WHERE tenant_id=$1 AND order_id=$2 AND stage_run_id=ANY($3::text[]) AND operation_key=ANY($4) AND generation_kind IN ('IMAGE','VIDEO')`,
+    [context.tenantId,context.orderId,[stageId,...(context.repair?[context.repair.source_production_stage_id]:[])],required])).rows
+    .filter(row=>row.stage_run_id===generationSourceStage(context,stageId,row.generation_kind,row.operation_key));
   requireThat(rows.length===required.length&&new Set(rows.map(r=>r.operation_key)).size===required.length,
     'GENERATED_PACK_INCOMPLETE','生成式整包缺少原计划节点',409);
   const outputs=new Map<string,{source:GenerationSource;output:GenerationOutput;bytes:Buffer}>();
+  const originalApproval=context.repair&&rows.some(r=>r.generation_kind==='VIDEO'&&r.stage_run_id!==stageId)
+    ?(await readReferenceApproval(db,cfg,store,originalRepairContext(context),context.repair.source_production_stage_id)).approval:null;
   for(const row of rows){
     const c=generationContract(context.contract,row.generation_kind),p=row.private;
-    requireThat(row.state==='SUCCEEDED'&&p.output&&p.billing_valid&&p.provider_terminal
+    requireThat(row.state==='SUCCEEDED'&&p.output&&p.billing_valid&&p.provider_terminal&&row.cost_confirmed
       &&p.owner_id===context.ownerId&&p.product_id===context.snapshot.product_id&&row.model_version_id===c.model_version_id
       &&p.contract_hash===hash(c)&&hash(p.wire_contract)===hash(c)&&p.prepared.contract_hash===hash(c)
       &&p.prepared.request_hash===row.input_hash&&p.request_sha256===row.input_hash,
       'GENERATED_PACK_SOURCE_INVALID','生成节点没有原模型/费用/请求与完整成品证据',503);
     if(row.generation_kind==='VIDEO'){
       const frame=approval.frames.find(f=>f.operation_key===(row.operation_key==='film:original'?'reference:film':row.operation_key.replace(/^video:/,'reference:')))!;
-      requireThat(p.prepared.reference_approval&&hash(p.prepared.reference_approval)===hash(approval)&&p.prepared.references.length===1
+      const sourceApproval=row.stage_run_id===stageId?approval:originalApproval;
+      requireThat(sourceApproval&&p.prepared.reference_approval&&hash(p.prepared.reference_approval)===hash(sourceApproval)&&p.prepared.references.length===1
         &&p.prepared.references[0]!.id===frame.asset_id&&p.prepared.references[0]!.sha256===frame.sha256,
         'GENERATION_REFERENCE_APPROVAL_CHANGED','视频实际参考与原报告不一致',503);
     }

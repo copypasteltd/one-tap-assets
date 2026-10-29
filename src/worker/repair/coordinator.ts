@@ -10,6 +10,7 @@ import {packetReports} from '../review/reports.js';
 import {stopScope} from '../lifecycle/termination.js';
 import {authorizeRepairCosts} from './cost-authorization.js';
 import {repairTargets} from './targets.js';
+import {affectedGenerationNodes} from './generation.js';
 
 /** Invoked after a review stage becomes SUCCEEDED, within that same database
  * transaction. No delivery worker can claim the old candidate between the
@@ -28,15 +29,14 @@ export class RepairCoordinator{
     }
     // Native speech needs a newly sold additional-ASR allowance. Existing sold
     // contracts grant one ASR call; a repair must never silently expand it.
-    // Generated routes remain blocked here until selective source reuse and
-    // their fresh reference approvals have been admitted end to end.
-    if(context.snapshot.engine!=='PHOTO_LAYOUT'){
+    if(context.snapshot.audio_policy.speech_mode!=='NONE'){
       await stopScope(db,{tenantId:lease.tenant_id,type:'ORDER',id:lease.scope_id},'REPAIR_ROUTE_NOT_ADMITTED');return;
     }
     await db.query('SAVEPOINT prepare_candidate_repair');
     try{
       requireThat(lease.job_id,'REPAIR_JOB_INVALID','缺少原订单任务',409);
       const targets=await repairTargets(db,packet,reports);
+      const generationNodes=await affectedGenerationNodes(db,context,targets);
       const active=await db.query(`SELECT id FROM stage_runs WHERE tenant_id=$1 AND job_id=$2 AND attempt=1
         AND state NOT IN ('SUCCEEDED','FAILED','CANCELLED') AND NOT(stage_name='DELIVER' AND state='READY')`,[lease.tenant_id,lease.job_id]);
       requireThat(active.rowCount===0,'REPAIR_ORIGINAL_STAGE_ACTIVE','原阶段尚未完成，不能启动修复',409);
@@ -52,7 +52,7 @@ export class RepairCoordinator{
         const next=await enqueueStage(db,{...base,name,dependencies});stages.push(next);dependencies=[next];
       }
       const authorization=await authorizeRepairCosts(db,this.cfg,{tenantId:lease.tenant_id,orderId:lease.scope_id,
-        snapshotHash:lease.input_hash,sourcePacketId:packet.packet_id,stageIds:stages,generationNodes:[],preparationStageIds:[preparation]});
+        snapshotHash:lease.input_hash,sourcePacketId:packet.packet_id,stageIds:stages,generationNodes,preparationStageIds:[preparation]});
       await db.query(`UPDATE render_jobs SET state='QC',updated_at=now(),data=data||jsonb_build_object(
         'current_stage','REPAIR_PLAN','total_stage_count',(SELECT count(*)::int FROM stage_runs WHERE job_id=$2 AND state<>'CANCELLED'),
         'updated_at',$3::text),private=private||jsonb_build_object('repair_authorization_id',$4::text)

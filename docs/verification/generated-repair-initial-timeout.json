@@ -1,0 +1,133 @@
+{
+  "numTotalTestSuites": 1,
+  "numPassedTestSuites": 0,
+  "numFailedTestSuites": 1,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 9,
+  "numPassedTests": 0,
+  "numFailedTests": 1,
+  "numPendingTests": 7,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793308746242,
+  "success": false,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "delivers the actual silent PER_SHOT_AI pack through reference review, production, post, QC and final independent reviews",
+          "status": "skipped",
+          "title": "delivers the actual silent PER_SHOT_AI pack through reference review, production, post, QC and final independent reviews",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "delivers the actual silent REFERENCE_FILM pack through reference review, production, post, QC and final independent reviews",
+          "status": "skipped",
+          "title": "delivers the actual silent REFERENCE_FILM pack through reference review, production, post, QC and final independent reviews",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "stops REFERENCE_FAIL before starting production or buying a video and reuses the original decision",
+          "status": "skipped",
+          "title": "stops REFERENCE_FAIL before starting production or buying a video and reuses the original decision",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "stops REFERENCE_UNCERTAIN before starting production or buying a video and reuses the original decision",
+          "status": "skipped",
+          "title": "stops REFERENCE_UNCERTAIN before starting production or buying a video and reuses the original decision",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "refuses an unsupported sold video aspect before any reference purchase or role",
+          "status": "skipped",
+          "title": "refuses an unsupported sold video aspect before any reference purchase or role",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects insufficient original reference/final-review quotas, vision capacity and durations at admission",
+          "status": "skipped",
+          "title": "rejects insufficient original reference/final-review quotas, vision capacity and durations at admission",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "retains an unknown reference purchase and its original hold without resubmitting or starting a reviewer",
+          "status": "skipped",
+          "title": "retains an unknown reference purchase and its original hold without resubmitting or starting a reviewer",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "repairs the actual silent PER_SHOT_AI image candidate using only authorized purchases and fresh reviews",
+          "status": "failed",
+          "title": "repairs the actual silent PER_SHOT_AI image candidate using only authorized purchases and fresh reviews",
+          "duration": 120094.8998,
+          "failureMessages": [
+            "Error: Test timed out in 120000ms.\nIf this is a long-running test, pass a timeout value as the last argument or configure it globally with \"testTimeout\".\n    at task (file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/node_modules/.pnpm/vitest@5.0.5_@types+node@24_074c366c144b624165a2ee5270d15630/node_modules/vitest/dist/chunks/run.BPv-BBRv.js:2700:43)\n    at Object.<anonymous> (file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/node_modules/.pnpm/vitest@5.0.5_@types+node@24_074c366c144b624165a2ee5270d15630/node_modules/vitest/dist/chunks/run.BPv-BBRv.js:2717:16)\n    at Object.<anonymous> (file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/node_modules/.pnpm/vitest@5.0.5_@types+node@24_074c366c144b624165a2ee5270d15630/node_modules/vitest/dist/chunks/run.BPv-BBRv.js:2486:28)\n    at Object.chain (file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/node_modules/.pnpm/vitest@5.0.5_@types+node@24_074c366c144b624165a2ee5270d15630/node_modules/vitest/dist/chunks/run.BPv-BBRv.js:1870:14)\n    at file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/node_modules/.pnpm/vitest@5.0.5_@types+node@24_074c366c144b624165a2ee5270d15630/node_modules/vitest/dist/chunks/run.BPv-BBRv.js:2886:11\n    at Array.forEach (<anonymous>)\n    at file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/node_modules/.pnpm/vitest@5.0.5_@types+node@24_074c366c144b624165a2ee5270d15630/node_modules/vitest/dist/chunks/run.BPv-BBRv.js:2882:10\n    at E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/generated-production.test.ts:226:3\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async VitestModuleEvaluator._runInlinedModule (file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/node_modules/.pnpm/vitest@5.0.5_@types+node@24_074c366c144b624165a2ee5270d15630/node_modules/vitest/dist/module-evaluator.js:261:4)"
+          ],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "repairs the actual silent REFERENCE_FILM video candidate using only authorized purchases and fresh reviews",
+          "status": "pending",
+          "title": "repairs the actual silent REFERENCE_FILM video candidate using only authorized purchases and fresh reviews",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793308757907,
+      "endTime": 1793308878001.9,
+      "status": "failed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/generated-production.test.ts"
+    }
+  ]
+}

@@ -1,8 +1,12 @@
+当前来源：[无声生成修复](generated-repair-source.json)，2项定向用例通过、7项未选；类型/服务端、doctor与四服务启动PASS。原图验证见上一轮保留证据；本轮未跑全面测试或重建小程序。初始超时/角色失败见[记录](generated-repair-attempts.json)。Current focused evidence replaces no historical full-suite failures.
+
+历史原图轮说明（以下至“当前快速交付证据”之前）：
+
 当前来源：[原图新候选修复](repair-candidate-source.json)，2项定向原生集成通过；类型/服务端、doctor及四服务启动PASS。第一轮就绪失败与初期夹具失败留存，生成式/原生口播修复和真实服务未准入。当前只重建服务端，其他产物NOT_RUN；全面测试未执行。Current focused evidence replaces no historical full-suite failures.
 
 # 当前快速交付证据 / Current focused delivery evidence
 
-按用户最新要求，本轮不运行全面测试、不等待全部绿灯。当前绑定：365 source files / 42 contracts / 4 resources; 7889efdb。原完整检查器保持源码，未在本轮执行；`SOURCE_DELIVERY`表示源码候选打包状态，不代表完整产品或商用验收。
+按用户最新要求，本轮不运行全面测试、不等待全部绿灯。当前绑定：366 source files / 42 contracts / 4 resources; 6e73b796。原完整检查器保持源码，未在本轮执行；`SOURCE_DELIVERY`表示源码候选打包状态，不代表完整产品或商用验收。
 
 The full suite and original publication checker were deliberately not run. Focused packaging records actual statuses, preserves failures and never promotes historical passes to current acceptance.
 
@@ -13,9 +17,9 @@ The full suite and original publication checker were deliberately not run. Focus
 | 03 | Preview build | NOT_RUN |
 | 04 | `build:alipay` | NOT_RUN |
 | 05 | `build:douyin` | NOT_RUN |
-| 06 | Focused repair cases | 2 PASS / 0 FAIL |
+| 06 | Generated repair cases | 2 PASS / 0 FAIL / 7 unselected |
 
-环境/启动：doctor FAIL，backend FAIL，preview FAIL。见[来源](delivery-focused-source.json)、[构建记录](../delivery/current.json)、[当前发布状态](publication.json)、[文件与媒体核验](repository-audit.json)和[交付指南](../delivery/README.md)。完整日志、数据库和私有配置留在忽略目录。既有媒体36项、C冻结25文件及原归档保留；本轮未打开浏览器。
+环境/启动：doctor PASS，backend PASS；preview NOT_RUN。见[来源](delivery-focused-source.json)、[构建记录](../delivery/current.json)、[当前发布状态](publication.json)、[文件与媒体核验](repository-audit.json)和[交付指南](../delivery/README.md)。完整日志、数据库和私有配置留在忽略目录。既有媒体36项、C冻结25文件及原归档保留；本轮未打开浏览器。
 
 以下为上一费用轮的历史说明；其中“本轮/当前”只指346c8c21，不覆盖本轮交付结果。The following section belongs to the historical cost-admission snapshot.
 

@@ -1,6 +1,8 @@
 # 源码交付与快速启动 / Source delivery and quick start
 
-2026-10-30新增[原图候选修复与重新验收](../实施/原图候选修复与重新验收-v1.0.md)：失败证据定位、CONTENT受限改稿、实际新文件、新封存包、双新复核及交付已接通，2项定向原生集成用例通过。原订单预算/截止/调用上限保持冻结；生成式及原生口播修复、真实服务和真机仍待完成。
+2026-10-30新增[生成式受限修复与原素材复用](../实施/生成式受限修复与原素材复用-v1.0.md)：两条无声生成路线已连接选择性重制、已结算原素材复用、新参考身份核验、新文件与双新复核交付。2项定向用例通过，7项旧用例本轮未选；外部模型与计量为合成响应。原订单限制保持冻结，原生口播修复、真实服务与真机验收仍待完成。
+
+上一轮原图专项（保留原验证来源）：[原图候选修复与重新验收](../实施/原图候选修复与重新验收-v1.0.md)：失败证据定位、CONTENT受限改稿、实际新文件、新封存包、双新复核及交付已接通，2项定向原生集成用例通过。原订单预算/截止/调用上限保持冻结；原生口播修复、真实服务和真机仍待完成。
 
 2026-10-30。按用户最新要求，以主要功能收口和可运行交付包为本轮目标；全面测试和全面绿灯不作为打包前置条件。需求仍为 v3.1 的 58 项，C「柚子创作社」设计保持原版。当前包用于开发接手、演示和服务配置，完整产品验收、真实服务与云端部署分别记录。
 
@@ -93,7 +95,7 @@ The intended main flow remains photos → multimodal product profile → communi
 
 | 编号 / No. | 交付后的剩余工作 / Remaining work |
 | --- | --- |
-| 01 | 生成式/原生口播的选择性重制、新参考/音轨与新包复核；原图已接通 / Generated and native-audio repair; photo repair connected |
+| 01 | 原生口播修复的新音轨/额外ASR与听音；原图/无声生成已接通 / Native-audio repair; photo and silent generation connected |
 | 02 | 真实Codex原生隔离/清理、模型质量/计费、语音授权及连续多镜变体 / Real runtime, providers, speech and official variants |
 | 03 | 支付宝/抖音真机登录、支付/退款、下载/相册和服务域名配置 / Native device and host integrations |
 | 04 | 完整社区商业发布、生成式售后、Plus管理界面及云端部署 / Remaining community, aftercare, Plus and deployment |

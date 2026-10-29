@@ -14,7 +14,7 @@ export async function generationContext(db:Db,lease:StageLease):Promise<Executio
     AND scope_id=$3 AND stage_name='PRODUCTION' AND input_hash=$4 AND deadline_at=$5`,
   [lease.tenant_id,lease.id,lease.scope_id,lease.input_hash,lease.deadline_at])).rowCount===1,
   'GENERATION_SCOPE_INVALID','生成租约与原订单、阶段、输入或截止时间不一致',403);
-  const context=await executionContext(db,lease.tenant_id,lease.scope_id,lease.input_hash);
+  const context=await executionContext(db,lease.tenant_id,lease.scope_id,lease.input_hash,lease.id);
   requireThat(context.snapshot.engine!=='PHOTO_LAYOUT','GENERATION_ROUTE_INVALID','原图路线不能购买生成服务',422);
   requireThat(lease.deadline_at.toISOString()===context.snapshot.deadline_at,'GENERATION_SCOPE_INVALID','生成阶段截止与冻结订单不一致',403);
   return context;

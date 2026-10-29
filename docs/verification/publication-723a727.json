@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "checked_at": "2026-10-29T21:01:47.445951+00:00",
+  "status": "SOURCE_DELIVERY",
+  "scope": "FOCUSED_PHOTO_REPAIR_AND_SERVER_SOURCE",
+  "reason": "USER_REQUESTED_FAST_DELIVERY_WITHOUT_FULL_GREEN_REQUIREMENT",
+  "original_publication_checker_status": "NOT_RUN_FOCUSED_DELIVERY",
+  "checker_weakened": false,
+  "source_set_hash": "7889efdb5c018641e90fecd7e5c12b4bb40404b008e895b5942a8e969f68442f",
+  "source_files": 365,
+  "builds_passed": false,
+  "selected_server_build_passed": true,
+  "checks": [
+    {
+      "task": "typecheck",
+      "status": "PASS",
+      "elapsed_ms": 35788,
+      "log_path": "runtime/delivery-builds/2026-10-29T20-56-24-306Z-809aceba/typecheck.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "build:server",
+      "status": "PASS",
+      "elapsed_ms": 1526,
+      "log_path": "runtime/delivery-builds/2026-10-29T20-56-24-306Z-809aceba/server.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "local_checks": {
+    "doctor": "PASS",
+    "backend": "PASS",
+    "preview": "NOT_RUN"
+  },
+  "focused_tests": {
+    "passed": 2,
+    "failed": 0
+  },
+  "full_suite_executed": false,
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false,
+  "evidence": "docs/verification/repair-candidate-source.json",
+  "historical_publication": "docs/verification/publication-83bd7ee.json"
+}
