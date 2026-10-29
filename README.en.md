@@ -6,6 +6,10 @@
 
 This repository is under active development: requirements **v3.1**, development contracts **v1.1**, and frozen **C “Yuzu Creative Studio” design v1.0**. The complete product and production admission have **not** passed; every official preset remains unavailable for sale. Shared screens, the native backend, silent packs for all three routes and private audio delivery for both generated routes are implemented. Real Codex operation, audio quality, official variants, native devices and commercial operation remain incomplete. See [implementation evidence](assets/implementation/current.json) and the [public verification summary](docs/verification/publication.json).
 
+Quick delivery: see the [handover and startup guide](docs/delivery/README.md). Run `.\scripts\setup-local.ps1`, then `doctor`, `local:start` or `preview:serve`. `delivery:build --smoke` runs bounded builds and focused smoke checks; `delivery:package` creates a ZIP with source and successful outputs. A fully green comprehensive suite is not a packaging prerequisite.
+
+Current delivery builds: **server: PASS / preview: TIMEOUT / alipay: TIMEOUT / douyin: TIMEOUT**. Doctor: FAIL; backend startup: FAIL; replay server: FAIL. The full suite was not rerun. See [build records](docs/delivery/current.json) and [focused provenance](docs/verification/delivery-focused-source.json).
+
 ## Screens and recorded interaction
 
 ![Shared screens: photos, presets, production and collection](docs/media/overview.png)
@@ -234,7 +238,7 @@ Root READMEs and operational guides are bilingual. Detailed historical requireme
 
 For UI evidence, start `dev:preview` and run `docs:media` in another terminal. `test:ui` invokes the same capture/assertion script. Local Edge, native FFmpeg/ffprobe and project-local Playwright recording components are required; see the [demo guide](docs/guides/DEMO.md).
 
-Current snapshot 346c8c21 contains 350 source/test/config files, 42 runtime contracts and four resources. All 22 focused cost/queue and failed-report admission checks pass. The initial implementation from this round fails the scope-denial control as expected (one selected failure, nine other assertions unselected in that file; other imported/unexecuted entries remain in its raw report). Native migration rehearsal from 25 to 26 preserves old UNKNOWN, actual bills, counters and the original deadline. Final original full chain: FAIL; type: PASS; units: 73 passed; native: 7 passed, 1 failed, 15 pending; 38 empty/unexecuted files. Server pre-build: PASS; mini builds: Alipay: NOT_EXECUTED; Douyin: NOT_EXECUTED. Preliminary JSONB failure, the intentionally cancelled initial full run, same-user fixture correction and diagnostic Date normalization remain separately archived. These are internal repair cost foundations; diagnosis, changed candidates, new sealed packets and two fresh reviews remain unconnected. All 58 requirements/52 P0, disabled sales and product/production/cloud false flags remain. See [exact provenance](docs/verification/repair-cost-native-source.json).
+Historical 346c8c21 results remain in [cost provenance](docs/verification/repair-cost-native-source.json). This round uses user-requested focused delivery checks. See the [delivery guide](docs/delivery/README.md) for current build/package results; prior passes and unexecuted tests are not promoted to current verification.
 
 完整命令未通过；源码进展与独立构建不升级为完整通过。 The full command chain fails; source progress and separate builds do not replace it.
 

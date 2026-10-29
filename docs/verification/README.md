@@ -1,3 +1,24 @@
+# 当前快速交付证据 / Current focused delivery evidence
+
+按用户最新要求，本轮不运行全面测试、不等待全部绿灯。当前绑定：358 source files / 42 contracts / 4 resources; 655aa4ce。原完整检查器保持源码，未在本轮执行；`SOURCE_DELIVERY`表示源码候选打包状态，不代表完整产品或商用验收。
+
+The full suite and original publication checker were deliberately not run. Focused packaging records actual statuses, preserves failures and never promotes historical passes to current acceptance.
+
+| 编号 / No. | 检查 / Check | 实际结果 / Actual |
+| --- | --- | --- |
+| 01 | `typecheck` | TIMEOUT |
+| 02 | `build:server` | PASS |
+| 03 | Preview build | TIMEOUT |
+| 04 | `build:alipay` | TIMEOUT |
+| 05 | `build:douyin` | TIMEOUT |
+| 06 | Focused smoke | TIMEOUT |
+
+环境/启动：doctor FAIL，backend FAIL，preview FAIL。见[来源](delivery-focused-source.json)、[构建记录](../delivery/current.json)、[当前发布状态](publication.json)、[文件与媒体核验](repository-audit.json)和[交付指南](../delivery/README.md)。完整日志、数据库和私有配置留在忽略目录。既有媒体36项、C冻结25文件及原归档保留；本轮未打开浏览器。
+
+以下为上一费用轮的历史说明；其中“本轮/当前”只指346c8c21，不覆盖本轮交付结果。The following section belongs to the historical cost-admission snapshot.
+
+---
+
 # 验证与发布证据 / Verification and publication evidence
 
 本轮[修复费用授权与原订单额度](../实施/修复费用授权与原订单额度-v1.0.md)绑定最终350份源码、42份运行契约、4项资源，摘要346c8c21。只增加内部费用基础，完整自动修复、真实服务/设备、全产品、生产与云端均未准入；官方方案全部禁售。

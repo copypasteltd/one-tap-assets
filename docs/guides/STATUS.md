@@ -1,43 +1,42 @@
-# 当前状态与后续顺序 / Status and next priorities
+# 当前交付与功能状态 / Delivery and functional status
 
-最新[修复费用授权与原订单额度](../实施/修复费用授权与原订单额度-v1.0.md)补齐内部费用入口：原失败报告重验、原额度/次数、六个新阶段与受影响生成节点的声明绑定；尚未自动规划或执行修复。Latest: internal repair cost authorization, with diagnosis/candidate production/fresh dual review still pending.
+2026-10-30：按用户要求加速主要功能收口，采用有界构建、核心冒烟和交付包核验，不等待全面测试绿灯。58项需求/52项P0、三路线、10风格/最少14变体和C设计继续保留。当前为源码与实际成功构建候选交付，完整自动修复、真实服务、真机及云端仍有缺口。
 
-最新[MCP原工具查询恢复与桥接回收](../实施/MCP原工具查询恢复与桥接回收-v1.0.md)只恢复已确认原编号的有界状态查询，输入关闭停止本桥I/O；不是完整自动素材修复或历史ASR根因证明。Latest: bounded original-intent observations and bridge-owned shutdown.
+The user requested focused delivery without a full green suite. Functional scope and the frozen design remain; this source/build candidate does not certify the complete product or production.
 
-最新[首轮制作费用隔离与原费用回执](../实施/首轮制作费用隔离与原费用回执-v1.0.md)接通原总额内的首轮/修复/售后费用边界；同一意图绑定原归属、金额与规范费率，实际锁等待后重查原截止。完整自动修复仍待实现。Latest: protected repair/aftercare holds, immutable cost replay and post-lock wall-clock deadlines, not a completed repair workflow.
+## 本轮交付 / This delivery
 
-最新[Worker脱敏故障诊断与日志隔离](../实施/Worker脱敏故障诊断与日志隔离-v1.0.md)增加固定内部分类和执行位置，隔离日志回调故障，保留原事务与公开错误码；历史内部错误根因尚未确认。Latest: private failure categories and log-sink isolation, without a confirmed cause for the earlier production failure.
+| 编号 / No. | 实现 / Implementation | 结果 / Result |
+| --- | --- | --- |
+| 01 | 原生初始化、自检 / Native setup and doctor | `setup-local.ps1` / `doctor` |
+| 02 | API、Worker、回收器和媒体维护 / Owned four-service startup | `local:start`, readiness and owned shutdown |
+| 03 | 共享小程序页面回放 / Shared-screen replay | `preview:serve`, loopback static server |
+| 04 | 独立构建和逐项日志 / Isolated builds and exact logs | `delivery:build --smoke`, bounded per command |
+| 05 | 源码、文档、媒体及成功产物ZIP / Source and available outputs | `delivery:package`, per-file SHA-256 |
 
-最新[工具队列原子领取与并发租约](../实施/工具队列原子领取与并发租约-v1.0.md)减少空闲领取往返，保留原能力、恢复时间与代次；六消费者/独立行锁回归及64次空队列对照留存。此项不证明历史超时已根治。Latest: atomic durable tool claims with concurrent/lock controls, without a proven historical timeout cause.
+当前绑定 / Current binding: 358 source files / 42 contracts / 4 resources; 655aa4ce。
 
-当前[完整展示文字与购买前排版校验](../实施/完整展示文字与购买前排版校验-v1.0.md)修正末尾丢字、实际字幕断言漏检与AI/章节/页脚重叠，接入规划、报价与制作入口。十套风格实际PNG与原操作版本变更阻断有专项；此项不代表自动修复或真实服务准入。Latest: complete measured text layout and original-operation version guards, not complete repair or production admission.
+| 编号 / No. | 检查 / Check | 实际结果 / Actual |
+| --- | --- | --- |
+| 01 | `typecheck` | TIMEOUT |
+| 02 | `build:server` | PASS |
+| 03 | Preview build | TIMEOUT |
+| 04 | `build:alipay` | TIMEOUT |
+| 05 | `build:douyin` | TIMEOUT |
+| 06 | Focused smoke | TIMEOUT |
 
-最新[可见AI标识与逐帧验收](../实施/AI可见标识与逐帧文件验收-v1.0.md)增加原报价冻结、全图片/全部视频帧实际标识、恢复/QC/交付绑定。原生字幕已有的右上文字保留，统一可验标识放左上；真实宿主/法律标识准入未验。Baked disclosure is checked over actual images and every video frame; host/legal admission remains unverified.
+| 编号 / No. | 启动自检 / Startup | 实际结果 / Actual |
+| --- | --- | --- |
+| 01 | doctor | FAIL |
+| 02 | backend | FAIL |
+| 03 | preview | FAIL |
+| 04 | static-server-fixture | PASS |
 
-最新[原生声音最终双复核与事务交付](../实施/原生声音最终双复核与事务交付-v1.0.md)已连接内部两路线原听音、两个最终角色、完整推理/工具/报告绑定和事务交付。正向中文/语义为刻意构造的控制响应，不是实际提示音的识别结果。Private final audio review/publication is connected with synthetic semantic control responses, not real listening or production certification.
+只有本轮成功目标纳入构建交付目录，超时/失败目标保留源码及重建命令；不使用旧产物补位。完整测试及原发布检查本轮未执行，历史失败仍见[原费用来源](../verification/repair-cost-native-source.json)。本轮没有修改页面，不重录既有媒体，36份原媒体及C定型稿按原摘要核对。
 
-2026-10-30｜需求v3.1 / 开发契约v1.1 / C设计v1.0。整体 **IN_PROGRESS**，完整产品、生产准入与云端部署均未完成。The complete product, production admission and cloud deployment are not verified.
+Only successful current builds enter the package; failed/timed-out targets retain source and rebuild instructions. The original full checker was not run this round. Historical failures remain unchanged, and the existing demonstration media is retained with its original synthetic-data scope.
 
-## 已执行验证 / Executed validation
-
-| 编号 / No. | 检查 / Check | 结果 / Result | 证明范围 / Scope |
-| --- | --- | --- | --- |
-| 01 | TypeScript | PASS | 最终原完整命令 / Final original full chain |
-| 02 | 单元 / Unit | 73 passed | 最终原完整命令；非旧报告 / Fresh full-chain result |
-| 03 | 原生集成 / Native integration | 7 passed, 1 failed, 15 pending; 38 empty/unexecuted files | 原断言/配置/时限，未选和空文件另计 / Original checks; pending and empty files retained |
-| 04 | 服务端 / Server | PASS（预构建 / pre-build） | 最终源码预构建；完整命令是否到达另见来源 / Same-source pre-build, full-chain progress recorded separately |
-| 05 | 双小程序 / Both mini-programs | Alipay: NOT_EXECUTED; Douyin: NOT_EXECUTED | 不沿用历史构建为本轮证明 / Prior builds do not certify the current run |
-| 06 | 浏览器回放 / Browser replay | PASS（原捕获 / prior capture） | 沿用原Vite构建、10页断言/截图与实际WebM/MP4/GIF来源；浏览器已关闭，本轮未重录页面 / Prior actual local capture; shared UI source unchanged |
-
-本轮费用/队列/失败报告授权22项专项和25→26迁移复演通过；本轮初版归属对照按预期失败。历史fdddb4e的MCP专项单独留存。Current focused cost/admission checks and migration rehearsal pass; the initial scope control fails as expected. Historical MCP evidence remains separate.
-
-机器可读结果：[实现索引](../../assets/implementation/current.json)、[发布核验摘要](../verification/publication.json)、[媒体清单](../media/capture-manifest.json)。完整执行日志/测试JSON位于未提交的`runtime/test-results/`；公开摘要保留计数、命令结果与摘要引用，但不包含本地凭证或运行数据库。Source hashes and original local log hashes are recorded; private runtime files are excluded from Git. Static documentation checks validate contracts/links, not product execution.
-
-本轮源码摘要346c8c21（350份源码/测试/配置、42份运行契约、4项资源）：费用/队列与独立失败报告授权22项专项通过；本轮初版费用入口的归属负向对照1项按预期失败，所选文件其余9项未选，报告另有其他导入/未执行项。第25→26版数据库迁移复演通过，旧UNKNOWN/实际账单/计数与原截止保留。最终原完整命令FAIL：类型PASS、单元73 passed、原生7 passed, 1 failed, 15 pending; 38 empty/unexecuted files；服务端预构建PASS，双小程序Alipay: NOT_EXECUTED; Douyin: NOT_EXECUTED。初步JSONB失败、加强归属校验而主动取消的整套、同用户夹具设置和日期诊断修正分别归档，不替代最终结果。费用授权只是一项内部基础；问题定位、新候选重制、新封存包和双新复核仍未接通。全部58项需求/52项P0、禁售及完整产品/生产/云端false保留。来源见[本轮费用验证](../verification/repair-cost-native-source.json)。
-
-Current snapshot 346c8c21 contains 350 source/test/config files, 42 runtime contracts and four resources. All 22 focused cost/queue and failed-report admission checks pass. The initial implementation from this round fails the scope-denial control as expected (one selected failure, nine other assertions unselected in that file; other imported/unexecuted entries remain in its raw report). Native migration rehearsal from 25 to 26 preserves old UNKNOWN, actual bills, counters and the original deadline. Final original full chain: FAIL; type: PASS; units: 73 passed; native: 7 passed, 1 failed, 15 pending; 38 empty/unexecuted files. Server pre-build: PASS; mini builds: Alipay: NOT_EXECUTED; Douyin: NOT_EXECUTED. Preliminary JSONB failure, the intentionally cancelled initial full run, same-user fixture correction and diagnostic Date normalization remain separately archived. These are internal repair cost foundations; diagnosis, changed candidates, new sealed packets and two fresh reviews remain unconnected. All 58 requirements/52 P0, disabled sales and product/production/cloud false flags remain. See [exact provenance](../verification/repair-cost-native-source.json).
-
-[恢复指南](RECOVERY.md)与[发布同步指南](PUBLISHING.md)适用于持续更新；本轮执行应用检查并沿用未变的原媒体，未打开浏览器；完整命令失败及独立原生结果如表，不能沿用旧通过。 Current source checks retain original unchanged media; the failed full command and standalone native outcome are reported separately.
+入口：[交付/启动指南](../delivery/README.md)、[构建记录](../delivery/current.json)、[精确来源](../verification/delivery-focused-source.json)、[实现索引](../../assets/implementation/current.json)。包生成后的路径/摘要另见仓库中的`docs/delivery/package.json`；它作为外部索引不打入自身所指的ZIP，以避免自引用。
 
 ## 当前实现边界 / Implementation boundary
 
@@ -68,7 +67,7 @@ Current snapshot 346c8c21 contains 350 source/test/config files, 42 runtime cont
 
 | 顺序 / Priority | 待办 / Work | 完成条件 / Completion evidence |
 | --- | --- | --- |
-| 00 | 原任务恢复及运行稳定性 / Original-operation recovery and stability | 按最终来源定位原生整套失败及历史类型/支付宝/私有对象/ASR/pg_restore异常，保持原限额完成完整命令；MCP读恢复对照和单项通过不能证明历史根因 / Use current provenance for any full-chain failure and retain historical compiler/private-object/ASR/restore diagnostics; standalone checks do not replace full verification |
+| 00 | 原任务恢复及运行稳定性 / Original-operation recovery and stability | 按当前交付结果处理启动与核心构建缺项；全面回归移至交付后，不作为本轮源码打包前置条件；历史故障继续留存 / Resolve current startup/build gaps first; defer comprehensive regression until after source delivery and preserve historical failures |
 | 01 | 生成式官方变体与真实服务验收 / Official generated variants and real-service acceptance | 在已有两条无声内部链路上验证真实模型、商品身份/风格质量、完整规格和原费用/恢复；不能用2秒夹具替代 / Real model/quality/specification evidence beyond short silent fixtures |
 | 02 | 原生有声与资源规格 / Native audio and resources | 在已有内部制作/ASR/POST/文件QC上验证真实授权/识别/OSS/费用，验证连续多镜人物/商品/声音绑定、完整输入容量及真实最终听音/双复核/交付质量 / Real rights/ASR/storage, multi-shot/full-input capacity and final listening/review/delivery quality |
 | 03 | 真实Codex与受限身份/释放 / Real Codex, restricted identity and cleanup | 服务凭证、真实推理计量、原生启动器、隔离/进程树/孤儿回收与G0证据 / Native verified operation |

@@ -6,6 +6,10 @@
 
 当前是持续开发的源码仓库：需求 **v3.1**、开发契约 **v1.1**、已定型的 **C「柚子创作社」设计 v1.0**。完整产品与生产准入均未通过，官方方案全部禁售。共享页面、原生后端、三路线无声整包及两条生成路线的内部有声交付已有实现；真实 Codex、声音质量、官方变体、宿主真机与商用运行仍有待办。具体证据见 [实现清单](assets/implementation/current.json) 和 [公开核验摘要](docs/verification/publication.json)。
 
+快速交付入口：[交付与启动指南](docs/delivery/README.md)。执行`.\scripts\setup-local.ps1`初始化，再用`doctor`自检、`local:start`启动后端、`preview:serve`查看共享页面。`delivery:build --smoke`只做有界构建和核心冒烟，`delivery:package`生成源码与实际成功产物ZIP；按本轮要求不等待全面测试绿灯。
+
+当前交付构建：**server: PASS / preview: TIMEOUT / alipay: TIMEOUT / douyin: TIMEOUT**。环境自检 FAIL；后端启动 FAIL；页面服务 FAIL。完整测试本轮未运行。逐项结果见[交付记录](docs/delivery/current.json)和[专项来源](docs/verification/delivery-focused-source.json)。
+
 ## 界面与操作演示
 
 ![共享页面：拍照、方案、制作与领取](docs/media/overview.png)
@@ -231,7 +235,7 @@ runtime/           私有运行数据/工具/构建/日志（不提交）
 
 UI 回放/媒体更新先启动 `dev:preview`，再执行 `docs:media`（`test:ui` 为同一脚本）；需要 Edge、原生 FFmpeg/ffprobe 与项目内 Playwright 录制组件，详见 [演示指南](docs/guides/DEMO.md)。
 
-本轮源码摘要346c8c21（350份源码/测试/配置、42份运行契约、4项资源）：费用/队列与独立失败报告授权22项专项通过；本轮初版费用入口的归属负向对照1项按预期失败，所选文件其余9项未选，报告另有其他导入/未执行项。第25→26版数据库迁移复演通过，旧UNKNOWN/实际账单/计数与原截止保留。最终原完整命令FAIL：类型PASS、单元73 passed、原生7 passed, 1 failed, 15 pending; 38 empty/unexecuted files；服务端预构建PASS，双小程序Alipay: NOT_EXECUTED; Douyin: NOT_EXECUTED。初步JSONB失败、加强归属校验而主动取消的整套、同用户夹具设置和日期诊断修正分别归档，不替代最终结果。费用授权只是一项内部基础；问题定位、新候选重制、新封存包和双新复核仍未接通。全部58项需求/52项P0、禁售及完整产品/生产/云端false保留。来源见[本轮费用验证](docs/verification/repair-cost-native-source.json)。
+历史346c8c21整套结果保留在[原费用验证](docs/verification/repair-cost-native-source.json)。本轮按用户要求采用快速交付检查；当前实际构建和包内容见[交付指南](docs/delivery/README.md)，不沿用历史通过或把未执行测试写成通过。
 
 完整命令未通过；源码进展与独立构建不升级为完整通过。 The full command chain fails; source progress and separate builds do not replace it.
 

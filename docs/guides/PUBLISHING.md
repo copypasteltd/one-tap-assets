@@ -1,5 +1,7 @@
 # 仓库发布与后续同步 / Repository publishing and synchronization
 
+2026-10-30最新交付策略：用户明确要求快速功能收口，不要求全面测试与全面绿灯。源码候选按[快速交付指南](../delivery/README.md)执行有界构建/核心冒烟与打包，不因历史全量未通过而停止源码同步；历史失败不改写，完整验收和生产准入仍单列。The current source candidate uses focused delivery checks; comprehensive acceptance remains separate.
+
 [中文 README](../../README.md) · [English README](../../README.en.md) · [协作约束 / Contributing](../../CONTRIBUTING.md) · [当前状态 / Status](STATUS.md)
 
 本项目持续同步到[`copypasteltd/one-tap-assets`](https://github.com/copypasteltd/one-tap-assets)，Git远端为`git@github.com:copypasteltd/one-tap-assets.git`。用户已授权后续正常提交和推送。发布源码与部署云端、启售方案、发布小程序是不同动作，本指南只规定仓库同步。

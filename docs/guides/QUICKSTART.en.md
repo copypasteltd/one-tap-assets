@@ -1,5 +1,7 @@
 # Native quick start
 
+One-command development setup: `.\scripts\setup-local.ps1`; environment checks: `.\scripts\run.ps1 doctor`; start API/Worker/reaper/maintenance: `.\scripts\run.ps1 local:start`. See the [delivery guide](../delivery/README.md) for source ZIP and build details.
+
 Private [final audio review and publication](../实施/原生声音最终双复核与事务交付-v1.0.md) is connected for both generated routes. Tests use actual native database/media and explicitly fabricated semantic/provider/rights/usage/isolation responses. LISTENING and ASR configuration default to disabled; their endpoints, keys and exact host allowlists stay empty in the example. Model/rate/capability registration and the original sold contract are also required. Environment values never enable sales. Saved-original receipt maintenance does not repurchase UNKNOWN calls. Public audio orders and real-service/device admission remain closed.
 
 [中文](QUICKSTART.md) · [Project README](../../README.en.md) · [Status](STATUS.md)

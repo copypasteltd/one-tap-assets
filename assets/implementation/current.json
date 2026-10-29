@@ -3,36 +3,125 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-29T19:17:32.381Z",
+  "checked_at": "2026-10-29T20:13:41.926Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "verification_mode": "FRESH_FULL",
+  "verification_mode": "FOCUSED_DELIVERY",
   "retained_integration": null,
   "command_checks_passed": false,
   "commands": [
     {
-      "command": "./scripts/run.ps1 typecheck",
-      "status": "PASS",
-      "log_path": "runtime/test-results/typecheck.log",
-      "log_sha256": "baee83b0dfaf199c5fc9d717129758c4a9ee82054d3aa99f3c05b48f678721a8"
+      "task": "typecheck",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+        "--noEmit"
+      ],
+      "shell": false,
+      "status": "TIMEOUT",
+      "exit_code": 1,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 182058,
+      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/typecheck.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
-      "command": "./scripts/run.ps1 test",
+      "task": "build:server",
+      "command": "node --import tsx scripts/build-server.ts",
+      "argv": [
+        "--import",
+        "tsx",
+        "scripts/build-server.ts"
+      ],
+      "shell": false,
       "status": "PASS",
-      "log_path": "runtime/test-results/test.log",
-      "log_sha256": "60b508e6514ed9140047756680d8d16801c1f2e61b8b093136a3a8ef6c558c2a"
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 57253,
+      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/server.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
-      "command": "./scripts/run.ps1 test:integration",
-      "status": "FAIL",
-      "log_path": "runtime/test-results/test-integration.log",
-      "log_sha256": "453ea45c9cfdab7cddadba8a0d2dc1985585ba57b0f44ef259a6b70329d8d3c9"
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T19-53-44-951Z-0cf981ca\\runtime\\build\\preview",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
+        "build",
+        "--config",
+        "src/preview/vite.config.ts",
+        "--outDir",
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T19-53-44-951Z-0cf981ca\\runtime\\build\\preview"
+      ],
+      "shell": false,
+      "status": "TIMEOUT",
+      "exit_code": 1,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 180269,
+      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/preview.log",
+      "log_sha256": "e524d94fbdaf0261b3ffb806276277f6451b841694c7e2ed4559be879ebf30fe"
+    },
+    {
+      "task": "build:alipay",
+      "command": "node scripts/build-mini.cjs alipay",
+      "argv": [
+        "scripts/build-mini.cjs",
+        "alipay"
+      ],
+      "shell": false,
+      "status": "TIMEOUT",
+      "exit_code": 1,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 180546,
+      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/alipay.log",
+      "log_sha256": "4a9e92cd872267b7c666f951719a287ff73311b07039818969e11a9cece88b33"
+    },
+    {
+      "task": "build:douyin",
+      "command": "node scripts/build-mini.cjs tt",
+      "argv": [
+        "scripts/build-mini.cjs",
+        "tt"
+      ],
+      "shell": false,
+      "status": "TIMEOUT",
+      "exit_code": 1,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 187678,
+      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/douyin.log",
+      "log_sha256": "be8acd37f9a168d611c59e635a786a131a25cf7bd7ee2d242a23c5565ffc7a12"
+    },
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/client-photos.test.ts tests/integration/multipart-upload.test.ts tests/integration/review-delivery.test.ts --outputFile.json=runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/smoke.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.integration.config.ts",
+        "tests/integration/client-photos.test.ts",
+        "tests/integration/multipart-upload.test.ts",
+        "tests/integration/review-delivery.test.ts",
+        "--outputFile.json=runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/smoke.json"
+      ],
+      "shell": false,
+      "status": "TIMEOUT",
+      "exit_code": 1,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 180472,
+      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/smoke.log",
+      "log_sha256": "a7b28d265f2e16e5613bacbca37bf5a2e978558ff51c7646476cf85d0684c4f2"
     }
   ],
   "suites": [],
-  "source_files": 350,
-  "source_set_hash": "346c8c21b939d8bd6390788ef42ae859d5a80dfaca84a38eaa10aa3b45b2c0bf",
+  "source_files": 358,
+  "source_set_hash": "655aa4cecdac0cf4a05fd1e9e28e8f44786c9eac2a2fa163bde5e1e0a6cced92",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -1352,11 +1441,39 @@
     },
     {
       "path": "scripts/build-mini.cjs",
-      "sha256": "b7cde720a7158e144fe87fd543b1d7372ebdd41086e94b2c94a6e84f0ec820a4"
+      "sha256": "5db02b7a8e86ee256dd890feefc31788017809917a53b0ccfd9afdd6ed40fe09"
+    },
+    {
+      "path": "scripts/build-output.cjs",
+      "sha256": "8b88d3e00aac33429be71bbefc2c621f89db6f168967312cc5a9b4c4672e5d52"
     },
     {
       "path": "scripts/build-server.ts",
-      "sha256": "c62cc47af8ee0f7468c0300a0f00456e754ac0e44c1e4d98daa926abcc61e44d"
+      "sha256": "b0e361a202514e7a97a123d3b24f7cf8e4a1a5e510035b0f5c74139fbd01413a"
+    },
+    {
+      "path": "scripts/delivery/build.ts",
+      "sha256": "2aad1664e93f89b554a247ee8f1b1e10f6864b513b21f28293c43021c867d63d"
+    },
+    {
+      "path": "scripts/delivery/common.ts",
+      "sha256": "16f4130dad96dd0ec0dca1ac6656392c6224a807be0f9783210de4db410ab811"
+    },
+    {
+      "path": "scripts/delivery/doctor.ts",
+      "sha256": "19fe08d5b5a207dde4a650df81a7ed7332144395dcc7abfd8139cfc5046e051a"
+    },
+    {
+      "path": "scripts/delivery/package.ts",
+      "sha256": "420a9918d2920f13c4b5e43f7a73f162785dc0e41373e1e94649529e47550dc3"
+    },
+    {
+      "path": "scripts/delivery/serve-preview.ts",
+      "sha256": "de98ae58b8bcc79a661156a21c722bc7787a9cf63faf4fdd73e2f18ac75dae02"
+    },
+    {
+      "path": "scripts/delivery/start.ts",
+      "sha256": "3cbf33270e69ac73b6a00ef3e54ccf32f70b3ca332e45468d67ee3aa5250ec3d"
     },
     {
       "path": "scripts/dev-setup.ts",
@@ -1380,7 +1497,7 @@
     },
     {
       "path": "scripts/mini-config.cjs",
-      "sha256": "1eb37f79c1d5132ac51135e268a849010d1010f11be1f4479406f683cd6c862b"
+      "sha256": "91412d283b43d56da5df97fdfc42e36836dd06e1bbbf503512ff7fa38113413f"
     },
     {
       "path": "scripts/record-disclosure.ts",
@@ -1396,11 +1513,15 @@
     },
     {
       "path": "scripts/run.ps1",
-      "sha256": "3a1c057b04d01f47bd6163a6b21d3aa462a5fa71f81051e7781e14c84e4e7783"
+      "sha256": "e621fd2010a8f6349dd3b80e08e53f8323583d5c308d98c95c310e9c067d3cbc"
     },
     {
       "path": "scripts/seed.ts",
       "sha256": "04259c63a814a161fc4b2ac08c74be95aa0245e332e084eae4371fb5ff092435"
+    },
+    {
+      "path": "scripts/setup-local.ps1",
+      "sha256": "f2af7e71dc51c6cf0a84040a4973ff21808abdbcca27a15d8123bfd197648e3c"
     },
     {
       "path": "scripts/verify-implementation.ts",
@@ -1412,7 +1533,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "546ea7a149214a6977c0fb10085380b9b8fcf08c5f592c1b36a78a711c1b89a9"
+      "sha256": "63b9624a385b28f30a86409e4b4a385729e5afad41274a9682414487ca7846e5"
     },
     {
       "path": "pnpm-lock.yaml",
@@ -1964,5 +2085,8 @@
     "Windows native media long-run stability after one intermittent C0000374 heap termination",
     "Production deployment and full 58-requirement audit"
   ],
-  "source_license": "Independently written project source; upstream AGPL clone remains research-only; no upstream production implementation copied."
+  "source_license": "Independently written project source; upstream AGPL clone remains research-only; no upstream production implementation copied.",
+  "historical_full_chain": "docs/verification/repair-cost-native-source.json",
+  "delivery_builds_passed": false,
+  "full_suite_executed": false
 }

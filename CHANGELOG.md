@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · 快速源码交付与原生启动 / Focused source delivery and native startup
+
+- 新增原生一键初始化、环境自检、四服务成组启停与共享页面服务。 Add native setup/doctor, owned API-worker-maintenance startup and static shared-screen replay.
+- 新增隔离构建、180秒逐命令时限、可选核心冒烟、逐文件摘要与源码/成功产物ZIP；不沿用旧产物。 Add isolated bounded delivery builds, focused smoke and a source/available-output ZIP with file hashes.
+- 实际构建 / Actual builds: server: PASS / preview: TIMEOUT / alipay: TIMEOUT / douyin: TIMEOUT; doctor FAIL, backend FAIL, preview FAIL. 全面测试未运行，失败/超时留存，不要求全绿打包。 Full suite not rerun; failures/timeouts remain explicit and do not block source packaging.
+- 绑定 / Bound: 358 source files / 42 contracts / 4 resources; 655aa4ce. 双语README、启动/状态/交付与证据同步，原C设计及36媒体保留，无浏览器/虚拟化调用。 Synchronize bilingual docs and preserve existing design/media.
+- 主要业务内核沿用既有实现；完整自动修复、真实Codex/模型/计费、真机、完整社区/售后、Plus和云端仍待完成。 Product, provider/device and production gaps remain explicit.
+
 ## 2026-10-30 · 修复费用授权与原订单额度 / Repair cost authorization
 
 - 实际核验 / Actual: 350 sources (346c8c21), focused 22 PASS, migration rehearsal PASS, initial scope control EXPECTED FAIL; final original full chain FAIL: type PASS, units 73 passed, native 7 passed, 1 failed, 15 pending; 38 empty/unexecuted files. Server pre-build PASS; mini builds Alipay: NOT_EXECUTED; Douyin: NOT_EXECUTED. 单项不替代整套 / Focused checks do not replace the full chain.

@@ -1,5 +1,7 @@
 # 一品成片工作约定
 
+- 2026-10-30用户最新交付指令：要求“快速做主要功能性收口，加速构建最终交付包，不要求全面测试与全面绿灯”。当前以`docs/delivery/README.md`、`delivery:build`/`delivery:package`为交付入口；只执行有界构建、启动和核心冒烟，旧全量命令不作为源码候选打包/同步的前置条件，不重复长整套。全部58需求与三路线仍保留，未知费用/权限/原截止/独立复核规则不放宽；未完成和未验证如实列明。后续正常提交推送及双语文档同步继续授权，禁止Docker/WSL/虚拟机，使用浏览器后关闭本次不用的标签。
+
 - 2026-10-30修复费用增补：以`docs/实施/修复费用授权与原订单额度-v1.0.md`及`repair-cost-native-source.json`为准。350源码/42契约/4资源摘要346c8c21，22费用/队列/失败报告授权专项及25→26原生迁移复演通过；本轮初版归属对照按预期失败，合并导入的其他未选/空文件按原报告留存。最终完整命令FAIL：typecheck PASS / unit 73 passed / native 7 passed, 1 failed, 15 pending; 38 empty/unexecuted files；服务端预构建PASS，双端Alipay: NOT_EXECUTED; Douyin: NOT_EXECUTED。唯一内部费用授权绑定新六阶段，实际阶段/租约/原总额/修复与售后保留/调用次数/截止不可重置，UNKNOWN及历史账单不改写；没有自动问题定位/候选重制/新包双新复核，全部58需求/52P0、禁售与产品/生产/云端false保留。初步JSONB/夹具错误、主动取消和Date诊断修正分别归档，不混同最终结果；无实际修复不得反复整套或放宽检查。正常源码提交推送持续授权。
 
 - 2026-10-30原工具恢复增补：以`docs/实施/MCP原工具查询恢复与桥接回收-v1.0.md`及`mcp-observation-native-source.json`为准。346源码/42契约/4资源摘要fdddb4e；22项MCP/消费者专项通过，旧桥对照1项按预期失败/14未选。原完整命令类型180秒超时、后续未执行；独立类型PASS、单元73 / 73 PASS、构建build:server: PASS / build:alipay: TIMEOUT / build:douyin: PASS、首次单独本轮原生FAIL: 7 passed, 1 failed, 15 pending; 36 empty/unexecuted files，单项不能覆盖完整FAIL。只恢复原编号GET、第三次连续失败停止；未知创建POST不重发，原权限/限流/TLS/HTTP20秒/角色截止保留，关闭stdin只停本桥I/O。历史根因未确认、完整修复未实现，全部58需求/52P0及禁售/产品/生产/云端false保留；无修复不得重复整套或放宽检查。

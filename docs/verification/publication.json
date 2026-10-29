@@ -1,89 +1,74 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-29T19:22:19.385Z",
-  "status": "BLOCKED",
-  "scope": "SOURCE_PROGRESS_NOT_PRODUCTION_PUBLICATION",
-  "reason": "LATEST_COMMAND_CHAIN_FAILED",
-  "actual_checker_exit_code": 1,
-  "actual_checker_log_path": "runtime/test-results/repair-costs-publication.log",
-  "actual_checker_log_sha256": "4e9aaf97a2a11026b889d83d0a180d8c66d89f244eeb208eb0cd866844dcb010",
-  "actual_checker_result_sha256": "c8d302c78468039fc17417c94adaccedc105729861eb41924e2eb4854a35c047",
-  "actual_checker_error": "Current scope/evidence invalid",
+  "checked_at": "2026-10-29T20:14:22.670871+00:00",
+  "status": "SOURCE_DELIVERY",
+  "scope": "FOCUSED_SOURCE_AND_AVAILABLE_BUILDS",
+  "reason": "USER_REQUESTED_FAST_DELIVERY_WITHOUT_FULL_GREEN_REQUIREMENT",
+  "original_publication_checker_status": "NOT_RUN_FOCUSED_DELIVERY",
   "checker_weakened": false,
-  "source_set_hash": "346c8c21b939d8bd6390788ef42ae859d5a80dfaca84a38eaa10aa3b45b2c0bf",
-  "implementation_evidence_sha256": "c59eb784088694b028ae9510e94559aab59769224d78d5503023723f34eb433a",
-  "source_files": 350,
-  "runtime_contract_files": 42,
-  "resource_files": 4,
-  "command_checks_passed": false,
-  "current_source_targeted_cost_admission_tests_passed": 22,
-  "legacy_scope_control_expected_failure_verified": true,
-  "native_migration_rehearsal": "PASS",
-  "full_chain_status": "FAIL",
-  "full_chain_suites": {
-    "unit": {
-      "report": {
-        "path": "runtime/test-results/repair-costs-final-full-unit.json",
-        "sha256": "c28918acd7feb458ca1cb77b88238864756a184ddb11d3fe654b890ea72ec67f"
-      },
-      "success": true,
-      "start_time_ms": 1793300140306,
-      "raw_counts": {
-        "numTotalTests": 73,
-        "numPassedTests": 73,
-        "numFailedTests": 0,
-        "numPendingTests": 0
-      },
-      "assertion_statuses": {
-        "passed": 73
-      },
-      "reported_files": 16,
-      "empty_unexecuted_files": 0,
-      "failed_cases": []
+  "source_set_hash": "655aa4cecdac0cf4a05fd1e9e28e8f44786c9eac2a2fa163bde5e1e0a6cced92",
+  "source_files": 358,
+  "builds_passed": false,
+  "checks": [
+    {
+      "task": "typecheck",
+      "status": "TIMEOUT",
+      "elapsed_ms": 182058,
+      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/typecheck.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
-    "integration": {
-      "report": {
-        "path": "runtime/test-results/repair-costs-final-full-integration.json",
-        "sha256": "fdf43a945abfd998738bb9234775c478d013c01e74c3c7163c2c47f18dd1812a"
-      },
-      "success": false,
-      "start_time_ms": 1793300146597,
-      "raw_counts": {
-        "numTotalTests": 23,
-        "numPassedTests": 7,
-        "numFailedTests": 1,
-        "numPendingTests": 0
-      },
-      "assertion_statuses": {
-        "passed": 7,
-        "failed": 1,
-        "pending": 15
-      },
-      "reported_files": 39,
-      "empty_unexecuted_files": 38,
-      "failed_cases": [
-        {
-          "title": "recovers only the saved original independent listening response after UNKNOWN without a second purchase",
-          "suite": "native-order.test.ts",
-          "duration_ms": 122999.96380000003,
-          "message_sha256": "a04d503ac95c0a4e065e42de3ecac3bc89b7b9a14b0e7adbc7b458f3f38f45f3",
-          "source_locations": [
-            "src/api/db/pool.ts:9",
-            "src/api/db/store.ts:50",
-            "src/worker/queue/leases.ts:86",
-            "src/worker/review/qc.ts:180"
-          ],
-          "category": "POSTGRESQL_STATEMENT_TIMEOUT",
-          "underlying_cause_confirmed": false
-        }
-      ]
+    {
+      "task": "build:server",
+      "status": "PASS",
+      "elapsed_ms": 57253,
+      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/server.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "exec",
+      "status": "TIMEOUT",
+      "elapsed_ms": 180269,
+      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/preview.log",
+      "log_sha256": "e524d94fbdaf0261b3ffb806276277f6451b841694c7e2ed4559be879ebf30fe"
+    },
+    {
+      "task": "build:alipay",
+      "status": "TIMEOUT",
+      "elapsed_ms": 180546,
+      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/alipay.log",
+      "log_sha256": "4a9e92cd872267b7c666f951719a287ff73311b07039818969e11a9cece88b33"
+    },
+    {
+      "task": "build:douyin",
+      "status": "TIMEOUT",
+      "elapsed_ms": 187678,
+      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/douyin.log",
+      "log_sha256": "be8acd37f9a168d611c59e635a786a131a25cf7bd7ee2d242a23c5565ffc7a12"
+    },
+    {
+      "task": "exec",
+      "status": "TIMEOUT",
+      "elapsed_ms": 180472,
+      "log_path": "runtime/delivery-builds/2026-10-29T19-53-44-951Z-0cf981ca/smoke.log",
+      "log_sha256": "a7b28d265f2e16e5613bacbca37bf5a2e978558ff51c7646476cf85d0684c4f2"
     }
+  ],
+  "local_checks": {
+    "doctor": "FAIL",
+    "backend": "FAIL",
+    "preview": "FAIL",
+    "static-server-fixture": "PASS"
   },
-  "media_files": 36,
-  "integrity_verified_separately": "docs/verification/repository-audit.json",
-  "documentation_and_contract_checks": 4808,
+  "full_suite_executed": false,
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "note": "The unchanged checker rejects the failed final full chain. Targeted controls and migration rehearsal do not replace it. Authorized source synchronization does not certify production or complete automatic repair."
+  "evidence": "docs/verification/delivery-focused-source.json",
+  "historical_publication": {
+    "source_commit": "6b494cedaa33884840b492840a3762973e261f25",
+    "record_sha256": "77a3f82dd9ad91f466a5e254a85e1f4260279dab7d3a1fce997ecd469c7a8b46",
+    "status": "BLOCKED",
+    "actual_checker_exit_code": 1,
+    "source_set_hash": "346c8c21b939d8bd6390788ef42ae859d5a80dfaca84a38eaa10aa3b45b2c0bf"
+  }
 }

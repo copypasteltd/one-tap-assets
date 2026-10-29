@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-10-29T20:20:26.081Z",
+  "id": "2026-10-29T19-53-44-951Z-0cf981ca",
+  "source_set_hash": "655aa4cecdac0cf4a05fd1e9e28e8f44786c9eac2a2fa163bde5e1e0a6cced92",
+  "archive_path": "runtime/releases/one-tap-assets-2026-10-29T19-53-44-951Z-0cf981ca/one-tap-assets-source-and-builds.zip",
+  "archive_sha256": "9db367caa48a2e22ce518d121d0d38ae51fd80a63028bf52b1cb603e119a019d",
+  "archive_bytes": 53216755,
+  "source_files": 679,
+  "build_files": 12,
+  "components": [
+    {
+      "name": "server",
+      "status": "PASS"
+    },
+    {
+      "name": "preview",
+      "status": "TIMEOUT"
+    },
+    {
+      "name": "alipay",
+      "status": "TIMEOUT"
+    },
+    {
+      "name": "douyin",
+      "status": "TIMEOUT"
+    }
+  ],
+  "manifest_path": "runtime/releases/one-tap-assets-2026-10-29T19-53-44-951Z-0cf981ca/manifest.json",
+  "full_suite_executed": false,
+  "full_suite_required_for_packaging": false,
+  "full_product_verified": false,
+  "production_admitted": false,
+  "independent_archive_verification": {
+    "status": "PASS",
+    "checked_at": "2026-10-29T20:20:55.663484+00:00",
+    "method": "INDEPENDENT_PYTHON_ZIPFILE_CRC_AND_SHA256",
+    "archive_sha256": "9db367caa48a2e22ce518d121d0d38ae51fd80a63028bf52b1cb603e119a019d",
+    "payload_files_verified": 691,
+    "archive_entries": 692,
+    "workspace_payload_bytes_matched": true,
+    "successful_build_components_verified": [
+      "server"
+    ],
+    "private_runtime_and_credentials_excluded": true,
+    "full_product_verified": false
+  }
+}

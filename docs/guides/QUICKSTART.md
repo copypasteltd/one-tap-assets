@@ -1,5 +1,7 @@
 # 原生快速启动
 
+一键开发初始化：`.\scripts\setup-local.ps1`；运行检查：`.\scripts\run.ps1 doctor`；启动API/Worker/回收/维护：`.\scripts\run.ps1 local:start`。源码ZIP和实际构建说明见[交付指南](../delivery/README.md)。
+
 内部[最终声音双复核与事务交付](../实施/原生声音最终双复核与事务交付-v1.0.md)已连接两路线，测试使用原生数据库/媒体及显式合成语义、供应商、授权/用量和隔离响应。LISTENING 与 ASR 配置默认关闭，示例地址/密钥/精确出口留空，还须冻结模型/能力/费率及原合同。环境变量不会启售；维护只核对已存原响应，UNKNOWN 不重购。公开有声订单、真实听感/账单/授权与宿主真机仍未准入。
 
 [English](QUICKSTART.en.md) · [项目说明](../../README.md) · [当前状态](STATUS.md)
