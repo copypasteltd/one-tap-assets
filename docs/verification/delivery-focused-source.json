@@ -1,42 +1,33 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T07:01:30.806338+00:00",
+  "checked_at": "2026-10-30T07:20:55.625691+00:00",
   "strategy": "USER_REQUESTED_FAST_MAIN_FUNCTIONAL_CLOSURE",
-  "functional_scope": "docs/实施/商品档案推荐与可用方案选择-v1.0.md",
-  "source_set_hash": "1ec66fe60f9efc22e6ebbd39d62fd9bbc4a109d0517380294d1d9def54ceba13",
-  "source_files": 451,
+  "source_set_hash": "6f318f706811807f9bc0818f5c2fae370b0032eeeea77d13e754b1809d7c86d3",
+  "source_files": 452,
   "runtime_contract_files": 42,
   "resource_files": 4,
-  "source_snapshot": "docs/verification/recommendations-built-source.json",
-  "tested_functional_files_equal_build": true,
+  "source_snapshot": "docs/verification/mini-mount-build.json",
+  "functional_scope": "docs/实施/商品档案推荐与可用方案选择-v1.0.md",
   "source_unchanged_during_tests": true,
-  "recording_script_added_after_tests": "scripts/record-recommendations.ts",
-  "recording_script_typechecked_in_final_build": true,
-  "unit_checks": {
+  "changed_functional_source": [
+    "src/shared/ui/recommendations.tsx"
+  ],
+  "added_diagnostic": [
+    "scripts/check-recommendations-mount.ts"
+  ],
+  "new_checks": {
     "status": "PASS",
-    "passed": 6,
-    "report": "docs/verification/recommendations-unit.json"
+    "passed": 3,
+    "evidence": "docs/verification/mini-mount-browser.json",
+    "actual_react_and_hooks": true,
+    "native_page_show_emulated": true,
+    "native_mini_device_verified": false
   },
-  "api_checks": {
-    "status": "PASS",
-    "passed": 4,
-    "transport": "DIRECT_BUSINESS_MODULE_WITH_NATIVE_POSTGRESQL",
-    "report": "docs/verification/recommendations-api.json"
-  },
-  "browser_checks": {
-    "status": "PASS",
-    "passed": 5,
-    "capture": "docs/media/recommendations/capture-manifest.json",
-    "runner": {
-      "status": "PASS",
-      "exit_code": 0,
-      "timeout_seconds": 180,
-      "elapsed_seconds": 39.016,
-      "log_path": "runtime/delivery/recommendations-recording-1793343156402114100.log",
-      "log_sha256": "9bd02964b6a4c621391096d374498136ef170186191401ab30a4ccfbc1f91ecc"
-    },
-    "synthetic_product_ranking_and_availability": true
-  },
+  "prior_recommendation_checks": "docs/verification/recommendations-source.json",
+  "backend_client_domain_and_prior_test_files_byte_identical": true,
+  "prior_browser_capture": "docs/media/recommendations/capture-manifest.json",
+  "prior_capture_matches_current_source_set": false,
+  "prior_capture_note": "Recorded before the mount fix. Appearance is retained; the current lifecycle behavior is covered by the new actual React harness, not by relabeling old recordings.",
   "build_report": "docs/delivery/current.json",
   "build_checks": [
     {
@@ -51,8 +42,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 54080,
-      "log_path": "runtime/delivery-builds/2026-10-30T06-46-35-968Z-0b696fbf/typecheck.log",
+      "elapsed_ms": 28544,
+      "log_path": "runtime/delivery-builds/2026-10-30T07-15-30-256Z-64dd0260/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -68,29 +59,29 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 8437,
-      "log_path": "runtime/delivery-builds/2026-10-30T06-46-35-968Z-0b696fbf/server.log",
+      "elapsed_ms": 555,
+      "log_path": "runtime/delivery-builds/2026-10-30T07-15-30-256Z-64dd0260/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T06-46-35-968Z-0b696fbf\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T07-15-30-256Z-64dd0260\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T06-46-35-968Z-0b696fbf\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T07-15-30-256Z-64dd0260\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 30463,
-      "log_path": "runtime/delivery-builds/2026-10-30T06-46-35-968Z-0b696fbf/preview.log",
-      "log_sha256": "94bf4205172af70af41a1be17eefa2ce27c81bebf1e54df5e9e01e241e29c2d5"
+      "elapsed_ms": 7573,
+      "log_path": "runtime/delivery-builds/2026-10-30T07-15-30-256Z-64dd0260/preview.log",
+      "log_sha256": "7f5df439341e82a9321aadc0cc4e5005ccb4de95d9a368608b6e6b8bd86aee65"
     }
   ],
   "components": [
@@ -116,11 +107,11 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 4.883,
-      "log_path": "runtime/delivery/recommendations-doctor-1793343014034342400.log",
-      "log_sha256": "1aa9326e95ca00c339e876ea103d923b83a2e93aef55e651d1ec598e05eda81f",
+      "elapsed_seconds": 2.311,
+      "log_path": "runtime/delivery/mini-mount-doctor-1793344652011060700.log",
+      "log_sha256": "576a81a34a3e93ccc884afeac804f7caa80929280ce66b4092b81f249b8d2cc1",
       "report": {
-        "checked_at": "2026-10-30T06:50:18.349Z",
+        "checked_at": "2026-10-30T07:17:34.290Z",
         "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
         "rows": [
           {
@@ -212,9 +203,9 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 34.229,
-      "log_path": "runtime/delivery/recommendations-backend-1793343014179608700.log",
-      "log_sha256": "8cad2e311f77909af3ceab8ba34aa0cded439ff646fe66b815b592dd8c50a214",
+      "elapsed_seconds": 10.576,
+      "log_path": "runtime/delivery/mini-mount-backend-1793344651980519200.log",
+      "log_sha256": "56060c93766f600a13d43bef074d76c53b34aff8c0321e0278f7c612b26ebd35",
       "local_stack_ready": true,
       "preview_http_ready": false
     },
@@ -222,8 +213,8 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 4.069,
-      "log_path": "runtime/delivery/recommendations-preview-1793343014268287300.log",
+      "elapsed_seconds": 2.136,
+      "log_path": "runtime/delivery/mini-mount-preview-1793344651979021600.log",
       "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
       "local_stack_ready": false,
       "preview_http_ready": true
@@ -233,11 +224,6 @@
   "no_new_migration": true,
   "business_operations": 77,
   "management_operations": 35,
-  "main_registry": "docs/verification/recommendations-main-registry.json",
-  "recommendation_policy": "profile-evidence-1.0",
-  "no_inference_or_charge_during_recommendation": true,
-  "attempts_report": "docs/verification/recommendations-attempts.json",
-  "prior_delivery": "docs/verification/delivery-focused-source-27045e2.json",
   "historical_evidence_unchanged": [
     {
       "path": "docs/verification/album-save-api.json",
@@ -542,6 +528,10 @@
     {
       "path": "docs/verification/delivery-focused-source-191b9eb.json",
       "sha256": "8bec94822d9f0a977689011f6ea2eab6cca036a09d06eeb341cba5258d31d847"
+    },
+    {
+      "path": "docs/verification/delivery-focused-source-27045e2.json",
+      "sha256": "822d281d854ce38091a8b7479d436f6d03a0eaf63a9c5307d76197b17aab5793"
     },
     {
       "path": "docs/verification/delivery-focused-source-38eec3e.json",
@@ -1032,6 +1022,10 @@
       "sha256": "62e994d11ca0af1eeafaa48c19bae26298827a084f3a35876965b16031387dd2"
     },
     {
+      "path": "docs/verification/publication-27045e2.json",
+      "sha256": "a49ce4193d1d3a322936e10a4ea63ebc616abb17931643d06e38db5ef95b390b"
+    },
+    {
       "path": "docs/verification/publication-3533cb4.json",
       "sha256": "1d700bdc425f36cd1097125983587f97a052a97eb116ddb1333c4efc6e3b4a7a"
     },
@@ -1104,6 +1098,58 @@
       "sha256": "a59d241b4dbb2ff526973dd32cd9bff9622c90ea0c9f61986b6573627ab9e93f"
     },
     {
+      "path": "docs/verification/recommendations-api.json",
+      "sha256": "a2d06e0a484d12330ab6e7408e627b62f057eed755c06ea74d225083ad791819"
+    },
+    {
+      "path": "docs/verification/recommendations-attempt-01-source.json",
+      "sha256": "d9b1206cae67845c72f19b0817ee4f09797624523fe8093698cfc1c3012341a0"
+    },
+    {
+      "path": "docs/verification/recommendations-attempt-01.json",
+      "sha256": "2cbc755995f4c7c61518d11d94f8f66d80b656f3a08e9c680aecba682312f50d"
+    },
+    {
+      "path": "docs/verification/recommendations-attempt-02-source.json",
+      "sha256": "d9b1206cae67845c72f19b0817ee4f09797624523fe8093698cfc1c3012341a0"
+    },
+    {
+      "path": "docs/verification/recommendations-attempt-02.json",
+      "sha256": "ef686c96669edbc26b4bac3cf6a0e0838b7b3f2853244c5b87073912284a7c37"
+    },
+    {
+      "path": "docs/verification/recommendations-attempt-03-source.json",
+      "sha256": "d9b1206cae67845c72f19b0817ee4f09797624523fe8093698cfc1c3012341a0"
+    },
+    {
+      "path": "docs/verification/recommendations-attempt-03.json",
+      "sha256": "90bafcf94b0a019f2e2a5c704215a6a1c77a7e9cc41ecf191c67cc7b366aa5a0"
+    },
+    {
+      "path": "docs/verification/recommendations-attempts.json",
+      "sha256": "6a59d57eca503928b0b2e8a49a8c28b7f7d596cd3f83f1952d44fbe8c27a5084"
+    },
+    {
+      "path": "docs/verification/recommendations-build.json",
+      "sha256": "96e6a96f6379f8058325cb220939fc20718510174288429b9a3113e1b857b355"
+    },
+    {
+      "path": "docs/verification/recommendations-built-source.json",
+      "sha256": "df7b950cb4da8ae91b40ae4bc8d6c946e3b1266bea59a3166e450f55cf0fa6b7"
+    },
+    {
+      "path": "docs/verification/recommendations-main-registry.json",
+      "sha256": "972c7e95a52d7eb17d5ad932825b632859fc3b459dedada082186e9e1b56d90d"
+    },
+    {
+      "path": "docs/verification/recommendations-source.json",
+      "sha256": "9c431a4e545770db55f29672fae8cf174022b0eba63eca8beb08a05fee78087c"
+    },
+    {
+      "path": "docs/verification/recommendations-unit.json",
+      "sha256": "c2e2fb16f7ebf612c96b80fd9e7f8f096a643e58690dabc78079b15c68bf5169"
+    },
+    {
       "path": "docs/verification/repair-candidate-attempts.json",
       "sha256": "364b9b231a81a6d947358193e50d780c5361feb27fcac8541a4a4acdf664f355"
     },
@@ -1126,6 +1172,10 @@
     {
       "path": "docs/verification/repository-audit-191b9eb.json",
       "sha256": "52577b4e7442c89608861c25efd163a3372d7a59cc448d5f0d9462575246a2c7"
+    },
+    {
+      "path": "docs/verification/repository-audit-27045e2.json",
+      "sha256": "c533eec479c2c75f471530fd6e69015ca2b8748d230d039ec15de543c4d9165f"
     },
     {
       "path": "docs/verification/repository-audit-3533cb4.json",
@@ -1444,26 +1494,26 @@
       "sha256": "fbf919d88e4b3bb6b2e1ff5993fb62a4dacfd78c559bd7232f0c780b28b41846"
     }
   ],
-  "existing_media_files_verified": 110,
-  "new_media_files_verified": 6,
-  "baseline_media_files_with_metadata": 136,
+  "existing_media_files_verified": 116,
+  "new_media_files_verified": 0,
+  "baseline_media_files_with_metadata": 144,
   "baseline_design_files": 48,
   "frozen_c_files": 25,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
+  "prior_delivery": "docs/verification/delivery-focused-source-b800422.json",
   "browser_used": true,
   "browser_tabs_closed": true,
   "owned_preview_server_stopped": true,
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
-  "original_publication_checker_executed": false,
   "checker_weakened": false,
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
   "limitations": [
-    "Recommendation checks photo bindings, current metadata admission, trusted bundles and licenses; the original exact plan, quote, native-audio, budget and payment gates remain authoritative.",
-    "Database, browser rendering and local startup are actual native operations; model admission, buyer product, evidence and availability used by focused checks are synthetic, not production approval.",
-    "No new actual generation or audio-quality acceptance. Full suites, mini builds, native devices, long-run stability, complete official/community admission, Plus, live services and cloud deployment remain pending."
+    "Native lifecycle is emulated with actual React, the shared component and its actual paging hook; this is not native Alipay/Douyin device acceptance.",
+    "Earlier 6 strategy/client, 4 native PostgreSQL and 5 browser checks remain in their original versioned reports. Backend/client/domain/tests have unchanged bytes; earlier recordings are not relabeled as fresh current-source captures.",
+    "All original generation, audio, quote, budget, identity, payment and cleanup gates remain. Live services and sales stay off. Full suites, mini builds/devices, complete commercial admission, Plus, cloud and long-run acceptance remain pending."
   ],
-  "canonical_recommendations_provenance": "docs/verification/recommendations-source.json"
+  "canonical_mini_mount_provenance": "docs/verification/mini-mount-source.json"
 }

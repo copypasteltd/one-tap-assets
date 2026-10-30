@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text } from '@tarojs/components';
 import type { DTO } from '../contracts/types';
 import { readRecommendations } from '../client/recommendations';
@@ -7,6 +7,8 @@ import { Action, More, Notice, Panel, ResourceState, navigate, usePagedResource 
 
 export function ProductRecommendations({ profile }: { profile: DTO<'Profile'> }) {
   const list = usePagedResource(cursor => readRecommendations(client(), profile, cursor), item => `${item.preset.preset_id}:${item.preset.version}`);
+  // Recognition finishes after the native page's initial onShow; the child must load on its own mount.
+  useEffect(() => { list.reload(); }, [list.reload]);
   return <><Text className='section-title'>适合这件商品的方案</Text><Text className='secondary'>先看照片是否够用，再按商品特点推荐。也可以自由挑选其他风格。</Text>
     <ResourceState error={list.error} busy={list.busy} retry={list.reload}/>
     {list.items.map(item => <Panel key={`${item.preset.preset_id}:${item.preset.version}`}>

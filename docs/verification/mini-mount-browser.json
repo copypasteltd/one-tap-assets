@@ -1,0 +1,31 @@
+{
+  "checked_at": "2026-10-30T07:14:00.027Z",
+  "status": "PASS",
+  "source_set_hash": "6f318f706811807f9bc0818f5c2fae370b0032eeeea77d13e754b1809d7c86d3",
+  "source_unchanged": true,
+  "kind": "ACTUAL_REACT_WITH_EMULATED_NATIVE_PAGE_SHOW_AND_SYNTHETIC_READ_ONLY_DATA",
+  "native_mini_device_verified": false,
+  "checks": [
+    "LATE_MOUNT_AFTER_NATIVE_SHOW_LOADS_FIRST_PAGE_WITHOUT_ANOTHER_SHOW",
+    "LATE_MOUNT_PAGINATION_RETAINS_FIRST_AND_SECOND_PAGE",
+    "RETURNING_NATIVE_SHOW_REFRESHES_THE_FIRST_PAGE"
+  ],
+  "errors": [],
+  "failure": null,
+  "browser_tabs_closed": true,
+  "owned_server_stopped": true,
+  "source_files": [
+    {
+      "path": "scripts/check-recommendations-mount.ts",
+      "sha256": "45b06d933a6a7852a768e6f4aaaf08a6fbf97413fa1fb583f8d143579446a410"
+    },
+    {
+      "path": "src/shared/ui/base.tsx",
+      "sha256": "08270940650785ce4a5e1a26e8c03282e25e6431e61fac252b4bfe10b3b50fbf"
+    },
+    {
+      "path": "src/shared/ui/recommendations.tsx",
+      "sha256": "58de639ea1ee68173158da1d47e71e5c892ac2fa18625101bf0f4c043289194e"
+    }
+  ]
+}

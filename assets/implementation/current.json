@@ -3,11 +3,11 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-30T07:01:30.806338+00:00",
+  "checked_at": "2026-10-30T07:16:07.746Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "verification_mode": "FOCUSED_PRODUCT_RECOMMENDATIONS_CLOSURE",
+  "verification_mode": "FOCUSED_MINI_RECOMMENDATION_MOUNT_CLOSURE",
   "retained_integration": null,
   "command_checks_passed": false,
   "commands": [
@@ -23,8 +23,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 54080,
-      "log_path": "runtime/delivery-builds/2026-10-30T06-46-35-968Z-0b696fbf/typecheck.log",
+      "elapsed_ms": 28544,
+      "log_path": "runtime/delivery-builds/2026-10-30T07-15-30-256Z-64dd0260/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -40,34 +40,34 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 8437,
-      "log_path": "runtime/delivery-builds/2026-10-30T06-46-35-968Z-0b696fbf/server.log",
+      "elapsed_ms": 555,
+      "log_path": "runtime/delivery-builds/2026-10-30T07-15-30-256Z-64dd0260/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T06-46-35-968Z-0b696fbf\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T07-15-30-256Z-64dd0260\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T06-46-35-968Z-0b696fbf\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T07-15-30-256Z-64dd0260\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 30463,
-      "log_path": "runtime/delivery-builds/2026-10-30T06-46-35-968Z-0b696fbf/preview.log",
-      "log_sha256": "94bf4205172af70af41a1be17eefa2ce27c81bebf1e54df5e9e01e241e29c2d5"
+      "elapsed_ms": 7573,
+      "log_path": "runtime/delivery-builds/2026-10-30T07-15-30-256Z-64dd0260/preview.log",
+      "log_sha256": "7f5df439341e82a9321aadc0cc4e5005ccb4de95d9a368608b6e6b8bd86aee65"
     }
   ],
   "suites": [],
-  "source_files": 451,
-  "source_set_hash": "1ec66fe60f9efc22e6ebbd39d62fd9bbc4a109d0517380294d1d9def54ceba13",
+  "source_files": 452,
+  "source_set_hash": "6f318f706811807f9bc0818f5c2fae370b0032eeeea77d13e754b1809d7c86d3",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -767,7 +767,7 @@
     },
     {
       "path": "src/shared/ui/recommendations.tsx",
-      "sha256": "15eab7785d88c81729170508c05bb54a9f75c95c5b3ef720e63dc30056310564"
+      "sha256": "58de639ea1ee68173158da1d47e71e5c892ac2fa18625101bf0f4c043289194e"
     },
     {
       "path": "src/shared/ui/revision.tsx",
@@ -1716,6 +1716,10 @@
     {
       "path": "scripts/build-server.ts",
       "sha256": "b0e361a202514e7a97a123d3b24f7cf8e4a1a5e510035b0f5c74139fbd01413a"
+    },
+    {
+      "path": "scripts/check-recommendations-mount.ts",
+      "sha256": "45b06d933a6a7852a768e6f4aaaf08a6fbf97413fa1fb583f8d143579446a410"
     },
     {
       "path": "scripts/community-commercial.ts",
@@ -2787,9 +2791,13 @@
   "product_recommendations": {
     "source_implemented": true,
     "fixture_verified": true,
-    "evidence": "docs/verification/recommendations-source.json",
-    "read_only": true,
-    "client_scope_checked": true,
-    "ranked_keyset_pagination": true
+    "evidence": "docs/verification/mini-mount-source.json",
+    "retained_backend_checks": "docs/verification/recommendations-source.json"
+  },
+  "recommendation_mount": {
+    "source_implemented": true,
+    "fixture_verified": true,
+    "native_device_verified": false,
+    "evidence": "docs/verification/mini-mount-source.json"
   }
 }

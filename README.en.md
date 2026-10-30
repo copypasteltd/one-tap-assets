@@ -6,6 +6,8 @@ One Tap Assets turns product photos into an image, short-video and copy pack. Al
 
 This delivery connects [profile-based recommendations and preset selection](docs/实施/商品档案推荐与可用方案选择-v1.0.md). After recognition, buyers see currently eligible offers, concrete reasons, authors and matching variant counts. They can browse other styles and retain their original selection. Reading recommendations does not invoke paid models, select a preset, or create plans, quotes or orders.
 
+The final patch starts recommendations when recognition mounts the component after the native page show event. Three checks use actual React with emulated page events: initial load, pagination and refresh on return. [Current build and evidence](docs/verification/mini-mount-source.json). The 15 earlier checks and recordings retain their original versions; backend/client/ranking bytes are unchanged and old captures are not relabeled as fresh current-source recordings.
+
 | Step | System behavior | Buyer action |
 | --- | --- | --- |
 | 1. Photograph | Bind 3–5 live photos of one product; recognize visible facts and unknowns | Capture whole, side and detail views without filling a product form |
@@ -16,7 +18,7 @@ This delivery connects [profile-based recommendations and preset selection](docs
 
 The community retains ten official styles and 25 trusted components, including three choices each for narrative, rhythm, camera and typography. Recommendations are read-only preselection: the exact plan, quote, audio, budget, payment and delivery gates revalidate live state.
 
-Six strategy/client checks, four native PostgreSQL checks and five browser checks pass, together with typecheck, server/preview builds, native setup and local startup. 451 source files, 42 contract/Skill files and four font resources; 31 migrations and 77 business/35 management operations, with no new migration. Three screenshots and WebM/MP4/GIF add 6 media files; all 110 previous media and the frozen C design remain intact. [Evidence](docs/verification/recommendations-source.json) · [Package](docs/delivery/package.json) · [Run and package](docs/delivery/README.md).
+Six strategy/client checks, four native PostgreSQL checks and five browser checks pass, together with typecheck, server/preview builds, native setup and local startup. 452 source files, 42 contract/Skill files and four font resources; 31 migrations and 77 business/35 management operations, with no new migration. Three screenshots and WebM/MP4/GIF add 6 media files; all 110 previous media and the frozen C design remain intact. [Evidence](docs/verification/recommendations-source.json) · [Package](docs/delivery/package.json) · [Run and package](docs/delivery/README.md).
 
 ![Profile-based preset selection in the shared mini-program UI](docs/media/recommendations/walkthrough.gif)
 
