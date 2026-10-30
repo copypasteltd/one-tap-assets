@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · Support repair workspace / 客服素材纠错工作台
+
+本轮已接通[客服素材纠错工作台](docs/实施/客服素材纠错工作台-v1.0.md)：原接手客服核对冻结档案和真实交付图片，编辑封面、展示顺序或配套文案，提交并查询原五阶段纠错结果。原键恢复与回复写入互斥，重载查询同一请求；实际新文案文件与素材版本交付通过。11项客户端检查、9组页面操作及4组实际接口检查通过，4张截图和录像/GIF已留存。
+
+New: the [support repair workspace](docs/实施/客服素材纠错工作台-v1.0.md) lets the assigned staff inspect the frozen profile and actual private images, edit cover/list order/companion copy, and follow the existing five-stage correction. It preserves the original request on ACK loss, shares a pending-write gate with replies, and recovers the linked request after reload. Actual corrected UTF-8 delivery passes; 11 client cases, 9 browser groups and 4 native API groups pass, with four screenshots and recorded GIF/video.
+
+Added two support:repair GET operations (77 business / 32 management total). Existing order, evidence, budget, deadline, UNKNOWN, license/privacy and independent-review gates stay enforced. Final server/web builds pass; mini builds and comprehensive suite NOT_RUN. All official presets remain disabled; no full-product, production or cloud admission claim. The initial client fixture failure is preserved separately.
+
 ## 2026-10-30 · 原工单免费纠错执行 / Evidence-bound platform corrections
 
 本轮接通[工单关联免费纠错与售后原额度](docs/实施/工单关联免费纠错与售后原额度-v1.0.md)：原接手客服按原工单、原交付版本提交封面、清单展示顺序或配套文案纠错；五阶段重新制作/验收后发布新版本，不消耗用户一次成功小修改。所有请求共用原售后费用、推理/角色/Token/工具额度和绝对截止。两项定向原生集成通过；仅类型、服务端/网页构建与本地启动，未运行全面测试、未重编小程序。

@@ -44,7 +44,7 @@ export function checkedRevisionChange(pack:DTO<'Deliverables'>,request:DTO<'Revi
   }
   return structuredClone(request);
 }
-async function deliveredSource(db:Db,tenantId:string,orderId:string,ownerId:string):Promise<{
+export async function deliveredSource(db:Db,tenantId:string,orderId:string,ownerId:string):Promise<{
   contract:FrozenContract;policy:RevisionPolicy;snapshot:Snapshot;snapshotHash:string;contractHash:string;expiry:string;
 }> {
   const order=(await db.query<{deadline_at:Date;private:{contract:FrozenContract;contract_hash:string};data:DTO<'Order'>}>(`SELECT deadline_at,private,data FROM orders

@@ -1,0 +1,103 @@
+{
+  "captured_at": "2026-10-30T01:10:32.786Z",
+  "type": "ACTUAL_STAFF_REPAIR_UI_NATIVE_FIVE_STAGE_API_POSTGRESQL_AND_FILES",
+  "data_source": "SYNTHETIC_PRODUCT_IMAGES_SEMANTIC_ROLES_IDENTITY_AND_METERING_REAL_BROWSER_HTTP_STDIO_DATABASE_MEDIA_AND_REPAIR_EFFECTS",
+  "source_set_hash": "e6892212fa01b34ddd8a1a4b24da093231318cd93e3cea35bdf663d732740559",
+  "build_root": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build",
+  "native_mini_device_verified": false,
+  "real_generation_verified": false,
+  "real_payment_verified": false,
+  "production_staff_identity_verified": false,
+  "full_product_verified": false,
+  "browser_tabs_closed": true,
+  "owned_api_and_database_pool_closed": true,
+  "browser_errors": [],
+  "external_network_requests": [],
+  "checks": [
+    "ACTUAL_STAFF_CLAIM_REVEALS_PERMISSION_GATED_FROZEN_PROFILE_AND_CURRENT_MANIFEST",
+    "ACTUAL_PRIVATE_PNG_BYTES_SERVER_AND_BROWSER_SHA256_CHECK_AND_DECODE",
+    "ALL_THREE_EDITORS_NOOP_GUARD_AND_EXPLICIT_CONFIRMATION_BEFORE_WRITE",
+    "COMMITTED_REPAIR_ACK_LOSS_BLOCKS_OTHER_WRITES_AND_REPLAYS_EXACT_ORIGINAL_KEY_BODY_ONCE",
+    "COMPLETION_LABEL_REQUIRES_ACTUAL_COMPLETED_REVISION_AND_NEW_MANIFEST",
+    "RELOAD_RECOVERS_LINKED_REPAIR_FROM_SERVER_WITHOUT_RESUBMISSION_OR_BROWSER_STORAGE",
+    "NO_HORIZONTAL_OVERFLOW_AT_360PX",
+    "PRIVACY_REFRESH_CLEARS_PRIVATE_REPAIR_PANEL",
+    "LOGOUT_CLEARS_CREDENTIALS_PRIVATE_PROFILE_DRAFT_AND_IMAGES"
+  ],
+  "api_checks": [
+    "BUYER_READ_ONLY_AND_UNASSIGNED_STAFF_CANNOT_READ_REPAIR_PROFILE_OR_PACK",
+    "ASSIGNEE_ONLY_FROZEN_PROFILE_EXACT_CURRENT_PACK_AND_IMAGE_VERSION_MEMBERSHIP",
+    "ACTUAL_FIVE_STAGE_REVISION_AND_FRESH_POST_FACTS_STYLE_RECEIPTS_PUBLISH_UTF8_BYTES_WITH_ORIGINAL_PARENT_EXPIRY_AND_ALLOWANCE",
+    "ACTUAL_PRIVACY_WITHDRAWAL_BLOCKS_PROFILE_AND_IMAGE_READ"
+  ],
+  "screenshots": [
+    {
+      "page": "01-source-profile-and-pack",
+      "path": "docs/media/support-repair/01-source-profile-and-pack.png"
+    },
+    {
+      "page": "02-private-delivered-image",
+      "path": "docs/media/support-repair/02-private-delivered-image.png"
+    },
+    {
+      "page": "03-correction-review",
+      "path": "docs/media/support-repair/03-correction-review.png"
+    },
+    {
+      "page": "04-completed-linked-delivery",
+      "path": "docs/media/support-repair/04-completed-linked-delivery.png"
+    }
+  ],
+  "recording": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 1100
+      }
+    ],
+    "format": {
+      "duration": "14.680000"
+    }
+  },
+  "files": [
+    {
+      "path": "docs/media/support-repair/01-source-profile-and-pack.png",
+      "bytes": 91674,
+      "sha256": "ddedda9edda5e035739414892ecd77e167b2bf9d4fe573558b6122bc92ecf1b2"
+    },
+    {
+      "path": "docs/media/support-repair/02-private-delivered-image.png",
+      "bytes": 62008,
+      "sha256": "ed0d2ea89db98c4eafc92770af6855b2bf6e64ff347571d1adbdd2b1652b1788"
+    },
+    {
+      "path": "docs/media/support-repair/03-correction-review.png",
+      "bytes": 95642,
+      "sha256": "9c5c2ace62a9ad4ee09c18e5cfd41fdf12fe8cfc904c976809d1327c6ee97415"
+    },
+    {
+      "path": "docs/media/support-repair/04-completed-linked-delivery.png",
+      "bytes": 101983,
+      "sha256": "8bcfe7d611326c0f9f030d8398f799f9a7edaa382a76ee7c131cffbe89d6bb65"
+    },
+    {
+      "path": "docs/media/support-repair/walkthrough.webm",
+      "bytes": 2134197,
+      "sha256": "6d864d051c9cfc0667d615c7d47fa33c82ce1a7d228fa9a34c63ec478cf8c2fb"
+    },
+    {
+      "path": "docs/media/support-repair/walkthrough.mp4",
+      "bytes": 415039,
+      "sha256": "c846907b429dcc884bbfc6c8b3c8151143de66d10686fa90f037a73baf624163"
+    },
+    {
+      "path": "docs/media/support-repair/walkthrough.gif",
+      "bytes": 835767,
+      "sha256": "681fe5e4dd5b13339e8c33f0721e17d169f7a17602da68d9b5e339d3fb067d31"
+    }
+  ],
+  "mutating_repair_requests": 2
+}

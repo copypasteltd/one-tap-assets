@@ -599,6 +599,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/support-tickets/{ticket_id}/repair-context": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 核对原工单的素材、档案与纠错状态
+         * @description 独立support:repair权限及原接手客服；每次重验撤销、许可、原清单与SHA，私有内容不缓存。可受理不等于保证交付；写入仍重新校验原工单与额度。
+         */
+        get: operations["getSupportRepairContext"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/support-tickets/{ticket_id}/repair-manifests/{manifest_revision}/images/{deliverable_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 读取当前原清单内的实际私有图片
+         * @description 独立support:repair权限及原接手客服；每次重验撤销、许可、原清单与SHA，私有内容不缓存。可受理不等于保证交付；写入仍重新校验原工单与额度。
+         */
+        get: operations["readSupportRepairImage"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -2280,6 +2320,7 @@ export interface components {
             message: string | null;
             attachment_asset_ids: string[];
             response: components["schemas"]["SupportReply"] | null;
+            repair_access?: boolean;
         };
         SupportProcessRequest: {
             expected_revision: number;
@@ -2322,6 +2363,36 @@ export interface components {
             ticket_id: string;
             expected_ticket_revision: number;
             change: components["schemas"]["RevisionRequest"];
+        };
+        SupportRepairContext: {
+            ticket: components["schemas"]["ManagedSupportTicket"];
+            manifest: components["schemas"]["Deliverables"] | null;
+            product_profile: components["schemas"]["Profile"] | null;
+            repair: components["schemas"]["Revision"] | null;
+            can_submit: boolean;
+            allowed_changes: ("COVER" | "ALLOWED_ORDER" | "DISPLAY_TEXT")[];
+            reason_codes: string[];
+            window_expires_at: string | null;
+        };
+        SupportRepairImage: {
+            /** @constant */
+            mime_type: "image/png";
+            sha256: string;
+            bytes_base64: string;
+            deliverable_id: string;
+            manifest_revision: number;
+        };
+        SupportRepairContextResponse: {
+            /** @constant */
+            code: "OK";
+            data: components["schemas"]["SupportRepairContext"];
+            trace_id: string;
+        };
+        SupportRepairImageResponse: {
+            /** @constant */
+            code: "OK";
+            data: components["schemas"]["SupportRepairImage"];
+            trace_id: string;
         };
     };
     responses: never;
@@ -3365,6 +3436,70 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ManagedSupportTicketResponse"];
+                };
+            };
+            /** @description 权限、版本或内容撤销错误 */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    getSupportRepairContext: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                ticket_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 工单状态或受权内容 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SupportRepairContextResponse"];
+                };
+            };
+            /** @description 权限、版本或内容撤销错误 */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    readSupportRepairImage: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                ticket_id: string;
+                manifest_revision: number;
+                deliverable_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 工单状态或受权内容 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SupportRepairImageResponse"];
                 };
             };
             /** @description 权限、版本或内容撤销错误 */

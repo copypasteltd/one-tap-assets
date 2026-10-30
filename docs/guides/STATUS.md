@@ -1,104 +1,53 @@
 # 当前交付与功能状态 / Delivery and functional status
 
-本轮接通[工单关联免费纠错与售后原额度](../实施/工单关联免费纠错与售后原额度-v1.0.md)：原接手客服按原工单、原交付版本提交封面、清单展示顺序或配套文案纠错；五阶段重新制作/验收后发布新版本，不消耗用户一次成功小修改。所有请求共用原售后费用、推理/角色/Token/工具额度和绝对截止。两项定向原生集成通过；仅类型、服务端/网页构建与本地启动，未运行全面测试、未重编小程序。
+2026-10-30。按用户要求优先完成主要功能和可运行交付包，不等待全面测试绿灯。当前增补[客服素材纠错工作台](../实施/客服素材纠错工作台-v1.0.md)，完整来源见[本轮证据](../verification/support-repair-ui-source.json)。58项需求/52项P0、三路线、官方10风格/至少14变体和C设计继续保留。
 
-以下旧轮次及截图/录像保持各自历史来源；本轮未改界面、不复录媒体。原生成式/口播售后、客服纠错编辑面板、真实服务、真机、完整社区商业制作及Plus仍待完成。
+## 本轮实现 / This delivery
 
-本轮新增[客服接单、回复与处理工作台](../实施/客服接单回复与处理工作台-v1.0.md)：实际管理接口支持队列、接单、私有证明、回复、解决和关闭；用户可在原反馈记录查看回复。17项单元检查、10项浏览器操作和4项实际API冒烟通过；API测试命令180秒超时且无用例结果，保留原记录，不等待全面绿灯。
-
-以下既有轮次记录对应各自历史源码，当前状态以本轮来源为准。本轮ZIP包含当前服务端/网页产物和完整小程序源码，最终快照未重建小程序编译物。
-
-2026-10-30新增[订单反馈与售后记录](../实施/订单反馈与售后记录-v1.0.md)：六类问题、可选证明图片、原请求回执丢失恢复、本人反馈分页/订单筛选与最新状态查询已接通。32项定向检查和10项页面操作通过，包含实际PNG本地上传验证；客服处理、真实退款/纠错、云存储及真机仍待验收。
-
-2026-10-30新增[分类保存与相册恢复](../实施/相册分类保存与宿主回调-v1.0.md)：支持整套、只存图片/视频及单项重试，返回恢复原进度，明确成功不重复保存，UNKNOWN先核对相册。双端真实接口适配等待complete串行，支付宝视频不再固定拒绝；27项定向检查和10项页面操作通过，真实手机相册仍待验收。
-
-2026-10-30新增[原订单取消与退款](../实施/订单取消与原支付动作-v1.0.md)：订单页支持付款前取消、已付款排队取消及原路退款进度，制作开始后转售后。旧支付动作每次重验原单，UNKNOWN只查单；取消后迟到付款只记一次并申请一次退款。17单元/6原生API和9项浏览器操作通过，真实交易与真机仍待验收。
-
-2026-10-30新增[草稿恢复与方案规格续选](../实施/草稿恢复与方案规格续选-v1.0.md)：首页恢复本人有效草稿，素材页列出服务端草稿；已有档案无需本地分析编号。先选方案后拍照保留方案/规格的四版本引用，可继续原清单或原规格，禁售/失效不换版；17项单元和3项原生API检查、8项浏览器操作通过。真实登录/模型与真机仍待验收。
-
-2026-10-30更新[逐张拍照与原上传批次](../实施/逐张拍照与原上传批次-v1.0.md)：支持逐张拍摄、相册补图、单张重拍和移除，保留取消前照片；凑齐3–5张后开始识别。同批次换图禁止覆盖原上传，新照片组清除过期的本地跳转引用。10项定向检查、6项共享页面操作检查通过；真机授权仍待验收。
-
-2026-10-30新增[生成式受限修复与原素材复用](../实施/生成式受限修复与原素材复用-v1.0.md)：两条无声生成路线已连接选择性重制、已结算原素材复用、新参考身份核验、新文件与双新复核交付。2项定向用例通过，7项旧用例本轮未选；外部模型与计量为合成响应。原订单限制保持冻结，原生口播修复、真实服务与真机验收仍待完成。
-
-上一轮原图专项（保留原验证来源）：[原图候选修复与重新验收](../实施/原图候选修复与重新验收-v1.0.md)：失败证据定位、CONTENT受限改稿、实际新文件、新封存包、双新复核及交付已接通，2项定向原生集成用例通过。原订单预算/截止/调用上限保持冻结；原生口播修复、真实服务和真机仍待完成。
-
-2026-10-30：按用户要求加速主要功能收口，采用有界构建、核心冒烟和交付包核验，不等待全面测试绿灯。58项需求/52项P0、三路线、10风格/最少14变体和C设计继续保留。当前为源码与实际成功构建候选交付，原生口播修复、真实服务、真机及云端仍有缺口。
-
-The user requested focused delivery without a full green suite. Functional scope and the frozen design remain; this source/build candidate does not certify the complete product or production.
-
-## 本轮交付 / This delivery
-
-| 编号 / No. | 实现 / Implementation | 结果 / Result |
+| 编号 | 本轮实现 | 结果 |
 | --- | --- | --- |
-| 01 | 原生初始化、自检 / Native setup and doctor | `setup-local.ps1` / `doctor` |
-| 02 | API、Worker、回收器和媒体维护 / Owned four-service startup | `local:start`, readiness and owned shutdown |
-| 03 | 共享小程序页面回放 / Shared-screen replay | `preview:serve`, loopback static server |
-| 04 | 独立构建和逐项日志 / Isolated builds and exact logs | `delivery:build --smoke`, bounded per command |
-| 05 | 源码、文档、媒体及成功产物ZIP / Source and available outputs | `delivery:package`, per-file SHA-256 |
+| 01 | 已接手客服读取冻结商品档案、当前清单和实际私有图片 | 已实现，独立权限/版本/摘要/隐私门禁 |
+| 02 | 封面、完整展示顺序和配套文案编辑 | 已实现，无变化阻断、核对确认 |
+| 03 | 原键回执恢复、回复与纠错互斥 | 已实现，真实已提交ACK丢失后只产生一个请求 |
+| 04 | 五阶段执行结果与重载查询 | 已实现，新文案实际字节及新manifest核验 |
+| 05 | 双语README、4截图、MP4/WebM/GIF与交付包 | 当前源码/成功产物打包，历史证据保持 |
 
-当前绑定 / Current binding: 405 source files / 42 contracts / 4 resources; bd27a390。
-
-| 编号 / No. | 检查 / Check | 实际结果 / Actual |
+| 编号 | 本轮检查 | 结果 |
 | --- | --- | --- |
-| 01 | 类型 / Typecheck | PASS |
-| 02 | 单元关键路径 / Focused units | 17 PASS / 0 FAIL; exact final source snapshot |
-| 03 | API测试命令 / API test command | TIMEOUT 180s; no case results |
-| 04 | 客服工作台 / Actual HTTP/browser smoke | 10 browser + 4 additional API checks PASS |
-| 05 | 自检/后端/页面服务 / Doctor/backend/replay | PASS / PASS / PASS |
-| 06 | server build | PASS |
-| 07 | preview build | PASS |
-| 08 | alipay build | NOT_RUN |
-| 09 | douyin build | NOT_RUN |
-| 10 | 全面测试/真实服务/真机 / Full/live/device | NOT_RUN / NOT_ADMITTED |
+| 01 | 客服客户端定向用例 | 11通过；首次1项夹具断言失败保留 |
+| 02 | 页面操作与原生API | 9组浏览器、4组实际API检查通过；输入/语义/身份/计量合成 |
+| 03 | 类型/server/preview/自检/四服务启动/预览启动 | PASS |
+| 04 | alipay/douyin最终编译 | NOT_RUN，完整源码保留，旧产物排除 |
+| 05 | 全面测试、真实服务、宿主真机、生产 | NOT_RUN / NOT_ADMITTED |
 
-只有本轮成功目标纳入构建交付目录，超时/失败目标保留源码及重建命令；不使用旧产物补位。完整测试及原发布检查本轮未执行，历史失败仍见[原费用来源](../verification/repair-cost-native-source.json)。本轮补录实际客服工作台4张截图与MP4/WebM/GIF；71份历史媒体及C定型稿原摘要不变，共核对78份媒体。API超时不升级为通过。
+当前绑定412源码/42契约/4资源，`e6892212`；[构建](../delivery/current.json)、[媒体](../media/support-repair/README.md)、[启动与打包](../delivery/README.md)。包路径和SHA另见仓库中的 `docs/delivery/package.json`，该外部索引不打入自身ZIP。
 
-Only successful current builds enter the package; failed/timed-out targets retain source and rebuild instructions. The original full checker was not run this round. Historical failures remain unchanged, and the existing demonstration media is retained with its original synthetic-data scope.
+## 既有实现边界 / Existing scope
 
-入口：[交付/启动指南](../delivery/README.md)、[构建记录](../delivery/current.json)、[精确来源](../verification/delivery-focused-source.json)、[实现索引](../../assets/implementation/current.json)。包生成后的路径/摘要另见仓库中的`docs/delivery/package.json`；它作为外部索引不打入自身所指的ZIP，以避免自引用。
-
-## 当前实现边界 / Implementation boundary
-
-| 编号 / No. | 内容 / Capability | 当前情况 / Current state |
+| 编号 | 能力 | 当前状态 |
 | --- | --- | --- |
-| 01 | 双小程序与API / Clients and API | 17共享页面；77业务/26管理接口契约与原生路由，账户恢复/相册journal；真机未验 / Shared source and builds, no native device certification |
-| 02 | 商品档案与内容 / Recognition and plan | 冻结照片、证据/unknown、商品锁、Skill预载/受控内容工具；真实模型未验 / Implemented contracts and fixtures, real model unverified |
-| 03 | 原图无声 / Silent photo layout | 实际PNG/MP4、后期/QC、封存双复核/事务交付、本人预览与有限修改；角色/计量/隔离为合成 / Actual native media, synthetic agent evidence |
-| 04 | 生成基础 / Generation foundation | 图片/异步视频、原任务恢复、预算/截止/实际媒体；35项网关和6项受控MCP专项 / Native provider-boundary and scoped-protocol fixtures |
-| 05 | 生成式无声整包 / Silent generated pack | 两路线参考核验→唯一制作角色→实际PNG/MP4整包→后期/QC/最终双复核/交付；原角色接管及原费用/额度，7项新专项；模型/隔离合成，官方变体未验 / Both complete silent fixture chains, original-role recovery and atomic publication; official variants unverified |
-| 06 | 社区 / Community | 收藏/草稿/授权/发布状态/治理，独立原图无声SAMPLE，审核后独立公开副本与撤回；完整商业发布未验 / Native lifecycle coverage, incomplete commercial admission |
-| 07 | 恢复与隐私 / Recovery and privacy | 租约、预算、原回执、登记对象回收、主库逻辑脱敏、外部签名删除日志与原生备份重放；真实物理/外部边界未验 / Controlled recovery coverage, incomplete production erasure |
-| 08 | 设计与文档 / Design and docs | C基线保留、双语README/操作指南、真实浏览器媒体、源码证据 / Frozen baseline, bilingual operational docs and actual replay media |
-| 09 | 原生声音内核 / Native audio kernel | 实际PCM/四字幕/许可配乐与压低/编码后检查，15项专项；内部订单POST现已包装接入，独立听音未验 / Actual kernel and private POST wrapper, no listening admission |
-| 10 | 持久转写 / Durable ASR | 17项专项，原任务/费用/私有WAV和实际字级时间码；POST受控工具、显式均值副本与相消检查已接入，真实服务未验 / Scoped private POST service; real provider unverified |
-| 11 | 声音合同与费用 / Audio contract and costs | 23项专项，人物/声音/许可/预算/一次整轨ASR/撤权退款；内部制作/ASR/POST/QC/听音/最终双复核/事务交付已消费，公开有声订单和真实服务仍关闭 / Private pipeline connected; public and real-provider admission closed |
-| 12 | 有声制作与后期 / Native production and POST | 当前23项订单专项含原12项文件链路、6项听音基础和5项最终复核；两路线完整原声/ALAC、一次ASR、字幕/许可配乐、原清单恢复与事务撤权核验 / Actual private pipeline; synthetic model, usage and authorization responses |
-| 13 | 最终声音双复核与交付 / Final native-audio review and publication | 同一原听音完整输入/推理/工具/不可变报告绑定，有声事务交付/下载与释放关联；新增5项控制回归包含于上述23项，正向中文语义刻意构造 / Private integration with fabricated semantic controls, no real-listening or production certification |
-| 14 | 自动修复 / Automatic repair | 原图及两无声生成路线已接通；支持选择性重制、原素材复用和新包双复核；原生口播待完成 / Photo and silent-generated repair connected; audio pending |
-| 15 | Worker内部故障与日志 / Private worker diagnostics | 固定分类/允许原生码/执行位置、公开错误不变，隔离同步/异步日志故障；尽力输出，生产日志链路未验 / Fixed private fields and non-authoritative sinks; durable production logging unverified |
-| 16 | MCP原任务查询 / Original MCP observations | 已确认编号的暂时性读故障有界恢复，第三次连续失败停止；原20秒HTTP/角色截止、授权/限流/TLS保留，输入关闭只停本桥I/O / Bounded original reads and owned shutdown; not complete media repair |
+| 01 | 双小程序与API | 17共享页面、77业务/32管理操作；拍照、草稿、方案、订单、保存和售后源码已有，真机未验 |
+| 02 | 多模态档案、内容、Skill | 照片/证据/unknown/身份锁/方案冻结与受控工具已有；真实模型未准入 |
+| 03 | 三条无声制作路线 | 原图排版及两生成路线的实际媒体/后期/QC/双复核/事务交付已有合成角色原生证据 |
+| 04 | 原生声音 | 内部原音轨、ASR、字幕、许可配乐、听音和最终复核链已有；真实听音/有声商用仍关闭 |
+| 05 | 修复与售后 | 原图和两无声生成路线受限失败修复、原图有限小修改/平台纠错已有；生成式/口播售后未完 |
+| 06 | 社区 | 收藏/草稿/授权/发布审核、原图无声SAMPLE及独立公开副本/撤回已有；完整商业制作未验 |
+| 07 | 资金、恢复与隐私 | 租约/预算/UNKNOWN、登记对象回收、主库逻辑脱敏/外部签名删除日志/原生备份重放已有；真实资金和外部删除边界未准入 |
+| 08 | 设计与文档 | C冻结25文件与归档保持；双语README及实际浏览器录制，历史78媒体另存 |
 
-首轮费用保护与内部修复费用授权已实现；首轮不能占用修复保留额，只有原失败证据及新阶段绑定通过后，内部费用端口才允许使用修复域。原图候选修复已接通，原生口播仍待完成。Photo repair uses these original limits; native-audio repair is unfinished.
+上述“已有”表示源码和各自有限证据范围，历史用例没有自动升级为当前全量验证。详见[源码进度](../实施/源码实现进度-v3.1.md)及[历史证据目录](../verification/README.md)。
 
-## 待完成优先顺序 / Remaining priorities
+## 待处理事项 / Remaining work
 
-完整原听音、最终双角色/推理/工具/报告与有声事务交付已有内部接入。需要真实中文听感、缓存账单、授权、跨镜人物/商品一致性及完整输入容量准入；控制测试不替代这些证据。Private integration exists; real listening, billing, rights, multi-shot and full-input capacity still require admission.
-
-| 顺序 / Priority | 待办 / Work | 完成条件 / Completion evidence |
+| 编号 | 待完成事项 | 状态 |
 | --- | --- | --- |
-| 00 | 原任务恢复及运行稳定性 / Original-operation recovery and stability | 按当前交付结果处理启动与核心构建缺项；全面回归移至交付后，不作为本轮源码打包前置条件；历史故障继续留存 / Resolve current startup/build gaps first; defer comprehensive regression until after source delivery and preserve historical failures |
-| 01 | 生成式官方变体与真实服务验收 / Official generated variants and real-service acceptance | 在已有两条无声内部链路上验证真实模型、商品身份/风格质量、完整规格和原费用/恢复；不能用2秒夹具替代 / Real model/quality/specification evidence beyond short silent fixtures |
-| 02 | 原生有声与资源规格 / Native audio and resources | 在已有内部制作/ASR/POST/文件QC上验证真实授权/识别/OSS/费用，验证连续多镜人物/商品/声音绑定、完整输入容量及真实最终听音/双复核/交付质量 / Real rights/ASR/storage, multi-shot/full-input capacity and final listening/review/delivery quality |
-| 03 | 真实Codex与受限身份/释放 / Real Codex, restricted identity and cleanup | 服务凭证、真实推理计量、原生启动器、隔离/进程树/孤儿回收与G0证据 / Native verified operation |
-| 04 | 支付/模型/对象存储与四组真机 / Live integrations and four device groups | 宿主登录/照片/付款/退款/下载/相册，真实费用及OSS/隐私边界 / Live platform and device evidence |
-| 05 | 自动修复、完整社区与售后 / Automatic repair, community and aftercare | F09/F46/F55最多一轮原预算/原截止修复、新候选/新包/双新复核；生成式/有声/资源样例、发布准入、许可撤销、完整修改与平台纠错 / Bounded repair with fresh candidates/reviews, plus eligible community and aftercare |
-| 06 | 全量P0验收与稳定性 / Full P0 acceptance and stability | 10风格/14变体各30次整包，52项P0及长期运行；历史原生heap异常需复验 / Benchmarks and native soak |
-| 07 | Plus与管理Web / Plus and management web | 复杂编辑/深化、运营界面，按P1单列 / Separate advanced interfaces |
+| 01 | 生成式/原生口播售后，图片内容和视频字幕修改 | 待实现 |
+| 02 | 真实Codex/模型/费率/支付/OSS、受限原生隔离/回收、生产删除和财务恢复 | 待接入准入 |
+| 03 | 两宿主授权、相册/支付真机，官方14变体完整质量与时延验收 | 待验收 |
+| 04 | 社区完整商业制作、生成式/有声样例、资源与许可全链路 | 待完成 |
+| 05 | Plus、转派/完整工单时间线、多语言/A-B等 | 后续需求 |
+| 06 | 云端服务部署、完整58项验收及商业开售 | 未完成；全部官方方案禁售，完整产品/生产/云端false |
 
-全部58项需求持续保留，不能以局部通过缩成仅原图MVP。所有官方方案维持`sale_enabled=false`；完整准入前不启售。Keep all 58 requirements; partial coverage does not reduce the scope to a photo-only MVP. All official variants remain unavailable for sale.
+后续继续使用原预算、绝对截止和UNKNOWN原任务恢复；不得用新实例/修订ID刷新额度，不可用元数据代替真实媒体、独立语义复核或生产隔离。普通提交推送继续按用户授权同步更新记录；不使用Docker/WSL/虚拟机，不调度未授权子代理。
 
-当前原图修复：两份原失败意见、唯一核算授权、CONTENT准备加六新阶段和新文件/双新复核；原生口播仍待完成。See [implementation and limits](../实施/修复费用授权与原订单额度-v1.0.md).
-
-## 更新与交付 / Updates
-
-每轮用编号表格报告实际完成、验证和待办，双语README/CHANGELOG/适用媒体与实现证据同步，提交推送并核对远端。历史文档的数量以最新实现索引补充；不得把合成运行、编译、截图或单个模型ACK升级为生产交付证明。Every round reports completed and pending work in numbered tables, refreshes relevant documentation/media/evidence, pushes normally and checks the remote. Fixtures, builds, screenshots and individual provider acknowledgments do not certify production.
+This focused source/build delivery keeps the original product scope. The named browser/API path uses actual local media, transport and database effects with synthetic inputs, semantic roles, identities and metering. Full-suite, live-provider, native-device, production and cloud acceptance remain incomplete.

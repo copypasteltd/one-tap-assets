@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T00:48:12.414Z",
-  "id": "2026-10-30T00-48-02-800Z-96472ecc",
-  "build_root": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build",
-  "source_set_hash": "12695007a2b84ce338ba4cf3e83f97187312be55b18dc7fa0a265ae614d31279",
+  "checked_at": "2026-10-30T01:09:38.590Z",
+  "id": "2026-10-30T01-09-29-425Z-9178eaa2",
+  "build_root": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build",
+  "source_set_hash": "e6892212fa01b34ddd8a1a4b24da093231318cd93e3cea35bdf663d732740559",
   "mini_api_configuration": "LOOPBACK_DEVELOPMENT_DEFAULT_REBUILD_FOR_DEVICE",
   "files": [
     {
@@ -236,7 +236,11 @@
     },
     {
       "path": "src/api/modules/support-desk.ts",
-      "sha256": "b3501160116f0eda1608b236faf102e81118e60699e03c18d8d6d5afcdcd6ec5"
+      "sha256": "1be31c9f44acd439d7d27500b08fc06436506916c8e84f5028cb5dd780991b88"
+    },
+    {
+      "path": "src/api/modules/support-repair.ts",
+      "sha256": "4d02e760a04485d830e88cbd24bf3e1fb2608fe8f35b226dbcfbac48c223d29a"
     },
     {
       "path": "src/api/modules/support.ts",
@@ -252,7 +256,7 @@
     },
     {
       "path": "src/api/routes/management.ts",
-      "sha256": "9e7d3b49b9f6aa490eab200d50948777ed50ed3ff79637e8a7c2f08408e07bbb"
+      "sha256": "d32e77491ca06fd4673332b5cc9f68d2cad1d2515c393b787bb759d255daabc6"
     },
     {
       "path": "src/api/routes/payments.ts",
@@ -484,7 +488,15 @@
     },
     {
       "path": "src/preview/support-main.tsx",
-      "sha256": "7603cd3253cdf6776c6a136baa3a77eb17f9971ecdbdf5bdd63664f94e148168"
+      "sha256": "5f75825410b3d6092cf7f32e5097be2488cb7c1bb7f3e2b8ac82703d20733277"
+    },
+    {
+      "path": "src/preview/support-repair.css",
+      "sha256": "1265982ef32968fc328cdf55edc449354817c9d43cef1b032da879801daf4621"
+    },
+    {
+      "path": "src/preview/support-repair.tsx",
+      "sha256": "e778db64cc29e7af6805fd7e8bb7cc6c3bd8e4136c814de011d63489defd23a0"
     },
     {
       "path": "src/preview/support.html",
@@ -540,7 +552,7 @@
     },
     {
       "path": "src/shared/client/support-desk.ts",
-      "sha256": "7d93a12dfe9a6024765a9fe7fdc9a1e4a6ba5e6316aa139cd7997833c8424ac8"
+      "sha256": "8cf51040ebd4105184b030983203c7c2bc7846687f97dd26ff7ddb20e6143da6"
     },
     {
       "path": "src/shared/client/support.ts",
@@ -548,7 +560,7 @@
     },
     {
       "path": "src/shared/contracts/api.generated.ts",
-      "sha256": "21425bbc0fba32e9123007efbd4de8ba604aaabde9e72e0498d0d12d5bdce516"
+      "sha256": "5fdcc6fd78b1d7a54aacb2e6bf9e68309a320aa648b1931b40165ba6c2b8bb5f"
     },
     {
       "path": "src/shared/contracts/endpoints.generated.ts",
@@ -556,7 +568,7 @@
     },
     {
       "path": "src/shared/contracts/management.generated.ts",
-      "sha256": "0d806995ed362330ad5dca52cd9d9f841f1ca522f1fb244e6bc2b1cd5ac288c7"
+      "sha256": "e49c579e53b46e98b65abbceaada2a8ba8844ee0f00f22fcea7a80d2833553c0"
     },
     {
       "path": "src/shared/contracts/types.ts",
@@ -988,7 +1000,7 @@
     },
     {
       "path": "src/worker/revisions/context.ts",
-      "sha256": "12942d4e8f9c105f42cff6f914d5492cea3c8317a053793e237d9a0e10726725"
+      "sha256": "f30227911c955086ac8115d73e4932b5ff23eb0ac00881d80ea03767902adc3d"
     },
     {
       "path": "src/worker/revisions/contract.ts",
@@ -1153,6 +1165,10 @@
     {
       "path": "tests/helpers/support-desk.ts",
       "sha256": "75842d67dd00fe8039f73f51c6557ee88f2be0dc3b83409d4ea9073d259f49d5"
+    },
+    {
+      "path": "tests/helpers/support-repair.ts",
+      "sha256": "fb5242e05f386764e0ae19def51686167232370975c35478b18a17f0bbec73fd"
     },
     {
       "path": "tests/integration/agent-traffic.test.ts",
@@ -1419,6 +1435,10 @@
       "sha256": "acc22587f024f1cdf91d48e547911d5730e54b646cdb44f5cbdde92703eeb24d"
     },
     {
+      "path": "tests/unit/support-repair-client.test.ts",
+      "sha256": "c81b00fcfe5fc644fb69bc18454a816d76802dadda0cd31b24521a625e6d73a3"
+    },
+    {
       "path": "tests/unit/support.test.ts",
       "sha256": "61df1dafe3ee4b11102a175f173b0541b801bffc37f6b02c7cba4314a86f5452"
     },
@@ -1472,7 +1492,7 @@
     },
     {
       "path": "scripts/生成Codex开发契约.py",
-      "sha256": "39888b9848634cda21f67eadaaf0b5769f3cd4f14bef19804df7007ee9de2e5e"
+      "sha256": "86bb2dcc02c3f10eb310b70e64a4e8f532f32313b6c3ad46fdb3055d29021182"
     },
     {
       "path": "scripts/生成v3需求配置.py",
@@ -1583,6 +1603,10 @@
       "sha256": "d002013048b88949869088d6f0ceeb82e90178730175f743f528eebefc0369a5"
     },
     {
+      "path": "scripts/record-support-repair.ts",
+      "sha256": "65e5979fb3c03acd735185c7ed320861f6dd3919f9119e34bd5bf720c0f42420"
+    },
+    {
       "path": "scripts/record-support.ts",
       "sha256": "5f52d0d995c7244cbeb0e37827a2c208425be2829e9d1505a66c9963f93615aa"
     },
@@ -1670,15 +1694,15 @@
     },
     {
       "path": "assets/development/v1.1/contracts/management-endpoints.json",
-      "sha256": "82c9d19e353d69f054aaf6a66a81259d18fdb68b40dd95b4187a6adfa6063bd4"
+      "sha256": "b1b480bb1e54dc3fc0bdded795cfd7a41caed9c7926557bb6ea78d302c7b2e9d"
     },
     {
       "path": "assets/development/v1.1/contracts/management-openapi.json",
-      "sha256": "8a8bcc074ea581bb009c39f8656efb68e000f3cf1d55ab0e63e955c057debe5c"
+      "sha256": "0250f33fcca1074459235fa2e43fb4e1ac41e6db6bcaee6e0fb241a31a3ee81b"
     },
     {
       "path": "assets/development/v1.1/contracts/openapi.json",
-      "sha256": "9360d3f5c01daa6bbd7389326f4f1973ca44a23bb8e87b3ff0896e4cdf3260a9"
+      "sha256": "eb8b94d6e441ed8c74132bb0d8540488df95d4f51da0a2fad7de9e0cc853ce56"
     },
     {
       "path": "assets/development/v1.1/contracts/product-identity-lock.schema.json",
@@ -1836,8 +1860,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 7885,
-      "log_path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/typecheck.log",
+      "elapsed_ms": 7698,
+      "log_path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -1853,29 +1877,29 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 346,
-      "log_path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/server.log",
+      "elapsed_ms": 235,
+      "log_path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T00-48-02-800Z-96472ecc\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T01-09-29-425Z-9178eaa2\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T00-48-02-800Z-96472ecc\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T01-09-29-425Z-9178eaa2\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 673,
-      "log_path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/preview.log",
-      "log_sha256": "74539d640c002b0b10ca081539026c125ee611d3db414c1b3106398e32083642"
+      "elapsed_ms": 587,
+      "log_path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/preview.log",
+      "log_sha256": "de0964892d5f68ef22eab3793eece4c245e37e2655fe12954f0bee8d41411a3b"
     }
   ],
   "components": [
@@ -1884,62 +1908,62 @@
       "status": "PASS",
       "files": [
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/api/main.js",
-          "sha256": "d237cf5da9c2b2e638e318f218cf6a986e69bf8a0f952fe79d26270681c7fb3d",
-          "bytes": 547346
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/api/main.js",
+          "sha256": "7f5a5cbdeadc53a041d4b1f1969ab795450e8f5d11b6c4378de988e66d655c49",
+          "bytes": 557130
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/api/main.js.map",
-          "sha256": "521e76f559b60102724af0fd7e65a6957020cd29efca2e652a3b555c9018cc03",
-          "bytes": 1285149
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/api/main.js.map",
+          "sha256": "9b0745d906308c448b5c0495f09be08a61b6aa85a6d5594891f951107df7a1bb",
+          "bytes": 1299869
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/worker/lifecycle/media-maintenance-main.js",
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/worker/lifecycle/media-maintenance-main.js",
           "sha256": "018e479e06088a383a050a2bfab19ff95c09fb2c0d4f1e35e107c595b556579b",
           "bytes": 506728
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/worker/lifecycle/media-maintenance-main.js.map",
-          "sha256": "7b0dde548871e8ff7409f59ed8faa04e8b8b712b1b0d40c2cfb9bea6737ea4bb",
-          "bytes": 1103209
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/worker/lifecycle/media-maintenance-main.js.map",
+          "sha256": "ecd28e133a0dda522863cd871fc4d7e95aba45f85e15a8a2e24123467ca1a63e",
+          "bytes": 1103217
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/worker/lifecycle/privacy-journal-main.js",
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/worker/lifecycle/privacy-journal-main.js",
           "sha256": "56146547c499ee94c7d3345f76e8a1f5a467d7cf7a011008fb6b30d4e2596904",
           "bytes": 84131
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/worker/lifecycle/privacy-journal-main.js.map",
-          "sha256": "03d2a3c907bcaf206c90bfbbc37c8731b634e9039f0d7d957ca1e52c96f3546e",
-          "bytes": 738012
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/worker/lifecycle/privacy-journal-main.js.map",
+          "sha256": "fc56b1861c06154ba3f7bc4ac7b60eb6adfae790d734b25c48e8207e380a224e",
+          "bytes": 738019
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/worker/lifecycle/reaper-main.js",
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/worker/lifecycle/reaper-main.js",
           "sha256": "8678a05c9b73cd9ccb7c8c369b8491bbfb23d67933a50f8e3da83aad4c5cc4d9",
           "bytes": 118779
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/worker/lifecycle/reaper-main.js.map",
-          "sha256": "9c4a289f44d7f9cdea60b4ce46b75760cf3f4896ad7c4e400971d4456140bbc8",
-          "bytes": 756288
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/worker/lifecycle/reaper-main.js.map",
+          "sha256": "7ece7ce33c588bdcc523406b602e9f564ecfed67908fdf7c5c3952b4ab609d9f",
+          "bytes": 756296
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/worker/main.js",
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/worker/main.js",
           "sha256": "506485299e3d39362f27c4bd4cb99da35a6f01131fd44ec02383b00ced9d1308",
           "bytes": 943650
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/worker/main.js.map",
-          "sha256": "b732dd6b59012229e124a9621097b720472a2812d42e619e7ad72f9e2ed61031",
-          "bytes": 1694257
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/worker/main.js.map",
+          "sha256": "9627371d58182957b00ef7baf8b41fafe56a88259c4d1215afa841d85dd60541",
+          "bytes": 1694265
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/worker/tool-gateway/mcp-main.js",
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/worker/tool-gateway/mcp-main.js",
           "sha256": "a8b3d90fd9743d2f7f04d27829fa00ccf0460920b660c0d5cf64094da753a297",
           "bytes": 6651
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/worker/tool-gateway/mcp-main.js.map",
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/worker/tool-gateway/mcp-main.js.map",
           "sha256": "a42bf16ca48c154e1df5ed668280fdde73b43b299194562e8a83d40b18b7ed9d",
           "bytes": 14172
         }
@@ -1950,73 +1974,73 @@
       "status": "PASS",
       "files": [
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/preview/assets/example-0.png",
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/preview/assets/example-0.png",
           "sha256": "20392025fceaab450a37805d63cce766bdc8f619a96465b1386c44c32cff3138",
           "bytes": 20355
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/preview/assets/example-1.png",
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/preview/assets/example-1.png",
           "sha256": "20392025fceaab450a37805d63cce766bdc8f619a96465b1386c44c32cff3138",
           "bytes": 20355
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/preview/assets/example-2.png",
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/preview/assets/example-2.png",
           "sha256": "20392025fceaab450a37805d63cce766bdc8f619a96465b1386c44c32cff3138",
           "bytes": 20355
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/preview/assets/index-atJc7AIw.css",
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/preview/assets/index-atJc7AIw.css",
           "sha256": "b169eea9e3298362712a467776da2c16739159bd0f73b5b2432037646b28fe13",
           "bytes": 9568
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/preview/assets/index-B8BhmYDh.js",
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/preview/assets/index-B8BhmYDh.js",
           "sha256": "cbd4e241fd42996ab1831e21703d438e1988c611eb267f69376a9b0a6059260c",
           "bytes": 195862
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/preview/assets/NotoSansSC_wght_-Dz1u1FRy.ttf",
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/preview/assets/NotoSansSC_wght_-Dz1u1FRy.ttf",
           "sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
           "bytes": 17772300
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/preview/assets/support-B_BoU47a.js",
-          "sha256": "f0892de8a9cd3469ef56b2854c098163a6700a323ddd473c4bb3cb378f65153a",
-          "bytes": 10168
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/preview/assets/support-BuiWav66.css",
+          "sha256": "7970c6843c195da517629fd907bfefb93f92d3fcda3cab79389185f4b5512685",
+          "bytes": 7269
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/preview/assets/support-DeYTdLLD.css",
-          "sha256": "b2f0194f80ff7ebe49c926ceed8c7f292ec93a7228f69a4b8864e05c3e99cc14",
-          "bytes": 4033
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/preview/assets/support-DxEHs4ls.js",
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/preview/assets/support-DxEHs4ls.js",
           "sha256": "16c9df220b341911677c59dd6e4e5c704b2b80618a0cb1d3eb50d53291239f08",
           "bytes": 158129
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/preview/index.html",
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/preview/assets/support-DZyusoxj.js",
+          "sha256": "678a4ed428339d2fbf14b0015954a876e1bfbc005944ef30f25fda912e53c795",
+          "bytes": 21153
+        },
+        {
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/preview/index.html",
           "sha256": "f4283d9ca35c8aba6c05fde275541ccfe188e272a609541ac1e89f4ad42ff14f",
           "bytes": 515
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/preview/product-card.png",
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/preview/product-card.png",
           "sha256": "f791d4b6e6c6445365811b2f404b1bb24587c934b7e6c539239709a188dca145",
           "bytes": 86842
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/preview/product-motion.mp4",
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/preview/product-motion.mp4",
           "sha256": "d5d02a3733a704a5f9117f490cfc86ed3c2bb7ec30be31bfca5252fdfbb6e3b0",
           "bytes": 18398
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/preview/product.svg",
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/preview/product.svg",
           "sha256": "2c507fbbdd3fad7e9f99beb6faca1f9bd608d1148e49c1665c052b956e6ed313",
           "bytes": 1693
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/runtime/build/preview/support.html",
-          "sha256": "92b8b17b0abddbf1d1ef2145c8f241403115a7ca8cf6015441769260693e188d",
+          "path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/runtime/build/preview/support.html",
+          "sha256": "dd859651a50708f7b9829e298490f50fde3aa9e6f2e3347fc58754adf60f1139",
           "bytes": 459
         }
       ]

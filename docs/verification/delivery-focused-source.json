@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T00:49:49.745526+00:00",
-  "strategy": "USER_REQUESTED_FAST_PLATFORM_REPAIR_CLOSURE",
-  "source_set_hash": "12695007a2b84ce338ba4cf3e83f97187312be55b18dc7fa0a265ae614d31279",
-  "source_files": 406,
+  "checked_at": "2026-10-30T01:14:24.511373+00:00",
+  "strategy": "USER_REQUESTED_FAST_SUPPORT_REPAIR_UI_CLOSURE",
+  "source_set_hash": "e6892212fa01b34ddd8a1a4b24da093231318cd93e3cea35bdf663d732740559",
+  "source_files": 412,
   "runtime_contract_files": 42,
   "resource_files": 4,
   "build_report": "docs/delivery/current.json",
@@ -20,8 +20,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 7885,
-      "log_path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/typecheck.log",
+      "elapsed_ms": 7698,
+      "log_path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -37,29 +37,29 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 346,
-      "log_path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/server.log",
+      "elapsed_ms": 235,
+      "log_path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T00-48-02-800Z-96472ecc\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T01-09-29-425Z-9178eaa2\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T00-48-02-800Z-96472ecc\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T01-09-29-425Z-9178eaa2\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 673,
-      "log_path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/preview.log",
-      "log_sha256": "74539d640c002b0b10ca081539026c125ee611d3db414c1b3106398e32083642"
+      "elapsed_ms": 587,
+      "log_path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/preview.log",
+      "log_sha256": "de0964892d5f68ef22eab3793eece4c245e37e2655fe12954f0bee8d41411a3b"
     }
   ],
   "components": [
@@ -80,48 +80,66 @@
       "status": "NOT_RUN"
     }
   ],
-  "api_checks": {
+  "unit_checks": {
     "status": "PASS",
-    "passed": 2,
+    "passed": 11,
     "failed": 0,
-    "source": "docs/verification/platform-repair-tested-source.json",
-    "report": "docs/verification/platform-repair-api.json",
+    "source": "docs/verification/support-repair-ui-tested-source.json",
+    "report": "docs/verification/support-repair-ui-unit.json",
     "command": {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/platform-repair.test.ts --outputFile.json=runtime/test-results/platform-repair-2026-10-30T00-46-16-024Z/api.json",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.config.ts tests/unit/support-desk-client.test.ts tests/unit/support-repair-client.test.ts --outputFile.json=runtime/test-results/support-repair-2026-10-30T01-09-50-088Z/unit.json",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
         "run",
         "--config",
-        "vitest.integration.config.ts",
-        "tests/integration/platform-repair.test.ts",
-        "--outputFile.json=runtime/test-results/platform-repair-2026-10-30T00-46-16-024Z/api.json"
+        "vitest.config.ts",
+        "tests/unit/support-desk-client.test.ts",
+        "tests/unit/support-repair-client.test.ts",
+        "--outputFile.json=runtime/test-results/support-repair-2026-10-30T01-09-50-088Z/unit.json"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
-      "timeout_ms": 180000,
-      "elapsed_ms": 42360,
-      "log_path": "runtime/test-results/platform-repair-2026-10-30T00-46-16-024Z/api.log",
-      "log_sha256": "52ac924af1310f2da7111cc83be9fbe75c31b62eebdc8ddc2d8ff4589f9dc622"
+      "timeout_ms": 90000,
+      "elapsed_ms": 759,
+      "log_path": "runtime/test-results/support-repair-2026-10-30T01-09-50-088Z/unit.log",
+      "log_sha256": "500ef3bdb2e221266cda04483137e2851103bf072685b66944374f1a1697870b"
     },
-    "source_unchanged": true,
-    "actual_private_media": true,
-    "actual_postgresql_and_native_http_stdio": true,
-    "real_external_models_payment_or_production_identity": false,
-    "owned_api_tools_native_role_processes_and_database_pool_closed": true
+    "source_unchanged": true
+  },
+  "browser_checks": {
+    "status": "PASS",
+    "groups": 9,
+    "actual_api_groups": 4,
+    "screenshots": 4,
+    "media_files": 7,
+    "manifest": "docs/media/support-repair/capture-manifest.json",
+    "command": {
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_seconds": 180,
+      "elapsed_seconds": 43.041,
+      "log_path": "runtime/delivery/support-repair-recording.log",
+      "log_sha256": "6e98ad32bd0385698f595aa0d0bc01a81315b1fc0659ed5c951cdb13071499ee"
+    },
+    "actual_private_media_postgresql_native_http_and_stdio": true,
+    "actual_five_stage_correction_and_utf8_publication": true,
+    "browser_tabs_closed": true,
+    "owned_api_tools_native_roles_and_database_pool_closed": true,
+    "production_identity_semantics_metering_or_external_service_verified": false
   },
   "local_checks": {
     "doctor": {
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 0.797,
+      "elapsed_seconds": 0.555,
       "log_path": "runtime/delivery/doctor-focused.log",
-      "log_sha256": "629eda06cd7de47be08d0eea93e0c9c9f7d43ecd5ab3e21e4b7cd922d1fa59cc",
+      "log_sha256": "b21620819e7991ae0004c249f6c1111e448d6782eb474508eb1a964ed88433ac",
       "report": {
-        "checked_at": "2026-10-30T00:48:56.757Z",
+        "checked_at": "2026-10-30T01:10:27.051Z",
         "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
         "rows": [
           {
@@ -213,9 +231,9 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 3.786,
+      "elapsed_seconds": 1.519,
       "log_path": "runtime/delivery/backend-focused.log",
-      "log_sha256": "ffaad729746530d6073dca4b2b9fd065c69822ada4321e251b22307482e7e241",
+      "log_sha256": "88f66342dcc60a51abc5b8cee963b3e30c4e675e017f4f9d4a046f181f62f1b2",
       "local_stack_ready": true,
       "preview_http_ready": false
     },
@@ -223,23 +241,23 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 0.812,
+      "elapsed_seconds": 0.836,
       "log_path": "runtime/delivery/preview-focused.log",
       "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
       "local_stack_ready": false,
       "preview_http_ready": true
     }
   },
-  "initial_build": "docs/verification/platform-repair-initial-build.json",
-  "initial_test_attempts": "docs/verification/platform-repair-attempts.json",
+  "initial_unit_attempt": "docs/verification/support-repair-ui-initial-unit.json",
   "functional_scope": [
-    "PHOTO_LAYOUT silent COVER/ALLOWED_ORDER/DISPLAY_TEXT",
-    "original assigned support ticket and evidence snapshot",
-    "five persistent stages and fresh POST/facts/style roles",
-    "actual copy bytes and immutable parent/new delivery manifest",
-    "platform repairs never consume user success allowance",
-    "all revisions share original aftercare spend/call/role/token/tool limits",
-    "original refund/license/privacy/expiry/UNKNOWN boundaries retained"
+    "assigned support:repair staff only",
+    "frozen profile/current manifest and actual private PNG integrity",
+    "COVER/complete ALLOWED_ORDER/companion DISPLAY_TEXT editors",
+    "explicit confirmation and shared pending-write gate",
+    "exact original-key/body ACK recovery",
+    "persisted linked repair query after reload",
+    "actual five-stage reviewed correction and fresh delivery manifest",
+    "privacy withdrawal and logout clear private UI state"
   ],
   "historical_evidence_unchanged": [
     {
@@ -309,6 +327,10 @@
     {
       "path": "docs/verification/delivery-focused-83bd7ee.json",
       "sha256": "de980354c266fad8fe00fdd66a710d987c6345b3f2391c023dc6d71c4672dc2c"
+    },
+    {
+      "path": "docs/verification/delivery-focused-b31c3e8.json",
+      "sha256": "ef2d2ef52284523724c431bcd593c5f1e8a3c969da2409a108bf02a54be4f0dc"
     },
     {
       "path": "docs/verification/delivery-focused-c7bbf39.json",
@@ -435,6 +457,26 @@
       "sha256": "5d582f3a3205c7bff72e99b2b22e605d6bd9df085a472171217efa9bbe3743d2"
     },
     {
+      "path": "docs/verification/platform-repair-api.json",
+      "sha256": "56812b85da4ead2b8e0fca91a7339365e1f42086b23a3d882441cc83ed62b469"
+    },
+    {
+      "path": "docs/verification/platform-repair-attempts.json",
+      "sha256": "87c4dedc4a5efda289d1b0fc7886149a060876504721d257bba7467748dbdbdc"
+    },
+    {
+      "path": "docs/verification/platform-repair-initial-build.json",
+      "sha256": "7e4c16fc17d651acd16a1aed3e77e3d24b3238bae667b0e8e4aa392aae15254c"
+    },
+    {
+      "path": "docs/verification/platform-repair-source.json",
+      "sha256": "55d4e40f05ebf0b8f9bbe33f0171731f66d75db4ada32a0458fc3d1f67080f7f"
+    },
+    {
+      "path": "docs/verification/platform-repair-tested-source.json",
+      "sha256": "49acd9d576bb3e963f7fcfe184f5260e3e0029a2585cd8176ddd898558047fc5"
+    },
+    {
       "path": "docs/verification/publication-3533cb4.json",
       "sha256": "1d700bdc425f36cd1097125983587f97a052a97eb116ddb1333c4efc6e3b4a7a"
     },
@@ -457,6 +499,10 @@
     {
       "path": "docs/verification/publication-83bd7ee.json",
       "sha256": "6fb05310a33448111e16e459d5906df051a332f08ca4a5a0309631418594419b"
+    },
+    {
+      "path": "docs/verification/publication-b31c3e8.json",
+      "sha256": "305c9e5bb5be0dc3527eb043fd9e5de1e2460ad5f4dd93c9f81319f9806d23d5"
     },
     {
       "path": "docs/verification/publication-c7bbf39.json",
@@ -509,6 +555,10 @@
     {
       "path": "docs/verification/repository-audit-83bd7ee.json",
       "sha256": "c48857242ca77b07f193c22a46c5d48c398777c5a8b090ea7755d87f607ba647"
+    },
+    {
+      "path": "docs/verification/repository-audit-b31c3e8.json",
+      "sha256": "8fe7ea95104d9f8ae7115a224792a888b79165a525c418e8a5dbf7a72f8a5830"
     },
     {
       "path": "docs/verification/repository-audit-c7bbf39.json",
@@ -618,10 +668,10 @@
   "frozen_c_files": 25,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
   "existing_media_files_verified": 78,
-  "new_media_files_verified": 0,
-  "browser_used": false,
-  "ui_changed": false,
-  "prior_delivery": "docs/verification/delivery-focused-b31c3e8.json",
+  "new_media_files_verified": 7,
+  "browser_used": true,
+  "ui_changed": true,
+  "prior_delivery": "docs/verification/delivery-focused-source-42dc446.json",
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
   "original_publication_checker_executed": false,
@@ -630,11 +680,10 @@
   "production_admitted": false,
   "cloud_deployed": false,
   "limitations": [
-    "management repair editor UI not added",
-    "generated/image-content/native-audio aftercare not implemented",
-    "synthetic identities/semantics/metering; no live Codex/provider/payment/device/cloud admission",
-    "final mini-program builds NOT_RUN; complete mini sources retained",
-    "all original 58 requirements/52 P0 remain; full community commercial production and Plus incomplete"
+    "PHOTO_LAYOUT silent existing-media order/cover and companion copy only; no image redraw, video caption or native speech editing",
+    "synthetic product inputs, semantic roles, identity and metering; no live Codex/provider/payment/device/cloud admission",
+    "both final mini-program builds NOT_RUN; complete mini source retained and old binaries excluded",
+    "all 58 requirements/52 P0 remain; generated/native-audio aftercare, full community commercial production and Plus remain incomplete"
   ],
-  "canonical_platform_repair_provenance": "docs/verification/platform-repair-source.json"
+  "canonical_support_repair_ui_provenance": "docs/verification/support-repair-ui-source.json"
 }

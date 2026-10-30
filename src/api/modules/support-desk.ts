@@ -46,7 +46,7 @@ function buyerTicket(row:TicketRow):DTO<'Ticket'>{
   if(row.content_available&&row.private?.response)result.response=row.private.response as DTO<'SupportReply'>;
   return result;
 }
-async function staffTicket(db:Db,ticketId:string,lock=false):Promise<TicketRow>{
+export async function staffTicket(db:Db,ticketId:string,lock=false):Promise<TicketRow>{
   const observed=(await db.query<TicketRow>(`${select} WHERE t.id=$1`,[ticketId])).rows[0]??notFound();
   // Privacy enumeration takes this lock before individual rows as well.
   await lockMediaOwner(db,observed.tenant_id,observed.owner_id!);
@@ -77,7 +77,8 @@ export async function listManagedTickets(db:Db,cfg:Config,admin:ManagementPrinci
 export async function managedTicket(db:Db,admin:ManagementPrincipal,ticketId:string,traceId:string):Promise<DTO<'ManagedSupportDetail'>>{
   const row=await staffTicket(db,ticketId);
   await audit(db,row.tenant_id,admin.actor,'SUPPORT_DETAIL_READ',row.id,{revision:row.data.revision??0},traceId);
-  return {summary:summary(row),message:row.content_available?String(row.private?.message??'')||null:null,
+  return {summary:summary(row),repair_access:row.content_available&&row.private?.assigned_actor===admin.actor&&(admin.permissions.has('support:repair')||admin.permissions.has('*')),
+    message:row.content_available?String(row.private?.message??'')||null:null,
     attachment_asset_ids:row.content_available?(row.private?.attachment_asset_ids as string[]??[]):[],
     response:row.content_available?(row.private?.response as DTO<'SupportReply'>??null):null};
 }

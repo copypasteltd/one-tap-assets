@@ -439,6 +439,34 @@
         "P01-F16"
       ],
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/support-tickets/{ticket_id}/repair-context",
+      "operation_id": "getSupportRepairContext",
+      "summary": "核对原工单的素材、档案与纠错状态",
+      "permission": "support:repair",
+      "request_schema": null,
+      "response_schema": "SupportRepairContext",
+      "requirements": [
+        "P01-F12",
+        "P01-F16"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/support-tickets/{ticket_id}/repair-manifests/{manifest_revision}/images/{deliverable_id}",
+      "operation_id": "readSupportRepairImage",
+      "summary": "读取当前原清单内的实际私有图片",
+      "permission": "support:repair",
+      "request_schema": null,
+      "response_schema": "SupportRepairImage",
+      "requirements": [
+        "P01-F12",
+        "P01-F16"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
     }
   ]
 }

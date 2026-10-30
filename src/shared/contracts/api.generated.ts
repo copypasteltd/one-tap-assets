@@ -3135,6 +3135,7 @@ export interface components {
             message: string | null;
             attachment_asset_ids: string[];
             response: components["schemas"]["SupportReply"] | null;
+            repair_access?: boolean;
         };
         SupportProcessRequest: {
             expected_revision: number;
@@ -3177,6 +3178,36 @@ export interface components {
             ticket_id: string;
             expected_ticket_revision: number;
             change: components["schemas"]["RevisionRequest"];
+        };
+        SupportRepairContext: {
+            ticket: components["schemas"]["ManagedSupportTicket"];
+            manifest: components["schemas"]["Deliverables"] | null;
+            product_profile: components["schemas"]["Profile"] | null;
+            repair: components["schemas"]["Revision"] | null;
+            can_submit: boolean;
+            allowed_changes: ("COVER" | "ALLOWED_ORDER" | "DISPLAY_TEXT")[];
+            reason_codes: string[];
+            window_expires_at: string | null;
+        };
+        SupportRepairImage: {
+            /** @constant */
+            mime_type: "image/png";
+            sha256: string;
+            bytes_base64: string;
+            deliverable_id: string;
+            manifest_revision: number;
+        };
+        SupportRepairContextResponse: {
+            /** @constant */
+            code: "OK";
+            data: components["schemas"]["SupportRepairContext"];
+            trace_id: string;
+        };
+        SupportRepairImageResponse: {
+            /** @constant */
+            code: "OK";
+            data: components["schemas"]["SupportRepairImage"];
+            trace_id: string;
         };
     };
     responses: never;

@@ -20,6 +20,7 @@ import { lockMediaOwner } from '../modules/media-access.js';
 import { scheduleAuthorizedSamples, authorizedSample, verifyAuthorizedFiles } from '../modules/authorized-samples.js';
 import {listManagedTickets,managedTicket,processTicket,supportEvidence,requestSupportRepair} from '../modules/support-desk.js';
 import {storage,type ObjectStorage} from '../storage/storage.js';
+import {supportRepairContext,supportRepairImage} from '../modules/support-repair.js';
 
 interface Endpoint { method: string; path: string; operation_id: string; permission: string; request_schema: SchemaName | null; response_schema: SchemaName }
 interface Context { db: Db; cfg: Config; store:ObjectStorage; admin: ManagementPrincipal; params: Record<string, string>; body: unknown; traceId: string; query: { cursor?: string; limit?: string; state?:string } }
@@ -41,6 +42,8 @@ async function lockActiveCommunityLicense(c: Context): Promise<void> {
   if (source?.source === 'COMMUNITY') requireThat((await license(c.db, source.license_version, true)).state === 'ACTIVE', 'LICENSE_NOT_AVAILABLE', '当前许可已停止用于新交易', 422);
 }
 const handlers: Record<string, (c: Context) => Promise<unknown>> = {
+  getSupportRepairContext:async c=>supportRepairContext(c.db,c.cfg,c.admin,c.params.ticket_id!,c.traceId),
+  readSupportRepairImage:async c=>supportRepairImage(c.db,c.cfg,c.store,c.admin,c.params.ticket_id!,c.params.manifest_revision!,c.params.deliverable_id!,c.traceId),
   listManagedSupportTickets: async c => listManagedTickets(c.db,c.cfg,c.admin,c.query),
   getManagedSupportTicket: async c => managedTicket(c.db,c.admin,c.params.ticket_id!,c.traceId),
   processSupportTicket: async c => processTicket(c.db,c.admin,c.params.ticket_id!,validate('SupportProcessRequest',c.body)),

@@ -614,6 +614,55 @@ def extend_platform_repair_contract(api: dict, admin: dict, endpoints: dict) -> 
             endpoint["request_schema"] = "PlatformErrorRepairRequest"
 
 
+def extend_support_repair_ui_contract(api: dict, admin: dict, endpoints: dict) -> None:
+    """Authenticated staff reads; private previews remain tied to a current manifest."""
+    for doc in (api, admin):
+        doc["components"]["schemas"]["ManagedSupportDetail"]["properties"]["repair_access"] = BOOL
+    schema = api["components"]["schemas"]
+    image = copy.deepcopy(schema["SupportEvidence"])
+    image["properties"].pop("asset_id")
+    image["properties"].update({"deliverable_id": ID, "manifest_revision": number(1)})
+    image["required"] = list(image["properties"])
+    models = {"SupportRepairContext": obj({"ticket": ref("ManagedSupportTicket"), "manifest": nullable(ref("Deliverables")),
+        "product_profile": nullable(ref("Profile")), "repair": nullable(ref("Revision")), "can_submit": BOOL,
+        "allowed_changes": arr(enum("COVER", "ALLOWED_ORDER", "DISPLAY_TEXT"), 0, 3), "reason_codes": arr(string(100), 0, 20), "window_expires_at": nullable(TIME)}),
+        "SupportRepairImage": image}
+    for doc in (api, admin):
+        doc["components"]["schemas"].update(copy.deepcopy(models))
+        for name in models:
+            wrapper = copy.deepcopy(doc["components"]["schemas"]["TicketResponse"])
+            wrapper["properties"]["data"] = ref(name)
+            doc["components"]["schemas"][name + "Response"] = wrapper
+    # The management document intentionally contains only its reachable DTOs.
+    visited = set()
+    def dependency(name):
+        if name in visited: return
+        visited.add(name)
+        if name not in admin["components"]["schemas"]:
+            admin["components"]["schemas"][name] = copy.deepcopy(schema[name])
+        def walk(value):
+            if isinstance(value, dict):
+                if "$ref" in value and value["$ref"].startswith("#/components/schemas/"): dependency(value["$ref"].rsplit("/", 1)[-1])
+                for v in value.values(): walk(v)
+            elif isinstance(value, list):
+                for v in value: walk(v)
+        walk(admin["components"]["schemas"][name])
+    for name in models: dependency(name)
+    for path, oid, title, response in [
+        ("/support-tickets/{ticket_id}/repair-context", "getSupportRepairContext", "核对原工单的素材、档案与纠错状态", "SupportRepairContext"),
+        ("/support-tickets/{ticket_id}/repair-manifests/{manifest_revision}/images/{deliverable_id}", "readSupportRepairImage", "读取当前原清单内的实际私有图片", "SupportRepairImage")]:
+        template = copy.deepcopy(admin["paths"]["/support-tickets/{ticket_id}"]["get"])
+        template.update(operationId=oid, summary=title, description="独立support:repair权限及原接手客服；每次重验撤销、许可、原清单与SHA，私有内容不缓存。可受理不等于保证交付；写入仍重新校验原工单与额度。")
+        template["parameters"] = [{"name": key, "in": "path", "required": True, "schema": number(1) if key == "manifest_revision" else ID} for key in re.findall(r"\{([^}]+)\}", path)]
+        template["x-required-permission"] = "support:repair"
+        template["responses"]["200"]["content"]["application/json"]["schema"] = ref(response + "Response")
+        admin["paths"][path] = {"get": template}
+        if not any(e["operation_id"] == oid for e in endpoints["endpoints"]):
+            endpoints["endpoints"].append({"method": "GET", "path": path, "operation_id": oid, "summary": title,
+                "permission": "support:repair", "request_schema": None, "response_schema": response,
+                "requirements": ["P01-F12", "P01-F16"], "implementation_status": STATUS})
+
+
 def main() -> None:
     reqs = read("assets/requirements/requirements.v3.1.json")["requirements"]
     registry = read("assets/skills/ypcc/v1.0/registry.json")
@@ -656,6 +705,7 @@ def main() -> None:
     extend_admin(admin, admin_endpoints, extra, dmap)
     extend_support_contract(api, admin, admin_endpoints, dmap)
     extend_platform_repair_contract(api, admin, admin_endpoints)
+    extend_support_repair_ui_contract(api, admin, admin_endpoints)
     # UI intent keys contain ':' and '.', matching both runtime domains.
     # Normalize only the current contracts; v1.0 remains a preserved snapshot.
     for document in (api, admin):

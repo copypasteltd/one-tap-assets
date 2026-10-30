@@ -1981,6 +1981,147 @@
           }
         }
       }
+    },
+    "/support-tickets/{ticket_id}/repair-context": {
+      "get": {
+        "operationId": "getSupportRepairContext",
+        "summary": "核对原工单的素材、档案与纠错状态",
+        "security": [
+          {
+            "managementSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "ticket_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        ],
+        "x-required-permission": "support:repair",
+        "x-requirements": [
+          "P01-F12",
+          "P01-F16"
+        ],
+        "x-design-pages": [
+          "D06",
+          "D10",
+          "D11",
+          "D14",
+          "D15",
+          "D21",
+          "D23"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+        "x-idempotency-required": false,
+        "description": "独立support:repair权限及原接手客服；每次重验撤销、许可、原清单与SHA，私有内容不缓存。可受理不等于保证交付；写入仍重新校验原工单与额度。",
+        "responses": {
+          "200": {
+            "description": "工单状态或受权内容",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SupportRepairContextResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "权限、版本或内容撤销错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/support-tickets/{ticket_id}/repair-manifests/{manifest_revision}/images/{deliverable_id}": {
+      "get": {
+        "operationId": "readSupportRepairImage",
+        "summary": "读取当前原清单内的实际私有图片",
+        "security": [
+          {
+            "managementSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "ticket_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          },
+          {
+            "name": "manifest_revision",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          {
+            "name": "deliverable_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        ],
+        "x-required-permission": "support:repair",
+        "x-requirements": [
+          "P01-F12",
+          "P01-F16"
+        ],
+        "x-design-pages": [
+          "D06",
+          "D10",
+          "D11",
+          "D14",
+          "D15",
+          "D21",
+          "D23"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+        "x-idempotency-required": false,
+        "description": "独立support:repair权限及原接手客服；每次重验撤销、许可、原清单与SHA，私有内容不缓存。可受理不等于保证交付；写入仍重新校验原工单与额度。",
+        "responses": {
+          "200": {
+            "description": "工单状态或受权内容",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SupportRepairImageResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "权限、版本或内容撤销错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -10564,6 +10705,9 @@
                 "type": "null"
               }
             ]
+          },
+          "repair_access": {
+            "type": "boolean"
           }
         },
         "required": [
@@ -10736,6 +10880,171 @@
           "ticket_id",
           "expected_ticket_revision",
           "change"
+        ],
+        "additionalProperties": false
+      },
+      "SupportRepairContext": {
+        "type": "object",
+        "properties": {
+          "ticket": {
+            "$ref": "#/components/schemas/ManagedSupportTicket"
+          },
+          "manifest": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Deliverables"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "product_profile": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Profile"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "repair": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Revision"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "can_submit": {
+            "type": "boolean"
+          },
+          "allowed_changes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "COVER",
+                "ALLOWED_ORDER",
+                "DISPLAY_TEXT"
+              ]
+            },
+            "minItems": 0,
+            "maxItems": 3
+          },
+          "reason_codes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "minItems": 0,
+            "maxItems": 20
+          },
+          "window_expires_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time",
+                "maxLength": 40,
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "ticket",
+          "manifest",
+          "product_profile",
+          "repair",
+          "can_submit",
+          "allowed_changes",
+          "reason_codes",
+          "window_expires_at"
+        ],
+        "additionalProperties": false
+      },
+      "SupportRepairImage": {
+        "type": "object",
+        "properties": {
+          "mime_type": {
+            "const": "image/png"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "bytes_base64": {
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 53333336,
+            "pattern": "^[A-Za-z0-9+/]+={0,2}$"
+          },
+          "deliverable_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "manifest_revision": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "mime_type",
+          "sha256",
+          "bytes_base64",
+          "deliverable_id",
+          "manifest_revision"
+        ],
+        "additionalProperties": false
+      },
+      "SupportRepairContextResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "const": "OK"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SupportRepairContext"
+          },
+          "trace_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          }
+        },
+        "required": [
+          "code",
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "SupportRepairImageResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "const": "OK"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SupportRepairImage"
+          },
+          "trace_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          }
+        },
+        "required": [
+          "code",
+          "data",
+          "trace_id"
         ],
         "additionalProperties": false
       }

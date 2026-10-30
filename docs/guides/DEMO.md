@@ -1,5 +1,7 @@
 # 页面与录制 / Screens and recording
 
+最新素材纠错演示见[4张截图与录像/GIF](../media/support-repair/README.md)，实际原生五阶段更正与新文件交付；输入/语义/身份/计量合成。本次浏览器和服务已关闭，旧录制来源保持。
+
 [中文README](../../README.md) · [English README](../../README.en.md)
 
 这些素材来自实际运行的`src/preview`：React DOM适配双小程序共享页面，本地合成Transport提供业务状态。截图不是设计稿重绘，也不是宿主真机证据。商品插画为本项目自绘，视频商品演示由该插画经原生FFmpeg生成；识别结果、订单、日期和交付状态都是夹具，未调用付费模型或支付。

@@ -20964,6 +20964,9 @@
                 "type": "null"
               }
             ]
+          },
+          "repair_access": {
+            "type": "boolean"
           }
         },
         "required": [
@@ -21136,6 +21139,171 @@
           "ticket_id",
           "expected_ticket_revision",
           "change"
+        ],
+        "additionalProperties": false
+      },
+      "SupportRepairContext": {
+        "type": "object",
+        "properties": {
+          "ticket": {
+            "$ref": "#/components/schemas/ManagedSupportTicket"
+          },
+          "manifest": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Deliverables"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "product_profile": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Profile"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "repair": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Revision"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "can_submit": {
+            "type": "boolean"
+          },
+          "allowed_changes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "COVER",
+                "ALLOWED_ORDER",
+                "DISPLAY_TEXT"
+              ]
+            },
+            "minItems": 0,
+            "maxItems": 3
+          },
+          "reason_codes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "minItems": 0,
+            "maxItems": 20
+          },
+          "window_expires_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time",
+                "maxLength": 40,
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "ticket",
+          "manifest",
+          "product_profile",
+          "repair",
+          "can_submit",
+          "allowed_changes",
+          "reason_codes",
+          "window_expires_at"
+        ],
+        "additionalProperties": false
+      },
+      "SupportRepairImage": {
+        "type": "object",
+        "properties": {
+          "mime_type": {
+            "const": "image/png"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "bytes_base64": {
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 53333336,
+            "pattern": "^[A-Za-z0-9+/]+={0,2}$"
+          },
+          "deliverable_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "manifest_revision": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "mime_type",
+          "sha256",
+          "bytes_base64",
+          "deliverable_id",
+          "manifest_revision"
+        ],
+        "additionalProperties": false
+      },
+      "SupportRepairContextResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "const": "OK"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SupportRepairContext"
+          },
+          "trace_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          }
+        },
+        "required": [
+          "code",
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "SupportRepairImageResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "const": "OK"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SupportRepairImage"
+          },
+          "trace_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          }
+        },
+        "required": [
+          "code",
+          "data",
+          "trace_id"
         ],
         "additionalProperties": false
       }

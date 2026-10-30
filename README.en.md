@@ -1,28 +1,8 @@
 # One Tap Assets · 一品成片
 
-New: [evidence-bound free platform corrections](docs/实施/工单关联免费纠错与售后原额度-v1.0.md) use the original assigned ticket and delivery version, then run all five aftercare stages and publish a fresh manifest. Cover, full-list order and companion copy corrections preserve the customer success allowance. All requests share the original sold spend, inference/role/token/tool limits and deadlines. Two native integration cases pass; current server/web builds and local startup pass. The comprehensive suite and final mini-program builds were not run.
-
-Earlier entries and media retain their own historical snapshots; this round changes no UI and records no new browser media.
-
-New: the [support desk](docs/实施/客服接单回复与处理工作台-v1.0.md) provides a real API-backed queue, exclusive claiming, private proof access, replies, resolution and closure. Buyers query their latest reply. Seventeen unit cases, ten browser checks and four actual API smoke checks pass; the targeted API test command timed out at 180 seconds without case results and remains recorded as a timeout.
-
-Earlier round entries retain their own historical source snapshots; the current delivery is defined by this round’s provenance. This ZIP includes current server/web outputs and complete mini-program source; final mini-program binaries were not rebuilt.
-
-New: [order feedback and aftercare records](docs/实施/订单反馈与售后记录-v1.0.md) adds six categories, optional private evidence, original-request recovery, paged owned history, order filtering and current status queries. Thirty-two focused cases and ten browser checks pass, including actual PNG uploads to the local service. Staff processing, live refunds/repairs, cloud storage and devices remain unverified.
-
-New: [selective album saving and recovery](docs/实施/相册分类保存与宿主回调-v1.0.md) adds whole-pack, image-only, video-only and individual retry actions. Original progress restores on reopening; confirmed success is skipped and UNKNOWN requires manual inspection. Both adapters wait for complete before advancing. Twenty-seven focused cases and ten browser checks pass; actual phone album writes remain unverified.
-
-New: [original-order cancellation and refunds](docs/实施/订单取消与原支付动作-v1.0.md) adds explicit cancellation before production, paid-queue cancellation and original-refund progress. Cached payment actions recheck current state; UNKNOWN only queries the original order, and late payment creates one original refund intent. Seventeen unit, six native API and nine browser cases pass; live payments/refunds and devices remain unverified.
-
-New: [server draft recovery and exact-spec continuation](docs/实施/草稿恢复与方案规格续选-v1.0.md) restores live owned drafts, ready profiles and matching original plans after reopening. All four preset/variant references survive capture; missing or withdrawn versions never fall back to another variant. Seventeen unit and three native API cases plus eight browser checks pass; real login, providers and devices remain unverified.
-
-New: [sequential capture and original upload batches](docs/实施/逐张拍照与原上传批次-v1.0.md) adds one-photo camera capture, album additions, targeted retake/removal and cancellation recovery. A valid 3–5-photo set starts recognition; changed batches cannot overwrite original uploads. Ten focused cases and six shared-page checks pass. Native-device permissions still require acceptance.
-
-New: [bounded generated repair and paid-source reuse](docs/实施/生成式受限修复与原素材复用-v1.0.md) connects both silent routes to selective purchases, verified original files, fresh reference review, changed bytes, new final consensus and delivery. Two focused cases pass; seven older cases were not selected. External models/metering are synthetic. Original sold limits remain frozen; native-audio repair and live/device acceptance remain incomplete.
-
-Previous round: [bounded photo-candidate repair](docs/实施/原图候选修复与重新验收-v1.0.md) connects located failures to a CONTENT revision, changed files, a new sealed packet, fresh dual review and delivery. Two focused native integration cases pass with synthetic external roles and metering. Original order limits remain frozen; native-audio repair, live providers and device acceptance remain unfinished.
-
 [English](README.en.md) · [中文](README.md) · [Documentation](docs/README.md) · [Quick start](docs/guides/QUICKSTART.en.md) · [Implementation status](docs/guides/STATUS.md) · [Changelog](CHANGELOG.md)
+
+New: the [support repair workspace](docs/实施/客服素材纠错工作台-v1.0.md) lets the assigned staff inspect the frozen profile and actual private images, edit cover/list order/companion copy, and follow the existing five-stage correction. It preserves the original request on ACK loss, shares a pending-write gate with replies, and recovers the linked request after reload. Actual corrected UTF-8 delivery passes; 11 client cases, 9 browser groups and 4 native API groups pass, with four screenshots and recorded GIF/video.
 
 **Photograph a product, choose a preset, receive a coordinated asset pack.** One Tap Assets is a recoverable cloud production service designed primarily for **Alipay and Douyin mini-programs**. It covers product recognition, content planning, image/video production, post-production, review and asset retrieval. The planned **Plus web application** serves advanced editing and deeper production and remains P1 work.
 
@@ -30,10 +10,16 @@ This repository is under active development: requirements **v3.1**, development 
 
 Quick delivery: see the [handover and startup guide](docs/delivery/README.md). Run `.\scripts\setup-local.ps1`, then `doctor`, `local:start` or `preview:serve`. `delivery:build --smoke` runs bounded builds and focused smoke checks; `delivery:package` creates a ZIP with source and successful outputs. A fully green comprehensive suite is not a packaging prerequisite.
 
-Current candidate: typecheck, doctor/startup and two native correction cases PASS. Builds: server: PASS, preview: PASS, alipay: NOT_RUN, douyin: NOT_RUN. No comprehensive suite, UI changes or new browser recordings this round. Bound: 406 source files / 42 contracts / 4 resources; 12695007. See [delivery](docs/delivery/current.json) and [provenance](docs/verification/platform-repair-source.json).
+Current candidate: type/server/preview/doctor/startup PASS; 11 client cases, 9 browser groups and 4 native API groups pass. Bound: 412 source files / 42 contracts / 4 resources, `e6892212`. The comprehensive suite and final mini-program builds were not run; complete source is retained. See [delivery](docs/delivery/current.json) and [provenance](docs/verification/support-repair-ui-source.json).
 
 ## Screens and recorded interaction
 
+
+最新素材纠错 / Latest support repair: [操作与来源](docs/media/support-repair/README.md)
+
+![原工单素材纠错 / Original-ticket correction](docs/media/support-repair/walkthrough.gif)
+
+[MP4](docs/media/support-repair/walkthrough.mp4) · [WebM](docs/media/support-repair/walkthrough.webm) · [截图与摘要 / Screens and hashes](docs/media/support-repair/capture-manifest.json)。实际本地页面/五阶段/文件效果；商品、语义、身份与计量合成，非生产或真机证明。Actual effects with synthetic inputs and roles, no live-service admission.
 
 最新客服工作台 / Latest support desk: [操作与来源](docs/media/support-desk/README.md)
 
@@ -194,7 +180,7 @@ flowchart LR
 | Media | Sharp 0.35.5, native FFmpeg/ffprobe, private storage and local development storage |
 | Agent | Codex app-server, bounded stdio/MCP, metered inference and style SkillBundles |
 | Verification | Vitest 5.0.5, Playwright 1.64.1, native PG/actual media and explicit synthetic provider/host fixtures |
-| Tooling | pnpm 10.13.1, one lockfile, JSON Schema 2020-12; 77 business/26 management endpoint contracts |
+| Tooling | pnpm 10.13.1, one lockfile, JSON Schema 2020-12; 77 business/32 management endpoint contracts |
 
 The project does not launch local Docker, WSL, virtual machines or Testcontainers, and does not require Redis. Native development scripts target Windows PowerShell. A complete startup on other operating systems has not been verified here.
 
@@ -246,7 +232,7 @@ Import `runtime/build/mini-alipay/` and `runtime/build/mini-douyin/` into offici
 
 Persist a one-time intent and atomically reserve the original order’s total budget before paid side effects. Model/rate contracts are frozen, not hardcoded. `UNKNOWN` recovers the original request/provider task and retains its cost hold without buying again. Lease generations reject stale workers; retries do not extend the original deadline. Files, reports, manifests and downloads bind actual-byte hashes. Private erasure and financial recovery are separate. Restore requires replaying an independent signed deletion journal; production durability and complete privacy erasure remain unverified.
 
-Resuming a client session, recovering an original provider task, repairing candidate media and revising a delivery are separate flows. **PHOTO_LAYOUT and both silent generated routes have bounded candidate repair; native-audio repair remains unfinished.** A `repair_rounds` field or lease takeover does not produce a new candidate, new sealed packet and two fresh reviews. Rejected work remains blocked; failure, refund and release have separate states. Never force PASS or recreate an order to bypass them. Limited photo aftercare does not implement generated revisions or free platform correction. See [recovery and repair boundaries](docs/guides/RECOVERY.md) for actual handling, error codes and remaining acceptance conditions.
+Resuming a client session, recovering an original provider task, repairing candidate media and revising a delivery are separate flows. **PHOTO_LAYOUT and both silent generated routes have bounded candidate repair; native-audio repair remains unfinished.** A `repair_rounds` field or lease takeover does not produce a new candidate, new sealed packet and two fresh reviews. Rejected work remains blocked; failure, refund and release have separate states. Never force PASS or recreate an order to bypass them. Limited photo aftercare and evidence-bound free platform correction now use the original five-stage pipeline; generated and native-audio aftercare remain unfinished. See [recovery and repair boundaries](docs/guides/RECOVERY.md) for actual handling, error codes and remaining acceptance conditions.
 
 ### Implemented server constraints
 
@@ -301,7 +287,7 @@ Historical 346c8c21 results remain in [cost provenance](docs/verification/repair
 
 完整命令未通过；源码进展与独立构建不升级为完整通过。 The full command chain fails; source progress and separate builds do not replace it.
 
-Remaining work includes official-variant and real-service acceptance of both generative routes, real native-audio quality and commercial admission, real Codex/isolation/cleanup, provider/payment/storage admission, four device groups, complete bounded one-round automatic repair, 14 variants × 30 full-pack benchmarks, complete community/aftercare, Plus/management UI and acceptance of all **58 requirements / 52 P0 requirements**. Follow [status and priorities](docs/guides/STATUS.md).
+Remaining work includes official-variant and real-service acceptance of both generative routes, real native-audio quality and commercial admission, real Codex/isolation/cleanup, provider/payment/storage admission, four device groups, complete bounded one-round automatic repair, 14 variants × 30 full-pack benchmarks, complete community/aftercare, Plus and remaining management workflows, and acceptance of all **58 requirements / 52 P0 requirements**. Follow [status and priorities](docs/guides/STATUS.md).
 
 Each development round synchronizes code, both READMEs, affected guides, applicable screenshots/video/GIF and the [changelog](CHANGELOG.md), then commits, pushes normally and verifies the remote commit. The [publishing guide](docs/guides/PUBLISHING.md) defines the sequence and documentation-only validation. Never overwrite unfamiliar remote work or commit credentials, customer photos, database files or caches.
 

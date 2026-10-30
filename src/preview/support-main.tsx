@@ -3,12 +3,14 @@ import {createRoot} from 'react-dom/client';
 import type {DTO} from '../shared/contracts/types';
 import {SupportDeskClient} from '../shared/client/support-desk';
 import {supportCategories,ticketStates} from '../shared/client/support';
+import {SupportRepairPanel} from './support-repair';
 import './support-console.css';
 
 function SupportConsole(){
   const desk=useRef(new SupportDeskClient()),epoch=useRef(0);const [token,setToken]=useState(''),[connected,setConnected]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState('');
   const [state,setState]=useState<DTO<'Ticket'>['state']>('OPEN'),[items,setItems]=useState<DTO<'ManagedSupportTicket'>[]>([]),[next,setNext]=useState<string|null>(null);
   const [detail,setDetail]=useState<DTO<'ManagedSupportDetail'>>(),[message,setMessage]=useState(''),[image,setImage]=useState(''),[pending,setPending]=useState(false);
+  const [repairRefresh,setRepairRefresh]=useState(0);
   useEffect(()=>()=>{epoch.current++;desk.current.disconnect();},[]);
   async function run(work:()=>Promise<void>){const current=epoch.current;setBusy(true);setError('');try{await work();}catch(e){if(current===epoch.current)setError(e instanceof Error?e.message:'操作未完成，请查询原工单');}
     finally{if(current===epoch.current){setBusy(false);setPending(desk.current.pending);}}}
@@ -20,8 +22,8 @@ function SupportConsole(){
   return <main className="desk"><header><a className="desk-brand" href="/ops/support">柚子创作社 <span>一品成片</span></a><div><span className="desk-kicker">客户支持</span><h1>让每一个问题，<br/>都有回应。</h1><p>接手、核实、回复，处理进展回到用户的原反馈记录。</p></div><span className="desk-dot">客服工作台</span></header>
     {!connected?<section className="desk-login"><h2>连接客服账户</h2><p>使用独立分配的客服访问令牌。访问令牌仅在当前页面内存中使用。</p><label>客服访问令牌<input autoComplete="off" type="password" value={token} onChange={e=>setToken(e.target.value)} placeholder="输入独立客服令牌"/></label><button disabled={busy||!token.trim()} onClick={()=>void run(async()=>{desk.current.connect(token);setToken('');await load();setConnected(true);})}>连接工作台</button></section>:<>
       <div className="desk-toolbar"><label>工单状态<select aria-label="工单状态" value={state} disabled={busy||pending} onChange={e=>{const value=e.target.value as typeof state;setState(value);setDetail(undefined);setImage('');void run(()=>load(value));}}>{Object.entries(ticketStates).map(([key,label])=><option key={key} value={key}>{label}</option>)}</select></label>
-        <button className="quiet" disabled={busy} onClick={()=>void run(async()=>{await load();if(detail){setDetail(await desk.current.detail(detail.summary.ticket_id));setImage('');}})}>刷新工单</button><button className="quiet" onClick={logout}>退出并清空</button></div>
-      {pending&&<div className="desk-notice" role="status">原操作回执未确认，已保留原版本、内容和请求编号。请继续确认后再处理其他工单。<button disabled={busy} onClick={()=>void run(async()=>{const result=await desk.current.retry();setMessage('');setDetail(await desk.current.detail(result.ticket_id));await load();})}>继续确认原操作</button></div>}
+        <button className="quiet" disabled={busy} onClick={()=>void run(async()=>{await load();if(detail){setDetail(await desk.current.detail(detail.summary.ticket_id));setImage('');setRepairRefresh(n=>n+1);}})}>刷新工单</button><button className="quiet" onClick={logout}>退出并清空</button></div>
+      {pending&&<div className="desk-notice" role="status">原操作回执未确认，已保留原版本、内容和请求编号。请继续确认后再处理其他工单。<button disabled={busy} onClick={()=>void run(async()=>{const id=desk.current.pendingTicketId!;if(desk.current.pendingKind==='REPAIR')await desk.current.retryRepair();else await desk.current.retry();setMessage('');setDetail(await desk.current.detail(id));await load();setRepairRefresh(n=>n+1);})}>继续确认原操作</button></div>}
       <div className="desk-grid"><section className="desk-list"><h2>处理队列 <span>{items.length}</span></h2>{!items.length&&<p className="desk-empty">当前状态没有待处理工单。</p>}
         {items.map(t=><button className={`desk-ticket ${detail?.summary.ticket_id===t.ticket_id?'selected':''}`} key={t.ticket_id} disabled={busy||pending} onClick={()=>void run(async()=>{setDetail(undefined);setMessage('');setImage('');setDetail(await desk.current.detail(t.ticket_id));})}><strong>{supportCategories[t.category as keyof typeof supportCategories]??'订单问题'}</strong><span>{ticketStates[t.state]}</span><small>{t.ticket_id}</small><small>订单 {t.order_id}</small></button>)}
         {next&&<button className="quiet" disabled={busy||pending} onClick={()=>void run(()=>load(state,true))}>加载更多工单</button>}</section>
@@ -34,6 +36,7 @@ function SupportConsole(){
             {detail.summary.state==='OPEN'&&<button disabled={busy||pending} onClick={()=>void run(()=>act('CLAIM'))}>接手这条工单</button>}
             {detail.summary.state==='PROCESSING'&&<><label>给用户的回复<textarea maxLength={2000} disabled={busy||pending} value={message} onChange={e=>setMessage(e.target.value)} placeholder="说明核实结果、处理建议或当前进展"/></label><div className="desk-actions"><button disabled={busy||pending||!message.trim()} onClick={()=>void run(()=>act('REPLY'))}>发送回复</button><button className="quiet" disabled={busy||pending||!message.trim()} onClick={()=>void run(()=>act('RESOLVE'))}>回复并标记已解决</button></div></>}
             {detail.summary.state==='RESOLVED'&&<button disabled={busy||pending} onClick={()=>void run(()=>act('CLOSE'))}>关闭已解决工单</button>}
+            {detail.repair_access&&<SupportRepairPanel key={detail.summary.ticket_id} desk={desk.current} detail={detail} busy={busy} pending={pending} refresh={repairRefresh} run={run} onChanged={async()=>{setDetail(await desk.current.detail(detail.summary.ticket_id));await load();}}/>}
           </>}
           <p className="desk-footnote">工单状态只记录客服沟通进展。退款、素材纠错和重新交付须以原订单实际结果为准。</p></>}
         </section></div></>}
