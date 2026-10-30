@@ -22,7 +22,7 @@ import {checkReviewImages,type ReviewImage,type ReviewImageBinding} from '../cod
 import {PendingExternal} from '../queue/leases.js';
 import {toolScopeById,type ToolScope} from '../tool-gateway/http.js';
 import type {ToolLease} from '../tool-gateway/consumer.js';
-import {revisionContext,revisionAdmission,type RevisionContext} from './context.js';
+import {revisionContext,revisionAdmission,type RevisionContext,type RevisionRow} from './context.js';
 
 export interface RevisionCandidate {revision_id:string;input_hash:string;items:DTO<'Deliverable'>[];cover_deliverable_id:string;candidate_hash:string}
 export interface RevisionPacket {revision_id:string;input_hash:string;parent_manifest_hash:string;source_packet_id:string;source_packet_hash:string;
@@ -62,11 +62,45 @@ async function originalContext(db:Db,c:RevisionContext):Promise<ExecutionContext
   return {tenantId:c.row.tenant_id,ownerId:c.row.owner_id,orderId:c.row.order_id,snapshotHash:c.input.original_snapshot_hash,
     snapshot:c.snapshot,contract:c.contract,photoVersionId:photo.id};
 }
-async function sourcePacket(db:Db,c:RevisionContext):Promise<{context:ExecutionContext;packet:DTO<'ReviewPacket'>}> {
+async function sourcePacket(db:Db,cfg:Config,c:RevisionContext):Promise<{context:ExecutionContext;packet:DTO<'ReviewPacket'>}> {
   const context=await originalContext(db,c);const packet=await currentReviewPacket(db,context);assertReviewConsensus(packet);
   requireThat(packet.publication_decision==='ALLOW','REVISION_PARENT_UNVERIFIED','原交付缺少已发布的封存证据',503);
+  // A later correction may inherit copy from an earlier accepted revision.
+  // Walk only immutable, completed links back to the original sealed media;
+  // revalidate each prior packet/role proof instead of treating metadata as PASS.
+  let parent=c.parent;let links=0;
+  while(parent.manifest_revision>1){
+    requireThat(++links<=c.policy.limits.max_requests,'REVISION_PARENT_UNVERIFIED','父清单链超出原售后调用边界',503);
+    const prior=(await db.query<RevisionRow>(`SELECT * FROM revision_requests WHERE tenant_id=$1 AND owner_id=$2 AND order_id=$3
+      AND id=$4 AND state='COMPLETED' AND result_manifest_id=$5`,[c.row.tenant_id,c.row.owner_id,c.row.order_id,parent.revision_id,parent.manifest_id])).rows[0];
+    const input=prior?.private.input;
+    requireThat(prior&&input,'REVISION_PARENT_LINK_MISSING','父版本缺少已完成的原修改记录',503);
+    requireThat(hash(input)===prior.input_hash&&input.revision_id===prior.id&&input.tenant_id===c.row.tenant_id
+      &&input.owner_id===c.row.owner_id&&input.order_id===c.row.order_id,
+      'REVISION_PARENT_INPUT_CHANGED','父版本冻结输入或归属不一致',503);
+    requireThat(input.original_snapshot_hash===c.input.original_snapshot_hash&&input.original_contract_hash===c.input.original_contract_hash&&input.policy_hash===c.input.policy_hash,
+      'REVISION_PARENT_SOURCE_CHANGED','父版本原合同或执行快照不一致',503);
+    requireThat(input.parent_manifest_revision===parent.manifest_revision-1&&prior.parent_manifest_revision===input.parent_manifest_revision,
+      'REVISION_PARENT_VERSION_CHANGED','父版本序号与原修改绑定不一致',503);
+    requireThat(hash(input.request)===hash(prior.private.request),'REVISION_PARENT_REQUEST_CHANGED','父版本原修改请求不一致',503);
+    // PostgreSQL's original order JSON can use +00:00, while the manifest
+    // retains ISO Z. Require the identical instant without extending either.
+    requireThat(Number.isFinite(Date.parse(input.delivery_expires_at))&&Date.parse(input.delivery_expires_at)===Date.parse(parent.expires_at),
+      'REVISION_PARENT_EXPIRY_CHANGED','父版本领取期不一致',503);
+    const previous=(await db.query<{data:DTO<'Deliverables'>;hash:string}>('SELECT data,hash FROM delivery_manifests WHERE tenant_id=$1 AND owner_id=$2 AND order_id=$3 AND id=$4',
+      [c.row.tenant_id,c.row.owner_id,c.row.order_id,input.parent_manifest_id])).rows[0];
+    requireThat(previous&&hash(previous.data)===previous.hash&&previous.hash===input.parent_manifest_hash
+      &&previous.data.manifest_revision===input.parent_manifest_revision&&parent.parent_manifest_id===previous.data.manifest_id,
+      'REVISION_PARENT_UNVERIFIED','父清单链与原版本摘要不一致',503);
+    const priorContext:RevisionContext={...c,row:prior,input,parent:previous.data,inputHash:prior.input_hash};
+    const sealed=revisionPacket(priorContext);
+    requireThat(hash(sealed.candidate.items)===hash(parent.items)&&sealed.candidate.cover_deliverable_id===parent.cover_deliverable_id,
+      'REVISION_PARENT_UNVERIFIED','父清单与前次验收候选不一致',503);
+    const {validateRevisionCompletion}=await import('./review.js');await validateRevisionCompletion(db,cfg,priorContext);
+    parent=previous.data;
+  }
   const post=await operationArtifacts(db,context,'POST');
-  requireThat(post.receipt.artifacts.length===c.parent.items.length && c.parent.items.every(i=>post.receipt.artifacts.some(a=>
+  requireThat(post.receipt.artifacts.length===parent.items.length && parent.items.every(i=>post.receipt.artifacts.some(a=>
     a.id===i.deliverable_id && a.slot_id===i.slot_id && a.sha256===i.sha256 && a.spec.kind===i.kind)),
   'REVISION_PARENT_UNVERIFIED','父清单与原封存文件不一致',503);
   return {context,packet};
@@ -105,7 +139,7 @@ export async function makeCandidate(pool:pg.Pool,store:ObjectStorage,scope:ToolS
   return output;
 }
 export async function inspectCandidate(db:Db,cfg:Config,store:ObjectStorage,c:RevisionContext,signal:AbortSignal):Promise<void> {
-  const output=candidate(c);await sourcePacket(db,c);
+  const output=candidate(c);await sourcePacket(db,cfg,c);
   const directory=inside(cfg.runtimeRoot,`revision-qc/${c.row.id}/${id('attempt')}`);await mkdir(directory,{recursive:true});
   try {for(const item of output.items){
     requireThat(!signal.aborted && Date.parse(c.input.deadline_at)>Date.now(),'REVISION_DEADLINE_EXCEEDED','修改已中断或到期',409);
@@ -121,7 +155,7 @@ export async function inspectCandidate(db:Db,cfg:Config,store:ObjectStorage,c:Re
   }}finally{await rm(inside(cfg.runtimeRoot,directory),{recursive:true,force:true});}
 }
 export async function buildRevisionPacket(db:Db,cfg:Config,store:ObjectStorage,c:RevisionContext,signal:AbortSignal):Promise<RevisionPacket> {
-  await inspectCandidate(db,cfg,store,c,signal);const source=await sourcePacket(db,c);
+  await inspectCandidate(db,cfg,store,c,signal);const source=await sourcePacket(db,cfg,c);
   const images=await originalImages(db,store,source.context,source.packet);await checkReviewImages(images,revisionAdmission(cfg,c));
   const body={revision_id:c.row.id,input_hash:c.inputHash,parent_manifest_hash:c.input.parent_manifest_hash,source_packet_id:source.packet.packet_id,
     source_packet_hash:source.packet.packet_hash,candidate:candidate(c),images:images.map(({bytes:_bytes,...binding})=>binding)};
@@ -133,7 +167,7 @@ export function revisionPacket(c:RevisionContext):RevisionPacket {
     && packet.parent_manifest_hash===c.input.parent_manifest_hash && hash(packet.candidate)===hash(candidate(c)),'REVISION_PACKET_CHANGED','修改封存包不一致',503);return packet;
 }
 export async function revisionImages(db:Db,cfg:Config,store:ObjectStorage,c:RevisionContext):Promise<ReviewImage[]> {
-  const packet=revisionPacket(c);const source=await sourcePacket(db,c);
+  const packet=revisionPacket(c);const source=await sourcePacket(db,cfg,c);
   requireThat(source.packet.packet_id===packet.source_packet_id && source.packet.packet_hash===packet.source_packet_hash,'REVISION_PACKET_CHANGED','原画面证据封存不一致',503);
   const images=await originalImages(db,store,source.context,source.packet);
   requireThat(hash(images.map(({bytes:_bytes,...binding})=>binding))===hash(packet.images),'REVISION_PACKET_CHANGED','复核画面绑定已变化',503);

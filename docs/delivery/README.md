@@ -1,5 +1,9 @@
 # 源码交付与快速启动 / Source delivery and quick start
 
+本轮接通[工单关联免费纠错与售后原额度](../实施/工单关联免费纠错与售后原额度-v1.0.md)：原接手客服按原工单、原交付版本提交封面、清单展示顺序或配套文案纠错；五阶段重新制作/验收后发布新版本，不消耗用户一次成功小修改。所有请求共用原售后费用、推理/角色/Token/工具额度和绝对截止。两项定向原生集成通过；仅类型、服务端/网页构建与本地启动，未运行全面测试、未重编小程序。
+
+以下旧轮次及截图/录像保持各自历史来源；本轮未改界面、不复录媒体。原生成式/口播售后、客服纠错编辑面板、真实服务、真机、完整社区商业制作及Plus仍待完成。
+
 本轮新增[客服接单、回复与处理工作台](../实施/客服接单回复与处理工作台-v1.0.md)：实际管理接口支持队列、接单、私有证明、回复、解决和关闭；用户可在原反馈记录查看回复。17项单元检查、10项浏览器操作和4项实际API冒烟通过；API测试命令180秒超时且无用例结果，保留原记录，不等待全面绿灯。
 
 以下既有轮次记录对应各自历史源码，当前状态以本轮来源为准。本轮ZIP包含当前服务端/网页产物和完整小程序源码，最终快照未重建小程序编译物。
@@ -31,7 +35,7 @@ This delivery follows the user's request to prioritize working main flows and pa
 | 03 | 内容、制作、后期、QC、独立双复核、交付及实例回收 / Production and recovery workers | `src/worker/` |
 | 04 | 十套官方风格、三路线规格、Skill和固定字体 / Presets, specifications, skills and fonts | `assets/` |
 | 05 | 双语说明、C定型稿、截图、MP4/WebM/GIF、开发文档 / Bilingual docs, designs and media | `README.md`, `README.en.md`, `docs/` |
-| 06 | 本轮实际成功构建的服务端、页面回放及双小程序 / Successfully built outputs from this run | 包内 / In archive: `runtime/build/` |
+| 06 | 本轮成功构建的服务端与网页；双小程序保留完整源码 / Current server/web outputs; complete mini-program sources retained | 包内 / In archive: `runtime/build/` |
 | 07 | 每项文件SHA-256、构建状态与排除项 / File hashes, build status and exclusions | 包内 / In archive: `DELIVERY-MANIFEST.json` |
 
 源码与构建文件放在同一ZIP，成功产物按实际状态纳入；失败或超时的目标不借用历史文件。包不包含真实配置、个人Codex账户、客户照片、数据库、运行日志或依赖目录。需要联网安装固定依赖及原生工具，并配置外部服务；这不是离线安装器。

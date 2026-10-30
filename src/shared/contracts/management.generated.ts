@@ -210,7 +210,7 @@ export interface paths {
         put?: never;
         /**
          * 平台错误关联免费纠错不耗小改额度
-         * @description 管理域独立audience与角色，所有访问/动作审计；产品会话不得提升权限。审批不能覆盖缺失的能力/价格/权利证据。
+         * @description 原接手客服及原版本工单；仅原图无声封面、完整清单顺序或配套文案纠错。共享原售后预算、推理和工具额度，冻结300秒/48小时/领取期最早截止，五阶段重新验收。不耗用户一次小修改，不自动解决工单。
          */
         post: operations["requestPlatformErrorRepair"];
         delete?: never;
@@ -2318,6 +2318,11 @@ export interface components {
             data: components["schemas"]["SupportEvidence"];
             trace_id: string;
         };
+        PlatformErrorRepairRequest: {
+            ticket_id: string;
+            expected_ticket_revision: number;
+            change: components["schemas"]["RevisionRequest"];
+        };
     };
     responses: never;
     parameters: {
@@ -2703,7 +2708,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["ManagementActionRequest"];
+                "application/json": components["schemas"]["PlatformErrorRepairRequest"];
             };
         };
         responses: {

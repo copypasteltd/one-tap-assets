@@ -16,7 +16,7 @@ import {PHOTO_QC_POLICY} from '../review/qc.js';
 
 export interface RevisionRow {
   id:string;tenant_id:string;owner_id:string;order_id:string;state:DTO<'Revision'>['state'];deadline_at:Date;input_hash:string;
-  parent_manifest_revision:number;kind:DTO<'RevisionRequest'>['kind'];result_manifest_id:string|null;
+  parent_manifest_revision:number;kind:DTO<'RevisionRequest'>['kind']|'PLATFORM_REPAIR';consumes_user_allowance:boolean;result_manifest_id:string|null;
   data:DTO<'Revision'>;private:{input?:RevisionInput;request?:DTO<'RevisionRequest'>;[key:string]:unknown};
 }
 export interface RevisionContext {
@@ -72,7 +72,8 @@ async function deliveredSource(db:Db,tenantId:string,orderId:string,ownerId:stri
   await verifyResourceLicenses(db,contract.resource_versions);
   return {contract,policy,snapshot:snapshot.data,snapshotHash:snapshot.hash,contractHash:order.private.contract_hash,expiry:order.data.delivery_expires_at};
 }
-export async function createRevision(db:Db,p:Principal,orderId:string,pack:DTO<'Deliverables'>,raw:DTO<'RevisionRequest'>):Promise<DTO<'Revision'>> {
+export async function createRevision(db:Db,p:Pick<Principal,'tenantId'|'userId'>,orderId:string,pack:DTO<'Deliverables'>,raw:DTO<'RevisionRequest'>,
+  platformError?:RevisionInput['platform_error']):Promise<DTO<'Revision'>> {
   await lockMediaOwner(db,p.tenantId,p.userId);await owned<DTO<'Order'>>(db,'orders',orderId,p,true);
   const source=await deliveredSource(db,p.tenantId,orderId,p.userId);const request=checkedRevisionChange(pack,raw,source.contract);
   requireThat(source.snapshot.engine==='PHOTO_LAYOUT' && source.snapshot.audio_policy.speech_mode==='NONE'
@@ -82,7 +83,11 @@ export async function createRevision(db:Db,p:Principal,orderId:string,pack:DTO<'
   const first=(await db.query<{delivered_at:Date}>('SELECT delivered_at FROM delivery_manifests WHERE tenant_id=$1 AND order_id=$2 ORDER BY revision LIMIT 1',[p.tenantId,orderId])).rows[0] ?? notFound();
   const windowEnds=first.delivered_at.getTime()+source.policy.window_hours*3600000;
   requireThat(windowEnds>Date.now(),'REVISION_WINDOW_EXPIRED','48小时小修改时限已结束',422);
-  const used=await db.query("SELECT id FROM revision_requests WHERE tenant_id=$1 AND order_id=$2 AND consumes_user_allowance AND state IN ('REQUESTED','PROCESSING','COMPLETED')",[p.tenantId,orderId]);
+  // A platform correction never consumes the customer's one small change, but
+  // all changes serialize against the same current manifest and sold account.
+  const active=await db.query<{consumes_user_allowance:boolean}>("SELECT consumes_user_allowance FROM revision_requests WHERE tenant_id=$1 AND order_id=$2 AND state IN ('REQUESTED','PROCESSING')",[p.tenantId,orderId]);
+  requireThat(!active.rowCount,active.rows.some(r=>r.consumes_user_allowance)?'REVISION_ALLOWANCE_USED':'REVISION_IN_PROGRESS','本单已有修改或纠错正在处理，请等待原请求',422);
+  const used=platformError?{rowCount:0}:await db.query("SELECT id FROM revision_requests WHERE tenant_id=$1 AND order_id=$2 AND consumes_user_allowance AND state='COMPLETED'",[p.tenantId,orderId]);
   requireThat(!used.rowCount,'REVISION_ALLOWANCE_USED','本单已有一次成功修改或正在修改',422);
   await ensureRevisionBudget(db,{tenantId:p.tenantId,ownerId:p.userId,orderId},source.policy);
   const pending=await db.query(`SELECT r.id FROM revision_cost_reservations r JOIN revision_budgets b ON b.tenant_id=r.tenant_id AND b.id=r.budget_id
@@ -91,10 +96,12 @@ export async function createRevision(db:Db,p:Principal,orderId:string,pack:DTO<'
   const revisionId=id('revision');const deadline=iso(Math.min(Date.now()+source.policy.deadline_seconds*1000,windowEnds,Date.parse(source.expiry)));
   const input:RevisionInput={revision_id:revisionId,tenant_id:p.tenantId,owner_id:p.userId,order_id:orderId,product_id:source.contract.product.product_id,
     request,parent_manifest_id:pack.manifest_id,parent_manifest_revision:pack.manifest_revision,parent_manifest_hash:parent.hash,
-    original_snapshot_hash:source.snapshotHash,original_contract_hash:source.contractHash,policy_hash:hash(source.policy),deadline_at:deadline,delivery_expires_at:source.expiry};
-  const data:DTO<'Revision'>={revision_id:revisionId,order_id:orderId,state:'REQUESTED',consumes_user_allowance:true,result_manifest_revision:null};const inputHash=hash(input);
+    original_snapshot_hash:source.snapshotHash,original_contract_hash:source.contractHash,policy_hash:hash(source.policy),deadline_at:deadline,delivery_expires_at:source.expiry,
+    ...(platformError?{platform_error:structuredClone(platformError)}:{})};
+  const consumes=!platformError;
+  const data:DTO<'Revision'>={revision_id:revisionId,order_id:orderId,state:'REQUESTED',consumes_user_allowance:consumes,result_manifest_revision:null};const inputHash=hash(input);
   await insert(db,'revision_requests',{id:revisionId,tenant_id:p.tenantId,owner_id:p.userId,order_id:orderId,parent_manifest_revision:pack.manifest_revision,
-    kind:request.kind,state:'REQUESTED',consumes_user_allowance:true,deadline_at:deadline,input_hash:inputHash,data,private:{request,input,manifest_id:pack.manifest_id}});
+    kind:platformError?'PLATFORM_REPAIR':request.kind,state:'REQUESTED',consumes_user_allowance:consumes,deadline_at:deadline,input_hash:inputHash,data,private:{request,input,manifest_id:pack.manifest_id}});
   let dependencies:string[]=[];
   for(const name of REVISION_STAGES) dependencies=[await enqueueStage(db,{tenantId:p.tenantId,scopeType:'REVISION',scopeId:revisionId,name,inputHash,deadlineAt:deadline,dependencies})];
   return data;
@@ -112,9 +119,19 @@ export async function revisionContext(db:Db,tenantId:string,revisionId:string,in
   requireThat(input && ['REQUESTED','PROCESSING'].includes(row.state) && row.deadline_at?.getTime()>Date.now(),'REVISION_NO_LONGER_EXECUTABLE','受限修改已结束、到期或缺少冻结输入',409);
   requireThat(hash(input)===row.input_hash && (!inputHash || row.input_hash===inputHash) && input.revision_id===row.id && input.tenant_id===tenantId
     && input.owner_id===row.owner_id && input.order_id===row.order_id && input.parent_manifest_revision===row.parent_manifest_revision
-    && input.deadline_at===row.deadline_at.toISOString() && hash(input.request)===hash(row.private.request) && input.request.kind===row.kind,
+    && input.deadline_at===row.deadline_at.toISOString() && hash(input.request)===hash(row.private.request)
+    && (input.platform_error?row.kind==='PLATFORM_REPAIR'&&!row.consumes_user_allowance:input.request.kind===row.kind&&row.consumes_user_allowance),
   'REVISION_INPUT_CHANGED','受限修改冻结输入不一致',503);
   const source=await deliveredSource(db,tenantId,row.order_id,row.owner_id);
+  if(input.platform_error){
+    const proof=input.platform_error;
+    const ticket=(await db.query<{data:DTO<'Ticket'>;private:Record<string,unknown>}>(`SELECT data,private FROM support_tickets
+      WHERE tenant_id=$1 AND owner_id=$2 AND order_id=$3 AND id=$4 AND NOT(private ? 'privacy_deleted')`,[tenantId,row.owner_id,row.order_id,proof.ticket_id])).rows[0];
+    const binding=ticket?.private.platform_repair as {revision_id:string;actor:string;ticket_revision:number}|undefined;
+    requireThat(ticket&&binding?.revision_id===row.id&&binding.actor===proof.actor&&binding.ticket_revision===proof.ticket_revision
+      && hash({category:ticket.data.category,message:ticket.private.message,attachments:ticket.private.attachment_asset_ids??[]})===proof.evidence_hash,
+      'PLATFORM_REPAIR_EVIDENCE_CHANGED','平台纠错缺少原工单或原问题证据已撤销',410);
+  }
   requireThat(source.snapshotHash===input.original_snapshot_hash && source.contractHash===input.original_contract_hash
     && hash(source.policy)===input.policy_hash && source.expiry===input.delivery_expires_at,'REVISION_INPUT_CHANGED','原订单或受限修改合同已变更',503);
   const parent=(await db.query<{hash:string;data:DTO<'Deliverables'>}>('SELECT hash,data FROM delivery_manifests WHERE tenant_id=$1 AND order_id=$2 ORDER BY revision DESC LIMIT 1',[tenantId,row.order_id])).rows[0] ?? notFound();

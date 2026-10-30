@@ -160,7 +160,7 @@
       "operation_id": "requestPlatformErrorRepair",
       "summary": "平台错误关联免费纠错不耗小改额度",
       "permission": "support:repair",
-      "request_schema": "ManagementActionRequest",
+      "request_schema": "PlatformErrorRepairRequest",
       "response_schema": "Revision",
       "requirements": [
         "P01-F12",

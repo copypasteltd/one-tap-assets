@@ -3173,6 +3173,11 @@ export interface components {
             data: components["schemas"]["SupportEvidence"];
             trace_id: string;
         };
+        PlatformErrorRepairRequest: {
+            ticket_id: string;
+            expected_ticket_revision: number;
+            change: components["schemas"]["RevisionRequest"];
+        };
     };
     responses: never;
     parameters: {

@@ -83,9 +83,10 @@ export class RevisionService {
       await insert(db,'delivery_manifests',{id:manifest.manifest_id,tenant_id:current.row.tenant_id,owner_id:current.row.owner_id,order_id:current.row.order_id,
         revision:manifest.manifest_revision,hash:hash(manifest),data:manifest,expires_at:manifest.expires_at,delivered_at:iso(),
         private:{revision_id:current.row.id,parent_manifest_hash:current.input.parent_manifest_hash,packet_hash:packet.packet_hash,review_hash:hash(current.row.private.review_reports)}});
-      await db.query(`UPDATE revision_requests SET state='COMPLETED',result_manifest_id=$3,consumes_user_allowance=true,
-        data=data||jsonb_build_object('state','COMPLETED','result_manifest_revision',$4::int,'consumes_user_allowance',true),updated_at=now()
-        WHERE tenant_id=$1 AND id=$2 AND state='PROCESSING'`,[lease.tenant_id,current.row.id,manifest.manifest_id,manifest.manifest_revision]);
+      const consumes=!current.input.platform_error;
+      await db.query(`UPDATE revision_requests SET state='COMPLETED',result_manifest_id=$3,consumes_user_allowance=$5,
+        data=data||jsonb_build_object('state','COMPLETED','result_manifest_revision',$4::int,'consumes_user_allowance',$5::boolean),updated_at=now()
+        WHERE tenant_id=$1 AND id=$2 AND state='PROCESSING'`,[lease.tenant_id,current.row.id,manifest.manifest_id,manifest.manifest_revision,consumes]);
       await outbox(db,lease.tenant_id,'RevisionDelivered',current.row.order_id,`revision-delivered:${current.row.id}`,{revision_id:current.row.id,manifest_id:manifest.manifest_id});
       await outbox(db,lease.tenant_id,'ReleaseRequested',current.row.id,`release:revision:${current.row.id}`,{scope_type:'REVISION',reason:'DELIVERED'});
     };

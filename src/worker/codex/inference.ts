@@ -170,7 +170,10 @@ export class InferenceGateway {
       const listeningHash=await scopeReviewListening(db,this.cfg,this.store,scope);
       const visual = await authorizeReviewImages(db, scope, input.input, binding.admission);
       const type = scope.scope_type==='REVISION'?'REVISION':scope.order_id ? 'ORDER' : 'PLATFORM'; const scopeId = scope.order_id ?? scope.preview_session_id!;
-      await db.query('SELECT pg_advisory_xact_lock(hashtextextended($1,0))', [`inference:${scope.tenant_id}:${type}:${scopeId}`]);
+      // Aftercare request IDs are checkpoints, not fresh sold token/call pools.
+      const revisionOrder=type==='REVISION'?(await db.query<{order_id:string}>('SELECT order_id FROM revision_requests WHERE tenant_id=$1 AND id=$2',[scope.tenant_id,scopeId])).rows[0]??notFound():null;
+      const scopeIds=revisionOrder?(await db.query<{id:string}>('SELECT id FROM revision_requests WHERE tenant_id=$1 AND order_id=$2',[scope.tenant_id,revisionOrder.order_id])).rows.map(r=>r.id):[scopeId];
+      await db.query('SELECT pg_advisory_xact_lock(hashtextextended($1,0))', [`inference:${scope.tenant_id}:${type}:${revisionOrder?.order_id??scopeId}`]);
       // Recheck after waiting on the scope budget lock. No lost lease may buy.
       await authorizeTool(db, authorization, true);
       const old = (await db.query<RequestRow>('SELECT * FROM inference_requests WHERE tenant_id=$1 AND run_id=$2 AND request_hash=$3', [scope.tenant_id, scope.run_id, requestHash])).rows[0];
@@ -184,13 +187,13 @@ export class InferenceGateway {
         COALESCE(sum(COALESCE(actual_output_tokens,reserved_output_tokens)),0) AS output,
         COALESCE(sum(COALESCE(actual_micro,reserved_micro)),0) AS cost,
         COALESCE(bool_or(private->>'scope_binding_hash' IS DISTINCT FROM $4),false) AS changed
-        FROM inference_requests WHERE tenant_id=$1 AND scope_type=$2 AND scope_id=$3`,
-      [scope.tenant_id, type, scopeId, hash(binding)])).rows[0]!;
+        FROM inference_requests WHERE tenant_id=$1 AND scope_type=$2 AND scope_id=ANY($3::text[])`,
+      [scope.tenant_id, type, scopeIds, hash(binding)])).rows[0]!;
       requireThat(!totals.pending, 'CODEX_INFERENCE_UNKNOWN', '该成本域存在在途或结果不明的推理，先核对原回执', 409);
       requireThat(!totals.changed, 'CODEX_SCOPE_BINDING_CHANGED', '原推理预算与准入快照不能更换', 409);
       if (binding.limits.max_requests_per_role !== undefined) {
         const roleCount = (await db.query<{ n: string }>(`SELECT count(*) AS n FROM inference_requests q JOIN agent_runs r ON r.id=q.run_id AND r.tenant_id=q.tenant_id
-          WHERE q.tenant_id=$1 AND q.scope_type=$2 AND q.scope_id=$3 AND r.role=$4`, [scope.tenant_id, type, scopeId, scope.role])).rows[0]!;
+          WHERE q.tenant_id=$1 AND q.scope_type=$2 AND q.scope_id=ANY($3::text[]) AND r.role=$4`, [scope.tenant_id, type, scopeIds, scope.role])).rows[0]!;
         requireThat(Number(roleCount.n) < binding.limits.max_requests_per_role, 'CODEX_ROLE_INFERENCE_LIMIT', '该角色已达到原合同推理轮次上限', 422);
       }
       const output = Math.min(binding.admission.max_request_output_tokens, binding.limits.max_output_tokens - Number(totals.output),

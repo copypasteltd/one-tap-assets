@@ -601,6 +601,19 @@ def extend_support_contract(api: dict, admin: dict, endpoints: dict, dmap: dict)
                 "requirements": requirements, "implementation_status": STATUS})
 
 
+def extend_platform_repair_contract(api: dict, admin: dict, endpoints: dict) -> None:
+    """Evidence-bound, frozen aftercare; no new sold route or budget."""
+    model = obj({"ticket_id": ID, "expected_ticket_revision": number(), "change": ref("RevisionRequest")})
+    for document in (api, admin):
+        document["components"]["schemas"]["PlatformErrorRepairRequest"] = copy.deepcopy(model)
+    operation = admin["paths"]["/orders/{order_id}/platform-repairs"]["post"]
+    operation["requestBody"]["content"]["application/json"]["schema"] = ref("PlatformErrorRepairRequest")
+    operation["description"] = "原接手客服及原版本工单；仅原图无声封面、完整清单顺序或配套文案纠错。共享原售后预算、推理和工具额度，冻结300秒/48小时/领取期最早截止，五阶段重新验收。不耗用户一次小修改，不自动解决工单。"
+    for endpoint in endpoints["endpoints"]:
+        if endpoint["operation_id"] == "requestPlatformErrorRepair":
+            endpoint["request_schema"] = "PlatformErrorRepairRequest"
+
+
 def main() -> None:
     reqs = read("assets/requirements/requirements.v3.1.json")["requirements"]
     registry = read("assets/skills/ypcc/v1.0/registry.json")
@@ -642,6 +655,7 @@ def main() -> None:
     admin_endpoints = read(OLD / "contracts/management-endpoints.json")
     extend_admin(admin, admin_endpoints, extra, dmap)
     extend_support_contract(api, admin, admin_endpoints, dmap)
+    extend_platform_repair_contract(api, admin, admin_endpoints)
     # UI intent keys contain ':' and '.', matching both runtime domains.
     # Normalize only the current contracts; v1.0 remains a preserved snapshot.
     for document in (api, admin):

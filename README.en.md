@@ -1,5 +1,9 @@
 # One Tap Assets · 一品成片
 
+New: [evidence-bound free platform corrections](docs/实施/工单关联免费纠错与售后原额度-v1.0.md) use the original assigned ticket and delivery version, then run all five aftercare stages and publish a fresh manifest. Cover, full-list order and companion copy corrections preserve the customer success allowance. All requests share the original sold spend, inference/role/token/tool limits and deadlines. Two native integration cases pass; current server/web builds and local startup pass. The comprehensive suite and final mini-program builds were not run.
+
+Earlier entries and media retain their own historical snapshots; this round changes no UI and records no new browser media.
+
 New: the [support desk](docs/实施/客服接单回复与处理工作台-v1.0.md) provides a real API-backed queue, exclusive claiming, private proof access, replies, resolution and closure. Buyers query their latest reply. Seventeen unit cases, ten browser checks and four actual API smoke checks pass; the targeted API test command timed out at 180 seconds without case results and remains recorded as a timeout.
 
 Earlier round entries retain their own historical source snapshots; the current delivery is defined by this round’s provenance. This ZIP includes current server/web outputs and complete mini-program source; final mini-program binaries were not rebuilt.
@@ -26,7 +30,7 @@ This repository is under active development: requirements **v3.1**, development 
 
 Quick delivery: see the [handover and startup guide](docs/delivery/README.md). Run `.\scripts\setup-local.ps1`, then `doctor`, `local:start` or `preview:serve`. `delivery:build --smoke` runs bounded builds and focused smoke checks; `delivery:package` creates a ZIP with source and successful outputs. A fully green comprehensive suite is not a packaging prerequisite.
 
-Current candidate: typecheck, doctor/startup, 17 unit cases, ten browser checks and four API smoke checks PASS. The API test command timed out without case results. Builds: server: PASS, preview: PASS, alipay: NOT_RUN, douyin: NOT_RUN. No comprehensive suite was run. Bound: 405 source files / 42 contracts / 4 resources; bd27a390. See [delivery](docs/delivery/current.json) and [provenance](docs/verification/support-desk-source.json).
+Current candidate: typecheck, doctor/startup and two native correction cases PASS. Builds: server: PASS, preview: PASS, alipay: NOT_RUN, douyin: NOT_RUN. No comprehensive suite, UI changes or new browser recordings this round. Bound: 406 source files / 42 contracts / 4 resources; 12695007. See [delivery](docs/delivery/current.json) and [provenance](docs/verification/platform-repair-source.json).
 
 ## Screens and recorded interaction
 

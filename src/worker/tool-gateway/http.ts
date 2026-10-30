@@ -91,7 +91,10 @@ export async function registerToolGateway(app: FastifyInstance, _cfg: Config, po
       const count = (await db.query<{ n: string }>('SELECT count(*) AS n FROM agent_tool_intents WHERE run_id=$1 AND tenant_id=$2', [scope.run_id, scope.tenant_id])).rows[0]!;
       requireThat(Number(count.n) < (binding?.private.max_tool_calls ?? 32), 'TOOL_LIMIT_EXCEEDED', '该运行已达到工具调用次数上限', 422);
       if ((scope.order_id || ['SAMPLE','REVISION'].includes(scope.scope_type)) && binding?.private.max_scope_tool_calls !== undefined) {
-        const scopeCount = (await db.query<{ n: string }>(`SELECT count(*) AS n FROM agent_tool_intents WHERE tenant_id=$1
+        const scopeCount = scope.scope_type==='REVISION'?(await db.query<{n:string}>(`SELECT count(*) AS n FROM agent_tool_intents t
+          JOIN revision_requests r ON r.tenant_id=t.tenant_id AND r.id=t.preview_session_id
+          WHERE t.tenant_id=$1 AND r.order_id=(SELECT order_id FROM revision_requests WHERE tenant_id=$1 AND id=$2)`,[scope.tenant_id,scope.scope_id])).rows[0]!:
+          (await db.query<{ n: string }>(`SELECT count(*) AS n FROM agent_tool_intents WHERE tenant_id=$1
           AND (($3::boolean AND order_id=$2) OR (NOT $3::boolean AND preview_session_id=$2))`, [scope.tenant_id, scope.order_id ?? scope.scope_id, Boolean(scope.order_id)])).rows[0]!;
         requireThat(Number(scopeCount.n) < binding.private.max_scope_tool_calls, 'TOOL_SCOPE_LIMIT_EXCEEDED', '整单已达到原合同工具调用上限', 422);
       }

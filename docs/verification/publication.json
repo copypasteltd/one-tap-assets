@@ -1,54 +1,194 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T00:08:21.808447+00:00",
-  "status": "SOURCE_DELIVERY_WITH_KNOWN_CHECK_LIMITATIONS",
-  "scope": "FOCUSED_SUPPORT_DESK_AND_AVAILABLE_BUILDS",
-  "reason": "USER_REQUESTED_FAST_DELIVERY_WITHOUT_FULL_GREEN_REQUIREMENT",
-  "original_publication_checker_status": "NOT_RUN_FOCUSED_DELIVERY",
+  "checked_at": "2026-10-30T00:49:49.745526+00:00",
+  "status": "PASS_FOCUSED_SOURCE_DELIVERY",
+  "scope": "PLATFORM_REPAIR_CLOSURE",
+  "reason": "User requested fast functional closure without a comprehensive green suite. Evidence is limited to the named two native cases and current server/web builds.",
+  "original_publication_checker_status": "NOT_RUN",
   "checker_weakened": false,
-  "source_set_hash": "bd27a39074f40267c692018badab21e750dfb9ad51204d291a5bc0766243272e",
-  "source_files": 405,
+  "source_set_hash": "12695007a2b84ce338ba4cf3e83f97187312be55b18dc7fa0a265ae614d31279",
+  "source_files": 406,
   "builds_passed": false,
   "selected_builds_passed": true,
   "checks": [
     {
       "task": "typecheck",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+        "--noEmit"
+      ],
+      "shell": false,
       "status": "PASS",
-      "elapsed_ms": 11923,
-      "log_path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/typecheck.log",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 7885,
+      "log_path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "build:server",
+      "command": "node --import tsx scripts/build-server.ts",
+      "argv": [
+        "--import",
+        "tsx",
+        "scripts/build-server.ts"
+      ],
+      "shell": false,
       "status": "PASS",
-      "elapsed_ms": 267,
-      "log_path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/server.log",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 346,
+      "log_path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T00-48-02-800Z-96472ecc\\runtime\\build\\preview",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
+        "build",
+        "--config",
+        "src/preview/vite.config.ts",
+        "--outDir",
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T00-48-02-800Z-96472ecc\\runtime\\build\\preview"
+      ],
+      "shell": false,
       "status": "PASS",
-      "elapsed_ms": 693,
-      "log_path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/preview.log",
-      "log_sha256": "65ec444b3e63033ee95093f9ab804f8383ebb91cb1e5f50aa2889ac5e84980d3"
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 673,
+      "log_path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/preview.log",
+      "log_sha256": "74539d640c002b0b10ca081539026c125ee611d3db414c1b3106398e32083642"
     }
   ],
   "local_checks": {
-    "doctor": "PASS",
-    "backend": "PASS",
-    "preview": "PASS"
+    "doctor": {
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_seconds": 90,
+      "elapsed_seconds": 0.797,
+      "log_path": "runtime/delivery/doctor-focused.log",
+      "log_sha256": "629eda06cd7de47be08d0eea93e0c9c9f7d43ecd5ab3e21e4b7cd922d1fa59cc",
+      "report": {
+        "checked_at": "2026-10-30T00:48:56.757Z",
+        "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
+        "rows": [
+          {
+            "id": "node",
+            "status": "PASS",
+            "detail": "24.22.1"
+          },
+          {
+            "id": "runtime/tools/package-manager/node_modules/pnpm/bin/pnpm.cjs",
+            "status": "PASS",
+            "detail": "present"
+          },
+          {
+            "id": "assets/presets/presets.v3.1.json",
+            "status": "PASS",
+            "detail": "present"
+          },
+          {
+            "id": "configuration",
+            "status": "PASS",
+            "detail": "environment=development; private values omitted"
+          },
+          {
+            "id": "database",
+            "status": "PASS",
+            "detail": "connected; 27 migrations"
+          },
+          {
+            "id": "ffmpeg",
+            "status": "PASS",
+            "detail": "Native executable on PATH responds"
+          },
+          {
+            "id": "ffprobe",
+            "status": "PASS",
+            "detail": "Native executable on PATH responds"
+          },
+          {
+            "id": "generation",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "codex",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "payments",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "community-publishing",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "server",
+            "status": "PRESENT_NOT_CERTIFIED",
+            "detail": "Existing default output; delivery:build records fresh isolated outputs"
+          },
+          {
+            "id": "preview",
+            "status": "PRESENT_NOT_CERTIFIED",
+            "detail": "Existing default output; delivery:build records fresh isolated outputs"
+          },
+          {
+            "id": "alipay",
+            "status": "NOT_BUILT",
+            "detail": "Run delivery:build"
+          },
+          {
+            "id": "douyin",
+            "status": "PRESENT_NOT_CERTIFIED",
+            "detail": "Existing default output; delivery:build records fresh isolated outputs"
+          },
+          {
+            "id": "catalog",
+            "status": "PASS",
+            "detail": "10 official presets; 14 variants"
+          }
+        ],
+        "full_product_verified": false,
+        "production_admitted": false
+      }
+    },
+    "backend": {
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_seconds": 90,
+      "elapsed_seconds": 3.786,
+      "log_path": "runtime/delivery/backend-focused.log",
+      "log_sha256": "ffaad729746530d6073dca4b2b9fd065c69822ada4321e251b22307482e7e241",
+      "local_stack_ready": true,
+      "preview_http_ready": false
+    },
+    "preview": {
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_seconds": 90,
+      "elapsed_seconds": 0.812,
+      "log_path": "runtime/delivery/preview-focused.log",
+      "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
+      "local_stack_ready": false,
+      "preview_http_ready": true
+    }
   },
-  "focused_unit_checks": {
-    "passed": 17,
-    "failed": 0
-  },
-  "vitest_api_attempt": "TIMEOUT_WITHOUT_RESULT",
-  "browser_checks": 10,
-  "additional_actual_api_smoke_checks": 4,
+  "native_api_cases": 2,
+  "browser_checks": "NOT_USED_UI_UNCHANGED",
   "full_suite_executed": false,
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "evidence": "docs/verification/support-desk-source.json",
-  "historical_publication": "docs/verification/publication-ea82904.json"
+  "evidence": "docs/verification/platform-repair-source.json",
+  "historical_publication": "docs/verification/publication-b31c3e8.json"
 }

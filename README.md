@@ -1,5 +1,9 @@
 # 一品成片 · One Tap Assets
 
+本轮接通[工单关联免费纠错与售后原额度](docs/实施/工单关联免费纠错与售后原额度-v1.0.md)：原接手客服按原工单、原交付版本提交封面、清单展示顺序或配套文案纠错；五阶段重新制作/验收后发布新版本，不消耗用户一次成功小修改。所有请求共用原售后费用、推理/角色/Token/工具额度和绝对截止。两项定向原生集成通过；仅类型、服务端/网页构建与本地启动，未运行全面测试、未重编小程序。
+
+以下旧轮次及截图/录像保持各自历史来源；本轮未改界面、不复录媒体。原生成式/口播售后、客服纠错编辑面板、真实服务、真机、完整社区商业制作及Plus仍待完成。
+
 本轮新增[客服接单、回复与处理工作台](docs/实施/客服接单回复与处理工作台-v1.0.md)：实际管理接口支持队列、接单、私有证明、回复、解决和关闭；用户可在原反馈记录查看回复。17项单元检查、10项浏览器操作和4项实际API冒烟通过；API测试命令180秒超时且无用例结果，保留原记录，不等待全面绿灯。
 
 以下既有轮次记录对应各自历史源码，当前状态以本轮来源为准。本轮ZIP包含当前服务端/网页产物和完整小程序源码，最终快照未重建小程序编译物。
@@ -26,7 +30,7 @@
 
 快速交付入口：[交付与启动指南](docs/delivery/README.md)。执行`.\scripts\setup-local.ps1`初始化，再用`doctor`自检、`local:start`启动后端、`preview:serve`查看共享页面。`delivery:build --smoke`只做有界构建和核心冒烟，`delivery:package`生成源码与实际成功产物ZIP；按本轮要求不等待全面测试绿灯。
 
-当前候选：类型、自检/启动、17项单元与10项浏览器/4项API冒烟通过；API测试命令超时（无用例结果）。构建 server: PASS, preview: PASS, alipay: NOT_RUN, douyin: NOT_RUN；未运行全面测试。绑定 405 source files / 42 contracts / 4 resources; bd27a390。见[交付记录](docs/delivery/current.json)、[本轮来源](docs/verification/support-desk-source.json)。
+当前候选：类型、自检/启动与2项原生纠错专项通过。构建 server: PASS, preview: PASS, alipay: NOT_RUN, douyin: NOT_RUN；未运行全面测试，本轮无界面改动或浏览器录制。绑定406 source files / 42 contracts / 4 resources；12695007。见[交付记录](docs/delivery/current.json)、[本轮来源](docs/verification/platform-repair-source.json)。
 
 
 最新客服工作台 / Latest support desk: [操作与来源](docs/media/support-desk/README.md)

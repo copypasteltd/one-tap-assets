@@ -18,7 +18,7 @@ import { publicationEvidence, compilePresetConfig, checkParentLicense } from '..
 import { license, registerLicense, decideLicense } from '../modules/licenses.js';
 import { lockMediaOwner } from '../modules/media-access.js';
 import { scheduleAuthorizedSamples, authorizedSample, verifyAuthorizedFiles } from '../modules/authorized-samples.js';
-import {listManagedTickets,managedTicket,processTicket,supportEvidence} from '../modules/support-desk.js';
+import {listManagedTickets,managedTicket,processTicket,supportEvidence,requestSupportRepair} from '../modules/support-desk.js';
 import {storage,type ObjectStorage} from '../storage/storage.js';
 
 interface Endpoint { method: string; path: string; operation_id: string; permission: string; request_schema: SchemaName | null; response_schema: SchemaName }
@@ -170,12 +170,7 @@ const handlers: Record<string, (c: Context) => Promise<unknown>> = {
     return { order_id: c.params.order_id!, events: rows.rows.map(r => ({ event_id: r.id, kind: r.action, trace_id: r.trace_id, occurred_at: r.occurred_at.toISOString() })), next_cursor: null } satisfies DTO<'OrderTrace'>;
   },
   requestPlatformErrorRepair: async c => {
-    const request = validate('ManagementActionRequest', c.body); const order = await record<DTO<'Order'>>(c.db, 'orders', c.params.order_id!, true);
-    requireThat(order.data.fulfillment_state === 'DELIVERED' && order.data.delivery_expires_at && Date.parse(order.data.delivery_expires_at) > Date.now() && request.evidence_record_ids.length > 0, 'REPAIR_NOT_AVAILABLE', '平台纠错须有未过期的交付和问题证据', 422);
-    const revision: DTO<'Revision'> = { revision_id: id('revision'), order_id: order.id, state: 'REQUESTED', consumes_user_allowance: false, result_manifest_revision: null };
-    const manifest = (await c.db.query<{ revision: number; id: string }>('SELECT revision,id FROM delivery_manifests WHERE order_id=$1 ORDER BY revision DESC LIMIT 1', [order.id])).rows[0] ?? notFound();
-    await insert(c.db, 'revision_requests', { id: revision.revision_id, tenant_id: order.tenant_id, owner_id: order.owner_id, order_id: order.id, parent_manifest_revision: manifest.revision, kind: 'PLATFORM_REPAIR', state: revision.state, consumes_user_allowance: false, data: revision, private: { request, manifest_id: manifest.id } });
-    await enqueueStage(c.db, { tenantId: order.tenant_id, scopeType: 'REVISION', scopeId: revision.revision_id, name: 'REVISION', inputHash: hash(request), deadlineAt: addSeconds(600) }); return action(c, order.id, 'PLATFORM_REPAIR');
+    return requestSupportRepair(c.db,c.admin,c.params.order_id!,validate('PlatformErrorRepairRequest',c.body));
   },
   requestOriginalOrderCompensation: async c => {
     const request = validate('CompensationRequest', c.body); const order = await record<DTO<'Order'>>(c.db, 'orders', c.params.order_id!, true);

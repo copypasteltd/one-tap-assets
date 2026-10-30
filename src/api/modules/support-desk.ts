@@ -3,10 +3,32 @@ import type {Config} from '../config.js';
 import type {DTO,ManagementPrincipal,Principal} from '../../shared/contracts/types.js';
 import {audit,update,type RecordRow,type PageQuery} from '../db/store.js';
 import {cursor,limit} from '../lib/pagination.js';
-import {iso,sha256} from '../lib/crypto.js';
+import {hash,iso,sha256} from '../lib/crypto.js';
 import {notFound,requireThat} from '../lib/errors.js';
 import {lockMediaOwner} from './media-access.js';
 import type {ObjectStorage} from '../storage/storage.js';
+import {createRevision} from '../../worker/revisions/context.js';
+
+/** Runs inside the management transaction; the frozen ticket is evidence, not
+ * permission to invent a new product, paid route or aftercare budget. */
+export async function requestSupportRepair(db:Db,admin:ManagementPrincipal,orderId:string,request:DTO<'PlatformErrorRepairRequest'>):Promise<DTO<'Revision'>>{
+  const ticket=await staffTicket(db,request.ticket_id,true),current=summary(ticket),evidence=ticket.private??{};
+  requireThat(ticket.order_id===orderId,'NOT_FOUND','工单不属于该订单',404);
+  requireThat(current.content_available,'SUPPORT_CONTENT_REVOKED','原工单私有内容已撤销',410);
+  requireThat(current.assigned_actor===admin.actor,'SUPPORT_ASSIGNEE_REQUIRED','仅接手原工单的客服可以发起纠错',403);
+  requireThat(current.revision===request.expected_ticket_revision,'SUPPORT_REVISION_CHANGED','工单已更新，请刷新后处理',409);
+  requireThat(current.state==='PROCESSING'&&['PRODUCT_ERROR','GENERATION','OTHER'].includes(current.category),
+    'PLATFORM_REPAIR_TICKET_INVALID','请使用处理中且涉及素材错误的原工单',422);
+  requireThat(!evidence.platform_repair,'PLATFORM_REPAIR_ALREADY_LINKED','该工单已关联原纠错请求，请查询原请求进度',409);
+  const parent=(await db.query<{data:DTO<'Deliverables'>}>('SELECT data FROM delivery_manifests WHERE tenant_id=$1 AND owner_id=$2 AND order_id=$3 ORDER BY revision DESC LIMIT 1',
+    [ticket.tenant_id,ticket.owner_id,orderId])).rows[0]??notFound();
+  const proof={ticket_id:ticket.id,ticket_revision:current.revision,actor:admin.actor,
+    evidence_hash:hash({category:ticket.data.category,message:evidence.message,attachments:evidence.attachment_asset_ids??[]})};
+  const revision=await createRevision(db,{tenantId:ticket.tenant_id,userId:ticket.owner_id!},orderId,parent.data,request.change,proof);
+  const now=iso();await update(db,'support_tickets',ticket.id,{data:{...ticket.data,revision:current.revision+1,updated_at:now},
+    private:{...ticket.private,platform_repair:{revision_id:revision.revision_id,actor:admin.actor,ticket_revision:current.revision}},updated_at:now},ticket.tenant_id);
+  return revision;
+}
 
 interface TicketRow extends RecordRow<DTO<'Ticket'>> {order_id:string;state:DTO<'Ticket'>['state'];content_available:boolean}
 const select=`SELECT t.*, NOT(COALESCE(o.private->>'media_revoked'='true',false) OR EXISTS

@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · 原工单免费纠错执行 / Evidence-bound platform corrections
+
+本轮接通[工单关联免费纠错与售后原额度](docs/实施/工单关联免费纠错与售后原额度-v1.0.md)：原接手客服按原工单、原交付版本提交封面、清单展示顺序或配套文案纠错；五阶段重新制作/验收后发布新版本，不消耗用户一次成功小修改。所有请求共用原售后费用、推理/角色/Token/工具额度和绝对截止。两项定向原生集成通过；仅类型、服务端/网页构建与本地启动，未运行全面测试、未重编小程序。
+
+New: [evidence-bound free platform corrections](docs/实施/工单关联免费纠错与售后原额度-v1.0.md) use the original assigned ticket and delivery version, then run all five aftercare stages and publish a fresh manifest. Cover, full-list order and companion copy corrections preserve the customer success allowance. All requests share the original sold spend, inference/role/token/tool limits and deadlines. Two native integration cases pass; current server/web builds and local startup pass. The comprehensive suite and final mini-program builds were not run.
+
+绑定406源码/42契约/4资源，`12695007`。初次类型错误、两次夹具预期及四次父版本链定位失败的原记录保留；修正连续修改只认首版与同一时刻日期文本差异，未延长期限。真实身份/语义/计量未准入，78份历史媒体与C25文件/归档原字节保留。
+
 ## 2026-10-30 · 客服处理闭环 / Support desk closure
 
 本轮新增[客服接单、回复与处理工作台](docs/实施/客服接单回复与处理工作台-v1.0.md)：实际管理接口支持队列、接单、私有证明、回复、解决和关闭；用户可在原反馈记录查看回复。17项单元检查、10项浏览器操作和4项实际API冒烟通过；API测试命令180秒超时且无用例结果，保留原记录，不等待全面绿灯。

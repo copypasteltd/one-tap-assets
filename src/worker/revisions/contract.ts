@@ -17,6 +17,7 @@ export interface RevisionInput {
   revision_id:string;tenant_id:string;owner_id:string;order_id:string;product_id:string;
   request:DTO<'RevisionRequest'>;parent_manifest_id:string;parent_manifest_revision:number;parent_manifest_hash:string;
   original_snapshot_hash:string;original_contract_hash:string;policy_hash:string;deadline_at:string;delivery_expires_at:string;
+  platform_error?:{ticket_id:string;ticket_revision:number;actor:string;evidence_hash:string};
 }
 /** Freeze before sale. No later configuration can increase a paid order's
  * aftercare limits; its actual price must be admitted with this cost included. */

@@ -1,33 +1,65 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T00:08:21.808447+00:00",
-  "strategy": "USER_REQUESTED_FAST_SUPPORT_DESK_CLOSURE",
-  "source_set_hash": "bd27a39074f40267c692018badab21e750dfb9ad51204d291a5bc0766243272e",
-  "source_files": 405,
+  "checked_at": "2026-10-30T00:49:49.745526+00:00",
+  "strategy": "USER_REQUESTED_FAST_PLATFORM_REPAIR_CLOSURE",
+  "source_set_hash": "12695007a2b84ce338ba4cf3e83f97187312be55b18dc7fa0a265ae614d31279",
+  "source_files": 406,
   "runtime_contract_files": 42,
   "resource_files": 4,
   "build_report": "docs/delivery/current.json",
   "build_checks": [
     {
       "task": "typecheck",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+        "--noEmit"
+      ],
+      "shell": false,
       "status": "PASS",
-      "elapsed_ms": 11923,
-      "log_path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/typecheck.log",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 7885,
+      "log_path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "build:server",
+      "command": "node --import tsx scripts/build-server.ts",
+      "argv": [
+        "--import",
+        "tsx",
+        "scripts/build-server.ts"
+      ],
+      "shell": false,
       "status": "PASS",
-      "elapsed_ms": 267,
-      "log_path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/server.log",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 346,
+      "log_path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T00-48-02-800Z-96472ecc\\runtime\\build\\preview",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
+        "build",
+        "--config",
+        "src/preview/vite.config.ts",
+        "--outDir",
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T00-48-02-800Z-96472ecc\\runtime\\build\\preview"
+      ],
+      "shell": false,
       "status": "PASS",
-      "elapsed_ms": 693,
-      "log_path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/preview.log",
-      "log_sha256": "65ec444b3e63033ee95093f9ab804f8383ebb91cb1e5f50aa2889ac5e84980d3"
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 673,
+      "log_path": "runtime/delivery-builds/2026-10-30T00-48-02-800Z-96472ecc/preview.log",
+      "log_sha256": "74539d640c002b0b10ca081539026c125ee611d3db414c1b3106398e32083642"
     }
   ],
   "components": [
@@ -48,16 +80,48 @@
       "status": "NOT_RUN"
     }
   ],
+  "api_checks": {
+    "status": "PASS",
+    "passed": 2,
+    "failed": 0,
+    "source": "docs/verification/platform-repair-tested-source.json",
+    "report": "docs/verification/platform-repair-api.json",
+    "command": {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/platform-repair.test.ts --outputFile.json=runtime/test-results/platform-repair-2026-10-30T00-46-16-024Z/api.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.integration.config.ts",
+        "tests/integration/platform-repair.test.ts",
+        "--outputFile.json=runtime/test-results/platform-repair-2026-10-30T00-46-16-024Z/api.json"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 42360,
+      "log_path": "runtime/test-results/platform-repair-2026-10-30T00-46-16-024Z/api.log",
+      "log_sha256": "52ac924af1310f2da7111cc83be9fbe75c31b62eebdc8ddc2d8ff4589f9dc622"
+    },
+    "source_unchanged": true,
+    "actual_private_media": true,
+    "actual_postgresql_and_native_http_stdio": true,
+    "real_external_models_payment_or_production_identity": false,
+    "owned_api_tools_native_role_processes_and_database_pool_closed": true
+  },
   "local_checks": {
     "doctor": {
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 0.647,
+      "elapsed_seconds": 0.797,
       "log_path": "runtime/delivery/doctor-focused.log",
-      "log_sha256": "9a4a1a19f78bfc9519ffe9c407191073656a74d08ab00ef51aee96e5291f272d",
+      "log_sha256": "629eda06cd7de47be08d0eea93e0c9c9f7d43ecd5ab3e21e4b7cd922d1fa59cc",
       "report": {
-        "checked_at": "2026-10-30T00:07:29.799Z",
+        "checked_at": "2026-10-30T00:48:56.757Z",
         "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
         "rows": [
           {
@@ -149,9 +213,9 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 2.104,
+      "elapsed_seconds": 3.786,
       "log_path": "runtime/delivery/backend-focused.log",
-      "log_sha256": "0ea063151f9ceb47caba56197357a3c360ce19a45a7ab0d195a00b34d9586a06",
+      "log_sha256": "ffaad729746530d6073dca4b2b9fd065c69822ada4321e251b22307482e7e241",
       "local_stack_ready": true,
       "preview_http_ready": false
     },
@@ -159,183 +223,128 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 0.974,
+      "elapsed_seconds": 0.812,
       "log_path": "runtime/delivery/preview-focused.log",
       "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
       "local_stack_ready": false,
       "preview_http_ready": true
     }
   },
-  "unit_checks": {
-    "status": "PASS",
-    "passed": 17,
-    "failed": 0,
-    "reported_files": 3,
-    "result": "docs/verification/support-desk-unit.json",
-    "tested_source_snapshot": "docs/verification/support-desk-tested-source.json",
-    "current_full_source_exact_match": true,
-    "shared_client_and_unit_test_source_files_unchanged": true,
-    "post_unit_changes": [],
-    "scope": "Private original support submission/client regressions and management original-key/account/receipt recovery"
-  },
-  "native_test_attempt": {
-    "status": "TIMEOUT",
-    "timeout_ms": 180000,
-    "case_result_file_produced": false,
-    "passed_cases_claimed": 0,
-    "root_cause_confirmed": false,
-    "evidence": "docs/verification/support-desk-api-timeout.json"
-  },
-  "initial_recording": "docs/verification/support-desk-initial-recording.json",
-  "initial_all_target_build": "docs/verification/support-desk-initial-build.json",
-  "initial_browser_environment": "docs/verification/support-desk-browser-environment.json",
-  "initial_fetch_binding": "docs/verification/support-desk-fetch-binding-initial.json",
-  "initial_privacy_fixture": "docs/verification/support-desk-privacy-fixture-initial.json",
-  "browser_and_api_smoke": {
-    "status": "PASS",
-    "manifest": "docs/media/support-desk/capture-manifest.json",
-    "sha256": "2ad15b60cd3800cdd5c8878854b9d93ea0360f1199acc412cbe29cc1003631af",
-    "browser_checks": [
-      "PUBLIC_LOGIN_SHELL_WITHOUT_PRIVATE_QUEUE_OR_STORED_CREDENTIAL",
-      "ACTUAL_POSTGRESQL_QUEUE_AND_AUDITED_DETAIL_READ",
-      "ACTUAL_UPLOADED_NORMALIZED_PNG_READ_AND_BROWSER_DECODE",
-      "COMMITTED_CLAIM_ACK_LOSS_FREEZES_NEW_WRITES",
-      "ORIGINAL_CLAIM_KEY_BODY_REPLAY_WITH_ONE_STATE_TRANSITION",
-      "ACTUAL_STAFF_REPLY_RETURNED_BY_OWNED_BUYER_API",
-      "ACTUAL_RESOLUTION_AND_CLOSE_WITHOUT_REFUND_OR_REPAIR",
-      "CREDENTIAL_AND_PRIVATE_CORRESPONDENCE_NOT_PERSISTED_IN_BROWSER_STORAGE",
-      "NO_HORIZONTAL_OVERFLOW_AT_360PX",
-      "LOGOUT_CLEARS_PRIVATE_PAGE_AND_CONNECTION_STATE"
-    ],
-    "api_checks": [
-      "INDEPENDENT_BUYER_READ_WRITE_PROOF_PERMISSIONS_AND_METADATA_ONLY_QUEUE",
-      "OWNED_BUYER_REPLY_AND_ASSIGNEE_ONLY_WRITES",
-      "CONCURRENT_ACTUAL_POSTGRESQL_CLAIMS_ONLY_ONE_VERSION_SUCCEEDS",
-      "ACTUAL_PRIVACY_REQUEST_IMMEDIATELY_HIDES_AND_BLOCKS_PRIVATE_CORRESPONDENCE_AND_PROOF"
-    ],
-    "screenshots": 4,
-    "media_files": 7,
-    "browser_tabs_closed": true,
-    "owned_api_and_database_pool_closed": true,
-    "actual_effects": [
-      "NATIVE_POSTGRESQL_TRANSACTIONS",
-      "ACTUAL_PNG_UPLOAD_LOCAL_STORAGE_AND_DECODE",
-      "ACTUAL_AUTHENTICATED_HTTP_STAFF_UI",
-      "ONE_ORIGINAL_CLAIM_AFTER_COMMITTED_ACK_LOSS",
-      "ACTUAL_BUYER_REPLY_OWNER_CHECK",
-      "ASSIGNEE_ONLY_REPLY",
-      "CONCURRENT_EXCLUSIVE_CLAIM",
-      "ACTUAL_PRIVACY_REQUEST_AND_IMMEDIATE_REVOCATION"
-    ],
-    "synthetic_inputs": [
-      "CUSTOMER",
-      "ORDER",
-      "IMAGE",
-      "MANAGEMENT_CREDENTIAL",
-      "ACK_LOSS_FAULT"
-    ],
-    "native_mini_device_verified": false,
-    "production_staff_identity_verified": false,
-    "real_generation_verified": false,
-    "real_payment_verified": false
-  },
-  "prior_delivery": {
-    "source_commit": "ea829047ec7fa8e750c9db9b878b4031a986a376",
-    "path": "docs/verification/delivery-focused-ea82904.json",
-    "sha256": "94c518660b0bdeddcd80d6f19e433292b14ae297fb4f07461c2a207384533bc4"
-  },
-  "full_suite_executed": false,
-  "full_suite_required_for_packaging": false,
-  "original_publication_checker_executed": false,
-  "checker_weakened": false,
+  "initial_build": "docs/verification/platform-repair-initial-build.json",
+  "initial_test_attempts": "docs/verification/platform-repair-attempts.json",
+  "functional_scope": [
+    "PHOTO_LAYOUT silent COVER/ALLOWED_ORDER/DISPLAY_TEXT",
+    "original assigned support ticket and evidence snapshot",
+    "five persistent stages and fresh POST/facts/style roles",
+    "actual copy bytes and immutable parent/new delivery manifest",
+    "platform repairs never consume user success allowance",
+    "all revisions share original aftercare spend/call/role/token/tool limits",
+    "original refund/license/privacy/expiry/UNKNOWN boundaries retained"
+  ],
   "historical_evidence_unchanged": [
     {
-      "path": "docs/verification/text-layout-native-source.json",
-      "sha256": "8767b7a787dafb2a674936c926ea219db362bcb7fb3755c4f4b645db3749da07"
+      "path": "docs/verification/album-save-api.json",
+      "sha256": "32d109467ffab4e51998730b417299e1b68031728bc2da7d13f49df611708e7a"
     },
     {
-      "path": "docs/verification/text-layout-attempts.json",
-      "sha256": "0ac527d0d8f5ddca909e094ed6c6431e1ac24069327d88a7c3d87237c18ea8ca"
+      "path": "docs/verification/album-save-initial-api.json",
+      "sha256": "f2dcd20554badfac91e0795a8dfc0d20e375a9c7e77a0db5c6ce238bc6eb1520"
     },
     {
-      "path": "docs/verification/disclosure-native-source.json",
-      "sha256": "0c7458f86eb561cb06fbc0486d2bb5a1273a1ea03e57520540f74d24f9552337"
+      "path": "docs/verification/album-save-initial-attempt.json",
+      "sha256": "17c53d3ececf4bc49f682fd9bbddc1b8ee7de1c32c1f47c8ec5720426d4b2716"
     },
     {
-      "path": "docs/verification/disclosure-attempts.json",
-      "sha256": "b2b28daa1665be4d80e5fb6bbd8ce63e2bb03f521c4852d18f12f9da438193c5"
+      "path": "docs/verification/album-save-initial-source.json",
+      "sha256": "b396c83ca6f6e4fda175faee8c79925dcd242288d499f9e93c77e15e735c90e4"
     },
     {
-      "path": "docs/verification/audio-review-native-source.json",
-      "sha256": "73f2c5ee3e832feba155b3cfb89bc362de626d231237ef0fd2bb501750a4191b"
+      "path": "docs/verification/album-save-initial-unit.json",
+      "sha256": "fb172462106055d219f859e6eaf38b800392e1d8c2ae85794e95b447bb21ef92"
+    },
+    {
+      "path": "docs/verification/album-save-source.json",
+      "sha256": "1a72e236dc3c4bda8aefae9a0d8cf2dd1b8ec810f0c338ee7d2161abaa048748"
+    },
+    {
+      "path": "docs/verification/album-save-tested-source.json",
+      "sha256": "aa23a41b6e5f974e98fc407edd219b782ee1a3303b78682a92d6da1315d174d9"
+    },
+    {
+      "path": "docs/verification/album-save-unit.json",
+      "sha256": "a49cd9ba3b42b7b41c639c113bc90368fca147ea1e235460debcb9710a05a27f"
     },
     {
       "path": "docs/verification/audio-review-attempts.json",
       "sha256": "55b3093994d0084b6f885a6e383e28b88fa5831219beab79eeed27fb5da892e3"
     },
     {
-      "path": "docs/verification/listening-native-source.json",
-      "sha256": "9d7df597dd604f746923a1238df80661336fe27d05fe13454ebeac4547926f13"
+      "path": "docs/verification/audio-review-native-source.json",
+      "sha256": "73f2c5ee3e832feba155b3cfb89bc362de626d231237ef0fd2bb501750a4191b"
     },
     {
-      "path": "docs/verification/listening-attempts.json",
-      "sha256": "83c7214998cd6a74e819fea11c9cc772c19df057d90085a9284816f44bc00694"
+      "path": "docs/verification/contracts.json",
+      "sha256": "bbdbbdef50e9a99d13f1e6ba0fc26b2b64f70633657ce13327249710e1fda36c"
     },
     {
-      "path": "docs/verification/tool-queue-native-source.json",
-      "sha256": "8f4b2a8e57bcda3016fbbd5a41c274b5173a7f919989386489b06c2313b9674c"
+      "path": "docs/verification/delivery-focused-3533cb4.json",
+      "sha256": "f22479a2abaebd956059f220bc40b4b2fc70bd9b8be006112c30d9a5a9d284bc"
     },
     {
-      "path": "docs/verification/worker-failure-native-source.json",
-      "sha256": "fbf919d88e4b3bb6b2e1ff5993fb62a4dacfd78c559bd7232f0c780b28b41846"
+      "path": "docs/verification/delivery-focused-48c7df7.json",
+      "sha256": "b28dfc12c3ba4808a1271303f6ae660e83143689b63c8b2fddd3fecd3b32d927"
     },
     {
-      "path": "docs/verification/order-budget-native-source.json",
-      "sha256": "167ba9ad0536b66305129060143a37a70424f93134334b76ffa95696163278df"
+      "path": "docs/verification/delivery-focused-5b9a1c6.json",
+      "sha256": "2851782ff6cf25bd430f3e6ce14c240a685c0442e8e41592b95f1237caba1084"
     },
     {
-      "path": "docs/verification/mcp-observation-native-source.json",
-      "sha256": "de9583465a2dc719d499e07ba32f6377851daaad331f9ba8cbaf07e47f71ab2d"
+      "path": "docs/verification/delivery-focused-660400a.json",
+      "sha256": "043d036a1c1314f6f9bb8216d4373ddd44917d2527a9979e40c979cbc54d6855"
     },
     {
-      "path": "docs/verification/repair-cost-native-source.json",
-      "sha256": "d206192f519e620ec7690171c81eb0973c91f81e82989c21b4d11bdf15d125c6"
+      "path": "docs/verification/delivery-focused-723a727.json",
+      "sha256": "4c12a82ddf8c7409ac325fab6086528bad95cd6080c3a6fda963e9b6076e98c6"
     },
     {
-      "path": "docs/verification/native-order-attempts.json",
-      "sha256": "482dec916c59c6fdb465f9291619bf138548ec13e6d3e89406a152abb6753483"
+      "path": "docs/verification/delivery-focused-83bd7ee.json",
+      "sha256": "de980354c266fad8fe00fdd66a710d987c6345b3f2391c023dc6d71c4672dc2c"
     },
     {
-      "path": "docs/verification/native-qc-attempts.json",
-      "sha256": "f9a19248cdcd21ec6855770cb67a256469d8b9c4dbe0a806eb685ef3176e9365"
+      "path": "docs/verification/delivery-focused-c7bbf39.json",
+      "sha256": "4608a183349519e2a377dd44867d56bdb495c0a8edd109273752f7279becd248"
     },
     {
-      "path": "docs/verification/repair-candidate-source.json",
-      "sha256": "d38d9f59dbc4c8733b27f3774dfbd62bbf25b6605a2d84906650b6902533a7a9"
+      "path": "docs/verification/delivery-focused-ea82904.json",
+      "sha256": "94c518660b0bdeddcd80d6f19e433292b14ae297fb4f07461c2a207384533bc4"
     },
     {
-      "path": "docs/verification/repair-candidate-tested-source.json",
-      "sha256": "02c9a357eef923fa78546faea70d4f4ecdc750cdc29e697716e4cbd709f2d945"
+      "path": "docs/verification/disclosure-attempts.json",
+      "sha256": "b2b28daa1665be4d80e5fb6bbd8ce63e2bb03f521c4852d18f12f9da438193c5"
     },
     {
-      "path": "docs/verification/repair-candidate-tests.json",
-      "sha256": "d1dd2a4357607025577f56e686f0c224389d1984ef4d62a93ab0f20f83c31b0f"
+      "path": "docs/verification/disclosure-native-source.json",
+      "sha256": "0c7458f86eb561cb06fbc0486d2bb5a1273a1ea03e57520540f74d24f9552337"
     },
     {
-      "path": "docs/verification/repair-candidate-attempts.json",
-      "sha256": "364b9b231a81a6d947358193e50d780c5361feb27fcac8541a4a4acdf664f355"
+      "path": "docs/verification/draft-resume-api.json",
+      "sha256": "5fc9c3860b52efd57f8a9a83d65c0514830de67966bc62c7ca10332bc3821dbc"
     },
     {
-      "path": "docs/verification/generated-repair-source.json",
-      "sha256": "3a24027f69d797aa52272805fb59339226ee7383a16f05d1f2b7ebf02ce2f4e6"
+      "path": "docs/verification/draft-resume-initial-typecheck.json",
+      "sha256": "5581f71542fd2dc0a287b4b7d31db1163633fc4142a711acf323e172d79d062d"
     },
     {
-      "path": "docs/verification/generated-repair-tested-source.json",
-      "sha256": "1044830f0c248660e951ef0bdd06a0677909d5926257495eb4a46c368b8a6f4c"
+      "path": "docs/verification/draft-resume-source.json",
+      "sha256": "606090ef4db3d9b1710adf1623a4fa23c138d06cda64ff833d888ca2d0d027e5"
     },
     {
-      "path": "docs/verification/generated-repair-tests.json",
-      "sha256": "a446104bb54334cc347ca1684277096608793cb5dd2685c358d837d7e70c7c1b"
+      "path": "docs/verification/draft-resume-tested-source.json",
+      "sha256": "d70e27043a25f5cea2b2e8b6457fcf4ce57701753c362b1c9eb88e927309059e"
+    },
+    {
+      "path": "docs/verification/draft-resume-unit.json",
+      "sha256": "51ead16fa990ca316d9fe12040ce87b19746281d8a0c8ff6164397d97f64ed6a"
     },
     {
       "path": "docs/verification/generated-repair-attempts.json",
@@ -358,40 +367,40 @@
       "sha256": "1170bbddbcd7827c90e7e74557ff5bda4e1cba4f07e2049f03ee77f6078541bc"
     },
     {
-      "path": "docs/verification/photo-capture-source.json",
-      "sha256": "0a3a5adb102b59dec7808e74283a0c3e508e84445d9527e30f6d42b9aa85a5bf"
+      "path": "docs/verification/generated-repair-source.json",
+      "sha256": "3a24027f69d797aa52272805fb59339226ee7383a16f05d1f2b7ebf02ce2f4e6"
     },
     {
-      "path": "docs/verification/photo-capture-tested-source.json",
-      "sha256": "0c6d8e0cdf93835f3dc1f92589aca77366d20738b20ef5203843fdecc41b1e28"
+      "path": "docs/verification/generated-repair-tested-source.json",
+      "sha256": "1044830f0c248660e951ef0bdd06a0677909d5926257495eb4a46c368b8a6f4c"
     },
     {
-      "path": "docs/verification/photo-capture-unit.json",
-      "sha256": "5d582f3a3205c7bff72e99b2b22e605d6bd9df085a472171217efa9bbe3743d2"
+      "path": "docs/verification/generated-repair-tests.json",
+      "sha256": "a446104bb54334cc347ca1684277096608793cb5dd2685c358d837d7e70c7c1b"
     },
     {
-      "path": "docs/verification/photo-capture-api.json",
-      "sha256": "7dc5e65b0cc9f6057c538b88fd4cb7e5545df0e6c5303bd27c4295c750e895a8"
+      "path": "docs/verification/listening-attempts.json",
+      "sha256": "83c7214998cd6a74e819fea11c9cc772c19df057d90085a9284816f44bc00694"
     },
     {
-      "path": "docs/verification/draft-resume-source.json",
-      "sha256": "606090ef4db3d9b1710adf1623a4fa23c138d06cda64ff833d888ca2d0d027e5"
+      "path": "docs/verification/listening-native-source.json",
+      "sha256": "9d7df597dd604f746923a1238df80661336fe27d05fe13454ebeac4547926f13"
     },
     {
-      "path": "docs/verification/draft-resume-tested-source.json",
-      "sha256": "d70e27043a25f5cea2b2e8b6457fcf4ce57701753c362b1c9eb88e927309059e"
+      "path": "docs/verification/mcp-observation-native-source.json",
+      "sha256": "de9583465a2dc719d499e07ba32f6377851daaad331f9ba8cbaf07e47f71ab2d"
     },
     {
-      "path": "docs/verification/draft-resume-unit.json",
-      "sha256": "51ead16fa990ca316d9fe12040ce87b19746281d8a0c8ff6164397d97f64ed6a"
+      "path": "docs/verification/native-order-attempts.json",
+      "sha256": "482dec916c59c6fdb465f9291619bf138548ec13e6d3e89406a152abb6753483"
     },
     {
-      "path": "docs/verification/draft-resume-api.json",
-      "sha256": "5fc9c3860b52efd57f8a9a83d65c0514830de67966bc62c7ca10332bc3821dbc"
+      "path": "docs/verification/native-qc-attempts.json",
+      "sha256": "f9a19248cdcd21ec6855770cb67a256469d8b9c4dbe0a806eb685ef3176e9365"
     },
     {
-      "path": "docs/verification/draft-resume-initial-typecheck.json",
-      "sha256": "5581f71542fd2dc0a287b4b7d31db1163633fc4142a711acf323e172d79d062d"
+      "path": "docs/verification/order-actions-api.json",
+      "sha256": "b56089dbdc0f3c036934132ab082f1cf260dc37cbc8ea642a3a50abbaab6f2a0"
     },
     {
       "path": "docs/verification/order-actions-source.json",
@@ -406,28 +415,180 @@
       "sha256": "30a2264d2115ad63839622a7988540490b984f882911ab42c0d303cee9217211"
     },
     {
-      "path": "docs/verification/order-actions-api.json",
-      "sha256": "b56089dbdc0f3c036934132ab082f1cf260dc37cbc8ea642a3a50abbaab6f2a0"
+      "path": "docs/verification/order-budget-native-source.json",
+      "sha256": "167ba9ad0536b66305129060143a37a70424f93134334b76ffa95696163278df"
     },
     {
-      "path": "docs/verification/album-save-source.json",
-      "sha256": "1a72e236dc3c4bda8aefae9a0d8cf2dd1b8ec810f0c338ee7d2161abaa048748"
+      "path": "docs/verification/photo-capture-api.json",
+      "sha256": "7dc5e65b0cc9f6057c538b88fd4cb7e5545df0e6c5303bd27c4295c750e895a8"
     },
     {
-      "path": "docs/verification/album-save-tested-source.json",
-      "sha256": "aa23a41b6e5f974e98fc407edd219b782ee1a3303b78682a92d6da1315d174d9"
+      "path": "docs/verification/photo-capture-source.json",
+      "sha256": "0a3a5adb102b59dec7808e74283a0c3e508e84445d9527e30f6d42b9aa85a5bf"
     },
     {
-      "path": "docs/verification/album-save-unit.json",
-      "sha256": "a49cd9ba3b42b7b41c639c113bc90368fca147ea1e235460debcb9710a05a27f"
+      "path": "docs/verification/photo-capture-tested-source.json",
+      "sha256": "0c6d8e0cdf93835f3dc1f92589aca77366d20738b20ef5203843fdecc41b1e28"
     },
     {
-      "path": "docs/verification/album-save-api.json",
-      "sha256": "32d109467ffab4e51998730b417299e1b68031728bc2da7d13f49df611708e7a"
+      "path": "docs/verification/photo-capture-unit.json",
+      "sha256": "5d582f3a3205c7bff72e99b2b22e605d6bd9df085a472171217efa9bbe3743d2"
+    },
+    {
+      "path": "docs/verification/publication-3533cb4.json",
+      "sha256": "1d700bdc425f36cd1097125983587f97a052a97eb116ddb1333c4efc6e3b4a7a"
+    },
+    {
+      "path": "docs/verification/publication-48c7df7.json",
+      "sha256": "864499fadb61a3ebe8448335d89cecc4905b38da05fc08d9dbc446d16579a2df"
+    },
+    {
+      "path": "docs/verification/publication-5b9a1c6.json",
+      "sha256": "4009e3f5ec6405610f3b6a5da6b64969ba0418158e6521947455c9f6899dc121"
+    },
+    {
+      "path": "docs/verification/publication-660400a.json",
+      "sha256": "d2e5827be4dfbc5ee438719e4c7e36a0b5d031ef51591eef84c30a46ce89a832"
+    },
+    {
+      "path": "docs/verification/publication-723a727.json",
+      "sha256": "d60d9bfedd4d08991c5b8893b4c5b53192e9ee778210186288a005817602de48"
+    },
+    {
+      "path": "docs/verification/publication-83bd7ee.json",
+      "sha256": "6fb05310a33448111e16e459d5906df051a332f08ca4a5a0309631418594419b"
+    },
+    {
+      "path": "docs/verification/publication-c7bbf39.json",
+      "sha256": "8e6caefbc9a3685f12953b53864870a30954a5512f62ab264e36040b6495b15b"
+    },
+    {
+      "path": "docs/verification/publication-ea82904.json",
+      "sha256": "a59d241b4dbb2ff526973dd32cd9bff9622c90ea0c9f61986b6573627ab9e93f"
+    },
+    {
+      "path": "docs/verification/repair-candidate-attempts.json",
+      "sha256": "364b9b231a81a6d947358193e50d780c5361feb27fcac8541a4a4acdf664f355"
+    },
+    {
+      "path": "docs/verification/repair-candidate-source.json",
+      "sha256": "d38d9f59dbc4c8733b27f3774dfbd62bbf25b6605a2d84906650b6902533a7a9"
+    },
+    {
+      "path": "docs/verification/repair-candidate-tested-source.json",
+      "sha256": "02c9a357eef923fa78546faea70d4f4ecdc750cdc29e697716e4cbd709f2d945"
+    },
+    {
+      "path": "docs/verification/repair-candidate-tests.json",
+      "sha256": "d1dd2a4357607025577f56e686f0c224389d1984ef4d62a93ab0f20f83c31b0f"
+    },
+    {
+      "path": "docs/verification/repair-cost-native-source.json",
+      "sha256": "d206192f519e620ec7690171c81eb0973c91f81e82989c21b4d11bdf15d125c6"
+    },
+    {
+      "path": "docs/verification/repository-audit-3533cb4.json",
+      "sha256": "4b1d118c78885a2a0fd1386a967aba342c71e4d34d1cde07d6c0833c0568064c"
+    },
+    {
+      "path": "docs/verification/repository-audit-48c7df7.json",
+      "sha256": "9a07884a21ec1cc0bee05a6b04ec4cbc88161ce4e09a5b9b0c91a3b9f70ab04d"
+    },
+    {
+      "path": "docs/verification/repository-audit-5b9a1c6.json",
+      "sha256": "75d38ce7eb3e8650939c42ebb330e5e58dd4ec4de116fec64c153145a1d94e01"
+    },
+    {
+      "path": "docs/verification/repository-audit-660400a.json",
+      "sha256": "2593526ea07bee627688a0bd1fdad34a0715cc4ca5e7d99828618c0c9e426317"
+    },
+    {
+      "path": "docs/verification/repository-audit-723a727.json",
+      "sha256": "3daf1bddfd95ec9c10f79934e15daf15b6d460b6f0589d21054132d33a221950"
+    },
+    {
+      "path": "docs/verification/repository-audit-83bd7ee.json",
+      "sha256": "c48857242ca77b07f193c22a46c5d48c398777c5a8b090ea7755d87f607ba647"
+    },
+    {
+      "path": "docs/verification/repository-audit-c7bbf39.json",
+      "sha256": "43dbc663e94bcf0d2e631230545ddb0529341d4b3a5feaf0cbd7bdd1e55bf523"
+    },
+    {
+      "path": "docs/verification/repository-audit-ea82904.json",
+      "sha256": "5c914f924b2e955c829d7dffd967b9cc33ca520e9bac8a85c3ea1bfc9e210910"
+    },
+    {
+      "path": "docs/verification/support-api.json",
+      "sha256": "c5d52c4681678a1282139190024424f3918adf929bda21ebdbe602396da0c54d"
+    },
+    {
+      "path": "docs/verification/support-desk-api-timeout.json",
+      "sha256": "4465b9b408ea731e8fdd41a438ecb9269286abf21ca350d391f02d74e5da88c1"
+    },
+    {
+      "path": "docs/verification/support-desk-browser-environment.json",
+      "sha256": "2281a16f607e99fa6158746424bb532253d45ee38f69bc49405137da14fa840e"
+    },
+    {
+      "path": "docs/verification/support-desk-fetch-binding-initial.json",
+      "sha256": "7ea10cc3db9b1901f82d3b3a2d3729ac531cf69c1c0687db43415c75a3e32539"
+    },
+    {
+      "path": "docs/verification/support-desk-initial-build.json",
+      "sha256": "83688dccfc91cffdad2ca962855cbf440c614a74f186449e03f78c6b9c8eabb9"
+    },
+    {
+      "path": "docs/verification/support-desk-initial-recording.json",
+      "sha256": "9b1dacdadffdd4bd87f38c8117c44cd3083af8b853b70d076c5662f0a855c1dc"
+    },
+    {
+      "path": "docs/verification/support-desk-initial-tested-source.json",
+      "sha256": "c3898ec627622421054d9de3ad5a0ba53360403ab7d095949136dc13159611bb"
+    },
+    {
+      "path": "docs/verification/support-desk-initial-unit.json",
+      "sha256": "69ae4e8d5c2b0b7b4fa8f4cae13e052f5de10e7963bc949b6691bc4199204194"
+    },
+    {
+      "path": "docs/verification/support-desk-privacy-fixture-initial.json",
+      "sha256": "f1bfbbf46a3d9deb06ca5634aa9369bd890ee588b86b0165701b9ae681d84975"
+    },
+    {
+      "path": "docs/verification/support-desk-source.json",
+      "sha256": "531aa0d37400f357bddfe29f7911cc82d78eebccd059cc9e7da353f3b9a47c6b"
+    },
+    {
+      "path": "docs/verification/support-desk-tested-source.json",
+      "sha256": "bb335b73124369020fa43648ac303c1f39f0d9ead60b2f4756588b165ba36e07"
+    },
+    {
+      "path": "docs/verification/support-desk-unit.json",
+      "sha256": "c1c35aee4df1800e7b2a66609ce63e50b41bfd6a713673821603ede9e76af966"
+    },
+    {
+      "path": "docs/verification/support-initial-api.json",
+      "sha256": "a071a63c00de1cfb1a13c5ba1ca0378e33b77631baec5f461b0179df3da89e1d"
+    },
+    {
+      "path": "docs/verification/support-initial-attempt.json",
+      "sha256": "4379fe4b128e98010db12584dd6cf820d329863530ece85bb5f9ab615e5c94aa"
+    },
+    {
+      "path": "docs/verification/support-initial-source.json",
+      "sha256": "e68c8603d6bec3c50f77ad290c19802400c55508f85f936ce4afbe42be553800"
+    },
+    {
+      "path": "docs/verification/support-initial-unit.json",
+      "sha256": "eeb9324b8aa0c9444a982abef20ff76140f37c1d374905dd367d1f2b48c63898"
     },
     {
       "path": "docs/verification/support-source.json",
       "sha256": "04c6249f3d2dabd960559b2efda441591d05fd4256142ecdab3b1f9f90d57a3e"
+    },
+    {
+      "path": "docs/verification/support-startup-initial.json",
+      "sha256": "06e093e15eea2ebcf66645424b0c7bf11adc4472e5f5783a98ae9fe83fd23fc6"
     },
     {
       "path": "docs/verification/support-tested-source.json",
@@ -438,35 +599,42 @@
       "sha256": "10be3f0e69ab6adc864ad18dd578c3bf023bac7eaa0bf8595cae575914a72113"
     },
     {
-      "path": "docs/verification/support-api.json",
-      "sha256": "c5d52c4681678a1282139190024424f3918adf929bda21ebdbe602396da0c54d"
+      "path": "docs/verification/text-layout-attempts.json",
+      "sha256": "0ac527d0d8f5ddca909e094ed6c6431e1ac24069327d88a7c3d87237c18ea8ca"
+    },
+    {
+      "path": "docs/verification/text-layout-native-source.json",
+      "sha256": "8767b7a787dafb2a674936c926ea219db362bcb7fb3755c4f4b645db3749da07"
+    },
+    {
+      "path": "docs/verification/tool-queue-native-source.json",
+      "sha256": "8f4b2a8e57bcda3016fbbd5a41c274b5173a7f919989386489b06c2313b9674c"
+    },
+    {
+      "path": "docs/verification/worker-failure-native-source.json",
+      "sha256": "fbf919d88e4b3bb6b2e1ff5993fb62a4dacfd78c559bd7232f0c780b28b41846"
     }
   ],
   "frozen_c_files": 25,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
-  "existing_media_files_verified": 71,
-  "new_media_files_verified": 7,
-  "functional_scope": {
-    "requirements": 58,
-    "p0": 52,
-    "routes": 3,
-    "official_styles": 10,
-    "minimum_variants": 14,
-    "business_operations": 77,
-    "management_operations": 30
-  },
+  "existing_media_files_verified": 78,
+  "new_media_files_verified": 0,
+  "browser_used": false,
+  "ui_changed": false,
+  "prior_delivery": "docs/verification/delivery-focused-b31c3e8.json",
+  "full_suite_executed": false,
+  "full_suite_required_for_packaging": false,
+  "original_publication_checker_executed": false,
+  "checker_weakened": false,
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
   "limitations": [
-    "The targeted Vitest API attempt timed out without case results; the actual HTTP/browser smoke is separately scoped and does not turn that attempt green",
-    "Only current successful build components are packaged; timed-out mini-program builds retain full current source and rebuild commands, never old binary replacements",
-    "Seventeen focused unit cases bind to the exact final source/contract/resource snapshot. The earlier sixteen-unit/API-timeout snapshot is separately retained and is not a final full-suite result",
-    "Support roles are globally configured operator tokens, not per-tenant admin assignments or production identity lifecycle",
-    "Only latest reply is stored; force reassignment, user follow-up, full conversation history and post-deletion new correspondence remain incomplete",
-    "Ticket resolution/closure does not execute or certify live refund, repair, redelivery or production support quality",
-    "Real Codex/providers, billing/isolation, native-audio repair, complete community/Plus, devices and cloud remain incomplete",
-    "Mini builds use loopback development API and need a verified service origin for devices"
+    "management repair editor UI not added",
+    "generated/image-content/native-audio aftercare not implemented",
+    "synthetic identities/semantics/metering; no live Codex/provider/payment/device/cloud admission",
+    "final mini-program builds NOT_RUN; complete mini sources retained",
+    "all original 58 requirements/52 P0 remain; full community commercial production and Plus incomplete"
   ],
-  "canonical_support_desk_provenance": "docs/verification/support-desk-source.json"
+  "canonical_platform_repair_provenance": "docs/verification/platform-repair-source.json"
 }

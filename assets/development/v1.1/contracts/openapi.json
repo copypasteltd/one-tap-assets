@@ -21115,6 +21115,29 @@
           "trace_id"
         ],
         "additionalProperties": false
+      },
+      "PlatformErrorRepairRequest": {
+        "type": "object",
+        "properties": {
+          "ticket_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "expected_ticket_revision": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          "change": {
+            "$ref": "#/components/schemas/RevisionRequest"
+          }
+        },
+        "required": [
+          "ticket_id",
+          "expected_ticket_revision",
+          "change"
+        ],
+        "additionalProperties": false
       }
     }
   },

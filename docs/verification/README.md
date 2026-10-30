@@ -1,3 +1,5 @@
+当前来源：[工单关联免费纠错](platform-repair-source.json)。406源码/42契约/4资源，`12695007`；两项原生定向集成、类型/server/preview/自检/启动PASS。初类型错误和两次夹具失败见来源内记录。无新界面或录屏；历史“当前”均属各自快照，未跑全面测试、未编译双小程序、未准入真实服务。
+
 当前来源：[订单反馈与售后记录](support-source.json)。绑定 395 source files / 42 contracts / 4 resources; 487ce077；类型、28单元/4原生API、10浏览器检查与四构建/本地启动PASS。API实际PNG上传与本地对象/文件验证，客服状态和浏览器上传/ACK为显式合成；不证明真实客服、退款、云存储或宿主权限。初版getOrder夹具缺字段被契约拒绝见[初次尝试](support-initial-attempt.json)，当次1失败/3未执行及源码/原报告保留；未放宽响应校验。全面测试、原发布检查器、真机和真实服务未验。
 
 Current focused source delivery preserves all original requirements and historical evidence. Earlier “current” paragraphs below refer only to their own source snapshots.
