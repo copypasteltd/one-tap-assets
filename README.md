@@ -1,93 +1,27 @@
 # 一品成片 · One Tap Assets
 
-本轮收口[社区审核工作台](docs/实施/社区审核工作台与原申请证据核对-v1.0.md)：工作人员在 `/ops/review` 核对原方案、实际图片/视频与授权证明，批准或退回后，再独立准备公开副本与发布。已提交但回执丢失时沿用原编号恢复，发布不会自动开售。客户仍优先使用支付宝、抖音小程序。
+[中文](README.md) · [English](README.en.md) · [文档](docs/README.md) · [启动](docs/guides/QUICKSTART.md) · [实现与待办](docs/guides/STATUS.md) · [更新记录](CHANGELOG.md)
 
-6项客户端、3项原生API（24项未选）、7项浏览器关键检查通过；类型/server/preview、自检及本地启动PASS，31迁移、无新迁移。439源码/42契约/4资源，`9dc6f240`；77业务/35管理操作。新增4截图、MP4/WebM/GIF，原93媒体及C原稿保留。全面测试、双小程序重编、真机NOT_RUN；真实服务、完整准入、Plus与云部署待完成，所有方案禁售。[准确证据](docs/verification/review-console-source.json) · [交付包](docs/delivery/package.json) · [启动指南](docs/delivery/README.md)。演示身份、权利、档案和READY/QC为合成；实际HTTP、数据库、上传、文件读取及公开副本不代表真实商业授权。
+一品成片面向商家，以支付宝、抖音小程序为主入口：拍摄商品照片，多模态模型识别真实特征，选择社区预设，云端按冻结规格制作图片、短片和配套文案，经独立核验后领取并保存。网页 Plus 用于后续深化制作。
 
-![社区审核工作台实际录制](docs/media/review-desk/walkthrough.gif)
+本轮收口[社区创作组件](docs/实施/社区受控叙事节奏运镜与文字样式-v1.0.md)：作者可选择 3 种叙事、3 种节奏、3 种运镜、3 种文字样式；选项进入版本绑定、内容计划和实际文件制作。原 10 风格与 3 执行组件保留，共 25 个。普通客户仍只需拍照选方案；作者的新选择用于制作可复用预设。
 
-[操作说明与全部媒体](docs/media/review-desk/README.md)
+| 类别 | 可选内容 | 运行方式 |
+| --- | --- | --- |
+| 叙事 | 先整体、细节开场、角度对照 | 依据照片档案选图，冻结镜头角色 |
+| 节奏 | 均匀、轻快开场、从容收尾 | 在原总时长与镜头数内分配整数帧；不兼容模型时长时拒绝排队 |
+| 运镜 | 固定、轻推、横移 | 原图执行实际动效；生成式请求携带所选运镜并继续独立复核 |
+| 文字 | 标准、醒目、轻简 | 完整中文排版；无声画面说明与原生声音字幕分别遵循原规格 |
 
-以下内容保留其历史来源，当前状态以上述记录为准。
+作者进入“作者工作台 → 新建方案”，选主风格、制作规格和可选组件，保存后用自有商品生成样例，再申请审核与发布。每类最多一项，再点取消可继承原设置。已有样例和订单使用原冻结配置，后续编辑不会覆盖；发布、准入和开售分别执行。
 
-本轮接通[原生声音售前完整绑定与购买交付](docs/实施/原生声音售前完整绑定与购买交付-v1.0.md)：买家原方案、完整声音报价、下单、付款确认、制作/后期、独立听音、双复核和私有领取贯通；付款确认前原能力撤回则按原单退款。原总预算包含生成、声音授权、转写、听音及原售后/修复上限，历史内部报价不自动升级。
+当前 444 源码 / 42 契约 / 4 资源，`40492124`；77 业务 / 35 管理操作，31 个迁移，无新迁移。5 项组件、3 项原生 API、3 条实际样例制作链和 5 项浏览器检查通过；类型、server/preview、自检及启动通过。新增 3 张截图、MP4/WebM/GIF 和三路线实际示例素材共 10 媒体，原 100 媒体与 C 设计保留。[准确证据](docs/verification/creative-components-source.json) · [交付包](docs/delivery/package.json) · [打包与启动](docs/delivery/README.md)。
 
-8项定向检查通过（声音购买5、社区订单回归3，28未选）；类型/server/preview/自检/本地启动PASS，主库31迁移、无新迁移。431源码/42契约/4资源，`59fe1100`。全量、单元全套、双小程序重编及复录NOT_RUN；原93媒体和C原件保留。[准确证据](docs/verification/native-sale-source.json) · [当前构建](docs/delivery/current.json) · [交付包](docs/delivery/package.json)。支付/授权/模型/身份/听音/OSS配置为合成，本地字节效果不代表真实云端或声音质量。真实服务/真机/完整准入/Plus/云端待完成，所有方案仍禁售。
+本轮按快速交付要求未跑全量测试、双小程序重编和真机验收。模型、档案、权利、身份与计量为合成；数据库、实际 PNG/MP4、制作阶段、封存和释放为原生执行。Windows 原生媒体长期稳定性仍待验证。真实服务、完整官方／社区商用准入、有声与附加资源样例、Plus、云部署及完整 58 项验收待完成，所有方案仍禁售。
 
-以下内容保留其历史来源，当前状态以上述记录为准。
+![社区作者组件实际操作](docs/media/creative-components/walkthrough.gif)
 
-本轮接通[社区商业配置与可信风格执行](docs/实施/社区商业配置与可信风格执行-v1.0.md)：平台从已准入蓝本一次性冻结价格、模型与费用；社区新编号正确绑定可信风格 Skill，买家规划、制作、复核和受限修改使用同一冻结配置。配置不继承准入或开售状态，已付款订单不受新销售停售影响。
-
-5项定向检查通过（社区商业3、两生成订单回归2/9未选）；类型/server/preview/自检/本地启动PASS，主库31迁移。430源码/42契约/4资源，`71c658d6`。全量、单元全套、双小程序重编及复录NOT_RUN；原93媒体和C原件保留。[准确证据](docs/verification/community-commerce-source.json) · [当前构建](docs/delivery/current.json) · [交付包](docs/delivery/package.json)。真实服务/真机/完整社区准入/Plus/云端待完成，所有方案仍禁售。
-
-以下内容保留其历史来源，当前状态以上述记录为准。
-
-本轮接通[生成式社区样例与独立平台额度](docs/实施/生成式社区样例与独立平台额度-v1.0.md)：作者可选逐镜头生成或参考整片的无声样例，经参考身份核验、实际制作/后期和全新双复核，再私有下载并申请独立公开副本。样例使用平台额度，不创建买家订单；原预算/次数/截止及 UNKNOWN 处理保持。
-
-本轮10项定向检查通过（主专项9，原订单回归1）；类型/server/preview/自检/本机启动PASS，主库30迁移。426源码/42契约/4资源，`e7a80120`。全面测试、单元全套、双小程序重编和复录NOT_RUN；原93媒体及C原件保留。[精确来源](docs/verification/generated-sample-source.json) · [当前构建](docs/delivery/current.json) · [交付包入口](docs/delivery/package.json)。真实服务、真机与云部署待完成，全部方案仍禁售。
-
-以下内容保留其历史来源，当前状态以上述记录为准。
-
-[中文](README.md) · [English](README.en.md) · [文档目录](docs/README.md) · [快速启动](docs/guides/QUICKSTART.md) · [实现与待办](docs/guides/STATUS.md) · [更新记录](CHANGELOG.md)
-
-本轮收口[图片加字与实际素材售后](docs/实施/图片加字与实际素材售后-v1.0.md)：小程序领取页选图并输入短标题，实际生成保留完整原画面的标题卡PNG，重新验收后交付新版本；客服原工单同类纠错接通。三路线专项通过，原音视频/预算/次数/截止保持；旧订单无授权不增加权益。
-
-**拍下商品，选一套方案，得到成体系的商品素材。** 一品成片以支付宝小程序、抖音小程序为主要入口，把商品识别、内容规划、图片/视频制作、后期、验收和素材领取组织成可恢复的云端服务。网页 Plus 定位于复杂编辑与深化制作，属于后续 P1 范围。
-
-当前是持续开发的源码仓库：需求 **v3.1**、开发契约 **v1.1**、已定型的 **C「柚子创作社」设计 v1.0**。完整产品与生产准入均未通过，官方方案全部禁售。共享页面、原生后端、三路线无声整包及两条生成路线的内部有声交付已有实现；真实 Codex、声音质量、官方变体、宿主真机与商用运行仍有待办。具体证据见 [实现清单](assets/implementation/current.json) 和 [公开核验摘要](docs/verification/publication.json)。
-
-快速交付入口：[交付与启动指南](docs/delivery/README.md)。执行`.\scripts\setup-local.ps1`初始化，再用`doctor`自检、`local:start`启动后端、`preview:serve`查看共享页面。`delivery:build --smoke`只做有界构建和核心冒烟，`delivery:package`生成源码与实际成功产物ZIP；按本轮要求不等待全面测试绿灯。
-
-当前候选：类型/server/preview/自检/启动PASS；8单元、4项三路线/迁移API专项与5项共享组件录制检查通过，42旧API用例未选。绑定421源码/42契约/4资源，`bc77e6cf`，29迁移。全面测试/双小程序重编NOT_RUN；85历史媒体/C设计原字节保持，新录8媒体。见[交付记录](docs/delivery/current.json)、[精确来源](docs/verification/image-text-source.json)。
-
-
-最新实际图片修改 / Latest actual image revision: [操作与来源](docs/media/image-text/README.md)
-
-![图片加字与重新交付 / Image title and a new delivered version](docs/media/image-text/walkthrough.gif)
-
-[MP4](docs/media/image-text/walkthrough.mp4) · [WebM](docs/media/image-text/walkthrough.webm) · [实际原图与新图 / Actual before and after](docs/media/image-text/README.md)。真实共享组件、HTTPS、五阶段和新PNG；商品/语义/身份/计量合成，非宿主真机或生产证明。Actual shared-component and native file effects with synthetic product/semantic/identity/metering inputs.
-
-最新素材纠错 / Latest support repair: [操作与来源](docs/media/support-repair/README.md)
-
-![原工单素材纠错 / Original-ticket correction](docs/media/support-repair/walkthrough.gif)
-
-[MP4](docs/media/support-repair/walkthrough.mp4) · [WebM](docs/media/support-repair/walkthrough.webm) · [截图与摘要 / Screens and hashes](docs/media/support-repair/capture-manifest.json)。实际本地页面/五阶段/文件效果；商品、语义、身份与计量合成，非生产或真机证明。Actual effects with synthetic inputs and roles, no live-service admission.
-
-最新客服工作台 / Latest support desk: [操作与来源](docs/media/support-desk/README.md)
-
-![客服接单与回复 / Support claiming and replies](docs/media/support-desk/walkthrough.gif)
-
-[MP4](docs/media/support-desk/walkthrough.mp4) · [WebM](docs/media/support-desk/walkthrough.webm) · [截图与摘要 / Screens and hashes](docs/media/support-desk/capture-manifest.json)。实际本地HTTP/API/数据库操作，客户、订单、图片及身份为合成夹具；未验生产客服、真实交易或真机。Actual local operations with synthetic inputs; no production/live/device claim.
-
-最新订单反馈 / Latest order feedback: [操作与来源](docs/media/support/README.md)
-
-![订单反馈与原请求恢复 / Order feedback and original request recovery](docs/media/support/walkthrough.gif)
-
-[MP4](docs/media/support/walkthrough.mp4) · [WebM](docs/media/support/walkthrough.webm) · [截图及摘要 / Screens and hashes](docs/media/support/capture-manifest.json)。实际共享页面录制，合成上传/回执与处理状态；不证明真实客服、退款或手机权限。Actual UI recording with synthetic support outcomes and no live staff or device claims.
-
-最新相册保存 / Latest album saving: [操作与来源](docs/media/album-save/README.md)
-
-![分类保存与原进度 / Selective album saving and original progress](docs/media/album-save/walkthrough.gif)
-
-[MP4](docs/media/album-save/walkthrough.mp4) · [WebM](docs/media/album-save/walkthrough.webm) · [截图及摘要 / Screens and hashes](docs/media/album-save/capture-manifest.json)。实际共享页面录制，合成相册回调与清单；没有写入真实手机相册。Actual UI recording with synthetic callbacks and no native device writes.
-
-最新订单操作 / Latest order actions: [操作与来源](docs/media/order-actions/README.md)
-
-![原订单取消与退款 / Original-order cancellation and refund](docs/media/order-actions/walkthrough.gif)
-
-[MP4](docs/media/order-actions/walkthrough.mp4) · [WebM](docs/media/order-actions/walkthrough.webm) · [截图及摘要 / Screens and hashes](docs/media/order-actions/capture-manifest.json)。实际共享页面录制，合成订单/金额/退款状态；不代表实际支付或退款到账。Actual UI recording with synthetic states; no live transaction or native-device claim.
-
-最新草稿恢复 / Latest draft recovery: [操作与来源](docs/media/draft-resume/README.md)
-
-![草稿恢复与原规格 / Server draft recovery and original specification](docs/media/draft-resume/walkthrough.gif)
-
-[MP4](docs/media/draft-resume/walkthrough.mp4) · [WebM](docs/media/draft-resume/walkthrough.webm) · [截图及摘要 / Screens and hashes](docs/media/draft-resume/capture-manifest.json)。实际共享页面录制，合成数据，官方方案仍禁售。Actual UI recording with synthetic metadata; no real recognition, payment or native-device claim.
-
-最新拍照交互 / Latest capture flow: [逐张拍照说明](docs/media/photo-capture/README.md)
-
-![逐张拍照、重拍与补图 / Sequential capture, retake and album additions](docs/media/photo-capture/walkthrough.gif)
-
-[MP4](docs/media/photo-capture/walkthrough.mp4) · [WebM](docs/media/photo-capture/walkthrough.webm) · [实际截图与来源](docs/media/photo-capture/capture-manifest.json)。实际共享页面录制，使用自绘合成商品，非宿主真机或真实识别/付款证明。Actual shared-page recording with synthetic photos; native-device and live-service acceptance remain separate.
+[截图、原始录屏与三路线实际文件](docs/media/creative-components/README.md)
 
 ## 界面与操作演示
 
@@ -210,11 +144,11 @@ flowchart LR
 | 客户端 | Taro 4.3.1、React 18.3.1、TypeScript 5.9.3，17 个共享页面及支付宝/抖音适配 |
 | 浏览器回放 | Vite 8.3.5、React DOM，共享页面与本地演示数据 |
 | 服务端 | Node.js 24（本次验证 24.22.1）、Fastify 5.12.7、独立 Worker/回收/维护 CLI |
-| 持久化 | 原生 PostgreSQL（本地 17.6-1）、阶段队列、outbox、租约代次、不可变回执，26 个迁移 |
+| 持久化 | 原生 PostgreSQL（本地 17.6-1）、阶段队列、outbox、租约代次、不可变回执，31 个迁移 |
 | 媒体 | Sharp 0.35.5、原生 FFmpeg/ffprobe、登记私有对象存储及本地开发存储 |
 | Agent | Codex app-server、受控 stdio/MCP、独立推理计量和风格 SkillBundle |
 | 验证 | Vitest 5.0.5、Playwright 1.64.1、原生 PG/真实媒体、显式合成供应商与宿主夹具 |
-| 工程 | pnpm 10.13.1、单一 lockfile、JSON Schema 2020-12、77 个业务/32 个管理接口契约 |
+| 工程 | pnpm 10.13.1、单一 lockfile、JSON Schema 2020-12、77 个业务/35 个管理接口契约 |
 
 本项目不调用本地 Docker、WSL、虚拟机或 Testcontainers，不依赖 Redis。开发脚本面向 Windows PowerShell；其他系统的完整启动流程未经本项目验证。
 

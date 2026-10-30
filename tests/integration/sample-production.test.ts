@@ -29,13 +29,14 @@ import { CodexRuntimeAdapter } from '../../src/worker/codex/runtime.js';
 import { ToolConsumer } from '../../src/worker/tool-gateway/consumer.js';
 import { sampleTools } from '../../src/worker/tool-gateway/sample-tools.js';
 import { SampleProductionService } from '../../src/worker/samples/service.js';
-import { SAMPLE_STAGES, sampleContext, type SampleContext } from '../../src/worker/samples/context.js';
+import { SAMPLE_STAGES, sampleContext,samplePlan, type SampleContext } from '../../src/worker/samples/context.js';
 import { samplePacket, packetAssetIds, validateSampleReview, type SampleReview } from '../../src/worker/samples/review.js';
 import { verifyCompletedSample } from '../../src/worker/samples/completion.js';
 import { FONT_BINDING } from '../../src/worker/media/font.js';
 import type { DTO } from '../../src/shared/contracts/types.js';
 import { PublicSamplePreparationService } from '../../src/worker/samples/publication.js';
 import type { AuthorizedRow } from '../../src/api/modules/authorized-samples.js';
+import {storedMedia,artifactBytes} from '../../src/worker/samples/media.js';
 
 /** Synthetic identities/AI only; PostgreSQL, HTTPS, MCP, PNG, MP4, receipts and
  * sample DAG are real native operations. No paid order or real model is used. */
@@ -278,15 +279,16 @@ it('refuses a revoked publication grant for already completed media links', asyn
 });
 
 /** Real native sample pipeline, synthetic model bytes/meaning/identities only. */
-async function generatedFixture(engine:'PER_SHOT_AI'|'REFERENCE_FILM',lostAck=false){
+async function generatedFixture(engine:'PER_SHOT_AI'|'REFERENCE_FILM',lostAck=false,components:string[]=[]){
   const contracts=[syntheticArkContract('IMAGE'),syntheticArkContract('VIDEO')];
   const image=contracts[0]!,video=contracts[1]!;
+  if(components.length)video.video!.durations=[1,2];
   video.video!.ratios=['9:16'];video.video!.dimensions=[{resolution:'480p',ratio:'9:16',width:360,height:640}];
   const variant=engine==='PER_SHOT_AI'?'quiet-luxury.ai-detail':'portrait-social.ai-presenter-multi';
   const style=engine==='PER_SHOT_AI'?'quiet-luxury':'portrait-social';
   const row=(await db.pool.query('SELECT id,private FROM execution_variants WHERE variant_id=$1',[variant])).rows[0]!;
   const source=row.private.source;source.audio_policy={...source.audio_policy,speech:'none',language:null,preserve_native_speech:false,caption_alignment:'NO_SPEECH',music:'none'};
-  const duration=engine==='PER_SHOT_AI'?2:1;
+  const duration=engine==='PER_SHOT_AI'||components.length?2:1;
   source.ai_disclosure_required=true;source.timeline_policy={fps:30,target_frames:duration*30,base_segments:duration===2?
     [{role:'whole',start_seconds:0,end_seconds:1},{role:'detail',start_seconds:1,end_seconds:2}]:[{role:'show',start_seconds:0,end_seconds:1}]};
   source.output_slots=source.output_slots.filter((o:{kind:string})=>o.kind!=='video').slice(0,1);
@@ -297,10 +299,10 @@ async function generatedFixture(engine:'PER_SHOT_AI'|'REFERENCE_FILM',lostAck=fa
   await db.pool.query(`UPDATE execution_variants SET private=private||jsonb_build_object('source',$2::jsonb,'model_version_ids',$3::jsonb) WHERE id=$1`,[row.id,JSON.stringify(source),JSON.stringify(contracts.map(c=>c.model_version_id))]);
   Object.assign(f.cfg.provider,{baseUrl:image.base_url,apiKey:'synthetic-not-real',imageModel:image.request_model,videoModel:video.request_model});
   f.cfg.provider.allowedHosts=[...new Set([...f.cfg.provider.allowedHosts,'generation.example.test','media.example.test'])];
-  const d=await createDraft(db.pool,f.p,{...draft.config,name:'Synthetic generated '+engine,component_versions:[`style.${style}.1`],variant_blueprint_ids:[`blueprint.${variant}`]});
+  const d=await createDraft(db.pool,f.p,{...draft.config,name:'Synthetic generated '+engine,component_versions:[`style.${style}.1`,...components],variant_blueprint_ids:[`blueprint.${variant}`]});
   const directory=inside(f.cfg.runtimeRoot,`tests/generated-sample/${id('media')}`);await mkdir(directory,{recursive:true});
   const videoPath=inside(directory,'provider.mp4');
-  await nativeCommand(f.cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-f','lavfi','-i','color=c=green:s=360x640:r=30','-t','1','-an','-c:v','libx264','-pix_fmt','yuv420p',videoPath],{cwd:directory,timeoutMs:30000});
+  await nativeCommand(f.cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-f','lavfi','-i','color=c=green:s=360x640:r=30','-t',engine==='REFERENCE_FILM'&&components.length?'2':'1','-an','-c:v','libx264','-pix_fmt','yuv420p',videoPath],{cwd:directory,timeoutMs:30000});
   const videoBytes=await readFile(videoPath),imageBytes=await sharp({create:{width:640,height:800,channels:3,background:'#1F5F43'}}).png().toBuffer();
   const calls:{method:string;url:string}[]=[];let task=0;
   const http=(value:unknown):HttpResponse=>{const bytes=Buffer.isBuffer(value)?value:Buffer.from(JSON.stringify(value));return {status:200,headers:{},bytes,json:()=>JSON.parse(bytes.toString('utf8'))};};
@@ -384,4 +386,43 @@ it('retains an UNKNOWN sample generation reservation and resumes only its origin
     await stop(s);const result=await g.gateway.reconcileReceipts();expect(result.blocked).toBeGreaterThan(0);
     expect(g.calls.filter(c=>c.method==='POST')).toHaveLength(1);
   }finally{await stop(s);await rm(g.directory,{recursive:true,force:true});}
+});
+const creativeSelection=['narrative.detail-first.1','rhythm.quick-open.1','camera.hold.1','caption.bold.1'];
+for(const engine of ['PHOTO_LAYOUT','PER_SHOT_AI','REFERENCE_FILM'] as const)it(`creative components complete actual ${engine} media with frozen choices, independent review and released instances`,async()=>{
+  const selected=engine==='PER_SHOT_AI'?creativeSelection.map(c=>c==='rhythm.quick-open.1'?'rhythm.even.1':c):creativeSelection;
+  const g=engine==='PHOTO_LAYOUT'?null:await generatedFixture(engine,false,selected);
+  const d=g?.draft??await createDraft(db.pool,f.p,{...draft.config,name:'受控细节开场样例',component_versions:['style.quiet-luxury.1',...creativeSelection]});
+  if(engine==='PER_SHOT_AI'){
+    await heartbeat();
+    const incompatible=await createDraft(db.pool,f.p,{...d.config,name:'短规格不能购买不兼容节奏',component_versions:d.config.component_versions.map(c=>c==='rhythm.even.1'?'rhythm.quick-open.1':c)});
+    const denied=await api('POST',`/preset-drafts/${incompatible.draft_id}/samples`,request(incompatible));
+    expect(denied.statusCode,denied.body).toBe(503);expect(denied.json().code).toBe('GENERATION_VIDEO_SPEC_UNAVAILABLE');expect(g!.calls).toHaveLength(0);
+    expect((await db.pool.query('SELECT id FROM public_samples WHERE draft_id=$1',[incompatible.draft_id])).rowCount).toBe(0);
+  }
+  const s=await create(d),before=launcher.launches,active=g?.service??service;
+  try{
+    const frozen=await sampleContext(db.pool,f.p.tenantId,s.sample_id),sourceHash=hash(frozen.input.source);
+    const changed=await api('PATCH',`/preset-drafts/${d.draft_id}`,{expected_revision:d.revision,config:{...d.config,component_versions:d.config.component_versions.filter(c=>c!=='camera.hold.1').concat('camera.pan.1')}});
+    expect(changed.statusCode,changed.body).toBe(200);
+    for(const name of SAMPLE_STAGES){const lease=(await claimStage(db.pool,id('creative-sample'),[name]))!;expect(lease.scope_id).toBe(s.sample_id);
+      try{await completeStage(db.pool,lease,await withFixtureLease(db.pool,lease,signal=>active.handle(lease,signal),controller.signal));}
+      catch(error){console.error('CREATIVE_SAMPLE_DIAGNOSTICS',name,(await db.pool.query("SELECT tool_name,state,data->>'error_code' AS code FROM agent_tool_intents WHERE stage_run_id=$1",[lease.id])).rows);throw error;}}
+    const c=await sampleContext(db.pool,f.p.tenantId,s.sample_id,undefined,false,true);
+    await verifyCompletedSample(db.pool,f.cfg,f.p.tenantId,s.sample_id,c.private);
+    expect(hash(c.input.source)).toBe(sourceHash);expect(c.input.source.creative_components.community_direction).toMatchObject({camera:'HOLD',caption:'bold',narrative:'DETAIL_FIRST'});
+    expect(samplePlan(c).shots.every(s=>s.camera==='HOLD')).toBe(true);
+    expect(launcher.launches-before).toBe(engine==='PHOTO_LAYOUT'?5:6);
+    const media=storedMedia(c,'POST'),video=media.artifacts.find(a=>a.kind==='video')!;
+    expect(video.inspection).toMatchObject({width:1080,height:1920,fps:30,frames:c.input.source.timeline_policy.target_frames,hasAudio:false});
+    const image=media.artifacts.find(a=>a.kind==='image')!;expect((await sharp(await artifactBytes(db.pool,store,c,image)).metadata()).format).toBe('png');
+    expect((await db.pool.query("SELECT i.id FROM agent_instances i WHERE i.preview_session_id=$1 AND i.state<>'RELEASED'",[s.sample_id])).rowCount).toBe(0);
+    expect((await db.pool.query('SELECT id FROM orders')).rowCount).toBe(0);expect((await db.pool.query('SELECT id FROM budget_reservations')).rowCount).toBe(0);
+    if(g)expect(g.calls.filter(x=>x.method==='POST')).toHaveLength(engine==='PER_SHOT_AI'?5:3);
+    const output=process.env.YPCC_CREATIVE_MEDIA_DIRECTORY;
+    if(output){const directory=inside(f.cfg.projectRoot,output);await mkdir(directory,{recursive:true});
+      await writeFile(inside(directory,`${engine.toLowerCase()}.mp4`),await artifactBytes(db.pool,store,c,video));
+      if(engine==='PHOTO_LAYOUT')await writeFile(inside(directory,'photo-layout.png'),await artifactBytes(db.pool,store,c,image));
+      await writeFile(inside(directory,`${engine.toLowerCase()}.json`),JSON.stringify({engine,source_hash:sourceHash,source:c.input.source,creative:c.private.creative,
+        target_frames:video.inspection!.frames,output_count:media.artifacts.length,role_count:launcher.launches-before,synthetic_models:true,actual_native_media:true},null,2));}
+  }finally{await stop(s);if(g)await rm(g.directory,{recursive:true,force:true});}
 });

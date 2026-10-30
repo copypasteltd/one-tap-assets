@@ -12,6 +12,9 @@ import type { DTO } from '../../src/shared/contracts/types';
 import type { HostPort, LocalPhoto } from '../../src/shared/platform/ports';
 import { ClientSession } from '../../src/shared/client/session';
 import { uploadEvidence } from '../../src/shared/client/evidence';
+import {compilePresetConfig} from '../../src/api/modules/community';
+import {transaction} from '../../src/api/db/pool';
+import {CREATIVE_COMPONENTS} from '../../src/shared/domain/creative-components';
 
 type Actor = Awaited<ReturnType<typeof account>>;
 let db: TestDatabase; let app: FastifyInstance; let folder: string; let a: Actor; let b: Actor; let buyer: Actor; let otherBuyer: Actor;
@@ -34,6 +37,40 @@ function request(method: HTTPMethods, path: string, actor?: Actor, body?: unknow
 }
 function settings(name = '测试作者的清新方案'): DTO<'PresetConfig'> { return { name, description: '仅用于原生数据库与界面接口验证的原创测试说明', style_tags: ['自然', '清新'],
   parent_preset_version: null, component_versions: [componentIds[0]!], variant_blueprint_ids: [blueprint], resource_version_ids: [], fork_allowed: true }; }
+it('creative components persist all four categories through the authenticated author API and freeze distinct executable sources',async()=>{
+  const registry=(await request('GET','/community-components',a)).json<{data:DTO<'ComponentOptionList'>}>().data;
+  expect(registry.items).toHaveLength(25);
+  const config={...settings('受控四类组件'),component_versions:[componentIds[0]!,'narrative.detail-first.1','rhythm.quick-open.1','camera.hold.1','caption.bold.1']};
+  const created=await request('POST','/preset-drafts',a,{config},id('creative-create'));expect(created.statusCode,created.body).toBe(201);
+  const d=created.json<{data:DTO<'PresetDraft'>}>().data;
+  expect((await request('GET',`/preset-drafts/${d.draft_id}`,a)).json().data.config).toEqual(config);
+  expect((await request('GET',`/preset-drafts/${d.draft_id}`,b)).statusCode).toBe(404);
+  const [first]=await transaction(db.pool,tx=>compilePresetConfig(tx,config));
+  const changed={...config,component_versions:config.component_versions.map(c=>c==='camera.hold.1'?'camera.pan.1':c)};
+  const update=await request('PATCH',`/preset-drafts/${d.draft_id}`,a,{expected_revision:d.revision,config:changed},id('creative-update'));
+  expect(update.statusCode,update.body).toBe(200);
+  const [second]=await transaction(db.pool,tx=>compilePresetConfig(tx,changed));
+  expect(second!.source_hash).not.toBe(first!.source_hash);
+  expect(first!.source.creative_components.community_direction).toMatchObject({camera:'HOLD',caption:'bold',narrative:'DETAIL_FIRST',rhythm:'QUICK_OPEN'});
+  expect(second!.source.creative_components.community_direction).toMatchObject({camera:'PAN'});
+  expect((first!.source.community_binding as {component_bindings:unknown[]}).component_bindings).toHaveLength(5);
+});
+it('creative components reject duplicate categories and engine conflicts before creating an author draft',async()=>{
+  for(const ids of [['camera.hold.1','camera.pan.1'],['engine.REFERENCE_FILM.1']]){
+    const result=await request('POST','/preset-drafts',a,{config:{...settings(),component_versions:[componentIds[0]!,...ids]}},id('creative-denied'));
+    expect(result.statusCode,result.body).toBe(422);expect(result.json().code).toBe(ids.length===2?'COMMUNITY_COMPONENT_CONFLICT':'COMPONENT_ENGINE_MISMATCH');
+  }
+});
+it('creative components reject altered registered text or version instead of silently compiling untrusted instructions',async()=>{
+  const definition=CREATIVE_COMPONENTS.find(c=>c.option.component_version_id==='camera.hold.1')!;
+  const config={...settings(),component_versions:[componentIds[0]!,definition.option.component_version_id]};
+  await db.pool.query('UPDATE component_versions SET data=$2 WHERE id=$1',[definition.option.component_version_id,{...definition.option,description:'powershell untrusted'}]);
+  try{await expect(transaction(db.pool,tx=>compilePresetConfig(tx,config))).rejects.toMatchObject({code:'COMMUNITY_COMPONENT_UNSUPPORTED'});}
+  finally{await db.pool.query('UPDATE component_versions SET data=$2 WHERE id=$1',[definition.option.component_version_id,definition.option]);}
+  await db.pool.query("UPDATE component_versions SET version='9.9.9' WHERE id=$1",[definition.option.component_version_id]);
+  try{await expect(transaction(db.pool,tx=>compilePresetConfig(tx,config))).rejects.toMatchObject({code:'COMMUNITY_COMPONENT_UNSUPPORTED'});}
+  finally{await db.pool.query('UPDATE component_versions SET version=$2 WHERE id=$1',[definition.option.component_version_id,definition.version]);}
+});
 async function draft(actor: Actor, name = id('draft-name')): Promise<DTO<'PresetDraft'>> {
   const r = await request('POST', '/preset-drafts', actor, { config: settings(name) }, id('create-draft')); expect(r.statusCode, r.body).toBe(201); return r.json<{ data: DTO<'PresetDraft'> }>().data;
 }

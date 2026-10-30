@@ -12,6 +12,7 @@ import type { StageCommit } from '../runtime.js';
 import { loadProductionFont } from '../media/font.js';
 import { renderLayout,xml } from '../media/layout.js';
 import { inspectImage } from '../media/photo-pipeline.js';
+import {communityCaptionStyle} from '../compiler/community-direction.js';
 
 /** Deterministic preview of the first contracted image. It consumes no paid
  * generation, has its own private lifetime, and never writes order artifacts. */
@@ -47,7 +48,8 @@ export class OptionalPreviewService {
     requireThat(sha256(original)===photo.sha256,'PHOTO_HASH_MISMATCH','实际照片与原方案不一致',503);
     const font=await loadProductionFont(this.cfg.projectRoot);
     const rendered=await renderLayout(original,{presetId:ctx.input.style_id,width:spec.width,height:spec.height,title:slot!.title,
-      subtitle:ctx.plan.private.creative.copy,sequence:1,total:ctx.plan.private.creative.image_slots.length,font});
+      subtitle:ctx.plan.private.creative.copy,sequence:1,total:ctx.plan.private.creative.image_slots.length,font,
+      ...(communityCaptionStyle(ctx.plan.private.source)?{captionStyle:communityCaptionStyle(ctx.plan.private.source)!}:{})});
     this.alive(lease,signal);
     const scaled=await sharp(rendered).resize({width:720,withoutEnlargement:true}).png().toBuffer({resolveWithObject:true});
     const width=scaled.info.width; const banner=96; const height=scaled.info.height+banner;

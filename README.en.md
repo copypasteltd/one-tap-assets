@@ -1,44 +1,27 @@
 # One Tap Assets · 一品成片
 
-This delivery adds the [community review workbench](docs/实施/社区审核工作台与原申请证据核对-v1.0.md) at `/ops/review`: staff inspect the original preset, actual PNG/MP4 samples and rights evidence, decide on content, then publish after a separate public-copy stage. A lost acknowledgement retries the original operation. Publication never enables sales. Alipay and Douyin mini-programs remain the primary customer clients.
+[English](README.en.md) · [中文](README.md) · [Docs](docs/README.md) · [Quick start](docs/guides/QUICKSTART.md) · [Status](docs/guides/STATUS.md) · [Changelog](CHANGELOG.md)
 
-Six focused client, three native API (24 unselected) and seven browser checks pass, together with typecheck, server/preview builds, native setup and startup. Migration 31; no new migration. 439 source / 42 contract / 4 resource files, `9dc6f240`; 77 business / 35 management operations. Four screenshots and MP4/WebM/GIF are included; the previous 93 media files and frozen C artwork are unchanged. Full suites, fresh mini builds and host-device checks were not run. Authors, staff identities, rights, profiles and READY/QC inputs are synthetic; native HTTP, database, upload, file-reading and public-copy effects are real. Live providers, full admission, Plus and cloud remain pending; sales stay disabled. [Evidence](docs/verification/review-console-source.json) · [Package](docs/delivery/package.json) · [Startup](docs/delivery/README.md).
+One Tap Assets turns product photos into a complete image, short-video and copy pack. Alipay and Douyin mini-programs are the primary clients: photograph the product, let multimodal analysis establish visible facts, select a community preset, then receive independently reviewed assets. The future Plus web client supports deeper editing.
 
-![Actual community review workbench recording](docs/media/review-desk/walkthrough.gif)
+This delivery completes [controlled community creative choices](docs/实施/社区受控叙事节奏运镜与文字样式-v1.0.md): three narrative orders, three rhythms, three camera movements and three text styles. Authors combine these with one official visual style and production blueprints. All choices enter the frozen version binding, content plan and actual native media pipeline. The original ten style and three engine components remain, making 25 registered components.
 
-[Recording and screenshots](docs/media/review-desk/README.md)
+| Choice | Options | Execution |
+| --- | --- | --- |
+| Narrative | Whole first, detail first, view comparison | Select photos using observed WHOLE/SIDE/DETAIL roles |
+| Rhythm | Even, quick opening, longer ending | Redistribute existing integer frames; incompatible model durations fail before queueing or charging |
+| Camera | Hold, push, pan | Native photo motion or explicit generated-video request, with independent review |
+| Text | Standard, bold, minimal | Complete Chinese layout; silent shot labels and native-audio captions keep their separate rules |
 
-Earlier entries describe their original delivery snapshots; the current scope is stated above.
+Open Creator → New preset, choose the style, blueprints and optional components, save, generate a sample using the author's own authorized product, then submit for review and publication. Each category is optional and mutually exclusive; tapping the selected option restores inheritance. Later draft edits do not change queued samples or sold snapshots. Publication, production admission and sales remain separate.
 
-This delivery connects [native-audio pre-sale binding and buyer delivery](docs/实施/原生声音售前完整绑定与购买交付-v1.0.md): original planning and quotes, checkout, payment confirmation, generation/post-production, independent listening, fresh facts/style reviews and private retrieval. Capability withdrawal before payment confirmation records the original payment and requests one original-order refund. The combined cost ceiling covers generation, audio rights, ASR, listening and original revision/repair allowances; historical internal quotes do not become purchasable.
+Current inventory: 444 source / 42 contract / 4 resource files, `40492124`; 77 business / 35 management operations; 31 migrations with no new migration. Five component, three native API, three actual SAMPLE pipeline and five browser checks pass, together with typecheck, server/preview builds, native setup and startup. Ten new media files include screenshots, MP4/WebM/GIF and actual outputs from all three silent routes. The previous 100 media files and frozen C design are preserved. [Evidence](docs/verification/creative-components-source.json) · [Package](docs/delivery/package.json) · [Run and package](docs/delivery/README.md).
 
-8 focused checks pass: five native-sale cases and three community-order regressions (28 not selected). Typecheck, server/preview builds, native setup and startup pass; migration 31 with no new migration. 431 source / 42 contract / 4 resource files, `59fe1100`. Full/unit suites, mini-program builds and browser recording were not run. Existing 93 media files and frozen C artwork stay unchanged. [Exact evidence](docs/verification/native-sale-source.json) · [Build](docs/delivery/current.json) · [Package](docs/delivery/package.json). Payments, rights, model semantics/usage, hearing, role identities and OSS metadata are synthetic, with local byte effects rather than live cloud or voice-quality evidence. Live services, devices, full admission, Plus and cloud remain pending; every preset stays unavailable for sale.
+Full suites, fresh mini builds and device checks were not run. Models, profiles, rights, identities and metering are synthetic; PostgreSQL, PNG/MP4, stage execution, review packets and release effects are native. Windows media long-run stability remains unverified after intermittent native failures. Live services, complete official/community commercial admission, audio/custom-resource samples, Plus, cloud deployment and all 58 requirements remain pending. Sales stay disabled.
 
-以下内容保留其历史来源，当前状态以上述记录为准。
+![Actual shared creator UI](docs/media/creative-components/walkthrough.gif)
 
-This delivery connects [community commercial preparation and trusted style execution](docs/实施/社区商业配置与可信风格执行-v1.0.md). An operator freezes the admitted blueprint price, models and original cost limits once; published community IDs select their frozen trusted style for buyer planning, production, fresh reviews and limited revisions. Preparation never inherits admission or enables sales. Paid orders keep their original snapshot when new sales stop.
-
-Five focused checks pass: three community cases and two generated-order regressions (nine not selected). Typecheck, server/preview builds, local setup and native startup pass; database migration 31. 430 source / 42 contract / 4 resource files, `71c658d6`. Full/unit suites, fresh mini-program builds and browser recording were not run; existing 93 media files and frozen C artwork stay unchanged. [Exact evidence](docs/verification/community-commerce-source.json) · [Build](docs/delivery/current.json) · [Package](docs/delivery/package.json). Live services, devices, full community admission, Plus and cloud remain pending; every preset stays unavailable for sale.
-
-以下内容保留其历史来源，当前状态以上述记录为准。
-
-This delivery connects [silent generated creator samples](docs/实施/生成式社区样例与独立平台额度-v1.0.md): per-shot generation and reference-film generation, independent reference identity review before video purchase, actual post-production and fresh final facts/style reviews, private downloads and separately authorized public copies. Samples use platform funds and create no buyer order; original budgets, quotas, deadlines and UNKNOWN recovery stay fixed.
-
-Ten focused checks pass (nine main cases plus one original-order regression), together with typecheck, server/web builds, native startup and setup checks. Database migration 30; 426 source / 42 contract / 4 resource files, `e7a80120`. Full/unit suites, fresh Alipay/Douyin builds and new browser capture were not run. Existing 93 media files and frozen C artwork remain byte-identical. [Exact evidence](docs/verification/generated-sample-source.json) · [Current build](docs/delivery/current.json) · [Delivery package](docs/delivery/package.json). Live services, devices and cloud deployment remain pending; every preset remains unavailable for sale.
-
-以下内容保留其历史来源，当前状态以上述记录为准。
-
-[English](README.en.md) · [中文](README.md) · [Documentation](docs/README.md) · [Quick start](docs/guides/QUICKSTART.en.md) · [Implementation status](docs/guides/STATUS.md) · [Changelog](CHANGELOG.md)
-
-This delivery adds [actual image-title revisions](docs/实施/图片加字与实际素材售后-v1.0.md): select a delivered image and enter a short title in the mini-program component, receive a real PNG with the complete original picture and a bottom title panel after fresh review. Assigned support staff can make the same authorized correction. All three route checks pass; original video/audio, budgets, quotas and deadlines remain fixed. Historical orders gain no grant.
-
-**Photograph a product, choose a preset, receive a coordinated asset pack.** One Tap Assets is a recoverable cloud production service designed primarily for **Alipay and Douyin mini-programs**. It covers product recognition, content planning, image/video production, post-production, review and asset retrieval. The planned **Plus web application** serves advanced editing and deeper production and remains P1 work.
-
-This repository is under active development: requirements **v3.1**, development contracts **v1.1**, and frozen **C “Yuzu Creative Studio” design v1.0**. The complete product and production admission have **not** passed; every official preset remains unavailable for sale. Shared screens, the native backend, silent packs for all three routes and private audio delivery for both generated routes are implemented. Real Codex operation, audio quality, official variants, native devices and commercial operation remain incomplete. See [implementation evidence](assets/implementation/current.json) and the [public verification summary](docs/verification/publication.json).
-
-Quick delivery: see the [handover and startup guide](docs/delivery/README.md). Run `.\scripts\setup-local.ps1`, then `doctor`, `local:start` or `preview:serve`. `delivery:build --smoke` runs bounded builds and focused smoke checks; `delivery:package` creates a ZIP with source and successful outputs. A fully green comprehensive suite is not a packaging prerequisite.
-
-Current candidate: type/server/preview/doctor/startup PASS; 8 unit, 4 three-route/migration API checks and 5 shared-component capture checks pass, with 42 existing API cases not selected. Bound: 421 source files / 42 contracts / 4 resources, `bc77e6cf`, migration 29. Full suite and mini builds NOT_RUN; 85 historical media files and C originals remain unchanged, with 8 new media files. See [delivery](docs/delivery/current.json) and [provenance](docs/verification/image-text-source.json).
+[Screenshots, browser recordings and actual route outputs](docs/media/creative-components/README.md)
 
 ## Screens and recorded interaction
 
@@ -210,11 +193,11 @@ flowchart LR
 | Mini-programs | Taro 4.3.1, React 18.3.1, TypeScript 5.9.3; 17 shared screens and platform ports |
 | Browser replay | Vite 8.3.5 and React DOM adapters with local fixtures |
 | Backend | Node.js 24, tested with 24.22.1; Fastify 5.12.7; worker/reaper/maintenance CLIs |
-| Persistence | Native PostgreSQL, local 17.6-1; durable stages/outbox, lease fencing and immutable receipts; 26 migrations |
+| Persistence | Native PostgreSQL, local 17.6-1; durable stages/outbox, lease fencing and immutable receipts; 31 migrations |
 | Media | Sharp 0.35.5, native FFmpeg/ffprobe, private storage and local development storage |
 | Agent | Codex app-server, bounded stdio/MCP, metered inference and style SkillBundles |
 | Verification | Vitest 5.0.5, Playwright 1.64.1, native PG/actual media and explicit synthetic provider/host fixtures |
-| Tooling | pnpm 10.13.1, one lockfile, JSON Schema 2020-12; 77 business/32 management endpoint contracts |
+| Tooling | pnpm 10.13.1, one lockfile, JSON Schema 2020-12; 77 business/35 management endpoint contracts |
 
 The project does not launch local Docker, WSL, virtual machines or Testcontainers, and does not require Redis. Native development scripts target Windows PowerShell. A complete startup on other operating systems has not been verified here.
 
@@ -285,7 +268,7 @@ New: [repair cost authorization within the original order](docs/实施/修复费
 ## Repository map and docs
 
 ```text
-src/api/            API, auth, domain services, 26 SQL migrations
+src/api/            API, auth, domain services, 31 SQL migrations
 src/worker/         Durable stages, Codex, MCP, media/review/reaping/privacy
 src/shared/         Shared screens, platform ports, recovery and generated contracts
 src/mini-alipay/    Alipay shell

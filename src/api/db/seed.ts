@@ -5,6 +5,7 @@ import { hash, id } from '../lib/crypto.js';
 import { variantDto, type PresetSource } from '../modules/catalog.js';
 import type { DTO } from '../../shared/contracts/types.js';
 import { FONT_BINDING, FONT_LICENSE, loadProductionFont } from '../../worker/media/font.js';
+import {CREATIVE_COMPONENTS} from '../../shared/domain/creative-components.js';
 
 export async function seed(pool: pg.Pool): Promise<void> {
   await loadProductionFont(process.cwd());
@@ -27,6 +28,8 @@ export async function seed(pool: pg.Pool): Promise<void> {
     for (const engine of ['PHOTO_LAYOUT', 'PER_SHOT_AI', 'REFERENCE_FILM'] as const) {
       await db.query('INSERT INTO component_versions(id,type,version,data) VALUES($1,$2,$3,$4) ON CONFLICT(id) DO NOTHING', [`engine.${engine}.1`, 'ENGINE', '1.0.0', { component_version_id: `engine.${engine}.1`, type: 'ENGINE', name: { PHOTO_LAYOUT: '照片动效', PER_SHOT_AI: '逐镜生成', REFERENCE_FILM: '连续短片' }[engine], description: '执行由平台受控工具完成，社区配置不能提交代码或外部链接。', supported_engines: [engine] } satisfies DTO<'ComponentOption'>]);
     }
+    for(const {option,version} of CREATIVE_COMPONENTS)await db.query('INSERT INTO component_versions(id,type,version,data) VALUES($1,$2,$3,$4) ON CONFLICT(id) DO NOTHING',
+      [option.component_version_id,option.type,version,option]);
     const skills = JSON.parse(await readFile('assets/skills/ypcc/v1.0/registry.json', 'utf8')) as { skills: { name: string; version: string; sha256: string }[]; bundles: { bundle_id: string; version: string; sha256: string }[] };
     for (const s of skills.skills) await db.query('INSERT INTO skill_versions(id,name,version,content_hash,trust_state,data) VALUES($1,$2,$3,$4,$5,$6) ON CONFLICT(name,version,content_hash) DO NOTHING', [id('skill'), s.name, s.version, s.sha256, 'OFFICIAL_DRAFT', s]);
     for (const b of skills.bundles) await db.query('INSERT INTO skill_bundles(id,version,bundle_hash,state,data) VALUES($1,$2,$3,$4,$5) ON CONFLICT(bundle_hash) DO NOTHING', [b.bundle_id, b.version, b.sha256, 'DRAFT_NOT_ADMITTED', b]);

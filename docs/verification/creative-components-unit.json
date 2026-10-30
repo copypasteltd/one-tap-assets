@@ -1,0 +1,95 @@
+{
+  "numTotalTestSuites": 1,
+  "numPassedTestSuites": 1,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 5,
+  "numPassedTests": 5,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793340806500,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "creative components preserve all three route outputs and total frames while enforcing real detail-first photos and selected movement",
+          "status": "passed",
+          "title": "creative components preserve all three route outputs and total frames while enforcing real detail-first photos and selected movement",
+          "duration": 54.83439999999996,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "creative components reject a shifted internal cut, changed camera, wrong photo evidence or rewritten narrative without accepting a complete but different timeline",
+          "status": "passed",
+          "title": "creative components reject a shifted internal cut, changed camera, wrong photo evidence or rewritten narrative without accepting a complete but different timeline",
+          "duration": 2.518100000000004,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "creative components reject duplicate categories, registry instruction injection and altered frozen directives",
+          "status": "passed",
+          "title": "creative components reject duplicate categories, registry instruction injection and altered frozen directives",
+          "duration": 2.336500000000001,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "creative components allow radio replacement and optional inheritance without changing legacy sources",
+          "status": "passed",
+          "title": "creative components allow radio replacement and optional inheritance without changing legacy sources",
+          "duration": 1.310200000000009,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "creative components render distinct complete safe-area text and transparent video labels with the production Chinese font",
+          "status": "passed",
+          "title": "creative components render distinct complete safe-area text and transparent video labels with the production Chinese font",
+          "duration": 990.5604999999999,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793340807136,
+      "endTime": 1793340808187.5605,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/creative-components.test.ts"
+    }
+  ]
+}

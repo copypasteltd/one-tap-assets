@@ -3,6 +3,7 @@ import type { VariantSource } from '../../api/modules/catalog.js';
 import { requireThat } from '../../api/lib/errors.js';
 import { hash } from '../../api/lib/crypto.js';
 import Ajv2020 from 'ajv/dist/2020.js';
+import {communityDirection} from './community-direction.js';
 
 export interface Shot {
   shot_id: string; start_frame: number; end_frame: number; overlap_frames: number;
@@ -38,12 +39,14 @@ export function basePlan(profile: DTO<'Profile'>, source: VariantSource): Creati
   const title = profile.name ?? profile.category ?? '商品实拍';
   const copy = approved.slice(0, 3).map(o => `${o.feature}：${o.value}`).join('；') || '从整体到细节，看看商品的真实样子。';
   const photos = profile.photo_roles;
+  const direction=communityDirection(source);
   const target = source.timeline_policy.target_frames;
   const roles = source.timeline_policy.base_segments ?? ['商品整体', '可见细节', '整体收束'].map((role, i) => ({ role, start_seconds: Math.round(target * i / 3) / 30, end_seconds: Math.round(target * (i + 1) / 3) / 30 }));
   const shots: Shot[] = roles.map((r, index) => {
-    const photo = photos[index % photos.length]!;
+    const preferred=direction?.narrative?(r.role.includes('细节')?'DETAIL':r.role.includes('角度')?'SIDE':'WHOLE'):null;
+    const photo = (preferred?photos.find(p=>p.role===preferred):undefined)??photos[index % photos.length]!;
     return { shot_id: `shot-${index + 1}`, start_frame: Math.round(r.start_seconds * 30), end_frame: index === roles.length - 1 ? target : Math.round(r.end_seconds * 30), overlap_frames: 0,
-      evidence_ids: profile.evidence.filter(e => e.asset_id === photo.asset_id).map(e => e.evidence_id), spoken_text: '', asset_id: photo.asset_id, intent: r.role, camera: index % 2 ? 'PAN' : 'PUSH' };
+      evidence_ids: profile.evidence.filter(e => e.asset_id === photo.asset_id).map(e => e.evidence_id), spoken_text: '', asset_id: photo.asset_id, intent: r.role, camera: direction?.camera??(index % 2 ? 'PAN' : 'PUSH') };
   });
   return { version: '1.1', identity_lock_id: profile.identity_lock_id, profile_hash: profile.profile_hash, variant_id: source.variant_id,
     fps: 30, target_frames: target, title, copy, claim_evidence_ids: [...new Set(approved.flatMap(o => o.evidence_ids))], shots,
@@ -64,6 +67,15 @@ export function validateCreativePlan(plan: CreativePlan, profile: DTO<'Profile'>
     position = shot.end_frame;
   }
   requireThat(position === plan.target_frames, 'TIMELINE_INVALID', '时间轴未覆盖完整时长', 422);
+  const direction=communityDirection(source);
+  if(direction){const segments=source.timeline_policy.base_segments;
+    requireThat(segments&&segments.length===plan.shots.length&&plan.shots.every((shot,i)=>shot.start_frame===Math.round(segments[i]!.start_seconds*30)
+      &&shot.end_frame===Math.round(segments[i]!.end_seconds*30)&&(!direction.camera||shot.camera===direction.camera)
+      &&(!direction.narrative||shot.intent===segments[i]!.role)),
+    'COMMUNITY_DIRECTION_MISMATCH','内容计划必须保留原方案选择的叙事、节奏与运镜',422);}
+  if(direction?.narrative)for(const shot of plan.shots){const role=shot.intent.includes('细节')?'DETAIL':shot.intent.includes('角度')?'SIDE':'WHOLE';
+    const matching=profile.photo_roles.filter(p=>p.role===role);
+    requireThat(!matching.length||matching.some(p=>p.asset_id===shot.asset_id),'COMMUNITY_PHOTO_ORDER_MISMATCH','镜头选图必须与照片档案中的整体、角度或细节证据对应',422);}
   const slots = source.output_slots.filter(s => s.kind === 'image');
   requireThat(slots.length === plan.image_slots.length && new Set(plan.image_slots.map(s => s.slot_id)).size === slots.length && plan.image_slots.every(s => slots.some(x => x.slot_id === s.slot_id) && photos.has(s.asset_id) && s.evidence_ids.every(e => evidence.has(e))), 'PLAN_OUTPUT_INVALID', '图片计划与交付清单不一致', 422);
   if (source.audio_policy.speech !== 'none') requireThat(plan.native_voice_id && plan.character_version_id && plan.shots.some(s => s.spoken_text.trim()), 'NATIVE_SPEECH_REQUIRED', '口播方案需要已准入的人物、声音和中文台词', 422);

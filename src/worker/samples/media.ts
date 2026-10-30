@@ -27,6 +27,7 @@ import { nativeCommand, inspectVideo, type MediaInspection } from '../media/nati
 import { loadProductionFont, FONT_BINDING, verifyResourceLicenses } from '../media/font.js';
 import { PendingExternal } from '../queue/leases.js';
 import { sampleContext, samplePlan, type SampleContext } from './context.js';
+import {communityCaptionStyle} from '../compiler/community-direction.js';
 
 export interface SampleArtifact {
   artifact_id: string; slot_id: string; kind: 'image' | 'video' | 'copy'; object_key: string;
@@ -157,11 +158,11 @@ export async function renderSample(pool: pg.Pool, cfg: Config, store: ObjectStor
         if (kind === 'image') {
           const index = artifacts.filter(a => a.kind === 'image').length; const planned = plan.image_slots.find(s => s.slot_id === slot.slot_id)!;
           const photo = material?.outputs.get(`image:${slot.slot_id}`)?.bytes??photos.get(planned.asset_id); requireThat(photo && slot.width && slot.height, 'PHOTO_MISSING', '缺少样例原照片', 422);
-          bytes = await renderLayout(photo, { presetId: style, width: slot.width, height: slot.height, title: planned.title, subtitle: plan.copy, sequence: index + 1, total: plan.image_slots.length, font,...(policy?{aiLabel:true,disclosure:policy}:{}) });
+          bytes = await renderLayout(photo, { presetId: style, width: slot.width, height: slot.height, title: planned.title, subtitle: plan.copy, sequence: index + 1, total: plan.image_slots.length, font,...(policy?{aiLabel:true,disclosure:policy}:{}),...(communityCaptionStyle(context.input.source)?{captionStyle:communityCaptionStyle(context.input.source)!}:{}) });
           if(policy)bytes=await markDisclosureImage(bytes,await disclosureRaster(cfg,policy,slot.width,slot.height));
         } else {
           requireThat(kind === 'video' && slot.width === 1080 && slot.height === 1920 && slot.fps === 30, 'SAMPLE_SLOT_UNSUPPORTED', '样例短片规格尚未接入', 503);
-          generatedVideo ??= material?await assembleSilentGeneratedVideo(cfg,gc!,material,directory,signal):(await renderPhotoVideo(cfg, { directory: join(directory, 'shots'), plan, presetId: style, photos, deadlineAt: context.input.deadline_at, signal, font })).bytes;
+          generatedVideo ??= material?await assembleSilentGeneratedVideo(cfg,gc!,material,directory,signal):(await renderPhotoVideo(cfg, { directory: join(directory, 'shots'), plan, presetId: style, photos, deadlineAt: context.input.deadline_at, signal, font,...(communityCaptionStyle(context.input.source)?{captionStyle:communityCaptionStyle(context.input.source)!}:{}) })).bytes;
           bytes = generatedVideo;
         }
       } else if (kind === 'copy') bytes = Buffer.from(plan.copy, 'utf8');

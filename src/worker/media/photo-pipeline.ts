@@ -16,6 +16,7 @@ import { renderLayout } from './layout.js';
 import { renderPhotoVideo } from './photo-video.js';
 import { loadProductionFont, verifyResourceLicenses } from './font.js';
 import {validatePlanLayout} from './plan-layout.js';
+import {communityCaptionStyle} from '../compiler/community-direction.js';
 import { artifactSetHash, claimMediaGeneration, commitMediaOperation, operationArtifacts, operationFor, originalMediaReceipt,
   type ArtifactSpec, type MediaOperation, type MediaPhase, type MediaReceipt, type PrivateArtifact } from './artifacts.js';
 
@@ -124,11 +125,11 @@ export class PhotoMediaPipeline {
       assertMediaAlive(context, signal); const planned = creative.image_slots.find(s => s.slot_id === slot.slot_id)!;
       const photo = photos.get(planned.asset_id); requireThat(photo && slot.width && slot.height, 'PHOTO_MISSING', '缺少本单原始商品照片', 422);
       const bytes = await renderLayout(photo, { presetId: styleId, width: slot.width, height: slot.height,
-        title: planned.title, subtitle: creative.copy, sequence: index + 1, total: creative.image_slots.length, font });
+        title: planned.title, subtitle: creative.copy, sequence: index + 1, total: creative.image_slots.length, font,...(communityCaptionStyle(context.contract.source)?{captionStyle:communityCaptionStyle(context.contract.source)!}:{}) });
       artifacts.push(await this.artifact(context, operation, slot.slot_id, bytes, this.spec(context, 'PRODUCTION', 'image', await inspectImage(bytes), [planned.asset_id])));
     }
     const video = await renderPhotoVideo(this.cfg, { directory: join(directory, 'shots'), plan: creative, presetId: styleId,
-      photos, deadlineAt: context.snapshot.deadline_at, signal, font });
+      photos, deadlineAt: context.snapshot.deadline_at, signal, font,...(communityCaptionStyle(context.contract.source)?{captionStyle:communityCaptionStyle(context.contract.source)!}:{}) });
     const inspection = await this.videoInspection(context, video.path, signal);
     for (const slot of context.snapshot.outputs.filter(s => s.kind === 'video')) {
       artifacts.push(await this.artifact(context, operation, slot.slot_id, video.bytes,

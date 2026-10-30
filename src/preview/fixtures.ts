@@ -4,9 +4,14 @@ import type {Transport} from '../shared/client/api';
 import type {HostPort} from '../shared/platform/ports';
 import type {DTO} from '../shared/contracts/types';
 import {digest} from '../shared/client/sha256';
+import {CREATIVE_COMPONENTS} from '../shared/domain/creative-components';
 
 const expires='2030-10-28T12:00:00.000Z',created='2026-10-28T08:00:00.000Z';
 const memory=new Map<string,unknown>();
+const creativeScenario=new URLSearchParams(location.search).get('scenario')==='creative-components';
+const creativeOptions:DTO<'ComponentOption'>[]=[...source.presets.map(p=>({component_version_id:`style.${p.preset_id}.1`,type:'STYLE',name:p.name,description:p.style.description,supported_engines:['PHOTO_LAYOUT','PER_SHOT_AI','REFERENCE_FILM']} as DTO<'ComponentOption'>)),
+  ...(['PHOTO_LAYOUT','PER_SHOT_AI','REFERENCE_FILM'] as const).map(engine=>({component_version_id:`engine.${engine}.1`,type:'ENGINE',name:{PHOTO_LAYOUT:'照片动效',PER_SHOT_AI:'逐镜生成',REFERENCE_FILM:'连续短片'}[engine],description:'受控执行路线',supported_engines:[engine]})),...CREATIVE_COMPONENTS.map(d=>d.option)];
+let creativeDraft:DTO<'PresetDraft'>|undefined;
 const slots=(variant:any)=>[...variant.output_slots.map((s:any)=>({slot_id:s.slot_id,kind:s.kind,count:1,width:s.width,height:s.height,
   fps:s.fps??null,duration_frames:s.duration_seconds?Math.round(s.duration_seconds*(s.fps??30)):null})),
   ...(variant.required_auxiliary_outputs.includes('copy')?[{slot_id:'copy',kind:'copy',count:1,width:null,height:null,fps:null,duration_frames:null}]:[])];
@@ -47,6 +52,12 @@ const demoPack:DTO<'Deliverables'>={manifest_id:'demo_manifest',order_id:order.o
     text:kind==='copy'?'让日常多一点清新的仪式感。白色泵头，琥珀色瓶身。此为合成演示文案，不包含功效承诺。':null,sha256:'a'.repeat(64)}))};
 function response(operation:string,path:string,body:any):unknown{
   switch(operation){
+    case 'listCommunityComponents':if(!creativeScenario)throw new Error('Synthetic creator scenario only');return {items:creativeOptions,next_cursor:null};
+    case 'listVariantBlueprints':if(!creativeScenario)throw new Error('Synthetic creator scenario only');return {items:source.presets.flatMap(p=>p.execution_variants.map(v=>({blueprint_id:`blueprint.${v.variant_id}`,name:v.name,engine:v.engine,allowed_component_version_ids:creativeOptions.map(c=>c.component_version_id),admission_required:true}))),next_cursor:null};
+    case 'listCommunityResources':if(!creativeScenario)throw new Error('Synthetic creator scenario only');return {items:[],next_cursor:null};
+    case 'getPresetDraft':if(!creativeScenario||!creativeDraft||path.split('/').at(-1)!==creativeDraft.draft_id)throw new Error('Synthetic draft not found');return creativeDraft;
+    case 'createPresetDraft':if(!creativeScenario)throw new Error('Synthetic creator scenario only');creativeDraft={draft_id:'demo_creative_draft',revision:0,config:structuredClone(body.config),publication_id:null,updated_at:created};return creativeDraft;
+    case 'updatePresetDraft':if(!creativeScenario||!creativeDraft||body.expected_revision!==creativeDraft.revision)throw new Error('Synthetic revision conflict');creativeDraft={...creativeDraft,revision:creativeDraft.revision+1,config:structuredClone(body.config)};return creativeDraft;
     case 'createPlatformSession':return session;
     case 'listProducts':return {items:[product],next_cursor:null};
     case 'getProduct':return product;

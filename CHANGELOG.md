@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · 社区创作组件 / Controlled creative components
+
+2026-10-30快速收口：[社区受控创作组件](docs/实施/社区受控叙事节奏运镜与文字样式-v1.0.md)。新增叙事/节奏/运镜/文字各3项，共25组件，冻结配置、按档案选图、整数帧、实际排版/无声片叠字与原有声字幕配置接通。5组件/3API/3实际无声SAMPLE/5浏览器通过；444/42/4 `40492124`，类型/server/preview/自检/启动PASS；31迁移、77业务/35管理，无新迁移。新增10媒体，原100媒体、48设计文件和历史证据保留。短模型时长拒绝、数据库锁/心跳与Windows原生失败均留存，未弱化门禁；全面测试/小程序重编/真机NOT_RUN。真实服务、完整准入、音频资源样例、Plus、云端/58完整验收待完成，全部禁售及产品/生产/云端false。
+
+Twelve declarative creative choices now reach frozen plans and actual native media. Five component, three API, three silent SAMPLE routes and five browser checks pass. Model-duration refusal, failed native attempts, synthetic boundaries and remaining live/device/cloud work are documented; full suites were not required.
+
+以下内容保留其历史来源，当前状态以上述记录为准。
+
 2026-10-30 — 社区审核工作台 / Community review workbench
 
 本轮收口[社区审核工作台](docs/实施/社区审核工作台与原申请证据核对-v1.0.md)：工作人员在 `/ops/review` 核对原方案、实际图片/视频与授权证明，批准或退回后，再独立准备公开副本与发布。已提交但回执丢失时沿用原编号恢复，发布不会自动开售。客户仍优先使用支付宝、抖音小程序。

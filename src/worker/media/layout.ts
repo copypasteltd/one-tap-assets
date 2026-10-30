@@ -3,6 +3,7 @@ import { requireThat } from '../../api/lib/errors.js';
 import { loadProductionFont, type ProductionFont } from './font.js';
 import {rasterLayoutText,wrapLayoutText,type TextRaster} from './text-layout.js';
 import type {AiDisclosureContract} from '../compiler/disclosure.js';
+import type {CaptionStyle} from '../../shared/domain/creative-components.js';
 export {escapeLayoutText as xml} from './text-layout.js';
 
 export interface LayoutStyle { id: string; bg: string; ink: string; accent: string; layout: 'AIR' | 'PAPER' | 'LUXE' | 'FRESH' | 'FLASH' | 'CALM' | 'CARDS' | 'POP' | 'STORY' | 'SOCIAL'; label: string }
@@ -19,7 +20,7 @@ export const STYLES: Record<string, LayoutStyle> = Object.fromEntries([
   { id: 'portrait-social', bg: '#FFEDE3', ink: '#503A37', accent: '#DF8D82', layout: 'SOCIAL', label: '分享眼前的真实好物' },
 ].map(s => [s.id, s as LayoutStyle]));
 export interface LayoutOptions {presetId:string;width:number;height:number;title:string;subtitle:string;sequence:number;total:number;
-  aiLabel?:boolean;font?:ProductionFont;disclosure?:AiDisclosureContract}
+  aiLabel?:boolean;font?:ProductionFont;disclosure?:AiDisclosureContract;captionStyle?:CaptionStyle}
 export interface TextPlacement extends TextRaster {left:number;top:number;kind:'TITLE'|'SUBTITLE'|'CHAPTER'|'FOOTER'}
 export async function prepareLayoutText(options:LayoutOptions){
   const { width: w, height: h } = options; const style = STYLES[options.presetId];
@@ -31,8 +32,9 @@ export async function prepareLayoutText(options:LayoutOptions){
   let bottom = Math.round((portrait ? 250 : 170) * unit);
   const imgW = w - margin * 2;
   const title = await wrapLayoutText(options.title,{font,size:titleSize,color:style.ink,bold:true},imgW,2);
-  const subtitleSize=Math.round(30*unit),footerSize=Math.round(22*unit),subtitleInset=style.layout==='CARDS'?Math.round(24*unit):0;
-  const subtitle = await wrapLayoutText(options.subtitle,{font,size:subtitleSize,color:style.ink},imgW-subtitleInset,portrait?3:2);
+  const subtitleSize=Math.round((options.captionStyle==='bold'?40:options.captionStyle==='minimal'?26:options.captionStyle==='standard'?32:30)*unit),footerSize=Math.round(22*unit),subtitleInset=style.layout==='CARDS'?Math.round(24*unit):0;
+  const subtitleStep=options.captionStyle?Math.ceil(subtitleSize*1.4):42*unit;
+  const subtitle = await wrapLayoutText(options.subtitle,{font,size:subtitleSize,color:style.ink,...(options.captionStyle==='bold'?{bold:true}:{})},imgW-subtitleInset,portrait?3:2);
   const policy=options.disclosure?.geometry;
   const markScale=policy?w/policy.reference_width:unit;
   const mark={left:Math.round((policy?.margin??32)*markScale),top:Math.round((policy?.margin??32)*markScale),
@@ -42,7 +44,7 @@ export async function prepareLayoutText(options:LayoutOptions){
   // Expand safe areas for actual line count; do not shrink fonts or erase text.
   top=Math.max(top,Math.ceil(titleFloor+titleSize+Math.max(0,title.length-1)*titleSize*1.2+50*unit));
   const footerTop=Math.round(h-48*unit-footerSize);
-  bottom=Math.max(bottom,Math.ceil(72*unit+Math.max(0,subtitle.length-1)*42*unit+h-footerTop+24*unit));
+  bottom=Math.max(bottom,Math.ceil(72*unit+Math.max(0,subtitle.length-1)*subtitleStep+h-footerTop+24*unit));
   const imgH=h-top-bottom;
   requireThat(imgH>0,'LAYOUT_TEXT_OVERFLOW','完整文字没有为商品图片留下安全区域',422);
   const text:TextPlacement[]=[];
@@ -57,7 +59,7 @@ export async function prepareLayoutText(options:LayoutOptions){
     text.push(rect);
   };
   for(const [i,line] of title.entries())put(line,margin,top-(title.length-i-1)*titleSize*1.2-50*unit,titleSize,'TITLE');
-  for(const [i,line] of subtitle.entries())put(line,margin+subtitleInset,h-bottom+(72+i*42)*unit,subtitleSize,'SUBTITLE');
+  for(const [i,line] of subtitle.entries())put(line,margin+subtitleInset,h-bottom+72*unit+i*subtitleStep,subtitleSize,'SUBTITLE');
   put(await rasterLayoutText(`${options.sequence} / ${options.total} · ${options.aiLabel?'AI 生成素材':'商品实拍'}`,
     {font,size:footerSize,color:style.ink}),w-margin,h-48*unit,footerSize,'FOOTER',true);
   if(style.layout==='STORY')put(await rasterLayoutText(`CHAPTER ${String(options.sequence).padStart(2,'0')}`,

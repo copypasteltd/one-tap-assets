@@ -3,11 +3,11 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-30T05:28:13.965551+00:00",
+  "checked_at": "2026-10-30T06:16:16.677750+00:00",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "verification_mode": "FOCUSED_REVIEW_CONSOLE_CLOSURE",
+  "verification_mode": "FOCUSED_CREATIVE_COMPONENTS_CLOSURE",
   "retained_integration": null,
   "command_checks_passed": false,
   "commands": [
@@ -23,8 +23,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 16654,
-      "log_path": "runtime/delivery-builds/2026-10-30T05-25-59-640Z-e9f10a3d/typecheck.log",
+      "elapsed_ms": 15565,
+      "log_path": "runtime/delivery-builds/2026-10-30T06-12-33-466Z-ae76aed3/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -40,34 +40,34 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 808,
-      "log_path": "runtime/delivery-builds/2026-10-30T05-25-59-640Z-e9f10a3d/server.log",
+      "elapsed_ms": 551,
+      "log_path": "runtime/delivery-builds/2026-10-30T06-12-33-466Z-ae76aed3/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T05-25-59-640Z-e9f10a3d\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T06-12-33-466Z-ae76aed3\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T05-25-59-640Z-e9f10a3d\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T06-12-33-466Z-ae76aed3\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 2151,
-      "log_path": "runtime/delivery-builds/2026-10-30T05-25-59-640Z-e9f10a3d/preview.log",
-      "log_sha256": "f526db6ca0c1eb14edd5e47d2520ae10782d410d98a96ea30101823628445988"
+      "elapsed_ms": 792,
+      "log_path": "runtime/delivery-builds/2026-10-30T06-12-33-466Z-ae76aed3/preview.log",
+      "log_sha256": "a81e39989adb6a6010213907e8bf431c600e98bb8bd4b28433b11d0847266f65"
     }
   ],
   "suites": [],
-  "source_files": 439,
-  "source_set_hash": "9dc6f240e2310ecc81bb09b458c9dc07376c3bdb4b92023985ba15d3f66be24a",
+  "source_files": 444,
+  "source_set_hash": "40492124847a766a93eb48d5feef79214217ff670d453221494ea2dc20bd0ba8",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -219,7 +219,7 @@
     },
     {
       "path": "src/api/db/seed.ts",
-      "sha256": "2d50c62d20f088e4d602b4ccf0cee1601d6a31532a468776a587b5bc2e4ccfa4"
+      "sha256": "3643668d16d28a3181852e3ba9b309175a6355fdb1a60c9c85360a81b2feb68c"
     },
     {
       "path": "src/api/db/store.ts",
@@ -271,7 +271,7 @@
     },
     {
       "path": "src/api/modules/community.ts",
-      "sha256": "bb89c4184dcb131ae44d622cef279c274f4402ac3770acf68276cddb4c8803cf"
+      "sha256": "16e793098e3b8c46e734803cb145c6da9076e517341c8c1f675571291e11e19b"
     },
     {
       "path": "src/api/modules/delivery.ts",
@@ -555,7 +555,7 @@
     },
     {
       "path": "src/preview/fixtures.ts",
-      "sha256": "3b070175a0ad5ee2c93e50064fb8595754675274c21fea6f07943bea18604c70"
+      "sha256": "4424728a2d0bb613a94ecdc25e68afe09cc877c94c7342747b0c4c9e05ab16e4"
     },
     {
       "path": "src/preview/index.html",
@@ -682,6 +682,10 @@
       "sha256": "dbc5872f557b7e14036ecbba6aaf29b2befdc07bce5cab77ba1d58fb483930a2"
     },
     {
+      "path": "src/shared/domain/creative-components.ts",
+      "sha256": "460785665213a06067d377cf6e637b5f202a6003d52cb006e6a5cba633266b8f"
+    },
+    {
       "path": "src/shared/domain/json.ts",
       "sha256": "9fd8cadd5d49c45923245b3abc216eb77cea8c37fe9b2943f545f089a927604b"
     },
@@ -715,7 +719,7 @@
     },
     {
       "path": "src/shared/ui/community.tsx",
-      "sha256": "b6d5c08d6b091d9d0727ec10cf44706c9c9846593602aae88fa97a4ed8aba058"
+      "sha256": "2ebe082861242defdbbbb4a30422db8436004750ff92950fa1e43e215ca7b673"
     },
     {
       "path": "src/shared/ui/creator-workflow.tsx",
@@ -823,7 +827,7 @@
     },
     {
       "path": "src/worker/codex/planning.ts",
-      "sha256": "a7f6240d54b985905990b44f46f9c4c387e319cccd83e1afa9473cf7beae8fb3"
+      "sha256": "27167dd6aea7d421c1e5754bf7e5d99619de042e20300ab84d2f98b3fed26120"
     },
     {
       "path": "src/worker/codex/review-images.ts",
@@ -842,6 +846,10 @@
       "sha256": "8e95bb4e2617f10e4fa7c2b3ada0794459b284f1d8ac72d017ecbeac1cea3403"
     },
     {
+      "path": "src/worker/compiler/community-direction.ts",
+      "sha256": "a65eae8eb333c8fd3f967742cba63e7e2f00b3fe6708a7b34e3019dae57278c4"
+    },
+    {
       "path": "src/worker/compiler/disclosure.ts",
       "sha256": "43819361ab2e511d0aae61c3e66fa105033ef79d078a8c1de5ad2334f547bdf6"
     },
@@ -851,7 +859,7 @@
     },
     {
       "path": "src/worker/compiler/plan.ts",
-      "sha256": "d1155b53b94040a7247d0c4d8fbd1abf3fadf30a10912693e345f47484d6f00f"
+      "sha256": "2f3f81a201da8320ad0af3b2de5f5690b67915ba604137ed2a5f274aff0b6b79"
     },
     {
       "path": "src/worker/compiler/snapshot.ts",
@@ -907,7 +915,7 @@
     },
     {
       "path": "src/worker/generation/silent-video.ts",
-      "sha256": "6b31299aa0e81d665bc6017fa0ae50f909e2871b42905cf1d42ba8338657706c"
+      "sha256": "f8667992b000dbc7cee48d8fa4a21345a417e0aa5445d2f0b44317bd58766e63"
     },
     {
       "path": "src/worker/lifecycle/cleanup-files.ts",
@@ -962,6 +970,10 @@
       "sha256": "5d5a105b5bd416a4f12254dc06119cfca7dda3c4d0590601c10104fbf3569554"
     },
     {
+      "path": "src/worker/media/community-captions.ts",
+      "sha256": "0d853661b24c5ffca9b386685247aefe94b59ce29bd3b4dd4022db0ce3c6a1a4"
+    },
+    {
       "path": "src/worker/media/disclosure.ts",
       "sha256": "88d704beb51037482109b5edb25c468881fa6041f0ec1e147d08354bdbd9c584"
     },
@@ -971,11 +983,11 @@
     },
     {
       "path": "src/worker/media/generated-pipeline.ts",
-      "sha256": "322b7dadb274fb1fa505e0c40dd44f1353072f9df101d2b4ae561d5e3870e085"
+      "sha256": "8ca537ab18781b0c73a4d5b941a1eca0954985bcfec4830fc6ce50ba4397a1e4"
     },
     {
       "path": "src/worker/media/layout.ts",
-      "sha256": "4b6ec94f0d05239b44173d60ddbd94cb5f4c1803fd568345918212f3b3a22338"
+      "sha256": "8c903e3bfa07f9ad532926710d2ecc758906fe5e0405534642d3194bbb2b168b"
     },
     {
       "path": "src/worker/media/native-audio-assembly.ts",
@@ -1003,15 +1015,15 @@
     },
     {
       "path": "src/worker/media/photo-pipeline.ts",
-      "sha256": "d00b050549136a1959a474193f88ca9439b6363a85cc6dc546790f4baa91e4f4"
+      "sha256": "08d098577817dbfcd338b66930dcb1c2b5b8d1a80db774126d9612573fd3faaf"
     },
     {
       "path": "src/worker/media/photo-video.ts",
-      "sha256": "85d88074572445b62216dbbbda7b52a8d79a88ff28d945293eed4f42d3bc1b2a"
+      "sha256": "516268e6f33a618404444eb8e872a8827ce0d5b2baffc3ff6158777b3d437d71"
     },
     {
       "path": "src/worker/media/plan-layout.ts",
-      "sha256": "549c8f21890a9104236edf4391d2ea64afe75125ee37d740b3a5d281055aa1ea"
+      "sha256": "dd0f932126c9eebb9935e5c66779981cfc62c7cb2cfcded2099e9b15d4ba5240"
     },
     {
       "path": "src/worker/media/text-layout.ts",
@@ -1027,7 +1039,7 @@
     },
     {
       "path": "src/worker/previews/service.ts",
-      "sha256": "0f7dd0693137d9cf8536a2e21163fe53debd86416d6dcc4cbf60cc75bf911a64"
+      "sha256": "b0297529bda7177bbae41367321da43300a44e59aa2127c1d1479550374f6dbb"
     },
     {
       "path": "src/worker/providers/ark.ts",
@@ -1171,7 +1183,7 @@
     },
     {
       "path": "src/worker/samples/media.ts",
-      "sha256": "ba4e08b9e67b575cf9b51feb6c42a6475c42e6be4e0a3f726f9cab837075a2eb"
+      "sha256": "c21c4a8351dd34edab31b72613710fc21bc9eba3485e13f298f5b16c0f0f4927"
     },
     {
       "path": "src/worker/samples/publication.ts",
@@ -1183,7 +1195,7 @@
     },
     {
       "path": "src/worker/samples/service.ts",
-      "sha256": "c0e9f47fe8e99165bb691ccf494d7525ce9202655bd818d399f2b3b6893b5645"
+      "sha256": "b75e47fe55582df77dbd8915be9a0e6e406a08a5b2da397a209f4d42079edc94"
     },
     {
       "path": "src/worker/speech/execute.ts",
@@ -1355,7 +1367,7 @@
     },
     {
       "path": "tests/integration/community.test.ts",
-      "sha256": "3a5e86acd5c47e4c4fca5afe60d0445b90ab4fe87991298b81aa4944f779e75a"
+      "sha256": "fd7df4052fd4e5a5dd403785af98b6d270d74657cbd17d1ed1418ed3843c6c51"
     },
     {
       "path": "tests/integration/disclosure.test.ts",
@@ -1479,7 +1491,7 @@
     },
     {
       "path": "tests/integration/sample-production.test.ts",
-      "sha256": "6dda6c4fa29b291f3b0cccd12ee2b052f86cdccbfca0d8892e9d7fd8f8be9265"
+      "sha256": "526754b27b7ed33af3ff9f1650c938cac1e674554fe1fef96f604afead299655"
     },
     {
       "path": "tests/integration/speech-gateway.test.ts",
@@ -1532,6 +1544,10 @@
     {
       "path": "tests/unit/contracts-security.test.ts",
       "sha256": "463b11a387beef46cf2eab614dd0d924f9242508504ef2282db5c4f418bd6c67"
+    },
+    {
+      "path": "tests/unit/creative-components.test.ts",
+      "sha256": "9e5e19dce061c0c443241282afb1b434d33002bff67c333acc7a95543f9e112f"
     },
     {
       "path": "tests/unit/disclosure.test.ts",
@@ -1740,6 +1756,10 @@
     {
       "path": "scripts/record-album-save.ts",
       "sha256": "26b7ec404d7349af56d3331a48db1e799815cf04c925e219e256e9f148236c71"
+    },
+    {
+      "path": "scripts/record-creative-components.ts",
+      "sha256": "466a9cbd1a4687cbcd69ac5722e1b190d39428775d11ed0435137a1f314a4a7c"
     },
     {
       "path": "scripts/record-disclosure.ts",
@@ -2359,7 +2379,7 @@
   },
   "not_verified": [
     "Real end-to-end product execution and production admission of every registered stage; a complete handler registry is not production readiness",
-    "Generated/audio/custom-resource creator samples, production community SkillBundle admission, arbitrary image redraw, existing in-image text replacement and caption/audio rewriting, device aftercare UI verification, Plus and complete management assignment/history; public sample lifecycle has native/fixture coverage but no production admission",
+    "Audio/custom-resource creator samples, production community SkillBundle admission, arbitrary image redraw, existing in-image text replacement and caption/audio rewriting, device aftercare UI verification, Plus and complete management assignment/history; public sample lifecycle has native/fixture coverage but no production admission",
     "Native host login/upload/payment/album behavior and visual review on actual devices",
     "Real Codex/model/payment calls",
     "Operator native restricted-identity launcher executable, actual OS isolation and certified inference hard limits",
@@ -2368,7 +2388,7 @@
     "Independent post-backup payment/usage intent recovery and financial restore admission",
     "All three production pipelines and 420 full-pack benchmark runs",
     "Four physical-device groups",
-    "Windows native media long-run stability after one intermittent C0000374 heap termination",
+    "Windows native media long-run stability after intermittent C0000374 heap terminations",
     "Production deployment and full 58-requirement audit"
   ],
   "source_license": "Independently written project source; upstream AGPL clone remains research-only; no upstream production implementation copied.",
@@ -2715,7 +2735,7 @@
   },
   "review_desk": {
     "source_implemented": true,
-    "fixture_verified": true,
+    "fixture_verified": false,
     "evidence": "docs/verification/review-console-source.json",
     "page": "/ops/review",
     "business_operations": 77,
@@ -2724,5 +2744,16 @@
     "review_publish_sale_separated": true,
     "sale_enabled": false,
     "production_staff_identity_verified": false
+  },
+  "creative_components": {
+    "source_implemented": true,
+    "fixture_verified": true,
+    "evidence": "docs/verification/creative-components-source.json",
+    "trusted_registry_components": 25,
+    "new_components": 12,
+    "frozen_source_and_plan_enforced": true,
+    "all_three_silent_sample_routes_verified": true,
+    "native_audio_style_source_wired": true,
+    "native_audio_style_newly_verified": false
   }
 }

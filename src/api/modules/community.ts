@@ -14,6 +14,8 @@ import { verifyCompletedSample } from '../../worker/samples/completion.js';
 import { getProfile } from './products.js';
 import { signDownload } from './delivery.js';
 import { cursor, limit } from '../lib/pagination.js';
+import {applyCommunityDirection,selectedCommunityDirection} from '../../worker/compiler/community-direction.js';
+import {CREATIVE_COMPONENTS} from '../../shared/domain/creative-components.js';
 
 export async function listSamples(db: Db, cfg: Config, p: Principal, draftId: string, query: PageQuery): Promise<DTO<'SampleList'>> {
   await owned(db, 'preset_drafts', draftId, p);
@@ -66,6 +68,7 @@ export async function validatePresetConfig(db: Db, config: DTO<'PresetConfig'>):
   requireThat(config.resource_version_ids.every(r => resourceRows.some(x => x.resource_version_id === r && x.usable)), 'RESOURCE_NOT_ALLOWED', '方案包含未授权或已停用的资源', 422);
   requireThat(!/(?:https?:\/\/|file:\/\/|powershell|cmd\.exe|<script|ignore\s+previous|忽略.*(?:指令|规则))/i.test(`${config.name} ${config.description}`), 'COMMUNITY_CONTENT_REJECTED', '方案描述仅用于展示创意，不接受外部链接或执行指令', 422);
   const selected = componentRows.filter(c => config.component_versions.includes(c.component_version_id));
+  selectedCommunityDirection(selected);
   requireThat(selected.filter(c => c.type === 'STYLE').length === 1, 'STYLE_REQUIRED', '请选择且只选择一种主风格', 422);
   requireThat(config.variant_blueprint_ids.every(b => {
     const blueprint = blueprintRows.find(x => x.blueprint_id === b)!;
@@ -91,7 +94,12 @@ export async function submitRights(db: Db, p: Principal, request: DTO<'RightsRec
  * remain display data; they never become executable instructions or endpoints. */
 export async function compilePresetConfig(db: Db, config: DTO<'PresetConfig'>): Promise<{ blueprint_id: string; source: VariantSource; source_hash: string }[]> {
   await validatePresetConfig(db, config);
-  const componentBindings = (await db.query<{ id: string; version: string; data: unknown }>('SELECT id,version,data FROM component_versions WHERE id=ANY($1) ORDER BY id FOR SHARE', [config.component_versions])).rows.map(row => ({ id: row.id, version: row.version, hash: hash(row.data) }));
+  const componentRows = (await db.query<{ id: string; version: string; data: DTO<'ComponentOption'> }>('SELECT id,version,data FROM component_versions WHERE id=ANY($1) ORDER BY id FOR SHARE', [config.component_versions])).rows;
+  requireThat(componentRows.length===config.component_versions.length&&componentRows.every(r=>r.id===r.data.component_version_id),
+    'COMMUNITY_COMPONENT_UNSUPPORTED','创作组件登记与原选择不一致',422);
+  for(const row of componentRows){const definition=CREATIVE_COMPONENTS.find(d=>d.option.component_version_id===row.id);
+    requireThat(!definition||row.version===definition.version,'COMMUNITY_COMPONENT_UNSUPPORTED','创作组件版本与可信映射不一致',422);}
+  const componentBindings = componentRows.map(row => ({ id: row.id, version: row.version, hash: hash(row.data) }));
   const resourceBindings = (await db.query<{ id: string; version: string; data: unknown }>(`SELECT id,version,data FROM resource_licenses
     WHERE data->>'resource_version_id'=ANY($1) ORDER BY id FOR SHARE`, [config.resource_version_ids])).rows.map(row => ({ id: row.id, version: row.version, hash: hash(row.data) }));
   const style = (await db.query<{ id: string; data: DTO<'ComponentOption'>; preset_id: string }>(`SELECT c.id,c.data,p.id AS preset_id
@@ -107,12 +115,12 @@ export async function compilePresetConfig(db: Db, config: DTO<'PresetConfig'>): 
       JOIN preset_versions v ON v.id=x.preset_version_id JOIN presets p ON p.id=v.preset_id
       WHERE p.id=$1 AND p.current_version=v.version AND x.engine=$2 ORDER BY x.variant_id LIMIT 1`, [style[0]!.preset_id, base.private.source.engine])).rows[0];
     requireThat(look, 'STYLE_ENGINE_UNAVAILABLE', '所选风格暂不支持该制作规格', 422);
-    const source: VariantSource = { ...structuredClone(base.private.source),
+    const source: VariantSource = applyCommunityDirection({ ...structuredClone(base.private.source),
       creative_components: { ...structuredClone(look.private.source.creative_components), platform_style_id: style[0]!.preset_id },
       skill_bundle: structuredClone(look.private.source.skill_bundle),
       community_binding: { config_hash: hash(config), blueprint_version_id: base.id, blueprint_source_hash: hash(base.private.source),
         style_component_id: style[0]!.id, style_component_hash: hash(style[0]!.data), component_versions: config.component_versions,
-        resource_version_ids: config.resource_version_ids, component_bindings: componentBindings, resource_bindings: resourceBindings } };
+        resource_version_ids: config.resource_version_ids, component_bindings: componentBindings, resource_bindings: resourceBindings } },componentRows.map(r=>r.data));
     compiled.push({ blueprint_id: blueprint, source, source_hash: hash(source) });
   }
   return compiled;

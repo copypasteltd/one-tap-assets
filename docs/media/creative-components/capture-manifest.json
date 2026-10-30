@@ -1,0 +1,135 @@
+{
+  "captured_at": "2026-10-30T06:14:51.804Z",
+  "type": "ACTUAL_BROWSER_RECORDING_SHARED_MINI_CREATIVE_COMPONENTS",
+  "data_source": "SYNTHETIC_CREATOR_METADATA_AND_MODELS_WITH_ACTUAL_POSTGRESQL_PNG_MP4_SAMPLE_PROOFS",
+  "source_set_hash": "40492124847a766a93eb48d5feef79214217ff670d453221494ea2dc20bd0ba8",
+  "build_root": "runtime/delivery-builds/2026-10-30T06-12-33-466Z-ae76aed3/runtime/build",
+  "native_mini_device_verified": false,
+  "real_generation_verified": false,
+  "real_payment_verified": false,
+  "browser_tabs_closed": true,
+  "owned_preview_server_stopped": true,
+  "browser_errors": [],
+  "external_network_requests": [],
+  "checks": [
+    "FOUR_OPTIONAL_CREATIVE_GROUPS_IN_ACTUAL_SHARED_MINI_EDITOR",
+    "TWELVE_TRUSTED_OPTIONS_AVAILABLE_WITHOUT_EXTRA_RESOURCE_UPLOAD",
+    "RADIO_REPLACEMENT_AND_SECOND_TAP_RESTORES_INHERITANCE",
+    "SYNTHETIC_DRAFT_SAVE_AND_REOPEN_PRESERVES_ALL_FOUR_SELECTIONS",
+    "NO_HORIZONTAL_OVERFLOW_AT_320PX"
+  ],
+  "screenshots": [
+    {
+      "page": "01-creator-draft",
+      "path": "docs/media/creative-components/01-creator-draft.png"
+    },
+    {
+      "page": "02-narrative-and-rhythm",
+      "path": "docs/media/creative-components/02-narrative-and-rhythm.png"
+    },
+    {
+      "page": "03-saved-text-style",
+      "path": "docs/media/creative-components/03-saved-text-style.png"
+    }
+  ],
+  "recording": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 430,
+        "height": 932
+      }
+    ],
+    "format": {
+      "duration": "3.920000"
+    }
+  },
+  "files": [
+    {
+      "path": "docs/media/creative-components/01-creator-draft.png",
+      "bytes": 63848,
+      "sha256": "96206169f544a693ae2e56c8c7884ab3546eeaaebaa9ac7e47077542cfba9c8a"
+    },
+    {
+      "path": "docs/media/creative-components/02-narrative-and-rhythm.png",
+      "bytes": 94066,
+      "sha256": "d2199f42934f02b59646c389d3e3d2964521937ce95f61e5234c02de7f22d006"
+    },
+    {
+      "path": "docs/media/creative-components/03-saved-text-style.png",
+      "bytes": 95789,
+      "sha256": "f518dfd774570b5f238681c39637bdcef919378a60a8e91223062ea65322910a"
+    },
+    {
+      "path": "docs/media/creative-components/walkthrough.webm",
+      "bytes": 756441,
+      "sha256": "1f999bb645c40ce31848a980d69ce1f6d5771d476a988ba8ab210b0767e36bc1"
+    },
+    {
+      "path": "docs/media/creative-components/walkthrough.mp4",
+      "bytes": 274945,
+      "sha256": "50bea5cbb2bb7c1f30ce1a67682bc4da66c563e71400a8278755dfea4998781e"
+    },
+    {
+      "path": "docs/media/creative-components/walkthrough.gif",
+      "bytes": 612299,
+      "sha256": "2bf9cc2091db21e03e6038b9487c1d358f0ae677b96c64885f68f211501d287f"
+    },
+    {
+      "path": "docs/media/creative-components/photo-layout.png",
+      "bytes": 22062,
+      "sha256": "d28cba7dc41fd7e84e7118ab85a37fce924cdca3cad621fda139775a1d547500"
+    },
+    {
+      "path": "docs/media/creative-components/photo_layout.mp4",
+      "bytes": 44882,
+      "sha256": "6d9676910d9b372b88a1931f149b9b2d4175dd1d77d6a945682d92bf704be1d8"
+    },
+    {
+      "path": "docs/media/creative-components/per_shot_ai.mp4",
+      "bytes": 13098,
+      "sha256": "c918d52e8d0f55a93f283bc67d90aade91c21659088ae44a683f9cf176262fe8"
+    },
+    {
+      "path": "docs/media/creative-components/reference_film.mp4",
+      "bytes": 13163,
+      "sha256": "255b482dcf279bd3e69545b2f5191b6044cd41b040a80895b66d69b39569882b"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/record-creative-components.ts",
+      "sha256": "466a9cbd1a4687cbcd69ac5722e1b190d39428775d11ed0435137a1f314a4a7c"
+    },
+    {
+      "path": "src/shared/ui/community.tsx",
+      "sha256": "2ebe082861242defdbbbb4a30422db8436004750ff92950fa1e43e215ca7b673"
+    },
+    {
+      "path": "src/shared/domain/creative-components.ts",
+      "sha256": "460785665213a06067d377cf6e637b5f202a6003d52cb006e6a5cba633266b8f"
+    },
+    {
+      "path": "src/worker/compiler/community-direction.ts",
+      "sha256": "a65eae8eb333c8fd3f967742cba63e7e2f00b3fe6708a7b34e3019dae57278c4"
+    },
+    {
+      "path": "src/worker/compiler/plan.ts",
+      "sha256": "2f3f81a201da8320ad0af3b2de5f5690b67915ba604137ed2a5f274aff0b6b79"
+    },
+    {
+      "path": "src/worker/generation/silent-video.ts",
+      "sha256": "f8667992b000dbc7cee48d8fa4a21345a417e0aa5445d2f0b44317bd58766e63"
+    },
+    {
+      "path": "src/worker/media/community-captions.ts",
+      "sha256": "0d853661b24c5ffca9b386685247aefe94b59ce29bd3b4dd4022db0ce3c6a1a4"
+    },
+    {
+      "path": "src/preview/fixtures.ts",
+      "sha256": "4424728a2d0bb613a94ecdc25e68afe09cc877c94c7342747b0c4c9e05ab16e4"
+    }
+  ]
+}

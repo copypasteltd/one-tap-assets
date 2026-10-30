@@ -7,14 +7,15 @@ import { renderLayout } from './layout.js';
 import { nativeCommand, inspectVideo, type MediaInspection } from './native.js';
 import { requireThat } from '../../api/lib/errors.js';
 import type { ProductionFont } from './font.js';
+import type {CaptionStyle} from '../../shared/domain/creative-components.js';
 
-export async function renderPhotoVideo(cfg: Config, input: { directory: string; plan: CreativePlan; presetId: string; photos: Map<string, Buffer>; deadlineAt: string; signal?: AbortSignal; font?: ProductionFont }): Promise<{ bytes: Buffer; inspection: MediaInspection; path: string }> {
+export async function renderPhotoVideo(cfg: Config, input: { directory: string; plan: CreativePlan; presetId: string; photos: Map<string, Buffer>; deadlineAt: string; signal?: AbortSignal; font?: ProductionFont;captionStyle?:CaptionStyle }): Promise<{ bytes: Buffer; inspection: MediaInspection; path: string }> {
   const dir = inside(cfg.runtimeRoot, input.directory); await mkdir(dir, { recursive: true }); const plan = input.plan;
   for (const [index, shot] of plan.shots.entries()) {
     requireThat(shot.end_frame > shot.start_frame && shot.overlap_frames === 0, 'TIMELINE_INVALID', '照片短片时间轴无效', 422);
     const photo = input.photos.get(shot.asset_id); requireThat(photo, 'PHOTO_MISSING', '缺少本单商品照片', 422);
     const frame = await renderLayout(photo, { presetId: input.presetId, width: 1080, height: 1920, title: plan.title,
-      subtitle: shot.intent, sequence: index + 1, total: plan.shots.length, ...(input.font ? { font: input.font } : {}) });
+      subtitle: shot.intent, sequence: index + 1, total: plan.shots.length, ...(input.font ? { font: input.font } : {}),...(input.captionStyle?{captionStyle:input.captionStyle}:{}) });
     const still = join(dir, `shot-${index}.png`); const part = join(dir, `shot-${index}.mp4`); await writeFile(still, frame);
     const frames = shot.end_frame - shot.start_frame;
     const zoom = shot.camera === 'HOLD' ? '1' : 'min(1.035,1+on*0.00025)';

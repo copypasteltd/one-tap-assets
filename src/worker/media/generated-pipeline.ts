@@ -20,6 +20,7 @@ import {PhotoMediaPipeline,assertMediaAlive,inspectImage} from './photo-pipeline
 import {operationArtifacts,type ArtifactSpec,type MediaOperation,type MediaPhase,type MediaReceipt,type PrivateArtifact} from './artifacts.js';
 import {loadProductionFont} from './font.js';
 import {renderLayout} from './layout.js';
+import {communityCaptionStyle} from '../compiler/community-direction.js';
 import {nativeCommand,inspectVideo,type MediaInspection} from './native.js';
 import type {NativeOrderAudio} from '../audio/order-proof.js';
 import {frozenAiDisclosure} from '../compiler/disclosure.js';
@@ -95,7 +96,7 @@ export class GeneratedMediaPipeline extends PhotoMediaPipeline {
       const input=material.outputs.get(`image:${slot.slot_id}`)!;
       const layout=await renderLayout(input.bytes,{presetId:style,width:slot.width!,height:slot.height!,title:planned.title,
         subtitle:context.contract.creative.copy,sequence:index+1,total:context.contract.creative.image_slots.length,font,aiLabel:true,
-        disclosure:frozenAiDisclosure(context.contract)!});
+        disclosure:frozenAiDisclosure(context.contract)!,...(communityCaptionStyle(context.contract.source)?{captionStyle:communityCaptionStyle(context.contract.source)!}:{})});
       const bytes=await markDisclosureImage(layout,await disclosureRaster(this.cfg,frozenAiDisclosure(context.contract)!,slot.width!,slot.height!));
       const spec=this.spec(context,'PRODUCTION','image',await inspectImage(bytes),[planned.asset_id]);
       spec.generation_sources=sourcesForSlot(material,'image',slot.slot_id);spec.reference_approval_hash=hash(material.approval);

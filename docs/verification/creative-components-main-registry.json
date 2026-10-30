@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-10-30T06:15:23.931Z",
+  "groups": [
+    {
+      "type": "CAMERA",
+      "count": 3
+    },
+    {
+      "type": "CAPTION",
+      "count": 3
+    },
+    {
+      "type": "ENGINE",
+      "count": 3
+    },
+    {
+      "type": "NARRATIVE",
+      "count": 3
+    },
+    {
+      "type": "RHYTHM",
+      "count": 3
+    },
+    {
+      "type": "STYLE",
+      "count": 10
+    }
+  ],
+  "total": 25,
+  "migrations": 31,
+  "sale_enabled_presets": 0,
+  "payments_enabled": false,
+  "generation_enabled": false,
+  "codex_enabled": false,
+  "publishing_enabled": false
+}

@@ -53,7 +53,7 @@ export class ContentPlanningService {
       completed = await this.executor.execute({ lease, role: 'CONTENT', variantId: skill.payload.variant_id,
         bundleHash: row.private.bundle_hash, admission, limits: row.private.inference_limits,
         allowedTools: ['analyze_photos', 'validate_content_plan', 'persist_stage_result'], outputSchema: creativePlanSchema,
-        input: { task: '基于已核验商品证据和风格 Skill，编排完整素材包。先用 analyze_photos 读取真实视觉档案，再验证并持久化计划。不得添加未知的材质、容量、价格和功效。',
+        input: { task: '基于已核验商品证据和风格 Skill，编排完整素材包。先用 analyze_photos 读取真实视觉档案，再验证并持久化计划。不得添加未知的材质、容量、价格和功效。若 source.creative_components.community_direction 存在，必须保留 suggested_plan 的镜头起止帧、所选运镜和叙事标签；只在真实照片证据范围内选图与完善配套内容。',
           profile: context.profile, source: context.source, suggested_plan: row.private.creative, admitted_native_voices: voices } }, signal);
     }
     const creative = await validatePlanningResult(this.pool, lease.tenant_id, lease.scope_id, completed.result);

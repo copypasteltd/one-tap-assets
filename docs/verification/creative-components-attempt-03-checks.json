@@ -1,0 +1,160 @@
+{
+  "numTotalTestSuites": 1,
+  "numPassedTestSuites": 0,
+  "numFailedTestSuites": 1,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 12,
+  "numPassedTests": 0,
+  "numFailedTests": 0,
+  "numPendingTests": 12,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793339750126,
+  "success": false,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "creative components persist all four categories through the authenticated author API and freeze distinct executable sources",
+          "status": "skipped",
+          "title": "creative components persist all four categories through the authenticated author API and freeze distinct executable sources",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "creative components reject duplicate categories and engine conflicts before creating an author draft",
+          "status": "skipped",
+          "title": "creative components reject duplicate categories and engine conflicts before creating an author draft",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "creative components reject altered registered text or version instead of silently compiling untrusted instructions",
+          "status": "skipped",
+          "title": "creative components reject altered registered text or version instead of silently compiling untrusted instructions",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "persists dotted and colon intent keys at both length boundaries and rejects invalid keys without creating drafts",
+          "status": "skipped",
+          "title": "persists dotted and colon intent keys at both length boundaries and rejects invalid keys without creating drafts",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "authenticates every creator recovery query and scopes nested samples and private records to their owner",
+          "status": "skipped",
+          "title": "authenticates every creator recovery query and scopes nested samples and private records to their owner",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects unregistered components, executable text, duplicate/ambiguous styles and incompatible production choices",
+          "status": "skipped",
+          "title": "rejects unregistered components, executable text, duplicate/ambiguous styles and incompatible production choices",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps optimistic draft edits and original fork attribution across replays and concurrent modifications",
+          "status": "skipped",
+          "title": "keeps optimistic draft edits and original fork attribution across replays and concurrent modifications",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "paginates favorites with account-bound cursors, current sale status and removal of withdrawn entries",
+          "status": "skipped",
+          "title": "paginates favorites with account-bound cursors, current sale status and removal of withdrawn entries",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "recovers actual sample/publication rows through scoped pages without exposing private payloads or certifying generation",
+          "status": "skipped",
+          "title": "recovers actual sample/publication rows through scoped pages without exposing private payloads or certifying generation",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "shows authors only governance metadata for their own presets and keeps reporter evidence and appeals private",
+          "status": "skipped",
+          "title": "shows authors only governance metadata for their own presets and keeps reporter evidence and appeals private",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "recovers an evidence batch after a lost completion response without duplicate uploads or rights submissions",
+          "status": "skipped",
+          "title": "recovers an evidence batch after a lost completion response without duplicate uploads or rights submissions",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "stops an evidence upload at an account switch without binding the old owner media to the new account",
+          "status": "skipped",
+          "title": "stops an evidence upload at an account switch without binding the old owner media to the new account",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793339750126,
+      "endTime": 1793339750126,
+      "status": "failed",
+      "message": "Hook timed out in 60000ms.\nIf this is a long-running hook, pass a timeout value as the last argument or configure it globally with \"hookTimeout\".",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/community.test.ts"
+    }
+  ]
+}

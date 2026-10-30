@@ -1,0 +1,473 @@
+{
+  "checked_at": "2026-10-30T06:16:16.677750+00:00",
+  "attempts": [
+    {
+      "base": "runtime/test-results/creative-components-2026-10-30T05-52-19-690Z",
+      "source_set_hash": "e222a9964533e000808a0f353e35eae1a53ac0174a7114062f53f6906704c6a8",
+      "source_unchanged": false,
+      "commands": [
+        {
+          "task": "typecheck",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+            "--noEmit"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 2,
+          "signal": null,
+          "timeout_ms": 120000,
+          "elapsed_ms": 69450,
+          "log_path": "runtime/test-results/creative-components-2026-10-30T05-52-19-690Z/type.log",
+          "log_sha256": "b9982e902094fc2a0e5fabf0706bbeb978288d5127cd91e2f097f68274e10c19"
+        }
+      ],
+      "source_snapshot": "docs/verification/creative-components-attempt-01-source.json"
+    },
+    {
+      "base": "runtime/test-results/creative-components-2026-10-30T05-54-22-620Z",
+      "source_set_hash": "30192083a7899ff959f0175687b99502723f98451af9b8a3d8c2ac3bf3ac53ed",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/creative-components.test.ts --outputFile.json=runtime/test-results/creative-components-2026-10-30T05-54-22-620Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "tests/unit/creative-components.test.ts",
+            "--outputFile.json=runtime/test-results/creative-components-2026-10-30T05-54-22-620Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 54901,
+          "log_path": "runtime/test-results/creative-components-2026-10-30T05-54-22-620Z/api.log",
+          "log_sha256": "e26db52836b0a44e07bf1ebfff5f315ed5c197a52bd2a4647df77c8c81aff845"
+        }
+      ],
+      "source_snapshot": "docs/verification/creative-components-attempt-02-source.json",
+      "check_report": "docs/verification/creative-components-attempt-02-checks.json",
+      "passed": 5,
+      "failed": 0,
+      "not_selected": 0
+    },
+    {
+      "base": "runtime/test-results/creative-components-2026-10-30T05-55-48-051Z",
+      "source_set_hash": "30192083a7899ff959f0175687b99502723f98451af9b8a3d8c2ac3bf3ac53ed",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/community.test.ts -t creative components --outputFile.json=runtime/test-results/creative-components-2026-10-30T05-55-48-051Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/community.test.ts",
+            "-t",
+            "creative components",
+            "--outputFile.json=runtime/test-results/creative-components-2026-10-30T05-55-48-051Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 173604,
+          "log_path": "runtime/test-results/creative-components-2026-10-30T05-55-48-051Z/api.log",
+          "log_sha256": "5128816a24be77c6fbbcf56048f3d2c705a50b666b047e5145cdd0831a5bafe4"
+        }
+      ],
+      "source_snapshot": "docs/verification/creative-components-attempt-03-source.json",
+      "check_report": "docs/verification/creative-components-attempt-03-checks.json",
+      "passed": 0,
+      "failed": 0,
+      "not_selected": 12
+    },
+    {
+      "base": "runtime/test-results/creative-components-2026-10-30T05-56-55-778Z",
+      "source_set_hash": "30192083a7899ff959f0175687b99502723f98451af9b8a3d8c2ac3bf3ac53ed",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts -t creative components --outputFile.json=runtime/test-results/creative-components-2026-10-30T05-56-55-778Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/sample-production.test.ts",
+            "-t",
+            "creative components",
+            "--outputFile.json=runtime/test-results/creative-components-2026-10-30T05-56-55-778Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 62893,
+          "log_path": "runtime/test-results/creative-components-2026-10-30T05-56-55-778Z/api.log",
+          "log_sha256": "f1109747ad68ef3b7811139830784e014258add74fb0a588bb9ca5a785e6e82f"
+        }
+      ],
+      "source_snapshot": "docs/verification/creative-components-attempt-04-source.json",
+      "check_report": "docs/verification/creative-components-attempt-04-checks.json",
+      "passed": 0,
+      "failed": 0,
+      "not_selected": 20
+    },
+    {
+      "base": "runtime/test-results/creative-components-2026-10-30T05-57-04-599Z",
+      "source_set_hash": "30192083a7899ff959f0175687b99502723f98451af9b8a3d8c2ac3bf3ac53ed",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/creative-components.test.ts --outputFile.json=runtime/test-results/creative-components-2026-10-30T05-57-04-599Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "tests/unit/creative-components.test.ts",
+            "--outputFile.json=runtime/test-results/creative-components-2026-10-30T05-57-04-599Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 7276,
+          "log_path": "runtime/test-results/creative-components-2026-10-30T05-57-04-599Z/api.log",
+          "log_sha256": "3ab8522a94687ac9a098d671f3052db9073acd7dc708f15d721889891a458a6c"
+        }
+      ],
+      "source_snapshot": "docs/verification/creative-components-attempt-05-source.json",
+      "check_report": "docs/verification/creative-components-attempt-05-checks.json",
+      "passed": 5,
+      "failed": 0,
+      "not_selected": 0
+    },
+    {
+      "base": "runtime/test-results/creative-components-2026-10-30T05-59-28-959Z",
+      "source_set_hash": "30192083a7899ff959f0175687b99502723f98451af9b8a3d8c2ac3bf3ac53ed",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/community.test.ts tests/integration/sample-production.test.ts -t creative components --outputFile.json=runtime/test-results/creative-components-2026-10-30T05-59-28-959Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/community.test.ts",
+            "tests/integration/sample-production.test.ts",
+            "-t",
+            "creative components",
+            "--outputFile.json=runtime/test-results/creative-components-2026-10-30T05-59-28-959Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 84965,
+          "log_path": "runtime/test-results/creative-components-2026-10-30T05-59-28-959Z/api.log",
+          "log_sha256": "ac313f70cf5bb4b1424df682ed19912ac9e3133d7f5544acb938eabf3894a875"
+        }
+      ],
+      "source_snapshot": "docs/verification/creative-components-attempt-06-source.json",
+      "check_report": "docs/verification/creative-components-attempt-06-checks.json",
+      "passed": 1,
+      "failed": 1,
+      "not_selected": 17
+    },
+    {
+      "base": "runtime/test-results/creative-components-2026-10-30T06-02-46-372Z",
+      "source_set_hash": "9fb05b566021d5ef440b3b869a4940448b26fc3c297bd4470317507a5e6a4749",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/community.test.ts tests/integration/sample-production.test.ts -t creative components --outputFile.json=runtime/test-results/creative-components-2026-10-30T06-02-46-372Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/community.test.ts",
+            "tests/integration/sample-production.test.ts",
+            "-t",
+            "creative components",
+            "--outputFile.json=runtime/test-results/creative-components-2026-10-30T06-02-46-372Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 45593,
+          "log_path": "runtime/test-results/creative-components-2026-10-30T06-02-46-372Z/api.log",
+          "log_sha256": "0998d8898d4c0bf2b30e94592addfaa88836480f29e22f23c07a0d19d4439b61"
+        }
+      ],
+      "source_snapshot": "docs/verification/creative-components-attempt-07-source.json",
+      "check_report": "docs/verification/creative-components-attempt-07-checks.json",
+      "passed": 3,
+      "failed": 0,
+      "not_selected": 27
+    },
+    {
+      "base": "runtime/test-results/creative-components-2026-10-30T06-03-37-193Z",
+      "source_set_hash": "9fb05b566021d5ef440b3b869a4940448b26fc3c297bd4470317507a5e6a4749",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/creative-components.test.ts --outputFile.json=runtime/test-results/creative-components-2026-10-30T06-03-37-193Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "tests/unit/creative-components.test.ts",
+            "--outputFile.json=runtime/test-results/creative-components-2026-10-30T06-03-37-193Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 3639,
+          "log_path": "runtime/test-results/creative-components-2026-10-30T06-03-37-193Z/api.log",
+          "log_sha256": "88243c259f8bb4a3307ab94bb402ebf58be17b377cd4f4a9a5da3df2b887134b"
+        }
+      ],
+      "source_snapshot": "docs/verification/creative-components-attempt-08-source.json",
+      "check_report": "docs/verification/creative-components-attempt-08-checks.json",
+      "passed": 5,
+      "failed": 0,
+      "not_selected": 0
+    },
+    {
+      "base": "runtime/test-results/creative-components-2026-10-30T06-04-50-501Z",
+      "source_set_hash": "9fb05b566021d5ef440b3b869a4940448b26fc3c297bd4470317507a5e6a4749",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts -t creative components --outputFile.json=runtime/test-results/creative-components-2026-10-30T06-04-50-501Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/sample-production.test.ts",
+            "-t",
+            "creative components",
+            "--outputFile.json=runtime/test-results/creative-components-2026-10-30T06-04-50-501Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 79205,
+          "log_path": "runtime/test-results/creative-components-2026-10-30T06-04-50-501Z/api.log",
+          "log_sha256": "0514aed3e91e0431790fdb824cad46af70b750ee5a97df80c5f4f4ced9814b47"
+        }
+      ],
+      "source_snapshot": "docs/verification/creative-components-attempt-09-source.json",
+      "check_report": "docs/verification/creative-components-attempt-09-checks.json",
+      "passed": 1,
+      "failed": 1,
+      "not_selected": 17
+    },
+    {
+      "base": "runtime/test-results/creative-components-2026-10-30T06-07-35-523Z",
+      "source_set_hash": "8731a12ba418d15798872b98674af65a98c36a6637209f21591a347104d3b23f",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts -t creative components --bail=0 --outputFile.json=runtime/test-results/creative-components-2026-10-30T06-07-35-523Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/sample-production.test.ts",
+            "-t",
+            "creative components",
+            "--bail=0",
+            "--outputFile.json=runtime/test-results/creative-components-2026-10-30T06-07-35-523Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 89313,
+          "log_path": "runtime/test-results/creative-components-2026-10-30T06-07-35-523Z/api.log",
+          "log_sha256": "1c925ae6351c718bda2d6c273fbbf8a459f4d7a03171a6f924a777f398ecf01f"
+        }
+      ],
+      "source_snapshot": "docs/verification/creative-components-attempt-10-source.json",
+      "check_report": "docs/verification/creative-components-attempt-10-checks.json",
+      "passed": 2,
+      "failed": 1,
+      "not_selected": 17
+    },
+    {
+      "base": "runtime/test-results/creative-components-2026-10-30T06-11-30-084Z",
+      "source_set_hash": "556fa0888cb3e24b44d4e02ebcde6b903e2e4b31c5c211e4a99b536b731ec410",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts -t ^creative components complete actual PER_SHOT_AI --outputFile.json=runtime/test-results/creative-components-2026-10-30T06-11-30-084Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/sample-production.test.ts",
+            "-t",
+            "^creative components complete actual PER_SHOT_AI",
+            "--outputFile.json=runtime/test-results/creative-components-2026-10-30T06-11-30-084Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 21476,
+          "log_path": "runtime/test-results/creative-components-2026-10-30T06-11-30-084Z/api.log",
+          "log_sha256": "91c7f321678710f521135ca8ae018014bc8ed81f253d008a6814619a57770dca"
+        }
+      ],
+      "source_snapshot": "docs/verification/creative-components-attempt-11-source.json",
+      "check_report": "docs/verification/creative-components-attempt-11-checks.json",
+      "passed": 0,
+      "failed": 1,
+      "not_selected": 19
+    },
+    {
+      "base": "runtime/test-results/creative-components-2026-10-30T06-12-23-425Z",
+      "source_set_hash": "40492124847a766a93eb48d5feef79214217ff670d453221494ea2dc20bd0ba8",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts -t creative components --bail=0 --outputFile.json=runtime/test-results/creative-components-2026-10-30T06-12-23-425Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/sample-production.test.ts",
+            "-t",
+            "creative components",
+            "--bail=0",
+            "--outputFile.json=runtime/test-results/creative-components-2026-10-30T06-12-23-425Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 105272,
+          "log_path": "runtime/test-results/creative-components-2026-10-30T06-12-23-425Z/api.log",
+          "log_sha256": "1b3ef7c804de022fae25797eea3d17e63bc7013d658db878e1a41b4c44d6d600"
+        }
+      ],
+      "source_snapshot": "docs/verification/creative-components-attempt-12-source.json",
+      "check_report": "docs/verification/creative-components-attempt-12-checks.json",
+      "passed": 3,
+      "failed": 0,
+      "not_selected": 17
+    },
+    {
+      "base": "runtime/test-results/creative-components-2026-10-30T06-13-19-109Z",
+      "source_set_hash": "40492124847a766a93eb48d5feef79214217ff670d453221494ea2dc20bd0ba8",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/community.test.ts -t creative components --outputFile.json=runtime/test-results/creative-components-2026-10-30T06-13-19-109Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/community.test.ts",
+            "-t",
+            "creative components",
+            "--outputFile.json=runtime/test-results/creative-components-2026-10-30T06-13-19-109Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 4883,
+          "log_path": "runtime/test-results/creative-components-2026-10-30T06-13-19-109Z/api.log",
+          "log_sha256": "cc5c8ce707859aaaa1c6e2010eae6eba1676841e4b7bd5dca0a4cdbddc3778bc"
+        }
+      ],
+      "source_snapshot": "docs/verification/creative-components-attempt-13-source.json",
+      "check_report": "docs/verification/creative-components-attempt-13-checks.json",
+      "passed": 3,
+      "failed": 0,
+      "not_selected": 9
+    },
+    {
+      "base": "runtime/test-results/creative-components-2026-10-30T06-13-25-371Z",
+      "source_set_hash": "40492124847a766a93eb48d5feef79214217ff670d453221494ea2dc20bd0ba8",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/creative-components.test.ts --outputFile.json=runtime/test-results/creative-components-2026-10-30T06-13-25-371Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "tests/unit/creative-components.test.ts",
+            "--outputFile.json=runtime/test-results/creative-components-2026-10-30T06-13-25-371Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 2738,
+          "log_path": "runtime/test-results/creative-components-2026-10-30T06-13-25-371Z/api.log",
+          "log_sha256": "5a6b997ad2700a186044bc0c36df31f59ada7de863b254f01c8eea5c57573125"
+        }
+      ],
+      "source_snapshot": "docs/verification/creative-components-attempt-14-source.json",
+      "check_report": "docs/verification/creative-components-attempt-14-checks.json",
+      "passed": 5,
+      "failed": 0,
+      "not_selected": 0
+    }
+  ],
+  "build_attempts": [
+    "docs/verification/creative-components-build-01.json",
+    "docs/verification/creative-components-build-02.json",
+    "docs/verification/creative-components-build-03.json",
+    "docs/verification/creative-components-build-04.json"
+  ],
+  "full_suite_executed": false,
+  "failure_notes": [
+    "Early preview optional captionStyle had a TypeScript exact-optional mismatch; fixed without weakening the type check.",
+    "Initial concurrent native database setup hit the shared migration advisory lock/hook timeout; subsequent attempts ran serially.",
+    "A short per-shot model fixture correctly rejected the 0.6/1.4-second quick-open schedule before queuing or spending. The final check explicitly proves this refusal, then uses a compatible even schedule; production duration/budget rules are unchanged.",
+    "The test fixture also needed a fresh heartbeat before a second request and a one-second per-shot supplier clip rather than a two-second whole-film clip; production heartbeat and media validation stayed intact.",
+    "One combined native test worker exited with Windows C0000374 heap corruption after API checks. Its original failed report is retained; successful checks use separate bounded processes. Long-run native stability remains unverified."
+  ]
+}

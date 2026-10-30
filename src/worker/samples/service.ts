@@ -53,7 +53,7 @@ export class SampleProductionService {
       admission: sampleAdmission(this.cfg, context), limits: context.input.limits, maxToolCalls: 32, maxScopeToolCalls: 160 };
     let request: RoleRequest;
     if (role === 'CONTENT') request = { ...common, allowedTools: ['analyze_photos','validate_content_plan','persist_stage_result'], outputSchema: creativePlanSchema,
-      input: { phase: 'CONTENT', task: '根据作者本人商品证据和已选风格规划完整样例。调用analyze_photos，校验完整计划后持久化，未知属性不得编造。',
+      input: { phase: 'CONTENT', task: '根据作者本人商品证据和已选风格规划完整样例。调用analyze_photos，校验完整计划后持久化，未知属性不得编造。若 source.creative_components.community_direction 存在，必须保留 suggested_plan 的镜头起止帧、所选运镜和叙事标签；只在真实照片证据范围内选图与完善配套内容。',
         profile: context.input.profile, source: context.input.source, suggested_plan: basePlan(context.input.profile, context.input.source) } };
     else if (role === 'PRODUCTION' || role === 'POST') request = { ...common, allowedTools: [role === 'PRODUCTION' ? context.input.generation?'render_generated_pack':'render_photo_pack' : 'execute_post_plan','inspect_actual_media','persist_stage_result'], outputSchema: sampleMediaResultSchema,
       input: { phase: role, snapshot_hash: context.inputHash, creative_plan: samplePlan(context), source: context.input.source,

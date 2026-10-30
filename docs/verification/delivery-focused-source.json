@@ -1,18 +1,14 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T05:28:13.965551+00:00",
-  "strategy": "USER_REQUESTED_FAST_REVIEW_CONSOLE_CLOSURE",
-  "source_set_hash": "9dc6f240e2310ecc81bb09b458c9dc07376c3bdb4b92023985ba15d3f66be24a",
-  "source_files": 439,
+  "checked_at": "2026-10-30T06:16:16.677750+00:00",
+  "strategy": "USER_REQUESTED_FAST_CREATIVE_COMPONENTS_CLOSURE",
+  "source_set_hash": "40492124847a766a93eb48d5feef79214217ff670d453221494ea2dc20bd0ba8",
+  "source_files": 444,
   "runtime_contract_files": 42,
   "resource_files": 4,
-  "source_snapshot": "docs/verification/review-console-tested-source.json",
+  "source_snapshot": "docs/verification/creative-components-tested-source.json",
+  "functional_scope": "docs/实施/社区受控叙事节奏运镜与文字样式-v1.0.md",
   "source_unchanged_during_tests": true,
-  "functional_scope": "docs/实施/社区审核工作台与原申请证据核对-v1.0.md",
-  "runtime_contract_documentation_updated_after_checks": [
-    "assets/development/v1.1/contracts/endpoint-catalog.md"
-  ],
-  "runtime_schema_files_unchanged_since_checks": true,
   "build_report": "docs/delivery/current.json",
   "build_checks": [
     {
@@ -27,8 +23,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 16654,
-      "log_path": "runtime/delivery-builds/2026-10-30T05-25-59-640Z-e9f10a3d/typecheck.log",
+      "elapsed_ms": 15565,
+      "log_path": "runtime/delivery-builds/2026-10-30T06-12-33-466Z-ae76aed3/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -44,29 +40,29 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 808,
-      "log_path": "runtime/delivery-builds/2026-10-30T05-25-59-640Z-e9f10a3d/server.log",
+      "elapsed_ms": 551,
+      "log_path": "runtime/delivery-builds/2026-10-30T06-12-33-466Z-ae76aed3/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T05-25-59-640Z-e9f10a3d\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T06-12-33-466Z-ae76aed3\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T05-25-59-640Z-e9f10a3d\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T06-12-33-466Z-ae76aed3\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 2151,
-      "log_path": "runtime/delivery-builds/2026-10-30T05-25-59-640Z-e9f10a3d/preview.log",
-      "log_sha256": "f526db6ca0c1eb14edd5e47d2520ae10782d410d98a96ea30101823628445988"
+      "elapsed_ms": 792,
+      "log_path": "runtime/delivery-builds/2026-10-30T06-12-33-466Z-ae76aed3/preview.log",
+      "log_sha256": "a81e39989adb6a6010213907e8bf431c600e98bb8bd4b28433b11d0847266f65"
     }
   ],
   "components": [
@@ -89,80 +85,110 @@
   ],
   "unit_checks": {
     "status": "PASS",
-    "passed": 6,
-    "report": "docs/verification/review-console-unit.json",
+    "passed": 5,
+    "not_selected": 0,
+    "report": "docs/verification/creative-components-unit.json",
     "command": {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/review-desk-client.test.ts --outputFile.json=runtime/test-results/review-console-2026-10-30T05-23-06-316Z/api.json",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/creative-components.test.ts --outputFile.json=runtime/test-results/creative-components-2026-10-30T06-13-25-371Z/api.json",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
         "run",
-        "tests/unit/review-desk-client.test.ts",
-        "--outputFile.json=runtime/test-results/review-console-2026-10-30T05-23-06-316Z/api.json"
+        "tests/unit/creative-components.test.ts",
+        "--outputFile.json=runtime/test-results/creative-components-2026-10-30T06-13-25-371Z/api.json"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 300000,
-      "elapsed_ms": 1175,
-      "log_path": "runtime/test-results/review-console-2026-10-30T05-23-06-316Z/api.log",
-      "log_sha256": "fd5903bb4208b8d04665c816195acb41e3907979434181932e26b3e95d770f97"
+      "elapsed_ms": 2738,
+      "log_path": "runtime/test-results/creative-components-2026-10-30T06-13-25-371Z/api.log",
+      "log_sha256": "5a6b997ad2700a186044bc0c36df31f59ada7de863b254f01c8eea5c57573125"
     }
   },
   "api_checks": {
     "status": "PASS",
     "passed": 3,
-    "not_selected": 24,
-    "report": "docs/verification/review-console-api.json",
+    "not_selected": 9,
+    "report": "docs/verification/creative-components-api.json",
     "command": {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/publication-workflow.test.ts -t review console --outputFile.json=runtime/test-results/review-console-2026-10-30T05-23-19-475Z/api.json",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/community.test.ts -t creative components --outputFile.json=runtime/test-results/creative-components-2026-10-30T06-13-19-109Z/api.json",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
         "run",
         "--config",
         "vitest.integration.config.ts",
-        "tests/integration/publication-workflow.test.ts",
+        "tests/integration/community.test.ts",
         "-t",
-        "review console",
-        "--outputFile.json=runtime/test-results/review-console-2026-10-30T05-23-19-475Z/api.json"
+        "creative components",
+        "--outputFile.json=runtime/test-results/creative-components-2026-10-30T06-13-19-109Z/api.json"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 300000,
-      "elapsed_ms": 10203,
-      "log_path": "runtime/test-results/review-console-2026-10-30T05-23-19-475Z/api.log",
-      "log_sha256": "bccd30167eec5709a8473e87a6565df2bc1e30fd173d9c3e41a34d117a8dc727"
+      "elapsed_ms": 4883,
+      "log_path": "runtime/test-results/creative-components-2026-10-30T06-13-19-109Z/api.log",
+      "log_sha256": "cc5c8ce707859aaaa1c6e2010eae6eba1676841e4b7bd5dca0a4cdbddc3778bc"
+    }
+  },
+  "sample_checks": {
+    "status": "PASS",
+    "passed": 3,
+    "not_selected": 17,
+    "report": "docs/verification/creative-components-sample.json",
+    "command": {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts -t creative components --bail=0 --outputFile.json=runtime/test-results/creative-components-2026-10-30T06-12-23-425Z/api.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.integration.config.ts",
+        "tests/integration/sample-production.test.ts",
+        "-t",
+        "creative components",
+        "--bail=0",
+        "--outputFile.json=runtime/test-results/creative-components-2026-10-30T06-12-23-425Z/api.json"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 300000,
+      "elapsed_ms": 105272,
+      "log_path": "runtime/test-results/creative-components-2026-10-30T06-12-23-425Z/api.log",
+      "log_sha256": "1b3ef7c804de022fae25797eea3d17e63bc7013d658db878e1a41b4c44d6d600"
     }
   },
   "browser_checks": {
     "status": "PASS",
-    "passed": 7,
-    "capture": "docs/media/review-desk/capture-manifest.json",
+    "passed": 5,
+    "capture": "docs/media/creative-components/capture-manifest.json",
     "runner": {
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 180,
-      "elapsed_seconds": 16.723,
-      "log_path": "runtime/delivery/review-desk-recording.log",
-      "log_sha256": "78cc07160ff6c8a1e9776d68a54b1e5475a4cf077fe1697cc9216833a4af0b59"
+      "elapsed_seconds": 13.338,
+      "log_path": "runtime/delivery/creative-components-recording-1793340882621299000.log",
+      "log_sha256": "45b51fb2551a7395122113adaf5236a6dc50f101e637c90a3847dc84880e11d3"
     },
-    "actual_native_http_pg_upload_png_mp4_and_public_copy": true,
-    "synthetic_author_rights_license_ready_qc_profile_and_operator_identity": true
+    "shared_mini_editor": true,
+    "synthetic_author_metadata": true
   },
   "local_checks": {
     "doctor": {
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 2.337,
-      "log_path": "runtime/delivery/doctor-focused.log",
-      "log_sha256": "9b7fd5520cf969c72decf9ccfcb857bcbbb318249cf426a10bd16487d21016ed",
+      "elapsed_seconds": 2.443,
+      "log_path": "runtime/delivery/creative-components-doctor-1793339944966399800.log",
+      "log_sha256": "ce90e2085d71a80f9a6b9e3aa0d0d777829a7c9d85c427dd4493636fcc896c49",
       "report": {
-        "checked_at": "2026-10-30T05:27:46.749Z",
+        "checked_at": "2026-10-30T05:59:07.365Z",
         "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
         "rows": [
           {
@@ -254,9 +280,9 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 8.428,
-      "log_path": "runtime/delivery/backend-focused.log",
-      "log_sha256": "ba3423e0d1571bd26c5596a2babaa5af758665cefb502beafcb2597d047bedb7",
+      "elapsed_seconds": 3.555,
+      "log_path": "runtime/delivery/creative-components-backend-1793340845744928100.log",
+      "log_sha256": "7275ec6a25abb8176bd5ee58ac653871223bf13ba1716d63a4b9c9050d93941e",
       "local_stack_ready": true,
       "preview_http_ready": false
     },
@@ -264,8 +290,8 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 2.117,
-      "log_path": "runtime/delivery/preview-focused.log",
+      "elapsed_seconds": 1.046,
+      "log_path": "runtime/delivery/creative-components-preview-1793340845737252700.log",
       "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
       "local_stack_ready": false,
       "preview_http_ready": true
@@ -275,8 +301,24 @@
   "no_new_migration": true,
   "business_operations": 77,
   "management_operations": 35,
-  "attempts_report": "docs/verification/review-console-attempts.json",
-  "prior_delivery": "docs/verification/delivery-focused-source-5f12cd7.json",
+  "trusted_components": 25,
+  "new_creative_components": 12,
+  "main_registry": "docs/verification/creative-components-main-registry.json",
+  "supported_engines": [
+    "PHOTO_LAYOUT",
+    "PER_SHOT_AI",
+    "REFERENCE_FILM"
+  ],
+  "actual_native_png_mp4_sample_dag_and_release": true,
+  "sample_role_runs": [
+    5,
+    6,
+    6
+  ],
+  "synthetic_models_profiles_rights_metering_and_os_identities": true,
+  "mcp_bridge_matches_candidate_bytes": true,
+  "attempts_report": "docs/verification/creative-components-attempts.json",
+  "prior_delivery": "docs/verification/delivery-focused-source-89d135a.json",
   "historical_evidence_unchanged": [
     {
       "path": "docs/verification/album-save-api.json",
@@ -441,6 +483,10 @@
     {
       "path": "docs/verification/delivery-focused-source-42dc446.json",
       "sha256": "6e939ddadf5e586b7b52aa2b7e3e78316a1615c05338494b76ca07ee46652157"
+    },
+    {
+      "path": "docs/verification/delivery-focused-source-5f12cd7.json",
+      "sha256": "298e3aeef4cb0a580d7c10ef083796e12ab4e2cd79e67c92ee7a0e155324bba8"
     },
     {
       "path": "docs/verification/delivery-focused-source-6b92d82.json",
@@ -935,6 +981,10 @@
       "sha256": "4009e3f5ec6405610f3b6a5da6b64969ba0418158e6521947455c9f6899dc121"
     },
     {
+      "path": "docs/verification/publication-5f12cd7.json",
+      "sha256": "4a21947026e219e3abb5b672c7d5ffffc9a87cdfc0a05bffda219211fc3ecc2d"
+    },
+    {
       "path": "docs/verification/publication-660400a.json",
       "sha256": "d2e5827be4dfbc5ee438719e4c7e36a0b5d031ef51591eef84c30a46ce89a832"
     },
@@ -1023,6 +1073,10 @@
       "sha256": "75d38ce7eb3e8650939c42ebb330e5e58dd4ec4de116fec64c153145a1d94e01"
     },
     {
+      "path": "docs/verification/repository-audit-5f12cd7.json",
+      "sha256": "5e332943c8354ca1eb3cc76fc265a7389d51d1ae5648ccfbff3ffa6c139209d0"
+    },
+    {
       "path": "docs/verification/repository-audit-660400a.json",
       "sha256": "2593526ea07bee627688a0bd1fdad34a0715cc4ca5e7d99828618c0c9e426317"
     },
@@ -1061,6 +1115,138 @@
     {
       "path": "docs/verification/repository-audit-ea82904.json",
       "sha256": "5c914f924b2e955c829d7dffd967b9cc33ca520e9bac8a85c3ea1bfc9e210910"
+    },
+    {
+      "path": "docs/verification/review-console-api.json",
+      "sha256": "f87787d47d6cd4755b97edc29d5f52a6543c5883393543d852382ee62eb0dac5"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-01-source.json",
+      "sha256": "23afe918ac31e2b98e14980097af3ac84a1085d4cf15cc2600519bc535602d86"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-02-checks.json",
+      "sha256": "4e6e95e4894ea709e3a998ec711a1b0dd79aba9b08e47f0b2db0c1864059712c"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-02-source.json",
+      "sha256": "23afe918ac31e2b98e14980097af3ac84a1085d4cf15cc2600519bc535602d86"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-03-checks.json",
+      "sha256": "4bd2bb82b2add0cfeb064c6816d7d234bd703ca776eee32d9a945105d0253f7f"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-03-source.json",
+      "sha256": "42263f040e3e1a29416159a4cf96bdeca399162c71af3094384d3e8b0bf555ed"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-04-checks.json",
+      "sha256": "cf76c88f2b0e835dc57b045e6ee2ff63ce32a6d3f811ad9fcfda5e68f32b463a"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-04-source.json",
+      "sha256": "e27199525149019e7035febbb76b8d0f3bbf07fa661b26a095e706aabfcddca4"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-05-checks.json",
+      "sha256": "c22b31b674d2d8b57b20771ec998fe3dea1ffd94a94aa068579a1b0cd7481d4a"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-05-source.json",
+      "sha256": "994a1f37d1b71ff4bd3677f10a5162f85bf0ea9fa4e363f185bf8f91c6281e45"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-06-checks.json",
+      "sha256": "6c4c0142e2099aadc801309328f6aba075427de9965523b143f10ef9b7df4835"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-06-source.json",
+      "sha256": "994a1f37d1b71ff4bd3677f10a5162f85bf0ea9fa4e363f185bf8f91c6281e45"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-07-checks.json",
+      "sha256": "eeab8385abe0910c9087d7d25df731eaca207c47abaffe39dc9903c3b447073d"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-07-source.json",
+      "sha256": "91e064c79c5052ad06e3114613a7ff1b46379b01afc046c82d027af1cd2daa78"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-08-checks.json",
+      "sha256": "53d94adea508077fca5ade0ecb2e535f96a57945e8e0990d5ed0eb9310d3fc95"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-08-source.json",
+      "sha256": "91e064c79c5052ad06e3114613a7ff1b46379b01afc046c82d027af1cd2daa78"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-09-checks.json",
+      "sha256": "c3450f087030726706612b88531a58ac9de8a8508308df856004e1efc946d758"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-09-source.json",
+      "sha256": "2017dd7633ec5bc4e14ecbbcb31bfc3d448e63ce6febd26b2eadaca6ae26ed6f"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-10-checks.json",
+      "sha256": "1f564c3361c061f56798fbf6e2bdacc5e250fe91fae7e1e0c716a9298be2ec5f"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-10-source.json",
+      "sha256": "2017dd7633ec5bc4e14ecbbcb31bfc3d448e63ce6febd26b2eadaca6ae26ed6f"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-11-checks.json",
+      "sha256": "84d5b8b16c567ab7117b7e29e0cfc44ad03a1a7a4d16408662529d0a33dd175a"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-11-source.json",
+      "sha256": "703f8ae822bdfc54f12a80ad9e954c966c38d133807bbd107470e4281805c4b3"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-12-checks.json",
+      "sha256": "f87787d47d6cd4755b97edc29d5f52a6543c5883393543d852382ee62eb0dac5"
+    },
+    {
+      "path": "docs/verification/review-console-attempt-12-source.json",
+      "sha256": "703f8ae822bdfc54f12a80ad9e954c966c38d133807bbd107470e4281805c4b3"
+    },
+    {
+      "path": "docs/verification/review-console-attempts.json",
+      "sha256": "ffbe8b99460e3f330ed4d78e0dd33e7b7a4b6d6c4de8f9e5484cb9166ea7c3bd"
+    },
+    {
+      "path": "docs/verification/review-console-initial-build.json",
+      "sha256": "77b3afb403290bdbe2ea7e21815f9f9916ff432d47b0a3e8afe1a453dbda52a4"
+    },
+    {
+      "path": "docs/verification/review-console-initial-types.json",
+      "sha256": "13b50caf57ac718fca81c6eb132c251f6f2a1e3d8edc635feadedb74224d54e2"
+    },
+    {
+      "path": "docs/verification/review-console-recording-01-source.json",
+      "sha256": "91e064c79c5052ad06e3114613a7ff1b46379b01afc046c82d027af1cd2daa78"
+    },
+    {
+      "path": "docs/verification/review-console-recording-02-source.json",
+      "sha256": "2017dd7633ec5bc4e14ecbbcb31bfc3d448e63ce6febd26b2eadaca6ae26ed6f"
+    },
+    {
+      "path": "docs/verification/review-console-recording-03-source.json",
+      "sha256": "703f8ae822bdfc54f12a80ad9e954c966c38d133807bbd107470e4281805c4b3"
+    },
+    {
+      "path": "docs/verification/review-console-source.json",
+      "sha256": "8d17223a1571493d7d9ca0c44f2c9151f2912a54cf9399ba301bf0a43f500af3"
+    },
+    {
+      "path": "docs/verification/review-console-tested-source.json",
+      "sha256": "703f8ae822bdfc54f12a80ad9e954c966c38d133807bbd107470e4281805c4b3"
+    },
+    {
+      "path": "docs/verification/review-console-unit.json",
+      "sha256": "84d5b8b16c567ab7117b7e29e0cfc44ad03a1a7a4d16408662529d0a33dd175a"
     },
     {
       "path": "docs/verification/support-api.json",
@@ -1175,17 +1361,16 @@
       "sha256": "fbf919d88e4b3bb6b2e1ff5993fb62a4dacfd78c559bd7232f0c780b28b41846"
     }
   ],
-  "existing_media_files_verified": 93,
-  "new_media_files_verified": 7,
-  "baseline_media_files_with_metadata": 115,
+  "existing_media_files_verified": 100,
+  "new_media_files_verified": 10,
+  "baseline_media_files_with_metadata": 124,
   "baseline_design_files": 48,
   "frozen_c_files": 25,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
   "browser_used": true,
   "browser_tabs_closed": true,
-  "owned_api_and_database_pool_closed": true,
+  "owned_preview_server_stopped": true,
   "full_suite_executed": false,
-  "current_full_unit_suite_executed": false,
   "full_suite_required_for_packaging": false,
   "original_publication_checker_executed": false,
   "checker_weakened": false,
@@ -1193,10 +1378,11 @@
   "production_admitted": false,
   "cloud_deployed": false,
   "limitations": [
-    "Actual native HTTP/PostgreSQL/uploads/PNG/FFmpeg MP4, byte reads, idempotent decisions and independent public-copy effects; authors/rights/license/profile/READY-QC/operator identity are explicit synthetic fixtures.",
-    "This does not certify real author rights, SAMPLE generation quality, production staff identity, live providers, payments, storage or process isolation.",
-    "Full suites, fresh mini-program builds and host-device tests were not run. Official/community commercial admission, audio/resource samples, advanced media editing, Plus and cloud remain pending.",
-    "All live service switches and sales remain disabled."
+    "Three actual native silent SAMPLE routes with synthetic models, profiles, rights, metering and role/OS identity; no real provider generation quality, semantic quality or production isolation certified.",
+    "Per-shot rhythms must fit admitted model durations; unsupported short schedules fail before queuing/charging. Single-shot presets cannot demonstrate inter-shot rhythm.",
+    "Native-audio caption style uses the existing contract path; audio/custom-resource SAMPLE admission and live audio quality are not newly verified.",
+    "Full suites, fresh mini-program builds and host-device checks were not run. Native Windows long-run stability remains unverified after intermittent C0000374 failures.",
+    "Complete official/community commercial admission, live services, Plus, cloud and full 58-requirement acceptance remain pending. All real service switches and sales remain disabled."
   ],
-  "canonical_review_console_provenance": "docs/verification/review-console-source.json"
+  "canonical_creative_components_provenance": "docs/verification/creative-components-source.json"
 }

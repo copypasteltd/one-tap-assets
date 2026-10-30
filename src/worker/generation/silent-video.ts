@@ -7,6 +7,8 @@ import type {generatedOutputs} from './outputs.js';
 import {frozenAiDisclosure} from '../compiler/disclosure.js';
 import {disclosureRaster} from '../media/disclosure.js';
 import {nativeCommand,inspectVideo} from '../media/native.js';
+import {communityCaptionStyle} from '../compiler/community-direction.js';
+import {communityCaptionRaster} from '../media/community-captions.js';
 
 /** Only actual generated MP4 inputs are accepted; no still-image substitute. */
 export async function assembleSilentGeneratedVideo(cfg:Config,context:GenerationContext,
@@ -19,10 +21,20 @@ export async function assembleSilentGeneratedVideo(cfg:Config,context:Generation
     const frames=context.snapshot.engine==='REFERENCE_FILM'?context.snapshot.timeline.target_frames:
       context.contract.creative.shots[index]!.end_frame-context.contract.creative.shots[index]!.start_frame;
     await writeFile(input,material.outputs.get(key)!.bytes);
+    const captionInputs:string[]=[],filters=[`[0:v]fps=30,scale=1080:1920:flags=lanczos,setsar=1[base]`,`[base][1:v]overlay=${mark.left}:${mark.top}:eof_action=repeat:format=auto[marked]`];
+    let mapped='marked';
+    if(communityCaptionStyle(context.contract.source)){
+      const shots=context.snapshot.engine==='REFERENCE_FILM'?context.contract.creative.shots:[context.contract.creative.shots[index]!];
+      for(const [position,shot] of shots.entries()){
+        const path=join(clips,`caption${index}-${position}.png`);await writeFile(path,await communityCaptionRaster(cfg.projectRoot,context.contract.source,shot.intent));captionInputs.push('-i',path);
+        const start=context.snapshot.engine==='REFERENCE_FILM'?shot.start_frame:0,end=context.snapshot.engine==='REFERENCE_FILM'?shot.end_frame:frames,next=`captioned${position}`;
+        filters.push(`[${mapped}][${position+2}:v]overlay=0:0:eof_action=repeat:format=auto:enable='gte(n,${start})*lt(n,${end})'[${next}]`);mapped=next;
+      }
+    }
     await nativeCommand(cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-nostdin','-y','-threads','2','-filter_threads','1',
-      '-filter_complex_threads','1','-protocol_whitelist','file,pipe','-i',input,'-i',join(clips,'disclosure.png'),
-      '-filter_complex',`[0:v]fps=30,scale=1080:1920:flags=lanczos,setsar=1[base];[base][1:v]overlay=${mark.left}:${mark.top}:eof_action=repeat:format=auto[marked]`,
-      '-map','[marked]','-an','-frames:v',String(frames),'-map_metadata','-1','-map_chapters','-1','-c:v','libx264','-threads','2',
+      '-filter_complex_threads','1','-protocol_whitelist','file,pipe','-i',input,'-i',join(clips,'disclosure.png'),...captionInputs,
+      '-filter_complex',filters.join(';'),
+      '-map',`[${mapped}]`,'-an','-frames:v',String(frames),'-map_metadata','-1','-map_chapters','-1','-c:v','libx264','-threads','2',
       '-preset','veryfast','-crf','20','-pix_fmt','yuv420p',output],
       {cwd:clips,timeoutMs:Math.max(1,Math.min(180000,Date.parse(context.snapshot.deadline_at)-Date.now())),signal});
     const actual=await inspectVideo(cfg,output,signal);
