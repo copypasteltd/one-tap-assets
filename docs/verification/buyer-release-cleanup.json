@@ -1,0 +1,40 @@
+{
+  "checked_at": "2026-10-30T10:53:10.230Z",
+  "scope": "EXPLICIT_ORIGINAL_SYNTHETIC_BUYER_CRASH_ONLY",
+  "schema": "ypcc_test_a520f690aab34b96813af5ab64c0baa0",
+  "original_source_set_hash": "ea335c9494249f5db9823c3b962f3534bae18a3518e0a594b1bfc5727a71a280",
+  "process_observation": {
+    "checked_at": "2026-10-30T10:53:08.3303204Z",
+    "role_processes": []
+  },
+  "root_cause_fixed": false,
+  "production_isolation_proved": false,
+  "objects_before": [
+    {
+      "key_sha256": "f1edc41df960543cba5249b61c4692ffeb376def9aa9e3ceda93cc0ec96b6a3f",
+      "bytes": 14240
+    },
+    {
+      "key_sha256": "3604645b9612aeaf01cf2a9317d5d5c7022661d8a85271de8f50ccf2fd4a6ab4",
+      "bytes": 14240
+    },
+    {
+      "key_sha256": "d97010279e2246754a5b600fbfe51f94547d67bb55859282b5e8b27d2ee471f9",
+      "bytes": 14240
+    },
+    {
+      "key_sha256": "f4c8b4165a2c76efad76dc5edaea44a03ba9269fda5b618d7d892e9e3ab997be",
+      "bytes": 429
+    }
+  ],
+  "directories": [
+    "runtime/agent-instances/instance_b9566ab5255a47488edfc9c3c37b2778",
+    "runtime/agent-control/instance_b9566ab5255a47488edfc9c3c37b2778",
+    "runtime/tests/native-order/media_4b027b3918644764a34485212daf8e86"
+  ],
+  "original_trace_sha256": "ffb2a05f95665f109715b993576df429984c5880a9fabe3e63430b7abe78f648",
+  "schema_removed": true,
+  "objects_absent": true,
+  "directories_absent": true,
+  "status": "PASS"
+}

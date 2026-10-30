@@ -1,0 +1,15 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+stdout | tests/integration/native-order.test.ts > checks out and delivers the native buyer PER_SHOT_AI pack from a real plan/quote through original paid audio review
+native-buyer-flow: E:\dev\sandbox\支付宝黑客松\一品成片\runtime\tests\native-order\media_e048527b4b0446d699da772f13c5ddd6\buyer-flow_04606124083046b5a33953266a738a54.jsonl
+
+ ✓ tests/integration/native-order.test.ts (37 tests | 36 skipped) 230048ms
+   ✓ checks out and delivers the native buyer PER_SHOT_AI pack from a real plan/quote through original paid audio review 214848ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed | 36 skipped (37)
+   Start at  18:43:17
+   Duration  250.56s (tests 93%, transform 4%, import 3%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/buyer-flow-2026-10-30T10-43-00-071Z-21df87dd/api.json

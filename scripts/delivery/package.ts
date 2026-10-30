@@ -3,6 +3,7 @@ import {createWriteStream} from 'node:fs';
 import {deflateRawSync} from 'node:zlib';
 import {execFileSync} from 'node:child_process';
 import {once} from 'node:events';
+import {randomUUID} from 'node:crypto';
 import {checked,directory,json,local,sha,snapshot,type FileEntry} from './common.js';
 const report=JSON.parse(await readFile('docs/delivery/current.json','utf8')) as {
  id:string;build_root:string;source_set_hash:string;files:unknown;runtime_contract_files:unknown;resource_files:unknown;
@@ -32,14 +33,17 @@ for(const component of report.components.filter(c=>c.status==='PASS'))for(const 
   await add(file.path,`runtime/build/${suffix}`,file.sha256);
 }
 if(new Set(files.map(f=>f.path)).size!==files.length||files.length>=65534)throw new Error('Duplicate or excessive delivery entries');
-const manifest={schema_version:'1.0',kind:'SOURCE_AND_AVAILABLE_BUILDS',id:report.id,created_at:new Date().toISOString(),
+// A documentation/evidence update can reuse the verified build. Each package
+// still gets its own directory; never overwrite an earlier delivered archive.
+const createdAt=new Date().toISOString(),packageId=createdAt.replace(/[:.]/g,'-')+'-'+randomUUID().slice(0,8);
+const manifest={schema_version:'1.0',kind:'SOURCE_AND_AVAILABLE_BUILDS',id:report.id,package_id:packageId,created_at:createdAt,
  source_set_hash:report.source_set_hash,builds_passed:report.builds_passed,full_suite_executed:false,
  verification_strategy:'USER_REQUESTED_FOCUSED_DELIVERY',components:report.components.map(({name,status})=>({name,status})),
  requirements_preserved:58,full_product_verified:false,production_admitted:false,cloud_deployed:false,
  excluded:['.git','.env.local','node_modules','private media','databases','logs','service credentials','personal Codex profiles'],
  prerequisites:'Windows; native Node 24/pnpm/PostgreSQL/FFmpeg and external service configuration as documented. Not an offline installer.',
  files:files.map(({path,sha256,bytes})=>({path,sha256,bytes}))};
-const out=`runtime/releases/one-tap-assets-${report.id}`;await directory(out);
+const out=`runtime/releases/one-tap-assets-${packageId}`;await directory(out);
 const zipPath=`${out}/one-tap-assets-source-and-builds.zip`,output=createWriteStream(local(zipPath),{flags:'wx'});
 let outputError:Error|undefined;output.on('error',error=>{outputError=error;});
 const crcTable=Array.from({length:256},(_,n)=>{for(let k=0;k<8;k++)n=n&1?0xedb88320^(n>>>1):n>>>1;return n>>>0;});
@@ -62,7 +66,7 @@ const centralStart=offset;for(const item of central)await write(item);const end=
 end.writeUInt32LE(0x06054b50,0);end.writeUInt16LE(central.length,8);end.writeUInt16LE(central.length,10);end.writeUInt32LE(offset-centralStart,12);end.writeUInt32LE(centralStart,16);
 await write(end);await new Promise<void>((done,fail)=>{output.once('error',fail);output.end(done);});
 const digest=sha(await readFile(zipPath));await json(`${out}/manifest.json`,manifest);await writeFile(`${out}/SHA256SUMS`,`${digest}  one-tap-assets-source-and-builds.zip\n`);
-const exported={schema_version:'1.0',created_at:manifest.created_at,id:report.id,source_set_hash:report.source_set_hash,archive_path:zipPath,
+const exported={schema_version:'1.0',created_at:manifest.created_at,id:report.id,package_id:packageId,source_set_hash:report.source_set_hash,archive_path:zipPath,
  archive_sha256:digest,archive_bytes:offset,source_files:source.length,build_files:files.length-source.length,components:manifest.components,
  manifest_path:`${out}/manifest.json`,full_suite_executed:false,full_suite_required_for_packaging:false,full_product_verified:false,production_admitted:false};
 await json('docs/delivery/package.json',exported);console.log(JSON.stringify(exported,null,2));

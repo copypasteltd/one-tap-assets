@@ -1,5 +1,17 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 — 原生买家流程核验与交付复打包
+
+- 原官方PER_SHOT_AI买家用例在原240秒内完成新规划、报价、付款确认、实际媒体、后期、QC、双复核、私有下载与实例释放；1通过/36未选，保留原执行摘要。
+- 每次打包独立package_id/目录，保留原构建id及摘要检查，支持同一构建更新文档后再出包，旧ZIP保持。
+- 原崩溃测试专属schema、3目录及4合成对象经归属核对后清理；旧失败证据不改，原生根因未确认。
+- 当前类型检查原180秒超时，server/preview通过且34产物相同；不重复全面测试/双端编译/真机。真实服务、完整验收继续待完成，无新UI媒体。
+- [实现细则](docs/实施/原生买家主流程核验与交付复打包-v1.0.md) · [准确证据](docs/verification/buyer-release-source.json)。
+
+One original native buyer case passes under its unchanged limit. Repackaging uses distinct package IDs and preserves old archives; the current typecheck timeout and earlier native failure observations remain explicit.
+
+以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
+
 ## 2026-10-30 — 可选商品纠错与同版续制
 
 - 小程序识别页增加五种可选轻量纠错，正常制作免填表；用户特征/标签补充保留“待复核”，不改变原观察事实及未知项。

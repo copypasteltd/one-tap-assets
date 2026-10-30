@@ -3,11 +3,11 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-30T10:28:22.818Z",
+  "checked_at": "2026-10-30T10:57:44.862Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "verification_mode": "FOCUSED_OPTIONAL_PROFILE_CORRECTION",
+  "verification_mode": "FOCUSED_NATIVE_BUYER_AND_REPACK",
   "retained_integration": null,
   "command_checks_passed": false,
   "commands": [
@@ -19,12 +19,12 @@
         "--noEmit"
       ],
       "shell": false,
-      "status": "PASS",
-      "exit_code": 0,
+      "status": "TIMEOUT",
+      "exit_code": 1,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 31636,
-      "log_path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/typecheck.log",
+      "elapsed_ms": 180984,
+      "log_path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -40,34 +40,34 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 3110,
-      "log_path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/server.log",
+      "elapsed_ms": 5291,
+      "log_path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T10-27-37-004Z-dbd6b329\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T10-53-45-033Z-445716dc\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T10-27-37-004Z-dbd6b329\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T10-53-45-033Z-445716dc\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 6380,
-      "log_path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/preview.log",
-      "log_sha256": "da2b4d85eeccb176780d734ac1c20d47e7264a888e2f6210cd5d781ba108b67b"
+      "elapsed_ms": 44795,
+      "log_path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/preview.log",
+      "log_sha256": "bec25238dcccc5f62ad7690ef949fa1994592175a9b423f0ce2f6c1dae5214f0"
     }
   ],
   "suites": [],
   "source_files": 475,
-  "source_set_hash": "e9b138c3350f5ca071371c9e26f74bf0c9a01a2920d431fadd918a862d177743",
+  "source_set_hash": "9e820572b9557cada27d9b2444dec0f7e8c2764db6af3184f3005381dbe70a81",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -1827,7 +1827,7 @@
     },
     {
       "path": "scripts/delivery/package.ts",
-      "sha256": "420a9918d2920f13c4b5e43f7a73f162785dc0e41373e1e94649529e47550dc3"
+      "sha256": "ccc6880d77e3bdad91a905c5da91c2c0eec3acc310bdb603cf3f47710d753d4a"
     },
     {
       "path": "scripts/delivery/readiness.ts",
@@ -2905,7 +2905,7 @@
     "production_verified": false,
     "evidence": "docs/verification/community-native-source.json"
   },
-  "selected_delivery_builds_passed": true,
+  "selected_delivery_builds_passed": false,
   "operational_metrics": {
     "source_implemented": true,
     "prior_fixture_evidence": "docs/verification/metrics-dashboard-source.json",
@@ -2914,8 +2914,21 @@
   },
   "profile_correction": {
     "source_implemented": true,
-    "fixture_verified": true,
+    "fixture_verified": false,
     "production_verified": false,
     "evidence": "docs/verification/profile-correction-source.json"
+  },
+  "native_buyer": {
+    "source_implemented": true,
+    "prior_snapshot_case_passed": true,
+    "tested_source_set_hash": "e9b138c3350f5ca071371c9e26f74bf0c9a01a2920d431fadd918a862d177743",
+    "current_application_files_identical": true,
+    "current_fixture_rerun": false,
+    "production_verified": false,
+    "evidence": "docs/verification/buyer-release-source.json"
+  },
+  "repeat_packaging": {
+    "source_implemented": true,
+    "verification_pointer": "docs/delivery/package.json"
   }
 }

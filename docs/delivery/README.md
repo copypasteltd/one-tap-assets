@@ -1,5 +1,11 @@
 # 源码交付与快速启动 / Source delivery and quick start
 
+当前交付支持同一构建重复出包：`id`继续表示构建编号，新增`package_id`标记每次打包和独立目录；旧ZIP不覆盖。文档变更可复用仍与当前源码/契约/字体完全匹配的构建，源码或产物改变继续拒绝打包。最近包与独立核验见[交付指针](package.json)，[主流程与复打包来源](../实施/原生买家主流程核验与交付复打包-v1.0.md)。本轮类型检查原180秒超时，server/preview成功；未等待全面绿灯，也不把类型超时改为通过。
+
+Packages now have distinct `package_id` values and directories while retaining build `id`. Documentation-only repacks reuse a matching build; source/output changes remain blocked. The current 180-second typecheck timeout is retained separately from successful server/web outputs.
+
+以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
+
 2026-10-30快速交付：[商品档案轻量纠错与同版续制](../实施/商品档案轻量纠错与同版续制-v1.0.md) · [准确证据及原尝试](../verification/profile-correction-source.json)。小程序识别页可选纠正名称/类别/特征/标签/照片用途，原键核对、新档案与商品锁、同版续制、换号/迟到响应和写入前字段/容量校验接通；正常流程免填表，用户补充不升级为观察事实，原已付合同不改。14客户端（5新+9兼容）/5原生API/6浏览器检查及类型/server/preview/原生自检/启动PASS，475/42/4 `e9b138c3`；32迁移原字节、77业务/35管理保持。新增5截图及MP4/WebM/GIF共8媒体，总138，旧130媒体/48设计及原历史证据保持。浏览器识别/纠错是合成回放，原生事务独立验证，不代表真实服务/真机验收。旧官方240秒超时未解，本轮原快照PLAN_ROLE原生进程0xc0000374崩溃亦待定位；真实服务/隔离/准入、双端真机、完整F17、Plus/云端及58项完整验收待完。全面测试与小程序重编NOT_RUN，真实服务/销售关闭，产品/生产/云端false。
 
 以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。

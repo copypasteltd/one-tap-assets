@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "status": "FIRST_ARCHIVE_RETAINED",
+  "checked_at": "2026-10-30T11:04:31.729064+00:00",
+  "source_set_hash": "9e820572b9557cada27d9b2444dec0f7e8c2764db6af3184f3005381dbe70a81",
+  "build_id": "2026-10-30T10-53-45-033Z-445716dc",
+  "first_package": {
+    "schema_version": "1.0",
+    "created_at": "2026-10-30T11:03:52.187Z",
+    "id": "2026-10-30T10-53-45-033Z-445716dc",
+    "package_id": "2026-10-30T11-03-52-187Z-017e75b5",
+    "source_set_hash": "9e820572b9557cada27d9b2444dec0f7e8c2764db6af3184f3005381dbe70a81",
+    "archive_path": "runtime/releases/one-tap-assets-2026-10-30T11-03-52-187Z-017e75b5/one-tap-assets-source-and-builds.zip",
+    "archive_sha256": "b2300619c7f13422be85fbba99554be40e38f844d872095d9f8e64c95051431c",
+    "archive_bytes": 107520581,
+    "source_files": 1481,
+    "build_files": 34,
+    "components": [
+      {
+        "name": "server",
+        "status": "PASS"
+      },
+      {
+        "name": "preview",
+        "status": "PASS"
+      },
+      {
+        "name": "alipay",
+        "status": "NOT_RUN"
+      },
+      {
+        "name": "douyin",
+        "status": "NOT_RUN"
+      }
+    ],
+    "manifest_path": "runtime/releases/one-tap-assets-2026-10-30T11-03-52-187Z-017e75b5/manifest.json",
+    "full_suite_executed": false,
+    "full_suite_required_for_packaging": false,
+    "full_product_verified": false,
+    "production_admitted": false
+  },
+  "final_repeat_verification": "docs/delivery/package.json",
+  "note": "The final pointer is excluded from its archive to avoid self reference. It records the second package comparison after the final ZIP is independently verified."
+}

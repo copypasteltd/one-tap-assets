@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T10:28:22.818Z",
-  "id": "2026-10-30T10-27-37-004Z-dbd6b329",
-  "build_root": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build",
-  "source_set_hash": "e9b138c3350f5ca071371c9e26f74bf0c9a01a2920d431fadd918a862d177743",
+  "checked_at": "2026-10-30T10:57:44.862Z",
+  "id": "2026-10-30T10-53-45-033Z-445716dc",
+  "build_root": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build",
+  "source_set_hash": "9e820572b9557cada27d9b2444dec0f7e8c2764db6af3184f3005381dbe70a81",
   "mini_api_configuration": "LOOPBACK_DEVELOPMENT_DEFAULT_REBUILD_FOR_DEVICE",
   "files": [
     {
@@ -1764,7 +1764,7 @@
     },
     {
       "path": "scripts/delivery/package.ts",
-      "sha256": "420a9918d2920f13c4b5e43f7a73f162785dc0e41373e1e94649529e47550dc3"
+      "sha256": "ccc6880d77e3bdad91a905c5da91c2c0eec3acc310bdb603cf3f47710d753d4a"
     },
     {
       "path": "scripts/delivery/readiness.ts",
@@ -2108,12 +2108,12 @@
         "--noEmit"
       ],
       "shell": false,
-      "status": "PASS",
-      "exit_code": 0,
+      "status": "TIMEOUT",
+      "exit_code": 1,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 31636,
-      "log_path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/typecheck.log",
+      "elapsed_ms": 180984,
+      "log_path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -2129,29 +2129,29 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 3110,
-      "log_path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/server.log",
+      "elapsed_ms": 5291,
+      "log_path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T10-27-37-004Z-dbd6b329\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T10-53-45-033Z-445716dc\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T10-27-37-004Z-dbd6b329\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T10-53-45-033Z-445716dc\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 6380,
-      "log_path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/preview.log",
-      "log_sha256": "da2b4d85eeccb176780d734ac1c20d47e7264a888e2f6210cd5d781ba108b67b"
+      "elapsed_ms": 44795,
+      "log_path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/preview.log",
+      "log_sha256": "bec25238dcccc5f62ad7690ef949fa1994592175a9b423f0ce2f6c1dae5214f0"
     }
   ],
   "components": [
@@ -2160,62 +2160,62 @@
       "status": "PASS",
       "files": [
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/api/main.js",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/api/main.js",
           "sha256": "f0c70b9293a8e1f7ad2a5895404adb24e7f6e469e639c9509b010035219eefa2",
           "bytes": 776913
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/api/main.js.map",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/api/main.js.map",
           "sha256": "8c1a66edd5a600bbf078d9dc3163509e1a506f20797ce28ce42fac734300191e",
           "bytes": 1760849
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/worker/lifecycle/media-maintenance-main.js",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/worker/lifecycle/media-maintenance-main.js",
           "sha256": "8ebe4b4d7acd8203ce8b29170c9de518067cc0a8192ac6600ff817c60bfcc429",
           "bytes": 725424
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/worker/lifecycle/media-maintenance-main.js.map",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/worker/lifecycle/media-maintenance-main.js.map",
           "sha256": "bfae8c759719e42e0dfe109afc4590774e6d475b7d8369b290ed7fffe1f052ff",
           "bytes": 1548044
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/worker/lifecycle/privacy-journal-main.js",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/worker/lifecycle/privacy-journal-main.js",
           "sha256": "eb5cfd584dd9f62c2d7428c63326ef81ca159c4ef34af04a673f1ae8eb2c745c",
           "bytes": 81544
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/worker/lifecycle/privacy-journal-main.js.map",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/worker/lifecycle/privacy-journal-main.js.map",
           "sha256": "cacdfd72872484605cc3bf96dc1291ed41a14986bbf2c820e20094a4f3f89af4",
           "bytes": 432135
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/worker/lifecycle/reaper-main.js",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/worker/lifecycle/reaper-main.js",
           "sha256": "897b6953a1de11124554208785f35636eda55559f2bf3b6a290d42562ed480bf",
           "bytes": 148641
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/worker/lifecycle/reaper-main.js.map",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/worker/lifecycle/reaper-main.js.map",
           "sha256": "b8868c4eb73638001554db8ec4eb6ec36e5529231a0b781d942651edd6f5ebb6",
           "bytes": 467306
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/worker/main.js",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/worker/main.js",
           "sha256": "8a2234c8d3635c8e95bd610ba6a95b5a72d4405b9b25e11345ecbfc405cd11b8",
           "bytes": 1117029
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/worker/main.js.map",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/worker/main.js.map",
           "sha256": "87acc510ddfe4e0d5264b9a50c0c03b8c5be8448dd097ae8df1752e36d6124ef",
           "bytes": 1997094
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/worker/tool-gateway/mcp-main.js",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/worker/tool-gateway/mcp-main.js",
           "sha256": "a8b3d90fd9743d2f7f04d27829fa00ccf0460920b660c0d5cf64094da753a297",
           "bytes": 6651
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/worker/tool-gateway/mcp-main.js.map",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/worker/tool-gateway/mcp-main.js.map",
           "sha256": "a42bf16ca48c154e1df5ed668280fdde73b43b299194562e8a83d40b18b7ed9d",
           "bytes": 14172
         }
@@ -2226,112 +2226,112 @@
       "status": "PASS",
       "files": [
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/assets/api-ruMpdi49.js",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/assets/api-ruMpdi49.js",
           "sha256": "2bac2f82b428aed46da5fc53d000bdba77155a11d4f12138b5b2ad640acd22bc",
           "bytes": 154598
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/assets/example-0.png",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/assets/example-0.png",
           "sha256": "20392025fceaab450a37805d63cce766bdc8f619a96465b1386c44c32cff3138",
           "bytes": 20355
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/assets/example-1.png",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/assets/example-1.png",
           "sha256": "20392025fceaab450a37805d63cce766bdc8f619a96465b1386c44c32cff3138",
           "bytes": 20355
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/assets/example-2.png",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/assets/example-2.png",
           "sha256": "20392025fceaab450a37805d63cce766bdc8f619a96465b1386c44c32cff3138",
           "bytes": 20355
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/assets/index-atJc7AIw.css",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/assets/index-atJc7AIw.css",
           "sha256": "b169eea9e3298362712a467776da2c16739159bd0f73b5b2432037646b28fe13",
           "bytes": 9568
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/assets/index-wyjfkrKt.js",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/assets/index-wyjfkrKt.js",
           "sha256": "5f63be4785bf2cb86c56f0f265fcb5ac541c7e14006cfaa415ca6ed471cb1be4",
           "bytes": 214766
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/assets/metrics-BAP50W2P.js",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/assets/metrics-BAP50W2P.js",
           "sha256": "c080fed3e761eff1b2e479d51de5b8545d0e2d952e2604b5c31a8310ec5115a3",
           "bytes": 11751
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/assets/metrics-D3EqNATB.css",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/assets/metrics-D3EqNATB.css",
           "sha256": "184da6b60ceb9b14e148ea50c958cfe5401a46e4e4ef11d592d4aad3e3bfba64",
           "bytes": 4663
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/assets/NotoSansSC_wght_-Dz1u1FRy.ttf",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/assets/NotoSansSC_wght_-Dz1u1FRy.ttf",
           "sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
           "bytes": 17772300
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/assets/review-BdrArJjk.css",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/assets/review-BdrArJjk.css",
           "sha256": "84b8c39804ca921c9ad865e28ae8ff6464a499da7429a66262636ce7328bcf08",
           "bytes": 2010
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/assets/review-C1ioUyAN.js",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/assets/review-C1ioUyAN.js",
           "sha256": "62828562c4a2a23c199da5f8e64a0d064a740e5b2f31326ddeb1b8a1b8a02ca2",
           "bytes": 17151
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/assets/support-Cakd7yMo.css",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/assets/support-Cakd7yMo.css",
           "sha256": "0a3bbbdcff137c267ff96f4c3162f49bc1d57061da3505f2a94b7155321d4e61",
           "bytes": 3237
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/assets/support-CbcpxOu6.js",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/assets/support-CbcpxOu6.js",
           "sha256": "215c0a6a8f85b1abe74b96088fe2140c3ffa7abd381a5bd14d5bfa55af60b3d7",
           "bytes": 3561
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/assets/support-console-ClwvL2kG.css",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/assets/support-console-ClwvL2kG.css",
           "sha256": "957b5cc3025309c6c6e29acd770beafdaa3d710510291775ee6f17d93191e1fa",
           "bytes": 4212
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/assets/support-Dzx6dYR_.js",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/assets/support-Dzx6dYR_.js",
           "sha256": "0e02d323ebc76b3b889824bd3e4cbd0cb0f858176875e4629f772c9c9b87406e",
           "bytes": 22443
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/index.html",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/index.html",
           "sha256": "5f5b16a74e7caeb7371ad7ed2a6feeed2ed9fb800d8b3ad613d6df716d4ce542",
           "bytes": 588
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/metrics.html",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/metrics.html",
           "sha256": "6d4a723e55353ff25ed14afa7018dd82391c95f43f1ecd800104b64da641945e",
           "bytes": 535
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/product-card.png",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/product-card.png",
           "sha256": "f791d4b6e6c6445365811b2f404b1bb24587c934b7e6c539239709a188dca145",
           "bytes": 86842
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/product-motion.mp4",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/product-motion.mp4",
           "sha256": "d5d02a3733a704a5f9117f490cfc86ed3c2bb7ec30be31bfca5252fdfbb6e3b0",
           "bytes": 18398
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/product.svg",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/product.svg",
           "sha256": "2c507fbbdd3fad7e9f99beb6faca1f9bd608d1148e49c1665c052b956e6ed313",
           "bytes": 1693
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/review.html",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/review.html",
           "sha256": "cbf7b92dafbdc7de55952a805c47ce542ec5bf956041b8b3b598ddbaf402ccb8",
           "bytes": 542
         },
         {
-          "path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/runtime/build/preview/support.html",
+          "path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/runtime/build/preview/support.html",
           "sha256": "ab0010fc57f8b4a23957c441cf6ece2f683545c1e2476c82f9217024130894ba",
           "bytes": 615
         }
@@ -2349,7 +2349,7 @@
     }
   ],
   "builds_passed": false,
-  "selected_builds_passed": true,
+  "selected_builds_passed": false,
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false

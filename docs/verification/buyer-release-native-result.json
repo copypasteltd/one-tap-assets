@@ -1,0 +1,29 @@
+{
+  "base": "runtime/test-results/buyer-flow-2026-10-30T10-43-00-071Z-21df87dd",
+  "source_set_hash": "e9b138c3350f5ca071371c9e26f74bf0c9a01a2920d431fadd918a862d177743",
+  "source_unchanged": true,
+  "commands": [
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/native-order.test.ts -t ^checks out and delivers the native buyer PER_SHOT_AI pack --outputFile.json=runtime/test-results/buyer-flow-2026-10-30T10-43-00-071Z-21df87dd/api.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.integration.config.ts",
+        "tests/integration/native-order.test.ts",
+        "-t",
+        "^checks out and delivers the native buyer PER_SHOT_AI pack",
+        "--outputFile.json=runtime/test-results/buyer-flow-2026-10-30T10-43-00-071Z-21df87dd/api.json"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 480000,
+      "elapsed_ms": 265146,
+      "log_path": "runtime/test-results/buyer-flow-2026-10-30T10-43-00-071Z-21df87dd/api.log",
+      "log_sha256": "a2735dcac616bb0664bfc0dc4d54790918d509c5137563d9058d1fd34d96a8da"
+    }
+  ]
+}
