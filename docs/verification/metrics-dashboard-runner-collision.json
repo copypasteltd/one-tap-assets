@@ -1,0 +1,10 @@
+{
+  "status": "RUNNER_FAILED_BEFORE_INTEGRATION_RESULT",
+  "source_set_hash": "cf1867789644137d25e8e8ca3d63a20c99aa9012ea3d2f80039c78a7b002b6ca",
+  "exit_code": 1,
+  "error": "EEXIST: file already exists, open runtime/test-results/metrics-dashboard-2026-10-30T09-58-16-440Z/api.log",
+  "reason": "Two independently launched wrappers selected the same millisecond directory. The existing unit report is retained only as unit evidence.",
+  "integration_pass_claimed": false,
+  "scoped_process_handles_missing_after_exit": true,
+  "correction": "Unique UUID directory suffix; subsequent wrapper executions are sequential."
+}

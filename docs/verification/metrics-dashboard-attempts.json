@@ -1,0 +1,278 @@
+{
+  "schema_version": "1.0",
+  "checks": [
+    {
+      "attempt": 1,
+      "source_set_hash": "8782aabe34f1a91180bd480fc99ce7fcd4c2c2d285237120db096799e7599cf8",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "typecheck",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+            "--noEmit"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 120000,
+          "elapsed_ms": 6909,
+          "log_path": "runtime/test-results/metrics-dashboard-2026-10-30T09-54-30-627Z/type.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-01-source.json",
+          "sha256": "9c4e8475cf86587ea528fc04062f6faf4b44d8831cdf8d3608715904989c51d3",
+          "bytes": 76300
+        },
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-01-result.json",
+          "sha256": "1ecc2ddb07a929d5b3cd9f9749828e43d89ba8c32fe1206c20844477cd9d926e",
+          "bytes": 844
+        },
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-01-type.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ],
+      "is_final_selected": false
+    },
+    {
+      "attempt": 2,
+      "source_set_hash": "cf1867789644137d25e8e8ca3d63a20c99aa9012ea3d2f80039c78a7b002b6ca",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/metrics-client.test.ts --outputFile.json=runtime/test-results/metrics-dashboard-2026-10-30T09-58-16-440Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "tests/unit/metrics-client.test.ts",
+            "--outputFile.json=runtime/test-results/metrics-dashboard-2026-10-30T09-58-16-440Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 1512,
+          "log_path": "runtime/test-results/metrics-dashboard-2026-10-30T09-58-16-440Z/api.log",
+          "log_sha256": "af5869d2054e12bd2533b8fd76d4a61bdadec84774c8d9ac3b60a6f2998b261e"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-02-source.json",
+          "sha256": "3249b316da6abf0bb88e79542092a9b404ec64fedfd22a06f3a1936d33b9e165",
+          "bytes": 76871
+        },
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-02-result.json",
+          "sha256": "648698ad8f45b9c8ff71be196e09e61c7a2ff311f8f204ca7461cc875a0ca221",
+          "bytes": 1096
+        },
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-02-api.json",
+          "sha256": "fbe3f2142a82c4cadf920f9d0ec75c6df5a2110595d5222713eaff1f44499288",
+          "bytes": 2064
+        },
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-02-api.log",
+          "sha256": "af5869d2054e12bd2533b8fd76d4a61bdadec84774c8d9ac3b60a6f2998b261e",
+          "bytes": 405
+        }
+      ],
+      "is_final_selected": false
+    },
+    {
+      "attempt": 3,
+      "source_set_hash": "cf1867789644137d25e8e8ca3d63a20c99aa9012ea3d2f80039c78a7b002b6ca",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/metrics.test.ts --outputFile.json=runtime/test-results/metrics-dashboard-2026-10-30T09-58-50-978Z-f8e85f17/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/metrics.test.ts",
+            "--outputFile.json=runtime/test-results/metrics-dashboard-2026-10-30T09-58-50-978Z-f8e85f17/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 3640,
+          "log_path": "runtime/test-results/metrics-dashboard-2026-10-30T09-58-50-978Z-f8e85f17/api.log",
+          "log_sha256": "6d47b0ca7a0d36c2343dd50203bf28c56fb598d1d92fc8396ef0a6b25c58f920"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-03-source.json",
+          "sha256": "3249b316da6abf0bb88e79542092a9b404ec64fedfd22a06f3a1936d33b9e165",
+          "bytes": 76871
+        },
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-03-result.json",
+          "sha256": "a53036233e89ab829a22c6cbe530fa9a55961afb3962803e61e26b485040c13a",
+          "bytes": 1230
+        },
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-03-api.json",
+          "sha256": "9e95f7c76f41606f245c2ebbca8e01c0237a62786e036744c9c4528284dad048",
+          "bytes": 1725
+        },
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-03-api.log",
+          "sha256": "6d47b0ca7a0d36c2343dd50203bf28c56fb598d1d92fc8396ef0a6b25c58f920",
+          "bytes": 403
+        }
+      ],
+      "is_final_selected": false
+    },
+    {
+      "attempt": 4,
+      "source_set_hash": "ea335c9494249f5db9823c3b962f3534bae18a3518e0a594b1bfc5727a71a280",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/metrics-client.test.ts --outputFile.json=runtime/test-results/metrics-dashboard-2026-10-30T10-06-25-473Z-09209ad9/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "tests/unit/metrics-client.test.ts",
+            "--outputFile.json=runtime/test-results/metrics-dashboard-2026-10-30T10-06-25-473Z-09209ad9/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 847,
+          "log_path": "runtime/test-results/metrics-dashboard-2026-10-30T10-06-25-473Z-09209ad9/api.log",
+          "log_sha256": "26f6e778a317b8f2dd822e0afcfbfe23376ef022c1daabff27695a91684ac426"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-04-source.json",
+          "sha256": "2d7ff1b8df9ba3046d81747d1536ddc86bb48df9f11adcaf5e8478ecbaf1a8fd",
+          "bytes": 76871
+        },
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-04-result.json",
+          "sha256": "16bfe79213dbd40569b0455136c445ab2deee238566247362e7ae2481b704168",
+          "bytes": 1131
+        },
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-04-api.json",
+          "sha256": "a714cc093836613e8658d0d218d3f47618e8fd7b47a0f604f4eb6be445310d97",
+          "bytes": 2064
+        },
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-04-api.log",
+          "sha256": "26f6e778a317b8f2dd822e0afcfbfe23376ef022c1daabff27695a91684ac426",
+          "bytes": 413
+        }
+      ],
+      "is_final_selected": true
+    },
+    {
+      "attempt": 5,
+      "source_set_hash": "ea335c9494249f5db9823c3b962f3534bae18a3518e0a594b1bfc5727a71a280",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/metrics.test.ts --outputFile.json=runtime/test-results/metrics-dashboard-2026-10-30T10-06-27-105Z-ac1e4368/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/metrics.test.ts",
+            "--outputFile.json=runtime/test-results/metrics-dashboard-2026-10-30T10-06-27-105Z-ac1e4368/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 9638,
+          "log_path": "runtime/test-results/metrics-dashboard-2026-10-30T10-06-27-105Z-ac1e4368/api.log",
+          "log_sha256": "9992668d363ee59216125a491b3834fc639444f5b7f42a637d71b634207b3bcd"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-05-source.json",
+          "sha256": "2d7ff1b8df9ba3046d81747d1536ddc86bb48df9f11adcaf5e8478ecbaf1a8fd",
+          "bytes": 76871
+        },
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-05-result.json",
+          "sha256": "be5fd07ecafc17a2f58fc0fd8a3ff424a026b9604632fb8098be5a4b7de6c493",
+          "bytes": 1230
+        },
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-05-api.json",
+          "sha256": "d82c0cdf7e299987c959283dfce5341ec0363f8388d3a32087b9027158c8e888",
+          "bytes": 1725
+        },
+        {
+          "path": "docs/verification/metrics-dashboard-attempt-05-api.log",
+          "sha256": "9992668d363ee59216125a491b3834fc639444f5b7f42a637d71b634207b3bcd",
+          "bytes": 402
+        }
+      ],
+      "is_final_selected": true
+    }
+  ],
+  "runner_collision": {
+    "path": "docs/verification/metrics-dashboard-runner-collision.json",
+    "sha256": "a53c57e2154c7b64cbd9b9450b68d4bfe0c44e1d6649cc4b7718961cfa573025",
+    "bytes": 632
+  },
+  "recording_attempt_01": {
+    "path": "docs/verification/metrics-dashboard-recording-attempt-01.json",
+    "sha256": "77a923f8f6ad28ea49f60adf969c88203a1d6150b7eb9e9fa92878e684d69301",
+    "bytes": 534
+  },
+  "recording_attempt_02": [
+    {
+      "path": "docs/verification/metrics-dashboard-recording-attempt-02-record.log",
+      "sha256": "400ccacb1bd570d16269c621867a85739b8420cb0cbb16ecf84f4a794ec8784b",
+      "bytes": 527
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-recording-attempt-02-result.json",
+      "sha256": "1071ee557069eb1b748f69a7942a46088c83f1730bd7f8f6fda04cb54d20bee5",
+      "bytes": 241
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-recording-attempt-02-build.json",
+      "sha256": "d2c23b9835e3c7135d6d0d72253d9257ba4c32e6807e0dc0d3f9c358bcf96f35",
+      "bytes": 88787
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-recording-attempt-02-observation.json",
+      "sha256": "8abcc921e40177809c6e5c17fbaf8300cc7d508efade9330e1dc77904d6f1646",
+      "bytes": 314
+    }
+  ],
+  "final_recording": "docs/verification/metrics-dashboard-recording.json",
+  "earlier_observations_preserved": true,
+  "earlier_results_relabelled": false,
+  "corrections": "Unique wrapper directories and sequential checks; project browser/media cache; flat browser callback without transpiler helpers. No runtime limits, assertions or application gates weakened."
+}

@@ -1,5 +1,18 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 — 运营窗口统计、实际界面和快速交付包
+
+- 管理统计修正忽略请求窗口、混入全历史、未付款状态及重复超时计数；统一半开UTC窗口和同一读取快照。已脱敏时间返回未知，首版交付与售后版本分开计量。
+- 新增 `/ops/metrics` 方案C运营页面，独立metrics:read权限、1/7/30天与自定义窗口、失败清除/原窗口重试、空值、费用及路线P95；客服与审核页增加入口。凭证只保留内存，旧响应失效，成功读取留聚合审计。
+- 4客户端、3原生API与6实际浏览器检查通过，类型/server/preview/原生自检/启动通过；无新迁移及接口操作。
+- 新增5张实际截图和MP4/WebM/GIF；双语README、口径、启动与事项/待办同步。运行器目录碰撞和前两次录制环境/回调错误保留原观察，不冒充应用通过。
+- 全面测试及双小程序重编/真机未执行，旧官方用例超时未解决，真实服务/销售保持关闭。
+- [实现及口径](docs/实施/运营看板与窗口一致统计-v1.0.md) · [准确证据](docs/verification/metrics-dashboard-source.json)。
+
+Operational metrics now honor a consistent requested window and expose an independent read-only C-style desk. Four client, three native API and six browser checks pass. Actual screenshots/video/GIF and bilingual documentation accompany the focused source/build package. Live services remain off; full suites and device acceptance were not performed.
+
+以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
+
 ## 2026-10-30 — 社区有声买家主链与交付包
 
 - 社区版本可由平台一次冻结默认人物/原生声音和明确 ORDER 商业授权，模型/费率、资源、价格及原预算保留。配置不自动准入或开售。

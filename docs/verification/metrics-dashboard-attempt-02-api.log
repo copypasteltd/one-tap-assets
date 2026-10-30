@@ -1,0 +1,11 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/unit/metrics-client.test.ts (4 tests) 240ms
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  17:58:17
+   Duration  908ms (transform 54%, tests 33%, import 13%, worker 1%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/metrics-dashboard-2026-10-30T09-58-16-440Z/api.json

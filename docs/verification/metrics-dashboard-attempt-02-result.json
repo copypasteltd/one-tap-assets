@@ -1,0 +1,25 @@
+{
+  "base": "runtime/test-results/metrics-dashboard-2026-10-30T09-58-16-440Z",
+  "source_set_hash": "cf1867789644137d25e8e8ca3d63a20c99aa9012ea3d2f80039c78a7b002b6ca",
+  "source_unchanged": true,
+  "commands": [
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/metrics-client.test.ts --outputFile.json=runtime/test-results/metrics-dashboard-2026-10-30T09-58-16-440Z/api.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "tests/unit/metrics-client.test.ts",
+        "--outputFile.json=runtime/test-results/metrics-dashboard-2026-10-30T09-58-16-440Z/api.json"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 480000,
+      "elapsed_ms": 1512,
+      "log_path": "runtime/test-results/metrics-dashboard-2026-10-30T09-58-16-440Z/api.log",
+      "log_sha256": "af5869d2054e12bd2533b8fd76d4a61bdadec84774c8d9ac3b60a6f2998b261e"
+    }
+  ]
+}

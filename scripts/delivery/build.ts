@@ -32,7 +32,7 @@ for(const [name,task,folders] of groups){
   const check=checks.find(c=>'task' in c&&c.task===task);const files:Awaited<ReturnType<typeof inventory>>=[];
   if(check?.status==='PASS')for(const folder of folders)files.push(...await inventory(`${out}/${folder}`));
   const required=name==='server'?['api/main.js','worker/main.js','worker/tool-gateway/mcp-main.js','worker/lifecycle/reaper-main.js','worker/lifecycle/media-maintenance-main.js','worker/lifecycle/privacy-journal-main.js']
-    :name==='preview'?['preview/index.html','preview/support.html','preview/review.html']:[`${name==='alipay'?'mini-alipay':'mini-douyin'}/app.json`,`${name==='alipay'?'mini-alipay':'mini-douyin'}/app.js`];
+    :name==='preview'?['preview/index.html','preview/support.html','preview/review.html','preview/metrics.html']:[`${name==='alipay'?'mini-alipay':'mini-douyin'}/app.json`,`${name==='alipay'?'mini-alipay':'mini-douyin'}/app.js`];
   const status=check?.status==='PASS'&&required.some(path=>!files.some(f=>f.path===`${out}/${path}`))?'MISSING_OUTPUT':check?.status??'NOT_RUN';
   components.push({name,status,files:status==='PASS'?files:[]});
 }

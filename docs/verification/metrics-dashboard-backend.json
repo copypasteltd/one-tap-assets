@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "exit_code": 0,
+  "timeout_seconds": 90,
+  "elapsed_seconds": 3.722,
+  "log_path": "runtime/delivery/metrics-dashboard-backend-1793354879146357600.log",
+  "log_sha256": "fe0bdfb4de109a612b955dccd90e2689b5297f8daf243564ad7f1e2db1f02c9d",
+  "local_stack_ready": true,
+  "preview_http_ready": false,
+  "public_log": {
+    "path": "docs/verification/metrics-dashboard-backend.log",
+    "sha256": "fe0bdfb4de109a612b955dccd90e2689b5297f8daf243564ad7f1e2db1f02c9d",
+    "bytes": 1564
+  }
+}

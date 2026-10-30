@@ -1,0 +1,14 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.evaluate: ReferenceError: __name is not defined
+    at eval (eval at evaluate (:370:30), <anonymous>:1:42)
+    at UtilityScript.evaluate (<anonymous>:372:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+    at range (E:\dev\sandbox\支付宝黑客松\一品成片\scripts\record-metrics.ts:24:76)
+    at <anonymous> (E:\dev\sandbox\支付宝黑客松\一品成片\scripts\record-metrics.ts:30:91) {
+  log: []
+}
+
+Node.js v24.22.1

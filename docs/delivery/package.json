@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "created_at": "2026-10-30T09:45:08.122Z",
-  "id": "2026-10-30T09-40-57-849Z-c67d7cf0",
-  "source_set_hash": "5d8ea011ee6459430d979ea68968d2d30d28044cf65093c492c2285aaee9721f",
-  "archive_path": "runtime/releases/one-tap-assets-2026-10-30T09-40-57-849Z-c67d7cf0/one-tap-assets-source-and-builds.zip",
-  "archive_sha256": "58da65f85d8be02d7f3d118a9b6b280929f64e45e591c389f639c6ebfd679188",
-  "archive_bytes": 102294779,
-  "source_files": 1325,
-  "build_files": 31,
+  "created_at": "2026-10-30T10:10:49.592Z",
+  "id": "2026-10-30T10-06-37-883Z-ddb3d828",
+  "source_set_hash": "ea335c9494249f5db9823c3b962f3534bae18a3518e0a594b1bfc5727a71a280",
+  "archive_path": "runtime/releases/one-tap-assets-2026-10-30T10-06-37-883Z-ddb3d828/one-tap-assets-source-and-builds.zip",
+  "archive_sha256": "cfd8794e3279738ac8aaa480f4fd3b5715af3445832f33889bfc31a41c0d9d67",
+  "archive_bytes": 104718160,
+  "source_files": 1392,
+  "build_files": 34,
   "components": [
     {
       "name": "server",
@@ -26,18 +26,18 @@
       "status": "NOT_RUN"
     }
   ],
-  "manifest_path": "runtime/releases/one-tap-assets-2026-10-30T09-40-57-849Z-c67d7cf0/manifest.json",
+  "manifest_path": "runtime/releases/one-tap-assets-2026-10-30T10-06-37-883Z-ddb3d828/manifest.json",
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
   "full_product_verified": false,
   "production_admitted": false,
   "independent_archive_verification": {
     "status": "PASS",
-    "checked_at": "2026-10-30T09:45:22.233065+00:00",
+    "checked_at": "2026-10-30T10:11:19.941190+00:00",
     "method": "INDEPENDENT_PYTHON_ZIPFILE_CRC_AND_SHA256",
-    "archive_sha256": "58da65f85d8be02d7f3d118a9b6b280929f64e45e591c389f639c6ebfd679188",
-    "payload_files_verified": 1356,
-    "archive_entries": 1357,
+    "archive_sha256": "cfd8794e3279738ac8aaa480f4fd3b5715af3445832f33889bfc31a41c0d9d67",
+    "payload_files_verified": 1426,
+    "archive_entries": 1427,
     "workspace_payload_bytes_matched": true,
     "successful_build_components_verified": [
       "server",

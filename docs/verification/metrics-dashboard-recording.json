@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "exit_code": 0,
+  "timeout_seconds": 150,
+  "elapsed_seconds": 53.181,
+  "log_path": "runtime/delivery/metrics-record-1793354831203141000.log",
+  "log_sha256": "065d039a7310dbe354561a2709bcc5bbcf2402966649c7f2b5773bcd319bb8d5",
+  "public_log": {
+    "path": "docs/verification/metrics-dashboard-recording.log",
+    "sha256": "065d039a7310dbe354561a2709bcc5bbcf2402966649c7f2b5773bcd319bb8d5",
+    "bytes": 107
+  }
+}

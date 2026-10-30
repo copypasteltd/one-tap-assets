@@ -1,0 +1,8 @@
+{
+  "status": "FAIL",
+  "exit_code": 1,
+  "timeout_seconds": 150,
+  "elapsed_seconds": 56.608,
+  "log_path": "runtime/delivery/metrics-record.log",
+  "log_sha256": "400ccacb1bd570d16269c621867a85739b8420cb0cbb16ecf84f4a794ec8784b"
+}

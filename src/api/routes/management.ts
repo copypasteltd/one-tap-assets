@@ -22,9 +22,10 @@ import {listManagedTickets,managedTicket,processTicket,supportEvidence,requestSu
 import {storage,type ObjectStorage} from '../storage/storage.js';
 import {supportRepairContext,supportRepairImage} from '../modules/support-repair.js';
 import {getPublicationReview,readPublicationReviewMedia,readPublicationRightsEvidence} from '../modules/review-desk.js';
+import {operationalSummary} from '../modules/metrics.js';
 
 interface Endpoint { method: string; path: string; operation_id: string; permission: string; request_schema: SchemaName | null; response_schema: SchemaName }
-interface Context { db: Db; cfg: Config; store:ObjectStorage; admin: ManagementPrincipal; params: Record<string, string>; body: unknown; traceId: string; query: { cursor?: string; limit?: string; state?:string } }
+interface Context { db: Db; cfg: Config; store:ObjectStorage; admin: ManagementPrincipal; params: Record<string, string>; body: unknown; traceId: string; query: { cursor?: string; limit?: string; state?:string;window_start?:unknown;window_end?:unknown } }
 async function record<T>(db: Db, table: Table, resourceId: string, lock = false): Promise<RecordRow<T>> { return (await db.query<RecordRow<T>>(`SELECT * FROM ${table} WHERE id=$1${lock ? ' FOR UPDATE' : ''}`, [resourceId])).rows[0] ?? notFound(); }
 async function action(c: Context, target: string, operation: string, state: DTO<'ManagementResult'>['state'] = 'ACCEPTED', reasons: string[] = []): Promise<DTO<'ManagementResult'>> {
   const data: DTO<'ManagementResult'> = { action_id: id('action'), resource_id: target, state, reason_codes: reasons, updated_at: iso() };
@@ -190,11 +191,9 @@ const handlers: Record<string, (c: Context) => Promise<unknown>> = {
   },
   reconcileProviderSubmission: async c => { const row = await record(c.db, 'provider_submissions', c.params.submission_id!, true); await outbox(c.db, row.tenant_id, 'ProviderReconciliationRequested', row.id, `provider-query:${row.id}:${id('request')}`, { submission_id: row.id }); return action(c, row.id, 'QUERY_ORIGINAL_SUBMISSION'); },
   readOperationalSummary: async c => {
-    const orders = (await c.db.query<{ paid: string; delivered: string; spent: string; p95: number | null }>("SELECT count(*) FILTER(WHERE payment_state='CONFIRMED') paid,count(*) FILTER(WHERE fulfillment_state='DELIVERED') delivered,coalesce(sum(spent_micro),0) spent,percentile_cont(.95) WITHIN GROUP(ORDER BY extract(epoch FROM updated_at-created_at)) FILTER(WHERE fulfillment_state='DELIVERED') p95 FROM orders WHERE created_at>now()-interval '30 days'")).rows[0]!;
-    const counts = (await c.db.query<{ unknown: string; refunds: string; deadline: string }>("SELECT (SELECT count(*) FROM provider_submissions WHERE state='UNKNOWN') unknown,(SELECT count(*) FROM refunds WHERE state IN ('REQUESTED','PROCESSING','UNKNOWN')) refunds,(SELECT count(*) FROM stage_runs WHERE data->>'reason_code'='HARD_DEADLINE_EXCEEDED') deadline")).rows[0]!;
-    const routes = await c.db.query<{ engine: string; p95: number }>("SELECT s.data->>'engine' engine,ceil(percentile_cont(.95) WITHIN GROUP(ORDER BY extract(epoch FROM m.delivered_at-(s.data->>'fulfillable_at')::timestamptz)))::integer p95 FROM delivery_manifests m JOIN execution_snapshots s ON s.order_id=m.order_id WHERE m.revision=1 GROUP BY s.data->>'engine'");
-    const route = (engine: string): number | null => routes.rows.find(r => r.engine === engine)?.p95 ?? null;
-    return { window_start: new Date(Date.now() - 30 * 86400000).toISOString(), window_end: iso(), paid_orders: Number(orders.paid), delivered_orders: Number(orders.delivered), unknown_submissions: Number(counts.unknown), refunds_pending: Number(counts.refunds), hard_deadline_failures: Number(counts.deadline), cost_currency: 'CNY', cost_micro_total: Number(orders.spent), automatic_pack_success_ratio: Number(orders.paid) ? Number(orders.delivered) / Number(orders.paid) : null, route_p95_seconds: { PHOTO_LAYOUT: route('PHOTO_LAYOUT'), PER_SHOT_AI: route('PER_SHOT_AI'), REFERENCE_FILM: route('REFERENCE_FILM') } } satisfies DTO<'MetricsSummary'>;
+    const summary=await operationalSummary(c.db,c.query);
+    await audit(c.db,null,c.admin.actor,'OPERATIONAL_SUMMARY_READ','aggregate',{window_start:summary.window_start,window_end:summary.window_end},c.traceId);
+    return summary;
   },
   reconcilePrivacyDeletion: async c => { const row = await record(c.db, 'privacy_deletions', c.params.deletion_id!); await outbox(c.db, row.tenant_id, 'PrivacyDeletionRequested', row.id, `privacy-reconcile:${row.id}:${id('request')}`, { deletion_id: row.id }); return action(c, row.id, 'PRIVACY_RECONCILE'); },
   getManagementAction: async c => (await record<DTO<'ManagementResult'>>(c.db, 'management_actions', c.params.action_id!)).data,

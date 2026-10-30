@@ -1,0 +1,103 @@
+{
+  "captured_at": "2026-10-30T10:08:04.295Z",
+  "type": "ACTUAL_METRICS_UI_NATIVE_HTTP_AND_DATABASE",
+  "data_source": "EXPLICIT_SYNTHETIC_PAYMENT_DELIVERY_COST_AND_OPERATOR_METADATA_IN_ISOLATED_NATIVE_POSTGRESQL_SCHEMA",
+  "source_set_hash": "ea335c9494249f5db9823c3b962f3534bae18a3518e0a594b1bfc5727a71a280",
+  "build_root": "runtime/delivery-builds/2026-10-30T10-06-37-883Z-ddb3d828/runtime/build",
+  "native_mini_device_verified": false,
+  "real_payment_verified": false,
+  "real_provider_cost_verified": false,
+  "production_staff_identity_verified": false,
+  "production_admitted": false,
+  "browser_tabs_closed": true,
+  "owned_api_and_database_pool_closed": true,
+  "browser_errors": [],
+  "external_network_requests": [],
+  "checks": [
+    "PUBLIC_LOGIN_SHELL_HAS_NO_PRIVATE_AGGREGATE_AND_REQUIRES_EXPLICIT_CONNECTION",
+    "ACTUAL_NATIVE_DATABASE_WINDOW_COUNTS_PAID_FIRST_DELIVERY_RATIO_COST_AND_ROUTE_TIMINGS",
+    "FAILED_REFRESH_CLEARS_STALE_VALUES_AND_RETRY_REUSES_THE_ORIGINAL_WINDOW",
+    "EMPTY_COHORT_DISPLAYS_ZERO_COUNTS_WITH_UNKNOWN_RATIO_AND_NO_INVENTED_TIMINGS",
+    "NARROW_VIEWPORT_HAS_NO_HORIZONTAL_OVERFLOW_AND_RETAINS_QUERY_AND_MEASURE_LABELS",
+    "DISCONNECT_CLEARS_AGGREGATE_AND_TOKEN_WITHOUT_COOKIE_OR_BROWSER_STORAGE"
+  ],
+  "screenshots": [
+    {
+      "page": "01-independent-login",
+      "path": "docs/media/metrics-dashboard/01-independent-login.png"
+    },
+    {
+      "page": "02-windowed-overview",
+      "path": "docs/media/metrics-dashboard/02-windowed-overview.png"
+    },
+    {
+      "page": "03-read-error",
+      "path": "docs/media/metrics-dashboard/03-read-error.png"
+    },
+    {
+      "page": "04-empty-window",
+      "path": "docs/media/metrics-dashboard/04-empty-window.png"
+    },
+    {
+      "page": "05-narrow-screen",
+      "path": "docs/media/metrics-dashboard/05-narrow-screen.png"
+    }
+  ],
+  "recording": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 1040
+      }
+    ],
+    "format": {
+      "duration": "3.720000"
+    }
+  },
+  "files": [
+    {
+      "path": "docs/media/metrics-dashboard/01-independent-login.png",
+      "bytes": 54281,
+      "sha256": "6dfefc59d2b23cd1f02086b9b4be2f33e2a132f857230d22d1087460430d1533"
+    },
+    {
+      "path": "docs/media/metrics-dashboard/02-windowed-overview.png",
+      "bytes": 165532,
+      "sha256": "53829448d9fda1ae31688057acce6501a5310a80b0ff882ad1691a908f1e0de9"
+    },
+    {
+      "path": "docs/media/metrics-dashboard/03-read-error.png",
+      "bytes": 59436,
+      "sha256": "8bbdaa81368621408ff4b43e4b047964ee95d829b14089d3b3cf077ac525e401"
+    },
+    {
+      "path": "docs/media/metrics-dashboard/04-empty-window.png",
+      "bytes": 171218,
+      "sha256": "87b14daf776dd614e17d5c0972faf7575aa642dfc14316e7c8c882a041233071"
+    },
+    {
+      "path": "docs/media/metrics-dashboard/05-narrow-screen.png",
+      "bytes": 159419,
+      "sha256": "0ab9199b0777dc8854d07f259deeaf11fbd20ac400fd7bbec233a6ed5ff69c1a"
+    },
+    {
+      "path": "docs/media/metrics-dashboard/walkthrough.webm",
+      "bytes": 924837,
+      "sha256": "496d99c2eedac5ae0c78dbcabfe0a6549d51d834dee23b41f6b99f6e6a281b4b"
+    },
+    {
+      "path": "docs/media/metrics-dashboard/walkthrough.mp4",
+      "bytes": 232589,
+      "sha256": "09a6c9168524d4441a1001c389af8b19202dbc7511733a6c89967dd37d59d29e"
+    },
+    {
+      "path": "docs/media/metrics-dashboard/walkthrough.gif",
+      "bytes": 341575,
+      "sha256": "5bb12f91e0a812aab8449857b54c604870f8c5902d16c657ecf1b411ad7e7cc8"
+    }
+  ],
+  "read_requests": 6
+}

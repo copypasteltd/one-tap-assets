@@ -1,5 +1,15 @@
 # 源码交付与快速启动 / Source delivery and quick start
 
+当前运营入口由API服务提供：`/ops/metrics`（统计）、`/ops/support`（客服）、`/ops/review`（社区审核）；各自沿用独立权限。单独启动静态预览不能提供管理API。使用仓库本轮构建时，先将 `YPCC_BUILD_ROOT` 设置为 `docs/delivery/current.json` 的 `build_root` 后运行 `pnpm local:start`；源码ZIP解压后的产物路径为 `runtime/build`。详见[运营使用与复录](../实施/运营看板与窗口一致统计-v1.0.md)。
+
+The API serves `/ops/metrics`, `/ops/support` and `/ops/review` under separate permissions. Static preview alone has no management API. In this checkout set `YPCC_BUILD_ROOT` to the current build report's `build_root`, then use `pnpm local:start`; packaged outputs are mapped to `runtime/build`.
+
+以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
+
+2026-10-30快速交付：[运营看板与窗口一致统计](../实施/运营看板与窗口一致统计-v1.0.md) · [准确证据及原始尝试](../verification/metrics-dashboard-source.json)。`/ops/metrics`接通独立权限、同窗口付款/首版交付、订单费用、路线P95和异常去重；错误清除旧数、原窗口重试、空数据/窄屏与断开清理已有实际界面证据。本轮4客户端+3原生API+6浏览器检查通过，类型/server/preview/原生自检/启动PASS；470/42/4 `ea335c94`，32迁移原字节保持，77业务/35管理。新增5截图+MP4/WebM/GIF共8媒体，总130；旧122媒体/48设计及历史证据保持。付款/交付/费用/运营身份为合成，非真实商用或质量证明。完整F17、旧官方用例超时定位、真实服务/隔离/准入、双小程序真机、Plus/云端与58项完整验收待完；全面测试和小程序重编NOT_RUN，真实服务/销售关闭，产品/生产/云端false。
+
+以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
+
 2026-10-30快速交付：[社区原生声音商业配置与买家交付](../实施/社区原生声音商业配置与买家交付-v1.0.md) · [准确证据与原始失败](../verification/community-native-source.json)。默认人物声音/ORDER授权、四模型费率、原预算/资源、规划锁定及最早到期报价接通；两路线买家付款→原声/字幕→整轨听音→新双复核→私有下载/释放有原生夹具证据。最终7项通过/33未选，461/42/4 `5d8ea011`；类型/server/preview/原生自检和启动PASS，32迁移原字节保持，77业务/35管理。早期一项旧官方买家用例原240秒限时超时仍待定位；不升级全面通过。122媒体/154含元数据、48设计与原历史JSON/日志保持，无新UI录制。提示音及合成语义/授权/付款不证明真实质量；全面测试、双小程序重编/真机未执行，真实服务/销售关闭，产品/生产/云端false。
 
 以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。

@@ -1,100 +1,61 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T09:44:11.101443+00:00",
+  "checked_at": "2026-10-30T10:10:23.043163+00:00",
   "strategy": "USER_REQUESTED_FAST_MAIN_FUNCTIONAL_CLOSURE",
-  "source_set_hash": "5d8ea011ee6459430d979ea68968d2d30d28044cf65093c492c2285aaee9721f",
-  "source_files": 461,
+  "source_set_hash": "ea335c9494249f5db9823c3b962f3534bae18a3518e0a594b1bfc5727a71a280",
+  "source_files": 470,
   "runtime_contract_files": 42,
   "resource_files": 4,
-  "source_snapshot": "docs/verification/community-native-tested-source.json",
-  "build_snapshot": "docs/verification/community-native-build.json",
-  "functional_scope": "docs/实施/社区原生声音商业配置与买家交付-v1.0.md",
+  "source_snapshot": "docs/verification/metrics-dashboard-tested-source.json",
+  "build_snapshot": "docs/verification/metrics-dashboard-build.json",
+  "functional_scope": "docs/实施/运营看板与窗口一致统计-v1.0.md",
   "source_unchanged_during_tests": true,
-  "test_fixture_mcp_bridge_matches_current_build": true,
   "new_checks": {
     "status": "PASS",
     "passed": 7,
-    "not_selected": 33,
-    "failed": 0,
-    "test_files": 2,
-    "native_community_cases": 4,
-    "silent_community_compatibility_cases": 3,
+    "client_cases": 4,
+    "native_database_api_cases": 3,
+    "browser_checks": 6,
     "runs": [
       {
-        "name": "native-community",
+        "name": "client",
         "passed": 4,
-        "not_selected": 33,
         "failed": 0,
-        "source_set_hash": "5d8ea011ee6459430d979ea68968d2d30d28044cf65093c492c2285aaee9721f",
+        "source_set_hash": "ea335c9494249f5db9823c3b962f3534bae18a3518e0a594b1bfc5727a71a280",
         "report": {
-          "path": "docs/verification/community-native-native-community-integration.json",
-          "sha256": "ff666c66f1930b41ce624ccff2a4e977cbcc513a3134c145fd22c79a892a4987",
-          "bytes": 12951
-        },
-        "wrapper": {
-          "path": "docs/verification/community-native-native-community-targeted.json",
-          "sha256": "5b1aae73d5f069719cf65e2e0d5cbfc51b9bfc64cf5a25248c923cbfec06f773",
-          "bytes": 1264
+          "path": "docs/verification/metrics-dashboard-client.json",
+          "sha256": "a714cc093836613e8658d0d218d3f47618e8fd7b47a0f604f4eb6be445310d97",
+          "bytes": 2064
         },
         "log": {
-          "path": "docs/verification/community-native-native-community.log",
-          "sha256": "885d5c0b8a2a038925640784f2fd79b01ed779a88ccb6103487fbbf9457ee0c7",
-          "bytes": 1664
+          "path": "docs/verification/metrics-dashboard-client.log",
+          "sha256": "26f6e778a317b8f2dd822e0afcfbfe23376ef022c1daabff27695a91684ac426",
+          "bytes": 413
         }
       },
       {
-        "name": "silent-community-compatibility",
+        "name": "api",
         "passed": 3,
-        "not_selected": 0,
         "failed": 0,
-        "source_set_hash": "5d8ea011ee6459430d979ea68968d2d30d28044cf65093c492c2285aaee9721f",
+        "source_set_hash": "ea335c9494249f5db9823c3b962f3534bae18a3518e0a594b1bfc5727a71a280",
         "report": {
-          "path": "docs/verification/community-native-silent-community-compatibility-integration.json",
-          "sha256": "b5b3802dd171df889c51f9c97820b50d6fda086f6f203222d71df655f61d8264",
-          "bytes": 1838
-        },
-        "wrapper": {
-          "path": "docs/verification/community-native-silent-community-compatibility-targeted.json",
-          "sha256": "2b255d38dd0950d646d3e1befc9a153cc7d55eaf70539c3fd5f2bb866d86d921",
-          "bytes": 1217
+          "path": "docs/verification/metrics-dashboard-api.json",
+          "sha256": "d82c0cdf7e299987c959283dfce5341ec0363f8388d3a32087b9027158c8e888",
+          "bytes": 1725
         },
         "log": {
-          "path": "docs/verification/community-native-silent-community-compatibility.log",
-          "sha256": "9d58aa491e9b1d0dc9da7306bfbdff021123bc958e5e22ee5aa2c002d93509b8",
-          "bytes": 554
+          "path": "docs/verification/metrics-dashboard-api.log",
+          "sha256": "9992668d363ee59216125a491b3834fc639444f5b7f42a637d71b634207b3bcd",
+          "bytes": 402
         }
       }
     ],
-    "actual_native_postgresql_ffmpeg_https_mcp_and_download": true,
-    "service_semantics_rights_identity_payment_and_prices_synthetic": true,
-    "real_chinese_speech_verified": false
+    "browser_manifest": "docs/media/metrics-dashboard/capture-manifest.json",
+    "recording": "docs/verification/metrics-dashboard-recording.json",
+    "actual_native_postgresql_and_http": true,
+    "payment_delivery_cost_and_staff_identity_synthetic": true
   },
-  "attempt_history": "docs/verification/community-native-attempts.json",
-  "initial_build": {
-    "report": {
-      "path": "docs/verification/community-native-initial-build.json",
-      "sha256": "3670290c4d3db50ffc9b2446d9b64e57cdb8a451e50e7bbc5dde2d98857ab1b1",
-      "bytes": 86751
-    },
-    "reason": "Typecheck rejected explicitly undefined optional nativeVoice in the negative test under exactOptionalPropertyTypes. An intentional unknown cast now reaches the same runtime guard. Server and preview already passed; those results retain their earlier snapshot.",
-    "logs": [
-      {
-        "path": "docs/verification/community-native-initial-build-1.log",
-        "sha256": "7f78bd410bc4312d7eba913fb5232bd274e09e3b7c52e25e8d5e453bef79ceca",
-        "bytes": 612
-      },
-      {
-        "path": "docs/verification/community-native-initial-build-2.log",
-        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "bytes": 0
-      },
-      {
-        "path": "docs/verification/community-native-initial-build-3.log",
-        "sha256": "a340412d7371713c136d84170e98954ba12aa01bee74cfbb6192af54a15e2350",
-        "bytes": 2097
-      }
-    ]
-  },
+  "attempt_history": "docs/verification/metrics-dashboard-attempts.json",
   "unresolved_earlier_regression": {
     "status": "TIMEOUT",
     "attempt": 3,
@@ -119,8 +80,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 17314,
-      "log_path": "runtime/delivery-builds/2026-10-30T09-40-57-849Z-c67d7cf0/typecheck.log",
+      "elapsed_ms": 14452,
+      "log_path": "runtime/delivery-builds/2026-10-30T10-06-37-883Z-ddb3d828/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -136,46 +97,46 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 587,
-      "log_path": "runtime/delivery-builds/2026-10-30T09-40-57-849Z-c67d7cf0/server.log",
+      "elapsed_ms": 1126,
+      "log_path": "runtime/delivery-builds/2026-10-30T10-06-37-883Z-ddb3d828/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T09-40-57-849Z-c67d7cf0\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T10-06-37-883Z-ddb3d828\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T09-40-57-849Z-c67d7cf0\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T10-06-37-883Z-ddb3d828\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 828,
-      "log_path": "runtime/delivery-builds/2026-10-30T09-40-57-849Z-c67d7cf0/preview.log",
-      "log_sha256": "04e9cc9b017dad1f51d25b884f8f24d11db002755664b76cb653ae1d10344269"
+      "elapsed_ms": 1570,
+      "log_path": "runtime/delivery-builds/2026-10-30T10-06-37-883Z-ddb3d828/preview.log",
+      "log_sha256": "c7467a09792d5dcaa4147d328d69d2bf4832342a0dabfd6b638ade92fd0257c9"
     }
   ],
   "build_logs": [
     {
-      "path": "docs/verification/community-native-build-1.log",
+      "path": "docs/verification/metrics-dashboard-build-1.log",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0
     },
     {
-      "path": "docs/verification/community-native-build-2.log",
+      "path": "docs/verification/metrics-dashboard-build-2.log",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0
     },
     {
-      "path": "docs/verification/community-native-build-3.log",
-      "sha256": "04e9cc9b017dad1f51d25b884f8f24d11db002755664b76cb653ae1d10344269",
-      "bytes": 2096
+      "path": "docs/verification/metrics-dashboard-build-3.log",
+      "sha256": "c7467a09792d5dcaa4147d328d69d2bf4832342a0dabfd6b638ade92fd0257c9",
+      "bytes": 2546
     }
   ],
   "components": [
@@ -201,11 +162,11 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 1.099,
-      "log_path": "runtime/delivery/community-native-doctor-1793353305658927500.log",
-      "log_sha256": "c701c942472e60e663d2fcd17a15376dd9ec126a18016de0836cdf50e041ac67",
+      "elapsed_seconds": 5.381,
+      "log_path": "runtime/delivery/metrics-dashboard-doctor-1793354872421845300.log",
+      "log_sha256": "720b696a1a3650e679e96889e05c8b50298292a59492f92357512f6dca72cc27",
       "report": {
-        "checked_at": "2026-10-30T09:41:46.713Z",
+        "checked_at": "2026-10-30T10:07:56.979Z",
         "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
         "rows": [
           {
@@ -293,8 +254,8 @@
         "production_admitted": false
       },
       "public_log": {
-        "path": "docs/verification/community-native-doctor.log",
-        "sha256": "c701c942472e60e663d2fcd17a15376dd9ec126a18016de0836cdf50e041ac67",
+        "path": "docs/verification/metrics-dashboard-doctor.log",
+        "sha256": "720b696a1a3650e679e96889e05c8b50298292a59492f92357512f6dca72cc27",
         "bytes": 2141
       }
     },
@@ -302,28 +263,28 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 5.199,
-      "log_path": "runtime/delivery/community-native-backend-1793353314365487100.log",
-      "log_sha256": "9ebfd5f32cdaf347f62415bc078fa91e46cdb51e62cf300316bd5789dce264a8",
+      "elapsed_seconds": 3.722,
+      "log_path": "runtime/delivery/metrics-dashboard-backend-1793354879146357600.log",
+      "log_sha256": "fe0bdfb4de109a612b955dccd90e2689b5297f8daf243564ad7f1e2db1f02c9d",
       "local_stack_ready": true,
       "preview_http_ready": false,
       "public_log": {
-        "path": "docs/verification/community-native-backend.log",
-        "sha256": "9ebfd5f32cdaf347f62415bc078fa91e46cdb51e62cf300316bd5789dce264a8",
-        "bytes": 1562
+        "path": "docs/verification/metrics-dashboard-backend.log",
+        "sha256": "fe0bdfb4de109a612b955dccd90e2689b5297f8daf243564ad7f1e2db1f02c9d",
+        "bytes": 1564
       }
     },
     "preview": {
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 0.89,
-      "log_path": "runtime/delivery/community-native-preview-1793353439317234500.log",
+      "elapsed_seconds": 1.331,
+      "log_path": "runtime/delivery/metrics-dashboard-preview-1793354883238550000.log",
       "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
       "local_stack_ready": false,
       "preview_http_ready": true,
       "public_log": {
-        "path": "docs/verification/community-native-preview.log",
+        "path": "docs/verification/metrics-dashboard-preview.log",
         "sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
         "bytes": 91
       }
@@ -443,6 +404,110 @@
     {
       "path": "docs/verification/community-commerce-tested-source.json",
       "sha256": "8d39f64c6310b5897ea1a87c9ff0ca242f4a64b148ba63ed8a2c28368fac3bad"
+    },
+    {
+      "path": "docs/verification/community-native-attempt-01-result.json",
+      "sha256": "77ea3258d29c43d38ce56bcc0c5c7f488dc11c30b283fd708a7f344d7b862d18"
+    },
+    {
+      "path": "docs/verification/community-native-attempt-01-source.json",
+      "sha256": "9cf935942be5dc8b5434cd29fceced3aa2cdd6e4f6f358e4a1d64d638db8ea4f"
+    },
+    {
+      "path": "docs/verification/community-native-attempt-02-api.json",
+      "sha256": "44b319d7c944dccd61720779fa8452d804eefbf786ff8118a79df9426c27c899"
+    },
+    {
+      "path": "docs/verification/community-native-attempt-02-result.json",
+      "sha256": "200b169d014bfc86974dda18ed2a3618176d2a7ce4ac8e5fc9d4c1b4e93194c1"
+    },
+    {
+      "path": "docs/verification/community-native-attempt-02-source.json",
+      "sha256": "6e9962536bd17a11869ab40e0fee39656bb9a37f56b459f9cd1eb36ca8b9acb4"
+    },
+    {
+      "path": "docs/verification/community-native-attempt-03-api.json",
+      "sha256": "6bedb34b129bd70929f39fbf206c370df4e98c7a777ff061294903fe49c9e492"
+    },
+    {
+      "path": "docs/verification/community-native-attempt-03-result.json",
+      "sha256": "99dc3625945e1e72070ae6d622e8abcafbe82957d0bf7f3ab7f9eb891a098625"
+    },
+    {
+      "path": "docs/verification/community-native-attempt-03-source.json",
+      "sha256": "6e9962536bd17a11869ab40e0fee39656bb9a37f56b459f9cd1eb36ca8b9acb4"
+    },
+    {
+      "path": "docs/verification/community-native-attempt-04-api.json",
+      "sha256": "ff666c66f1930b41ce624ccff2a4e977cbcc513a3134c145fd22c79a892a4987"
+    },
+    {
+      "path": "docs/verification/community-native-attempt-04-result.json",
+      "sha256": "5b1aae73d5f069719cf65e2e0d5cbfc51b9bfc64cf5a25248c923cbfec06f773"
+    },
+    {
+      "path": "docs/verification/community-native-attempt-04-source.json",
+      "sha256": "83664897daa116b74864bbda4e8b0aab30badb6bed39e20a87cbd1f00b78b494"
+    },
+    {
+      "path": "docs/verification/community-native-attempt-05-api.json",
+      "sha256": "b5b3802dd171df889c51f9c97820b50d6fda086f6f203222d71df655f61d8264"
+    },
+    {
+      "path": "docs/verification/community-native-attempt-05-result.json",
+      "sha256": "2b255d38dd0950d646d3e1befc9a153cc7d55eaf70539c3fd5f2bb866d86d921"
+    },
+    {
+      "path": "docs/verification/community-native-attempt-05-source.json",
+      "sha256": "83664897daa116b74864bbda4e8b0aab30badb6bed39e20a87cbd1f00b78b494"
+    },
+    {
+      "path": "docs/verification/community-native-attempts.json",
+      "sha256": "2d976284b99b8c699ae77bc4cf8a888c90ed4295faf15bd193c02dc4d34734bd"
+    },
+    {
+      "path": "docs/verification/community-native-backend.json",
+      "sha256": "a68b4a689c4ed4192317a6445fbcd07329aa5188ce43e23fd333509c7c1f06dc"
+    },
+    {
+      "path": "docs/verification/community-native-build.json",
+      "sha256": "eaf75d05ec962bf931aafbee578dd5c53e7388a502b1dbf60909d3edad05fd5b"
+    },
+    {
+      "path": "docs/verification/community-native-doctor.json",
+      "sha256": "74935fcce2d70fb0a01f369d9ec38b98ce6affb557e44a600320d2b2fcce141e"
+    },
+    {
+      "path": "docs/verification/community-native-initial-build.json",
+      "sha256": "3670290c4d3db50ffc9b2446d9b64e57cdb8a451e50e7bbc5dde2d98857ab1b1"
+    },
+    {
+      "path": "docs/verification/community-native-native-community-integration.json",
+      "sha256": "ff666c66f1930b41ce624ccff2a4e977cbcc513a3134c145fd22c79a892a4987"
+    },
+    {
+      "path": "docs/verification/community-native-native-community-targeted.json",
+      "sha256": "5b1aae73d5f069719cf65e2e0d5cbfc51b9bfc64cf5a25248c923cbfec06f773"
+    },
+    {
+      "path": "docs/verification/community-native-preview.json",
+      "sha256": "a9034f20b2653b1f83f0d56a209d32c90b04b1fc180275cec2d16eca1e3cebb7"
+    },
+    {
+      "path": "docs/verification/community-native-silent-community-compatibility-integration.json",
+      "sha256": "b5b3802dd171df889c51f9c97820b50d6fda086f6f203222d71df655f61d8264"
+    },
+    {
+      "path": "docs/verification/community-native-silent-community-compatibility-targeted.json",
+      "sha256": "2b255d38dd0950d646d3e1befc9a153cc7d55eaf70539c3fd5f2bb866d86d921"
+    },
+    {
+      "path": "docs/verification/community-native-source.json",
+      "sha256": "42f58375b762adf03e5c5dc8f274fe800be37d361b0216e2857050d0d8f40df1"
+    },
+    {
+      "path": "docs/verification/community-native-tested-source.json",
+      "sha256": "83664897daa116b74864bbda4e8b0aab30badb6bed39e20a87cbd1f00b78b494"
     },
     {
       "path": "docs/verification/contracts.json",
@@ -639,6 +704,10 @@
     {
       "path": "docs/verification/delivery-focused-source-191b9eb.json",
       "sha256": "8bec94822d9f0a977689011f6ea2eab6cca036a09d06eeb341cba5258d31d847"
+    },
+    {
+      "path": "docs/verification/delivery-focused-source-1a7832b.json",
+      "sha256": "c6f508eaa1bd5a87b8197f6a7d06ccc5b789d2ae9c6f290a3b065fb7ef920679"
     },
     {
       "path": "docs/verification/delivery-focused-source-27045e2.json",
@@ -1297,6 +1366,10 @@
       "sha256": "62e994d11ca0af1eeafaa48c19bae26298827a084f3a35876965b16031387dd2"
     },
     {
+      "path": "docs/verification/publication-1a7832b.json",
+      "sha256": "908475f36efbe0fefac4e2ff8de0b078eab5818d7b793601949cba6155ab0e56"
+    },
+    {
       "path": "docs/verification/publication-27045e2.json",
       "sha256": "a49ce4193d1d3a322936e10a4ea63ebc616abb17931643d06e38db5ef95b390b"
     },
@@ -1455,6 +1528,10 @@
     {
       "path": "docs/verification/repository-audit-191b9eb.json",
       "sha256": "52577b4e7442c89608861c25efd163a3372d7a59cc448d5f0d9462575246a2c7"
+    },
+    {
+      "path": "docs/verification/repository-audit-1a7832b.json",
+      "sha256": "4f205a8f9fe4d991381d4076f02d87bcc55d807206a53a03b31cf0efcfd7a58e"
     },
     {
       "path": "docs/verification/repository-audit-27045e2.json",
@@ -1786,15 +1863,16 @@
     }
   ],
   "existing_media_files_verified": 122,
-  "new_media_files_verified": 0,
-  "total_media_files": 122,
+  "new_media_files_verified": 8,
+  "total_media_files": 130,
   "baseline_media_files_with_metadata": 154,
   "baseline_design_files": 48,
   "frozen_c_files": 25,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
-  "prior_delivery": "docs/verification/delivery-focused-source-1a7832b.json",
+  "prior_delivery": "docs/verification/delivery-focused-source-7e849e2.json",
   "prior_ui_captures_relabelled": false,
-  "browser_used": false,
+  "browser_used": true,
+  "browser_tabs_closed": true,
   "owned_test_and_local_services_stopped": true,
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
@@ -1803,17 +1881,17 @@
   "production_admitted": false,
   "cloud_deployed": false,
   "functional_changes": [
-    "Platform preparation freezes the default admitted character/native voice and explicit ORDER-use rights for a community native-audio version; SAMPLE rights never substitute.",
-    "Four exact admitted generation/ASR/listening model and rate registrations, exact resources, original price/budget/repair allowance and earliest expiry are frozen without admission or sales.",
-    "Planning input and tools retain the same default voice and recheck live original rights/models before inference and result acceptance.",
-    "Quotes recheck the immutable community binding, price the actual complete shot/reference plan within the original budget, and expire no later than the earliest frozen capability or right.",
-    "Both native AI routes reuse the original paid-order production, one ASR, whole-track listening, fresh dual reviews, private downloads and instance release; community authors cannot read buyer assets."
+    "Requested UTC half-open window is validated and applied consistently to all aggregate measures in one read snapshot.",
+    "Paid first-manifest delivery, route timing and distinct deadline scopes exclude unpaid, missing, repeated and out-of-window records without inventing absent values.",
+    "Independent metrics:read operator UI uses C design, 1/7/30-day or custom windows, explicit empty/error/retry states and route/cost/exception context.",
+    "Memory-only credentials and stale-response rejection; successful aggregate reads are audited without buyer content or private resource addresses."
   ],
   "limitations": [
-    "Test audio consists of tones; Chinese ASR text, listening verdicts, media semantics, admission, identities, licenses, payment and rates are synthetic. Real PostgreSQL, HTTPS/MCP, FFmpeg files and private downloads are exercised.",
-    "One earlier existing official buyer case timed out at the unchanged 240-second limit. Root cause is unresolved; the later seven selected checks are a distinct scope, not an all-green claim.",
-    "No new UI or browser capture was made. All 122 historical media and frozen C design assets retain their original bytes and provenance.",
-    "Live services and sales remain off. Full suites, native mini-program rebuilds/devices, complete official/community commercial admission, production isolation, Plus, cloud and all 58 acceptance items remain pending."
+    "Counts show current state of records created in the window, not historical state as of its end. Costs cover the order ledger only.",
+    "Recognition, recommendations, album saves, effective community reuse, free platform costs and test/manual/real traffic segregation remain outside this metrics increment.",
+    "UI uses actual native HTTP and isolated PostgreSQL with synthetic payment, delivery, cost and staff metadata; not real payment, provider billing, quality or production identity validation.",
+    "An earlier official buyer case exceeded its unchanged 240-second limit. Root cause remains unresolved; no full-chain or full-suite pass is claimed this turn.",
+    "Live services and sales remain off. Native mini builds/devices, live services, commercial admission, production isolation, Plus, cloud and all 58 acceptance items remain pending."
   ],
-  "canonical_community_native_provenance": "docs/verification/community-native-source.json"
+  "canonical_metrics_dashboard_provenance": "docs/verification/metrics-dashboard-source.json"
 }

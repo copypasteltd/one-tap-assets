@@ -1,0 +1,11 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/integration/metrics.test.ts (3 tests) 7601ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  18:06:28
+   Duration  8.83s (tests 88%, import 9%, transform 3%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/metrics-dashboard-2026-10-30T10-06-27-105Z-ac1e4368/api.json
