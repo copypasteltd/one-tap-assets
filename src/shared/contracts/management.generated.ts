@@ -2692,6 +2692,7 @@ export interface components {
             user_code: string;
             /** @enum {string} */
             decision: "APPROVE" | "DENY";
+            account_binding_id?: string;
         };
         PlusLinkApproval: {
             link_id: string;
@@ -2704,6 +2705,8 @@ export interface components {
             access: "OWN_PROJECTS_AND_EDIT_DRAFTS";
             can_prepare_render_plans: boolean;
             can_prepare_video_render_plans?: boolean;
+            account_binding_id?: string;
+            source_platform?: components["schemas"]["Platform"];
         };
         PlusLinkPollRequest: {
             poll_key: string;
@@ -2719,6 +2722,7 @@ export interface components {
             state: "ACTIVE" | "REVOKED" | "EXPIRED";
             can_prepare_render_plans: boolean;
             can_prepare_video_render_plans?: boolean;
+            account_binding_id?: string;
         };
         PlusBrowserSession: {
             access_token: string;
@@ -3010,6 +3014,70 @@ export interface components {
         };
         PlusVideoRenderPlanListResponse: {
             data: components["schemas"]["PlusVideoRenderPlanList"];
+            trace_id: string;
+        };
+        AccountBindingStartRequest: Record<string, never>;
+        AccountBindingCodeRequest: {
+            user_code: string;
+        };
+        AccountBindingDecisionRequest: {
+            /** @enum {string} */
+            decision: "CONFIRM" | "CANCEL" | "REJECT";
+            verification_code?: string;
+        };
+        AccountBindingRequest: {
+            request_id: string;
+            /** @enum {string} */
+            state: "PENDING" | "CLAIMED" | "BOUND" | "CANCELLED" | "REJECTED" | "EXPIRED";
+            /** @enum {string} */
+            role: "ORIGIN" | "PEER" | "CANDIDATE";
+            origin_platform: components["schemas"]["Platform"];
+            peer_platform?: components["schemas"]["Platform"];
+            /** Format: date-time */
+            created_at: string;
+            /** Format: date-time */
+            expires_at: string;
+            user_code?: string;
+            verification_code?: string;
+            binding_id?: string;
+        };
+        AccountBinding: {
+            binding_id: string;
+            peer_platform: components["schemas"]["Platform"];
+            /** @enum {string} */
+            state: "ACTIVE" | "REVOKED";
+            /** Format: date-time */
+            created_at: string;
+            revoked_at: string | null;
+            /** @constant */
+            access: "PROJECTS_DRAFTS_AND_EXPLICIT_PLUS_PLANS";
+        };
+        AccountBindingRequestList: {
+            items: components["schemas"]["AccountBindingRequest"][];
+            next_cursor: null;
+        };
+        AccountBindingList: {
+            items: components["schemas"]["AccountBinding"][];
+            next_cursor: null;
+        };
+        AccountBindingRequestResponse: {
+            data: components["schemas"]["AccountBindingRequest"];
+            trace_id: string;
+        };
+        AccountBindingRequestListResponse: {
+            data: components["schemas"]["AccountBindingRequestList"];
+            trace_id: string;
+        };
+        AccountBindingListResponse: {
+            data: components["schemas"]["AccountBindingList"];
+            trace_id: string;
+        };
+        AccountBindingResponse: {
+            data: components["schemas"]["AccountBinding"];
+            trace_id: string;
+        };
+        PlusBrowserSessionResponse: {
+            data: components["schemas"]["PlusBrowserSession"];
             trace_id: string;
         };
     };

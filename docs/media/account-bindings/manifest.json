@@ -1,0 +1,116 @@
+{
+  "checked_at": "2026-10-30T18:49:48.304Z",
+  "source_set_hash": "9943204b3a2c3a3f28648175f91bedfdb4c8b117d5de6b3b6ae46e453fe92700",
+  "classification": "ACTUAL_SHARED_UI_NATIVE_HTTP_AND_PG_WITH_SYNTHETIC_IDENTITIES_ORDER_QA_AND_PNG",
+  "checks": [
+    "TWO_NATIVE_FIXTURE_IDENTITIES_REQUIRED_ORIGIN_CONFIRMATION_IN_ACTUAL_SHARED_UI",
+    "BOUND_SOURCE_LIBRARY_AND_DELIVERABLES_RENDER_FROM_REAL_HTTP_HANDLERS_NO_HORIZONTAL_OVERFLOW",
+    "EXPLICIT_BOUND_SOURCE_APPROVAL_REACHES_ACTUAL_PLUS_WORKSPACE",
+    "REVOKED_BINDING_IS_REJECTED_BY_EXISTING_PLUS_SESSION_ON_NEXT_OPERATION"
+  ],
+  "shots": [
+    {
+      "path": "docs/media/account-bindings/01-origin-invite.png",
+      "label": "发起端五分钟邀请"
+    },
+    {
+      "path": "docs/media/account-bindings/02-peer-proof.png",
+      "label": "另一端主动加入，尚未共享"
+    },
+    {
+      "path": "docs/media/account-bindings/03-mutual-confirmation.png",
+      "label": "发起端核对后完成绑定"
+    },
+    {
+      "path": "docs/media/account-bindings/04-bound-projects.png",
+      "label": "另一端作品和真实清单读取"
+    },
+    {
+      "path": "docs/media/account-bindings/05-plus-source.png",
+      "label": "Plus 显式选择已绑定作品来源"
+    },
+    {
+      "path": "docs/media/account-bindings/06-plus-bound-workspace.png",
+      "label": "电脑 Plus 标明作品来源及原渠道义务"
+    },
+    {
+      "path": "docs/media/account-bindings/07-revoked.png",
+      "label": "任一端解除绑定"
+    }
+  ],
+  "media": [
+    {
+      "path": "docs/media/account-bindings/01-origin-invite.png",
+      "bytes": 111791,
+      "sha256": "9d6a9209ada482268cf02ed7b81d0a540ad8ab6db47d87dd6b222c6d09f3d1e1"
+    },
+    {
+      "path": "docs/media/account-bindings/02-peer-proof.png",
+      "bytes": 111370,
+      "sha256": "99c86abb0f40039c6799d0f31f1ff214cf891a6cde7d6c89c6170cd445e963fa"
+    },
+    {
+      "path": "docs/media/account-bindings/03-mutual-confirmation.png",
+      "bytes": 89276,
+      "sha256": "114800e44b06d999a1d9ee344095aba495ab326989fe8be8fd8287e8c3aa4996"
+    },
+    {
+      "path": "docs/media/account-bindings/04-bound-projects.png",
+      "bytes": 82129,
+      "sha256": "49bb2eef813c013c472394c0befde63cc44705f0afb6b0113457dc7cf54be933"
+    },
+    {
+      "path": "docs/media/account-bindings/05-plus-source.png",
+      "bytes": 218259,
+      "sha256": "e3851f4223e65ac6aa89653daa1f4c26e95c0a2afa69c3fd6e775c2aab5e83c4"
+    },
+    {
+      "path": "docs/media/account-bindings/06-plus-bound-workspace.png",
+      "bytes": 88565,
+      "sha256": "62594e664146b29748f9f37614e376c6c850b07b842401afe23741e856313fc1"
+    },
+    {
+      "path": "docs/media/account-bindings/07-revoked.png",
+      "bytes": 238579,
+      "sha256": "bf1856d14ab370048f37a3ed7805067542663bf40988e325614a17d316f12479"
+    },
+    {
+      "path": "docs/media/account-bindings/walkthrough.webm",
+      "bytes": 1335688,
+      "sha256": "99a2d43a3660327a8591838d523c4ec7a29f8d7ca275e392207777dbca93eee9"
+    },
+    {
+      "path": "docs/media/account-bindings/walkthrough.mp4",
+      "bytes": 327869,
+      "sha256": "bbe21a59cf795ece8800eca2341ec9769fed0927b6ba2313bf657f03ec3b69ab"
+    },
+    {
+      "path": "docs/media/account-bindings/walkthrough.gif",
+      "bytes": 1155079,
+      "sha256": "5395927f993363c7ee3ced4ecd2c83a5b71579aea4a354d63ef6de14af9ca725"
+    }
+  ],
+  "video_probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 390,
+        "height": 844
+      }
+    ],
+    "format": {
+      "duration": "15.680000"
+    }
+  },
+  "browser_errors": [],
+  "browser_closed": true,
+  "owned_tabs_closed": true,
+  "owned_preview_server_closed": true,
+  "temporary_schema_removed": true,
+  "real_device_verified": false,
+  "actual_platform_login_verified": false,
+  "actual_album_save_verified": false,
+  "production_admitted": false
+}

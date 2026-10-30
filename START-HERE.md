@@ -22,7 +22,13 @@ The primary clients are the Alipay and Douyin mini-programs. Users take photos, 
 
 Repository builds use fresh isolated output directories. The ZIP maps successful outputs to `runtime/build/`. Startup verifies the recorded source, contract, font and selected output hashes before choosing a directory. An explicit `YPCC_BUILD_ROOT` selects developer outputs and is reported as unverified.
 
-## 2. Windows首次运行 / First run
+## 2. 本人两端作品 / Link your two accounts
+
+账户与隐私 → 绑定支付宝与抖音账号 → 本端发起；本人另一平台输入码并加入；发起端核对双方第二确认码完成。我的素材 → 查看已绑定端作品。Plus批准时可明确选择作品来源。任一端可解除，原订单、付款与退款继续由原平台负责。
+
+Start from Account & privacy, join from your other mini-program, then verify matching second codes on the originating device. Open the bound source in My assets or select it during mobile Plus approval. Either end can revoke the link; payment and refund responsibility stay with the original platform. [Screens and recording](docs/media/account-bindings/README.md).
+
+## 3. Windows首次运行 / First run
 
 进入仓库或解压后的`one-tap-assets`目录：
 
@@ -50,7 +56,7 @@ Default API: `https://localhost:3100`; actual Plus: `https://localhost:3100/plus
 
 Open `http://127.0.0.1:4173/`. The replay uses synthetic data. Actual Plus runs at the API origin and requires explicit phone authorization. Close unused tabs and stop the preview terminal when finished.
 
-## 3. 双小程序与重新交付 / Mini-programs and rebuilding
+## 4. 双小程序与重新交付 / Mini-programs and rebuilding
 
 在对应官方开发者工具中导入成功产物，配置真实AppID、合法HTTPS API域名、登录/支付合同及权限。ZIP内目录为`runtime/build/mini-alipay`与`runtime/build/mini-douyin`；仓库独立目录以构建记录为准。默认API原点用于本机开发，真机使用前必须设置`TARO_APP_API_BASE`并重新构建；抖音支付还需已核验的`TARO_APP_DOUYIN_TRADE_CONTRACT`。
 
@@ -70,7 +76,7 @@ To create another delivery from the Git repository:
 
 This runs type checking, selected builds and packaging without the full test suite. Failed targets remain explicit; a partial archive can still contain successful outputs and all source. Source/contract/output mismatches stop packaging. Dependencies, tools, credentials and databases are excluded; the archive is not an offline installer.
 
-## 4. 上线前仍需完成 / Still required for live operation
+## 5. 上线前仍需完成 / Still required for live operation
 
 | 编号 / No. | 待完成 / Required work |
 | --- | --- |
@@ -79,6 +85,6 @@ This runs type checking, selected builds and packaging without the full test sui
 | P03 | 双平台官方工具与iOS/Android真机登录、付款、下载、相册验收 / Host-tool and device acceptance |
 | P04 | 完整58项、官方变体质量/成本容量及长期运营验收 / Full acceptance, quality, cost, capacity and operations |
 
-真实服务和销售默认关闭。当前源码、原生媒体/数据库链路及构建证据不等于真实模型质量、生产隔离或云端上线。ASR、多轨/视频批量、长期跨平台绑定等扩展范围见[当前状态](docs/guides/STATUS.md)。详细方案与使用逻辑见[中文README](README.md) / [English README](README.en.md)。
+真实服务和销售默认关闭。当前源码、原生媒体/数据库链路及构建证据不等于真实模型质量、生产隔离或云端上线。本人双平台主动绑定见[绑定与共享作品](docs/实施/双平台本人账号绑定与共享作品-v1.0.md)，真实宿主实测仍待；ASR、多轨/视频批量等扩展范围见[当前状态](docs/guides/STATUS.md)。详细方案与使用逻辑见[中文README](README.md) / [English README](README.en.md)。
 
 Live services and sales remain disabled by default. Source, native media/database execution and build evidence do not establish real model quality, production isolation or cloud deployment. See the status page for remaining extensions.

@@ -1,0 +1,29 @@
+{
+  "baseline_commit": "0248cd66bcc9c60063c4fde4aa41668654283645",
+  "preserved_before_f24_update": [
+    {
+      "path": "assets/development/v1.1/contracts/endpoint-catalog.md",
+      "sha256": "3fd4701b0160a9b7db9220ba09609e1a570dbda65805a8f72fecb7b6603d687e"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/endpoints.json",
+      "sha256": "664605e26f587ff4515d199cc3dd5dcc8056a38f8e1c7ad067ea209ace47e57b"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/management-openapi.json",
+      "sha256": "3c7d8cffe7996828b44b6ff52cab0cfca6910779b32804207ae5adb6cd3c8b2b"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/openapi.json",
+      "sha256": "4c4d832813150d13cfb59ddeaea5d6e6023c4daa338f08a7f56bec9f00775981"
+    },
+    {
+      "path": "assets/development/v1.1/data-model.json",
+      "sha256": "e4db7a7810c0d42031e7edc9b8f3ff231487cccb1d047451b51f1c99bdad256f"
+    },
+    {
+      "path": "assets/development/v1.1/development-baseline.json",
+      "sha256": "29a9a57c23d11c71d0a559bb7cc2ff822e09ebc71e8b3981455e19e8433f1bc1"
+    }
+  ]
+}

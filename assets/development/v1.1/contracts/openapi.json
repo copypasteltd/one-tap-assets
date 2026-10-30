@@ -16416,6 +16416,1317 @@
         ],
         "x-implementation-status": "DESIGN_NOT_IMPLEMENTED"
       }
+    },
+    "/account-bindings/requests": {
+      "post": {
+        "operationId": "createAccountBindingRequest",
+        "summary": "原小程序发起五分钟双端绑定",
+        "description": "原小程序发起五分钟双端绑定",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountBindingRequestResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F24"
+        ],
+        "x-design-pages": [
+          "D22"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountBindingStartRequest"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listAccountBindingRequests",
+        "summary": "恢复本人尚未结束的绑定请求，最多五条",
+        "description": "恢复本人尚未结束的绑定请求，最多五条",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountBindingRequestListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F24"
+        ],
+        "x-design-pages": [
+          "D22"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED"
+      }
+    },
+    "/account-bindings/inspect": {
+      "post": {
+        "operationId": "inspectAccountBindingCode",
+        "summary": "另一端查看邀请；不接触作品或授予权限",
+        "description": "另一端查看邀请；不接触作品或授予权限",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountBindingRequestResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F24"
+        ],
+        "x-design-pages": [
+          "D22"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountBindingCodeRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/account-bindings/claim": {
+      "post": {
+        "operationId": "claimAccountBindingRequest",
+        "summary": "另一端主动证明控制权并等待发起端核对确认码",
+        "description": "另一端主动证明控制权并等待发起端核对确认码",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountBindingRequestResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F24"
+        ],
+        "x-design-pages": [
+          "D22"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountBindingCodeRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/account-bindings/requests/{request_id}": {
+      "get": {
+        "operationId": "getAccountBindingRequest",
+        "summary": "本人双方读取绑定进度",
+        "description": "本人双方读取绑定进度",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [
+          {
+            "name": "request_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountBindingRequestResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F24"
+        ],
+        "x-design-pages": [
+          "D22"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED"
+      }
+    },
+    "/account-bindings/requests/{request_id}/decision": {
+      "post": {
+        "operationId": "decideAccountBindingRequest",
+        "summary": "发起端核对双方确认码后确认或取消；另一端可撤回",
+        "description": "发起端核对双方确认码后确认或取消；另一端可撤回",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [
+          {
+            "name": "request_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountBindingRequestResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F24"
+        ],
+        "x-design-pages": [
+          "D22"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountBindingDecisionRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/account-bindings": {
+      "get": {
+        "operationId": "listAccountBindings",
+        "summary": "读取本人当前绑定及最近二十条解除记录",
+        "description": "读取本人当前绑定及最近二十条解除记录",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountBindingListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F24"
+        ],
+        "x-design-pages": [
+          "D22"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED"
+      }
+    },
+    "/account-bindings/{binding_id}": {
+      "delete": {
+        "operationId": "revokeAccountBinding",
+        "summary": "任何一端解除绑定并撤销派生连接及下载权限",
+        "description": "任何一端解除绑定并撤销派生连接及下载权限",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [
+          {
+            "name": "binding_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountBindingResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F24"
+        ],
+        "x-design-pages": [
+          "D22"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED"
+      }
+    },
+    "/account-bindings/{binding_id}/project-session": {
+      "post": {
+        "operationId": "createBoundProjectSession",
+        "summary": "本机短期浏览已绑定端项目；原渠道资金权限不转移",
+        "description": "本机短期浏览已绑定端项目；原渠道资金权限不转移",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [
+          {
+            "name": "binding_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlusBrowserSessionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F24"
+        ],
+        "x-design-pages": [
+          "D22"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED"
+      }
     }
   },
   "components": {
@@ -26628,6 +27939,10 @@
               "APPROVE",
               "DENY"
             ]
+          },
+          "account_binding_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
           }
         },
         "required": [
@@ -26668,6 +27983,13 @@
           },
           "can_prepare_video_render_plans": {
             "type": "boolean"
+          },
+          "account_binding_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "source_platform": {
+            "$ref": "#/components/schemas/Platform"
           }
         },
         "required": [
@@ -26726,6 +28048,10 @@
           },
           "can_prepare_video_render_plans": {
             "type": "boolean"
+          },
+          "account_binding_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
           }
         },
         "required": [
@@ -26797,7 +28123,7 @@
         "properties": {
           "items": {
             "type": "array",
-            "maxItems": 5,
+            "maxItems": 10,
             "items": {
               "$ref": "#/components/schemas/PlusSessionInfo"
             }
@@ -28129,6 +29455,279 @@
         "properties": {
           "data": {
             "$ref": "#/components/schemas/PlusVideoRenderPlanList"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBindingStartRequest": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      },
+      "AccountBindingCodeRequest": {
+        "type": "object",
+        "properties": {
+          "user_code": {
+            "type": "string",
+            "pattern": "^[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{8}$"
+          }
+        },
+        "required": [
+          "user_code"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBindingDecisionRequest": {
+        "type": "object",
+        "properties": {
+          "decision": {
+            "type": "string",
+            "enum": [
+              "CONFIRM",
+              "CANCEL",
+              "REJECT"
+            ]
+          },
+          "verification_code": {
+            "type": "string",
+            "pattern": "^[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{8}$"
+          }
+        },
+        "required": [
+          "decision"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBindingRequest": {
+        "type": "object",
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "CLAIMED",
+              "BOUND",
+              "CANCELLED",
+              "REJECTED",
+              "EXPIRED"
+            ]
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "ORIGIN",
+              "PEER",
+              "CANDIDATE"
+            ]
+          },
+          "origin_platform": {
+            "$ref": "#/components/schemas/Platform"
+          },
+          "peer_platform": {
+            "$ref": "#/components/schemas/Platform"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          },
+          "user_code": {
+            "type": "string",
+            "pattern": "^[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{8}$"
+          },
+          "verification_code": {
+            "type": "string",
+            "pattern": "^[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{8}$"
+          },
+          "binding_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          }
+        },
+        "required": [
+          "request_id",
+          "state",
+          "role",
+          "origin_platform",
+          "created_at",
+          "expires_at"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBinding": {
+        "type": "object",
+        "properties": {
+          "binding_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "peer_platform": {
+            "$ref": "#/components/schemas/Platform"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "REVOKED"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          },
+          "revoked_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "access": {
+            "const": "PROJECTS_DRAFTS_AND_EXPLICIT_PLUS_PLANS"
+          }
+        },
+        "required": [
+          "binding_id",
+          "peer_platform",
+          "state",
+          "created_at",
+          "revoked_at",
+          "access"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBindingRequestList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "maxItems": 5,
+            "items": {
+              "$ref": "#/components/schemas/AccountBindingRequest"
+            }
+          },
+          "next_cursor": {
+            "type": "null"
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBindingList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "maxItems": 20,
+            "items": {
+              "$ref": "#/components/schemas/AccountBinding"
+            }
+          },
+          "next_cursor": {
+            "type": "null"
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBindingRequestResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AccountBindingRequest"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBindingRequestListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AccountBindingRequestList"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBindingListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AccountBindingList"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBindingResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AccountBinding"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusBrowserSessionResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusBrowserSession"
           },
           "trace_id": {
             "type": "string"

@@ -3,7 +3,7 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-30T17:36:31.227Z",
+  "checked_at": "2026-10-30T18:48:05.794Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
@@ -23,8 +23,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 18425,
-      "log_path": "runtime/delivery/final-closure-package-typecheck.log",
+      "elapsed_ms": 72759,
+      "log_path": "runtime/delivery-builds/2026-10-30T18-24-25-007Z-2dcdefda/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -40,33 +40,29 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 419,
-      "log_path": "runtime/delivery-builds/2026-10-30T17-32-49-676Z-d552a8fa/server.log",
-      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "retained_from_source_set_hash": "9791cc29900941316ab4a25b5b5b1e70346a9d90e072558376e226a8a6fcd13a",
-      "rerun": false
+      "elapsed_ms": 1916,
+      "log_path": "runtime/delivery-builds/2026-10-30T18-24-25-007Z-2dcdefda/server.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T17-32-49-676Z-d552a8fa\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T18-24-25-007Z-2dcdefda\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T17-32-49-676Z-d552a8fa\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T18-24-25-007Z-2dcdefda\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 18962,
-      "log_path": "runtime/delivery-builds/2026-10-30T17-32-49-676Z-d552a8fa/preview.log",
-      "log_sha256": "7d5a9589760e9dec66e17505ef41eb85d5dbe25e01915623db7ddb77fa103232",
-      "retained_from_source_set_hash": "9791cc29900941316ab4a25b5b5b1e70346a9d90e072558376e226a8a6fcd13a",
-      "rerun": false
+      "elapsed_ms": 21910,
+      "log_path": "runtime/delivery-builds/2026-10-30T18-24-25-007Z-2dcdefda/preview.log",
+      "log_sha256": "daf4597ac26410c3cf643df76c1fab853a6194c0d9a8cd944a3266e879484b98"
     },
     {
       "task": "build:alipay",
@@ -76,15 +72,13 @@
         "alipay"
       ],
       "shell": false,
-      "status": "PASS",
-      "exit_code": 0,
+      "status": "TIMEOUT",
+      "exit_code": 1,
       "signal": null,
       "timeout_ms": 360000,
-      "elapsed_ms": 181751,
-      "log_path": "runtime/delivery-builds/2026-10-30T17-32-49-676Z-d552a8fa/alipay.log",
-      "log_sha256": "a12aaacb0b9df8042e5315bc17f180df582fa4b122c1f094ce7b4dfd7497eced",
-      "retained_from_source_set_hash": "9791cc29900941316ab4a25b5b5b1e70346a9d90e072558376e226a8a6fcd13a",
-      "rerun": false
+      "elapsed_ms": 361704,
+      "log_path": "runtime/delivery-builds/2026-10-30T18-24-25-007Z-2dcdefda/alipay.log",
+      "log_sha256": "2f2b6e8e51de3c21ffe82820b8d2efe4cc7a16485a342de5816643238845fac1"
     },
     {
       "task": "build:douyin",
@@ -98,16 +92,98 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 360000,
-      "elapsed_ms": 10259,
-      "log_path": "runtime/delivery-builds/2026-10-30T17-32-49-676Z-d552a8fa/douyin.log",
-      "log_sha256": "1a13e01067b427f77264124fabf90d4ac16b1be64340e587ff378c9ed97dd445",
-      "retained_from_source_set_hash": "9791cc29900941316ab4a25b5b5b1e70346a9d90e072558376e226a8a6fcd13a",
-      "rerun": false
+      "elapsed_ms": 164453,
+      "log_path": "runtime/delivery-builds/2026-10-30T18-24-25-007Z-2dcdefda/douyin.log",
+      "log_sha256": "341e62bd39132e9b3673370b11263e90b5c0322bc326eaf447cf555a3d156249"
+    },
+    {
+      "task": "typecheck",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+        "--noEmit"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 19235,
+      "log_path": "runtime/delivery-builds/2026-10-30T18-24-25-007Z-2dcdefda/typecheck-recovery.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T18-24-25-007Z-2dcdefda\\runtime\\build\\preview",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
+        "build",
+        "--config",
+        "src/preview/vite.config.ts",
+        "--outDir",
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T18-24-25-007Z-2dcdefda\\runtime\\build\\preview"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 5207,
+      "log_path": "runtime/delivery-builds/2026-10-30T18-24-25-007Z-2dcdefda/preview-recovery.log",
+      "log_sha256": "3258e74cc0da60cc55f1d8855586291601286b28ba055ae35f8465aae46a97bd"
+    },
+    {
+      "task": "build:alipay",
+      "command": "node scripts/build-mini.cjs alipay",
+      "argv": [
+        "scripts/build-mini.cjs",
+        "alipay"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 360000,
+      "elapsed_ms": 47240,
+      "log_path": "runtime/delivery-builds/2026-10-30T18-24-25-007Z-2dcdefda/alipay-recovery.log",
+      "log_sha256": "f3fa7521e2dbce2cc58b697321429ad9d2d712671deb9eda79771d6d52287e75"
+    },
+    {
+      "task": "typecheck",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+        "--noEmit"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 10035,
+      "log_path": "runtime/delivery-builds/2026-10-30T18-24-25-007Z-2dcdefda/typecheck-recorder.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "typecheck",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+        "--noEmit"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 11152,
+      "log_path": "runtime/delivery-builds/2026-10-30T18-24-25-007Z-2dcdefda/typecheck-recorder-9943204b.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     }
   ],
   "suites": [],
-  "source_files": 548,
-  "source_set_hash": "b00375bf3877f2e8600ec1a3516794f8cbc0db402341de704b46820a0dcf0bd7",
+  "source_files": 554,
+  "source_set_hash": "9943204b3a2c3a3f28648175f91bedfdb4c8b117d5de6b3b6ae46e453fe92700",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -282,6 +358,10 @@
       "sha256": "cb8a83f2dca4b01aa6a4923fa22b098a945edd59e82cf81297fb53907f2fdf6f"
     },
     {
+      "path": "src/api/db/migrations/039_account_bindings.sql",
+      "sha256": "43787f8e02abb2788c5caaceae8eec72e94e58aaa5a356d5ee8a067daa76174e"
+    },
+    {
       "path": "src/api/db/pool.ts",
       "sha256": "81dff3e39d44a521e3a3cfafe6d7b734cfb477f5cd33926c14694c0364777850"
     },
@@ -316,6 +396,10 @@
     {
       "path": "src/api/main.ts",
       "sha256": "2794e18ba1db3234197f6d274bd84021241f3363b159543af5e58272cd4c5824"
+    },
+    {
+      "path": "src/api/modules/account-bindings.ts",
+      "sha256": "6f3a4220c231d5f7bcf9b94fe3eea452b92482f87f6bb5220edeee2fea89fe97"
     },
     {
       "path": "src/api/modules/assets.ts",
@@ -375,7 +459,7 @@
     },
     {
       "path": "src/api/modules/plus-access.ts",
-      "sha256": "8acb4bc8e6507913cd21bbc471119f13f59e957cd8775ec0a5c3772919a3ba99"
+      "sha256": "9466b851ba9ccedac1809994c96665e6609120a145bedc2bcadc4d6d6c883945"
     },
     {
       "path": "src/api/modules/plus-batches.ts",
@@ -455,7 +539,7 @@
     },
     {
       "path": "src/api/routes/business.ts",
-      "sha256": "8664c3c62e1009a0362aa0fd7f739914a211c33ac063e150dfe545e935d4b689"
+      "sha256": "777997a1453397c20fc25f69ff0d0cccd77b706b85b0089c9651e471a59fd5ae"
     },
     {
       "path": "src/api/routes/management.ts",
@@ -667,11 +751,11 @@
     },
     {
       "path": "src/preview/components.tsx",
-      "sha256": "2b07ca420ceda654605bcbc6a7de032df2810cacd84874cd680e25f3a462929d"
+      "sha256": "0c9b7d5030788806a5dc85daac6c4208045403a51f5e2f0f872135fad68fbe0a"
     },
     {
       "path": "src/preview/fixtures.ts",
-      "sha256": "264592e622eddb6eb6c0be56c73e21d4c1a3f09ed4bea3223294468f12346cf9"
+      "sha256": "6ca17e9638abc520abf20c3ef3ba9bc454b0c374d54dc68f41c2e394361bfbd8"
     },
     {
       "path": "src/preview/index.html",
@@ -823,15 +907,15 @@
     },
     {
       "path": "src/shared/contracts/api.generated.ts",
-      "sha256": "2c34a5957b9a87dea97d8cafd29e57f5d59fe11788e70e4c277b82a92141a632"
+      "sha256": "2e42ce63fd63b1b2e775c14067d20cabf9ce9df97d5c5a87c4353379234ca2d5"
     },
     {
       "path": "src/shared/contracts/endpoints.generated.ts",
-      "sha256": "08656ba7b2f7ae292014f884182c9670325a33b14f3d8c4dbe7e08b0616331d8"
+      "sha256": "c9ce00ccd18b643bcce059903fd5572d24b490e6d5d97be901fe1d5f0ab87ac3"
     },
     {
       "path": "src/shared/contracts/management.generated.ts",
-      "sha256": "371f750fd557daf77405d97ea8dcb853075dfc93614862e84f561473529b120d"
+      "sha256": "6635a92d00e302103274a40357d200d1c02902bfb232127fcff2b60e28e5c080"
     },
     {
       "path": "src/shared/contracts/types.ts",
@@ -890,6 +974,10 @@
       "sha256": "2b850ca49e782a8825c4a43418016ecb7c31d361d8f0b2ad02f000bf9a66a513"
     },
     {
+      "path": "src/shared/ui/account-bindings.tsx",
+      "sha256": "d12a04acdbb629ea66a487ce69b742218740d940fad32a4f233dd33b414130f7"
+    },
+    {
       "path": "src/shared/ui/analysis.tsx",
       "sha256": "12e42dceec4940a010d2afb4f1fd52702b5bd0eff7f55f06497765fa47a27ac7"
     },
@@ -923,7 +1011,7 @@
     },
     {
       "path": "src/shared/ui/pages.tsx",
-      "sha256": "47fbefc8895eeb999e931b6ae56bb8d912b35843a6b92d30f0054c04de6be01e"
+      "sha256": "dead6fc774f90d530012a7a1664a6337c948a95e7953d8e84e68f0f9e50e7383"
     },
     {
       "path": "src/shared/ui/photos.tsx",
@@ -935,7 +1023,7 @@
     },
     {
       "path": "src/shared/ui/plus-connections.tsx",
-      "sha256": "aea798d1c4d543aedbd3b055e836617adb6a86fa24f5321bede073c99602aadf"
+      "sha256": "0abec22d70e88bfbbc67738a05bbca970ad7247ba83ce102e02fa8210c88d9b8"
     },
     {
       "path": "src/shared/ui/plus-render-requests.tsx",
@@ -987,11 +1075,11 @@
     },
     {
       "path": "src/web/main.tsx",
-      "sha256": "9a69bd4245761243039d74688d65c45e5ccec8ff58077fb9cabf939916fc87f4"
+      "sha256": "208ddb33bfa78c3420acb0471c2dc032de19054cdad466f4cc201150a25a4759"
     },
     {
       "path": "src/web/plus.css",
-      "sha256": "09cea5f84fdf43fb6aaa059851ed199bbfe5b592e4f06b6d823e2e9af978052a"
+      "sha256": "c3eff328677a1f65428979fd624cafc69a4562ece3216a27ccb96a32a2de9c0a"
     },
     {
       "path": "src/web/private-preview.tsx",
@@ -1638,6 +1726,10 @@
       "sha256": "fb5242e05f386764e0ae19def51686167232370975c35478b18a17f0bbec73fd"
     },
     {
+      "path": "tests/integration/account-bindings.test.ts",
+      "sha256": "5e22f64a9a51f8f5efa77133a45a21fdcc15a899030f94e2410f139c38943d12"
+    },
+    {
       "path": "tests/integration/agent-traffic.test.ts",
       "sha256": "0b68f8bb6de66f56c1d05ab66b96c7780bb54034aa657d539983c9030df5209d"
     },
@@ -2066,6 +2158,10 @@
       "sha256": "961fc70c5ca4dc8a0020b02b745cfdec54b4442d6ee0c096409744f485c64ecf"
     },
     {
+      "path": "scripts/account_binding_contracts.py",
+      "sha256": "bee5faacfa1c2a691edeca25dc0821df092fffcb4e1d73cb67789aa2a7ca479e"
+    },
+    {
       "path": "scripts/bootstrap-native.ps1",
       "sha256": "f1f11bcdacdd704343e790c55792715cce64b14d182fbc1f549cce6985568af0"
     },
@@ -2159,7 +2255,7 @@
     },
     {
       "path": "scripts/plus_contracts.py",
-      "sha256": "cb4158fb453773e1482e24e2685683b31db188d4d83566dcf111a9071ea15c62"
+      "sha256": "dba703b802648b6eb177a584b7327d0a9acc402e1b8fe7ee5e98ec3fe5f155b6"
     },
     {
       "path": "scripts/plus_video_contracts.py",
@@ -2168,6 +2264,10 @@
     {
       "path": "scripts/recommendation_event_contracts.py",
       "sha256": "d36610b29d160f31b2d84e4537215a5ec9d487f350d5d6d61134a0aceb715460"
+    },
+    {
+      "path": "scripts/record-account-bindings.ts",
+      "sha256": "4f64b8e6644479159709cc52c372ec2a7a3c7ae8d1886cdf8459666dd1d512b9"
     },
     {
       "path": "scripts/record-album-save.ts",
@@ -2329,11 +2429,11 @@
     },
     {
       "path": "assets/development/v1.1/contracts/endpoint-catalog.md",
-      "sha256": "3fd4701b0160a9b7db9220ba09609e1a570dbda65805a8f72fecb7b6603d687e"
+      "sha256": "8cb021b8ff606e60f91ba869f973459b289623af635bb8ab35f3d46d9832d4bb"
     },
     {
       "path": "assets/development/v1.1/contracts/endpoints.json",
-      "sha256": "664605e26f587ff4515d199cc3dd5dcc8056a38f8e1c7ad067ea209ace47e57b"
+      "sha256": "2d11ba34e0604f8bfbd7a334774d17d0ab8673f797002720b59da78e53699251"
     },
     {
       "path": "assets/development/v1.1/contracts/execution-snapshot.schema.json",
@@ -2345,11 +2445,11 @@
     },
     {
       "path": "assets/development/v1.1/contracts/management-openapi.json",
-      "sha256": "3c7d8cffe7996828b44b6ff52cab0cfca6910779b32804207ae5adb6cd3c8b2b"
+      "sha256": "e92e10bc4b8572d3f7f61189cc97ef8f358f5e32634d5f6af04ecd7f0792a419"
     },
     {
       "path": "assets/development/v1.1/contracts/openapi.json",
-      "sha256": "4c4d832813150d13cfb59ddeaea5d6e6023c4daa338f08a7f56bec9f00775981"
+      "sha256": "cab145c6af3a21f9e468b5d3b8fd47a003d714d793881d7fea31f04e14480550"
     },
     {
       "path": "assets/development/v1.1/contracts/product-identity-lock.schema.json",
@@ -3342,7 +3442,7 @@
   "current_browser_checks_executed": true,
   "delivery_selected_builds_passed": true,
   "latest_evidence": "docs/verification/video-range-source.json",
-  "delivery_build_id": "2026-10-30T17-46-56-011Z-a226bcf7",
+  "delivery_build_id": "2026-10-30T18-24-25-007Z-2dcdefda",
   "delivery_all_builds_passed": true,
   "focused_functional_evidence": "docs/verification/final-closure-source.json",
   "retained_application_evidence": {
@@ -3366,5 +3466,14 @@
     "original_compiler_report": "docs/verification/final-closure-build.json",
     "native_startup_report": "docs/verification/final-closure-native.json",
     "note": "The only source change adds generated in-archive delivery metadata. All source used by the four compilers and native services remains identical. Existing 179 outputs and startup results are retained with exact byte checks."
+  },
+  "account_binding": {
+    "status": "SOURCE_AND_FOCUSED_NATIVE_VERIFIED_NOT_REAL_HOST_ADMITTED",
+    "requirements": [
+      "P01-F24"
+    ],
+    "evidence": "docs/verification/account-binding-source.json",
+    "native_checks": 13,
+    "real_device_verified": false
   }
 }

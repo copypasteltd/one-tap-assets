@@ -26,6 +26,7 @@ import {recordRecommendationEvent} from '../modules/recommendation-events.js';
 import {getUsageFeedback,setUsageFeedback} from '../modules/usage-feedback.js';
 import * as plus from '../modules/plus-access.js';
 import * as edits from '../modules/plus-edits.js';
+import * as bindings from '../modules/account-bindings.js';
 
 export interface BusinessContext { db: PoolClient; cfg: Config; principal: Principal | null; params: Record<string, string>; query: PageQuery; body: unknown }
 export type BusinessHandler = (ctx: BusinessContext) => Promise<unknown>;
@@ -33,6 +34,15 @@ const principal = (ctx: BusinessContext): Principal => { if (!ctx.principal) thr
 const param = (ctx: BusinessContext, name: string): string => ctx.params[name] ?? notFound();
 
 export const businessHandlers: Record<string, BusinessHandler> = {
+  createAccountBindingRequest:async c=>{validate('AccountBindingStartRequest',c.body);return bindings.createAccountBindingRequest(c.db,c.cfg,principal(c));},
+  inspectAccountBindingCode:async c=>bindings.inspectAccountBindingCode(c.db,c.cfg,principal(c),validate('AccountBindingCodeRequest',c.body)),
+  claimAccountBindingRequest:async c=>bindings.claimAccountBindingRequest(c.db,c.cfg,principal(c),validate('AccountBindingCodeRequest',c.body)),
+  listAccountBindingRequests:async c=>bindings.listAccountBindingRequests(c.db,c.cfg,principal(c)),
+  getAccountBindingRequest:async c=>bindings.getAccountBindingRequest(c.db,c.cfg,principal(c),param(c,'request_id')),
+  decideAccountBindingRequest:async c=>bindings.decideAccountBindingRequest(c.db,c.cfg,principal(c),param(c,'request_id'),validate('AccountBindingDecisionRequest',c.body)),
+  listAccountBindings:async c=>bindings.listAccountBindings(c.db,principal(c)),
+  revokeAccountBinding:async c=>bindings.revokeAccountBinding(c.db,principal(c),param(c,'binding_id')),
+  createBoundProjectSession:async c=>plus.createBoundProjectSession(c.db,c.cfg,principal(c),param(c,'binding_id')),
   createPlusVideoDraft:async c=>plusVideo.createPlusVideoDraft(c.db,principal(c),validate('PlusEditCreateRequest',c.body)),
   getPlusVideoDraft:async c=>plusVideo.getPlusVideoDraft(c.db,principal(c),param(c,'draft_id')),
   savePlusVideoDraft:async c=>plusVideo.savePlusVideoDraft(c.db,principal(c),param(c,'draft_id'),validate('PlusVideoSaveRequest',c.body)),

@@ -1,5 +1,16 @@
 # 更新记录 / Changelog
 
+## 2026-10-31 — 本人双平台绑定与共享作品 / Voluntary cross-platform linking
+
+- 新增039迁移、9个业务接口及生成契约/DTO，115业务/38管理、328schema/84实体，两端仍各17页面。原契约按原字节归档。 / Added native mutual binding, generated contracts and migration 039.
+- 原生双方主动证明、固定五分钟邀请、发起端第二码核对、恢复/取消/撤回；单身份单一有效关系，解除不可逆。 / Both native identities must actively prove control before sharing; fixed deadlines and irreversible revocation.
+- 小程序独立15分钟连接浏览已绑定端作品并调用宿主保存；Plus明确选择来源，沿用独立制作权限。原订单、权益与交易渠道不合并。 / Isolated mobile access and explicit Plus source selection preserve original ownership/payment channels.
+- 任一端撤销绑定后，派生会话、旧轮询和已有下载链接失效；重绑不会恢复旧权限。 / Either end revokes derived capabilities and existing signed downloads; rebinding cannot revive them.
+- 13项原生重点检查通过；必要构建、实际共享UI/原生HTTP与数据库录屏结果以准确记录为准，未跑全面测试。真实身份/支付/设备/服务/生产隔离与云端仍待。 / Focused native checks only; real host, provider, isolation and cloud admission remain pending.
+
+[细则 / Details](docs/实施/双平台本人账号绑定与共享作品-v1.0.md) · [媒体 / Media](docs/media/account-bindings/README.md) · [证据 / Evidence](docs/verification/account-binding-source.json)
+
+
 ## 2026-10-31 — 当前构建启动与最终交付入口 / Current-build startup and final delivery
 
 - 新增`START-HERE.md`与`delivery:final`，将必要构建和打包串联；部分失败保持实际状态，全面测试不作为出包前提。/ Added the handoff entry and focused build/package command.

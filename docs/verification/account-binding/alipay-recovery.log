@@ -1,0 +1,192 @@
+Tips:
+1. 建议开启持久化缓存功能，能有效提升二次编译速度，详情请参考: https://docs.taro.zone/docs/config-detail#cache。
+
+
+
+● Webpack █████████████████████████  (0%)  
+ 
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ setup (2%)  
+ run
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ setup (9%) compilation 
+ mini-css-extract-plugin
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (10%) 0/20 entries 20/20 dependen
+cies 0/20 modules 1 active 
+ babel-loader › ..\..\..\src\mini-alipay\app.config.ts
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (10%) 0/20 entries 20/20 dependen
+cies 0/20 modules 1 active 
+ babel-loader › ..\..\..\src\mini-alipay\app.config.ts
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (10%) 0/20 entries 20/20 dependen
+cies 1/20 modules 19 active 
+ ...bcb20ca068\node_modules\@tarojs\webpack5-runner\dist\template\custom-wrapp
+er.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 38/62 dependen
+cies 1/38 modules 20 active 
+ taro-loader › ..\..\..\src\mini-alipay\app.tsx
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 39/98 dependen
+cies 1/39 modules 38 active 
+ babel-loader › ..\..\..\src\mini-alipay\host.ts
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 76/104 depende
+ncies 1/42 modules 40 active 
+ babel-loader › ..\..\..\src\shared\ui\runtime.ts
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 80/104 depende
+ncies 1/46 modules 44 active 
+ babel-loader › ..\..\..\src\shared\platform\taro-host.ts
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 82/104 depende
+ncies 1/48 modules 46 active 
+ babel-loader › ..\..\..\src\shared\client\api.ts
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 101/140 depend
+encies 1/51 modules 50 active 
+ ...m\@tarojs+react@4.3.1_react@18.3.1\node_modules\@tarojs\react\dist\react.e
+sm.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 115/193 depend
+encies 1/58 modules 51 active 
+ babel-loader › ..\..\..\src\shared\ui\plus-video-requests.tsx
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 128/207 depend
+encies 1/70 modules 69 active 
+ babel-loader › ..\..\..\src\shared\contracts\endpoints.generated.ts
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 195/284 depend
+encies 1/100 modules 87 active 
+ ...odules\.pnpm\@tarojs+runtime@4.3.1\node_modules\@tarojs\runtime\dist\optio
+ns.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 328/387 depend
+encies 2/127 modules 87 active 
+ ...e_modules\.pnpm\@tarojs+runtime@4.3.1\node_modules\@tarojs\runtime\dist\pe
+rf.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%)  
+ ...postcs_551a6981a2572dff8f93a34fe4b61376\node_modules\postcss-loader\dist\c
+js.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 371/413 depend
+encies 8/134 modules 126 active 
+ babel-loader › ..\..\..\src\shared\ui\plus-batch-requests.tsx
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 381/413 depend
+encies 11/137 modules 126 active 
+ css-loader › postcss-loader › ..\..\..\src\shared\ui\theme.css
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 400/413 depend
+encies 11/145 modules 126 active 
+ css-loader › postcss-loader › ..\..\..\src\shared\ui\theme.css
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 638/698 depend
+encies 28/155 modules 110 active 
+ ...e@7.29.10\node_modules\@babel\runtime\helpers\esm\unsupportedIterableToArr
+ay.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 689/698 depend
+encies 32/176 modules 142 active 
+ ...el+runtime@7.29.10\node_modules\@babel\runtime\helpers\esm\nonIterableSpre
+ad.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 758/785 depend
+encies 75/182 modules 102 active 
+ ...m\@babel+runtime@7.29.10\node_modules\@babel\runtime\helpers\esm\toPrimiti
+ve.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 769/801 depend
+encies 87/189 modules 100 active 
+ ...time@4.3.1\node_modules\@tarojs\runtime\dist\dom-external\inner-html\scann
+er.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 795/803 depend
+encies 103/199 modules 90 active 
+ ...es\.pnpm\@tarojs+shared@4.3.1\node_modules\@tarojs\shared\dist\event-chann
+el.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 835/837 depend
+encies 148/202 modules 54 active 
+ ...arojs+runtime@4.3.1_@tarojs+shared@4.3.1\node_modules\@tarojs\api\dist\ind
+ex.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (15%) 2/20 entries 840/845 depend
+encies 158/205 modules 47 active 
+ ...arojs+runtime@4.3.1_@tarojs+shared@4.3.1\node_modules\@tarojs\api\dist\too
+ls.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (15%) 2/20 entries 841/845 depend
+encies 159/206 modules 47 active 
+ ...arojs+runtime@4.3.1_@tarojs+shared@4.3.1\node_modules\@tarojs\api\dist\too
+ls.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (18%) 3/20 entries 858/858 depend
+encies 174/213 modules 38 active 
+ ...1e3232ffdda7d50c5797fc93e4\node_modules\css-loader\dist\runtime\noSourceMa
+ps.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ sealing (71%)  
+ dependencies optimization
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ sealing (78%)  
+ chunk modules optimization
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ sealing (88%)  
+ runtime requirements
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ sealing (92%) asset processing 
+ TaroMiniPlugin
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ sealing (92%) asset processing 
+ CssMinimizerPlugin
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ sealing (92%) asset processing 
+ RealContentHashPlugin
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ emitting (98%)  
+ after emit
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+√ Webpack
+  Compiled successfully in 24.62s
+
+{"platform":"alipay","artifact_status":"PASS","pages":17,"files":71,"host_launch_verified":false,"real_device_verified":false}

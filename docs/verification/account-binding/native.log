@@ -1,0 +1,14 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/integration/account-bindings.test.ts (6 tests) 22612ms
+   ✓ requires native control of both platforms, hides unrelated requests and keeps a fixed invite deadline 1145ms
+   ✓ grants no access on claim and requires the origin to verify the peer code; concurrent confirmation creates one binding 726ms
+ ✓ tests/integration/plus-workspace.test.ts (7 tests) 8408ms
+
+ Test Files  2 passed (2)
+      Tests  13 passed (13)
+   Start at  02:22:04
+   Duration  65.08s (tests 50%, import 31%, transform 19%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/tmp/account-binding-integration.json

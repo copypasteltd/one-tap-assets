@@ -1,0 +1,20 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+browserContext.newPage: Executable doesn't exist at C:\Users\carzy\AppData\Local\ms-playwright\ffmpeg-1013\ffmpeg-win64.exe
+╔═════════════════════════════════════════════════════════════════╗
+║ Video rendering requires ffmpeg binary.                         ║
+║ Downloading it will not affect any of the system-wide settings. ║
+║ Please run the following command:                               ║
+║                                                                 ║
+║     npx playwright install ffmpeg                               ║
+║                                                                 ║
+║ <3 Playwright Team                                              ║
+╚═════════════════════════════════════════════════════════════════╝
+    at <anonymous> (E:\dev\sandbox\支付宝黑客松\一品成片\scripts\record-account-bindings.ts:40:57) {
+  log: [],
+  name: 'Error'
+}
+
+Node.js v24.22.1

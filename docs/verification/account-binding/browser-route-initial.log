@@ -1,0 +1,14 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.textContent: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for getByLabel('电脑接续码')[22m
+
+    at <anonymous> (E:\dev\sandbox\支付宝黑客松\一品成片\scripts\record-account-bindings.ts:63:49) {
+  log: [ "  - waiting for getByLabel('电脑接续码')" ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.22.1

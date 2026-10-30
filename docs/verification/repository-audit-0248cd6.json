@@ -1,0 +1,56 @@
+{
+  "checked_at": "2026-10-30T17:49:23.500391+00:00",
+  "status": "PASS",
+  "scope": "FOCUSED_DELIVERY_DOCUMENT_SOURCE_MEDIA_AND_BUILD_INTEGRITY_NOT_FULL_PRODUCT_ACCEPTANCE",
+  "source_set_hash": "b00375bf3877f2e8600ec1a3516794f8cbc0db402341de704b46820a0dcf0bd7",
+  "source_files": 548,
+  "runtime_contract_files": 42,
+  "resource_files": 4,
+  "evidence": "docs/verification/final-closure-source.json",
+  "markdown_files": 197,
+  "local_links_verified": 1947,
+  "public_diagnostic_logs": 14,
+  "media_files": 190,
+  "protected_baseline_files_unchanged": 1187,
+  "historical_json_unchanged": 631,
+  "historical_json_preserved_with_archives": 634,
+  "old_migrations_preserved": 38,
+  "all_application_files_unchanged": 358,
+  "current_builds": [
+    {
+      "name": "server",
+      "status": "PASS"
+    },
+    {
+      "name": "preview",
+      "status": "PASS"
+    },
+    {
+      "name": "alipay",
+      "status": "PASS"
+    },
+    {
+      "name": "douyin",
+      "status": "PASS"
+    }
+  ],
+  "build_provenance": {
+    "compiler_build_id": "2026-10-30T17-32-49-676Z-d552a8fa",
+    "compiler_source_set_hash": "9791cc29900941316ab4a25b5b5b1e70346a9d90e072558376e226a8a6fcd13a",
+    "changed_source_files": [
+      "scripts/delivery/package.ts"
+    ],
+    "all_compiler_and_application_inputs_identical": true,
+    "all_179_compiler_outputs_byte_identical": true,
+    "compiler_rerun_after_packager_only_change": false,
+    "native_startup_repeated_after_packager_only_change": false,
+    "original_compiler_report": "docs/verification/final-closure-build.json",
+    "native_startup_report": "docs/verification/final-closure-native.json",
+    "note": "The only source change adds generated in-archive delivery metadata. All source used by the four compilers and native services remains identical. Existing 179 outputs and startup results are retained with exact byte checks."
+  },
+  "legacy_full_command_verifier_executed": false,
+  "full_suite_executed": false,
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false
+}

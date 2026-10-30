@@ -7,5 +7,5 @@ export function Image({src,mode,className,...props}:Props){return <img src={src}
 export function Video({objectFit,...props}:Props){return <video {...props} style={{objectFit:objectFit??'contain'}}/>;}
 export function Switch({checked,onChange,color:_,...props}:Props){return <input type="checkbox" aria-label="确认规则" checked={checked} onChange={e=>onChange?.({detail:{value:e.target.checked}})} {...props}/>;}
 export function Textarea({onInput,maxlength,...props}:Props){return <textarea {...props} maxLength={maxlength} onChange={e=>onInput?.({detail:{value:e.target.value}})}/>;}
-export function Input({onInput,maxlength,...props}:Props){return <input {...props} maxLength={maxlength} onChange={e=>onInput?.({detail:{value:e.target.value}})}/>;}
+export function Input({onInput,maxlength,ariaLabel,...props}:Props){return <input {...props} {...(ariaLabel?{'aria-label':ariaLabel}:{})} maxLength={maxlength} onChange={e=>onInput?.({detail:{value:e.target.value}})}/>;}
 export function Picker({children,range,onChange,...props}:Props){return <label>{children}<select aria-label="选择" {...props} onChange={e=>onChange?.({detail:{value:e.target.value}})}>{range?.map((v:string,i:number)=><option key={i} value={i}>{v}</option>)}</select></label>;}

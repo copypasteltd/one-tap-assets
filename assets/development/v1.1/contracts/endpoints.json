@@ -2498,6 +2498,168 @@
         "D22"
       ],
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/account-bindings/requests",
+      "operation_id": "createAccountBindingRequest",
+      "summary": "原小程序发起五分钟双端绑定",
+      "request_schema": "AccountBindingStartRequest",
+      "response_schema": "AccountBindingRequest",
+      "success_status": 200,
+      "auth_policy": "native-session-and-mutual-binding-control",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/account-bindings/inspect",
+      "operation_id": "inspectAccountBindingCode",
+      "summary": "另一端查看邀请；不接触作品或授予权限",
+      "request_schema": "AccountBindingCodeRequest",
+      "response_schema": "AccountBindingRequest",
+      "success_status": 200,
+      "auth_policy": "native-session-and-mutual-binding-control",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/account-bindings/claim",
+      "operation_id": "claimAccountBindingRequest",
+      "summary": "另一端主动证明控制权并等待发起端核对确认码",
+      "request_schema": "AccountBindingCodeRequest",
+      "response_schema": "AccountBindingRequest",
+      "success_status": 200,
+      "auth_policy": "native-session-and-mutual-binding-control",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/account-bindings/requests",
+      "operation_id": "listAccountBindingRequests",
+      "summary": "恢复本人尚未结束的绑定请求，最多五条",
+      "request_schema": null,
+      "response_schema": "AccountBindingRequestList",
+      "success_status": 200,
+      "auth_policy": "native-session-and-mutual-binding-control",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/account-bindings/requests/{request_id}",
+      "operation_id": "getAccountBindingRequest",
+      "summary": "本人双方读取绑定进度",
+      "request_schema": null,
+      "response_schema": "AccountBindingRequest",
+      "success_status": 200,
+      "auth_policy": "native-session-and-mutual-binding-control",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/account-bindings/requests/{request_id}/decision",
+      "operation_id": "decideAccountBindingRequest",
+      "summary": "发起端核对双方确认码后确认或取消；另一端可撤回",
+      "request_schema": "AccountBindingDecisionRequest",
+      "response_schema": "AccountBindingRequest",
+      "success_status": 200,
+      "auth_policy": "native-session-and-mutual-binding-control",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/account-bindings",
+      "operation_id": "listAccountBindings",
+      "summary": "读取本人当前绑定及最近二十条解除记录",
+      "request_schema": null,
+      "response_schema": "AccountBindingList",
+      "success_status": 200,
+      "auth_policy": "native-session-and-mutual-binding-control",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "DELETE",
+      "path": "/account-bindings/{binding_id}",
+      "operation_id": "revokeAccountBinding",
+      "summary": "任何一端解除绑定并撤销派生连接及下载权限",
+      "request_schema": null,
+      "response_schema": "AccountBinding",
+      "success_status": 200,
+      "auth_policy": "native-session-and-mutual-binding-control",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/account-bindings/{binding_id}/project-session",
+      "operation_id": "createBoundProjectSession",
+      "summary": "本机短期浏览已绑定端项目；原渠道资金权限不转移",
+      "request_schema": null,
+      "response_schema": "PlusBrowserSession",
+      "success_status": 200,
+      "auth_policy": "native-session-and-mutual-binding-control",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
     }
   ]
 }

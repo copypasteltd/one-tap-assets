@@ -1826,7 +1826,9 @@
         "identity_id",
         "session_id",
         "allow_render_plans",
-        "allow_video_render_plans"
+        "allow_video_render_plans",
+        "account_binding_id",
+        "approved_by_identity_id"
       ],
       "invariant": "Explicit native confirmation only; 5-minute challenge; hashed secrets; retries preserve original session and expiry.",
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
@@ -1845,7 +1847,9 @@
         "expires_at",
         "revoked_at",
         "allow_render_plans",
-        "allow_video_render_plans"
+        "allow_video_render_plans",
+        "account_binding_id",
+        "approved_by_identity_id"
       ],
       "invariant": "One-hour independent read/edit capability; no native payment/refund or identity merge; revocation checked inside each transaction and signed download.",
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
@@ -1937,6 +1941,37 @@
         "failure"
       ],
       "invariant": "Per-item savepoint isolates preparation failure; immutable independent render plan and native quote/payment/delivery; product deletion physically erases its batch metadata.",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "account_binding_requests",
+      "primary_key": "id",
+      "scope": "explicit-two-native-identities",
+      "fields": [
+        "id",
+        "code_hash",
+        "origin_identity_id",
+        "peer_identity_id",
+        "state",
+        "binding_id",
+        "created_at",
+        "expires_at"
+      ],
+      "invariant": "Five-minute frozen deadline; origin native proof, peer native claim and origin verification-code confirmation; no rights before BOUND; peer and terminal outcome never replaced.",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "account_bindings",
+      "primary_key": "id",
+      "scope": "explicit-two-native-identities",
+      "fields": [
+        "id",
+        "alipay_identity_id",
+        "douyin_identity_id",
+        "created_at",
+        "revoked_at"
+      ],
+      "invariant": "One active counterpart per identity; mutual native proof; projects and drafts only; original orders, paid rights and refunds remain in original tenant/channel. Revocation is irreversible and invalidates derived grants.",
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
     }
   ],

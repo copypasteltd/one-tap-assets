@@ -1,0 +1,68 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+ExpectError: expect(locator).toBeVisible() failed
+
+Locator: getByText('电脑连接已关闭或到期，请重新接续', { exact: true })
+Expected: visible
+Timeout: 5000ms
+Error: element(s) not found
+
+Call log:
+  - Expect "toBeVisible" getByText('电脑连接已关闭或到期，请重新接续', { exact: true }) with timeout 5000ms
+  - waiting for getByText('电脑连接已关闭或到期，请重新接续', { exact: true })
+
+    at captureRawStack (E:\dev\sandbox\支付宝黑客松\一品成片\node_modules\.pnpm\playwright-core@1.64.1\node_modules\playwright-core\lib\coreBundle.js:9282:17)
+    at callMatcherAsStep (E:\dev\sandbox\支付宝黑客松\一品成片\node_modules\.pnpm\playwright@1.64.1\node_modules\playwright\lib\matchers\expect.js:13316:57)
+    at Object.toBeVisible (E:\dev\sandbox\支付宝黑客松\一品成片\node_modules\.pnpm\playwright@1.64.1\node_modules\playwright\lib\matchers\expect.js:13308:23)
+    at <anonymous> (E:\dev\sandbox\支付宝黑客松\一品成片\scripts\record-account-bindings.ts:68:129) {
+  matcherResult: {
+    message: 'expect(locator).toBeVisible() failed\n' +
+      '\n' +
+      "Locator: getByText('电脑连接已关闭或到期，请重新接续', { exact: true })\n" +
+      'Expected: visible\n' +
+      'Timeout: 5000ms\n' +
+      'Error: element(s) not found\n' +
+      '\n' +
+      'Call log:\n' +
+      `  - Expect "toBeVisible" getByText('电脑连接已关闭或到期，请重新接续', { exact: true }) with timeout 5000ms\n` +
+      "  - waiting for getByText('电脑连接已关闭或到期，请重新接续', { exact: true })\n",
+    pass: false,
+    actual: undefined,
+    name: 'toBeVisible',
+    expected: 'visible',
+    log: [
+      `  - Expect "toBeVisible" getByText('电脑连接已关闭或到期，请重新接续', { exact: true }) with timeout 5000ms`,
+      "  - waiting for getByText('电脑连接已关闭或到期，请重新接续', { exact: true })"
+    ],
+    timeout: 5000,
+    ariaSnapshot: '- banner:\n' +
+      '  - link "一品成片 Plus 首页":\n' +
+      '    - /url: /plus/\n' +
+      '    - text: 一\n' +
+      '    - strong: 一品成片\n' +
+      '    - text: Plus\n' +
+      '  - text: 把一件商品，做得更完整\n' +
+      '- main:\n' +
+      '  - text: 手机拍好 · 电脑接着做\n' +
+      '  - heading "给你的素材， 多一点创作空间。" [level=1]\n' +
+      '  - paragraph: 从小程序继续本人作品，在更大的画布上调整图片裁切、规格与文字，保存独立编辑草稿。\n' +
+      '  - text: 本人项目 原素材领取 独立草稿\n' +
+      '  - paragraph: 拍照、制作、相册保存和基础社区发布，继续在支付宝或抖音小程序完成。\n' +
+      '  - heading "从手机接续到这里" [level=2]\n' +
+      '  - paragraph: 生成接续码，在小程序「账户与隐私 → 接续到电脑 Plus」中输入，选择当前端或已绑定端作品后确认。\n' +
+      '  - checkbox "允许整理正式制作清单（每次付款仍需手机确认）"\n' +
+      '  - text: 允许整理正式制作清单（每次付款仍需手机确认）\n' +
+      '  - checkbox "允许整理原片视频剪辑清单（独立计价，付款仍需手机确认）"\n' +
+      '  - text: 允许整理原片视频剪辑清单（独立计价，付款仍需手机确认）\n' +
+      '  - button "生成接续码"\n' +
+      '  - paragraph: 连接后可查看和编辑本人素材草稿，有效1小时，可随时从手机关闭。付款和退款仍在原小程序处理。\n' +
+      '- alert:\n' +
+      '  - text: 电脑连接已关闭或到期，请重新接续\n' +
+      '  - button "重新接续"\n' +
+      '- contentinfo: 一品成片 Plus · 本人作品接续与独立编辑草稿'
+  }
+}
+
+Node.js v24.22.1

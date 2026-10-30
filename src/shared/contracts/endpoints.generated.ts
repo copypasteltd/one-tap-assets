@@ -839,5 +839,77 @@ export const endpoints = {
     "idempotency": false,
     "request": null,
     "response": "PlusVideoRenderPlan"
+  },
+  "createAccountBindingRequest": {
+    "method": "POST",
+    "path": "/account-bindings/requests",
+    "authenticated": true,
+    "idempotency": false,
+    "request": "AccountBindingStartRequest",
+    "response": "AccountBindingRequest"
+  },
+  "inspectAccountBindingCode": {
+    "method": "POST",
+    "path": "/account-bindings/inspect",
+    "authenticated": true,
+    "idempotency": false,
+    "request": "AccountBindingCodeRequest",
+    "response": "AccountBindingRequest"
+  },
+  "claimAccountBindingRequest": {
+    "method": "POST",
+    "path": "/account-bindings/claim",
+    "authenticated": true,
+    "idempotency": false,
+    "request": "AccountBindingCodeRequest",
+    "response": "AccountBindingRequest"
+  },
+  "listAccountBindingRequests": {
+    "method": "GET",
+    "path": "/account-bindings/requests",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "AccountBindingRequestList"
+  },
+  "getAccountBindingRequest": {
+    "method": "GET",
+    "path": "/account-bindings/requests/{request_id}",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "AccountBindingRequest"
+  },
+  "decideAccountBindingRequest": {
+    "method": "POST",
+    "path": "/account-bindings/requests/{request_id}/decision",
+    "authenticated": true,
+    "idempotency": false,
+    "request": "AccountBindingDecisionRequest",
+    "response": "AccountBindingRequest"
+  },
+  "listAccountBindings": {
+    "method": "GET",
+    "path": "/account-bindings",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "AccountBindingList"
+  },
+  "revokeAccountBinding": {
+    "method": "DELETE",
+    "path": "/account-bindings/{binding_id}",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "AccountBinding"
+  },
+  "createBoundProjectSession": {
+    "method": "POST",
+    "path": "/account-bindings/{binding_id}/project-session",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "PlusBrowserSession"
   }
 } as const;

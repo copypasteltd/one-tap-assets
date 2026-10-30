@@ -16,6 +16,7 @@ import {selectedPreset,usePreset} from '../client/preset-selection';
 import {Order,paymentText,fulfillmentText} from './order';
 import {Help} from './help';
 import {PlusConnections} from './plus-connections';
+import {AccountBindings,BoundProjects} from './account-bindings';
 import {PlusPlanDetails} from './plus-render-requests';
 export { navigate } from './base';
 
@@ -74,6 +75,7 @@ function Library() {
     <View className='community-actions'><Button className='filter' onClick={() => navigate('favorites')}>我的收藏</Button><Button className='filter' onClick={() => navigate('creator')}>我的方案</Button><Button className='filter' onClick={() => navigate('moderation')}>举报与申诉</Button></View>
     {resource.loaded && !resource.items.length && <><Notice>还没有素材包。拍下商品，开始你的第一套。</Notice><Action onClick={() => navigate('photos')}>拍照做素材</Action></>}
     {resource.items.map(order => <Panel key={order.order_id}><Text className='card-title'>{fulfillmentText[order.fulfillment_state]}</Text><Text className='secondary'>{paymentText[order.payment_state]} · ¥{(order.amount_fen / 100).toFixed(2)}</Text><Text className='caption'>{new Date(order.created_at).toLocaleString()}</Text><Action secondary onClick={() => navigate(order.fulfillment_state === 'DELIVERED' ? 'pack' : 'order', { order_id: order.order_id })}>{order.fulfillment_state === 'DELIVERED' ? '查看素材包' : '查看原订单'}</Action></Panel>)}<More {...resource} /><ProductDrafts/>
+    <BoundProjects/>
   </>;
 }
 function Settings() {
@@ -81,7 +83,7 @@ function Settings() {
   return <><Text className='page-headline'>账户与隐私</Text><Notice>照片用于当前商品识别与制作，成品在领取期内保留。财务和争议记录按必要范围留存。</Notice>
     <Action disabled={action.busy} secondary onClick={() => void action.run(async () => { await client().login(); const answer = await Taro.showModal({ title: '删除本账户的媒体资料？', content: '进行中的制作将受影响，领取链接会撤销。已保存到手机的文件不会被远程删除。', confirmText: '确认申请', confirmColor: '#B83232' });
       if (answer.confirm) setDeletion(await client().api.call('requestPrivacyDeletion', { body: { scope: 'ACCOUNT_MEDIA', acknowledge_inflight_contract: true }, key: client().intent('privacy-deletion', { nonce: Date.now() }) })); })}>申请删除媒体资料</Action>
-    {deletion && <Notice>删除申请已受理，正在处理。清理结果确认后才算完成。</Notice>}{action.error && <Notice error>{action.error}</Notice>}<Action secondary onClick={() => { client().logout(); navigate('home'); }}>退出当前会话</Action><Action secondary onClick={() => navigate('help')}>查看帮助</Action><PlusConnections/>
+    {deletion && <Notice>删除申请已受理，正在处理。清理结果确认后才算完成。</Notice>}{action.error && <Notice error>{action.error}</Notice>}<Action secondary onClick={() => { client().logout(); navigate('home'); }}>退出当前会话</Action><Action secondary onClick={() => navigate('help')}>查看帮助</Action><AccountBindings/><PlusConnections/>
   </>;
 }
 const screens: Record<PageName, () => ReactNode> = { home: Home, catalog: Catalog, library: Library, photos: Photos, analysis: Analysis, preset: Preset, confirm: Confirm, order: Order, pack: Pack, settings: Settings, help: Help, favorites: Favorites, creator: Creator, draft: DraftEditor, rights: Rights, publication: Publication, moderation: Moderation };

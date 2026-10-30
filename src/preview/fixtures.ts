@@ -1,6 +1,6 @@
 import source from '../../assets/presets/presets.v3.1.json';
 import {endpoints} from '../shared/contracts/endpoints.generated';
-import type {Transport} from '../shared/client/api';
+import type {Transport,WireResponse} from '../shared/client/api';
 import type {HostPort} from '../shared/platform/ports';
 import type {DTO} from '../shared/contracts/types';
 import {digest} from '../shared/client/sha256';
@@ -90,6 +90,7 @@ function response(operation:string,path:string,body:any,key=''):unknown{
     case 'listPlusRenderBatches':return {items:[],next_cursor:null};
     case 'listPlusRenderPlans':return {items:[],next_cursor:null};
     case 'listPlusSessions':return {items:demoPlusSessions,next_cursor:null};
+    case 'listAccountBindings':case 'listAccountBindingRequests':return {items:[],next_cursor:null};
     case 'inspectPlusLink':return {link_id:'pluslink_synthetic',user_code:body.user_code,expires_at:expires,state:'PENDING',access:'OWN_PROJECTS_AND_EDIT_DRAFTS',can_prepare_render_plans:false};
     case 'decidePlusLink':{
       if(body.decision==='APPROVE')demoPlusSessions=[{session_id:'plussession_synthetic_replay',platform:'alipay',created_at:created,expires_at:expires,state:'ACTIVE',can_prepare_render_plans:false}];
@@ -140,6 +141,11 @@ function response(operation:string,path:string,body:any,key=''):unknown{
   }
 }
 const transport:Transport=async request=>{
+  if(new URLSearchParams(location.search).get('scenario')==='account-bindings'){
+    const bridge=(window as unknown as {__YPCC_ACCOUNT_BINDING_TRANSPORT__?:Transport}).__YPCC_ACCOUNT_BINDING_TRANSPORT__;
+    if(bridge)return bridge(request);
+    return {status:503,headers:{},data:{code:'CONTROLLED_REPLAY_REQUIRED',message:'两端绑定回放需要受控的原生服务连接'}} satisfies WireResponse;
+  }
   const url=new URL(request.url),path=url.pathname.replace(/^\/v1\/p01/,'');
   const found=Object.entries(endpoints).find(([,e])=>e.method===request.method&&new RegExp(`^${e.path.replace(/\{[^}]+\}/g,'[^/]+')}$`).test(path));
   if(!found)return {status:404,headers:{},data:{error:{code:'PREVIEW_ONLY',message:'该操作不在浏览器演示范围内'}}};

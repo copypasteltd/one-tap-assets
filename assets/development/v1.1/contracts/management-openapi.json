@@ -12533,6 +12533,10 @@
               "APPROVE",
               "DENY"
             ]
+          },
+          "account_binding_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
           }
         },
         "required": [
@@ -12573,6 +12577,13 @@
           },
           "can_prepare_video_render_plans": {
             "type": "boolean"
+          },
+          "account_binding_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "source_platform": {
+            "$ref": "#/components/schemas/Platform"
           }
         },
         "required": [
@@ -12631,6 +12642,10 @@
           },
           "can_prepare_video_render_plans": {
             "type": "boolean"
+          },
+          "account_binding_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
           }
         },
         "required": [
@@ -12702,7 +12717,7 @@
         "properties": {
           "items": {
             "type": "array",
-            "maxItems": 5,
+            "maxItems": 10,
             "items": {
               "$ref": "#/components/schemas/PlusSessionInfo"
             }
@@ -14034,6 +14049,279 @@
         "properties": {
           "data": {
             "$ref": "#/components/schemas/PlusVideoRenderPlanList"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBindingStartRequest": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      },
+      "AccountBindingCodeRequest": {
+        "type": "object",
+        "properties": {
+          "user_code": {
+            "type": "string",
+            "pattern": "^[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{8}$"
+          }
+        },
+        "required": [
+          "user_code"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBindingDecisionRequest": {
+        "type": "object",
+        "properties": {
+          "decision": {
+            "type": "string",
+            "enum": [
+              "CONFIRM",
+              "CANCEL",
+              "REJECT"
+            ]
+          },
+          "verification_code": {
+            "type": "string",
+            "pattern": "^[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{8}$"
+          }
+        },
+        "required": [
+          "decision"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBindingRequest": {
+        "type": "object",
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "CLAIMED",
+              "BOUND",
+              "CANCELLED",
+              "REJECTED",
+              "EXPIRED"
+            ]
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "ORIGIN",
+              "PEER",
+              "CANDIDATE"
+            ]
+          },
+          "origin_platform": {
+            "$ref": "#/components/schemas/Platform"
+          },
+          "peer_platform": {
+            "$ref": "#/components/schemas/Platform"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          },
+          "user_code": {
+            "type": "string",
+            "pattern": "^[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{8}$"
+          },
+          "verification_code": {
+            "type": "string",
+            "pattern": "^[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{8}$"
+          },
+          "binding_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          }
+        },
+        "required": [
+          "request_id",
+          "state",
+          "role",
+          "origin_platform",
+          "created_at",
+          "expires_at"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBinding": {
+        "type": "object",
+        "properties": {
+          "binding_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "peer_platform": {
+            "$ref": "#/components/schemas/Platform"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "REVOKED"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          },
+          "revoked_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time",
+                "maxLength": 40
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "access": {
+            "const": "PROJECTS_DRAFTS_AND_EXPLICIT_PLUS_PLANS"
+          }
+        },
+        "required": [
+          "binding_id",
+          "peer_platform",
+          "state",
+          "created_at",
+          "revoked_at",
+          "access"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBindingRequestList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "maxItems": 5,
+            "items": {
+              "$ref": "#/components/schemas/AccountBindingRequest"
+            }
+          },
+          "next_cursor": {
+            "type": "null"
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBindingList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "maxItems": 20,
+            "items": {
+              "$ref": "#/components/schemas/AccountBinding"
+            }
+          },
+          "next_cursor": {
+            "type": "null"
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBindingRequestResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AccountBindingRequest"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBindingRequestListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AccountBindingRequestList"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBindingListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AccountBindingList"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "AccountBindingResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/AccountBinding"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusBrowserSessionResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusBrowserSession"
           },
           "trace_id": {
             "type": "string"
