@@ -6,6 +6,8 @@ import {loadProductionFont,type ProductionFont} from './font.js';
 import {communityCaptionStyle} from '../compiler/community-direction.js';
 import {communityCaptionRaster} from './community-captions.js';
 import {plusRenderBinding} from '../../shared/domain/plus-render.js';
+import {plusVideoBinding} from '../../shared/domain/plus-video.js';
+import {preparePlusVideoText} from './plus-video-layout.js';
 import {preparePlusLayoutText} from './plus-image.js';
 
 /** The same actual glyph/geometry preparation used by the renderer, without
@@ -13,6 +15,7 @@ import {preparePlusLayoutText} from './plus-image.js';
 export async function validatePlanLayout(plan:CreativePlan,source:VariantSource,preset:string,font?:ProductionFont,disclosure?:AiDisclosureContract):Promise<void>{
   const pinned=font??await loadProductionFont(process.cwd());
   if(plusRenderBinding(source)){await preparePlusLayoutText({source,plan,presetId:preset,font:pinned,...(disclosure?{disclosure}:{})});return;}
+  if(plusVideoBinding(source)){await preparePlusVideoText({source,plan,presetId:preset,font:pinned,...(disclosure?{disclosure}:{})});return;}
   const configured=source.creative_components.platform_style_id;
   const presetId=typeof configured==='string'?configured:preset;
   const images=source.output_slots.filter(s=>s.kind==='image');

@@ -1,3 +1,4 @@
+import {plusVideoBinding} from '../../shared/domain/plus-video.js';
 import type pg from 'pg';
 import type {Config} from '../../api/config.js';
 import {transaction,type Db} from '../../api/db/pool.js';
@@ -48,6 +49,9 @@ export class NativeListeningReader {
   protected async sources(db:Db,context:ExecutionContext):Promise<void>{
     const production=await operationArtifacts(db,context,'PRODUCTION'),post=await operationArtifacts(db,context,'POST');
     const artifacts=[...production.receipt.artifacts,...post.receipt.artifacts];
+    if(plusVideoBinding(context.contract.source)){await nativeQcWrites(db,context,artifacts);
+      for(const artifact of artifacts)requireThat(sha256(await this.store.get(artifact.object_key,512000000))===artifact.sha256,
+        'LISTENING_MEDIA_CHANGED','原视频编辑候选已变化',503);return;}
     const proof=post.receipt.artifacts.find(a=>a.spec.kind==='video')?.spec.native_audio?.post;
     requireThat(proof,'LISTENING_SOURCE_INVALID','听音缺少原订单后期和原成功转写绑定',503);
     const original=await originalNativeTranscript(db,this.store,context,proof.asr_submission_id,proof.source_write_id);
@@ -79,7 +83,9 @@ export class NativeListeningReader {
     }
     const images=await packetImages(db,this.store,context,packet);
     const facts={profile:context.contract.profile,identity_lock_hash:context.snapshot.identity_lock_hash,
-      caption_style:context.contract.native_audio_contract!.caption_style,music:context.contract.native_audio_contract!.music,
+      ...(plusVideoBinding(context.contract.source)?{plus_video:plusVideoBinding(context.contract.source),
+        caption_instruction:'SUBTITLE逐句核对实际声音；ON_SCREEN_COPY是画面文案，必须符合商品证据；用户文字不是转写结果。'}
+        :{caption_style:context.contract.native_audio_contract!.caption_style,music:context.contract.native_audio_contract!.music}),
       frames:rows.filter(r=>r.kind==='VIDEO_FRAME').map(r=>({asset_id:r.id,artifact_id:r.artifact_id,frame_index:r.frame_index,time_ms:r.time_ms}))};
     return {c,prepared:prepareListening(c,{packet_hash:packet.packet_hash,snapshot_hash:context.snapshotHash,output_set_hash:packet.output_set_hash,
       target_frames:context.snapshot.timeline.target_frames,audios,images,facts})};

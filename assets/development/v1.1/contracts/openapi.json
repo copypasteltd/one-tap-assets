@@ -15232,6 +15232,1190 @@
         ],
         "x-implementation-status": "DESIGN_NOT_IMPLEMENTED"
       }
+    },
+    "/plus/video-drafts": {
+      "post": {
+        "operationId": "createPlusVideoDraft",
+        "summary": "为本人当前已交付视频建立独立剪辑草稿",
+        "description": "为本人当前已交付视频建立独立剪辑草稿",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlusVideoDraftResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F18",
+          "P01-F24"
+        ],
+        "x-design-pages": [
+          "D22"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlusEditCreateRequest"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "listPlusVideoDrafts",
+        "summary": "分页读取本人有效视频编辑草稿",
+        "description": "分页读取本人有效视频编辑草稿",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Cursor"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlusVideoListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F18",
+          "P01-F24"
+        ],
+        "x-design-pages": [
+          "D22"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED"
+      }
+    },
+    "/plus/video-drafts/{draft_id}": {
+      "get": {
+        "operationId": "getPlusVideoDraft",
+        "summary": "读取本人视频剪辑草稿及可信来源规格",
+        "description": "读取本人视频剪辑草稿及可信来源规格",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [
+          {
+            "name": "draft_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlusVideoDraftResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F18",
+          "P01-F24"
+        ],
+        "x-design-pages": [
+          "D22"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED"
+      },
+      "put": {
+        "operationId": "savePlusVideoDraft",
+        "summary": "按修订号保存选段、裁切、定时字幕和原声选择",
+        "description": "按修订号保存选段、裁切、定时字幕和原声选择",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [
+          {
+            "name": "draft_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlusVideoDraftResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F18",
+          "P01-F24"
+        ],
+        "x-design-pages": [
+          "D22"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlusVideoSaveRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/plus/video-render-styles": {
+      "get": {
+        "operationId": "listPlusVideoStyles",
+        "summary": "读取独立视频编辑制作风格与价格",
+        "description": "读取独立视频编辑制作风格与价格",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlusRenderStyleListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F18",
+          "P01-F24"
+        ],
+        "x-design-pages": [
+          "D22"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED"
+      }
+    },
+    "/plus/video-drafts/{draft_id}/render-plans": {
+      "post": {
+        "operationId": "createPlusVideoPlan",
+        "summary": "经手机单独授权冻结视频编辑清单，回原渠道核对报价并付款",
+        "description": "经手机单独授权冻结视频编辑清单，回原渠道核对报价并付款",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [
+          {
+            "name": "draft_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlusVideoRenderPlanResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F18",
+          "P01-F24"
+        ],
+        "x-design-pages": [
+          "D22"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlusRenderCreateRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/plus/video-render-plans": {
+      "get": {
+        "operationId": "listPlusVideoPlans",
+        "summary": "本人在电脑或原小程序恢复视频制作清单",
+        "description": "本人在电脑或原小程序恢复视频制作清单",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Cursor"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlusVideoRenderPlanListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F18",
+          "P01-F24"
+        ],
+        "x-design-pages": [
+          "D22"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED"
+      }
+    },
+    "/plus/video-render-plans/{request_id}": {
+      "get": {
+        "operationId": "getPlusVideoPlan",
+        "summary": "读取本人视频制作清单及原渠道独立订单状态",
+        "description": "读取本人视频制作清单及原渠道独立订单状态",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [
+          {
+            "name": "request_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlusVideoRenderPlanResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F18",
+          "P01-F24"
+        ],
+        "x-design-pages": [
+          "D22"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED"
+      }
     }
   },
   "components": {
@@ -16826,6 +18010,10 @@
             ]
           },
           "plus_render_request_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "plus_video_request_id": {
             "type": "string",
             "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
           }
@@ -25373,6 +26561,9 @@
         "properties": {
           "prepare_render_plans": {
             "type": "boolean"
+          },
+          "prepare_video_render_plans": {
+            "type": "boolean"
           }
         },
         "required": [],
@@ -25474,6 +26665,9 @@
           },
           "can_prepare_render_plans": {
             "type": "boolean"
+          },
+          "can_prepare_video_render_plans": {
+            "type": "boolean"
           }
         },
         "required": [
@@ -25528,6 +26722,9 @@
             ]
           },
           "can_prepare_render_plans": {
+            "type": "boolean"
+          },
+          "can_prepare_video_render_plans": {
             "type": "boolean"
           }
         },
@@ -25835,118 +27032,6 @@
         ],
         "additionalProperties": false
       },
-      "PlusLinkResponse": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/PlusLink"
-          },
-          "trace_id": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "data",
-          "trace_id"
-        ],
-        "additionalProperties": false
-      },
-      "PlusLinkApprovalResponse": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/PlusLinkApproval"
-          },
-          "trace_id": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "data",
-          "trace_id"
-        ],
-        "additionalProperties": false
-      },
-      "PlusLinkStatusResponse": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/PlusLinkStatus"
-          },
-          "trace_id": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "data",
-          "trace_id"
-        ],
-        "additionalProperties": false
-      },
-      "PlusSessionInfoResponse": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/PlusSessionInfo"
-          },
-          "trace_id": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "data",
-          "trace_id"
-        ],
-        "additionalProperties": false
-      },
-      "PlusSessionListResponse": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/PlusSessionList"
-          },
-          "trace_id": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "data",
-          "trace_id"
-        ],
-        "additionalProperties": false
-      },
-      "PlusEditDraftResponse": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/PlusEditDraft"
-          },
-          "trace_id": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "data",
-          "trace_id"
-        ],
-        "additionalProperties": false
-      },
-      "PlusEditListResponse": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/PlusEditList"
-          },
-          "trace_id": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "data",
-          "trace_id"
-        ],
-        "additionalProperties": false
-      },
       "PlusRenderCreateRequest": {
         "type": "object",
         "properties": {
@@ -26136,54 +27221,6 @@
         "required": [
           "items",
           "next_cursor"
-        ],
-        "additionalProperties": false
-      },
-      "PlusRenderStyleListResponse": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/PlusRenderStyleList"
-          },
-          "trace_id": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "data",
-          "trace_id"
-        ],
-        "additionalProperties": false
-      },
-      "PlusRenderPlanResponse": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/PlusRenderPlan"
-          },
-          "trace_id": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "data",
-          "trace_id"
-        ],
-        "additionalProperties": false
-      },
-      "PlusRenderPlanListResponse": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/PlusRenderPlanList"
-          },
-          "trace_id": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "data",
-          "trace_id"
         ],
         "additionalProperties": false
       },
@@ -26436,6 +27473,166 @@
         ],
         "additionalProperties": false
       },
+      "PlusLinkResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusLink"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusLinkApprovalResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusLinkApproval"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusLinkStatusResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusLinkStatus"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusSessionInfoResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusSessionInfo"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusSessionListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusSessionList"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusEditDraftResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusEditDraft"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusEditListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusEditList"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusRenderStyleListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusRenderStyleList"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusRenderPlanResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusRenderPlan"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusRenderPlanListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusRenderPlanList"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
       "PlusBatchResponse": {
         "type": "object",
         "properties": {
@@ -26457,6 +27654,481 @@
         "properties": {
           "data": {
             "$ref": "#/components/schemas/PlusBatchList"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusVideoSettings": {
+        "type": "object",
+        "properties": {
+          "crop": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "y": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "width": {
+                "type": "number",
+                "minimum": 0.01,
+                "maximum": 1
+              },
+              "height": {
+                "type": "number",
+                "minimum": 0.01,
+                "maximum": 1
+              }
+            },
+            "required": [
+              "x",
+              "y",
+              "width",
+              "height"
+            ],
+            "additionalProperties": false
+          },
+          "canvas": {
+            "type": "object",
+            "properties": {
+              "width": {
+                "type": "integer",
+                "minimum": 256,
+                "maximum": 1920
+              },
+              "height": {
+                "type": "integer",
+                "minimum": 256,
+                "maximum": 1920
+              }
+            },
+            "required": [
+              "width",
+              "height"
+            ],
+            "additionalProperties": false
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 80
+          },
+          "brand": {
+            "type": "string",
+            "maxLength": 60
+          },
+          "facts": {
+            "type": "array",
+            "maxItems": 8,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            }
+          },
+          "trim": {
+            "type": "object",
+            "properties": {
+              "start_frame": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 3600
+              },
+              "end_frame": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 3600
+              }
+            },
+            "required": [
+              "start_frame",
+              "end_frame"
+            ],
+            "additionalProperties": false
+          },
+          "audio_mode": {
+            "type": "string",
+            "enum": [
+              "PRESERVE",
+              "MUTE"
+            ]
+          },
+          "captions": {
+            "type": "array",
+            "maxItems": 40,
+            "items": {
+              "type": "object",
+              "properties": {
+                "start_frame": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 3600
+                },
+                "end_frame": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 3600
+                },
+                "text": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "SUBTITLE",
+                    "ON_SCREEN_COPY"
+                  ]
+                }
+              },
+              "required": [
+                "start_frame",
+                "end_frame",
+                "text",
+                "kind"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "crop",
+          "canvas",
+          "title",
+          "brand",
+          "facts",
+          "trim",
+          "audio_mode",
+          "captions"
+        ],
+        "additionalProperties": false
+      },
+      "PlusVideoSource": {
+        "type": "object",
+        "properties": {
+          "width": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3840
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3840
+          },
+          "fps": {
+            "const": 30
+          },
+          "frames": {
+            "type": "integer",
+            "minimum": 30,
+            "maximum": 3600
+          },
+          "has_audio": {
+            "type": "boolean"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 512000000
+          }
+        },
+        "required": [
+          "width",
+          "height",
+          "fps",
+          "frames",
+          "has_audio",
+          "size_bytes"
+        ],
+        "additionalProperties": false
+      },
+      "PlusVideoDraft": {
+        "type": "object",
+        "properties": {
+          "draft_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "order_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "product_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "manifest_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "manifest_revision": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "deliverable_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "source_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "settings": {
+            "$ref": "#/components/schemas/PlusVideoSettings"
+          },
+          "fact_status": {
+            "const": "USER_PROVIDED_UNVERIFIED"
+          },
+          "state": {
+            "const": "DRAFT"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          },
+          "media_kind": {
+            "const": "video"
+          },
+          "source": {
+            "$ref": "#/components/schemas/PlusVideoSource"
+          }
+        },
+        "required": [
+          "draft_id",
+          "order_id",
+          "product_id",
+          "manifest_id",
+          "manifest_revision",
+          "deliverable_id",
+          "source_sha256",
+          "revision",
+          "settings",
+          "fact_status",
+          "state",
+          "created_at",
+          "updated_at",
+          "media_kind",
+          "source"
+        ],
+        "additionalProperties": false
+      },
+      "PlusVideoSaveRequest": {
+        "type": "object",
+        "properties": {
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "settings": {
+            "$ref": "#/components/schemas/PlusVideoSettings"
+          }
+        },
+        "required": [
+          "expected_revision",
+          "settings"
+        ],
+        "additionalProperties": false
+      },
+      "PlusVideoList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "$ref": "#/components/schemas/PlusVideoDraft"
+            }
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 4096
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "additionalProperties": false
+      },
+      "PlusVideoRenderPlan": {
+        "type": "object",
+        "properties": {
+          "request_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "draft_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "draft_revision": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "source_order_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          },
+          "settings": {
+            "$ref": "#/components/schemas/PlusVideoSettings"
+          },
+          "price_fen": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "pricing_version": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "plan": {
+            "$ref": "#/components/schemas/Plan"
+          },
+          "order": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Order"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "request_id",
+          "draft_id",
+          "draft_revision",
+          "source_order_id",
+          "created_at",
+          "settings",
+          "price_fen",
+          "pricing_version",
+          "plan",
+          "order"
+        ],
+        "additionalProperties": false
+      },
+      "PlusVideoRenderPlanList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "$ref": "#/components/schemas/PlusVideoRenderPlan"
+            }
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 4096
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "additionalProperties": false
+      },
+      "PlusVideoDraftResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusVideoDraft"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusVideoListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusVideoList"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusVideoRenderPlanResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusVideoRenderPlan"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusVideoRenderPlanListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusVideoRenderPlanList"
           },
           "trace_id": {
             "type": "string"

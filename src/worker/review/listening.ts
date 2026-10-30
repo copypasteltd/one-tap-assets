@@ -1,3 +1,4 @@
+import {orderNeedsListening} from '../audio/listening-contract.js';
 import type {Config} from '../../api/config.js';
 import type {Db} from '../../api/db/pool.js';
 import {hash} from '../../api/lib/crypto.js';
@@ -14,7 +15,7 @@ import {readDeliveredNativeListening,type DeliveredListeningAuthority} from '../
 export async function reviewListening(db:Db,cfg:Config,context:ExecutionContext,packet:DTO<'ReviewPacket'>,
   store:ObjectStorage=storage(cfg),aftercare?:DeliveredListeningAuthority):Promise<ListeningEvidence|null>{
   requireAudioReviewAdmission(context);
-  if(context.snapshot.audio_policy.speech_mode==='NONE')return null;
+  if(!orderNeedsListening(context.contract))return null;
   const evidence=aftercare?await readDeliveredNativeListening(db,cfg,store,context,aftercare):await readNativeListening(db,cfg,store,context);
   requireThat(evidence.packet_hash===packet.packet_hash,'LISTENING_PACKET_CHANGED','最终复核只能读取同一原审查包的听音',409);
   return evidence;
@@ -26,7 +27,7 @@ export async function scopeReviewListening(db:Db,cfg:Config,store:ObjectStorage,
     const {revisionContext}=await import('../revisions/context.js');
     const {revisionPacket,revisionImages}=await import('../revisions/media.js');
     const c=await revisionContext(db,scope.tenant_id,scope.scope_id,scope.snapshot_hash),packet=revisionPacket(c);
-    if(c.snapshot.audio_policy.speech_mode==='NONE')return null;
+    if(!orderNeedsListening(c.contract))return null;
     await revisionImages(db,cfg,store,c);
     const run=(await db.query<{private:{review_input?:{retained_native_audio_hash?:string}}}>(
       'SELECT private FROM agent_runs WHERE tenant_id=$1 AND id=$2',[scope.tenant_id,scope.run_id])).rows[0];
@@ -38,7 +39,7 @@ export async function scopeReviewListening(db:Db,cfg:Config,store:ObjectStorage,
   if(scope.scope_type!=='ORDER'||!['REVIEW_FACTS','REVIEW_STYLE'].includes(scope.stage_name))return null;
   const context=await executionContext(db,scope.tenant_id,scope.scope_id,scope.snapshot_hash,scope.stage_run_id);
   requireAudioReviewAdmission(context);
-  const evidence=context.snapshot.audio_policy.speech_mode==='NONE'?null:await readNativeListening(db,cfg,store,context);
+  const evidence=!orderNeedsListening(context.contract)?null:await readNativeListening(db,cfg,store,context);
   const run=(await db.query<{private:{review_input?:{native_listening?:ListeningEvidence}}}>(
     'SELECT private FROM agent_runs WHERE tenant_id=$1 AND id=$2',[scope.tenant_id,scope.run_id])).rows[0];
   requireThat(evidence?Boolean(run?.private.review_input?.native_listening)&&evidence.packet_hash===scope.packet_hash&&hash(run?.private.review_input?.native_listening)===hash(evidence)

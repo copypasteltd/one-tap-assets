@@ -25,9 +25,15 @@ import { extractEvidenceFrames, FRAME_SAMPLING_POLICY } from './evidence.js';
 import { assertSealedPacket, packetHash, reviewHash, REVIEW_HASH_ALGORITHM } from './packet.js';
 import {nativeAudioQc,nativeQcWrites,nativeQcResources,verifyNativeAudioEvidence,type NativeQcBundle} from './native-audio.js';
 import {plusRenderBinding} from '../../shared/domain/plus-render.js';
+import {plusVideoBinding,PLUS_VIDEO_QC} from '../../shared/domain/plus-video.js';
+import {PlusVideoMediaPipeline} from '../media/plus-video.js';
+import {plusVideoQc,verifyPlusVideoEvidence} from './plus-video.js';
 
 export const PHOTO_QC_POLICY = 'YPCC-QC-PHOTO-1.0.0';
 export function mediaQcPolicy(context:ExecutionContext):string{
+  if(plusVideoBinding(context.contract.source)){
+    requireThat(context.snapshot.codex_contract.qc_policy_version===PLUS_VIDEO_QC,'QC_POLICY_UNAVAILABLE','视频编辑缺少冻结验收规则',503);return PLUS_VIDEO_QC;
+  }
   if(context.snapshot.audio_policy.speech_mode==='NATIVE_ZH'){
     validateGenerationExecution(context.contract,true);return NATIVE_AUDIO_QC_POLICY;
   }
@@ -72,9 +78,10 @@ export async function verifySealedEvidence(db: Db, store: ObjectStorage, packet:
   for (const row of rows){
     const bytes=await store.get(row.object_key,30_000_000);
     requireThat(sha256(bytes)===row.sha256,'REVIEW_EVIDENCE_CHANGED','封存审查证据字节已变化',503);
-    if(packet.qc_policy_version===NATIVE_AUDIO_QC_POLICY)nativeBytes.set(row.id,bytes);
+    if([NATIVE_AUDIO_QC_POLICY,PLUS_VIDEO_QC].includes(packet.qc_policy_version))nativeBytes.set(row.id,bytes);
   }
   if(packet.qc_policy_version===NATIVE_AUDIO_QC_POLICY)verifyNativeAudioEvidence(packet,rows,nativeBytes);
+  if(packet.qc_policy_version===PLUS_VIDEO_QC)verifyPlusVideoEvidence(packet,rows,nativeBytes);
   return rows;
 }
 export class QualityControlService {
@@ -103,7 +110,8 @@ export class QualityControlService {
     const directory = inside(this.cfg.runtimeRoot, `review-work/${packetId}/${id('attempt')}`); await mkdir(directory, { recursive: true });
     try {
       const native=policy===NATIVE_AUDIO_QC_POLICY;
-      const pipeline = context.snapshot.engine==='PHOTO_LAYOUT'?new PhotoMediaPipeline(this.pool,this.cfg,this.store)
+      const videoEdit=plusVideoBinding(context.contract.source);
+      const pipeline = videoEdit?new PlusVideoMediaPipeline(this.pool,this.cfg,this.store):context.snapshot.engine==='PHOTO_LAYOUT'?new PhotoMediaPipeline(this.pool,this.cfg,this.store)
         :native?new NativeOrderMediaPipeline(this.pool,this.cfg,this.store):new GeneratedMediaPipeline(this.pool,this.cfg,this.store);
       const photos = await pipeline.photos(context);
       for (const [phase, receipt] of [['production', production.receipt], ['post', post.receipt]] as const) {
@@ -111,8 +119,9 @@ export class QualityControlService {
       }
       this.checkSources(context, production.receipt, post.receipt);
       const audio:NativeQcBundle|undefined=native?await nativeAudioQc(this.pool,this.cfg,this.store,context,production.receipt,post.receipt,join(directory,'audio'),signal):undefined;
+      const videoBundle=videoEdit?await plusVideoQc(this.cfg,this.store,context,post.receipt,join(directory,'plus-video'),signal):undefined;
       const evidence: ReviewEvidence[] = [];
-      const nativeBytes=native?new Map<string,Buffer>():null;
+      const nativeBytes=native||videoEdit?new Map<string,Buffer>():null;
       const save = async (kind: ReviewEvidence['kind'], bytes: Buffer, artifactId: string | null, data: Record<string, unknown>, frame: number | null = null,mimeType?:string): Promise<void> => {
         assertMediaAlive(context, signal);
         requireThat(evidence.length < 1000, 'REVIEW_EVIDENCE_LIMIT', '完整审查材料超过容量', 422);
@@ -130,6 +139,8 @@ export class QualityControlService {
       const plus=plusRenderBinding(context.contract.source);if(plus){const bytes=await this.store.get(plus.source_object_key,30_000_000);
         requireThat(sha256(bytes)===plus.source_sha256,'PLUS_SOURCE_BYTES_CHANGED','进阶原图与冻结来源不一致',503);
         await save('CANDIDATE_IMAGE',bytes,null,{purpose:'PLUS_SOURCE_REFERENCE',source_artifact_id:plus.source_artifact_id,source_sha256:plus.source_sha256});}
+      if(videoEdit&&videoBundle)for(const frame of videoBundle.source_frames)await save('CANDIDATE_IMAGE',frame.bytes,null,
+        {purpose:'PLUS_VIDEO_SOURCE_REFERENCE',source_artifact_id:videoEdit.source_artifact_id,source_sha256:videoEdit.source_sha256},frame.index);
       for (const artifact of post.receipt.artifacts) {
         const bytes = await this.store.get(artifact.object_key, artifact.spec.kind === 'video' ? 512_000_000 : 30_000_000);
         requireThat(sha256(bytes) === artifact.sha256, 'ARTIFACT_HASH_MISMATCH', '审查前候选文件已变化', 503);
@@ -137,7 +148,7 @@ export class QualityControlService {
           const path = join(directory, `${artifact.id}.mp4`); await writeFile(path, bytes, { flag: 'wx' });
           const inspection = artifact.spec.inspection;
           requireThat('frames' in inspection && inspection.frames, 'REVIEW_VIDEO_INVALID', '缺少实际视频帧数', 503);
-          const boundaries = [...context.snapshot.timeline.shots.flatMap(s => [s.start_frame, s.end_frame - 1]),...(audio?.caption_frames??[])];
+          const boundaries = [...context.snapshot.timeline.shots.flatMap(s => [s.start_frame, s.end_frame - 1]),...(audio?.caption_frames??[]),...(videoBundle?.caption_frames??[])];
           const frames = await extractEvidenceFrames(this.cfg, path, join(directory, artifact.id), inspection.frames, boundaries, context.snapshot.deadline_at, signal);
           for (const frame of frames) {
             await inspectImage(frame.bytes);
@@ -147,9 +158,12 @@ export class QualityControlService {
       }
       if(audio)for(const item of audio.files)await save(item.kind,item.bytes,item.artifact_id,
         {audio_contract_hash:audio.audio_contract_hash,asr_submission_id:audio.asr_submission_id},null,item.mime_type);
+      if(videoBundle)for(const item of videoBundle.files)await save(item.kind,item.bytes,item.artifact_id,
+        {plus_video_binding_hash:hash(videoEdit)},null,item.mime_type);
       await save('CONTRACT', Buffer.from(JSON.stringify({ version: policy, snapshot: context.snapshot, profile: context.contract.profile,
         creative_plan: context.contract.creative, resources: context.snapshot.resource_versions, sampling_policy: FRAME_SAMPLING_POLICY,
         ...(plus?{plus_render:{binding:plus,user_input_status:'USER_PROVIDED_UNVERIFIED',review_instruction:'核对所选原图、裁切、完整文字与规格。用户品牌/事实仅是补充，必须由原商品证据支持，不能提升为观察事实；源图的AI属性须保留。'}}:{}),
+        ...(videoEdit?{plus_video:{binding:videoEdit,user_input_status:'USER_PROVIDED_UNVERIFIED',review_instruction:'逐项核对原片选段、裁切、真实封面和定时字幕；SUBTITLE必须与实际声音一致，ON_SCREEN_COPY须符合商品证据。保留声音时两位复核者须消费已结算的独立听音。'}}:{}),
         ...(context.repair?{repair_binding:{authorization_id:context.repair.authorization_id,source_packet_id:context.repair.source_packet_id,
           source_packet_hash:context.repair.source_packet_hash,planning_stage_id:context.repair.planning_stage_id,
           plan_hash:context.repair.plan_hash,target_slot_ids:context.repair.target_slot_ids}}:{}),
@@ -165,7 +179,8 @@ export class QualityControlService {
         production_thread_ids: identities.map(i => i.thread_id), production_process_refs: identities.map(i => i.process_ref),
         reports: [], deterministic_pass: true, evidence_complete: true, unknown_paid_calls: 0, publication_decision: 'PENDING' };
       packet.packet_hash = packetHash(packet); assertSealedPacket(packet); assertMediaAlive(context, signal);
-      if(nativeBytes)verifyNativeAudioEvidence(packet,evidence,nativeBytes);
+      if(native&&nativeBytes)verifyNativeAudioEvidence(packet,evidence,nativeBytes);
+      if(videoEdit&&nativeBytes)verifyPlusVideoEvidence(packet,evidence,nativeBytes);
       return async db => {
         await lockMediaOwner(db,context.tenantId,context.ownerId);
         await executionContext(db, context.tenantId, context.orderId, context.snapshotHash,lease.id);
@@ -179,6 +194,11 @@ export class QualityControlService {
           for(const item of [...production.receipt.artifacts,...post.receipt.artifacts,...evidence])
             requireThat(sha256(await this.store.get(item.object_key,512_000_000))===item.sha256,
             'REVIEW_EVIDENCE_CHANGED','声音审查文件在封存前已变化',503);
+        }
+        if(videoBundle){
+          await nativeQcWrites(db,context,[...production.receipt.artifacts,...post.receipt.artifacts,...evidence]);
+          for(const item of [...production.receipt.artifacts,...post.receipt.artifacts,...evidence])
+            requireThat(sha256(await this.store.get(item.object_key,512000000))===item.sha256,'REVIEW_EVIDENCE_CHANGED','视频编辑候选或封存文件已变化',503);
         }
         requireThat(await unsettledOrderCalls(db, context) === 0, 'QC_PAID_CALL_UNRESOLVED', '提交时仍有未决付费调用', 409);
         for (const old of [production, post]) {
@@ -198,8 +218,9 @@ export class QualityControlService {
             order_id: context.orderId, artifact_id: artifact.id, ruleset_version: policy, decision: 'PASS',
             data: { packet_id: packetId, packet_hash: packet.packet_hash, sha256: artifact.sha256, inspection: artifact.spec.inspection,
               checked: ['FULL_DECODE', 'EXACT_SLOTS', 'SPEC', 'SOLD_PROVENANCE', 'RESOURCE_LICENSE', 'FULL_TIMELINE_EVIDENCE',
-                ...(audio?['FULL_NATIVE_TRACK','ORIGINAL_SETTLED_ASR','RECONSTRUCTED_NATIVE_MIX','CAPTION_TIMECODE_FRAMES']:[])],
-              semantic_review: 'PENDING',...(audio?{independent_listening:'REQUIRED'}:{}) } });
+                ...(audio?['FULL_NATIVE_TRACK','ORIGINAL_SETTLED_ASR','RECONSTRUCTED_NATIVE_MIX','CAPTION_TIMECODE_FRAMES']:[]),
+                ...(videoEdit?['ORIGINAL_VIDEO_SELECTION','CAPTION_TIMELINE','AUDIO_MODE','ACTUAL_FIRST_FRAME_COVER']:[])],
+              semantic_review: 'PENDING',...(audio||videoBundle?.files.some(f=>f.kind==='NATIVE_AUDIO')?{independent_listening:'REQUIRED'}:{}) } });
         }
         await db.query(`UPDATE stage_runs SET private=private||jsonb_build_object('review_packet_id',$3::text,'packet_hash',$4::text)
           WHERE tenant_id=$1 AND id=$2`, [context.tenantId, lease.id, packetId, packet.packet_hash]);

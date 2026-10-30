@@ -7,7 +7,9 @@ import {requireThat} from '../../api/lib/errors.js';
 import type {ObjectStorage} from '../../api/storage/storage.js';
 import type {DTO} from '../../shared/contracts/types.js';
 import {frozenNativeAudio,verifyNativeAudioLive,type NativeAudioContract} from '../audio/contract.js';
-import {frozenOrderListening} from '../audio/listening-contract.js';
+import {frozenOrderListening,orderNeedsListening} from '../audio/listening-contract.js';
+import {plusVideoBinding} from '../../shared/domain/plus-video.js';
+import {verifyResourceLicenses} from '../media/font.js';
 import {originalNativeTranscript} from '../audio/order-proof.js';
 import type {ExecutionContext} from '../compiler/order-context.js';
 import type {ArtifactSpec,MediaReceipt} from '../media/artifacts.js';
@@ -62,10 +64,11 @@ export function nativeCaptionFrames(transcript:NativeTranscript,targetFrames:num
 /** Contract prerequisite only. Stage, inference, report and publication
  * callers additionally revalidate the paid original listening evidence. */
 export function requireAudioReviewAdmission(context:ExecutionContext):void{
-  requireThat(context.snapshot.audio_policy.speech_mode==='NONE'||Boolean(frozenOrderListening(context.contract)),'INDEPENDENT_AUDIO_REVIEW_REQUIRED',
+  requireThat(!orderNeedsListening(context.contract)||Boolean(frozenOrderListening(context.contract)),'INDEPENDENT_AUDIO_REVIEW_REQUIRED',
     '原生声音缺少冻结的独立听音合同，不能执行最终复核或交付',503);
 }
 export async function nativeQcResources(db:Db,store:ObjectStorage,context:ExecutionContext):Promise<void>{
+  if(plusVideoBinding(context.contract.source)){await verifyResourceLicenses(db,context.snapshot.resource_versions);return;}
   await verifyNativeAudioLive(db,context.contract,true);const audio=frozenNativeAudio(context.contract)!;
   if(audio.music){
     const right=audio.rights.find(r=>r.kind==='MUSIC');requireThat(right?.media,'AUDIO_MUSIC_MEDIA_UNAVAILABLE','声音封存缺少实际许可配乐',503);

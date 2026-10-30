@@ -24,7 +24,9 @@ import {freezeAiDisclosure,frozenAiDisclosure} from '../../worker/compiler/discl
 import {bundleForSource} from '../../worker/codex/skills.js';
 import {freezeNativeSale,verifyNativeSaleLive,verifyNativeSaleRegistration} from '../../worker/audio/commerce.js';
 import {communityNativeBinding,verifyCommunityNativeQuote} from './community-native.js';
-import {plusRenderBinding,derivePlusSource} from '../../shared/domain/plus-render.js';
+import {plusWorkBinding,derivePlusWorkSource} from '../../shared/domain/plus-work.js';
+import {PLUS_VIDEO_VERSION,PLUS_VIDEO_QC,plusVideoNeedsListening} from '../../shared/domain/plus-video.js';
+import {freezeOrderListening,verifyListeningLive} from '../../worker/audio/listening-contract.js';
 import {verifyPlusRenderSource} from './plus-render-source.js';
 export { requestRefundInternal } from './refunds.js';
 
@@ -43,13 +45,14 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
   const native=communityNativeBinding(privateData.source,(privateData.commercial_binding as {native_audio?:unknown}|undefined)?.native_audio);
   if(native)requireThat(plan.private?.native_commercial&&hash(plan.private.native_commercial)===hash(native)&&current.data.price_fen===native.price_fen,
     'COMMUNITY_NATIVE_CONFIGURATION_CHANGED','社区声音规划或价格与原冻结配置不一致，请重新规划',409);
-  const codexContract = privateData.codex_contract as DTO<'CodexContract'>;
+  const codexContract = structuredClone(privateData.codex_contract) as DTO<'CodexContract'>;
   validateInternal('codex-contract', codexContract);
   const skill=await bundleForSource(cfg,privateData.source,codexContract.skill_bundle_hash);
-  const plus=plusRenderBinding(plan.private!.source as FrozenContract['source']);
-  const executionSource=plus?derivePlusSource(privateData.source,plus):privateData.source;
+  const plus=plusWorkBinding(plan.private!.source as FrozenContract['source']);
+  const executionSource=plus?derivePlusWorkSource(privateData.source,plus):privateData.source;
+  if(plus?.version===PLUS_VIDEO_VERSION)codexContract.qc_policy_version=PLUS_VIDEO_QC;
   requireThat(hash(plan.private?.source)===hash(executionSource),'PLAN_SOURCE_CHANGED','方案制作配置已变化，请重新规划',409);
-  if(plus){requireThat(cfg.plusRender.enabled&&cfg.plusRender.priceFen===plus.pricing.amount_fen&&cfg.plusRender.pricingVersion===plus.pricing.version,
+  if(plus){const pricing=plus.version===PLUS_VIDEO_VERSION?cfg.plusVideoRender:cfg.plusRender;requireThat(pricing.enabled&&pricing.priceFen===plus.pricing.amount_fen&&pricing.pricingVersion===plus.pricing.version,
     'PLUS_RENDER_PRICING_CHANGED','进阶制作价格或服务配置已变化，请重新整理独立清单',409);
     await verifyPlusRenderSource(db,p.tenantId,p.userId,plus,true,Number((executionSource.slo_policy as {hard_deadline_seconds:number}).hard_deadline_seconds));}
   const planned = plan.private?.runtime_admission as CodexAdmission | undefined;
@@ -63,6 +66,16 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
   requireThat(bundle?.state === 'ADMITTED', 'SKILL_BUNDLE_NOT_ADMITTED', '当前方案的制作能力尚未准入', 422);
   const models = await db.query<GenerationModelRow>('SELECT id,status,data,private FROM provider_model_versions WHERE id=ANY($1)', [privateData.model_version_ids ?? []]);
   requireThat(models.rows.length > 0 && models.rows.length === privateData.model_version_ids?.length && models.rows.every(m => m.status === 'ADMITTED'), 'MODEL_NOT_ADMITTED', '当前方案的模型能力尚未准入', 422);
+  if(plus?.version===PLUS_VIDEO_VERSION){
+    requireThat(plus.pricing.budget_micro===cfg.plusVideoRender.budgetMicro&&plus.pricing.listening_model_version_id===(cfg.plusVideoRender.listeningModelVersionId||null),
+      'PLUS_RENDER_PRICING_CHANGED','视频制作预算或听音配置已变化，请重新整理清单',409);
+    if(plusVideoNeedsListening(executionSource)){
+      const selected=(await db.query<GenerationModelRow>('SELECT id,status,data,private FROM provider_model_versions WHERE id=$1 FOR SHARE',[plus.pricing.listening_model_version_id])).rows[0];
+      requireThat(selected?.status==='ADMITTED'&&selected.data.roles.includes('QC')&&models.rows.every(m=>!m.data.roles.includes('QC')||m.id===selected.id),
+        'PLUS_VIDEO_LISTENING_NOT_ADMITTED','保留原声需要明确绑定已准入的独立听音模型',503);
+      if(!models.rows.some(m=>m.id===selected!.id))models.rows.push(selected!);
+    }
+  }
   const profile = await owned<DTO<'Profile'>>(db, 'profile_versions', String(plan.profile_id), p);
   const lock = await scoped(db, 'identity_locks', profile.data.identity_lock_id, p.tenantId);
   const photo = (await db.query<{ photo_set_hash: string }>('SELECT photo_set_hash FROM product_photo_versions WHERE id=$1 AND tenant_id=$2', [plan.photo_version_id, p.tenantId])).rows[0] ?? notFound();
@@ -72,7 +85,7 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
   const contract: FrozenContract = { product: product.data, profile: profile.data, photo_set_hash: photo.photo_set_hash, identity_lock_hash: String(lock.hash),
     request: plan.private!.request as DTO<'PlanRequest'>, creative: plan.private!.creative as CreativePlan, source: executionSource, plan_hash: request.plan_hash,
     model_versions: models.rows.map(m => m.data), resource_versions: resources, codex_contract: codexContract,
-    budget_micro: privateData.budget_micro ?? 0, repair_ceiling_micro: privateData.repair_ceiling_micro ?? 0,
+    budget_micro: plus?.version===PLUS_VIDEO_VERSION?plus.pricing.budget_micro:privateData.budget_micro ?? 0, repair_ceiling_micro: privateData.repair_ceiling_micro ?? 0,
     runtime_binding: { admission, limits: { owner_id: p.userId, max_requests: codexContract.max_turns_per_role * 4,
       max_requests_per_role: codexContract.max_turns_per_role, max_input_tokens: codexContract.max_input_tokens,
       max_output_tokens: codexContract.max_output_tokens, ceiling_micro: codexContract.agent_cost_ceiling_micro,
@@ -86,6 +99,7 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
     contract.generation_contracts=freezeGenerationContracts(cfg,models.rows);
   }
   await freezeNativeAudio(db,cfg,contract,models.rows);
+  if(plusVideoNeedsListening(contract.source)){freezeOrderListening(cfg,contract,models.rows);await verifyListeningLive(db,cfg,contract,true);}
   verifyCommunityNativeQuote(contract,native,models.rows);
   if(contract.source.engine!=='PHOTO_LAYOUT'){
     if(contract.source.audio_policy.speech==='none')validateGenerationExecution(contract);
@@ -112,8 +126,9 @@ export async function createOrder(db: Db, cfg: Config, p: Principal, request: DT
   const contract = quote.private!.contract as FrozenContract;
   frozenAiDisclosure(contract);
   requireThat(hash(contract)===quote.private!.contract_hash,'QUOTE_CONTRACT_MISMATCH','原报价合同摘要不一致',503);
-  const plus=plusRenderBinding(contract.source);if(plus){requireThat(cfg.plusRender.enabled,'PLUS_RENDER_NOT_ADMITTED','进阶图片制作已暂停，请保留草稿',503);
+  const plus=plusWorkBinding(contract.source);if(plus){requireThat((plus.version===PLUS_VIDEO_VERSION?cfg.plusVideoRender:cfg.plusRender).enabled,'PLUS_RENDER_NOT_ADMITTED','进阶制作已暂停，请保留草稿',503);
     await verifyPlusRenderSource(db,p.tenantId,p.userId,plus,true,Number((contract.source.slo_policy as {hard_deadline_seconds:number}).hard_deadline_seconds));}
+  if(plusVideoNeedsListening(contract.source))await verifyListeningLive(db,cfg,contract,true);
   if(contract.source.audio_policy.speech==='none')await verifyNativeAudioLive(db,contract,true);
   else await verifyNativeSaleLive(db,cfg,contract,true);
   const product = await owned<DTO<'Product'>>(db, 'product_drafts', contract.product.product_id, p);
@@ -148,7 +163,7 @@ export async function confirmPayment(db: Db, event: VerifiedPayment): Promise<DT
   const canExecute=order.data.fulfillment_state==='NOT_STARTED'&&Date.parse(order.data.payable_until)>=Date.now()&&!('media_revoked' in order.private);
   let audioEligible=true;let audioReason='AUDIO_RIGHTS_UNAVAILABLE';
   try{if(canExecute){await verifyNativeAudioLive(db,order.private.contract,true);
-    const plus=plusRenderBinding(order.private.contract.source);if(plus)await verifyPlusRenderSource(db,tenant,order.owner_id,plus,true,
+    const plus=plusWorkBinding(order.private.contract.source);if(plus)await verifyPlusRenderSource(db,tenant,order.owner_id,plus,true,
       Number((order.private.contract.source.slo_policy as {hard_deadline_seconds:number}).hard_deadline_seconds));
     if(order.private.contract.native_sale_contract)await verifyNativeSaleRegistration(db,order.private.contract,true);}}
   catch(e){

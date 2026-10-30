@@ -1,3 +1,5 @@
+import {PlusVideoMediaPipeline} from '../media/plus-video.js';
+import {plusVideoBinding} from '../../shared/domain/plus-video.js';
 import { mkdir, rm } from 'node:fs/promises';
 import { join } from 'node:path';
 import type pg from 'pg';
@@ -34,7 +36,7 @@ export class PublicationService {
     requireAudioReviewAdmission(context);
     const packet = await currentReviewPacket(db, context);
     const nativeListening=await reviewListening(db,this.cfg,context,packet,this.store);
-    if(nativeListening){const post=await operationArtifacts(db,context,'POST');
+    if(nativeListening&&!plusVideoBinding(context.contract.source)){const post=await operationArtifacts(db,context,'POST');
       await new NativeOrderMediaPipeline(this.pool,this.cfg,this.store).verifyBindings(db,context,post.receipt,lockResources);}
     requireThat(packet.qc_policy_version===mediaQcPolicy(context),'PUBLICATION_ROUTE_UNAVAILABLE','原订单验收与发布规则不一致',503);
     if(context.snapshot.engine!=='PHOTO_LAYOUT'){
@@ -66,7 +68,7 @@ export class PublicationService {
     const {packet,nativeListening} = await this.ready(this.pool, context); const post = await operationArtifacts(this.pool, context, 'POST');
     const directory = join(this.cfg.runtimeRoot, 'publication-work', id('attempt')); await mkdir(directory, { recursive: true });
     try {
-      const pipeline = nativeListening?new NativeOrderMediaPipeline(this.pool,this.cfg,this.store):
+      const pipeline = plusVideoBinding(context.contract.source)?new PlusVideoMediaPipeline(this.pool,this.cfg,this.store):nativeListening?new NativeOrderMediaPipeline(this.pool,this.cfg,this.store):
         context.snapshot.engine==='PHOTO_LAYOUT'?new PhotoMediaPipeline(this.pool,this.cfg,this.store):new GeneratedMediaPipeline(this.pool,this.cfg,this.store);
       await pipeline.photos(context); await pipeline.verify(context, post.receipt, directory, signal);
       await packetImages(this.pool, this.store, context, packet);

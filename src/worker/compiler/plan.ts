@@ -5,6 +5,7 @@ import { hash } from '../../api/lib/crypto.js';
 import Ajv2020 from 'ajv/dist/2020.js';
 import {communityDirection} from './community-direction.js';
 import {plusRenderBinding,plusCreativeText,validatePlusCreative} from '../../shared/domain/plus-render.js';
+import {plusVideoBinding,validatePlusVideoCreative} from '../../shared/domain/plus-video.js';
 
 export interface Shot {
   shot_id: string; start_frame: number; end_frame: number; overlap_frames: number;
@@ -55,6 +56,10 @@ export function basePlan(profile: DTO<'Profile'>, source: VariantSource): Creati
     native_voice_id: null, character_version_id: null, scene: '只使用商品原图中可见的视角和结构' };
   const plus=plusRenderBinding(source);if(plus){Object.assign(result,plusCreativeText(plus.settings,result));
     result.image_slots=[{slot_id:'plus-image',asset_id:plus.source_artifact_id,title:result.title,evidence_ids:allEvidence}];}
+  const video=plusVideoBinding(source);if(video){Object.assign(result,plusCreativeText(video.settings,result));
+    result.shots=[{...shots[0]!,shot_id:'plus-video',start_frame:0,end_frame:target,overlap_frames:0,asset_id:video.source_artifact_id,
+      intent:'原视频选段与定时字幕',camera:'HOLD',spoken_text:'',evidence_ids:allEvidence}];
+    result.image_slots=[{slot_id:'plus-video-cover',asset_id:video.source_artifact_id,title:result.title,evidence_ids:allEvidence}];}
   return result;
 }
 export function validateCreativePlan(plan: CreativePlan, profile: DTO<'Profile'>, source: VariantSource,allowAftercareCopy=false): void {
@@ -62,6 +67,7 @@ export function validateCreativePlan(plan: CreativePlan, profile: DTO<'Profile'>
   requireThat(plan.version === '1.1' && plan.identity_lock_id === profile.identity_lock_id && plan.profile_hash === profile.profile_hash && plan.variant_id === source.variant_id, 'PLAN_SCOPE_INVALID', '制作计划与商品版本不匹配', 422);
   requireThat(plan.fps === 30 && plan.target_frames === source.timeline_policy.target_frames, 'TIMELINE_INVALID', '制作时长与规格不匹配', 422);
   const evidence = new Set(profile.evidence.map(e => e.evidence_id)); const photos = new Set(profile.photo_roles.map(r => r.asset_id));
+  const video=plusVideoBinding(source);if(video)photos.add(video.source_artifact_id);
   requireThat(new Set(plan.shots.map(s => s.shot_id)).size === plan.shots.length, 'TIMELINE_INVALID', '分镜标识重复', 422);
   requireThat(plan.claim_evidence_ids.every(e => evidence.has(e)) && plan.shots.every(s => photos.has(s.asset_id) && s.evidence_ids.every(e => evidence.has(e))), 'EVIDENCE_SCOPE_INVALID', '计划引用了无权使用或不存在的证据', 422);
   requireThat(plan.shots.length > 0 && plan.shots.length <= 100, 'TIMELINE_INVALID', '分镜数量无效', 422);
@@ -71,7 +77,7 @@ export function validateCreativePlan(plan: CreativePlan, profile: DTO<'Profile'>
     position = shot.end_frame;
   }
   requireThat(position === plan.target_frames, 'TIMELINE_INVALID', '时间轴未覆盖完整时长', 422);
-  const direction=communityDirection(source);
+  const direction=video?null:communityDirection(source);
   if(direction){const segments=source.timeline_policy.base_segments;
     requireThat(segments&&segments.length===plan.shots.length&&plan.shots.every((shot,i)=>shot.start_frame===Math.round(segments[i]!.start_seconds*30)
       &&shot.end_frame===Math.round(segments[i]!.end_seconds*30)&&(!direction.camera||shot.camera===direction.camera)
@@ -84,6 +90,7 @@ export function validateCreativePlan(plan: CreativePlan, profile: DTO<'Profile'>
   const imageAssets=new Set(photos);if(plus)imageAssets.add(plus.source_artifact_id);
   requireThat(slots.length === plan.image_slots.length && new Set(plan.image_slots.map(s => s.slot_id)).size === slots.length && plan.image_slots.every(s => slots.some(x => x.slot_id === s.slot_id) && imageAssets.has(s.asset_id) && s.evidence_ids.every(e => evidence.has(e))), 'PLAN_OUTPUT_INVALID', '图片计划与交付清单不一致', 422);
   validatePlusCreative(plan,source,allowAftercareCopy);
+  validatePlusVideoCreative(plan,profile,source,allowAftercareCopy);
   if (source.audio_policy.speech !== 'none') requireThat(plan.native_voice_id && plan.character_version_id && plan.shots.some(s => s.spoken_text.trim()), 'NATIVE_SPEECH_REQUIRED', '口播方案需要已准入的人物、声音和中文台词', 422);
   const knownText = profile.observations.filter(o => o.status === 'OBSERVED').map(o => o.value).join(' ');
   // Shot intent is also painted into PHOTO_LAYOUT frames. It is not a private

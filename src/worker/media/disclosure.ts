@@ -16,7 +16,7 @@ export interface AiDisclosureProof {
   pixels_sha256:string;max_mean_abs_error:number;min_foreground_match:number;
 }
 export async function disclosureRaster(cfg:Config,policy:AiDisclosureContract,width:number,height:number):Promise<DisclosureRaster>{
-  const plus=policy.rendering_profile==='PLUS_IMAGE_V1';
+  const plus=(policy.rendering_profile==='PLUS_IMAGE_V1'||policy.rendering_profile==='PLUS_VIDEO_V1');
   requireThat(Number.isSafeInteger(width)&&Number.isSafeInteger(height)&&(plus?width>=256&&width<=3840&&height>=256&&height<=3840&&width*height<=PLUS_RENDER_PIXELS:
     width>=640&&width<=1920&&height>=640&&height<=1920),
     'AI_DISCLOSURE_SPEC_INVALID','AI标识图片尺寸无效',422);
@@ -45,7 +45,7 @@ export async function inspectDisclosure(cfg:Config,policy:AiDisclosureContract,b
   requireThat(Number.isSafeInteger(frames)&&frames>0&&frames<=3600,'AI_DISCLOSURE_CAPACITY_UNAVAILABLE','必须检查全部实际帧',422);
   if(options.kind==='image'){
     // Compare RGBA, including opaque alpha: invisible RGB must never certify a visible mark.
-    const region=await sharp(bytes,{limitInputPixels:policy.rendering_profile==='PLUS_IMAGE_V1'?PLUS_RENDER_PIXELS:4_000_000,failOn:'warning'}).extract({left,top,width,height}).ensureAlpha().raw().toBuffer();
+    const region=await sharp(bytes,{limitInputPixels:(policy.rendering_profile==='PLUS_IMAGE_V1'||policy.rendering_profile==='PLUS_VIDEO_V1')?PLUS_RENDER_PIXELS:4_000_000,failOn:'warning'}).extract({left,top,width,height}).ensureAlpha().raw().toBuffer();
     const original=await sharp(raster.png).ensureAlpha().raw().toBuffer();
     requireThat(region.equals(original),'AI_DISCLOSURE_PIXELS_MISSING','实际交付图片缺少完整AI标识',422);
     actual=region;expected=original;

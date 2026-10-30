@@ -775,5 +775,69 @@ export const endpoints = {
     "idempotency": false,
     "request": null,
     "response": "PlusBatch"
+  },
+  "createPlusVideoDraft": {
+    "method": "POST",
+    "path": "/plus/video-drafts",
+    "authenticated": true,
+    "idempotency": false,
+    "request": "PlusEditCreateRequest",
+    "response": "PlusVideoDraft"
+  },
+  "getPlusVideoDraft": {
+    "method": "GET",
+    "path": "/plus/video-drafts/{draft_id}",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "PlusVideoDraft"
+  },
+  "savePlusVideoDraft": {
+    "method": "PUT",
+    "path": "/plus/video-drafts/{draft_id}",
+    "authenticated": true,
+    "idempotency": false,
+    "request": "PlusVideoSaveRequest",
+    "response": "PlusVideoDraft"
+  },
+  "listPlusVideoDrafts": {
+    "method": "GET",
+    "path": "/plus/video-drafts",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "PlusVideoList"
+  },
+  "listPlusVideoStyles": {
+    "method": "GET",
+    "path": "/plus/video-render-styles",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "PlusRenderStyleList"
+  },
+  "createPlusVideoPlan": {
+    "method": "POST",
+    "path": "/plus/video-drafts/{draft_id}/render-plans",
+    "authenticated": true,
+    "idempotency": false,
+    "request": "PlusRenderCreateRequest",
+    "response": "PlusVideoRenderPlan"
+  },
+  "listPlusVideoPlans": {
+    "method": "GET",
+    "path": "/plus/video-render-plans",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "PlusVideoRenderPlanList"
+  },
+  "getPlusVideoPlan": {
+    "method": "GET",
+    "path": "/plus/video-render-plans/{request_id}",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "PlusVideoRenderPlan"
   }
 } as const;

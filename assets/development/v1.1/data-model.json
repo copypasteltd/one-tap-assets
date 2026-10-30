@@ -1825,7 +1825,8 @@
         "owner_id",
         "identity_id",
         "session_id",
-        "allow_render_plans"
+        "allow_render_plans",
+        "allow_video_render_plans"
       ],
       "invariant": "Explicit native confirmation only; 5-minute challenge; hashed secrets; retries preserve original session and expiry.",
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
@@ -1843,7 +1844,8 @@
         "created_at",
         "expires_at",
         "revoked_at",
-        "allow_render_plans"
+        "allow_render_plans",
+        "allow_video_render_plans"
       ],
       "invariant": "One-hour independent read/edit capability; no native payment/refund or identity merge; revocation checked inside each transaction and signed download.",
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
@@ -1863,7 +1865,8 @@
         "revision",
         "data",
         "created_at",
-        "updated_at"
+        "updated_at",
+        "media_kind"
       ],
       "invariant": "Owned paid current image; separate draft/revision; user-supplied facts remain unverified; deletion physically erases draft and all saved versions.",
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
@@ -1897,7 +1900,8 @@
         "plan_id",
         "input_hash",
         "binding",
-        "created_at"
+        "created_at",
+        "media_kind"
       ],
       "invariant": "Immutable independently quoted render plan; exact owned source/edit/tariff frozen, no payment capability in browser; unique natural input and product deletion erasure.",
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"

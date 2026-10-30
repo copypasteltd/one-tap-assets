@@ -1012,6 +1012,7 @@ export interface components {
             estimated_seconds_min: number | null;
             estimated_seconds_max: number | null;
             plus_render_request_id?: string;
+            plus_video_request_id?: string;
         };
         PreviewRequest: {
             plan_id: string;
@@ -2673,6 +2674,7 @@ export interface components {
         };
         PlusLinkCreateRequest: {
             prepare_render_plans?: boolean;
+            prepare_video_render_plans?: boolean;
         };
         PlusLink: {
             link_id: string;
@@ -2701,6 +2703,7 @@ export interface components {
             /** @constant */
             access: "OWN_PROJECTS_AND_EDIT_DRAFTS";
             can_prepare_render_plans: boolean;
+            can_prepare_video_render_plans?: boolean;
         };
         PlusLinkPollRequest: {
             poll_key: string;
@@ -2715,6 +2718,7 @@ export interface components {
             /** @enum {string} */
             state: "ACTIVE" | "REVOKED" | "EXPIRED";
             can_prepare_render_plans: boolean;
+            can_prepare_video_render_plans?: boolean;
         };
         PlusBrowserSession: {
             access_token: string;
@@ -2780,34 +2784,6 @@ export interface components {
             items: components["schemas"]["PlusEditDraft"][];
             next_cursor: string | null;
         };
-        PlusLinkResponse: {
-            data: components["schemas"]["PlusLink"];
-            trace_id: string;
-        };
-        PlusLinkApprovalResponse: {
-            data: components["schemas"]["PlusLinkApproval"];
-            trace_id: string;
-        };
-        PlusLinkStatusResponse: {
-            data: components["schemas"]["PlusLinkStatus"];
-            trace_id: string;
-        };
-        PlusSessionInfoResponse: {
-            data: components["schemas"]["PlusSessionInfo"];
-            trace_id: string;
-        };
-        PlusSessionListResponse: {
-            data: components["schemas"]["PlusSessionList"];
-            trace_id: string;
-        };
-        PlusEditDraftResponse: {
-            data: components["schemas"]["PlusEditDraft"];
-            trace_id: string;
-        };
-        PlusEditListResponse: {
-            data: components["schemas"]["PlusEditList"];
-            trace_id: string;
-        };
         PlusRenderCreateRequest: {
             expected_revision: number;
             variant_id: string;
@@ -2842,18 +2818,6 @@ export interface components {
         PlusRenderPlanList: {
             items: components["schemas"]["PlusRenderPlan"][];
             next_cursor: string | null;
-        };
-        PlusRenderStyleListResponse: {
-            data: components["schemas"]["PlusRenderStyleList"];
-            trace_id: string;
-        };
-        PlusRenderPlanResponse: {
-            data: components["schemas"]["PlusRenderPlan"];
-            trace_id: string;
-        };
-        PlusRenderPlanListResponse: {
-            data: components["schemas"]["PlusRenderPlanList"];
-            trace_id: string;
         };
         PlusBatchItemRequest: {
             draft_id: string;
@@ -2900,12 +2864,152 @@ export interface components {
             items: components["schemas"]["PlusBatchSummary"][];
             next_cursor: string | null;
         };
+        PlusLinkResponse: {
+            data: components["schemas"]["PlusLink"];
+            trace_id: string;
+        };
+        PlusLinkApprovalResponse: {
+            data: components["schemas"]["PlusLinkApproval"];
+            trace_id: string;
+        };
+        PlusLinkStatusResponse: {
+            data: components["schemas"]["PlusLinkStatus"];
+            trace_id: string;
+        };
+        PlusSessionInfoResponse: {
+            data: components["schemas"]["PlusSessionInfo"];
+            trace_id: string;
+        };
+        PlusSessionListResponse: {
+            data: components["schemas"]["PlusSessionList"];
+            trace_id: string;
+        };
+        PlusEditDraftResponse: {
+            data: components["schemas"]["PlusEditDraft"];
+            trace_id: string;
+        };
+        PlusEditListResponse: {
+            data: components["schemas"]["PlusEditList"];
+            trace_id: string;
+        };
+        PlusRenderStyleListResponse: {
+            data: components["schemas"]["PlusRenderStyleList"];
+            trace_id: string;
+        };
+        PlusRenderPlanResponse: {
+            data: components["schemas"]["PlusRenderPlan"];
+            trace_id: string;
+        };
+        PlusRenderPlanListResponse: {
+            data: components["schemas"]["PlusRenderPlanList"];
+            trace_id: string;
+        };
         PlusBatchResponse: {
             data: components["schemas"]["PlusBatch"];
             trace_id: string;
         };
         PlusBatchListResponse: {
             data: components["schemas"]["PlusBatchList"];
+            trace_id: string;
+        };
+        PlusVideoSettings: {
+            crop: {
+                x: number;
+                y: number;
+                width: number;
+                height: number;
+            };
+            canvas: {
+                width: number;
+                height: number;
+            };
+            title: string;
+            brand: string;
+            facts: string[];
+            trim: {
+                start_frame: number;
+                end_frame: number;
+            };
+            /** @enum {string} */
+            audio_mode: "PRESERVE" | "MUTE";
+            captions: {
+                start_frame: number;
+                end_frame: number;
+                text: string;
+                /** @enum {string} */
+                kind: "SUBTITLE" | "ON_SCREEN_COPY";
+            }[];
+        };
+        PlusVideoSource: {
+            width: number;
+            height: number;
+            /** @constant */
+            fps: 30;
+            frames: number;
+            has_audio: boolean;
+            size_bytes: number;
+        };
+        PlusVideoDraft: {
+            draft_id: string;
+            order_id: string;
+            product_id: string;
+            manifest_id: string;
+            manifest_revision: number;
+            deliverable_id: string;
+            source_sha256: string;
+            revision: number;
+            settings: components["schemas"]["PlusVideoSettings"];
+            /** @constant */
+            fact_status: "USER_PROVIDED_UNVERIFIED";
+            /** @constant */
+            state: "DRAFT";
+            /** Format: date-time */
+            created_at: string;
+            /** Format: date-time */
+            updated_at: string;
+            /** @constant */
+            media_kind: "video";
+            source: components["schemas"]["PlusVideoSource"];
+        };
+        PlusVideoSaveRequest: {
+            expected_revision: number;
+            settings: components["schemas"]["PlusVideoSettings"];
+        };
+        PlusVideoList: {
+            items: components["schemas"]["PlusVideoDraft"][];
+            next_cursor: string | null;
+        };
+        PlusVideoRenderPlan: {
+            request_id: string;
+            draft_id: string;
+            draft_revision: number;
+            source_order_id: string;
+            /** Format: date-time */
+            created_at: string;
+            settings: components["schemas"]["PlusVideoSettings"];
+            price_fen: number;
+            pricing_version: string;
+            plan: components["schemas"]["Plan"];
+            order: components["schemas"]["Order"] | null;
+        };
+        PlusVideoRenderPlanList: {
+            items: components["schemas"]["PlusVideoRenderPlan"][];
+            next_cursor: string | null;
+        };
+        PlusVideoDraftResponse: {
+            data: components["schemas"]["PlusVideoDraft"];
+            trace_id: string;
+        };
+        PlusVideoListResponse: {
+            data: components["schemas"]["PlusVideoList"];
+            trace_id: string;
+        };
+        PlusVideoRenderPlanResponse: {
+            data: components["schemas"]["PlusVideoRenderPlan"];
+            trace_id: string;
+        };
+        PlusVideoRenderPlanListResponse: {
+            data: components["schemas"]["PlusVideoRenderPlanList"];
             trace_id: string;
         };
     };

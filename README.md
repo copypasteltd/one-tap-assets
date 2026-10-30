@@ -1,18 +1,20 @@
 # 一品成片 · One Tap Assets
 
-**小程序优先的商品素材自助制作服务。** 用户拍照，由多模态识别商品与可见特征，选择社区预设，核对清单和费用后主动付款；系统按风格Skill完成内容梳理、制作、后期、QC及独立事实/风格复核，交付可保存的素材。官方提供10套基础风格，社区按同一规格扩展。
+**支付宝、抖音小程序优先的自助商品素材工作室。** 拍下商品，多模态识别可见特征，选择社区预设，确认清单与费用后制作整套素材。官方10套不同风格/节奏方案提供基础体验；风格Skill参与内容、制作、后期、文件预验收及独立事实/风格复核，交付后释放实例，手机领取和保存相册。
 
-**本轮交付：支付宝和抖音小程序均已实际编译成功。** 两端各17个页面、IDE配置、依赖和SHA256清单，连同服务端及Plus网页构建一起纳入独立交付包。529份源码、37次迁移、98项业务/38项管理接口、305个schema、82个逻辑实体。使用原生Windows工具链；不使用Docker或WSL。
+**本轮已收口 Plus 原片视频剪辑。** 在本人已交付视频上按帧选段、裁切、设置尺寸和定时字幕，选择保留/关闭原声，保存独立修订；手机单独批准视频制作权限，再核对这版清单、完整费用并主动付款。正式交付真实MP4、其实际首帧PNG封面及文案，保留原素材。保留原声时须完成完整音轨技术比对、独立听音和双复核；手填字幕保持待核对状态，不宣称自动ASR。
 
-[交付包位置与SHA256](docs/delivery/package.json) · [小程序导入/真机清单](docs/guides/MINI-PROGRAM-IMPORT.md) · [准确构建与专项证据](docs/verification/mini-closure-source.json) · [编号事项及待办](docs/guides/STATUS.md) · [English](README.en.md)
+![原片选段、字幕与手机确认](docs/media/plus-video/walkthrough.gif)
 
-网页Plus用于深化图片编辑和批量整理：手机明确批准连接，电脑保存裁切、尺寸及文字，选择2至10份草稿逐件选风格，回原小程序分别确认报价和付款。每件独立制作、审核、交付新PNG与文案；失败或未付款不阻断其他商品，保留原素材和原订单权益。相同意图重试去重，撤销/删除/到期使对应私有访问失效。
+[完整剪辑方案与约束](docs/实施/Plus原片视频剪辑与定时字幕-v1.0.md) · [截图、实际样片、MP4/WebM/GIF](docs/media/plus-video/README.md) · [实际视频样片](docs/media/plus-video/edited-sample.mp4) · [English](README.en.md)
 
-![批量商品独立制作演示](docs/media/plus-batches/walkthrough.gif)
+源码同时保留 Plus 图片精细编辑和2至10件商品逐件制作/付款/交付。小程序仍承担拍照、识别、预设、交易和领取；电脑负责深入编辑和整理清单。输出限制：选段1–60秒、最大1080p总像素、最多40条定时字幕；有声选段须符合当前已准入听音协议（现上限30秒）。本路线一次免费受限修改仅调整文案，重新剪辑或改字幕另立清单。
 
-[Plus单图完整设计](docs/实施/Plus独立图片正式制作与手机付款交付-v1.0.md) · [批量方案及使用逻辑](docs/实施/Plus批量商品独立制作与逐件交付-v1.0.md) · [截图、实际PNG、MP4/WebM/GIF](docs/media/plus-batches/README.md)。保留全部180份历史媒体及方案C原稿。本轮界面没有调整，因此沿用这些标明来源的演示。
+**本轮关键检查及必要构建通过，未运行全面测试。** 4项原生关键链路、4项浏览器流程、类型/服务端/Plus/支付宝/抖音构建；双端各17页面和IDE配置。543份源码、38迁移、106业务/38管理接口、316schema/82实体。全程原生Windows，不使用Docker或WSL。新录制10份媒体，原180份媒体和方案C原稿保持。
 
-本轮5项目录专项与必要构建通过，未运行全面测试。目录检查不代表开发者工具或真机验收。默认API是本机地址，真机须使用实际AppID、HTTPS服务域名与已核验配置重新构建。此前业务链路真实执行PostgreSQL/HTTPS/MCP/PNG，身份、付款、模型、语义判定和进程身份为合成；真实服务与销售默认关闭。Plus视频/字幕/复杂作者工具、长期身份绑定、真实服务和云端部署仍待完成。
+[交付包路径与SHA256](docs/delivery/package.json) · [完整编号状态](docs/guides/STATUS.md) · [准确证据](docs/verification/plus-video-source.json) · [小程序导入说明](docs/guides/MINI-PROGRAM-IMPORT.md)
+
+演示实际运行原生PostgreSQL、HTTPS、MCP及FFmpeg；账户、原交付元数据、付款事件、模型/听音判定和隔离身份为合成，音频仅为提示音。真实服务和销售默认关闭；开发者工具/真机、真实身份支付/模型/隔离准入及云端部署仍待。先前失败与运行器启动超时单独留档。自动转写、多轨/视频批量和高级作者工具、长期身份绑定及58项完整验收继续保留在待办。
 
 ## 界面与操作演示
 
@@ -135,11 +137,11 @@ flowchart LR
 | 客户端 | Taro 4.3.1、React 18.3.1、TypeScript 5.9.3，17 个共享页面及支付宝/抖音适配 |
 | 浏览器回放 | Vite 8.3.5、React DOM，共享页面与本地演示数据 |
 | 服务端 | Node.js 24（本次验证 24.22.1）、Fastify 5.12.7、独立 Worker/回收/维护 CLI |
-| 持久化 | 原生 PostgreSQL（本地 17.6-1）、阶段队列、outbox、租约代次、不可变回执，37 个迁移 |
+| 持久化 | 原生 PostgreSQL（本地 17.6-1）、阶段队列、outbox、租约代次、不可变回执，38 个迁移 |
 | 媒体 | Sharp 0.35.5、原生 FFmpeg/ffprobe、登记私有对象存储及本地开发存储 |
 | Agent | Codex app-server、受控 stdio/MCP、独立推理计量和风格 SkillBundle |
 | 验证 | Vitest 5.0.5、Playwright 1.64.1、原生 PG/真实媒体、显式合成供应商与宿主夹具 |
-| 工程 | pnpm 10.13.1、单一 lockfile、JSON Schema 2020-12、98 个业务/38 个管理接口契约 |
+| 工程 | pnpm 10.13.1、单一 lockfile、JSON Schema 2020-12、106 个业务/38 个管理接口契约 |
 
 本项目不调用本地 Docker、WSL、虚拟机或 Testcontainers，不依赖 Redis。开发脚本面向 Windows PowerShell；其他系统的完整启动流程未经本项目验证。
 
@@ -209,7 +211,7 @@ Worker新增[脱敏故障诊断与日志隔离](docs/实施/Worker脱敏故障�
 ## 代码与文档导航
 
 ```text
-src/api/            API、鉴权、领域服务、37 个 SQL 迁移
+src/api/            API、鉴权、领域服务、38 个 SQL 迁移
 src/worker/         持久阶段、Codex、MCP、制作/复核/回收/隐私
 src/shared/         双端页面、平台端口、客户端恢复与生成契约
 src/mini-alipay/    支付宝小程序壳

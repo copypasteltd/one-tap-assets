@@ -1,18 +1,8 @@
 # 技术结构与执行逻辑 / Architecture and execution
 
-2026-10-30快速功能收口：[Plus手机确认与独立编辑草稿](../实施/Plus手机确认与独立编辑草稿-v1.0.md) · [准确证据](../verification/plus-workspace-source.json)。小程序主动确认、5分钟码/1小时电脑连接、本人商品订单与实际原图、独立裁切/规格/文字草稿、修订冲突和撤销失效已接通；同源 `/plus/` 沿用C。507源码/35迁移/91业务38管理、288schema79实体。3客户端与7原生API专项、类型/server/preview和本机启动通过，只做相关检查；浏览器与媒体以本轮来源为准。身份/付款/验收语义合成，手机是共享UI回放，非真实服务或宿主验收。正式渲染/报价/双复核交付、字幕/批量/复杂作者工具、双平台长期绑定、真实准入与58项完整验收仍待，完整产品/生产/云端false。旧153媒体、方案C与历史原件保持。
+2026-10-31快速功能收口：Plus原片视频选段、裁切、定时字幕、原声保留/静音、独立手机授权与确认付款、新MP4/真实首帧封面/文案交付已接通。有声选段封存完整原选段与成片WAV，通过原声技术比对、独立听音及事实/风格双复核；手填字幕不冒充ASR。有声视频的免费受限售后仅修改文案并保留原音视频。4项原生关键链路检查、4项真实浏览器流程及类型/server/Plus/支付宝/抖音构建通过，未执行全面测试。543源码、38迁移、106业务/38管理接口、316schema/82实体；新增10份截图/MP4/WebM/GIF，原180媒体及方案C保持。原生数据库/HTTPS/MCP/FFmpeg实际运行，账户、付款、模型/听音判定及隔离身份为合成；真实服务和销售默认关闭。双端真机、真实服务/隔离准入、云端部署、多轨与视频批量/自动转写/复杂作者工具、长期身份绑定及58项完整验收仍待。
 
-以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
-
-最新费用结构：[修复费用授权与原订单额度](../实施/修复费用授权与原订单额度-v1.0.md)。新增迁移026及不可变核算授权，四个付费入口按实际阶段和租约选择费用用途；不增加模型或客户财务权限。新表只含ID/哈希/核算节点，不复制媒体、提示词或报告正文。原一次性预付许可分摊仍取原记录。Automatic repair orchestration and changed-candidate production remain unconnected.
-
-最新[原生声音最终双复核与事务交付](../实施/原生声音最终双复核与事务交付-v1.0.md)把完整双声道/全画面、原请求/响应/费用、两个独立角色和推理/工具/报告证据连接到有声事务发布。FACTS 唯一平台准备，STYLE 只读；每个消费边界重验原件、费用、授权和原截止。正向语义是刻意构造的控制响应，不代表真实模型听对。Public ordering/sales, real Chinese listening/billing/rights, native isolation and device admission remain closed. 以下历史“未接最终阶段”按本条区分内部接通与生产准入。
-
-2026-10-29增补：[异步转写与原任务回执](../实施/异步音频转写与原任务回执-v1.0.md)已实现内部POST服务：实际视频/PCM→私有单声道WAV→原任务/原费用/回执恢复→实际字级转写。`provider_submissions`增加ASR类型且与Ark分流，媒体维护器只核对已存回执。17项原生专项使用合成供应商，不代表真实中文ASR/OSS、独立听音或正式有声交付已准入。后文历史“持久ASR待实现”按本条区分内部实现与真实服务准入；原有声销售门禁保留。
-
-The internal POST transcription service reuses the original ledger and private-object scope. Its seventeen native fixtures use synthetic provider responses. Frozen audio contracts and scoped private production/POST tools are now connected as described above; private final review/publication is connected; real ASR/listening/billing/storage and production admission remain incomplete; technical file QC is connected.
-
-[中文README](../../README.md) · [English README](../../README.en.md) · [状态 / Status](STATUS.md)
+[视频剪辑需求、协议与配置](../实施/Plus原片视频剪辑与定时字幕-v1.0.md) · [截图与录屏](../media/plus-video/README.md) · [准确证据](../verification/plus-video-source.json) · [编号完成与待办](STATUS.md)。下文保留此前方案和历史验证来源；当前新增范围以上述视频剪辑说明及本轮证据为准。
 
 ## 入口与模块 / Surfaces and modules
 

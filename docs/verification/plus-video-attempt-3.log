@@ -1,0 +1,40 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ❯ tests/integration/plus-video.test.ts (4 tests | 1 failed) 12568ms
+   ✓ requires a separately approved video capability and preserves isolated optimistic drafts 274ms
+   × freezes a video plan and independent native price, rejects unavailable listening before payment 6833ms
+   · encodes a real selected MP4 with timed captions, retains sound, seals two complete WAVs and publishes only after both reviews
+   · honors explicit mute in a separate paid version without reusing or buying listening
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/plus-video.test.ts > freezes a video plan and independent native price, rejects unavailable listening before payment
+AssertionError: expected [ 'copy', 'image', 'video' ] to deeply equal [ 'image', 'video' ]
+
+- Expected
++ Received
+
+  [
++   "copy",
+    "image",
+    "video",
+  ]
+
+ ❯ tests/integration/plus-video.test.ts:39:59
+     37|   await f.step('PLAN');request=(await f.call(`/plus/video-render-plans…
+     38|   expect(request.plan.state).toBe('READY');expect(request.plan.plus_vi…
+     39|   expect(request.plan.output_slots.map(x=>x.kind).sort()).toEqual(['im…
+       |                                                           ^
+     40|   f.cfg.provider.listening!.enabled=false;
+     41|   const quoted=await f.call('/quotes','POST',{plan_id:request.plan.pla…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (4)
+   Start at  23:56:08
+   Duration  13.95s (tests 91%, import 6%, transform 3%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/integration.json

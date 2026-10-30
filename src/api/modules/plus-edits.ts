@@ -39,7 +39,7 @@ export async function createPlusEditDraft(db:Db,p:Principal,request:DTO<'PlusEdi
 }
 export async function getPlusEditDraft(db:Db,p:Principal,draftId:string):Promise<DTO<'PlusEditDraft'>>{
   plus(p);await lockMediaOwner(db,p.tenantId,p.userId);
-  const row=(await db.query<{data:DTO<'PlusEditDraft'>}>('SELECT data FROM plus_edit_drafts WHERE tenant_id=$1 AND owner_id=$2 AND id=$3',[p.tenantId,p.userId,draftId])).rows[0]??notFound();
+  const row=(await db.query<{data:DTO<'PlusEditDraft'>}>(`SELECT data FROM plus_edit_drafts WHERE tenant_id=$1 AND owner_id=$2 AND id=$3 AND media_kind='image'`,[p.tenantId,p.userId,draftId])).rows[0]??notFound();
   const s=await source(db,p,row.data.order_id,row.data.deliverable_id);
   requireThat(row.data.manifest_id===s.pack.manifest_id&&row.data.source_sha256===s.item.sha256,'PLUS_SOURCE_CHANGED','原素材已有新版本，请从新素材重新建立编辑草稿',409);
   return row.data;
@@ -58,7 +58,7 @@ export async function listPlusEditDrafts(db:Db,cfg:Config,p:Principal,query:Page
   const rows=(await db.query<{id:string;created_at:Date;data:DTO<'PlusEditDraft'>}>(`SELECT d.id,d.created_at,d.data FROM plus_edit_drafts d
     JOIN product_drafts p ON p.tenant_id=d.tenant_id AND p.id=d.product_id JOIN orders o ON o.tenant_id=d.tenant_id AND o.id=d.order_id
     JOIN delivery_manifests m ON m.tenant_id=d.tenant_id AND m.id=d.manifest_id
-    WHERE d.tenant_id=$1 AND d.owner_id=$2 AND p.deleted_at IS NULL AND p.expires_at>now() AND o.payment_state='CONFIRMED'
+    WHERE d.tenant_id=$1 AND d.owner_id=$2 AND d.media_kind='image' AND p.deleted_at IS NULL AND p.expires_at>now() AND o.payment_state='CONFIRMED'
       AND o.fulfillment_state='DELIVERED' AND o.private->>'media_revoked' IS DISTINCT FROM 'true' AND m.expires_at>now()
       AND NOT EXISTS(SELECT 1 FROM delivery_manifests later WHERE later.tenant_id=d.tenant_id AND later.order_id=d.order_id AND later.revision>m.revision)
       AND ($3::timestamptz IS NULL OR (d.created_at,d.id)<($3,$4)) ORDER BY d.created_at DESC,d.id DESC LIMIT $5`,[p.tenantId,p.userId,point?.createdAt??null,point?.id??null,size+1])).rows;

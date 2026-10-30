@@ -44,7 +44,7 @@ async function dto(db:Db,p:Principal,row:RenderRow):Promise<DTO<'PlusRenderPlan'
 }
 const visible=`SELECT r.*,v.data plan FROM plus_render_plans r JOIN plan_versions v ON v.tenant_id=r.tenant_id AND v.id=r.plan_id
  JOIN product_drafts p ON p.tenant_id=r.tenant_id AND p.id=r.product_id
- WHERE r.tenant_id=$1 AND r.owner_id=$2 AND p.deleted_at IS NULL AND p.expires_at>now()`;
+ WHERE r.tenant_id=$1 AND r.owner_id=$2 AND r.media_kind='image' AND p.deleted_at IS NULL AND p.expires_at>now()`;
 export async function getPlusRenderPlan(db:Db,p:Principal,requestId:string):Promise<DTO<'PlusRenderPlan'>> {
   const row=(await db.query<RenderRow>(visible+' AND r.id=$3',[p.tenantId,p.userId,requestId])).rows[0]??notFound();return dto(db,p,row);
 }

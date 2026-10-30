@@ -1,3 +1,5 @@
+import {PlusVideoMediaPipeline} from '../media/plus-video.js';
+import {plusVideoBinding} from '../../shared/domain/plus-video.js';
 import { readFileSync } from 'node:fs';
 import { mkdir, rm } from 'node:fs/promises';
 import type pg from 'pg';
@@ -61,7 +63,7 @@ export async function validateMediaStageResult(db: pg.Pool | pg.PoolClient, cont
 }
 export function productionTools(pool: pg.Pool, cfg: Config, store: ObjectStorage,gateway?:GenerationGateway,speech?:SpeechGateway): Record<string, ToolHandler> {
   requireThat(!(gateway||speech)||cfg.env==='test','TEST_PORT_FORBIDDEN','制作供应商端口仅限测试',500);
-  const pipelineFor=(context:ExecutionContext)=>context.snapshot.engine==='PHOTO_LAYOUT'?new PhotoMediaPipeline(pool,cfg,store)
+  const pipelineFor=(context:ExecutionContext)=>plusVideoBinding(context.contract.source)?new PlusVideoMediaPipeline(pool,cfg,store):context.snapshot.engine==='PHOTO_LAYOUT'?new PhotoMediaPipeline(pool,cfg,store)
     :context.snapshot.audio_policy.speech_mode==='NATIVE_ZH'?new NativeOrderMediaPipeline(pool,cfg,store,gateway,speech):new GeneratedMediaPipeline(pool,cfg,store,gateway);
   const render = (phase: MediaPhase,generatedOnly?:boolean): ToolHandler => async (scope, args, intent, signal) => {
     requireThat(args.snapshot_hash===scope.snapshot_hash,'INPUT_HASH_MISMATCH','制作参数与原冻结输入不一致',422);

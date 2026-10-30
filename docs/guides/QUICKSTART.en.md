@@ -1,18 +1,6 @@
 # Native quick start
 
-The current native startup applies migration035 and serves the same-origin HTTPS `/plus/` workbench. Generate a code on the computer, then explicitly approve it in the signed-in mini-program under account/privacy → Plus. The one-hour grant supports owned assets and separate image editing drafts, with revocation. Use the current-build launcher; manual startup must point `YPCC_BUILD_ROOT` to the current build directory. Final rendering, separate purchase and acceptance remain pending. Sales remain disabled. [Scope and permissions](../实施/Plus手机确认与独立编辑草稿-v1.0.md).
-
-以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
-
-One-command development setup: `.\scripts\setup-local.ps1`; environment checks: `.\scripts\run.ps1 doctor`; start API/Worker/reaper/maintenance: `.\scripts\run.ps1 local:start`. See the [delivery guide](../delivery/README.md) for source ZIP and build details.
-
-Private [final audio review and publication](../实施/原生声音最终双复核与事务交付-v1.0.md) is connected for both generated routes. Tests use actual native database/media and explicitly fabricated semantic/provider/rights/usage/isolation responses. LISTENING and ASR configuration default to disabled; their endpoints, keys and exact host allowlists stay empty in the example. Model/rate/capability registration and the original sold contract are also required. Environment values never enable sales. Saved-original receipt maintenance does not repurchase UNKNOWN calls. Public audio orders and real-service/device admission remain closed.
-
-[中文](QUICKSTART.md) · [Project README](../../README.en.md) · [Status](STATUS.md)
-
-The internal transcription service has separate `ASR_SERVICE_ENABLED=false`, `ASR_BASE_URL`, `ASR_API_KEY` and `ASR_ALLOWED_HOSTS` configuration. It defaults to disabled. Environment variables alone cannot admit audible orders: the original POST lease, model/rate contract, registered private video and restricted HTTPS storage are still required. [Configuration and seventeen native fixtures](../实施/异步音频转写与原任务回执-v1.0.md). The [audio contract and original-order accounting guide](../实施/原生声音合同与原订单费用-v1.0.md) documents character/voice/music rights, captions, one complete-track ASR, migration023 and twenty-three additional native fixtures. Scoped private audio tools and technical file QC are implemented; real authorizations/providers and production listening/final review/delivery quality remain unadmitted.
-
-Run all commands from the checkout root in Windows PowerShell. The current development workspace is `E:\dev\sandbox\支付宝黑客松\一品成片`. Do not launch Docker, WSL, VMs or indirect container scripts. Tools, caches, builds, test media and the local database belong in ignored `runtime/`.
+The current delivery adds Plus source-video trim, crop, timed captions, explicit audio retention/mute and independent native approval/payment. Four focused native checks, four browser workflow checks and the required server/web/Alipay/Douyin builds passed; no full suite or device acceptance ran. Real services and sales remain disabled. See [video workflow and configuration](../实施/Plus原片视频剪辑与定时字幕-v1.0.md), [exact evidence](../verification/plus-video-source.json), [recordings](../media/plus-video/README.md) and [numbered status](STATUS.md).
 
 ## 1. Dependencies and browser replay
 

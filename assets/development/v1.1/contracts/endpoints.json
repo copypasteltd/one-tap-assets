@@ -2346,6 +2346,158 @@
         "D22"
       ],
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/plus/video-drafts",
+      "operation_id": "createPlusVideoDraft",
+      "summary": "为本人当前已交付视频建立独立剪辑草稿",
+      "request_schema": "PlusEditCreateRequest",
+      "response_schema": "PlusVideoDraft",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/video-drafts/{draft_id}",
+      "operation_id": "getPlusVideoDraft",
+      "summary": "读取本人视频剪辑草稿及可信来源规格",
+      "request_schema": null,
+      "response_schema": "PlusVideoDraft",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "PUT",
+      "path": "/plus/video-drafts/{draft_id}",
+      "operation_id": "savePlusVideoDraft",
+      "summary": "按修订号保存选段、裁切、定时字幕和原声选择",
+      "request_schema": "PlusVideoSaveRequest",
+      "response_schema": "PlusVideoDraft",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/video-drafts",
+      "operation_id": "listPlusVideoDrafts",
+      "summary": "分页读取本人有效视频编辑草稿",
+      "request_schema": null,
+      "response_schema": "PlusVideoList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/video-render-styles",
+      "operation_id": "listPlusVideoStyles",
+      "summary": "读取独立视频编辑制作风格与价格",
+      "request_schema": null,
+      "response_schema": "PlusRenderStyleList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/plus/video-drafts/{draft_id}/render-plans",
+      "operation_id": "createPlusVideoPlan",
+      "summary": "经手机单独授权冻结视频编辑清单，回原渠道核对报价并付款",
+      "request_schema": "PlusRenderCreateRequest",
+      "response_schema": "PlusVideoRenderPlan",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/video-render-plans",
+      "operation_id": "listPlusVideoPlans",
+      "summary": "本人在电脑或原小程序恢复视频制作清单",
+      "request_schema": null,
+      "response_schema": "PlusVideoRenderPlanList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/video-render-plans/{request_id}",
+      "operation_id": "getPlusVideoPlan",
+      "summary": "读取本人视频制作清单及原渠道独立订单状态",
+      "request_schema": null,
+      "response_schema": "PlusVideoRenderPlan",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
     }
   ]
 }

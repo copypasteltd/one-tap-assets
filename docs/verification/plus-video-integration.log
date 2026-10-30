@@ -1,0 +1,15 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/integration/plus-video.test.ts (4 tests) 56548ms
+   ✓ requires a separately approved video capability and preserves isolated optimistic drafts 361ms
+   ✓ freezes a video plan and independent native price, rejects unavailable listening before payment 4938ms
+   ✓ encodes a real selected MP4 with timed captions, retains sound, seals two complete WAVs and publishes only after both reviews 28884ms
+   ✓ honors explicit mute in a separate paid version without reusing or buying listening 17815ms
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  00:01:17
+   Duration  58.29s (tests 97%, import 2%, transform 1%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/integration.json

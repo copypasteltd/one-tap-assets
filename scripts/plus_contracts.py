@@ -1,5 +1,6 @@
 """Explicit mini-program approval and owner-scoped Plus editing drafts."""
 import copy
+from plus_video_contracts import extend_video_contract, extend_video_data
 
 def extend_plus_contract(a, m, e):
     def ref(n): return {'$ref': '#/components/schemas/' + n}
@@ -100,6 +101,7 @@ def extend_plus_contract(a, m, e):
         row=copy.deepcopy(template);row.update(method=method,path=path,operation_id=op,summary=summary,request_schema=request,response_schema=response,
           auth_policy='public-plus-link-secret' if public else 'product-session-and-resource-ownership',idempotency_required=False,requirements=['P01-F18','P01-F24'],design_pages=['D22'])
         e['endpoints'].append(row)
+    extend_video_contract(a, m, e)
 
 def extend_plus_data(model):
     for table,fields,invariant in [
@@ -111,6 +113,7 @@ def extend_plus_data(model):
       ('plus_render_batches',['id','tenant_id','owner_id','request_key_hash','input_hash','item_count','created_at'],'Hashed owner-scoped intent key; no cached private response; immutable batch contains no shared charge or runtime. Replays recheck permission and redact removed items.'),
       ('plus_render_batch_items',['id','tenant_id','batch_id','position','product_id','request_id','input','failure'],'Per-item savepoint isolates preparation failure; immutable independent render plan and native quote/payment/delivery; product deletion physically erases its batch metadata.')
     ]:model['entities'].append({'table':table,'primary_key':'draft_id' if table=='plus_edit_versions' else 'id','scope':'global' if table=='plus_links' else 'tenant','fields':fields,'invariant':invariant,'implementation_status':'DESIGN_NOT_IMPLEMENTED'})
+    extend_video_data(model)
 
 def plus_catalog(e):
     text='\n\n## Plus主动接续与独立编辑草稿\n\n所有凭证只在内存流转，原生会话批准，电脑会话限制在本人读取/草稿；不复制支付权限。自然键与修订号提供幂等，避免通用缓存复活撤销连接。\n\n| 方法/路径 | operationId | 请求 → 响应 |\n| --- | --- | --- |\n'

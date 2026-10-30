@@ -10,6 +10,7 @@ import { listPresets, presetVersion } from '../modules/catalog.js';
 import { createPlan, checkInput, createPreview } from '../modules/plans.js';
 import * as plusRender from '../modules/plus-render.js';
 import * as plusBatches from '../modules/plus-batches.js';
+import * as plusVideo from '../modules/plus-video.js';
 import { createQuote, createOrder, cancelOrder, requestRefundInternal } from '../modules/commerce.js';
 import { getDeliverables, createDownloadLink, createSaveSession, recordSaveReceipt, requestRevision, previewLink,listRevisions } from '../modules/delivery.js';
 import { HELP_ARTICLES, createTicket, requestDeletion } from '../modules/support.js';
@@ -32,6 +33,14 @@ const principal = (ctx: BusinessContext): Principal => { if (!ctx.principal) thr
 const param = (ctx: BusinessContext, name: string): string => ctx.params[name] ?? notFound();
 
 export const businessHandlers: Record<string, BusinessHandler> = {
+  createPlusVideoDraft:async c=>plusVideo.createPlusVideoDraft(c.db,principal(c),validate('PlusEditCreateRequest',c.body)),
+  getPlusVideoDraft:async c=>plusVideo.getPlusVideoDraft(c.db,principal(c),param(c,'draft_id')),
+  savePlusVideoDraft:async c=>plusVideo.savePlusVideoDraft(c.db,principal(c),param(c,'draft_id'),validate('PlusVideoSaveRequest',c.body)),
+  listPlusVideoDrafts:async c=>plusVideo.listPlusVideoDrafts(c.db,c.cfg,principal(c),c.query),
+  listPlusVideoStyles:async c=>plusVideo.listPlusVideoStyles(c.db,c.cfg),
+  createPlusVideoPlan:async c=>plusVideo.createPlusVideoPlan(c.db,c.cfg,principal(c),param(c,'draft_id'),validate('PlusRenderCreateRequest',c.body)),
+  listPlusVideoPlans:async c=>plusVideo.listPlusVideoPlans(c.db,c.cfg,principal(c),c.query),
+  getPlusVideoPlan:async c=>plusVideo.getPlusVideoPlan(c.db,principal(c),param(c,'request_id')),
   createPlusLink:async c=>plus.createPlusLink(c.db,c.cfg,validate('PlusLinkCreateRequest',c.body)),
   createPlusRenderBatch:async c=>plusBatches.createPlusRenderBatch(c.db,c.cfg,principal(c),validate('PlusBatchCreateRequest',c.body)),
   listPlusRenderBatches:async c=>plusBatches.listPlusRenderBatches(c.db,c.cfg,principal(c),c.query),

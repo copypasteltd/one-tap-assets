@@ -65,8 +65,8 @@ export async function plusRenderFixture(){
       QC:new QualityControlService(db.pool,cfg,f.store),REVIEW_FACTS:new ReviewStageService(db.pool,cfg,runtime),REVIEW_STYLE:new ReviewStageService(db.pool,cfg,runtime),DELIVER:new PublicationService(db.pool,cfg,f.store)};
     const call=async(path:string,method:'GET'|'POST'|'PUT'|'DELETE'='GET',payload?:unknown,access?:string)=>app!.inject({method,url:'/v1/p01'+path,
       headers:{...(access?{authorization:`Bearer ${access}`}:{ }),...(method!=='GET'?{'idempotency-key':id('synthetic_intent')}:{})},...(payload===undefined?{}:{payload:payload as Record<string,unknown>})});
-    const connect=async(prepare=false)=>{
-      const link=(await call('/plus/links','POST',{prepare_render_plans:prepare})).json().data as DTO<'PlusLink'>;
+    const connect=async(prepare=false,prepareVideo=false)=>{
+      const link=(await call('/plus/links','POST',{prepare_render_plans:prepare,prepare_video_render_plans:prepareVideo})).json().data as DTO<'PlusLink'>;
       const approved=await call('/plus/links/decision','POST',{user_code:link.user_code,decision:'APPROVE'},buyer.accessToken);
       if(approved.statusCode!==200)throw new Error(`Synthetic phone approval ${approved.statusCode}`);
       return (await call(`/plus/links/${link.link_id}/poll`,'POST',{poll_key:link.poll_key})).json().data.session as DTO<'PlusBrowserSession'>;
@@ -80,7 +80,7 @@ export async function plusRenderFixture(){
       return transaction(db.pool,client=>confirmPayment(client,{channel:p.platform,appId:p.appId,subjectId:p.subjectId,merchantId:merchant,
         orderId:order.order_id,providerOrderId:id('synthetic_payment'),eventKey:id('synthetic_event'),amountFen:order.amount_fen,rawHash:hash({synthetic:true,at:iso()})}));
     };
-    return {...f,db,buyer,other,cfg,app,call,connect,step,pay,launcher,images,originalId,artifactId,pack,png,
+    return {...f,db,buyer,other,cfg,app,call,connect,step,pay,launcher,images,originalId,artifactId,pack,png,services,
       close:async()=>{controller.abort();await consumer;await app!.close();await db.close();}};
   }catch(error){controller.abort();await consumer;await app?.close();await db.close();throw error;}
 }

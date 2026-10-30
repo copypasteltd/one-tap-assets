@@ -1,3 +1,4 @@
+import {orderNeedsListening} from '../audio/listening-contract.js';
 import { bundleForSource } from '../codex/skills.js';
 import type pg from 'pg';
 import type { Config } from '../../api/config.js';
@@ -34,7 +35,7 @@ export class ReviewStageService {
     const packet = await currentReviewPacket(this.pool, context);
     requireThat(reviewMayContinue(packet,lease.stage_name),
       'REVIEW_PACKET_BLOCKED', '当前封存材料已阻断或不可复核', 409);
-    if(context.snapshot.audio_policy.speech_mode!=='NONE'&&lease.stage_name==='REVIEW_FACTS')await this.listening.review(lease,signal);
+    if(orderNeedsListening(context.contract)&&lease.stage_name==='REVIEW_FACTS')await this.listening.review(lease,signal);
     const nativeListening=await reviewListening(this.pool,this.cfg,context,packet);
     if (await unsettledOrderCalls(this.pool, context)) throw new PendingExternal(5, 'REVIEW_PAID_CALL_UNRESOLVED');
     const binding = context.contract.runtime_binding; const cc = context.snapshot.codex_contract;

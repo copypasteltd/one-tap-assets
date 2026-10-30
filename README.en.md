@@ -1,18 +1,20 @@
 # One Tap Assets · 一品成片
 
-**A mobile-first self-service product asset studio for Alipay and Douyin mini-programs.** Photograph a product, let multimodal analysis identify its visible features, choose a community preset, then explicitly confirm the asset list and fee. Style Skills guide planning, production, post, QC and independent factual/style review before private delivery and album saving. Ten official styles establish the baseline for community extensions.
+**A mobile-first self-service product asset studio for Alipay and Douyin mini-programs.** Photograph a product, let multimodal analysis identify visible features, choose a community preset and explicitly confirm the asset list and fee. Ten official styles establish the community baseline. Style Skills guide planning, production, post, deterministic QC and independent factual/style review; instances are released after delivery, and customers save assets on their phones.
 
-**This delivery includes actual successful builds for both mini-programs.** Each has 17 pages, IDE configuration, local dependencies and a SHA256 inventory. The independent archive also contains server and Plus web builds. The repository contains 529 source files, 37 migrations, 98 business / 38 management operations, 305 schemas and 82 logical entities. All tools run natively on Windows, without Docker or WSL.
+**This round closes the Plus source-video editing workflow.** Trim an owned delivered MP4 by frame, crop it, choose dimensions, add timed cues, retain or mute its original audio and save an independent revision. Explicit video permission is approved on the phone; each production has its own native confirmation, fee and payment. The new private pack contains an actual edited MP4, a PNG extracted from its first frame and copy. The original assets survive. Audio retention requires full-track comparison, separately settled listening evidence and both reviewers. Manual captions remain unverified input; automatic ASR is not claimed.
 
-[Package location and SHA256](docs/delivery/package.json) · [Mini-program import and device checklist](docs/guides/MINI-PROGRAM-IMPORT.md) · [Exact focused evidence](docs/verification/mini-closure-source.json) · [Numbered completed/pending work](docs/guides/STATUS.md) · [中文](README.md)
+![Source-video trim and captions](docs/media/plus-video/walkthrough.gif)
 
-Plus supports deeper image editing and independent batch preparation. Explicit phone approval grants a temporary connection; save crop, dimensions and text on the computer, choose 2–10 saved drafts and per-item style versions, then return to the original mini-program for separate quotes and payments. Each item gets its own production, review and new PNG/copy delivery. An unpaid or failed sibling does not block another item. Original assets and entitlements survive; request-intent deduplication and current deletion/expiry/revocation checks protect recovery.
+[Design, usage, limits and configuration](docs/实施/Plus原片视频剪辑与定时字幕-v1.0.md) · [Screens, actual sample, MP4/WebM/GIF](docs/media/plus-video/README.md) · [Actual edited MP4](docs/media/plus-video/edited-sample.mp4) · [中文](README.md)
 
-![Independent product-batch walkthrough](docs/media/plus-batches/walkthrough.gif)
+Existing Plus single-image editing and 2–10-item independent batch production remain available. The mini-program handles capture, recognition, presets, payment and saving; Plus provides deeper editing and preparation. Video edits cover 1–60 seconds, up to 2,073,600 pixels and 40 timed cues. Retained audio must fit the admitted listening contract, currently at most 30 seconds. This route's one free limited revision changes copy only; changing the cut or baked captions requires a new independent production.
 
-[Single-image design](docs/实施/Plus独立图片正式制作与手机付款交付-v1.0.md) · [Batch design and flow](docs/实施/Plus批量商品独立制作与逐件交付-v1.0.md) · [Screenshots, actual PNG, MP4/WebM/GIF](docs/media/plus-batches/README.md). All 180 previous media assets and frozen C references remain unchanged; this build-only round reuses their explicitly stated provenance.
+**Focused checks and required builds passed; no full test suite was run.** Four native integration checks, 4 browser workflow checks, typecheck, server, Plus web, Alipay and Douyin builds. Both mini-programs contain 17 pages with IDE configuration and SHA256 inventories. The repository contains 543 source files, 38 migrations, 106 business/38 management operations, 316 schemas and 82 logical entities. All tools run natively on Windows without Docker or WSL. This round adds 10 media files while preserving all 180 previous media files and the frozen C design.
 
-Five artifact checks and the required type/server/web/native builds passed. No full suite, IDE launch or device acceptance was run. Rebuild the default loopback API origin with actual app/domain configuration for phones. Previous business checks execute actual PostgreSQL/HTTPS/MCP/PNG with synthetic identity, payment, inference, semantic verdicts and process identity. Real services and sales remain disabled. Plus video/subtitles/advanced authoring, permanent identity binding, real-service admission and cloud deployment remain outstanding.
+[Archive location and SHA256](docs/delivery/package.json) · [Numbered completed/pending work](docs/guides/STATUS.md) · [Exact evidence](docs/verification/plus-video-source.json) · [Mini-program import](docs/guides/MINI-PROGRAM-IMPORT.md)
+
+PostgreSQL, HTTPS, MCP and FFmpeg actually execute. Identity, parent delivery metadata, payment events, inference/listening verdicts and isolation identity are synthetic control fixtures; the sample audio is a generated tone. Real services and sales default to off. IDE/device acceptance, real identity/payment/model/isolation admission and cloud deployment remain pending. Preliminary failures and the runner startup timeout are retained separately. Automatic transcription, multi-track/batch-video authoring, permanent identity linking and full 58-requirement acceptance remain open.
 
 ## Screens and recorded interaction
 
@@ -184,7 +186,7 @@ flowchart LR
 | Mini-programs | Taro 4.3.1, React 18.3.1, TypeScript 5.9.3; 17 shared screens and platform ports |
 | Browser replay | Vite 8.3.5 and React DOM adapters with local fixtures |
 | Backend | Node.js 24, tested with 24.22.1; Fastify 5.12.7; worker/reaper/maintenance CLIs |
-| Persistence | Native PostgreSQL, local 17.6-1; durable stages/outbox, lease fencing and immutable receipts; 37 migrations |
+| Persistence | Native PostgreSQL, local 17.6-1; durable stages/outbox, lease fencing and immutable receipts; 38 migrations |
 | Media | Sharp 0.35.5, native FFmpeg/ffprobe, private storage and local development storage |
 | Agent | Codex app-server, bounded stdio/MCP, metered inference and style SkillBundles |
 | Verification | Vitest 5.0.5, Playwright 1.64.1, native PG/actual media and explicit synthetic provider/host fixtures |
@@ -259,7 +261,7 @@ New: [repair cost authorization within the original order](docs/实施/修复费
 ## Repository map and docs
 
 ```text
-src/api/            API, auth, domain services, 37 SQL migrations
+src/api/            API, auth, domain services, 38 SQL migrations
 src/worker/         Durable stages, Codex, MCP, media/review/reaping/privacy
 src/shared/         Shared screens, platform ports, recovery and generated contracts
 src/mini-alipay/    Alipay shell

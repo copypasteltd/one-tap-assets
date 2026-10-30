@@ -1,0 +1,90 @@
+{
+  "status": "PASS",
+  "generated_files": 20,
+  "files": [
+    {
+      "path": "assets/development/v1.1/contracts/agent-stage-result.schema.json",
+      "sha256": "e2b096e294dab003b8f7d7e81b4239c14be5a9bf96d90288a98b49c60cb30969"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/cleanup-receipt.schema.json",
+      "sha256": "eb00e5401cb86166ad288fc19c43002f9997071d2a166ad77ce79cb499781f4c"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/codex-contract.schema.json",
+      "sha256": "7038ade984f1bfb2c3662dadd3dcfddeaf4b5cfce7b76783da8f49e4e636b950"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/codex-fixtures.json",
+      "sha256": "b4bf3c18b9751b499c84b9e9cd38d3c2bafed3d2ffeed6117ae380ddfde0285d"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/codex-quote-binding.schema.json",
+      "sha256": "45e57cc548dc7d732cb2b313b8d66d80c1e8b3760d5c243371f421d10dc0e84d"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/contract-fixtures.json",
+      "sha256": "c860e605ea44358adcbd3cc1e325a09d90f0fe07c1e61240549917dd6af0de62"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/endpoint-catalog.md",
+      "sha256": "3fd4701b0160a9b7db9220ba09609e1a570dbda65805a8f72fecb7b6603d687e"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/endpoints.json",
+      "sha256": "664605e26f587ff4515d199cc3dd5dcc8056a38f8e1c7ad067ea209ace47e57b"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/execution-snapshot.schema.json",
+      "sha256": "ef67ca6ca12128cd7be9b0961ba0562074597d4564bf224efed43673a70af46f"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/management-endpoints.json",
+      "sha256": "918db8bef27a7064e71f21e52a3dadb7d5a99e7c9f5b171dd11cc8dfa87ac66b"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/management-openapi.json",
+      "sha256": "3c7d8cffe7996828b44b6ff52cab0cfca6910779b32804207ae5adb6cd3c8b2b"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/openapi.json",
+      "sha256": "4c4d832813150d13cfb59ddeaea5d6e6023c4daa338f08a7f56bec9f00775981"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/product-identity-lock.schema.json",
+      "sha256": "79bb376aef4fce065f2fba7c7c53fc0b4a18926d02075c1023f3d83aae969334"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/provider-submission.schema.json",
+      "sha256": "20a80e1cbea3b4f22f452504f0eb010aedea577e0b4bc327a447ec0a7a2a5805"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/review-packet.schema.json",
+      "sha256": "c4347c5c8750523e9d52b094bd4d0255e5f44813dd46bc1b65041c65d27ddb73"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/tool-call-intent.schema.json",
+      "sha256": "948f6e97c554a5b7bfaa16641563b887ad00ad4848100864a80b3503df94be45"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/vendor/openapi-3.1-schema.json",
+      "sha256": "d822625144137ef68810823f453c39936b011b402e45f0b35a94a6fd91df284b"
+    },
+    {
+      "path": "assets/development/v1.1/contracts/vendor/source-record.json",
+      "sha256": "f3907628c3bfb7bef854d9148b607ed97414845d0880d332150a1e663672cb63"
+    },
+    {
+      "path": "assets/development/v1.1/data-model.json",
+      "sha256": "e4db7a7810c0d42031e7edc9b8f3ff231487cccb1d047451b51f1c99bdad256f"
+    },
+    {
+      "path": "assets/development/v1.1/development-baseline.json",
+      "sha256": "29a9a57c23d11c71d0a559bb7cc2ff822e09ebc71e8b3981455e19e8433f1bc1"
+    }
+  ],
+  "business_operations": 106,
+  "management_operations": 38,
+  "schemas": 316,
+  "public_sources_modified": false
+}

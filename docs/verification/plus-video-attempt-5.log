@@ -1,0 +1,24 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯
+
+Vitest caught 1 unhandled error during the test run.
+This might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.
+
+⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯
+Error: [vitest-pool]: Timeout starting forks runner.
+ ❯ Timeout._onTimeout node_modules/.pnpm/vitest@5.0.5_@types+node@24_074c366c144b624165a2ee5270d15630/node_modules/vitest/dist/chunks/index.1TqnEahn.js:5920:65
+ ❯ listOnTimeout node:internal/timers:685:17
+ ❯ process.processTimers node:internal/timers:618:7
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+
+
+ Test Files  no tests
+      Tests  no tests
+     Errors  1 error
+   Start at  23:58:45
+   Duration  113.98s
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/integration.json

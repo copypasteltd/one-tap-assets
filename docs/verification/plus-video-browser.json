@@ -1,0 +1,73 @@
+{
+  "checked_at": "2026-10-30T16:23:06.375Z",
+  "source_set_hash": "539634851c52a6f1a661b05a8c0723ac443cac3744d809027a256256e942c1b8",
+  "build_id": "2026-10-30T16-02-53-413Z-27f6437c",
+  "checks": [
+    "SEPARATE_VIDEO_PERMISSION_APPROVED_BY_NATIVE_ACCOUNT",
+    "SAVED_EXACT_TRIM_TIMED_COPY_AND_FROZEN_INDEPENDENT_VIDEO_PLAN",
+    "ACTUAL_MP4_POST_QC_TWO_COMPLETE_AUDIO_TRACKS_AND_TWO_REVIEW_INPUTS",
+    "NEW_PRIVATE_VIDEO_COVER_COPY_AND_ORIGINAL_PACK_PRESERVED"
+  ],
+  "files": [
+    {
+      "path": "docs/media/plus-video/01-explicit-video-permission.png",
+      "sha256": "6fd181bfbdf30f6957ac5df739baf4e622e0476f83ea2183360225881d0d9ab7",
+      "bytes": 123650
+    },
+    {
+      "path": "docs/media/plus-video/02-trim-and-timed-caption.png",
+      "sha256": "085ac362f9bed3fa1023bd4302d2a47914d512160c0bdeab76ae629010ea8022",
+      "bytes": 218439
+    },
+    {
+      "path": "docs/media/plus-video/03-independent-phone-checkout.png",
+      "sha256": "816dc2a577602b7fcb3989cc0f79b898ce0f043445f29e1390810523cd932ea9",
+      "bytes": 245196
+    },
+    {
+      "path": "docs/media/plus-video/04-reviewed-video-complete.png",
+      "sha256": "1341bcb52b14a4ab52dbc8fb9227207dfc3b616a4e0ab42d61c9468096bddef7",
+      "bytes": 246651
+    },
+    {
+      "path": "docs/media/plus-video/05-private-video-cover-and-copy.png",
+      "sha256": "7eb580c2c885f3b305442da472a009b44243240345192fbe043aaf1f86e05a61",
+      "bytes": 91433
+    },
+    {
+      "path": "docs/media/plus-video/edited-sample.mp4",
+      "sha256": "1475b7203bd74f458fb2faf4a1ea833f9f70b8a3ca6df4464dd2fb48f8873be1",
+      "bytes": 60311
+    },
+    {
+      "path": "docs/media/plus-video/actual-first-frame-cover.png",
+      "sha256": "31028288662eba99d4d0b827aa96bf50d0d631caec96a0adac8b596f27b2a3fb",
+      "bytes": 33452
+    },
+    {
+      "path": "docs/media/plus-video/walkthrough.webm",
+      "sha256": "d632bc5f73944eac174816d07bfc972ccac5a2d068b007856d8f70773e933bf5",
+      "bytes": 6183661
+    },
+    {
+      "path": "docs/media/plus-video/walkthrough.mp4",
+      "sha256": "38228142f6f588f412beb3502e893afe956d1112f98c8972607f003990c14cfb",
+      "bytes": 1258054
+    },
+    {
+      "path": "docs/media/plus-video/walkthrough.gif",
+      "sha256": "be4e061d954915211f8fc8d3e3ebc333ff4fcce5d498812950f6720677ac501f",
+      "bytes": 8105039
+    }
+  ],
+  "browser_errors": [],
+  "external_origins": [],
+  "browser_closed": true,
+  "services_closed": true,
+  "actual_native_pg_https_mcp_ffmpeg": true,
+  "synthetic_identity_payment_inference_listening_and_isolation": true,
+  "full_suite_executed": false,
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false
+}

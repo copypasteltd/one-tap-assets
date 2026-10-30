@@ -139,7 +139,7 @@
     "design_units": 23,
     "design_components": 22,
     "state_machines": 18,
-    "api_operations": 98,
+    "api_operations": 106,
     "management_api_operations": 38,
     "work_packages": 20,
     "skills": 19,
@@ -176,6 +176,5 @@
     "release_target_seconds": 300,
     "reaper_interval_seconds": 60,
     "cleanup_alert_seconds": 600
-  },
-  "api_operations": 95
+  }
 }

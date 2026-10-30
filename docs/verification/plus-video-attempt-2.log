@@ -1,0 +1,37 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ❯ tests/integration/plus-video.test.ts (4 tests | 1 failed) 11559ms
+   ✓ requires a separately approved video capability and preserves isolated optimistic drafts 2532ms
+   × freezes a video plan and independent native price, rejects unavailable listening before payment 105ms
+   · encodes a real selected MP4 with timed captions, retains sound, seals two complete WAVs and publishes only after both reviews
+   · honors explicit mute in a separate paid version without reusing or buying listening
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/plus-video.test.ts > freezes a video plan and independent native price, rejects unavailable listening before payment
+AssertionError: {"code":"RESPONSE_CONTRACT_ERROR","message":"服务端响应校验失败","retryable":false,"trace_id":"trace_7e72abf27d32453bb6c33cb5a179f17d","details":[{"field":"/plan/output_slots/0/duration_frames","reason":"must be >= 1"},{"field":"/plan/output_slots/0/duration_frames","reason":"must be null"},{"field":"/plan/output_slots/0/duration_frames","reason":"must match a schema in anyOf"}]}: expected 500 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 500
+
+ ❯ tests/integration/plus-video.test.ts:34:144
+     32| it('freezes a video plan and independent native price, rejects unavail…
+     33|   const body={expected_revision:draft.revision,variant_id:'minimal-cle…
+     34|   const created=await f.call(`/plus/video-drafts/${draft.draft_id}/ren…
+       |                                                                                                                                                ^
+     35|   const retry=await f.call(`/plus/video-drafts/${draft.draft_id}/rende…
+     36|   expect(request).toMatchObject({draft_revision:2,price_fen:300,settin…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (4)
+   Start at  23:55:27
+   Duration  13.55s (tests 88%, import 8%, transform 3%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/integration.json

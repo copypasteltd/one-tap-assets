@@ -1,5 +1,16 @@
 # 更新记录 / Changelog
 
+## 2026-10-31 · Plus 原片视频剪辑与定时字幕
+
+- 原片按帧选段、归一裁切、偶数尺寸、定时字幕、原声保留或显式关闭；实际编码MP4及真实首帧封面，原版本保留。
+- 单独电脑视频权限、不可变修订和独立价格/预算/听音模型；原小程序逐项确认和主动付款。
+- 专用文件预验收、完整选段/成片WAV及原声比对、复用原费用和UNKNOWN协议的独立听音、同包双复核、实例释放和原文案售后。
+- 新增迁移038、8个业务接口及11个schema；官方10风格、14变体、19Skill/14bundle保持原版本。
+- 4项关键原生链路及真实浏览器流程、类型和四类构建通过；截图、实际样片、录屏与GIF更新。保留5次先前失败/运行器超时记录，未跑全面测试。
+- Real source-video MP4 editing, timed captions, explicit audio retention/mute, separate native approval/payment and independently reviewed private delivery. Source/final audio, original artifacts, budgets and limited copy aftercare remain bound. Real-service/device/cloud admission remains pending.
+
+[需求与边界](docs/实施/Plus原片视频剪辑与定时字幕-v1.0.md) · [精确记录](docs/verification/plus-video-source.json)。
+
 ## 2026-10-30 · 双小程序实际构建与交付目录收口
 
 - 根据实际约255秒完整编译诊断，将每端原生构建时限从180秒调整为360秒，保留进程树终止和失败候选排除。

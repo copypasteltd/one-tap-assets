@@ -1,0 +1,87 @@
+import {beforeAll,afterAll,it,expect} from 'vitest';
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {join} from 'node:path';
+import sharp from 'sharp';
+import {plusVideoFixture} from '../helpers/plus-video';
+import type {DTO} from '../../src/shared/contracts/types';
+import {hash,sha256,id} from '../../src/api/lib/crypto';
+import {inspectVideo,nativeCommand} from '../../src/worker/media/native';
+import {checkedRevisionChange} from '../../src/worker/revisions/context';
+import {frozenOrderListening} from '../../src/worker/audio/listening-contract';
+
+let f:Awaited<ReturnType<typeof plusVideoFixture>>,session:DTO<'PlusBrowserSession'>,draft:DTO<'PlusVideoDraft'>,request:DTO<'PlusVideoRenderPlan'>,order:DTO<'Order'>;
+const access=()=>session.access_token,native=()=>f.buyer.accessToken;
+beforeAll(async()=>{f=await plusVideoFixture();},120000);afterAll(async()=>{await f?.close();});
+it('requires a separately approved video capability and preserves isolated optimistic drafts',async()=>{
+  const old=await f.connect(true);expect(old.connection.can_prepare_video_render_plans).toBe(false);
+  const created=await f.call('/plus/video-drafts','POST',{order_id:f.originalId,deliverable_id:f.artifactId},old.access_token);
+  expect(created.statusCode,created.body).toBe(200);draft=created.json().data;
+  expect(draft.source).toMatchObject({fps:30,frames:120,has_audio:true});
+  const body={expected_revision:1,variant_id:'minimal-clean.photo-layout',variant_version:'3.1.0'};
+  expect((await f.call(`/plus/video-drafts/${draft.draft_id}/render-plans`,'POST',body,old.access_token)).statusCode).toBe(403);
+  session=await f.connect(false,true);expect(session.connection.can_prepare_video_render_plans).toBe(true);
+  expect((await f.call(`/plus/edit-drafts/${draft.draft_id}`,'GET',undefined,access())).statusCode).toBe(404);
+  const settings:DTO<'PlusVideoSettings'>={...draft.settings,canvas:{width:640,height:960},crop:{x:.05,y:.05,width:.9,height:.9},
+    title:'蓝色随行杯',trim:{start_frame:30,end_frame:90},audio_mode:'PRESERVE',captions:[
+      {start_frame:0,end_frame:30,text:'蓝色杯身',kind:'ON_SCREEN_COPY'},{start_frame:32,end_frame:60,text:'带盖随行',kind:'ON_SCREEN_COPY'}]};
+  const bad=await f.call(`/plus/video-drafts/${draft.draft_id}`,'PUT',{expected_revision:1,settings:{...settings,captions:[{...settings.captions[0]!,end_frame:61}]}},access());
+  expect(bad.statusCode,bad.body).toBe(422);
+  const saved=await f.call(`/plus/video-drafts/${draft.draft_id}`,'PUT',{expected_revision:1,settings},access());expect(saved.statusCode,saved.body).toBe(200);draft=saved.json().data;
+  expect((await f.call(`/plus/video-drafts/${draft.draft_id}`,'PUT',{expected_revision:1,settings:{...settings,title:'旧版本'}},access())).statusCode).toBe(409);
+});
+it('freezes a video plan and independent native price, rejects unavailable listening before payment',async()=>{
+  const body={expected_revision:draft.revision,variant_id:'minimal-clean.photo-layout',variant_version:'3.1.0'};
+  const created=await f.call(`/plus/video-drafts/${draft.draft_id}/render-plans`,'POST',body,access());expect(created.statusCode,created.body).toBe(200);request=created.json().data;
+  const retry=await f.call(`/plus/video-drafts/${draft.draft_id}/render-plans`,'POST',body,access());expect(retry.json().data.request_id).toBe(request.request_id);
+  expect(request).toMatchObject({draft_revision:2,price_fen:300,settings:draft.settings});expect(JSON.stringify(request)).not.toContain('source_object_key');
+  await f.step('PLAN');request=(await f.call(`/plus/video-render-plans/${request.request_id}`,'GET',undefined,native())).json().data;
+  expect(request.plan.state).toBe('READY');expect(request.plan.plus_video_request_id).toBe(request.request_id);
+  expect(request.plan.output_slots.map(x=>x.kind).sort()).toEqual(['copy','image','video']);
+  f.cfg.provider.listening!.enabled=false;
+  const quoted=await f.call('/quotes','POST',{plan_id:request.plan.plan_id,plan_hash:request.plan.plan_hash},native());expect(quoted.statusCode,quoted.body).toBe(503);
+  f.cfg.provider.listening!.enabled=true;
+  expect((await f.call('/quotes','POST',{plan_id:request.plan.plan_id,plan_hash:request.plan.plan_hash},access())).statusCode).toBe(403);
+  const valid=await f.call('/quotes','POST',{plan_id:request.plan.plan_id,plan_hash:request.plan.plan_hash},native());expect(valid.statusCode,valid.body).toBe(201);
+  expect(valid.json().data.amount_fen).toBe(300);
+  const next=await f.call('/orders','POST',{quote_id:valid.json().data.quote_id,channel:'alipay'},native());expect(next.statusCode,next.body).toBe(201);order=next.json().data;
+  expect(order.order_id).not.toBe(f.originalId);await f.pay(order);
+});
+it('encodes a real selected MP4 with timed captions, retains sound, seals two complete WAVs and publishes only after both reviews',async()=>{
+  for(const name of ['PRODUCTION','POST','QC','REVIEW_FACTS','REVIEW_STYLE','DELIVER'] as const)await f.step(name);
+  expect(f.listenCount()).toBe(1);
+  const response=await f.call(`/orders/${order.order_id}/deliverables`,'GET',undefined,access());expect(response.statusCode,response.body).toBe(200);
+  const pack=response.json().data as DTO<'Deliverables'>;expect(pack.items.map(x=>x.kind).sort()).toEqual(['copy','image','video']);
+  const video=pack.items.find(x=>x.kind==='video')!,cover=pack.items.find(x=>x.kind==='image')!,directory=join(f.cfg.runtimeRoot,'test-plus-video',id('verify'));
+  await mkdir(directory,{recursive:true});
+  const artifacts=(await f.db.pool.query('SELECT id,object_key FROM artifacts WHERE order_id=$1',[order.order_id])).rows as {id:string;object_key:string}[];
+  const bytes=await f.store.get(artifacts.find(a=>a.id===video.deliverable_id)!.object_key),path=join(directory,'final.mp4');await writeFile(path,bytes);
+  expect(sha256(bytes)).toBe(video.sha256);expect(await inspectVideo(f.cfg,path)).toMatchObject({width:640,height:960,frames:60,fps:30,hasAudio:true,audioCodec:'aac'});
+  const first=join(directory,'first.png');await nativeCommand(f.cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-nostdin','-threads','2','-i',path,'-frames:v','1','-threads','1',first],{cwd:directory,timeoutMs:30000});
+  const coverBytes=await f.store.get(artifacts.find(a=>a.id===cover.deliverable_id)!.object_key);
+  expect(await sharp(coverBytes).raw().toBuffer()).toEqual(await sharp(await readFile(first)).raw().toBuffer());
+  const evidence=(await f.db.pool.query('SELECT kind,object_key,data FROM review_evidence WHERE order_id=$1',[order.order_id])).rows;
+  expect(evidence.filter(x=>['NATIVE_AUDIO','FINAL_AUDIO'].includes(x.kind))).toHaveLength(2);expect(evidence.some(x=>x.kind==='TRANSCRIPT')).toBe(false);
+  expect(evidence.some(x=>x.data.purpose==='PLUS_VIDEO_SOURCE_REFERENCE')).toBe(true);
+  const report=JSON.parse((await f.store.get(evidence.find(x=>x.kind==='AUDIO_QC').object_key)).toString());expect(report.comparison.correlation).toBeGreaterThanOrEqual(.98);
+  expect(report.independent_listening).toBe('REQUIRED');
+  const original=(await f.call(`/orders/${f.originalId}/deliverables`,'GET',undefined,native())).json().data;expect(hash(original)).toBe(hash(f.pack));
+  const contract=(await f.db.pool.query('SELECT private FROM orders WHERE id=$1',[order.order_id])).rows[0].private.contract;
+  expect(frozenOrderListening(contract)?.model_version_id).toBe(f.listening.model_version_id);
+  expect(checkedRevisionChange(pack,{kind:'DISPLAY_TEXT',manifest_revision:1,display_text:'蓝色带盖杯'},contract)).toMatchObject({kind:'DISPLAY_TEXT'});
+  expect(contract.revision_policy.image_text).toBeUndefined();
+  const roles=(await f.db.pool.query("SELECT r.private FROM agent_runs r JOIN stage_runs s ON s.tenant_id=r.tenant_id AND s.private->>'role_run_id'=r.id WHERE s.scope_type='ORDER' AND s.scope_id=$1 AND r.role IN ('REVIEW_FACTS','REVIEW_STYLE')",[order.order_id])).rows;
+  expect(roles).toHaveLength(2);expect(roles.every(r=>r.private.review_input.native_listening.submission_id)).toBe(true);
+  expect((await f.db.pool.query("SELECT id FROM agent_instances WHERE state='ACTIVE'")).rowCount).toBe(0);
+});
+it('honors explicit mute in a separate paid version without reusing or buying listening',async()=>{
+  const settings={...draft.settings,audio_mode:'MUTE' as const,title:'蓝色杯身',trim:{start_frame:0,end_frame:30},captions:[{start_frame:0,end_frame:30,text:'蓝色杯身',kind:'ON_SCREEN_COPY' as const}]};
+  const saved=await f.call(`/plus/video-drafts/${draft.draft_id}`,'PUT',{expected_revision:draft.revision,settings},access());expect(saved.statusCode,saved.body).toBe(200);draft=saved.json().data;
+  const made=await f.call(`/plus/video-drafts/${draft.draft_id}/render-plans`,'POST',{expected_revision:draft.revision,variant_id:'minimal-clean.photo-layout',variant_version:'3.1.0'},access());expect(made.statusCode,made.body).toBe(200);
+  await f.step('PLAN');const r=(await f.call(`/plus/video-render-plans/${made.json().data.request_id}`,'GET',undefined,native())).json().data;
+  const q=await f.call('/quotes','POST',{plan_id:r.plan.plan_id,plan_hash:r.plan.plan_hash},native());expect(q.statusCode,q.body).toBe(201);
+  const o=await f.call('/orders','POST',{quote_id:q.json().data.quote_id,channel:'alipay'},native());expect(o.statusCode,o.body).toBe(201);await f.pay(o.json().data);
+  for(const name of ['PRODUCTION','POST','QC','REVIEW_FACTS','REVIEW_STYLE','DELIVER'] as const)await f.step(name);
+  const pack=(await f.call(`/orders/${o.json().data.order_id}/deliverables`,'GET',undefined,access())).json().data as DTO<'Deliverables'>;
+  const item=pack.items.find(x=>x.kind==='video')!,a=(await f.db.pool.query('SELECT spec_json FROM artifacts WHERE id=$1',[item.deliverable_id])).rows[0];
+  expect(a.spec_json.inspection).toMatchObject({frames:30,hasAudio:false,audioCodec:null});expect(f.listenCount()).toBe(1);
+});

@@ -1,74 +1,8 @@
 # 页面与录制 / Screens and recording
 
-新增[自愿反馈与运营分群6截图/录屏](../media/usage-insights/README.md)：实际共享小程序界面，反馈为浏览器合成夹具；运营页真实HTTP/原生数据库配合合成元数据。原始录制摘要不改标，最终仅生成器变化且应用/产物字节相同的关系见[证据](../verification/feedback-insights-source.json)。
+2026-10-31快速功能收口：Plus原片视频选段、裁切、定时字幕、原声保留/静音、独立手机授权与确认付款、新MP4/真实首帧封面/文案交付已接通。有声选段封存完整原选段与成片WAV，通过原声技术比对、独立听音及事实/风格双复核；手填字幕不冒充ASR。有声视频的免费受限售后仅修改文案并保留原音视频。4项原生关键链路检查、4项真实浏览器流程及类型/server/Plus/支付宝/抖音构建通过，未执行全面测试。543源码、38迁移、106业务/38管理接口、316schema/82实体；新增10份截图/MP4/WebM/GIF，原180媒体及方案C保持。原生数据库/HTTPS/MCP/FFmpeg实际运行，账户、付款、模型/听音判定及隔离身份为合成；真实服务和销售默认关闭。双端真机、真实服务/隔离准入、云端部署、多轨与视频批量/自动转写/复杂作者工具、长期身份绑定及58项完整验收仍待。
 
-以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
-
-最新素材纠错演示见[4张截图与录像/GIF](../media/support-repair/README.md)，实际原生五阶段更正与新文件交付；输入/语义/身份/计量合成。本次浏览器和服务已关闭，旧录制来源保持。
-
-[中文README](../../README.md) · [English README](../../README.en.md)
-
-这些素材来自实际运行的`src/preview`：React DOM适配双小程序共享页面，本地合成Transport提供业务状态。截图不是设计稿重绘，也不是宿主真机证据。商品插画为本项目自绘，视频商品演示由该插画经原生FFmpeg生成；识别结果、订单、日期和交付状态都是夹具，未调用付费模型或支付。
-
-The media records the running browser adapter for shared mini-program screens with synthetic local transport. These are actual page captures, not repainted mockups or native-device evidence. The original product illustration and its FFmpeg motion clip are fixtures; recognition, orders, dates and delivery state are synthetic. No paid model or payment is invoked.
-
-
-最新客服工作台 / Latest support desk: [操作与来源](../media/support-desk/README.md)
-
-![客服接单与回复 / Support claiming and replies](../media/support-desk/walkthrough.gif)
-
-[MP4](../media/support-desk/walkthrough.mp4) · [WebM](../media/support-desk/walkthrough.webm) · [截图与摘要 / Screens and hashes](../media/support-desk/capture-manifest.json)。实际本地HTTP/API/数据库操作，客户、订单、图片及身份为合成夹具；未验生产客服、真实交易或真机。Actual local operations with synthetic inputs; no production/live/device claim.
-
-最新订单反馈 / Latest order feedback: [操作与来源](../media/support/README.md)
-
-![订单反馈与原请求恢复 / Order feedback and original request recovery](../media/support/walkthrough.gif)
-
-[MP4](../media/support/walkthrough.mp4) · [WebM](../media/support/walkthrough.webm) · [截图及摘要 / Screens and hashes](../media/support/capture-manifest.json)。实际共享页面录制，合成上传/回执与处理状态；不证明真实客服、退款或手机权限。Actual UI recording with synthetic support outcomes and no live staff or device claims.
-
-最新相册保存 / Latest album saving: [操作与来源](../media/album-save/README.md)
-
-![分类保存与原进度 / Selective album saving and original progress](../media/album-save/walkthrough.gif)
-
-[MP4](../media/album-save/walkthrough.mp4) · [WebM](../media/album-save/walkthrough.webm) · [截图及摘要 / Screens and hashes](../media/album-save/capture-manifest.json)。实际共享页面录制，合成相册回调与清单；没有写入真实手机相册。Actual UI recording with synthetic callbacks and no native device writes.
-
-最新订单操作 / Latest order actions: [操作与来源](../media/order-actions/README.md)
-
-![原订单取消与退款 / Original-order cancellation and refund](../media/order-actions/walkthrough.gif)
-
-[MP4](../media/order-actions/walkthrough.mp4) · [WebM](../media/order-actions/walkthrough.webm) · [截图及摘要 / Screens and hashes](../media/order-actions/capture-manifest.json)。实际共享页面录制，合成订单/金额/退款状态；不代表实际支付或退款到账。Actual UI recording with synthetic states; no live transaction or native-device claim.
-
-最新草稿恢复 / Latest draft recovery: [操作与来源](../media/draft-resume/README.md)
-
-![草稿恢复与原规格 / Server draft recovery and original specification](../media/draft-resume/walkthrough.gif)
-
-[MP4](../media/draft-resume/walkthrough.mp4) · [WebM](../media/draft-resume/walkthrough.webm) · [截图及摘要 / Screens and hashes](../media/draft-resume/capture-manifest.json)。实际共享页面录制，合成数据，官方方案仍禁售。Actual UI recording with synthetic metadata; no real recognition, payment or native-device claim.
-
-最新拍照交互 / Latest capture flow: [逐张拍照说明](../media/photo-capture/README.md)
-
-![逐张拍照、重拍与补图 / Sequential capture, retake and album additions](../media/photo-capture/walkthrough.gif)
-
-[MP4](../media/photo-capture/walkthrough.mp4) · [WebM](../media/photo-capture/walkthrough.webm) · [实际截图与来源](../media/photo-capture/capture-manifest.json)。实际共享页面录制，使用自绘合成商品，非宿主真机或真实识别/付款证明。Actual shared-page recording with synthetic photos; native-device and live-service acceptance remain separate.
-
-![四页总览 / Four-screen overview](../media/overview.png)
-
-![操作GIF / Interaction GIF](../media/walkthrough.gif)
-
-| 编号 / No. | 页面 / Screen | 原图 / Capture |
-| --- | --- | --- |
-| 01 | 拍照制作 / Home | [PNG](../media/screenshots/01-home.png) |
-| 02 | 照片选择 / Photos | [PNG](../media/screenshots/02-photos.png) |
-| 03 | 自动商品档案 / Product analysis | [PNG](../media/screenshots/03-analysis.png) |
-| 04 | 方案社区10套 / Preset community | [PNG](../media/screenshots/04-community.png) |
-| 05 | 方案细节与禁售状态 / Preset and admission | [PNG](../media/screenshots/05-preset.png) |
-| 06 | 素材清单确认 / Pack confirmation | [PNG](../media/screenshots/06-checklist.png) |
-| 07 | 制作阶段回放 / Production state replay | [PNG](../media/screenshots/07-order.png) |
-| 08 | 整包领取 / Asset collection | [PNG](../media/screenshots/08-pack.png) |
-| 09 | 我的素材 / Library | [PNG](../media/screenshots/09-library.png) |
-| 10 | 作者入口 / Creator entry | [PNG](../media/screenshots/10-creator.png) |
-
-完整录屏：[H.264 MP4](../media/walkthrough.mp4)、[原始WebM](../media/walkthrough.webm)。本次MP4约14.56秒，430×932；GIF为调色板优化的动画。逐文件字节数/SHA、ffprobe结果、浏览器关闭标记、异常/外部请求记录见[清单](../media/capture-manifest.json)。
-
-The MP4 is approximately 14.56 seconds at 430×932. The GIF is an actual palette-optimized animation derived from the recording. The manifest records byte sizes/hashes, ffprobe data, closed-browser status, page errors and external requests.
+[视频剪辑需求、协议与配置](../实施/Plus原片视频剪辑与定时字幕-v1.0.md) · [截图与录屏](../media/plus-video/README.md) · [准确证据](../verification/plus-video-source.json) · [编号完成与待办](STATUS.md)。下文保留此前方案和历史验证来源；当前新增范围以上述视频剪辑说明及本轮证据为准。
 
 ## 复录 / Recapture
 

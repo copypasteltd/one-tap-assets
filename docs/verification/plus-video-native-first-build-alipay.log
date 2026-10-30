@@ -1,0 +1,93 @@
+Tips:
+1. 建议开启持久化缓存功能，能有效提升二次编译速度，详情请参考: https://docs.taro.zone/docs/config-detail#cache。
+
+
+
+● Webpack █████████████████████████  (0%)  
+ 
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ setup (1%)  
+ before run
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ setup (2%)  
+ run
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ setup (9%) compilation 
+ mini-css-extract-plugin
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ setup (9%) compilation 
+ CssMinimizerPlugin
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (10%) 0/20 entries 19/20 dependen
+cies 0/19 modules 1 active 
+ babel-loader › ..\..\..\src\mini-alipay\app.tsx
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (10%)  
+ ...babel+c_e6bed0d53ca0f21ec395107131173a40\node_modules\babel-loader\lib\ind
+ex.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (10%) 0/20 entries 19/20 dependen
+cies 0/19 modules 1 active 
+ babel-loader › ..\..\..\src\mini-alipay\app.tsx
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (10%) 0/20 entries 19/20 dependen
+cies 0/19 modules 3 active 
+ babel-loader › ..\..\..\src\mini-alipay\pages\catalog\index.tsx
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (10%) 0/20 entries 19/21 dependen
+cies 0/19 modules 19 active 
+ babel-loader › ..\..\..\src\mini-alipay\pages\moderation\index.tsx
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 37/61 dependen
+cies 1/37 modules 19 active 
+ taro-loader › ..\..\..\src\mini-alipay\pages\photos\index.tsx
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 39/97 dependen
+cies 1/39 modules 37 active 
+ ...bcb20ca068\node_modules\@tarojs\webpack5-runner\dist\template\custom-wrapp
+er.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 75/97 dependen
+cies 1/42 modules 41 active 
+ ..._modules\.pnpm\@tarojs+runtime@4.3.1\node_modules\@tarojs\runtime\dist\ind
+ex.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 75/100 depende
+ncies 1/42 modules 41 active 
+ ..._modules\.pnpm\@tarojs+runtime@4.3.1\node_modules\@tarojs\runtime\dist\ind
+ex.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 93/122 depende
+ncies 1/43 modules 42 active 
+ ..\..\..\node_modules\.pnpm\react@18.3.1\node_modules\react\jsx-runtime.js
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (12%) 1/20 entries 112/164 depend
+encies 1/60 modules 58 active 
+ babel-loader › ..\..\..\src\shared\client\session.ts
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (15%) 2/20 entries 114/164 depend
+encies 2/61 modules 59 active 
+ babel-loader › ..\..\..\src\shared\client\api.ts
+
+[2K[1A[2K[1A[2K[1A[2K[1A[2K[1A[2K[G
+● Webpack █████████████████████████ building (15%) 2/20 entries 116/165 depend
+encies 2/62 modules 60 active 
+ ....1_@tarojs+_e858eef14443ec3219a8b3fa033341aa\node_modules\@tarojs\taro\ind
+ex.js
+

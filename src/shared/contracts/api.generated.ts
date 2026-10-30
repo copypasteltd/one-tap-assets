@@ -1767,6 +1767,134 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/plus/video-drafts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 分页读取本人有效视频编辑草稿
+         * @description 分页读取本人有效视频编辑草稿
+         */
+        get: operations["listPlusVideoDrafts"];
+        put?: never;
+        /**
+         * 为本人当前已交付视频建立独立剪辑草稿
+         * @description 为本人当前已交付视频建立独立剪辑草稿
+         */
+        post: operations["createPlusVideoDraft"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/plus/video-drafts/{draft_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 读取本人视频剪辑草稿及可信来源规格
+         * @description 读取本人视频剪辑草稿及可信来源规格
+         */
+        get: operations["getPlusVideoDraft"];
+        /**
+         * 按修订号保存选段、裁切、定时字幕和原声选择
+         * @description 按修订号保存选段、裁切、定时字幕和原声选择
+         */
+        put: operations["savePlusVideoDraft"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/plus/video-render-styles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 读取独立视频编辑制作风格与价格
+         * @description 读取独立视频编辑制作风格与价格
+         */
+        get: operations["listPlusVideoStyles"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/plus/video-drafts/{draft_id}/render-plans": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * 经手机单独授权冻结视频编辑清单，回原渠道核对报价并付款
+         * @description 经手机单独授权冻结视频编辑清单，回原渠道核对报价并付款
+         */
+        post: operations["createPlusVideoPlan"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/plus/video-render-plans": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 本人在电脑或原小程序恢复视频制作清单
+         * @description 本人在电脑或原小程序恢复视频制作清单
+         */
+        get: operations["listPlusVideoPlans"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/plus/video-render-plans/{request_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 读取本人视频制作清单及原渠道独立订单状态
+         * @description 读取本人视频制作清单及原渠道独立订单状态
+         */
+        get: operations["getPlusVideoPlan"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -2036,6 +2164,7 @@ export interface components {
             estimated_seconds_min: number | null;
             estimated_seconds_max: number | null;
             plus_render_request_id?: string;
+            plus_video_request_id?: string;
         };
         PreviewRequest: {
             plan_id: string;
@@ -3740,6 +3869,7 @@ export interface components {
         };
         PlusLinkCreateRequest: {
             prepare_render_plans?: boolean;
+            prepare_video_render_plans?: boolean;
         };
         PlusLink: {
             link_id: string;
@@ -3768,6 +3898,7 @@ export interface components {
             /** @constant */
             access: "OWN_PROJECTS_AND_EDIT_DRAFTS";
             can_prepare_render_plans: boolean;
+            can_prepare_video_render_plans?: boolean;
         };
         PlusLinkPollRequest: {
             poll_key: string;
@@ -3782,6 +3913,7 @@ export interface components {
             /** @enum {string} */
             state: "ACTIVE" | "REVOKED" | "EXPIRED";
             can_prepare_render_plans: boolean;
+            can_prepare_video_render_plans?: boolean;
         };
         PlusBrowserSession: {
             access_token: string;
@@ -3847,34 +3979,6 @@ export interface components {
             items: components["schemas"]["PlusEditDraft"][];
             next_cursor: string | null;
         };
-        PlusLinkResponse: {
-            data: components["schemas"]["PlusLink"];
-            trace_id: string;
-        };
-        PlusLinkApprovalResponse: {
-            data: components["schemas"]["PlusLinkApproval"];
-            trace_id: string;
-        };
-        PlusLinkStatusResponse: {
-            data: components["schemas"]["PlusLinkStatus"];
-            trace_id: string;
-        };
-        PlusSessionInfoResponse: {
-            data: components["schemas"]["PlusSessionInfo"];
-            trace_id: string;
-        };
-        PlusSessionListResponse: {
-            data: components["schemas"]["PlusSessionList"];
-            trace_id: string;
-        };
-        PlusEditDraftResponse: {
-            data: components["schemas"]["PlusEditDraft"];
-            trace_id: string;
-        };
-        PlusEditListResponse: {
-            data: components["schemas"]["PlusEditList"];
-            trace_id: string;
-        };
         PlusRenderCreateRequest: {
             expected_revision: number;
             variant_id: string;
@@ -3909,18 +4013,6 @@ export interface components {
         PlusRenderPlanList: {
             items: components["schemas"]["PlusRenderPlan"][];
             next_cursor: string | null;
-        };
-        PlusRenderStyleListResponse: {
-            data: components["schemas"]["PlusRenderStyleList"];
-            trace_id: string;
-        };
-        PlusRenderPlanResponse: {
-            data: components["schemas"]["PlusRenderPlan"];
-            trace_id: string;
-        };
-        PlusRenderPlanListResponse: {
-            data: components["schemas"]["PlusRenderPlanList"];
-            trace_id: string;
         };
         PlusBatchItemRequest: {
             draft_id: string;
@@ -3967,12 +4059,152 @@ export interface components {
             items: components["schemas"]["PlusBatchSummary"][];
             next_cursor: string | null;
         };
+        PlusLinkResponse: {
+            data: components["schemas"]["PlusLink"];
+            trace_id: string;
+        };
+        PlusLinkApprovalResponse: {
+            data: components["schemas"]["PlusLinkApproval"];
+            trace_id: string;
+        };
+        PlusLinkStatusResponse: {
+            data: components["schemas"]["PlusLinkStatus"];
+            trace_id: string;
+        };
+        PlusSessionInfoResponse: {
+            data: components["schemas"]["PlusSessionInfo"];
+            trace_id: string;
+        };
+        PlusSessionListResponse: {
+            data: components["schemas"]["PlusSessionList"];
+            trace_id: string;
+        };
+        PlusEditDraftResponse: {
+            data: components["schemas"]["PlusEditDraft"];
+            trace_id: string;
+        };
+        PlusEditListResponse: {
+            data: components["schemas"]["PlusEditList"];
+            trace_id: string;
+        };
+        PlusRenderStyleListResponse: {
+            data: components["schemas"]["PlusRenderStyleList"];
+            trace_id: string;
+        };
+        PlusRenderPlanResponse: {
+            data: components["schemas"]["PlusRenderPlan"];
+            trace_id: string;
+        };
+        PlusRenderPlanListResponse: {
+            data: components["schemas"]["PlusRenderPlanList"];
+            trace_id: string;
+        };
         PlusBatchResponse: {
             data: components["schemas"]["PlusBatch"];
             trace_id: string;
         };
         PlusBatchListResponse: {
             data: components["schemas"]["PlusBatchList"];
+            trace_id: string;
+        };
+        PlusVideoSettings: {
+            crop: {
+                x: number;
+                y: number;
+                width: number;
+                height: number;
+            };
+            canvas: {
+                width: number;
+                height: number;
+            };
+            title: string;
+            brand: string;
+            facts: string[];
+            trim: {
+                start_frame: number;
+                end_frame: number;
+            };
+            /** @enum {string} */
+            audio_mode: "PRESERVE" | "MUTE";
+            captions: {
+                start_frame: number;
+                end_frame: number;
+                text: string;
+                /** @enum {string} */
+                kind: "SUBTITLE" | "ON_SCREEN_COPY";
+            }[];
+        };
+        PlusVideoSource: {
+            width: number;
+            height: number;
+            /** @constant */
+            fps: 30;
+            frames: number;
+            has_audio: boolean;
+            size_bytes: number;
+        };
+        PlusVideoDraft: {
+            draft_id: string;
+            order_id: string;
+            product_id: string;
+            manifest_id: string;
+            manifest_revision: number;
+            deliverable_id: string;
+            source_sha256: string;
+            revision: number;
+            settings: components["schemas"]["PlusVideoSettings"];
+            /** @constant */
+            fact_status: "USER_PROVIDED_UNVERIFIED";
+            /** @constant */
+            state: "DRAFT";
+            /** Format: date-time */
+            created_at: string;
+            /** Format: date-time */
+            updated_at: string;
+            /** @constant */
+            media_kind: "video";
+            source: components["schemas"]["PlusVideoSource"];
+        };
+        PlusVideoSaveRequest: {
+            expected_revision: number;
+            settings: components["schemas"]["PlusVideoSettings"];
+        };
+        PlusVideoList: {
+            items: components["schemas"]["PlusVideoDraft"][];
+            next_cursor: string | null;
+        };
+        PlusVideoRenderPlan: {
+            request_id: string;
+            draft_id: string;
+            draft_revision: number;
+            source_order_id: string;
+            /** Format: date-time */
+            created_at: string;
+            settings: components["schemas"]["PlusVideoSettings"];
+            price_fen: number;
+            pricing_version: string;
+            plan: components["schemas"]["Plan"];
+            order: components["schemas"]["Order"] | null;
+        };
+        PlusVideoRenderPlanList: {
+            items: components["schemas"]["PlusVideoRenderPlan"][];
+            next_cursor: string | null;
+        };
+        PlusVideoDraftResponse: {
+            data: components["schemas"]["PlusVideoDraft"];
+            trace_id: string;
+        };
+        PlusVideoListResponse: {
+            data: components["schemas"]["PlusVideoList"];
+            trace_id: string;
+        };
+        PlusVideoRenderPlanResponse: {
+            data: components["schemas"]["PlusVideoRenderPlan"];
+            trace_id: string;
+        };
+        PlusVideoRenderPlanListResponse: {
+            data: components["schemas"]["PlusVideoRenderPlanList"];
             trace_id: string;
         };
     };
@@ -15085,6 +15317,912 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PlusBatchResponse"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    listPlusVideoDrafts: {
+        parameters: {
+            query?: {
+                cursor?: components["parameters"]["Cursor"];
+                limit?: components["parameters"]["Limit"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 成功 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlusVideoListResponse"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    createPlusVideoDraft: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PlusEditCreateRequest"];
+            };
+        };
+        responses: {
+            /** @description 成功 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlusVideoDraftResponse"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    getPlusVideoDraft: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                draft_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 成功 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlusVideoDraftResponse"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    savePlusVideoDraft: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                draft_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PlusVideoSaveRequest"];
+            };
+        };
+        responses: {
+            /** @description 成功 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlusVideoDraftResponse"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    listPlusVideoStyles: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 成功 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlusRenderStyleListResponse"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    createPlusVideoPlan: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                draft_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PlusRenderCreateRequest"];
+            };
+        };
+        responses: {
+            /** @description 成功 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlusVideoRenderPlanResponse"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    listPlusVideoPlans: {
+        parameters: {
+            query?: {
+                cursor?: components["parameters"]["Cursor"];
+                limit?: components["parameters"]["Limit"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 成功 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlusVideoRenderPlanListResponse"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    getPlusVideoPlan: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                request_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 成功 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlusVideoRenderPlanResponse"];
                 };
             };
             /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */

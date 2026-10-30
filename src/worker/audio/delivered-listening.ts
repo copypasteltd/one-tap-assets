@@ -1,3 +1,4 @@
+import {orderNeedsListening} from './listening-contract.js';
 import type {Db} from '../../api/db/pool.js';
 import type {Config} from '../../api/config.js';
 import type {ObjectStorage} from '../../api/storage/storage.js';
@@ -18,7 +19,7 @@ class DeliveredNativeListeningReader extends NativeListeningReader {
     const c=await revisionContext(db,context.tenantId,this.authority.revision_id,this.authority.input_hash);
     requireThat(c.row.owner_id===context.ownerId&&c.row.order_id===context.orderId&&c.input.product_id===context.snapshot.product_id
       &&c.input.original_snapshot_hash===context.snapshotHash&&c.input.original_contract_hash===hash(originalRepairContext(context).contract)
-      &&c.snapshot.audio_policy.speech_mode==='NATIVE_ZH','LISTENING_AFTERCARE_NOT_AUTHORIZED','原听音只允许当前本人售后读取',403);
+      &&orderNeedsListening(c.contract),'LISTENING_AFTERCARE_NOT_AUTHORIZED','原听音只允许当前本人售后读取',403);
   }
   protected override async packetAuthorization(db:Db,context:ExecutionContext,packet:DTO<'ReviewPacket'>):Promise<void>{
     await this.authorize(db,context);

@@ -1,3 +1,4 @@
+import {PLUS_VIDEO_QC,plusVideoBinding} from '../../shared/domain/plus-video.js';
 import type {Db} from '../../api/db/pool.js';
 import type {DTO} from '../../shared/contracts/types.js';
 import {hash,id} from '../../api/lib/crypto.js';
@@ -11,7 +12,7 @@ export function limitedRevisionRoute(snapshot:Snapshot):boolean {
   if(snapshot.audio_policy.speech_mode==='NATIVE_ZH')return ['PER_SHOT_AI','REFERENCE_FILM'].includes(snapshot.engine)
     &&snapshot.codex_contract.qc_policy_version===NATIVE_AUDIO_QC_POLICY&&Boolean(snapshot.native_audio_contract_hash&&snapshot.listening_contract_hash);
   return snapshot.audio_policy.speech_mode==='NONE'&&snapshot.audio_policy.music_license_ids.length===0
-    &&(snapshot.engine==='PHOTO_LAYOUT'?snapshot.codex_contract.qc_policy_version==='YPCC-QC-PHOTO-1.0.0':
+    &&(snapshot.engine==='PHOTO_LAYOUT'?['YPCC-QC-PHOTO-1.0.0',PLUS_VIDEO_QC].includes(snapshot.codex_contract.qc_policy_version):
       ['PER_SHOT_AI','REFERENCE_FILM'].includes(snapshot.engine)&&snapshot.codex_contract.qc_policy_version===GENERATED_QC_POLICY);
 }
 import type {CodexAdmission} from '../codex/admission.js';
@@ -46,7 +47,7 @@ export function freezeRevisionPolicy(contract:FrozenContract,skillVariantId=cont
   const styleId=contract.source.creative_components.platform_style_id;
   const style=STYLES[typeof styleId==='string'?styleId:contract.request.preset_id];
   const plus=contract.source.creative_components.plus_render;
-  const imageTextSupported=!plus||contract.source.output_slots.filter(s=>s.kind==='image').every(s=>s.width>=640&&s.height>=640&&s.width<=1920&&s.height<=1920&&s.width*s.height<=4000000);
+  const imageTextSupported=!plusVideoBinding(contract.source)&&(!plus||contract.source.output_slots.filter(s=>s.kind==='image').every(s=>s.width>=640&&s.height>=640&&s.width<=1920&&s.height<=1920&&s.width*s.height<=4000000));
   if(imageTextSupported&&style&&contract.resource_versions.some(r=>hash(r)===hash(FONT_BINDING)))policy.image_text={version:'YPCC-IMAGE-TEXT-1',max_chars:28,
     max_lines:2,panel_fraction:0.22,font:{...FONT_BINDING},background:style.bg,ink:style.ink,accent:style.accent};
   validateRevisionPolicy(policy);return policy;

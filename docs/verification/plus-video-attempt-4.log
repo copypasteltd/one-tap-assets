@@ -1,0 +1,31 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ❯ tests/integration/plus-video.test.ts (4 tests | 1 failed) 34589ms
+   ✓ requires a separately approved video capability and preserves isolated optimistic drafts 187ms
+   ✓ freezes a video plan and independent native price, rejects unavailable listening before payment 4038ms
+   × encodes a real selected MP4 with timed captions, retains sound, seals two complete WAVs and publishes only after both reviews 26738ms
+   · honors explicit mute in a separate paid version without reusing or buying listening
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/plus-video.test.ts > encodes a real selected MP4 with timed captions, retains sound, seals two complete WAVs and publishes only after both reviews
+error: column "order_id" does not exist
+ ❯ node_modules/.pnpm/pg-pool@3.14.0_pg@8.23.1/node_modules/pg-pool/index.js:45:11
+ ❯ tests/integration/plus-video.test.ts:72:16
+     70|   expect(checkedRevisionChange(pack,{kind:'DISPLAY_TEXT',manifest_revi…
+     71|   expect(contract.revision_policy.image_text).toBeUndefined();
+     72|   const roles=(await f.db.pool.query("SELECT private FROM agent_runs W…
+       |                ^
+     73|   expect(roles).toHaveLength(2);expect(roles.every(r=>r.private.review…
+     74|   expect((await f.db.pool.query("SELECT id FROM agent_instances WHERE …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 passed (4)
+   Start at  23:57:08
+   Duration  39.64s (tests 88%, import 9%, transform 3%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/integration.json

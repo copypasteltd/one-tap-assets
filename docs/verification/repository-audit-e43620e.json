@@ -1,0 +1,63 @@
+{
+  "checked_at": "2026-10-30T15:13:08.179427+00:00",
+  "status": "PASS",
+  "scope": "DELIVERY_FILE_AND_DOCUMENT_INTEGRITY_NOT_FULL_PRODUCT_ACCEPTANCE",
+  "source_set_hash": "f83a34c4c251547aa12d7f0c8be258ef01fed3d0d6b027d452b102f2e9b2a077",
+  "source_files": 529,
+  "runtime_contract_files": 42,
+  "resource_files": 4,
+  "evidence": "docs/verification/mini-closure-source.json",
+  "markdown_files": 192,
+  "local_links_verified": 1899,
+  "public_diagnostic_logs": 7,
+  "media_files": 180,
+  "historical_json_unchanged": 596,
+  "old_migrations_preserved": 37,
+  "prior_api_operations_and_schemas_unchanged": true,
+  "native_mini_builds": [
+    {
+      "host": "alipay",
+      "status": "PASS",
+      "files": 71,
+      "artifact_validation": {
+        "status": "PASS",
+        "page_count": 17,
+        "file_count": 71,
+        "javascript_files_parsed": 22,
+        "local_dependencies_checked": 22,
+        "project_configuration": "mini.project.json",
+        "host_launch_verified": false,
+        "real_device_verified": false
+      },
+      "manifest": {
+        "path": "docs/verification/mini-closure-alipay-artifacts.json",
+        "sha256": "0d101efe7c98a00c59790d1e17f5c96e829c720c0602668ce87124b4d853939b",
+        "bytes": 11580
+      }
+    },
+    {
+      "host": "douyin",
+      "status": "PASS",
+      "files": 70,
+      "artifact_validation": {
+        "status": "PASS",
+        "page_count": 17,
+        "file_count": 70,
+        "javascript_files_parsed": 22,
+        "local_dependencies_checked": 21,
+        "project_configuration": "project.config.json",
+        "host_launch_verified": false,
+        "real_device_verified": false
+      },
+      "manifest": {
+        "path": "docs/verification/mini-closure-douyin-artifacts.json",
+        "sha256": "edb1faac7312c8a7b0ff6cbf6d967c7cec7c3ff8e2c09085727609e8edbc4bd9",
+        "bytes": 11433
+      }
+    }
+  ],
+  "full_suite_executed": false,
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false
+}

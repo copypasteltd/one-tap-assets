@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "created_at": "2026-10-30T15:15:11.733Z",
-  "id": "2026-10-30T15-07-05-734Z-75c4f52e",
-  "package_id": "2026-10-30T15-15-11-733Z-3b60e449",
-  "source_set_hash": "f83a34c4c251547aa12d7f0c8be258ef01fed3d0d6b027d452b102f2e9b2a077",
-  "archive_path": "runtime/releases/one-tap-assets-2026-10-30T15-15-11-733Z-3b60e449/one-tap-assets-source-and-builds.zip",
-  "archive_sha256": "1e0af1926f5f83df9526f62c971ffd21b2ca4fdd0bd41024c78d1101bd3dea80",
-  "archive_bytes": 128988020,
-  "source_files": 1796,
+  "created_at": "2026-10-30T16:32:31.753Z",
+  "id": "2026-10-30T16-02-53-413Z-27f6437c",
+  "package_id": "2026-10-30T16-32-31-753Z-bf85aa73",
+  "source_set_hash": "539634851c52a6f1a661b05a8c0723ac443cac3744d809027a256256e942c1b8",
+  "archive_path": "runtime/releases/one-tap-assets-2026-10-30T16-32-31-753Z-bf85aa73/one-tap-assets-source-and-builds.zip",
+  "archive_sha256": "703bd3bd3582527e08a6d878aebfbe96523c43f285e615e19e041f55d81da0bd",
+  "archive_bytes": 145803989,
+  "source_files": 1845,
   "build_files": 179,
   "components": [
     {
@@ -27,18 +27,18 @@
       "status": "PASS"
     }
   ],
-  "manifest_path": "runtime/releases/one-tap-assets-2026-10-30T15-15-11-733Z-3b60e449/manifest.json",
+  "manifest_path": "runtime/releases/one-tap-assets-2026-10-30T16-32-31-753Z-bf85aa73/manifest.json",
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
   "full_product_verified": false,
   "production_admitted": false,
   "independent_archive_verification": {
     "status": "PASS",
-    "checked_at": "2026-10-30T15:15:48.791181+00:00",
+    "checked_at": "2026-10-30T16:33:07.511680+00:00",
     "method": "INDEPENDENT_PYTHON_ZIPFILE_CRC_AND_SHA256",
-    "archive_sha256": "1e0af1926f5f83df9526f62c971ffd21b2ca4fdd0bd41024c78d1101bd3dea80",
-    "payload_files_verified": 1975,
-    "archive_entries": 1976,
+    "archive_sha256": "703bd3bd3582527e08a6d878aebfbe96523c43f285e615e19e041f55d81da0bd",
+    "payload_files_verified": 2024,
+    "archive_entries": 2025,
     "workspace_payload_bytes_matched": true,
     "successful_build_components_verified": [
       "server",

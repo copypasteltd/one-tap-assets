@@ -17,6 +17,7 @@ export interface Config {
     listening?:{enabled:boolean;baseUrl:string;apiKey:string;allowedHosts:string[]} };
   managementTokens: string;
   plusRender:{enabled:boolean;priceFen:number;pricingVersion:string};
+  plusVideoRender:{enabled:boolean;priceFen:number;pricingVersion:string;budgetMicro:number;listeningModelVersionId:string};
   samples: { dailyBudgetMicro: number; costCeilingMicro: number; maxConcurrent: number; deadlineSeconds: number };
   privacyJournal: { enabled: boolean; directory: string; sourceId: string; keyId: string; hmacKey: string };
   codex: { enabled: boolean; binary: string; sha256: string; model: string; apiKey: string; inferenceProxy: string; protocol: string; rateVersion: string; maxTurns: number; maxInputTokens: number; maxOutputTokens: number; costCeilingMicro: number; isolationCommand: string; admissionPath: string; dailyBudgetMicro: number };
@@ -53,6 +54,8 @@ export function config(overrides: Partial<Config> = {}): Config {
         allowedHosts:text('ASR_ALLOWED_HOSTS').split(',').map(s=>s.trim()).filter(Boolean)}}:{}) },
     managementTokens: text('MANAGEMENT_TOKENS_JSON'),
     plusRender:{enabled:enabled('PLUS_IMAGE_RENDER_ENABLED'),priceFen:num('PLUS_IMAGE_RENDER_PRICE_FEN',0),pricingVersion:text('PLUS_IMAGE_RENDER_PRICING_VERSION')},
+    plusVideoRender:{enabled:enabled('PLUS_VIDEO_RENDER_ENABLED'),priceFen:num('PLUS_VIDEO_RENDER_PRICE_FEN',0),pricingVersion:text('PLUS_VIDEO_RENDER_PRICING_VERSION'),
+      budgetMicro:num('PLUS_VIDEO_RENDER_BUDGET_MICRO',0),listeningModelVersionId:text('PLUS_VIDEO_LISTENING_MODEL_VERSION_ID')},
     samples: { dailyBudgetMicro: num('SAMPLE_DAILY_BUDGET_MICRO', 0), costCeilingMicro: num('SAMPLE_COST_CEILING_MICRO', 0), maxConcurrent: num('SAMPLE_MAX_CONCURRENT', 1), deadlineSeconds: num('SAMPLE_DEADLINE_SECONDS', 3600) },
     privacyJournal: { enabled: enabled('PRIVACY_JOURNAL_ENABLED'), directory: text('PRIVACY_JOURNAL_DIRECTORY', 'privacy-journal'),
       sourceId: text('PRIVACY_JOURNAL_SOURCE_ID'), keyId: text('PRIVACY_JOURNAL_KEY_ID'), hmacKey: text('PRIVACY_JOURNAL_HMAC_KEY') },

@@ -1,24 +1,24 @@
 {
-  "checked_at": "2026-10-30T15:13:08.179427+00:00",
+  "checked_at": "2026-10-30T16:27:37.321579+00:00",
   "status": "PASS",
   "scope": "DELIVERY_FILE_AND_DOCUMENT_INTEGRITY_NOT_FULL_PRODUCT_ACCEPTANCE",
-  "source_set_hash": "f83a34c4c251547aa12d7f0c8be258ef01fed3d0d6b027d452b102f2e9b2a077",
-  "source_files": 529,
+  "source_set_hash": "539634851c52a6f1a661b05a8c0723ac443cac3744d809027a256256e942c1b8",
+  "source_files": 543,
   "runtime_contract_files": 42,
   "resource_files": 4,
-  "evidence": "docs/verification/mini-closure-source.json",
-  "markdown_files": 192,
-  "local_links_verified": 1899,
-  "public_diagnostic_logs": 7,
-  "media_files": 180,
-  "historical_json_unchanged": 596,
+  "evidence": "docs/verification/plus-video-source.json",
+  "markdown_files": 194,
+  "local_links_verified": 1883,
+  "public_diagnostic_logs": 12,
+  "media_files": 190,
+  "historical_json_unchanged": 608,
   "old_migrations_preserved": 37,
-  "prior_api_operations_and_schemas_unchanged": true,
+  "prior_api_operations_preserved": true,
+  "optional_video_fields_added_without_changing_existing_schema_requirements": true,
   "native_mini_builds": [
     {
-      "host": "alipay",
+      "name": "alipay",
       "status": "PASS",
-      "files": 71,
       "artifact_validation": {
         "status": "PASS",
         "page_count": 17,
@@ -28,17 +28,11 @@
         "project_configuration": "mini.project.json",
         "host_launch_verified": false,
         "real_device_verified": false
-      },
-      "manifest": {
-        "path": "docs/verification/mini-closure-alipay-artifacts.json",
-        "sha256": "0d101efe7c98a00c59790d1e17f5c96e829c720c0602668ce87124b4d853939b",
-        "bytes": 11580
       }
     },
     {
-      "host": "douyin",
+      "name": "douyin",
       "status": "PASS",
-      "files": 70,
       "artifact_validation": {
         "status": "PASS",
         "page_count": 17,
@@ -48,16 +42,13 @@
         "project_configuration": "project.config.json",
         "host_launch_verified": false,
         "real_device_verified": false
-      },
-      "manifest": {
-        "path": "docs/verification/mini-closure-douyin-artifacts.json",
-        "sha256": "edb1faac7312c8a7b0ff6cbf6d967c7cec7c3ff8e2c09085727609e8edbc4bd9",
-        "bytes": 11433
       }
     }
   ],
   "full_suite_executed": false,
   "full_product_verified": false,
   "production_admitted": false,
-  "cloud_deployed": false
+  "cloud_deployed": false,
+  "all_baseline_files_unchanged_except_archived_rolling_indices": 882,
+  "historical_json_preserved_with_archives": 611
 }

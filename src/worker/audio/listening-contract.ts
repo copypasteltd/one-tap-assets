@@ -4,6 +4,9 @@ import {hash} from '../../api/lib/crypto.js';
 import {requireThat} from '../../api/lib/errors.js';
 import type {FrozenContract,ModelBinding} from '../compiler/snapshot.js';
 import {admitListeningContract,frozenListeningContract,type ListeningContract} from '../providers/omni-listening.js';
+import {plusVideoBinding,plusVideoNeedsListening} from '../../shared/domain/plus-video.js';
+
+export function orderNeedsListening(contract:FrozenContract):boolean{return contract.source.audio_policy.speech!=='none'||plusVideoNeedsListening(contract.source);}
 
 export interface ListeningModelRow {id:string;status:string;data:ModelBinding;private?:{listening_contract?:unknown}}
 function matches(c:ListeningContract,row:ListeningModelRow):boolean{
@@ -17,6 +20,13 @@ export function frozenOrderListening(contract:FrozenContract):ListeningContract|
   const raw=contract.listening_contract;
   if(!raw)return null;
   const c=frozenListeningContract(raw),audio=contract.native_audio_contract;
+  const plus=plusVideoBinding(contract.source);
+  if(plus){requireThat(plusVideoNeedsListening(contract.source)&&contract.creative.target_frames<=c.max_target_frames
+    &&plus.pricing.listening_model_version_id===c.model_version_id&&plus.pricing.budget_micro===contract.budget_micro
+    &&contract.model_versions.filter(m=>m.roles.includes('QC')).length===1&&contract.model_versions.some(m=>matches(c,{id:c.model_version_id,status:'ADMITTED',data:m}))
+    &&BigInt(c.per_request_ceiling_micro)*BigInt(c.max_packets)+BigInt(contract.codex_contract.agent_cost_ceiling_micro)
+      +BigInt(contract.revision_policy?.budget_micro??0)<=BigInt(contract.budget_micro),
+    'PLUS_VIDEO_LISTENING_CONTRACT_INVALID','保留原声的听音时长、模型或费用上限未完整纳入视频订单',503);return c;}
   requireThat(audio&&contract.source.audio_policy.speech!=='none'&&contract.creative.target_frames===audio.target_frames
     &&audio.target_frames<=c.max_target_frames&&contract.model_versions.filter(m=>m.roles.includes('QC')).length===1
     &&contract.model_versions.some(m=>matches(c,{id:c.model_version_id,status:'ADMITTED',data:m}))
@@ -27,7 +37,7 @@ export function frozenOrderListening(contract:FrozenContract):ListeningContract|
 export function freezeOrderListening(cfg:Config,contract:FrozenContract,models:ListeningModelRow[]):void{
   const rows=models.filter(m=>m.data.roles.includes('QC'));
   if(rows.length===0){requireThat(!contract.listening_contract,'LISTENING_ORDER_CONTRACT_INVALID','听音合同缺少原模型绑定',503);return;}
-  requireThat(rows.length===1&&contract.native_audio_contract,'LISTENING_ORDER_CONTRACT_INVALID','有声方案只能选择唯一独立听音模型',503);
+  requireThat(rows.length===1&&(contract.native_audio_contract||plusVideoNeedsListening(contract.source)),'LISTENING_ORDER_CONTRACT_INVALID','有声方案只能选择唯一独立听音模型',503);
   const c=admitListeningContract(cfg,rows[0]!.private?.listening_contract);
   requireThat(rows[0]!.status==='ADMITTED'&&matches(c,rows[0]!),'LISTENING_MODEL_BINDING_INVALID','听音模型准入、协议、能力摘要或费率版本不一致',503);
   contract.listening_contract=structuredClone(c);frozenOrderListening(contract);
