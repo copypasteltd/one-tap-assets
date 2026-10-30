@@ -1,5 +1,15 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · Native candidate repair / 有声候选失败修复
+
+本轮收口[有声候选失败修复](docs/实施/有声候选修复与原冻结转写额度-v1.0.md)：两生成路线可在下单前冻结的一次额外识别/听音额度内，限定重制、新验收并交付，修复后可继续已有封面售后。旧订单不增次数，原预算与截止不变。4单元、4数据库/旧识别回归、2条原生整链通过；不等待全面测试。
+
+This delivery closes [failed native-candidate repair](docs/实施/有声候选修复与原冻结转写额度-v1.0.md) on both generated routes: a pre-sale optional ASR/listening allowance permits one scoped repair with fresh media, QC, listening and independent reviews, then existing cover aftercare. Historical orders gain no allowance; budgets and deadlines stay fixed. Four unit, four database/original-ASR and two native flow cases pass; no comprehensive suite was required.
+
+Migration 028 preserves old single-ASR orders and UNKNOWN holds, allowing an immutable second attempt only under the original pre-sale repair grant. Original sources and old reports cannot authorize the new pack. Both initial failed attempts retain exact source/build/test reports. No UI change or media recapture; live-service/device/production/cloud acceptance remains incomplete.
+
+以下内容对应各自历史轮次，当前结论以上述来源为准。
+
 ## 2026-10-30 · Native audio aftercare / 有声素材售后
 
 本轮接通[有声素材售后与原听音复核](docs/实施/有声素材售后与原听音复核-v1.0.md)：两生成路线的已有封面、完整展示排序和配套文案可走原五阶段、新独立双复核，音视频字节保持原版；重新核对原听音/转写/费用/许可。19项单元、2项原生集成通过，未跑全面测试；原预算、次数、截止和UNKNOWN恢复保持。

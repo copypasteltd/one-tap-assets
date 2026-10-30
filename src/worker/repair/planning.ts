@@ -15,10 +15,11 @@ import type {StageCommit} from '../runtime.js';
 import type {ToolScope} from '../tool-gateway/http.js';
 import type {ToolHandler} from '../tool-gateway/consumer.js';
 import {checkedRepairPlan} from './context.js';
+import {frozenNativeAudio} from '../audio/contract.js';
 
 export async function validateRepairPlanningResult(db:Db,tenant:string,order:string,snapshot:string,stage:string,raw:unknown):Promise<CreativePlan>{
   const context=await executionContext(db,tenant,order,snapshot,stage);
-  requireThat(context.repair?.planning_stage_id===stage&&context.snapshot.audio_policy.speech_mode==='NONE',
+  requireThat(context.repair?.planning_stage_id===stage&&(context.snapshot.audio_policy.speech_mode==='NONE'||frozenNativeAudio(context.contract)?.repair),
     'REPAIR_PLAN_NOT_AUTHORIZED','修复规划只能读取本单已支持路线的准备阶段',409);
   const plan=checkedRepairPlan(context,raw);
   await validatePlanLayout(plan,context.contract.source,context.snapshot.preset_id);
@@ -53,7 +54,8 @@ export class RepairPlanningService{
     requireThat(lease.scope_type==='ORDER'&&lease.stage_name==='REPAIR_PLAN'&&lease.attempt===2,'REPAIR_STAGE_BINDING_INVALID','不是本单修复准备阶段',409);
     const context=await executionContext(this.pool,lease.tenant_id,lease.scope_id,lease.input_hash,lease.id);
     const repair=context.repair,binding=context.contract.runtime_binding,cc=context.snapshot.codex_contract;
-    requireThat(repair&&binding&&context.snapshot.audio_policy.speech_mode==='NONE','REPAIR_PLAN_NOT_AUTHORIZED','缺少本单修复权限',409);
+    requireThat(repair&&binding&&(context.snapshot.audio_policy.speech_mode==='NONE'||frozenNativeAudio(context.contract)?.repair),
+      'REPAIR_PLAN_NOT_AUTHORIZED','缺少本单修复权限',409);
     const packet=(await this.pool.query<{data:DTO<'ReviewPacket'>}>(
       "SELECT data FROM review_packets WHERE tenant_id=$1 AND id=$2 AND order_id=$3 AND state='FAILED'",
       [lease.tenant_id,repair.source_packet_id,lease.scope_id])).rows[0]?.data;

@@ -1,0 +1,84 @@
+{
+  "numTotalTestSuites": 1,
+  "numPassedTestSuites": 1,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 4,
+  "numPassedTests": 4,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793326455914,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "preserves every original stereo sample in the complete canonical review WAV",
+          "status": "passed",
+          "title": "preserves every original stereo sample in the complete canonical review WAV",
+          "duration": 4.099999999999909,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects empty, partial stereo samples and overlong review audio",
+          "status": "passed",
+          "title": "rejects empty, partial stereo samples and overlong review audio",
+          "duration": 0.9976000000001477,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "exposes distinct actual frames at phrase and word boundaries and midpoints",
+          "status": "passed",
+          "title": "exposes distinct actual frames at phrase and word boundaries and midpoints",
+          "duration": 0.6322000000000116,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects caption intervals outside the complete original timeline",
+          "status": "passed",
+          "title": "rejects caption intervals outside the complete original timeline",
+          "duration": 0.8341000000000349,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793326457142,
+      "endTime": 1793326457148.834,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/native-review-audio.test.ts"
+    }
+  ]
+}

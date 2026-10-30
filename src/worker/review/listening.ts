@@ -36,7 +36,7 @@ export async function scopeReviewListening(db:Db,cfg:Config,store:ObjectStorage,
     return hash(packet.native_audio);
   }
   if(scope.scope_type!=='ORDER'||!['REVIEW_FACTS','REVIEW_STYLE'].includes(scope.stage_name))return null;
-  const context=await executionContext(db,scope.tenant_id,scope.scope_id,scope.snapshot_hash);
+  const context=await executionContext(db,scope.tenant_id,scope.scope_id,scope.snapshot_hash,scope.stage_run_id);
   requireAudioReviewAdmission(context);
   const evidence=context.snapshot.audio_policy.speech_mode==='NONE'?null:await readNativeListening(db,cfg,store,context);
   const run=(await db.query<{private:{review_input?:{native_listening?:ListeningEvidence}}}>(

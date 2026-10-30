@@ -7,6 +7,7 @@ import {requireThat} from '../../api/lib/errors.js';
 import type {ExecutionContext} from '../compiler/order-context.js';
 import {revisionContext} from '../revisions/context.js';
 import {NativeListeningReader,type ListeningEvidence} from './listening-gateway.js';
+import {originalRepairContext} from '../repair/generation.js';
 
 export interface DeliveredListeningAuthority {revision_id:string;input_hash:string}
 /** A separate read-only authorization for unchanged delivered media. It never
@@ -16,7 +17,7 @@ class DeliveredNativeListeningReader extends NativeListeningReader {
   private async authorize(db:Db,context:ExecutionContext):Promise<void>{
     const c=await revisionContext(db,context.tenantId,this.authority.revision_id,this.authority.input_hash);
     requireThat(c.row.owner_id===context.ownerId&&c.row.order_id===context.orderId&&c.input.product_id===context.snapshot.product_id
-      &&c.input.original_snapshot_hash===context.snapshotHash&&c.input.original_contract_hash===hash(context.contract)
+      &&c.input.original_snapshot_hash===context.snapshotHash&&c.input.original_contract_hash===hash(originalRepairContext(context).contract)
       &&c.snapshot.audio_policy.speech_mode==='NATIVE_ZH','LISTENING_AFTERCARE_NOT_AUTHORIZED','原听音只允许当前本人售后读取',403);
   }
   protected override async packetAuthorization(db:Db,context:ExecutionContext,packet:DTO<'ReviewPacket'>):Promise<void>{

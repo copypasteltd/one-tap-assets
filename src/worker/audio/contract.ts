@@ -24,6 +24,8 @@ export interface AudioRight {
   media?:{object_key:string;sha256:string;size_bytes:number;mime_type:string};
 }
 export interface NativeAudioContract {
+  repair?:{version:'YPCC-NATIVE-REPAIR-1';additional_asr_calls:1;asr_ceiling_micro:number;
+    additional_listening_packets:1;listening_ceiling_micro:number;ceiling_micro:number};
   version:typeof AUDIO_CONTRACT_VERSION;source_policy_hash:string;plan_hash:string;target_frames:number;
   language:'zh-CN';preserve_native_audio:true;secondary_tts:false;original_gain_db:0;sample_rate:48000;channels:2;
   caption_style:'standard'|'bold'|'minimal'|'karaoke';font:ResourceBinding;
@@ -44,14 +46,18 @@ const rightSchema=exact({kind:{enum:['NATIVE_CHARACTER','NATIVE_VOICE','MUSIC']}
 Object.assign(rightSchema.properties,{media:exact({object_key:{type:'string',pattern:'^licensed-resources/[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$'},
   sha256:digest,size_bytes:integer(1,64_000_000),mime_type:{enum:['audio/wav','audio/mpeg','audio/mp4','audio/flac','audio/ogg']}})});
 const ajv=new Ajv2020({strict:false}),validCharacter=ajv.compile<CharacterVoiceAdmission>(characterSchema);
-const validAudio=ajv.compile<NativeAudioContract>(exact({version:{const:AUDIO_CONTRACT_VERSION},source_policy_hash:digest,plan_hash:digest,target_frames:integer(1,3600),
+const audioSchema=exact({version:{const:AUDIO_CONTRACT_VERSION},source_policy_hash:digest,plan_hash:digest,target_frames:integer(1,3600),
   language:{const:'zh-CN'},preserve_native_audio:{const:true},secondary_tts:{const:false},original_gain_db:{const:0},sample_rate:{const:48000},channels:{const:2},
   caption_style:{enum:['standard','bold','minimal','karaoke']},font:resource,character:characterSchema,character_admission_hash:digest,
   rights:{type:'array',minItems:2,maxItems:3,items:rightSchema},music:{anyOf:[{type:'null'},exact({binding:resource,gain_db:{type:'number',minimum:-36,maximum:-6},
     linear_gain:{type:'number',exclusiveMinimum:0,maximum:1},ducking:{type:'boolean'},loop_to_timeline:{type:'boolean'}})]},
   asr:exact({contract:{type:'object'},contract_hash:digest,input_strategy:{const:'ASSEMBLED_NATIVE_TRACK'},max_calls:{const:1},seconds:integer(1,120)}),
   processing_policy:{const:NATIVE_AUDIO_POLICY},ducking_policy_hash:digest,
-  cost:exact({asr_ceiling_micro:integer(1,1_000_000_000),license_allocation_micro:integer(0,3_000_000_000),ceiling_micro:integer(1,4_000_000_000)})}));
+  cost:exact({asr_ceiling_micro:integer(1,1_000_000_000),license_allocation_micro:integer(0,3_000_000_000),ceiling_micro:integer(1,4_000_000_000)})});
+Object.assign(audioSchema.properties,{repair:exact({version:{const:'YPCC-NATIVE-REPAIR-1'},additional_asr_calls:{const:1},
+  asr_ceiling_micro:integer(1,1_000_000_000),additional_listening_packets:{const:1},listening_ceiling_micro:integer(1,1_000_000_000),
+  ceiling_micro:integer(2,2_000_000_000)})});
+const validAudio=ajv.compile<NativeAudioContract>(audioSchema);
 
 function sourcePolicy(contract:FrozenContract){
   const s=contract.source,c=s.creative_components;
@@ -110,6 +116,12 @@ export function frozenNativeAudio(contract:FrozenContract):NativeAudioContract|u
       &&components.bgm_duck===m.ducking&&(components.music_loop_to_timeline??false)===m.loop_to_timeline,'AUDIO_MUSIC_CHANGED','配乐、音量、压低或循环不得临时替换',503);
   }else requireThat(!components.music_asset_version,'AUDIO_MUSIC_CHANGED','选定的配乐不能降为无声',503);
   const allocations=audio.rights.reduce((sum,r)=>sum+BigInt(r.allocation_micro),0n),total=allocations+BigInt(asr.rate.ceiling_micro);
+  if(audio.repair){const r=audio.repair,listening=contract.listening_contract;
+    requireThat(listening?.max_packets===2&&r.asr_ceiling_micro===asr.rate.ceiling_micro
+      &&r.listening_ceiling_micro===listening.per_request_ceiling_micro
+      &&r.ceiling_micro===r.asr_ceiling_micro+r.listening_ceiling_micro&&r.ceiling_micro<=contract.repair_ceiling_micro,
+      'NATIVE_REPAIR_CONTRACT_INVALID','有声修复必须在原声音合同和修复额度内预留一次转写及第二个整包听音',503);
+  }
   requireThat(BigInt(audio.cost.license_allocation_micro)===allocations&&audio.cost.asr_ceiling_micro===asr.rate.ceiling_micro
     &&BigInt(audio.cost.ceiling_micro)===total&&total<=BigInt(contract.budget_micro),'AUDIO_BUDGET_INVALID','声音与许可费用未纳入原总预算',503);return audio;
 }
@@ -165,7 +177,14 @@ export async function freezeNativeAudio(db:Db,cfg:Config,contract:FrozenContract
     caption_style:c.caption_preset as NativeAudioContract['caption_style'],font:{...FONT_BINDING},character,character_admission_hash:hash(character),rights,music,
     asr:{contract:structuredClone(asr),contract_hash:hash(asr),input_strategy:'ASSEMBLED_NATIVE_TRACK',max_calls:1,seconds:Math.ceil(contract.creative.target_frames/30)},
     processing_policy:NATIVE_AUDIO_POLICY,ducking_policy_hash:hash(DUCKING_POLICY),cost:{asr_ceiling_micro:asr.rate.ceiling_micro,license_allocation_micro:allocation,ceiling_micro:allocation+asr.rate.ceiling_micro}};
-  frozenNativeAudio(contract);freezeOrderListening(cfg,contract,models);await verifyResourceLicenses(db,contract.resource_versions,true);
+  frozenNativeAudio(contract);freezeOrderListening(cfg,contract,models);
+  // Only the quote compiler can add this allowance, before the order and its
+  // immutable snapshot exist. Historical one-ASR contracts remain unchanged.
+  const listening=contract.listening_contract,repairCeiling=asr.rate.ceiling_micro+(listening?.per_request_ceiling_micro??0);
+  if(listening&&contract.repair_ceiling_micro>=repairCeiling)contract.native_audio_contract.repair={version:'YPCC-NATIVE-REPAIR-1',
+    additional_asr_calls:1,asr_ceiling_micro:asr.rate.ceiling_micro,additional_listening_packets:1,
+    listening_ceiling_micro:listening.per_request_ceiling_micro,ceiling_micro:repairCeiling};
+  frozenNativeAudio(contract);await verifyResourceLicenses(db,contract.resource_versions,true);
 }
 export async function verifyNativeAudioLive(db:Db,contract:FrozenContract,lock=false):Promise<void>{
   const audio=frozenNativeAudio(contract);if(!audio)return;

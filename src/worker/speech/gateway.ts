@@ -198,8 +198,23 @@ export class SpeechGateway {
       await db.query('SELECT pg_advisory_xact_lock(hashtextextended($1,0))',[`speech-order:${lease.tenant_id}:${lease.scope_id}`]);
       const prior=(await db.query<{id:string}>('SELECT id FROM provider_submissions WHERE intent_key=$1',[intent])).rows[0];if(prior)return {id:prior.id,created:false};
       if(audio){
-        requireThat(((await db.query(`SELECT id FROM provider_submissions WHERE tenant_id=$1 AND order_id=$2 AND generation_kind='ASR'`,
-          [lease.tenant_id,lease.scope_id])).rowCount??0)<audio.asr.max_calls,'ASR_ORIGINAL_CALL_LIMIT','原订单已创建整轨转写，只能恢复原任务',409);
+        const calls=(await db.query<{attempt:number;state:string;budget_state:string;audio_hash:string;billing_valid:string;terminal:string}>(
+          `SELECT s.attempt,p.state,b.state AS budget_state,p.private->>'audio_contract_hash' AS audio_hash,
+          p.private->>'billing_valid' AS billing_valid,p.private->>'provider_terminal' AS terminal
+          FROM provider_submissions p JOIN stage_runs s ON s.tenant_id=p.tenant_id AND s.id=p.stage_run_id
+          JOIN budget_reservations b ON b.tenant_id=p.tenant_id AND b.id=p.reservation_id AND b.order_id=p.order_id
+          WHERE p.tenant_id=$1 AND p.order_id=$2 AND p.generation_kind='ASR'`,[lease.tenant_id,lease.scope_id])).rows;
+        requireThat(calls.length<audio.asr.max_calls+(current.repair?(audio.repair?.additional_asr_calls??0):0)
+          &&calls.every(p=>p.attempt===1)&&(!current.repair||audio.repair&&calls.length===1&&calls.every(p=>p.state==='SUCCEEDED'
+            &&p.budget_state==='SETTLED'&&p.billing_valid==='true'&&p.terminal==='true'&&p.audio_hash===hash(audio))),
+          'ASR_ORIGINAL_CALL_LIMIT','原整轨转写只能原键恢复；新修复转写须有原冻结额度和首轮已结算回执',409);
+        if(current.repair)requireThat((await db.query(`SELECT w.id FROM private_object_writes w
+          JOIN artifacts a ON a.tenant_id=w.tenant_id AND a.order_id=w.order_id AND a.object_key=w.object_key AND a.sha256=w.sha256
+          JOIN media_operations m ON m.tenant_id=a.tenant_id AND m.id=a.media_operation_id AND m.phase='PRODUCTION' AND m.state='READY'
+          JOIN stage_runs s ON s.tenant_id=m.tenant_id AND s.id=m.stage_run_id AND s.attempt=2 AND s.state='SUCCEEDED'
+          WHERE w.tenant_id=$1 AND w.order_id=$2 AND w.id=$3 AND a.spec_json->>'kind'='video'
+          AND s.id=ANY($4::text[]) AND s.input_hash=$5`,[lease.tenant_id,lease.scope_id,sourceWriteId,current.repair.stage_ids,lease.input_hash])).rowCount!>0,
+          'ASR_REPAIR_SOURCE_INVALID','修复转写只能读取本轮已完成制作阶段的完整视频',409);
         await allocateNativeAudioRights(db,lease.tenant_id,lease.scope_id,current.contract);
       }
       requireThat((await db.query(`SELECT id FROM provider_model_versions WHERE id=$1 AND status='ADMITTED' AND data->>'capability_hash'=$2
@@ -207,7 +222,8 @@ export class SpeechGateway {
       const reservation=await reserveStageCost(db,lease,intent,c.rate.ceiling_micro,{contract_hash:hash(c),rate_snapshot_id:c.rate_snapshot_id,rate:c.rate},{kind:'ASR'});
       const submissionId=id('speech'),prefix=`${lease.tenant_id}/speech/${lease.scope_id}/${submissionId}`,wavKey=`${prefix}/source.wav`;
       const url=this.store.signedReadUrl!(wavKey,new Date(Math.min(lease.deadline_at.getTime(),Date.now()+7200000))),body=speechRequest(c,url);
-      await insert(db,'provider_submissions',{id:submissionId,tenant_id:lease.tenant_id,order_id:lease.scope_id,stage_run_id:lease.id,generation_kind:'ASR',model_version_id:c.model_version_id,
+      await insert(db,'provider_submissions',{id:submissionId,tenant_id:lease.tenant_id,order_id:lease.scope_id,stage_run_id:lease.id,generation_kind:'ASR',
+        ...(audio?{native_asr_attempt:current.repair?2:1}:{}),model_version_id:c.model_version_id,
         operation_key:operation,intent_key:intent,input_hash:hash({contract:hash(c),source:prepared.source,deadline_at:context.snapshot.deadline_at}),state:'SUBMITTING',reservation_id:reservation,
         data:{submission_id:submissionId,state:'SUBMITTING',kind:'ASR'},private:{owner_id:context.ownerId,product_id:context.snapshot.product_id,wire_contract:c,contract_hash:hash(c),...(audio?{audio_contract_hash:hash(audio)}:{}),
           request_key:`${prefix}/request.json`,request_sha256:sha256(body),prepared:{source:prepared.source,url,wav_key:wavKey,deadline_at:context.snapshot.deadline_at},

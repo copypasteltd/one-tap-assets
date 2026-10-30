@@ -1,3 +1,7 @@
+# 核验来源与历史记录
+
+当前来源：[有声候选修复](native-repair-source.json)、[测试快照](native-repair-tested-source.json)、[4单元](native-repair-unit.json)、[4数据库回归](native-repair-db.json)、[2原生整链](native-repair-api.json)、[3次尝试与原失败](native-repair-attempts.json)。418/42/4，`f159bc5f`；类型/server/preview/原生启动PASS，全面测试/小程序重编/浏览器复录NOT_RUN。下列“当前”仅对应各自历史来源，不自动升级为本轮证据。
+
 当前来源：[生成式无声售后](generated-aftercare-source.json)。414源码/42契约/4资源，`bc638bc4`；15单元、4原生用例、类型/server/preview/自检/启动PASS，9旧用例未选。85历史媒体与C25/归档保持，未复录浏览器；首次类型诊断仅有报告记录，未伪造源码快照。未跑全面测试、未重编小程序，真实服务和真机未验。
 
 当前依据：[有声售后源码](native-aftercare-source.json)、[测试快照](native-aftercare-tested-source.json)、[19单元](native-aftercare-unit.json)、[2原生集成](native-aftercare-api.json)及[首次失败](native-aftercare-initial-attempt.json)。416/42/4，`b9954b76`；本轮未跑全面测试、未调用浏览器。

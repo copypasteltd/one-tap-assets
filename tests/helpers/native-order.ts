@@ -15,7 +15,7 @@ import {syntheticListeningContract} from './listening.js';
 
 /** A complete private ORDER input, with synthetic authorization/model/price
  * registrations. This never changes public sales or real-provider admission. */
-export async function nativeOrderFixture(db:TestDatabase,root:string,options:{engine:'PER_SHOT_AI'|'REFERENCE_FILM';music?:Buffer;style?:'standard'|'bold'|'minimal'|'karaoke';listening?:boolean;revisions?:boolean}={engine:'PER_SHOT_AI'}){
+export async function nativeOrderFixture(db:TestDatabase,root:string,options:{engine:'PER_SHOT_AI'|'REFERENCE_FILM';music?:Buffer;style?:'standard'|'bold'|'minimal'|'karaoke';listening?:boolean;revisions?:boolean;repair?:boolean}={engine:'PER_SHOT_AI'}){
   if(db.cfg.env!=='test')throw new Error('Native order fixture requires APP_ENV=test');
   const directory=inside(db.cfg.runtimeRoot,root);await mkdir(directory,{recursive:true});
   const image=syntheticArkContract('IMAGE'),video=syntheticArkContract('VIDEO'),speech=syntheticSpeechContract(2);
@@ -56,6 +56,9 @@ export async function nativeOrderFixture(db:TestDatabase,root:string,options:{en
       // Synthetic full audio material has a larger original, pre-sale context
       // ceiling. This never refills a sold order or certifies a real model.
       if(listening){c.codex_contract.max_input_tokens=600000;c.runtime_binding!.limits.max_input_tokens=600000;}
+      // Frozen before the synthetic sale, never an update of a running order.
+      if(options.repair){c.repair_ceiling_micro=1000000;c.codex_contract.max_turns_per_role=4;c.codex_contract.max_tool_calls=40;
+        c.runtime_binding!.limits.max_requests=16;c.runtime_binding!.limits.max_requests_per_role=4;}
       if(listening){const binding={provider:listening.provider,actual_model:listening.actual_model,registry_version:listening.registry_version,
         roles:['QC' as const],capability_hash:hash(listening),rate_snapshot_id:listening.rate_snapshot_id};
         c.model_versions.push(binding);

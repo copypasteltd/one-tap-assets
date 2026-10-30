@@ -33,7 +33,9 @@ interface Receipt {version:'YPCC-LISTENING-RECEIPT-1';submission_id:string;reque
 export class NativeListeningReader {
   constructor(protected database:Db,protected cfg:Config,protected store:ObjectStorage){}
   protected async packetAuthorization(_db:Db,_context:ExecutionContext,packet:import('../../shared/contracts/types.js').DTO<'ReviewPacket'>):Promise<void>{
-    requireThat(['SEALED','REVIEWING','PASSED'].includes(packet.state)&&packet.publication_decision==='PENDING',
+    const failedOpinion=packet.state==='FAILED'&&packet.publication_decision==='BLOCK'&&packet.reports.length>=1&&packet.reports.length<=2
+      &&packet.reports[0]?.role==='REVIEW_FACTS'&&packet.reports.every(r=>r.evidence_complete&&r.verdict!=='INSUFFICIENT_EVIDENCE');
+    requireThat(['SEALED','REVIEWING','PASSED'].includes(packet.state)&&packet.publication_decision==='PENDING'||failedOpinion,
       'LISTENING_PACKET_INVALID','听音需要当前封存且未阻断的完整审查包',409);
   }
   protected async deadlineAuthorization(_db:Db,context:ExecutionContext):Promise<void>{
@@ -154,14 +156,18 @@ export function readNativeListening(db:Db,cfg:Config,store:ObjectStorage,context
 /** Platform preparation. Codex roles receive only read-only evidence tools. */
 export class NativeListeningGateway extends NativeListeningReader {
   constructor(private pool:pg.Pool,cfg:Config,store:ObjectStorage,private client=new ListeningClient(cfg)){super(pool,cfg,store);}
+  protected override async packetAuthorization(_db:Db,_context:ExecutionContext,packet:import('../../shared/contracts/types.js').DTO<'ReviewPacket'>):Promise<void>{
+    requireThat(['SEALED','REVIEWING','PASSED'].includes(packet.state)&&packet.publication_decision==='PENDING',
+      'LISTENING_PACKET_INVALID','付费听音只能准备当前未阻断的完整封存包',409);
+  }
   private scope(r:ListeningRow):PrivateObjectScope{return {tenantId:r.tenant_id,ownerId:r.private.owner_id,productId:r.private.product_id,orderId:r.order_id,kind:'RECEIPT'};}
   private async prepared(lease:StageLease):Promise<{context:ExecutionContext;c:ListeningContract;prepared:PreparedListening}>{
     requireThat(lease.scope_type==='ORDER'&&lease.stage_name==='REVIEW_FACTS','LISTENING_SCOPE_INVALID','听音仅能为原订单最终事实复核准备',403);
-    const context=await executionContext(this.pool,lease.tenant_id,lease.scope_id,lease.input_hash);
+    const context=await executionContext(this.pool,lease.tenant_id,lease.scope_id,lease.input_hash,lease.id);
     return {context,...await this.compiled(this.pool,context)};
   }
   private async authorize(db:Db,lease:StageLease,expected:PreparedListening['summary']):Promise<ExecutionContext>{
-    const context=await executionContext(db,lease.tenant_id,lease.scope_id,lease.input_hash);
+    const context=await executionContext(db,lease.tenant_id,lease.scope_id,lease.input_hash,lease.id);
     await lockMediaOwner(db,context.tenantId,context.ownerId);await assertLease(db,lease);
     const c=await verifyListeningLive(db,this.cfg,context.contract,true),packet=await currentReviewPacket(db,context);
     requireThat(hash(c)===expected.contract_hash&&packet.packet_hash===expected.packet_hash&&packet.output_set_hash===expected.output_set_hash

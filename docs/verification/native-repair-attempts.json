@@ -1,0 +1,203 @@
+{
+  "checked_at": "2026-10-30T02:22:32.944565+00:00",
+  "attempts": [
+    {
+      "base": "runtime/test-results/native-repair-2026-10-30T02-06-36-405Z",
+      "build_id": "2026-10-30T02-05-34-357Z-9719ca7f",
+      "source_set_hash": "1e3958b3c02a217eb03885817d769040c2ad6ab974da0ed491534e6df36a019b",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.config.ts tests/unit/native-review-audio.test.ts --outputFile.json=runtime/test-results/native-repair-2026-10-30T02-06-36-405Z/unit.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.config.ts",
+            "tests/unit/native-review-audio.test.ts",
+            "--outputFile.json=runtime/test-results/native-repair-2026-10-30T02-06-36-405Z/unit.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 90000,
+          "elapsed_ms": 2898,
+          "log_path": "runtime/test-results/native-repair-2026-10-30T02-06-36-405Z/unit.log",
+          "log_sha256": "401026a92af6e82e0d295ac6fcaa527824d61588365fe2e1489497a6d7153bea"
+        },
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/native-order.test.ts -t repairs a native --outputFile.json=runtime/test-results/native-repair-2026-10-30T02-06-36-405Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/native-order.test.ts",
+            "-t",
+            "repairs a native",
+            "--outputFile.json=runtime/test-results/native-repair-2026-10-30T02-06-36-405Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 540000,
+          "elapsed_ms": 11990,
+          "log_path": "runtime/test-results/native-repair-2026-10-30T02-06-36-405Z/api.log",
+          "log_sha256": "e0667e44ea5e1802260f9b3d7fa901934b111d0c0f4ddecd154cb751ef76958e"
+        }
+      ],
+      "source_report": "docs/verification/native-repair-attempt-1-source.json",
+      "build_report": "docs/verification/native-repair-attempt-1-build.json",
+      "reports": {
+        "unit": "docs/verification/native-repair-attempt-1-unit.json",
+        "api": "docs/verification/native-repair-attempt-1-api.json"
+      }
+    },
+    {
+      "base": "runtime/test-results/native-repair-2026-10-30T02-08-02-044Z",
+      "build_id": "2026-10-30T02-07-28-201Z-95cb2645",
+      "source_set_hash": "2e011bc50e269282a08c9b8ffc91a22fa42e8b66b8f4cc18cd963af2489938e5",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.config.ts tests/unit/native-review-audio.test.ts --outputFile.json=runtime/test-results/native-repair-2026-10-30T02-08-02-044Z/unit.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.config.ts",
+            "tests/unit/native-review-audio.test.ts",
+            "--outputFile.json=runtime/test-results/native-repair-2026-10-30T02-08-02-044Z/unit.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 90000,
+          "elapsed_ms": 1379,
+          "log_path": "runtime/test-results/native-repair-2026-10-30T02-08-02-044Z/unit.log",
+          "log_sha256": "966ac0f5e256da473c2aef71e70e4b340c06a8106ee2b4904ed2d0e814cb646e"
+        },
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/native-order.test.ts -t repairs a native --outputFile.json=runtime/test-results/native-repair-2026-10-30T02-08-02-044Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/native-order.test.ts",
+            "-t",
+            "repairs a native",
+            "--outputFile.json=runtime/test-results/native-repair-2026-10-30T02-08-02-044Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 540000,
+          "elapsed_ms": 87379,
+          "log_path": "runtime/test-results/native-repair-2026-10-30T02-08-02-044Z/api.log",
+          "log_sha256": "14f9fb945e6c1aa9e425580ba598e8b03102f88e2ee5d57ff3c1c7094d50317e"
+        }
+      ],
+      "source_report": "docs/verification/native-repair-attempt-2-source.json",
+      "build_report": "docs/verification/native-repair-attempt-2-build.json",
+      "reports": {
+        "unit": "docs/verification/native-repair-attempt-2-unit.json",
+        "api": "docs/verification/native-repair-attempt-2-api.json"
+      }
+    },
+    {
+      "base": "runtime/test-results/native-repair-2026-10-30T02-14-15-063Z",
+      "build_id": "2026-10-30T02-13-49-020Z-71e33019",
+      "source_set_hash": "f159bc5f7bd4124745f050e04e16f72bc31a6f1ce46387b48e47eabcd326130a",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.config.ts tests/unit/native-review-audio.test.ts --outputFile.json=runtime/test-results/native-repair-2026-10-30T02-14-15-063Z/unit.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.config.ts",
+            "tests/unit/native-review-audio.test.ts",
+            "--outputFile.json=runtime/test-results/native-repair-2026-10-30T02-14-15-063Z/unit.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 90000,
+          "elapsed_ms": 1920,
+          "log_path": "runtime/test-results/native-repair-2026-10-30T02-14-15-063Z/unit.log",
+          "log_sha256": "4f9b7185563dcc05b9f8bc6486e7deea03eebc66dec222eab145a9964d1e9940"
+        },
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/native-repair-migration.test.ts tests/integration/audio-contract.test.ts -t upgrades the original native ASR|does not acquire a second full-track ASR|unknown original ACK|resumes the same successful ASR --outputFile.json=runtime/test-results/native-repair-2026-10-30T02-14-15-063Z/db.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/native-repair-migration.test.ts",
+            "tests/integration/audio-contract.test.ts",
+            "-t",
+            "upgrades the original native ASR|does not acquire a second full-track ASR|unknown original ACK|resumes the same successful ASR",
+            "--outputFile.json=runtime/test-results/native-repair-2026-10-30T02-14-15-063Z/db.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 90000,
+          "elapsed_ms": 8552,
+          "log_path": "runtime/test-results/native-repair-2026-10-30T02-14-15-063Z/db.log",
+          "log_sha256": "2bf91b6fd3d980cd995ef7e1ca61b448bf84963a3d9ce4e536e9d15e928f500f"
+        },
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/native-order.test.ts -t repairs a native --outputFile.json=runtime/test-results/native-repair-2026-10-30T02-14-15-063Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/native-order.test.ts",
+            "-t",
+            "repairs a native",
+            "--outputFile.json=runtime/test-results/native-repair-2026-10-30T02-14-15-063Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 540000,
+          "elapsed_ms": 249995,
+          "log_path": "runtime/test-results/native-repair-2026-10-30T02-14-15-063Z/api.log",
+          "log_sha256": "7557aedb699ed9f61d449cd47be3bdfbb08fe0518541168fc9051c43bf90c986"
+        }
+      ],
+      "source_report": "docs/verification/native-repair-attempt-3-source.json",
+      "build_report": "docs/verification/native-repair-attempt-3-build.json",
+      "reports": {
+        "unit": "docs/verification/native-repair-attempt-3-unit.json",
+        "db": "docs/verification/native-repair-attempt-3-db.json",
+        "api": "docs/verification/native-repair-attempt-3-api.json"
+      }
+    }
+  ],
+  "failures_preserved": 2,
+  "notes": [
+    "Attempt 1 fixture expected 200 but frozen ASR plus listening correctly totals 300; assertion now derives from the sold rates.",
+    "Attempt 2 reached the repair POST and was blocked by the original one-ASR unique index (23505), before a second ASR purchase; migration 028 adds a pre-sale-bound attempt gate.",
+    "Attempt 3 passes the named checks. Other cases and the comprehensive suite were not run."
+  ]
+}

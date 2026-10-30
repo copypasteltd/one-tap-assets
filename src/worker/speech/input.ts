@@ -50,7 +50,8 @@ export async function speechContext(db:Db,lease:StageLease):Promise<ExecutionCon
   requireThat((await db.query(`SELECT id FROM stage_runs WHERE tenant_id=$1 AND id=$2 AND scope_type='ORDER' AND scope_id=$3
     AND stage_name='POST' AND input_hash=$4 AND deadline_at=$5`,[lease.tenant_id,lease.id,lease.scope_id,lease.input_hash,lease.deadline_at])).rowCount===1,
     'ASR_SCOPE_INVALID','转写租约与原订单、输入或截止不一致',403);
-  const context=await executionContext(db,lease.tenant_id,lease.scope_id,lease.input_hash);
+  const context=await executionContext(db,lease.tenant_id,lease.scope_id,lease.input_hash,lease.id);
+  if(context.repair)requireThat(frozenNativeAudio(context.contract)?.repair,'ASR_REPAIR_NOT_FROZEN','原订单未预留有声修复转写',409);
   requireThat(context.snapshot.deadline_at===lease.deadline_at.toISOString(),'ASR_SCOPE_INVALID','转写不能延长原订单截止',403);return context;
 }
 export function boundSpeechContract(context:ExecutionContext):SpeechContract {

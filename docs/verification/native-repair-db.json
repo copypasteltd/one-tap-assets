@@ -1,0 +1,339 @@
+{
+  "numTotalTestSuites": 3,
+  "numPassedTestSuites": 3,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 24,
+  "numPassedTests": 4,
+  "numFailedTests": 0,
+  "numPendingTests": 20,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793326457852,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) freezes PER_SHOT_AI original voice/character, full-track ASR and explicit no-bed policy",
+          "status": "skipped",
+          "title": "freezes PER_SHOT_AI original voice/character, full-track ASR and explicit no-bed policy",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) freezes REFERENCE_FILM original voice/character, full-track ASR and explicit no-bed policy",
+          "status": "skipped",
+          "title": "freezes REFERENCE_FILM original voice/character, full-track ASR and explicit no-bed policy",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) freezes standard captions and licensed music gain/duck/loop",
+          "status": "skipped",
+          "title": "freezes standard captions and licensed music gain/duck/loop",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) freezes bold captions and licensed music gain/duck/loop",
+          "status": "skipped",
+          "title": "freezes bold captions and licensed music gain/duck/loop",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) freezes minimal captions and licensed music gain/duck/loop",
+          "status": "skipped",
+          "title": "freezes minimal captions and licensed music gain/duck/loop",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) freezes karaoke captions and licensed music gain/duck/loop",
+          "status": "skipped",
+          "title": "freezes karaoke captions and licensed music gain/duck/loop",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) rejects changing frozen caption, voice, cost or selected background without a new contract",
+          "status": "skipped",
+          "title": "rejects changing frozen caption, voice, cost or selected background without a new contract",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) requires full license text and its exact digest before compiling selected music",
+          "status": "skipped",
+          "title": "requires full license text and its exact digest before compiling selected music",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) rejects unknown caption style, secondary TTS and unbound font",
+          "status": "skipped",
+          "title": "rejects unknown caption style, secondary TTS and unbound font",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) requires the admitted exact character/voice/video model combination and unexpired proof",
+          "status": "skipped",
+          "title": "requires the admitted exact character/voice/video model combination and unexpired proof",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) refuses to silently drop selected music or action audio on a silent route",
+          "status": "skipped",
+          "title": "refuses to silently drop selected music or action audio on a silent route",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) includes ASR and all fixed license allocations inside the same generation, Agent, repair and aftercare ceiling",
+          "status": "skipped",
+          "title": "includes ASR and all fixed license allocations inside the same generation, Agent, repair and aftercare ceiling",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) settles prepaid resource allocations once across concurrent tool/resume attempts",
+          "status": "skipped",
+          "title": "settles prepaid resource allocations once across concurrent tool/resume attempts",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) records zero-cost prepaid rights explicitly without adding ASR or spending extra",
+          "status": "skipped",
+          "title": "records zero-cost prepaid rights explicitly without adding ASR or spending extra",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) protects reserved aftercare and rolls back all allocations when remaining original funds do not fit",
+          "status": "skipped",
+          "title": "protects reserved aftercare and rolls back all allocations when remaining original funds do not fit",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) immutable registrations reject altered price/evidence, deletion and admission revival",
+          "status": "skipped",
+          "title": "immutable registrations reject altered price/evidence, deletion and admission revival",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) license expiry may tighten and revocation is irreversible, including during checkpoint recovery",
+          "status": "skipped",
+          "title": "license expiry may tighten and revocation is irreversible, including during checkpoint recovery",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) acknowledges an original payment after rights revocation and requests one refund instead of opening production",
+          "status": "skipped",
+          "title": "acknowledges an original payment after rights revocation and requests one refund instead of opening production",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) does not acquire a second full-track ASR when another registered source ID is supplied concurrently",
+          "status": "passed",
+          "title": "does not acquire a second full-track ASR when another registered source ID is supplied concurrently",
+          "duration": 791.3106999999998,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) resumes the same successful ASR without charging rights or the provider twice",
+          "status": "passed",
+          "title": "resumes the same successful ASR without charging rights or the provider twice",
+          "duration": 707.6143999999999,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) unknown original ACK keeps its reservation and forbids a replacement source purchase",
+          "status": "passed",
+          "title": "unknown original ACK keeps its reservation and forbids a replacement source purchase",
+          "duration": 641.1361999999999,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) rejects a partial clip instead of treating it as the full sold audio timeline",
+          "status": "skipped",
+          "title": "rejects a partial clip instead of treating it as the full sold audio timeline",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "native audio frozen contract and original order accounting (synthetic authorizations/model)"
+          ],
+          "fullName": "native audio frozen contract and original order accounting (synthetic authorizations/model) revoking a license stops original ASR recovery and publishes no transcript",
+          "status": "skipped",
+          "title": "revoking a license stops original ASR recovery and publishes no transcript",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793326459708,
+      "endTime": 1793326461848.1362,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/audio-contract.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "upgrades the original native ASR hold from migration 27 without refilling its allowance or changing its financial facts",
+          "status": "passed",
+          "title": "upgrades the original native ASR hold from migration 27 without refilling its allowance or changing its financial facts",
+          "duration": 2786.3142,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793326462931,
+      "endTime": 1793326465717.3142,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/native-repair-migration.test.ts"
+    }
+  ]
+}

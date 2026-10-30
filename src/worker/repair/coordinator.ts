@@ -11,6 +11,7 @@ import {stopScope} from '../lifecycle/termination.js';
 import {authorizeRepairCosts} from './cost-authorization.js';
 import {repairTargets} from './targets.js';
 import {affectedGenerationNodes} from './generation.js';
+import {frozenNativeAudio} from '../audio/contract.js';
 
 /** Invoked after a review stage becomes SUCCEEDED, within that same database
  * transaction. No delivery worker can claim the old candidate between the
@@ -27,9 +28,9 @@ export class RepairCoordinator{
     if(lease.attempt!==1||packet.state!=='FAILED'||reports.some(r=>!r.evidence_complete||r.verdict==='INSUFFICIENT_EVIDENCE')){
       await stopScope(db,{tenantId:lease.tenant_id,type:'ORDER',id:lease.scope_id},'REPAIR_REVIEW_BLOCKED');return;
     }
-    // Native speech needs a newly sold additional-ASR allowance. Existing sold
-    // contracts grant one ASR call; a repair must never silently expand it.
-    if(context.snapshot.audio_policy.speech_mode!=='NONE'){
+    // An additional ASR purchase must already be frozen before sale. Never
+    // upgrade an existing one-ASR order in response to a failed candidate.
+    if(context.snapshot.audio_policy.speech_mode!=='NONE'&&!frozenNativeAudio(context.contract)?.repair){
       await stopScope(db,{tenantId:lease.tenant_id,type:'ORDER',id:lease.scope_id},'REPAIR_ROUTE_NOT_ADMITTED');return;
     }
     await db.query('SAVEPOINT prepare_candidate_repair');

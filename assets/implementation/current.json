@@ -3,11 +3,11 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-30T01:52:48.072481+00:00",
+  "checked_at": "2026-10-30T02:22:32.944565+00:00",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "verification_mode": "FOCUSED_NATIVE_AUDIO_AFTERCARE_CLOSURE",
+  "verification_mode": "FOCUSED_NATIVE_FAILED_CANDIDATE_REPAIR_CLOSURE",
   "retained_integration": null,
   "command_checks_passed": true,
   "commands": [
@@ -23,8 +23,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 9048,
-      "log_path": "runtime/delivery-builds/2026-10-30T01-46-58-103Z-bba057cc/typecheck.log",
+      "elapsed_ms": 6505,
+      "log_path": "runtime/delivery-builds/2026-10-30T02-13-49-020Z-71e33019/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -40,48 +40,55 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 541,
-      "log_path": "runtime/delivery-builds/2026-10-30T01-46-58-103Z-bba057cc/server.log",
+      "elapsed_ms": 282,
+      "log_path": "runtime/delivery-builds/2026-10-30T02-13-49-020Z-71e33019/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T01-46-58-103Z-bba057cc\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T02-13-49-020Z-71e33019\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T01-46-58-103Z-bba057cc\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T02-13-49-020Z-71e33019\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 1034,
-      "log_path": "runtime/delivery-builds/2026-10-30T01-46-58-103Z-bba057cc/preview.log",
-      "log_sha256": "5d0112f82f152435649e86c74a3bca4acefcddcbeb338566792e939474c41350"
+      "elapsed_ms": 686,
+      "log_path": "runtime/delivery-builds/2026-10-30T02-13-49-020Z-71e33019/preview.log",
+      "log_sha256": "89bf182facb9a9b22ba91276bc68dd76c96b7dadc9a589628a34687e99ab431b"
     }
   ],
   "suites": [
     {
-      "name": "revision-management-clients-and-native-evidence",
+      "name": "native-review-audio",
       "status": "PASS",
-      "passed": 19,
-      "report": "docs/verification/native-aftercare-unit.json"
+      "passed": 4,
+      "report": "docs/verification/native-repair-unit.json"
     },
     {
-      "name": "native-retained-media-aftercare",
+      "name": "native-migration-and-original-asr",
+      "status": "PASS",
+      "passed": 4,
+      "not_selected": 20,
+      "report": "docs/verification/native-repair-db.json"
+    },
+    {
+      "name": "native-candidate-repair-delivery-and-aftercare",
       "status": "PASS",
       "passed": 2,
-      "not_selected": 23,
-      "report": "docs/verification/native-aftercare-api.json"
+      "not_selected": 25,
+      "report": "docs/verification/native-repair-api.json"
     }
   ],
-  "source_files": 416,
-  "source_set_hash": "b9954b76d4a7f5bf5c218c76685f2ff7f9589ec40e25244a1fa7fd5f33ed7f37",
+  "source_files": 418,
+  "source_set_hash": "f159bc5f7bd4124745f050e04e16f72bc31a6f1ce46387b48e47eabcd326130a",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -210,6 +217,10 @@
     {
       "path": "src/api/db/migrations/027_repair_planning.sql",
       "sha256": "e3b46eaa243019105bc6bf1f0ee3533c9e73f3bfdae88b2bd6bf0a013eeff25e"
+    },
+    {
+      "path": "src/api/db/migrations/028_native_repair_asr.sql",
+      "sha256": "ff9d1a79b884edebdeaa645e0cfec4a49cf37264c3cbc76c8199b19b56442905"
     },
     {
       "path": "src/api/db/pool.ts",
@@ -745,11 +756,11 @@
     },
     {
       "path": "src/worker/audio/contract.ts",
-      "sha256": "416d36693278ecebd771cbd1549b14154eb35094bc42f99eb5f99435e9963db5"
+      "sha256": "ac9ec7098c2e80b05b308f45ed99255fb5a1df464c2832f0def6bfd24540d298"
     },
     {
       "path": "src/worker/audio/delivered-listening.ts",
-      "sha256": "cf75c2aad3d2eee0a1e0453f0ee2580dee4e0571dc6fdc155ba6303dc96ebd8b"
+      "sha256": "1658040333a39bc8162e66af74d6aec6320583b70788ed945d82a86d3ebc56ef"
     },
     {
       "path": "src/worker/audio/listening-contract.ts",
@@ -757,7 +768,7 @@
     },
     {
       "path": "src/worker/audio/listening-gateway.ts",
-      "sha256": "fb9428280c5076f34263fd0844b44154c3745517b4e8f93859a8dde77ae21794"
+      "sha256": "36d02f6b3e489f7ea9959d30d2be0deda53a104db90b96df1d4772d91aa49943"
     },
     {
       "path": "src/worker/audio/order-proof.ts",
@@ -957,7 +968,7 @@
     },
     {
       "path": "src/worker/media/native-order-pipeline.ts",
-      "sha256": "cbcb30ee7a11d8c48121adbc801df1761515e54b76836d90ade22ee1c9c2d55f"
+      "sha256": "f45d4ba89d71cffacfdfc41006459b07adcd5a98a159a9d407d3e1c269219542"
     },
     {
       "path": "src/worker/media/native.ts",
@@ -1025,7 +1036,7 @@
     },
     {
       "path": "src/worker/repair/coordinator.ts",
-      "sha256": "f207801adce512b9fd7e4ea5f86acceeee8ea47cb45ca657bd16347f2ac24171"
+      "sha256": "52b456183675fcf6f75488c96e855a3c36c70fff4cc8fcced98be0421d949336"
     },
     {
       "path": "src/worker/repair/cost-authorization.ts",
@@ -1037,7 +1048,7 @@
     },
     {
       "path": "src/worker/repair/planning.ts",
-      "sha256": "3824813e2a05dedc6bf8bd16561c9babb8809756859bd45979aadf6b3f13240b"
+      "sha256": "08b26b9ada7da127bc548db5010b5276b0acb6557eea052107b9c511d93acd42"
     },
     {
       "path": "src/worker/repair/targets.ts",
@@ -1053,7 +1064,7 @@
     },
     {
       "path": "src/worker/review/listening.ts",
-      "sha256": "363978164321cbffef8614d2e9152ac9d9e5408b4a59e4a7bb6df247d2bfa9da"
+      "sha256": "406756d1ca9c8a0ae4669c974edf172fcd1d1e664e9ab70b6d6fea3c80c7e3ce"
     },
     {
       "path": "src/worker/review/native-audio.ts",
@@ -1141,11 +1152,11 @@
     },
     {
       "path": "src/worker/speech/gateway.ts",
-      "sha256": "184c5b657049f45263947a84941391376b614bd869ee30debf489706a487bbcf"
+      "sha256": "148246416ebb5a227bac9a733593e163b2c5e475799ad668957ac22baa9d5372"
     },
     {
       "path": "src/worker/speech/input.ts",
-      "sha256": "ff2fa276bd1b12b3f68a061a28f9d930c94575a4f02f19ab2b82d2adc314d8d3"
+      "sha256": "7ad15571eb277c55ac4195e371d3a6cc3ac2cb36fc7b1a6f187a3bdd30bcc62d"
     },
     {
       "path": "src/worker/tool-gateway/consumer.ts",
@@ -1237,7 +1248,7 @@
     },
     {
       "path": "tests/helpers/native-order.ts",
-      "sha256": "4453ce86434020207724bd1611e561dfaa7f079ca3523cf858ce3734ff17025f"
+      "sha256": "b74da8eb1434c8d27b8350099dcecd2f46e5363b710bc79500e1cedef939a442"
     },
     {
       "path": "tests/helpers/reference.ts",
@@ -1349,7 +1360,11 @@
     },
     {
       "path": "tests/integration/native-order.test.ts",
-      "sha256": "9430cf67cc29078934159a5dbf675b31aac8e4131a69bfbc76e5f2088140e7d4"
+      "sha256": "51a9e9705dae3b2feb3c0b8d2a39647da1d9e36e791a5dec7c80e40de53395eb"
+    },
+    {
+      "path": "tests/integration/native-repair-migration.test.ts",
+      "sha256": "9910823376bb9a01db791d71b9780ead882dc0afeb1b019e973e9516c6d336cd"
     },
     {
       "path": "tests/integration/optional-preview.test.ts",
@@ -2095,10 +2110,12 @@
     "all_generated_routes_verified": false,
     "native_audio_verified": false,
     "real_provider_call_verified": false,
-    "notes": "Historical generation baseline (earlier source-bound counts follow): Both silent generated routes now execute platform-derived references, a released independent identity review, one PRODUCTION role and bounded render_generated_pack, actual generated image/video assembly, explicit POST, route-specific QC, fresh final facts/style reviews and atomic delivery. Reference and final facts runs share the original two-turn facts bucket; five paid roles and twelve tool calls must fit the sold limits. Same-generation role uniqueness, original budget and deadline remain unchanged. Generated source/approval hashes and actual stored bytes are revalidated through post, QC and publication, including inside the publication transaction. Seven complete-pack/rejection/recovery fixtures join the 35 gateway, 6 MCP and 15 reference cases, using native PostgreSQL, actual PNG/MP4, HTTPS and stdio/MCP with synthetic model, usage and isolation. Actual source clip colors and order are checked after final download; no still-animation substitution. Official audio variants, real semantic quality/provider admission, generated SAMPLE/revisions and full variant benchmarks remain incomplete. Later retained-media silent/native aftercare is connected; see aftercare_source. Image/caption/audio rewriting and native failed-production repair remain incomplete.",
+    "notes": "Historical generation baseline (earlier source-bound counts follow): Both silent generated routes now execute platform-derived references, a released independent identity review, one PRODUCTION role and bounded render_generated_pack, actual generated image/video assembly, explicit POST, route-specific QC, fresh final facts/style reviews and atomic delivery. Reference and final facts runs share the original two-turn facts bucket; five paid roles and twelve tool calls must fit the sold limits. Same-generation role uniqueness, original budget and deadline remain unchanged. Generated source/approval hashes and actual stored bytes are revalidated through post, QC and publication, including inside the publication transaction. Seven complete-pack/rejection/recovery fixtures join the 35 gateway, 6 MCP and 15 reference cases, using native PostgreSQL, actual PNG/MP4, HTTPS and stdio/MCP with synthetic model, usage and isolation. Actual source clip colors and order are checked after final download; no still-animation substitution. Official audio variants, real semantic quality/provider admission, generated SAMPLE/revisions and full variant benchmarks remain incomplete. Later retained-media silent/native aftercare is connected; see aftercare_source. Native failed-candidate repair is now connected only with a pre-sale optional ASR/listening repair allowance; see native_failed_candidate_repair_source. Image/caption/audio rewriting remains incomplete.",
     "existing_media_aftercare_connected": true,
     "native_audio_aftercare_connected": true,
-    "aftercare_source": "docs/verification/native-aftercare-source.json"
+    "aftercare_source": "docs/verification/native-aftercare-source.json",
+    "native_failed_candidate_repair_connected": true,
+    "native_failed_candidate_repair_source": "docs/verification/native-repair-source.json"
   },
   "native_audio_kernel": {
     "implemented": true,
@@ -2277,7 +2294,7 @@
   },
   "not_verified": [
     "Real end-to-end product execution and production admission of every registered stage; a complete handler registry is not production readiness",
-    "Generated/audio/custom-resource creator samples, production community SkillBundle admission, image/caption/audio rewriting, native failed-production repair and device aftercare UI verification, Plus and complete management assignment/history; public sample lifecycle has native/fixture coverage but no production admission",
+    "Generated/audio/custom-resource creator samples, production community SkillBundle admission, image/caption/audio rewriting, device aftercare UI verification, Plus and complete management assignment/history; public sample lifecycle has native/fixture coverage but no production admission",
     "Native host login/upload/payment/album behavior and visual review on actual devices",
     "Real Codex/model/payment calls",
     "Operator native restricted-identity launcher executable, actual OS isolation and certified inference hard limits",
@@ -2534,6 +2551,29 @@
     "in_video_caption_or_audio_editing": false,
     "full_requirement_verified": false,
     "source": "docs/verification/native-aftercare-source.json",
-    "live_external_or_production_verified": false
+    "live_external_or_production_verified": false,
+    "post_repair_published_pack_connected": true,
+    "post_repair_cover_source": "docs/verification/native-repair-source.json"
+  },
+  "native_failed_candidate_repair": {
+    "implemented": true,
+    "engines": [
+      "PER_SHOT_AI",
+      "REFERENCE_FILM"
+    ],
+    "optional_pre_sale_frozen_allowance_required": true,
+    "first_pass_asr_max_calls": 1,
+    "additional_repair_asr_calls": 1,
+    "max_repair_rounds": 1,
+    "existing_repair_reserve_only": true,
+    "sold_contract_upgrade_allowed": false,
+    "scoped_content_and_new_six_candidate_stages": true,
+    "original_dialogue_identity_timing_and_voice_fixed": true,
+    "new_media_asr_listening_and_independent_reviews_required": true,
+    "migration": 28,
+    "post_repair_cover_aftercare_verified_with_synthetic_native_fixture": true,
+    "source": "docs/verification/native-repair-source.json",
+    "live_external_or_production_verified": false,
+    "full_requirement_verified": false
   }
 }

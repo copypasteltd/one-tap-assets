@@ -102,7 +102,7 @@ export class NativeOrderMediaPipeline extends GeneratedMediaPipeline {
       'LEASE_LOST','后期原租约已被接管或不属于原冻结合同',409);await assertLease(this.pool,row);return row;
   }
   async transcribe(scope:ToolScope,artifactId:string|undefined,signal:AbortSignal){
-    const lease=await this.lease(scope),context=await executionContext(this.pool,scope.tenant_id,scope.order_id!,scope.snapshot_hash);
+    const lease=await this.lease(scope),context=await executionContext(this.pool,scope.tenant_id,scope.order_id!,scope.snapshot_hash,scope.stage_run_id);
     this.assertRoute(context);const source=await this.productionSource(this.pool,context,artifactId);
     const directory=inside(this.cfg.runtimeRoot,`native-asr-inspect/${id('inspect')}`);await mkdir(directory,{recursive:true});
     try{
@@ -186,7 +186,7 @@ export class NativeOrderMediaPipeline extends GeneratedMediaPipeline {
   override async execute(scope:ToolScope,intent:ToolLease,phase:'PRODUCTION'|'POST',signal:AbortSignal){
     const output=await super.execute(scope,intent,phase,signal);
     return {...output,commit:async(db:pg.PoolClient)=>{
-      const context=await executionContext(db,scope.tenant_id,scope.order_id!,scope.snapshot_hash);await this.verifyBindings(db,context,output.receipt,true);await output.commit(db);
+      const context=await executionContext(db,scope.tenant_id,scope.order_id!,scope.snapshot_hash,scope.stage_run_id);await this.verifyBindings(db,context,output.receipt,true);await output.commit(db);
     }};
   }
 }

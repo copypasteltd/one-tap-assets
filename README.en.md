@@ -2,7 +2,7 @@
 
 [English](README.en.md) · [中文](README.md) · [Documentation](docs/README.md) · [Quick start](docs/guides/QUICKSTART.en.md) · [Implementation status](docs/guides/STATUS.md) · [Changelog](CHANGELOG.md)
 
-New: [native audio aftercare](docs/实施/有声素材售后与原听音复核-v1.0.md) supports existing cover, complete-list display order and companion copy on both generated routes while keeping every original image/video/audio byte. Fresh independent roles bind full original listening, transcript, costs and rights. Nineteen unit cases and two native integration cases pass; budgets, limits, deadlines and UNKNOWN recovery remain frozen.
+This delivery closes [failed native-candidate repair](docs/实施/有声候选修复与原冻结转写额度-v1.0.md) on both generated routes: a pre-sale optional ASR/listening allowance permits one scoped repair with fresh media, QC, listening and independent reviews, then existing cover aftercare. Historical orders gain no allowance; budgets and deadlines stay fixed. Four unit, four database/original-ASR and two native flow cases pass; no comprehensive suite was required.
 
 **Photograph a product, choose a preset, receive a coordinated asset pack.** One Tap Assets is a recoverable cloud production service designed primarily for **Alipay and Douyin mini-programs**. It covers product recognition, content planning, image/video production, post-production, review and asset retrieval. The planned **Plus web application** serves advanced editing and deeper production and remains P1 work.
 
@@ -10,7 +10,7 @@ This repository is under active development: requirements **v3.1**, development 
 
 Quick delivery: see the [handover and startup guide](docs/delivery/README.md). Run `.\scripts\setup-local.ps1`, then `doctor`, `local:start` or `preview:serve`. `delivery:build --smoke` runs bounded builds and focused smoke checks; `delivery:package` creates a ZIP with source and successful outputs. A fully green comprehensive suite is not a packaging prerequisite.
 
-Current candidate: type/server/preview/doctor/startup PASS; 19 unit cases and 2 native audio aftercare cases pass, 23 existing cases not selected. Bound: 416 source files / 42 contracts / 4 resources, `b9954b76`. Full suite and final mini builds NOT_RUN; all 85 historical media files and frozen C design remain. See [delivery](docs/delivery/current.json) and [provenance](docs/verification/native-aftercare-source.json).
+Current candidate: type/server/preview/doctor/startup PASS; 4 unit, 4 database regressions and 2 native repair flows pass, with 20/25 existing cases not selected. Bound: 418 source files / 42 contracts / 4 resources, `f159bc5f`, migration 28. Full suite, mini builds and browser recapture NOT_RUN; 85 historical media files and C design remain. See [delivery](docs/delivery/current.json) and [provenance](docs/verification/native-repair-source.json).
 
 ## Screens and recorded interaction
 
