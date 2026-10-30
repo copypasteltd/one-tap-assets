@@ -7,6 +7,7 @@ import {requireThat} from '../../api/lib/errors.js';
 import type {AiDisclosureContract} from '../compiler/disclosure.js';
 import {loadProductionFont} from './font.js';
 import {nativeCommand} from './native.js';
+import {PLUS_RENDER_PIXELS} from '../../shared/domain/plus-render.js';
 
 export interface DisclosureRaster {png:Buffer;left:number;top:number;width:number;height:number}
 export interface AiDisclosureProof {
@@ -15,12 +16,14 @@ export interface AiDisclosureProof {
   pixels_sha256:string;max_mean_abs_error:number;min_foreground_match:number;
 }
 export async function disclosureRaster(cfg:Config,policy:AiDisclosureContract,width:number,height:number):Promise<DisclosureRaster>{
-  requireThat(Number.isSafeInteger(width)&&Number.isSafeInteger(height)&&width>=640&&width<=1920&&height>=640&&height<=1920,
+  const plus=policy.rendering_profile==='PLUS_IMAGE_V1';
+  requireThat(Number.isSafeInteger(width)&&Number.isSafeInteger(height)&&(plus?width>=256&&width<=3840&&height>=256&&height<=3840&&width*height<=PLUS_RENDER_PIXELS:
+    width>=640&&width<=1920&&height>=640&&height<=1920),
     'AI_DISCLOSURE_SPEC_INVALID','AI标识图片尺寸无效',422);
   const font=await loadProductionFont(cfg.projectRoot);
   requireThat(hash(font.binding)===hash(policy.font)&&Array.from(policy.text).every(c=>font.supports(c.codePointAt(0)!)),
     'AI_DISCLOSURE_FONT_CHANGED','AI标识字体不属于原冻结许可',503);
-  const scale=width/policy.geometry.reference_width,w=Math.round(policy.geometry.width*scale),h=Math.round(policy.geometry.height*scale),margin=Math.round(policy.geometry.margin*scale);
+  const scale=plus?Math.max(.5,width/policy.geometry.reference_width):width/policy.geometry.reference_width,w=Math.round(policy.geometry.width*scale),h=Math.round(policy.geometry.height*scale),margin=Math.round(policy.geometry.margin*scale);
   const glyph=await sharp({text:{text:`<span foreground="${policy.colors.foreground}" fallback="false">${policy.text}</span>`,
     font:`Noto Sans SC Bold ${Math.round(policy.geometry.font_size*scale)}`,fontfile:font.path,rgba:true,dpi:72}}).png().toBuffer({resolveWithObject:true});
   requireThat(glyph.info.width<w-16&&glyph.info.height<h-12,'AI_DISCLOSURE_SPEC_INVALID','AI标识文字溢出',422);
@@ -28,8 +31,8 @@ export async function disclosureRaster(cfg:Config,policy:AiDisclosureContract,wi
     left:Math.floor((w-glyph.info.width)/2),top:Math.floor((h-glyph.info.height)/2)}]).png().toBuffer();
   return {png,left:margin,top:margin,width:w,height:h};
 }
-export async function markDisclosureImage(bytes:Buffer,raster:DisclosureRaster):Promise<Buffer>{
-  return sharp(bytes,{limitInputPixels:4_000_000,failOn:'warning'}).composite([{input:raster.png,left:raster.left,top:raster.top}]).png().toBuffer();
+export async function markDisclosureImage(bytes:Buffer,raster:DisclosureRaster,maxPixels=4_000_000):Promise<Buffer>{
+  return sharp(bytes,{limitInputPixels:maxPixels,failOn:'warning'}).composite([{input:raster.png,left:raster.left,top:raster.top}]).png().toBuffer();
 }
 /** Full-frame-count crop decode, not sampled frames, metadata or OCR claims.
  * The opaque fixed raster permits a bounded comparison after H264 encoding. */
@@ -42,7 +45,7 @@ export async function inspectDisclosure(cfg:Config,policy:AiDisclosureContract,b
   requireThat(Number.isSafeInteger(frames)&&frames>0&&frames<=3600,'AI_DISCLOSURE_CAPACITY_UNAVAILABLE','必须检查全部实际帧',422);
   if(options.kind==='image'){
     // Compare RGBA, including opaque alpha: invisible RGB must never certify a visible mark.
-    const region=await sharp(bytes,{limitInputPixels:4_000_000,failOn:'warning'}).extract({left,top,width,height}).ensureAlpha().raw().toBuffer();
+    const region=await sharp(bytes,{limitInputPixels:policy.rendering_profile==='PLUS_IMAGE_V1'?PLUS_RENDER_PIXELS:4_000_000,failOn:'warning'}).extract({left,top,width,height}).ensureAlpha().raw().toBuffer();
     const original=await sharp(raster.png).ensureAlpha().raw().toBuffer();
     requireThat(region.equals(original),'AI_DISCLOSURE_PIXELS_MISSING','实际交付图片缺少完整AI标识',422);
     actual=region;expected=original;

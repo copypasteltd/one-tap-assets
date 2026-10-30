@@ -13,14 +13,14 @@ def extend_plus_contract(a, m, e):
     settings = obj({'crop':obj({k:{'type':'number','minimum':0 if k in ['x','y'] else .01,'maximum':1} for k in ['x','y','width','height']}),
                     'canvas':obj({k:{'type':'integer','minimum':256,'maximum':3840} for k in ['width','height']}),
                     'title':text(80),'brand':text(60),'facts':{'type':'array','maxItems':8,'items':{'type':'string','minLength':1,'maxLength':200}}})
-    info = obj({'session_id':rid,'platform':ref('Platform'),'created_at':time,'expires_at':time,'state':{'type':'string','enum':['ACTIVE','REVOKED','EXPIRED']}})
+    info = obj({'session_id':rid,'platform':ref('Platform'),'created_at':time,'expires_at':time,'state':{'type':'string','enum':['ACTIVE','REVOKED','EXPIRED']},'can_prepare_render_plans':{'type':'boolean'}})
     browser = obj({**copy.deepcopy(a['components']['schemas']['Session']['properties']),'connection':ref('PlusSessionInfo')})
     schemas = {
-      'PlusLinkCreateRequest':obj({}),
+      'PlusLinkCreateRequest':obj({'prepare_render_plans':{'type':'boolean'}},[]),
       'PlusLink':obj({'link_id':rid,'user_code':code,'poll_key':key,'expires_at':time,'poll_interval_seconds':{'const':3}}),
       'PlusLinkInspectRequest':obj({'user_code':code}),
       'PlusLinkDecisionRequest':obj({'user_code':code,'decision':{'type':'string','enum':['APPROVE','DENY']}}),
-      'PlusLinkApproval':obj({'link_id':rid,'user_code':code,'expires_at':time,'state':{'type':'string','enum':['PENDING','APPROVED','DENIED']},'access':{'const':'OWN_PROJECTS_AND_EDIT_DRAFTS'}}),
+      'PlusLinkApproval':obj({'link_id':rid,'user_code':code,'expires_at':time,'state':{'type':'string','enum':['PENDING','APPROVED','DENIED']},'access':{'const':'OWN_PROJECTS_AND_EDIT_DRAFTS'},'can_prepare_render_plans':{'type':'boolean'}}),
       'PlusLinkPollRequest':obj({'poll_key':key}),
       'PlusSessionInfo':info,'PlusBrowserSession':browser,
       'PlusLinkStatus':obj({'state':{'type':'string','enum':['PENDING','APPROVED','DENIED']},'session':ref('PlusBrowserSession')},['state']),
@@ -33,6 +33,19 @@ def extend_plus_contract(a, m, e):
                          'fact_status':{'const':'USER_PROVIDED_UNVERIFIED'},'state':{'const':'DRAFT'},'created_at':time,'updated_at':time}),
       'PlusEditList':obj({'items':{'type':'array','maxItems':100,'items':ref('PlusEditDraft')},'next_cursor':{'anyOf':[{'type':'string','maxLength':4096},{'type':'null'}]}})
     }
+    schemas.update({
+      'PlusRenderCreateRequest':obj({'expected_revision':integer,'variant_id':rid,'variant_version':rid}),
+      'PlusRenderStyle':obj({'preset_id':rid,'preset_version':rid,'variant_id':rid,'variant_version':rid,'name':text(200),
+                            'sale_enabled':{'type':'boolean'},'price_fen':{'anyOf':[{'type':'integer','minimum':1,'maximum':2147483647},{'type':'null'}]},
+                            'reason_codes':{'type':'array','maxItems':30,'items':text(100)}}),
+      'PlusRenderStyleList':obj({'items':{'type':'array','maxItems':100,'items':ref('PlusRenderStyle')}}),
+      'PlusRenderPlan':obj({'request_id':rid,'draft_id':rid,'draft_revision':integer,'source_order_id':rid,'created_at':time,
+                           'settings':ref('PlusEditSettings'),'price_fen':integer,'pricing_version':text(100),'plan':ref('Plan'),
+                           'order':{'anyOf':[ref('Order'),{'type':'null'}]}}),
+      'PlusRenderPlanList':obj({'items':{'type':'array','maxItems':100,'items':ref('PlusRenderPlan')},
+                               'next_cursor':{'anyOf':[{'type':'string','maxLength':4096},{'type':'null'}]}})
+    })
+    for doc in [a,m]:doc['components']['schemas']['Plan']['properties']['plus_render_request_id']=rid
     operations = [
       ('createPlusLink','POST','/plus/links','PlusLinkCreateRequest','PlusLink',True,'创建短期电脑接续码'),
       ('inspectPlusLink','POST','/plus/links/inspect','PlusLinkInspectRequest','PlusLinkApproval',False,'小程序查看本人准备确认的电脑接续'),
@@ -44,7 +57,11 @@ def extend_plus_contract(a, m, e):
       ('createPlusEditDraft','POST','/plus/edit-drafts','PlusEditCreateRequest','PlusEditDraft',False,'为本人已交付图片建立独立编辑草稿'),
       ('getPlusEditDraft','GET','/plus/edit-drafts/{draft_id}',None,'PlusEditDraft',False,'读取本人当前有效来源的编辑草稿'),
       ('savePlusEditDraft','PUT','/plus/edit-drafts/{draft_id}','PlusEditSaveRequest','PlusEditDraft',False,'按修订号保存裁切、规格和待核对文字'),
-      ('listPlusEditDrafts','GET','/plus/edit-drafts',None,'PlusEditList',False,'按本人范围分页读取有效编辑草稿')
+      ('listPlusEditDrafts','GET','/plus/edit-drafts',None,'PlusEditList',False,'按本人范围分页读取有效编辑草稿'),
+      ('listPlusRenderStyles','GET','/plus/render-styles',None,'PlusRenderStyleList',False,'读取独立图片制作风格及当前计价可用性'),
+      ('createPlusRenderPlan','POST','/plus/edit-drafts/{draft_id}/render-plans','PlusRenderCreateRequest','PlusRenderPlan',False,'冻结编辑修订并整理独立制作清单，付款仍需小程序确认'),
+      ('listPlusRenderPlans','GET','/plus/render-plans',None,'PlusRenderPlanList',False,'本人在电脑或原小程序继续独立制作请求'),
+      ('getPlusRenderPlan','GET','/plus/render-plans/{request_id}',None,'PlusRenderPlan',False,'读取本人独立制作清单及原渠道订单状态')
     ]
     for _,_,_,_,response,_,_ in operations:
         schemas[response+'Response']=obj({'data':ref(response),'trace_id':{'type':'string'}})
@@ -54,7 +71,7 @@ def extend_plus_contract(a, m, e):
     for op,method,path,request,response,public,summary in operations:
         operation=copy.deepcopy(source)
         params=[{'name':part[1:-1],'in':'path','required':True,'schema':rid} for part in path.split('/') if part.startswith('{')]
-        if op=='listPlusEditDrafts':params+=copy.deepcopy(a['paths']['/products']['get'].get('parameters',[]))
+        if op in ['listPlusEditDrafts','listPlusRenderPlans']:params+=copy.deepcopy(a['paths']['/products']['get'].get('parameters',[]))
         operation.update(operationId=op,summary=summary,description=summary,parameters=params)
         operation['x-requirements']=['P01-F18','P01-F24'];operation['x-design-pages']=['D22'];operation['x-idempotency-required']=False
         if public:operation['security']=[]
@@ -67,10 +84,11 @@ def extend_plus_contract(a, m, e):
 
 def extend_plus_data(model):
     for table,fields,invariant in [
-      ('plus_links',['id','code_hash','poll_key_hash','state','expires_at','tenant_id','owner_id','identity_id','session_id'],'Explicit native confirmation only; 5-minute challenge; hashed secrets; retries preserve original session and expiry.'),
-      ('plus_sessions',['id','tenant_id','owner_id','identity_id','token_hash','created_at','expires_at','revoked_at'],'One-hour independent read/edit capability; no native payment/refund or identity merge; revocation checked inside each transaction and signed download.'),
+      ('plus_links',['id','code_hash','poll_key_hash','state','expires_at','tenant_id','owner_id','identity_id','session_id','allow_render_plans'],'Explicit native confirmation only; 5-minute challenge; hashed secrets; retries preserve original session and expiry.'),
+      ('plus_sessions',['id','tenant_id','owner_id','identity_id','token_hash','created_at','expires_at','revoked_at','allow_render_plans'],'One-hour independent read/edit capability; no native payment/refund or identity merge; revocation checked inside each transaction and signed download.'),
       ('plus_edit_drafts',['id','tenant_id','owner_id','order_id','product_id','manifest_id','deliverable_id','revision','data','created_at','updated_at'],'Owned paid current image; separate draft/revision; user-supplied facts remain unverified; deletion physically erases draft and all saved versions.'),
-      ('plus_edit_versions',['draft_id','revision','settings_hash','settings','created_at'],'Append-only edit metadata versions, independent of immutable paid delivery; erased with source deletion.')
+      ('plus_edit_versions',['draft_id','revision','settings_hash','settings','created_at'],'Append-only edit metadata versions, independent of immutable paid delivery; erased with source deletion.'),
+      ('plus_render_plans',['id','tenant_id','owner_id','product_id','draft_id','draft_revision','source_order_id','plan_id','input_hash','binding','created_at'],'Immutable independently quoted render plan; exact owned source/edit/tariff frozen, no payment capability in browser; unique natural input and product deletion erasure.')
     ]:model['entities'].append({'table':table,'primary_key':'draft_id' if table=='plus_edit_versions' else 'id','scope':'global' if table=='plus_links' else 'tenant','fields':fields,'invariant':invariant,'implementation_status':'DESIGN_NOT_IMPLEMENTED'})
 
 def plus_catalog(e):

@@ -45,7 +45,9 @@ export function freezeRevisionPolicy(contract:FrozenContract,skillVariantId=cont
       max_requests_per_role:c.max_turns_per_role,ceiling_micro:c.agent_cost_ceiling_micro,daily_ceiling_micro:c.agent_cost_ceiling_micro}};
   const styleId=contract.source.creative_components.platform_style_id;
   const style=STYLES[typeof styleId==='string'?styleId:contract.request.preset_id];
-  if(style&&contract.resource_versions.some(r=>hash(r)===hash(FONT_BINDING)))policy.image_text={version:'YPCC-IMAGE-TEXT-1',max_chars:28,
+  const plus=contract.source.creative_components.plus_render;
+  const imageTextSupported=!plus||contract.source.output_slots.filter(s=>s.kind==='image').every(s=>s.width>=640&&s.height>=640&&s.width<=1920&&s.height<=1920&&s.width*s.height<=4000000);
+  if(imageTextSupported&&style&&contract.resource_versions.some(r=>hash(r)===hash(FONT_BINDING)))policy.image_text={version:'YPCC-IMAGE-TEXT-1',max_chars:28,
     max_lines:2,panel_fraction:0.22,font:{...FONT_BINDING},background:style.bg,ink:style.ink,accent:style.accent};
   validateRevisionPolicy(policy);return policy;
 }

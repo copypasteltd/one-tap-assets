@@ -16,6 +16,7 @@ export interface Config {
     speech?:{enabled:boolean;baseUrl:string;apiKey:string;allowedHosts:string[]};
     listening?:{enabled:boolean;baseUrl:string;apiKey:string;allowedHosts:string[]} };
   managementTokens: string;
+  plusRender:{enabled:boolean;priceFen:number;pricingVersion:string};
   samples: { dailyBudgetMicro: number; costCeilingMicro: number; maxConcurrent: number; deadlineSeconds: number };
   privacyJournal: { enabled: boolean; directory: string; sourceId: string; keyId: string; hmacKey: string };
   codex: { enabled: boolean; binary: string; sha256: string; model: string; apiKey: string; inferenceProxy: string; protocol: string; rateVersion: string; maxTurns: number; maxInputTokens: number; maxOutputTokens: number; costCeilingMicro: number; isolationCommand: string; admissionPath: string; dailyBudgetMicro: number };
@@ -51,6 +52,7 @@ export function config(overrides: Partial<Config> = {}): Config {
       ...(text('ASR_BASE_URL')?{speech:{enabled:enabled('ASR_SERVICE_ENABLED'),baseUrl:text('ASR_BASE_URL'),apiKey:text('ASR_API_KEY'),
         allowedHosts:text('ASR_ALLOWED_HOSTS').split(',').map(s=>s.trim()).filter(Boolean)}}:{}) },
     managementTokens: text('MANAGEMENT_TOKENS_JSON'),
+    plusRender:{enabled:enabled('PLUS_IMAGE_RENDER_ENABLED'),priceFen:num('PLUS_IMAGE_RENDER_PRICE_FEN',0),pricingVersion:text('PLUS_IMAGE_RENDER_PRICING_VERSION')},
     samples: { dailyBudgetMicro: num('SAMPLE_DAILY_BUDGET_MICRO', 0), costCeilingMicro: num('SAMPLE_COST_CEILING_MICRO', 0), maxConcurrent: num('SAMPLE_MAX_CONCURRENT', 1), deadlineSeconds: num('SAMPLE_DEADLINE_SECONDS', 3600) },
     privacyJournal: { enabled: enabled('PRIVACY_JOURNAL_ENABLED'), directory: text('PRIVACY_JOURNAL_DIRECTORY', 'privacy-journal'),
       sourceId: text('PRIVACY_JOURNAL_SOURCE_ID'), keyId: text('PRIVACY_JOURNAL_KEY_ID'), hmacKey: text('PRIVACY_JOURNAL_HMAC_KEY') },

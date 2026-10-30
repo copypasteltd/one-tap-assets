@@ -8,6 +8,7 @@ import { createProduct, bindPhotos, createAnalysis, getProfile, correctProfile }
 import { createUploadGrant, completeAsset } from '../modules/assets.js';
 import { listPresets, presetVersion } from '../modules/catalog.js';
 import { createPlan, checkInput, createPreview } from '../modules/plans.js';
+import * as plusRender from '../modules/plus-render.js';
 import { createQuote, createOrder, cancelOrder, requestRefundInternal } from '../modules/commerce.js';
 import { getDeliverables, createDownloadLink, createSaveSession, recordSaveReceipt, requestRevision, previewLink,listRevisions } from '../modules/delivery.js';
 import { HELP_ARTICLES, createTicket, requestDeletion } from '../modules/support.js';
@@ -30,7 +31,11 @@ const principal = (ctx: BusinessContext): Principal => { if (!ctx.principal) thr
 const param = (ctx: BusinessContext, name: string): string => ctx.params[name] ?? notFound();
 
 export const businessHandlers: Record<string, BusinessHandler> = {
-  createPlusLink:async c=>plus.createPlusLink(c.db,c.cfg),
+  createPlusLink:async c=>plus.createPlusLink(c.db,c.cfg,validate('PlusLinkCreateRequest',c.body)),
+  listPlusRenderStyles:async c=>plusRender.listPlusRenderStyles(c.db,c.cfg),
+  createPlusRenderPlan:async c=>plusRender.createPlusRenderPlan(c.db,c.cfg,principal(c),param(c,'draft_id'),validate('PlusRenderCreateRequest',c.body)),
+  listPlusRenderPlans:async c=>plusRender.listPlusRenderPlans(c.db,c.cfg,principal(c),c.query),
+  getPlusRenderPlan:async c=>plusRender.getPlusRenderPlan(c.db,principal(c),param(c,'request_id')),
   inspectPlusLink:async c=>plus.inspectPlusLink(c.db,c.cfg,principal(c),validate('PlusLinkInspectRequest',c.body)),
   decidePlusLink:async c=>plus.decidePlusLink(c.db,c.cfg,principal(c),validate('PlusLinkDecisionRequest',c.body)),
   pollPlusLink:async c=>plus.pollPlusLink(c.db,c.cfg,param(c,'link_id'),validate('PlusLinkPollRequest',c.body)),

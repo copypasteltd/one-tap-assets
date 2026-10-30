@@ -1,0 +1,34 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/integration/plus-workspace.test.ts (7 tests) 10133ms
+   ✓ requires explicit native approval and a separate high-entropy polling secret 548ms
+ ❯ tests/integration/plus-render.test.ts (4 tests | 4 skipped) 10813ms
+   ↓ requires an explicitly approved new capability, keeps financial operations native and scopes requests to the owner
+   ↓ freezes crop, size, copy and separate price, deduplicates retries and rejects stale drafts
+   ↓ runs content planning, native fee confirmation and a distinct synthetic payment before queuing work
+   ↓ renders the actual edited PNG, seals its source reference, independently reviews and delivers a new private pack
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/plus-render.test.ts [ tests/integration/plus-render.test.ts ]
+error: new row for relation "execution_variants" violates check constraint "execution_variants_check"
+ ❯ node_modules/.pnpm/pg-pool@3.14.0_pg@8.23.1/node_modules/pg-pool/index.js:45:11
+ ❯ plusRenderFixture tests/helpers/plus-render.ts:34:5
+     32|     const cfg=f.cfg;cfg.plusRender={enabled:true,priceFen:200,pricingV…
+     33|     await db.pool.query("UPDATE stage_runs SET state='CANCELLED' WHERE…
+     34|     await db.pool.query(`UPDATE execution_variants SET admission_state…
+       |     ^
+     35|       data=data||'{"admission_state":"ADMITTED","sale_enabled":true}':…
+     36|       private=private||jsonb_build_object('codex_contract',$2::jsonb,'…
+ ❯ tests/integration/plus-render.test.ts:9:23
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  7 passed | 4 skipped (11)
+   Start at  21:27:45
+   Duration  39.30s (tests 54%, import 25%, transform 21%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/plus-render-2026-10-30T13-27-44-752Z-378e8838/api.json

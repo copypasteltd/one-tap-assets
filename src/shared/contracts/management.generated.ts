@@ -1011,6 +1011,7 @@ export interface components {
             reason_codes: string[];
             estimated_seconds_min: number | null;
             estimated_seconds_max: number | null;
+            plus_render_request_id?: string;
         };
         PreviewRequest: {
             plan_id: string;
@@ -2670,7 +2671,9 @@ export interface components {
             data: components["schemas"]["RecommendationEventReceipt"];
             trace_id: string;
         };
-        PlusLinkCreateRequest: Record<string, never>;
+        PlusLinkCreateRequest: {
+            prepare_render_plans?: boolean;
+        };
         PlusLink: {
             link_id: string;
             user_code: string;
@@ -2697,6 +2700,7 @@ export interface components {
             state: "PENDING" | "APPROVED" | "DENIED";
             /** @constant */
             access: "OWN_PROJECTS_AND_EDIT_DRAFTS";
+            can_prepare_render_plans: boolean;
         };
         PlusLinkPollRequest: {
             poll_key: string;
@@ -2710,6 +2714,7 @@ export interface components {
             expires_at: string;
             /** @enum {string} */
             state: "ACTIVE" | "REVOKED" | "EXPIRED";
+            can_prepare_render_plans: boolean;
         };
         PlusBrowserSession: {
             access_token: string;
@@ -2801,6 +2806,53 @@ export interface components {
         };
         PlusEditListResponse: {
             data: components["schemas"]["PlusEditList"];
+            trace_id: string;
+        };
+        PlusRenderCreateRequest: {
+            expected_revision: number;
+            variant_id: string;
+            variant_version: string;
+        };
+        PlusRenderStyle: {
+            preset_id: string;
+            preset_version: string;
+            variant_id: string;
+            variant_version: string;
+            name: string;
+            sale_enabled: boolean;
+            price_fen: number | null;
+            reason_codes: string[];
+        };
+        PlusRenderStyleList: {
+            items: components["schemas"]["PlusRenderStyle"][];
+        };
+        PlusRenderPlan: {
+            request_id: string;
+            draft_id: string;
+            draft_revision: number;
+            source_order_id: string;
+            /** Format: date-time */
+            created_at: string;
+            settings: components["schemas"]["PlusEditSettings"];
+            price_fen: number;
+            pricing_version: string;
+            plan: components["schemas"]["Plan"];
+            order: components["schemas"]["Order"] | null;
+        };
+        PlusRenderPlanList: {
+            items: components["schemas"]["PlusRenderPlan"][];
+            next_cursor: string | null;
+        };
+        PlusRenderStyleListResponse: {
+            data: components["schemas"]["PlusRenderStyleList"];
+            trace_id: string;
+        };
+        PlusRenderPlanResponse: {
+            data: components["schemas"]["PlusRenderPlan"];
+            trace_id: string;
+        };
+        PlusRenderPlanListResponse: {
+            data: components["schemas"]["PlusRenderPlanList"];
             trace_id: string;
         };
     };

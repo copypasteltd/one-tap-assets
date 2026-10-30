@@ -16,6 +16,10 @@ import { bindProductionFont, loadProductionFont, verifyResourceLicenses } from '
 import type { ResourceBinding } from '../../worker/compiler/snapshot.js';
 import { STYLES } from '../../worker/media/layout.js';
 import {communityNativeBinding,verifyCommunityNativeRegistration,applyCommunityNativeVoice} from './community-native.js';
+import {derivePlusSource,plusRenderBinding,type PlusRenderBinding} from '../../shared/domain/plus-render.js';
+import {verifyPlusRenderSource} from './plus-render-source.js';
+import {assertPlusRenderGrant} from './plus-access.js';
+import {outputSlots} from './catalog.js';
 
 export async function checkInput(db: Db, p: Principal, request: DTO<'InputCheckRequest'>): Promise<DTO<'InputCheck'>> {
   const product = await owned<DTO<'Product'>>(db, 'product_drafts', request.product_id, p);
@@ -28,7 +32,7 @@ export async function checkInput(db: Db, p: Principal, request: DTO<'InputCheckR
   if (variant.data.engine !== 'PHOTO_LAYOUT' && !profile.data.photo_roles.some(r => ['DETAIL', 'LABEL'].includes(r.role))) { reasons.push('DETAIL_PHOTO_REQUIRED'); guidance.push('该方案需要清晰细节，请靠近商品补拍。'); }
   return { eligible: reasons.length === 0, reason_codes: reasons, capture_guidance: guidance };
 }
-export async function createPlan(db: Db, cfg: Config, p: Principal, request: DTO<'PlanRequest'>): Promise<DTO<'Plan'>> {
+export async function createPlan(db: Db, cfg: Config, p: Principal, request: DTO<'PlanRequest'>,plus?:PlusRenderBinding): Promise<DTO<'Plan'>> {
   const product = await owned<DTO<'Product'>>(db, 'product_drafts', request.product_id, p, true);
   requireThat(product.data.photo_version === request.photo_version && product.data.profile_id === request.profile_id && !product.deleted_at, 'INPUT_VERSION_CHANGED', '商品照片或档案已更新');
   const profile = await owned<DTO<'Profile'>>(db, 'profile_versions', request.profile_id, p);
@@ -36,6 +40,9 @@ export async function createPlan(db: Db, cfg: Config, p: Principal, request: DTO
   const preset = await presetVersion(db, request.preset_id, request.preset_version);
   requireThat(preset.variants.some(v => v.variant_id === request.variant_id && v.version === request.variant_version), 'VARIANT_SCOPE_INVALID', '制作规格不属于该方案', 422);
   const variant = await getVariant(db, request.variant_id, request.variant_version);
+  if(plus){requireThat(request.product_id===plus.source_product_id,'PLUS_SOURCE_CHANGED','进阶制作必须保留原商品身份',403);
+    await assertPlusRenderGrant(db,p);await verifyPlusRenderSource(db,p.tenantId,p.userId,plus,true,1200);}
+  const source=plus?derivePlusSource(variant.private.source,plus):variant.private.source;
   const native=communityNativeBinding(variant.private.source,(variant.private.commercial_binding as {native_audio?:unknown}|undefined)?.native_audio);
   if(native)await verifyCommunityNativeRegistration(db,variant.private.source,native);
   const input = await checkInput(db, p, { product_id: request.product_id, profile_id: request.profile_id, variant_id: request.variant_id, variant_version: request.variant_version });
@@ -47,17 +54,17 @@ export async function createPlan(db: Db, cfg: Config, p: Principal, request: DTO
     daily_ceiling_micro: cfg.codex.dailyBudgetMicro, owner_id: p.userId };
   requireThat(inferenceLimits.daily_ceiling_micro >= inferenceLimits.ceiling_micro, 'CODEX_LIMITS_INVALID', '平台内容规划费用额度尚未配置', 503);
   const photo = (await db.query<{ id: string }>('SELECT id FROM product_photo_versions WHERE tenant_id=$1 AND product_id=$2 AND revision=$3', [p.tenantId, request.product_id, request.photo_version])).rows[0] ?? notFound();
-  const planId = id('plan'); const creative = basePlan(profile.data, variant.private.source);
+  const planId = id('plan'); const creative = basePlan(profile.data, source);
   if(native)applyCommunityNativeVoice(creative,native);
   const data: DTO<'Plan'> = { plan_id: planId, state: 'PLANNING', plan_hash: null, product_id: request.product_id, profile_id: request.profile_id,
-    variant_id: request.variant_id, engine: variant.data.engine, summary: '', output_slots: variant.data.output_slots, reason_codes: [],
+    variant_id: request.variant_id, engine: variant.data.engine, summary: '', output_slots: outputSlots(source), reason_codes: [],
     estimated_seconds_min: variant.data.engine === 'PHOTO_LAYOUT' ? 30 : 180, estimated_seconds_max: DEADLINES[variant.data.engine] };
-  const inputHash = hash({ request, suggested_plan: creative, profile_hash: profile.data.profile_hash, source: variant.private.source,
+  const inputHash = hash({ request, suggested_plan: creative, profile_hash: profile.data.profile_hash, source,
     bundle_hash: bundle.sha256, runtime_admission: runtimeAdmission, inference_limits: inferenceLimits,
     ...(native?{native_commercial_hash:hash(native)}:{}) });
   await insert(db, 'plan_versions', { id: planId, tenant_id: p.tenantId, owner_id: p.userId, product_id: request.product_id,
     photo_version_id: photo.id, profile_id: request.profile_id, identity_lock_id: request.identity_lock_id, variant_version_id: variant.id,
-    state: data.state, data, private: { request, creative, source: variant.private.source, runtime_admission: runtimeAdmission,
+    state: data.state, data, private: { request, creative, source, runtime_admission: runtimeAdmission,
       inference_limits: inferenceLimits, bundle_hash: bundle.sha256, plan_input_hash: inputHash,...(native?{native_commercial:native}:{}) } });
   await enqueueStage(db, { tenantId: p.tenantId, scopeType: 'PLAN', scopeId: planId, name: 'PLAN', inputHash, deadlineAt: addSeconds(300) });
   return data;
@@ -65,6 +72,7 @@ export async function createPlan(db: Db, cfg: Config, p: Principal, request: DTO
 export async function createPreview(db: Db, cfg:Config, p: Principal, productId: string, request: DTO<'PreviewRequest'>): Promise<DTO<'Preview'>> {
   await lockMediaOwner(db,p.tenantId,p.userId);
   const current=await previewPlan(db,p,request.plan_id); const {plan}=current;
+  requireThat(!plusRenderBinding(plan.private.source),'PLUS_PREVIEW_NOT_AVAILABLE','进阶图片以独立规格清单确认，本人预览通道正在扩展',503);
   requireThat(plan.product_id === productId && plan.plan_hash === request.plan_hash, 'PLAN_CHANGED', '方案已更新或尚未就绪');
   const old = (await db.query<{ data: DTO<'Preview'> }>('SELECT data FROM optional_previews WHERE tenant_id=$1 AND owner_id=$2 AND plan_id=$3 AND expires_at>now() ORDER BY created_at DESC LIMIT 1', [p.tenantId, p.userId, plan.id])).rows[0];
   if (old) return old.data;

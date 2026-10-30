@@ -3,7 +3,7 @@ import {PlusClient} from '../../src/web/client';
 import type {DTO} from '../../src/shared/contracts/types';
 import type {WireRequest} from '../../src/shared/client/api';
 const link:DTO<'PlusLink'>={link_id:'pluslink_synthetic',user_code:'ABCD2345',poll_key:'p'.repeat(43),expires_at:new Date(Date.now()+300000).toISOString(),poll_interval_seconds:3};
-const session=():DTO<'PlusBrowserSession'>=>({access_token:'s'.repeat(43),token_type:'Bearer',user_id:'synthetic-buyer',expires_at:new Date(Date.now()+3600000).toISOString(),connection:{session_id:'plussession_'+'a'.repeat(32),platform:'alipay',created_at:new Date().toISOString(),expires_at:new Date(Date.now()+3600000).toISOString(),state:'ACTIVE'}});
+const session=():DTO<'PlusBrowserSession'>=>({access_token:'s'.repeat(43),token_type:'Bearer',user_id:'synthetic-buyer',expires_at:new Date(Date.now()+3600000).toISOString(),connection:{session_id:'plussession_'+'a'.repeat(32),platform:'alipay',created_at:new Date().toISOString(),expires_at:new Date(Date.now()+3600000).toISOString(),state:'ACTIVE',can_prepare_render_plans:false}});
 const response=(data:unknown)=>({status:200,headers:{},data:{data}});
 it('uses a separate poll secret, keeps approval in memory and drops it on disconnect',async()=>{
   const seen:WireRequest[]=[],s=session();const client=new PlusClient('https://synthetic.invalid',async input=>{seen.push(input);return response(input.url.endsWith('/poll')?{state:'APPROVED',session:s}:{items:[],next_cursor:null});});
@@ -20,4 +20,10 @@ it('does not return an old private read after changing the connection',async()=>
   let resolve!:(data:ReturnType<typeof response>)=>void;const client=new PlusClient('https://synthetic.invalid',async input=>input.url.endsWith('/poll')?response({state:'APPROVED',session:session()}):new Promise(done=>{resolve=done;}));
   await client.poll(link);const pending=client.call('listProducts');client.disconnect();resolve(response({items:[{private:'old account'}],next_cursor:null}));
   await expect(pending).rejects.toMatchObject({code:'PLUS_CONNECTION_CHANGED'});
+});
+
+it('clears private credentials and notifies the mounted workspace on unauthorized responses',async()=>{
+  const client=new PlusClient('https://synthetic.invalid',async input=>input.url.endsWith('/poll')?response({state:'APPROVED',session:session()}):{status:401,headers:{},data:{error:{code:'PLUS_SESSION_REVOKED',message:'连接已撤销'}}});
+  let cleared=0;const unsubscribe=client.onSessionEnded(()=>{cleared++;});await client.poll(link);await expect(client.call('listProducts')).rejects.toBeTruthy();
+  expect(client.connected()).toBeUndefined();expect(cleared).toBe(1);unsubscribe();
 });

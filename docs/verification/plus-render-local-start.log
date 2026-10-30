@@ -1,0 +1,7 @@
+{"at":"2026-10-30T13:43:11.746Z","event":"reaper_ready","worker_id":"reaper_ccfe99d8bb8e43cd99cb9fb387940769"}
+{"at":"2026-10-30T13:43:12.344Z","event":"media_maintenance_ready","worker_id":"media_cleanup_958fb414dbae49c3b7a2435bc3244dc7"}
+{"at":"2026-10-30T13:43:13.450Z","event":"worker_ready","worker_id":"worker_e2e6d10efc864a4181dc2f1f5bc6cd3b","skill_cache":{"bundles":14,"skills":19},"stage_handlers":[],"event_handlers":[],"incomplete_stages":["ANALYZE","PLAN","REPAIR_PLAN","PRODUCTION","POST","QC","REVIEW_FACTS","REVIEW_STYLE","DELIVER","PREVIEW","REVISION","REVISION_QC","REVISION_REVIEW_FACTS","REVISION_REVIEW_STYLE","REVISION_COMPLETE","SAMPLE","SAMPLE_PRODUCTION","SAMPLE_POST","SAMPLE_QC","SAMPLE_REVIEW_FACTS","SAMPLE_REVIEW_STYLE","SAMPLE_COMPLETE"],"stage_registry_complete":false}
+{"level":30,"time":1793367799067,"pid":19624,"hostname":"wikigspc","msg":"Server listening at https://127.0.0.1:3100"}
+{"level":30,"time":1793367799222,"pid":19624,"hostname":"wikigspc","reqId":"trace_bfbd4a69a51c44e99ddb85308953e5db","req":{"method":"GET","route":"/readyz"},"msg":"incoming request"}
+{"event":"local_stack_ready","api":"https://localhost:3100","ready_services":["api/main.js","worker/main.js","worker/lifecycle/reaper-main.js","worker/lifecycle/media-maintenance-main.js"],"payments_enabled":false,"generation_enabled":false,"codex_enabled":false}
+{"level":30,"time":1793367799402,"pid":19624,"hostname":"wikigspc","reqId":"trace_bfbd4a69a51c44e99ddb85308953e5db","res":{"status":200},"responseTime":177.85750000000007,"msg":"request completed"}

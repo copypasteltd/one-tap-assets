@@ -1,0 +1,27 @@
+{
+  "base": "runtime/test-results/plus-render-2026-10-30T13-30-59-937Z-94f28879",
+  "source_set_hash": "61cb90e65e06ed9a30d18a46a57b6ae65b5a00abbfed4ec9f944169dd59c5238",
+  "source_unchanged": true,
+  "commands": [
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/plus-render.test.ts --outputFile.json=runtime/test-results/plus-render-2026-10-30T13-30-59-937Z-94f28879/api.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.integration.config.ts",
+        "tests/integration/plus-render.test.ts",
+        "--outputFile.json=runtime/test-results/plus-render-2026-10-30T13-30-59-937Z-94f28879/api.json"
+      ],
+      "shell": false,
+      "status": "FAIL",
+      "exit_code": 1,
+      "signal": null,
+      "timeout_ms": 480000,
+      "elapsed_ms": 8428,
+      "log_path": "runtime/test-results/plus-render-2026-10-30T13-30-59-937Z-94f28879/api.log",
+      "log_sha256": "b69ea64b60c60a68a1f783f9a9f564782d4a44d0ecd110c7ea556f6aa1c91f40"
+    }
+  ]
+}

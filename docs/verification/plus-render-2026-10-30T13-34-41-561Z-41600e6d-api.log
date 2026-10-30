@@ -1,0 +1,32 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ❯ tests/integration/plus-render.test.ts (4 tests | 1 failed) 5896ms
+   ✓ requires an explicitly approved new capability, keeps financial operations native and scopes requests to the owner 225ms
+   ✓ freezes crop, size, copy and separate price, deduplicates retries and rejects stale drafts 133ms
+   × runs content planning, native fee confirmation and a distinct synthetic payment before queuing work 3325ms
+   · renders the actual edited PNG, seals its source reference, independently reviews and delivers a new private pack
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/plus-render.test.ts > runs content planning, native fee confirmation and a distinct synthetic payment before queuing work
+AssertionError: {"data":{"quote_id":"quote_6fae41cfa1a7408aaa4ce9069aa94662","plan_id":"plan_83e5efd2bb03480ea3493a218a7cec03","plan_hash":"658738cc476774dfa5abfe6b27b1997d904a9946c6be1570de60d2fecb471162","state":"OPEN","currency":"CNY","amount_fen":200,"expires_at":"2026-10-30T13:49:48.959Z","output_slots":[{"fps":null,"kind":"image","count":1,"width":1080,"height":1440,"slot_id":"plus-image","duration_frames":null},{"fps":null,"kind":"copy","count":1,"width":null,"height":null,"slot_id":"copy","duration_frames":null}],"terms_version":"YPCC-TERMS-3.1","hard_deadline_seconds":600},"trace_id":"trace_9db5d21cf5544b21b80b8a2948042ea2"}: expected 201 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 201
+
+ ❯ tests/integration/plus-render.test.ts:38:99
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 passed (4)
+   Start at  21:34:42
+   Duration  7.27s (tests 83%, import 12%, transform 5%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/plus-render-2026-10-30T13-34-41-561Z-41600e6d/api.json

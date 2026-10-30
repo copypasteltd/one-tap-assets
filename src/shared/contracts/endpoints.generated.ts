@@ -719,5 +719,37 @@ export const endpoints = {
     "idempotency": false,
     "request": null,
     "response": "PlusEditList"
+  },
+  "listPlusRenderStyles": {
+    "method": "GET",
+    "path": "/plus/render-styles",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "PlusRenderStyleList"
+  },
+  "createPlusRenderPlan": {
+    "method": "POST",
+    "path": "/plus/edit-drafts/{draft_id}/render-plans",
+    "authenticated": true,
+    "idempotency": false,
+    "request": "PlusRenderCreateRequest",
+    "response": "PlusRenderPlan"
+  },
+  "listPlusRenderPlans": {
+    "method": "GET",
+    "path": "/plus/render-plans",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "PlusRenderPlanList"
+  },
+  "getPlusRenderPlan": {
+    "method": "GET",
+    "path": "/plus/render-plans/{request_id}",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "PlusRenderPlan"
   }
 } as const;

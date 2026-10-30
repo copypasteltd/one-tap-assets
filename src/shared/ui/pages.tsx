@@ -1,4 +1,4 @@
-import React, { useRef, useState, type ReactNode } from 'react';
+import React, { useEffect, useRef, useState, type ReactNode } from 'react';
 import Taro, { useRouter } from '@tarojs/taro';
 import { View, Text, Button, Image, Switch } from '@tarojs/components';
 import type { DTO } from '../contracts/types';
@@ -15,6 +15,7 @@ import {selectedPreset,usePreset} from '../client/preset-selection';
 import {Order,paymentText,fulfillmentText} from './order';
 import {Help} from './help';
 import {PlusConnections} from './plus-connections';
+import {PlusPlanDetails} from './plus-render-requests';
 export { navigate } from './base';
 
 const title = { home: '一品成片', catalog: '方案社区', library: '我的素材', photos: '拍下你的商品', analysis: '整理商品信息', preset: '方案详情', confirm: '确认素材清单', order: '我的订单', pack: '领取素材', settings: '账户与隐私', help: '帮助与反馈', favorites: '我的收藏', creator: '我的方案', draft: '编辑方案', rights: '授权资料', publication: '发布记录', moderation: '举报与申诉' };
@@ -52,15 +53,17 @@ function Preset() {
   </>}</>;
 }
 function Confirm() {
-  const route = useRouter(); const [quote, setQuote] = useState<DTO<'Quote'>>(); const [accepted, setAccepted] = useState(false); const action = useAction();
+  const route = useRouter(); const [quote, setQuote] = useState<DTO<'Quote'>>(); const [accepted, setAccepted] = useState(false); const [plusReady,setPlusReady]=useState(false);const action = useAction();
   const resource = useResource(async () => { await client().login(); return client().api.call('getPlan', { params: { plan_id: route.params.plan_id ?? client().recover().planId ?? '' } }); }, p => ['PLANNING', 'VALIDATING'].includes(p.state)); const plan = resource.data;
+  useEffect(()=>{setQuote(undefined);setAccepted(false);setPlusReady(false);},[plan?.plan_id,plan?.plan_hash]);
   return <><ResourceState {...resource} retry={resource.reload} />{plan && <><Text className='page-headline'>确认这一套素材</Text><Text>{plan.summary || '正在整理内容与清单…'}</Text><Slots slots={plan.output_slots} />
-    {plan.state==='READY' && plan.plan_hash && plan.engine==='PHOTO_LAYOUT' && <OptionalPreview key={`${plan.plan_id}:${plan.plan_hash}`} plan={plan} />}
-    {plan.state === 'READY' && plan.plan_hash && !quote && <Action disabled={action.busy} onClick={() => void action.run(async () => { setQuote(await client().api.call('createQuote', { body: { plan_id: plan.plan_id, plan_hash: plan.plan_hash! }, key: client().intent('quote', { plan: plan.plan_id, nonce: Date.now() }) })); })}>查看完整费用</Action>}
+    {plan.plus_render_request_id&&<PlusPlanDetails key={plan.plus_render_request_id} plan={plan} onReady={setPlusReady}/>}
+    {plan.state==='READY' && plan.plan_hash && plan.engine==='PHOTO_LAYOUT' && !plan.plus_render_request_id && <OptionalPreview key={`${plan.plan_id}:${plan.plan_hash}`} plan={plan} />}
+    {plan.state === 'READY' && plan.plan_hash && !quote && (!plan.plus_render_request_id||plusReady) && <Action disabled={action.busy} onClick={() => void action.run(async () => { setQuote(await client().api.call('createQuote', { body: { plan_id: plan.plan_id, plan_hash: plan.plan_hash! }, key: client().intent('quote', { plan: plan.plan_id, nonce: Date.now() }) })); })}>查看完整费用</Action>}
     {['FAILED', 'BLOCKED'].includes(plan.state) && <Notice error>当前照片或方案暂不能完成制作，请返回调整方案或重新拍照。</Notice>}
     {quote && <Panel><Text className='price'>¥{(quote.amount_fen / 100).toFixed(2)}</Text><Text>整包费用 · 最长{Math.ceil(quote.hard_deadline_seconds / 60)}分钟完成制作</Text><Text className='secondary'>报价有效至{new Date(quote.expires_at).toLocaleTimeString()}。交付后可领取7天，48小时内可成功小改一次。平台制作失败按原单处理退款。</Text>
       <View className='consent'><Switch checked={accepted} onChange={e => setAccepted(e.detail.value)} color='#FF7948' /><Text>我已确认完整清单、费用和交付规则</Text></View>
-      <Action disabled={!accepted || action.busy} onClick={() => void action.run(async () => { const order = await client().api.call('createOrder', { body: { quote_id: quote.quote_id, channel: client().host.platform }, key: client().intent('order', { quote: quote.quote_id }) }); client().remember({ orderId: order.order_id }); navigate('order', { order_id: order.order_id }); })}>{action.busy ? '正在建立原订单…' : '确认并继续'}</Action>
+      <Action disabled={!accepted || action.busy || !!plan.plus_render_request_id&&!plusReady} onClick={() => void action.run(async () => { const order = await client().api.call('createOrder', { body: { quote_id: quote.quote_id, channel: client().host.platform }, key: client().intent('order', { quote: quote.quote_id }) }); client().remember({ orderId: order.order_id }); navigate('order', { order_id: order.order_id }); })}>{action.busy ? '正在建立原订单…' : '确认并继续'}</Action>
     </Panel>}{action.error && <Notice error>{action.error}</Notice>}</>}</>;
 }
 function Library() {

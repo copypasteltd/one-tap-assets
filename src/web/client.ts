@@ -6,13 +6,15 @@ type Operation=keyof typeof endpoints;
 export class PlusClient{
   private generation=0;private session:DTO<'PlusBrowserSession'>|undefined;private requests=new Set<AbortController>();
   readonly api:ApiClient;
+  private ended:(()=>void)|undefined;
+  onSessionEnded(callback:()=>void){this.ended=callback;return()=>{if(this.ended===callback)this.ended=undefined;};}
   constructor(origin:string,transport?:Transport){
     const wire:Transport=transport??(async input=>{
       const result=await fetch(input.url,{method:input.method,headers:input.headers,...(input.body===undefined?{}:{body:input.body as string}),
         ...(input.signal?{signal:input.signal}:{}),credentials:'omit',cache:'no-store',redirect:'error'});
       return{status:result.status,data:await result.text(),headers:Object.fromEntries(result.headers)};
     });
-    this.api=new ApiClient(origin,wire,()=>this.disconnect(),true);
+    this.api=new ApiClient(origin,wire,()=>{this.disconnect();this.ended?.();},true);
   }
   disconnect(){this.generation++;for(const controller of this.requests)controller.abort();this.requests.clear();this.session=undefined;this.api.setSession(null);}
   connected(){return this.session;}

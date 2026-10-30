@@ -217,7 +217,7 @@ export async function inspectCandidate(db:Db,cfg:Config,store:ObjectStorage,c:Re
     requireThat(!signal.aborted && Date.parse(c.input.deadline_at)>Date.now(),'REVISION_DEADLINE_EXCEEDED','修改已中断或到期',409);
     const bytes=await candidateBytes(db,store,c,item);
     if(item.kind==='copy')requireThat(new TextDecoder('utf-8',{fatal:true}).decode(bytes)===item.text,'REVISION_COPY_CHANGED','配套文案与实际文件不一致',503);
-    else if(item.kind==='image'){const actual=await inspectImage(bytes);requireThat(actual.width===item.width && actual.height===item.height && bytes.length===item.size_bytes,
+    else if(item.kind==='image'){const actual=await inspectImage(bytes,source.context.contract.source.creative_components.plus_render?8294400:4_000_000);requireThat(actual.width===item.width && actual.height===item.height && bytes.length===item.size_bytes,
       'REVISION_MEDIA_SPEC_INVALID','修改图片规格与原交付不一致',503);
       if(disclosure)await inspectDisclosure(cfg,disclosure,bytes,{kind:'image',width:actual.width,height:actual.height,frames:1,directory,deadline_at:c.input.deadline_at,signal});}
     else {const file=join(directory,`${item.deliverable_id}.mp4`);await writeFile(file,bytes);const actual=await inspectVideo(cfg,file,signal);

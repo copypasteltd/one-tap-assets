@@ -7,15 +7,10 @@ import {requireThat,notFound} from '../lib/errors.js';
 import {cursor,limit} from '../lib/pagination.js';
 import {getDeliverables} from './delivery.js';
 import {lockMediaOwner} from './media-access.js';
+import {validatePlusSettings} from '../../shared/domain/plus-render.js';
+export {validatePlusSettings} from '../../shared/domain/plus-render.js';
 
 function plus(p:Principal){requireThat(!!p.plusSessionId,'PLUS_SESSION_REQUIRED','请先在小程序确认当前电脑连接',403);}
-export function validatePlusSettings(s:DTO<'PlusEditSettings'>):void{
-  const c=s.crop;
-  requireThat([c.x,c.y,c.width,c.height].every(Number.isFinite)&&c.x>=0&&c.y>=0&&c.width>=.01&&c.height>=.01
-    &&c.x+c.width<=1+1e-9&&c.y+c.height<=1+1e-9,'PLUS_CROP_INVALID','裁切区域需完整位于图片内',422);
-  requireThat(Number.isInteger(s.canvas.width)&&Number.isInteger(s.canvas.height)&&s.canvas.width>=256&&s.canvas.height>=256
-    &&s.canvas.width<=3840&&s.canvas.height<=3840&&s.canvas.width*s.canvas.height<=8294400,'PLUS_CANVAS_INVALID','规格需在256至3840像素内，且总像素不超过4K画面',422);
-}
 async function source(db:Db,p:Principal,orderId:string,deliverableId:string){
   plus(p);await lockMediaOwner(db,p.tenantId,p.userId);
   const order=await owned<DTO<'Order'>>(db,'orders',orderId,p);

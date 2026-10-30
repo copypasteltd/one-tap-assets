@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T12:47:43.451317+00:00",
+  "checked_at": "2026-10-30T13:51:16.903409+00:00",
   "status": "FOCUSED_DELIVERY_NOT_FULL_PUBLICATION_ACCEPTANCE",
-  "source_set_hash": "21c214025fd9aaeda2c2b1011b8a8c5b4253c72bbf2d905f2c5bc7363adeeb86",
-  "source_files": 507,
-  "evidence": "docs/verification/plus-workspace-source.json",
+  "source_set_hash": "593fc11303be7f076b7598a70f93861bcc0baa13ad2c6815a40bc7927718a311",
+  "source_files": 518,
+  "evidence": "docs/verification/plus-render-source.json",
   "builds_passed": false,
   "selected_builds_passed": true,
   "checks": [
@@ -20,8 +20,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 17146,
-      "log_path": "runtime/delivery-builds/2026-10-30T12-46-02-363Z-6feeca84/typecheck.log",
+      "elapsed_ms": 42478,
+      "log_path": "runtime/delivery-builds/2026-10-30T13-40-20-679Z-bf6ea9e6/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -37,33 +37,33 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 394,
-      "log_path": "runtime/delivery-builds/2026-10-30T12-46-02-363Z-6feeca84/server.log",
+      "elapsed_ms": 856,
+      "log_path": "runtime/delivery-builds/2026-10-30T13-40-20-679Z-bf6ea9e6/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T12-46-02-363Z-6feeca84\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T13-40-20-679Z-bf6ea9e6\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T12-46-02-363Z-6feeca84\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T13-40-20-679Z-bf6ea9e6\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 708,
-      "log_path": "runtime/delivery-builds/2026-10-30T12-46-02-363Z-6feeca84/preview.log",
-      "log_sha256": "2ce8285b6a76054465bb55238ccb594746813812cba96a49acebcbc1af129dfb"
+      "elapsed_ms": 8091,
+      "log_path": "runtime/delivery-builds/2026-10-30T13-40-20-679Z-bf6ea9e6/preview.log",
+      "log_sha256": "4e65e1eafbb83e68811484e86d815638ac4958c048810875b091c0e522099ec0"
     }
   ],
-  "focused_tests_passed": 10,
-  "browser_checks_passed": 9,
+  "focused_tests_passed": 4,
+  "browser_checks_passed": 6,
   "native_mini_builds_and_devices": "NOT_RUN",
   "prior_captures_relabelled": false,
   "checker_weakened": false,
@@ -72,6 +72,6 @@
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "verification_mode": "FOCUSED_PLUS_PHONE_APPROVAL_AND_EDIT_DRAFTS",
-  "media_files": 162
+  "verification_mode": "FOCUSED_PLUS_SINGLE_IMAGE_NATIVE_PAYMENT_AND_PRIVATE_DELIVERY",
+  "media_files": 171
 }

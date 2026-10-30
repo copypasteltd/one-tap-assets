@@ -17,6 +17,10 @@ import { renderPhotoVideo } from './photo-video.js';
 import { loadProductionFont, verifyResourceLicenses } from './font.js';
 import {validatePlanLayout} from './plan-layout.js';
 import {communityCaptionStyle} from '../compiler/community-direction.js';
+import {plusRenderBinding,PLUS_RENDER_VERSION,PLUS_RENDER_PIXELS} from '../../shared/domain/plus-render.js';
+import {renderPlusImage} from './plus-image.js';
+import {frozenAiDisclosure} from '../compiler/disclosure.js';
+import {disclosureRaster,markDisclosureImage,inspectDisclosure} from './disclosure.js';
 import { artifactSetHash, claimMediaGeneration, commitMediaOperation, operationArtifacts, operationFor, originalMediaReceipt,
   type ArtifactSpec, type MediaOperation, type MediaPhase, type MediaReceipt, type PrivateArtifact } from './artifacts.js';
 
@@ -25,8 +29,8 @@ export function assertMediaAlive(context: ExecutionContext, signal: AbortSignal)
   requireThat(!signal.aborted, 'TOOL_EXECUTION_INTERRUPTED', '媒体执行已停止', 409);
   requireThat(Date.parse(context.snapshot.deadline_at) > Date.now(), 'ORDER_DEADLINE_EXCEEDED', '原订单制作期限已结束', 409);
 }
-export async function inspectImage(bytes: Buffer): Promise<MediaInspection> {
-  const image = sharp(bytes, { limitInputPixels: 4_000_000, failOn: 'warning' }); const meta = await image.metadata();
+export async function inspectImage(bytes: Buffer,maxPixels=4_000_000): Promise<MediaInspection> {
+  const image = sharp(bytes, { limitInputPixels: maxPixels, failOn: 'warning' }); const meta = await image.metadata();
   requireThat(meta.format === 'png' && meta.width && meta.height && !meta.exif && !meta.xmp && (!meta.pages || meta.pages === 1),
     'MEDIA_IMAGE_INVALID', '图片编码、元数据或页数不符合规格', 422);
   await image.raw().toBuffer();
@@ -44,6 +48,8 @@ export function checkReceiptSlots(context: ExecutionContext, receipt: MediaRecei
 }
 export class PhotoMediaPipeline {
   protected readonly rendererVersion:string=PHOTO_PIPELINE_VERSION;
+  protected version(context:ExecutionContext):string{return plusRenderBinding(context.contract.source)?PLUS_RENDER_VERSION:this.rendererVersion;}
+  protected pixelLimit(context:ExecutionContext):number{return plusRenderBinding(context.contract.source)?PLUS_RENDER_PIXELS:4_000_000;}
   constructor(protected pool: pg.Pool, protected cfg: Config, protected store: ObjectStorage) {}
   protected assertRoute(context:ExecutionContext):void{
     requireThat(context.snapshot.engine==='PHOTO_LAYOUT'&&context.snapshot.audio_policy.speech_mode==='NONE',
@@ -62,6 +68,8 @@ export class PhotoMediaPipeline {
       const bytes = await this.store.get(row.object_key, 125_000_000);
       requireThat(sha256(bytes) === row.sha256, 'INPUT_HASH_MISMATCH', '原订单照片字节摘要不一致', 503); photos.set(row.id, bytes);
     }
+    const plus=plusRenderBinding(context.contract.source);if(plus){const bytes=await this.store.get(plus.source_object_key,30_000_000);
+      requireThat(sha256(bytes)===plus.source_sha256&&bytes.length===plus.source_bytes,'PLUS_SOURCE_BYTES_CHANGED','原素材实际字节与冻结清单不一致',503);photos.set(plus.source_artifact_id,bytes);}
     return photos;
   }
   protected async artifact(context: ExecutionContext, operation: MediaOperation, slotId: string, bytes: Buffer, spec: ArtifactSpec, _signal?:AbortSignal): Promise<PrivateArtifact> {
@@ -75,7 +83,7 @@ export class PhotoMediaPipeline {
   protected spec(context: ExecutionContext, phase: MediaPhase, kind: ArtifactSpec['kind'], inspection: ArtifactSpec['inspection'], sourceAssets: string[], sourceArtifacts: string[] = []): ArtifactSpec {
     return { phase, kind, snapshot_hash: context.snapshotHash, plan_hash: context.snapshot.plan_hash,
       ...(context.repair?.plan_hash?{repair_plan_hash:context.repair.plan_hash}:{}),
-      identity_lock_hash: context.snapshot.identity_lock_hash, renderer_version: this.rendererVersion,
+      identity_lock_hash: context.snapshot.identity_lock_hash, renderer_version: this.version(context),
       source_asset_ids: [...new Set(sourceAssets)].sort(), source_artifact_ids: [...new Set(sourceArtifacts)].sort(),
       resource_bindings: context.snapshot.resource_versions, inspection };
   }
@@ -99,13 +107,16 @@ export class PhotoMediaPipeline {
       const slot = context.snapshot.outputs.find(s => s.slot_id === artifact.slot_id)!;
       requireThat(artifact.spec.snapshot_hash === context.snapshotHash && artifact.spec.plan_hash === context.snapshot.plan_hash
         && artifact.spec.repair_plan_hash === (context.repair?.plan_hash??undefined)
-        && artifact.spec.identity_lock_hash === context.snapshot.identity_lock_hash && artifact.spec.renderer_version === this.rendererVersion
+        && artifact.spec.identity_lock_hash === context.snapshot.identity_lock_hash && artifact.spec.renderer_version === this.version(context)
         && hash(artifact.spec.resource_bindings) === hash(context.snapshot.resource_versions),
         'MEDIA_RECEIPT_MISMATCH', '产物来源不属于冻结合同或执行器版本', 503);
       let actual: ArtifactSpec['inspection'];
       if (slot.kind === 'image') {
-        actual = await inspectImage(bytes);
+        actual = await inspectImage(bytes,this.pixelLimit(context));
         requireThat(actual.width === slot.width && actual.height === slot.height, 'MEDIA_CONTRACT_FAILED', '图片实际尺寸不符合合同', 422);
+        if(plusRenderBinding(context.contract.source)?.inherits_ai){const policy=frozenAiDisclosure(context.contract)!;
+          const proof=await inspectDisclosure(this.cfg,policy,bytes,{kind:'image',width:slot.width!,height:slot.height!,frames:1,directory,deadline_at:context.snapshot.deadline_at,signal});
+          requireThat(artifact.spec.ai_disclosure&&hash(artifact.spec.ai_disclosure)===hash(proof),'AI_DISCLOSURE_PROOF_INVALID','进阶图片实际标识与冻结证明不一致',503);}
       } else if (slot.kind === 'video') {
         const path = join(directory, `${artifact.id}.mp4`); await writeFile(path, bytes, { flag: 'wx' });
         actual = await this.videoInspection(context, path, signal);
@@ -121,6 +132,14 @@ export class PhotoMediaPipeline {
     const photos = await this.photos(context); const creative = context.contract.creative; const artifacts: PrivateArtifact[] = [];
     const configuredStyle = context.contract.source.creative_components.platform_style_id;
     const styleId = typeof configuredStyle === 'string' ? configuredStyle : context.snapshot.preset_id;
+    const plus=plusRenderBinding(context.contract.source);if(plus){
+      const source=photos.get(plus.source_artifact_id)!;const policy=frozenAiDisclosure(context.contract);
+      let bytes=await renderPlusImage(source,{source:context.contract.source,plan:creative,presetId:context.snapshot.preset_id,font,...(policy?{disclosure:policy}:{})});
+      if(policy)bytes=await markDisclosureImage(bytes,await disclosureRaster(this.cfg,policy,plus.settings.canvas.width,plus.settings.canvas.height),PLUS_RENDER_PIXELS);
+      const spec=this.spec(context,'PRODUCTION','image',await inspectImage(bytes,PLUS_RENDER_PIXELS),[plus.source_artifact_id]);
+      if(policy)spec.ai_disclosure=await inspectDisclosure(this.cfg,policy,bytes,{kind:'image',width:plus.settings.canvas.width,height:plus.settings.canvas.height,frames:1,directory,deadline_at:context.snapshot.deadline_at,signal});
+      return [await this.artifact(context,operation,'plus-image',bytes,spec)];
+    }
     for (const [index, slot] of context.snapshot.outputs.filter(s => s.kind === 'image').entries()) {
       assertMediaAlive(context, signal); const planned = creative.image_slots.find(s => s.slot_id === slot.slot_id)!;
       const photo = photos.get(planned.asset_id); requireThat(photo && slot.width && slot.height, 'PHOTO_MISSING', '缺少本单原始商品照片', 422);
@@ -151,8 +170,8 @@ export class PhotoMediaPipeline {
       requireThat(sha256(input) === original.sha256, 'ARTIFACT_HASH_MISMATCH', '原制作产物已发生变化', 503);
       let bytes: Buffer; let inspection: MediaInspection;
       if (slot.kind === 'image') {
-        bytes = await sharp(input, { limitInputPixels: 4_000_000, failOn: 'warning' }).png({ compressionLevel: 9 }).toBuffer();
-        inspection = await inspectImage(bytes);
+        bytes = await sharp(input, { limitInputPixels: this.pixelLimit(context), failOn: 'warning' }).png({ compressionLevel: 9 }).toBuffer();
+        inspection = await inspectImage(bytes,this.pixelLimit(context));
       } else {
         const inputPath = join(directory, `${id('input')}.mp4`); const outputPath = join(directory, `${id('final')}.mp4`);
         await writeFile(inputPath, input, { flag: 'wx' });
@@ -162,8 +181,10 @@ export class PhotoMediaPipeline {
         { cwd: directory, timeoutMs: Math.max(1, Math.min(180000, Date.parse(context.snapshot.deadline_at) - Date.now())), signal });
         inspection = await this.videoInspection(context, outputPath, signal); bytes = await readFile(outputPath);
       }
-      artifacts.push(await this.artifact(context, operation, slot.slot_id, bytes,
-        this.spec(context, 'POST', slot.kind, inspection, original.spec.source_asset_ids, [original.id]),signal));
+      const spec=this.spec(context, 'POST', slot.kind, inspection, original.spec.source_asset_ids, [original.id]);
+      if(slot.kind==='image'&&plusRenderBinding(context.contract.source)?.inherits_ai){const policy=frozenAiDisclosure(context.contract)!;
+        spec.ai_disclosure=await inspectDisclosure(this.cfg,policy,bytes,{kind:'image',width:slot.width!,height:slot.height!,frames:1,directory,deadline_at:context.snapshot.deadline_at,signal});}
+      artifacts.push(await this.artifact(context, operation, slot.slot_id, bytes,spec,signal));
     }
     return artifacts;
   }
@@ -176,7 +197,7 @@ export class PhotoMediaPipeline {
     assertMediaAlive(context, signal);
     await validatePlanLayout(context.contract.creative,context.contract.source,context.snapshot.preset_id,await loadProductionFont(this.cfg.projectRoot),context.contract.ai_disclosure_contract);
     const previous = phase === 'POST' ? await operationArtifacts(this.pool, context, 'PRODUCTION') : null;
-    const inputHash = hash({ renderer_version: this.rendererVersion, phase, snapshot_hash: context.snapshotHash,
+    const inputHash = hash({ renderer_version: this.version(context), phase, snapshot_hash: context.snapshotHash,
       creative: context.contract.creative, production_set_hash: previous ? artifactSetHash(previous.receipt.artifacts) : null });
     let operation = await operationFor(this.pool, scope, intent, phase, inputHash);
     const directory = inside(this.cfg.runtimeRoot, `media-work/${operation.id}/${id('attempt')}`); await mkdir(directory, { recursive: true });

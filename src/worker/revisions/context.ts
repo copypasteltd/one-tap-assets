@@ -45,13 +45,13 @@ export function checkedRevisionChange(pack:DTO<'Deliverables'>,request:DTO<'Revi
     requireThat(request.image_text&&pack.items.some(i=>i.kind==='image'&&i.deliverable_id===request.image_text!.deliverable_id),
       'REVISION_IMAGE_NOT_OWNED','请选择当前本单已交付的图片',422);
     checkImageText(request.image_text.text,policy);
-    validateCreativePlan({...contract.creative,copy:request.image_text.text},contract.profile,contract.source);
+    validateCreativePlan({...contract.creative,copy:request.image_text.text},contract.profile,contract.source,true);
   }
   if(request.kind==='DISPLAY_TEXT'){
     requireThat(request.display_text?.trim() && request.display_text===request.display_text.trim(),'REVISION_TEXT_INVALID','请输入完整的展示文字并去除首尾空白',422);
     requireThat(pack.items.filter(i=>i.kind==='copy').length===1,'REVISION_TEXT_UNAVAILABLE','本单缺少唯一可修改的配套展示文案',422);
     requireThat(request.display_text!==pack.items.find(i=>i.kind==='copy')?.text,'REVISION_NO_CHANGE','配套文案尚未改变',422);
-    validateCreativePlan({...contract.creative,copy:request.display_text},contract.profile,contract.source);
+    validateCreativePlan({...contract.creative,copy:request.display_text},contract.profile,contract.source,true);
   }
   return structuredClone(request);
 }

@@ -87,11 +87,12 @@ function response(operation:string,path:string,body:any,key=''):unknown{
     case 'getPlan':return {plan_id:'demo_plan',product_id:product.product_id,profile_id:profile.profile_id,variant_id:first.execution_variants[0]!.variant_id,state:'READY',engine:'PHOTO_LAYOUT',plan_hash:'a'.repeat(64),summary:'演示清单：同一件商品，按极简净白方案制作配套图片、短片与文案。',output_slots:firstSlots};
     case 'createQuote':return {quote_id:'demo_quote',amount_fen:0,currency:'CNY',expires_at:expires,hard_deadline_seconds:600};
     case 'createOrder':return order;
+    case 'listPlusRenderPlans':return {items:[],next_cursor:null};
     case 'listPlusSessions':return {items:demoPlusSessions,next_cursor:null};
-    case 'inspectPlusLink':return {link_id:'pluslink_synthetic',user_code:body.user_code,expires_at:expires,state:'PENDING',access:'OWN_PROJECTS_AND_EDIT_DRAFTS'};
+    case 'inspectPlusLink':return {link_id:'pluslink_synthetic',user_code:body.user_code,expires_at:expires,state:'PENDING',access:'OWN_PROJECTS_AND_EDIT_DRAFTS',can_prepare_render_plans:false};
     case 'decidePlusLink':{
-      if(body.decision==='APPROVE')demoPlusSessions=[{session_id:'plussession_synthetic_replay',platform:'alipay',created_at:created,expires_at:expires,state:'ACTIVE'}];
-      return {link_id:'pluslink_synthetic',user_code:body.user_code,expires_at:expires,state:body.decision==='APPROVE'?'APPROVED':'DENIED',access:'OWN_PROJECTS_AND_EDIT_DRAFTS'};}
+      if(body.decision==='APPROVE')demoPlusSessions=[{session_id:'plussession_synthetic_replay',platform:'alipay',created_at:created,expires_at:expires,state:'ACTIVE',can_prepare_render_plans:false}];
+      return {link_id:'pluslink_synthetic',user_code:body.user_code,expires_at:expires,state:body.decision==='APPROVE'?'APPROVED':'DENIED',access:'OWN_PROJECTS_AND_EDIT_DRAFTS',can_prepare_render_plans:false};}
     case 'revokePlusSession':{const session=demoPlusSessions[0]!;demoPlusSessions=[];return {...session,state:'REVOKED'};}
     case 'recordRecommendationEvent':window.dispatchEvent(new CustomEvent('preview:recommendation-event',{detail:{kind:body.kind}}));return {accepted:true,duplicate:false};
     case 'recommendPresets':return new URLSearchParams(location.search).get('scenario')==='recommendations'

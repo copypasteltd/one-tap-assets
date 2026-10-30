@@ -176,5 +176,6 @@
     "release_target_seconds": 300,
     "reaper_interval_seconds": 60,
     "cleanup_alert_seconds": 600
-  }
+  },
+  "api_operations": 95
 }

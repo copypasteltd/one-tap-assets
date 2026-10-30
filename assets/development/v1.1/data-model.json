@@ -1824,7 +1824,8 @@
         "tenant_id",
         "owner_id",
         "identity_id",
-        "session_id"
+        "session_id",
+        "allow_render_plans"
       ],
       "invariant": "Explicit native confirmation only; 5-minute challenge; hashed secrets; retries preserve original session and expiry.",
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
@@ -1841,7 +1842,8 @@
         "token_hash",
         "created_at",
         "expires_at",
-        "revoked_at"
+        "revoked_at",
+        "allow_render_plans"
       ],
       "invariant": "One-hour independent read/edit capability; no native payment/refund or identity merge; revocation checked inside each transaction and signed download.",
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
@@ -1878,6 +1880,26 @@
         "created_at"
       ],
       "invariant": "Append-only edit metadata versions, independent of immutable paid delivery; erased with source deletion.",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "plus_render_plans",
+      "primary_key": "id",
+      "scope": "tenant",
+      "fields": [
+        "id",
+        "tenant_id",
+        "owner_id",
+        "product_id",
+        "draft_id",
+        "draft_revision",
+        "source_order_id",
+        "plan_id",
+        "input_hash",
+        "binding",
+        "created_at"
+      ],
+      "invariant": "Immutable independently quoted render plan; exact owned source/edit/tariff frozen, no payment capability in browser; unique natural input and product deletion erasure.",
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
     }
   ],

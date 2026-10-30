@@ -8,6 +8,8 @@ import { validateCreativePlan, creativePlanHash, type CreativePlan } from '../co
 import type { ToolScope } from './http.js';
 import type { ToolHandler } from './consumer.js';
 import {validatePlanLayout} from '../media/plan-layout.js';
+import {plusRenderBinding} from '../../shared/domain/plus-render.js';
+import {verifyPlusRenderSource} from '../../api/modules/plus-render-source.js';
 import {communityNativeBinding,validateCommunityNativePlan,verifyCommunityNativeRegistration,type CommunityNativeBinding} from '../../api/modules/community-native.js';
 
 export interface PlanContext { profile: DTO<'Profile'>; source: VariantSource; presetId:string; planId: string; native:CommunityNativeBinding|null }
@@ -25,6 +27,9 @@ export async function planningContext(db: pg.Pool | pg.PoolClient, tenantId: str
     AND deleted_at IS NULL AND expires_at>now()`, [tenantId, plan.product_id, plan.profile_id]);
   requireThat(product.rowCount === 1, 'INPUT_VERSION_CHANGED', '当前商品输入已更新或删除', 409);
   validate('Profile', profile.data, true);
+  const plus=plusRenderBinding(plan.private.source);if(plus){
+    const owner=(await db.query<{owner_id:string}>('SELECT owner_id FROM plan_versions WHERE tenant_id=$1 AND id=$2',[tenantId,planId])).rows[0]!;
+    await verifyPlusRenderSource(db,tenantId,owner.owner_id,plus,true);}
   const { profile_hash, ...body } = profile.data; requireThat(hash(body) === profile_hash, 'PROFILE_HASH_MISMATCH', '商品证据摘要不一致', 503);
   requireThat(typeof plan.private.request?.preset_id === 'string' && plan.private.request.preset_id.length > 0,
     'PLAN_INPUT_CHANGED', '原方案选择信息不完整，请重新选择方案', 409);

@@ -1,0 +1,100 @@
+{
+  "captured_at": "2026-10-30T13:44:09.514Z",
+  "status": "PASS",
+  "source_set_hash": "593fc11303be7f076b7598a70f93861bcc0baa13ad2c6815a40bc7927718a311",
+  "build_root": "runtime/delivery-builds/2026-10-30T13-40-20-679Z-bf6ea9e6/runtime/build",
+  "data_source": "ACTUAL_HTTPS_POSTGRESQL_MCP_PNG_CONTENT_PRODUCTION_POST_QC_TWO_REVIEWS_AND_DELIVERY;SYNTHETIC_IDENTITY_PAYMENT_MODEL_VERDICTS_AND_PROCESS_IDENTITY",
+  "checks": [
+    "EXPLICIT_NATIVE_PHONE_APPROVAL_OF_SEPARATE_PREPARE_SCOPE",
+    "UNSAVED_EDITS_CANNOT_ENTER_COMMERCIAL_PLAN",
+    "PERSISTED_CONTENT_ROLE_AND_FROZEN_PRICE_HANDOFF",
+    "DISTINCT_NATIVE_QUOTE_ORDER_AND_SYNTHETIC_PAYMENT_BEFORE_WORK",
+    "ACTUAL_NEW_PNG_AND_COPY_AFTER_PRODUCTION_POST_QC_AND_TWO_REVIEWS",
+    "ORIGINAL_PACK_PRESERVED"
+  ],
+  "screenshots": [
+    {
+      "path": "docs/media/plus-render/01-explicit-production-scope.png",
+      "page": "01-explicit-production-scope"
+    },
+    {
+      "path": "docs/media/plus-render/02-edited-size-and-separate-price.png",
+      "page": "02-edited-size-and-separate-price"
+    },
+    {
+      "path": "docs/media/plus-render/03-native-payment-handoff.png",
+      "page": "03-native-payment-handoff"
+    },
+    {
+      "path": "docs/media/plus-render/04-reviewed-production-complete.png",
+      "page": "04-reviewed-production-complete"
+    },
+    {
+      "path": "docs/media/plus-render/05-new-private-image-and-copy.png",
+      "page": "05-new-private-image-and-copy"
+    },
+    {
+      "path": "docs/media/plus-render/06-actual-edited-image.png",
+      "page": "ACTUAL_NEW_PNG_OUTPUT_NOT_A_SCREENSHOT"
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/media/plus-render/01-explicit-production-scope.png",
+      "bytes": 124392,
+      "sha256": "f31b474df321abfa4d67bd8b918532c674f30c2e49e901f0119f1d66c16484d3"
+    },
+    {
+      "path": "docs/media/plus-render/02-edited-size-and-separate-price.png",
+      "bytes": 126406,
+      "sha256": "98feb0b2858e9ecfa4d6baa27275583e8da92bdc15a809425d20b2fa7fb58fdb"
+    },
+    {
+      "path": "docs/media/plus-render/03-native-payment-handoff.png",
+      "bytes": 113806,
+      "sha256": "a3547e0fa34e40420482bba7031d4b0c5def22c29d1d6994d21de9e1953f9fd8"
+    },
+    {
+      "path": "docs/media/plus-render/04-reviewed-production-complete.png",
+      "bytes": 111093,
+      "sha256": "77d9483dada72949d7a6351e048ccb62966d8f04ba2d9bad10d5fe946d294b50"
+    },
+    {
+      "path": "docs/media/plus-render/05-new-private-image-and-copy.png",
+      "bytes": 78135,
+      "sha256": "810b8bdee7c1f6ce939d0873086896b77bae81d5c960bff7ca2f7ed26f391728"
+    },
+    {
+      "path": "docs/media/plus-render/06-actual-edited-image.png",
+      "bytes": 32258,
+      "sha256": "e0af9d4569eed54fceb1820624db82da94a151668763d8b70285ba98a1fcf0fb"
+    },
+    {
+      "path": "docs/media/plus-render/walkthrough.mp4",
+      "bytes": 567496,
+      "sha256": "a4cfb60ce7ade8c7d97d6492826a0ede53c3d62695719ac4908b91ec2c7a40c8"
+    },
+    {
+      "path": "docs/media/plus-render/walkthrough.webm",
+      "bytes": 3029030,
+      "sha256": "1f4e6c87c61e5d770e6ade00372683c119e033266e8abbea929cb063f3c5ab27"
+    },
+    {
+      "path": "docs/media/plus-render/walkthrough.gif",
+      "bytes": 827046,
+      "sha256": "9cb80c93992540c5d94e29ded7417298ed021a49b02121636a8b709e6dd62681"
+    }
+  ],
+  "recording": {
+    "format": {
+      "duration": "29.800000"
+    }
+  },
+  "browser_errors": [],
+  "external_network_requests": [],
+  "browser_tabs_closed": true,
+  "owned_api_and_database_pool_closed": true,
+  "real_service_or_payment_verified": false,
+  "native_mini_device_verified": false,
+  "full_product_verified": false
+}

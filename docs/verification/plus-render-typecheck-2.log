@@ -1,0 +1,8 @@
+tests/helpers/plus-render.ts(56,40): error TS2554: Expected 1 arguments, but got 2.
+tests/helpers/plus-render.ts(68,122): error TS2344: Type '"PlusSession"' does not satisfy the constraint '"Platform" | "StringMap" | "AssetState" | "AnalysisState" | "Observation" | "Hypothesis" | "Evidence" | "Engine" | "AdmissionState" | "OutputSlot" | "PresetSummary" | "Variant" | ... 283 more ... | "ProductInsightsResponse"'.
+tests/integration/plus-render.test.ts(7,65): error TS2344: Type '"PlusSession"' does not satisfy the constraint '"Platform" | "StringMap" | "AssetState" | "AnalysisState" | "Observation" | "Hypothesis" | "Evidence" | "Engine" | "AdmissionState" | "OutputSlot" | "PresetSummary" | "Variant" | ... 283 more ... | "ProductInsightsResponse"'.
+tests/integration/plus-render.test.ts(8,49): error TS18046: 'session' is of type 'unknown'.
+tests/integration/plus-render.test.ts(11,38): error TS18046: 'old' is of type 'unknown'.
+tests/integration/plus-render.test.ts(12,102): error TS18046: 'old' is of type 'unknown'.
+tests/integration/plus-render.test.ts(14,87): error TS18046: 'old' is of type 'unknown'.
+tests/integration/plus-render.test.ts(15,40): error TS18046: 'session' is of type 'unknown'.

@@ -24,6 +24,8 @@ import {freezeAiDisclosure,frozenAiDisclosure} from '../../worker/compiler/discl
 import {bundleForSource} from '../../worker/codex/skills.js';
 import {freezeNativeSale,verifyNativeSaleLive,verifyNativeSaleRegistration} from '../../worker/audio/commerce.js';
 import {communityNativeBinding,verifyCommunityNativeQuote} from './community-native.js';
+import {plusRenderBinding,derivePlusSource} from '../../shared/domain/plus-render.js';
+import {verifyPlusRenderSource} from './plus-render-source.js';
 export { requestRefundInternal } from './refunds.js';
 
 export async function createQuote(db: Db, cfg: Config, p: Principal, request: DTO<'QuoteRequest'>): Promise<DTO<'Quote'>> {
@@ -44,7 +46,12 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
   const codexContract = privateData.codex_contract as DTO<'CodexContract'>;
   validateInternal('codex-contract', codexContract);
   const skill=await bundleForSource(cfg,privateData.source,codexContract.skill_bundle_hash);
-  requireThat(hash(plan.private?.source)===hash(privateData.source),'PLAN_SOURCE_CHANGED','方案制作配置已变化，请重新规划',409);
+  const plus=plusRenderBinding(plan.private!.source as FrozenContract['source']);
+  const executionSource=plus?derivePlusSource(privateData.source,plus):privateData.source;
+  requireThat(hash(plan.private?.source)===hash(executionSource),'PLAN_SOURCE_CHANGED','方案制作配置已变化，请重新规划',409);
+  if(plus){requireThat(cfg.plusRender.enabled&&cfg.plusRender.priceFen===plus.pricing.amount_fen&&cfg.plusRender.pricingVersion===plus.pricing.version,
+    'PLUS_RENDER_PRICING_CHANGED','进阶制作价格或服务配置已变化，请重新整理独立清单',409);
+    await verifyPlusRenderSource(db,p.tenantId,p.userId,plus,true,Number((executionSource.slo_policy as {hard_deadline_seconds:number}).hard_deadline_seconds));}
   const planned = plan.private?.runtime_admission as CodexAdmission | undefined;
   requireThat(planned && plan.private?.content_run_id && codexContract.runtime_sha256 === planned.runtime_sha256
     && codexContract.runtime_build_id === planned.runtime_build_id && codexContract.protocol_version === planned.protocol_version
@@ -63,7 +70,7 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
   const resources = bindProductionFont(privateData.resource_versions ?? []);
   await verifyResourceLicenses(db, resources);
   const contract: FrozenContract = { product: product.data, profile: profile.data, photo_set_hash: photo.photo_set_hash, identity_lock_hash: String(lock.hash),
-    request: plan.private!.request as DTO<'PlanRequest'>, creative: plan.private!.creative as CreativePlan, source: privateData.source, plan_hash: request.plan_hash,
+    request: plan.private!.request as DTO<'PlanRequest'>, creative: plan.private!.creative as CreativePlan, source: executionSource, plan_hash: request.plan_hash,
     model_versions: models.rows.map(m => m.data), resource_versions: resources, codex_contract: codexContract,
     budget_micro: privateData.budget_micro ?? 0, repair_ceiling_micro: privateData.repair_ceiling_micro ?? 0,
     runtime_binding: { admission, limits: { owner_id: p.userId, max_requests: codexContract.max_turns_per_role * 4,
@@ -86,8 +93,9 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
   }
   requireThat(contract.budget_micro >= codexContract.agent_cost_ceiling_micro + contract.revision_policy.budget_micro,
     'BUDGET_INVALID', '原订单总预算必须同时覆盖制作与受限修改', 503);
-  const data: DTO<'Quote'> = { quote_id: id('quote'), plan_id: plan.id, plan_hash: request.plan_hash, state: 'OPEN', currency: 'CNY', amount_fen: current.data.price_fen,
-    expires_at: new Date(Math.min(Date.parse(addSeconds(900)),Date.parse(contract.native_sale_contract?.valid_until??addSeconds(900)),native?Date.parse(native.valid_until):Infinity)).toISOString(), output_slots: plan.data.output_slots, terms_version: 'YPCC-TERMS-3.1', hard_deadline_seconds: Number((privateData.source.slo_policy as { hard_deadline_seconds: number }).hard_deadline_seconds) };
+  const data: DTO<'Quote'> = { quote_id: id('quote'), plan_id: plan.id, plan_hash: request.plan_hash, state: 'OPEN', currency: 'CNY', amount_fen: plus?.pricing.amount_fen??current.data.price_fen,
+    expires_at: new Date(Math.min(Date.parse(addSeconds(900)),Date.parse(contract.native_sale_contract?.valid_until??addSeconds(900)),native?Date.parse(native.valid_until):Infinity,
+      plus?Date.parse(plus.source_expires_at)-Number((executionSource.slo_policy as {hard_deadline_seconds:number}).hard_deadline_seconds)*1000:Infinity)).toISOString(), output_slots: plan.data.output_slots, terms_version: 'YPCC-TERMS-3.1', hard_deadline_seconds: Number((executionSource.slo_policy as { hard_deadline_seconds: number }).hard_deadline_seconds) };
   const binding = { tenant_id: p.tenantId, quote_id: data.quote_id, preview_session_id: plan.id, plan_hash: request.plan_hash, codex_contract: codexContract, codex_contract_hash: hash(codexContract), skill_bundle_hash: codexContract.skill_bundle_hash, expires_at: data.expires_at };
   validateInternal('codex-quote-binding', binding);
   await insert(db, 'quotes', { id: data.quote_id, tenant_id: p.tenantId, owner_id: p.userId, plan_id: plan.id, plan_hash: request.plan_hash, amount_fen: data.amount_fen, expires_at: data.expires_at, state: data.state, data, private: { contract, binding, contract_hash: hash(contract) } });
@@ -104,6 +112,8 @@ export async function createOrder(db: Db, cfg: Config, p: Principal, request: DT
   const contract = quote.private!.contract as FrozenContract;
   frozenAiDisclosure(contract);
   requireThat(hash(contract)===quote.private!.contract_hash,'QUOTE_CONTRACT_MISMATCH','原报价合同摘要不一致',503);
+  const plus=plusRenderBinding(contract.source);if(plus){requireThat(cfg.plusRender.enabled,'PLUS_RENDER_NOT_ADMITTED','进阶图片制作已暂停，请保留草稿',503);
+    await verifyPlusRenderSource(db,p.tenantId,p.userId,plus,true,Number((contract.source.slo_policy as {hard_deadline_seconds:number}).hard_deadline_seconds));}
   if(contract.source.audio_policy.speech==='none')await verifyNativeAudioLive(db,contract,true);
   else await verifyNativeSaleLive(db,cfg,contract,true);
   const product = await owned<DTO<'Product'>>(db, 'product_drafts', contract.product.product_id, p);
@@ -138,9 +148,12 @@ export async function confirmPayment(db: Db, event: VerifiedPayment): Promise<DT
   const canExecute=order.data.fulfillment_state==='NOT_STARTED'&&Date.parse(order.data.payable_until)>=Date.now()&&!('media_revoked' in order.private);
   let audioEligible=true;let audioReason='AUDIO_RIGHTS_UNAVAILABLE';
   try{if(canExecute){await verifyNativeAudioLive(db,order.private.contract,true);
+    const plus=plusRenderBinding(order.private.contract.source);if(plus)await verifyPlusRenderSource(db,tenant,order.owner_id,plus,true,
+      Number((order.private.contract.source.slo_policy as {hard_deadline_seconds:number}).hard_deadline_seconds));
     if(order.private.contract.native_sale_contract)await verifyNativeSaleRegistration(db,order.private.contract,true);}}
   catch(e){
-    if(e instanceof AppError&&e.code==='NATIVE_SALE_CAPABILITY_CHANGED'){audioEligible=false;audioReason='AUDIO_CAPABILITY_UNAVAILABLE';}
+    if(e instanceof AppError&&['PLUS_SOURCE_UNAVAILABLE','PLUS_SOURCE_CHANGED','INPUT_VERSION_CHANGED'].includes(e.code)){audioEligible=false;audioReason='PLUS_SOURCE_UNAVAILABLE';}
+    else if(e instanceof AppError&&e.code==='NATIVE_SALE_CAPABILITY_CHANGED'){audioEligible=false;audioReason='AUDIO_CAPABILITY_UNAVAILABLE';}
     else if(e instanceof AppError&&['AUDIO_LICENSE_UNAVAILABLE','CHARACTER_VOICE_NOT_ADMITTED','AUDIO_CHARACTER_CHANGED','AUDIO_LICENSE_CHANGED','RESOURCE_LICENSE_UNAVAILABLE'].includes(e.code))audioEligible=false;
     else throw e;
   }

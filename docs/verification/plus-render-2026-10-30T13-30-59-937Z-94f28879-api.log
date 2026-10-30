@@ -1,0 +1,37 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ❯ tests/integration/plus-render.test.ts (4 tests | 1 failed) 6124ms
+   ✓ requires an explicitly approved new capability, keeps financial operations native and scopes requests to the owner 279ms
+   ✓ freezes crop, size, copy and separate price, deduplicates retries and rejects stale drafts 137ms
+   × runs content planning, native fee confirmation and a distinct synthetic payment before queuing work 3386ms
+   · renders the actual edited PNG, seals its source reference, independently reviews and delivers a new private pack
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/plus-render.test.ts > runs content planning, native fee confirmation and a distinct synthetic payment before queuing work
+AssertionError: expected 400 to be 409 // Object.is equality
+
+- Expected
++ Received
+
+- 409
++ 400
+
+ ❯ tests/integration/plus-render.test.ts:37:121
+     35|   expect(request.plan.state).toBe('READY');expect(request.plan.output_…
+     36|   const body={plan_id:request.plan.plan_id,plan_hash:request.plan.plan…
+     37|   f.cfg.plusRender.pricingVersion='SYNTHETIC-CHANGED';expect((await f.…
+       |                                                                                                                         ^
+     38|   const quoted=await f.call('/quotes','POST',body,native());expect(quo…
+     39|   const created=await f.call('/orders','POST',{quote_id:quoted.json().…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 passed (4)
+   Start at  21:31:02
+   Duration  7.61s (tests 82%, import 12%, transform 6%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/plus-render-2026-10-30T13-30-59-937Z-94f28879/api.json

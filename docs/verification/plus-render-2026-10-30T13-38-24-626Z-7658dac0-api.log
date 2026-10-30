@@ -1,0 +1,32 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ❯ tests/integration/plus-render.test.ts (4 tests | 1 failed) 24911ms
+   ✓ requires an explicitly approved new capability, keeps financial operations native and scopes requests to the owner 964ms
+   ✓ freezes crop, size, copy and separate price, deduplicates retries and rejects stale drafts 255ms
+   ✓ runs content planning, native fee confirmation and a distinct synthetic payment before queuing work 5259ms
+   × renders the actual edited PNG, seals its source reference, independently reviews and delivers a new private pack 12387ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/plus-render.test.ts > renders the actual edited PNG, seals its source reference, independently reviews and delivers a new private pack
+AssertionError: {"code":"RESPONSE_CONTRACT_ERROR","message":"服务端响应校验失败","retryable":false,"trace_id":"trace_3e1c2e34e93a443593177bf2f45249fc","details":[{"field":"/order/delivery_expires_at","reason":"must match pattern \"^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$\""},{"field":"/order/delivery_expires_at","reason":"must be null"},{"field":"/order/delivery_expires_at","reason":"must match a schema in anyOf"},{"field":"/order","reason":"must be null"},{"field":"/order","reason":"must match a schema in anyOf"}]}: expected 500 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 500
+
+ ❯ tests/integration/plus-render.test.ts:58:136
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 3 passed (4)
+   Start at  21:38:25
+   Duration  27.13s (tests 93%, import 5%, transform 2%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/plus-render-2026-10-30T13-38-24-626Z-7658dac0/api.json

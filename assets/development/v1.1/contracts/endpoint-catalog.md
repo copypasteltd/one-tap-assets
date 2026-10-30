@@ -180,3 +180,7 @@ GET 推荐保持只读。可见比例至少 50% 且连续停留 500ms 后报曝�
 | GET /plus/edit-drafts/{draft_id} | getPlusEditDraft | 无 → PlusEditDraft |
 | PUT /plus/edit-drafts/{draft_id} | savePlusEditDraft | PlusEditSaveRequest → PlusEditDraft |
 | GET /plus/edit-drafts | listPlusEditDrafts | 无 → PlusEditList |
+| GET /plus/render-styles | listPlusRenderStyles | 无 → PlusRenderStyleList |
+| POST /plus/edit-drafts/{draft_id}/render-plans | createPlusRenderPlan | PlusRenderCreateRequest → PlusRenderPlan |
+| GET /plus/render-plans | listPlusRenderPlans | 无 → PlusRenderPlanList |
+| GET /plus/render-plans/{request_id} | getPlusRenderPlan | 无 → PlusRenderPlan |

@@ -24,6 +24,7 @@ import { validateMediaStageResult } from '../tool-gateway/production-tools.js';
 import { extractEvidenceFrames, FRAME_SAMPLING_POLICY } from './evidence.js';
 import { assertSealedPacket, packetHash, reviewHash, REVIEW_HASH_ALGORITHM } from './packet.js';
 import {nativeAudioQc,nativeQcWrites,nativeQcResources,verifyNativeAudioEvidence,type NativeQcBundle} from './native-audio.js';
+import {plusRenderBinding} from '../../shared/domain/plus-render.js';
 
 export const PHOTO_QC_POLICY = 'YPCC-QC-PHOTO-1.0.0';
 export function mediaQcPolicy(context:ExecutionContext):string{
@@ -126,6 +127,9 @@ export class QualityControlService {
           frame_index: frame, time_ms: frame === null ? null : Math.round(frame * 1000 / 30), data });
         nativeBytes?.set(evidenceId,bytes);
       };
+      const plus=plusRenderBinding(context.contract.source);if(plus){const bytes=await this.store.get(plus.source_object_key,30_000_000);
+        requireThat(sha256(bytes)===plus.source_sha256,'PLUS_SOURCE_BYTES_CHANGED','进阶原图与冻结来源不一致',503);
+        await save('CANDIDATE_IMAGE',bytes,null,{purpose:'PLUS_SOURCE_REFERENCE',source_artifact_id:plus.source_artifact_id,source_sha256:plus.source_sha256});}
       for (const artifact of post.receipt.artifacts) {
         const bytes = await this.store.get(artifact.object_key, artifact.spec.kind === 'video' ? 512_000_000 : 30_000_000);
         requireThat(sha256(bytes) === artifact.sha256, 'ARTIFACT_HASH_MISMATCH', '审查前候选文件已变化', 503);
@@ -145,6 +149,7 @@ export class QualityControlService {
         {audio_contract_hash:audio.audio_contract_hash,asr_submission_id:audio.asr_submission_id},null,item.mime_type);
       await save('CONTRACT', Buffer.from(JSON.stringify({ version: policy, snapshot: context.snapshot, profile: context.contract.profile,
         creative_plan: context.contract.creative, resources: context.snapshot.resource_versions, sampling_policy: FRAME_SAMPLING_POLICY,
+        ...(plus?{plus_render:{binding:plus,user_input_status:'USER_PROVIDED_UNVERIFIED',review_instruction:'核对所选原图、裁切、完整文字与规格。用户品牌/事实仅是补充，必须由原商品证据支持，不能提升为观察事实；源图的AI属性须保留。'}}:{}),
         ...(context.repair?{repair_binding:{authorization_id:context.repair.authorization_id,source_packet_id:context.repair.source_packet_id,
           source_packet_hash:context.repair.source_packet_hash,planning_stage_id:context.repair.planning_stage_id,
           plan_hash:context.repair.plan_hash,target_slot_ids:context.repair.target_slot_ids}}:{}),
@@ -154,7 +159,7 @@ export class QualityControlService {
       const packet: DTO<'ReviewPacket'> = { packet_id: packetId, tenant_id: context.tenantId, order_id: context.orderId,
         state: 'SEALED', packet_hash: '', snapshot_hash: context.snapshotHash, identity_lock_hash: context.snapshot.identity_lock_hash,
         skill_bundle_hash: context.snapshot.codex_contract.skill_bundle_hash, qc_policy_version: policy,
-        original_assets: [...photos].map(([asset_id, bytes]) => ({ asset_id, sha256: sha256(bytes) })),
+        original_assets: [...photos].filter(([asset_id])=>!plus||asset_id!==plus.source_artifact_id).map(([asset_id, bytes]) => ({ asset_id, sha256: sha256(bytes) })),
         evidence_assets: evidence.map(e => ({ asset_id: e.id, sha256: e.sha256 })), required_slot_ids: context.snapshot.outputs.map(s => s.slot_id),
         outputs, output_set_hash: reviewHash(outputs), production_run_ids: identities.map(i => i.run_id),
         production_thread_ids: identities.map(i => i.thread_id), production_process_refs: identities.map(i => i.process_ref),

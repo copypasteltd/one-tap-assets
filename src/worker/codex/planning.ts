@@ -54,7 +54,7 @@ export class ContentPlanningService {
       completed = await this.executor.execute({ lease, role: 'CONTENT', variantId: skill.payload.variant_id,
         bundleHash: row.private.bundle_hash, admission, limits: row.private.inference_limits,
         allowedTools: ['analyze_photos', 'validate_content_plan', 'persist_stage_result'], outputSchema: creativePlanSchema,
-        input: { task: '基于已核验商品证据和风格 Skill，编排完整素材包。先用 analyze_photos 读取真实视觉档案，再验证并持久化计划。不得添加未知的材质、容量、价格和功效。若 source.creative_components.community_direction 存在，必须保留 suggested_plan 的镜头起止帧、所选运镜和叙事标签；只在真实照片证据范围内选图与完善配套内容。',
+        input: { task: '基于已核验商品证据和风格 Skill，编排完整素材包。先用 analyze_photos 读取真实视觉档案，再验证并持久化计划。不得添加未知的材质、容量、价格和功效。若 source.creative_components.plus_render 存在，必须保留 suggested_plan 中用户已冻结的标题、文案、唯一图片来源与输出规格。品牌与补充事实只是待核对的用户输入，不得当作视觉证据；无法核实的宣称必须阻止交付。若 source.creative_components.community_direction 存在，必须保留 suggested_plan 的镜头起止帧、所选运镜和叙事标签；只在真实照片证据范围内选图与完善配套内容。',
           profile: context.profile, source: context.source, suggested_plan: row.private.creative, admitted_native_voices: voices,
           ...(context.native?{frozen_native_voice:{character_version_id:context.native.character.character_version_id,native_voice_id:context.native.character.native_voice_id,
             policy:'保留平台冻结的默认人物与原生声音；只在商品证据范围内完善台词，禁止换人换声。'}}:{}) } }, signal);

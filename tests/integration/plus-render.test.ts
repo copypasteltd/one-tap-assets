@@ -1,0 +1,62 @@
+import {beforeAll,afterAll,it,expect} from 'vitest';
+import {plusRenderFixture} from '../helpers/plus-render';
+import type {DTO} from '../../src/shared/contracts/types';
+import {hash,sha256} from '../../src/api/lib/crypto';
+import sharp from 'sharp';
+import {checkedRevisionChange} from '../../src/worker/revisions/context';
+
+let f:Awaited<ReturnType<typeof plusRenderFixture>>,session:DTO<'PlusBrowserSession'>,draft:DTO<'PlusEditDraft'>,request:DTO<'PlusRenderPlan'>,order:DTO<'Order'>;
+const native=()=>f.buyer.accessToken,access=()=>session.access_token;
+beforeAll(async()=>{f=await plusRenderFixture();});afterAll(async()=>{await f?.close();});
+it('requires an explicitly approved new capability, keeps financial operations native and scopes requests to the owner',async()=>{
+  const old=await f.connect();expect(old.connection.can_prepare_render_plans).toBe(false);
+  draft=(await f.call('/plus/edit-drafts','POST',{order_id:f.originalId,deliverable_id:f.artifactId},old.access_token)).json().data;
+  const body={expected_revision:1,variant_id:'minimal-clean.photo-layout',variant_version:'3.1.0'};
+  expect((await f.call(`/plus/edit-drafts/${draft.draft_id}/render-plans`,'POST',body,old.access_token)).statusCode).toBe(403);
+  session=await f.connect(true);expect(session.connection.can_prepare_render_plans).toBe(true);
+  expect((await f.call('/quotes','POST',{plan_id:'untrusted',plan_hash:'a'.repeat(64)},access())).statusCode).toBe(403);
+  const styles=await f.call('/plus/render-styles','GET',undefined,access());expect(styles.statusCode,styles.body).toBe(200);
+  expect(styles.json().data.items.find((x:DTO<'PlusRenderStyle'>)=>x.variant_id===body.variant_id)).toMatchObject({sale_enabled:true,price_fen:200});
+});
+it('freezes crop, size, copy and separate price, deduplicates retries and rejects stale drafts',async()=>{
+  const settings={...draft.settings,canvas:{width:1080,height:1440},crop:{x:.05,y:.05,width:.9,height:.9},title:'蓝色随行杯',facts:['蓝色']};
+  const saved=await f.call(`/plus/edit-drafts/${draft.draft_id}`,'PUT',{expected_revision:1,settings},access());expect(saved.statusCode,saved.body).toBe(200);draft=saved.json().data;
+  const body={expected_revision:draft.revision,variant_id:'minimal-clean.photo-layout',variant_version:'3.1.0'};
+  const created=await f.call(`/plus/edit-drafts/${draft.draft_id}/render-plans`,'POST',body,access());expect(created.statusCode,created.body).toBe(200);request=created.json().data;
+  const retry=await f.call(`/plus/edit-drafts/${draft.draft_id}/render-plans`,'POST',body,access());expect(retry.statusCode,retry.body).toBe(200);expect(retry.json().data.request_id).toBe(request.request_id);
+  expect(request).toMatchObject({draft_revision:2,price_fen:200,settings,order:null});
+  expect((await f.call(`/plus/render-plans/${request.request_id}`,'GET',undefined,f.other.accessToken)).statusCode).toBe(404);
+  expect((await f.call(`/plus/edit-drafts/${draft.draft_id}/render-plans`,'POST',{...body,expected_revision:1},access())).statusCode).toBe(409);
+  await f.call(`/plus/edit-drafts/${draft.draft_id}`,'PUT',{expected_revision:2,settings:{...settings,title:'后续草稿'}},access());
+  const frozen=(await f.call(`/plus/render-plans/${request.request_id}`,'GET',undefined,access())).json().data;
+  expect(frozen.settings.title).toBe('蓝色随行杯');expect(JSON.stringify(frozen)).not.toContain('source_object_key');
+});
+it('runs content planning, native fee confirmation and a distinct synthetic payment before queuing work',async()=>{
+  await f.step('PLAN');request=(await f.call(`/plus/render-plans/${request.request_id}`,'GET',undefined,native())).json().data;
+  expect(request.plan.state).toBe('READY');expect(request.plan.output_slots).toHaveLength(2);
+  const body={plan_id:request.plan.plan_id,plan_hash:request.plan.plan_hash};
+  f.cfg.plusRender.pricingVersion='SYNTHETIC-CHANGED';const changed=await f.call('/quotes','POST',body,native());expect(changed.statusCode,changed.body).toBe(409);f.cfg.plusRender.pricingVersion='SYNTHETIC-PLUS-1';
+  const quoted=await f.call('/quotes','POST',body,native());expect(quoted.statusCode,quoted.body).toBe(201);expect(quoted.json().data.amount_fen).toBe(200);
+  const created=await f.call('/orders','POST',{quote_id:quoted.json().data.quote_id,channel:'alipay'},native());expect(created.statusCode,created.body).toBe(201);order=created.json().data;
+  expect(order.order_id).not.toBe(f.originalId);expect(order.fulfillment_state).toBe('NOT_STARTED');
+  order=await f.pay(order);expect(order).toMatchObject({payment_state:'CONFIRMED',fulfillment_state:'QUEUED'});
+});
+it('renders the actual edited PNG, seals its source reference, independently reviews and delivers a new private pack',async()=>{
+  for(const name of ['PRODUCTION','POST','QC','REVIEW_FACTS','REVIEW_STYLE','DELIVER'] as const)await f.step(name);
+  const delivered=await f.call(`/orders/${order.order_id}/deliverables`,'GET',undefined,access());expect(delivered.statusCode,delivered.body).toBe(200);
+  const pack=delivered.json().data as DTO<'Deliverables'>;expect(pack.items.map(x=>x.kind).sort()).toEqual(['copy','image']);
+  const image=pack.items.find(x=>x.kind==='image')!,row=(await f.db.pool.query('SELECT object_key FROM artifacts WHERE id=$1',[image.deliverable_id])).rows[0];
+  const bytes=await f.store.get(row.object_key);expect(sha256(bytes)).toBe(image.sha256);expect(await sharp(bytes).metadata()).toMatchObject({format:'png',width:1080,height:1440});
+  expect(image.sha256).not.toBe(f.pack.items[0]!.sha256);
+  const sealed=(await f.db.pool.query("SELECT object_key,sha256 FROM review_evidence WHERE order_id=$1 AND data->>'purpose'='PLUS_SOURCE_REFERENCE'",[order.order_id])).rows[0];
+  expect(sha256(await f.store.get(sealed.object_key))).toBe(f.pack.items[0]!.sha256);
+  const original=(await f.call(`/orders/${f.originalId}/deliverables`,'GET',undefined,native())).json().data;
+  expect(hash(original)).toBe(hash(f.pack));expect(f.launcher.launches).toBe(5);
+  expect((await f.db.pool.query("SELECT id FROM agent_instances WHERE state='ACTIVE'")).rowCount).toBe(0);
+  expect(f.images.filter(n=>n>0)).toHaveLength(2);
+  const ticket=await f.call(`/deliverables/${image.deliverable_id}/download-link`,'POST',undefined,access());expect(ticket.statusCode,ticket.body).toBe(200);
+  const status=await f.call(`/plus/render-plans/${request.request_id}`,'GET',undefined,access());expect(status.statusCode,status.body).toBe(200);expect(status.json().data.order.fulfillment_state).toBe('DELIVERED');
+  const nativeOrder=await f.call(`/orders/${order.order_id}`,'GET',undefined,native());expect(nativeOrder.statusCode,nativeOrder.body).toBe(200);expect(nativeOrder.json().data.delivery_expires_at).toMatch(/^\d{4}-\d{2}-\d{2}T/);
+  const contract=(await f.db.pool.query('SELECT private FROM orders WHERE id=$1',[order.order_id])).rows[0].private.contract;
+  expect(checkedRevisionChange(pack,{kind:'DISPLAY_TEXT',manifest_revision:1,display_text:'蓝色带盖杯'},contract)).toMatchObject({kind:'DISPLAY_TEXT'});
+});

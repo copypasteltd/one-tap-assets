@@ -69,5 +69,6 @@ export async function packetMaterial(db: Db, store: ObjectStorage, packet: DTO<'
     audio_evidence:rows.filter(r=>r.kind==='NATIVE_AUDIO'||r.kind==='FINAL_AUDIO').map(r=>({asset_id:r.id,sha256:r.sha256,kind:r.kind,
       artifact_id:r.artifact_id,mime_type:r.mime_type,semantic_review:'PENDING'})),
     visual_evidence: rows.filter(r => r.kind === 'CANDIDATE_IMAGE' || r.kind === 'VIDEO_FRAME')
-    .map(r => ({ asset_id: r.id, sha256: r.sha256, kind: r.kind, artifact_id: r.artifact_id, frame_index: r.frame_index, time_ms: r.time_ms })) };
+    .map(r => ({ asset_id: r.id, sha256: r.sha256, kind: r.kind, artifact_id: r.artifact_id, frame_index: r.frame_index, time_ms: r.time_ms,
+      ...(r.data.purpose?{purpose:r.data.purpose}:{}) })) };
 }

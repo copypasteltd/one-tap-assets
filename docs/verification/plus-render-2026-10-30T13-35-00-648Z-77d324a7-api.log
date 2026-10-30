@@ -1,0 +1,35 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ❯ tests/integration/plus-render.test.ts (4 tests | 1 failed) 12886ms
+   ✓ requires an explicitly approved new capability, keeps financial operations native and scopes requests to the owner 277ms
+   ✓ freezes crop, size, copy and separate price, deduplicates retries and rejects stale drafts 193ms
+   ✓ runs content planning, native fee confirmation and a distinct synthetic payment before queuing work 3431ms
+   × renders the actual edited PNG, seals its source reference, independently reviews and delivers a new private pack 6407ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/plus-render.test.ts > renders the actual edited PNG, seals its source reference, independently reviews and delivers a new private pack
+Error: 已售原图不可用或归属不一致
+ ❯ requireThat src/api/lib/errors.ts:6:25
+      4| }
+      5| export function requireThat(condition: unknown, code: string, message:…
+      6|   if (!condition) throw new AppError(code, message, status);
+       |                         ^
+      7| }
+      8| export function notFound(): never { throw new AppError('NOT_FOUND', '内…
+ ❯ packetImages src/worker/review/context.ts:49:7
+ ❯ ReviewStageService.handle src/worker/review/stage.ts:59:55
+ ❯ withFixtureLease tests/helpers/lease.ts:15:18
+ ❯ Object.step tests/helpers/plus-render.ts:76:41
+ ❯ tests/integration/plus-render.test.ts:44:97
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 3 passed (4)
+   Start at  21:35:01
+   Duration  14.32s (tests 91%, import 7%, transform 2%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/plus-render-2026-10-30T13-35-00-648Z-77d324a7/api.json

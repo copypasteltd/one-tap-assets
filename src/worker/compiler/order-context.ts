@@ -8,6 +8,8 @@ import type { FrozenContract, Snapshot } from './snapshot.js';
 import {frozenNativeAudio,verifyNativeAudioLive} from '../audio/contract.js';
 import {frozenOrderListening} from '../audio/listening-contract.js';
 import {frozenAiDisclosure} from './disclosure.js';
+import {plusRenderBinding} from '../../shared/domain/plus-render.js';
+import {verifyPlusRenderSource} from '../../api/modules/plus-render-source.js';
 import {repairExecutionContext,type RepairContext} from '../repair/context.js';
 
 export interface ExecutionContext {
@@ -40,6 +42,7 @@ export async function executionContext(db: pg.Pool | pg.PoolClient, tenantId: st
   requireThat(hash(body) === profile_hash, 'PROFILE_HASH_MISMATCH', '商品档案摘要不一致', 503);
   validateCreativePlan(contract.creative, contract.profile, contract.source);
   frozenAiDisclosure(contract);
+  const plus=plusRenderBinding(contract.source);if(plus)await verifyPlusRenderSource(db,tenantId,order.owner_id,plus);
   const audio=frozenNativeAudio(contract);
   const listening=frozenOrderListening(contract);
   requireThat(snapshot.listening_contract_hash===(listening?hash(listening):undefined),

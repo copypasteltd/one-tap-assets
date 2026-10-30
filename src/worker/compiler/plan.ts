@@ -4,6 +4,7 @@ import { requireThat } from '../../api/lib/errors.js';
 import { hash } from '../../api/lib/crypto.js';
 import Ajv2020 from 'ajv/dist/2020.js';
 import {communityDirection} from './community-direction.js';
+import {plusRenderBinding,plusCreativeText,validatePlusCreative} from '../../shared/domain/plus-render.js';
 
 export interface Shot {
   shot_id: string; start_frame: number; end_frame: number; overlap_frames: number;
@@ -48,12 +49,15 @@ export function basePlan(profile: DTO<'Profile'>, source: VariantSource): Creati
     return { shot_id: `shot-${index + 1}`, start_frame: Math.round(r.start_seconds * 30), end_frame: index === roles.length - 1 ? target : Math.round(r.end_seconds * 30), overlap_frames: 0,
       evidence_ids: profile.evidence.filter(e => e.asset_id === photo.asset_id).map(e => e.evidence_id), spoken_text: '', asset_id: photo.asset_id, intent: r.role, camera: direction?.camera??(index % 2 ? 'PAN' : 'PUSH') };
   });
-  return { version: '1.1', identity_lock_id: profile.identity_lock_id, profile_hash: profile.profile_hash, variant_id: source.variant_id,
+  const result:CreativePlan={ version: '1.1', identity_lock_id: profile.identity_lock_id, profile_hash: profile.profile_hash, variant_id: source.variant_id,
     fps: 30, target_frames: target, title, copy, claim_evidence_ids: [...new Set(approved.flatMap(o => o.evidence_ids))], shots,
     image_slots: source.output_slots.filter(s => s.kind === 'image').map((s, i) => ({ slot_id: s.slot_id, asset_id: photos[i % photos.length]!.asset_id, title: i === 0 ? title : s.role, evidence_ids: allEvidence })),
     native_voice_id: null, character_version_id: null, scene: '只使用商品原图中可见的视角和结构' };
+  const plus=plusRenderBinding(source);if(plus){Object.assign(result,plusCreativeText(plus.settings,result));
+    result.image_slots=[{slot_id:'plus-image',asset_id:plus.source_artifact_id,title:result.title,evidence_ids:allEvidence}];}
+  return result;
 }
-export function validateCreativePlan(plan: CreativePlan, profile: DTO<'Profile'>, source: VariantSource): void {
+export function validateCreativePlan(plan: CreativePlan, profile: DTO<'Profile'>, source: VariantSource,allowAftercareCopy=false): void {
   requireThat(schemaValid(plan), 'PLAN_SCHEMA_INVALID', '制作计划的结构不符合受控规范', 422);
   requireThat(plan.version === '1.1' && plan.identity_lock_id === profile.identity_lock_id && plan.profile_hash === profile.profile_hash && plan.variant_id === source.variant_id, 'PLAN_SCOPE_INVALID', '制作计划与商品版本不匹配', 422);
   requireThat(plan.fps === 30 && plan.target_frames === source.timeline_policy.target_frames, 'TIMELINE_INVALID', '制作时长与规格不匹配', 422);
@@ -76,8 +80,10 @@ export function validateCreativePlan(plan: CreativePlan, profile: DTO<'Profile'>
   if(direction?.narrative)for(const shot of plan.shots){const role=shot.intent.includes('细节')?'DETAIL':shot.intent.includes('角度')?'SIDE':'WHOLE';
     const matching=profile.photo_roles.filter(p=>p.role===role);
     requireThat(!matching.length||matching.some(p=>p.asset_id===shot.asset_id),'COMMUNITY_PHOTO_ORDER_MISMATCH','镜头选图必须与照片档案中的整体、角度或细节证据对应',422);}
-  const slots = source.output_slots.filter(s => s.kind === 'image');
-  requireThat(slots.length === plan.image_slots.length && new Set(plan.image_slots.map(s => s.slot_id)).size === slots.length && plan.image_slots.every(s => slots.some(x => x.slot_id === s.slot_id) && photos.has(s.asset_id) && s.evidence_ids.every(e => evidence.has(e))), 'PLAN_OUTPUT_INVALID', '图片计划与交付清单不一致', 422);
+  const slots = source.output_slots.filter(s => s.kind === 'image'),plus=plusRenderBinding(source);
+  const imageAssets=new Set(photos);if(plus)imageAssets.add(plus.source_artifact_id);
+  requireThat(slots.length === plan.image_slots.length && new Set(plan.image_slots.map(s => s.slot_id)).size === slots.length && plan.image_slots.every(s => slots.some(x => x.slot_id === s.slot_id) && imageAssets.has(s.asset_id) && s.evidence_ids.every(e => evidence.has(e))), 'PLAN_OUTPUT_INVALID', '图片计划与交付清单不一致', 422);
+  validatePlusCreative(plan,source,allowAftercareCopy);
   if (source.audio_policy.speech !== 'none') requireThat(plan.native_voice_id && plan.character_version_id && plan.shots.some(s => s.spoken_text.trim()), 'NATIVE_SPEECH_REQUIRED', '口播方案需要已准入的人物、声音和中文台词', 422);
   const knownText = profile.observations.filter(o => o.status === 'OBSERVED').map(o => o.value).join(' ');
   // Shot intent is also painted into PHOTO_LAYOUT frames. It is not a private

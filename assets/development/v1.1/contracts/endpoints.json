@@ -2213,6 +2213,82 @@
         "D22"
       ],
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/render-styles",
+      "operation_id": "listPlusRenderStyles",
+      "summary": "读取独立图片制作风格及当前计价可用性",
+      "request_schema": null,
+      "response_schema": "PlusRenderStyleList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/plus/edit-drafts/{draft_id}/render-plans",
+      "operation_id": "createPlusRenderPlan",
+      "summary": "冻结编辑修订并整理独立制作清单，付款仍需小程序确认",
+      "request_schema": "PlusRenderCreateRequest",
+      "response_schema": "PlusRenderPlan",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/render-plans",
+      "operation_id": "listPlusRenderPlans",
+      "summary": "本人在电脑或原小程序继续独立制作请求",
+      "request_schema": null,
+      "response_schema": "PlusRenderPlanList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/render-plans/{request_id}",
+      "operation_id": "getPlusRenderPlan",
+      "summary": "读取本人独立制作清单及原渠道订单状态",
+      "request_schema": null,
+      "response_schema": "PlusRenderPlan",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
     }
   ]
 }

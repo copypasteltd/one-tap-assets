@@ -114,7 +114,7 @@ export class PublicationService {
       await db.query(`UPDATE private_object_writes SET expires_at=GREATEST(expires_at,$3::timestamptz)
         WHERE tenant_id=$1 AND order_id=$2 AND NOT delete_requested AND state<>'DELETED'`, [context.tenantId, context.orderId, expiresAt]);
       await db.query(`UPDATE orders SET fulfillment_state='DELIVERED',delivery_expires_at=$3::timestamptz,updated_at=now(),
-        data=data||jsonb_build_object('fulfillment_state','DELIVERED','delivery_expires_at',$3::text) WHERE tenant_id=$1 AND id=$2`, [context.tenantId, context.orderId, expiresAt]);
+        data=data||jsonb_build_object('fulfillment_state','DELIVERED','delivery_expires_at',$4::text) WHERE tenant_id=$1 AND id=$2`, [context.tenantId, context.orderId, expiresAt, expiresAt]);
       await db.query(`UPDATE render_jobs SET state='DELIVERED',updated_at=now(),data=data||jsonb_build_object('state','DELIVERED','current_stage','DELIVER','updated_at',$3::text)
         WHERE tenant_id=$1 AND order_id=$2`, [context.tenantId, context.orderId, deliveredAt]);
       latest.publication_decision = 'ALLOW';

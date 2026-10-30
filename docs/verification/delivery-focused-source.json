@@ -1,184 +1,547 @@
 {
-  "checked_at": "2026-10-30T12:47:43.451317+00:00",
-  "status": "FOCUSED_PLUS_SOURCE_IMPLEMENTED_NOT_FULL_PRODUCT_ACCEPTANCE",
-  "source_set_hash": "21c214025fd9aaeda2c2b1011b8a8c5b4253c72bbf2d905f2c5bc7363adeeb86",
-  "source_files": 507,
+  "checked_at": "2026-10-30T13:51:16.903409+00:00",
+  "status": "PASS",
+  "source_set_hash": "593fc11303be7f076b7598a70f93861bcc0baa13ad2c6815a40bc7927718a311",
+  "source_files": 518,
   "runtime_contract_files": 42,
   "resource_files": 4,
-  "database_migrations": 35,
-  "business_operations": 91,
+  "database_migrations": 36,
+  "business_operations": 95,
   "management_operations": 38,
-  "schemas": 288,
-  "logical_entities": 79,
-  "source_snapshot": "docs/delivery/current.json",
-  "specification": "docs/实施/Plus手机确认与独立编辑草稿-v1.0.md",
+  "schemas": 296,
+  "logical_entities": 80,
+  "specification": "docs/实施/Plus独立图片正式制作与手机付款交付-v1.0.md",
+  "source_snapshot": {
+    "path": "docs/verification/plus-render-source-snapshot.json",
+    "sha256": "4b7644fec7a983d15e77b7441dd11ac03f1a9859da67958c33c57c7412fed56e",
+    "bytes": 96654
+  },
   "tests": [
     {
-      "kind": "unit",
-      "passed": 3,
-      "original_source_set_hash": "717e2190cdab5e7bb479f2d636a8bed25244464fa398528e2653e2f06365290b",
-      "differences_from_final_source": {
+      "run": "plus-render-2026-10-30T13-26-49-534Z-5dedbbb4",
+      "status": "PASS",
+      "passed_tests": 7,
+      "failed_tests": 0,
+      "pending_tests": 0,
+      "failed_suites": 0,
+      "source_unchanged": true,
+      "source_set_hash": "35795702de114bc638ebae69eff05065268fdbc98c7f48a2f8f4e0d5644f3ecf",
+      "source_differences_from_final": {
         "files": [
-          "scripts/record-plus-workspace.ts",
-          "tests/integration/plus-workspace.test.ts"
+          "scripts/record-plus-render.ts",
+          "src/api/modules/plus-access.ts",
+          "src/api/modules/plus-render.ts",
+          "src/shared/domain/plus-render.ts",
+          "src/web/render-panel.tsx",
+          "src/worker/compiler/plan.ts",
+          "src/worker/review/publication.ts",
+          "src/worker/review/qc.ts",
+          "src/worker/revisions/context.ts",
+          "tests/helpers/plus-render.ts",
+          "tests/integration/plus-render.test.ts"
         ],
         "runtime_contract_files": [],
         "resource_files": []
       },
       "files": [
         {
-          "path": "docs/verification/plus-workspace-unit-source.json",
-          "sha256": "283183931fbdda8f1f98f8d5637203d08acd2c1044fca4c85cacd083a45dcc21",
-          "bytes": 82361
+          "path": "docs/verification/plus-render-2026-10-30T13-26-49-534Z-5dedbbb4-result.json",
+          "sha256": "f133467c7e0089a971923f4fe744508c84ab692af6ce69e4d43e7978ef74471e",
+          "bytes": 1174
         },
         {
-          "path": "docs/verification/plus-workspace-unit-result.json",
-          "sha256": "44dd5298481e9a56bcf5fafd2ecd741d423d8fcdd20581f3c8a203cf6c78a23f",
-          "bytes": 1115
+          "path": "docs/verification/plus-render-2026-10-30T13-26-49-534Z-5dedbbb4-api.json",
+          "sha256": "3ad83f74d5a3d3bb6a20a212a18be614b3ea36f1d87ebba8eb7856b38bbf9cdf",
+          "bytes": 2986
         },
         {
-          "path": "docs/verification/plus-workspace-unit-api.json",
-          "sha256": "002efde9f468100c09f01e8d168e23e71d6c9a01d0a67aa4fe9fb3cb29b2399d",
-          "bytes": 1548
+          "path": "docs/verification/plus-render-2026-10-30T13-26-49-534Z-5dedbbb4-source.json",
+          "sha256": "07f752b5e03ec53c59f7a7ab589ee61f9cf90d9c42a28a0b851a01cece72c765",
+          "bytes": 83833
         },
         {
-          "path": "docs/verification/plus-workspace-unit-api.log",
-          "sha256": "84054ac43a3c82d86a4ce4e7c681c6c4318eb0f680d11acea3b353fba7521538",
-          "bytes": 406
+          "path": "docs/verification/plus-render-2026-10-30T13-26-49-534Z-5dedbbb4-api.log",
+          "sha256": "1dd3fb63cd3ef5e234365b67e21959ac12bc688b0c6edce7c5e45a7d4f1186e2",
+          "bytes": 642
         }
       ]
     },
     {
-      "kind": "native",
-      "passed": 7,
-      "original_source_set_hash": "83da1e6bae1aa7f3b18ee243301262c75fa1877be4ed8e14038b329010580752",
-      "differences_from_final_source": {
+      "run": "plus-render-2026-10-30T13-27-44-752Z-378e8838",
+      "status": "FAIL",
+      "passed_tests": 7,
+      "failed_tests": 0,
+      "pending_tests": 4,
+      "failed_suites": 1,
+      "source_unchanged": true,
+      "source_set_hash": "35795702de114bc638ebae69eff05065268fdbc98c7f48a2f8f4e0d5644f3ecf",
+      "source_differences_from_final": {
         "files": [
-          "scripts/record-plus-workspace.ts"
+          "scripts/record-plus-render.ts",
+          "src/api/modules/plus-access.ts",
+          "src/api/modules/plus-render.ts",
+          "src/shared/domain/plus-render.ts",
+          "src/web/render-panel.tsx",
+          "src/worker/compiler/plan.ts",
+          "src/worker/review/publication.ts",
+          "src/worker/review/qc.ts",
+          "src/worker/revisions/context.ts",
+          "tests/helpers/plus-render.ts",
+          "tests/integration/plus-render.test.ts"
         ],
         "runtime_contract_files": [],
         "resource_files": []
       },
       "files": [
         {
-          "path": "docs/verification/plus-workspace-native-source.json",
-          "sha256": "f023ef7e59d1c7eabe7f623d6a0624c0a7e3db61860e41e72e2a9d97c5bb33c7",
-          "bytes": 82361
+          "path": "docs/verification/plus-render-2026-10-30T13-27-44-752Z-378e8838-result.json",
+          "sha256": "ff9b7d6ed3d866fbff515cf39667c2021f86471046766b5006111b0fd6ef97ee",
+          "bytes": 1308
         },
         {
-          "path": "docs/verification/plus-workspace-native-result.json",
-          "sha256": "f25e1050e17d349038fd1d52949cd5fe40d957aa0d3c414d72b146e445723571",
-          "bytes": 1232
+          "path": "docs/verification/plus-render-2026-10-30T13-27-44-752Z-378e8838-api.json",
+          "sha256": "331fbe08c2a1f5ea8efa5b7ef331f96fc713ab7b54d364fa753d82f7d28114e0",
+          "bytes": 4536
         },
         {
-          "path": "docs/verification/plus-workspace-native-api.json",
-          "sha256": "c9add1bb88400ce9cb4d052f9839337d60853a128c1bdf1b429842af180812db",
-          "bytes": 2921
+          "path": "docs/verification/plus-render-2026-10-30T13-27-44-752Z-378e8838-source.json",
+          "sha256": "07f752b5e03ec53c59f7a7ab589ee61f9cf90d9c42a28a0b851a01cece72c765",
+          "bytes": 83833
         },
         {
-          "path": "docs/verification/plus-workspace-native-api.log",
-          "sha256": "3de7cb7ad89a4271b7e506395e0e38c859c1d6999e2a184f11459b4a199d1094",
-          "bytes": 407
+          "path": "docs/verification/plus-render-2026-10-30T13-27-44-752Z-378e8838-api.log",
+          "sha256": "751ba9612cb3c605986548a2f812998eefb5821074a6f55aa5763665204a1609",
+          "bytes": 1992
+        }
+      ]
+    },
+    {
+      "run": "plus-render-2026-10-30T13-30-59-937Z-94f28879",
+      "status": "FAIL",
+      "passed_tests": 2,
+      "failed_tests": 1,
+      "pending_tests": 0,
+      "failed_suites": 1,
+      "source_unchanged": true,
+      "source_set_hash": "61cb90e65e06ed9a30d18a46a57b6ae65b5a00abbfed4ec9f944169dd59c5238",
+      "source_differences_from_final": {
+        "files": [
+          "scripts/record-plus-render.ts",
+          "src/api/modules/plus-access.ts",
+          "src/api/modules/plus-render.ts",
+          "src/shared/domain/plus-render.ts",
+          "src/web/render-panel.tsx",
+          "src/worker/compiler/plan.ts",
+          "src/worker/review/publication.ts",
+          "src/worker/review/qc.ts",
+          "src/worker/revisions/context.ts",
+          "tests/helpers/plus-render.ts",
+          "tests/integration/plus-render.test.ts"
+        ],
+        "runtime_contract_files": [],
+        "resource_files": []
+      },
+      "files": [
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-30-59-937Z-94f28879-result.json",
+          "sha256": "7516b0a3b32270ff30b9923b92db5583bae9e5c5fd646f3cb44f9bd7d609bab1",
+          "bytes": 1214
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-30-59-937Z-94f28879-api.json",
+          "sha256": "87f3a459815ca988d1f4d5a523776147eb321d376e37bd37ac82be845e79ab87",
+          "bytes": 2595
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-30-59-937Z-94f28879-source.json",
+          "sha256": "0836c51cfd315162710af16a724d82ab65eb86a28fe53a58533f985c54ac1a53",
+          "bytes": 83976
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-30-59-937Z-94f28879-api.log",
+          "sha256": "b69ea64b60c60a68a1f783f9a9f564782d4a44d0ecd110c7ea556f6aa1c91f40",
+          "bytes": 1872
+        }
+      ]
+    },
+    {
+      "run": "plus-render-2026-10-30T13-33-37-867Z-11b42f8d",
+      "status": "FAIL",
+      "passed_tests": 2,
+      "failed_tests": 1,
+      "pending_tests": 0,
+      "failed_suites": 1,
+      "source_unchanged": true,
+      "source_set_hash": "d3b42a73189104cfcf1f01a3cb4eb18692099021e825d580a80db4c49f65a8a4",
+      "source_differences_from_final": {
+        "files": [
+          "scripts/record-plus-render.ts",
+          "src/api/modules/plus-access.ts",
+          "src/api/modules/plus-render.ts",
+          "src/shared/domain/plus-render.ts",
+          "src/web/render-panel.tsx",
+          "src/worker/compiler/plan.ts",
+          "src/worker/review/publication.ts",
+          "src/worker/review/qc.ts",
+          "src/worker/revisions/context.ts",
+          "tests/helpers/plus-render.ts",
+          "tests/integration/plus-render.test.ts"
+        ],
+        "runtime_contract_files": [],
+        "resource_files": []
+      },
+      "files": [
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-33-37-867Z-11b42f8d-result.json",
+          "sha256": "284d6b03e0ec78e21c7b386724dd0f48a0fbe7dc12b7527d94a0a54b3615a304",
+          "bytes": 1214
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-33-37-867Z-11b42f8d-api.json",
+          "sha256": "da0423bd6fc25c26a76820183e5bcda5449f8a4c6b259950b1f45316dc988fd5",
+          "bytes": 2809
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-33-37-867Z-11b42f8d-source.json",
+          "sha256": "71920dee62b434c64756d74ff835395b0c0ef53fcb2bd574e42645de484427b2",
+          "bytes": 83976
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-33-37-867Z-11b42f8d-api.log",
+          "sha256": "7ce1ac19a475b33a8ff5a98d725391bc2913c53536fc1d844c9ed351b23ad943",
+          "bytes": 1515
+        }
+      ]
+    },
+    {
+      "run": "plus-render-2026-10-30T13-34-11-064Z-7ea35a50",
+      "status": "FAIL",
+      "passed_tests": 2,
+      "failed_tests": 1,
+      "pending_tests": 0,
+      "failed_suites": 1,
+      "source_unchanged": true,
+      "source_set_hash": "2b2c7638e9f6ca16b0b86bdb5e0eadba239e3acbf403b44e1526c3bbc83a9dbe",
+      "source_differences_from_final": {
+        "files": [
+          "scripts/record-plus-render.ts",
+          "src/api/modules/plus-access.ts",
+          "src/api/modules/plus-render.ts",
+          "src/shared/domain/plus-render.ts",
+          "src/web/render-panel.tsx",
+          "src/worker/compiler/plan.ts",
+          "src/worker/review/publication.ts",
+          "src/worker/review/qc.ts",
+          "src/worker/revisions/context.ts",
+          "tests/helpers/plus-render.ts",
+          "tests/integration/plus-render.test.ts"
+        ],
+        "runtime_contract_files": [],
+        "resource_files": []
+      },
+      "files": [
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-34-11-064Z-7ea35a50-result.json",
+          "sha256": "ec7c777a2610c4fe2f7670f8b1a4e480de625c7d0edd6a5075052ae5d751195f",
+          "bytes": 1214
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-34-11-064Z-7ea35a50-api.json",
+          "sha256": "1857a8de8a2916a2a4ac4410ff71ed468da865e93554c7c21a38be2320e5f8b5",
+          "bytes": 2784
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-34-11-064Z-7ea35a50-source.json",
+          "sha256": "c4b6275f7c52079554c0e65feb922ce9581c007e77412144cb618115c74af98d",
+          "bytes": 83976
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-34-11-064Z-7ea35a50-api.log",
+          "sha256": "3981c823e498cb2035bf65bb953d693a180109c9ce3fceef4d17bb6a01de1112",
+          "bytes": 1492
+        }
+      ]
+    },
+    {
+      "run": "plus-render-2026-10-30T13-34-41-561Z-41600e6d",
+      "status": "FAIL",
+      "passed_tests": 2,
+      "failed_tests": 1,
+      "pending_tests": 0,
+      "failed_suites": 1,
+      "source_unchanged": true,
+      "source_set_hash": "95fd05b1abc777ea964b55cc15d32f8f425b583883435424b4a044fccb141aca",
+      "source_differences_from_final": {
+        "files": [
+          "scripts/record-plus-render.ts",
+          "src/api/modules/plus-access.ts",
+          "src/api/modules/plus-render.ts",
+          "src/shared/domain/plus-render.ts",
+          "src/web/render-panel.tsx",
+          "src/worker/compiler/plan.ts",
+          "src/worker/review/publication.ts",
+          "src/worker/review/qc.ts",
+          "src/worker/revisions/context.ts",
+          "tests/integration/plus-render.test.ts"
+        ],
+        "runtime_contract_files": [],
+        "resource_files": []
+      },
+      "files": [
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-34-41-561Z-41600e6d-result.json",
+          "sha256": "d21bcc22986254eb4646a2a5adeb52448778a99a79fff1ba9e5eda53d151d816",
+          "bytes": 1214
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-34-41-561Z-41600e6d-api.json",
+          "sha256": "8fefb99decf81af8e2843c49c56f9090a35aaa8d81762d46a29be407142e9a70",
+          "bytes": 3305
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-34-41-561Z-41600e6d-source.json",
+          "sha256": "740e17876b4d9109e3ed53b1759cea6d9a56c72272e720538ea08ccbcd145d21",
+          "bytes": 83976
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-34-41-561Z-41600e6d-api.log",
+          "sha256": "a0c744c1da6a4d568d5a08e9021811547e87ef04c98aa52029ef571cb5903759",
+          "bytes": 1953
+        }
+      ]
+    },
+    {
+      "run": "plus-render-2026-10-30T13-35-00-648Z-77d324a7",
+      "status": "FAIL",
+      "passed_tests": 3,
+      "failed_tests": 1,
+      "pending_tests": 0,
+      "failed_suites": 1,
+      "source_unchanged": true,
+      "source_set_hash": "626b064c37b16e3e10b628b9b89ca5e1ad6bd6fbc8d83c29801496c189ae9be9",
+      "source_differences_from_final": {
+        "files": [
+          "src/api/modules/plus-access.ts",
+          "src/api/modules/plus-render.ts",
+          "src/shared/domain/plus-render.ts",
+          "src/web/render-panel.tsx",
+          "src/worker/compiler/plan.ts",
+          "src/worker/review/publication.ts",
+          "src/worker/review/qc.ts",
+          "src/worker/revisions/context.ts",
+          "tests/integration/plus-render.test.ts"
+        ],
+        "runtime_contract_files": [],
+        "resource_files": []
+      },
+      "files": [
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-35-00-648Z-77d324a7-result.json",
+          "sha256": "aaa0c534131231ca16d94e05c4c868ae252aeaf2a131797ebfbb8fbdc858018b",
+          "bytes": 1215
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-35-00-648Z-77d324a7-api.json",
+          "sha256": "9e2dab17944af640cf3291d9bd4bc5c8aab3dc06c102ae7f5546eee94711adeb",
+          "bytes": 3131
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-35-00-648Z-77d324a7-source.json",
+          "sha256": "87850304b29499f549255c4be76c20b1e9910cbb9a832cd7ab6d36a4a42b21a7",
+          "bytes": 83976
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-35-00-648Z-77d324a7-api.log",
+          "sha256": "f18ca78447fbf00ee777f32c2e6bed89aabc7615d35c8a24ef4b91d1527929aa",
+          "bytes": 1854
+        }
+      ]
+    },
+    {
+      "run": "plus-render-2026-10-30T13-36-51-484Z-708cf392",
+      "status": "FAIL",
+      "passed_tests": 3,
+      "failed_tests": 1,
+      "pending_tests": 0,
+      "failed_suites": 1,
+      "source_unchanged": true,
+      "source_set_hash": "7113fe4f89facec346117d3eda4f96c40e1aa84d16b265c37ce7d0b11924e1c3",
+      "source_differences_from_final": {
+        "files": [
+          "src/api/modules/plus-access.ts",
+          "src/api/modules/plus-render.ts",
+          "src/web/render-panel.tsx",
+          "src/worker/review/publication.ts",
+          "tests/integration/plus-render.test.ts"
+        ],
+        "runtime_contract_files": [],
+        "resource_files": []
+      },
+      "files": [
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-36-51-484Z-708cf392-result.json",
+          "sha256": "6f1ffc230c9798d77137032df99a51ac5eac847752d9c369e2f62d804001e538",
+          "bytes": 1215
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-36-51-484Z-708cf392-api.json",
+          "sha256": "dd302006d24a9cd697b95e8b8f191a57ab22d4efc0dda36ececd5bdc84a62ffe",
+          "bytes": 2627
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-36-51-484Z-708cf392-source.json",
+          "sha256": "515846cce606c628ad8924be766a0592a69b5edbaf9eee04aaf98a38d28ae654",
+          "bytes": 83976
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-36-51-484Z-708cf392-api.log",
+          "sha256": "b3122c12eddaad2ddf24e4587083e042fdb3918b2d38de05587c3fcfdff7dd94",
+          "bytes": 1675
+        }
+      ]
+    },
+    {
+      "run": "plus-render-2026-10-30T13-38-24-626Z-7658dac0",
+      "status": "FAIL",
+      "passed_tests": 3,
+      "failed_tests": 1,
+      "pending_tests": 0,
+      "failed_suites": 1,
+      "source_unchanged": true,
+      "source_set_hash": "23c9589967d88fb823be0875b8318f6bfe91461b9c6f44446caf150ce94ce4c3",
+      "source_differences_from_final": {
+        "files": [
+          "src/api/modules/plus-access.ts",
+          "src/api/modules/plus-render.ts",
+          "src/web/render-panel.tsx",
+          "src/worker/review/publication.ts",
+          "tests/integration/plus-render.test.ts"
+        ],
+        "runtime_contract_files": [],
+        "resource_files": []
+      },
+      "files": [
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-38-24-626Z-7658dac0-result.json",
+          "sha256": "7a148fce77f79a0ec7a09c546aa8949a053ef7f30ef70ce8b57b687ad68213d5",
+          "bytes": 1215
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-38-24-626Z-7658dac0-api.json",
+          "sha256": "5ebbcdf4f19ca2ae5bb5875ff6d5f0692aa0e1799eff6b49ae4fb00dd6e70096",
+          "bytes": 3252
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-38-24-626Z-7658dac0-source.json",
+          "sha256": "cc79b3da21c737e22ca25e6e5b577b20206bca6e8201a0f2c291b2eef2a3e4dc",
+          "bytes": 83976
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-38-24-626Z-7658dac0-api.log",
+          "sha256": "6b9a2f5e72a0fa246fd696bf8a42691d55cb1d3e1c23f19fa9b1eff2053aceb6",
+          "bytes": 1899
+        }
+      ]
+    },
+    {
+      "run": "plus-render-2026-10-30T13-40-20-611Z-0c053234",
+      "status": "PASS",
+      "passed_tests": 4,
+      "failed_tests": 0,
+      "pending_tests": 0,
+      "failed_suites": 0,
+      "source_unchanged": true,
+      "source_set_hash": "593fc11303be7f076b7598a70f93861bcc0baa13ad2c6815a40bc7927718a311",
+      "source_differences_from_final": {
+        "files": [],
+        "runtime_contract_files": [],
+        "resource_files": []
+      },
+      "files": [
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-40-20-611Z-0c053234-result.json",
+          "sha256": "7d593803e90c4c220dcb738d1a4c74f6268914a10590cd13f1d4d3e9511422b9",
+          "bytes": 1215
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-40-20-611Z-0c053234-api.json",
+          "sha256": "7aa86da096bcfd43481b85613c5d6d2b65f888ba432ff79d9bb64679ab61b45a",
+          "bytes": 2120
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-40-20-611Z-0c053234-source.json",
+          "sha256": "02c4fdf4462390106fd35c55e94209b90d9b3c37a54caf741d548b81b1057b5f",
+          "bytes": 83976
+        },
+        {
+          "path": "docs/verification/plus-render-2026-10-30T13-40-20-611Z-0c053234-api.log",
+          "sha256": "8c229f15b0b7ef0c55cea331bbb46efff2a8a1fe3ab7e71a92c56dcc00627dbb",
+          "bytes": 773
         }
       ]
     }
   ],
-  "initial_native_attempt": [
-    {
-      "path": "docs/verification/plus-workspace-initial-native-source.json",
-      "sha256": "283183931fbdda8f1f98f8d5637203d08acd2c1044fca4c85cacd083a45dcc21",
-      "bytes": 82361
-    },
-    {
-      "path": "docs/verification/plus-workspace-initial-native-result.json",
-      "sha256": "ce36ec0641dde4ff6ecad92dbc615f653450613a4258b51f23cb8b218087ced9",
-      "bytes": 1233
-    },
-    {
-      "path": "docs/verification/plus-workspace-initial-native-api.json",
-      "sha256": "8a34e1594335914e7a0a31f19e057b99d9b1cfbf851e04dba812c300bca6a93a",
-      "bytes": 3569
-    },
-    {
-      "path": "docs/verification/plus-workspace-initial-native-api.log",
-      "sha256": "658b6ca1e0b30302100b3863228f713282569231025d5490196f39544a77236c",
-      "bytes": 2244
-    }
+  "initial_attempt_explanations": [
+    "Isolated fixture was missing a required non-null admitted variant price.",
+    "Native quote fixture lacked an idempotency header.",
+    "Synthetic admission file lacked the review capability already present in its in-memory media fixture.",
+    "Isolated variant lacked an explicit model registry binding.",
+    "Quote and order success assertions used 200 instead of the contracted 201.",
+    "Paid source artifact was incorrectly indexed as a product photo; QC now seals it separately.",
+    "Final-state assertion initially lacked HTTP diagnostics; the next attempt exposed an invalid order expiry response.",
+    "Publication timestamp reused a timestamp-typed SQL parameter for JSON text; a separate ISO string binding now preserves the response contract."
   ],
-  "initial_native_result": "2 PASS / 1 FAIL / 4 not run; fixture omitted required channel, corrected without weakening authorization assertion",
-  "initial_build": [
-    {
-      "path": "docs/verification/plus-workspace-initial-build-result.json",
-      "sha256": "4628175bc6a375ff8e41aeb8531330c77dc36b8169179677a3b417e7ad1619a5",
-      "bytes": 95042
-    },
-    {
-      "path": "docs/verification/plus-workspace-initial-build-typecheck.log",
-      "sha256": "615ceb8ac813aed8920266bc48151de06df6dbb718ea721817d0ac79ff211c59",
-      "bytes": 8175
-    }
-  ],
-  "initial_build_result": "test inject helper allowed null payload; corrected its type; server/preview passed in original attempt",
-  "recording_attempts": [
-    {
-      "path": "docs/verification/plus-workspace-recording-initial.log",
-      "sha256": "b7c738eb95776165d60ef438f07a4b52640b71e673024499f4f57db446b6be6c",
-      "bytes": 468
-    },
-    {
-      "path": "docs/verification/plus-workspace-recording-selector-failure.log",
-      "sha256": "95b9f93877edcd19dc74b4f714a57cd794dc92ff828e5be78ae81a7447f364e9",
-      "bytes": 3632
-    },
-    {
-      "path": "docs/verification/plus-workspace-recording.log",
-      "sha256": "520ad72849721e2056bc84b5acab92757eb0b346e53c3c6524145a030006340a",
-      "bytes": 107
-    }
-  ],
-  "recording_fixes": "Only recorder current-build path and alert locator corrected; failed attempts preserved; application checks not relabelled as rerun.",
-  "build_snapshot": {
-    "path": "docs/verification/plus-workspace-build.json",
-    "sha256": "a7c5404015ec424a0eaa2d6ab1a0e35996ecaa2acc79e8c728fd654fc05bf53a",
-    "bytes": 95038
-  },
+  "source_correspondence_note": "The final four native vertical checks, focused build, browser recording and native startup match this exact source. The seven early unit checks and seven draft-workspace assertions inside the first failed suite retain their original snapshots and explicit differences; they are not relabelled as final-source reruns. Initial type diagnostics have no exact snapshot and are diagnostic only.",
+  "build_snapshot": "docs/verification/plus-render-build.json",
   "build_logs": [
     {
-      "path": "docs/verification/plus-workspace-build-1.log",
+      "path": "docs/verification/plus-render-build-typecheck.log",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0
     },
     {
-      "path": "docs/verification/plus-workspace-build-2.log",
+      "path": "docs/verification/plus-render-build-build-server.log",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0
     },
     {
-      "path": "docs/verification/plus-workspace-build-3.log",
-      "sha256": "2ce8285b6a76054465bb55238ccb594746813812cba96a49acebcbc1af129dfb",
+      "path": "docs/verification/plus-render-build-exec.log",
+      "sha256": "4e65e1eafbb83e68811484e86d815638ac4958c048810875b091c0e522099ec0",
       "bytes": 2996
+    },
+    {
+      "path": "docs/verification/plus-render-build.json",
+      "sha256": "4b7644fec7a983d15e77b7441dd11ac03f1a9859da67958c33c57c7412fed56e",
+      "bytes": 96654
     }
   ],
   "generator": {
-    "path": "docs/verification/plus-workspace-generator.json",
+    "path": "docs/verification/plus-render-generator.json",
     "sha256": "2681e403a6dc036d9866e1345e664d7bf44187ff4d7513d130d7ac31594599e4",
     "bytes": 468
   },
-  "browser_capture": "docs/media/plus-workspace/capture-manifest.json",
-  "browser_checks": [
-    "ACTUAL_HTTPS_NATIVE_APPROVAL_AND_HASHED_POLL_CLAIM_CONNECT_BROWSER",
-    "OWNER_SCOPED_PAID_PACK_LOADED_FROM_NATIVE_DATABASE",
-    "ACTUAL_SIGNED_PRIVATE_PNG_BYTES_RENDERED",
-    "NATIVE_PERSISTED_CROP_SPEC_TEXT_AND_UNVERIFIED_FACTS_IN_SEPARATE_REVISION",
-    "SAVED_DRAFT_RECOVERS_FROM_NATIVE_API",
-    "NO_BROWSER_STORAGE_OR_COOKIE_CONTAINS_AUTHORIZATION",
-    "SHARED_MINI_APPROVAL_AND_REVOCATION_UI_WITH_EXPLICIT_SYNTHETIC_REPLIES",
-    "NATIVE_REVOCATION_DENIES_FUTURE_REQUESTS_AND_CLEARS_PRIVATE_BROWSER_VIEW",
-    "NO_HORIZONTAL_OVERFLOW_AT_320PX"
+  "diagnostic_files": [
+    {
+      "path": "docs/verification/plus-render-initial-typecheck.log",
+      "sha256": "3507f44f87f27cac8abe84183ae33151e03aa86118db1c650f4f4f17aaff33eb",
+      "bytes": 162
+    },
+    {
+      "path": "docs/verification/plus-render-typecheck-2.log",
+      "sha256": "ec4628faf8781f44d81228aba058e7654bdb780385bf0dfc4f712b478109c734",
+      "bytes": 1216
+    },
+    {
+      "path": "docs/verification/plus-render-recording-attempt-1.log",
+      "sha256": "d3197b37fdd83bd6cc5011c24de4ca82d12cebfa17dbf6c06c2ab26816e92739",
+      "bytes": 91
+    }
   ],
+  "browser_capture": "docs/media/plus-render/capture-manifest.json",
+  "browser_checks": 6,
   "local_checks": {
-    "base": "runtime/test-results/plus-workspace-local-2026-10-30T12-42-06-721Z-dc342e64",
-    "source_set_hash": "83da1e6bae1aa7f3b18ee243301262c75fa1877be4ed8e14038b329010580752",
+    "base": "runtime/test-results/plus-render-local-2026-10-30T13-42-57-440Z-f92d53b0",
+    "source_set_hash": "593fc11303be7f076b7598a70f93861bcc0baa13ad2c6815a40bc7927718a311",
     "source_unchanged": true,
     "commands": [
       {
@@ -191,9 +554,9 @@
         "status": "PASS",
         "exit_code": 0,
         "timeout_ms": 60000,
-        "elapsed_ms": 1334,
-        "log_path": "runtime/test-results/plus-workspace-local-2026-10-30T12-42-06-721Z-dc342e64/doctor.log",
-        "log_sha256": "f50894af0b972a78b9f8212bdd409499542bb606d067498d448203a47e68c6a3"
+        "elapsed_ms": 4862,
+        "log_path": "runtime/test-results/plus-render-local-2026-10-30T13-42-57-440Z-f92d53b0/doctor.log",
+        "log_sha256": "5155e7b7d8b13c7ad6573c51f7df82cd12ea3e8f53ca493ba5073429f5dffe3f"
       },
       {
         "task": "start-once",
@@ -206,42 +569,29 @@
         "status": "PASS",
         "exit_code": 0,
         "timeout_ms": 60000,
-        "elapsed_ms": 5053,
-        "log_path": "runtime/test-results/plus-workspace-local-2026-10-30T12-42-06-721Z-dc342e64/start.log",
-        "log_sha256": "20a02a4f7c4c0d518bb495e4cb894d7fd81ac2baf4a10f7074dcee428649ee17"
+        "elapsed_ms": 16288,
+        "log_path": "runtime/test-results/plus-render-local-2026-10-30T13-42-57-440Z-f92d53b0/start.log",
+        "log_sha256": "ca45621a923b680a5db641b8465924cbb1367e3d86bcf1a6d26231c093699672"
       }
     ]
   },
   "local_files": [
     {
-      "path": "docs/verification/plus-workspace-local-result.json",
-      "sha256": "93adf394ce257d9ed603d88243ca6ce8b083cf6380436cfb79df0c3129ddc0d3",
-      "bytes": 1104
+      "path": "docs/verification/plus-render-local-result.json",
+      "sha256": "177952a392cdf2b439eeb7021436811983f600815253dbf7d4a0da6e808334ce",
+      "bytes": 1096
     },
     {
-      "path": "docs/verification/plus-workspace-local-doctor.log",
-      "sha256": "f50894af0b972a78b9f8212bdd409499542bb606d067498d448203a47e68c6a3",
+      "path": "docs/verification/plus-render-local-doctor.log",
+      "sha256": "5155e7b7d8b13c7ad6573c51f7df82cd12ea3e8f53ca493ba5073429f5dffe3f",
       "bytes": 2141
     },
     {
-      "path": "docs/verification/plus-workspace-local-start.log",
-      "sha256": "20a02a4f7c4c0d518bb495e4cb894d7fd81ac2baf4a10f7074dcee428649ee17",
+      "path": "docs/verification/plus-render-local-start.log",
+      "sha256": "ca45621a923b680a5db641b8465924cbb1367e3d86bcf1a6d26231c093699672",
       "bytes": 1566
-    },
-    {
-      "path": "docs/verification/plus-workspace-doctor.json",
-      "sha256": "f50894af0b972a78b9f8212bdd409499542bb606d067498d448203a47e68c6a3",
-      "bytes": 2141
     }
   ],
-  "local_source_differences": {
-    "files": [
-      "scripts/record-plus-workspace.ts"
-    ],
-    "runtime_contract_files": [],
-    "resource_files": []
-  },
-  "subsequent_source_note": "Final source differs from native/local execution only by recorder build-root binding and correct alert locator; unit execution additionally predates integration-helper type/valid financial-request fixture correction. Runtime application, unit test, native test assertions and 42 contract slots are unchanged from their applicable successful runs.",
   "historical_evidence_unchanged": [
     {
       "path": "docs/verification/album-save-api.json",
@@ -490,6 +840,22 @@
     {
       "path": "docs/verification/community-native-tested-source.json",
       "sha256": "83664897daa116b74864bbda4e8b0aab30badb6bed39e20a87cbd1f00b78b494"
+    },
+    {
+      "path": "docs/verification/contracts-9db6fcc/endpoints.json",
+      "sha256": "09828c9937e6b1bfdac31e14ba33076890f6c907f5fe42ab5d8efa5d595161fd"
+    },
+    {
+      "path": "docs/verification/contracts-9db6fcc/management-endpoints.json",
+      "sha256": "15b75fa29176933a0811db6dd6b4a44efc38163bfd0b610fcfce59264969ef3d"
+    },
+    {
+      "path": "docs/verification/contracts-9db6fcc/management-openapi.json",
+      "sha256": "1bfb9d562981e349b6df961d58098718c0e519fb79dfdc5b32391f0317325182"
+    },
+    {
+      "path": "docs/verification/contracts-9db6fcc/openapi.json",
+      "sha256": "181d573da372a5bf727deeaeca8c4c4358ab3e626f78c19f903cefafe4b914ca"
     },
     {
       "path": "docs/verification/contracts-cdaa60f/endpoints.json",
@@ -766,6 +1132,10 @@
     {
       "path": "docs/verification/delivery-focused-source-89d135a.json",
       "sha256": "dbebfe0b854692200def16480f856579b1e57ce175b3b11209607c1f74f470c4"
+    },
+    {
+      "path": "docs/verification/delivery-focused-source-9db6fcc.json",
+      "sha256": "fa13fe2524fa7341c49418f11c8d2f1a2a3b1c3cdd341140a796eb16250feaf2"
     },
     {
       "path": "docs/verification/delivery-focused-source-b31b408.json",
@@ -1560,6 +1930,66 @@
       "sha256": "49acd9d576bb3e963f7fcfe184f5260e3e0029a2585cd8176ddd898558047fc5"
     },
     {
+      "path": "docs/verification/plus-workspace-build.json",
+      "sha256": "a7c5404015ec424a0eaa2d6ab1a0e35996ecaa2acc79e8c728fd654fc05bf53a"
+    },
+    {
+      "path": "docs/verification/plus-workspace-doctor.json",
+      "sha256": "f50894af0b972a78b9f8212bdd409499542bb606d067498d448203a47e68c6a3"
+    },
+    {
+      "path": "docs/verification/plus-workspace-generator.json",
+      "sha256": "2681e403a6dc036d9866e1345e664d7bf44187ff4d7513d130d7ac31594599e4"
+    },
+    {
+      "path": "docs/verification/plus-workspace-initial-build-result.json",
+      "sha256": "4628175bc6a375ff8e41aeb8531330c77dc36b8169179677a3b417e7ad1619a5"
+    },
+    {
+      "path": "docs/verification/plus-workspace-initial-native-api.json",
+      "sha256": "8a34e1594335914e7a0a31f19e057b99d9b1cfbf851e04dba812c300bca6a93a"
+    },
+    {
+      "path": "docs/verification/plus-workspace-initial-native-result.json",
+      "sha256": "ce36ec0641dde4ff6ecad92dbc615f653450613a4258b51f23cb8b218087ced9"
+    },
+    {
+      "path": "docs/verification/plus-workspace-initial-native-source.json",
+      "sha256": "283183931fbdda8f1f98f8d5637203d08acd2c1044fca4c85cacd083a45dcc21"
+    },
+    {
+      "path": "docs/verification/plus-workspace-local-result.json",
+      "sha256": "93adf394ce257d9ed603d88243ca6ce8b083cf6380436cfb79df0c3129ddc0d3"
+    },
+    {
+      "path": "docs/verification/plus-workspace-native-api.json",
+      "sha256": "c9add1bb88400ce9cb4d052f9839337d60853a128c1bdf1b429842af180812db"
+    },
+    {
+      "path": "docs/verification/plus-workspace-native-result.json",
+      "sha256": "f25e1050e17d349038fd1d52949cd5fe40d957aa0d3c414d72b146e445723571"
+    },
+    {
+      "path": "docs/verification/plus-workspace-native-source.json",
+      "sha256": "f023ef7e59d1c7eabe7f623d6a0624c0a7e3db61860e41e72e2a9d97c5bb33c7"
+    },
+    {
+      "path": "docs/verification/plus-workspace-source.json",
+      "sha256": "74eaecaa7a8285c7424c50ce8991b131ed230540fac89c7497e7e3aea84aae2b"
+    },
+    {
+      "path": "docs/verification/plus-workspace-unit-api.json",
+      "sha256": "002efde9f468100c09f01e8d168e23e71d6c9a01d0a67aa4fe9fb3cb29b2399d"
+    },
+    {
+      "path": "docs/verification/plus-workspace-unit-result.json",
+      "sha256": "44dd5298481e9a56bcf5fafd2ecd741d423d8fcdd20581f3c8a203cf6c78a23f"
+    },
+    {
+      "path": "docs/verification/plus-workspace-unit-source.json",
+      "sha256": "283183931fbdda8f1f98f8d5637203d08acd2c1044fca4c85cacd083a45dcc21"
+    },
+    {
       "path": "docs/verification/profile-correction-api.json",
       "sha256": "3d88523aab858f2d4dc3e45cb2f59279ec726544546e1419143556a2d267d773"
     },
@@ -1770,6 +2200,10 @@
     {
       "path": "docs/verification/publication-89d135a.json",
       "sha256": "e36a1900ec874761abac301d5d348c0b09de3b4943abf2c44ca14b87f833975f"
+    },
+    {
+      "path": "docs/verification/publication-9db6fcc.json",
+      "sha256": "b039204041bfab36af7b6be77659662ef36d17e422892531871c5b50b2f3eeda"
     },
     {
       "path": "docs/verification/publication-b31b408.json",
@@ -2002,6 +2436,10 @@
     {
       "path": "docs/verification/repository-audit-89d135a.json",
       "sha256": "d06a64f008f0e4ec91984973624f6a33b7a191752e22b6939726d3004c394d62"
+    },
+    {
+      "path": "docs/verification/repository-audit-9db6fcc.json",
+      "sha256": "3a907c8bff0602b871adbf1442196d70a50218950bfb1ae6470428c5e672c855"
     },
     {
       "path": "docs/verification/repository-audit-b31b408.json",
@@ -2284,30 +2722,23 @@
       "sha256": "fbf919d88e4b3bb6b2e1ff5993fb62a4dacfd78c559bd7232f0c780b28b41846"
     }
   ],
-  "historical_media_files": 153,
+  "historical_media_files": 162,
   "new_media_files": 9,
-  "media_files": 162,
-  "provenance": "ACTUAL_HTTPS_POSTGRESQL_AND_PRIVATE_PNG_PLUS_WEB_UI_WITH_SYNTHETIC_IDENTITY_PAYMENT_QA_METADATA;SHARED_MINI_REPLAY_USES_SYNTHETIC_RESPONSES",
+  "media_files": 171,
+  "provenance": "Actual native PostgreSQL, HTTPS, MCP role protocol, PNG layout, sealed evidence, review workflow and private delivery. Original paid metadata, inference, payment event, semantic verdicts and OS process identity are synthetic. No cloud, real payment/model/semantic quality or native mini-device acceptance.",
   "full_suite_executed": false,
   "native_mini_builds": "NOT_RUN",
   "native_mini_device_verified": false,
-  "final_plus_rendering_verified": false,
+  "final_plus_single_image_workflow_verified_with_synthetic_services": true,
+  "plus_video_batch_and_authoring_verified": false,
   "permanent_cross_platform_binding_verified": false,
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "contract_compatibility": [
-    {
-      "path": "assets/development/v1.1/contracts/openapi.json",
-      "old_paths_and_schemas_semantically_unchanged": true,
-      "old_paths": 71,
-      "old_schemas": 266
-    },
-    {
-      "path": "assets/development/v1.1/contracts/management-openapi.json",
-      "old_paths_and_schemas_semantically_unchanged": true,
-      "old_paths": 37,
-      "old_schemas": 258
-    }
-  ]
+  "contract_compatibility": {
+    "original_slots_retained": 42,
+    "prior_contracts": "docs/verification/contracts-d1034ff",
+    "new_business_operations": 4,
+    "existing_grants_default_to_no_new_permission": true
+  }
 }

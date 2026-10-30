@@ -1,0 +1,14 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/integration/plus-render.test.ts (4 tests) 25537ms
+   ✓ requires an explicitly approved new capability, keeps financial operations native and scopes requests to the owner 602ms
+   ✓ runs content planning, native fee confirmation and a distinct synthetic payment before queuing work 3747ms
+   ✓ renders the actual edited PNG, seals its source reference, independently reviews and delivers a new private pack 14817ms
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  21:40:33
+   Duration  53.37s (tests 49%, import 43%, transform 8%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/plus-render-2026-10-30T13-40-20-611Z-0c053234/api.json

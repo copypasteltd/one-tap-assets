@@ -1,5 +1,15 @@
 # One Tap Assets · 一品成片
 
+2026-10-30 delivery update: **Plus now has a complete single-image production path.** Save a crop, exact canvas size and text on the computer, select a style and prepare a separate production plan. The original Alipay/Douyin mini-program explicitly approves this extra capability, displays the frozen version and full new fee, and requires an intentional native payment. CONTENT, production, post-processing, file QC and independent facts/style reviews then deliver a new private PNG and accompanying copy. Original media, orders and their revision rights remain available; old computer grants receive no automatic elevation.
+
+![Plus single-image production walkthrough](docs/media/plus-render/walkthrough.gif)
+
+[Complete flow, API, configuration and limits](docs/实施/Plus独立图片正式制作与手机付款交付-v1.0.md) · [Screenshots, actual PNG, MP4/WebM/GIF](docs/media/plus-render/README.md) · [Status and remaining work](docs/guides/STATUS.md) · [Exact evidence and initial failures](docs/verification/plus-render-source.json) · [Delivery package manifest](docs/delivery/package.json).
+
+518 source files, 36 migrations, 95 business / 38 management operations, 296 schemas and 80 logical entities. Four final-source vertical checks, required type/server/preview builds, native startup and six browser checks passed. Early unit/draft checks retain their actual source differences. No full-suite green gate, fresh mini-program builds or native-device acceptance was required. Nine new media files bring the total to 171; all original 162 media and the frozen C design remain intact. HTTPS, PostgreSQL, MCP and PNG processing are actual local execution; payment, inference, semantic verdicts and process identity are synthetic. Real services remain disabled pending configuration and admission. Video/subtitles/batch/advanced authoring and cloud release remain outstanding.
+
+Earlier delivery notes retain their original evidence and scope.
+
 2026-10-30 delivery update: **Plus now supports explicit phone approval and independent image editing drafts.** Open same-origin HTTPS `/plus/`, generate a five-minute code and approve it in the signed-in mini-program. The one-hour computer grant reads owned products, orders and delivered packs; edit crop, output dimensions, title, optional brand and unverified facts, save a separate revision and resume it. Revoke from the phone or this browser; existing Plus download links then fail. Credentials stay in browser memory. Payments and refunds remain in the original mini-program.
 
 ![Actual Plus browser walkthrough](docs/media/plus-workspace/walkthrough.gif)

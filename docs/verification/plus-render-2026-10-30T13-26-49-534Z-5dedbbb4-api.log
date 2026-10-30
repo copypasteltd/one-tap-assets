@@ -1,0 +1,14 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/unit/plus-client.test.ts (4 tests) 17ms
+ ✓ tests/unit/plus-image.test.ts (3 tests) 1152ms
+   ✓ applies the selected crop and delivers a real small PNG within the exact requested canvas 625ms
+   ✓ preserves a verifiable visible AI mark on a 2160 by 3840 edited image 455ms
+
+ Test Files  2 passed (2)
+      Tests  7 passed (7)
+   Start at  21:27:05
+   Duration  18.14s (import 79%, transform 14%, tests 7%, worker 1%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/plus-render-2026-10-30T13-26-49-534Z-5dedbbb4/api.json
