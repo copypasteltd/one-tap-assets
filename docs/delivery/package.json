@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "created_at": "2026-10-30T06:19:03.636Z",
-  "id": "2026-10-30T06-12-33-466Z-ae76aed3",
-  "source_set_hash": "40492124847a766a93eb48d5feef79214217ff670d453221494ea2dc20bd0ba8",
-  "archive_path": "runtime/releases/one-tap-assets-2026-10-30T06-12-33-466Z-ae76aed3/one-tap-assets-source-and-builds.zip",
-  "archive_sha256": "a7ad088edfe9b81fa05c253edb9de3e94998184939899c9fbb3719ef7a315d25",
-  "archive_bytes": 98776667,
-  "source_files": 1164,
+  "created_at": "2026-10-30T07:01:45.197Z",
+  "id": "2026-10-30T06-46-35-968Z-0b696fbf",
+  "source_set_hash": "1ec66fe60f9efc22e6ebbd39d62fd9bbc4a109d0517380294d1d9def54ceba13",
+  "archive_path": "runtime/releases/one-tap-assets-2026-10-30T06-46-35-968Z-0b696fbf/one-tap-assets-source-and-builds.zip",
+  "archive_sha256": "5ba163be88afe1824a82abdd70041304bc4505bfcb5f4b66c7f49d0ad5a9130e",
+  "archive_bytes": 101136348,
+  "source_files": 1196,
   "build_files": 31,
   "components": [
     {
@@ -26,18 +26,18 @@
       "status": "NOT_RUN"
     }
   ],
-  "manifest_path": "runtime/releases/one-tap-assets-2026-10-30T06-12-33-466Z-ae76aed3/manifest.json",
+  "manifest_path": "runtime/releases/one-tap-assets-2026-10-30T06-46-35-968Z-0b696fbf/manifest.json",
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
   "full_product_verified": false,
   "production_admitted": false,
   "independent_archive_verification": {
     "status": "PASS",
-    "checked_at": "2026-10-30T06:19:27.650848+00:00",
+    "checked_at": "2026-10-30T07:03:21.414343+00:00",
     "method": "INDEPENDENT_PYTHON_ZIPFILE_CRC_AND_SHA256",
-    "archive_sha256": "a7ad088edfe9b81fa05c253edb9de3e94998184939899c9fbb3719ef7a315d25",
-    "payload_files_verified": 1195,
-    "archive_entries": 1196,
+    "archive_sha256": "5ba163be88afe1824a82abdd70041304bc4505bfcb5f4b66c7f49d0ad5a9130e",
+    "payload_files_verified": 1227,
+    "archive_entries": 1228,
     "workspace_payload_bytes_matched": true,
     "successful_build_components_verified": [
       "server",

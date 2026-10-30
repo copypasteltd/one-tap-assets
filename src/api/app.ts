@@ -69,7 +69,7 @@ export async function buildApp(deps: AppDependencies): Promise<FastifyInstance> 
     }
     const handler = businessHandlers[e.operation_id]; if (!handler) throw new Error(`Missing operation implementation: ${e.operation_id}`);
     app.route({ method: e.method as HTTPMethods, url: `/v1/p01${e.path.replaceAll(/\{([^}]+)\}/g, ':$1')}`, handler: async (request, reply) => {
-      if(['getSupportTicket','listSupportTickets'].includes(e.operation_id))reply.header('Cache-Control','private, no-store').header('Referrer-Policy','no-referrer');
+      if(['getSupportTicket','listSupportTickets','recommendPresets'].includes(e.operation_id))reply.header('Cache-Control','private, no-store').header('Referrer-Policy','no-referrer');
       const principal: Principal | null = e.auth_policy.startsWith('public') ? null : await authenticate(pool, request.headers.authorization, cfg);
       if (e.request_schema) validate(e.request_schema, request.body);
       const params = request.params as Record<string, string>;

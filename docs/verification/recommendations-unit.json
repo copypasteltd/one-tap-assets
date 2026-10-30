@@ -1,0 +1,106 @@
+{
+  "numTotalTestSuites": 1,
+  "numPassedTestSuites": 1,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 6,
+  "numPassedTests": 6,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793342531163,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "ranks the recognized category and evidence-backed structure above generic styles",
+          "status": "passed",
+          "title": "ranks the recognized category and evidence-backed structure above generic styles",
+          "duration": 6.483400000000984,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "ignores hypotheses and observations with missing or foreign photo evidence",
+          "status": "passed",
+          "title": "ignores hypotheses and observations with missing or foreign photo evidence",
+          "duration": 2.2730000000010477,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "routes a recognized food category without copying unconfirmed product claims into reasons",
+          "status": "passed",
+          "title": "routes a recognized food category without copying unconfirmed product claims into reasons",
+          "duration": 1.8176000000021304,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "reads a recommendation without replacing the selected style or creating a plan/charge",
+          "status": "passed",
+          "title": "reads a recommendation without replacing the selected style or creating a plan/charge",
+          "duration": 6.882399999998597,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "discards a response when the buyer changes while recommendations load",
+          "status": "passed",
+          "title": "discards a response when the buyer changes while recommendations load",
+          "duration": 2.8875999999982014,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "discards a response after the active draft changes",
+          "status": "passed",
+          "title": "discards a response after the active draft changes",
+          "duration": 1.1696999999985565,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793342551679,
+      "endTime": 1793342551701.1697,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/recommendations.test.ts"
+    }
+  ]
+}

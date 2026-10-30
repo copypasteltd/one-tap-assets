@@ -1,14 +1,42 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T06:16:16.677750+00:00",
-  "strategy": "USER_REQUESTED_FAST_CREATIVE_COMPONENTS_CLOSURE",
-  "source_set_hash": "40492124847a766a93eb48d5feef79214217ff670d453221494ea2dc20bd0ba8",
-  "source_files": 444,
+  "checked_at": "2026-10-30T07:01:30.806338+00:00",
+  "strategy": "USER_REQUESTED_FAST_MAIN_FUNCTIONAL_CLOSURE",
+  "functional_scope": "docs/实施/商品档案推荐与可用方案选择-v1.0.md",
+  "source_set_hash": "1ec66fe60f9efc22e6ebbd39d62fd9bbc4a109d0517380294d1d9def54ceba13",
+  "source_files": 451,
   "runtime_contract_files": 42,
   "resource_files": 4,
-  "source_snapshot": "docs/verification/creative-components-tested-source.json",
-  "functional_scope": "docs/实施/社区受控叙事节奏运镜与文字样式-v1.0.md",
+  "source_snapshot": "docs/verification/recommendations-built-source.json",
+  "tested_functional_files_equal_build": true,
   "source_unchanged_during_tests": true,
+  "recording_script_added_after_tests": "scripts/record-recommendations.ts",
+  "recording_script_typechecked_in_final_build": true,
+  "unit_checks": {
+    "status": "PASS",
+    "passed": 6,
+    "report": "docs/verification/recommendations-unit.json"
+  },
+  "api_checks": {
+    "status": "PASS",
+    "passed": 4,
+    "transport": "DIRECT_BUSINESS_MODULE_WITH_NATIVE_POSTGRESQL",
+    "report": "docs/verification/recommendations-api.json"
+  },
+  "browser_checks": {
+    "status": "PASS",
+    "passed": 5,
+    "capture": "docs/media/recommendations/capture-manifest.json",
+    "runner": {
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_seconds": 180,
+      "elapsed_seconds": 39.016,
+      "log_path": "runtime/delivery/recommendations-recording-1793343156402114100.log",
+      "log_sha256": "9bd02964b6a4c621391096d374498136ef170186191401ab30a4ccfbc1f91ecc"
+    },
+    "synthetic_product_ranking_and_availability": true
+  },
   "build_report": "docs/delivery/current.json",
   "build_checks": [
     {
@@ -23,8 +51,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 15565,
-      "log_path": "runtime/delivery-builds/2026-10-30T06-12-33-466Z-ae76aed3/typecheck.log",
+      "elapsed_ms": 54080,
+      "log_path": "runtime/delivery-builds/2026-10-30T06-46-35-968Z-0b696fbf/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -40,29 +68,29 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 551,
-      "log_path": "runtime/delivery-builds/2026-10-30T06-12-33-466Z-ae76aed3/server.log",
+      "elapsed_ms": 8437,
+      "log_path": "runtime/delivery-builds/2026-10-30T06-46-35-968Z-0b696fbf/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T06-12-33-466Z-ae76aed3\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T06-46-35-968Z-0b696fbf\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T06-12-33-466Z-ae76aed3\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T06-46-35-968Z-0b696fbf\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 792,
-      "log_path": "runtime/delivery-builds/2026-10-30T06-12-33-466Z-ae76aed3/preview.log",
-      "log_sha256": "a81e39989adb6a6010213907e8bf431c600e98bb8bd4b28433b11d0847266f65"
+      "elapsed_ms": 30463,
+      "log_path": "runtime/delivery-builds/2026-10-30T06-46-35-968Z-0b696fbf/preview.log",
+      "log_sha256": "94bf4205172af70af41a1be17eefa2ce27c81bebf1e54df5e9e01e241e29c2d5"
     }
   ],
   "components": [
@@ -83,112 +111,16 @@
       "status": "NOT_RUN"
     }
   ],
-  "unit_checks": {
-    "status": "PASS",
-    "passed": 5,
-    "not_selected": 0,
-    "report": "docs/verification/creative-components-unit.json",
-    "command": {
-      "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/creative-components.test.ts --outputFile.json=runtime/test-results/creative-components-2026-10-30T06-13-25-371Z/api.json",
-      "argv": [
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
-        "run",
-        "tests/unit/creative-components.test.ts",
-        "--outputFile.json=runtime/test-results/creative-components-2026-10-30T06-13-25-371Z/api.json"
-      ],
-      "shell": false,
-      "status": "PASS",
-      "exit_code": 0,
-      "signal": null,
-      "timeout_ms": 300000,
-      "elapsed_ms": 2738,
-      "log_path": "runtime/test-results/creative-components-2026-10-30T06-13-25-371Z/api.log",
-      "log_sha256": "5a6b997ad2700a186044bc0c36df31f59ada7de863b254f01c8eea5c57573125"
-    }
-  },
-  "api_checks": {
-    "status": "PASS",
-    "passed": 3,
-    "not_selected": 9,
-    "report": "docs/verification/creative-components-api.json",
-    "command": {
-      "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/community.test.ts -t creative components --outputFile.json=runtime/test-results/creative-components-2026-10-30T06-13-19-109Z/api.json",
-      "argv": [
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
-        "run",
-        "--config",
-        "vitest.integration.config.ts",
-        "tests/integration/community.test.ts",
-        "-t",
-        "creative components",
-        "--outputFile.json=runtime/test-results/creative-components-2026-10-30T06-13-19-109Z/api.json"
-      ],
-      "shell": false,
-      "status": "PASS",
-      "exit_code": 0,
-      "signal": null,
-      "timeout_ms": 300000,
-      "elapsed_ms": 4883,
-      "log_path": "runtime/test-results/creative-components-2026-10-30T06-13-19-109Z/api.log",
-      "log_sha256": "cc5c8ce707859aaaa1c6e2010eae6eba1676841e4b7bd5dca0a4cdbddc3778bc"
-    }
-  },
-  "sample_checks": {
-    "status": "PASS",
-    "passed": 3,
-    "not_selected": 17,
-    "report": "docs/verification/creative-components-sample.json",
-    "command": {
-      "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts -t creative components --bail=0 --outputFile.json=runtime/test-results/creative-components-2026-10-30T06-12-23-425Z/api.json",
-      "argv": [
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
-        "run",
-        "--config",
-        "vitest.integration.config.ts",
-        "tests/integration/sample-production.test.ts",
-        "-t",
-        "creative components",
-        "--bail=0",
-        "--outputFile.json=runtime/test-results/creative-components-2026-10-30T06-12-23-425Z/api.json"
-      ],
-      "shell": false,
-      "status": "PASS",
-      "exit_code": 0,
-      "signal": null,
-      "timeout_ms": 300000,
-      "elapsed_ms": 105272,
-      "log_path": "runtime/test-results/creative-components-2026-10-30T06-12-23-425Z/api.log",
-      "log_sha256": "1b3ef7c804de022fae25797eea3d17e63bc7013d658db878e1a41b4c44d6d600"
-    }
-  },
-  "browser_checks": {
-    "status": "PASS",
-    "passed": 5,
-    "capture": "docs/media/creative-components/capture-manifest.json",
-    "runner": {
-      "status": "PASS",
-      "exit_code": 0,
-      "timeout_seconds": 180,
-      "elapsed_seconds": 13.338,
-      "log_path": "runtime/delivery/creative-components-recording-1793340882621299000.log",
-      "log_sha256": "45b51fb2551a7395122113adaf5236a6dc50f101e637c90a3847dc84880e11d3"
-    },
-    "shared_mini_editor": true,
-    "synthetic_author_metadata": true
-  },
   "local_checks": {
     "doctor": {
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 2.443,
-      "log_path": "runtime/delivery/creative-components-doctor-1793339944966399800.log",
-      "log_sha256": "ce90e2085d71a80f9a6b9e3aa0d0d777829a7c9d85c427dd4493636fcc896c49",
+      "elapsed_seconds": 4.883,
+      "log_path": "runtime/delivery/recommendations-doctor-1793343014034342400.log",
+      "log_sha256": "1aa9326e95ca00c339e876ea103d923b83a2e93aef55e651d1ec598e05eda81f",
       "report": {
-        "checked_at": "2026-10-30T05:59:07.365Z",
+        "checked_at": "2026-10-30T06:50:18.349Z",
         "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
         "rows": [
           {
@@ -280,9 +212,9 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 3.555,
-      "log_path": "runtime/delivery/creative-components-backend-1793340845744928100.log",
-      "log_sha256": "7275ec6a25abb8176bd5ee58ac653871223bf13ba1716d63a4b9c9050d93941e",
+      "elapsed_seconds": 34.229,
+      "log_path": "runtime/delivery/recommendations-backend-1793343014179608700.log",
+      "log_sha256": "8cad2e311f77909af3ceab8ba34aa0cded439ff646fe66b815b592dd8c50a214",
       "local_stack_ready": true,
       "preview_http_ready": false
     },
@@ -290,8 +222,8 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 1.046,
-      "log_path": "runtime/delivery/creative-components-preview-1793340845737252700.log",
+      "elapsed_seconds": 4.069,
+      "log_path": "runtime/delivery/recommendations-preview-1793343014268287300.log",
       "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
       "local_stack_ready": false,
       "preview_http_ready": true
@@ -301,24 +233,11 @@
   "no_new_migration": true,
   "business_operations": 77,
   "management_operations": 35,
-  "trusted_components": 25,
-  "new_creative_components": 12,
-  "main_registry": "docs/verification/creative-components-main-registry.json",
-  "supported_engines": [
-    "PHOTO_LAYOUT",
-    "PER_SHOT_AI",
-    "REFERENCE_FILM"
-  ],
-  "actual_native_png_mp4_sample_dag_and_release": true,
-  "sample_role_runs": [
-    5,
-    6,
-    6
-  ],
-  "synthetic_models_profiles_rights_metering_and_os_identities": true,
-  "mcp_bridge_matches_candidate_bytes": true,
-  "attempts_report": "docs/verification/creative-components-attempts.json",
-  "prior_delivery": "docs/verification/delivery-focused-source-89d135a.json",
+  "main_registry": "docs/verification/recommendations-main-registry.json",
+  "recommendation_policy": "profile-evidence-1.0",
+  "no_inference_or_charge_during_recommendation": true,
+  "attempts_report": "docs/verification/recommendations-attempts.json",
+  "prior_delivery": "docs/verification/delivery-focused-source-27045e2.json",
   "historical_evidence_unchanged": [
     {
       "path": "docs/verification/album-save-api.json",
@@ -433,6 +352,158 @@
       "sha256": "bbdbbdef50e9a99d13f1e6ba0fc26b2b64f70633657ce13327249710e1fda36c"
     },
     {
+      "path": "docs/verification/creative-components-api.json",
+      "sha256": "964bdd1c4be28b003cc85cd93586447867063135a6164e8b9ad05f395a2394c8"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-01-source.json",
+      "sha256": "dd8d06bad56ad9f6cf9bc0567164f6b44e7a3c06a0f248cf811dfc7b26faca3a"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-02-checks.json",
+      "sha256": "7c9d9412cddb4b00b3d19e44bb55e1399fe98883bfba4aff5319edb716b9f4bb"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-02-source.json",
+      "sha256": "b823aa1b93b9c84226b6cfbbbc3e88ef1d69f9c65df99d2aad9109cb90a922b1"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-03-checks.json",
+      "sha256": "325f0c0e1752a66dead849bbf3bf1a2005653362bd44e646b6c6250afebf9859"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-03-source.json",
+      "sha256": "b823aa1b93b9c84226b6cfbbbc3e88ef1d69f9c65df99d2aad9109cb90a922b1"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-04-checks.json",
+      "sha256": "caa385783c2503d256c9d8daf9db82dd65ae624cdd153e892c6e0f27ccd04e39"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-04-source.json",
+      "sha256": "b823aa1b93b9c84226b6cfbbbc3e88ef1d69f9c65df99d2aad9109cb90a922b1"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-05-checks.json",
+      "sha256": "756ab736d27aea160b2607e47aa1ade1edfd8ff38978a77e8257239d52d249cb"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-05-source.json",
+      "sha256": "b823aa1b93b9c84226b6cfbbbc3e88ef1d69f9c65df99d2aad9109cb90a922b1"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-06-checks.json",
+      "sha256": "51832e66b92449e395c4ad91048d2b4defc33ea9a6fddbdd6214cd3a2d41432c"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-06-source.json",
+      "sha256": "b823aa1b93b9c84226b6cfbbbc3e88ef1d69f9c65df99d2aad9109cb90a922b1"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-07-checks.json",
+      "sha256": "282a8d49ec4de64d641054373a182c1f97000b10d1ddc2f72bead34e91932f78"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-07-source.json",
+      "sha256": "b81d78c32ca59c751fc450f3c348c5b79d562b00457a35f1d7bd82973bb23baf"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-08-checks.json",
+      "sha256": "8e64f9f9263b236687cc469ab5df99c602315770a7e394d034489caec495f7f6"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-08-source.json",
+      "sha256": "b81d78c32ca59c751fc450f3c348c5b79d562b00457a35f1d7bd82973bb23baf"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-09-checks.json",
+      "sha256": "99d2fbbceb66bb1b0d3a2e1186a7481b72668a58287c28c13080cd0098b6ccd8"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-09-source.json",
+      "sha256": "b81d78c32ca59c751fc450f3c348c5b79d562b00457a35f1d7bd82973bb23baf"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-10-checks.json",
+      "sha256": "3effafafb60e26832d8e735b27de9b90831b75275a2854c32c0e78daafc3ce48"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-10-source.json",
+      "sha256": "c9418d0d74b4c76f643866a2804b241278d1c07bd245883a7b47723bc42d1a48"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-11-checks.json",
+      "sha256": "6c5f6bd3ef40975ac34609d64a0aaf978ef2abf3c7a155323b8ae0bee4ccaed2"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-11-source.json",
+      "sha256": "fc438a57bd6ff5db4b804bccfa88c7fa523f467a60bb0731dcf4513a23ce6be3"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-12-checks.json",
+      "sha256": "3e607405102c4872bac7b28329bf88e688bfcf9af226c5ae524aea9e5e4ff413"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-12-source.json",
+      "sha256": "426c91ca7afce922dc12e98e1a418548e12deab1902ac4d59c36b91c771b551d"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-13-checks.json",
+      "sha256": "964bdd1c4be28b003cc85cd93586447867063135a6164e8b9ad05f395a2394c8"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-13-source.json",
+      "sha256": "426c91ca7afce922dc12e98e1a418548e12deab1902ac4d59c36b91c771b551d"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-14-checks.json",
+      "sha256": "c06119e9c97981ca66135b7b9390a94dfad42b8b7c97e43edd09a96c731385a2"
+    },
+    {
+      "path": "docs/verification/creative-components-attempt-14-source.json",
+      "sha256": "426c91ca7afce922dc12e98e1a418548e12deab1902ac4d59c36b91c771b551d"
+    },
+    {
+      "path": "docs/verification/creative-components-attempts.json",
+      "sha256": "40c9f222d304c5ae337cedc9870bb53eba3cc3086d059149bedc63c4aa9cc030"
+    },
+    {
+      "path": "docs/verification/creative-components-build-01.json",
+      "sha256": "9aa75284341a4b9eef59098d2dc031e79a024c0bcf0620f492bbb003f07d5986"
+    },
+    {
+      "path": "docs/verification/creative-components-build-02.json",
+      "sha256": "74433eb92f1a9f5699e270b8f52a13958429911d3f031bf0a3b3677c90f02078"
+    },
+    {
+      "path": "docs/verification/creative-components-build-03.json",
+      "sha256": "3d0e8173d831724407f442459473415fb08a050f0da3909d3c77fe2e2cf831a0"
+    },
+    {
+      "path": "docs/verification/creative-components-build-04.json",
+      "sha256": "184d00193943d10720d079e7e2453b1d3fdf95edcd42420b77acbf3b7e312e33"
+    },
+    {
+      "path": "docs/verification/creative-components-main-registry.json",
+      "sha256": "bf4ad0d5e7d34f4924743748f0aad966e644c270adb9a473d95122bcd95d6754"
+    },
+    {
+      "path": "docs/verification/creative-components-sample.json",
+      "sha256": "3e607405102c4872bac7b28329bf88e688bfcf9af226c5ae524aea9e5e4ff413"
+    },
+    {
+      "path": "docs/verification/creative-components-source.json",
+      "sha256": "2d5799272d08f90668af74a298a4f14b05120b252001cec7a43140fd975f57b8"
+    },
+    {
+      "path": "docs/verification/creative-components-tested-source.json",
+      "sha256": "426c91ca7afce922dc12e98e1a418548e12deab1902ac4d59c36b91c771b551d"
+    },
+    {
+      "path": "docs/verification/creative-components-unit.json",
+      "sha256": "c06119e9c97981ca66135b7b9390a94dfad42b8b7c97e43edd09a96c731385a2"
+    },
+    {
       "path": "docs/verification/delivery-focused-3533cb4.json",
       "sha256": "f22479a2abaebd956059f220bc40b4b2fc70bd9b8be006112c30d9a5a9d284bc"
     },
@@ -491,6 +562,10 @@
     {
       "path": "docs/verification/delivery-focused-source-6b92d82.json",
       "sha256": "18853e3e184043682b7d0ea290a62469204e37527eb003f2e5dfb49f82e13276"
+    },
+    {
+      "path": "docs/verification/delivery-focused-source-89d135a.json",
+      "sha256": "dbebfe0b854692200def16480f856579b1e57ce175b3b11209607c1f74f470c4"
     },
     {
       "path": "docs/verification/delivery-focused-source-b31b408.json",
@@ -1001,6 +1076,10 @@
       "sha256": "6fb05310a33448111e16e459d5906df051a332f08ca4a5a0309631418594419b"
     },
     {
+      "path": "docs/verification/publication-89d135a.json",
+      "sha256": "e36a1900ec874761abac301d5d348c0b09de3b4943abf2c44ca14b87f833975f"
+    },
+    {
       "path": "docs/verification/publication-b31b408.json",
       "sha256": "a66f1ddbfbcd5eeeb063631e9852cd486bf4e0d4d101594c611468fed3c30a0c"
     },
@@ -1091,6 +1170,10 @@
     {
       "path": "docs/verification/repository-audit-83bd7ee.json",
       "sha256": "c48857242ca77b07f193c22a46c5d48c398777c5a8b090ea7755d87f607ba647"
+    },
+    {
+      "path": "docs/verification/repository-audit-89d135a.json",
+      "sha256": "d06a64f008f0e4ec91984973624f6a33b7a191752e22b6939726d3004c394d62"
     },
     {
       "path": "docs/verification/repository-audit-b31b408.json",
@@ -1361,9 +1444,9 @@
       "sha256": "fbf919d88e4b3bb6b2e1ff5993fb62a4dacfd78c559bd7232f0c780b28b41846"
     }
   ],
-  "existing_media_files_verified": 100,
-  "new_media_files_verified": 10,
-  "baseline_media_files_with_metadata": 124,
+  "existing_media_files_verified": 110,
+  "new_media_files_verified": 6,
+  "baseline_media_files_with_metadata": 136,
   "baseline_design_files": 48,
   "frozen_c_files": 25,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
@@ -1378,11 +1461,9 @@
   "production_admitted": false,
   "cloud_deployed": false,
   "limitations": [
-    "Three actual native silent SAMPLE routes with synthetic models, profiles, rights, metering and role/OS identity; no real provider generation quality, semantic quality or production isolation certified.",
-    "Per-shot rhythms must fit admitted model durations; unsupported short schedules fail before queuing/charging. Single-shot presets cannot demonstrate inter-shot rhythm.",
-    "Native-audio caption style uses the existing contract path; audio/custom-resource SAMPLE admission and live audio quality are not newly verified.",
-    "Full suites, fresh mini-program builds and host-device checks were not run. Native Windows long-run stability remains unverified after intermittent C0000374 failures.",
-    "Complete official/community commercial admission, live services, Plus, cloud and full 58-requirement acceptance remain pending. All real service switches and sales remain disabled."
+    "Recommendation checks photo bindings, current metadata admission, trusted bundles and licenses; the original exact plan, quote, native-audio, budget and payment gates remain authoritative.",
+    "Database, browser rendering and local startup are actual native operations; model admission, buyer product, evidence and availability used by focused checks are synthetic, not production approval.",
+    "No new actual generation or audio-quality acceptance. Full suites, mini builds, native devices, long-run stability, complete official/community admission, Plus, live services and cloud deployment remain pending."
   ],
-  "canonical_creative_components_provenance": "docs/verification/creative-components-source.json"
+  "canonical_recommendations_provenance": "docs/verification/recommendations-source.json"
 }

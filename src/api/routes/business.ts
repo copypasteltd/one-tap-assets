@@ -18,6 +18,7 @@ import { deletionJournal } from '../privacy/journal.js';
 import {originalPaymentAction} from '../modules/payment-actions.js';
 import { publicSampleMedia, withdrawPublicSamples } from '../modules/authorized-samples.js';
 import { getPreview } from '../modules/previews.js';
+import {recommendPresets} from '../modules/recommendations.js';
 
 export interface BusinessContext { db: PoolClient; cfg: Config; principal: Principal | null; params: Record<string, string>; query: PageQuery; body: unknown }
 export type BusinessHandler = (ctx: BusinessContext) => Promise<unknown>;
@@ -40,16 +41,7 @@ export const businessHandlers: Record<string, BusinessHandler> = {
   listPresets: async c => listPresets(c.db, c.cfg, c.query),
   getPresetVersion: async c => presetVersion(c.db, param(c, 'preset_id'), param(c, 'version')),
   listPresetVariants: async c => ({ items: (await presetVersion(c.db, param(c, 'preset_id'), param(c, 'version'))).variants, next_cursor: null }),
-  recommendPresets: async c => {
-    const p = principal(c); const profile = await getProfile(c.db, p, param(c, 'product_id')); const catalog = await listPresets(c.db, c.cfg, { ...c.query, limit: '100' });
-    const items: DTO<'Recommendation'>[] = [];
-    for (const preset of catalog.items) {
-      const detail = await presetVersion(c.db, preset.preset_id, preset.version); const accepted: string[] = []; const missing = new Set<string>();
-      for (const v of detail.variants) { const check = await checkInput(c.db, p, { product_id: profile.product_id, profile_id: profile.profile_id, variant_id: v.variant_id, variant_version: v.version }); if (check.eligible) accepted.push(v.variant_id); else check.capture_guidance.forEach(t => missing.add(t)); }
-      items.push({ preset, variant_ids: accepted.length ? accepted : detail.variants.map(v => v.variant_id), reason: accepted.length ? `根据当前商品的整体和细节照片，可使用${accepted.length}种制作规格。` : '补齐所需照片后可使用此方案。', missing_inputs: [...missing] });
-    }
-    return { items: items.sort((a, b) => a.missing_inputs.length - b.missing_inputs.length), next_cursor: null };
-  },
+  recommendPresets: async c => recommendPresets(c.db,c.cfg,principal(c),param(c,'product_id'),c.query),
   checkVariantInput: async c => checkInput(c.db, principal(c), validate('InputCheckRequest', c.body)),
   createPlan: async c => createPlan(c.db, c.cfg, principal(c), validate('PlanRequest', c.body)),
   getPlan: async c => (await owned<DTO<'Plan'>>(c.db, 'plan_versions', param(c, 'plan_id'), principal(c))).data,

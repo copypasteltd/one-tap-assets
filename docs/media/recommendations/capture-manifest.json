@@ -1,0 +1,111 @@
+{
+  "captured_at": "2026-10-30T06:53:15.200Z",
+  "type": "ACTUAL_BROWSER_RECORDING_SHARED_MINI_PRODUCT_RECOMMENDATIONS",
+  "data_source": "SYNTHETIC_PRODUCT_RECOMMENDATIONS_AND_WITHDRAWAL_METADATA_ACTUAL_BROWSER_RENDERING",
+  "source_set_hash": "1ec66fe60f9efc22e6ebbd39d62fd9bbc4a109d0517380294d1d9def54ceba13",
+  "build_root": "runtime/delivery-builds/2026-10-30T06-46-35-968Z-0b696fbf/runtime/build",
+  "native_mini_device_verified": false,
+  "real_generation_verified": false,
+  "real_payment_verified": false,
+  "browser_tabs_closed": true,
+  "owned_preview_server_stopped": true,
+  "browser_errors": [],
+  "external_network_requests": [],
+  "checks": [
+    "ACTUAL_SHARED_ANALYSIS_DISPLAYS_THREE_SYNTHETIC_REASONS_AND_VARIANT_COUNTS",
+    "EXACT_VERSION_AND_RECOMMENDED_VARIANT_PRESERVED_DETAIL_RECHECKS_SYNTHETIC_WITHDRAWAL",
+    "BUYER_CAN_BROWSE_ALL_TEN_STYLES_WITHOUT_AUTOMATIC_SELECTION",
+    "EMPTY_LIST_OFFERS_CATALOG_AND_RECAPTURE_WITHOUT_REQUIRED_FORM",
+    "NO_HORIZONTAL_OVERFLOW_AT_320PX"
+  ],
+  "screenshots": [
+    {
+      "page": "01-product-recommendations",
+      "path": "docs/media/recommendations/01-product-recommendations.png"
+    },
+    {
+      "page": "02-exact-version-recheck",
+      "path": "docs/media/recommendations/02-exact-version-recheck.png"
+    },
+    {
+      "page": "03-empty-recommendations",
+      "path": "docs/media/recommendations/03-empty-recommendations.png"
+    }
+  ],
+  "recording": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 430,
+        "height": 932
+      }
+    ],
+    "format": {
+      "duration": "8.640000"
+    }
+  },
+  "files": [
+    {
+      "path": "docs/media/recommendations/01-product-recommendations.png",
+      "bytes": 88710,
+      "sha256": "9041cc2224c1449130c732a0d4e85053edc77b6a0858a40e83db7e44e5bb3957"
+    },
+    {
+      "path": "docs/media/recommendations/02-exact-version-recheck.png",
+      "bytes": 57395,
+      "sha256": "25408dfe876e875fea09c54895353edc0716933de8f9a5741e7ba65db1a5e80d"
+    },
+    {
+      "path": "docs/media/recommendations/03-empty-recommendations.png",
+      "bytes": 77600,
+      "sha256": "c5625596801a77a787ab1b611bada10df0e19f504ad9b40b57110df402594f03"
+    },
+    {
+      "path": "docs/media/recommendations/walkthrough.webm",
+      "bytes": 911203,
+      "sha256": "571cf7a073a14dd4db8ac94cfa03e8403a2b15b85f3aa5d11345248e81671582"
+    },
+    {
+      "path": "docs/media/recommendations/walkthrough.mp4",
+      "bytes": 205457,
+      "sha256": "fc95601f4346f35dc4537e626a5d93bbcde9eb7cd9bbe3f23aa2e3902477e918"
+    },
+    {
+      "path": "docs/media/recommendations/walkthrough.gif",
+      "bytes": 823741,
+      "sha256": "4e8403a75592b174e81b5b526e54d5e3c973e023cbcbfa0cf0af509f84a43846"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/record-recommendations.ts",
+      "sha256": "ca82986475284cf1dacf228c93bccccd0069b881ae42d6dc7e2295fbf16512a3"
+    },
+    {
+      "path": "src/shared/ui/analysis.tsx",
+      "sha256": "6bc56fb69c90c501c98924d70394774fab8f82a0c2e46df858df2155ed6669f2"
+    },
+    {
+      "path": "src/shared/ui/recommendations.tsx",
+      "sha256": "15eab7785d88c81729170508c05bb54a9f75c95c5b3ef720e63dc30056310564"
+    },
+    {
+      "path": "src/shared/client/recommendations.ts",
+      "sha256": "e2cf0e58f0fcf0c8c4b4ecef472b6ecd75889f75f0e73fbd80fcf1388595dd2c"
+    },
+    {
+      "path": "src/shared/domain/recommendations.ts",
+      "sha256": "0176927841d681de59994721d549b901e3966f28e994256c7699edd6a47c895c"
+    },
+    {
+      "path": "src/api/modules/recommendations.ts",
+      "sha256": "b49d32c929c957c1b501d1adff5fe945a6c7126add6c3d5599fb6bd89d5b15ce"
+    },
+    {
+      "path": "src/preview/fixtures.ts",
+      "sha256": "97ab5b2dd50ed185786a888263ecebca31e03d17f2e86de936eddd3fd0af9d64"
+    }
+  ]
+}

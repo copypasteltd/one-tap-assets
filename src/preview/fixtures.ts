@@ -43,6 +43,7 @@ demoRefund(demoOrders.demo_refunded!).state='REFUNDED';
 const session={access_token:'synthetic-browser-only',token_type:'Bearer' as const,expires_at:expires,user_id:'demo_user'};
 const profile={product_id:'demo_product',profile_id:'demo_profile',photo_version:1,identity_lock_id:'demo_lock',name:'柚香洗护 · 演示商品',
   summary:'透明琥珀色瓶身，白色泵头，正面可见演示标签。内容为合成回放，不代表真实多模态识别。',unknowns:['成分与功效','未经核实的品牌和认证'],
+  conflicts:[],photo_roles:[{asset_id:'demo-a',role:'WHOLE'},{asset_id:'demo-b',role:'DETAIL'}],
   observations:[{feature:'瓶身',value:'透明琥珀色',status:'OBSERVED'},{feature:'结构',value:'白色按压泵头',status:'OBSERVED'}]};
 const product={product_id:'demo_product',revision:1,photo_version:1,profile_id:'demo_profile',created_at:created};
 const demoPack:DTO<'Deliverables'>={manifest_id:'demo_manifest',order_id:order.order_id,expires_at:expires,cover_deliverable_id:'demo_image',manifest_revision:1,
@@ -79,6 +80,10 @@ function response(operation:string,path:string,body:any):unknown{
     case 'getPlan':return {plan_id:'demo_plan',product_id:product.product_id,profile_id:profile.profile_id,variant_id:first.execution_variants[0]!.variant_id,state:'READY',engine:'PHOTO_LAYOUT',plan_hash:'a'.repeat(64),summary:'演示清单：同一件商品，按极简净白方案制作配套图片、短片与文案。',output_slots:firstSlots};
     case 'createQuote':return {quote_id:'demo_quote',amount_fen:0,currency:'CNY',expires_at:expires,hard_deadline_seconds:600};
     case 'createOrder':return order;
+    case 'recommendPresets':return new URLSearchParams(location.search).get('scenario')==='recommendations'
+      ?{items:['fresh-daily','feature-cards','color-pop'].map(id=>({preset:{...summaries.find(p=>p.preset_id===id)!,sale_enabled:true},
+        variant_ids:[`${id}.photo-layout`],reason:{'fresh-daily':'当前商品类别适合明亮轻盈的日常风格。','feature-cards':'照片已确认结构细节，适合用信息卡片逐项展示。','color-pop':'照片已确认可见配色，可以用色块突出商品原色。'}[id],missing_inputs:[]})),next_cursor:null}
+      :{items:[],next_cursor:null};
     case 'getProductProfile':return profile;
     case 'getAnalysis':return {analysis_id:'demo_analysis',state:'READY'};
     case 'getDeliverables':return demoPack;

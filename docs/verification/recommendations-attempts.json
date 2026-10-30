@@ -1,0 +1,108 @@
+{
+  "checked_at": "2026-10-30T07:01:30.806338+00:00",
+  "attempts": [
+    {
+      "base": "runtime/test-results/recommendations-2026-10-30T06-41-06-694Z",
+      "source_set_hash": "16711a25a24a93248b4da18028204457f9ab1229705e56a32d35844ca7a16087",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "typecheck",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+            "--noEmit"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 120000,
+          "elapsed_ms": 20734,
+          "log_path": "runtime/test-results/recommendations-2026-10-30T06-41-06-694Z/type.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "base": "runtime/test-results/recommendations-2026-10-30T06-41-37-328Z",
+      "source_set_hash": "16711a25a24a93248b4da18028204457f9ab1229705e56a32d35844ca7a16087",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/recommendations.test.ts --outputFile.json=runtime/test-results/recommendations-2026-10-30T06-41-37-328Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "tests/unit/recommendations.test.ts",
+            "--outputFile.json=runtime/test-results/recommendations-2026-10-30T06-41-37-328Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 54060,
+          "log_path": "runtime/test-results/recommendations-2026-10-30T06-41-37-328Z/api.log",
+          "log_sha256": "5989c79f56962d36b7235820381559dea003655bed0c461e59dde0ae6d74b312"
+        }
+      ]
+    },
+    {
+      "base": "runtime/test-results/recommendations-2026-10-30T06-41-37-359Z",
+      "source_set_hash": "16711a25a24a93248b4da18028204457f9ab1229705e56a32d35844ca7a16087",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/recommendations.test.ts --outputFile.json=runtime/test-results/recommendations-2026-10-30T06-41-37-359Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/recommendations.test.ts",
+            "--outputFile.json=runtime/test-results/recommendations-2026-10-30T06-41-37-359Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 109928,
+          "log_path": "runtime/test-results/recommendations-2026-10-30T06-41-37-359Z/api.log",
+          "log_sha256": "f45cb3f6d19f1ca2ae2be7ba9a7164bd054cf060ffd2b7a887d0d9210296c1f2"
+        }
+      ]
+    }
+  ],
+  "initial_type_error": {
+    "evidence_kind": "OBSERVED_TOOL_OUTPUT_NOT_A_CAPTURED_LOG",
+    "status": "FAIL",
+    "cause": "Initial code used AppError.statusCode; corrected to the existing AppError.status. Final typecheck and selected builds pass."
+  },
+  "initial_recording": {
+    "checked_at": "2026-10-30T06:52:36.257271+00:00",
+    "status": "FAIL",
+    "exit_code": 1,
+    "cause": "The direct recorder launcher omitted PLAYWRIGHT_BROWSERS_PATH and searched the global cache instead of the existing project-local runtime/playwright-browsers/ffmpeg-1013 binary.",
+    "failure": "browserContext.newPage: default ffmpeg-win64.exe not found",
+    "evidence_kind": "OBSERVED_TOOL_OUTPUT_NOT_A_CAPTURED_LOG",
+    "correction": "Use the project-local recording launcher and existing ffmpeg cache; no binaries downloaded and no source changes.",
+    "cleanup": "Recorder finally blocks close the owned context/browser/server."
+  },
+  "final_recording": {
+    "status": "PASS",
+    "exit_code": 0,
+    "timeout_seconds": 180,
+    "elapsed_seconds": 39.016,
+    "log_path": "runtime/delivery/recommendations-recording-1793343156402114100.log",
+    "log_sha256": "9bd02964b6a4c621391096d374498136ef170186191401ab30a4ccfbc1f91ecc"
+  },
+  "test_source_difference_from_build": [
+    "Only the new recording script was added after the focused tests; all tested source, contracts and resources match the final build by SHA-256. The final build typechecks this recording script."
+  ],
+  "full_suite_executed": false,
+  "checks_weakened": false
+}

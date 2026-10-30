@@ -4,6 +4,7 @@ import {client} from './runtime';
 import {readDraftAnalysis,resumeDraft} from '../client/drafts';
 import {loadSelectedPreset,startSelectedPlan} from '../client/preset-selection';
 import {Action,Notice,Panel,ResourceState,Slots,navigate,useAction,useResource} from './base';
+import {ProductRecommendations} from './recommendations';
 
 export function Analysis(){
   const action=useAction(),resource=useResource(()=>readDraftAnalysis(client()),value=>Boolean(value.analysis&&['QUEUED','ANALYZING','VALIDATING'].includes(value.analysis.state)));
@@ -21,6 +22,7 @@ export function Analysis(){
         })}>{action.busy?'正在整理素材清单…':'用已选方案继续制作'}</Action>
         <Action secondary onClick={()=>navigate('preset',{preset_id:selection.data!.detail.preset.preset_id,version:selection.data!.detail.preset.version,variant_id:selection.data!.variant.variant_id})}>查看原方案规格</Action></Panel>}
       {selection.error&&<Notice error>{selection.error}</Notice>}
+      <ProductRecommendations key={`${profile.product_id}:${profile.profile_id}:${profile.photo_version}`} profile={profile}/>
       <Action secondary={Boolean(selection.data)} onClick={()=>navigate('catalog')}>{selection.data?'再看看其他方案':'挑选一套方案'}</Action>
       <Action secondary onClick={()=>navigate('photos')}>重新拍照</Action>
     </>:data&&data.analysis&&['FAILED','BLOCKED'].includes(data.analysis.state)?<><Notice error>这些照片暂时无法支持完整制作，请补拍整体和清晰细节。</Notice><Action onClick={()=>navigate('photos')}>重新拍照</Action></>
