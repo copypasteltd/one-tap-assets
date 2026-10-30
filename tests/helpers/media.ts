@@ -60,7 +60,6 @@ export async function mediaFixture(db: TestDatabase,options:{principal?:Principa
     budget_micro: 10000000, repair_ceiling_micro: 0, runtime_binding: { admission: f.admission,
       limits: { max_requests: 8, max_requests_per_role: 2, max_input_tokens: 80000, max_output_tokens: 8000,
         ceiling_micro: 1000000, daily_ceiling_micro: 1000000, owner_id: f.p.userId } } };
-  if(options.revisions)contract.revision_policy=freezeRevisionPolicy(contract);
   if(options.speech){
     if(db.cfg.env!=='test')throw new Error('Synthetic speech admission requires APP_ENV=test');
     const c=options.speech;contract.speech_contract=structuredClone(c);
@@ -82,6 +81,7 @@ export async function mediaFixture(db: TestDatabase,options:{principal?:Principa
     if(db.cfg.env!=='test')throw new Error('Synthetic contract configuration requires APP_ENV=test');
     await options.configureContract(contract);
   }
+  if(options.revisions)contract.revision_policy=freezeRevisionPolicy(contract);
   if(contract.source.engine!=='PHOTO_LAYOUT')contract.source.ai_disclosure_required=true;
   freezeAiDisclosure(contract);
   const quoteId = id('quote'); const orderId = id('order'); const jobId = id('job'); const snapshotId = id('snapshot');

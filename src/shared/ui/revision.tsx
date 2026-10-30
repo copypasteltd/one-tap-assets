@@ -3,6 +3,7 @@ import {useDidShow} from '@tarojs/taro';
 import {View,Text,Button,Textarea} from '@tarojs/components';
 import type {DTO} from '../contracts/types';
 import {client} from './runtime';
+import {revisionProgress} from '../client/revisions';
 import {Action,Notice,Panel,ResourceState,useAction,useResource} from './base';
 const labels={COVER:'素材包封面',ALLOWED_ORDER:'展示顺序',DISPLAY_TEXT:'配套文案'};
 const kindName={image:'图片',video:'短片',copy:'文案'};
@@ -14,9 +15,8 @@ export function LimitedRevision({pack,onDelivered}:{pack:DTO<'Deliverables'>;onD
   const resource=useResource(async()=>{await client().login();return client().api.call('listRevisions',{params:{order_id:pack.order_id},query:{limit:20}});},
     data=>Boolean(data?.items.some(r=>['REQUESTED','PROCESSING'].includes(r.state))));
   useDidShow(()=>{if(owner.current!==client().api.userId){owner.current=client().api.userId;setText('');setOrdered([]);setCover('');resource.reload();}});
-  const latest=resource.data?.items[0];const active=resource.data?.items.find(r=>['REQUESTED','PROCESSING'].includes(r.state));
-  const completed=resource.data?.items.find(r=>r.state==='COMPLETED');
-  useEffect(()=>{if(completed?.result_manifest_revision && completed.result_manifest_revision>pack.manifest_revision && refreshed.current!==completed.revision_id){refreshed.current=completed.revision_id;onDelivered();}},[completed?.revision_id,completed?.result_manifest_revision,pack.manifest_revision,onDelivered]);
+  const latest=resource.data?.items[0];const {active,delivered,customerCompleted:completed}=revisionProgress(resource.data?.items??[]);
+  useEffect(()=>{if(delivered?.result_manifest_revision && delivered.result_manifest_revision>pack.manifest_revision && refreshed.current!==delivered.revision_id){refreshed.current=delivered.revision_id;onDelivered();}},[delivered?.revision_id,delivered?.result_manifest_revision,pack.manifest_revision,onDelivered]);
   const move=(index:number,delta:number):void=>setOrdered(old=>{const next=[...old];const target=index+delta;if(target<0 || target>=next.length)return old;[next[index],next[target]]=[next[target]!,next[index]!];return next;});
   const request:DTO<'RevisionRequest'>={manifest_revision:pack.manifest_revision,kind,...kind==='COVER'?{cover_deliverable_id:cover}:
     kind==='ALLOWED_ORDER'?{ordered_deliverable_ids:ordered}:{display_text:text.trim()}};

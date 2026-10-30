@@ -14,6 +14,14 @@ import {buildApp} from '../../src/api/app.js';
 import {id,hash,sha256} from '../../src/api/lib/crypto.js';
 import {AppError} from '../../src/api/lib/errors.js';
 import {createDownloadLink,getDeliverables} from '../../src/api/modules/delivery.js';
+import {issueSession} from '../../src/api/modules/identity.js';
+import {revisionTools} from '../../src/worker/tool-gateway/revision-tools.js';
+import {RevisionService} from '../../src/worker/revisions/service.js';
+import {REVISION_STAGES} from '../../src/worker/revisions/contract.js';
+import {revisionContext} from '../../src/worker/revisions/context.js';
+import {inspectCandidate} from '../../src/worker/revisions/media.js';
+import type {NativeLaunchManifest} from '../../src/worker/codex/launcher.js';
+import type {DTO} from '../../src/shared/contracts/types.js';
 import {ArkClient} from '../../src/worker/providers/ark.js';
 import {GenerationGateway} from '../../src/worker/generation/gateway.js';
 import {validateGenerationExecution} from '../../src/worker/generation/contracts.js';
@@ -65,12 +73,12 @@ afterEach(async()=>{
 });
 afterAll(async()=>{await db?.close();if(root)await rm(root,{recursive:true,force:true});});
 type Engine='PER_SHOT_AI'|'REFERENCE_FILM';
-async function setup(engine:Engine,options:{mode?:string;wrongAspect?:boolean;unknownReference?:boolean;loseFirstQuery?:boolean;repair?:boolean}={}){
+async function setup(engine:Engine,options:{mode?:string;wrongAspect?:boolean;unknownReference?:boolean;loseFirstQuery?:boolean;repair?:boolean;revisions?:boolean}={}){
   const ic=syntheticArkContract('IMAGE'),vc=syntheticArkContract('VIDEO');vc.video!.durations=[1,2];
   if(!options.wrongAspect){vc.video!.ratios=['9:16'];vc.video!.dimensions=[{resolution:'480p',ratio:'9:16',width:360,height:640}];}
   const cfg=config({...db.cfg,generationEnabled:true,provider:{...db.cfg.provider,apiKey:'synthetic-not-real',baseUrl:ic.base_url,
     imageModel:ic.request_model,videoModel:vc.request_model,allowedHosts:['generation.example.test','media.example.test']}});
-  const f=await mediaFixture({...db,cfg},{generation:{engine,contracts:[ic,vc],twoShots:true,
+  const f=await mediaFixture({...db,cfg},{revisions:options.revisions??false,generation:{engine,contracts:[ic,vc],twoShots:true,
     variantId:engine==='PER_SHOT_AI'?'quiet-luxury.ai-detail':'portrait-social.ai-presenter-multi'},
     ...(options.repair?{configureContract:async(c:import('../../src/worker/compiler/snapshot.js').FrozenContract)=>{
       // Pre-sold synthetic allowance, never an in-flight limit increase.
@@ -117,8 +125,9 @@ async function setup(engine:Engine,options:{mode?:string;wrongAspect?:boolean;un
   const controller=new AbortController(),launcher=new FixtureLauncher(options.mode),executor=new CodexRuntimeAdapter(db.pool,f.cfg,launcher);
   const media=productionTools(db.pool,f.cfg,f.store,gateway),review=reviewTools(db.pool,f.cfg,f.store);
   const repair=repairPlanningTools(db.pool),handlers:Record<string,ToolHandler>={};
+  const aftercare=revisionTools(db.pool,f.cfg,f.store);
   for(const name of new Set([...Object.keys(media),...Object.keys(review),...Object.keys(repair)]))handlers[name]=(scope,...args)=>{
-    const selected=scope.stage_name==='REPAIR_PLAN'?repair:scope.role.startsWith('REVIEW_')?review:media;
+    const selected=scope.scope_type==='REVISION'?aftercare:scope.stage_name==='REPAIR_PLAN'?repair:scope.role.startsWith('REVIEW_')?review:media;
     return selected[name]!(scope,...args);
   };
   active.push({app,controller,task:new ToolConsumer(db.pool,id('generated_tools'),handlers).run(controller.signal)});
@@ -293,4 +302,69 @@ it.each([
   const order=(await db.pool.query('SELECT private,budget_micro,deadline_at,fulfillment_state FROM orders WHERE id=$1',[f.orderId])).rows[0];
   expect(hash(order.private.contract)).toBe(hash(f.contract));expect(Number(order.budget_micro)).toBe(f.contract.budget_micro);
   expect(order.deadline_at.toISOString()).toBe(f.snapshot.deadline_at);expect(order.fulfillment_state).toBe('DELIVERED');
+});
+
+
+class AftercareLauncher extends FixtureLauncher{
+  override async launch(path:string,manifest:NativeLaunchManifest){const result=await super.launch(path,manifest);
+    result.receipt.os_identity_ref=`SYNTHETIC-NOT-RESTRICTED:${manifest.run_id}`;result.receipt.process_ref+=`:${manifest.run_id}`;return result;}
+}
+it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('preserves both silent-generated aftercare flows for %s without repurchasing media or spending the customer success on a platform correction',async engine=>{
+  const f=await setup(engine,{revisions:true}),signal=f.controller.signal;
+  await finish(f.lease,()=>f.service.handle(f.lease,signal));const post=(await claimStage(db.pool,id('aftercare'),['POST']))!;
+  await finish(post,()=>f.service.handle(post,signal));let previous=post;
+  for(const name of ['QC','REVIEW_FACTS','REVIEW_STYLE','DELIVER']){
+    const lease=await next(f,name,previous);previous=lease;
+    await finish(lease,()=>name==='QC'?new QualityControlService(db.pool,f.cfg,f.store).handle(lease,signal):name==='DELIVER'?
+      new PublicationService(db.pool,f.cfg,f.store).handle(lease,signal):new ReviewStageService(db.pool,f.cfg,f.executor).handle(lease,signal));
+  }
+  const original=await getDeliverables(db.pool,f.p,f.orderId),purchases=f.calls.filter(c=>c.method==='POST').length;
+  const originalCost=(await db.pool.query('SELECT spent_micro,deadline_at,private FROM orders WHERE id=$1',[f.orderId])).rows[0];
+  const token=(await issueSession(db.pool,{platform:'alipay',appId:f.p.appId,subjectId:f.p.subjectId})).access_token;
+  const staffToken='SYNTHETIC-GENERATED-AFTERCARE-STAFF';f.cfg.managementTokens=JSON.stringify([{actor:'generated-aftercare-staff',token_hash:sha256(staffToken),permissions:['support:read','support:write','support:repair']}]);
+  const user=(key=id('aftercare-http'))=>({authorization:`Bearer ${token}`,'idempotency-key':key});
+  const staff=()=>({authorization:`Bearer ${staffToken}`,'idempotency-key':id('aftercare-staff-http')});
+  const created=await f.app.inject({method:'POST',url:`/v1/p01/orders/${f.orderId}/tickets`,headers:user(),payload:{category:'PRODUCT_ERROR',message:'合成生成式封面纠错；只更换原包封面。',attachment_asset_ids:[]}});
+  expect(created.statusCode,created.body).toBe(201);const ticket=created.json().data as DTO<'Ticket'>,ticketUrl=`/v1/internal/p01/support-tickets/${ticket.ticket_id}`;
+  expect((await f.app.inject({method:'POST',url:ticketUrl+'/process',headers:staff(),payload:{action:'CLAIM',expected_revision:0}})).statusCode).toBe(200);
+  const offered=await f.app.inject({url:ticketUrl+'/repair-context',headers:staff()});expect(offered.statusCode,offered.body).toBe(200);expect(offered.json().data.can_submit).toBe(true);
+  const cover=original.items.filter(i=>i.kind==='image')[1]!.deliverable_id;
+  const accepted=await f.app.inject({method:'POST',url:`/v1/internal/p01/orders/${f.orderId}/platform-repairs`,headers:staff(),
+    payload:{ticket_id:ticket.ticket_id,expected_ticket_revision:1,change:{kind:'COVER',manifest_revision:1,cover_deliverable_id:cover}}});
+  expect(accepted.statusCode,accepted.body).toBe(200);const correction=accepted.json().data as DTO<'Revision'>;expect(correction.consumes_user_allowance).toBe(false);
+  const execute=async(revision:DTO<'Revision'>,revocationProbe=false)=>{
+    const service=new RevisionService(db.pool,f.cfg,f.store,new CodexRuntimeAdapter(db.pool,f.cfg,new AftercareLauncher()));
+    for(const name of REVISION_STAGES){const lease=(await claimStage(db.pool,id('aftercare-worker'),[name]))!;expect(lease.scope_id).toBe(revision.revision_id);
+      if(name==='REVISION_QC'&&revocationProbe){
+        const generated=(await db.pool.query("SELECT private->'output'->>'object_key' AS object_key FROM provider_submissions WHERE order_id=$1 AND generation_kind='VIDEO' LIMIT 1",[f.orderId])).rows[0].object_key;
+        await db.pool.query('UPDATE private_object_writes SET delete_requested=true WHERE object_key=$1',[generated]);
+        try{await expect(service.handle(lease,signal)).rejects.toMatchObject({code:'GENERATION_MEDIA_REVOKED'});expect((await getDeliverables(db.pool,f.p,f.orderId)).manifest_revision).toBe(1);}
+        finally{await db.pool.query('UPDATE private_object_writes SET delete_requested=false WHERE object_key=$1',[generated]);}
+      }
+      try{await finish(lease,()=>service.handle(lease,signal));}catch(error){
+        console.error(JSON.stringify({synthetic_fixture_only:true,stage:name,tools:(await db.pool.query("SELECT tool_name,state,data->>'error_code' AS code FROM agent_tool_intents WHERE stage_run_id=$1",[lease.id])).rows}));
+        if(name==='REVISION'){try{await inspectCandidate(db.pool,f.cfg,f.store,await revisionContext(db.pool,f.p.tenantId,revision.revision_id),signal);}catch(probe){console.error(probe instanceof Error?probe.message:'Candidate failed');}}
+        throw error;}
+    }
+  };
+  await execute(correction,true);const corrected=await getDeliverables(db.pool,f.p,f.orderId);
+  expect(corrected.manifest_revision).toBe(2);expect(corrected.cover_deliverable_id).toBe(cover);expect(corrected.items).toEqual(original.items);
+  expect((await f.app.inject({url:ticketUrl+'/repair-context',headers:staff()})).json().data.repair).toMatchObject({state:'COMPLETED',consumes_user_allowance:false});
+  const text=`${f.contract.creative.copy}\n实拍展示，欢迎了解。`,url=`/v1/p01/orders/${f.orderId}/revisions`,key=id('aftercare-buyer');
+  const payload={kind:'DISPLAY_TEXT',manifest_revision:2,display_text:text};
+  const requested=await f.app.inject({method:'POST',url,headers:user(key),payload});expect(requested.statusCode,requested.body).toBe(202);
+  const revision=requested.json().data as DTO<'Revision'>;expect(revision.consumes_user_allowance).toBe(true);
+  expect((await f.app.inject({method:'POST',url,headers:user(key),payload})).json().data).toEqual(revision);
+  await execute(revision);const updated=await getDeliverables(db.pool,f.p,f.orderId),copy=updated.items.find(i=>i.kind==='copy')!;
+  expect(updated.manifest_revision).toBe(3);expect(updated.parent_manifest_id).toBe(corrected.manifest_id);expect(updated.expires_at).toBe(original.expires_at);
+  expect(updated.items.filter(i=>i.kind!=='copy')).toEqual(original.items.filter(i=>i.kind!=='copy'));
+  const artifact=(await db.pool.query('SELECT object_key FROM artifacts WHERE id=$1',[copy.deliverable_id])).rows[0];expect((await f.store.get(artifact.object_key)).toString('utf8')).toBe(text);
+  expect(f.calls.filter(c=>c.method==='POST')).toHaveLength(purchases);
+  const order=(await db.pool.query('SELECT spent_micro,deadline_at,private FROM orders WHERE id=$1',[f.orderId])).rows[0];
+  expect(order.spent_micro).toBe(originalCost.spent_micro);expect(order.deadline_at).toEqual(originalCost.deadline_at);expect(order.private.contract).toEqual(originalCost.private.contract);
+  expect((await db.pool.query('SELECT data FROM delivery_manifests WHERE id=$1',[original.manifest_id])).rows[0].data).toEqual(original);
+  const budget=(await db.pool.query('SELECT * FROM revision_budgets WHERE order_id=$1',[f.orderId])).rows[0];expect(Number(budget.spent_micro)).toBeGreaterThan(0);expect(Number(budget.ceiling_micro)).toBe(f.contract.revision_policy!.budget_micro);
+  expect((await db.pool.query("SELECT id FROM inference_requests WHERE scope_type='REVISION' AND scope_id=ANY($1::text[])",[[correction.revision_id,revision.revision_id]])).rowCount).toBe(6);
+  const denied=await f.app.inject({method:'POST',url,headers:user(),payload:{kind:'COVER',manifest_revision:3,cover_deliverable_id:original.items.filter(i=>i.kind==='image')[0]!.deliverable_id}});
+  expect(denied.statusCode,denied.body).toBe(422);expect(denied.json().code).toBe('REVISION_ALLOWANCE_USED');
 });

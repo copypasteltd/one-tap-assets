@@ -9,10 +9,10 @@ import {verifyResourceLicenses} from '../media/font.js';
 import {validateCreativePlan} from '../compiler/plan.js';
 import type {FrozenContract,Snapshot} from '../compiler/snapshot.js';
 import {enqueueStage} from '../queue/enqueue.js';
-import {ensureRevisionBudget,validateRevisionPolicy,REVISION_STAGES,type RevisionInput,type RevisionPolicy} from './contract.js';
+import {ensureRevisionBudget,validateRevisionPolicy,limitedRevisionRoute,REVISION_STAGES,type RevisionInput,type RevisionPolicy} from './contract.js';
 import {checkAdmission,type CodexAdmission} from '../codex/admission.js';
 import type {Config} from '../../api/config.js';
-import {PHOTO_QC_POLICY} from '../review/qc.js';
+import {validateGenerationExecution} from '../generation/contracts.js';
 
 export interface RevisionRow {
   id:string;tenant_id:string;owner_id:string;order_id:string;state:DTO<'Revision'>['state'];deadline_at:Date;input_hash:string;
@@ -76,8 +76,8 @@ export async function createRevision(db:Db,p:Pick<Principal,'tenantId'|'userId'>
   platformError?:RevisionInput['platform_error']):Promise<DTO<'Revision'>> {
   await lockMediaOwner(db,p.tenantId,p.userId);await owned<DTO<'Order'>>(db,'orders',orderId,p,true);
   const source=await deliveredSource(db,p.tenantId,orderId,p.userId);const request=checkedRevisionChange(pack,raw,source.contract);
-  requireThat(source.snapshot.engine==='PHOTO_LAYOUT' && source.snapshot.audio_policy.speech_mode==='NONE'
-    && source.snapshot.codex_contract.qc_policy_version===PHOTO_QC_POLICY,'REVISION_POLICY_UNAVAILABLE','该路线的修改验收尚未开放',503);
+  requireThat(limitedRevisionRoute(source.snapshot),'REVISION_POLICY_UNAVAILABLE','该路线的修改验收尚未开放',503);
+  if(source.snapshot.engine!=='PHOTO_LAYOUT')validateGenerationExecution(source.contract);
   const parent=(await db.query<{hash:string;data:DTO<'Deliverables'>}>(`SELECT hash,data FROM delivery_manifests WHERE tenant_id=$1 AND owner_id=$2 AND order_id=$3 ORDER BY revision DESC LIMIT 1`,[p.tenantId,p.userId,orderId])).rows[0] ?? notFound();
   requireThat(hash(parent.data)===parent.hash && hash(parent.data)===hash(pack),'MANIFEST_CHANGED','原素材清单摘要已变更',409);
   const first=(await db.query<{delivered_at:Date}>('SELECT delivered_at FROM delivery_manifests WHERE tenant_id=$1 AND order_id=$2 ORDER BY revision LIMIT 1',[p.tenantId,orderId])).rows[0] ?? notFound();
@@ -123,6 +123,8 @@ export async function revisionContext(db:Db,tenantId:string,revisionId:string,in
     && (input.platform_error?row.kind==='PLATFORM_REPAIR'&&!row.consumes_user_allowance:input.request.kind===row.kind&&row.consumes_user_allowance),
   'REVISION_INPUT_CHANGED','受限修改冻结输入不一致',503);
   const source=await deliveredSource(db,tenantId,row.order_id,row.owner_id);
+  requireThat(limitedRevisionRoute(source.snapshot),'REVISION_POLICY_UNAVAILABLE','原订单没有冻结对应路线的无声修改验收能力',503);
+  if(source.snapshot.engine!=='PHOTO_LAYOUT')validateGenerationExecution(source.contract);
   if(input.platform_error){
     const proof=input.platform_error;
     const ticket=(await db.query<{data:DTO<'Ticket'>;private:Record<string,unknown>}>(`SELECT data,private FROM support_tickets

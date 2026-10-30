@@ -1,0 +1,223 @@
+{
+  "numTotalTestSuites": 3,
+  "numPassedTestSuites": 3,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 15,
+  "numPassedTests": 15,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793323444150,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "refreshes a completed platform correction without hiding the customer modification editor",
+          "status": "passed",
+          "title": "refreshes a completed platform correction without hiding the customer modification editor",
+          "duration": 1.4333000000000027,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "blocks simultaneous work while either a platform correction or a customer modification is active",
+          "status": "passed",
+          "title": "blocks simultaneous work while either a platform correction or a customer modification is active",
+          "duration": 0.23470000000000368,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "retains the used customer success when a later free correction updates the pack",
+          "status": "passed",
+          "title": "retains the used customer success when a later free correction updates the pack",
+          "duration": 0.558400000000006,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "does not spend the customer success on failed attempts or an empty history",
+          "status": "passed",
+          "title": "does not spend the customer success on failed attempts or an empty history",
+          "duration": 0.19299999999998363,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793323444648,
+      "endTime": 1793323444650.193,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/revision-progress.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "calls the default browser fetch without binding the client as its Window receiver",
+          "status": "passed",
+          "title": "calls the default browser fetch without binding the client as its Window receiver",
+          "duration": 23.713899999999995,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps an uncertain mutation on the original key/body and rejects replacement content",
+          "status": "passed",
+          "title": "keeps an uncertain mutation on the original key/body and rejects replacement content",
+          "duration": 3.872799999999984,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "clears a definitively rejected operation and requires current state for any next request",
+          "status": "passed",
+          "title": "clears a definitively rejected operation and requires current state for any next request",
+          "duration": 1.4358999999999753,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects a late successful reply after logout or account replacement",
+          "status": "passed",
+          "title": "rejects a late successful reply after logout or account replacement",
+          "duration": 1.319500000000005,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "retains a successful but mismatched receipt for original-key recovery",
+          "status": "passed",
+          "title": "retains a successful but mismatched receipt for original-key recovery",
+          "duration": 0.9661999999999864,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793323444365,
+      "endTime": 1793323444395.9663,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/support-desk-client.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "freezes an uncertain correction and shares one pending-write gate with ticket processing",
+          "status": "passed",
+          "title": "freezes an uncertain correction and shares one pending-write gate with ticket processing",
+          "duration": 26.100499999999982,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "does not replace a pending ticket operation with a correction",
+          "status": "passed",
+          "title": "does not replace a pending ticket operation with a correction",
+          "duration": 0.5534000000000106,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "retains a foreign or allowance-consuming correction receipt for original-key recovery",
+          "status": "passed",
+          "title": "retains a foreign or allowance-consuming correction receipt for original-key recovery",
+          "duration": 1.5016999999999996,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "clears a definitive stale-ticket refusal and rejects late responses across accounts",
+          "status": "passed",
+          "title": "clears a definitive stale-ticket refusal and rejects late responses across accounts",
+          "duration": 3.829800000000006,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects a cross-order context instead of displaying private material",
+          "status": "passed",
+          "title": "rejects a cross-order context instead of displaying private material",
+          "duration": 0.9576000000000136,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "checks both manifest identity and actual PNG hash before returning a private image",
+          "status": "passed",
+          "title": "checks both manifest identity and actual PNG hash before returning a private image",
+          "duration": 4.4084,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793323444365,
+      "endTime": 1793323444402.4084,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/support-repair-client.test.ts"
+    }
+  ]
+}

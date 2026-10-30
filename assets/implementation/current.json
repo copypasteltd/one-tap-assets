@@ -3,11 +3,11 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-30T01:14:24.511373+00:00",
+  "checked_at": "2026-10-30T01:30:23.799473+00:00",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "verification_mode": "FOCUSED_SUPPORT_REPAIR_UI_CLOSURE",
+  "verification_mode": "FOCUSED_SILENT_GENERATED_AFTERCARE_CLOSURE",
   "retained_integration": null,
   "command_checks_passed": true,
   "commands": [
@@ -23,8 +23,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 7698,
-      "log_path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/typecheck.log",
+      "elapsed_ms": 16880,
+      "log_path": "runtime/delivery-builds/2026-10-30T01-23-22-762Z-7e39e903/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -40,48 +40,48 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 235,
-      "log_path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/server.log",
+      "elapsed_ms": 790,
+      "log_path": "runtime/delivery-builds/2026-10-30T01-23-22-762Z-7e39e903/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T01-09-29-425Z-9178eaa2\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T01-23-22-762Z-7e39e903\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T01-09-29-425Z-9178eaa2\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T01-23-22-762Z-7e39e903\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 587,
-      "log_path": "runtime/delivery-builds/2026-10-30T01-09-29-425Z-9178eaa2/preview.log",
-      "log_sha256": "de0964892d5f68ef22eab3793eece4c245e37e2655fe12954f0bee8d41411a3b"
+      "elapsed_ms": 849,
+      "log_path": "runtime/delivery-builds/2026-10-30T01-23-22-762Z-7e39e903/preview.log",
+      "log_sha256": "2c95d5b2f75787e678a1a786d2d195109b261dbdabae15dfa6a0c278ac576db1"
     }
   ],
   "suites": [
     {
-      "name": "support-desk-and-repair-client",
+      "name": "revision-progress-and-management-clients",
       "status": "PASS",
-      "passed": 11,
-      "report": "docs/verification/support-repair-ui-unit.json"
+      "passed": 15,
+      "report": "docs/verification/generated-aftercare-unit.json"
     },
     {
-      "name": "actual-support-repair-browser-native-api",
+      "name": "generated-aftercare-and-photo-correction-native",
       "status": "PASS",
-      "browser_groups": 9,
-      "api_groups": 4,
-      "report": "docs/media/support-repair/capture-manifest.json"
+      "passed": 4,
+      "not_selected": 9,
+      "report": "docs/verification/generated-aftercare-api.json"
     }
   ],
-  "source_files": 412,
-  "source_set_hash": "e6892212fa01b34ddd8a1a4b24da093231318cd93e3cea35bdf663d732740559",
+  "source_files": 414,
+  "source_set_hash": "bc638bc4f3bb50df1473135bc6452dd8555ccf07aa615b8598192b933e24d3b9",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -317,7 +317,7 @@
     },
     {
       "path": "src/api/modules/support-repair.ts",
-      "sha256": "4d02e760a04485d830e88cbd24bf3e1fb2608fe8f35b226dbcfbac48c223d29a"
+      "sha256": "f0ddd4b3a53b3eaf85758d6b537e5051eccb6b1d5003e44fa9680bf725bf1758"
     },
     {
       "path": "src/api/modules/support.ts",
@@ -620,6 +620,10 @@
       "sha256": "4a55f14857548d316fe7fa1adf2775615a1c8e964069e8ac72bbb70cff2c1201"
     },
     {
+      "path": "src/shared/client/revisions.ts",
+      "sha256": "165238655d409932abbb2aeec8afc7fee49054c9fb898c84ad5355161715ef3a"
+    },
+    {
       "path": "src/shared/client/session.ts",
       "sha256": "208c95fd7d2bab0f7a555458d0d1d2394dbdacaceafb38790ec63919d4a28ccf"
     },
@@ -721,7 +725,7 @@
     },
     {
       "path": "src/shared/ui/revision.tsx",
-      "sha256": "48d03971d232725588acc07465ba8c3d79807d290b1c6269d2353f3d8905fe2b"
+      "sha256": "8aa4c5a6507aeb3da66e3c27426b2aaf4b14bc8c87aa93b1b351934ae89f8397"
     },
     {
       "path": "src/shared/ui/runtime.ts",
@@ -1077,15 +1081,15 @@
     },
     {
       "path": "src/worker/revisions/context.ts",
-      "sha256": "f30227911c955086ac8115d73e4932b5ff23eb0ac00881d80ea03767902adc3d"
+      "sha256": "a7aa934e5d845a22eef1738848bbffcf4448dee94ee2a3c64fafc3ebdbcc385f"
     },
     {
       "path": "src/worker/revisions/contract.ts",
-      "sha256": "8a6c610ab88c83aec1ea96a53a00a93712351741498e1cff42411b82a5151b51"
+      "sha256": "f156213d6200100eeefbe849e42982ae3456083132a83119a2c5c583f8cbf919"
     },
     {
       "path": "src/worker/revisions/media.ts",
-      "sha256": "3b9f548fbb03acad0cb3c452273e9d7ef07f3973a8719deda07c3bd3a63f67a0"
+      "sha256": "1938045ad2adba4bc313d7c5897368bac666edcaebfb0f12fd70f5348b822785"
     },
     {
       "path": "src/worker/revisions/review.ts",
@@ -1221,7 +1225,7 @@
     },
     {
       "path": "tests/helpers/media.ts",
-      "sha256": "de4ba976964c701976d179770d80eb04c0e6b90bc6ee44b62f529303b469abb2"
+      "sha256": "5dfefecdbe7dc9db928dc4d7c98f5ce9dbf5c7d6a5fc85ff523927ecbe5f9c62"
     },
     {
       "path": "tests/helpers/native-order.ts",
@@ -1293,7 +1297,7 @@
     },
     {
       "path": "tests/integration/generated-production.test.ts",
-      "sha256": "ceee41511b6e38c0072d9188c10a5380a2856cdb8287873725d3b21e188803a8"
+      "sha256": "03d1b7fcbf4daa8986482981dec7be8191c51f106e3db5f09f48fedfe9390e06"
     },
     {
       "path": "tests/integration/generation-gateway.test.ts",
@@ -1502,6 +1506,10 @@
     {
       "path": "tests/unit/review-packet.test.ts",
       "sha256": "b852ee4e07e57d9c5a67a27f33eb0b7cc62dff4e556fe158255d42cae48537bb"
+    },
+    {
+      "path": "tests/unit/revision-progress.test.ts",
+      "sha256": "bc4c55b8f0de65c1815deecbfc3b900a80255b0b0cdbca6e80da7dae96d5d181"
     },
     {
       "path": "tests/unit/speech-channel.test.ts",
@@ -2444,7 +2452,7 @@
   },
   "platform_error_repair": {
     "implemented": true,
-    "scope": "PHOTO_LAYOUT_SILENT_EXISTING_MEDIA_AND_COPY",
+    "scope": "ALL_THREE_SILENT_ROUTES_EXISTING_MEDIA_AND_COMPANION_COPY",
     "operations": 77,
     "management_operations": 32,
     "frozen_support_evidence": true,
@@ -2452,15 +2460,16 @@
     "fresh_dual_review": true,
     "original_shared_aftercare_limits": true,
     "consumes_user_allowance": false,
-    "source": "docs/verification/support-repair-ui-source.json",
+    "source": "docs/verification/generated-aftercare-source.json",
     "management_editor_ui": true,
-    "generated_or_native_audio_aftercare": false,
     "real_external_or_production_verified": false,
-    "full_requirement_verified": false
+    "full_requirement_verified": false,
+    "silent_generated_aftercare": true,
+    "native_audio_aftercare": false
   },
   "support_repair_ui": {
     "implemented": true,
-    "scope": "PHOTO_LAYOUT_SILENT_EXISTING_MEDIA_AND_COMPANION_COPY",
+    "scope": "ALL_THREE_SILENT_ROUTES_EXISTING_MEDIA_AND_COMPANION_COPY",
     "operations": 77,
     "management_operations": 32,
     "permission": "support:repair",
@@ -2468,8 +2477,29 @@
     "private_manifest_image_integrity": true,
     "memory_only_pending_writes": true,
     "reload_recovers_linked_revision": true,
-    "source": "docs/verification/support-repair-ui-source.json",
+    "source": "docs/verification/generated-aftercare-source.json",
     "full_requirement_verified": false,
-    "real_external_or_production_verified": false
+    "real_external_or_production_verified": false,
+    "silent_generated_aftercare": true,
+    "native_audio_aftercare": false
+  },
+  "silent_generated_aftercare": {
+    "implemented": true,
+    "engines": [
+      "PER_SHOT_AI",
+      "REFERENCE_FILM"
+    ],
+    "operations": [
+      "COVER",
+      "ALLOWED_ORDER",
+      "DISPLAY_TEXT"
+    ],
+    "fresh_five_stage_revision": true,
+    "original_generated_sources_and_ai_disclosure_rechecked": true,
+    "additional_generation_purchases": false,
+    "customer_editor_preserves_free_correction_allowance": true,
+    "source": "docs/verification/generated-aftercare-source.json",
+    "native_audio_aftercare": false,
+    "full_requirement_verified": false
   }
 }

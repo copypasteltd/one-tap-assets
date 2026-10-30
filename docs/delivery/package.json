@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "created_at": "2026-10-30T01:15:35.304Z",
-  "id": "2026-10-30T01-09-29-425Z-9178eaa2",
-  "source_set_hash": "e6892212fa01b34ddd8a1a4b24da093231318cd93e3cea35bdf663d732740559",
-  "archive_path": "runtime/releases/one-tap-assets-2026-10-30T01-09-29-425Z-9178eaa2/one-tap-assets-source-and-builds.zip",
-  "archive_sha256": "69ae70d2e9c6c9412694462f309bd732d99ed550470beff5f2d50008957730bd",
-  "archive_bytes": 85477072,
-  "source_files": 898,
+  "created_at": "2026-10-30T01:33:10.613Z",
+  "id": "2026-10-30T01-23-22-762Z-7e39e903",
+  "source_set_hash": "bc638bc4f3bb50df1473135bc6452dd8555ccf07aa615b8598192b933e24d3b9",
+  "archive_path": "runtime/releases/one-tap-assets-2026-10-30T01-23-22-762Z-7e39e903/one-tap-assets-source-and-builds.zip",
+  "archive_sha256": "e5f55c4ef7b1b1cf29a022e3110bc3db153c2bae6a9c06d6484bbbb5b99b6dc3",
+  "archive_bytes": 85359937,
+  "source_files": 909,
   "build_files": 26,
   "components": [
     {
@@ -26,18 +26,18 @@
       "status": "NOT_RUN"
     }
   ],
-  "manifest_path": "runtime/releases/one-tap-assets-2026-10-30T01-09-29-425Z-9178eaa2/manifest.json",
+  "manifest_path": "runtime/releases/one-tap-assets-2026-10-30T01-23-22-762Z-7e39e903/manifest.json",
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
   "full_product_verified": false,
   "production_admitted": false,
   "independent_archive_verification": {
     "status": "PASS",
-    "checked_at": "2026-10-30T01:15:55.896052+00:00",
+    "checked_at": "2026-10-30T01:33:22.502188+00:00",
     "method": "INDEPENDENT_PYTHON_ZIPFILE_CRC_AND_SHA256",
-    "archive_sha256": "69ae70d2e9c6c9412694462f309bd732d99ed550470beff5f2d50008957730bd",
-    "payload_files_verified": 924,
-    "archive_entries": 925,
+    "archive_sha256": "e5f55c4ef7b1b1cf29a022e3110bc3db153c2bae6a9c06d6484bbbb5b99b6dc3",
+    "payload_files_verified": 935,
+    "archive_entries": 936,
     "workspace_payload_bytes_matched": true,
     "successful_build_components_verified": [
       "server",

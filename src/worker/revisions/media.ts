@@ -23,6 +23,11 @@ import {PendingExternal} from '../queue/leases.js';
 import {toolScopeById,type ToolScope} from '../tool-gateway/http.js';
 import type {ToolLease} from '../tool-gateway/consumer.js';
 import {revisionContext,revisionAdmission,type RevisionContext,type RevisionRow} from './context.js';
+import {repairExecutionContext} from '../repair/context.js';
+import {packetReports} from '../review/reports.js';
+import {generatedOutputs,checkGeneratedSources} from '../generation/outputs.js';
+import {frozenAiDisclosure} from '../compiler/disclosure.js';
+import {inspectDisclosure} from '../media/disclosure.js';
 
 export interface RevisionCandidate {revision_id:string;input_hash:string;items:DTO<'Deliverable'>[];cover_deliverable_id:string;candidate_hash:string}
 export interface RevisionPacket {revision_id:string;input_hash:string;parent_manifest_hash:string;source_packet_id:string;source_packet_hash:string;
@@ -59,12 +64,23 @@ async function originalContext(db:Db,c:RevisionContext):Promise<ExecutionContext
   const photo=(await db.query<{id:string;photo_set_hash:string}>(`SELECT id,photo_set_hash FROM product_photo_versions
     WHERE tenant_id=$1 AND product_id=$2 AND revision=$3`,[c.row.tenant_id,c.input.product_id,c.snapshot.photo_version])).rows[0];
   requireThat(photo?.photo_set_hash===c.snapshot.photo_set_hash,'INPUT_HASH_MISMATCH','原商品照片版本已不一致',503);
-  return {tenantId:c.row.tenant_id,ownerId:c.row.owner_id,orderId:c.row.order_id,snapshotHash:c.input.original_snapshot_hash,
+  const base:ExecutionContext={tenantId:c.row.tenant_id,ownerId:c.row.owner_id,orderId:c.row.order_id,snapshotHash:c.input.original_snapshot_hash,
     snapshot:c.snapshot,contract:c.contract,photoVersionId:photo.id};
+  const published=(await db.query<{qc_stage_id:string;data:DTO<'ReviewPacket'>;binding:{packet_id:string;packet_hash:string;snapshot_hash:string}}>(`SELECT p.qc_stage_id,p.data,m.private AS binding
+    FROM delivery_manifests m JOIN review_packets p ON p.tenant_id=m.tenant_id AND p.order_id=m.order_id AND p.id=m.private->>'packet_id'
+    WHERE m.tenant_id=$1 AND m.owner_id=$2 AND m.order_id=$3 AND m.revision=1 AND p.snapshot_hash=$4`,
+    [c.row.tenant_id,c.row.owner_id,c.row.order_id,c.input.original_snapshot_hash])).rows;
+  requireThat(published.length===1&&published[0]!.binding.packet_hash===published[0]!.data.packet_hash
+    &&published[0]!.binding.snapshot_hash===c.input.original_snapshot_hash,'REVISION_PARENT_UNVERIFIED','原交付缺少唯一且一致的封存发布记录',503);
+  return repairExecutionContext(db,base,published[0]!.qc_stage_id);
 }
-async function sourcePacket(db:Db,cfg:Config,c:RevisionContext):Promise<{context:ExecutionContext;packet:DTO<'ReviewPacket'>}> {
+async function sourcePacket(db:Db,cfg:Config,store:ObjectStorage,c:RevisionContext):Promise<{context:ExecutionContext;packet:DTO<'ReviewPacket'>}> {
   const context=await originalContext(db,c);const packet=await currentReviewPacket(db,context);assertReviewConsensus(packet);
   requireThat(packet.publication_decision==='ALLOW','REVISION_PARENT_UNVERIFIED','原交付缺少已发布的封存证据',503);
+  const binding=(await db.query<{private:{packet_id:string;packet_hash:string}}>(`SELECT private FROM delivery_manifests
+    WHERE tenant_id=$1 AND owner_id=$2 AND order_id=$3 AND revision=1`,[c.row.tenant_id,c.row.owner_id,c.row.order_id])).rows[0]?.private;
+  requireThat(binding?.packet_id===packet.packet_id&&binding.packet_hash===packet.packet_hash
+    &&hash(await packetReports(db,cfg,context,packet))===hash(packet.reports),'REVISION_PARENT_UNVERIFIED','原发布版本与独立复核持久证据不一致',503);
   // A later correction may inherit copy from an earlier accepted revision.
   // Walk only immutable, completed links back to the original sealed media;
   // revalidate each prior packet/role proof instead of treating metadata as PASS.
@@ -103,6 +119,13 @@ async function sourcePacket(db:Db,cfg:Config,c:RevisionContext):Promise<{context
   requireThat(post.receipt.artifacts.length===parent.items.length && parent.items.every(i=>post.receipt.artifacts.some(a=>
     a.id===i.deliverable_id && a.slot_id===i.slot_id && a.sha256===i.sha256 && a.spec.kind===i.kind)),
   'REVISION_PARENT_UNVERIFIED','父清单与原封存文件不一致',503);
+  if(context.snapshot.engine!=='PHOTO_LAYOUT'){
+    const production=await operationArtifacts(db,context,'PRODUCTION');
+    checkGeneratedSources(post.receipt,await generatedOutputs(db,cfg,store,context,production.operation.stage_run_id));
+    const disclosure=frozenAiDisclosure(context.contract)!;
+    requireThat(post.receipt.artifacts.filter(a=>a.spec.kind!=='copy').every(a=>a.spec.ai_disclosure?.contract_hash===hash(disclosure)
+      &&a.spec.ai_disclosure.output_sha256===a.sha256),'AI_DISCLOSURE_PROOF_INVALID','原生成素材缺少对应冻结标识与文件的验收证明',503);
+  }
   return {context,packet};
 }
 export async function candidateBytes(db:Db,store:ObjectStorage,c:RevisionContext,item:DTO<'Deliverable'>):Promise<Buffer> {
@@ -139,23 +162,26 @@ export async function makeCandidate(pool:pg.Pool,store:ObjectStorage,scope:ToolS
   return output;
 }
 export async function inspectCandidate(db:Db,cfg:Config,store:ObjectStorage,c:RevisionContext,signal:AbortSignal):Promise<void> {
-  const output=candidate(c);await sourcePacket(db,cfg,c);
+  const output=candidate(c);const source=await sourcePacket(db,cfg,store,c);
+  const disclosure=frozenAiDisclosure(source.context.contract);
   const directory=inside(cfg.runtimeRoot,`revision-qc/${c.row.id}/${id('attempt')}`);await mkdir(directory,{recursive:true});
   try {for(const item of output.items){
     requireThat(!signal.aborted && Date.parse(c.input.deadline_at)>Date.now(),'REVISION_DEADLINE_EXCEEDED','修改已中断或到期',409);
     const bytes=await candidateBytes(db,store,c,item);
     if(item.kind==='copy')requireThat(new TextDecoder('utf-8',{fatal:true}).decode(bytes)===item.text,'REVISION_COPY_CHANGED','配套文案与实际文件不一致',503);
     else if(item.kind==='image'){const actual=await inspectImage(bytes);requireThat(actual.width===item.width && actual.height===item.height && bytes.length===item.size_bytes,
-      'REVISION_MEDIA_SPEC_INVALID','修改图片规格与原交付不一致',503);}
+      'REVISION_MEDIA_SPEC_INVALID','修改图片规格与原交付不一致',503);
+      if(disclosure)await inspectDisclosure(cfg,disclosure,bytes,{kind:'image',width:actual.width,height:actual.height,frames:1,directory,deadline_at:c.input.deadline_at,signal});}
     else {const file=join(directory,`${item.deliverable_id}.mp4`);await writeFile(file,bytes);const actual=await inspectVideo(cfg,file,signal);
       requireThat(actual.width===item.width && actual.height===item.height && actual.fps===item.fps && actual.frames===item.duration_frames
         && actual.bytes===item.size_bytes && !actual.hasAudio && actual.codec==='h264','REVISION_MEDIA_SPEC_INVALID','修改视频规格与原交付不一致',503);
       await nativeCommand(cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-hide_banner','-loglevel','error','-xerror','-nostdin','-threads','2','-protocol_whitelist','file,pipe','-i',file,'-map','0:v:0','-an','-f','null','-'],
         {cwd:directory,timeoutMs:Math.max(1,Math.min(120000,Date.parse(c.input.deadline_at)-Date.now())),signal});}
+    if(item.kind==='video'&&disclosure)await inspectDisclosure(cfg,disclosure,bytes,{kind:'video',width:item.width!,height:item.height!,frames:item.duration_frames!,directory,deadline_at:c.input.deadline_at,signal});
   }}finally{await rm(inside(cfg.runtimeRoot,directory),{recursive:true,force:true});}
 }
 export async function buildRevisionPacket(db:Db,cfg:Config,store:ObjectStorage,c:RevisionContext,signal:AbortSignal):Promise<RevisionPacket> {
-  await inspectCandidate(db,cfg,store,c,signal);const source=await sourcePacket(db,cfg,c);
+  await inspectCandidate(db,cfg,store,c,signal);const source=await sourcePacket(db,cfg,store,c);
   const images=await originalImages(db,store,source.context,source.packet);await checkReviewImages(images,revisionAdmission(cfg,c));
   const body={revision_id:c.row.id,input_hash:c.inputHash,parent_manifest_hash:c.input.parent_manifest_hash,source_packet_id:source.packet.packet_id,
     source_packet_hash:source.packet.packet_hash,candidate:candidate(c),images:images.map(({bytes:_bytes,...binding})=>binding)};
@@ -167,7 +193,7 @@ export function revisionPacket(c:RevisionContext):RevisionPacket {
     && packet.parent_manifest_hash===c.input.parent_manifest_hash && hash(packet.candidate)===hash(candidate(c)),'REVISION_PACKET_CHANGED','修改封存包不一致',503);return packet;
 }
 export async function revisionImages(db:Db,cfg:Config,store:ObjectStorage,c:RevisionContext):Promise<ReviewImage[]> {
-  const packet=revisionPacket(c);const source=await sourcePacket(db,cfg,c);
+  const packet=revisionPacket(c);const source=await sourcePacket(db,cfg,store,c);
   requireThat(source.packet.packet_id===packet.source_packet_id && source.packet.packet_hash===packet.source_packet_hash,'REVISION_PACKET_CHANGED','原画面证据封存不一致',503);
   const images=await originalImages(db,store,source.context,source.packet);
   requireThat(hash(images.map(({bytes:_bytes,...binding})=>binding))===hash(packet.images),'REVISION_PACKET_CHANGED','复核画面绑定已变化',503);

@@ -1,0 +1,9 @@
+{
+  "status": "FAIL",
+  "command": "typecheck",
+  "error": "TS2379: exactOptionalPropertyTypes rejected revisions:boolean|undefined in the test setup.",
+  "resolution": "Pass the explicit false default for a test-only option; no production gate or quota changed.",
+  "full_suite_executed": false,
+  "source_snapshot_captured": false,
+  "evidence_scope": "REPORTED_TYPECHECK_DIAGNOSTIC_ONLY_NOT_A_SOURCE_BOUND_TEST_RESULT"
+}

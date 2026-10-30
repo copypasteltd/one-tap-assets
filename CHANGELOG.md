@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · Silent generated aftercare / 生成式无声售后
+
+本轮接通[生成式无声售后与原媒体保留](docs/实施/生成式无声售后与原媒体保留-v1.0.md)：两生成路线可修改素材包封面、完整展示顺序与配套文案；沿用原图片/视频，核对原生成来源、已结算费用、AI标识和独立双复核。修复领取页将平台免费纠错误算为用户成功次数的问题。15项单元、4项原生集成通过，另9项旧用例未选；原预算/次数/截止与UNKNOWN规则保持。
+
+New: [silent generated aftercare](docs/实施/生成式无声售后与原媒体保留-v1.0.md) supports cover, complete-list display order and companion copy on both generated routes while retaining original image/video bytes. Original references, settled costs, AI disclosure and fresh independent reviews are checked. The buyer editor now keeps its success allowance after a free platform correction. Fifteen unit cases and four native cases pass; nine existing cases were not selected. Original budgets, limits, deadlines and UNKNOWN recovery remain enforced.
+
+Existing 77 business / 32 management operations are retained. First-published evidence, original generated receipts and actual AI marks are checked. No speech, image redraw, video timeline/caption editing or live-service admission is claimed. Server/web outputs pass; final mini builds, comprehensive testing and browser recapture NOT_RUN.
+
 ## 2026-10-30 · Support repair workspace / 客服素材纠错工作台
 
 本轮已接通[客服素材纠错工作台](docs/实施/客服素材纠错工作台-v1.0.md)：原接手客服核对冻结档案和真实交付图片，编辑封面、展示顺序或配套文案，提交并查询原五阶段纠错结果。原键恢复与回复写入互斥，重载查询同一请求；实际新文案文件与素材版本交付通过。11项客户端检查、9组页面操作及4组实际接口检查通过，4张截图和录像/GIF已留存。

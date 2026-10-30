@@ -8,7 +8,7 @@ import {audit} from '../db/store.js';
 import {validate} from '../lib/validation.js';
 import {staffTicket,managedTicket} from './support-desk.js';
 import {deliveredSource} from '../../worker/revisions/context.js';
-import {PHOTO_QC_POLICY} from '../../worker/review/qc.js';
+import {limitedRevisionRoute} from '../../worker/revisions/contract.js';
 import {inspectImage} from '../../worker/media/photo-pipeline.js';
 
 export async function supportRepairContext(db:Db,cfg:Config,admin:ManagementPrincipal,ticketId:string,traceId:string):Promise<DTO<'SupportRepairContext'>>{
@@ -35,7 +35,7 @@ export async function supportRepairContext(db:Db,cfg:Config,admin:ManagementPrin
   const expiry=Math.min(first.delivered_at.getTime()+source.policy.window_hours*3600000,Date.parse(source.expiry));result.window_expires_at=iso(expiry);
   if(repair)result.reason_codes.push('PLATFORM_REPAIR_ALREADY_LINKED');
   if(ticket.state!=='PROCESSING'||!['PRODUCT_ERROR','GENERATION','OTHER'].includes(ticket.data.category))result.reason_codes.push('PLATFORM_REPAIR_TICKET_INVALID');
-  if(source.snapshot.engine!=='PHOTO_LAYOUT'||source.snapshot.audio_policy.speech_mode!=='NONE'||source.snapshot.codex_contract.qc_policy_version!==PHOTO_QC_POLICY)result.reason_codes.push('REVISION_POLICY_UNAVAILABLE');
+  if(!limitedRevisionRoute(source.snapshot))result.reason_codes.push('REVISION_POLICY_UNAVAILABLE');
   if(expiry<=Date.now())result.reason_codes.push('REVISION_WINDOW_EXPIRED');
   if(!cfg.codex.enabled||!cfg.codex.apiKey)result.reason_codes.push('CODEX_NOT_CONFIGURED');
   const active=await db.query("SELECT id FROM revision_requests WHERE tenant_id=$1 AND order_id=$2 AND state IN ('REQUESTED','PROCESSING')",[ticket.tenant_id,ticket.order_id]);

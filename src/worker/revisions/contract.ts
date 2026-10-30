@@ -2,7 +2,16 @@ import type {Db} from '../../api/db/pool.js';
 import type {DTO} from '../../shared/contracts/types.js';
 import {hash,id} from '../../api/lib/crypto.js';
 import {requireThat} from '../../api/lib/errors.js';
-import type {FrozenContract} from '../compiler/snapshot.js';
+import type {FrozenContract,Snapshot} from '../compiler/snapshot.js';
+import {GENERATED_QC_POLICY} from '../generation/contracts.js';
+
+/** The same bounded operations preserve existing media on all silent routes.
+ * Native speech and licensed music need their separate aftercare contract. */
+export function limitedRevisionRoute(snapshot:Snapshot):boolean {
+  return snapshot.audio_policy.speech_mode==='NONE'&&snapshot.audio_policy.music_license_ids.length===0
+    &&(snapshot.engine==='PHOTO_LAYOUT'?snapshot.codex_contract.qc_policy_version==='YPCC-QC-PHOTO-1.0.0':
+      ['PER_SHOT_AI','REFERENCE_FILM'].includes(snapshot.engine)&&snapshot.codex_contract.qc_policy_version===GENERATED_QC_POLICY);
+}
 import type {CodexAdmission} from '../codex/admission.js';
 import type {InferenceLimits} from '../codex/inference.js';
 
