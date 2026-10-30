@@ -58,7 +58,8 @@ function SupportCenter({buyer,order}:{buyer:string;order:DTO<'Order'>|null}){
     {records.map(ticket=><Panel key={ticket.ticket_id}><View className='section-title'><Text>{supportCategories[ticket.category as keyof typeof supportCategories]??'订单问题'}</Text><Text>{ticketStates[ticket.state]??'状态待查询'}</Text></View>
       <Text className='caption'>反馈编号：{ticket.ticket_id}</Text><Text className='caption'>关联订单：{ticket.order_id}</Text><Text className='caption'>更新于 {new Date(ticket.updated_at).toLocaleString()}</Text>
       <Action secondary disabled={action.busy} onClick={()=>void action.run(async()=>{scope();setDetail(undefined);const current=await client().api.call('getSupportTicket',{params:{ticket_id:ticket.ticket_id}});scope();if(current.ticket_id!==ticket.ticket_id||current.order_id!==ticket.order_id)throw new ClientError('SUPPORT_RESULT_INVALID','反馈记录已变化，请重新查询');setDetail(current);})}>查询最新处理状态</Action>
-      {detail?.ticket_id===ticket.ticket_id&&<Notice>最新状态：{ticketStates[detail.state]??'请稍后查询'}。{detail.state==='RESOLVED'?'处理记录已更新，退款与素材请查询原订单。':'如需查看退款或领取素材，请进入关联订单。'}</Notice>}
+      {detail?.ticket_id===ticket.ticket_id&&<><Notice>最新状态：{ticketStates[detail.state]??'请稍后查询'}。{detail.state==='RESOLVED'?'处理记录已更新，退款与素材请查询原订单。':'如需查看退款或领取素材，请进入关联订单。'}</Notice>
+        {detail.response&&<View className='support-reply'><Text className='card-title'>客服回复</Text><Text>{detail.response.message}</Text><Text className='caption'>回复于 {new Date(detail.response.updated_at).toLocaleString()}</Text></View>}</>}
       <Action secondary disabled={action.busy} onClick={()=>navigate('order',{order_id:ticket.order_id})}>查看关联订单</Action>
     </Panel>)}<More {...history}/>
   </>;

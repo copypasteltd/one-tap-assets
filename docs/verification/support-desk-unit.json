@@ -1,0 +1,245 @@
+{
+  "numTotalTestSuites": 3,
+  "numPassedTestSuites": 3,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 17,
+  "numPassedTests": 17,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793318736232,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "hashes byte-boundaries and Unicode without requiring browser or Node globals in a mini-program",
+          "status": "passed",
+          "title": "hashes byte-boundaries and Unicode without requiring browser or Node globals in a mini-program",
+          "duration": 23.701299999999947,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects unsafe service URLs, requires the original intent and clears an expired identity",
+          "status": "passed",
+          "title": "rejects unsafe service URLs, requires the original intent and clears an expired identity",
+          "duration": 7.846300000000042,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "does not retry unknown payment mutations and retains backpressure from the server",
+          "status": "passed",
+          "title": "does not retry unknown payment mutations and retains backpressure from the server",
+          "duration": 1.4122999999999593,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects an in-flight private response after an account switch instead of caching it for the next buyer",
+          "status": "passed",
+          "title": "rejects an in-flight private response after an account switch instead of caching it for the next buyer",
+          "duration": 1.0180999999998903,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "uses the same intent-key boundaries as both published API domains before sending a mutation",
+          "status": "passed",
+          "title": "uses the same intent-key boundaries as both published API domains before sending a mutation",
+          "duration": 138.81589999999994,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793318736883,
+      "endTime": 1793318737055.816,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/client.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "calls the default browser fetch without binding the client as its Window receiver",
+          "status": "passed",
+          "title": "calls the default browser fetch without binding the client as its Window receiver",
+          "duration": 46.31540000000001,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps an uncertain mutation on the original key/body and rejects replacement content",
+          "status": "passed",
+          "title": "keeps an uncertain mutation on the original key/body and rejects replacement content",
+          "duration": 5.631099999999947,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "clears a definitively rejected operation and requires current state for any next request",
+          "status": "passed",
+          "title": "clears a definitively rejected operation and requires current state for any next request",
+          "duration": 1.2701000000000136,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects a late successful reply after logout or account replacement",
+          "status": "passed",
+          "title": "rejects a late successful reply after logout or account replacement",
+          "duration": 1.2098000000000297,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "retains a successful but mismatched receipt for original-key recovery",
+          "status": "passed",
+          "title": "retains a successful but mismatched receipt for original-key recovery",
+          "duration": 1.0899,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793318736739,
+      "endTime": 1793318736795.0898,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/support-desk-client.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "validates support input before any API call and never stores descriptions, bytes or links",
+          "status": "passed",
+          "title": "validates support input before any API call and never stores descriptions, bytes or links",
+          "duration": 5.460100000000011,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "freezes one original submission, shares concurrent calls and skips another mutation after success",
+          "status": "passed",
+          "title": "freezes one original submission, shares concurrent calls and skips another mutation after success",
+          "duration": 4.773599999999988,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "retries the original key and body after a committed ACK is lost without allowing edited content",
+          "status": "passed",
+          "title": "retries the original key and body after a committed ACK is lost without allowing edited content",
+          "duration": 2.9049999999999727,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "reuses the original upload grant and completed asset when retrying a support request",
+          "status": "passed",
+          "title": "reuses the original upload grant and completed asset when retrying a support request",
+          "duration": 3.9329999999999927,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "stops after a grant resolves if the page was hidden and does not upload or create a ticket",
+          "status": "passed",
+          "title": "stops after a grant resolves if the page was hidden and does not upload or create a ticket",
+          "duration": 1.3467999999999734,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects an account switch during order lookup and a response bound to another order",
+          "status": "passed",
+          "title": "rejects an account switch during order lookup and a response bound to another order",
+          "duration": 1.508100000000013,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps a mismatched ticket result unresolved instead of displaying it as accepted",
+          "status": "passed",
+          "title": "keeps a mismatched ticket result unresolved instead of displaying it as accepted",
+          "duration": 0.6086999999999989,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793318737255,
+      "endTime": 1793318737275.6086,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/support.test.ts"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-29T23:25:22.216Z",
-  "id": "2026-10-29T23-24-00-670Z-376313d1",
-  "build_root": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build",
-  "source_set_hash": "487ce07715d5685df6392c4a87070a5ef21dde2eb0ef13dda56d628072d96c3d",
+  "checked_at": "2026-10-30T00:05:48.834Z",
+  "id": "2026-10-30T00-05-34-639Z-5e5813d4",
+  "build_root": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build",
+  "source_set_hash": "bd27a39074f40267c692018badab21e750dfb9ad51204d291a5bc0766243272e",
   "mini_api_configuration": "LOOPBACK_DEVELOPMENT_DEFAULT_REBUILD_FOR_DEVICE",
   "files": [
     {
@@ -16,7 +16,7 @@
     },
     {
       "path": "src/api/app.ts",
-      "sha256": "cee8c435feb0ff638f48d184a8d0f89742ca438b13db4e4ab1310528d691b1e1"
+      "sha256": "2ab8b1206b7add8423d6b35009142a311f3cbc73db7900d8cadab52d0e930679"
     },
     {
       "path": "src/api/config.ts",
@@ -235,6 +235,10 @@
       "sha256": "09247cee3e4c5fddf337c118ae569b6ff17a7439e89e4498eb6c4205a595a9aa"
     },
     {
+      "path": "src/api/modules/support-desk.ts",
+      "sha256": "665d020a1bd36607b13b429097475e8104f13569f23081a4e51dddc83c7473ca"
+    },
+    {
       "path": "src/api/modules/support.ts",
       "sha256": "209f28569e50fdcffeb06ba44fb913158b3a1f8bcc5a14e92605415790361c30"
     },
@@ -244,15 +248,19 @@
     },
     {
       "path": "src/api/routes/business.ts",
-      "sha256": "dee4dad8992f56ed9df8f132a66bb134dd0f5dc762830a6dc510a28daa272153"
+      "sha256": "22d1409bcf3e02ed4f0e21174bbba6af76c00ab34fc640f827957ec0943e81be"
     },
     {
       "path": "src/api/routes/management.ts",
-      "sha256": "7ff8804dcf4a22145102ea3b60f9ab42e83699a7e0528329dd36d8a15ead02e9"
+      "sha256": "cd6bd2bc9a8df3530a08f3ca00028d8547a8a0f2b11fdeeb5cbe043140c13684"
     },
     {
       "path": "src/api/routes/payments.ts",
       "sha256": "2d81c63960c748002d6674b2179806dfdd44b2eafab0e850160c6b0e9b6647c3"
+    },
+    {
+      "path": "src/api/routes/support-console.ts",
+      "sha256": "aee3ecdd06df68963485e017e85f7ff1da4e59054fd458423f521f37d29a50fd"
     },
     {
       "path": "src/api/storage/oss-versions.ts",
@@ -471,12 +479,24 @@
       "sha256": "5dd20f6fcc27de0cf1d8088c418873eb3cbe006f3b904dae968cacb584d0b174"
     },
     {
+      "path": "src/preview/support-console.css",
+      "sha256": "9c844b9c286b0aa43434bf21d6bc1195a78d5adb7e156ef70ea207ceacbb8c24"
+    },
+    {
+      "path": "src/preview/support-main.tsx",
+      "sha256": "7603cd3253cdf6776c6a136baa3a77eb17f9971ecdbdf5bdd63664f94e148168"
+    },
+    {
+      "path": "src/preview/support.html",
+      "sha256": "0d045ba69157c05618e578c57c57418a7590e46ee21b4be7d3ac6ae6d6cbdcf8"
+    },
+    {
       "path": "src/preview/taro.ts",
       "sha256": "516eb0f6818d17a49e2fdc90120b0309b69d213451e6ea6d9d6fe53ba965c712"
     },
     {
       "path": "src/preview/vite.config.ts",
-      "sha256": "cf1a11ccb219845138b9088976787278b46b567261b447805d99fdd118155fa7"
+      "sha256": "763e44c8792f1538410819e3ab011f14d2cd1d509936e5d54cdae35090141646"
     },
     {
       "path": "src/shared/client/album.ts",
@@ -519,12 +539,16 @@
       "sha256": "f3c0828471c5f1d620fe719ea61bab7f6ba5231ca22ed7d9022695199cbae179"
     },
     {
+      "path": "src/shared/client/support-desk.ts",
+      "sha256": "7d93a12dfe9a6024765a9fe7fdc9a1e4a6ba5e6316aa139cd7997833c8424ac8"
+    },
+    {
       "path": "src/shared/client/support.ts",
       "sha256": "c5a554bb1bb72d26025c7fed1e9bc4556139fb66fd2a11a3253922e153a2d87a"
     },
     {
       "path": "src/shared/contracts/api.generated.ts",
-      "sha256": "c7cb468d0c9b88cbb247273af8fa5eb2e93b70b0f9e28b8cfd610547df7bcbe5"
+      "sha256": "45ea2d7d18e51db4804554cccc0f3340f5b680061e5f16d0f25b924a487a65c3"
     },
     {
       "path": "src/shared/contracts/endpoints.generated.ts",
@@ -532,7 +556,7 @@
     },
     {
       "path": "src/shared/contracts/management.generated.ts",
-      "sha256": "03e9b078f3071428dbdd3652684f4847f4fd6614dbc538c048fec25dde48d0b3"
+      "sha256": "cdf9cf96c4b9147dec6a6f73d69bb8335f49fecff5e53ff3358287046c65b4b6"
     },
     {
       "path": "src/shared/contracts/types.ts",
@@ -584,7 +608,7 @@
     },
     {
       "path": "src/shared/ui/help.tsx",
-      "sha256": "daff98c6991d6c58b58f640a45287036e079628f9ddbd90ffcb2dc01743b84b8"
+      "sha256": "cb8b53fa045796aef3977eebd6248c2aeda422a855e2112e6a30bba5e913ce53"
     },
     {
       "path": "src/shared/ui/order.tsx",
@@ -616,7 +640,7 @@
     },
     {
       "path": "src/shared/ui/theme.css",
-      "sha256": "a85ebce8b9e972d973e2c46935058d676ab005cd5b210cd9cbe8f231ba5b9433"
+      "sha256": "05d8df730b321437a6dab56cd51d5a40c7d24d39504abf40562edbbd0e875737"
     },
     {
       "path": "src/worker/analysis/profile.ts",
@@ -1127,6 +1151,10 @@
       "sha256": "4d0f5f183fdf74a121a438f388e48871c8385f4af333a1bbe270cb4962109690"
     },
     {
+      "path": "tests/helpers/support-desk.ts",
+      "sha256": "75842d67dd00fe8039f73f51c6557ee88f2be0dc3b83409d4ea9073d259f49d5"
+    },
+    {
       "path": "tests/integration/agent-traffic.test.ts",
       "sha256": "0b68f8bb6de66f56c1d05ab66b96c7780bb54034aa657d539983c9030df5209d"
     },
@@ -1287,6 +1315,10 @@
       "sha256": "98706bd991e12fb4fbbb4f2881240af4c923e12ecd495cb59e53c5ed7e5295f5"
     },
     {
+      "path": "tests/integration/support-desk.test.ts",
+      "sha256": "7f113360f2367cf63b9697c04d776d001413926de1019f5e6615d7cd38b76cca"
+    },
+    {
       "path": "tests/integration/support-flow.test.ts",
       "sha256": "468fd343c9bb566e2632508653108242109c877f48cff3c8758e32530cf61272"
     },
@@ -1379,6 +1411,10 @@
       "sha256": "e1915a87059b63299e59df93e4553dc429d296e6a5991e0d78016eff8851b6ef"
     },
     {
+      "path": "tests/unit/support-desk-client.test.ts",
+      "sha256": "acc22587f024f1cdf91d48e547911d5730e54b646cdb44f5cbdde92703eeb24d"
+    },
+    {
       "path": "tests/unit/support.test.ts",
       "sha256": "61df1dafe3ee4b11102a175f173b0541b801bffc37f6b02c7cba4314a86f5452"
     },
@@ -1432,7 +1468,7 @@
     },
     {
       "path": "scripts/生成Codex开发契约.py",
-      "sha256": "b918158149e52902bf26f59f6bcd8d56e3e1824117fa226f1b122906f1ba1430"
+      "sha256": "ddeb7c1614b5dc0ca9f62acc2cd74a192a45a13f68ce933d229a55d017dbada8"
     },
     {
       "path": "scripts/生成v3需求配置.py",
@@ -1456,7 +1492,7 @@
     },
     {
       "path": "scripts/delivery/build.ts",
-      "sha256": "8c7e593dd51d537be8c97c26dc4c8c3f321d89c9d909fb3223abaa37018995a3"
+      "sha256": "f8c9e30e556d809e8d68acb046e6260293f9f3e91fce601a7ee82dc1e482aa78"
     },
     {
       "path": "scripts/delivery/common.ts",
@@ -1539,6 +1575,10 @@
       "sha256": "c3167d1e5cfcc86f0310b4ce4fe5fa4a7f36ae10cb8d66e984dbb76ce297ea03"
     },
     {
+      "path": "scripts/record-support-desk.ts",
+      "sha256": "d002013048b88949869088d6f0ceeb82e90178730175f743f528eebefc0369a5"
+    },
+    {
       "path": "scripts/record-support.ts",
       "sha256": "5f52d0d995c7244cbeb0e37827a2c208425be2829e9d1505a66c9963f93615aa"
     },
@@ -1614,7 +1654,7 @@
     },
     {
       "path": "assets/development/v1.1/contracts/endpoint-catalog.md",
-      "sha256": "dae3d7a5bd435ed33c582732fc6df371beaa6945d9bbcc79be2281572b0d0b47"
+      "sha256": "c4cb9a114cff350b62887257a1efc2f4ef5b7573a5f407f9c07d81aee52b0de7"
     },
     {
       "path": "assets/development/v1.1/contracts/endpoints.json",
@@ -1626,15 +1666,15 @@
     },
     {
       "path": "assets/development/v1.1/contracts/management-endpoints.json",
-      "sha256": "a77c13a38b39409d6356cbd5edbca6ed9ce152ba9b37534dbdd6e6b528dc8d2e"
+      "sha256": "18a905c5ef167cbbb88028797cc219b5b8cb846248366d91c4f6835beeace50d"
     },
     {
       "path": "assets/development/v1.1/contracts/management-openapi.json",
-      "sha256": "e67ff8e6fa6e45e0f7236d27f2820d1f93451a255ea90899ae82f48f084676b3"
+      "sha256": "ca2a8ee679645a09f3e6bb1570ad4b2de0ed58a43818fc4b56f9181cbe7e19d7"
     },
     {
       "path": "assets/development/v1.1/contracts/openapi.json",
-      "sha256": "b4e7e8794ccace38a81ab363ccc99c0b93f16e9c2ab049d75e08702f49e6f121"
+      "sha256": "fda9697f24c5a344b3327afec685d92eb974c24cfeb5dfd736ecc55d3938557c"
     },
     {
       "path": "assets/development/v1.1/contracts/product-identity-lock.schema.json",
@@ -1776,7 +1816,7 @@
     }
   ],
   "strategy": "USER_REQUESTED_FOCUSED_DELIVERY",
-  "build_selection": "ALL",
+  "build_selection": "SERVER_AND_PREVIEW",
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
   "checks": [
@@ -1792,8 +1832,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 7160,
-      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/typecheck.log",
+      "elapsed_ms": 11923,
+      "log_path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -1809,61 +1849,29 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 7417,
-      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/server.log",
+      "elapsed_ms": 267,
+      "log_path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T23-24-00-670Z-376313d1\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T00-05-34-639Z-5e5813d4\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-29T23-24-00-670Z-376313d1\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T00-05-34-639Z-5e5813d4\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 2477,
-      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/preview.log",
-      "log_sha256": "22a31e36073f773fa848b07993f4214e966eda8c425c7fd76aaefa41f90d455c"
-    },
-    {
-      "task": "build:alipay",
-      "command": "node scripts/build-mini.cjs alipay",
-      "argv": [
-        "scripts/build-mini.cjs",
-        "alipay"
-      ],
-      "shell": false,
-      "status": "PASS",
-      "exit_code": 0,
-      "signal": null,
-      "timeout_ms": 180000,
-      "elapsed_ms": 44510,
-      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/alipay.log",
-      "log_sha256": "8efd51629ddab1c5d9171efb0406a6f2fd9016a76c0fbaf7c4e92a6fa705fc06"
-    },
-    {
-      "task": "build:douyin",
-      "command": "node scripts/build-mini.cjs tt",
-      "argv": [
-        "scripts/build-mini.cjs",
-        "tt"
-      ],
-      "shell": false,
-      "status": "PASS",
-      "exit_code": 0,
-      "signal": null,
-      "timeout_ms": 180000,
-      "elapsed_ms": 14555,
-      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/douyin.log",
-      "log_sha256": "09dea7f2b9f288ccb6266a49473fa228aeaaea2a122ac3f0670c5bb69502ecc9"
+      "elapsed_ms": 693,
+      "log_path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/preview.log",
+      "log_sha256": "65ec444b3e63033ee95093f9ab804f8383ebb91cb1e5f50aa2889ac5e84980d3"
     }
   ],
   "components": [
@@ -1872,62 +1880,62 @@
       "status": "PASS",
       "files": [
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/api/main.js",
-          "sha256": "6a860c4bd1a70f45b2db3f34b1d223b76f92a2f0b47cd98a4b1239532d776325",
-          "bytes": 533075
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/api/main.js",
+          "sha256": "e25c56c54184c10cbbe4eee676041a4e03b7e20ba78208d74aae4f22a1047c29",
+          "bytes": 543910
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/api/main.js.map",
-          "sha256": "79eb3f0597202a459fedd79cda5aa48827aac8575fd785065b25e854604f263b",
-          "bytes": 1260923
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/api/main.js.map",
+          "sha256": "c6679e7a1ffe955d0c842b04bec3850e6e6f94444610293d0c2967c5b80ae77a",
+          "bytes": 1279427
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/worker/lifecycle/media-maintenance-main.js",
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/worker/lifecycle/media-maintenance-main.js",
           "sha256": "f21d56bfc462cb99fb0bf9fab8bbc52dc2f9eaa167d5f1daee954c20d9fa326d",
           "bytes": 505288
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/worker/lifecycle/media-maintenance-main.js.map",
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/worker/lifecycle/media-maintenance-main.js.map",
           "sha256": "f83f00bcbec97a07cc86fe243ccd9e234dbc9bb7ddd975da361c2041f43f8dd5",
           "bytes": 1099525
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/worker/lifecycle/privacy-journal-main.js",
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/worker/lifecycle/privacy-journal-main.js",
           "sha256": "56146547c499ee94c7d3345f76e8a1f5a467d7cf7a011008fb6b30d4e2596904",
           "bytes": 84131
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/worker/lifecycle/privacy-journal-main.js.map",
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/worker/lifecycle/privacy-journal-main.js.map",
           "sha256": "324eea740c571601e0be116bd886fd99977a5e1287694a55055c82556aa53ef3",
           "bytes": 735574
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/worker/lifecycle/reaper-main.js",
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/worker/lifecycle/reaper-main.js",
           "sha256": "804b93c9a61d45a7842d4db4915f2d39097b8dbc9dfdf6643742dbfc2974a8f0",
           "bytes": 117795
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/worker/lifecycle/reaper-main.js.map",
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/worker/lifecycle/reaper-main.js.map",
           "sha256": "151492de2ef5f562acbc32cc387ccfa43b7ac76fa02a5cc188f42368abcdf1b6",
           "bytes": 753385
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/worker/main.js",
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/worker/main.js",
           "sha256": "74acdc9ad560f172f6fc6f29c611b31638b4342fba117f9e055608973cfa8c7f",
           "bytes": 907990
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/worker/main.js.map",
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/worker/main.js.map",
           "sha256": "62fad0755ae799704b0af221572befe9e9a82b842f3ccea829fd9a5fb541430b",
           "bytes": 1679671
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/worker/tool-gateway/mcp-main.js",
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/worker/tool-gateway/mcp-main.js",
           "sha256": "a8b3d90fd9743d2f7f04d27829fa00ccf0460920b660c0d5cf64094da753a297",
           "bytes": 6651
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/worker/tool-gateway/mcp-main.js.map",
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/worker/tool-gateway/mcp-main.js.map",
           "sha256": "a42bf16ca48c154e1df5ed668280fdde73b43b299194562e8a83d40b18b7ed9d",
           "bytes": 14172
         }
@@ -1938,756 +1946,89 @@
       "status": "PASS",
       "files": [
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/preview/assets/example-0.png",
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/preview/assets/example-0.png",
           "sha256": "20392025fceaab450a37805d63cce766bdc8f619a96465b1386c44c32cff3138",
           "bytes": 20355
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/preview/assets/example-1.png",
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/preview/assets/example-1.png",
           "sha256": "20392025fceaab450a37805d63cce766bdc8f619a96465b1386c44c32cff3138",
           "bytes": 20355
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/preview/assets/example-2.png",
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/preview/assets/example-2.png",
           "sha256": "20392025fceaab450a37805d63cce766bdc8f619a96465b1386c44c32cff3138",
           "bytes": 20355
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/preview/assets/index-B76ro5v9.js",
-          "sha256": "00956bfca63ff3bafe7211cc36610dc572db5eb1fb3f8d30752b1930e4666457",
-          "bytes": 353734
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/preview/assets/index-atJc7AIw.css",
+          "sha256": "b169eea9e3298362712a467776da2c16739159bd0f73b5b2432037646b28fe13",
+          "bytes": 9568
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/preview/assets/index-BW8Y2NgY.css",
-          "sha256": "225be9763a16271d0975664009c49297ae23eb0226380762993ea5bd72faf57c",
-          "bytes": 9450
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/preview/assets/index-B8BhmYDh.js",
+          "sha256": "cbd4e241fd42996ab1831e21703d438e1988c611eb267f69376a9b0a6059260c",
+          "bytes": 195862
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/preview/assets/NotoSansSC_wght_-Dz1u1FRy.ttf",
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/preview/assets/NotoSansSC_wght_-Dz1u1FRy.ttf",
           "sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
           "bytes": 17772300
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/preview/index.html",
-          "sha256": "01d13de9a55fa1592b45a5f07765f0a54e1165f24db3fe216edcdd43833f113f",
-          "bytes": 436
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/preview/assets/support-B_BoU47a.js",
+          "sha256": "f0892de8a9cd3469ef56b2854c098163a6700a323ddd473c4bb3cb378f65153a",
+          "bytes": 10168
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/preview/product-card.png",
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/preview/assets/support-DeYTdLLD.css",
+          "sha256": "b2f0194f80ff7ebe49c926ceed8c7f292ec93a7228f69a4b8864e05c3e99cc14",
+          "bytes": 4033
+        },
+        {
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/preview/assets/support-DxEHs4ls.js",
+          "sha256": "16c9df220b341911677c59dd6e4e5c704b2b80618a0cb1d3eb50d53291239f08",
+          "bytes": 158129
+        },
+        {
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/preview/index.html",
+          "sha256": "f4283d9ca35c8aba6c05fde275541ccfe188e272a609541ac1e89f4ad42ff14f",
+          "bytes": 515
+        },
+        {
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/preview/product-card.png",
           "sha256": "f791d4b6e6c6445365811b2f404b1bb24587c934b7e6c539239709a188dca145",
           "bytes": 86842
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/preview/product-motion.mp4",
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/preview/product-motion.mp4",
           "sha256": "d5d02a3733a704a5f9117f490cfc86ed3c2bb7ec30be31bfca5252fdfbb6e3b0",
           "bytes": 18398
         },
         {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/preview/product.svg",
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/preview/product.svg",
           "sha256": "2c507fbbdd3fad7e9f99beb6faca1f9bd608d1148e49c1665c052b956e6ed313",
           "bytes": 1693
+        },
+        {
+          "path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build/preview/support.html",
+          "sha256": "92b8b17b0abddbf1d1ef2145c8f241403115a7ca8cf6015441769260693e188d",
+          "bytes": 459
         }
       ]
     },
     {
       "name": "alipay",
-      "status": "PASS",
-      "files": [
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/.browserslistrc",
-          "sha256": "69d1831b4ef2b668d044d740d8c962d7eb56c752dc13b1fe6f7bac7770b98eeb",
-          "bytes": 38
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/app-origin.acss",
-          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "bytes": 0
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/app.acss",
-          "sha256": "c3afefcfcda8af414a0ba1625662166c66a3e88819b3af58091121dff64086d8",
-          "bytes": 52
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/app.js",
-          "sha256": "9649bec572e7a477c1e087d03c8f7af6aceb08f2bb79eabd3ec2f32167902671",
-          "bytes": 105390
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/app.js.LICENSE.txt",
-          "sha256": "08604636b38ae83699d7a95fc32255f871cbee504511ee89fdef4f98cdfcc356",
-          "bytes": 749
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/app.json",
-          "sha256": "69a49d9335479b7ff4c952eb2c624a6e79a55174bf85a1e3692ca0e2f66d39e3",
-          "bytes": 508
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/assets/example-0.png",
-          "sha256": "fbe417da970e88dc1f5a8cebada560262222de086649b9b4126e1a2ad7e17e78",
-          "bytes": 32740
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/assets/example-1.png",
-          "sha256": "38926cb4ece3c397ec8419afc28d1801669a1205a7585017435c239084566d32",
-          "bytes": 41136
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/assets/example-2.png",
-          "sha256": "81d9dc630343ab058245fcb816eda598b7fe845f77fd0aab226ebbba9b359ce2",
-          "bytes": 30067
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/base.axml",
-          "sha256": "350c24760c231036ef401a575ff0bbf1550bc1dfb6c66436a7e5f1b49dea4c74",
-          "bytes": 11178
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/common.acss",
-          "sha256": "ab3201c6829761bf5445b63f2f6b6c160e908b357452178f04a087309b6d3ef9",
-          "bytes": 7775
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/common.js",
-          "sha256": "b15a8100eb451a5d95f99d78a7f82a94f3739b771ef52e6c69097e995a9c7b7b",
-          "bytes": 168883
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/example-source.json",
-          "sha256": "6f2f30b3ea1b36e59493a102b9c517df23a7415fd4491d1cf94e7e378a10d3b0",
-          "bytes": 428
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/analysis/index.axml",
-          "sha256": "0a583e97185dccf4bac14706400588b7b5e410d6f46b05a2a08f552d4cc1ecea",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/analysis/index.js",
-          "sha256": "f1c3e6d37646985038f2424b502560e31dcbd9ee436451a325b214a5d752a380",
-          "bytes": 418
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/analysis/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/catalog/index.axml",
-          "sha256": "0a583e97185dccf4bac14706400588b7b5e410d6f46b05a2a08f552d4cc1ecea",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/catalog/index.js",
-          "sha256": "d6b0179107992fe9e4ea7ab69ac6d4c636e6d347fe59a740f58e11ef46c8cfa4",
-          "bytes": 415
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/catalog/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/confirm/index.axml",
-          "sha256": "0a583e97185dccf4bac14706400588b7b5e410d6f46b05a2a08f552d4cc1ecea",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/confirm/index.js",
-          "sha256": "f09929dbeb74b0086b1f72aa8db083548189e014bf3360c37f35854bf23acbe8",
-          "bytes": 414
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/confirm/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/creator/index.axml",
-          "sha256": "0a583e97185dccf4bac14706400588b7b5e410d6f46b05a2a08f552d4cc1ecea",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/creator/index.js",
-          "sha256": "cfee17e36888e114dc4dd12e5b3fcc89456eb8a96df383ce26e51ab2f55b92ed",
-          "bytes": 414
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/creator/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/draft/index.axml",
-          "sha256": "0a583e97185dccf4bac14706400588b7b5e410d6f46b05a2a08f552d4cc1ecea",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/draft/index.js",
-          "sha256": "39f475f19d8b88e5e4aaa35d213053f1609f7b0eb9c9192804aa5a4afab494eb",
-          "bytes": 412
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/draft/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/favorites/index.axml",
-          "sha256": "0a583e97185dccf4bac14706400588b7b5e410d6f46b05a2a08f552d4cc1ecea",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/favorites/index.js",
-          "sha256": "606bb7be0a2a95068f40a0202ecf51ea06cc004ec6398e2b4122bf0fd36b31fb",
-          "bytes": 418
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/favorites/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/help/index.axml",
-          "sha256": "0a583e97185dccf4bac14706400588b7b5e410d6f46b05a2a08f552d4cc1ecea",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/help/index.js",
-          "sha256": "83f0ca4ff4a35157ad85a8e315aef25c648985f5cae2853a208a541c60ac77e8",
-          "bytes": 410
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/help/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/home/index.axml",
-          "sha256": "0a583e97185dccf4bac14706400588b7b5e410d6f46b05a2a08f552d4cc1ecea",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/home/index.js",
-          "sha256": "f0a9c283209abaecce620404c0b0bd1d2be058566afa3ba98063074f8f3d8682",
-          "bytes": 410
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/home/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/library/index.axml",
-          "sha256": "0a583e97185dccf4bac14706400588b7b5e410d6f46b05a2a08f552d4cc1ecea",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/library/index.js",
-          "sha256": "423ce7d9ca18692930239fe3b8f16e728255aec859f0c74baa1bab859f1bc4d0",
-          "bytes": 416
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/library/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/moderation/index.axml",
-          "sha256": "0a583e97185dccf4bac14706400588b7b5e410d6f46b05a2a08f552d4cc1ecea",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/moderation/index.js",
-          "sha256": "373e740ca6a8d3e3d3f1448e84668d81bab1b9c9c9c2d8b693f74c98549108de",
-          "bytes": 422
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/moderation/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/order/index.axml",
-          "sha256": "0a583e97185dccf4bac14706400588b7b5e410d6f46b05a2a08f552d4cc1ecea",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/order/index.js",
-          "sha256": "76fecd7f352d31efbb9062e5c3c6562b986f381181e4c689bddc9d0d5453a9ea",
-          "bytes": 412
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/order/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/pack/index.axml",
-          "sha256": "0a583e97185dccf4bac14706400588b7b5e410d6f46b05a2a08f552d4cc1ecea",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/pack/index.js",
-          "sha256": "4879296cd12728f8b989781f16a698159e64d9370b876f298bc19a43d430289b",
-          "bytes": 410
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/pack/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/photos/index.axml",
-          "sha256": "0a583e97185dccf4bac14706400588b7b5e410d6f46b05a2a08f552d4cc1ecea",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/photos/index.js",
-          "sha256": "016a6e15a5c12fd811055690c942e0adcd691c9f1799df8733668183e396f329",
-          "bytes": 414
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/photos/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/preset/index.axml",
-          "sha256": "0a583e97185dccf4bac14706400588b7b5e410d6f46b05a2a08f552d4cc1ecea",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/preset/index.js",
-          "sha256": "261a64178549c8e6208a422197a93b47bfde98404d359351823082d25c91731e",
-          "bytes": 414
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/preset/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/publication/index.axml",
-          "sha256": "0a583e97185dccf4bac14706400588b7b5e410d6f46b05a2a08f552d4cc1ecea",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/publication/index.js",
-          "sha256": "cd6c23f962bacee9a35fbcd8cebc2c84c74540f7641301dadda9c700a714480f",
-          "bytes": 424
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/publication/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/rights/index.axml",
-          "sha256": "0a583e97185dccf4bac14706400588b7b5e410d6f46b05a2a08f552d4cc1ecea",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/rights/index.js",
-          "sha256": "35d1557f2be79c7e688f4c07e0a5e4087d33a7a5549df43e36a43cad28d989f6",
-          "bytes": 414
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/rights/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/settings/index.axml",
-          "sha256": "0a583e97185dccf4bac14706400588b7b5e410d6f46b05a2a08f552d4cc1ecea",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/settings/index.js",
-          "sha256": "1a471ddc76767d4481f7a48fb9f5359e950a5f1577f5229dc1121db4beae15df",
-          "bytes": 418
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/pages/settings/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/runtime.js",
-          "sha256": "529ee3cc8614557c350692990e82ff7e972691ac84ba27dfed40613984d0e7d6",
-          "bytes": 2187
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/taro.js",
-          "sha256": "1a23be6195b065afc8ef18ca9335927e8190d278a19362fa4eadeb2f8cc1139e",
-          "bytes": 134858
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/utils.sjs",
-          "sha256": "506b1943de96f44954d0c0e0d98d7a879ab2109ebc4250f501056e89ff4d322f",
-          "bytes": 467
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/vendors.js",
-          "sha256": "3d02b4179326f18150af1c8729e427e81c1803826555acc4719e8cd1b33b15c5",
-          "bytes": 19313
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-alipay/vendors.js.LICENSE.txt",
-          "sha256": "784f801887c62e7fca78a248e53a4d12adaa07e92a30941269d1f6408e95584f",
-          "bytes": 651
-        }
-      ]
+      "status": "NOT_RUN",
+      "files": []
     },
     {
       "name": "douyin",
-      "status": "PASS",
-      "files": [
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/app-origin.ttss",
-          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-          "bytes": 0
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/app.js",
-          "sha256": "dacbe1eca6110e62089cd8811ef842d50f633d55200e4e5405d5c9885f679a42",
-          "bytes": 107035
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/app.js.LICENSE.txt",
-          "sha256": "08604636b38ae83699d7a95fc32255f871cbee504511ee89fdef4f98cdfcc356",
-          "bytes": 749
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/app.json",
-          "sha256": "4f61bf2d665c9e5bc63876d0d806595d8dc1e1f29f69e7d75e6a343cd4956c2f",
-          "bytes": 533
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/app.ttss",
-          "sha256": "c66d9dacffd7f389152f9648daf9eac7edb7bc1142f9e44d824a6d7d3acf3ed1",
-          "bytes": 52
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/assets/example-0.png",
-          "sha256": "fbe417da970e88dc1f5a8cebada560262222de086649b9b4126e1a2ad7e17e78",
-          "bytes": 32740
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/assets/example-1.png",
-          "sha256": "38926cb4ece3c397ec8419afc28d1801669a1205a7585017435c239084566d32",
-          "bytes": 41136
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/assets/example-2.png",
-          "sha256": "81d9dc630343ab058245fcb816eda598b7fe845f77fd0aab226ebbba9b359ce2",
-          "bytes": 30067
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/base.ttml",
-          "sha256": "b5ac7f8b8f71e60327c03b73fd5fd1254938bdc936a690a209ba1a947830c1cd",
-          "bytes": 11430
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/common.js",
-          "sha256": "f597f1e28088481e8cae83e4a95173da0648c152e6be827759e8f5d7446be0e8",
-          "bytes": 168884
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/common.ttss",
-          "sha256": "ab3201c6829761bf5445b63f2f6b6c160e908b357452178f04a087309b6d3ef9",
-          "bytes": 7775
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/example-source.json",
-          "sha256": "6f2f30b3ea1b36e59493a102b9c517df23a7415fd4491d1cf94e7e378a10d3b0",
-          "bytes": 428
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/analysis/index.js",
-          "sha256": "272f6ac199bdf9412f87a5a0a3b99d4b4ac47dfc7db62e7017efdc95c7196312",
-          "bytes": 424
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/analysis/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/analysis/index.ttml",
-          "sha256": "b134f6db2b337b7018d584b1f0253722368b1be77b045cfefecc5cfc4c24b24a",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/catalog/index.js",
-          "sha256": "912de5c1d9b533c5efa93ee4bcf1e06256c7aa1db96875c9821839e70dbdc38f",
-          "bytes": 421
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/catalog/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/catalog/index.ttml",
-          "sha256": "b134f6db2b337b7018d584b1f0253722368b1be77b045cfefecc5cfc4c24b24a",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/confirm/index.js",
-          "sha256": "8dbe1602e40946fdec703eab46946dfc8b000280c45f0701d5ae63cb9fa9ccf0",
-          "bytes": 422
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/confirm/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/confirm/index.ttml",
-          "sha256": "b134f6db2b337b7018d584b1f0253722368b1be77b045cfefecc5cfc4c24b24a",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/creator/index.js",
-          "sha256": "0f9fca78ae23c9f404e1fa4cebaf18f00070c03160d8ead48eac431d98d4be22",
-          "bytes": 422
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/creator/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/creator/index.ttml",
-          "sha256": "b134f6db2b337b7018d584b1f0253722368b1be77b045cfefecc5cfc4c24b24a",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/draft/index.js",
-          "sha256": "49d7428d2cbf70a0440e5f1e6bc271cf1916532483e4ced31151106177336cb4",
-          "bytes": 418
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/draft/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/draft/index.ttml",
-          "sha256": "b134f6db2b337b7018d584b1f0253722368b1be77b045cfefecc5cfc4c24b24a",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/favorites/index.js",
-          "sha256": "acb2311cbb89d0788190996e4ccca86993360c31936998c204c4bcca6faf9534",
-          "bytes": 426
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/favorites/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/favorites/index.ttml",
-          "sha256": "b134f6db2b337b7018d584b1f0253722368b1be77b045cfefecc5cfc4c24b24a",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/help/index.js",
-          "sha256": "03e4f56fc70313b1c4566e5924e0ca97eed82bb16dd2e97d1df57ed2cb887111",
-          "bytes": 416
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/help/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/help/index.ttml",
-          "sha256": "b134f6db2b337b7018d584b1f0253722368b1be77b045cfefecc5cfc4c24b24a",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/home/index.js",
-          "sha256": "3d4b0e91520b419e0e612d1d46f739a911e0b8dfe11f67f4545ea0207190acd2",
-          "bytes": 416
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/home/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/home/index.ttml",
-          "sha256": "b134f6db2b337b7018d584b1f0253722368b1be77b045cfefecc5cfc4c24b24a",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/library/index.js",
-          "sha256": "acb13a4e936711ac57b2f9017bc273ab280ca872a3354442e662c6259ff0a35c",
-          "bytes": 422
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/library/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/library/index.ttml",
-          "sha256": "b134f6db2b337b7018d584b1f0253722368b1be77b045cfefecc5cfc4c24b24a",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/moderation/index.js",
-          "sha256": "facb3dc7a92ed537226b2f5abf5e9ef16c5fbf882256cfcdb660be671ac74284",
-          "bytes": 426
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/moderation/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/moderation/index.ttml",
-          "sha256": "b134f6db2b337b7018d584b1f0253722368b1be77b045cfefecc5cfc4c24b24a",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/order/index.js",
-          "sha256": "0ced867ba6038808fec1dd0fe4feee4186424ee372e46d7749181ea43d284a31",
-          "bytes": 418
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/order/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/order/index.ttml",
-          "sha256": "b134f6db2b337b7018d584b1f0253722368b1be77b045cfefecc5cfc4c24b24a",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/pack/index.js",
-          "sha256": "02b50ef6d661509e760c2f3e13c77dd435a27cd94f57898065b89f877acf61c6",
-          "bytes": 414
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/pack/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/pack/index.ttml",
-          "sha256": "b134f6db2b337b7018d584b1f0253722368b1be77b045cfefecc5cfc4c24b24a",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/photos/index.js",
-          "sha256": "85cf9dfb79bd4b0735086f9ec3757982323169a7191781b128e5f1114b1cb5df",
-          "bytes": 420
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/photos/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/photos/index.ttml",
-          "sha256": "b134f6db2b337b7018d584b1f0253722368b1be77b045cfefecc5cfc4c24b24a",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/preset/index.js",
-          "sha256": "405febbbc437d7abaafa87350c4b3ea4b5f758c73bc1478baf209ac16b7feda4",
-          "bytes": 420
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/preset/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/preset/index.ttml",
-          "sha256": "b134f6db2b337b7018d584b1f0253722368b1be77b045cfefecc5cfc4c24b24a",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/publication/index.js",
-          "sha256": "7228c398b93e6a5a514acd9d9691585f891e65066587f97311f64f5feaef9b04",
-          "bytes": 430
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/publication/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/publication/index.ttml",
-          "sha256": "b134f6db2b337b7018d584b1f0253722368b1be77b045cfefecc5cfc4c24b24a",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/rights/index.js",
-          "sha256": "8fefb7704e197c7365cbaead79e1aa0f0645e4c1ecf3b9c21e8497cdc14cf386",
-          "bytes": 420
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/rights/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/rights/index.ttml",
-          "sha256": "b134f6db2b337b7018d584b1f0253722368b1be77b045cfefecc5cfc4c24b24a",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/settings/index.js",
-          "sha256": "39b16c018041b886d15d140c885c4410105af368977ece677b3fb54c479e3986",
-          "bytes": 424
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/settings/index.json",
-          "sha256": "37d7cfe6b3bb4a51e3a730a96b791a62d3178bedc4112629d397b14f764a8973",
-          "bytes": 22
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/pages/settings/index.ttml",
-          "sha256": "b134f6db2b337b7018d584b1f0253722368b1be77b045cfefecc5cfc4c24b24a",
-          "bytes": 80
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/runtime.js",
-          "sha256": "1a2c5ba9721b09b7ff91e09f9459e5f52aaa3980f3e79f7b5f3cc38a2aaa26d8",
-          "bytes": 2187
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/taro.js",
-          "sha256": "5a5095d9cc1072e5191e894f024c2f63abc3eefbc0e26dd8cd939810c7780c32",
-          "bytes": 128985
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/utils.sjs",
-          "sha256": "eceadd23ee3adbfce85e755dd0d18b1120ec236ea70b479f4f209a894bba1537",
-          "bytes": 391
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/vendors.js",
-          "sha256": "61934f67b41e27dd805f370dbf017708e812ee1e9d631aa5b6bdbaa833a880cc",
-          "bytes": 19313
-        },
-        {
-          "path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/runtime/build/mini-douyin/vendors.js.LICENSE.txt",
-          "sha256": "784f801887c62e7fca78a248e53a4d12adaa07e92a30941269d1f6408e95584f",
-          "bytes": 651
-        }
-      ]
+      "status": "NOT_RUN",
+      "files": []
     }
   ],
-  "builds_passed": true,
+  "builds_passed": false,
   "selected_builds_passed": true,
   "full_product_verified": false,
   "production_admitted": false,

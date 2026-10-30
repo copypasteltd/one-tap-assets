@@ -383,6 +383,62 @@
         "P01-F30"
       ],
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/support-tickets",
+      "operation_id": "listManagedSupportTickets",
+      "summary": "查询客服待办（无私有正文）",
+      "permission": "support:read",
+      "request_schema": null,
+      "response_schema": "ManagedSupportTicketList",
+      "requirements": [
+        "P01-F12",
+        "P01-F16"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/support-tickets/{ticket_id}",
+      "operation_id": "getManagedSupportTicket",
+      "summary": "授权查询工单正文与回复",
+      "permission": "support:read",
+      "request_schema": null,
+      "response_schema": "ManagedSupportDetail",
+      "requirements": [
+        "P01-F12",
+        "P01-F16"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/support-tickets/{ticket_id}/evidence/{asset_id}",
+      "operation_id": "readSupportEvidence",
+      "summary": "授权查看原工单证明图片",
+      "permission": "support:evidence",
+      "request_schema": null,
+      "response_schema": "SupportEvidence",
+      "requirements": [
+        "P01-F12",
+        "P01-F16"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/support-tickets/{ticket_id}/process",
+      "operation_id": "processSupportTicket",
+      "summary": "按原版本接单、回复、解决或关闭",
+      "permission": "support:write",
+      "request_schema": "SupportProcessRequest",
+      "response_schema": "ManagedSupportTicket",
+      "requirements": [
+        "P01-F12",
+        "P01-F16"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
     }
   ]
 }

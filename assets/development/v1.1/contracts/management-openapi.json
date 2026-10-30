@@ -1705,6 +1705,282 @@
           }
         }
       }
+    },
+    "/support-tickets": {
+      "get": {
+        "operationId": "listManagedSupportTickets",
+        "summary": "查询客服待办（无私有正文）",
+        "security": [
+          {
+            "managementSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Cursor"
+          },
+          {
+            "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "OPEN",
+                "PROCESSING",
+                "RESOLVED",
+                "CLOSED"
+              ]
+            }
+          }
+        ],
+        "x-required-permission": "support:read",
+        "x-requirements": [
+          "P01-F12",
+          "P01-F16"
+        ],
+        "x-design-pages": [
+          "D06",
+          "D10",
+          "D11",
+          "D14",
+          "D15",
+          "D21",
+          "D23"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+        "x-idempotency-required": false,
+        "description": "独立管理身份；正文与附件读取审计且不缓存，原版本/接手人限制写入。处理完成不代表退款、修复或重新交付。",
+        "responses": {
+          "200": {
+            "description": "工单状态或受权内容",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManagedSupportTicketListResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "权限、版本或内容撤销错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/support-tickets/{ticket_id}": {
+      "get": {
+        "operationId": "getManagedSupportTicket",
+        "summary": "授权查询工单正文与回复",
+        "security": [
+          {
+            "managementSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "ticket_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        ],
+        "x-required-permission": "support:read",
+        "x-requirements": [
+          "P01-F12",
+          "P01-F16"
+        ],
+        "x-design-pages": [
+          "D06",
+          "D10",
+          "D11",
+          "D14",
+          "D15",
+          "D21",
+          "D23"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+        "x-idempotency-required": false,
+        "description": "独立管理身份；正文与附件读取审计且不缓存，原版本/接手人限制写入。处理完成不代表退款、修复或重新交付。",
+        "responses": {
+          "200": {
+            "description": "工单状态或受权内容",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManagedSupportDetailResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "权限、版本或内容撤销错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/support-tickets/{ticket_id}/evidence/{asset_id}": {
+      "get": {
+        "operationId": "readSupportEvidence",
+        "summary": "授权查看原工单证明图片",
+        "security": [
+          {
+            "managementSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "ticket_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          },
+          {
+            "name": "asset_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        ],
+        "x-required-permission": "support:evidence",
+        "x-requirements": [
+          "P01-F12",
+          "P01-F16"
+        ],
+        "x-design-pages": [
+          "D06",
+          "D10",
+          "D11",
+          "D14",
+          "D15",
+          "D21",
+          "D23"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+        "x-idempotency-required": false,
+        "description": "独立管理身份；正文与附件读取审计且不缓存，原版本/接手人限制写入。处理完成不代表退款、修复或重新交付。",
+        "responses": {
+          "200": {
+            "description": "工单状态或受权内容",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SupportEvidenceResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "权限、版本或内容撤销错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/support-tickets/{ticket_id}/process": {
+      "post": {
+        "operationId": "processSupportTicket",
+        "summary": "按原版本接单、回复、解决或关闭",
+        "security": [
+          {
+            "managementSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "ticket_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "x-required-permission": "support:write",
+        "x-requirements": [
+          "P01-F12",
+          "P01-F16"
+        ],
+        "x-design-pages": [
+          "D06",
+          "D10",
+          "D11",
+          "D14",
+          "D15",
+          "D21",
+          "D23"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+        "x-idempotency-required": true,
+        "description": "独立管理身份；正文与附件读取审计且不缓存，原版本/接手人限制写入。处理完成不代表退款、修复或重新交付。",
+        "responses": {
+          "200": {
+            "description": "工单状态或受权内容",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManagedSupportTicketResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "权限、版本或内容撤销错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SupportProcessRequest"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -4392,6 +4668,14 @@
             "format": "date-time",
             "maxLength": 40,
             "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          "response": {
+            "$ref": "#/components/schemas/SupportReply"
           }
         },
         "required": [
@@ -10122,6 +10406,313 @@
         "required": [
           "expected_revision",
           "reason"
+        ],
+        "additionalProperties": false
+      },
+      "SupportReply": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40,
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$"
+          }
+        },
+        "required": [
+          "message",
+          "updated_at"
+        ],
+        "additionalProperties": false
+      },
+      "ManagedSupportTicket": {
+        "type": "object",
+        "properties": {
+          "ticket_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "order_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "OPEN",
+              "PROCESSING",
+              "RESOLVED",
+              "CLOSED"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40,
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          "assigned_actor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "has_response": {
+            "type": "boolean"
+          },
+          "content_available": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ticket_id",
+          "order_id",
+          "state",
+          "category",
+          "updated_at",
+          "revision",
+          "assigned_actor",
+          "has_response",
+          "content_available"
+        ],
+        "additionalProperties": false
+      },
+      "ManagedSupportTicketList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ManagedSupportTicket"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2048
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "additionalProperties": false
+      },
+      "ManagedSupportDetail": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "$ref": "#/components/schemas/ManagedSupportTicket"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "attachment_asset_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            },
+            "minItems": 0,
+            "maxItems": 5
+          },
+          "response": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SupportReply"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "summary",
+          "message",
+          "attachment_asset_ids",
+          "response"
+        ],
+        "additionalProperties": false
+      },
+      "SupportProcessRequest": {
+        "type": "object",
+        "properties": {
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "CLAIM",
+              "REPLY",
+              "RESOLVE",
+              "CLOSE"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "expected_revision",
+          "action"
+        ],
+        "additionalProperties": false
+      },
+      "SupportEvidence": {
+        "type": "object",
+        "properties": {
+          "asset_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "mime_type": {
+            "const": "image/png"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "bytes_base64": {
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 53333336,
+            "pattern": "^[A-Za-z0-9+/]+={0,2}$"
+          }
+        },
+        "required": [
+          "asset_id",
+          "mime_type",
+          "sha256",
+          "bytes_base64"
+        ],
+        "additionalProperties": false
+      },
+      "ManagedSupportTicketResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "const": "OK"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ManagedSupportTicket"
+          },
+          "trace_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          }
+        },
+        "required": [
+          "code",
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "ManagedSupportTicketListResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "const": "OK"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ManagedSupportTicketList"
+          },
+          "trace_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          }
+        },
+        "required": [
+          "code",
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "ManagedSupportDetailResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "const": "OK"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ManagedSupportDetail"
+          },
+          "trace_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          }
+        },
+        "required": [
+          "code",
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "SupportEvidenceResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "const": "OK"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SupportEvidence"
+          },
+          "trace_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          }
+        },
+        "required": [
+          "code",
+          "data",
+          "trace_id"
         ],
         "additionalProperties": false
       }

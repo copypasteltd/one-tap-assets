@@ -18,9 +18,11 @@ import { publicationEvidence, compilePresetConfig, checkParentLicense } from '..
 import { license, registerLicense, decideLicense } from '../modules/licenses.js';
 import { lockMediaOwner } from '../modules/media-access.js';
 import { scheduleAuthorizedSamples, authorizedSample, verifyAuthorizedFiles } from '../modules/authorized-samples.js';
+import {listManagedTickets,managedTicket,processTicket,supportEvidence} from '../modules/support-desk.js';
+import {storage,type ObjectStorage} from '../storage/storage.js';
 
 interface Endpoint { method: string; path: string; operation_id: string; permission: string; request_schema: SchemaName | null; response_schema: SchemaName }
-interface Context { db: Db; cfg: Config; admin: ManagementPrincipal; params: Record<string, string>; body: unknown; traceId: string; query: { cursor?: string; limit?: string } }
+interface Context { db: Db; cfg: Config; store:ObjectStorage; admin: ManagementPrincipal; params: Record<string, string>; body: unknown; traceId: string; query: { cursor?: string; limit?: string; state?:string } }
 async function record<T>(db: Db, table: Table, resourceId: string, lock = false): Promise<RecordRow<T>> { return (await db.query<RecordRow<T>>(`SELECT * FROM ${table} WHERE id=$1${lock ? ' FOR UPDATE' : ''}`, [resourceId])).rows[0] ?? notFound(); }
 async function action(c: Context, target: string, operation: string, state: DTO<'ManagementResult'>['state'] = 'ACCEPTED', reasons: string[] = []): Promise<DTO<'ManagementResult'>> {
   const data: DTO<'ManagementResult'> = { action_id: id('action'), resource_id: target, state, reason_codes: reasons, updated_at: iso() };
@@ -39,6 +41,10 @@ async function lockActiveCommunityLicense(c: Context): Promise<void> {
   if (source?.source === 'COMMUNITY') requireThat((await license(c.db, source.license_version, true)).state === 'ACTIVE', 'LICENSE_NOT_AVAILABLE', '当前许可已停止用于新交易', 422);
 }
 const handlers: Record<string, (c: Context) => Promise<unknown>> = {
+  listManagedSupportTickets: async c => listManagedTickets(c.db,c.cfg,c.admin,c.query),
+  getManagedSupportTicket: async c => managedTicket(c.db,c.admin,c.params.ticket_id!,c.traceId),
+  processSupportTicket: async c => processTicket(c.db,c.admin,c.params.ticket_id!,validate('SupportProcessRequest',c.body)),
+  readSupportEvidence: async c => supportEvidence(c.db,c.store,c.admin,c.params.ticket_id!,c.params.asset_id!,c.traceId),
   registerPresetLicense: async c => registerLicense(c.db, validate('PresetLicenseRegistration', c.body)),
   decidePresetLicense: async c => decideLicense(c.db, c.params.license_id!, validate('PresetLicenseDecision', c.body)),
   listReviewQueue: async c => {
@@ -207,11 +213,12 @@ const handlers: Record<string, (c: Context) => Promise<unknown>> = {
   },
   getCleanupReceipt: async c => (await c.db.query<{ data: DTO<'CleanupReceipt'> }>('SELECT data FROM cleanup_receipts WHERE instance_id=$1 ORDER BY verified_at DESC LIMIT 1', [c.params.instance_id])).rows[0]?.data ?? notFound(),
 };
-export async function registerManagement(app: FastifyInstance, cfg: Config, pool: pg.Pool): Promise<void> {
+export async function registerManagement(app: FastifyInstance, cfg: Config, pool: pg.Pool, store:ObjectStorage=storage(cfg)): Promise<void> {
   const catalog = JSON.parse(await readFile('assets/development/v1.1/contracts/management-endpoints.json', 'utf8')) as { endpoints: Endpoint[] };
   for (const e of catalog.endpoints) {
     const handler = handlers[e.operation_id]; if (!handler) throw new Error(`Missing management operation ${e.operation_id}`);
     app.route({ method: e.method as HTTPMethods, url: `/v1/internal/p01${e.path.replaceAll(/\{([^}]+)\}/g, ':$1')}`, handler: async (request, reply) => {
+      reply.header('Cache-Control','no-store').header('Referrer-Policy','no-referrer');
       const admin = authenticateManagement(cfg, request.headers.authorization, e.permission); if (e.request_schema) validate(e.request_schema, request.body);
       const result = await transaction(pool, async db => {
         const params = request.params as Record<string, string>; const body = request.body ?? {}; const target = Object.values(params).join(':');
@@ -222,7 +229,7 @@ export async function registerManagement(app: FastifyInstance, cfg: Config, pool
           const prior = (await db.query<{ request_hash: string; response: unknown }>('SELECT request_hash,response FROM management_idempotency_records WHERE actor=$1 AND operation=$2 AND target_id=$3 AND key=$4', [admin.actor, e.operation_id, target, key])).rows[0];
           if (prior) { requireThat(prior.request_hash === hash(body), 'IDEMPOTENCY_CONFLICT', '相同管理请求标识不能用于不同内容'); return prior.response; }
         }
-        const data = await handler({ db, cfg, admin, params, body, traceId: request.id, query: request.query as Context['query'] }); validate(e.response_schema, data, true);
+        const data = await handler({ db, cfg, store, admin, params, body, traceId: request.id, query: request.query as Context['query'] }); validate(e.response_schema, data, true);
         if (mutates) {
           await insert(db, 'management_idempotency_records', { actor: admin.actor, operation: e.operation_id, target_id: target, key, request_hash: hash(body), response: data });
           await audit(db, null, admin.actor, e.operation_id, target || 'global', body, request.id);

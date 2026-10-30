@@ -1,5 +1,9 @@
 # 一品成片 · One Tap Assets
 
+本轮新增[客服接单、回复与处理工作台](docs/实施/客服接单回复与处理工作台-v1.0.md)：实际管理接口支持队列、接单、私有证明、回复、解决和关闭；用户可在原反馈记录查看回复。17项单元检查、10项浏览器操作和4项实际API冒烟通过；API测试命令180秒超时且无用例结果，保留原记录，不等待全面绿灯。
+
+以下既有轮次记录对应各自历史源码，当前状态以本轮来源为准。本轮ZIP包含当前服务端/网页产物和完整小程序源码，最终快照未重建小程序编译物。
+
 2026-10-30新增[订单反馈与售后记录](docs/实施/订单反馈与售后记录-v1.0.md)：六类问题、可选证明图片、原请求回执丢失恢复、本人反馈分页/订单筛选与最新状态查询已接通。32项定向检查和10项页面操作通过，包含实际PNG本地上传验证；客服处理、真实退款/纠错、云存储及真机仍待验收。
 
 2026-10-30新增[分类保存与相册恢复](docs/实施/相册分类保存与宿主回调-v1.0.md)：支持整套、只存图片/视频及单项重试，返回恢复原进度，明确成功不重复保存，UNKNOWN先核对相册。双端真实接口适配等待complete串行，支付宝视频不再固定拒绝；27项定向检查和10项页面操作通过，真实手机相册仍待验收。
@@ -22,8 +26,14 @@
 
 快速交付入口：[交付与启动指南](docs/delivery/README.md)。执行`.\scripts\setup-local.ps1`初始化，再用`doctor`自检、`local:start`启动后端、`preview:serve`查看共享页面。`delivery:build --smoke`只做有界构建和核心冒烟，`delivery:package`生成源码与实际成功产物ZIP；按本轮要求不等待全面测试绿灯。
 
-当前候选：类型检查、32项定向测试、10项浏览器操作、自检及服务启动通过；构建结果 server: PASS, preview: PASS, alipay: PASS, douyin: PASS。未运行全面测试。绑定 395 source files / 42 contracts / 4 resources; 487ce077。见[交付记录](docs/delivery/current.json)、[本轮来源](docs/verification/support-source.json)。
+当前候选：类型、自检/启动、17项单元与10项浏览器/4项API冒烟通过；API测试命令超时（无用例结果）。构建 server: PASS, preview: PASS, alipay: NOT_RUN, douyin: NOT_RUN；未运行全面测试。绑定 405 source files / 42 contracts / 4 resources; bd27a390。见[交付记录](docs/delivery/current.json)、[本轮来源](docs/verification/support-desk-source.json)。
 
+
+最新客服工作台 / Latest support desk: [操作与来源](docs/media/support-desk/README.md)
+
+![客服接单与回复 / Support claiming and replies](docs/media/support-desk/walkthrough.gif)
+
+[MP4](docs/media/support-desk/walkthrough.mp4) · [WebM](docs/media/support-desk/walkthrough.webm) · [截图与摘要 / Screens and hashes](docs/media/support-desk/capture-manifest.json)。实际本地HTTP/API/数据库操作，客户、订单、图片及身份为合成夹具；未验生产客服、真实交易或真机。Actual local operations with synthetic inputs; no production/live/device claim.
 
 最新订单反馈 / Latest order feedback: [操作与来源](docs/media/support/README.md)
 

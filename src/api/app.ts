@@ -27,6 +27,7 @@ import { authorizedSample, authorizedFile } from './modules/authorized-samples.j
 import { deletionJournal } from './privacy/journal.js';
 import { previewMedia,checkPreviewBytes } from './modules/previews.js';
 import {requestRateLimit} from '../worker/tool-gateway/traffic.js';
+import {registerSupportConsole} from './routes/support-console.js';
 
 interface Endpoint { method: string; path: string; operation_id: string; request_schema: SchemaName | null; response_schema: SchemaName | null; success_status: number; auth_policy: string; idempotency_required: boolean }
 export interface AppDependencies { cfg: Config; pool?: pg.Pool; storage?: ObjectStorage; exchange?: (request: DTO<'SessionRequest'>) => Promise<PlatformIdentity>; tls?: boolean; testErrorObserver?: (error: unknown) => void; inferenceHttp?: InferenceHttp }
@@ -53,6 +54,7 @@ export async function buildApp(deps: AppDependencies): Promise<FastifyInstance> 
     void reply.code(e.status).send({ code: e.code, message: e.message, retryable: e.retryable, trace_id: request.id, details: e.details });
   });
   app.get('/healthz', async () => { await pool.query('SELECT 1'); return { status: 'ok', service: '一品成片', version: '0.1.0' }; });
+  registerSupportConsole(app);
   app.addHook('onRequest', async request => { if (request.url.split('?')[0] !== '/healthz') await journal?.assertReady(pool); });
   app.get('/readyz', async () => { await pool.query('SELECT 1'); await journal?.assertReady(pool); return { status: 'ready' }; });
   app.get('/v1/p01/runtime-info', async () => ({ data: { dev_mode: cfg.devMode, payment_enabled: cfg.paymentsEnabled, generation_enabled: cfg.generationEnabled, codex_enabled: cfg.codex.enabled }, trace_id: id('trace') }));
@@ -67,6 +69,7 @@ export async function buildApp(deps: AppDependencies): Promise<FastifyInstance> 
     }
     const handler = businessHandlers[e.operation_id]; if (!handler) throw new Error(`Missing operation implementation: ${e.operation_id}`);
     app.route({ method: e.method as HTTPMethods, url: `/v1/p01${e.path.replaceAll(/\{([^}]+)\}/g, ':$1')}`, handler: async (request, reply) => {
+      if(['getSupportTicket','listSupportTickets'].includes(e.operation_id))reply.header('Cache-Control','private, no-store').header('Referrer-Policy','no-referrer');
       const principal: Principal | null = e.auth_policy.startsWith('public') ? null : await authenticate(pool, request.headers.authorization, cfg);
       if (e.request_schema) validate(e.request_schema, request.body);
       const params = request.params as Record<string, string>;
@@ -169,7 +172,7 @@ export async function buildApp(deps: AppDependencies): Promise<FastifyInstance> 
       return reply.send({ data: await issueSession(pool, { platform: request.body.platform, appId: `dev-${request.body.platform}`, subjectId: account }), trace_id: request.id });
     });
   }
-  const { registerManagement } = await import('./routes/management.js'); await registerManagement(app, cfg, pool);
+  const { registerManagement } = await import('./routes/management.js'); await registerManagement(app, cfg, pool,store);
   const { registerPayments } = await import('./routes/payments.js'); await registerPayments(app, cfg, pool);
   const { registerToolGateway } = await import('../worker/tool-gateway/http.js'); await registerToolGateway(app, cfg, pool, store);
   requireThat(!deps.inferenceHttp || cfg.env === 'test', 'TEST_PORT_FORBIDDEN', '推理替身只能用于显式测试环境', 500);

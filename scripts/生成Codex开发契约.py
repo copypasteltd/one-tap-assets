@@ -546,6 +546,61 @@ def extend_admin(admin: dict, endpoints: dict, schemas: dict, dmap: dict) -> Non
     admin["info"]["version"] = "1.1.0-design"
 
 
+def extend_support_contract(api: dict, admin: dict, endpoints: dict, dmap: dict) -> None:
+    """Private correspondence stays out of management idempotency receipts."""
+    reply = obj({"message": string(2000), "updated_at": TIME})
+    ticket = api["components"]["schemas"]["Ticket"]
+    ticket["properties"].update({"revision": number(), "response": ref("SupportReply")})
+    summary = copy.deepcopy(ticket)
+    summary["properties"].pop("response", None)
+    summary["properties"].update({"assigned_actor": nullable(string(128)), "has_response": BOOL, "content_available": BOOL})
+    summary["required"] = list(summary["properties"])
+    schemas = {
+        "SupportReply": reply,
+        "ManagedSupportTicket": summary,
+        "ManagedSupportTicketList": obj({"items": arr(ref("ManagedSupportTicket")), "next_cursor": nullable(string(2048))}),
+        "ManagedSupportDetail": obj({"summary": ref("ManagedSupportTicket"), "message": nullable(string(2000)),
+            "attachment_asset_ids": arr(ID, 0, 5), "response": nullable(ref("SupportReply"))}),
+        "SupportProcessRequest": obj({"expected_revision": number(), "action": enum("CLAIM", "REPLY", "RESOLVE", "CLOSE"),
+            "message": string(2000)}, ["expected_revision", "action"]),
+        "SupportEvidence": obj({"asset_id": ID, "mime_type": {"const": "image/png"}, "sha256": HASH,
+            "bytes_base64": {"type": "string", "minLength": 4, "maxLength": 53333336, "pattern": "^[A-Za-z0-9+/]+={0,2}$"}}),
+    }
+    for document in (api, admin):
+        document["components"]["schemas"]["Ticket"] = copy.deepcopy(ticket)
+        document["components"]["schemas"].update(copy.deepcopy(schemas))
+        for name in ("ManagedSupportTicket", "ManagedSupportTicketList", "ManagedSupportDetail", "SupportEvidence"):
+            envelope = copy.deepcopy(document["components"]["schemas"]["TicketResponse"])
+            envelope["properties"]["data"] = ref(name)
+            document["components"]["schemas"][name + "Response"] = envelope
+    defs = [
+        ("GET", "/support-tickets", "listManagedSupportTickets", "查询客服待办（无私有正文）", "support:read", None, "ManagedSupportTicketList"),
+        ("GET", "/support-tickets/{ticket_id}", "getManagedSupportTicket", "授权查询工单正文与回复", "support:read", None, "ManagedSupportDetail"),
+        ("GET", "/support-tickets/{ticket_id}/evidence/{asset_id}", "readSupportEvidence", "授权查看原工单证明图片", "support:evidence", None, "SupportEvidence"),
+        ("POST", "/support-tickets/{ticket_id}/process", "processSupportTicket", "按原版本接单、回复、解决或关闭", "support:write", "SupportProcessRequest", "ManagedSupportTicket"),
+    ]
+    for method, path, oid, title, permission, request, response in defs:
+        params = [{"name": k, "in": "path", "required": True, "schema": ID} for k in re.findall(r"\{([^}]+)\}", path)]
+        if method == "POST": params.append({"$ref": "#/components/parameters/IdempotencyKey"})
+        if oid == "listManagedSupportTickets":
+            params += [{"$ref": "#/components/parameters/Cursor"}, {"$ref": "#/components/parameters/Limit"},
+                {"name": "state", "in": "query", "schema": enum("OPEN", "PROCESSING", "RESOLVED", "CLOSED")}]
+        requirements = ["P01-F12", "P01-F16"]
+        op = {"operationId": oid, "summary": title, "security": [{"managementSession": []}], "parameters": params,
+            "x-required-permission": permission, "x-requirements": requirements,
+            "x-design-pages": sorted({p for r in requirements for p in dmap[r]}),
+            "x-implementation-status": STATUS, "x-idempotency-required": method == "POST",
+            "description": "独立管理身份；正文与附件读取审计且不缓存，原版本/接手人限制写入。处理完成不代表退款、修复或重新交付。",
+            "responses": {"200": {"description": "工单状态或受权内容", "content": {"application/json": {"schema": ref(response + "Response")}}},
+                "default": {"description": "权限、版本或内容撤销错误", "content": {"application/json": {"schema": ref("Error")}}}}}
+        if request: op["requestBody"] = {"required": True, "content": {"application/json": {"schema": ref(request)}}}
+        admin["paths"].setdefault(path, {})[method.lower()] = op
+        if not any(e["operation_id"] == oid for e in endpoints["endpoints"]):
+            endpoints["endpoints"].append({"method": method, "path": path, "operation_id": oid, "summary": title,
+                "permission": permission, "request_schema": request, "response_schema": response,
+                "requirements": requirements, "implementation_status": STATUS})
+
+
 def main() -> None:
     reqs = read("assets/requirements/requirements.v3.1.json")["requirements"]
     registry = read("assets/skills/ypcc/v1.0/registry.json")
@@ -586,6 +641,7 @@ def main() -> None:
     admin = read(OLD / "contracts/management-openapi.json")
     admin_endpoints = read(OLD / "contracts/management-endpoints.json")
     extend_admin(admin, admin_endpoints, extra, dmap)
+    extend_support_contract(api, admin, admin_endpoints, dmap)
     # UI intent keys contain ':' and '.', matching both runtime domains.
     # Normalize only the current contracts; v1.0 remains a preserved snapshot.
     for document in (api, admin):

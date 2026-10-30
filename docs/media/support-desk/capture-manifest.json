@@ -1,0 +1,137 @@
+{
+  "captured_at": "2026-10-30T00:06:44.493Z",
+  "type": "ACTUAL_STAFF_UI_NATIVE_API_AND_POSTGRESQL",
+  "data_source": "SYNTHETIC_CUSTOMER_ORDER_IMAGE_CREDENTIAL_AND_ACK_FAULT_REAL_LOCAL_HTTP_DATABASE_AND_FILE_EFFECTS",
+  "source_set_hash": "bd27a39074f40267c692018badab21e750dfb9ad51204d291a5bc0766243272e",
+  "build_root": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/runtime/build",
+  "native_mini_device_verified": false,
+  "real_generation_verified": false,
+  "real_payment_verified": false,
+  "production_staff_identity_verified": false,
+  "browser_tabs_closed": true,
+  "owned_api_and_database_pool_closed": true,
+  "browser_errors": [],
+  "external_network_requests": [],
+  "checks": [
+    "PUBLIC_LOGIN_SHELL_WITHOUT_PRIVATE_QUEUE_OR_STORED_CREDENTIAL",
+    "ACTUAL_POSTGRESQL_QUEUE_AND_AUDITED_DETAIL_READ",
+    "ACTUAL_UPLOADED_NORMALIZED_PNG_READ_AND_BROWSER_DECODE",
+    "COMMITTED_CLAIM_ACK_LOSS_FREEZES_NEW_WRITES",
+    "ORIGINAL_CLAIM_KEY_BODY_REPLAY_WITH_ONE_STATE_TRANSITION",
+    "ACTUAL_STAFF_REPLY_RETURNED_BY_OWNED_BUYER_API",
+    "ACTUAL_RESOLUTION_AND_CLOSE_WITHOUT_REFUND_OR_REPAIR",
+    "CREDENTIAL_AND_PRIVATE_CORRESPONDENCE_NOT_PERSISTED_IN_BROWSER_STORAGE",
+    "NO_HORIZONTAL_OVERFLOW_AT_360PX",
+    "LOGOUT_CLEARS_PRIVATE_PAGE_AND_CONNECTION_STATE"
+  ],
+  "api_checks": [
+    "INDEPENDENT_BUYER_READ_WRITE_PROOF_PERMISSIONS_AND_METADATA_ONLY_QUEUE",
+    "OWNED_BUYER_REPLY_AND_ASSIGNEE_ONLY_WRITES",
+    "CONCURRENT_ACTUAL_POSTGRESQL_CLAIMS_ONLY_ONE_VERSION_SUCCEEDS",
+    "ACTUAL_PRIVACY_REQUEST_IMMEDIATELY_HIDES_AND_BLOCKS_PRIVATE_CORRESPONDENCE_AND_PROOF"
+  ],
+  "screenshots": [
+    {
+      "page": "01-independent-login",
+      "path": "docs/media/support-desk/01-independent-login.png"
+    },
+    {
+      "page": "02-authorized-proof",
+      "path": "docs/media/support-desk/02-authorized-proof.png"
+    },
+    {
+      "page": "03-original-claim-pending",
+      "path": "docs/media/support-desk/03-original-claim-pending.png"
+    },
+    {
+      "page": "04-reply-and-resolution",
+      "path": "docs/media/support-desk/04-reply-and-resolution.png"
+    }
+  ],
+  "recording": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 960
+      }
+    ],
+    "format": {
+      "duration": "3.040000"
+    }
+  },
+  "files": [
+    {
+      "path": "docs/media/support-desk/01-independent-login.png",
+      "bytes": 51111,
+      "sha256": "b65907ea4bc30004c48ce9bb2576b474a8b039953eb36bb3657f6c2dd3968248"
+    },
+    {
+      "path": "docs/media/support-desk/02-authorized-proof.png",
+      "bytes": 57826,
+      "sha256": "7878e6192e11a4fc053945cfdbaffe82d1edba8e7d7d5a1e35c368d872105219"
+    },
+    {
+      "path": "docs/media/support-desk/03-original-claim-pending.png",
+      "bytes": 94980,
+      "sha256": "ee22c2fa9b5b169157dc3697e52fdbc78db56bd43d9d10eed7c482d6dc3f59e3"
+    },
+    {
+      "path": "docs/media/support-desk/04-reply-and-resolution.png",
+      "bytes": 89479,
+      "sha256": "b39f97b5f42824f6e3746a0b5a7752bf31e18093e749304b7caefcfc2ebffe71"
+    },
+    {
+      "path": "docs/media/support-desk/walkthrough.webm",
+      "bytes": 730116,
+      "sha256": "86419f686ec55f42e71c918eaaa196d01895e7524e1c85c2841b3117ae62eeca"
+    },
+    {
+      "path": "docs/media/support-desk/walkthrough.mp4",
+      "bytes": 178103,
+      "sha256": "09fd3e53bb761f6b10e8df428d8eb4d84153a615971a7dd7a941b0a6bf682c17"
+    },
+    {
+      "path": "docs/media/support-desk/walkthrough.gif",
+      "bytes": 344201,
+      "sha256": "a6462a5511fdd5ceb8a057d46ee716bcc25ed916a6b483d9615eb30161bd0977"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/record-support-desk.ts",
+      "sha256": "d002013048b88949869088d6f0ceeb82e90178730175f743f528eebefc0369a5"
+    },
+    {
+      "path": "src/api/modules/support-desk.ts",
+      "sha256": "665d020a1bd36607b13b429097475e8104f13569f23081a4e51dddc83c7473ca"
+    },
+    {
+      "path": "src/api/routes/support-console.ts",
+      "sha256": "aee3ecdd06df68963485e017e85f7ff1da4e59054fd458423f521f37d29a50fd"
+    },
+    {
+      "path": "src/shared/client/support-desk.ts",
+      "sha256": "7d93a12dfe9a6024765a9fe7fdc9a1e4a6ba5e6316aa139cd7997833c8424ac8"
+    },
+    {
+      "path": "src/preview/support-main.tsx",
+      "sha256": "7603cd3253cdf6776c6a136baa3a77eb17f9971ecdbdf5bdd63664f94e148168"
+    },
+    {
+      "path": "src/preview/support-console.css",
+      "sha256": "9c844b9c286b0aa43434bf21d6bc1195a78d5adb7e156ef70ea207ceacbb8c24"
+    },
+    {
+      "path": "src/shared/ui/help.tsx",
+      "sha256": "cb8b53fa045796aef3977eebd6248c2aeda422a855e2112e6a30bba5e913ce53"
+    },
+    {
+      "path": "tests/helpers/support-desk.ts",
+      "sha256": "75842d67dd00fe8039f73f51c6557ee88f2be0dc3b83409d4ea9073d259f49d5"
+    }
+  ],
+  "mutating_requests": 5
+}

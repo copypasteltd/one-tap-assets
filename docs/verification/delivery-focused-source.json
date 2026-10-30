@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-29T23:27:04.625962+00:00",
-  "strategy": "USER_REQUESTED_FOCUSED_ORDER_SUPPORT_DELIVERY",
-  "source_set_hash": "487ce07715d5685df6392c4a87070a5ef21dde2eb0ef13dda56d628072d96c3d",
-  "source_files": 395,
+  "checked_at": "2026-10-30T00:08:21.808447+00:00",
+  "strategy": "USER_REQUESTED_FAST_SUPPORT_DESK_CLOSURE",
+  "source_set_hash": "bd27a39074f40267c692018badab21e750dfb9ad51204d291a5bc0766243272e",
+  "source_files": 405,
   "runtime_contract_files": 42,
   "resource_files": 4,
   "build_report": "docs/delivery/current.json",
@@ -11,37 +11,23 @@
     {
       "task": "typecheck",
       "status": "PASS",
-      "elapsed_ms": 7160,
-      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/typecheck.log",
+      "elapsed_ms": 11923,
+      "log_path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "build:server",
       "status": "PASS",
-      "elapsed_ms": 7417,
-      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/server.log",
+      "elapsed_ms": 267,
+      "log_path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
       "status": "PASS",
-      "elapsed_ms": 2477,
-      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/preview.log",
-      "log_sha256": "22a31e36073f773fa848b07993f4214e966eda8c425c7fd76aaefa41f90d455c"
-    },
-    {
-      "task": "build:alipay",
-      "status": "PASS",
-      "elapsed_ms": 44510,
-      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/alipay.log",
-      "log_sha256": "8efd51629ddab1c5d9171efb0406a6f2fd9016a76c0fbaf7c4e92a6fa705fc06"
-    },
-    {
-      "task": "build:douyin",
-      "status": "PASS",
-      "elapsed_ms": 14555,
-      "log_path": "runtime/delivery-builds/2026-10-29T23-24-00-670Z-376313d1/douyin.log",
-      "log_sha256": "09dea7f2b9f288ccb6266a49473fa228aeaaea2a122ac3f0670c5bb69502ecc9"
+      "elapsed_ms": 693,
+      "log_path": "runtime/delivery-builds/2026-10-30T00-05-34-639Z-5e5813d4/preview.log",
+      "log_sha256": "65ec444b3e63033ee95093f9ab804f8383ebb91cb1e5f50aa2889ac5e84980d3"
     }
   ],
   "components": [
@@ -55,11 +41,11 @@
     },
     {
       "name": "alipay",
-      "status": "PASS"
+      "status": "NOT_RUN"
     },
     {
       "name": "douyin",
-      "status": "PASS"
+      "status": "NOT_RUN"
     }
   ],
   "local_checks": {
@@ -67,11 +53,11 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 2.352,
+      "elapsed_seconds": 0.647,
       "log_path": "runtime/delivery/doctor-focused.log",
-      "log_sha256": "0df1c6a51fc49a93cefa1ca411ef1fb29059eaa5b70f28ca11d1b5e7c72639a3",
+      "log_sha256": "9a4a1a19f78bfc9519ffe9c407191073656a74d08ab00ef51aee96e5291f272d",
       "report": {
-        "checked_at": "2026-10-29T23:17:26.803Z",
+        "checked_at": "2026-10-30T00:07:29.799Z",
         "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
         "rows": [
           {
@@ -163,154 +149,100 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 5.214,
+      "elapsed_seconds": 2.104,
       "log_path": "runtime/delivery/backend-focused.log",
-      "log_sha256": "0777daf4849bc8964ed896a0ec530c328629fe64b63c8b0cb27e573eb5cbafcf",
+      "log_sha256": "0ea063151f9ceb47caba56197357a3c360ce19a45a7ab0d195a00b34d9586a06",
       "local_stack_ready": true,
-      "preview_http_ready": false,
-      "observed_ready_services": [
-        "api/main.js",
-        "worker/main.js",
-        "worker/lifecycle/reaper-main.js",
-        "worker/lifecycle/media-maintenance-main.js"
-      ],
-      "paid_service_switches_enabled": false
+      "preview_http_ready": false
     },
     "preview": {
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 1.255,
+      "elapsed_seconds": 0.974,
       "log_path": "runtime/delivery/preview-focused.log",
       "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
       "local_stack_ready": false,
       "preview_http_ready": true
     }
   },
-  "focused_tests": {
+  "unit_checks": {
     "status": "PASS",
-    "passed": 32,
+    "passed": 17,
     "failed": 0,
-    "unit_passed": 28,
-    "api_passed": 4,
-    "reported_files": 5,
-    "unit": "docs/verification/support-unit.json",
-    "api": "docs/verification/support-api.json",
-    "commands": [
-      {
-        "task": "typecheck",
-        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
-        "argv": [
-          "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
-          "--noEmit"
-        ],
-        "shell": false,
-        "status": "PASS",
-        "exit_code": 0,
-        "signal": null,
-        "timeout_ms": 180000,
-        "elapsed_ms": 6316,
-        "log_path": "runtime/test-results/support-2026-10-29T23-23-21-774Z/typecheck.log",
-        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-      },
-      {
-        "task": "exec",
-        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.config.ts tests/unit/album.test.ts tests/unit/support.test.ts tests/unit/client.test.ts tests/unit/local-readiness.test.ts --outputFile.json=runtime/test-results/support-2026-10-29T23-23-21-774Z/unit.json",
-        "argv": [
-          "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
-          "run",
-          "--config",
-          "vitest.config.ts",
-          "tests/unit/album.test.ts",
-          "tests/unit/support.test.ts",
-          "tests/unit/client.test.ts",
-          "tests/unit/local-readiness.test.ts",
-          "--outputFile.json=runtime/test-results/support-2026-10-29T23-23-21-774Z/unit.json"
-        ],
-        "shell": false,
-        "status": "PASS",
-        "exit_code": 0,
-        "signal": null,
-        "timeout_ms": 180000,
-        "elapsed_ms": 3896,
-        "log_path": "runtime/test-results/support-2026-10-29T23-23-21-774Z/unit.log",
-        "log_sha256": "6398fed81fc21d3ccc3990aa0b07af3d06d800d21a7b2e0807bd631285911128"
-      },
-      {
-        "task": "exec",
-        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/support-flow.test.ts --outputFile.json=runtime/test-results/support-2026-10-29T23-23-21-774Z/api.json",
-        "argv": [
-          "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
-          "run",
-          "--config",
-          "vitest.integration.config.ts",
-          "tests/integration/support-flow.test.ts",
-          "--outputFile.json=runtime/test-results/support-2026-10-29T23-23-21-774Z/api.json"
-        ],
-        "shell": false,
-        "status": "PASS",
-        "exit_code": 0,
-        "signal": null,
-        "timeout_ms": 180000,
-        "elapsed_ms": 26682,
-        "log_path": "runtime/test-results/support-2026-10-29T23-23-21-774Z/api.log",
-        "log_sha256": "9def24fa66afa4f3ce81c423355a25c18a9bad7a3373c5504b7c66a8aa4a72d7"
-      }
-    ],
-    "tested_source_snapshot": "docs/verification/support-tested-source.json",
-    "source_exact_match": true,
-    "coverage": [
-      "Six feedback categories, trimmed input, optional private evidence and original-order binding",
-      "Actual generated PNG upload, local object write, image validation and private support association",
-      "Concurrent submissions share one original operation; confirmed success does not create another ticket",
-      "Committed ticket ACK loss reuses original key/body and original completed evidence upload",
-      "Changed input rejected until pending original submission is resolved",
-      "Hidden page or changed account stops new upload completion/writes and ticket creation",
-      "Owned paged history, buyer-bound cursor and forbidden foreign order/ticket reads",
-      "Wrong-purpose, foreign and revoked proof assets rejected",
-      "Latest stored processing state read independently of original OPEN creation receipt",
-      "Local launcher elapsed-time readiness budget rejects late success and stops on shutdown",
-      "Retained album queue and private API/account-scoped client regressions"
-    ],
-    "native_login_and_staff_state_transitions": "SYNTHETIC_OR_EXCLUDED",
-    "payment_or_generation_called": false,
-    "actual_local_effects": [
-      "NATIVE_POSTGRESQL",
-      "REAL_API_AUTH_AND_SCOPE",
-      "ACTUAL_PNG_UPLOAD_AND_LOCAL_OBJECT_WRITE",
-      "PRIVATE_TICKET_ASSOCIATION_AND_ORIGINAL_KEY",
-      "OWNED_SERVICE_STARTUP"
-    ]
+    "reported_files": 3,
+    "result": "docs/verification/support-desk-unit.json",
+    "tested_source_snapshot": "docs/verification/support-desk-tested-source.json",
+    "current_full_source_exact_match": true,
+    "shared_client_and_unit_test_source_files_unchanged": true,
+    "post_unit_changes": [],
+    "scope": "Private original support submission/client regressions and management original-key/account/receipt recovery"
   },
-  "browser_capture": {
+  "native_test_attempt": {
+    "status": "TIMEOUT",
+    "timeout_ms": 180000,
+    "case_result_file_produced": false,
+    "passed_cases_claimed": 0,
+    "root_cause_confirmed": false,
+    "evidence": "docs/verification/support-desk-api-timeout.json"
+  },
+  "initial_recording": "docs/verification/support-desk-initial-recording.json",
+  "initial_all_target_build": "docs/verification/support-desk-initial-build.json",
+  "initial_browser_environment": "docs/verification/support-desk-browser-environment.json",
+  "initial_fetch_binding": "docs/verification/support-desk-fetch-binding-initial.json",
+  "initial_privacy_fixture": "docs/verification/support-desk-privacy-fixture-initial.json",
+  "browser_and_api_smoke": {
     "status": "PASS",
-    "manifest": "docs/media/support/capture-manifest.json",
-    "sha256": "1ced5657f299292aa941318f5421ea13ceabfe8d2c0a435bc3d4474a5b021667",
-    "checks": [
-      "OWNED_ORDER_FEEDBACK_WITH_NO_AUTOMATIC_MUTATION",
-      "CLASSIFIED_FEEDBACK_AND_PLATFORM_ERROR_GUIDANCE",
-      "OPTIONAL_LOCAL_EVIDENCE_SELECTION_AND_REMOVAL_BEFORE_UPLOAD",
-      "LOST_COMMITTED_ACK_PRESERVES_ORIGINAL_FEEDBACK_AND_LOCKS_EDITS",
-      "ORIGINAL_KEY_BODY_AND_COMPLETED_UPLOAD_REUSED_AFTER_ACK_LOSS",
-      "CURRENT_ORDER_AND_ALL_OWNED_RECORDS_FILTERS",
-      "LATEST_TICKET_GET_DISPLAYS_CURRENT_PROCESSING_STATE",
-      "REOPENED_ACCOUNT_HISTORY_WITHOUT_RESUBMISSION_OR_ORDER_REQUIRED",
-      "FEEDBACK_ACCEPTANCE_NEVER_IMPLIES_PAYMENT_REFUND_OR_REPAIR",
-      "NO_HORIZONTAL_OVERFLOW_AT_320PX"
+    "manifest": "docs/media/support-desk/capture-manifest.json",
+    "sha256": "2ad15b60cd3800cdd5c8878854b9d93ea0360f1199acc412cbe29cc1003631af",
+    "browser_checks": [
+      "PUBLIC_LOGIN_SHELL_WITHOUT_PRIVATE_QUEUE_OR_STORED_CREDENTIAL",
+      "ACTUAL_POSTGRESQL_QUEUE_AND_AUDITED_DETAIL_READ",
+      "ACTUAL_UPLOADED_NORMALIZED_PNG_READ_AND_BROWSER_DECODE",
+      "COMMITTED_CLAIM_ACK_LOSS_FREEZES_NEW_WRITES",
+      "ORIGINAL_CLAIM_KEY_BODY_REPLAY_WITH_ONE_STATE_TRANSITION",
+      "ACTUAL_STAFF_REPLY_RETURNED_BY_OWNED_BUYER_API",
+      "ACTUAL_RESOLUTION_AND_CLOSE_WITHOUT_REFUND_OR_REPAIR",
+      "CREDENTIAL_AND_PRIVATE_CORRESPONDENCE_NOT_PERSISTED_IN_BROWSER_STORAGE",
+      "NO_HORIZONTAL_OVERFLOW_AT_360PX",
+      "LOGOUT_CLEARS_PRIVATE_PAGE_AND_CONNECTION_STATE"
+    ],
+    "api_checks": [
+      "INDEPENDENT_BUYER_READ_WRITE_PROOF_PERMISSIONS_AND_METADATA_ONLY_QUEUE",
+      "OWNED_BUYER_REPLY_AND_ASSIGNEE_ONLY_WRITES",
+      "CONCURRENT_ACTUAL_POSTGRESQL_CLAIMS_ONLY_ONE_VERSION_SUCCEEDS",
+      "ACTUAL_PRIVACY_REQUEST_IMMEDIATELY_HIDES_AND_BLOCKS_PRIVATE_CORRESPONDENCE_AND_PROOF"
     ],
     "screenshots": 4,
     "media_files": 7,
     "browser_tabs_closed": true,
-    "owned_preview_server_stopped": true,
-    "native_device_verified": false,
+    "owned_api_and_database_pool_closed": true,
+    "actual_effects": [
+      "NATIVE_POSTGRESQL_TRANSACTIONS",
+      "ACTUAL_PNG_UPLOAD_LOCAL_STORAGE_AND_DECODE",
+      "ACTUAL_AUTHENTICATED_HTTP_STAFF_UI",
+      "ONE_ORIGINAL_CLAIM_AFTER_COMMITTED_ACK_LOSS",
+      "ACTUAL_BUYER_REPLY_OWNER_CHECK",
+      "ASSIGNEE_ONLY_REPLY",
+      "CONCURRENT_EXCLUSIVE_CLAIM",
+      "ACTUAL_PRIVACY_REQUEST_AND_IMMEDIATE_REVOCATION"
+    ],
+    "synthetic_inputs": [
+      "CUSTOMER",
+      "ORDER",
+      "IMAGE",
+      "MANAGEMENT_CREDENTIAL",
+      "ACK_LOSS_FAULT"
+    ],
+    "native_mini_device_verified": false,
+    "production_staff_identity_verified": false,
     "real_generation_verified": false,
-    "real_payment_verified": false,
-    "real_refund_verified": false
+    "real_payment_verified": false
   },
   "prior_delivery": {
-    "source_commit": "c7bbf395a4bb86d3f48c97a948566119f929a247",
-    "path": "docs/verification/delivery-focused-c7bbf39.json",
-    "sha256": "4608a183349519e2a377dd44867d56bdb495c0a8edd109273752f7279becd248"
+    "source_commit": "ea829047ec7fa8e750c9db9b878b4031a986a376",
+    "path": "docs/verification/delivery-focused-ea82904.json",
+    "sha256": "94c518660b0bdeddcd80d6f19e433292b14ae297fb4f07461c2a207384533bc4"
   },
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
@@ -492,39 +424,49 @@
     {
       "path": "docs/verification/album-save-api.json",
       "sha256": "32d109467ffab4e51998730b417299e1b68031728bc2da7d13f49df611708e7a"
+    },
+    {
+      "path": "docs/verification/support-source.json",
+      "sha256": "04c6249f3d2dabd960559b2efda441591d05fd4256142ecdab3b1f9f90d57a3e"
+    },
+    {
+      "path": "docs/verification/support-tested-source.json",
+      "sha256": "585dba8942c92cb5599cc01396a4527b72aa1d8d25536322c9fda9847ffc881f"
+    },
+    {
+      "path": "docs/verification/support-unit.json",
+      "sha256": "10be3f0e69ab6adc864ad18dd578c3bf023bac7eaa0bf8595cae575914a72113"
+    },
+    {
+      "path": "docs/verification/support-api.json",
+      "sha256": "c5d52c4681678a1282139190024424f3918adf929bda21ebdbe602396da0c54d"
     }
   ],
   "frozen_c_files": 25,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
-  "existing_media_files_verified": 64,
+  "existing_media_files_verified": 71,
   "new_media_files_verified": 7,
   "functional_scope": {
     "requirements": 58,
     "p0": 52,
     "routes": 3,
     "official_styles": 10,
-    "minimum_variants": 14
+    "minimum_variants": 14,
+    "business_operations": 77,
+    "management_operations": 30
   },
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
   "limitations": [
-    "Browser uploads, ACK loss and processing transitions are synthetic; official presets remain unavailable",
-    "API checks use actual generated PNGs and local uploads; staff transitions are explicit SQL fixtures, not a staff workflow or live refund/repair",
-    "Unsent text/photos are held only in page memory; reopening reads owned ticket records and does not restore private form drafts",
-    "Native login/photo authorization, real cloud object storage, customer service and payment/refund outcomes require separate evidence",
-    "Real Codex/providers, billing/isolation, native-audio repair, complete community/staff aftercare/Plus and cloud remain incomplete",
-    "Historical album/order/draft/photo/generated/repair checks retain their exact original sources; comprehensive suites were not rerun",
-    "Mini builds use loopback development API; rebuild with verified service origin for devices"
+    "The targeted Vitest API attempt timed out without case results; the actual HTTP/browser smoke is separately scoped and does not turn that attempt green",
+    "Only current successful build components are packaged; timed-out mini-program builds retain full current source and rebuild commands, never old binary replacements",
+    "Seventeen focused unit cases bind to the exact final source/contract/resource snapshot. The earlier sixteen-unit/API-timeout snapshot is separately retained and is not a final full-suite result",
+    "Support roles are globally configured operator tokens, not per-tenant admin assignments or production identity lifecycle",
+    "Only latest reply is stored; force reassignment, user follow-up, full conversation history and post-deletion new correspondence remain incomplete",
+    "Ticket resolution/closure does not execute or certify live refund, repair, redelivery or production support quality",
+    "Real Codex/providers, billing/isolation, native-audio repair, complete community/Plus, devices and cloud remain incomplete",
+    "Mini builds use loopback development API and need a verified service origin for devices"
   ],
-  "initial_attempt": "docs/verification/support-initial-attempt.json",
-  "initial_startup_attempt": "docs/verification/support-startup-initial.json",
-  "local_readiness": {
-    "preview_budget_ms": 30000,
-    "backend_budget_ms": 45000,
-    "all_four_services_required": true,
-    "order_deadlines_or_gates_changed": false,
-    "original_delay_root_cause_confirmed": false
-  },
-  "canonical_support_provenance": "docs/verification/support-source.json"
+  "canonical_support_desk_provenance": "docs/verification/support-desk-source.json"
 }

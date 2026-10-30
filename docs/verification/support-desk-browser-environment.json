@@ -1,0 +1,11 @@
+{
+  "status": "FAIL",
+  "exit_code": 1,
+  "timeout_seconds": 180,
+  "elapsed_seconds": 12.247,
+  "log_path": "runtime/delivery/support-desk-recording.log",
+  "log_sha256": "b35f94816be26891d0ccb96771ec97406fd2a4bd51023fd49bcddf3552be9172",
+  "raw_log": "node:internal/modules/run_main:107\n    triggerUncaughtException(\n    ^\n\nbrowserContext.newPage: Executable doesn't exist at C:\\Users\\carzy\\AppData\\Local\\ms-playwright\\ffmpeg-1013\\ffmpeg-win64.exe\n╔═════════════════════════════════════════════════════════════════╗\n║ Video rendering requires ffmpeg binary.                         ║\n║ Downloading it will not affect any of the system-wide settings. ║\n║ Please run the following command:                               ║\n║                                                                 ║\n║     npx playwright install ffmpeg                               ║\n║                                                                 ║\n║ <3 Playwright Team                                              ║\n╚═════════════════════════════════════════════════════════════════╝\n    at <anonymous> (E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\scripts\\record-support-desk.ts:27:32) {\n  log: [],\n  name: 'Error'\n}\n\nNode.js v24.22.1\n",
+  "cause": "The ignored recording launcher omitted PLAYWRIGHT_BROWSERS_PATH and searched the default global cache. Pointed it at the existing project runtime/playwright-browsers ffmpeg-1013 bundle, matching scripts/run.ps1. No browser binary downloaded.",
+  "owned_browser_api_and_test_schema_closed": true
+}

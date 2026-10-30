@@ -1,5 +1,9 @@
 # 源码交付与快速启动 / Source delivery and quick start
 
+本轮新增[客服接单、回复与处理工作台](../实施/客服接单回复与处理工作台-v1.0.md)：实际管理接口支持队列、接单、私有证明、回复、解决和关闭；用户可在原反馈记录查看回复。17项单元检查、10项浏览器操作和4项实际API冒烟通过；API测试命令180秒超时且无用例结果，保留原记录，不等待全面绿灯。
+
+以下既有轮次记录对应各自历史源码，当前状态以本轮来源为准。本轮ZIP包含当前服务端/网页产物和完整小程序源码，最终快照未重建小程序编译物。
+
 2026-10-30新增[订单反馈与售后记录](../实施/订单反馈与售后记录-v1.0.md)：六类问题、可选证明图片、原请求回执丢失恢复、本人反馈分页/订单筛选与最新状态查询已接通。32项定向检查和10项页面操作通过，包含实际PNG本地上传验证；客服处理、真实退款/纠错、云存储及真机仍待验收。
 
 2026-10-30新增[分类保存与相册恢复](../实施/相册分类保存与宿主回调-v1.0.md)：支持整套、只存图片/视频及单项重试，返回恢复原进度，明确成功不重复保存，UNKNOWN先核对相册。双端真实接口适配等待complete串行，支付宝视频不再固定拒绝；27项定向检查和10项页面操作通过，真实手机相册仍待验收。
@@ -88,6 +92,10 @@ $env:TARO_APP_API_BASE = 'https://your-api.example'
 Without an explicit origin, delivery builds use `https://localhost:3100` for local development. Device builds must be rebuilt with a reachable host-approved origin. Douyin payments additionally require `TARO_APP_DOUYIN_TRADE_CONTRACT`. Import successful mini-program outputs into the corresponding official developer tools and configure application IDs, domains and permissions.
 
 `delivery:build --server-only`仅进行类型与服务端构建，其他目标记为NOT_RUN；适用于后端专项收口。该模式的成功只代表所选服务端构建，完整构建状态仍单独保留。The server-only mode explicitly leaves other build targets NOT_RUN.
+
+`delivery:build --skip-mini`执行类型、服务端和网页构建，小程序目标记为NOT_RUN。本轮客服增补采用此模式；ZIP包含两端完整源码及当前服务端/网页产物，最终快照未重建小程序，也没有混入旧编译物。初版支付宝TIMEOUT、抖音PASS见[原构建记录](../verification/support-desk-initial-build.json)，不升级为最终快照通过。需要小程序产物时，配置实际HTTPS地址并执行上面的完整构建。
+
+`delivery:build --skip-mini` builds the server and web pages, explicitly leaving both mini-program outputs NOT_RUN. This support-desk package includes complete mini-program source and current server/web outputs. Earlier Alipay TIMEOUT and Douyin PASS belong to the original snapshot; current mini-program binaries are excluded. Run a full build with the configured HTTPS API when producing host outputs.
 
 `delivery:build`直接调用已安装的固定工具，输出到新的独立目录。执行类型检查、服务端、共享页面、支付宝和抖音构建，每个命令最多180秒；一个目标失败后仍记录其他目标。`--smoke`仅选照片上传/恢复及原图素材完整双复核交付相关文件，最多180秒；不运行全套。所有状态和日志摘要写入[current.json](current.json)，完整日志留在忽略目录。打包不要求全部检查通过，包清单会显示实际缺项。
 

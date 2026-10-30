@@ -7,6 +7,12 @@
 The media records the running browser adapter for shared mini-program screens with synthetic local transport. These are actual page captures, not repainted mockups or native-device evidence. The original product illustration and its FFmpeg motion clip are fixtures; recognition, orders, dates and delivery state are synthetic. No paid model or payment is invoked.
 
 
+最新客服工作台 / Latest support desk: [操作与来源](../media/support-desk/README.md)
+
+![客服接单与回复 / Support claiming and replies](../media/support-desk/walkthrough.gif)
+
+[MP4](../media/support-desk/walkthrough.mp4) · [WebM](../media/support-desk/walkthrough.webm) · [截图与摘要 / Screens and hashes](../media/support-desk/capture-manifest.json)。实际本地HTTP/API/数据库操作，客户、订单、图片及身份为合成夹具；未验生产客服、真实交易或真机。Actual local operations with synthetic inputs; no production/live/device claim.
+
 最新订单反馈 / Latest order feedback: [操作与来源](../media/support/README.md)
 
 ![订单反馈与原请求恢复 / Order feedback and original request recovery](../media/support/walkthrough.gif)

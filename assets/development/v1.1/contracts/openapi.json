@@ -14864,6 +14864,14 @@
             "format": "date-time",
             "maxLength": 40,
             "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          "response": {
+            "$ref": "#/components/schemas/SupportReply"
           }
         },
         "required": [
@@ -20798,6 +20806,313 @@
         "required": [
           "expected_revision",
           "reason"
+        ],
+        "additionalProperties": false
+      },
+      "SupportReply": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40,
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$"
+          }
+        },
+        "required": [
+          "message",
+          "updated_at"
+        ],
+        "additionalProperties": false
+      },
+      "ManagedSupportTicket": {
+        "type": "object",
+        "properties": {
+          "ticket_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "order_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "OPEN",
+              "PROCESSING",
+              "RESOLVED",
+              "CLOSED"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40,
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          "assigned_actor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "has_response": {
+            "type": "boolean"
+          },
+          "content_available": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ticket_id",
+          "order_id",
+          "state",
+          "category",
+          "updated_at",
+          "revision",
+          "assigned_actor",
+          "has_response",
+          "content_available"
+        ],
+        "additionalProperties": false
+      },
+      "ManagedSupportTicketList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ManagedSupportTicket"
+            },
+            "minItems": 0,
+            "maxItems": 100
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2048
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "additionalProperties": false
+      },
+      "ManagedSupportDetail": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "$ref": "#/components/schemas/ManagedSupportTicket"
+          },
+          "message": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "attachment_asset_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            },
+            "minItems": 0,
+            "maxItems": 5
+          },
+          "response": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SupportReply"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "summary",
+          "message",
+          "attachment_asset_ids",
+          "response"
+        ],
+        "additionalProperties": false
+      },
+      "SupportProcessRequest": {
+        "type": "object",
+        "properties": {
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "CLAIM",
+              "REPLY",
+              "RESOLVE",
+              "CLOSE"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "expected_revision",
+          "action"
+        ],
+        "additionalProperties": false
+      },
+      "SupportEvidence": {
+        "type": "object",
+        "properties": {
+          "asset_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "mime_type": {
+            "const": "image/png"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "bytes_base64": {
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 53333336,
+            "pattern": "^[A-Za-z0-9+/]+={0,2}$"
+          }
+        },
+        "required": [
+          "asset_id",
+          "mime_type",
+          "sha256",
+          "bytes_base64"
+        ],
+        "additionalProperties": false
+      },
+      "ManagedSupportTicketResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "const": "OK"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ManagedSupportTicket"
+          },
+          "trace_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          }
+        },
+        "required": [
+          "code",
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "ManagedSupportTicketListResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "const": "OK"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ManagedSupportTicketList"
+          },
+          "trace_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          }
+        },
+        "required": [
+          "code",
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "ManagedSupportDetailResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "const": "OK"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ManagedSupportDetail"
+          },
+          "trace_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          }
+        },
+        "required": [
+          "code",
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "SupportEvidenceResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "const": "OK"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SupportEvidence"
+          },
+          "trace_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          }
+        },
+        "required": [
+          "code",
+          "data",
+          "trace_id"
         ],
         "additionalProperties": false
       }

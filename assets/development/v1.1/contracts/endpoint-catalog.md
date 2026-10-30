@@ -128,3 +128,7 @@
 | GET /agent-instances/{instance_id}/cleanup-receipt | getCleanupReceipt | agent:read |
 | POST /preset-licenses | registerPresetLicense | moderator:review |
 | POST /preset-licenses/{license_id}/decision | decidePresetLicense | moderator:publish |
+| GET /support-tickets | listManagedSupportTickets | support:read |
+| GET /support-tickets/{ticket_id} | getManagedSupportTicket | support:read |
+| GET /support-tickets/{ticket_id}/evidence/{asset_id} | readSupportEvidence | support:evidence |
+| POST /support-tickets/{ticket_id}/process | processSupportTicket | support:write |

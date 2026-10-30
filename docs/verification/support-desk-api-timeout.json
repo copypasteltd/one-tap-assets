@@ -1,0 +1,58 @@
+{
+  "base": "runtime/test-results/support-desk-2026-10-29T23-43-04-583Z",
+  "source_set_hash": "bf0273dca5ed4c54276726b294843e942c88ae4d4d9321e27f3d33de52fa3606",
+  "source_unchanged": false,
+  "commands": [
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.config.ts tests/unit/support.test.ts tests/unit/support-desk-client.test.ts tests/unit/client.test.ts --outputFile.json=runtime/test-results/support-desk-2026-10-29T23-43-04-583Z/unit.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.config.ts",
+        "tests/unit/support.test.ts",
+        "tests/unit/support-desk-client.test.ts",
+        "tests/unit/client.test.ts",
+        "--outputFile.json=runtime/test-results/support-desk-2026-10-29T23-43-04-583Z/unit.json"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 62580,
+      "log_path": "runtime/test-results/support-desk-2026-10-29T23-43-04-583Z/unit.log",
+      "log_sha256": "02c9c83594a4c1353b69ae9c3249b0a0a2d09ae41c05454453962379f977cb1c"
+    },
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/support-flow.test.ts tests/integration/support-desk.test.ts --outputFile.json=runtime/test-results/support-desk-2026-10-29T23-43-04-583Z/api.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.integration.config.ts",
+        "tests/integration/support-flow.test.ts",
+        "tests/integration/support-desk.test.ts",
+        "--outputFile.json=runtime/test-results/support-desk-2026-10-29T23-43-04-583Z/api.json"
+      ],
+      "shell": false,
+      "status": "TIMEOUT",
+      "exit_code": 1,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 180414,
+      "log_path": "runtime/test-results/support-desk-2026-10-29T23-43-04-583Z/api.log",
+      "log_sha256": "a7b28d265f2e16e5613bacbca37bf5a2e978558ff51c7646476cf85d0684c4f2"
+    }
+  ],
+  "status": "TIMEOUT_WITHOUT_CASE_RESULTS",
+  "api_log": "\n RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片\n\n",
+  "tested_source": "docs/verification/support-desk-initial-tested-source.json",
+  "unit": "docs/verification/support-desk-initial-unit.json",
+  "case_result_file_produced": false,
+  "api_cases_claimed_passed": 0,
+  "root_cause_confirmed": false,
+  "comprehensive_suite_executed": false
+}

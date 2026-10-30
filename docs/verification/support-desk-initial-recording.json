@@ -1,0 +1,14 @@
+{
+  "status": "FAIL",
+  "exit_code": 1,
+  "timeout_seconds": 180,
+  "elapsed_seconds": 24.926,
+  "log_path": "runtime/delivery/support-desk-recording.log",
+  "log_sha256": "629a4a8a748e943f275de70fa6c0d8315d901fe5edfd63e2b683a7d69c188604",
+  "source_build": "docs/verification/support-desk-initial-build.json",
+  "raw_log": "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\tests\\helpers\\support-desk.ts:20\n      if(grant.statusCode!==201)throw new Error(`Synthetic proof grant failed: ${grant.statusCode} ${grant.body}`);\n                                      ^\n\nError: Synthetic proof grant failed: 400 {\"code\":\"INVALID_REQUEST\",\"message\":\"请求内容不符合规范\",\"retryable\":false,\"trace_id\":\"trace_aad650de4003444eb47c7f2e7e27695a\",\"details\":[{\"field\":\"/\",\"reason\":\"must have required property 'file_name'\"}]}\n    at Object.fixture (E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\tests\\helpers\\support-desk.ts:20:39)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async <anonymous> (E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\scripts\\record-support-desk.ts:15:17)\n\nNode.js v24.22.1\n",
+  "cause": "The new synthetic upload fixture omitted AssetRequest.file_name. The actual API rejected it with INVALID_REQUEST before launching the browser. Added the required synthetic file name without weakening validation.",
+  "independent_api_timeout_root_cause_confirmed": false,
+  "browser_launched": false,
+  "owned_api_and_test_schema_cleanup_completed": true
+}

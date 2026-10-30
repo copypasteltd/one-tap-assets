@@ -519,6 +519,86 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/support-tickets": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 查询客服待办（无私有正文）
+         * @description 独立管理身份；正文与附件读取审计且不缓存，原版本/接手人限制写入。处理完成不代表退款、修复或重新交付。
+         */
+        get: operations["listManagedSupportTickets"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/support-tickets/{ticket_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 授权查询工单正文与回复
+         * @description 独立管理身份；正文与附件读取审计且不缓存，原版本/接手人限制写入。处理完成不代表退款、修复或重新交付。
+         */
+        get: operations["getManagedSupportTicket"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/support-tickets/{ticket_id}/evidence/{asset_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 授权查看原工单证明图片
+         * @description 独立管理身份；正文与附件读取审计且不缓存，原版本/接手人限制写入。处理完成不代表退款、修复或重新交付。
+         */
+        get: operations["readSupportEvidence"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/support-tickets/{ticket_id}/process": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * 按原版本接单、回复、解决或关闭
+         * @description 独立管理身份；正文与附件读取审计且不缓存，原版本/接手人限制写入。处理完成不代表退款、修复或重新交付。
+         */
+        post: operations["processSupportTicket"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -991,6 +1071,8 @@ export interface components {
             category: string;
             /** Format: date-time */
             updated_at: string;
+            revision?: number;
+            response?: components["schemas"]["SupportReply"];
         };
         PresetConfig: {
             name: string;
@@ -2171,6 +2253,71 @@ export interface components {
             expected_revision: number;
             reason: string;
         };
+        SupportReply: {
+            message: string;
+            /** Format: date-time */
+            updated_at: string;
+        };
+        ManagedSupportTicket: {
+            ticket_id: string;
+            order_id: string;
+            /** @enum {string} */
+            state: "OPEN" | "PROCESSING" | "RESOLVED" | "CLOSED";
+            category: string;
+            /** Format: date-time */
+            updated_at: string;
+            revision: number;
+            assigned_actor: string | null;
+            has_response: boolean;
+            content_available: boolean;
+        };
+        ManagedSupportTicketList: {
+            items: components["schemas"]["ManagedSupportTicket"][];
+            next_cursor: string | null;
+        };
+        ManagedSupportDetail: {
+            summary: components["schemas"]["ManagedSupportTicket"];
+            message: string | null;
+            attachment_asset_ids: string[];
+            response: components["schemas"]["SupportReply"] | null;
+        };
+        SupportProcessRequest: {
+            expected_revision: number;
+            /** @enum {string} */
+            action: "CLAIM" | "REPLY" | "RESOLVE" | "CLOSE";
+            message?: string;
+        };
+        SupportEvidence: {
+            asset_id: string;
+            /** @constant */
+            mime_type: "image/png";
+            sha256: string;
+            bytes_base64: string;
+        };
+        ManagedSupportTicketResponse: {
+            /** @constant */
+            code: "OK";
+            data: components["schemas"]["ManagedSupportTicket"];
+            trace_id: string;
+        };
+        ManagedSupportTicketListResponse: {
+            /** @constant */
+            code: "OK";
+            data: components["schemas"]["ManagedSupportTicketList"];
+            trace_id: string;
+        };
+        ManagedSupportDetailResponse: {
+            /** @constant */
+            code: "OK";
+            data: components["schemas"]["ManagedSupportDetail"];
+            trace_id: string;
+        };
+        SupportEvidenceResponse: {
+            /** @constant */
+            code: "OK";
+            data: components["schemas"]["SupportEvidence"];
+            trace_id: string;
+        };
     };
     responses: never;
     parameters: {
@@ -3083,6 +3230,139 @@ export interface operations {
                 };
             };
             /** @description 权限/状态/证据错误 */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    listManagedSupportTickets: {
+        parameters: {
+            query?: {
+                cursor?: components["parameters"]["Cursor"];
+                limit?: components["parameters"]["Limit"];
+                state?: "OPEN" | "PROCESSING" | "RESOLVED" | "CLOSED";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 工单状态或受权内容 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ManagedSupportTicketListResponse"];
+                };
+            };
+            /** @description 权限、版本或内容撤销错误 */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    getManagedSupportTicket: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                ticket_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 工单状态或受权内容 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ManagedSupportDetailResponse"];
+                };
+            };
+            /** @description 权限、版本或内容撤销错误 */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    readSupportEvidence: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                ticket_id: string;
+                asset_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 工单状态或受权内容 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SupportEvidenceResponse"];
+                };
+            };
+            /** @description 权限、版本或内容撤销错误 */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    processSupportTicket: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": components["parameters"]["IdempotencyKey"];
+            };
+            path: {
+                ticket_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SupportProcessRequest"];
+            };
+        };
+        responses: {
+            /** @description 工单状态或受权内容 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ManagedSupportTicketResponse"];
+                };
+            };
+            /** @description 权限、版本或内容撤销错误 */
             default: {
                 headers: {
                     [name: string]: unknown;

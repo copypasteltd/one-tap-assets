@@ -11,6 +11,7 @@ import { createPlan, checkInput, createPreview } from '../modules/plans.js';
 import { createQuote, createOrder, cancelOrder, requestRefundInternal } from '../modules/commerce.js';
 import { getDeliverables, createDownloadLink, createSaveSession, recordSaveReceipt, requestRevision, previewLink,listRevisions } from '../modules/delivery.js';
 import { HELP_ARTICLES, createTicket, requestDeletion } from '../modules/support.js';
+import {listBuyerTickets,getBuyerTicket} from '../modules/support-desk.js';
 import * as community from '../modules/community.js';
 import { license, licenses } from '../modules/licenses.js';
 import { deletionJournal } from '../privacy/journal.js';
@@ -78,8 +79,8 @@ export const businessHandlers: Record<string, BusinessHandler> = {
   getRevision: async c => (await owned<DTO<'Revision'>>(c.db, 'revision_requests', param(c, 'revision_id'), principal(c))).data,
   listRevisions:async c=>listRevisions(c.db,c.cfg,principal(c),param(c,'order_id'),c.query),
   createSupportTicket: async c => createTicket(c.db, principal(c), param(c, 'order_id'), validate('TicketRequest', c.body)),
-  listSupportTickets: async c => listOwned(c.db, c.cfg, 'support_tickets', principal(c), c.query),
-  getSupportTicket: async c => (await owned<DTO<'Ticket'>>(c.db, 'support_tickets', param(c, 'ticket_id'), principal(c))).data,
+  listSupportTickets: async c => listBuyerTickets(c.db,c.cfg,principal(c),c.query),
+  getSupportTicket: async c => getBuyerTicket(c.db,principal(c),param(c,'ticket_id')),
   listHelpArticles: async () => ({ items: HELP_ARTICLES, next_cursor: null }),
   requestPrivacyDeletion: async c => requestDeletion(c.db, principal(c), validate('PrivacyDeletionRequest', c.body), { journal: deletionJournal(c.cfg) }),
   getPrivacyDeletion: async c => (await owned<DTO<'PrivacyDeletion'>>(c.db, 'privacy_deletions', param(c, 'deletion_id'), principal(c))).data,

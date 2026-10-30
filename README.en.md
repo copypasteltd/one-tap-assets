@@ -1,5 +1,9 @@
 # One Tap Assets · 一品成片
 
+New: the [support desk](docs/实施/客服接单回复与处理工作台-v1.0.md) provides a real API-backed queue, exclusive claiming, private proof access, replies, resolution and closure. Buyers query their latest reply. Seventeen unit cases, ten browser checks and four actual API smoke checks pass; the targeted API test command timed out at 180 seconds without case results and remains recorded as a timeout.
+
+Earlier round entries retain their own historical source snapshots; the current delivery is defined by this round’s provenance. This ZIP includes current server/web outputs and complete mini-program source; final mini-program binaries were not rebuilt.
+
 New: [order feedback and aftercare records](docs/实施/订单反馈与售后记录-v1.0.md) adds six categories, optional private evidence, original-request recovery, paged owned history, order filtering and current status queries. Thirty-two focused cases and ten browser checks pass, including actual PNG uploads to the local service. Staff processing, live refunds/repairs, cloud storage and devices remain unverified.
 
 New: [selective album saving and recovery](docs/实施/相册分类保存与宿主回调-v1.0.md) adds whole-pack, image-only, video-only and individual retry actions. Original progress restores on reopening; confirmed success is skipped and UNKNOWN requires manual inspection. Both adapters wait for complete before advancing. Twenty-seven focused cases and ten browser checks pass; actual phone album writes remain unverified.
@@ -22,10 +26,16 @@ This repository is under active development: requirements **v3.1**, development 
 
 Quick delivery: see the [handover and startup guide](docs/delivery/README.md). Run `.\scripts\setup-local.ps1`, then `doctor`, `local:start` or `preview:serve`. `delivery:build --smoke` runs bounded builds and focused smoke checks; `delivery:package` creates a ZIP with source and successful outputs. A fully green comprehensive suite is not a packaging prerequisite.
 
-Current candidate: typecheck, 32 focused tests, ten browser checks, doctor and owned startup PASS. Builds: server: PASS, preview: PASS, alipay: PASS, douyin: PASS. No comprehensive suite was run. Bound: 395 source files / 42 contracts / 4 resources; 487ce077. See [delivery records](docs/delivery/current.json) and [focused provenance](docs/verification/support-source.json).
+Current candidate: typecheck, doctor/startup, 17 unit cases, ten browser checks and four API smoke checks PASS. The API test command timed out without case results. Builds: server: PASS, preview: PASS, alipay: NOT_RUN, douyin: NOT_RUN. No comprehensive suite was run. Bound: 405 source files / 42 contracts / 4 resources; bd27a390. See [delivery](docs/delivery/current.json) and [provenance](docs/verification/support-desk-source.json).
 
 ## Screens and recorded interaction
 
+
+最新客服工作台 / Latest support desk: [操作与来源](docs/media/support-desk/README.md)
+
+![客服接单与回复 / Support claiming and replies](docs/media/support-desk/walkthrough.gif)
+
+[MP4](docs/media/support-desk/walkthrough.mp4) · [WebM](docs/media/support-desk/walkthrough.webm) · [截图与摘要 / Screens and hashes](docs/media/support-desk/capture-manifest.json)。实际本地HTTP/API/数据库操作，客户、订单、图片及身份为合成夹具；未验生产客服、真实交易或真机。Actual local operations with synthetic inputs; no production/live/device claim.
 
 最新订单反馈 / Latest order feedback: [操作与来源](docs/media/support/README.md)
 

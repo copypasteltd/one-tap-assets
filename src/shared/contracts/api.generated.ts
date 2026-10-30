@@ -1886,6 +1886,8 @@ export interface components {
             category: string;
             /** Format: date-time */
             updated_at: string;
+            revision?: number;
+            response?: components["schemas"]["SupportReply"];
         };
         PresetConfig: {
             name: string;
@@ -3105,6 +3107,71 @@ export interface components {
         PublicSampleWithdrawalRequest: {
             expected_revision: number;
             reason: string;
+        };
+        SupportReply: {
+            message: string;
+            /** Format: date-time */
+            updated_at: string;
+        };
+        ManagedSupportTicket: {
+            ticket_id: string;
+            order_id: string;
+            /** @enum {string} */
+            state: "OPEN" | "PROCESSING" | "RESOLVED" | "CLOSED";
+            category: string;
+            /** Format: date-time */
+            updated_at: string;
+            revision: number;
+            assigned_actor: string | null;
+            has_response: boolean;
+            content_available: boolean;
+        };
+        ManagedSupportTicketList: {
+            items: components["schemas"]["ManagedSupportTicket"][];
+            next_cursor: string | null;
+        };
+        ManagedSupportDetail: {
+            summary: components["schemas"]["ManagedSupportTicket"];
+            message: string | null;
+            attachment_asset_ids: string[];
+            response: components["schemas"]["SupportReply"] | null;
+        };
+        SupportProcessRequest: {
+            expected_revision: number;
+            /** @enum {string} */
+            action: "CLAIM" | "REPLY" | "RESOLVE" | "CLOSE";
+            message?: string;
+        };
+        SupportEvidence: {
+            asset_id: string;
+            /** @constant */
+            mime_type: "image/png";
+            sha256: string;
+            bytes_base64: string;
+        };
+        ManagedSupportTicketResponse: {
+            /** @constant */
+            code: "OK";
+            data: components["schemas"]["ManagedSupportTicket"];
+            trace_id: string;
+        };
+        ManagedSupportTicketListResponse: {
+            /** @constant */
+            code: "OK";
+            data: components["schemas"]["ManagedSupportTicketList"];
+            trace_id: string;
+        };
+        ManagedSupportDetailResponse: {
+            /** @constant */
+            code: "OK";
+            data: components["schemas"]["ManagedSupportDetail"];
+            trace_id: string;
+        };
+        SupportEvidenceResponse: {
+            /** @constant */
+            code: "OK";
+            data: components["schemas"]["SupportEvidence"];
+            trace_id: string;
         };
     };
     responses: never;
