@@ -1,0 +1,374 @@
+{
+  "numTotalTestSuites": 1,
+  "numPassedTestSuites": 0,
+  "numFailedTestSuites": 1,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 33,
+  "numPassedTests": 1,
+  "numFailedTests": 1,
+  "numPendingTests": 28,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793335200743,
+  "success": false,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "persists original independent listening for PER_SHOT_AI and keeps insufficient synthetic observations out of delivery",
+          "status": "skipped",
+          "title": "persists original independent listening for PER_SHOT_AI and keeps insufficient synthetic observations out of delivery",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "persists original independent listening for REFERENCE_FILM and keeps insufficient synthetic observations out of delivery",
+          "status": "skipped",
+          "title": "persists original independent listening for REFERENCE_FILM and keeps insufficient synthetic observations out of delivery",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "binds synthetic native final review and delivery for PER_SHOT_AI to one original listening receipt",
+          "status": "skipped",
+          "title": "binds synthetic native final review and delivery for PER_SHOT_AI to one original listening receipt",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "binds synthetic native final review and delivery for REFERENCE_FILM to one original listening receipt",
+          "status": "skipped",
+          "title": "binds synthetic native final review and delivery for REFERENCE_FILM to one original listening receipt",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "blocks synthetic native final review publication after durable voice revocation before commit",
+          "status": "skipped",
+          "title": "blocks synthetic native final review publication after durable voice revocation before commit",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "blocks synthetic native final review when OMIT_ROLE_LISTENING is missing",
+          "status": "skipped",
+          "title": "blocks synthetic native final review when OMIT_ROLE_LISTENING is missing",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "blocks synthetic native final review when OMIT_TOOL_LISTENING is missing",
+          "status": "skipped",
+          "title": "blocks synthetic native final review when OMIT_TOOL_LISTENING is missing",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "recovers only the saved original independent listening response after UNKNOWN without a second purchase",
+          "status": "skipped",
+          "title": "recovers only the saved original independent listening response after UNKNOWN without a second purchase",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "holds delivery and retains original costs after independent listening BAD_RESULT",
+          "status": "skipped",
+          "title": "holds delivery and retains original costs after independent listening BAD_RESULT",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "holds delivery and retains original costs after independent listening CACHED",
+          "status": "skipped",
+          "title": "holds delivery and retains original costs after independent listening CACHED",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "holds delivery and retains original costs after independent listening REVOKE",
+          "status": "skipped",
+          "title": "holds delivery and retains original costs after independent listening REVOKE",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "seals private PER_SHOT_AI native production/ASR/POST/QC through real HTTPS/MCP while independent listening and delivery stay closed",
+          "status": "skipped",
+          "title": "seals private PER_SHOT_AI native production/ASR/POST/QC through real HTTPS/MCP while independent listening and delivery stay closed",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "seals private REFERENCE_FILM native production/ASR/POST/QC through real HTTPS/MCP while independent listening and delivery stay closed",
+          "status": "skipped",
+          "title": "seals private REFERENCE_FILM native production/ASR/POST/QC through real HTTPS/MCP while independent listening and delivery stay closed",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "refuses native QC sealing after original-write is revoked between preparation and commit",
+          "status": "skipped",
+          "title": "refuses native QC sealing after original-write is revoked between preparation and commit",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "refuses native QC sealing after voice-license is revoked between preparation and commit",
+          "status": "skipped",
+          "title": "refuses native QC sealing after voice-license is revoked between preparation and commit",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "restores the stored POST receipt after its transaction rolls back without another ASR or render generation",
+          "status": "skipped",
+          "title": "restores the stored POST receipt after its transaction rolls back without another ASR or render generation",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "defers the original UNKNOWN ASR acknowledgement and never replaces its source or purchase",
+          "status": "skipped",
+          "title": "defers the original UNKNOWN ASR acknowledgement and never replaces its source or purchase",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects missing licensed music bytes before reference generation or inference",
+          "status": "skipped",
+          "title": "rejects missing licensed music bytes before reference generation or inference",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects changed licensed music bytes before reference generation or inference",
+          "status": "skipped",
+          "title": "rejects changed licensed music bytes before reference generation or inference",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects a different artifact, invented assembly proof and changed original bytes before ASR",
+          "status": "skipped",
+          "title": "rejects a different artifact, invented assembly proof and changed original bytes before ASR",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects native POST commit after voice revocation and exposes no READY post checkpoint",
+          "status": "skipped",
+          "title": "rejects native POST commit after voice revocation and exposes no READY post checkpoint",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps public order creation closed for a structurally valid internal native contract",
+          "status": "passed",
+          "title": "keeps public order creation closed for a structurally valid internal native contract",
+          "duration": 4630.703699999998,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects incomplete native sale capability and the combined generation/listening cost overflow before checkout",
+          "status": "failed",
+          "title": "rejects incomplete native sale capability and the combined generation/listening cost overflow before checkout",
+          "duration": 36.83139999999548,
+          "failureMessages": [
+            "error: character voice admission cannot be revived\n    at E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\.pnpm\\pg-pool@3.14.0_pg@8.23.1\\node_modules\\pg-pool\\index.js:45:11\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at setup (E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/native-order.test.ts:100:20)\n    at E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/native-order.test.ts:535:11\n    at async file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/node_modules/.pnpm/vitest@5.0.5_@types+node@24_074c366c144b624165a2ee5270d15630/node_modules/vitest/dist/chunks/run.BPv-BBRv.js:2801:20"
+          ],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "records native payment truth and one original refund when frozen listening admission is withdrawn before payment confirmation",
+          "status": "pending",
+          "title": "records native payment truth and one original refund when frozen listening admission is withdrawn before payment confirmation",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "checks out and delivers the native buyer PER_SHOT_AI pack from a real plan/quote through original paid audio review",
+          "status": "pending",
+          "title": "checks out and delivers the native buyer PER_SHOT_AI pack from a real plan/quote through original paid audio review",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "checks out and delivers the native buyer REFERENCE_FILM pack from a real plan/quote through original paid audio review",
+          "status": "pending",
+          "title": "checks out and delivers the native buyer REFERENCE_FILM pack from a real plan/quote through original paid audio review",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "assembles and rechecks both original tone segments losslessly, rejecting a gap and replaced PCM evidence",
+          "status": "skipped",
+          "title": "assembles and rechecks both original tone segments losslessly, rejecting a gap and replaced PCM evidence",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "retains original native audio for PER_SHOT_AI aftercare with fresh reviews and no new generation ASR or listening purchases",
+          "status": "skipped",
+          "title": "retains original native audio for PER_SHOT_AI aftercare with fresh reviews and no new generation ASR or listening purchases",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "retains original native audio for REFERENCE_FILM aftercare with fresh reviews and no new generation ASR or listening purchases",
+          "status": "skipped",
+          "title": "retains original native audio for REFERENCE_FILM aftercare with fresh reviews and no new generation ASR or listening purchases",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "repairs a native PER_SHOT_AI failed video using its pre-sale ASR allowance and fresh listening before delivery",
+          "status": "skipped",
+          "title": "repairs a native PER_SHOT_AI failed video using its pre-sale ASR allowance and fresh listening before delivery",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "repairs a native REFERENCE_FILM failed video using its pre-sale ASR allowance and fresh listening before delivery",
+          "status": "skipped",
+          "title": "repairs a native REFERENCE_FILM failed video using its pre-sale ASR allowance and fresh listening before delivery",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "adds an actual image title to a delivered native PER_SHOT_AI pack without buying generation ASR or listening again",
+          "status": "skipped",
+          "title": "adds an actual image title to a delivered native PER_SHOT_AI pack without buying generation ASR or listening again",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "adds an actual image title to a delivered native REFERENCE_FILM pack without buying generation ASR or listening again",
+          "status": "skipped",
+          "title": "adds an actual image title to a delivered native REFERENCE_FILM pack without buying generation ASR or listening again",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793335239145,
+      "endTime": 1793335243812.8313,
+      "status": "failed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/native-order.test.ts"
+    }
+  ]
+}

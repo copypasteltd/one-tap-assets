@@ -1,5 +1,15 @@
 # 更新记录 / Changelog
 
+2026-10-30 — 原生声音购买与完整费用绑定 / Native-audio checkout and complete cost binding
+
+本轮接通[原生声音售前完整绑定与购买交付](docs/实施/原生声音售前完整绑定与购买交付-v1.0.md)：买家原方案、完整声音报价、下单、付款确认、制作/后期、独立听音、双复核和私有领取贯通；付款确认前原能力撤回则按原单退款。原总预算包含生成、声音授权、转写、听音及原售后/修复上限，历史内部报价不自动升级。
+
+8项定向检查通过（声音购买5、社区订单回归3，28未选）；类型/server/preview/自检/本地启动PASS，主库31迁移、无新迁移。431源码/42契约/4资源，`59fe1100`。全量、单元全套、双小程序重编及复录NOT_RUN；原93媒体和C原件保留。[准确证据](docs/verification/native-sale-source.json) · [当前构建](docs/delivery/current.json) · [交付包](docs/delivery/package.json)。支付/授权/模型/身份/听音/OSS配置为合成，本地字节效果不代表真实云端或声音质量。真实服务/真机/完整准入/Plus/云端待完成，所有方案仍禁售。
+
+This delivery connects [native-audio pre-sale binding and buyer delivery](docs/实施/原生声音售前完整绑定与购买交付-v1.0.md): original planning and quotes, checkout, payment confirmation, generation/post-production, independent listening, fresh facts/style reviews and private retrieval. Capability withdrawal before payment confirmation records the original payment and requests one original-order refund. The combined cost ceiling covers generation, audio rights, ASR, listening and original revision/repair allowances; historical internal quotes do not become purchasable.
+
+以下内容保留其历史来源，当前状态以上述记录为准。
+
 2026-10-30 — 社区商业配置与可信风格执行 / Community commercial preparation and trusted style execution
 
 本轮接通[社区商业配置与可信风格执行](docs/实施/社区商业配置与可信风格执行-v1.0.md)：平台从已准入蓝本一次性冻结价格、模型与费用；社区新编号正确绑定可信风格 Skill，买家规划、制作、复核和受限修改使用同一冻结配置。配置不继承准入或开售状态，已付款订单不受新销售停售影响。

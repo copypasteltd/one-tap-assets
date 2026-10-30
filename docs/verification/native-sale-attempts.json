@@ -1,0 +1,174 @@
+{
+  "checked_at": "2026-10-30T04:50:14.790810+00:00",
+  "attempts": [
+    {
+      "base": "runtime/test-results/native-sale-2026-10-30T04-38-05-613Z",
+      "source_set_hash": "6ef6889555009779691ec59c84bb3620df77fce8bcf7c79312df52007c01d63b",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "typecheck",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+            "--noEmit"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 2,
+          "signal": null,
+          "timeout_ms": 120000,
+          "elapsed_ms": 49780,
+          "log_path": "runtime/test-results/native-sale-2026-10-30T04-38-05-613Z/type.log",
+          "log_sha256": "c1b935f667261b39b045af52b595822d11e4fefd7cd61f02d4c44077659977ff"
+        }
+      ],
+      "source_snapshot": "docs/verification/native-sale-attempt-01-source.json"
+    },
+    {
+      "base": "runtime/test-results/native-sale-2026-10-30T04-39-52-032Z",
+      "source_set_hash": "cd459bfae1ae26a97b886e76c27c0347d2c9e6d0c0ccda873b94fdfa4647583b",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/native-order.test.ts -t rejects incomplete native sale|records native payment truth|checks out and delivers the native buyer|keeps public order creation closed --outputFile.json=runtime/test-results/native-sale-2026-10-30T04-39-52-032Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/native-order.test.ts",
+            "-t",
+            "rejects incomplete native sale|records native payment truth|checks out and delivers the native buyer|keeps public order creation closed",
+            "--outputFile.json=runtime/test-results/native-sale-2026-10-30T04-39-52-032Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 660000,
+          "elapsed_ms": 52318,
+          "log_path": "runtime/test-results/native-sale-2026-10-30T04-39-52-032Z/api.log",
+          "log_sha256": "3adb5172fa0c38730738a77fb939555f5bde274347dfe5aba7f174d9d9f29db6"
+        }
+      ],
+      "source_snapshot": "docs/verification/native-sale-attempt-02-source.json",
+      "api_report": "docs/verification/native-sale-attempt-02-api.json",
+      "passed": 1,
+      "failed": 1,
+      "not_selected": 28
+    },
+    {
+      "base": "runtime/test-results/native-sale-2026-10-30T04-43-31-583Z",
+      "source_set_hash": "d2c61748ec5bd818683378c03f5f40c95c665b2ab549615685dbfdf09b7449db",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/native-order.test.ts -t rejects incomplete native sale|records native payment truth|checks out and delivers the native buyer|keeps public order creation closed --outputFile.json=runtime/test-results/native-sale-2026-10-30T04-43-31-583Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/native-order.test.ts",
+            "-t",
+            "rejects incomplete native sale|records native payment truth|checks out and delivers the native buyer|keeps public order creation closed",
+            "--outputFile.json=runtime/test-results/native-sale-2026-10-30T04-43-31-583Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 660000,
+          "elapsed_ms": 13289,
+          "log_path": "runtime/test-results/native-sale-2026-10-30T04-43-31-583Z/api.log",
+          "log_sha256": "d133143eb45fa987c1ce318ed709a69f102f2f1c2dc91c4e0aa64c9d05fe3f63"
+        }
+      ],
+      "source_snapshot": "docs/verification/native-sale-attempt-03-source.json",
+      "api_report": "docs/verification/native-sale-attempt-03-api.json",
+      "passed": 1,
+      "failed": 1,
+      "not_selected": 28
+    },
+    {
+      "base": "runtime/test-results/native-sale-2026-10-30T04-44-27-719Z",
+      "source_set_hash": "59fe11005651de6be3c992ff6483621e203368734cb9cd0318125fdbd30eeca5",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/native-order.test.ts -t rejects incomplete native sale|records native payment truth|checks out and delivers the native buyer|keeps public order creation closed --outputFile.json=runtime/test-results/native-sale-2026-10-30T04-44-27-719Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/native-order.test.ts",
+            "-t",
+            "rejects incomplete native sale|records native payment truth|checks out and delivers the native buyer|keeps public order creation closed",
+            "--outputFile.json=runtime/test-results/native-sale-2026-10-30T04-44-27-719Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 660000,
+          "elapsed_ms": 261267,
+          "log_path": "runtime/test-results/native-sale-2026-10-30T04-44-27-719Z/api.log",
+          "log_sha256": "93c3ae6e6efabb697f5840906048eff45fb4423a8e10857e4b9e92b581e2c243"
+        }
+      ],
+      "source_snapshot": "docs/verification/native-sale-attempt-04-source.json",
+      "api_report": "docs/verification/native-sale-attempt-04-api.json",
+      "passed": 5,
+      "failed": 0,
+      "not_selected": 28
+    },
+    {
+      "base": "runtime/test-results/native-sale-2026-10-30T04-49-07-735Z",
+      "source_set_hash": "59fe11005651de6be3c992ff6483621e203368734cb9cd0318125fdbd30eeca5",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/community-commercial.test.ts --outputFile.json=runtime/test-results/native-sale-2026-10-30T04-49-07-735Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/community-commercial.test.ts",
+            "--outputFile.json=runtime/test-results/native-sale-2026-10-30T04-49-07-735Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 660000,
+          "elapsed_ms": 36828,
+          "log_path": "runtime/test-results/native-sale-2026-10-30T04-49-07-735Z/api.log",
+          "log_sha256": "e9b132b71b19a19ed6cf52dbb8768c50c8a2d7d89ba3beb561377ee1599436d8"
+        }
+      ],
+      "source_snapshot": "docs/verification/native-sale-attempt-05-source.json",
+      "api_report": "docs/verification/native-sale-attempt-05-api.json",
+      "passed": 3,
+      "failed": 0,
+      "not_selected": 0
+    }
+  ],
+  "full_suite_executed": false,
+  "failure_notes": [
+    "Initial typecheck found two possibly-undefined listening configuration accesses in the new tests; corrected their explicit fixture assertion.",
+    "The synthetic buyer setup initially tried to retire a character using REJECTED; the immutable database rule correctly required RETIRED. Production rules were unchanged.",
+    "The private media fixture added review_vision only in memory. The public planning fixture now writes its complete synthetic admission file before planning; the real quote gate was not weakened."
+  ],
+  "fixture_boundaries": [
+    "Synthetic bank/payment events, authorizations, generation/ASR/listening semantics, role identity and usage.",
+    "Synthetic OSS preflight configuration; actual byte effects use local storage and mocked private signed-input transport after checkout. No live OSS/cloud evidence.",
+    "Actual native PostgreSQL, HTTPS/stdio/MCP and PNG/MP4/ALAC/AAC effects; tone audio does not establish Chinese voice or hearing quality."
+  ]
+}

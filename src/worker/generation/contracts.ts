@@ -5,6 +5,7 @@ import type {FrozenContract,ModelBinding} from '../compiler/snapshot.js';
 import {admitArkContract,frozenArkContract,type ArkContract} from '../providers/ark.js';
 import {frozenNativeAudio} from '../audio/contract.js';
 import {frozenAiDisclosure} from '../compiler/disclosure.js';
+import {frozenOrderListening} from '../audio/listening-contract.js';
 
 export interface GenerationModelRow {id:string;status:string;data:ModelBinding;private?:{ark_contract?:unknown;speech_contract?:unknown;listening_contract?:unknown}}
 export const GENERATED_QC_POLICY='YPCC-QC-GENERATED-SILENT-1.0.0';
@@ -31,19 +32,24 @@ export function generationContract(contract:FrozenContract,kind:'IMAGE'|'VIDEO')
   requireThat(contract.model_versions.some(data=>matches(c,{id:c.model_version_id,status:'ADMITTED',data})),
     'GENERATION_MODEL_BINDING_INVALID','原订单的生成协议与模型快照不一致',503);return c;
 }
-export function validateGenerationBudget(contract:FrozenContract,nativeOrder=false):void{
-  if(contract.source.engine==='PHOTO_LAYOUT')return;
-  frozenAiDisclosure(contract);
+export function generationCostCeiling(contract:FrozenContract):bigint{
+  if(contract.source.engine==='PHOTO_LAYOUT')return 0n;
   const image=generationContract(contract,'IMAGE'),video=generationContract(contract,'VIDEO');
   const shots=contract.creative.shots.length;
   const imageCalls=contract.source.output_slots.filter(slot=>slot.kind==='image').length+(contract.source.engine==='PER_SHOT_AI'?shots:1);
   const videoCalls=contract.source.engine==='PER_SHOT_AI'?shots:1;
-  const minimum=BigInt(imageCalls)*BigInt(image.rate.ceiling_micro)+BigInt(videoCalls)*BigInt(video.rate.ceiling_micro)
+  const listening=contract.source.audio_policy.speech==='none'?null:frozenOrderListening(contract);
+  return BigInt(imageCalls)*BigInt(image.rate.ceiling_micro)+BigInt(videoCalls)*BigInt(video.rate.ceiling_micro)
     +BigInt(contract.codex_contract.agent_cost_ceiling_micro)+BigInt(contract.revision_policy?.budget_micro??0)+BigInt(contract.repair_ceiling_micro)
-    +BigInt(frozenNativeAudio(contract)?.cost.ceiling_micro??0);
+    +BigInt(frozenNativeAudio(contract)?.cost.ceiling_micro??0)
+    +BigInt(listening?.per_request_ceiling_micro??0)*BigInt(listening?.max_packets??0);
+}
+export function validateGenerationBudget(contract:FrozenContract,nativeOrder=false):void{
+  if(contract.source.engine==='PHOTO_LAYOUT')return;
+  frozenAiDisclosure(contract);const minimum=generationCostCeiling(contract);
   requireThat(minimum<=BigInt(contract.budget_micro),'GENERATION_BUDGET_INVALID','原总预算不能覆盖冻结素材、Agent、售后与修复上界',503);
   requireThat(nativeOrder?!!frozenNativeAudio(contract):contract.source.audio_policy.speech==='none',
-    'NATIVE_AUDIO_NOT_ADMITTED','原生人声必须使用独立内部订单执行器；公开准入仍未完成',503);
+    'NATIVE_AUDIO_NOT_ADMITTED','原生人声必须冻结完整声音合同并通过对应购买准入',503);
 }
 /** Admission before the first paid call, never a runtime quota increase. The
  * reference reviewer and final facts reviewer share the original facts bucket. */

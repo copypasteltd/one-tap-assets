@@ -1,0 +1,73 @@
+{
+  "numTotalTestSuites": 1,
+  "numPassedTestSuites": 1,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 3,
+  "numPassedTests": 3,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793335749258,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "resolves only the compiled trusted style and rejects hash, engine and arbitrary-ID substitutions",
+          "status": "passed",
+          "title": "resolves only the compiled trusted style and rejects hash, engine and arbitrary-ID substitutions",
+          "duration": 49.330799999999726,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "requires admitted costs and active license, freezes once without admitting or selling, and protects database configuration",
+          "status": "passed",
+          "title": "requires admitted costs and active license, freezes once without admitting or selling, and protects database configuration",
+          "duration": 349.2401,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "runs community buyer planning, frozen quote/checkout, original payment, native media and two fresh reviews through private delivery",
+          "status": "passed",
+          "title": "runs community buyer planning, frozen quote/checkout, original payment, native media and two fresh reviews through private delivery",
+          "duration": 28646.8542,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793335755214,
+      "endTime": 1793335784259.8542,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/community-commercial.test.ts"
+    }
+  ]
+}

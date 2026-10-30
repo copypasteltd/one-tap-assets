@@ -22,6 +22,7 @@ import {freezeRevisionPolicy,ensureRevisionBudget} from '../../worker/revisions/
 import {freezeNativeAudio,verifyNativeAudioLive} from '../../worker/audio/contract.js';
 import {freezeAiDisclosure,frozenAiDisclosure} from '../../worker/compiler/disclosure.js';
 import {bundleForSource} from '../../worker/codex/skills.js';
+import {freezeNativeSale,verifyNativeSaleLive,verifyNativeSaleRegistration} from '../../worker/audio/commerce.js';
 export { requestRefundInternal } from './refunds.js';
 
 export async function createQuote(db: Db, cfg: Config, p: Principal, request: DTO<'QuoteRequest'>): Promise<DTO<'Quote'>> {
@@ -74,11 +75,14 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
     contract.generation_contracts=freezeGenerationContracts(cfg,models.rows);
   }
   await freezeNativeAudio(db,cfg,contract,models.rows);
-  if(contract.source.engine!=='PHOTO_LAYOUT')validateGenerationExecution(contract);
+  if(contract.source.engine!=='PHOTO_LAYOUT'){
+    if(contract.source.audio_policy.speech==='none')validateGenerationExecution(contract);
+    else await freezeNativeSale(db,cfg,contract);
+  }
   requireThat(contract.budget_micro >= codexContract.agent_cost_ceiling_micro + contract.revision_policy.budget_micro,
     'BUDGET_INVALID', '原订单总预算必须同时覆盖制作与受限修改', 503);
   const data: DTO<'Quote'> = { quote_id: id('quote'), plan_id: plan.id, plan_hash: request.plan_hash, state: 'OPEN', currency: 'CNY', amount_fen: current.data.price_fen,
-    expires_at: addSeconds(900), output_slots: plan.data.output_slots, terms_version: 'YPCC-TERMS-3.1', hard_deadline_seconds: Number((privateData.source.slo_policy as { hard_deadline_seconds: number }).hard_deadline_seconds) };
+    expires_at: new Date(Math.min(Date.parse(addSeconds(900)),Date.parse(contract.native_sale_contract?.valid_until??addSeconds(900)))).toISOString(), output_slots: plan.data.output_slots, terms_version: 'YPCC-TERMS-3.1', hard_deadline_seconds: Number((privateData.source.slo_policy as { hard_deadline_seconds: number }).hard_deadline_seconds) };
   const binding = { tenant_id: p.tenantId, quote_id: data.quote_id, preview_session_id: plan.id, plan_hash: request.plan_hash, codex_contract: codexContract, codex_contract_hash: hash(codexContract), skill_bundle_hash: codexContract.skill_bundle_hash, expires_at: data.expires_at };
   validateInternal('codex-quote-binding', binding);
   await insert(db, 'quotes', { id: data.quote_id, tenant_id: p.tenantId, owner_id: p.userId, plan_id: plan.id, plan_hash: request.plan_hash, amount_fen: data.amount_fen, expires_at: data.expires_at, state: data.state, data, private: { contract, binding, contract_hash: hash(contract) } });
@@ -95,8 +99,8 @@ export async function createOrder(db: Db, cfg: Config, p: Principal, request: DT
   const contract = quote.private!.contract as FrozenContract;
   frozenAiDisclosure(contract);
   requireThat(hash(contract)===quote.private!.contract_hash,'QUOTE_CONTRACT_MISMATCH','原报价合同摘要不一致',503);
-  requireThat(contract.source.audio_policy.speech==='none','NATIVE_AUDIO_NOT_ADMITTED','有声订单的独立听音、QC和交付尚未准入',503);
-  await verifyNativeAudioLive(db,contract,true);
+  if(contract.source.audio_policy.speech==='none')await verifyNativeAudioLive(db,contract,true);
+  else await verifyNativeSaleLive(db,cfg,contract,true);
   const product = await owned<DTO<'Product'>>(db, 'product_drafts', contract.product.product_id, p);
   requireThat(!product.deleted_at && new Date(String(product.expires_at)).getTime() > Date.now()
     && product.data.profile_id === contract.profile.profile_id, 'INPUT_VERSION_CHANGED', '商品输入已更新或过期，请重新获取报价');
@@ -127,9 +131,12 @@ export async function confirmPayment(db: Db, event: VerifiedPayment): Promise<DT
   await insert(db, 'ledger_entries', { id: id('ledger'), tenant_id: tenant, order_id: event.orderId, event_key: `paid:${payment.id}`, entry_type: 'PAYMENT', amount_fen: event.amountFen, currency: 'CNY' });
   await update(db, 'payments', payment.id, { state: 'CONFIRMED', provider_order_id: event.providerOrderId, data: { ...payment.data, state: 'CONFIRMED', action: { kind: 'QUERY_ORIGINAL_ORDER' } }, updated_at: iso() }, tenant);
   const canExecute=order.data.fulfillment_state==='NOT_STARTED'&&Date.parse(order.data.payable_until)>=Date.now()&&!('media_revoked' in order.private);
-  let audioEligible=true;
-  try{if(canExecute)await verifyNativeAudioLive(db,order.private.contract,true);}catch(e){
-    if(e instanceof AppError&&['AUDIO_LICENSE_UNAVAILABLE','CHARACTER_VOICE_NOT_ADMITTED','AUDIO_CHARACTER_CHANGED','AUDIO_LICENSE_CHANGED','RESOURCE_LICENSE_UNAVAILABLE'].includes(e.code))audioEligible=false;
+  let audioEligible=true;let audioReason='AUDIO_RIGHTS_UNAVAILABLE';
+  try{if(canExecute){await verifyNativeAudioLive(db,order.private.contract,true);
+    if(order.private.contract.native_sale_contract)await verifyNativeSaleRegistration(db,order.private.contract,true);}}
+  catch(e){
+    if(e instanceof AppError&&e.code==='NATIVE_SALE_CAPABILITY_CHANGED'){audioEligible=false;audioReason='AUDIO_CAPABILITY_UNAVAILABLE';}
+    else if(e instanceof AppError&&['AUDIO_LICENSE_UNAVAILABLE','CHARACTER_VOICE_NOT_ADMITTED','AUDIO_CHARACTER_CHANGED','AUDIO_LICENSE_CHANGED','RESOURCE_LICENSE_UNAVAILABLE'].includes(e.code))audioEligible=false;
     else throw e;
   }
   const eligible = canExecute && audioEligible && await extendFrozenInputRetention(db, tenant, order.owner_id,
@@ -153,7 +160,7 @@ export async function confirmPayment(db: Db, event: VerifiedPayment): Promise<DT
     await outbox(db, tenant, 'RenderRequested', data.order_id, `render:${data.order_id}`, { job_id: jobId });
   }
   await update(db, 'orders', data.order_id, { data, payment_state: data.payment_state, fulfillment_state: data.fulfillment_state, updated_at: iso() }, tenant);
-  if (!eligible) data.refund_id = (await requestRefundInternal(db, tenant, data.order_id, audioEligible?'LATE_OR_CANCELLED_PAYMENT':'AUDIO_RIGHTS_UNAVAILABLE')).refund_id;
+  if (!eligible) data.refund_id = (await requestRefundInternal(db, tenant, data.order_id, audioEligible?'LATE_OR_CANCELLED_PAYMENT':audioReason)).refund_id;
   return data;
 }
 export async function cancelOrder(db: Db, p: Principal, orderId: string, reason: string): Promise<DTO<'Order'>> {

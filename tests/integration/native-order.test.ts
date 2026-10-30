@@ -13,7 +13,15 @@ import {buildApp} from '../../src/api/app.js';
 import {insert} from '../../src/api/db/store.js';
 import {transaction} from '../../src/api/db/pool.js';
 import {addSeconds,hash,id,sha256} from '../../src/api/lib/crypto.js';
-import {createOrder} from '../../src/api/modules/commerce.js';
+import {createOrder,createQuote,confirmPayment,type VerifiedPayment} from '../../src/api/modules/commerce.js';
+import {createPlan} from '../../src/api/modules/plans.js';
+import {variantDto} from '../../src/api/modules/catalog.js';
+import {bundleForSource} from '../../src/worker/codex/skills.js';
+import {ContentPlanningService} from '../../src/worker/codex/planning.js';
+import {contentTools} from '../../src/worker/tool-gateway/content-tools.js';
+import {frozenNativeSale} from '../../src/worker/audio/commerce.js';
+import {generationCostCeiling} from '../../src/worker/generation/contracts.js';
+import type {FrozenContract,Snapshot} from '../../src/worker/compiler/snapshot.js';
 import {ArkClient} from '../../src/worker/providers/ark.js';
 import {SpeechClient,type SpeechTransport} from '../../src/worker/providers/dashscope-asr.js';
 import {GenerationGateway} from '../../src/worker/generation/gateway.js';
@@ -84,11 +92,15 @@ afterEach(async context=>{
   await db.pool.query("UPDATE stage_runs SET state='CANCELLED' WHERE state NOT IN ('SUCCEEDED','FAILED')");
   await db.pool.query("UPDATE agent_tool_intents SET state='CANCELLED' WHERE state IN ('QUEUED','UNKNOWN','RUNNING')");
   await db.pool.query('UPDATE agent_capabilities SET revoked_at=COALESCE(revoked_at,now())');
+  await db.pool.query("UPDATE execution_variants SET sale_enabled=false,data=jsonb_set(data,'{sale_enabled}','false') WHERE sale_enabled=true");
 });
 afterAll(async()=>{await db?.close();if(root)await rm(inside(db.cfg.runtimeRoot,root),{recursive:true,force:true});});
 
-async function setup(options:{engine?:'PER_SHOT_AI'|'REFERENCE_FILM';music?:boolean;lostAsrAck?:boolean;crashPostCommit?:boolean;revokePostCommit?:boolean;listening?:boolean;dropListeningProof?:boolean;revisions?:boolean;repair?:boolean}={}){
+async function setup(options:{engine?:'PER_SHOT_AI'|'REFERENCE_FILM';music?:boolean;lostAsrAck?:boolean;crashPostCommit?:boolean;revokePostCommit?:boolean;listening?:boolean;dropListeningProof?:boolean;revisions?:boolean;repair?:boolean;buyer?:boolean}={}){
+  if(options.buyer)await db.pool.query("UPDATE character_versions SET data=jsonb_set(data,'{admission_state}','\"RETIRED\"') WHERE data->>'admission_state'='ADMITTED'");
   const f=await nativeOrderFixture(db,join(root,id('order')),{engine:options.engine??'PER_SHOT_AI',...(options.music?{music}:{}),style:options.engine==='REFERENCE_FILM'?'minimal':'karaoke',...(options.listening?{listening:true}:{}),revisions:options.revisions??false,repair:options.repair??false});
+  if(options.buyer){f.cfg.paymentsEnabled=true;f.cfg.storage={...f.cfg.storage,driver:'oss',endpoint:'https://example.test',bucket:'input',keyId:'SYNTHETIC-NOT-REAL',secret:'SYNTHETIC-NOT-REAL'};
+    await writeFile(f.cfg.codex.admissionPath,JSON.stringify(f.admission));}
   const {image:ic,video:vc}=f.models,tasks=new Map<string,string>(),generationRequests:Record<string,unknown>[]=[];
   let providerCalls=0,asrPosts=0,inputUrl='',postCommits=0,inferences=0,taskId=id('synthetic_asr_task');
   const gateway=new GenerationGateway(db.pool,f.cfg,f.store,new ArkClient(f.cfg,async(url,_hosts,opt={})=>{
@@ -115,9 +127,9 @@ async function setup(options:{engine?:'PER_SHOT_AI'|'REFERENCE_FILM';music?:bool
     return response({request_id:'synthetic-query',output:{task_id:taskId,task_status:'SUCCEEDED',result:{transcription_url:'https://result.example.test/original.json'}},usage:{seconds:2}});
   };
   const speech=new SpeechGateway(db.pool,f.cfg,f.store,new SpeechClient(f.cfg,transport));
-  const app=await buildApp({cfg:f.cfg,pool:db.pool,inferenceHttp:async()=>{inferences++;return {status:200,headers:{'content-type':'text/event-stream'},bytes:syntheticSse(f.admission),json:()=>null};}});
+  const app=await buildApp({cfg:f.cfg,pool:db.pool,storage:f.store,inferenceHttp:async()=>{inferences++;return {status:200,headers:{'content-type':'text/event-stream'},bytes:syntheticSse(f.admission),json:()=>null};}});
   await app.listen({host:'127.0.0.1',port:0});const address=app.server.address();if(!address||typeof address==='string')throw new Error('Missing native HTTPS');f.cfg.publicBaseUrl=`https://localhost:${address.port}`;
-  const controller=new AbortController(),launcher=new FixtureLauncher(),executor=new CodexRuntimeAdapter(db.pool,f.cfg,launcher),media=productionTools(db.pool,f.cfg,f.store,gateway,speech),review=reviewTools(db.pool,f.cfg,f.store);
+  const controller=new AbortController(),launcher=new FixtureLauncher(options.buyer?'NATIVE_PLAN':'NORMAL'),executor=new CodexRuntimeAdapter(db.pool,f.cfg,launcher),media=productionTools(db.pool,f.cfg,f.store,gateway,speech),review=reviewTools(db.pool,f.cfg,f.store),content=contentTools(db.pool);
   const post:ToolHandler=async(...args)=>{
     const result=await media.execute_post_plan!(...args);return {...result,commit:async tx=>{
       postCommits++;
@@ -127,13 +139,13 @@ async function setup(options:{engine?:'PER_SHOT_AI'|'REFERENCE_FILM';music?:bool
     }};
   };
   const toolEvents:WorkerLogEvent[]=[];
-  const revisions=revisionTools(db.pool,f.cfg,f.store),handlers:Record<string,ToolHandler>={...media,...review,execute_post_plan:post,
+  const revisions=revisionTools(db.pool,f.cfg,f.store),handlers:Record<string,ToolHandler>={...content,...media,...review,execute_post_plan:post,
     extract_review_evidence:async(...args)=>{const output=await review.extract_review_evidence!(...args);
       if(options.dropListeningProof&&['REVIEW_FACTS','REVIEW_STYLE'].includes(args[0].stage_name)){
         const {native_listening_hash:_,native_listening:__,...result}=output.result as Record<string,unknown>;
         return {...output,result};
       }return output;},
-    persist_stage_result:(scope,...args)=>(scope.role.startsWith('REVIEW_')?review:media).persist_stage_result!(scope,...args)};
+    persist_stage_result:(scope,...args)=>(scope.scope_type==='PLAN'?content:scope.role.startsWith('REVIEW_')?review:media).persist_stage_result!(scope,...args)};
   if(options.revisions)for(const name of Object.keys(revisions)){const original=handlers[name]!;
     handlers[name]=(scope,...args)=>(scope.scope_type==='REVISION'?revisions[name]!:original)(scope,...args);}
   if(options.repair){const planning=repairPlanningTools(db.pool);for(const name of Object.keys(planning)){const original=handlers[name];
@@ -495,6 +507,89 @@ it('keeps public order creation closed for a structurally valid internal native 
   expect(()=>validateGenerationExecution(f.contract)).toThrowError(expect.objectContaining({code:'NATIVE_AUDIO_NOT_ADMITTED'}));
   await expect(transaction(db.pool,q=>createOrder(q,f.cfg,f.p,{quote_id:quote,channel:'alipay'}))).rejects.toMatchObject({code:'NATIVE_AUDIO_NOT_ADMITTED'});
 });
+async function nativeBuyerQuote(f:Fixture){
+  await db.pool.query("UPDATE stage_runs SET state='CANCELLED' WHERE scope_id=$1 AND state NOT IN ('SUCCEEDED','FAILED')",[f.orderId]);
+  const source=f.contract.source,skill=await bundleForSource(f.cfg,source),preset=source.variant_id.split('.')[0]!;
+  const cc={...f.contract.codex_contract,skill_bundle_id:skill.bundle_id,skill_bundle_version:skill.version};
+  // Explicit synthetic registrations; these are not official production
+  // variant or real model/rights/cost admission evidence.
+  await db.pool.query("UPDATE execution_variants SET sale_enabled=true,admission_state='ADMITTED',price_fen=100,data=$2,private=$3 WHERE variant_id=$1",
+    [source.variant_id,JSON.stringify({...variantDto(source),sale_enabled:true,admission_state:'ADMITTED',price_fen:100}),JSON.stringify({source,preset_id:preset,
+      codex_contract:cc,model_version_ids:Object.values(f.models).map(m=>m.model_version_id),budget_micro:f.contract.budget_micro,
+      repair_ceiling_micro:f.contract.repair_ceiling_micro,resource_versions:f.contract.resource_versions})]);
+  await db.pool.query("UPDATE skill_bundles SET state='ADMITTED' WHERE bundle_hash=$1",[skill.sha256]);
+  const plan=await createPlan(db.pool,f.cfg,f.p,{product_id:f.product.product_id,photo_version:1,profile_id:f.profile.profile_id,identity_lock_id:f.profile.identity_lock_id,
+    preset_id:preset,preset_version:source.version,variant_id:source.variant_id,variant_version:source.version});
+  const lease=(await claimStage(db.pool,id('native-buyer-plan'),['PLAN']))!;expect(lease.scope_id).toBe(plan.plan_id);
+  const planner=new ContentPlanningService(db.pool,f.cfg,new CodexRuntimeAdapter(db.pool,f.cfg,f.launcher));
+  await completeStage(db.pool,lease,await withFixtureLease(db.pool,lease,s=>planner.handle(lease,s)));
+  const ready=(await db.pool.query('SELECT data FROM plan_versions WHERE id=$1',[plan.plan_id])).rows[0].data as DTO<'Plan'>;
+  const quote=await transaction(db.pool,q=>createQuote(q,f.cfg,f.p,{plan_id:plan.plan_id,plan_hash:ready.plan_hash!}));
+  const contract=(await db.pool.query<{private:{contract:FrozenContract}}>('SELECT private FROM quotes WHERE id=$1',[quote.quote_id])).rows[0]!.private.contract;
+  expect(frozenNativeSale(contract).ceiling_micro).toBe(Number(generationCostCeiling(contract)));expect(contract.creative.native_voice_id).toBe(f.character.native_voice_id);
+  expect(Date.parse(quote.expires_at)).toBeLessThanOrEqual(Date.parse(contract.native_sale_contract!.valid_until));
+  expect(f.providerCalls()).toBe(0);expect(f.asrPosts()).toBe(0);return {quote,contract};
+}
+function nativePayment(f:Fixture,orderId:string):VerifiedPayment{return {channel:f.p.platform,appId:f.p.appId,merchantId:f.cfg.alipay.merchantId,
+  subjectId:f.p.subjectId,orderId,providerOrderId:id('synthetic-paid-native'),eventKey:id('synthetic-event'),amountFen:100,rawHash:hash('SYNTHETIC VERIFIED PAYMENT; NO REAL CHARGE')};}
+it('rejects incomplete native sale capability and the combined generation/listening cost overflow before checkout',async()=>{
+  const f=await setup({buyer:true,listening:true,revisions:true}),{quote,contract}=await nativeBuyerQuote(f);
+  const body={quote_id:quote.quote_id,channel:f.p.platform};
+  const originalDriver=f.cfg.storage.driver;f.cfg.storage.driver='local';
+  await expect(transaction(db.pool,q=>createOrder(q,f.cfg,f.p,body))).rejects.toMatchObject({code:'NATIVE_INPUT_STORAGE_UNAVAILABLE'});f.cfg.storage.driver=originalDriver;
+  f.cfg.provider.listening!.enabled=false;
+  await expect(transaction(db.pool,q=>createOrder(q,f.cfg,f.p,body))).rejects.toMatchObject({code:'LISTENING_NOT_ADMITTED'});f.cfg.provider.listening!.enabled=true;
+  await db.pool.query("UPDATE provider_model_versions SET status='SUSPENDED' WHERE id=$1",[f.models.listening!.model_version_id]);
+  await expect(transaction(db.pool,q=>createOrder(q,f.cfg,f.p,body))).rejects.toMatchObject({code:'NATIVE_SALE_CAPABILITY_CHANGED'});
+  const listening=frozenOrderListening(contract)!,low={...contract,budget_micro:Number(generationCostCeiling(contract))-1};
+  expect(frozenOrderListening(low)).toBeTruthy();expect(Number(generationCostCeiling(contract))-listening.per_request_ceiling_micro*listening.max_packets).toBeLessThan(low.budget_micro);
+  expect(()=>validateGenerationExecution(low,true)).toThrowError(expect.objectContaining({code:'GENERATION_BUDGET_INVALID'}));
+  expect((await db.pool.query('SELECT id FROM orders WHERE quote_id=$1',[quote.quote_id])).rowCount).toBe(0);expect(f.providerCalls()).toBe(0);
+});
+it('records native payment truth and one original refund when frozen listening admission is withdrawn before payment confirmation',async()=>{
+  const f=await setup({buyer:true,listening:true,revisions:true}),{quote}=await nativeBuyerQuote(f);
+  const order=await transaction(db.pool,q=>createOrder(q,f.cfg,f.p,{quote_id:quote.quote_id,channel:f.p.platform}));
+  await db.pool.query("UPDATE provider_model_versions SET status='SUSPENDED' WHERE id=$1",[f.models.listening!.model_version_id]);
+  const event=nativePayment(f,order.order_id),paid=await transaction(db.pool,q=>confirmPayment(q,event));
+  expect(paid).toMatchObject({payment_state:'CONFIRMED',fulfillment_state:'CANCELLED',refund_id:expect.any(String)});
+  expect((await transaction(db.pool,q=>confirmPayment(q,event))).refund_id).toBe(paid.refund_id);
+  expect((await db.pool.query("SELECT id FROM ledger_entries WHERE order_id=$1 AND entry_type='PAYMENT'",[order.order_id])).rowCount).toBe(1);
+  expect((await db.pool.query('SELECT id FROM refunds WHERE order_id=$1',[order.order_id])).rowCount).toBe(1);
+  expect((await db.pool.query("SELECT id FROM stage_runs WHERE scope_type='ORDER' AND scope_id=$1",[order.order_id])).rowCount).toBe(0);
+  expect(f.providerCalls()).toBe(0);expect(f.asrPosts()).toBe(0);
+});
+it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('checks out and delivers the native buyer %s pack from a real plan/quote through original paid audio review',async engine=>{
+  const original=await setup({buyer:true,listening:true,revisions:true,engine,music:engine==='REFERENCE_FILM'}),{quote}=await nativeBuyerQuote(original);
+  const order=await transaction(db.pool,q=>createOrder(q,original.cfg,original.p,{quote_id:quote.quote_id,channel:original.p.platform}));
+  const event=nativePayment(original,order.order_id),paid=await transaction(db.pool,q=>confirmPayment(q,event));expect(paid.fulfillment_state).toBe('QUEUED');
+  const stored=(await db.pool.query<{private:{contract:FrozenContract}}>('SELECT private FROM orders WHERE id=$1',[order.order_id])).rows[0]!.private.contract;
+  const snapshot=(await db.pool.query<{hash:string;data:Snapshot}>('SELECT hash,data FROM execution_snapshots WHERE order_id=$1',[order.order_id])).rows[0]!;
+  // The admitted OSS configuration above is synthetic. Actual byte effects
+  // use the same local test store and mocked signed-input transport as the
+  // private native pipeline tests; this is explicitly not an OSS/cloud test.
+  original.cfg.storage={...db.cfg.storage};
+  const first=(await claimStage(db.pool,id('native-buyer-production'),['PRODUCTION']))!;expect(first.scope_id).toBe(order.order_id);
+  const f={...original,orderId:order.order_id,contract:stored,snapshot:snapshot.data,snapshotHash:snapshot.hash,lease:first};
+  // Idempotent checkout recovers the same original order even when new sales
+  // stop. No new runtime, budget or payment intent is created.
+  await db.pool.query("UPDATE execution_variants SET sale_enabled=false,data=jsonb_set(data,'{sale_enabled}','false') WHERE variant_id=$1",[stored.source.variant_id]);
+  expect((await transaction(db.pool,q=>createOrder(q,f.cfg,f.p,{quote_id:quote.quote_id,channel:f.p.platform}))).order_id).toBe(order.order_id);
+  await stage(f,first);const post=await postLease(f);await stage(f,post);
+  const qc=(await claimStage(db.pool,id('native-buyer-qc'),['QC']))!;
+  await completeStage(db.pool,qc,await withFixtureLease(db.pool,qc,s=>new QualityControlService(db.pool,f.cfg,f.store).handle(qc,s)));
+  const facts=(await claimStage(db.pool,id('native-buyer-facts'),['REVIEW_FACTS']))!,context=await executionContext(db.pool,f.p.tenantId,f.orderId,f.snapshotHash),packet=await currentReviewPacket(db.pool,context);
+  const listening=listeningClient({...f,review:facts,context,packet},'SYNTHETIC_PASS');
+  const review=new ReviewStageService(db.pool,f.cfg,new CodexRuntimeAdapter(db.pool,f.cfg,f.launcher),listening.gateway);
+  await completeStage(db.pool,facts,await withFixtureLease(db.pool,facts,s=>review.handle(facts,s)));
+  const style=(await claimStage(db.pool,id('native-buyer-style'),['REVIEW_STYLE']))!;
+  await completeStage(db.pool,style,await withFixtureLease(db.pool,style,s=>review.handle(style,s)));
+  const delivery=(await claimStage(db.pool,id('native-buyer-delivery'),['DELIVER']))!;
+  await completeStage(db.pool,delivery,await withFixtureLease(db.pool,delivery,s=>new PublicationService(db.pool,f.cfg,f.store).handle(delivery,s)));
+  const pack=await getDeliverables(db.pool,f.p,f.orderId),video=pack.items.find(i=>i.kind==='video')!;
+  const link=await createDownloadLink(db.pool,f.cfg,f.p,video.deliverable_id),url=new URL(link.url),download=await f.app.inject({method:'GET',url:url.pathname+url.search});
+  expect(download.statusCode).toBe(200);expect(download.rawPayload.length).toBeGreaterThan(1000);expect(f.asrPosts()).toBe(1);expect(listening.posts()).toBe(1);expect(f.launcher.launches).toBe(6);
+  expect((await db.pool.query('SELECT id FROM agent_instances WHERE order_id=$1 AND state<>$2',[f.orderId,'RELEASED'])).rowCount).toBe(0);
+},240000);
 it('assembles and rechecks both original tone segments losslessly, rejecting a gap and replaced PCM evidence',async()=>{
   const directory=join(root,id('assembly'));await mkdir(directory,{recursive:true});const segments:NativeSegment[]=['red','blue'].map((key,i)=>({node_key:`video:shot-${i+1}`,
     start_frame:i*30,end_frame:(i+1)*30,bytes:clips.get(key)!,source_sha256:sha256(clips.get(key)!)}));

@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T04:18:28.247227+00:00",
-  "strategy": "USER_REQUESTED_FAST_COMMUNITY_COMMERCIAL_CLOSURE",
-  "source_set_hash": "71c658d6b0c0773f5f927141e21ce0e60bab46d8bab3074f8c8be8463510cb97",
-  "source_files": 430,
+  "checked_at": "2026-10-30T04:50:14.790810+00:00",
+  "strategy": "USER_REQUESTED_FAST_NATIVE_SALE_CLOSURE",
+  "source_set_hash": "59fe11005651de6be3c992ff6483621e203368734cb9cd0318125fdbd30eeca5",
+  "source_files": 431,
   "runtime_contract_files": 42,
   "resource_files": 4,
   "build_report": "docs/delivery/current.json",
@@ -20,8 +20,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 10335,
-      "log_path": "runtime/delivery-builds/2026-10-30T04-14-11-228Z-6ab31175/typecheck.log",
+      "elapsed_ms": 9714,
+      "log_path": "runtime/delivery-builds/2026-10-30T04-47-26-892Z-95e9b8b2/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -37,29 +37,29 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 831,
-      "log_path": "runtime/delivery-builds/2026-10-30T04-14-11-228Z-6ab31175/server.log",
+      "elapsed_ms": 2691,
+      "log_path": "runtime/delivery-builds/2026-10-30T04-47-26-892Z-95e9b8b2/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T04-14-11-228Z-6ab31175\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T04-47-26-892Z-95e9b8b2\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T04-14-11-228Z-6ab31175\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T04-47-26-892Z-95e9b8b2\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 9636,
-      "log_path": "runtime/delivery-builds/2026-10-30T04-14-11-228Z-6ab31175/preview.log",
-      "log_sha256": "30123cbc57304ce6b7343dde0748d8bc56d745f20cd894465064d4c118677838"
+      "elapsed_ms": 44407,
+      "log_path": "runtime/delivery-builds/2026-10-30T04-47-26-892Z-95e9b8b2/preview.log",
+      "log_sha256": "42ee9093d049b9609fc80b62717bd3c5246591603d089803ba0c5ad9bedeb05e"
     }
   ],
   "components": [
@@ -80,65 +80,68 @@
       "status": "NOT_RUN"
     }
   ],
-  "source_snapshot": "docs/verification/community-commerce-tested-source.json",
+  "source_snapshot": "docs/verification/native-sale-tested-source.json",
   "source_unchanged_during_tests": true,
   "api_checks": {
     "status": "PASS",
-    "passed": 5,
+    "passed": 8,
     "main": {
-      "passed": 3,
-      "report": "docs/verification/community-commerce-api.json",
+      "passed": 5,
+      "not_selected": 28,
+      "report": "docs/verification/native-sale-api.json",
       "command": {
         "task": "exec",
-        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/community-commercial.test.ts --outputFile.json=runtime/test-results/community-commerce-2026-10-30T04-13-02-053Z/api.json",
+        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/native-order.test.ts -t rejects incomplete native sale|records native payment truth|checks out and delivers the native buyer|keeps public order creation closed --outputFile.json=runtime/test-results/native-sale-2026-10-30T04-44-27-719Z/api.json",
+        "argv": [
+          "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+          "run",
+          "--config",
+          "vitest.integration.config.ts",
+          "tests/integration/native-order.test.ts",
+          "-t",
+          "rejects incomplete native sale|records native payment truth|checks out and delivers the native buyer|keeps public order creation closed",
+          "--outputFile.json=runtime/test-results/native-sale-2026-10-30T04-44-27-719Z/api.json"
+        ],
+        "shell": false,
+        "status": "PASS",
+        "exit_code": 0,
+        "signal": null,
+        "timeout_ms": 660000,
+        "elapsed_ms": 261267,
+        "log_path": "runtime/test-results/native-sale-2026-10-30T04-44-27-719Z/api.log",
+        "log_sha256": "93c3ae6e6efabb697f5840906048eff45fb4423a8e10857e4b9e92b581e2c243"
+      }
+    },
+    "community_order_regression": {
+      "passed": 3,
+      "not_selected": 0,
+      "report": "docs/verification/native-sale-order-regression.json",
+      "command": {
+        "task": "exec",
+        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/community-commercial.test.ts --outputFile.json=runtime/test-results/native-sale-2026-10-30T04-49-07-735Z/api.json",
         "argv": [
           "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
           "run",
           "--config",
           "vitest.integration.config.ts",
           "tests/integration/community-commercial.test.ts",
-          "--outputFile.json=runtime/test-results/community-commerce-2026-10-30T04-13-02-053Z/api.json"
+          "--outputFile.json=runtime/test-results/native-sale-2026-10-30T04-49-07-735Z/api.json"
         ],
         "shell": false,
         "status": "PASS",
         "exit_code": 0,
         "signal": null,
         "timeout_ms": 660000,
-        "elapsed_ms": 25264,
-        "log_path": "runtime/test-results/community-commerce-2026-10-30T04-13-02-053Z/api.log",
-        "log_sha256": "3331e6afe2e01a70062e60f31725a943ef4f22c22fcf54f7d5491aff3b87c00a"
+        "elapsed_ms": 36828,
+        "log_path": "runtime/test-results/native-sale-2026-10-30T04-49-07-735Z/api.log",
+        "log_sha256": "e9b132b71b19a19ed6cf52dbb8768c50c8a2d7d89ba3beb561377ee1599436d8"
       }
     },
-    "order_regression": {
-      "passed": 2,
-      "not_selected": 9,
-      "report": "docs/verification/community-commerce-order-regression.json",
-      "command": {
-        "task": "exec",
-        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/generated-production.test.ts -t delivers the actual silent --outputFile.json=runtime/test-results/community-commerce-2026-10-30T04-14-11-226Z/api.json",
-        "argv": [
-          "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
-          "run",
-          "--config",
-          "vitest.integration.config.ts",
-          "tests/integration/generated-production.test.ts",
-          "-t",
-          "delivers the actual silent",
-          "--outputFile.json=runtime/test-results/community-commerce-2026-10-30T04-14-11-226Z/api.json"
-        ],
-        "shell": false,
-        "status": "PASS",
-        "exit_code": 0,
-        "signal": null,
-        "timeout_ms": 660000,
-        "elapsed_ms": 122761,
-        "log_path": "runtime/test-results/community-commerce-2026-10-30T04-14-11-226Z/api.log",
-        "log_sha256": "3145f2cc8f45f9a86ef592b26c1810a0afe5730bda58ea061da85a8cb28aaabb"
-      }
-    },
-    "synthetic_published_offer_admission_semantics_identity_and_usage": true,
-    "actual_native_pg_https_mcp_png_mp4": true,
-    "community_buyer_roles": 5
+    "synthetic_payment_rights_model_semantics_identity_and_usage": true,
+    "actual_native_pg_https_mcp_png_mp4_audio": true,
+    "native_buyer_roles": 6,
+    "live_oss_verified": false,
+    "test_storage": "SYNTHETIC_OSS_PREFLIGHT_THEN_LOCAL_BYTE_EFFECTS"
   },
   "current_unit_suite_executed": false,
   "fixture_bridge_matches_current_build": true,
@@ -148,11 +151,11 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 1.878,
+      "elapsed_seconds": 1.343,
       "log_path": "runtime/delivery/doctor-focused.log",
-      "log_sha256": "cf30d5e2e6b8ddb90d2d36e4b3dadcbcbb53e29dfdbfa22ceedc3e475d594831",
+      "log_sha256": "90c1c01368313fd9852f9f5cd0d39a3d86ef0e54eaab30bb99f617d7e50efb74",
       "report": {
-        "checked_at": "2026-10-30T04:15:02.271Z",
+        "checked_at": "2026-10-30T04:49:09.120Z",
         "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
         "rows": [
           {
@@ -244,9 +247,9 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 9.841,
+      "elapsed_seconds": 6.237,
       "log_path": "runtime/delivery/backend-focused.log",
-      "log_sha256": "34aba71ad3b5a06b6d87f6822a8594d85dd6e26adf1323545e91c711762875e2",
+      "log_sha256": "5196f21b0ad254d83f625223d0839d73f98200ec21c69b75767609211062f4a6",
       "local_stack_ready": true,
       "preview_http_ready": false
     },
@@ -254,7 +257,7 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 1.986,
+      "elapsed_seconds": 1.673,
       "log_path": "runtime/delivery/preview-focused.log",
       "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
       "local_stack_ready": false,
@@ -262,9 +265,9 @@
     }
   },
   "main_database_migrations": 31,
-  "attempts_report": "docs/verification/community-commerce-attempts.json",
-  "prior_delivery": "docs/verification/delivery-focused-source-40c42dd.json",
-  "functional_scope": "docs/实施/社区商业配置与可信风格执行-v1.0.md",
+  "attempts_report": "docs/verification/native-sale-attempts.json",
+  "prior_delivery": "docs/verification/delivery-focused-source-bd22546.json",
+  "functional_scope": "docs/实施/原生声音售前完整绑定与购买交付-v1.0.md",
   "historical_evidence_unchanged": [
     {
       "path": "docs/verification/album-save-api.json",
@@ -305,6 +308,74 @@
     {
       "path": "docs/verification/audio-review-native-source.json",
       "sha256": "73f2c5ee3e832feba155b3cfb89bc362de626d231237ef0fd2bb501750a4191b"
+    },
+    {
+      "path": "docs/verification/community-commerce-api.json",
+      "sha256": "08f827b600b712dfbbc7f4d2e7e0b3ff8e2a48875d02e9926a6315ded03ab2d3"
+    },
+    {
+      "path": "docs/verification/community-commerce-attempt-01-source.json",
+      "sha256": "dfb776bcabd1879282b8839b25e7bb08d34c19d2d253e6ea326484b113f35972"
+    },
+    {
+      "path": "docs/verification/community-commerce-attempt-02-api.json",
+      "sha256": "7920d6f27ef0fd0ff5a4cb60f605772724bec22dfcaa8e5c7de8572c8691f77b"
+    },
+    {
+      "path": "docs/verification/community-commerce-attempt-02-source.json",
+      "sha256": "efcb2a1a768acdebc80e81269b9e310f16a794e062e3cdb9ac909ad2852dd29e"
+    },
+    {
+      "path": "docs/verification/community-commerce-attempt-03-api.json",
+      "sha256": "2d47cee5f52094977cdbaaa28c69ebaf3f6ffc5c4a1266f852d46d850374f354"
+    },
+    {
+      "path": "docs/verification/community-commerce-attempt-03-source.json",
+      "sha256": "eb6cb9846da70ed9841bb3dff31c5eda71124c0910812b095be67a575c41399c"
+    },
+    {
+      "path": "docs/verification/community-commerce-attempt-04-api.json",
+      "sha256": "86a1a983688dde2ab773fe6a72ccd0a234787f560bbe3be608e18fa1a85c4cf3"
+    },
+    {
+      "path": "docs/verification/community-commerce-attempt-04-source.json",
+      "sha256": "6570a609e23b8d8dcd47c082921537b0713b5ce2eff48ea07e3e4ccb3d7609fd"
+    },
+    {
+      "path": "docs/verification/community-commerce-attempt-05-api.json",
+      "sha256": "08f827b600b712dfbbc7f4d2e7e0b3ff8e2a48875d02e9926a6315ded03ab2d3"
+    },
+    {
+      "path": "docs/verification/community-commerce-attempt-05-source.json",
+      "sha256": "8d39f64c6310b5897ea1a87c9ff0ca242f4a64b148ba63ed8a2c28368fac3bad"
+    },
+    {
+      "path": "docs/verification/community-commerce-attempt-06-api.json",
+      "sha256": "21013e1d4007d25f236fb5eda3bea972944e9867905b199239321c61ec2cd57c"
+    },
+    {
+      "path": "docs/verification/community-commerce-attempt-06-source.json",
+      "sha256": "8d39f64c6310b5897ea1a87c9ff0ca242f4a64b148ba63ed8a2c28368fac3bad"
+    },
+    {
+      "path": "docs/verification/community-commerce-attempts.json",
+      "sha256": "622594292d40d2214a1fa1d7db3e7074ba9dd45e62f6d65bb7f3edc557b3efa0"
+    },
+    {
+      "path": "docs/verification/community-commerce-interrupted-runner-source.json",
+      "sha256": "dfb776bcabd1879282b8839b25e7bb08d34c19d2d253e6ea326484b113f35972"
+    },
+    {
+      "path": "docs/verification/community-commerce-order-regression.json",
+      "sha256": "21013e1d4007d25f236fb5eda3bea972944e9867905b199239321c61ec2cd57c"
+    },
+    {
+      "path": "docs/verification/community-commerce-source.json",
+      "sha256": "f95093a74f53d35dc1a45bec6e5a12f9e945c9b52d39b693db30cca1cfe3a498"
+    },
+    {
+      "path": "docs/verification/community-commerce-tested-source.json",
+      "sha256": "8d39f64c6310b5897ea1a87c9ff0ca242f4a64b148ba63ed8a2c28368fac3bad"
     },
     {
       "path": "docs/verification/contracts.json",
@@ -353,6 +424,10 @@
     {
       "path": "docs/verification/delivery-focused-source-38eec3e.json",
       "sha256": "0b4f8f6318626c3f8eadafaa0c789ba679b2add43437b2f2f88de049a192ab01"
+    },
+    {
+      "path": "docs/verification/delivery-focused-source-40c42dd.json",
+      "sha256": "e21f496a27dc29c8459945fd453b5c1803c36eb02984f8543466b958894079b2"
     },
     {
       "path": "docs/verification/delivery-focused-source-42dc446.json",
@@ -775,6 +850,10 @@
       "sha256": "f9e074e061b81f4e016c8806cc429439819f860826c1459d0ef1e85ed559e808"
     },
     {
+      "path": "docs/verification/publication-40c42dd.json",
+      "sha256": "7b9fc727beee8d2fe2ef5f3586f700727a3c31997f8ae51f966c1bf51eeebe94"
+    },
+    {
       "path": "docs/verification/publication-42dc446.json",
       "sha256": "46a9315922055538c33a9035bdb42602df58b59643b44e0ae6560b49b3225223"
     },
@@ -853,6 +932,10 @@
     {
       "path": "docs/verification/repository-audit-38eec3e.json",
       "sha256": "14993c277ec28c25acb2a09366aa6c9a83d425b125aadeb4015e39bc1adfb1c8"
+    },
+    {
+      "path": "docs/verification/repository-audit-40c42dd.json",
+      "sha256": "577048f28cea4db0ec97e06e9c6dbdf53c110c7c66bd7c85b7f0aa08368bde18"
     },
     {
       "path": "docs/verification/repository-audit-42dc446.json",
@@ -1017,6 +1100,8 @@
   ],
   "existing_media_files_verified": 93,
   "new_media_files_verified": 0,
+  "baseline_media_files_with_metadata": 115,
+  "baseline_design_files": 48,
   "frozen_c_files": 25,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
   "browser_used": false,
@@ -1029,10 +1114,10 @@
   "production_admitted": false,
   "cloud_deployed": false,
   "limitations": [
-    "Community commercial test seeds explicit publication and independent admission fixtures; this is not live community approval or a real payment.",
-    "Original generated pack regression uses synthetic provider/model semantics/usage and same-user launcher identities with actual native media.",
-    "All live services stay disabled; native device builds, full/unit suites and new browser recording were not run.",
-    "Live providers, restricted identities/cleanup, payments, device and complete community admission, external-resource/audio samples, Plus and cloud remain pending."
+    "Both native buyer packs use synthetic payment, rights, model text/hearing/usage and same-user role launcher identities with actual native files.",
+    "OSS metadata is synthetic and byte effects use the local test adapter; no live OSS, bank, Chinese voice/hearing or production isolation admission.",
+    "All live services and sales remain disabled; full/unit suites, mini-program builds and new browser recording were not run.",
+    "Live providers, restricted identity/cleanup, payments, devices, full official/community admission, external-resource/audio samples, Plus and cloud remain pending."
   ],
-  "canonical_community_commerce_provenance": "docs/verification/community-commerce-source.json"
+  "canonical_native_sale_provenance": "docs/verification/native-sale-source.json"
 }

@@ -156,6 +156,11 @@ async function dispatch(message) {
       if (mode !== 'SKIP_PERSIST') await tool('persist_stage_result', { result: output });
       if (mode === 'CHANGED_FINAL') output.verdict = 'FAIL';
     } else {
+      if(mode==='NATIVE_PLAN'){
+        const character=input.admitted_native_voices[0];if(!character)throw new Error('Synthetic native character missing');
+        input.suggested_plan.character_version_id=character.character_version_id;input.suggested_plan.native_voice_id=character.native_voice_ids[0];
+        input.suggested_plan.shots.forEach((s,i)=>{s.spoken_text=i===0?'商品实拍。':'细节展示。';});
+      }
       await tool('analyze_photos'); await tool('validate_content_plan', { plan: input.suggested_plan });
       if (mode !== 'SKIP_PERSIST') await tool('persist_stage_result', { result: input.suggested_plan });
       output = mode === 'CHANGED_FINAL' ? { ...input.suggested_plan, title: 'Changed after persistence' } : input.suggested_plan;

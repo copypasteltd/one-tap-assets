@@ -32,6 +32,7 @@ export interface Snapshot {
   fulfillable_at: string; deadline_at: string; policy_version: string; codex_contract: DTO<'CodexContract'>;
 }
 export interface FrozenContract {
+  native_sale_contract?:import('../audio/commerce.js').NativeSaleContract;
   ai_disclosure_contract?:import('./disclosure.js').AiDisclosureContract;
   native_audio_contract?:NativeAudioContract;
   listening_contract?:ListeningContract;
