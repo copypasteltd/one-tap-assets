@@ -1,0 +1,15 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/integration/sample-production.test.ts (24 tests | 20 skipped) 101441ms
+   ✓ native SAMPLE PER_SHOT_AI keeps whole original audio, actual ASR captions, settled listening and two fresh reviews 44925ms
+   ✓ native SAMPLE REFERENCE_FILM keeps whole original audio, actual ASR captions, settled listening and two fresh reviews 36932ms
+   ✓ native SAMPLE refuses missing defaults, paid-order-only rights and an insufficient original allowance before spending 344ms
+   ✓ native SAMPLE holds an unknown ASR in its original platform reservation without a second POST 16737ms
+
+ Test Files  1 passed (1)
+      Tests  4 passed | 20 skipped (24)
+   Start at  16:25:43
+   Duration  102.80s (tests 99%, import 1%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/native-sample-2026-10-30T08-25-43-088Z/api.json

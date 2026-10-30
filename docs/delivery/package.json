@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "created_at": "2026-10-30T08:50:31.296Z",
+  "created_at": "2026-10-30T08:56:31.184Z",
   "id": "2026-10-30T08-31-29-585Z-23cca323",
   "source_set_hash": "52416aa969b252c137015e7e8789eca8a4666d18ab61e3b81b74695f7a69383b",
   "archive_path": "runtime/releases/one-tap-assets-2026-10-30T08-31-29-585Z-23cca323/one-tap-assets-source-and-builds.zip",
-  "archive_sha256": "6de346f526aa489696dfd1c765eb6bb9cce0e0d47a792e851ea541b22caf72c9",
-  "archive_bytes": 101975694,
-  "source_files": 1260,
+  "archive_sha256": "89b1ac9f38cdac75f6ed8de1276e51ff351441cfa5478e863224c52f2ef1429b",
+  "archive_bytes": 101990013,
+  "source_files": 1277,
   "build_files": 31,
   "components": [
     {
@@ -33,11 +33,11 @@
   "production_admitted": false,
   "independent_archive_verification": {
     "status": "PASS",
-    "checked_at": "2026-10-30T08:50:56.044429+00:00",
+    "checked_at": "2026-10-30T08:58:51.945997+00:00",
     "method": "INDEPENDENT_PYTHON_ZIPFILE_CRC_AND_SHA256",
-    "archive_sha256": "6de346f526aa489696dfd1c765eb6bb9cce0e0d47a792e851ea541b22caf72c9",
-    "payload_files_verified": 1291,
-    "archive_entries": 1292,
+    "archive_sha256": "89b1ac9f38cdac75f6ed8de1276e51ff351441cfa5478e863224c52f2ef1429b",
+    "payload_files_verified": 1308,
+    "archive_entries": 1309,
     "workspace_payload_bytes_matched": true,
     "successful_build_components_verified": [
       "server",

@@ -1,0 +1,54 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ❯ tests/integration/sample-production.test.ts (24 tests | 1 failed | 23 skipped) 39326ms
+   ↓ requires all seven live handlers and configured independent budgets before queuing
+   ↓ produces actual full-spec photos/video/copy through five fresh synthetic roles without an order or buyer charge
+   ↓ serves only private owned sample files and rejects post-QC byte tampering
+   ↓ publishes the actually produced complete sample as independent public PNG/MP4 copies without repeating any model work
+   ↓ rejects incomplete, wrong-packet and forged PASS reports and changed completion bindings
+   ↓ does not accept READY/QC flags or test-fixture markers outside APP_ENV=test
+   ↓ recovers the original content checkpoint after lease takeover without another role or inference
+   ↓ checks the frozen sample cost ceiling before submitting any upstream request
+   ↓ holds an ambiguous sample reservation and does not rebuy inference on stage recovery
+   ↓ rechecks the pinned resource license before completed samples can be published
+   ↓ fails closed for generated blueprints without admitted model protocols before any sample stages or inference
+   ↓ stops a deleted or expired input before consuming any inference budget
+   ↓ refuses a revoked publication grant for already completed media links
+   × native SAMPLE PER_SHOT_AI keeps whole original audio, actual ASR captions, settled listening and two fresh reviews 37035ms
+   ↓ native SAMPLE REFERENCE_FILM keeps whole original audio, actual ASR captions, settled listening and two fresh reviews
+   ↓ native SAMPLE refuses missing defaults, paid-order-only rights and an insufficient original allowance before spending
+   ↓ native SAMPLE holds an unknown ASR in its original platform reservation without a second POST
+   ↓ completes PER_SHOT_AI creator sample, private download and independent public copies within platform funds
+   ↓ completes REFERENCE_FILM creator sample, private download and independent public copies within platform funds
+   ↓ rejects insufficient frozen sample funds and UNCERTAIN reference identity before buying any video
+   ↓ retains an UNKNOWN sample generation reservation and resumes only its original intent without buyer funds
+   ↓ creative components complete actual PHOTO_LAYOUT media with frozen choices, independent review and released instances
+   ↓ creative components complete actual PER_SHOT_AI media with frozen choices, independent review and released instances
+   ↓ creative components complete actual REFERENCE_FILM media with frozen choices, independent review and released instances
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/sample-production.test.ts > native SAMPLE PER_SHOT_AI keeps whole original audio, actual ASR captions, settled listening and two fresh reviews
+Error: 原样例听音、完整输入、模型或费用绑定不一致
+ ❯ requireThat src/api/lib/errors.ts:6:25
+      4| }
+      5| export function requireThat(condition: unknown, code: string, message:…
+      6|   if (!condition) throw new AppError(code, message, status);
+       |                         ^
+      7| }
+      8| export function notFound(): never { throw new AppError('NOT_FOUND', '内…
+ ❯ SampleListeningReader.evidence src/worker/samples/listening.ts:87:5
+ ❯ SampleProductionService.handle src/worker/samples/service.ts:72:42
+ ❯ withFixtureLease tests/helpers/lease.ts:15:18
+ ❯ tests/integration/sample-production.test.ts:350:41
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 23 skipped (24)
+   Start at  16:18:41
+   Duration  40.58s (tests 97%, import 2%, transform 1%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/native-sample-2026-10-30T08-18-41-231Z/api.json

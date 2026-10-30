@@ -1,0 +1,27 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ❯ tests/integration/sample-production.test.ts (0 test)
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/sample-production.test.ts [ tests/integration/sample-production.test.ts ]
+Error: Cannot find package 'canonicalize' imported from E:/dev/sandbox/支付宝黑客松/一品成片/src/worker/samples/audio-evidence.ts
+ ❯ src/worker/samples/audio-evidence.ts:3:1
+      1| import {writeFile} from 'node:fs/promises';
+      2| import {join} from 'node:path';
+      3| import canonicalize from 'canonicalize';
+       | ^
+      4| import type pg from 'pg';
+      5| import type {Db} from '../../api/db/pool.js';
+ ❯ src/worker/samples/listening.ts:16:1
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  no tests
+   Start at  16:20:33
+   Duration  2.41s (worker 96%, environment 4%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/native-sample-2026-10-30T08-20-32-594Z/api.json
