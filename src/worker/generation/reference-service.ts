@@ -1,3 +1,4 @@
+import { bundleForSource } from '../codex/skills.js';
 import type {GenerationContext} from './scope.js';
 import type pg from 'pg';
 import type {Config} from '../../api/config.js';
@@ -45,7 +46,8 @@ export class ReferenceIdentityService {
       runId=prior[0].id;raw=prior[0].private.stage_result;
     }else{
       try{
-        const completed=await this.executor.execute({lease,role:'REVIEW_FACTS',variantId:context.skillVariantId??context.snapshot.variant_id,bundleHash:cc.skill_bundle_hash,
+        const skill=await bundleForSource(this.cfg,context.contract.source,cc.skill_bundle_hash);
+        const completed=await this.executor.execute({lease,role:'REVIEW_FACTS',variantId:skill.payload.variant_id,bundleHash:cc.skill_bundle_hash,
           admission,limits:binding.limits,maxToolCalls:cc.max_tool_calls,maxScopeToolCalls:cc.max_tool_calls,
           allowedTools:['extract_review_evidence','persist_stage_result'],input:referenceRoleInput(material.packet),outputSchema:referenceReportSchema,
           review:{purpose:'REFERENCE_IDENTITY',packetHash:material.packet.packet_hash,images:material.images}},signal);

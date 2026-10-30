@@ -21,6 +21,7 @@ import { lockMediaOwner } from './media-access.js';
 import {freezeRevisionPolicy,ensureRevisionBudget} from '../../worker/revisions/contract.js';
 import {freezeNativeAudio,verifyNativeAudioLive} from '../../worker/audio/contract.js';
 import {freezeAiDisclosure,frozenAiDisclosure} from '../../worker/compiler/disclosure.js';
+import {bundleForSource} from '../../worker/codex/skills.js';
 export { requestRefundInternal } from './refunds.js';
 
 export async function createQuote(db: Db, cfg: Config, p: Principal, request: DTO<'QuoteRequest'>): Promise<DTO<'Quote'>> {
@@ -37,6 +38,8 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
   const privateData = current.private as typeof current.private & { resource_versions?: ResourceBinding[]; repair_ceiling_micro?: number };
   const codexContract = privateData.codex_contract as DTO<'CodexContract'>;
   validateInternal('codex-contract', codexContract);
+  const skill=await bundleForSource(cfg,privateData.source,codexContract.skill_bundle_hash);
+  requireThat(hash(plan.private?.source)===hash(privateData.source),'PLAN_SOURCE_CHANGED','方案制作配置已变化，请重新规划',409);
   const planned = plan.private?.runtime_admission as CodexAdmission | undefined;
   requireThat(planned && plan.private?.content_run_id && codexContract.runtime_sha256 === planned.runtime_sha256
     && codexContract.runtime_build_id === planned.runtime_build_id && codexContract.protocol_version === planned.protocol_version
@@ -62,7 +65,7 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
       max_requests_per_role: codexContract.max_turns_per_role, max_input_tokens: codexContract.max_input_tokens,
       max_output_tokens: codexContract.max_output_tokens, ceiling_micro: codexContract.agent_cost_ceiling_micro,
       daily_ceiling_micro: codexContract.agent_cost_ceiling_micro } } };
-  contract.revision_policy=freezeRevisionPolicy(contract);
+  contract.revision_policy=freezeRevisionPolicy(contract,skill.payload.variant_id);
   freezeAiDisclosure(contract);
   requireThat(creativePlanHash(contract.creative)===contract.plan_hash,'PLAN_CHANGED','报价的完整文案与原规划摘要不一致',409);
   validateCreativePlan(contract.creative,contract.profile,contract.source);

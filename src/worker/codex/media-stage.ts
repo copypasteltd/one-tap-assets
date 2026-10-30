@@ -1,3 +1,4 @@
+import { bundleForSource } from './skills.js';
 import type pg from 'pg';
 import type { Config } from '../../api/config.js';
 import { hash } from '../../api/lib/crypto.js';
@@ -62,7 +63,8 @@ export class MediaStageService {
       completed = { runId: prior.id, instanceId: prior.instance_id, result: prior.private.stage_result, resultHash: prior.output_hash };
     } else {
       const primaryTool = phase === 'PRODUCTION' ? context.snapshot.engine==='PHOTO_LAYOUT'?'render_photo_pack':'render_generated_pack' : 'execute_post_plan';
-      completed = await this.executor.execute({ lease, role: phase, variantId: context.snapshot.variant_id, bundleHash: cc.skill_bundle_hash,
+      const skill = await bundleForSource(this.cfg, context.contract.source, cc.skill_bundle_hash);
+      completed = await this.executor.execute({ lease, role: phase, variantId: skill.payload.variant_id, bundleHash: cc.skill_bundle_hash,
         admission, limits: binding.limits, maxToolCalls: cc.max_tool_calls, maxScopeToolCalls: cc.max_tool_calls,
         allowedTools: [primaryTool, 'inspect_actual_media', 'persist_stage_result',...(native&&phase==='POST'?['transcribe_actual_audio']:[])], outputSchema: mediaStageResultSchema,
         input: { phase, snapshot_hash: context.snapshotHash, snapshot: context.snapshot, creative_plan: context.contract.creative,

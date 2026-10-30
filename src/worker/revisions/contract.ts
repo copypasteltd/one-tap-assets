@@ -35,15 +35,16 @@ export interface RevisionInput {
 }
 /** Freeze before sale. No later configuration can increase a paid order's
  * aftercare limits; its actual price must be admitted with this cost included. */
-export function freezeRevisionPolicy(contract:FrozenContract):RevisionPolicy {
+export function freezeRevisionPolicy(contract:FrozenContract,skillVariantId=contract.source.variant_id):RevisionPolicy {
   const binding=contract.runtime_binding;const c=contract.codex_contract;
   requireThat(binding && Number.isSafeInteger(c.agent_cost_ceiling_micro) && c.agent_cost_ceiling_micro>0,
     'REVISION_CONTRACT_UNAVAILABLE','制作合同缺少受限修改的执行与费用能力',503);
   const policy:RevisionPolicy={version:REVISION_POLICY_VERSION,window_hours:48,deadline_seconds:300,max_successes:1,
-    budget_micro:c.agent_cost_ceiling_micro,bundle_hash:c.skill_bundle_hash,skill_variant_id:contract.source.variant_id,
+    budget_micro:c.agent_cost_ceiling_micro,bundle_hash:c.skill_bundle_hash,skill_variant_id:skillVariantId,
     admission:structuredClone(binding.admission),limits:{...structuredClone(binding.limits),max_requests:c.max_turns_per_role*3,
       max_requests_per_role:c.max_turns_per_role,ceiling_micro:c.agent_cost_ceiling_micro,daily_ceiling_micro:c.agent_cost_ceiling_micro}};
-  const style=STYLES[contract.request.preset_id];
+  const styleId=contract.source.creative_components.platform_style_id;
+  const style=STYLES[typeof styleId==='string'?styleId:contract.request.preset_id];
   if(style&&contract.resource_versions.some(r=>hash(r)===hash(FONT_BINDING)))policy.image_text={version:'YPCC-IMAGE-TEXT-1',max_chars:28,
     max_lines:2,panel_fraction:0.22,font:{...FONT_BINDING},background:style.bg,ink:style.ink,accent:style.accent};
   validateRevisionPolicy(policy);return policy;

@@ -48,6 +48,8 @@ export async function mediaFixture(db: TestDatabase,options:{principal?:Principa
   const base = (JSON.parse(readFileSync('assets/development/v1.1/contracts/codex-fixtures.json', 'utf8')) as { cases: { name: string; value: DTO<'CodexContract'> }[] }).cases.find(c => c.name === 'frozen_codex_contract')!.value;
   const bundleHash = options.generation?.variantId?(await bundleForVariant(f.cfg,options.generation.variantId)).sha256
     :(await db.pool.query('SELECT private FROM plan_versions WHERE id=$1', [f.plan.plan_id])).rows[0].private.bundle_hash as string;
+  if(options.generation?.variantId){const bundle=await bundleForVariant(f.cfg,options.generation.variantId);
+    source.skill_bundle={id:bundle.bundle_id,version:bundle.version,hash:bundle.sha256};}
   const cc: DTO<'CodexContract'> = { ...base, runtime_build_id: f.admission.runtime_build_id, runtime_sha256: f.admission.runtime_sha256,
     protocol_version: f.admission.protocol_version, model_version_id: f.admission.model_version_id, rate_version_id: f.admission.rate_version_id,
     skill_bundle_hash: bundleHash, qc_policy_version: options.generation?GENERATED_QC_POLICY:PHOTO_QC_POLICY, max_turns_per_role: 2, max_input_tokens: 80000, max_output_tokens: 8000, max_tool_calls: 24, agent_cost_ceiling_micro: 1000000 };

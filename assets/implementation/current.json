@@ -3,11 +3,11 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-30T03:41:50.255Z",
+  "checked_at": "2026-10-30T04:18:28.247227+00:00",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "verification_mode": "FOCUSED_DELIVERY",
+  "verification_mode": "FOCUSED_COMMUNITY_COMMERCIAL_CLOSURE",
   "retained_integration": null,
   "command_checks_passed": false,
   "commands": [
@@ -23,8 +23,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 8029,
-      "log_path": "runtime/delivery-builds/2026-10-30T03-41-35-360Z-aad06a60/typecheck.log",
+      "elapsed_ms": 10335,
+      "log_path": "runtime/delivery-builds/2026-10-30T04-14-11-228Z-6ab31175/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -40,34 +40,34 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 1082,
-      "log_path": "runtime/delivery-builds/2026-10-30T03-41-35-360Z-aad06a60/server.log",
+      "elapsed_ms": 831,
+      "log_path": "runtime/delivery-builds/2026-10-30T04-14-11-228Z-6ab31175/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T03-41-35-360Z-aad06a60\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T04-14-11-228Z-6ab31175\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T03-41-35-360Z-aad06a60\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T04-14-11-228Z-6ab31175\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 5036,
-      "log_path": "runtime/delivery-builds/2026-10-30T03-41-35-360Z-aad06a60/preview.log",
-      "log_sha256": "48ad8cdbb2bf9a7d7d229787ce2a37e3f15d4c5da9c91a70b8a54e8e026a30d3"
+      "elapsed_ms": 9636,
+      "log_path": "runtime/delivery-builds/2026-10-30T04-14-11-228Z-6ab31175/preview.log",
+      "log_sha256": "30123cbc57304ce6b7343dde0748d8bc56d745f20cd894465064d4c118677838"
     }
   ],
   "suites": [],
-  "source_files": 426,
-  "source_set_hash": "e7a80120958ea9cc601ec785f82bb1512ddd0df62edb9e6db6d07d85fab8635f",
+  "source_files": 430,
+  "source_set_hash": "71c658d6b0c0773f5f927141e21ce0e60bab46d8bab3074f8c8be8463510cb97",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -210,6 +210,10 @@
       "sha256": "7c6b6387aa5594c52caacccc9a6de8349e8f591a8640e80bce7741eafd050eb4"
     },
     {
+      "path": "src/api/db/migrations/031_community_commercial.sql",
+      "sha256": "7bcec1ac3d9e50391918d7aab1d66794146e9a8d2bdeb5e7e7783b05e400bb4a"
+    },
+    {
       "path": "src/api/db/pool.ts",
       "sha256": "81dff3e39d44a521e3a3cfafe6d7b734cfb477f5cd33926c14694c0364777850"
     },
@@ -259,7 +263,11 @@
     },
     {
       "path": "src/api/modules/commerce.ts",
-      "sha256": "abef438f4764fe291d8e42955b299b39cb98c6f7c81a496ab8c82ca75b2dcb14"
+      "sha256": "8d372039f6af0c20addb9cceec0ddd92f250c3418f39c3ae24839dff822d83c9"
+    },
+    {
+      "path": "src/api/modules/community-commercial.ts",
+      "sha256": "536ab414628b2b1b80c8d6de4e41a35c323cb3f5f05b48e9d6e5eab208a53f67"
     },
     {
       "path": "src/api/modules/community.ts",
@@ -287,7 +295,7 @@
     },
     {
       "path": "src/api/modules/plans.ts",
-      "sha256": "78131c78e65323d6935a503955cf2607ecd4e83617528fc9ed6b4812c4d1c00c"
+      "sha256": "d95af6bb058b37e513095c0b569e09c1d5f8cfdfd6eea7a0d89f63c24589c7c8"
     },
     {
       "path": "src/api/modules/previews.ts",
@@ -331,7 +339,7 @@
     },
     {
       "path": "src/api/routes/management.ts",
-      "sha256": "d32e77491ca06fd4673332b5cc9f68d2cad1d2515c393b787bb759d255daabc6"
+      "sha256": "60fd067a3144d926e8179e9214d480cfabe94d394e928ae61f89e0dfff6d8d55"
     },
     {
       "path": "src/api/routes/payments.ts",
@@ -787,11 +795,11 @@
     },
     {
       "path": "src/worker/codex/media-stage.ts",
-      "sha256": "3b9105a2757c63398850ca0f1cf8c17598f129efb83b2c8f02cc4f2a9a3268f6"
+      "sha256": "132daf446fd140f3f33851d5ec6cc96a314d9903cf6ed1fcb9227878690c433a"
     },
     {
       "path": "src/worker/codex/planning.ts",
-      "sha256": "a2aa07b97e2bbbd84919e730c520a14d9619e4692a23e1bf4c058e4753320e7d"
+      "sha256": "a7f6240d54b985905990b44f46f9c4c387e319cccd83e1afa9473cf7beae8fb3"
     },
     {
       "path": "src/worker/codex/review-images.ts",
@@ -807,7 +815,7 @@
     },
     {
       "path": "src/worker/codex/skills.ts",
-      "sha256": "d9777c90c7a0b6515bbf18743dbd736919db99807234bea10586e189327d35f3"
+      "sha256": "8e95bb4e2617f10e4fa7c2b3ada0794459b284f1d8ac72d017ecbeac1cea3403"
     },
     {
       "path": "src/worker/compiler/disclosure.ts",
@@ -847,7 +855,7 @@
     },
     {
       "path": "src/worker/generation/prepare.ts",
-      "sha256": "915549cb6253336752b31172df37204527959b3e192a7dcf7f777125b0e0d6b5"
+      "sha256": "af8d4001e97e9805ddfd265d83253125c8726e61506753ca5e8c64f8f552d787"
     },
     {
       "path": "src/worker/generation/reference-approval.ts",
@@ -863,7 +871,7 @@
     },
     {
       "path": "src/worker/generation/reference-service.ts",
-      "sha256": "c04cc1f7e1f4211106eb8a5ce5d3293ad0545bc83c9cf639c1bd39167ffd2f19"
+      "sha256": "46206fb8df39115f812e054ba1481c0a15ebb5a50d1cd9e8f2901a14a3d04aaa"
     },
     {
       "path": "src/worker/generation/requests.ts",
@@ -1043,7 +1051,7 @@
     },
     {
       "path": "src/worker/repair/planning.ts",
-      "sha256": "08b26b9ada7da127bc548db5010b5276b0acb6557eea052107b9c511d93acd42"
+      "sha256": "87a20074c7f85303569b06359d0a55cf1022ef9120e2e34dc185c0c452a134ba"
     },
     {
       "path": "src/worker/repair/targets.ts",
@@ -1083,7 +1091,7 @@
     },
     {
       "path": "src/worker/review/stage.ts",
-      "sha256": "6dddafc3b1ea8147a681a8d0002fd8a0c95328cf3d40e7f35c7f058462633885"
+      "sha256": "7448e4a3e4b07ce6ee13b4e10637f6a05df7a9560a90b4c4230c43fef406ebb4"
     },
     {
       "path": "src/worker/revisions/audio.ts",
@@ -1099,7 +1107,7 @@
     },
     {
       "path": "src/worker/revisions/contract.ts",
-      "sha256": "92e659a37340bab439002987bb3fc87bff5aa72d49ffb66a4f0f65c03ff8fb0b"
+      "sha256": "2977cadd055d3afb9e29eae654697f2e5b2baa51b70889bc26d409b8f051204f"
     },
     {
       "path": "src/worker/revisions/image-text.ts",
@@ -1251,7 +1259,7 @@
     },
     {
       "path": "tests/helpers/media.ts",
-      "sha256": "5dfefecdbe7dc9db928dc4d7c98f5ce9dbf5c7d6a5fc85ff523927ecbe5f9c62"
+      "sha256": "48b4225b447a5b3ef2e0a20ad0628eab907d57abb10d09947419383201249497"
     },
     {
       "path": "tests/helpers/native-order.ts",
@@ -1312,6 +1320,10 @@
     {
       "path": "tests/integration/codex-planning.test.ts",
       "sha256": "efca4c207a4f679c606e11bfe74364622315e4c14eb2d5e0e6a1ec3f9c42a106"
+    },
+    {
+      "path": "tests/integration/community-commercial.test.ts",
+      "sha256": "d49e4b4f67e198a208f95b9427c5460a8a050eea3b180206fb25f799231c9d5c"
     },
     {
       "path": "tests/integration/community.test.ts",
@@ -1634,6 +1646,10 @@
       "sha256": "b0e361a202514e7a97a123d3b24f7cf8e4a1a5e510035b0f5c74139fbd01413a"
     },
     {
+      "path": "scripts/community-commercial.ts",
+      "sha256": "eb6ab334d184d302722051af9fa961423652f6eece91e3d7ff108888925bd385"
+    },
+    {
       "path": "scripts/delivery/build.ts",
       "sha256": "f8c9e30e556d809e8d68acb046e6260293f9f3e91fce601a7ee82dc1e482aa78"
     },
@@ -1751,7 +1767,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "63b9624a385b28f30a86409e4b4a385729e5afad41274a9682414487ca7846e5"
+      "sha256": "be8ae86745e7f3f647efedf897c096e9fabbd510103f69fc53cd9d1f59a4e4b9"
     },
     {
       "path": "pnpm-lock.yaml",
@@ -2631,8 +2647,20 @@
     "private_and_public_copies_separate": true,
     "migration": 30,
     "source": "docs/verification/generated-sample-source.json",
-    "representative_fixture_verified": true,
+    "representative_fixture_verified": false,
     "live_external_or_production_verified": false,
     "full_requirement_verified": false
+  },
+  "community_commercial": {
+    "source_implemented": true,
+    "fixture_verified": true,
+    "evidence": "docs/verification/community-commerce-source.json",
+    "native_migrations": 31,
+    "operator_freeze_once": true,
+    "sale_enabled": false,
+    "production_admitted": false,
+    "buyer_photo_layout_full_chain_fixture_verified": true,
+    "generated_order_regression_cases": 2,
+    "community_generated_sale_admission_verified": false
   }
 }

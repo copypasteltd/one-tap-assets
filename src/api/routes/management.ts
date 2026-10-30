@@ -132,6 +132,8 @@ const handlers: Record<string, (c: Context) => Promise<unknown>> = {
     const row = await getVariant(c.db, c.params.variant_id!, c.params.version!, true);
     requireThat(row.revision === request.expected_revision, 'REVISION_CONFLICT', '准入记录已更新');
     if (request.action === 'ADMIT') {
+      if(row.private.source.community_binding){const commercial=row.private.commercial_binding as {source_hash?:string}|undefined;
+        requireThat(commercial?.source_hash===hash(row.private.source),'COMMERCIAL_CONFIGURATION_REQUIRED','社区规格须先由平台冻结商业配置，再独立完成准入',422);}
       const evidence = (await c.db.query<{ passed: boolean; variant_version_id: string; data: { full_pack_runs: number; includes_failures: boolean; critical_negative_misses: number; device_groups_passed: number; codex_fault_cases: number; signed_verified: boolean } }>('SELECT * FROM admission_evidence WHERE id=$1 AND kind=$2', [request.evidence_set_id, 'FULL_ADMISSION_SET'])).rows[0];
       requireThat(evidence?.variant_version_id === row.id && evidence.passed && evidence.data.signed_verified && evidence.data.full_pack_runs >= 30 && evidence.data.includes_failures && evidence.data.critical_negative_misses === 0 && evidence.data.device_groups_passed === 4 && evidence.data.codex_fault_cases >= 40, 'ADMISSION_EVIDENCE_INSUFFICIENT', '缺少完整实测、真机、隔离与成本准入证据', 422);
       requireThat(row.data.price_fen !== null && row.private.codex_contract && row.private.model_version_ids?.length, 'ADMISSION_CONFIGURATION_INCOMPLETE', '价格、模型和Codex合同尚未完成冻结', 422);

@@ -1,0 +1,74 @@
+{
+  "numTotalTestSuites": 1,
+  "numPassedTestSuites": 0,
+  "numFailedTestSuites": 1,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 3,
+  "numPassedTests": 1,
+  "numFailedTests": 1,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793333398091,
+  "success": false,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "resolves only the compiled trusted style and rejects hash, engine and arbitrary-ID substitutions",
+          "status": "passed",
+          "title": "resolves only the compiled trusted style and rejects hash, engine and arbitrary-ID substitutions",
+          "duration": 12.73859999999695,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "requires admitted costs and active license, freezes once without admitting or selling, and protects database configuration",
+          "status": "failed",
+          "title": "requires admitted costs and active license, freezes once without admitting or selling, and protects database configuration",
+          "duration": 6.116300000008778,
+          "failureMessages": [
+            "error: new row for relation \"community_licenses\" violates check constraint \"community_licenses_check\"\n    at E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\.pnpm\\pg-pool@3.14.0_pg@8.23.1\\node_modules\\pg-pool\\index.js:45:11\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/community-commercial.test.ts:82:3\n    at async file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/node_modules/.pnpm/vitest@5.0.5_@types+node@24_074c366c144b624165a2ee5270d15630/node_modules/vitest/dist/chunks/run.BPv-BBRv.js:2801:20"
+          ],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "runs community buyer planning, frozen quote/checkout, original payment, native media and two fresh reviews through private delivery",
+          "status": "pending",
+          "title": "runs community buyer planning, frozen quote/checkout, original payment, native media and two fresh reviews through private delivery",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793333488865,
+      "endTime": 1793333488884.1162,
+      "status": "failed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/community-commercial.test.ts"
+    }
+  ]
+}

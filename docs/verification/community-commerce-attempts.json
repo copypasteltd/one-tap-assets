@@ -1,0 +1,205 @@
+{
+  "checked_at": "2026-10-30T04:18:28.247227+00:00",
+  "attempts": [
+    {
+      "base": "runtime/test-results/community-commerce-2026-10-30T04-07-14-167Z",
+      "source_set_hash": "96ce6ffb6844fbef42583e523c0edd1a925f099103d68fc9d7ff50cfbbaf9dc8",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "typecheck",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+            "--noEmit"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 2,
+          "signal": null,
+          "timeout_ms": 120000,
+          "elapsed_ms": 105124,
+          "log_path": "runtime/test-results/community-commerce-2026-10-30T04-07-14-167Z/type.log",
+          "log_sha256": "140389173c29f419feeef459e65015261b458b6f2f3ecacfd10e05dddc12a46e"
+        }
+      ],
+      "source_snapshot": "docs/verification/community-commerce-attempt-01-source.json"
+    },
+    {
+      "base": "runtime/test-results/community-commerce-2026-10-30T04-09-25-617Z",
+      "source_set_hash": "55ecd58a810acdd85dad3de7716a1dadbd7a4ef57fe44c10964c07d32d7166c3",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/community-commercial.test.ts --outputFile.json=runtime/test-results/community-commerce-2026-10-30T04-09-25-617Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/community-commercial.test.ts",
+            "--outputFile.json=runtime/test-results/community-commerce-2026-10-30T04-09-25-617Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 660000,
+          "elapsed_ms": 123628,
+          "log_path": "runtime/test-results/community-commerce-2026-10-30T04-09-25-617Z/api.log",
+          "log_sha256": "d6018c59c3a63b981d2344d40eba59049120e26594d15a9c181310f7fb999a54"
+        }
+      ],
+      "source_snapshot": "docs/verification/community-commerce-attempt-02-source.json",
+      "api_report": "docs/verification/community-commerce-attempt-02-api.json",
+      "passed": 1,
+      "failed": 1,
+      "not_selected": 0
+    },
+    {
+      "base": "runtime/test-results/community-commerce-2026-10-30T04-12-12-845Z",
+      "source_set_hash": "56736780b04d0478b50207d1a26119637f6e0cf10a40e4dc9bf6d64585c2f842",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/community-commercial.test.ts --outputFile.json=runtime/test-results/community-commerce-2026-10-30T04-12-12-845Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/community-commercial.test.ts",
+            "--outputFile.json=runtime/test-results/community-commerce-2026-10-30T04-12-12-845Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 660000,
+          "elapsed_ms": 3817,
+          "log_path": "runtime/test-results/community-commerce-2026-10-30T04-12-12-845Z/api.log",
+          "log_sha256": "1e403940dfe878926736a31c001aeaf3087c061a4a72cb20da8cf204b0851bb3"
+        }
+      ],
+      "source_snapshot": "docs/verification/community-commerce-attempt-03-source.json",
+      "api_report": "docs/verification/community-commerce-attempt-03-api.json",
+      "passed": 1,
+      "failed": 1,
+      "not_selected": 0
+    },
+    {
+      "base": "runtime/test-results/community-commerce-2026-10-30T04-12-35-452Z",
+      "source_set_hash": "f4d8e77084e05c63962546354ee3ffb4cd04f57b3101bf676c9df8ff67eb070e",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/community-commercial.test.ts --outputFile.json=runtime/test-results/community-commerce-2026-10-30T04-12-35-452Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/community-commercial.test.ts",
+            "--outputFile.json=runtime/test-results/community-commerce-2026-10-30T04-12-35-452Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 660000,
+          "elapsed_ms": 3523,
+          "log_path": "runtime/test-results/community-commerce-2026-10-30T04-12-35-452Z/api.log",
+          "log_sha256": "0516f48a3cdc4d6a3f7fa03ba275523a8db0cf1c23ff2e6166d0f326cc09228a"
+        }
+      ],
+      "source_snapshot": "docs/verification/community-commerce-attempt-04-source.json",
+      "api_report": "docs/verification/community-commerce-attempt-04-api.json",
+      "passed": 1,
+      "failed": 1,
+      "not_selected": 0
+    },
+    {
+      "base": "runtime/test-results/community-commerce-2026-10-30T04-13-02-053Z",
+      "source_set_hash": "71c658d6b0c0773f5f927141e21ce0e60bab46d8bab3074f8c8be8463510cb97",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/community-commercial.test.ts --outputFile.json=runtime/test-results/community-commerce-2026-10-30T04-13-02-053Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/community-commercial.test.ts",
+            "--outputFile.json=runtime/test-results/community-commerce-2026-10-30T04-13-02-053Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 660000,
+          "elapsed_ms": 25264,
+          "log_path": "runtime/test-results/community-commerce-2026-10-30T04-13-02-053Z/api.log",
+          "log_sha256": "3331e6afe2e01a70062e60f31725a943ef4f22c22fcf54f7d5491aff3b87c00a"
+        }
+      ],
+      "source_snapshot": "docs/verification/community-commerce-attempt-05-source.json",
+      "api_report": "docs/verification/community-commerce-attempt-05-api.json",
+      "passed": 3,
+      "failed": 0,
+      "not_selected": 0
+    },
+    {
+      "base": "runtime/test-results/community-commerce-2026-10-30T04-14-11-226Z",
+      "source_set_hash": "71c658d6b0c0773f5f927141e21ce0e60bab46d8bab3074f8c8be8463510cb97",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/generated-production.test.ts -t delivers the actual silent --outputFile.json=runtime/test-results/community-commerce-2026-10-30T04-14-11-226Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/generated-production.test.ts",
+            "-t",
+            "delivers the actual silent",
+            "--outputFile.json=runtime/test-results/community-commerce-2026-10-30T04-14-11-226Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 660000,
+          "elapsed_ms": 122761,
+          "log_path": "runtime/test-results/community-commerce-2026-10-30T04-14-11-226Z/api.log",
+          "log_sha256": "3145f2cc8f45f9a86ef592b26c1810a0afe5730bda58ea061da85a8cb28aaabb"
+        }
+      ],
+      "source_snapshot": "docs/verification/community-commerce-attempt-06-source.json",
+      "api_report": "docs/verification/community-commerce-attempt-06-api.json",
+      "passed": 2,
+      "failed": 0,
+      "not_selected": 9
+    }
+  ],
+  "interrupted_invoker": {
+    "command": "node runtime/tmp/check-community-commerce.mjs type",
+    "status": "INTERRUPTED_NOT_A_PASS",
+    "source_snapshot": "docs/verification/community-commerce-interrupted-runner-source.json",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reason": "Stopped owned preliminary invocation before a completed report; reran with explicit tsx loader."
+  },
+  "failure_notes": [
+    "Initial compile found a test using the wrong download-link signature.",
+    "License fixtures first changed only JSON state and then tried to reactivate a retired license; the corrected probe rolls back the original transaction.",
+    "Commercial route guard initially rejected the existing optional-licensed-or-contract-silent policy; corrected to accept its silent route without buying music."
+  ],
+  "full_suite_executed": false,
+  "documentation_finalizer_note": "Final metadata write initially shadowed local_checks with a Markdown link path. Completed from the already verified proof; no application source or test result changed."
+}

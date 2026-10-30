@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T03:48:03.078566+00:00",
-  "strategy": "USER_REQUESTED_FAST_GENERATED_CREATOR_SAMPLE_CLOSURE",
-  "source_set_hash": "e7a80120958ea9cc601ec785f82bb1512ddd0df62edb9e6db6d07d85fab8635f",
-  "source_files": 426,
+  "checked_at": "2026-10-30T04:18:28.247227+00:00",
+  "strategy": "USER_REQUESTED_FAST_COMMUNITY_COMMERCIAL_CLOSURE",
+  "source_set_hash": "71c658d6b0c0773f5f927141e21ce0e60bab46d8bab3074f8c8be8463510cb97",
+  "source_files": 430,
   "runtime_contract_files": 42,
   "resource_files": 4,
   "build_report": "docs/delivery/current.json",
@@ -20,8 +20,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 8029,
-      "log_path": "runtime/delivery-builds/2026-10-30T03-41-35-360Z-aad06a60/typecheck.log",
+      "elapsed_ms": 10335,
+      "log_path": "runtime/delivery-builds/2026-10-30T04-14-11-228Z-6ab31175/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -37,29 +37,29 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 1082,
-      "log_path": "runtime/delivery-builds/2026-10-30T03-41-35-360Z-aad06a60/server.log",
+      "elapsed_ms": 831,
+      "log_path": "runtime/delivery-builds/2026-10-30T04-14-11-228Z-6ab31175/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T03-41-35-360Z-aad06a60\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T04-14-11-228Z-6ab31175\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T03-41-35-360Z-aad06a60\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T04-14-11-228Z-6ab31175\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 5036,
-      "log_path": "runtime/delivery-builds/2026-10-30T03-41-35-360Z-aad06a60/preview.log",
-      "log_sha256": "48ad8cdbb2bf9a7d7d229787ce2a37e3f15d4c5da9c91a70b8a54e8e026a30d3"
+      "elapsed_ms": 9636,
+      "log_path": "runtime/delivery-builds/2026-10-30T04-14-11-228Z-6ab31175/preview.log",
+      "log_sha256": "30123cbc57304ce6b7343dde0748d8bc56d745f20cd894465064d4c118677838"
     }
   ],
   "components": [
@@ -80,76 +80,65 @@
       "status": "NOT_RUN"
     }
   ],
-  "source_snapshot": "docs/verification/generated-sample-tested-source.json",
+  "source_snapshot": "docs/verification/community-commerce-tested-source.json",
   "source_unchanged_during_tests": true,
   "api_checks": {
     "status": "PASS",
-    "passed": 10,
+    "passed": 5,
     "main": {
-      "passed": 9,
-      "not_selected": 43,
-      "report": "docs/verification/generated-sample-api.json",
+      "passed": 3,
+      "report": "docs/verification/community-commerce-api.json",
       "command": {
         "task": "exec",
-        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts tests/integration/generation-gateway.test.ts -t produces actual full-spec|publishes the actually produced|without admitted model protocols|completes .* creator sample|retains an UNKNOWN sample|rejects insufficient frozen sample funds|refuses a reference-film video purchase|also refuses a per-shot video purchase --outputFile.json=runtime/test-results/generated-sample-2026-10-30T03-40-40-197Z/api.json",
+        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/community-commercial.test.ts --outputFile.json=runtime/test-results/community-commerce-2026-10-30T04-13-02-053Z/api.json",
         "argv": [
           "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
           "run",
           "--config",
           "vitest.integration.config.ts",
-          "tests/integration/sample-production.test.ts",
-          "tests/integration/generation-gateway.test.ts",
-          "-t",
-          "produces actual full-spec|publishes the actually produced|without admitted model protocols|completes .* creator sample|retains an UNKNOWN sample|rejects insufficient frozen sample funds|refuses a reference-film video purchase|also refuses a per-shot video purchase",
-          "--outputFile.json=runtime/test-results/generated-sample-2026-10-30T03-40-40-197Z/api.json"
+          "tests/integration/community-commercial.test.ts",
+          "--outputFile.json=runtime/test-results/community-commerce-2026-10-30T04-13-02-053Z/api.json"
         ],
         "shell": false,
         "status": "PASS",
         "exit_code": 0,
         "signal": null,
         "timeout_ms": 660000,
-        "elapsed_ms": 128723,
-        "log_path": "runtime/test-results/generated-sample-2026-10-30T03-40-40-197Z/api.log",
-        "log_sha256": "cd79e5c7e2ca0765dc64acb651428fa7d31c775f7ff36b5b26796fe6f42e5d69"
+        "elapsed_ms": 25264,
+        "log_path": "runtime/test-results/community-commerce-2026-10-30T04-13-02-053Z/api.log",
+        "log_sha256": "3331e6afe2e01a70062e60f31725a943ef4f22c22fcf54f7d5491aff3b87c00a"
       }
     },
     "order_regression": {
-      "passed": 1,
-      "not_selected": 34,
-      "report": "docs/verification/generated-sample-order-regression.json",
+      "passed": 2,
+      "not_selected": 9,
+      "report": "docs/verification/community-commerce-order-regression.json",
       "command": {
         "task": "exec",
-        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/generation-gateway.test.ts -t binds the original report and generated per-shot bytes --outputFile.json=runtime/test-results/generated-sample-2026-10-30T03-45-19-723Z/api.json",
+        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/generated-production.test.ts -t delivers the actual silent --outputFile.json=runtime/test-results/community-commerce-2026-10-30T04-14-11-226Z/api.json",
         "argv": [
           "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
           "run",
           "--config",
           "vitest.integration.config.ts",
-          "tests/integration/generation-gateway.test.ts",
+          "tests/integration/generated-production.test.ts",
           "-t",
-          "binds the original report and generated per-shot bytes",
-          "--outputFile.json=runtime/test-results/generated-sample-2026-10-30T03-45-19-723Z/api.json"
+          "delivers the actual silent",
+          "--outputFile.json=runtime/test-results/community-commerce-2026-10-30T04-14-11-226Z/api.json"
         ],
         "shell": false,
         "status": "PASS",
         "exit_code": 0,
         "signal": null,
         "timeout_ms": 660000,
-        "elapsed_ms": 20131,
-        "log_path": "runtime/test-results/generated-sample-2026-10-30T03-45-19-723Z/api.log",
-        "log_sha256": "48214cab347f3fc6f866547fef01f2f46407ed93bf0d0d578d0c533b57f0af76"
+        "elapsed_ms": 122761,
+        "log_path": "runtime/test-results/community-commerce-2026-10-30T04-14-11-226Z/api.log",
+        "log_sha256": "3145f2cc8f45f9a86ef592b26c1810a0afe5730bda58ea061da85a8cb28aaabb"
       }
     },
-    "engines": [
-      "PHOTO_LAYOUT",
-      "PER_SHOT_AI",
-      "REFERENCE_FILM"
-    ],
-    "per_shot_generated_video_segments": 2,
-    "per_shot_frames_checked": 60,
-    "reference_film_frames_checked": 30,
-    "private_download_and_independent_public_copy": true,
-    "synthetic_model_semantics_identity_and_usage": true
+    "synthetic_published_offer_admission_semantics_identity_and_usage": true,
+    "actual_native_pg_https_mcp_png_mp4": true,
+    "community_buyer_roles": 5
   },
   "current_unit_suite_executed": false,
   "fixture_bridge_matches_current_build": true,
@@ -159,11 +148,11 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 1.052,
+      "elapsed_seconds": 1.878,
       "log_path": "runtime/delivery/doctor-focused.log",
-      "log_sha256": "27486014701ca204a8a72f7a1226fe3e1eee62a74c34121bf94463f1bcdb1940",
+      "log_sha256": "cf30d5e2e6b8ddb90d2d36e4b3dadcbcbb53e29dfdbfa22ceedc3e475d594831",
       "report": {
-        "checked_at": "2026-10-30T03:43:38.747Z",
+        "checked_at": "2026-10-30T04:15:02.271Z",
         "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
         "rows": [
           {
@@ -189,7 +178,7 @@
           {
             "id": "database",
             "status": "PASS",
-            "detail": "connected; 30 migrations"
+            "detail": "connected; 31 migrations"
           },
           {
             "id": "ffmpeg",
@@ -255,9 +244,9 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 4.501,
+      "elapsed_seconds": 9.841,
       "log_path": "runtime/delivery/backend-focused.log",
-      "log_sha256": "ff96f81ac6a78ec2e2da9f807d226b2112be6d4f2c5a1ab78ffdc8ff52ab0ced",
+      "log_sha256": "34aba71ad3b5a06b6d87f6822a8594d85dd6e26adf1323545e91c711762875e2",
       "local_stack_ready": true,
       "preview_http_ready": false
     },
@@ -265,41 +254,17 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 0.812,
+      "elapsed_seconds": 1.986,
       "log_path": "runtime/delivery/preview-focused.log",
       "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
       "local_stack_ready": false,
       "preview_http_ready": true
     }
   },
-  "main_database_migrations": 30,
-  "attempts_report": "docs/verification/generated-sample-attempts.json",
-  "prior_delivery": {
-    "commit": "38eec3eb1529651a4fe6671d4917a364723db924",
-    "source_set_hash": "bc77e6cf3c2a93190613ff8971c5c018320734f9446e62175cd699a097d8e41d",
-    "evidence": "docs/verification/image-text-source.json",
-    "publication": "docs/verification/publication-38eec3e.json"
-  },
-  "functional_scope": {
-    "specification": "docs/实施/生成式社区样例与独立平台额度-v1.0.md",
-    "new_silent_generated_sample_routes": [
-      "PER_SHOT_AI",
-      "REFERENCE_FILM"
-    ],
-    "no_fabricated_order_or_payment": true,
-    "separate_sample_provider_scope": true,
-    "original_sample_total_cost_split_not_increased": true,
-    "shared_owner_daily_platform_account": true,
-    "reference_identity_before_video_purchase": true,
-    "fresh_final_facts_and_style_reviews": true,
-    "all_originals_references_and_final_media_in_review": true,
-    "all_generated_frames_visible_ai_label": true,
-    "unknown_original_intent_recovery": true,
-    "stopped_scope_financial_receipt_recovery": true,
-    "migration": 30,
-    "historical_samples_not_upgraded": true,
-    "original_order_limits_unchanged": true
-  },
+  "main_database_migrations": 31,
+  "attempts_report": "docs/verification/community-commerce-attempts.json",
+  "prior_delivery": "docs/verification/delivery-focused-source-40c42dd.json",
+  "functional_scope": "docs/实施/社区商业配置与可信风格执行-v1.0.md",
   "historical_evidence_unchanged": [
     {
       "path": "docs/verification/album-save-api.json",
@@ -384,6 +349,10 @@
     {
       "path": "docs/verification/delivery-focused-source-191b9eb.json",
       "sha256": "8bec94822d9f0a977689011f6ea2eab6cca036a09d06eeb341cba5258d31d847"
+    },
+    {
+      "path": "docs/verification/delivery-focused-source-38eec3e.json",
+      "sha256": "0b4f8f6318626c3f8eadafaa0c789ba679b2add43437b2f2f88de049a192ab01"
     },
     {
       "path": "docs/verification/delivery-focused-source-42dc446.json",
@@ -480,6 +449,78 @@
     {
       "path": "docs/verification/generated-repair-tests.json",
       "sha256": "a446104bb54334cc347ca1684277096608793cb5dd2685c358d837d7e70c7c1b"
+    },
+    {
+      "path": "docs/verification/generated-sample-api.json",
+      "sha256": "09e28cde3883f7f467f512ef51e50e312b8fe6e6a176eaa432c5c539a9077cb7"
+    },
+    {
+      "path": "docs/verification/generated-sample-attempt-1-source.json",
+      "sha256": "7a46e4c7205de92f1373af9a3221802563e7a77ad728dcdf6248bc5416bfa435"
+    },
+    {
+      "path": "docs/verification/generated-sample-attempt-2-source.json",
+      "sha256": "6b3a5f954b29cd677ffe61d3e4ea58efc8ea68adc76a4127ed666a0701615942"
+    },
+    {
+      "path": "docs/verification/generated-sample-attempt-3-api.json",
+      "sha256": "efb23194756b0b894140c8ec8ec3350a51007eccdaef23bcd7b4b2157639d76e"
+    },
+    {
+      "path": "docs/verification/generated-sample-attempt-3-source.json",
+      "sha256": "1cbc6cebb5796759f281b96943a1b3fb7c5155077113fd448d1947d1108b354c"
+    },
+    {
+      "path": "docs/verification/generated-sample-attempt-4-api.json",
+      "sha256": "906f9b398c853b2795d9d260a1d1e3fc330c11f7306ce700bf9c02aebd62e3cc"
+    },
+    {
+      "path": "docs/verification/generated-sample-attempt-4-source.json",
+      "sha256": "f4a5410ce79ea53893580242e4d8d50885c4f7ae89cd72de085acb4a7f16c0c7"
+    },
+    {
+      "path": "docs/verification/generated-sample-attempt-5-api.json",
+      "sha256": "54d8f68faf8a912b1ed823e10a1441d1474c60c5122644172cce090a28a34c9c"
+    },
+    {
+      "path": "docs/verification/generated-sample-attempt-5-source.json",
+      "sha256": "6f72b01cdd63651462db2e385740060f7c82f24b7a9a52fa9441b15e2cffe260"
+    },
+    {
+      "path": "docs/verification/generated-sample-attempt-6-api.json",
+      "sha256": "09e28cde3883f7f467f512ef51e50e312b8fe6e6a176eaa432c5c539a9077cb7"
+    },
+    {
+      "path": "docs/verification/generated-sample-attempt-6-source.json",
+      "sha256": "8c3991482179114275cd7a3a87b9f7479115b33792e9fbcc286a09fdd6e43355"
+    },
+    {
+      "path": "docs/verification/generated-sample-attempt-7-api.json",
+      "sha256": "88c799f4f55d7994d8e36107640efc5d52971a6f5e1e693919fb5a800f1b092e"
+    },
+    {
+      "path": "docs/verification/generated-sample-attempt-7-source.json",
+      "sha256": "8c3991482179114275cd7a3a87b9f7479115b33792e9fbcc286a09fdd6e43355"
+    },
+    {
+      "path": "docs/verification/generated-sample-attempts.json",
+      "sha256": "9735f4cd751b13fa753831398d5de0cfbd063f1ccd563e579281aedcbfc5953f"
+    },
+    {
+      "path": "docs/verification/generated-sample-invoker-diagnostic-source.json",
+      "sha256": "7a46e4c7205de92f1373af9a3221802563e7a77ad728dcdf6248bc5416bfa435"
+    },
+    {
+      "path": "docs/verification/generated-sample-order-regression.json",
+      "sha256": "88c799f4f55d7994d8e36107640efc5d52971a6f5e1e693919fb5a800f1b092e"
+    },
+    {
+      "path": "docs/verification/generated-sample-source.json",
+      "sha256": "c9076a5e0df05d6a6d243b6486b2f32254e36c214b6e3bc232b62533f34e4dcf"
+    },
+    {
+      "path": "docs/verification/generated-sample-tested-source.json",
+      "sha256": "8c3991482179114275cd7a3a87b9f7479115b33792e9fbcc286a09fdd6e43355"
     },
     {
       "path": "docs/verification/image-text-api.json",
@@ -730,6 +771,10 @@
       "sha256": "1d700bdc425f36cd1097125983587f97a052a97eb116ddb1333c4efc6e3b4a7a"
     },
     {
+      "path": "docs/verification/publication-38eec3e.json",
+      "sha256": "f9e074e061b81f4e016c8806cc429439819f860826c1459d0ef1e85ed559e808"
+    },
+    {
       "path": "docs/verification/publication-42dc446.json",
       "sha256": "46a9315922055538c33a9035bdb42602df58b59643b44e0ae6560b49b3225223"
     },
@@ -804,6 +849,10 @@
     {
       "path": "docs/verification/repository-audit-3533cb4.json",
       "sha256": "4b1d118c78885a2a0fd1386a967aba342c71e4d34d1cde07d6c0833c0568064c"
+    },
+    {
+      "path": "docs/verification/repository-audit-38eec3e.json",
+      "sha256": "14993c277ec28c25acb2a09366aa6c9a83d425b125aadeb4015e39bc1adfb1c8"
     },
     {
       "path": "docs/verification/repository-audit-42dc446.json",
@@ -980,11 +1029,10 @@
   "production_admitted": false,
   "cloud_deployed": false,
   "limitations": [
-    "Representative cases use short synthetic source videos and model semantics, identities and usage. Actual PostgreSQL, HTTPS/MCP, PNG/MP4, private/public objects and platform ledgers are exercised.",
-    "Generated creator samples support silent routes and the platform font only. Native speech, music and external author resources remain unsupported without their own execution and rights admission.",
-    "No current unit/full suite, fresh mini builds or new browser capture. All existing 93 media and C design baseline are preserved.",
-    "The native local stack starts with external Codex, generation, payment and community publishing OFF. Startup readiness does not admit production stage handlers or real transactions.",
-    "Real providers/rates/payment/OSS, restricted native identities, devices, 10 styles/14 variants at actual durations, community commerce, Plus and cloud/full 58-requirement acceptance remain incomplete."
+    "Community commercial test seeds explicit publication and independent admission fixtures; this is not live community approval or a real payment.",
+    "Original generated pack regression uses synthetic provider/model semantics/usage and same-user launcher identities with actual native media.",
+    "All live services stay disabled; native device builds, full/unit suites and new browser recording were not run.",
+    "Live providers, restricted identities/cleanup, payments, device and complete community admission, external-resource/audio samples, Plus and cloud remain pending."
   ],
-  "canonical_generated_sample_provenance": "docs/verification/generated-sample-source.json"
+  "canonical_community_commerce_provenance": "docs/verification/community-commerce-source.json"
 }

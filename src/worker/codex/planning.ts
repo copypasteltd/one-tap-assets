@@ -1,3 +1,4 @@
+import { bundleForSource } from './skills.js';
 import type pg from 'pg';
 import type { Config } from '../../api/config.js';
 import type { DTO } from '../../shared/contracts/types.js';
@@ -48,7 +49,8 @@ export class ContentPlanningService {
         .map(v => ({ character_version_id: v.id, native_voice_ids: v.data.native_voice_ids }));
       if (context.source.audio_policy.speech !== 'none') requireThat(voices.some(v => Array.isArray(v.native_voice_ids) && v.native_voice_ids.length > 0),
         'CHARACTER_VOICE_NOT_ADMITTED', '该口播规格尚未配置可用的人物与中文原声', 503);
-      completed = await this.executor.execute({ lease, role: 'CONTENT', variantId: context.source.variant_id,
+      const skill = await bundleForSource(this.cfg, context.source, row.private.bundle_hash);
+      completed = await this.executor.execute({ lease, role: 'CONTENT', variantId: skill.payload.variant_id,
         bundleHash: row.private.bundle_hash, admission, limits: row.private.inference_limits,
         allowedTools: ['analyze_photos', 'validate_content_plan', 'persist_stage_result'], outputSchema: creativePlanSchema,
         input: { task: '基于已核验商品证据和风格 Skill，编排完整素材包。先用 analyze_photos 读取真实视觉档案，再验证并持久化计划。不得添加未知的材质、容量、价格和功效。',

@@ -1,5 +1,11 @@
 # One Tap Assets · 一品成片
 
+This delivery connects [community commercial preparation and trusted style execution](docs/实施/社区商业配置与可信风格执行-v1.0.md). An operator freezes the admitted blueprint price, models and original cost limits once; published community IDs select their frozen trusted style for buyer planning, production, fresh reviews and limited revisions. Preparation never inherits admission or enables sales. Paid orders keep their original snapshot when new sales stop.
+
+Five focused checks pass: three community cases and two generated-order regressions (nine not selected). Typecheck, server/preview builds, local setup and native startup pass; database migration 31. 430 source / 42 contract / 4 resource files, `71c658d6`. Full/unit suites, fresh mini-program builds and browser recording were not run; existing 93 media files and frozen C artwork stay unchanged. [Exact evidence](docs/verification/community-commerce-source.json) · [Build](docs/delivery/current.json) · [Package](docs/delivery/package.json). Live services, devices, full community admission, Plus and cloud remain pending; every preset stays unavailable for sale.
+
+以下内容保留其历史来源，当前状态以上述记录为准。
+
 This delivery connects [silent generated creator samples](docs/实施/生成式社区样例与独立平台额度-v1.0.md): per-shot generation and reference-film generation, independent reference identity review before video purchase, actual post-production and fresh final facts/style reviews, private downloads and separately authorized public copies. Samples use platform funds and create no buyer order; original budgets, quotas, deadlines and UNKNOWN recovery stay fixed.
 
 Ten focused checks pass (nine main cases plus one original-order regression), together with typecheck, server/web builds, native startup and setup checks. Database migration 30; 426 source / 42 contract / 4 resource files, `e7a80120`. Full/unit suites, fresh Alipay/Douyin builds and new browser capture were not run. Existing 93 media files and frozen C artwork remain byte-identical. [Exact evidence](docs/verification/generated-sample-source.json) · [Current build](docs/delivery/current.json) · [Delivery package](docs/delivery/package.json). Live services, devices and cloud deployment remain pending; every preset remains unavailable for sale.

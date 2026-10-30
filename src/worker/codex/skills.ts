@@ -7,6 +7,7 @@ import { sha256 } from '../../api/lib/crypto.js';
 import { canonicalize } from '../../shared/domain/json.js';
 import { requireThat } from '../../api/lib/errors.js';
 import type { AgentRole } from '../tool-gateway/policy.js';
+import type { VariantSource } from '../../api/modules/catalog.js';
 interface SkillRef { name: string; version: string; sha256: string }
 export interface SkillBundle { bundle_id: string; version: string; sha256: string; payload: { preset_id: string; variant_id: string; engine: string; roles: Record<AgentRole, SkillRef[]> } }
 interface Registry { skills: (SkillRef & { path: string })[]; bundles: SkillBundle[] }
@@ -20,6 +21,25 @@ export async function bundleForHash(cfg: Config, bundleHash: string): Promise<Sk
   const registry = JSON.parse(await readFile(inside(cfg.projectRoot, 'assets/skills/ypcc/v1.0/registry.json'), 'utf8')) as Registry;
   const bundle = registry.bundles.find(b => b.sha256 === bundleHash);
   requireThat(bundle && sha256(canonicalize(bundle.payload)) === bundle.sha256, 'SKILL_BUNDLE_MISSING', '冻结的可信 Skill 组合缺失或摘要不一致', 503);
+  return bundle;
+}
+/** Community IDs identify a published offer. Only the platform-compiled,
+ * frozen source may select an existing trusted style bundle; authors cannot
+ * supply executable skills or turn a bundle hash into an authority grant. */
+export async function bundleForSource(cfg: Config, source: VariantSource, expectedHash = source.skill_bundle.hash): Promise<SkillBundle> {
+  const bundle = await bundleForHash(cfg, expectedHash);
+  const binding = source.community_binding as { config_hash?: string; blueprint_version_id?: string; blueprint_source_hash?: string;
+    style_component_id?: string; style_component_hash?: string; component_versions?: string[] } | undefined;
+  const compiled = binding && /^[a-f0-9]{64}$/.test(binding.config_hash ?? '')
+    && /^[a-f0-9]{64}$/.test(binding.blueprint_source_hash ?? '') && typeof binding.blueprint_version_id === 'string'
+    && binding.blueprint_version_id.length > 0 && /^[a-f0-9]{64}$/.test(binding.style_component_hash ?? '')
+    && binding.style_component_id === `style.${bundle.payload.preset_id}.1`
+    && binding.component_versions?.includes(binding.style_component_id)
+    && source.creative_components.platform_style_id === bundle.payload.preset_id;
+  requireThat(source.skill_bundle.hash === bundle.sha256 && source.skill_bundle.id === bundle.bundle_id
+    && source.skill_bundle.version === bundle.version && source.engine === bundle.payload.engine
+    && (binding ? compiled : source.variant_id === bundle.payload.variant_id),
+    'SKILL_SOURCE_BINDING_INVALID', '冻结方案与可信风格 Skill 绑定不一致', 503);
   return bundle;
 }
 export async function prewarmSkills(cfg: Config): Promise<{ bundles: number; skills: number }> {

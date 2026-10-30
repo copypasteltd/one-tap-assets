@@ -11,6 +11,7 @@
     "contracts": "tsx scripts/generate-types.ts",
     "db:migrate": "tsx scripts/migrate.ts",
     "db:seed": "tsx scripts/seed.ts",
+    "community:prepare": "node --env-file=.env.local --import tsx scripts/community-commercial.ts",
     "dev:api": "tsx watch src/api/main.ts",
     "dev:worker": "tsx watch src/worker/main.ts",
     "dev:reaper": "tsx watch src/worker/lifecycle/reaper-main.ts",

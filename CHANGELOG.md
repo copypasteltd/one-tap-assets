@@ -1,5 +1,15 @@
 # 更新记录 / Changelog
 
+2026-10-30 — 社区商业配置与可信风格执行 / Community commercial preparation and trusted style execution
+
+本轮接通[社区商业配置与可信风格执行](docs/实施/社区商业配置与可信风格执行-v1.0.md)：平台从已准入蓝本一次性冻结价格、模型与费用；社区新编号正确绑定可信风格 Skill，买家规划、制作、复核和受限修改使用同一冻结配置。配置不继承准入或开售状态，已付款订单不受新销售停售影响。
+
+5项定向检查通过（社区商业3、两生成订单回归2/9未选）；类型/server/preview/自检/本地启动PASS，主库31迁移。430源码/42契约/4资源，`71c658d6`。全量、单元全套、双小程序重编及复录NOT_RUN；原93媒体和C原件保留。[准确证据](docs/verification/community-commerce-source.json) · [当前构建](docs/delivery/current.json) · [交付包](docs/delivery/package.json)。真实服务/真机/完整社区准入/Plus/云端待完成，所有方案仍禁售。
+
+平台操作：`pnpm community:prepare <variant-id> <version> <expected-revision> <operator> <reason>`。配置读取本地环境文件，包含乐观修订号和不可变保护；完整准入和开售继续独立进行。 / Operator preparation loads the local environment, checks the expected revision and freezes configuration once. Admission and sale remain separate.
+
+以下内容保留其历史来源，当前状态以上述记录为准。
+
 2026-10-30 — Generated creator sample closure / 生成式社区样例收口
 
 本轮接通[生成式社区样例与独立平台额度](docs/实施/生成式社区样例与独立平台额度-v1.0.md)：作者可选逐镜头生成或参考整片的无声样例，经参考身份核验、实际制作/后期和全新双复核，再私有下载并申请独立公开副本。样例使用平台额度，不创建买家订单；原预算/次数/截止及 UNKNOWN 处理保持。

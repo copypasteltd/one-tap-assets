@@ -1,3 +1,4 @@
+import { bundleForSource } from '../codex/skills.js';
 import type pg from 'pg';
 import type { Config } from '../../api/config.js';
 import { hash } from '../../api/lib/crypto.js';
@@ -56,7 +57,8 @@ export class ReviewStageService {
       completed = { runId: prior.id, instanceId: prior.instance_id, result: prior.private.stage_result, resultHash: prior.output_hash };
     } else {
       const store = storage(this.cfg); const images = await packetImages(this.pool, store, context, packet);
-      completed = await this.executor.execute({ lease, role: lease.stage_name, variantId: context.snapshot.variant_id, bundleHash: cc.skill_bundle_hash,
+      const skill = await bundleForSource(this.cfg, context.contract.source, cc.skill_bundle_hash);
+      completed = await this.executor.execute({ lease, role: lease.stage_name, variantId: skill.payload.variant_id, bundleHash: cc.skill_bundle_hash,
         admission, limits: binding.limits, maxToolCalls: cc.max_tool_calls, maxScopeToolCalls: cc.max_tool_calls,
         allowedTools: ['extract_review_evidence', 'persist_stage_result'], outputSchema: reviewReportSchema,
         review: { packetHash: packet.packet_hash, images,...(nativeListening?{native_listening:nativeListening}:{}) },

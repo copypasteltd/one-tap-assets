@@ -9,7 +9,7 @@ import { basePlan } from '../../worker/compiler/plan.js';
 import { enqueueStage } from '../../worker/queue/enqueue.js';
 import { DEADLINES, POLICIES } from '../../shared/domain/policies.js';
 import { codexAdmission } from '../../worker/codex/admission.js';
-import { bundleForVariant } from '../../worker/codex/skills.js';
+import { bundleForSource } from '../../worker/codex/skills.js';
 import { lockMediaOwner } from './media-access.js';
 import { previewPlan, PREVIEW_RENDERER_VERSION, type PreviewInput } from './previews.js';
 import { bindProductionFont, loadProductionFont, verifyResourceLicenses } from '../../worker/media/font.js';
@@ -38,7 +38,7 @@ export async function createPlan(db: Db, cfg: Config, p: Principal, request: DTO
   const input = await checkInput(db, p, { product_id: request.product_id, profile_id: request.profile_id, variant_id: request.variant_id, variant_version: request.variant_version });
   requireThat(input.eligible, 'INPUT_INSUFFICIENT', input.capture_guidance.join(' ') || '当前输入不满足该方案', 422);
   requireThat(cfg.codex.enabled, 'CODEX_NOT_CONFIGURED', '内容规划服务尚未配置', 503);
-  const runtimeAdmission = await codexAdmission(cfg); const bundle = await bundleForVariant(cfg, request.variant_id);
+  const runtimeAdmission = await codexAdmission(cfg); const bundle = await bundleForSource(cfg, variant.private.source);
   const inferenceLimits = { max_requests: cfg.codex.maxTurns, max_input_tokens: cfg.codex.maxInputTokens,
     max_output_tokens: cfg.codex.maxOutputTokens, ceiling_micro: cfg.codex.costCeilingMicro,
     daily_ceiling_micro: cfg.codex.dailyBudgetMicro, owner_id: p.userId };
