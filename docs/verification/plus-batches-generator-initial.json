@@ -1,0 +1,6 @@
+{
+  "status": "FAIL",
+  "stage": "EXACT_CATALOG_COMPARISON",
+  "reason": "Runtime JSON and data model matched, but directly regenerated catalog had one missing blank line and one extra terminal blank line. Replaced it with the redirected full-generator output.",
+  "historical_evidence_modified": false
+}

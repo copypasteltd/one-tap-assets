@@ -1,0 +1,13 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/integration/plus-batches.test.ts (4 tests) 33498ms
+   ✓ requires explicit phone permission, rejects duplicate selection and isolates a stale third product 883ms
+   ✓ delivers one paid product through actual PNG and both reviews while its sibling remains independently unpaid 20828ms
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  22:26:23
+   Duration  69.53s (tests 49%, import 27%, transform 24%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/plus-batches-2026-10-30T14-26-12-076Z-357c6206/api.json

@@ -5,7 +5,7 @@ import {id,token,sha256,hmac,addSeconds} from '../lib/crypto.js';
 import {requireThat,notFound} from '../lib/errors.js';
 import {lockMediaOwner} from './media-access.js';
 
-const allowed=new Set(['getPlusSession','revokePlusSession','listProducts','getProduct','getProductProfile','listOrders','getOrder','getDeliverables','createDownloadLink','createPlusEditDraft','getPlusEditDraft','savePlusEditDraft','listPlusEditDrafts','listPlusRenderStyles','createPlusRenderPlan','listPlusRenderPlans','getPlusRenderPlan']);
+const allowed=new Set(['getPlusSession','revokePlusSession','listProducts','getProduct','getProductProfile','listOrders','getOrder','getDeliverables','createDownloadLink','createPlusEditDraft','getPlusEditDraft','savePlusEditDraft','listPlusEditDrafts','listPlusRenderStyles','createPlusRenderPlan','listPlusRenderPlans','getPlusRenderPlan','createPlusRenderBatch','listPlusRenderBatches','getPlusRenderBatch']);
 export async function plusPrincipal(db:Db,bearer:string):Promise<Principal|undefined>{
   const row=(await db.query<{id:string;tenant_id:string;owner_id:string;platform:DTO<'Platform'>;app_id:string;subject_id:string}>(`SELECT s.id,s.tenant_id,s.owner_id,i.platform,i.app_id,i.subject_id
     FROM plus_sessions s JOIN platform_identities i ON i.tenant_id=s.tenant_id AND i.id=s.identity_id AND i.user_id=s.owner_id
@@ -20,7 +20,7 @@ export async function assertPlusOperation(db:Db,p:Principal|null,operation:strin
   await lockMediaOwner(db,p.tenantId,p.userId);
   requireThat(!!(await db.query('SELECT id FROM plus_sessions WHERE tenant_id=$1 AND owner_id=$2 AND id=$3 AND revoked_at IS NULL AND expires_at>now() FOR SHARE',[p.tenantId,p.userId,p.plusSessionId])).rowCount,
     'PLUS_SESSION_REVOKED','电脑连接已关闭或到期，请重新接续',401);
-  if(operation==='createPlusRenderPlan')await assertPlusRenderGrant(db,p);
+  if(operation==='createPlusRenderPlan'||operation==='createPlusRenderBatch')await assertPlusRenderGrant(db,p);
 }
 export async function assertPlusRenderGrant(db:Db,p:Principal):Promise<void>{
   requireThat(!!p.plusSessionId,'PLUS_SESSION_REQUIRED','请在电脑工作台提交制作清单',403);

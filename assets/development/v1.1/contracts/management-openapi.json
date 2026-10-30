@@ -13275,6 +13275,287 @@
           "trace_id"
         ],
         "additionalProperties": false
+      },
+      "PlusBatchItemRequest": {
+        "type": "object",
+        "properties": {
+          "draft_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "variant_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "variant_version": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          }
+        },
+        "required": [
+          "draft_id",
+          "expected_revision",
+          "variant_id",
+          "variant_version"
+        ],
+        "additionalProperties": false
+      },
+      "PlusBatchFailure": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]{0,79}$"
+          },
+          "message": {
+            "type": "string",
+            "maxLength": 2000
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "additionalProperties": false
+      },
+      "PlusBatchCreateRequest": {
+        "type": "object",
+        "properties": {
+          "request_key": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{21,127}$"
+          },
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 10,
+            "uniqueItems": true,
+            "items": {
+              "$ref": "#/components/schemas/PlusBatchItemRequest"
+            }
+          }
+        },
+        "required": [
+          "request_key",
+          "items"
+        ],
+        "additionalProperties": false
+      },
+      "PlusBatchSummary": {
+        "type": "object",
+        "properties": {
+          "batch_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          },
+          "item_count": {
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 10
+          },
+          "prepared_count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10
+          },
+          "preparation_failed_count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10
+          },
+          "removed_count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10
+          }
+        },
+        "required": [
+          "batch_id",
+          "created_at",
+          "item_count",
+          "prepared_count",
+          "preparation_failed_count",
+          "removed_count"
+        ],
+        "additionalProperties": false
+      },
+      "PlusBatchItem": {
+        "type": "object",
+        "properties": {
+          "position": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "PREPARED",
+              "PREPARATION_FAILED",
+              "SOURCE_REMOVED"
+            ]
+          },
+          "input": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlusBatchItemRequest"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "render": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlusRenderPlan"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "failure": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PlusBatchFailure"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "position",
+          "state",
+          "input",
+          "render",
+          "failure"
+        ],
+        "additionalProperties": false
+      },
+      "PlusBatch": {
+        "type": "object",
+        "properties": {
+          "batch_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          },
+          "item_count": {
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 10
+          },
+          "prepared_count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10
+          },
+          "preparation_failed_count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10
+          },
+          "removed_count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10
+          },
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 10,
+            "items": {
+              "$ref": "#/components/schemas/PlusBatchItem"
+            }
+          }
+        },
+        "required": [
+          "batch_id",
+          "created_at",
+          "item_count",
+          "prepared_count",
+          "preparation_failed_count",
+          "removed_count",
+          "items"
+        ],
+        "additionalProperties": false
+      },
+      "PlusBatchList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "$ref": "#/components/schemas/PlusBatchSummary"
+            }
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 4096
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "additionalProperties": false
+      },
+      "PlusBatchResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusBatch"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusBatchListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusBatchList"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
       }
     }
   },

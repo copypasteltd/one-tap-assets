@@ -87,6 +87,7 @@ function response(operation:string,path:string,body:any,key=''):unknown{
     case 'getPlan':return {plan_id:'demo_plan',product_id:product.product_id,profile_id:profile.profile_id,variant_id:first.execution_variants[0]!.variant_id,state:'READY',engine:'PHOTO_LAYOUT',plan_hash:'a'.repeat(64),summary:'演示清单：同一件商品，按极简净白方案制作配套图片、短片与文案。',output_slots:firstSlots};
     case 'createQuote':return {quote_id:'demo_quote',amount_fen:0,currency:'CNY',expires_at:expires,hard_deadline_seconds:600};
     case 'createOrder':return order;
+    case 'listPlusRenderBatches':return {items:[],next_cursor:null};
     case 'listPlusRenderPlans':return {items:[],next_cursor:null};
     case 'listPlusSessions':return {items:demoPlusSessions,next_cursor:null};
     case 'inspectPlusLink':return {link_id:'pluslink_synthetic',user_code:body.user_code,expires_at:expires,state:'PENDING',access:'OWN_PROJECTS_AND_EDIT_DRAFTS',can_prepare_render_plans:false};

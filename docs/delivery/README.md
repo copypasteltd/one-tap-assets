@@ -1,5 +1,12 @@
 # 源码交付与快速启动 / Source delivery and quick start
 
+
+本轮交付更新：Plus批量商品图片制作、逐件原渠道费用确认和独立交付，详见[实现方案](../实施/Plus批量商品独立制作与逐件交付-v1.0.md)及[准确证据](../verification/plus-batches-source.json)。当前包收录完整源码、已通过编译的服务端和Plus预览、双语文档与180份媒体。支付宝和抖音候选编译各在180秒超时；记录保持失败，这两项可执行产物不收录，客户端源码完整保留。未执行全面测试或真机验收，真实服务默认关闭，非离线安装包。
+
+This delivery includes complete source, successful server/Plus builds, bilingual documentation and 180 media files. Each native mini-program candidate compiler timed out at 180 seconds and is retained as failed; its executable output is excluded. Native client sources are included. No full suite, real-service admission, native-device acceptance or cloud deployment is claimed. The archive requires the documented native runtimes and configured external services.
+
+以[当前交付包清单](package.json)中的路径、SHA256和独立ZIP核对结果为准。只收录当前源码和构建对应的文件，不收录私有配置、数据库或客户素材。失败候选不阻塞已通过组件的快速交付。
+
 2026-10-30快速功能收口：[Plus手机确认与独立编辑草稿](../实施/Plus手机确认与独立编辑草稿-v1.0.md) · [准确证据](../verification/plus-workspace-source.json)。小程序主动确认、5分钟码/1小时电脑连接、本人商品订单与实际原图、独立裁切/规格/文字草稿、修订冲突和撤销失效已接通；同源 `/plus/` 沿用C。507源码/35迁移/91业务38管理、288schema79实体。3客户端与7原生API专项、类型/server/preview和本机启动通过，只做相关检查；浏览器与媒体以本轮来源为准。身份/付款/验收语义合成，手机是共享UI回放，非真实服务或宿主验收。正式渲染/报价/双复核交付、字幕/批量/复杂作者工具、双平台长期绑定、真实准入与58项完整验收仍待，完整产品/生产/云端false。旧153媒体、方案C与历史原件保持。
 
 以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。

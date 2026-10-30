@@ -2855,6 +2855,59 @@ export interface components {
             data: components["schemas"]["PlusRenderPlanList"];
             trace_id: string;
         };
+        PlusBatchItemRequest: {
+            draft_id: string;
+            expected_revision: number;
+            variant_id: string;
+            variant_version: string;
+        };
+        PlusBatchFailure: {
+            code: string;
+            message: string;
+        };
+        PlusBatchCreateRequest: {
+            request_key: string;
+            items: components["schemas"]["PlusBatchItemRequest"][];
+        };
+        PlusBatchSummary: {
+            batch_id: string;
+            /** Format: date-time */
+            created_at: string;
+            item_count: number;
+            prepared_count: number;
+            preparation_failed_count: number;
+            removed_count: number;
+        };
+        PlusBatchItem: {
+            position: number;
+            /** @enum {string} */
+            state: "PREPARED" | "PREPARATION_FAILED" | "SOURCE_REMOVED";
+            input: components["schemas"]["PlusBatchItemRequest"] | null;
+            render: components["schemas"]["PlusRenderPlan"] | null;
+            failure: components["schemas"]["PlusBatchFailure"] | null;
+        };
+        PlusBatch: {
+            batch_id: string;
+            /** Format: date-time */
+            created_at: string;
+            item_count: number;
+            prepared_count: number;
+            preparation_failed_count: number;
+            removed_count: number;
+            items: components["schemas"]["PlusBatchItem"][];
+        };
+        PlusBatchList: {
+            items: components["schemas"]["PlusBatchSummary"][];
+            next_cursor: string | null;
+        };
+        PlusBatchResponse: {
+            data: components["schemas"]["PlusBatch"];
+            trace_id: string;
+        };
+        PlusBatchListResponse: {
+            data: components["schemas"]["PlusBatchList"];
+            trace_id: string;
+        };
     };
     responses: never;
     parameters: {

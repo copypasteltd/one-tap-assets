@@ -45,6 +45,22 @@ def extend_plus_contract(a, m, e):
       'PlusRenderPlanList':obj({'items':{'type':'array','maxItems':100,'items':ref('PlusRenderPlan')},
                                'next_cursor':{'anyOf':[{'type':'string','maxLength':4096},{'type':'null'}]}})
     })
+    batch_item=obj({'draft_id':rid,**copy.deepcopy(schemas['PlusRenderCreateRequest']['properties'])})
+    count={'type':'integer','minimum':0,'maximum':10}
+    batch_summary=obj({'batch_id':rid,'created_at':time,'item_count':{'type':'integer','minimum':2,'maximum':10},
+      'prepared_count':count,'preparation_failed_count':count,'removed_count':count})
+    schemas.update({
+      'PlusBatchItemRequest':batch_item,
+      'PlusBatchFailure':obj({'code':{'type':'string','pattern':'^[A-Z][A-Z0-9_]{0,79}$'},'message':text(2000)}),
+      'PlusBatchCreateRequest':obj({'request_key':{'type':'string','pattern':'^[A-Za-z0-9][A-Za-z0-9_-]{21,127}$'},
+        'items':{'type':'array','minItems':2,'maxItems':10,'uniqueItems':True,'items':ref('PlusBatchItemRequest')}}),
+      'PlusBatchSummary':batch_summary,
+      'PlusBatchItem':obj({'position':{'type':'integer','minimum':1,'maximum':10},'state':{'type':'string','enum':['PREPARED','PREPARATION_FAILED','SOURCE_REMOVED']},
+        'input':{'anyOf':[ref('PlusBatchItemRequest'),{'type':'null'}]},'render':{'anyOf':[ref('PlusRenderPlan'),{'type':'null'}]},
+        'failure':{'anyOf':[ref('PlusBatchFailure'),{'type':'null'}]}}),
+      'PlusBatch':obj({**copy.deepcopy(batch_summary['properties']),'items':{'type':'array','minItems':2,'maxItems':10,'items':ref('PlusBatchItem')}}),
+      'PlusBatchList':obj({'items':{'type':'array','maxItems':100,'items':ref('PlusBatchSummary')},'next_cursor':copy.deepcopy(schemas['PlusRenderPlanList']['properties']['next_cursor'])})
+    })
     for doc in [a,m]:doc['components']['schemas']['Plan']['properties']['plus_render_request_id']=rid
     operations = [
       ('createPlusLink','POST','/plus/links','PlusLinkCreateRequest','PlusLink',True,'创建短期电脑接续码'),
@@ -61,7 +77,10 @@ def extend_plus_contract(a, m, e):
       ('listPlusRenderStyles','GET','/plus/render-styles',None,'PlusRenderStyleList',False,'读取独立图片制作风格及当前计价可用性'),
       ('createPlusRenderPlan','POST','/plus/edit-drafts/{draft_id}/render-plans','PlusRenderCreateRequest','PlusRenderPlan',False,'冻结编辑修订并整理独立制作清单，付款仍需小程序确认'),
       ('listPlusRenderPlans','GET','/plus/render-plans',None,'PlusRenderPlanList',False,'本人在电脑或原小程序继续独立制作请求'),
-      ('getPlusRenderPlan','GET','/plus/render-plans/{request_id}',None,'PlusRenderPlan',False,'读取本人独立制作清单及原渠道订单状态')
+      ('getPlusRenderPlan','GET','/plus/render-plans/{request_id}',None,'PlusRenderPlan',False,'读取本人独立制作清单及原渠道订单状态'),
+      ('createPlusRenderBatch','POST','/plus/render-batches','PlusBatchCreateRequest','PlusBatch',False,'批量整理2至10件商品的独立清单，单品失败隔离、原渠道逐件付款'),
+      ('listPlusRenderBatches','GET','/plus/render-batches',None,'PlusBatchList',False,'本人分页查看批量制作记录'),
+      ('getPlusRenderBatch','GET','/plus/render-batches/{batch_id}',None,'PlusBatch',False,'读取批次各件独立规划、订单和交付状态')
     ]
     for _,_,_,_,response,_,_ in operations:
         schemas[response+'Response']=obj({'data':ref(response),'trace_id':{'type':'string'}})
@@ -71,7 +90,7 @@ def extend_plus_contract(a, m, e):
     for op,method,path,request,response,public,summary in operations:
         operation=copy.deepcopy(source)
         params=[{'name':part[1:-1],'in':'path','required':True,'schema':rid} for part in path.split('/') if part.startswith('{')]
-        if op in ['listPlusEditDrafts','listPlusRenderPlans']:params+=copy.deepcopy(a['paths']['/products']['get'].get('parameters',[]))
+        if op in ['listPlusEditDrafts','listPlusRenderPlans','listPlusRenderBatches']:params+=copy.deepcopy(a['paths']['/products']['get'].get('parameters',[]))
         operation.update(operationId=op,summary=summary,description=summary,parameters=params)
         operation['x-requirements']=['P01-F18','P01-F24'];operation['x-design-pages']=['D22'];operation['x-idempotency-required']=False
         if public:operation['security']=[]
@@ -88,7 +107,9 @@ def extend_plus_data(model):
       ('plus_sessions',['id','tenant_id','owner_id','identity_id','token_hash','created_at','expires_at','revoked_at','allow_render_plans'],'One-hour independent read/edit capability; no native payment/refund or identity merge; revocation checked inside each transaction and signed download.'),
       ('plus_edit_drafts',['id','tenant_id','owner_id','order_id','product_id','manifest_id','deliverable_id','revision','data','created_at','updated_at'],'Owned paid current image; separate draft/revision; user-supplied facts remain unverified; deletion physically erases draft and all saved versions.'),
       ('plus_edit_versions',['draft_id','revision','settings_hash','settings','created_at'],'Append-only edit metadata versions, independent of immutable paid delivery; erased with source deletion.'),
-      ('plus_render_plans',['id','tenant_id','owner_id','product_id','draft_id','draft_revision','source_order_id','plan_id','input_hash','binding','created_at'],'Immutable independently quoted render plan; exact owned source/edit/tariff frozen, no payment capability in browser; unique natural input and product deletion erasure.')
+      ('plus_render_plans',['id','tenant_id','owner_id','product_id','draft_id','draft_revision','source_order_id','plan_id','input_hash','binding','created_at'],'Immutable independently quoted render plan; exact owned source/edit/tariff frozen, no payment capability in browser; unique natural input and product deletion erasure.'),
+      ('plus_render_batches',['id','tenant_id','owner_id','request_key_hash','input_hash','item_count','created_at'],'Hashed owner-scoped intent key; no cached private response; immutable batch contains no shared charge or runtime. Replays recheck permission and redact removed items.'),
+      ('plus_render_batch_items',['id','tenant_id','batch_id','position','product_id','request_id','input','failure'],'Per-item savepoint isolates preparation failure; immutable independent render plan and native quote/payment/delivery; product deletion physically erases its batch metadata.')
     ]:model['entities'].append({'table':table,'primary_key':'draft_id' if table=='plus_edit_versions' else 'id','scope':'global' if table=='plus_links' else 'tenant','fields':fields,'invariant':invariant,'implementation_status':'DESIGN_NOT_IMPLEMENTED'})
 
 def plus_catalog(e):

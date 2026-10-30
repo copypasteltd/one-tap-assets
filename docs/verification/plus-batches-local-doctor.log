@@ -1,0 +1,88 @@
+{
+  "checked_at": "2026-10-30T14:31:46.302Z",
+  "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
+  "rows": [
+    {
+      "id": "node",
+      "status": "PASS",
+      "detail": "24.22.1"
+    },
+    {
+      "id": "runtime/tools/package-manager/node_modules/pnpm/bin/pnpm.cjs",
+      "status": "PASS",
+      "detail": "present"
+    },
+    {
+      "id": "assets/presets/presets.v3.1.json",
+      "status": "PASS",
+      "detail": "present"
+    },
+    {
+      "id": "configuration",
+      "status": "PASS",
+      "detail": "environment=development; private values omitted"
+    },
+    {
+      "id": "database",
+      "status": "PASS",
+      "detail": "connected; 36 migrations"
+    },
+    {
+      "id": "ffmpeg",
+      "status": "PASS",
+      "detail": "Native executable on PATH responds"
+    },
+    {
+      "id": "ffprobe",
+      "status": "PASS",
+      "detail": "Native executable on PATH responds"
+    },
+    {
+      "id": "generation",
+      "status": "OFF",
+      "detail": "External service remains disabled"
+    },
+    {
+      "id": "codex",
+      "status": "OFF",
+      "detail": "External service remains disabled"
+    },
+    {
+      "id": "payments",
+      "status": "OFF",
+      "detail": "External service remains disabled"
+    },
+    {
+      "id": "community-publishing",
+      "status": "OFF",
+      "detail": "External service remains disabled"
+    },
+    {
+      "id": "server",
+      "status": "PRESENT_NOT_CERTIFIED",
+      "detail": "Existing default output; delivery:build records fresh isolated outputs"
+    },
+    {
+      "id": "preview",
+      "status": "PRESENT_NOT_CERTIFIED",
+      "detail": "Existing default output; delivery:build records fresh isolated outputs"
+    },
+    {
+      "id": "alipay",
+      "status": "NOT_BUILT",
+      "detail": "Run delivery:build"
+    },
+    {
+      "id": "douyin",
+      "status": "PRESENT_NOT_CERTIFIED",
+      "detail": "Existing default output; delivery:build records fresh isolated outputs"
+    },
+    {
+      "id": "catalog",
+      "status": "PASS",
+      "detail": "10 official presets; 14 variants"
+    }
+  ],
+  "full_product_verified": false,
+  "production_admitted": false
+}

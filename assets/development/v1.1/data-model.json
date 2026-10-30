@@ -1901,6 +1901,39 @@
       ],
       "invariant": "Immutable independently quoted render plan; exact owned source/edit/tariff frozen, no payment capability in browser; unique natural input and product deletion erasure.",
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "plus_render_batches",
+      "primary_key": "id",
+      "scope": "tenant",
+      "fields": [
+        "id",
+        "tenant_id",
+        "owner_id",
+        "request_key_hash",
+        "input_hash",
+        "item_count",
+        "created_at"
+      ],
+      "invariant": "Hashed owner-scoped intent key; no cached private response; immutable batch contains no shared charge or runtime. Replays recheck permission and redact removed items.",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "plus_render_batch_items",
+      "primary_key": "id",
+      "scope": "tenant",
+      "fields": [
+        "id",
+        "tenant_id",
+        "batch_id",
+        "position",
+        "product_id",
+        "request_id",
+        "input",
+        "failure"
+      ],
+      "invariant": "Per-item savepoint isolates preparation failure; immutable independent render plan and native quote/payment/delivery; product deletion physically erases its batch metadata.",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
     }
   ],
   "critical_composite_relations": [

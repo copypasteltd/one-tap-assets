@@ -4,6 +4,7 @@ import type {DTO} from '../shared/contracts/types';
 import {ClientError} from '../shared/client/api';
 import {PlusClient} from './client';
 import {PlusRenderPanel} from './render-panel';
+import {PlusBatchWorkspace} from './batch-workspace';
 import './plus.css';
 
 const api=new PlusClient(location.origin);
@@ -13,9 +14,9 @@ function PlusApp(){
   const [products,setProducts]=useState<DTO<'ProductList'>>(),[orders,setOrders]=useState<DTO<'OrderList'>>(),[drafts,setDrafts]=useState<DTO<'PlusEditList'>>();
   const [pack,setPack]=useState<DTO<'Deliverables'>>(),[draft,setDraft]=useState<DTO<'PlusEditDraft'>>(),[settings,setSettings]=useState<DTO<'PlusEditSettings'>>(),[facts,setFacts]=useState('');
   const [image,setImage]=useState(''),[source,setSource]=useState<DTO<'Deliverable'>>(),[busy,setBusy]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState('');
-  const [prepareRender,setPrepareRender]=useState(false);
+  const [prepareRender,setPrepareRender]=useState(false),[batchOpen,setBatchOpen]=useState(false);
   const lock=useRef(false),epoch=useRef(0),mounted=useRef(true);
-  function reset(){epoch.current++;api.disconnect();setLink(undefined);setConnection(undefined);setProducts(undefined);setOrders(undefined);setDrafts(undefined);setPack(undefined);setDraft(undefined);setSettings(undefined);setFacts('');setImage('');setSource(undefined);setNotice('');setError('');}
+  function reset(){epoch.current++;api.disconnect();setLink(undefined);setConnection(undefined);setProducts(undefined);setOrders(undefined);setDrafts(undefined);setPack(undefined);setDraft(undefined);setSettings(undefined);setFacts('');setImage('');setSource(undefined);setNotice('');setError('');setBatchOpen(false);}
   async function run(work:()=>Promise<void>){if(lock.current)return;lock.current=true;const current=epoch.current;setBusy(true);setError('');setNotice('');
     try{await work();}catch(e){if(mounted.current&&current===epoch.current){if(connection&&!api.connected()){reset();setError('电脑连接已关闭或到期，请重新接续');}else setError(e instanceof ClientError?e.message:'暂时无法完成，请重新读取当前记录');}}
     finally{lock.current=false;if(mounted.current)setBusy(false);}}
@@ -41,7 +42,7 @@ function PlusApp(){
     };
     timer=setTimeout(()=>void poll(),3000);return()=>{stopped=true;if(timer)clearTimeout(timer);};
   },[link,connection]);
-  async function openPack(orderId:string){const value=await api.call('getDeliverables',{params:{order_id:orderId}});setPack(value);setDraft(undefined);setSettings(undefined);setImage('');setSource(undefined);}
+  async function openPack(orderId:string){const value=await api.call('getDeliverables',{params:{order_id:orderId}});setPack(value);setDraft(undefined);setSettings(undefined);setImage('');setSource(undefined);setBatchOpen(false);}
   async function imageDraft(next:DTO<'PlusEditDraft'>){
     const p=await api.call('getDeliverables',{params:{order_id:next.order_id}}),item=p.items.find(i=>i.deliverable_id===next.deliverable_id);
     if(!item)throw new ClientError('SOURCE_CHANGED','原素材已更新，请重新打开素材包');
@@ -52,10 +53,10 @@ function PlusApp(){
   const crop=settings?.crop,canvas=settings?.canvas;
   const cropAspect=source&&crop?((source.width??1080)*Math.max(.01,crop.width))/((source.height??1080)*Math.max(.01,crop.height)):1;
   const canvasAspect=canvas?Math.max(1,canvas.width)/Math.max(1,canvas.height):1;
-  return <div className='plus-app'><header className='plus-header'><a className='plus-brand' href='/plus/' aria-label='一品成片 Plus 首页'><span className='plus-mark'>一</span><strong>一品成片</strong><span className='plus-tag'>Plus</span></a><span>把一件商品，做得更完整</span>{connection&&<button onClick={()=>void run(async()=>{await api.call('revokePlusSession',{params:{plus_session_id:connection.session_id}});reset();})}>关闭本机连接</button>}</header>
+  return <div className='plus-app'><header className='plus-header'><a className='plus-brand' href='/plus/' aria-label='一品成片 Plus 首页'><span className='plus-mark'>一</span><strong>一品成片</strong><span className='plus-tag'>Plus</span></a><span>把一件商品，做得更完整</span>{connection&&<><button className={batchOpen?'plus-primary':''} disabled={busy} onClick={()=>setBatchOpen(value=>!value)}>{batchOpen?'返回单图编辑':'批量制作'}</button><button onClick={()=>void run(async()=>{await api.call('revokePlusSession',{params:{plus_session_id:connection.session_id}});reset();})}>关闭本机连接</button></>}</header>
     {!connection?<main className='plus-welcome'><section><span className='plus-eyebrow'>手机拍好 · 电脑接着做</span><h1>给你的素材，<br/>多一点创作空间。</h1><p>从小程序继续本人作品，在更大的画布上调整图片裁切、规格与文字，保存独立编辑草稿。</p><div className='plus-permissions'><span>本人项目</span><span>原素材领取</span><span>独立草稿</span></div><p className='plus-muted'>拍照、制作、相册保存和基础社区发布，继续在支付宝或抖音小程序完成。</p></section><section className='plus-ticket'><h2>从手机接续到这里</h2><p>生成接续码，在小程序「账户与隐私 → 接续到电脑 Plus」中输入并确认。</p>{link&&<><output className='plus-code' aria-label='电脑接续码'>{link.user_code.slice(0,4)} {link.user_code.slice(4)}</output><p className='plus-muted'>5分钟内有效 · 等待你在手机上确认</p></>}
       <label className='plus-render-consent'><input type='checkbox' checked={prepareRender} onChange={e=>setPrepareRender(e.target.checked)}/>允许整理正式制作清单（每次付款仍需手机确认）</label><button className='plus-primary' disabled={busy} onClick={()=>{reset();void run(async()=>{setLink(await api.call('createPlusLink',{body:{prepare_render_plans:prepareRender}}));});}}>{link?'重新生成接续码':'生成接续码'}</button><p className='plus-muted'>连接后可查看和编辑本人素材草稿，有效1小时，可随时从手机关闭。付款和退款仍在原小程序处理。</p></section></main>:
-    <main className='plus-workbench'><aside className='plus-library'><div className='plus-section-head'><h2>我的创作</h2><button disabled={busy} onClick={()=>void run(workspace)}>刷新</button></div><p className='plus-muted'>{connection.platform==='alipay'?'支付宝':'抖音'}已确认 · {new Date(connection.expires_at).toLocaleTimeString()}到期</p>
+    batchOpen?<PlusBatchWorkspace api={api} onDelivered={orderId=>void run(()=>openPack(orderId))}/>:<main className='plus-workbench'><aside className='plus-library'><div className='plus-section-head'><h2>我的创作</h2><button disabled={busy} onClick={()=>void run(workspace)}>刷新</button></div><p className='plus-muted'>{connection.platform==='alipay'?'支付宝':'抖音'}已确认 · {new Date(connection.expires_at).toLocaleTimeString()}到期</p>
       <h3>素材包</h3>{orders?.items.map(order=><button className={`plus-source-row ${pack?.order_id===order.order_id?'selected':''}`} disabled={busy||order.fulfillment_state!=='DELIVERED'} key={order.order_id} onClick={()=>void run(()=>openPack(order.order_id))}><strong>{order.fulfillment_state==='DELIVERED'?'查看已交付素材':'制作中的订单'}</strong><span>订单 {order.order_id.slice(-6)} · ¥{(order.amount_fen/100).toFixed(2)}</span></button>)}
       {orders&&!orders.items.length&&<p>还没有素材包。先用手机拍照，完成你的第一套。</p>}{orders?.next_cursor&&<button disabled={busy} onClick={()=>void run(async()=>{const next=await api.call('listOrders',{query:{limit:20,cursor:orders.next_cursor!}});setOrders({...next,items:[...orders.items,...next.items]});})}>更多素材包</button>}
       <h3>编辑草稿</h3>{drafts?.items.map(item=><button key={item.draft_id} className='plus-source-row' disabled={busy} onClick={()=>void run(async()=>imageDraft(await api.call('getPlusEditDraft',{params:{draft_id:item.draft_id}})))}><strong>{item.settings.title||'图片编辑草稿'}</strong><span>版本 {item.revision} · {item.settings.canvas.width}×{item.settings.canvas.height}</span></button>)}

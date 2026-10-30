@@ -1,0 +1,103 @@
+{
+  "captured_at": "2026-10-30T14:33:00.253Z",
+  "status": "PASS",
+  "source_set_hash": "034fdb1ba27431892c5e272775c494e526b0a7f207a8336f25b8f9a7be524888",
+  "build_root": "runtime/delivery-builds/2026-10-30T14-30-03-025Z-bb830a0c/runtime/build",
+  "data_source": "ACTUAL_HTTPS_POSTGRESQL_MCP_PNG_BATCH_CONTENT_PRODUCTION_POST_QC_TWO_REVIEWS_AND_DELIVERY;SYNTHETIC_IDENTITY_PAYMENT_MODEL_VERDICTS_AND_PROCESS_IDENTITY",
+  "checks": [
+    "EXPLICIT_NATIVE_APPROVAL_OF_BROWSER_PREPARATION_SCOPE",
+    "ACTUAL_PRIVATE_PRODUCT_THUMBNAILS_IN_LAZY_BOUNDED_WORKSPACE",
+    "FROZEN_CLIENT_REVISION_AND_PER_ITEM_SAVEPOINT_FAILURE",
+    "TWO_INDEPENDENT_CONTENT_PLANS_READY_FOR_NATIVE_CONFIRMATION",
+    "TWO_DISTINCT_NATIVE_QUOTES_AND_ORDERS_ONLY_FIRST_SYNTHETICALLY_PAID",
+    "FIRST_PRODUCT_DELIVERED_AFTER_QC_TWO_REVIEWS_AND_ALL_ROLE_RELEASES",
+    "UNPAID_SIBLING_AND_FAILED_PRODUCT_DO_NOT_BLOCK_DELIVERY",
+    "ALL_THREE_ORIGINAL_PACKS_PRESERVED",
+    "BROWSER_DISCONNECT_CLEARS_PRIVATE_BATCH_WORKSPACE"
+  ],
+  "screenshots": [
+    {
+      "path": "docs/media/plus-batches/01-select-three-products.png",
+      "page": "01-select-three-products"
+    },
+    {
+      "path": "docs/media/plus-batches/02-stale-item-isolated.png",
+      "page": "02-stale-item-isolated"
+    },
+    {
+      "path": "docs/media/plus-batches/03-separate-native-confirmation.png",
+      "page": "03-separate-native-confirmation"
+    },
+    {
+      "path": "docs/media/plus-batches/04-first-delivered-second-unpaid.png",
+      "page": "04-first-delivered-second-unpaid"
+    },
+    {
+      "path": "docs/media/plus-batches/05-open-independent-private-pack.png",
+      "page": "05-open-independent-private-pack"
+    },
+    {
+      "path": "docs/media/plus-batches/06-actual-batch-product.png",
+      "page": "ACTUAL_PAID_BATCH_ITEM_PNG_NOT_A_SCREENSHOT"
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/media/plus-batches/01-select-three-products.png",
+      "bytes": 132679,
+      "sha256": "588bb87145f0e463beb4b3d59c4169b625ad92f775dca5d4d8d66183718ba787"
+    },
+    {
+      "path": "docs/media/plus-batches/02-stale-item-isolated.png",
+      "bytes": 115373,
+      "sha256": "fc109deaf6e34b3bb60d68704b5dbd779d27f2fcc2e8014dd94ce6ab7c5c9e50"
+    },
+    {
+      "path": "docs/media/plus-batches/03-separate-native-confirmation.png",
+      "bytes": 116819,
+      "sha256": "f829351f4c9f5d668493875e922e0bc123f0cf69df096ef5e7f790c40a5c317a"
+    },
+    {
+      "path": "docs/media/plus-batches/04-first-delivered-second-unpaid.png",
+      "bytes": 117117,
+      "sha256": "6ea00a06f3fba51aca5ea8a3e02cb059076debce06929ed713ced55f92082e46"
+    },
+    {
+      "path": "docs/media/plus-batches/05-open-independent-private-pack.png",
+      "bytes": 102697,
+      "sha256": "87ffcb41cfbd002d2ef0c95533017e9902ee3b96e2d2e11f4e98357fdc592eae"
+    },
+    {
+      "path": "docs/media/plus-batches/06-actual-batch-product.png",
+      "bytes": 32258,
+      "sha256": "e0af9d4569eed54fceb1820624db82da94a151668763d8b70285ba98a1fcf0fb"
+    },
+    {
+      "path": "docs/media/plus-batches/walkthrough.mp4",
+      "bytes": 658159,
+      "sha256": "4bb0618462a00cb108137f6a84a77fb63dea83b5fd3b7cb7f3a070c65c4e41c5"
+    },
+    {
+      "path": "docs/media/plus-batches/walkthrough.webm",
+      "bytes": 4192922,
+      "sha256": "c67f73726606b530b3014ac8dd89eaa75679da26a458da9146665f3d702820c5"
+    },
+    {
+      "path": "docs/media/plus-batches/walkthrough.gif",
+      "bytes": 949776,
+      "sha256": "b419f02796da5f783d7c213af6bbc51026a558fe6069136a16f30b30c3647210"
+    }
+  ],
+  "recording": {
+    "format": {
+      "duration": "35.920000"
+    }
+  },
+  "browser_errors": [],
+  "external_network_requests": [],
+  "browser_tabs_closed": true,
+  "owned_api_and_database_pool_closed": true,
+  "real_service_or_payment_verified": false,
+  "native_mini_device_verified": false,
+  "full_product_verified": false
+}

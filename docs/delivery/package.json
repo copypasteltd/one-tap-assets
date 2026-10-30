@@ -1,14 +1,14 @@
 {
   "schema_version": "1.0",
-  "created_at": "2026-10-30T13:55:24.376Z",
-  "id": "2026-10-30T13-40-20-679Z-bf6ea9e6",
-  "package_id": "2026-10-30T13-55-24-376Z-3c7fab26",
-  "source_set_hash": "593fc11303be7f076b7598a70f93861bcc0baa13ad2c6815a40bc7927718a311",
-  "archive_path": "runtime/releases/one-tap-assets-2026-10-30T13-55-24-376Z-3c7fab26/one-tap-assets-source-and-builds.zip",
-  "archive_sha256": "3531aef5cc9e3c1e483b9240ce260e46c0169db115a7845fcf174733b358bbab",
-  "archive_bytes": 121551678,
-  "source_files": 1720,
-  "build_files": 37,
+  "created_at": "2026-10-30T14:46:08.170Z",
+  "id": "2026-10-30T14-30-03-025Z-bb830a0c",
+  "package_id": "2026-10-30T14-46-08-170Z-36a02345",
+  "source_set_hash": "034fdb1ba27431892c5e272775c494e526b0a7f207a8336f25b8f9a7be524888",
+  "archive_path": "runtime/releases/one-tap-assets-2026-10-30T14-46-08-170Z-36a02345/one-tap-assets-source-and-builds.zip",
+  "archive_sha256": "1d7bc9907af37aa8940991a4b7cfdfd76ad60f4cbb0643021fe009adf0609b06",
+  "archive_bytes": 128311036,
+  "source_files": 1774,
+  "build_files": 38,
   "components": [
     {
       "name": "server",
@@ -20,25 +20,25 @@
     },
     {
       "name": "alipay",
-      "status": "NOT_RUN"
+      "status": "TIMEOUT"
     },
     {
       "name": "douyin",
-      "status": "NOT_RUN"
+      "status": "TIMEOUT"
     }
   ],
-  "manifest_path": "runtime/releases/one-tap-assets-2026-10-30T13-55-24-376Z-3c7fab26/manifest.json",
+  "manifest_path": "runtime/releases/one-tap-assets-2026-10-30T14-46-08-170Z-36a02345/manifest.json",
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
   "full_product_verified": false,
   "production_admitted": false,
   "independent_archive_verification": {
     "status": "PASS",
-    "checked_at": "2026-10-30T13:57:15.038056+00:00",
+    "checked_at": "2026-10-30T14:47:07.364258+00:00",
     "method": "INDEPENDENT_PYTHON_ZIPFILE_CRC_AND_SHA256",
-    "archive_sha256": "3531aef5cc9e3c1e483b9240ce260e46c0169db115a7845fcf174733b358bbab",
-    "payload_files_verified": 1757,
-    "archive_entries": 1758,
+    "archive_sha256": "1d7bc9907af37aa8940991a4b7cfdfd76ad60f4cbb0643021fe009adf0609b06",
+    "payload_files_verified": 1812,
+    "archive_entries": 1813,
     "workspace_payload_bytes_matched": true,
     "successful_build_components_verified": [
       "server",

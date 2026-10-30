@@ -2289,6 +2289,63 @@
         "D22"
       ],
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/plus/render-batches",
+      "operation_id": "createPlusRenderBatch",
+      "summary": "批量整理2至10件商品的独立清单，单品失败隔离、原渠道逐件付款",
+      "request_schema": "PlusBatchCreateRequest",
+      "response_schema": "PlusBatch",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/render-batches",
+      "operation_id": "listPlusRenderBatches",
+      "summary": "本人分页查看批量制作记录",
+      "request_schema": null,
+      "response_schema": "PlusBatchList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/render-batches/{batch_id}",
+      "operation_id": "getPlusRenderBatch",
+      "summary": "读取批次各件独立规划、订单和交付状态",
+      "request_schema": null,
+      "response_schema": "PlusBatch",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
     }
   ]
 }

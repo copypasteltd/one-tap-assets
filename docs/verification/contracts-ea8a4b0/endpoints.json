@@ -1,0 +1,2294 @@
+{
+  "status": "DESIGN_NOT_IMPLEMENTED",
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/sessions/platform",
+      "operation_id": "createPlatformSession",
+      "summary": "宿主临时凭证换产品会话",
+      "request_schema": "SessionRequest",
+      "response_schema": "Session",
+      "success_status": 200,
+      "auth_policy": "public-rate-limited",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F01",
+        "P01-F23"
+      ],
+      "design_pages": [
+        "D01",
+        "D02",
+        "D10",
+        "D13",
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/products",
+      "operation_id": "createProduct",
+      "summary": "创建无商品表单草稿",
+      "request_schema": "ProductRequest",
+      "response_schema": "Product",
+      "success_status": 201,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F01",
+        "P01-F02",
+        "P01-F03"
+      ],
+      "design_pages": [
+        "D01",
+        "D02",
+        "D03",
+        "D06",
+        "D10",
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/products",
+      "operation_id": "listProducts",
+      "summary": "查询本人商品草稿",
+      "request_schema": null,
+      "response_schema": "ProductList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F01"
+      ],
+      "design_pages": [
+        "D01",
+        "D10",
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/products/{product_id}",
+      "operation_id": "getProduct",
+      "summary": "恢复本人草稿版本",
+      "request_schema": null,
+      "response_schema": "Product",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F01",
+        "P01-F02"
+      ],
+      "design_pages": [
+        "D01",
+        "D02",
+        "D10",
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/assets",
+      "operation_id": "createUploadGrant",
+      "summary": "申请私有照片上传授权",
+      "request_schema": "AssetRequest",
+      "response_schema": "UploadGrant",
+      "success_status": 201,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F02",
+        "P01-F15",
+        "P01-F23"
+      ],
+      "design_pages": [
+        "D01",
+        "D02",
+        "D11",
+        "D13",
+        "D18",
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/assets/{asset_id}/complete",
+      "operation_id": "completeAssetUpload",
+      "summary": "后端验证上传并确认READY",
+      "request_schema": "AssetCompleteRequest",
+      "response_schema": "Asset",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F02",
+        "P01-F15",
+        "P01-F25"
+      ],
+      "design_pages": [
+        "D01",
+        "D02",
+        "D03",
+        "D07",
+        "D11",
+        "D13",
+        "D18",
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "PUT",
+      "path": "/products/{product_id}/photos",
+      "operation_id": "bindProductPhotos",
+      "summary": "绑定3至5张已验证照片",
+      "request_schema": "PhotoBindingRequest",
+      "response_schema": "Product",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F02",
+        "P01-F03",
+        "P01-F25"
+      ],
+      "design_pages": [
+        "D01",
+        "D02",
+        "D03",
+        "D06",
+        "D07"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/products/{product_id}/analyses",
+      "operation_id": "createAnalysis",
+      "summary": "受理真实多模态分析",
+      "request_schema": "AnalysisRequest",
+      "response_schema": "Analysis",
+      "success_status": 202,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F03",
+        "P01-F25",
+        "P01-F26",
+        "P01-F34"
+      ],
+      "design_pages": [
+        "D02",
+        "D03",
+        "D06",
+        "D07",
+        "D15"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/analyses/{analysis_id}",
+      "operation_id": "getAnalysis",
+      "summary": "查询分析状态",
+      "request_schema": null,
+      "response_schema": "Analysis",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F03",
+        "P01-F26"
+      ],
+      "design_pages": [
+        "D03",
+        "D06",
+        "D15"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/products/{product_id}/profile",
+      "operation_id": "getProductProfile",
+      "summary": "读取本人有证据档案",
+      "request_schema": null,
+      "response_schema": "Profile",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F03",
+        "P01-F26",
+        "P01-F34"
+      ],
+      "design_pages": [
+        "D03",
+        "D06",
+        "D07",
+        "D15"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/products/{product_id}/corrections",
+      "operation_id": "correctProfile",
+      "summary": "可选纠错生成新档案锁版本",
+      "request_schema": "CorrectionRequest",
+      "response_schema": "Profile",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F03",
+        "P01-F12",
+        "P01-F26",
+        "P01-F34"
+      ],
+      "design_pages": [
+        "D03",
+        "D06",
+        "D07",
+        "D11",
+        "D15",
+        "D23"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/presets",
+      "operation_id": "listPresets",
+      "summary": "发现官方与社区方案",
+      "request_schema": null,
+      "response_schema": "PresetSummaryList",
+      "success_status": 200,
+      "auth_policy": "public-rate-limited",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F04",
+        "P01-F21",
+        "P01-F27",
+        "P01-F29"
+      ],
+      "design_pages": [
+        "D01",
+        "D04",
+        "D05",
+        "D07",
+        "D10",
+        "D16",
+        "D17",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/presets/{preset_id}/versions/{version}",
+      "operation_id": "getPresetVersion",
+      "summary": "查看不可变预设及授权样例信息",
+      "request_schema": null,
+      "response_schema": "PresetDetail",
+      "success_status": 200,
+      "auth_policy": "public-rate-limited",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F04",
+        "P01-F21",
+        "P01-F30",
+        "P01-F33"
+      ],
+      "design_pages": [
+        "D01",
+        "D04",
+        "D05",
+        "D07",
+        "D14",
+        "D16",
+        "D17",
+        "D18",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/presets/{preset_id}/versions/{version}/variants",
+      "operation_id": "listPresetVariants",
+      "summary": "查询效果变体与禁售原因",
+      "request_schema": null,
+      "response_schema": "VariantList",
+      "success_status": 200,
+      "auth_policy": "public-rate-limited",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F19",
+        "P01-F21",
+        "P01-F33",
+        "P01-F37",
+        "P01-F38",
+        "P01-F39",
+        "P01-F42",
+        "P01-F46"
+      ],
+      "design_pages": [
+        "D01",
+        "D04",
+        "D05",
+        "D07",
+        "D09",
+        "D11",
+        "D12",
+        "D14",
+        "D17",
+        "D19",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/products/{product_id}/preset-recommendations",
+      "operation_id": "recommendPresets",
+      "summary": "基于本人档案推荐方案",
+      "request_schema": null,
+      "response_schema": "RecommendationList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F21",
+        "P01-F25",
+        "P01-F29"
+      ],
+      "design_pages": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D07",
+        "D10",
+        "D16"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/input-check",
+      "operation_id": "checkVariantInput",
+      "summary": "收费前核变体输入充分性",
+      "request_schema": "InputCheckRequest",
+      "response_schema": "InputCheck",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F21",
+        "P01-F25",
+        "P01-F36",
+        "P01-F42"
+      ],
+      "design_pages": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D07",
+        "D09",
+        "D17",
+        "D19"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/plans",
+      "operation_id": "createPlan",
+      "summary": "受理有证据脚本与帧计划",
+      "request_schema": "PlanRequest",
+      "response_schema": "Plan",
+      "success_status": 202,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F05",
+        "P01-F06",
+        "P01-F32",
+        "P01-F33",
+        "P01-F35",
+        "P01-F36",
+        "P01-F37",
+        "P01-F38",
+        "P01-F39",
+        "P01-F40"
+      ],
+      "design_pages": [
+        "D03",
+        "D05",
+        "D07",
+        "D09",
+        "D11",
+        "D12",
+        "D14",
+        "D17",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plans/{plan_id}",
+      "operation_id": "getPlan",
+      "summary": "查询计划摘要与哈希",
+      "request_schema": null,
+      "response_schema": "Plan",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F05",
+        "P01-F06",
+        "P01-F35"
+      ],
+      "design_pages": [
+        "D03",
+        "D05",
+        "D07",
+        "D09",
+        "D17"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/products/{product_id}/previews",
+      "operation_id": "createOptionalPreview",
+      "summary": "按同版计划受理可选本人预览",
+      "request_schema": "PreviewRequest",
+      "response_schema": "Preview",
+      "success_status": 202,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F06",
+        "P01-F07"
+      ],
+      "design_pages": [
+        "D05",
+        "D07",
+        "D14"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/previews/{preview_id}",
+      "operation_id": "getOptionalPreview",
+      "summary": "查询本人预览状态",
+      "request_schema": null,
+      "response_schema": "Preview",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F06"
+      ],
+      "design_pages": [
+        "D05",
+        "D07"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/previews/{preview_id}/download-link",
+      "operation_id": "createPreviewLink",
+      "summary": "授权访问本人预览",
+      "request_schema": null,
+      "response_schema": "PreviewLink",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F06",
+        "P01-F15"
+      ],
+      "design_pages": [
+        "D02",
+        "D05",
+        "D07",
+        "D11",
+        "D13",
+        "D18",
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/quotes",
+      "operation_id": "createQuote",
+      "summary": "服务端定价与冻结整包合同",
+      "request_schema": "QuoteRequest",
+      "response_schema": "Quote",
+      "success_status": 201,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F07",
+        "P01-F33",
+        "P01-F42",
+        "P01-F46"
+      ],
+      "design_pages": [
+        "D05",
+        "D07",
+        "D09",
+        "D14",
+        "D17",
+        "D19",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/orders",
+      "operation_id": "createOrder",
+      "summary": "消费报价建立原渠道订单",
+      "request_schema": "OrderRequest",
+      "response_schema": "Order",
+      "success_status": 201,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F06",
+        "P01-F07",
+        "P01-F08",
+        "P01-F33"
+      ],
+      "design_pages": [
+        "D05",
+        "D07",
+        "D08",
+        "D14",
+        "D17",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/orders",
+      "operation_id": "listOrders",
+      "summary": "查询本人作品与订单",
+      "request_schema": null,
+      "response_schema": "OrderList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F01",
+        "P01-F08",
+        "P01-F11"
+      ],
+      "design_pages": [
+        "D01",
+        "D08",
+        "D10",
+        "D11",
+        "D12",
+        "D13",
+        "D14",
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/orders/{order_id}",
+      "operation_id": "getOrder",
+      "summary": "查询验付履约与退款引用",
+      "request_schema": null,
+      "response_schema": "Order",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F08",
+        "P01-F09",
+        "P01-F13"
+      ],
+      "design_pages": [
+        "D08",
+        "D09",
+        "D10",
+        "D14",
+        "D15",
+        "D23"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/orders/{order_id}/payment-attempts",
+      "operation_id": "getOrCreatePaymentAction",
+      "summary": "沿原单创建或恢复获准支付动作",
+      "request_schema": null,
+      "response_schema": "PaymentAction",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F08",
+        "P01-F23"
+      ],
+      "design_pages": [
+        "D02",
+        "D08",
+        "D13",
+        "D14",
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/payment-events/{provider}",
+      "operation_id": "receivePaymentEvent",
+      "summary": "接收原通道支付事件并后端核验",
+      "request_schema": null,
+      "response_schema": null,
+      "success_status": 200,
+      "auth_policy": "provider-native-signature-and-server-reconciliation",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F08",
+        "P01-F13",
+        "P01-F43"
+      ],
+      "design_pages": [
+        "D08",
+        "D09",
+        "D14",
+        "D15",
+        "D23"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/jobs/{job_id}",
+      "operation_id": "getJob",
+      "summary": "读取云端任务真实状态",
+      "request_schema": null,
+      "response_schema": "Job",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F09",
+        "P01-F43",
+        "P01-F46",
+        "P01-F49",
+        "P01-F50"
+      ],
+      "design_pages": [
+        "D05",
+        "D07",
+        "D08",
+        "D09",
+        "D10",
+        "D14",
+        "D15",
+        "D19",
+        "D21"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/jobs/{job_id}/stages",
+      "operation_id": "listJobStages",
+      "summary": "查询脱敏阶段状态",
+      "request_schema": null,
+      "response_schema": "StageList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F09",
+        "P01-F43",
+        "P01-F50"
+      ],
+      "design_pages": [
+        "D08",
+        "D09",
+        "D10",
+        "D14",
+        "D15",
+        "D19",
+        "D21"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/orders/{order_id}/deliverables",
+      "operation_id": "getDeliverables",
+      "summary": "完整QC交付后读取素材清单",
+      "request_schema": null,
+      "response_schema": "Deliverables",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F10",
+        "P01-F11",
+        "P01-F40",
+        "P01-F41"
+      ],
+      "design_pages": [
+        "D05",
+        "D07",
+        "D09",
+        "D10",
+        "D11",
+        "D12",
+        "D13",
+        "D15",
+        "D17"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/deliverables/{deliverable_id}/download-link",
+      "operation_id": "createDownloadLink",
+      "summary": "校验领取权益后签发5分钟短链",
+      "request_schema": null,
+      "response_schema": "DownloadLink",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F11",
+        "P01-F15",
+        "P01-F22"
+      ],
+      "design_pages": [
+        "D02",
+        "D10",
+        "D11",
+        "D12",
+        "D13",
+        "D18",
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/save-sessions",
+      "operation_id": "createSaveSession",
+      "summary": "记录本安装保存队列",
+      "request_schema": "SaveSessionRequest",
+      "response_schema": "SaveSession",
+      "success_status": 201,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F11",
+        "P01-F22",
+        "P01-F23"
+      ],
+      "design_pages": [
+        "D02",
+        "D10",
+        "D11",
+        "D12",
+        "D13",
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/save-receipts",
+      "operation_id": "recordSaveReceipt",
+      "summary": "幂等记录逐文件相册回执",
+      "request_schema": "SaveReceiptRequest",
+      "response_schema": "Receipt",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F17",
+        "P01-F22",
+        "P01-F23"
+      ],
+      "design_pages": [
+        "D02",
+        "D11",
+        "D12",
+        "D13",
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/orders/{order_id}/cancel",
+      "operation_id": "cancelOrder",
+      "summary": "按原单合同取消并处理在途竞态",
+      "request_schema": "ReasonRequest",
+      "response_schema": "Order",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F08",
+        "P01-F13",
+        "P01-F43"
+      ],
+      "design_pages": [
+        "D08",
+        "D09",
+        "D14",
+        "D15",
+        "D23"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/orders/{order_id}/refund-requests",
+      "operation_id": "requestRefund",
+      "summary": "提交原渠道退款请求",
+      "request_schema": "ReasonRequest",
+      "response_schema": "Refund",
+      "success_status": 202,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F13",
+        "P01-F16"
+      ],
+      "design_pages": [
+        "D10",
+        "D14",
+        "D15",
+        "D21",
+        "D23"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/refunds/{refund_id}",
+      "operation_id": "getRefund",
+      "summary": "查询原退款真实状态",
+      "request_schema": null,
+      "response_schema": "Refund",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F13",
+        "P01-F16"
+      ],
+      "design_pages": [
+        "D10",
+        "D14",
+        "D15",
+        "D21",
+        "D23"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/orders/{order_id}/revisions",
+      "operation_id": "requestLimitedRevision",
+      "summary": "48小时一次受限小修改",
+      "request_schema": "RevisionRequest",
+      "response_schema": "Revision",
+      "success_status": 202,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F12"
+      ],
+      "design_pages": [
+        "D06",
+        "D11",
+        "D15",
+        "D23"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/revisions/{revision_id}",
+      "operation_id": "getRevision",
+      "summary": "查询关联修改版本",
+      "request_schema": null,
+      "response_schema": "Revision",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F12"
+      ],
+      "design_pages": [
+        "D06",
+        "D11",
+        "D15",
+        "D23"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/orders/{order_id}/tickets",
+      "operation_id": "createSupportTicket",
+      "summary": "提交原单帮助或平台纠错",
+      "request_schema": "TicketRequest",
+      "response_schema": "Ticket",
+      "success_status": 201,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F12",
+        "P01-F14",
+        "P01-F16"
+      ],
+      "design_pages": [
+        "D06",
+        "D10",
+        "D11",
+        "D14",
+        "D15",
+        "D19",
+        "D21",
+        "D23"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/tickets",
+      "operation_id": "listSupportTickets",
+      "summary": "查询本人售后工单",
+      "request_schema": null,
+      "response_schema": "TicketList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F16"
+      ],
+      "design_pages": [
+        "D10",
+        "D14",
+        "D15",
+        "D21"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/tickets/{ticket_id}",
+      "operation_id": "getSupportTicket",
+      "summary": "查询本人售后处理",
+      "request_schema": null,
+      "response_schema": "Ticket",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F16"
+      ],
+      "design_pages": [
+        "D10",
+        "D14",
+        "D15",
+        "D21"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/help-articles",
+      "operation_id": "listHelpArticles",
+      "summary": "自助帮助",
+      "request_schema": null,
+      "response_schema": "HelpArticleList",
+      "success_status": 200,
+      "auth_policy": "public-rate-limited",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F16"
+      ],
+      "design_pages": [
+        "D10",
+        "D14",
+        "D15",
+        "D21"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/privacy-deletions",
+      "operation_id": "requestPrivacyDeletion",
+      "summary": "请求清理本人商品或账户媒体",
+      "request_schema": "PrivacyDeletionRequest",
+      "response_schema": "PrivacyDeletion",
+      "success_status": 202,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F15"
+      ],
+      "design_pages": [
+        "D02",
+        "D11",
+        "D13",
+        "D18",
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/privacy-deletions/{deletion_id}",
+      "operation_id": "getPrivacyDeletion",
+      "summary": "查询清理回执与保留边界",
+      "request_schema": null,
+      "response_schema": "PrivacyDeletion",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F15"
+      ],
+      "design_pages": [
+        "D02",
+        "D11",
+        "D13",
+        "D18",
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/community-components",
+      "operation_id": "listCommunityComponents",
+      "summary": "作者查询平台受控组件目录",
+      "request_schema": null,
+      "response_schema": "ComponentOptionList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F28",
+        "P01-F32"
+      ],
+      "design_pages": [
+        "D05",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/variant-blueprints",
+      "operation_id": "listVariantBlueprints",
+      "summary": "作者查询允许组合的执行蓝本",
+      "request_schema": null,
+      "response_schema": "VariantBlueprintList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F28",
+        "P01-F32",
+        "P01-F33",
+        "P01-F42"
+      ],
+      "design_pages": [
+        "D05",
+        "D07",
+        "D14",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/community-resource-versions",
+      "operation_id": "listCommunityResources",
+      "summary": "作者查询获准字体音乐人物声音资源",
+      "request_schema": null,
+      "response_schema": "ResourceOptionList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F28",
+        "P01-F30",
+        "P01-F36",
+        "P01-F40",
+        "P01-F47"
+      ],
+      "design_pages": [
+        "D05",
+        "D07",
+        "D09",
+        "D11",
+        "D12",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/rights-records",
+      "operation_id": "submitRightsRecord",
+      "summary": "作者提交私有授权证据",
+      "request_schema": "RightsRecordRequest",
+      "response_schema": "RightsRecord",
+      "success_status": 201,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F15",
+        "P01-F28",
+        "P01-F30",
+        "P01-F47"
+      ],
+      "design_pages": [
+        "D02",
+        "D05",
+        "D11",
+        "D13",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20",
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/rights-records/{rights_record_id}",
+      "operation_id": "getRightsRecord",
+      "summary": "查询本人权利证据审核",
+      "request_schema": null,
+      "response_schema": "RightsRecord",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F28",
+        "P01-F30",
+        "P01-F47"
+      ],
+      "design_pages": [
+        "D05",
+        "D11",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/preset-drafts",
+      "operation_id": "createPresetDraft",
+      "summary": "创建受控社区方案草稿",
+      "request_schema": "PresetDraftRequest",
+      "response_schema": "PresetDraft",
+      "success_status": 201,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F04",
+        "P01-F28",
+        "P01-F32"
+      ],
+      "design_pages": [
+        "D04",
+        "D05",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/preset-drafts",
+      "operation_id": "listPresetDrafts",
+      "summary": "列出作者本人草稿",
+      "request_schema": null,
+      "response_schema": "PresetDraftList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F28"
+      ],
+      "design_pages": [
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/preset-drafts/{draft_id}",
+      "operation_id": "getPresetDraft",
+      "summary": "恢复作者草稿与版本",
+      "request_schema": null,
+      "response_schema": "PresetDraft",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F28",
+        "P01-F33"
+      ],
+      "design_pages": [
+        "D05",
+        "D07",
+        "D14",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "PATCH",
+      "path": "/preset-drafts/{draft_id}",
+      "operation_id": "updatePresetDraft",
+      "summary": "乐观并发更新受控配置",
+      "request_schema": "PresetDraftPatch",
+      "response_schema": "PresetDraft",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F28",
+        "P01-F32",
+        "P01-F33"
+      ],
+      "design_pages": [
+        "D05",
+        "D07",
+        "D14",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/preset-drafts/{draft_id}/samples",
+      "operation_id": "createPresetSample",
+      "summary": "受理授权私有样例生成",
+      "request_schema": "SampleRequest",
+      "response_schema": "Sample",
+      "success_status": 202,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F28",
+        "P01-F36",
+        "P01-F47"
+      ],
+      "design_pages": [
+        "D05",
+        "D07",
+        "D09",
+        "D11",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/preset-samples/{sample_id}",
+      "operation_id": "getPresetSample",
+      "summary": "查询作者样例状态",
+      "request_schema": null,
+      "response_schema": "Sample",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F28",
+        "P01-F47"
+      ],
+      "design_pages": [
+        "D05",
+        "D11",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/preset-samples/{sample_id}/media-links",
+      "operation_id": "createPrivateSampleMediaLinks",
+      "summary": "授权作者查看本人私有样例",
+      "request_schema": null,
+      "response_schema": "SampleMedia",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F15",
+        "P01-F28",
+        "P01-F47"
+      ],
+      "design_pages": [
+        "D02",
+        "D05",
+        "D11",
+        "D13",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20",
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/public-samples/{sample_id}",
+      "operation_id": "getPublicSampleMedia",
+      "summary": "查看独立授权且审核公开的样例",
+      "request_schema": null,
+      "response_schema": "PublicSampleMedia",
+      "success_status": 200,
+      "auth_policy": "public-rate-limited",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F21",
+        "P01-F28",
+        "P01-F31",
+        "P01-F47"
+      ],
+      "design_pages": [
+        "D01",
+        "D04",
+        "D05",
+        "D07",
+        "D11",
+        "D15",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20",
+        "D21"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/appeals/{appeal_id}",
+      "operation_id": "getAppeal",
+      "summary": "查询本人或有权当事人的申诉",
+      "request_schema": null,
+      "response_schema": "Appeal",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F31"
+      ],
+      "design_pages": [
+        "D04",
+        "D15",
+        "D16",
+        "D18",
+        "D19",
+        "D20",
+        "D21"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/preset-drafts/{draft_id}/submit",
+      "operation_id": "submitPresetPublication",
+      "summary": "提交审核与准入材料",
+      "request_schema": "PublicationRequest",
+      "response_schema": "Publication",
+      "success_status": 202,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F28",
+        "P01-F30",
+        "P01-F31",
+        "P01-F47"
+      ],
+      "design_pages": [
+        "D04",
+        "D05",
+        "D11",
+        "D15",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20",
+        "D21"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/preset-publications/{publication_id}",
+      "operation_id": "getPresetPublication",
+      "summary": "查询审核准入与停售状态",
+      "request_schema": null,
+      "response_schema": "Publication",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F28",
+        "P01-F31",
+        "P01-F50"
+      ],
+      "design_pages": [
+        "D04",
+        "D09",
+        "D14",
+        "D15",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20",
+        "D21"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "PUT",
+      "path": "/presets/{preset_id}/favorite",
+      "operation_id": "setFavorite",
+      "summary": "收藏方案",
+      "request_schema": null,
+      "response_schema": "Favorite",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F29"
+      ],
+      "design_pages": [
+        "D04",
+        "D10",
+        "D16"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "DELETE",
+      "path": "/presets/{preset_id}/favorite",
+      "operation_id": "deleteFavorite",
+      "summary": "取消收藏",
+      "request_schema": null,
+      "response_schema": "Favorite",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F29"
+      ],
+      "design_pages": [
+        "D04",
+        "D10",
+        "D16"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/favorites",
+      "operation_id": "listFavorites",
+      "summary": "查询本人收藏",
+      "request_schema": null,
+      "response_schema": "PresetSummaryList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F29"
+      ],
+      "design_pages": [
+        "D04",
+        "D10",
+        "D16"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/presets/{preset_id}/forks",
+      "operation_id": "forkPreset",
+      "summary": "依父版本许可派生草稿",
+      "request_schema": "ForkRequest",
+      "response_schema": "PresetDraft",
+      "success_status": 201,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F30",
+        "P01-F32"
+      ],
+      "design_pages": [
+        "D05",
+        "D16",
+        "D17",
+        "D18",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/presets/{preset_id}/reports",
+      "operation_id": "reportPreset",
+      "summary": "举报版本与提交私有证据",
+      "request_schema": "ReportRequest",
+      "response_schema": "Report",
+      "success_status": 201,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F31"
+      ],
+      "design_pages": [
+        "D04",
+        "D15",
+        "D16",
+        "D18",
+        "D19",
+        "D20",
+        "D21"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/reports",
+      "operation_id": "listReports",
+      "summary": "查询本人举报",
+      "request_schema": null,
+      "response_schema": "ReportList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F31"
+      ],
+      "design_pages": [
+        "D04",
+        "D15",
+        "D16",
+        "D18",
+        "D19",
+        "D20",
+        "D21"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/reports/{report_id}",
+      "operation_id": "getReport",
+      "summary": "查询有权读取的举报决定",
+      "request_schema": null,
+      "response_schema": "Report",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F31"
+      ],
+      "design_pages": [
+        "D04",
+        "D15",
+        "D16",
+        "D18",
+        "D19",
+        "D20",
+        "D21"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/reports/{report_id}/appeals",
+      "operation_id": "appealReportDecision",
+      "summary": "对有权申诉的治理决定申诉",
+      "request_schema": "AppealRequest",
+      "response_schema": "Appeal",
+      "success_status": 201,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F31"
+      ],
+      "design_pages": [
+        "D04",
+        "D15",
+        "D16",
+        "D18",
+        "D19",
+        "D20",
+        "D21"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/rights-records",
+      "operation_id": "listRightsRecords",
+      "summary": "查询本人授权资料",
+      "request_schema": null,
+      "response_schema": "RightsRecordList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F28",
+        "P01-F30",
+        "P01-F47"
+      ],
+      "design_pages": [
+        "D05",
+        "D11",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/preset-drafts/{draft_id}/samples",
+      "operation_id": "listPresetSamples",
+      "summary": "恢复本人草稿的样例记录",
+      "request_schema": null,
+      "response_schema": "SampleList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F28",
+        "P01-F47"
+      ],
+      "design_pages": [
+        "D05",
+        "D11",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/preset-publications",
+      "operation_id": "listPresetPublications",
+      "summary": "查询本人方案发布记录",
+      "request_schema": null,
+      "response_schema": "PublicationList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F28",
+        "P01-F29"
+      ],
+      "design_pages": [
+        "D04",
+        "D10",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/appeals",
+      "operation_id": "listAppeals",
+      "summary": "查询本人申诉记录",
+      "request_schema": null,
+      "response_schema": "AppealList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F31"
+      ],
+      "design_pages": [
+        "D04",
+        "D15",
+        "D16",
+        "D18",
+        "D19",
+        "D20",
+        "D21"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/creator/reports",
+      "operation_id": "listAuthorReports",
+      "summary": "查询涉及本人方案的治理状态",
+      "request_schema": null,
+      "response_schema": "ReportList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F28",
+        "P01-F31"
+      ],
+      "design_pages": [
+        "D04",
+        "D15",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20",
+        "D21"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/orders/{order_id}/revisions",
+      "operation_id": "listRevisions",
+      "summary": "恢复本人订单的修改记录",
+      "request_schema": null,
+      "response_schema": "RevisionList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F12"
+      ],
+      "design_pages": [
+        "D06",
+        "D11",
+        "D15",
+        "D23"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/preset-publications/{publication_id}/sample-withdrawals",
+      "operation_id": "withdrawPublicSamples",
+      "summary": "撤回本次发布的全部公开样例",
+      "request_schema": "PublicSampleWithdrawalRequest",
+      "response_schema": "Publication",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": true,
+      "requirements": [
+        "P01-F15",
+        "P01-F28",
+        "P01-F29",
+        "P01-F30"
+      ],
+      "design_pages": [
+        "D02",
+        "D04",
+        "D05",
+        "D10",
+        "D11",
+        "D13",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20",
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/preset-licenses",
+      "operation_id": "listPresetLicenses",
+      "summary": "查询社区方案许可版本",
+      "request_schema": null,
+      "response_schema": "PresetLicenseList",
+      "success_status": 200,
+      "auth_policy": "public-rate-limited",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F28",
+        "P01-F29",
+        "P01-F30"
+      ],
+      "design_pages": [
+        "D04",
+        "D05",
+        "D10",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/preset-licenses/{license_id}",
+      "operation_id": "getPresetLicense",
+      "summary": "读取指定版本的完整许可",
+      "request_schema": null,
+      "response_schema": "PresetLicense",
+      "success_status": 200,
+      "auth_policy": "public-rate-limited",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F28",
+        "P01-F29",
+        "P01-F30"
+      ],
+      "design_pages": [
+        "D04",
+        "D05",
+        "D10",
+        "D16",
+        "D17",
+        "D18",
+        "D19",
+        "D20"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/orders/{order_id}/usage-feedback",
+      "operation_id": "getUsageFeedback",
+      "summary": "读取本人订单的自愿使用反馈",
+      "request_schema": null,
+      "response_schema": "UsageFeedback",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F17",
+        "P01-F23"
+      ],
+      "design_pages": [
+        "D11"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "PUT",
+      "path": "/orders/{order_id}/usage-feedback",
+      "operation_id": "setUsageFeedback",
+      "summary": "按原修订号更新或撤回自愿反馈；不影响保存和交付",
+      "request_schema": "UsageFeedbackRequest",
+      "response_schema": "UsageFeedback",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F17",
+        "P01-F23"
+      ],
+      "design_pages": [
+        "D11"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/products/{product_id}/recommendation-events",
+      "operation_id": "recordRecommendationEvent",
+      "summary": "记录本人当前推荐的可见停留或点击；自然键去重，不影响制作",
+      "request_schema": "RecommendationEventRequest",
+      "response_schema": "RecommendationEventReceipt",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F17",
+        "P01-F21"
+      ],
+      "design_pages": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D07",
+        "D10",
+        "D16"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/plus/links",
+      "operation_id": "createPlusLink",
+      "summary": "创建短期电脑接续码",
+      "request_schema": "PlusLinkCreateRequest",
+      "response_schema": "PlusLink",
+      "success_status": 200,
+      "auth_policy": "public-plus-link-secret",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/plus/links/inspect",
+      "operation_id": "inspectPlusLink",
+      "summary": "小程序查看本人准备确认的电脑接续",
+      "request_schema": "PlusLinkInspectRequest",
+      "response_schema": "PlusLinkApproval",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/plus/links/decision",
+      "operation_id": "decidePlusLink",
+      "summary": "小程序主动允许或拒绝电脑接续",
+      "request_schema": "PlusLinkDecisionRequest",
+      "response_schema": "PlusLinkApproval",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/plus/links/{link_id}/poll",
+      "operation_id": "pollPlusLink",
+      "summary": "电脑持独立秘密等待确认；原确认不续期",
+      "request_schema": "PlusLinkPollRequest",
+      "response_schema": "PlusLinkStatus",
+      "success_status": 200,
+      "auth_policy": "public-plus-link-secret",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/session",
+      "operation_id": "getPlusSession",
+      "summary": "读取当前电脑连接",
+      "request_schema": null,
+      "response_schema": "PlusSessionInfo",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/sessions",
+      "operation_id": "listPlusSessions",
+      "summary": "小程序读取本人有效电脑连接",
+      "request_schema": null,
+      "response_schema": "PlusSessionList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "DELETE",
+      "path": "/plus/sessions/{plus_session_id}",
+      "operation_id": "revokePlusSession",
+      "summary": "撤销本人电脑连接及其短期下载权限",
+      "request_schema": null,
+      "response_schema": "PlusSessionInfo",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/plus/edit-drafts",
+      "operation_id": "createPlusEditDraft",
+      "summary": "为本人已交付图片建立独立编辑草稿",
+      "request_schema": "PlusEditCreateRequest",
+      "response_schema": "PlusEditDraft",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/edit-drafts/{draft_id}",
+      "operation_id": "getPlusEditDraft",
+      "summary": "读取本人当前有效来源的编辑草稿",
+      "request_schema": null,
+      "response_schema": "PlusEditDraft",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "PUT",
+      "path": "/plus/edit-drafts/{draft_id}",
+      "operation_id": "savePlusEditDraft",
+      "summary": "按修订号保存裁切、规格和待核对文字",
+      "request_schema": "PlusEditSaveRequest",
+      "response_schema": "PlusEditDraft",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/edit-drafts",
+      "operation_id": "listPlusEditDrafts",
+      "summary": "按本人范围分页读取有效编辑草稿",
+      "request_schema": null,
+      "response_schema": "PlusEditList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/render-styles",
+      "operation_id": "listPlusRenderStyles",
+      "summary": "读取独立图片制作风格及当前计价可用性",
+      "request_schema": null,
+      "response_schema": "PlusRenderStyleList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/plus/edit-drafts/{draft_id}/render-plans",
+      "operation_id": "createPlusRenderPlan",
+      "summary": "冻结编辑修订并整理独立制作清单，付款仍需小程序确认",
+      "request_schema": "PlusRenderCreateRequest",
+      "response_schema": "PlusRenderPlan",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/render-plans",
+      "operation_id": "listPlusRenderPlans",
+      "summary": "本人在电脑或原小程序继续独立制作请求",
+      "request_schema": null,
+      "response_schema": "PlusRenderPlanList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/render-plans/{request_id}",
+      "operation_id": "getPlusRenderPlan",
+      "summary": "读取本人独立制作清单及原渠道订单状态",
+      "request_schema": null,
+      "response_schema": "PlusRenderPlan",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    }
+  ]
+}

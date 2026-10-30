@@ -1,5 +1,17 @@
 # One Tap Assets · 一品成片
 
+2026-10-30 delivery update: **Multi-product image preparation and independent delivery are connected.** Select 2–10 saved drafts in Plus, choose each style and prepare each plan. On the original Alipay/Douyin mini-program, review every plan and its full fee, then intentionally pay for each order. Production, post-processing, file QC and separate facts/style reviews deliver a new private PNG and copy for each paid product. One stale, failed or unpaid item does not block a sibling; original media and entitlements remain available.
+
+![Independent product-batch production walkthrough](docs/media/plus-batches/walkthrough.gif)
+
+[Complete flow, API and constraints](docs/实施/Plus批量商品独立制作与逐件交付-v1.0.md) · [Screenshots, actual output, MP4/WebM/GIF](docs/media/plus-batches/README.md) · [Numbered work and remaining items](docs/guides/STATUS.md) · [Exact evidence](docs/verification/plus-batches-source.json) · [Delivery package manifest](docs/delivery/package.json).
+
+Workflow: mobile photos/production → explicit phone approval for Plus → saved image drafts → computer batch selection/preparation → native batch history and per-item fee confirmation/payment → independent delivery. Browser access never authorizes payment or refund. Batch history is recoverable; replay uses a hashed request intent and current private visibility, and draft conflicts are isolated with database savepoints.
+
+527 source files, 37 migrations, 98 business / 38 management operations, 305 schemas and 82 logical entities. Four final-source vertical checks, required type/server/Plus builds, native startup and nine browser checks passed. No full-suite green gate is imposed. Both Alipay and Douyin candidate compilers timed out at 180 seconds. Their failed records are retained; these candidates are excluded from executable delivery and do not block the successful server/Plus package. Nine new media files bring the total to 180; the original 171 and frozen C design remain intact. Local HTTPS, PostgreSQL, MCP and PNG execution are actual; identity, payment, inference, semantic verdicts and process identity are synthetic. Real services remain disabled. Video/subtitles/advanced authoring, permanent cross-platform binding, native-device acceptance and cloud deployment remain outstanding.
+
+Earlier delivery notes retain their original evidence and scope.
+
 2026-10-30 delivery update: **Plus now has a complete single-image production path.** Save a crop, exact canvas size and text on the computer, select a style and prepare a separate production plan. The original Alipay/Douyin mini-program explicitly approves this extra capability, displays the frozen version and full new fee, and requires an intentional native payment. CONTENT, production, post-processing, file QC and independent facts/style reviews then deliver a new private PNG and accompanying copy. Original media, orders and their revision rights remain available; old computer grants receive no automatic elevation.
 
 ![Plus single-image production walkthrough](docs/media/plus-render/walkthrough.gif)

@@ -9,6 +9,7 @@ import { createUploadGrant, completeAsset } from '../modules/assets.js';
 import { listPresets, presetVersion } from '../modules/catalog.js';
 import { createPlan, checkInput, createPreview } from '../modules/plans.js';
 import * as plusRender from '../modules/plus-render.js';
+import * as plusBatches from '../modules/plus-batches.js';
 import { createQuote, createOrder, cancelOrder, requestRefundInternal } from '../modules/commerce.js';
 import { getDeliverables, createDownloadLink, createSaveSession, recordSaveReceipt, requestRevision, previewLink,listRevisions } from '../modules/delivery.js';
 import { HELP_ARTICLES, createTicket, requestDeletion } from '../modules/support.js';
@@ -32,6 +33,9 @@ const param = (ctx: BusinessContext, name: string): string => ctx.params[name] ?
 
 export const businessHandlers: Record<string, BusinessHandler> = {
   createPlusLink:async c=>plus.createPlusLink(c.db,c.cfg,validate('PlusLinkCreateRequest',c.body)),
+  createPlusRenderBatch:async c=>plusBatches.createPlusRenderBatch(c.db,c.cfg,principal(c),validate('PlusBatchCreateRequest',c.body)),
+  listPlusRenderBatches:async c=>plusBatches.listPlusRenderBatches(c.db,c.cfg,principal(c),c.query),
+  getPlusRenderBatch:async c=>plusBatches.getPlusRenderBatch(c.db,principal(c),param(c,'batch_id')),
   listPlusRenderStyles:async c=>plusRender.listPlusRenderStyles(c.db,c.cfg),
   createPlusRenderPlan:async c=>plusRender.createPlusRenderPlan(c.db,c.cfg,principal(c),param(c,'draft_id'),validate('PlusRenderCreateRequest',c.body)),
   listPlusRenderPlans:async c=>plusRender.listPlusRenderPlans(c.db,c.cfg,principal(c),c.query),

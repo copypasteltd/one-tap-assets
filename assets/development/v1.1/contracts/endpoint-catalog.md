@@ -184,3 +184,6 @@ GET 推荐保持只读。可见比例至少 50% 且连续停留 500ms 后报曝�
 | POST /plus/edit-drafts/{draft_id}/render-plans | createPlusRenderPlan | PlusRenderCreateRequest → PlusRenderPlan |
 | GET /plus/render-plans | listPlusRenderPlans | 无 → PlusRenderPlanList |
 | GET /plus/render-plans/{request_id} | getPlusRenderPlan | 无 → PlusRenderPlan |
+| POST /plus/render-batches | createPlusRenderBatch | PlusBatchCreateRequest → PlusBatch |
+| GET /plus/render-batches | listPlusRenderBatches | 无 → PlusBatchList |
+| GET /plus/render-batches/{batch_id} | getPlusRenderBatch | 无 → PlusBatch |

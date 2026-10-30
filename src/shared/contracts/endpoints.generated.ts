@@ -751,5 +751,29 @@ export const endpoints = {
     "idempotency": false,
     "request": null,
     "response": "PlusRenderPlan"
+  },
+  "createPlusRenderBatch": {
+    "method": "POST",
+    "path": "/plus/render-batches",
+    "authenticated": true,
+    "idempotency": false,
+    "request": "PlusBatchCreateRequest",
+    "response": "PlusBatch"
+  },
+  "listPlusRenderBatches": {
+    "method": "GET",
+    "path": "/plus/render-batches",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "PlusBatchList"
+  },
+  "getPlusRenderBatch": {
+    "method": "GET",
+    "path": "/plus/render-batches/{batch_id}",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "PlusBatch"
   }
 } as const;

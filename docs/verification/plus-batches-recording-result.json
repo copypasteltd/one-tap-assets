@@ -1,0 +1,10 @@
+{
+  "base": "runtime/test-results/plus-batches-recording-2026-10-30T14-31-38-875Z-74a8a8fe",
+  "status": "PASS",
+  "exit_code": 0,
+  "elapsed_ms": 77168,
+  "source_set_hash": "034fdb1ba27431892c5e272775c494e526b0a7f207a8336f25b8f9a7be524888",
+  "source_unchanged": true,
+  "log_path": "runtime/test-results/plus-batches-recording-2026-10-30T14-31-38-875Z-74a8a8fe/recording.log",
+  "log_sha256": "17f96dddb9fee406c7308a4e3085a79b1b8d803b560542f0ff89294a83c0b066"
+}

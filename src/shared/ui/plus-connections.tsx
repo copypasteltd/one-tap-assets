@@ -5,6 +5,7 @@ import type {DTO} from '../contracts/types';
 import {client} from './runtime';
 import {Action,Notice,Panel,ResourceState,useAction,useResource} from './base';
 import {PlusRenderRequests} from './plus-render-requests';
+import {PlusBatchRequests} from './plus-batch-requests';
 declare const __YPCC_API_BASE__:string;
 
 export function PlusConnections(){
@@ -37,6 +38,6 @@ function ConnectionManager(){
         await client().api.call('revokePlusSession',{params:{plus_session_id:session.session_id}});list.reload();
       })}>关闭这个电脑连接</Action></Panel>)}
     {!list.busy&&list.data&&!list.data.items.length&&<Text className='secondary'>目前没有有效电脑连接。确认后，可在电脑继续你的素材。</Text>}
-    <Action secondary onClick={list.reload}>刷新连接记录</Action><PlusRenderRequests/>
+    <Action secondary onClick={list.reload}>刷新连接记录</Action><PlusBatchRequests/><PlusRenderRequests/>
   </Panel>;
 }

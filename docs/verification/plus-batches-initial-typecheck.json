@@ -1,0 +1,7 @@
+{
+  "exit_code": 2,
+  "status": "FAIL",
+  "diagnostic": "src/web/batch-workspace.tsx(38,373): error TS18047: 'style.price_fen' is possibly 'null'.",
+  "source_status": "INTERMEDIATE_SOURCE_BEFORE_BATCH_TESTS_AND_NULL_PRICE_FIX",
+  "was_cancelled": false
+}
