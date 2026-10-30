@@ -1,0 +1,21 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+stdout | tests/integration/native-order.test.ts > delivers native community buyer PER_SHOT_AI from frozen default voice through original paid audio and private download
+native-buyer-flow: E:\dev\sandbox\支付宝黑客松\一品成片\runtime\tests\native-order\media_9a48d77076794731af22fd4f4fef394b\buyer-flow_926368c3a2644ad4bf98fee8a1100d61.jsonl
+
+stdout | tests/integration/native-order.test.ts > delivers native community buyer REFERENCE_FILM from frozen default voice through original paid audio and private download
+native-buyer-flow: E:\dev\sandbox\支付宝黑客松\一品成片\runtime\tests\native-order\media_9a48d77076794731af22fd4f4fef394b\buyer-flow_82fa06360f954a80820a5eea135b7bc4.jsonl
+
+ ✓ tests/integration/native-order.test.ts (37 tests | 33 skipped) 122272ms
+   ✓ delivers native community buyer PER_SHOT_AI from frozen default voice through original paid audio and private download 61634ms
+   ✓ delivers native community buyer REFERENCE_FILM from frozen default voice through original paid audio and private download 55683ms
+   ✓ freezes native community configuration only with explicit ORDER voice rights and its original complete budget 800ms
+   ✓ locks native community planning to its frozen voice and rejects changed models and revoked ORDER rights before inference 993ms
+
+ Test Files  1 passed (1)
+      Tests  4 passed | 33 skipped (37)
+   Start at  17:36:36
+   Duration  136.80s (tests 90%, import 6%, transform 4%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/community-native-2026-10-30T09-36-34-622Z/api.json

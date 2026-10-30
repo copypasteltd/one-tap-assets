@@ -1,5 +1,9 @@
 # 源码交付与快速启动 / Source delivery and quick start
 
+2026-10-30快速交付：[社区原生声音商业配置与买家交付](../实施/社区原生声音商业配置与买家交付-v1.0.md) · [准确证据与原始失败](../verification/community-native-source.json)。默认人物声音/ORDER授权、四模型费率、原预算/资源、规划锁定及最早到期报价接通；两路线买家付款→原声/字幕→整轨听音→新双复核→私有下载/释放有原生夹具证据。最终7项通过/33未选，461/42/4 `5d8ea011`；类型/server/preview/原生自检和启动PASS，32迁移原字节保持，77业务/35管理。早期一项旧官方买家用例原240秒限时超时仍待定位；不升级全面通过。122媒体/154含元数据、48设计与原历史JSON/日志保持，无新UI录制。提示音及合成语义/授权/付款不证明真实质量；全面测试、双小程序重编/真机未执行，真实服务/销售关闭，产品/生产/云端false。
+
+以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
+
 2026-10-30快速交付：[社区原生声音样例](../实施/社区原生声音样例与平台声音账本-v1.0.md) · [准确证据](../verification/native-sample-source.json)。两条生成路线的原声拼接、一次转写字幕、完整双轨听音、新双复核、独立平台费用及公开许可撤回接通。8项关键检查通过/56未选，459/42/4 `52416aa9`；类型/server/preview/原生自检及启动PASS，主库32迁移，001–031原字节保持，77业务/35管理操作。新增6媒体、原116媒体及C设计保持。提示音及合成语义/中文转写/听音/许可/身份不代表真实服务质量。全量测试、双小程序重编/真机未执行；真实服务及销售关闭，产品/生产/云端false。
 
 以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
@@ -145,9 +149,9 @@ Without an explicit origin, delivery builds use `https://localhost:3100` for loc
 
 `delivery:build --server-only`仅进行类型与服务端构建，其他目标记为NOT_RUN；适用于后端专项收口。该模式的成功只代表所选服务端构建，完整构建状态仍单独保留。The server-only mode explicitly leaves other build targets NOT_RUN.
 
-`delivery:build --skip-mini`执行类型、服务端和网页构建，小程序目标记为NOT_RUN。本轮客服增补采用此模式；ZIP包含两端完整源码及当前服务端/网页产物，最终快照未重建小程序，也没有混入旧编译物。初版支付宝TIMEOUT、抖音PASS见[原构建记录](../verification/support-desk-initial-build.json)，不升级为最终快照通过。需要小程序产物时，配置实际HTTPS地址并执行上面的完整构建。
+`delivery:build --skip-mini`执行类型、服务端和网页构建，小程序目标记为NOT_RUN。当前快速交付采用此模式；ZIP包含两端完整源码及当前服务端/网页产物，最终快照未重建小程序，也没有混入旧编译物。初版支付宝TIMEOUT、抖音PASS见[原构建记录](../verification/support-desk-initial-build.json)，不升级为最终快照通过。需要小程序产物时，配置实际HTTPS地址并执行上面的完整构建。
 
-`delivery:build --skip-mini` builds the server and web pages, explicitly leaving both mini-program outputs NOT_RUN. This support-desk package includes complete mini-program source and current server/web outputs. Earlier Alipay TIMEOUT and Douyin PASS belong to the original snapshot; current mini-program binaries are excluded. Run a full build with the configured HTTPS API when producing host outputs.
+`delivery:build --skip-mini` builds the server and web pages, explicitly leaving both mini-program outputs NOT_RUN. This focused package includes complete mini-program source and current server/web outputs. Earlier Alipay TIMEOUT and Douyin PASS belong to the original snapshot; current mini-program binaries are excluded. Run a full build with the configured HTTPS API when producing host outputs.
 
 `delivery:build`直接调用已安装的固定工具，输出到新的独立目录。执行类型检查、服务端、共享页面、支付宝和抖音构建，每个命令最多180秒；一个目标失败后仍记录其他目标。`--smoke`仅选照片上传/恢复及原图素材完整双复核交付相关文件，最多180秒；不运行全套。所有状态和日志摘要写入[current.json](current.json)，完整日志留在忽略目录。打包不要求全部检查通过，包清单会显示实际缺项。
 
@@ -165,10 +169,10 @@ The intended main flow remains photos → multimodal product profile → communi
 
 | 编号 / No. | 交付后的剩余工作 / Remaining work |
 | --- | --- |
-| 01 | 原生口播修复的新音轨/额外ASR与听音；原图/无声生成已接通 / Native-audio repair; photo and silent generation connected |
+| 01 | 原生有声失败修复及保留原声售后已有源码；真实口播质量和各资源完整准入待验 / Native repair/retained-audio aftercare source exists; real voice/resource admission remains pending |
 | 02 | 真实Codex原生隔离/清理、模型质量/计费、语音授权及连续多镜变体 / Real runtime, providers, speech and official variants |
 | 03 | 支付宝/抖音真机登录、支付/退款、下载/相册和服务域名配置 / Native device and host integrations |
-| 04 | 完整社区商业发布、生成式售后、Plus管理界面及云端部署 / Remaining community, aftercare, Plus and deployment |
+| 04 | 静音/有声社区买家源码和生成式售后已接通；完整商业准入、Plus及云部署待完 / Community buyer/aftercare source is connected; complete admission, Plus and cloud remain pending |
 | 05 | 已记录的原生数据库超时与完整验收；不阻断当前源码候选打包 / Historical timeout investigation and comprehensive acceptance |
 
 历史全量失败和单项证据保留在[验证索引](../verification/README.md)；它们不被本轮快速构建改写为全通过。[当前状态](../guides/STATUS.md)继续记录功能缺口。每轮同步双语README、更新说明和远端仓库。

@@ -15,6 +15,7 @@ import { previewPlan, PREVIEW_RENDERER_VERSION, type PreviewInput } from './prev
 import { bindProductionFont, loadProductionFont, verifyResourceLicenses } from '../../worker/media/font.js';
 import type { ResourceBinding } from '../../worker/compiler/snapshot.js';
 import { STYLES } from '../../worker/media/layout.js';
+import {communityNativeBinding,verifyCommunityNativeRegistration,applyCommunityNativeVoice} from './community-native.js';
 
 export async function checkInput(db: Db, p: Principal, request: DTO<'InputCheckRequest'>): Promise<DTO<'InputCheck'>> {
   const product = await owned<DTO<'Product'>>(db, 'product_drafts', request.product_id, p);
@@ -35,6 +36,8 @@ export async function createPlan(db: Db, cfg: Config, p: Principal, request: DTO
   const preset = await presetVersion(db, request.preset_id, request.preset_version);
   requireThat(preset.variants.some(v => v.variant_id === request.variant_id && v.version === request.variant_version), 'VARIANT_SCOPE_INVALID', '制作规格不属于该方案', 422);
   const variant = await getVariant(db, request.variant_id, request.variant_version);
+  const native=communityNativeBinding(variant.private.source,(variant.private.commercial_binding as {native_audio?:unknown}|undefined)?.native_audio);
+  if(native)await verifyCommunityNativeRegistration(db,variant.private.source,native);
   const input = await checkInput(db, p, { product_id: request.product_id, profile_id: request.profile_id, variant_id: request.variant_id, variant_version: request.variant_version });
   requireThat(input.eligible, 'INPUT_INSUFFICIENT', input.capture_guidance.join(' ') || '当前输入不满足该方案', 422);
   requireThat(cfg.codex.enabled, 'CODEX_NOT_CONFIGURED', '内容规划服务尚未配置', 503);
@@ -45,15 +48,17 @@ export async function createPlan(db: Db, cfg: Config, p: Principal, request: DTO
   requireThat(inferenceLimits.daily_ceiling_micro >= inferenceLimits.ceiling_micro, 'CODEX_LIMITS_INVALID', '平台内容规划费用额度尚未配置', 503);
   const photo = (await db.query<{ id: string }>('SELECT id FROM product_photo_versions WHERE tenant_id=$1 AND product_id=$2 AND revision=$3', [p.tenantId, request.product_id, request.photo_version])).rows[0] ?? notFound();
   const planId = id('plan'); const creative = basePlan(profile.data, variant.private.source);
+  if(native)applyCommunityNativeVoice(creative,native);
   const data: DTO<'Plan'> = { plan_id: planId, state: 'PLANNING', plan_hash: null, product_id: request.product_id, profile_id: request.profile_id,
     variant_id: request.variant_id, engine: variant.data.engine, summary: '', output_slots: variant.data.output_slots, reason_codes: [],
     estimated_seconds_min: variant.data.engine === 'PHOTO_LAYOUT' ? 30 : 180, estimated_seconds_max: DEADLINES[variant.data.engine] };
   const inputHash = hash({ request, suggested_plan: creative, profile_hash: profile.data.profile_hash, source: variant.private.source,
-    bundle_hash: bundle.sha256, runtime_admission: runtimeAdmission, inference_limits: inferenceLimits });
+    bundle_hash: bundle.sha256, runtime_admission: runtimeAdmission, inference_limits: inferenceLimits,
+    ...(native?{native_commercial_hash:hash(native)}:{}) });
   await insert(db, 'plan_versions', { id: planId, tenant_id: p.tenantId, owner_id: p.userId, product_id: request.product_id,
     photo_version_id: photo.id, profile_id: request.profile_id, identity_lock_id: request.identity_lock_id, variant_version_id: variant.id,
     state: data.state, data, private: { request, creative, source: variant.private.source, runtime_admission: runtimeAdmission,
-      inference_limits: inferenceLimits, bundle_hash: bundle.sha256, plan_input_hash: inputHash } });
+      inference_limits: inferenceLimits, bundle_hash: bundle.sha256, plan_input_hash: inputHash,...(native?{native_commercial:native}:{}) } });
   await enqueueStage(db, { tenantId: p.tenantId, scopeType: 'PLAN', scopeId: planId, name: 'PLAN', inputHash, deadlineAt: addSeconds(300) });
   return data;
 }

@@ -23,6 +23,7 @@ import {freezeNativeAudio,verifyNativeAudioLive} from '../../worker/audio/contra
 import {freezeAiDisclosure,frozenAiDisclosure} from '../../worker/compiler/disclosure.js';
 import {bundleForSource} from '../../worker/codex/skills.js';
 import {freezeNativeSale,verifyNativeSaleLive,verifyNativeSaleRegistration} from '../../worker/audio/commerce.js';
+import {communityNativeBinding,verifyCommunityNativeQuote} from './community-native.js';
 export { requestRefundInternal } from './refunds.js';
 
 export async function createQuote(db: Db, cfg: Config, p: Principal, request: DTO<'QuoteRequest'>): Promise<DTO<'Quote'>> {
@@ -37,6 +38,9 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
   requireThat(current.data.sale_enabled && current.data.admission_state === 'ADMITTED' && current.data.price_fen !== null, 'VARIANT_NOT_FOR_SALE', '该制作规格尚未开放购买', 422);
   requireThat(cfg.paymentsEnabled && cfg.codex.enabled, 'SERVICE_NOT_ADMITTED', '制作或交易服务尚未开放', 503);
   const privateData = current.private as typeof current.private & { resource_versions?: ResourceBinding[]; repair_ceiling_micro?: number };
+  const native=communityNativeBinding(privateData.source,(privateData.commercial_binding as {native_audio?:unknown}|undefined)?.native_audio);
+  if(native)requireThat(plan.private?.native_commercial&&hash(plan.private.native_commercial)===hash(native)&&current.data.price_fen===native.price_fen,
+    'COMMUNITY_NATIVE_CONFIGURATION_CHANGED','社区声音规划或价格与原冻结配置不一致，请重新规划',409);
   const codexContract = privateData.codex_contract as DTO<'CodexContract'>;
   validateInternal('codex-contract', codexContract);
   const skill=await bundleForSource(cfg,privateData.source,codexContract.skill_bundle_hash);
@@ -75,6 +79,7 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
     contract.generation_contracts=freezeGenerationContracts(cfg,models.rows);
   }
   await freezeNativeAudio(db,cfg,contract,models.rows);
+  verifyCommunityNativeQuote(contract,native,models.rows);
   if(contract.source.engine!=='PHOTO_LAYOUT'){
     if(contract.source.audio_policy.speech==='none')validateGenerationExecution(contract);
     else await freezeNativeSale(db,cfg,contract);
@@ -82,7 +87,7 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
   requireThat(contract.budget_micro >= codexContract.agent_cost_ceiling_micro + contract.revision_policy.budget_micro,
     'BUDGET_INVALID', '原订单总预算必须同时覆盖制作与受限修改', 503);
   const data: DTO<'Quote'> = { quote_id: id('quote'), plan_id: plan.id, plan_hash: request.plan_hash, state: 'OPEN', currency: 'CNY', amount_fen: current.data.price_fen,
-    expires_at: new Date(Math.min(Date.parse(addSeconds(900)),Date.parse(contract.native_sale_contract?.valid_until??addSeconds(900)))).toISOString(), output_slots: plan.data.output_slots, terms_version: 'YPCC-TERMS-3.1', hard_deadline_seconds: Number((privateData.source.slo_policy as { hard_deadline_seconds: number }).hard_deadline_seconds) };
+    expires_at: new Date(Math.min(Date.parse(addSeconds(900)),Date.parse(contract.native_sale_contract?.valid_until??addSeconds(900)),native?Date.parse(native.valid_until):Infinity)).toISOString(), output_slots: plan.data.output_slots, terms_version: 'YPCC-TERMS-3.1', hard_deadline_seconds: Number((privateData.source.slo_policy as { hard_deadline_seconds: number }).hard_deadline_seconds) };
   const binding = { tenant_id: p.tenantId, quote_id: data.quote_id, preview_session_id: plan.id, plan_hash: request.plan_hash, codex_contract: codexContract, codex_contract_hash: hash(codexContract), skill_bundle_hash: codexContract.skill_bundle_hash, expires_at: data.expires_at };
   validateInternal('codex-quote-binding', binding);
   await insert(db, 'quotes', { id: data.quote_id, tenant_id: p.tenantId, owner_id: p.userId, plan_id: plan.id, plan_hash: request.plan_hash, amount_fen: data.amount_fen, expires_at: data.expires_at, state: data.state, data, private: { contract, binding, contract_hash: hash(contract) } });

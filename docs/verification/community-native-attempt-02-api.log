@@ -1,0 +1,13 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/integration/native-order.test.ts (37 tests | 35 skipped) 51235ms
+   ✓ freezes native community configuration only with explicit ORDER voice rights and its original complete budget 9768ms
+   ✓ locks native community planning to its frozen voice and rejects changed models and revoked ORDER rights before inference 1578ms
+
+ Test Files  1 passed (1)
+      Tests  2 passed | 35 skipped (37)
+   Start at  17:25:21
+   Duration  106.93s (tests 51%, import 26%, transform 23%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/community-native-2026-10-30T09-24-44-617Z/api.json

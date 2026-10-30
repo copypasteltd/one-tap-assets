@@ -1,0 +1,64 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ❯ tests/integration/native-order.test.ts (37 tests | 1 failed | 31 skipped) 266796ms
+   ↓ persists original independent listening for PER_SHOT_AI and keeps insufficient synthetic observations out of delivery
+   ↓ persists original independent listening for REFERENCE_FILM and keeps insufficient synthetic observations out of delivery
+   ↓ binds synthetic native final review and delivery for PER_SHOT_AI to one original listening receipt
+   ↓ binds synthetic native final review and delivery for REFERENCE_FILM to one original listening receipt
+   ↓ blocks synthetic native final review publication after durable voice revocation before commit
+   ↓ blocks synthetic native final review when OMIT_ROLE_LISTENING is missing
+   ↓ blocks synthetic native final review when OMIT_TOOL_LISTENING is missing
+   ↓ recovers only the saved original independent listening response after UNKNOWN without a second purchase
+   ↓ holds delivery and retains original costs after independent listening BAD_RESULT
+   ↓ holds delivery and retains original costs after independent listening CACHED
+   ↓ holds delivery and retains original costs after independent listening REVOKE
+   ↓ seals private PER_SHOT_AI native production/ASR/POST/QC through real HTTPS/MCP while independent listening and delivery stay closed
+   ↓ seals private REFERENCE_FILM native production/ASR/POST/QC through real HTTPS/MCP while independent listening and delivery stay closed
+   ↓ refuses native QC sealing after original-write is revoked between preparation and commit
+   ↓ refuses native QC sealing after voice-license is revoked between preparation and commit
+   ↓ restores the stored POST receipt after its transaction rolls back without another ASR or render generation
+   ↓ defers the original UNKNOWN ASR acknowledgement and never replaces its source or purchase
+   ↓ rejects missing licensed music bytes before reference generation or inference
+   ↓ rejects changed licensed music bytes before reference generation or inference
+   ↓ rejects a different artifact, invented assembly proof and changed original bytes before ASR
+   ↓ rejects native POST commit after voice revocation and exposes no READY post checkpoint
+   ↓ keeps public order creation closed for a structurally valid internal native contract
+   ↓ rejects incomplete native sale capability and the combined generation/listening cost overflow before checkout
+   ↓ records native payment truth and one original refund when frozen listening admission is withdrawn before payment confirmation
+   × checks out and delivers the native buyer PER_SHOT_AI pack from a real plan/quote through original paid audio review 240105ms
+   · checks out and delivers the native buyer REFERENCE_FILM pack from a real plan/quote through original paid audio review
+   · delivers native community buyer PER_SHOT_AI from frozen default voice through original paid audio and private download
+   · delivers native community buyer REFERENCE_FILM from frozen default voice through original paid audio and private download
+   · freezes native community configuration only with explicit ORDER voice rights and its original complete budget
+   · locks native community planning to its frozen voice and rejects changed models and revoked ORDER rights before inference
+   ↓ assembles and rechecks both original tone segments losslessly, rejecting a gap and replaced PCM evidence
+   ↓ retains original native audio for PER_SHOT_AI aftercare with fresh reviews and no new generation ASR or listening purchases
+   ↓ retains original native audio for REFERENCE_FILM aftercare with fresh reviews and no new generation ASR or listening purchases
+   ↓ repairs a native PER_SHOT_AI failed video using its pre-sale ASR allowance and fresh listening before delivery
+   ↓ repairs a native REFERENCE_FILM failed video using its pre-sale ASR allowance and fresh listening before delivery
+   ↓ adds an actual image title to a delivered native PER_SHOT_AI pack without buying generation ASR or listening again
+   ↓ adds an actual image title to a delivered native REFERENCE_FILM pack without buying generation ASR or listening again
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/native-order.test.ts > checks out and delivers the native buyer PER_SHOT_AI pack from a real plan/quote through original paid audio review
+Error: Test timed out in 240000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ❯ tests/integration/native-order.test.ts:617:51
+    615|   }
+    616| }
+    617| it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('checks out and del…
+       |                                                   ^
+    618|   engine=>deliverNativeBuyer(engine),240000);
+    619| it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('delivers native co…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (2)
+      Tests  1 failed | 31 skipped (37)
+   Start at  17:29:26
+   Duration  286.51s (tests 94%, import 4%, transform 2%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/community-native-2026-10-30T09-28-21-574Z/api.json

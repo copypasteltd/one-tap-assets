@@ -1,5 +1,18 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 — 社区有声买家主链与交付包
+
+- 社区版本可由平台一次冻结默认人物/原生声音和明确 ORDER 商业授权，模型/费率、资源、价格及原预算保留。配置不自动准入或开售。
+- 规划输入、工具和最终结果保持同一人物声音；模型变化、授权撤回、SAMPLE-only、无效资源或预算不足在收费前拒绝。报价重验完整实际成本与最早到期时间。
+- 两条原生视频路线复用原付款、制作、ASR 字幕、完整听音、全新事实/风格双复核、私有下载和实例释放；作者无买家读取权。复用迁移031，无新迁移，原32迁移保持。
+- 最终7项重点检查通过/33未选，类型/server/preview/本机自检与启动通过。早期测试类型失败、初次构建类型失败及旧官方买家用例240秒超时均保留原来源；超时原因未确认，不称全面通过。
+- 双语README、启动说明、事项/待办表和源码包同步。122媒体与C设计保持原版本；无新浏览器录制。真实服务/销售仍关闭，全面测试/小程序重编/真机未执行。
+- [实现细则](docs/实施/社区原生声音商业配置与买家交付-v1.0.md) · [准确来源及原失败](docs/verification/community-native-source.json)。
+
+Community native-audio presets now freeze platform defaults and explicit ORDER rights through planning and buyer delivery. Seven focused checks pass; one earlier official buyer timeout remains unresolved. Live services and sales remain off; full suites and native device acceptance were not performed.
+
+以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
+
 ## 2026-10-30 — 社区原生声音样例与最终源码包
 
 - 两条 AI 视频 SAMPLE 路线接通原生声音、实际整轨 ALAC 拼接、唯一 ASR、AAC 字幕后期、完整双轨听音、新实例双重核验及交付释放。

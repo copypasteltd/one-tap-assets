@@ -1,31 +1,110 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T08:49:22.124371+00:00",
+  "checked_at": "2026-10-30T09:44:11.101443+00:00",
   "strategy": "USER_REQUESTED_FAST_MAIN_FUNCTIONAL_CLOSURE",
-  "source_set_hash": "52416aa969b252c137015e7e8789eca8a4666d18ab61e3b81b74695f7a69383b",
-  "source_files": 459,
+  "source_set_hash": "5d8ea011ee6459430d979ea68968d2d30d28044cf65093c492c2285aaee9721f",
+  "source_files": 461,
   "runtime_contract_files": 42,
   "resource_files": 4,
-  "source_snapshot": "docs/verification/native-sample-tested-source.json",
-  "build_snapshot": "docs/verification/native-sample-build.json",
-  "functional_scope": "docs/实施/社区原生声音样例与平台声音账本-v1.0.md",
+  "source_snapshot": "docs/verification/community-native-tested-source.json",
+  "build_snapshot": "docs/verification/community-native-build.json",
+  "functional_scope": "docs/实施/社区原生声音商业配置与买家交付-v1.0.md",
   "source_unchanged_during_tests": true,
   "test_fixture_mcp_bridge_matches_current_build": true,
   "new_checks": {
     "status": "PASS",
-    "passed": 8,
-    "not_selected": 56,
+    "passed": 7,
+    "not_selected": 33,
     "failed": 0,
-    "test_files": 3,
-    "new_native_sample_cases": 4,
-    "related_compatibility_cases": 4,
-    "evidence": "docs/verification/native-sample-integration.json",
-    "wrapper": "docs/verification/native-sample-targeted.json",
-    "actual_native_postgresql_and_ffmpeg": true,
-    "generation_semantics_asr_listening_rights_identity_and_prices_synthetic": true,
+    "test_files": 2,
+    "native_community_cases": 4,
+    "silent_community_compatibility_cases": 3,
+    "runs": [
+      {
+        "name": "native-community",
+        "passed": 4,
+        "not_selected": 33,
+        "failed": 0,
+        "source_set_hash": "5d8ea011ee6459430d979ea68968d2d30d28044cf65093c492c2285aaee9721f",
+        "report": {
+          "path": "docs/verification/community-native-native-community-integration.json",
+          "sha256": "ff666c66f1930b41ce624ccff2a4e977cbcc513a3134c145fd22c79a892a4987",
+          "bytes": 12951
+        },
+        "wrapper": {
+          "path": "docs/verification/community-native-native-community-targeted.json",
+          "sha256": "5b1aae73d5f069719cf65e2e0d5cbfc51b9bfc64cf5a25248c923cbfec06f773",
+          "bytes": 1264
+        },
+        "log": {
+          "path": "docs/verification/community-native-native-community.log",
+          "sha256": "885d5c0b8a2a038925640784f2fd79b01ed779a88ccb6103487fbbf9457ee0c7",
+          "bytes": 1664
+        }
+      },
+      {
+        "name": "silent-community-compatibility",
+        "passed": 3,
+        "not_selected": 0,
+        "failed": 0,
+        "source_set_hash": "5d8ea011ee6459430d979ea68968d2d30d28044cf65093c492c2285aaee9721f",
+        "report": {
+          "path": "docs/verification/community-native-silent-community-compatibility-integration.json",
+          "sha256": "b5b3802dd171df889c51f9c97820b50d6fda086f6f203222d71df655f61d8264",
+          "bytes": 1838
+        },
+        "wrapper": {
+          "path": "docs/verification/community-native-silent-community-compatibility-targeted.json",
+          "sha256": "2b255d38dd0950d646d3e1befc9a153cc7d55eaf70539c3fd5f2bb866d86d921",
+          "bytes": 1217
+        },
+        "log": {
+          "path": "docs/verification/community-native-silent-community-compatibility.log",
+          "sha256": "9d58aa491e9b1d0dc9da7306bfbdff021123bc958e5e22ee5aa2c002d93509b8",
+          "bytes": 554
+        }
+      }
+    ],
+    "actual_native_postgresql_ffmpeg_https_mcp_and_download": true,
+    "service_semantics_rights_identity_payment_and_prices_synthetic": true,
     "real_chinese_speech_verified": false
   },
-  "attempt_history": "docs/verification/native-sample-attempts.json",
+  "attempt_history": "docs/verification/community-native-attempts.json",
+  "initial_build": {
+    "report": {
+      "path": "docs/verification/community-native-initial-build.json",
+      "sha256": "3670290c4d3db50ffc9b2446d9b64e57cdb8a451e50e7bbc5dde2d98857ab1b1",
+      "bytes": 86751
+    },
+    "reason": "Typecheck rejected explicitly undefined optional nativeVoice in the negative test under exactOptionalPropertyTypes. An intentional unknown cast now reaches the same runtime guard. Server and preview already passed; those results retain their earlier snapshot.",
+    "logs": [
+      {
+        "path": "docs/verification/community-native-initial-build-1.log",
+        "sha256": "7f78bd410bc4312d7eba913fb5232bd274e09e3b7c52e25e8d5e453bef79ceca",
+        "bytes": 612
+      },
+      {
+        "path": "docs/verification/community-native-initial-build-2.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "path": "docs/verification/community-native-initial-build-3.log",
+        "sha256": "a340412d7371713c136d84170e98954ba12aa01bee74cfbb6192af54a15e2350",
+        "bytes": 2097
+      }
+    ]
+  },
+  "unresolved_earlier_regression": {
+    "status": "TIMEOUT",
+    "attempt": 3,
+    "test": "Existing official PER_SHOT_AI buyer delivery",
+    "timeout_ms": 240000,
+    "root_cause": "UNCONFIRMED",
+    "limits_increased": false,
+    "assertions_weakened": false,
+    "later_full_official_rerun": "NOT_RUN"
+  },
   "build_report": "docs/delivery/current.json",
   "build_checks": [
     {
@@ -40,8 +119,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 10224,
-      "log_path": "runtime/delivery-builds/2026-10-30T08-31-29-585Z-23cca323/typecheck.log",
+      "elapsed_ms": 17314,
+      "log_path": "runtime/delivery-builds/2026-10-30T09-40-57-849Z-c67d7cf0/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -57,46 +136,46 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 1321,
-      "log_path": "runtime/delivery-builds/2026-10-30T08-31-29-585Z-23cca323/server.log",
+      "elapsed_ms": 587,
+      "log_path": "runtime/delivery-builds/2026-10-30T09-40-57-849Z-c67d7cf0/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T08-31-29-585Z-23cca323\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T09-40-57-849Z-c67d7cf0\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T08-31-29-585Z-23cca323\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T09-40-57-849Z-c67d7cf0\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 8946,
-      "log_path": "runtime/delivery-builds/2026-10-30T08-31-29-585Z-23cca323/preview.log",
-      "log_sha256": "d45786aef0499872b740ca8fe275968e03c6203e7e1cc687329f27020bba03b7"
+      "elapsed_ms": 828,
+      "log_path": "runtime/delivery-builds/2026-10-30T09-40-57-849Z-c67d7cf0/preview.log",
+      "log_sha256": "04e9cc9b017dad1f51d25b884f8f24d11db002755664b76cb653ae1d10344269"
     }
   ],
   "build_logs": [
     {
-      "path": "docs/verification/native-sample-build-1.log",
+      "path": "docs/verification/community-native-build-1.log",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0
     },
     {
-      "path": "docs/verification/native-sample-build-2.log",
+      "path": "docs/verification/community-native-build-2.log",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0
     },
     {
-      "path": "docs/verification/native-sample-build-3.log",
-      "sha256": "d45786aef0499872b740ca8fe275968e03c6203e7e1cc687329f27020bba03b7",
-      "bytes": 2820
+      "path": "docs/verification/community-native-build-3.log",
+      "sha256": "04e9cc9b017dad1f51d25b884f8f24d11db002755664b76cb653ae1d10344269",
+      "bytes": 2096
     }
   ],
   "components": [
@@ -122,11 +201,11 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 1.266,
-      "log_path": "runtime/delivery/native-sample-doctor-1793349397094335400.log",
-      "log_sha256": "e746e35bacb0a0cecd1402405b69fd27b83ed8f9c3a320a2cbc66847d6dd9900",
+      "elapsed_seconds": 1.099,
+      "log_path": "runtime/delivery/community-native-doctor-1793353305658927500.log",
+      "log_sha256": "c701c942472e60e663d2fcd17a15376dd9ec126a18016de0836cdf50e041ac67",
       "report": {
-        "checked_at": "2026-10-30T08:36:38.313Z",
+        "checked_at": "2026-10-30T09:41:46.713Z",
         "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
         "rows": [
           {
@@ -214,8 +293,8 @@
         "production_admitted": false
       },
       "public_log": {
-        "path": "docs/verification/native-sample-doctor.log",
-        "sha256": "e746e35bacb0a0cecd1402405b69fd27b83ed8f9c3a320a2cbc66847d6dd9900",
+        "path": "docs/verification/community-native-doctor.log",
+        "sha256": "c701c942472e60e663d2fcd17a15376dd9ec126a18016de0836cdf50e041ac67",
         "bytes": 2141
       }
     },
@@ -223,14 +302,14 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 9.011,
-      "log_path": "runtime/delivery/native-sample-backend-1793349265436713600.log",
-      "log_sha256": "addced8923f717314a28f83fbe0a3a5a8b37c2b2b282dfd511d016042a55ebe9",
+      "elapsed_seconds": 5.199,
+      "log_path": "runtime/delivery/community-native-backend-1793353314365487100.log",
+      "log_sha256": "9ebfd5f32cdaf347f62415bc078fa91e46cdb51e62cf300316bd5789dce264a8",
       "local_stack_ready": true,
       "preview_http_ready": false,
       "public_log": {
-        "path": "docs/verification/native-sample-backend.log",
-        "sha256": "addced8923f717314a28f83fbe0a3a5a8b37c2b2b282dfd511d016042a55ebe9",
+        "path": "docs/verification/community-native-backend.log",
+        "sha256": "9ebfd5f32cdaf347f62415bc078fa91e46cdb51e62cf300316bd5789dce264a8",
         "bytes": 1562
       }
     },
@@ -238,21 +317,21 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 1.033,
-      "log_path": "runtime/delivery/native-sample-preview-1793349397018987100.log",
+      "elapsed_seconds": 0.89,
+      "log_path": "runtime/delivery/community-native-preview-1793353439317234500.log",
       "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
       "local_stack_ready": false,
       "preview_http_ready": true,
       "public_log": {
-        "path": "docs/verification/native-sample-preview.log",
+        "path": "docs/verification/community-native-preview.log",
         "sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
         "bytes": 91
       }
     }
   },
   "main_database_migrations": 32,
-  "new_migration": "src/api/db/migrations/032_sample_native_audio.sql",
-  "previous_31_migrations_byte_identical": true,
+  "new_migration": null,
+  "previous_32_migrations_byte_identical": true,
   "business_operations": 77,
   "management_operations": 35,
   "creative_components": 25,
@@ -568,6 +647,10 @@
     {
       "path": "docs/verification/delivery-focused-source-38eec3e.json",
       "sha256": "0b4f8f6318626c3f8eadafaa0c789ba679b2add43437b2f2f88de049a192ab01"
+    },
+    {
+      "path": "docs/verification/delivery-focused-source-3c31123.json",
+      "sha256": "ba2231fd1b02ef40492bb8e0fa94c98f2736d5615cb1299785cda79da19d5ef5"
     },
     {
       "path": "docs/verification/delivery-focused-source-40c42dd.json",
@@ -1010,6 +1093,150 @@
       "sha256": "2fef63bb0611a61975ae31103038997dd65b7088402769810a98642051cbc6f5"
     },
     {
+      "path": "docs/verification/native-sample-attempt-01-result.json",
+      "sha256": "9f46927c7ee13b67ce91c4510e68276fec7221f29cad13d9ba6f0bb10940a94f"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-01-source.json",
+      "sha256": "a968b444ff078bdd127c902327e00b1475e5e974a98ee6bb815b075c66085b33"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-02-result.json",
+      "sha256": "459aab846d122cca9431e8a154b11ef9bb595f19a0c3f8386e9661be73327874"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-02-source.json",
+      "sha256": "7b257350a25061e52131c172678410082dfb50c53c805bd4c85d924b3210609a"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-03-api.json",
+      "sha256": "96f811b3aecd4ebe8e816722a1c51a6f613700ed9fb7192272c4f485c2990582"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-03-result.json",
+      "sha256": "fbcb6483a4fea8bb31a0eddccf48f042f18792b145be6a01eedb7fc12caebcc3"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-03-source.json",
+      "sha256": "7b257350a25061e52131c172678410082dfb50c53c805bd4c85d924b3210609a"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-04-api.json",
+      "sha256": "f565c94fbc56b4a9b79f1248eeb03bde39821b380ee0762c27deb1d7142a35e9"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-04-result.json",
+      "sha256": "ef25514f83f046d18e5016b6d7b8364a70a39d8de5d929838aaa42e22de416b1"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-04-source.json",
+      "sha256": "16c355d76162cddfe943ad0547e5eba270018afce72e3ad80d70b77c565f9772"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-05-api.json",
+      "sha256": "17e6879406d350608688b64a9ded9c0374e8c4fef2489e3171da2c32548727e9"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-05-result.json",
+      "sha256": "6ccc8cb879eb1eec8026d6f62e0bc87b3002b023df04b7d9dfeb263be3cc34cd"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-05-source.json",
+      "sha256": "cf463cb75233540ec6c441448639dea0c0c9ba14768d1c213972ec06398d8b2e"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-06-api.json",
+      "sha256": "bebe4e0924060fe67a9cb0a5052832ace1de89e01911894d7e6a68ee32b53f89"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-06-result.json",
+      "sha256": "0358a6fd3cc798a8e4face4774690c50ca1caf967d1975a2703654da8e638db8"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-06-source.json",
+      "sha256": "74dbece640577c932ae807f2cb8340640ce910f9e89b14caea54fb46c6133940"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-07-result.json",
+      "sha256": "acdbdb971dbafe5c6a6a11b3dd9c42088eae3ec2e1e1652c6391eea50a4af727"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-07-source.json",
+      "sha256": "a3010cca0e93d2cc7e687d46ae85b7e519a46e7f3011d60e126717f1afb1dd01"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-08-api.json",
+      "sha256": "6d66df17ec4fb220ffaabaa73c9dc966780f0a93fd3c0cefc654d0d5588a39df"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-08-result.json",
+      "sha256": "fe19863a8d03417e8e87183fc4ee1e8cc923fe681b0912dee7fa397e259c0b0b"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-08-source.json",
+      "sha256": "a3010cca0e93d2cc7e687d46ae85b7e519a46e7f3011d60e126717f1afb1dd01"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-09-result.json",
+      "sha256": "0474d033b14fe7ba5b22f0c484d4659ae2bdb6c5450108961bc7a5c308483457"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-09-source.json",
+      "sha256": "eaff36b4816e90c3e3a47495f9006acee72f9fd76d6c64f6f1edb0b3fde7ac32"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-10-api.json",
+      "sha256": "b14647f25ecbbba0b41e0f56278948a67512e84bd88549dd774e585eda7f8c61"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-10-result.json",
+      "sha256": "058e3ae67bff8f0404d17e7b2f305fc76b5ed33aa0aede93916fdd6d01577afc"
+    },
+    {
+      "path": "docs/verification/native-sample-attempt-10-source.json",
+      "sha256": "eaff36b4816e90c3e3a47495f9006acee72f9fd76d6c64f6f1edb0b3fde7ac32"
+    },
+    {
+      "path": "docs/verification/native-sample-attempts.json",
+      "sha256": "2950fc18062cef2dbe5c5fafc862cf8c5680b8db5e96c6ea20c9f8bf12ba2220"
+    },
+    {
+      "path": "docs/verification/native-sample-backend.json",
+      "sha256": "9605cded874b22c7cae68d009214b572337efa298cb66fc826afb8573e7d7ba5"
+    },
+    {
+      "path": "docs/verification/native-sample-build.json",
+      "sha256": "a3256b9bc373f3c08311e9ee25bb752beb76b2c242862c0e44994644fb66e2ba"
+    },
+    {
+      "path": "docs/verification/native-sample-doctor.json",
+      "sha256": "74b7600b0c31856a6d0a38c46268c25b27dd67b19cf8adadf694977157e41925"
+    },
+    {
+      "path": "docs/verification/native-sample-integration.json",
+      "sha256": "b14647f25ecbbba0b41e0f56278948a67512e84bd88549dd774e585eda7f8c61"
+    },
+    {
+      "path": "docs/verification/native-sample-preview.json",
+      "sha256": "ae315c6c35a47c426132ae1bfd2f672ee0e45cc5c5d74b7ae792773efc1bc234"
+    },
+    {
+      "path": "docs/verification/native-sample-source.json",
+      "sha256": "880b867d9c0d8854318ac4c4c5c623a576ac8b5d4e01206800bea0e2bdf82ec4"
+    },
+    {
+      "path": "docs/verification/native-sample-targeted.json",
+      "sha256": "058e3ae67bff8f0404d17e7b2f305fc76b5ed33aa0aede93916fdd6d01577afc"
+    },
+    {
+      "path": "docs/verification/native-sample-tested-source.json",
+      "sha256": "eaff36b4816e90c3e3a47495f9006acee72f9fd76d6c64f6f1edb0b3fde7ac32"
+    },
+    {
+      "path": "docs/verification/native-sample-typecheck.json",
+      "sha256": "0474d033b14fe7ba5b22f0c484d4659ae2bdb6c5450108961bc7a5c308483457"
+    },
+    {
       "path": "docs/verification/order-actions-api.json",
       "sha256": "b56089dbdc0f3c036934132ab082f1cf260dc37cbc8ea642a3a50abbaab6f2a0"
     },
@@ -1080,6 +1307,10 @@
     {
       "path": "docs/verification/publication-38eec3e.json",
       "sha256": "f9e074e061b81f4e016c8806cc429439819f860826c1459d0ef1e85ed559e808"
+    },
+    {
+      "path": "docs/verification/publication-3c31123.json",
+      "sha256": "7580c13387cbb745e4ea6b51d64299b3b6a1743d7b880b8a6b17efef7208fe6c"
     },
     {
       "path": "docs/verification/publication-40c42dd.json",
@@ -1236,6 +1467,10 @@
     {
       "path": "docs/verification/repository-audit-38eec3e.json",
       "sha256": "14993c277ec28c25acb2a09366aa6c9a83d425b125aadeb4015e39bc1adfb1c8"
+    },
+    {
+      "path": "docs/verification/repository-audit-3c31123.json",
+      "sha256": "56bda5ca985024f6284c93bd72f8270c4c30d575bc65ec8f3446122993201df8"
     },
     {
       "path": "docs/verification/repository-audit-40c42dd.json",
@@ -1550,16 +1785,14 @@
       "sha256": "fbf919d88e4b3bb6b2e1ff5993fb62a4dacfd78c559bd7232f0c780b28b41846"
     }
   ],
-  "existing_media_files_verified": 116,
-  "new_media_files_verified": 6,
+  "existing_media_files_verified": 122,
+  "new_media_files_verified": 0,
   "total_media_files": 122,
-  "baseline_media_files_with_metadata": 144,
-  "new_media_files_with_metadata": 10,
+  "baseline_media_files_with_metadata": 154,
   "baseline_design_files": 48,
   "frozen_c_files": 25,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
-  "media_capture": "docs/media/native-sample/capture-manifest.json",
-  "prior_delivery": "docs/verification/delivery-focused-source-3c31123.json",
+  "prior_delivery": "docs/verification/delivery-focused-source-1a7832b.json",
   "prior_ui_captures_relabelled": false,
   "browser_used": false,
   "owned_test_and_local_services_stopped": true,
@@ -1570,16 +1803,17 @@
   "production_admitted": false,
   "cloud_deployed": false,
   "functional_changes": [
-    "PER_SHOT_AI and REFERENCE_FILM native-audio SAMPLE execution uses the existing author flow and independent platform ledger.",
-    "Frozen character/voice and explicit SAMPLE-use rights precede spending; unused resources and insufficient original budget are rejected.",
-    "Actual original-audio ALAC assembly, one source-bound ASR, AAC captions, complete original/final WAV listening and two fresh final reviews.",
-    "UNKNOWN requests are not repurchased; receipt-only reconciliation preserves the original budget, deadline, stage and append-only evidence.",
-    "Independent public copies recheck live audio rights and earliest expiry; revocation immediately denies reads and maintenance withdraws publication."
+    "Platform preparation freezes the default admitted character/native voice and explicit ORDER-use rights for a community native-audio version; SAMPLE rights never substitute.",
+    "Four exact admitted generation/ASR/listening model and rate registrations, exact resources, original price/budget/repair allowance and earliest expiry are frozen without admission or sales.",
+    "Planning input and tools retain the same default voice and recheck live original rights/models before inference and result acceptance.",
+    "Quotes recheck the immutable community binding, price the actual complete shot/reference plan within the original budget, and expire no later than the earliest frozen capability or right.",
+    "Both native AI routes reuse the original paid-order production, one ASR, whole-track listening, fresh dual reviews, private downloads and instance release; community authors cannot read buyer assets."
   ],
   "limitations": [
-    "Actual test audio consists of tones. Chinese ASR text, listening PASS, media semantics, model admission, identities, rights and pricing are synthetic; not real voice-quality acceptance.",
-    "Previous UI and frozen design captures retain their original sources; no browser or new native-device acceptance was performed.",
-    "Live services and sales remain off. Full suites, native mini-program builds/devices, complete community/official commercial admission, production isolation, Plus, cloud and all 58 acceptance items remain pending."
+    "Test audio consists of tones; Chinese ASR text, listening verdicts, media semantics, admission, identities, licenses, payment and rates are synthetic. Real PostgreSQL, HTTPS/MCP, FFmpeg files and private downloads are exercised.",
+    "One earlier existing official buyer case timed out at the unchanged 240-second limit. Root cause is unresolved; the later seven selected checks are a distinct scope, not an all-green claim.",
+    "No new UI or browser capture was made. All 122 historical media and frozen C design assets retain their original bytes and provenance.",
+    "Live services and sales remain off. Full suites, native mini-program rebuilds/devices, complete official/community commercial admission, production isolation, Plus, cloud and all 58 acceptance items remain pending."
   ],
-  "canonical_native_sample_provenance": "docs/verification/native-sample-source.json"
+  "canonical_community_native_provenance": "docs/verification/community-native-source.json"
 }

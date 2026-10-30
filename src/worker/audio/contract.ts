@@ -127,15 +127,20 @@ export function frozenNativeAudio(contract:FrozenContract):NativeAudioContract|u
     &&BigInt(audio.cost.ceiling_micro)===total&&total<=BigInt(contract.budget_micro),'AUDIO_BUDGET_INVALID','声音与许可费用未纳入原总预算',503);return audio;
 }
 async function readCharacter(db:Db,contract:FrozenContract,lock=false):Promise<CharacterVoiceAdmission>{
+  return readNativeVoiceCharacter(db,contract.creative,videoContract(contract).model_version_id,lock);
+}
+/** Registration-only lookup for pre-sale platform configuration. No generation,
+ * order, reservation or SAMPLE authorization is created by this operation. */
+export async function readNativeVoiceCharacter(db:Db,selection:{character_version_id:string|null;native_voice_id:string|null},videoModelId:string,lock=false):Promise<CharacterVoiceAdmission>{
   const row=(await db.query<{data:{admission_state?:string;native_voice_ids?:string[];native_audio_admissions?:unknown[]}}>(
-    `SELECT data FROM character_versions WHERE id=$1${lock?' FOR SHARE':''}`,[contract.creative.character_version_id])).rows[0];
-  const entries=row?.data.native_audio_admissions?.filter(raw=>validCharacter(raw)&&raw.native_voice_id===contract.creative.native_voice_id)??[];
-  requireThat(row?.data.admission_state==='ADMITTED'&&row.data.native_voice_ids?.includes(contract.creative.native_voice_id!)&&entries.length===1
-    &&validCharacter(entries[0])&&entries[0].character_version_id===contract.creative.character_version_id
-    &&entries[0].video_model_version_id===videoContract(contract).model_version_id&&Date.parse(entries[0].valid_until)>Date.now(),
+    `SELECT data FROM character_versions WHERE id=$1${lock?' FOR SHARE':''}`,[selection.character_version_id])).rows[0];
+  const entries=row?.data.native_audio_admissions?.filter(raw=>validCharacter(raw)&&raw.native_voice_id===selection.native_voice_id)??[];
+  requireThat(row?.data.admission_state==='ADMITTED'&&row.data.native_voice_ids?.includes(selection.native_voice_id!)&&entries.length===1
+    &&validCharacter(entries[0])&&entries[0].character_version_id===selection.character_version_id
+    &&entries[0].video_model_version_id===videoModelId&&Date.parse(entries[0].valid_until)>Date.now(),
     'CHARACTER_VOICE_NOT_ADMITTED','人物、声音、视频模型组合或许可证据未准入或已过期',503);return structuredClone(entries[0]);
 }
-async function readRight(db:Db,binding:ResourceBinding,kind:AudioRightKind,lock=false,use:AudioLicenseUse='ORDER'):Promise<AudioRight>{
+export async function readRight(db:Db,binding:ResourceBinding,kind:AudioRightKind,lock=false,use:AudioLicenseUse='ORDER'):Promise<AudioRight>{
   const row=(await db.query<{version:string;data:{resource_version_id?:string;resource_hash?:string;license_text?:string;license_sha256?:string;admission_state?:string;
     audio_media?:AudioRight['media'];audio_rights?:{kind?:string;allowed_use?:string;allocation_mode?:string;allocation_micro?:number;
       sample?:{kind?:string;allowed_use?:string;allocation_mode?:string;allocation_micro?:number}}}}>(

@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "exit_code": 0,
+  "timeout_seconds": 90,
+  "elapsed_seconds": 5.199,
+  "log_path": "runtime/delivery/community-native-backend-1793353314365487100.log",
+  "log_sha256": "9ebfd5f32cdaf347f62415bc078fa91e46cdb51e62cf300316bd5789dce264a8",
+  "local_stack_ready": true,
+  "preview_http_ready": false,
+  "public_log": {
+    "path": "docs/verification/community-native-backend.log",
+    "sha256": "9ebfd5f32cdaf347f62415bc078fa91e46cdb51e62cf300316bd5789dce264a8",
+    "bytes": 1562
+  }
+}

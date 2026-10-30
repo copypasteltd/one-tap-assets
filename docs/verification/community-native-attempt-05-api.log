@@ -1,0 +1,12 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/integration/community-commercial.test.ts (3 tests) 22196ms
+   ✓ runs community buyer planning, frozen quote/checkout, original payment, native media and two fresh reviews through private delivery 18901ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  17:40:13
+   Duration  24.06s (tests 93%, import 5%, transform 2%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/community-native-2026-10-30T09-40-12-849Z/api.json

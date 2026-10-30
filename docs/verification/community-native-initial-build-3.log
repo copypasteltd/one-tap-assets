@@ -1,0 +1,20 @@
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 59 modules transformed.
+rendering chunks...
+computing gzip size...
+runtime/delivery-builds/2026-10-30T09-27-58-693Z-17eb82d4/runtime/build/preview/review.html                                0.54 kB │ gzip:  0.36 kB
+runtime/delivery-builds/2026-10-30T09-27-58-693Z-17eb82d4/runtime/build/preview/index.html                                 0.58 kB │ gzip:  0.38 kB
+runtime/delivery-builds/2026-10-30T09-27-58-693Z-17eb82d4/runtime/build/preview/support.html                               0.61 kB │ gzip:  0.36 kB
+runtime/delivery-builds/2026-10-30T09-27-58-693Z-17eb82d4/runtime/build/preview/assets/NotoSansSC_wght_-Dz1u1FRy.ttf  17,772.30 kB
+runtime/delivery-builds/2026-10-30T09-27-58-693Z-17eb82d4/runtime/build/preview/assets/review-BdrArJjk.css                 2.01 kB │ gzip:  0.80 kB
+runtime/delivery-builds/2026-10-30T09-27-58-693Z-17eb82d4/runtime/build/preview/assets/support-Cakd7yMo.css                3.23 kB │ gzip:  1.03 kB
+runtime/delivery-builds/2026-10-30T09-27-58-693Z-17eb82d4/runtime/build/preview/assets/support-console-DeYTdLLD.css        4.03 kB │ gzip:  1.47 kB
+runtime/delivery-builds/2026-10-30T09-27-58-693Z-17eb82d4/runtime/build/preview/assets/index-atJc7AIw.css                  9.56 kB │ gzip:  2.58 kB
+runtime/delivery-builds/2026-10-30T09-27-58-693Z-17eb82d4/runtime/build/preview/assets/support-CbcpxOu6.js                 3.56 kB │ gzip:  1.82 kB
+runtime/delivery-builds/2026-10-30T09-27-58-693Z-17eb82d4/runtime/build/preview/assets/review-BMuy_If7.js                 17.08 kB │ gzip:  6.11 kB
+runtime/delivery-builds/2026-10-30T09-27-58-693Z-17eb82d4/runtime/build/preview/assets/support-DnoVCyNv.js                22.25 kB │ gzip:  7.53 kB
+runtime/delivery-builds/2026-10-30T09-27-58-693Z-17eb82d4/runtime/build/preview/assets/api-ruMpdi49.js                   154.59 kB │ gzip: 49.44 kB
+runtime/delivery-builds/2026-10-30T09-27-58-693Z-17eb82d4/runtime/build/preview/assets/index-Du6_dJ5p.js                 205.14 kB │ gzip: 47.60 kB
+
+✓ built in 12.26s

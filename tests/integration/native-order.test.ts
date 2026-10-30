@@ -65,6 +65,9 @@ import {readDeliveredNativeListening} from '../../src/worker/audio/delivered-lis
 import {RepairCoordinator} from '../../src/worker/repair/coordinator.js';
 import {RepairPlanningService,repairPlanningTools} from '../../src/worker/repair/planning.js';
 import {validateReviewReport} from '../../src/worker/review/reports.js';
+import {nativeCommunityFixture} from '../helpers/native-community.js';
+import {prepareCommunityCommercial} from '../../src/api/modules/community-commercial.js';
+import {validatePlanningResult} from '../../src/worker/tool-gateway/content-tools.js';
 
 // Real native PostgreSQL, HTTPS/stdio/MCP, actual tone/PNG/MP4/ALAC/AAC bytes.
 // Authorizations, recognizer text/usage, generation and isolation are synthetic.
@@ -507,28 +510,47 @@ it('keeps public order creation closed for a structurally valid internal native 
   expect(()=>validateGenerationExecution(f.contract)).toThrowError(expect.objectContaining({code:'NATIVE_AUDIO_NOT_ADMITTED'}));
   await expect(transaction(db.pool,q=>createOrder(q,f.cfg,f.p,{quote_id:quote,channel:'alipay'}))).rejects.toMatchObject({code:'NATIVE_AUDIO_NOT_ADMITTED'});
 });
-async function nativeBuyerQuote(f:Fixture){
+async function nativeBuyerQuote(f:Fixture,community=false,phase:(name:string)=>Promise<void>=async()=>{}){
+  await phase('CONFIGURE');
   await db.pool.query("UPDATE stage_runs SET state='CANCELLED' WHERE scope_id=$1 AND state NOT IN ('SUCCEEDED','FAILED')",[f.orderId]);
-  const source=f.contract.source,skill=await bundleForSource(f.cfg,source),preset=source.variant_id.split('.')[0]!;
+  const communityFixture=community?await nativeCommunityFixture(db,f.cfg,f.contract,Object.values(f.models).map(m=>m.model_version_id)):undefined;
+  if(communityFixture){
+    const prepared=await transaction(db.pool,q=>prepareCommunityCommercial(q,f.cfg,communityFixture.input));
+    expect(prepared).toMatchObject({sale_enabled:false,admission_state:'NOT_EVALUATED',revision:1,price_fen:100});
+  }
+  const source=communityFixture?.source??f.contract.source,skill=await bundleForSource(f.cfg,source),preset=communityFixture?.presetId??source.variant_id.split('.')[0]!;
   const cc={...f.contract.codex_contract,skill_bundle_id:skill.bundle_id,skill_bundle_version:skill.version};
   // Explicit synthetic registrations; these are not official production
   // variant or real model/rights/cost admission evidence.
-  await db.pool.query("UPDATE execution_variants SET sale_enabled=true,admission_state='ADMITTED',price_fen=100,data=$2,private=$3 WHERE variant_id=$1",
+  if(!communityFixture)await db.pool.query("UPDATE execution_variants SET sale_enabled=true,admission_state='ADMITTED',price_fen=100,data=$2,private=$3 WHERE variant_id=$1",
     [source.variant_id,JSON.stringify({...variantDto(source),sale_enabled:true,admission_state:'ADMITTED',price_fen:100}),JSON.stringify({source,preset_id:preset,
       codex_contract:cc,model_version_ids:Object.values(f.models).map(m=>m.model_version_id),budget_micro:f.contract.budget_micro,
       repair_ceiling_micro:f.contract.repair_ceiling_micro,resource_versions:f.contract.resource_versions})]);
   await db.pool.query("UPDATE skill_bundles SET state='ADMITTED' WHERE bundle_hash=$1",[skill.sha256]);
+  await phase('CREATE_PLAN');
   const plan=await createPlan(db.pool,f.cfg,f.p,{product_id:f.product.product_id,photo_version:1,profile_id:f.profile.profile_id,identity_lock_id:f.profile.identity_lock_id,
     preset_id:preset,preset_version:source.version,variant_id:source.variant_id,variant_version:source.version});
   const lease=(await claimStage(db.pool,id('native-buyer-plan'),['PLAN']))!;expect(lease.scope_id).toBe(plan.plan_id);
   const planner=new ContentPlanningService(db.pool,f.cfg,new CodexRuntimeAdapter(db.pool,f.cfg,f.launcher));
+  await phase('PLAN_ROLE');
   await completeStage(db.pool,lease,await withFixtureLease(db.pool,lease,s=>planner.handle(lease,s)));
   const ready=(await db.pool.query('SELECT data FROM plan_versions WHERE id=$1',[plan.plan_id])).rows[0].data as DTO<'Plan'>;
+  if(communityFixture){
+    await expect(transaction(db.pool,q=>createQuote(q,f.cfg,f.p,{plan_id:plan.plan_id,plan_hash:ready.plan_hash!}))).rejects.toMatchObject({code:'VARIANT_NOT_FOR_SALE'});
+    // Independent admission and publication metadata are synthetic. Never
+    // copy the blueprint's admission or claim the real platform is open.
+    await db.pool.query("UPDATE execution_variants SET sale_enabled=true,admission_state='ADMITTED',data=jsonb_set(jsonb_set(data,'{sale_enabled}','true'),'{admission_state}','\"ADMITTED\"') WHERE variant_id=$1",[source.variant_id]);
+  }
+  await phase('QUOTE');
   const quote=await transaction(db.pool,q=>createQuote(q,f.cfg,f.p,{plan_id:plan.plan_id,plan_hash:ready.plan_hash!}));
   const contract=(await db.pool.query<{private:{contract:FrozenContract}}>('SELECT private FROM quotes WHERE id=$1',[quote.quote_id])).rows[0]!.private.contract;
   expect(frozenNativeSale(contract).ceiling_micro).toBe(Number(generationCostCeiling(contract)));expect(contract.creative.native_voice_id).toBe(f.character.native_voice_id);
   expect(Date.parse(quote.expires_at)).toBeLessThanOrEqual(Date.parse(contract.native_sale_contract!.valid_until));
-  expect(f.providerCalls()).toBe(0);expect(f.asrPosts()).toBe(0);return {quote,contract};
+  if(communityFixture){
+    const configured=(await db.pool.query('SELECT private FROM execution_variants WHERE variant_id=$1',[source.variant_id])).rows[0].private;
+    expect(Date.parse(quote.expires_at)).toBeLessThanOrEqual(Date.parse(configured.commercial_binding.native_audio.valid_until));
+  }
+  expect(f.providerCalls()).toBe(0);expect(f.asrPosts()).toBe(0);return {quote,contract,communityFixture};
 }
 function nativePayment(f:Fixture,orderId:string):VerifiedPayment{return {channel:f.p.platform,appId:f.p.appId,merchantId:f.cfg.alipay.merchantId,
   subjectId:f.p.subjectId,orderId,providerOrderId:id('synthetic-paid-native'),eventKey:id('synthetic-event'),amountFen:100,rawHash:hash('SYNTHETIC VERIFIED PAYMENT; NO REAL CHARGE')};}
@@ -558,8 +580,12 @@ it('records native payment truth and one original refund when frozen listening a
   expect((await db.pool.query("SELECT id FROM stage_runs WHERE scope_type='ORDER' AND scope_id=$1",[order.order_id])).rowCount).toBe(0);
   expect(f.providerCalls()).toBe(0);expect(f.asrPosts()).toBe(0);
 });
-it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('checks out and delivers the native buyer %s pack from a real plan/quote through original paid audio review',async engine=>{
-  const original=await setup({buyer:true,listening:true,revisions:true,engine,music:engine==='REFERENCE_FILM'}),{quote}=await nativeBuyerQuote(original);
+async function deliverNativeBuyer(engine:'PER_SHOT_AI'|'REFERENCE_FILM',community=false){
+  const trace=join(root,`${id('buyer-flow')}.jsonl`),started=Date.now();
+  const phase=async(name:string)=>{await appendFile(trace,JSON.stringify({engine,community,phase:name,elapsed_ms:Date.now()-started})+'\n');};
+  console.log('native-buyer-flow: '+trace);await phase('SETUP');
+  const original=await setup({buyer:true,listening:true,revisions:true,engine,music:engine==='REFERENCE_FILM'}),{quote,communityFixture}=await nativeBuyerQuote(original,community,phase);
+  await phase('ORDER_PAYMENT');
   const order=await transaction(db.pool,q=>createOrder(q,original.cfg,original.p,{quote_id:quote.quote_id,channel:original.p.platform}));
   const event=nativePayment(original,order.order_id),paid=await transaction(db.pool,q=>confirmPayment(q,event));expect(paid.fulfillment_state).toBe('QUEUED');
   const stored=(await db.pool.query<{private:{contract:FrozenContract}}>('SELECT private FROM orders WHERE id=$1',[order.order_id])).rows[0]!.private.contract;
@@ -574,22 +600,87 @@ it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('checks out and delivers the 
   // stop. No new runtime, budget or payment intent is created.
   await db.pool.query("UPDATE execution_variants SET sale_enabled=false,data=jsonb_set(data,'{sale_enabled}','false') WHERE variant_id=$1",[stored.source.variant_id]);
   expect((await transaction(db.pool,q=>createOrder(q,f.cfg,f.p,{quote_id:quote.quote_id,channel:f.p.platform}))).order_id).toBe(order.order_id);
-  await stage(f,first);const post=await postLease(f);await stage(f,post);
+  await phase('PRODUCTION');await stage(f,first);const post=await postLease(f);await phase('POST');await stage(f,post);
   const qc=(await claimStage(db.pool,id('native-buyer-qc'),['QC']))!;
-  await completeStage(db.pool,qc,await withFixtureLease(db.pool,qc,s=>new QualityControlService(db.pool,f.cfg,f.store).handle(qc,s)));
+  await phase('QC');await completeStage(db.pool,qc,await withFixtureLease(db.pool,qc,s=>new QualityControlService(db.pool,f.cfg,f.store).handle(qc,s)));
   const facts=(await claimStage(db.pool,id('native-buyer-facts'),['REVIEW_FACTS']))!,context=await executionContext(db.pool,f.p.tenantId,f.orderId,f.snapshotHash),packet=await currentReviewPacket(db.pool,context);
   const listening=listeningClient({...f,review:facts,context,packet},'SYNTHETIC_PASS');
   const review=new ReviewStageService(db.pool,f.cfg,new CodexRuntimeAdapter(db.pool,f.cfg,f.launcher),listening.gateway);
-  await completeStage(db.pool,facts,await withFixtureLease(db.pool,facts,s=>review.handle(facts,s)));
+  await phase('REVIEW_FACTS');await completeStage(db.pool,facts,await withFixtureLease(db.pool,facts,s=>review.handle(facts,s)));
   const style=(await claimStage(db.pool,id('native-buyer-style'),['REVIEW_STYLE']))!;
-  await completeStage(db.pool,style,await withFixtureLease(db.pool,style,s=>review.handle(style,s)));
+  await phase('REVIEW_STYLE');await completeStage(db.pool,style,await withFixtureLease(db.pool,style,s=>review.handle(style,s)));
   const delivery=(await claimStage(db.pool,id('native-buyer-delivery'),['DELIVER']))!;
-  await completeStage(db.pool,delivery,await withFixtureLease(db.pool,delivery,s=>new PublicationService(db.pool,f.cfg,f.store).handle(delivery,s)));
+  await phase('DELIVER');await completeStage(db.pool,delivery,await withFixtureLease(db.pool,delivery,s=>new PublicationService(db.pool,f.cfg,f.store).handle(delivery,s)));
   const pack=await getDeliverables(db.pool,f.p,f.orderId),video=pack.items.find(i=>i.kind==='video')!;
   const link=await createDownloadLink(db.pool,f.cfg,f.p,video.deliverable_id),url=new URL(link.url),download=await f.app.inject({method:'GET',url:url.pathname+url.search});
   expect(download.statusCode).toBe(200);expect(download.rawPayload.length).toBeGreaterThan(1000);expect(f.asrPosts()).toBe(1);expect(listening.posts()).toBe(1);expect(f.launcher.launches).toBe(6);
   expect((await db.pool.query('SELECT id FROM agent_instances WHERE order_id=$1 AND state<>$2',[f.orderId,'RELEASED'])).rowCount).toBe(0);
-},240000);
+  if(communityFixture){
+    expect(stored.request.preset_id).toBe(communityFixture.presetId);expect(stored.source.community_binding).toBeTruthy();
+    expect(stored.creative.character_version_id).toBe(f.character.character_version_id);
+    expect(stored.native_audio_contract!.rights).toHaveLength(engine==='REFERENCE_FILM'?3:2);
+    await expect(getDeliverables(db.pool,communityFixture.author.principal,f.orderId)).rejects.toMatchObject({code:'NOT_FOUND'});
+  }
+  await phase('COMPLETE');
+}
+it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('checks out and delivers the native buyer %s pack from a real plan/quote through original paid audio review',
+  engine=>deliverNativeBuyer(engine),240000);
+it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('delivers native community buyer %s from frozen default voice through original paid audio and private download',
+  engine=>deliverNativeBuyer(engine,true),240000);
+it('freezes native community configuration only with explicit ORDER voice rights and its original complete budget',async()=>{
+  const f=await setup({buyer:true,listening:true,revisions:true});
+  await db.pool.query("UPDATE stage_runs SET state='CANCELLED' WHERE scope_id=$1 AND state NOT IN ('SUCCEEDED','FAILED')",[f.orderId]);
+  const c=await nativeCommunityFixture(db,f.cfg,f.contract,Object.values(f.models).map(m=>m.model_version_id));
+  const prepare=(input:Parameters<typeof prepareCommunityCommercial>[2]=c.input)=>transaction(db.pool,q=>prepareCommunityCommercial(q,f.cfg,input));
+  // Intentionally invalid input exercises the runtime guard; this assertion
+  // bypasses only TypeScript's exact-optional check, not application validation.
+  await expect(prepare({...c.input,nativeVoice:undefined} as unknown as Parameters<typeof prepareCommunityCommercial>[2])).rejects.toMatchObject({code:'COMMUNITY_NATIVE_VOICE_REQUIRED'});
+  const character={...f.character,character_version_id:id('sample_only_character'),native_voice_id:id('sample_only_voice')};
+  for(const [field,kind] of [['character_binding','NATIVE_CHARACTER'],['voice_binding','NATIVE_VOICE']] as const){
+    const binding={resource_version_id:id('sample_only_resource'),license_record_id:id('sample_only_license'),hash:sha256(id('sample_only_bytes'))},text='SYNTHETIC SAMPLE ONLY; NOT A COMMERCIAL ORDER GRANT';
+    character[field]=binding;
+    await insert(db.pool,'resource_licenses',{id:binding.license_record_id,resource_id:binding.resource_version_id,version:'SYNTHETIC-SAMPLE-ONLY',expires_at:addSeconds(3600),data:{
+      admission_state:'ADMITTED',resource_version_id:binding.resource_version_id,resource_hash:binding.hash,license_text:text,license_sha256:sha256(text),
+      audio_rights:{sample:{kind,allowed_use:'PUBLIC_ADVERTISING_SAMPLE',allocation_mode:'PREPAID_PLATFORM_SAMPLE_ALLOCATION',allocation_micro:20}}}});
+  }
+  await insert(db.pool,'character_versions',{id:character.character_version_id,character_id:id('sample_only_person'),version:'SYNTHETIC-SAMPLE-ONLY',
+    data:{admission_state:'ADMITTED',native_voice_ids:[character.native_voice_id],native_audio_admissions:[character]}});
+  await expect(prepare({...c.input,nativeVoice:character})).rejects.toMatchObject({code:'COMMUNITY_NATIVE_VOICE_REQUIRED'});
+  await expect(prepare({...c.input,nativeVoice:{character_version_id:character.character_version_id,native_voice_id:character.native_voice_id}}))
+    .rejects.toMatchObject({code:'AUDIO_LICENSE_UNAVAILABLE'});
+  await expect(transaction(db.pool,async q=>{
+    const minimum=f.contract.codex_contract.agent_cost_ceiling_micro*2+f.contract.repair_ceiling_micro;
+    await q.query("UPDATE execution_variants SET private=jsonb_set(private,'{budget_micro}',$2::jsonb) WHERE variant_id=$1",[c.blueprintId,JSON.stringify(minimum)]);
+    await expect(prepareCommunityCommercial(q,f.cfg,c.input)).rejects.toMatchObject({code:'COMMUNITY_NATIVE_BUDGET_INVALID'});
+    throw new Error('rollback original budget probe');
+  })).rejects.toThrow('rollback original budget probe');
+  await expect(prepare()).resolves.toMatchObject({sale_enabled:false,admission_state:'NOT_EVALUATED',revision:1});
+  await expect(prepare({...c.input,expectedRevision:1})).rejects.toMatchObject({code:'COMMERCIAL_ALREADY_FROZEN'});
+  await expect(db.pool.query("UPDATE execution_variants SET private=jsonb_set(private,'{commercial_binding,native_audio,character,native_voice_id}','\"invented\"') WHERE variant_id=$1",[c.source.variant_id]))
+    .rejects.toThrow('frozen community configuration');
+  const stored=(await db.pool.query('SELECT private,data FROM execution_variants WHERE variant_id=$1',[c.source.variant_id])).rows[0];
+  expect(stored.private.budget_micro).toBe(f.contract.budget_micro);expect(stored.private.commercial_binding.native_audio.character.native_voice_id).toBe(f.character.native_voice_id);
+  expect(stored.data.sale_enabled).toBe(false);expect(f.providerCalls()).toBe(0);expect(f.asrPosts()).toBe(0);
+});
+it('locks native community planning to its frozen voice and rejects changed models and revoked ORDER rights before inference',async()=>{
+  const f=await setup({buyer:true,listening:true,revisions:true});
+  await db.pool.query("UPDATE stage_runs SET state='CANCELLED' WHERE scope_id=$1 AND state NOT IN ('SUCCEEDED','FAILED')",[f.orderId]);
+  const c=await nativeCommunityFixture(db,f.cfg,f.contract,Object.values(f.models).map(m=>m.model_version_id));
+  await expect(createPlan(db.pool,f.cfg,f.p,c.request)).rejects.toMatchObject({code:'COMMUNITY_NATIVE_NOT_CONFIGURED'});
+  await transaction(db.pool,q=>prepareCommunityCommercial(q,f.cfg,c.input));
+  for(const mode of ['MODEL','RIGHT'] as const)await expect(transaction(db.pool,async q=>{
+    if(mode==='MODEL')await q.query("UPDATE provider_model_versions SET status='SUSPENDED' WHERE id=$1",[f.models.listening!.model_version_id]);
+    else await q.query('UPDATE resource_licenses SET revoked_at=now() WHERE id=$1',[f.character.voice_binding.license_record_id]);
+    await expect(createPlan(q,f.cfg,f.p,c.request)).rejects.toMatchObject({code:mode==='MODEL'?'COMMUNITY_NATIVE_CONFIGURATION_CHANGED':'AUDIO_LICENSE_UNAVAILABLE'});
+    throw new Error('rollback original registration probe');
+  })).rejects.toThrow('rollback original registration probe');
+  const plan=await createPlan(db.pool,f.cfg,f.p,c.request),row=(await db.pool.query('SELECT private FROM plan_versions WHERE id=$1',[plan.plan_id])).rows[0];
+  expect(row.private.creative.native_voice_id).toBe(f.character.native_voice_id);expect(row.private.native_commercial.character.character_version_id).toBe(f.character.character_version_id);
+  await expect(validatePlanningResult(db.pool,f.p.tenantId,plan.plan_id,{...row.private.creative,native_voice_id:id('different_native_voice')}))
+    .rejects.toMatchObject({code:'COMMUNITY_NATIVE_VOICE_CHANGED'});
+  expect(f.providerCalls()).toBe(0);expect(f.asrPosts()).toBe(0);
+  await db.pool.query("UPDATE stage_runs SET state='CANCELLED' WHERE scope_type='PLAN' AND scope_id=$1",[plan.plan_id]);
+});
 it('assembles and rechecks both original tone segments losslessly, rejecting a gap and replaced PCM evidence',async()=>{
   const directory=join(root,id('assembly'));await mkdir(directory,{recursive:true});const segments:NativeSegment[]=['red','blue'].map((key,i)=>({node_key:`video:shot-${i+1}`,
     start_frame:i*30,end_frame:(i+1)*30,bytes:clips.get(key)!,source_sha256:sha256(clips.get(key)!)}));

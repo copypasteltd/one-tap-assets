@@ -10,10 +10,12 @@ import {requireThat,notFound} from '../lib/errors.js';
 import {validateInternal} from '../lib/validation.js';
 import {audit} from '../db/store.js';
 import {FONT_BINDING} from '../../worker/media/font.js';
+import {freezeCommunityNative,type CommunityNativeVoice} from './community-native.js';
+import type {GenerationModelRow} from '../../worker/generation/contracts.js';
 
 /** Operator-only preparation, never an admission or a sale switch. Caller must
  * use a transaction; community authors have no route to this function. */
-export async function prepareCommunityCommercial(db:Db,cfg:Config,input:{variantId:string;version:string;expectedRevision:number;actor:string;reason:string}):Promise<DTO<'ManagedVersion'>> {
+export async function prepareCommunityCommercial(db:Db,cfg:Config,input:{variantId:string;version:string;expectedRevision:number;actor:string;reason:string;nativeVoice?:CommunityNativeVoice}):Promise<DTO<'ManagedVersion'>> {
   requireThat(Number.isSafeInteger(input.expectedRevision)&&input.expectedRevision>=0&&input.actor.trim().length>=2
     &&input.actor.length<=128&&input.reason.trim().length>=4&&input.reason.length<=1000,'COMMERCIAL_INPUT_INVALID','请提供版本、原修订号、平台操作人及配置说明',422);
   const row=await getVariant(db,input.variantId,input.version,true);
@@ -30,9 +32,11 @@ export async function prepareCommunityCommercial(db:Db,cfg:Config,input:{variant
   const compiled=await compilePresetConfig(db,publication.private.config);
   const candidate=compiled.find(c=>hash({...c.source,variant_id:row.data.variant_id,version:row.data.version,name:row.data.name})===hash(row.private.source));
   requireThat(candidate,'COMMERCIAL_SOURCE_CHANGED','发布后的蓝本、组件或资源已变化，请重新制作样例并发布新版本',422);
-  requireThat(publication.private.config.resource_version_ids.length===0&&row.data.speech_mode==='NONE'
-    &&['none','approved_licensed_or_contract_silent'].includes(row.private.source.audio_policy.music),
-    'COMMERCIAL_ROUTE_NOT_AVAILABLE','当前商业配置只支持无声及平台字体路线',422);
+  const native=row.data.speech_mode==='NATIVE_ZH';
+  requireThat(native||(publication.private.config.resource_version_ids.length===0&&row.data.speech_mode==='NONE'
+    &&['none','approved_licensed_or_contract_silent'].includes(row.private.source.audio_policy.music)),
+    'COMMERCIAL_ROUTE_NOT_AVAILABLE','该商业配置没有已准入的制作与声音路线',422);
+  requireThat(native||!input.nativeVoice,'COMMUNITY_NATIVE_POLICY_INVALID','无声社区规格不能添加人物声音商业配置',422);
   const binding=row.private.source.community_binding as {blueprint_version_id:string;blueprint_source_hash:string};
   const base=(await db.query<{id:string;revision:number;data:DTO<'Variant'>;private:Record<string,unknown>}>(
     `SELECT x.id,x.revision,x.data,x.private FROM execution_variants x JOIN preset_versions v ON v.id=x.preset_version_id
@@ -47,18 +51,20 @@ export async function prepareCommunityCommercial(db:Db,cfg:Config,input:{variant
   const models=base.private.model_version_ids;
   requireThat(Array.isArray(models)&&models.length>0&&new Set(models).size===models.length&&models.every(m=>typeof m==='string'),
     'COMMERCIAL_CONFIGURATION_INCOMPLETE','蓝本模型配置不完整',422);
-  const admitted=await db.query("SELECT id FROM provider_model_versions WHERE id=ANY($1) AND status='ADMITTED' FOR SHARE",[models]);
+  const admitted=await db.query<GenerationModelRow>("SELECT id,status,data,private FROM provider_model_versions WHERE id=ANY($1) AND status='ADMITTED' FOR SHARE",[models]);
   const budget=Number(base.private.budget_micro),repair=Number(base.private.repair_ceiling_micro??0);
   requireThat(admitted.rowCount===models.length&&Number.isSafeInteger(budget)&&Number.isSafeInteger(repair)&&repair>=0
     &&budget>=cc.agent_cost_ceiling_micro*2+repair,'COMMERCIAL_CONFIGURATION_INCOMPLETE','蓝本模型或原制作、修改预算不足',422);
   const resources=base.private.resource_versions??[];
-  requireThat(Array.isArray(resources)&&resources.length<=1&&resources.every(r=>hash(r)===hash(FONT_BINDING)),
+  requireThat(Array.isArray(resources)&&(native||(resources.length<=1&&resources.every(r=>hash(r)===hash(FONT_BINDING)))),
     'COMMERCIAL_ROUTE_NOT_AVAILABLE','额外资源必须单独定价与准入',422);
+  const nativeBinding=native?await freezeCommunityNative(db,cfg,row.private.source,admitted.rows,resources as import('../../worker/compiler/snapshot.js').ResourceBinding[],
+    cc,budget,repair,Number(base.data.price_fen),input.nativeVoice):null;
   const commercial={version:'YPCC-COMMUNITY-COMMERCIAL-1',source_hash:hash(row.private.source),blueprint_version_id:base.id,
     blueprint_revision:base.revision,blueprint_configuration_hash:hash(base.private),skill_bundle_hash:skill.sha256,
-    actor:input.actor,reason:input.reason,configured_at:iso()};
+    actor:input.actor,reason:input.reason,configured_at:iso(),...(nativeBinding?{native_audio:nativeBinding}:{})};
   const privateData={...row.private,model_version_ids:structuredClone(models),budget_micro:budget,repair_ceiling_micro:repair,
-    resource_versions:[],codex_contract:cc,commercial_binding:commercial};
+    resource_versions:nativeBinding?.resource_versions??[],codex_contract:cc,commercial_binding:commercial};
   const data={...row.data,price_fen:base.data.price_fen,sale_enabled:false,reason_codes:['REQUIRES_COMMUNITY_FULL_ADMISSION']};
   await db.query('UPDATE execution_variants SET price_fen=$2,data=$3,private=$4,revision=revision+1 WHERE id=$1',
     [row.id,data.price_fen,JSON.stringify(data),JSON.stringify(privateData)]);

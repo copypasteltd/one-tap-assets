@@ -30,7 +30,8 @@ export class ContentPlanningService {
     const context = await planningContext(this.pool, lease.tenant_id, lease.scope_id);
     const admission = checkAdmission(this.cfg, row.private.runtime_admission);
     const expected = hash({ request: row.private.request, suggested_plan: row.private.creative, profile_hash: context.profile.profile_hash, source: context.source,
-      bundle_hash: row.private.bundle_hash, runtime_admission: admission, inference_limits: row.private.inference_limits });
+      bundle_hash: row.private.bundle_hash, runtime_admission: admission, inference_limits: row.private.inference_limits,
+      ...(context.native?{native_commercial_hash:hash(context.native)}:{}) });
     requireThat(expected === lease.input_hash && row.private.plan_input_hash === expected, 'PLAN_INPUT_HASH_MISMATCH', '规划输入快照摘要不一致', 503);
     const prior = (await this.pool.query<{ id: string; instance_id: string; input_hash: string; output_hash: string; private: { stage_result: unknown }; state: string }>(
       `SELECT id,instance_id,input_hash,output_hash,private,state FROM agent_runs WHERE tenant_id=$1
@@ -44,7 +45,7 @@ export class ContentPlanningService {
         'CODEX_RESULT_NOT_PERSISTED', '原角色检查点摘要不一致', 503);
       completed = { runId: prior.id, instanceId: prior.instance_id, result: prior.private.stage_result, resultHash: prior.output_hash };
     } else {
-      const voices = (await this.pool.query<{ id: string; data: { native_voice_ids: string[] } }>(
+      const voices = context.native?[{character_version_id:context.native.character.character_version_id,native_voice_ids:[context.native.character.native_voice_id]}]:(await this.pool.query<{ id: string; data: { native_voice_ids: string[] } }>(
         "SELECT id,data FROM character_versions WHERE data->>'admission_state'='ADMITTED' ORDER BY id LIMIT 100")).rows
         .map(v => ({ character_version_id: v.id, native_voice_ids: v.data.native_voice_ids }));
       if (context.source.audio_policy.speech !== 'none') requireThat(voices.some(v => Array.isArray(v.native_voice_ids) && v.native_voice_ids.length > 0),
@@ -54,7 +55,9 @@ export class ContentPlanningService {
         bundleHash: row.private.bundle_hash, admission, limits: row.private.inference_limits,
         allowedTools: ['analyze_photos', 'validate_content_plan', 'persist_stage_result'], outputSchema: creativePlanSchema,
         input: { task: '基于已核验商品证据和风格 Skill，编排完整素材包。先用 analyze_photos 读取真实视觉档案，再验证并持久化计划。不得添加未知的材质、容量、价格和功效。若 source.creative_components.community_direction 存在，必须保留 suggested_plan 的镜头起止帧、所选运镜和叙事标签；只在真实照片证据范围内选图与完善配套内容。',
-          profile: context.profile, source: context.source, suggested_plan: row.private.creative, admitted_native_voices: voices } }, signal);
+          profile: context.profile, source: context.source, suggested_plan: row.private.creative, admitted_native_voices: voices,
+          ...(context.native?{frozen_native_voice:{character_version_id:context.native.character.character_version_id,native_voice_id:context.native.character.native_voice_id,
+            policy:'保留平台冻结的默认人物与原生声音；只在商品证据范围内完善台词，禁止换人换声。'}}:{}) } }, signal);
     }
     const creative = await validatePlanningResult(this.pool, lease.tenant_id, lease.scope_id, completed.result);
     requireThat(creativePlanHash(creative) === completed.resultHash, 'CODEX_RESULT_NOT_PERSISTED', '规划结果摘要不一致', 503);

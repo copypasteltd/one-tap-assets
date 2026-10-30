@@ -2,27 +2,27 @@
 
 [English](README.en.md) · [中文](README.md) · [Docs](docs/README.md) · [Quick start](docs/guides/QUICKSTART.md) · [Status](docs/guides/STATUS.md) · [Changelog](CHANGELOG.md)
 
-One Tap Assets turns product photos into an image, short-video and copy pack. Alipay and Douyin mini-programs are the primary clients. Multimodal analysis establishes visible features without a product form; the future Plus web client supports deeper editing.
+One Tap Assets turns product photos into a coordinated image, short-video and copy pack. **Alipay and Douyin mini-programs are the primary clients**. Multimodal analysis establishes visible product facts without a product form; users select a community preset and confirm the pack. The future Plus web client supports deeper editing.
 
-The latest source connects [community native-audio samples and their independent platform audio ledger](docs/实施/社区原生声音样例与平台声音账本-v1.0.md). Both AI-video routes use the existing author workflow: original-audio generation, complete assembly, one transcription, captions and post-production, whole-track original/final listening, and two fresh independent final reviews. Authors can download privately and submit for approval and independent public copies. Revoked audio rights immediately deny public access and maintenance withdraws publication. Sample costs use the original platform allocation without creating buyer orders.
+The current source connects [community native-audio commercial configuration and buyer delivery](docs/实施/社区原生声音商业配置与买家交付-v1.0.md). Platform operators explicitly freeze a default character/voice, commercial rights, exact model/rate registrations and the original budget for a community version. Buyers use the existing mini-program flow for planning, quote, payment, original-audio video and captions, whole-track listening, two fresh independent reviews and private delivery. Authors cannot read buyer assets. SAMPLE showcase rights never substitute for ORDER commercial rights; configuration does not grant admission or enable sales.
 
 | Step | System behavior | Buyer action |
 | --- | --- | --- |
-| 1. Photograph | Bind 3–5 photos of one product; recognize visible facts and unknowns | Capture whole, side and detail views without a product form |
-| 2. Select | Filter unavailable variants and rank photo-supported product matches | Read reasons, authors and asset specifications; select a community preset |
-| 3. Confirm | Freeze identity, exact preset/Skill, assets, models, rights, budget and price | Review the asset list and explicitly pay |
-| 4. Produce | Photo motion, per-shot AI or reference-film routes; Codex planning, production, post and independent reviews | Follow progress; failures use the original order rules |
-| 5. Receive | Save images/videos, copy text, use limited aftercare; release the instance | Save within the delivery window |
+| 1. Photograph | Analyze one product's photo evidence, visible attributes and unknowns | Capture whole, side and detail views without a product form |
+| 2. Select | Recommend available community specifications from product/photo evidence | Read style, author and pack details; select a preset |
+| 3. Confirm | Freeze identity, Skill, default voice, models, rights and complete costs | Review assets and price, then explicitly pay |
+| 4. Produce | Codex planning, production, post, QC and independent dual review | Follow progress and original-order exception handling |
+| 5. Receive | Privately deliver assets and release the instance | Save to the album, copy text and use bounded aftercare |
 
-The community retains ten official styles and 25 trusted components for controlled author extensions. Recommendation initial loading, pagination and refresh remain implemented. Existing UI screenshots, recordings, GIFs and the frozen C design retain their original versioned provenance.
+Ten official styles and 25 trusted components support controlled community extensions. The three routes, native-audio SAMPLE and independent public-copy mechanisms remain. This change adds no page layout.
 
-Eight focused checks pass; 56 other tests are not selected. Coverage includes both native SAMPLE delivery routes, rights/budget gates, UNKNOWN without repurchase, and existing silent-sample/order-audio compatibility. Typecheck, server/preview builds, native database checks and local startup pass. The current snapshot contains 459 source files, 42 contract/Skill files, four font resources, 32 migrations and 77 business/35 management operations. [Evidence](docs/verification/native-sample-source.json) · [Package metadata](docs/delivery/package.json) · [Run and package](docs/delivery/README.md) · [Completed and pending work](docs/guides/STATUS.md).
+**Seven focused checks pass on the final snapshot**: both native community buyer routes, two configuration/planning gates and three existing silent community cases. Typecheck, server/preview builds, native database checks and local startup pass. Another 33 tests are not selected. An earlier existing official buyer case exceeded its unchanged 240-second limit; its cause remains unresolved and the original record is retained. The snapshot contains 461 source files, 42 contract/Skill files, four font resources, 32 migrations and 77 business/35 management operations. [Evidence and earlier failures](docs/verification/community-native-source.json) · [Package](docs/delivery/package.json) · [Run and package](docs/delivery/README.md) · [Completed and pending work](docs/guides/STATUS.md).
 
-![Profile-based preset selection, retained original UI recording](docs/media/recommendations/walkthrough.gif)
+![Product-based preset recommendations, original UI recording retained](docs/media/recommendations/walkthrough.gif)
 
-[Per-shot MP4](docs/media/native-sample/per_shot_ai.mp4) · [Reference-film MP4](docs/media/native-sample/reference_film.mp4) · [Frames, GIFs, hashes and provenance](docs/media/native-sample/README.md). Six new media files are added; all 116 earlier media and frozen design files retain their bytes. These are actual native pipeline outputs with tone audio. Chinese transcription, listening verdicts, generated semantics, rights, identities and prices are synthetic fixtures, not real Chinese voice-quality acceptance.
+[Native sample MP4s, frames and GIFs](docs/media/native-sample/README.md) and all other retained recordings total 122 media files with unchanged bytes. Frozen C design files and the archive remain intact. Audio consists of tones; Chinese transcription, listening verdicts, generated semantics, licenses, identities, prices and payment are synthetic fixtures. Actual native database, media processing and private downloads do not prove real commercial voice quality.
 
-This delivery follows the requested focused approach without full suites or fresh native mini-program builds/device checks. Live generation, Codex, audio, payment, complete community commercial admission, production isolation, Plus, cloud and long-run acceptance remain pending. Real services and sale switches remain off; full-product, production and cloud flags remain false.
+This follows the requested focused delivery without full suites or an all-green prerequisite. Mini-program rebuilds/devices, live Codex/generation/audio/payment, complete official/community commercial admission, production isolation, Plus, cloud and all 58 acceptance items remain pending. Live services and sales stay off; full-product, production and cloud flags remain false. The ZIP contains source and current server/web outputs; documented native tools and external service configuration are separate prerequisites.
 
 ## Screens and recorded interaction
 

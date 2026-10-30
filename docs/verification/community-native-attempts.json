@@ -1,0 +1,260 @@
+{
+  "schema_version": "1.0",
+  "attempts": [
+    {
+      "attempt": 1,
+      "source_set_hash": "ceace0e83ed2a6de5f98df75a3914a1b486d848ac5b36df6494167f1b4ffd5a4",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "typecheck",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+            "--noEmit"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 2,
+          "signal": null,
+          "timeout_ms": 120000,
+          "elapsed_ms": 88495,
+          "log_path": "runtime/test-results/community-native-2026-10-30T09-20-23-975Z/type.log",
+          "log_sha256": "c155bed1b9fef8418d4bffc845af0fdc675f693210081ee39e21106ccc844653"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/community-native-attempt-01-source.json",
+          "sha256": "9cf935942be5dc8b5434cd29fceced3aa2cdd6e4f6f358e4a1d64d638db8ea4f",
+          "bytes": 75601
+        },
+        {
+          "path": "docs/verification/community-native-attempt-01-result.json",
+          "sha256": "77ea3258d29c43d38ce56bcc0c5c7f488dc11c30b283fd708a7f344d7b862d18",
+          "bytes": 843
+        },
+        {
+          "path": "docs/verification/community-native-attempt-01-type.log",
+          "sha256": "c155bed1b9fef8418d4bffc845af0fdc675f693210081ee39e21106ccc844653",
+          "bytes": 692
+        }
+      ],
+      "observation": "Negative fixture cast was too narrow for deliberately missing voice; corrected test typing, not the runtime guard.",
+      "is_final_selected": false
+    },
+    {
+      "attempt": 2,
+      "source_set_hash": "d2d960e4c113e2da9ff0cec192ba3920325281ebf482ac29ecead0b7df1a915f",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/native-order.test.ts -t freezes native community|locks native community --outputFile.json=runtime/test-results/community-native-2026-10-30T09-24-44-617Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/native-order.test.ts",
+            "-t",
+            "freezes native community|locks native community",
+            "--outputFile.json=runtime/test-results/community-native-2026-10-30T09-24-44-617Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 129294,
+          "log_path": "runtime/test-results/community-native-2026-10-30T09-24-44-617Z/api.log",
+          "log_sha256": "d37416edc62ceca8ed6ad971d157b18978724582bcae9657cace3b4c7b156485"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/community-native-attempt-02-source.json",
+          "sha256": "6e9962536bd17a11869ab40e0fee39656bb9a37f56b459f9cd1eb36ca8b9acb4",
+          "bytes": 75601
+        },
+        {
+          "path": "docs/verification/community-native-attempt-02-result.json",
+          "sha256": "200b169d014bfc86974dda18ed2a3618176d2a7ce4ac8e5fc9d4c1b4e93194c1",
+          "bytes": 1326
+        },
+        {
+          "path": "docs/verification/community-native-attempt-02-api.json",
+          "sha256": "44b319d7c944dccd61720779fa8452d804eefbf786ff8118a79df9426c27c899",
+          "bytes": 12895
+        },
+        {
+          "path": "docs/verification/community-native-attempt-02-api.log",
+          "sha256": "d37416edc62ceca8ed6ad971d157b18978724582bcae9657cace3b4c7b156485",
+          "bytes": 689
+        }
+      ],
+      "observation": "Two new configuration/planning gates passed on their original earlier snapshot; not counted again in the final seven checks.",
+      "is_final_selected": false
+    },
+    {
+      "attempt": 3,
+      "source_set_hash": "d2d960e4c113e2da9ff0cec192ba3920325281ebf482ac29ecead0b7df1a915f",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/native-order.test.ts tests/integration/community-commercial.test.ts -t native community|checks out and delivers the native buyer|resolves only the compiled trusted style|requires admitted costs and active license|runs community buyer planning --outputFile.json=runtime/test-results/community-native-2026-10-30T09-28-21-574Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/native-order.test.ts",
+            "tests/integration/community-commercial.test.ts",
+            "-t",
+            "native community|checks out and delivers the native buyer|resolves only the compiled trusted style|requires admitted costs and active license|runs community buyer planning",
+            "--outputFile.json=runtime/test-results/community-native-2026-10-30T09-28-21-574Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 320997,
+          "log_path": "runtime/test-results/community-native-2026-10-30T09-28-21-574Z/api.log",
+          "log_sha256": "59d2af11922a755fea18a53f0694880c645f6937e28c2be671f49717f21166cf"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/community-native-attempt-03-source.json",
+          "sha256": "6e9962536bd17a11869ab40e0fee39656bb9a37f56b459f9cd1eb36ca8b9acb4",
+          "bytes": 75601
+        },
+        {
+          "path": "docs/verification/community-native-attempt-03-result.json",
+          "sha256": "99dc3625945e1e72070ae6d622e8abcafbe82957d0bf7f3ab7f9eb891a098625",
+          "bytes": 1679
+        },
+        {
+          "path": "docs/verification/community-native-attempt-03-api.json",
+          "sha256": "6bedb34b129bd70929f39fbf206c370df4e98c7a777ff061294903fe49c9e492",
+          "bytes": 15366
+        },
+        {
+          "path": "docs/verification/community-native-attempt-03-api.log",
+          "sha256": "59d2af11922a755fea18a53f0694880c645f6937e28c2be671f49717f21166cf",
+          "bytes": 5358
+        }
+      ],
+      "observation": "The first pre-existing official PER_SHOT_AI buyer case exceeded its original 240000 ms limit. Bail=1 stopped the selection before new community positives or silent compatibility ran. Root cause remains unconfirmed; not relabelled PASS.",
+      "is_final_selected": false
+    },
+    {
+      "attempt": 4,
+      "source_set_hash": "5d8ea011ee6459430d979ea68968d2d30d28044cf65093c492c2285aaee9721f",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/native-order.test.ts -t native community --outputFile.json=runtime/test-results/community-native-2026-10-30T09-36-34-622Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/native-order.test.ts",
+            "-t",
+            "native community",
+            "--outputFile.json=runtime/test-results/community-native-2026-10-30T09-36-34-622Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 138973,
+          "log_path": "runtime/test-results/community-native-2026-10-30T09-36-34-622Z/api.log",
+          "log_sha256": "885d5c0b8a2a038925640784f2fd79b01ed779a88ccb6103487fbbf9457ee0c7"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/community-native-attempt-04-source.json",
+          "sha256": "83664897daa116b74864bbda4e8b0aab30badb6bed39e20a87cbd1f00b78b494",
+          "bytes": 75601
+        },
+        {
+          "path": "docs/verification/community-native-attempt-04-result.json",
+          "sha256": "5b1aae73d5f069719cf65e2e0d5cbfc51b9bfc64cf5a25248c923cbfec06f773",
+          "bytes": 1264
+        },
+        {
+          "path": "docs/verification/community-native-attempt-04-api.json",
+          "sha256": "ff666c66f1930b41ce624ccff2a4e977cbcc513a3134c145fd22c79a892a4987",
+          "bytes": 12951
+        },
+        {
+          "path": "docs/verification/community-native-attempt-04-api.log",
+          "sha256": "885d5c0b8a2a038925640784f2fd79b01ed779a88ccb6103487fbbf9457ee0c7",
+          "bytes": 1664
+        }
+      ],
+      "observation": "Both new community native buyer deliveries and both configuration/planning gates passed with original time limits and assertions. Optional phase traces were added; no budget or runtime gate changed.",
+      "is_final_selected": true
+    },
+    {
+      "attempt": 5,
+      "source_set_hash": "5d8ea011ee6459430d979ea68968d2d30d28044cf65093c492c2285aaee9721f",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/community-commercial.test.ts --outputFile.json=runtime/test-results/community-native-2026-10-30T09-40-12-849Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/community-commercial.test.ts",
+            "--outputFile.json=runtime/test-results/community-native-2026-10-30T09-40-12-849Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 24681,
+          "log_path": "runtime/test-results/community-native-2026-10-30T09-40-12-849Z/api.log",
+          "log_sha256": "9d58aa491e9b1d0dc9da7306bfbdff021123bc958e5e22ee5aa2c002d93509b8"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/community-native-attempt-05-source.json",
+          "sha256": "83664897daa116b74864bbda4e8b0aab30badb6bed39e20a87cbd1f00b78b494",
+          "bytes": 75601
+        },
+        {
+          "path": "docs/verification/community-native-attempt-05-result.json",
+          "sha256": "2b255d38dd0950d646d3e1befc9a153cc7d55eaf70539c3fd5f2bb866d86d921",
+          "bytes": 1217
+        },
+        {
+          "path": "docs/verification/community-native-attempt-05-api.json",
+          "sha256": "b5b3802dd171df889c51f9c97820b50d6fda086f6f203222d71df655f61d8264",
+          "bytes": 1838
+        },
+        {
+          "path": "docs/verification/community-native-attempt-05-api.log",
+          "sha256": "9d58aa491e9b1d0dc9da7306bfbdff021123bc958e5e22ee5aa2c002d93509b8",
+          "bytes": 554
+        }
+      ],
+      "observation": "All three existing silent community cases passed on the final source snapshot.",
+      "is_final_selected": true
+    }
+  ],
+  "earlier_failures_preserved": true,
+  "earlier_results_relabelled": false
+}

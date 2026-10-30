@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "created_at": "2026-10-30T08:56:31.184Z",
-  "id": "2026-10-30T08-31-29-585Z-23cca323",
-  "source_set_hash": "52416aa969b252c137015e7e8789eca8a4666d18ab61e3b81b74695f7a69383b",
-  "archive_path": "runtime/releases/one-tap-assets-2026-10-30T08-31-29-585Z-23cca323/one-tap-assets-source-and-builds.zip",
-  "archive_sha256": "89b1ac9f38cdac75f6ed8de1276e51ff351441cfa5478e863224c52f2ef1429b",
-  "archive_bytes": 101990013,
-  "source_files": 1277,
+  "created_at": "2026-10-30T09:45:08.122Z",
+  "id": "2026-10-30T09-40-57-849Z-c67d7cf0",
+  "source_set_hash": "5d8ea011ee6459430d979ea68968d2d30d28044cf65093c492c2285aaee9721f",
+  "archive_path": "runtime/releases/one-tap-assets-2026-10-30T09-40-57-849Z-c67d7cf0/one-tap-assets-source-and-builds.zip",
+  "archive_sha256": "58da65f85d8be02d7f3d118a9b6b280929f64e45e591c389f639c6ebfd679188",
+  "archive_bytes": 102294779,
+  "source_files": 1325,
   "build_files": 31,
   "components": [
     {
@@ -26,18 +26,18 @@
       "status": "NOT_RUN"
     }
   ],
-  "manifest_path": "runtime/releases/one-tap-assets-2026-10-30T08-31-29-585Z-23cca323/manifest.json",
+  "manifest_path": "runtime/releases/one-tap-assets-2026-10-30T09-40-57-849Z-c67d7cf0/manifest.json",
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
   "full_product_verified": false,
   "production_admitted": false,
   "independent_archive_verification": {
     "status": "PASS",
-    "checked_at": "2026-10-30T08:58:51.945997+00:00",
+    "checked_at": "2026-10-30T09:45:22.233065+00:00",
     "method": "INDEPENDENT_PYTHON_ZIPFILE_CRC_AND_SHA256",
-    "archive_sha256": "89b1ac9f38cdac75f6ed8de1276e51ff351441cfa5478e863224c52f2ef1429b",
-    "payload_files_verified": 1308,
-    "archive_entries": 1309,
+    "archive_sha256": "58da65f85d8be02d7f3d118a9b6b280929f64e45e591c389f639c6ebfd679188",
+    "payload_files_verified": 1356,
+    "archive_entries": 1357,
     "workspace_payload_bytes_matched": true,
     "successful_build_components_verified": [
       "server",
