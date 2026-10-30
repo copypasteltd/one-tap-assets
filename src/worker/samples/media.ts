@@ -28,11 +28,15 @@ import { loadProductionFont, FONT_BINDING, verifyResourceLicenses } from '../med
 import { PendingExternal } from '../queue/leases.js';
 import { sampleContext, samplePlan, type SampleContext } from './context.js';
 import {communityCaptionStyle} from '../compiler/community-direction.js';
+import {produceSampleNative,postSampleNative,verifySampleNativeArtifact,verifySampleNativeBindings,type SampleNativeProof} from './native-media.js';
+import {verifySampleNativeLive} from './context.js';
+import {SampleSpeechGateway} from './speech.js';
 
 export interface SampleArtifact {
   artifact_id: string; slot_id: string; kind: 'image' | 'video' | 'copy'; object_key: string;
   sha256: string; size_bytes: number; inspection: MediaInspection | null;
   generation_sources?:GenerationSource[];reference_approval_hash?:string;ai_disclosure?:AiDisclosureProof;
+  native_audio?:SampleNativeProof;
 }
 export interface SampleMediaReceipt { operation_id: string; phase: 'PRODUCTION' | 'POST'; snapshot_hash: string; artifacts: SampleArtifact[] }
 const mime = (kind: SampleArtifact['kind']): string => kind === 'image' ? 'image/png' : kind === 'video' ? 'video/mp4' : 'text/plain; charset=utf-8';
@@ -70,6 +74,7 @@ export async function verifySampleGeneratedReceipt(db:Db,cfg:Config,store:Object
       &&a.ai_disclosure.output_sha256===a.sha256,'GENERATED_PACK_SOURCE_INVALID','样例的原生成来源、参考核验或AI标识证明不一致',503);
     await artifactBytes(db,store,c,a);
   }
+  await verifySampleNativeBindings(db,cfg,store,c,receipt);
 }
 export async function verifyMedia(db: Db, cfg: Config, store: ObjectStorage, context: SampleContext, receipt: SampleMediaReceipt, directory: string, signal: AbortSignal): Promise<void> {
   await mkdir(directory, { recursive: true });
@@ -87,7 +92,10 @@ export async function verifyMedia(db: Db, cfg: Config, store: ObjectStorage, con
     else { const path = join(directory, `${artifact.artifact_id}.mp4`); await writeFile(path, bytes); actual = await inspectVideo(cfg, path, signal); }
     requireThat(hash(actual) === hash(artifact.inspection) && actual.width === slot.width && actual.height === slot.height
       && (artifact.kind !== 'video' || (actual.codec === 'h264' && actual.pixelFormat === 'yuv420p' && actual.fps === slot.fps
-        && actual.frames === slot.duration_frames && !actual.hasAudio)), 'SAMPLE_MEDIA_CONTRACT_FAILED', '实际样例文件不符合冻结规格', 422);
+        && actual.frames === slot.duration_frames && (context.input.generation?.audio
+          ?actual.hasAudio&&actual.audioCodec===(receipt.phase==='PRODUCTION'?'alac':'aac'):!actual.hasAudio))), 'SAMPLE_MEDIA_CONTRACT_FAILED', '实际样例文件不符合冻结规格', 422);
+    if(artifact.kind==='video'&&context.input.generation?.audio)await verifySampleNativeArtifact(db,cfg,store,context,artifact,receipt.phase,directory,signal);
+    else requireThat(!artifact.native_audio,'SAMPLE_AUDIO_PROOF_INVALID','无声或非视频文件不能附带声音证明',503);
     if(policy){const proof=await inspectDisclosure(cfg,policy,bytes,{kind:artifact.kind,width:actual.width!,height:actual.height!,frames:samplePlan(context).target_frames,directory,deadline_at:context.input.deadline_at,signal});
       requireThat(hash(proof)===hash(artifact.ai_disclosure),'AI_DISCLOSURE_PROOF_INVALID','样例实际全部画面标识与原证明不一致',503);}
   }
@@ -95,7 +103,7 @@ export async function verifyMedia(db: Db, cfg: Config, store: ObjectStorage, con
 
 /** Native deterministic work may recover original registered bytes. It never
  * retries a charged provider request or overwrites an uncertain object. */
-export async function renderSample(pool: pg.Pool, cfg: Config, store: ObjectStorage, scope: ToolScope, phase: 'PRODUCTION' | 'POST', signal: AbortSignal, injected?:GenerationGateway): Promise<SampleMediaReceipt> {
+export async function renderSample(pool: pg.Pool, cfg: Config, store: ObjectStorage, scope: ToolScope, phase: 'PRODUCTION' | 'POST', signal: AbortSignal, injected?:GenerationGateway,speech?:SampleSpeechGateway): Promise<SampleMediaReceipt> {
   const operation = await transaction(pool, async db => {
     await toolScopeById(db, scope.capability_id, true); const c = await sampleContext(db, scope.tenant_id, scope.scope_id, scope.snapshot_hash, true);
     const operations = (c.private.native_operations ?? {}) as Record<string, { operation_id: string; input_hash: string }>;
@@ -110,11 +118,15 @@ export async function renderSample(pool: pg.Pool, cfg: Config, store: ObjectStor
   const directory = inside(cfg.runtimeRoot, `sample-work/${context.input.sample_id}/${operation.operation_id}/${scope.run_id}`);
   await mkdir(directory, { recursive: true });
   try {
+    await verifySampleNativeLive(pool,cfg,context);
     await verifyResourceLicenses(pool, [FONT_BINDING]); const font = await loadProductionFont(cfg.projectRoot);
     const saved = context.private[phase.toLowerCase()];
     if (saved) { const receipt = storedMedia(context, phase); await verifyMedia(pool, cfg, store, context, receipt, directory, signal); return receipt; }
     let material:Awaited<ReturnType<typeof generatedOutputs>>|undefined;
     const generated=context.input.source.engine!=='PHOTO_LAYOUT',gc=generated?sampleGenerationContext(context):null;
+    const native=!!context.input.generation?.audio;
+    const stage=(await pool.query<StageLease>('SELECT * FROM stage_runs WHERE tenant_id=$1 AND id=$2',[scope.tenant_id,scope.stage_run_id])).rows[0]!;
+    requireThat(String(stage.fencing_token)===String(scope.stage_fencing_token),'LEASE_LOST','样例原媒体租约已变化',409);
     const policy=gc?frozenAiDisclosure(gc.contract):null;
     if(generated&&phase==='PRODUCTION'){
       const lease=(await pool.query<StageLease>('SELECT * FROM stage_runs WHERE tenant_id=$1 AND id=$2',[scope.tenant_id,scope.stage_run_id])).rows[0]!;
@@ -140,6 +152,7 @@ export async function renderSample(pool: pg.Pool, cfg: Config, store: ObjectStor
     }
     const prior = phase === 'POST' ? storedMedia(context, 'PRODUCTION') : null;
     const artifacts: SampleArtifact[] = []; let generatedVideo: Buffer | undefined;
+    let nativeVideo:Awaited<ReturnType<typeof produceSampleNative>>|Awaited<ReturnType<typeof postSampleNative>>|undefined;
     for (const slot of outputSlots(source).filter(s => phase === 'POST' || s.kind !== 'copy')) {
       requireThat(!signal.aborted && Date.parse(context.input.deadline_at) > Date.now(), 'SAMPLE_NO_LONGER_EXECUTABLE', '样例执行已停止或到期', 409);
       requireThat(slot.count === 1, 'SAMPLE_SLOT_UNSUPPORTED', '样例槽位尚不支持此数量', 503);
@@ -147,8 +160,10 @@ export async function renderSample(pool: pg.Pool, cfg: Config, store: ObjectStor
       const artifactId = `sampleasset_${sha256(`${operation.operation_id}:${slot.slot_id}`).slice(0, 32)}`;
       const key = `${scope.tenant_id}/samples/${context.input.sample_id}/${operation.operation_id}/${artifactId}.${extension}`;
       const original = (await pool.query<{ state: string; sha256: string; delete_requested: boolean }>('SELECT state,sha256,delete_requested FROM private_object_writes WHERE tenant_id=$1 AND object_key=$2', [scope.tenant_id, key])).rows[0];
-      let bytes: Buffer;
-      if (original) {
+      let bytes: Buffer;let nativeProof:SampleNativeProof|undefined;
+      if(original){requireThat(!original.delete_requested,'SAMPLE_OBJECT_INVALID','样例原文件已撤销',409);
+        if(original.state!=='STORED')throw new PendingExternal(5,'SAMPLE_ORIGINAL_WRITE_UNRESOLVED');}
+      if (original&&!(native&&kind==='video')) {
         requireThat(!original.delete_requested && original.state !== 'ERASED', 'SAMPLE_OBJECT_INVALID', '样例原文件已撤销', 409);
         if (original.state !== 'STORED') throw new PendingExternal(5, 'SAMPLE_ORIGINAL_WRITE_UNRESOLVED');
         bytes = await store.get(key, 125_000_000); requireThat(sha256(bytes) === original.sha256, 'SAMPLE_OBJECT_CHANGED', '原样例写入字节不一致', 503);
@@ -162,14 +177,16 @@ export async function renderSample(pool: pg.Pool, cfg: Config, store: ObjectStor
           if(policy)bytes=await markDisclosureImage(bytes,await disclosureRaster(cfg,policy,slot.width,slot.height));
         } else {
           requireThat(kind === 'video' && slot.width === 1080 && slot.height === 1920 && slot.fps === 30, 'SAMPLE_SLOT_UNSUPPORTED', '样例短片规格尚未接入', 503);
-          generatedVideo ??= material?await assembleSilentGeneratedVideo(cfg,gc!,material,directory,signal):(await renderPhotoVideo(cfg, { directory: join(directory, 'shots'), plan, presetId: style, photos, deadlineAt: context.input.deadline_at, signal, font,...(communityCaptionStyle(context.input.source)?{captionStyle:communityCaptionStyle(context.input.source)!}:{}) })).bytes;
-          bytes = generatedVideo;
+          if(native){nativeVideo??=await produceSampleNative(pool,cfg,store,context,directory,signal);bytes=nativeVideo.bytes;nativeProof=nativeVideo.native_audio;}
+          else {generatedVideo ??= material?await assembleSilentGeneratedVideo(cfg,gc!,material,directory,signal):(await renderPhotoVideo(cfg, { directory: join(directory, 'shots'), plan, presetId: style, photos, deadlineAt: context.input.deadline_at, signal, font,...(communityCaptionStyle(context.input.source)?{captionStyle:communityCaptionStyle(context.input.source)!}:{}) })).bytes;
+            bytes=generatedVideo;}
         }
       } else if (kind === 'copy') bytes = Buffer.from(plan.copy, 'utf8');
       else {
         const input = prior!.artifacts.find(a => a.slot_id === slot.slot_id && a.kind === kind); requireThat(input, 'SAMPLE_PACK_INCOMPLETE', '后期缺少原制作文件', 422);
         const raw = await artifactBytes(pool, store, context, input);
         if (kind === 'image') bytes = await sharp(raw, { limitInputPixels: 4_000_000, failOn: 'warning' }).png({ compressionLevel: 9 }).toBuffer();
+        else if(native){nativeVideo??=await postSampleNative(pool,cfg,store,context,stage,speech??new SampleSpeechGateway(pool,cfg,store),directory,signal);bytes=nativeVideo.bytes;nativeProof=nativeVideo.native_audio;}
         else {
           const inputPath = join(directory, `${artifactId}-input.mp4`); const outputPath = join(directory, `${artifactId}-post.mp4`); await writeFile(inputPath, raw);
           await nativeCommand(cfg, process.env.FFMPEG_PATH?.trim() || 'ffmpeg', ['-hide_banner','-loglevel','error','-nostdin','-y','-threads','2','-filter_threads','1','-protocol_whitelist','file,pipe','-i',inputPath,
@@ -178,11 +195,13 @@ export async function renderSample(pool: pg.Pool, cfg: Config, store: ObjectStor
           bytes = await (await import('node:fs/promises')).readFile(outputPath);
         }
       }
-      if (!original) await writePrivateObject(pool, store, { tenantId: scope.tenant_id, ownerId: context.input.owner_id, productId: context.input.request.product_id, kind: 'MEDIA' }, key, bytes, mime(kind));
+      if(original)requireThat(sha256(bytes)===original.sha256,'SAMPLE_OBJECT_CHANGED','恢复的原样例字节与原记录不一致',503);
+      else await writePrivateObject(pool, store, { tenantId: scope.tenant_id, ownerId: context.input.owner_id, productId: context.input.request.product_id, kind: 'MEDIA' }, key, bytes, mime(kind));
       let inspection: MediaInspection | null = null;
       if (kind === 'image') inspection = await inspectImage(bytes);
       if (kind === 'video') { const path = join(directory, `${artifactId}-inspect.mp4`); await writeFile(path, bytes); inspection = await inspectVideo(cfg, path, signal); }
       const artifact:SampleArtifact={artifact_id:artifactId,slot_id:slot.slot_id,kind,object_key:key,sha256:sha256(bytes),size_bytes:bytes.length,inspection};
+      if(nativeProof)artifact.native_audio=nativeProof;
       if(generated&&kind!=='copy'){
         const original=prior?.artifacts.find(a=>a.slot_id===slot.slot_id)!;
         artifact.generation_sources=material?sourcesForSlot(material,kind,slot.slot_id):original.generation_sources!;

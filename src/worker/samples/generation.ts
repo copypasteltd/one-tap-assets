@@ -19,6 +19,8 @@ import {ReferenceIdentityService} from '../generation/reference-service.js';
 import {referenceRequest} from '../generation/requests.js';
 import {submitGenerationNode} from '../generation/execute.js';
 import type {RoleExecutor} from '../codex/planning.js';
+import {projectSampleContract} from './generation-contract.js';
+import {frozenNativeAudio} from '../audio/contract.js';
 
 /** Noncommercial projection of the frozen sample, never bindSnapshot(fakeOrder). */
 export function sampleGenerationContext(c:SampleContext):GenerationContext{
@@ -28,23 +30,18 @@ export function sampleGenerationContext(c:SampleContext):GenerationContext{
   const plan=samplePlan(c),maxVideo=i.source.engine==='PER_SHOT_AI'?plan.shots.length:1;
   requireThat(maxVideo<=g.max_video_calls&&plan.image_slots.length+maxVideo<=g.max_image_calls,
     'SAMPLE_GENERATION_BUDGET_INVALID','内容计划超出原样例生成次数',422);
-  const contract:FrozenContract={product:g.product,profile:i.profile,photo_set_hash:i.photo_set_hash,identity_lock_hash:i.identity_lock_hash,
-    request:{product_id:i.request.product_id,photo_version:i.profile.photo_version,profile_id:i.profile.profile_id,identity_lock_id:i.profile.identity_lock_id,
-      preset_id:String(i.source.creative_components.platform_style_id),preset_version:i.source.skill_bundle.version,variant_id:i.source.variant_id,variant_version:i.source.version},
-    creative:plan,source:i.source,plan_hash:creativePlanHash(plan),model_versions:g.model_versions,resource_versions:g.resource_versions,
-    codex_contract:g.codex_contract,generation_contracts:g.generation_contracts,budget_micro:g.total_ceiling_micro,repair_ceiling_micro:0,
-    runtime_binding:{admission:i.admission,limits:i.limits}};
-  freezeAiDisclosure(contract);validateGenerationExecution(contract);
+  const contract=projectSampleContract(i,plan),audio=frozenNativeAudio(contract);
   const snapshot:GenerationContext['snapshot']={schema_version:'1.1.0',tenant_id:i.tenant_id,product_id:i.request.product_id,
     photo_version:i.profile.photo_version,photo_set_hash:i.photo_set_hash,profile_id:i.profile.profile_id,profile_hash:i.profile.profile_hash,
     identity_lock_id:i.profile.identity_lock_id,identity_lock_hash:i.identity_lock_hash,preset_id:contract.request.preset_id,preset_version:contract.request.preset_version,
     variant_id:i.source.variant_id,variant_version:i.source.version,engine:i.source.engine,plan_hash:contract.plan_hash,canonicalization:'RFC8785',
     model_versions:g.model_versions,resource_versions:g.resource_versions,reference_policy:{max_images:5,max_total_pixels:150_000_000,mapping_hash:null},
-    audio_policy:{speech_mode:'NONE',language:null,native_voice_id:null,preserve_native_speech:false,caption_alignment:'NO_SPEECH',music_license_ids:[],ducking_enabled:false},
+    audio_policy:{speech_mode:audio?'NATIVE_ZH':'NONE',language:audio?'zh-CN':null,native_voice_id:audio?plan.native_voice_id:null,
+      preserve_native_speech:!!audio,caption_alignment:audio?'ACTUAL_AUDIO':'NO_SPEECH',music_license_ids:audio?.music?[audio.music.binding.license_record_id]:[],ducking_enabled:audio?.music?.ducking??false},
     timeline:{fps:30,target_frames:plan.target_frames,shots:plan.shots.map(({shot_id,start_frame,end_frame,overlap_frames,evidence_ids,spoken_text})=>({shot_id,start_frame,end_frame,overlap_frames,evidence_ids,spoken_text}))},
     outputs:i.source.output_slots.map(s=>({slot_id:s.slot_id,kind:s.kind,count:1,width:s.width,height:s.height,fps:s.kind==='video'?30:null,
       duration_frames:s.kind==='video'?plan.target_frames:null,format:s.kind==='video'?'mp4-h264-yuv420p':'png'})),
-    deadline_at:i.deadline_at,codex_contract:g.codex_contract};
+    deadline_at:i.deadline_at,codex_contract:g.codex_contract,...(audio?{native_audio_contract_hash:hash(audio)}:{})};
   return {tenantId:i.tenant_id,orderId:null,sampleId:i.sample_id,skillVariantId:i.skill_variant_id,ownerId:i.owner_id,
     snapshotHash:c.inputHash,photoVersionId:i.photo_version_id,snapshot,contract};
 }
@@ -64,7 +61,7 @@ function adapter():GenerationScopeAdapter{return {column:'sample_id',type:'SAMPL
   reserve:async(db,lease,intent,contract)=>{
     const c=await sampleContext(db,lease.tenant_id,lease.scope_id,lease.input_hash,true),g=c.input.generation!;
     const reserved=(await db.query<{amount:string}>(`SELECT COALESCE(sum(b.amount_micro),0) AS amount FROM provider_submissions p
-      JOIN platform_budget_reservations b ON b.tenant_id=p.tenant_id AND b.id=p.reservation_id WHERE p.tenant_id=$1 AND p.sample_id=$2`,[lease.tenant_id,lease.scope_id])).rows[0]!;
+      JOIN platform_budget_reservations b ON b.tenant_id=p.tenant_id AND b.id=p.reservation_id WHERE p.tenant_id=$1 AND p.sample_id=$2 AND p.generation_kind IN ('IMAGE','VIDEO')`,[lease.tenant_id,lease.scope_id])).rows[0]!;
     requireThat(Number(reserved.amount)+contract.rate.ceiling_micro<=g.ceiling_micro,'SAMPLE_GENERATION_BUDGET_EXCEEDED','原样例生成额度已用完',429);
     return reservePlatform(db,{tenantId:lease.tenant_id,ownerId:c.input.owner_id,category:'CODEX_SAMPLE',dailyCeilingMicro:c.input.limits.daily_ceiling_micro},
       intent,contract.rate.ceiling_micro,{sample_id:lease.scope_id,input_hash:c.inputHash,contract_hash:hash(contract),rate_snapshot_id:contract.rate_snapshot_id,rate:contract.rate});

@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-10-30T08:39:08.745917+00:00",
+  "source_set_hash": "52416aa969b252c137015e7e8789eca8a4666d18ab61e3b81b74695f7a69383b",
+  "integration_report": "docs/verification/native-sample-integration.json",
+  "capture_kind": "ACTUAL_NATIVE_SAMPLE_OUTPUT_NOT_BROWSER_UI",
+  "browser_used": false,
+  "synthetic_semantics": true,
+  "limitations": "Actual MP4/PNG/GIF and native audio processing; generated image/video, Chinese ASR, listening PASS, rights, identities and prices are synthetic. Tone audio is not real Chinese speech. GIF has no sound.",
+  "files": [
+    {
+      "path": "docs/media/native-sample/per_shot_ai.mp4",
+      "sha256": "7db7a0f303fcf7c60bb6d111d141628529eee4bc67f9f27f72de03d4e486f227",
+      "bytes": 64711
+    },
+    {
+      "path": "docs/media/native-sample/per_shot_ai.png",
+      "sha256": "2cac71b5c9ef0d53f4f14b1cd2312d3a1af68e15611a3225e1595b6cb9fbf630",
+      "bytes": 40473
+    },
+    {
+      "path": "docs/media/native-sample/per_shot_ai.gif",
+      "sha256": "f70544519107058d839cad817341f7bd142a4aed1eac75b2561b340a2bcd0d33",
+      "bytes": 4303
+    },
+    {
+      "path": "docs/media/native-sample/per_shot_ai.json",
+      "sha256": "f3b1dece99a8c0f0925536764ea5474e3a496f3748a514c4ae09922d51318a96",
+      "bytes": 50386
+    },
+    {
+      "path": "docs/media/native-sample/reference_film.mp4",
+      "sha256": "224c807ac456dcb1aa7707707c0cd58b51a72dbf12cc567a0dbbadda57cd73f4",
+      "bytes": 64451
+    },
+    {
+      "path": "docs/media/native-sample/reference_film.png",
+      "sha256": "2cac71b5c9ef0d53f4f14b1cd2312d3a1af68e15611a3225e1595b6cb9fbf630",
+      "bytes": 40473
+    },
+    {
+      "path": "docs/media/native-sample/reference_film.gif",
+      "sha256": "f70544519107058d839cad817341f7bd142a4aed1eac75b2561b340a2bcd0d33",
+      "bytes": 4303
+    },
+    {
+      "path": "docs/media/native-sample/reference_film.json",
+      "sha256": "482f7c8e68325e445e6b7bfbc7b7260b7fcf6e0816ae721599901df92275ca2b",
+      "bytes": 50400
+    }
+  ]
+}

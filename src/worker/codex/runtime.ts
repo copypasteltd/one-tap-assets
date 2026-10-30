@@ -46,8 +46,10 @@ export class CodexRuntimeAdapter {
       && hash(request.allowedTools) === hash(['extract_review_evidence','persist_stage_result']),
     'CODEX_REVIEW_BINDING_INVALID', '参考帧核验只准在原制作阶段运行独立事实角色和两个核验工具', 503);
     if (request.review) await checkReviewImages(request.review.images, request.admission);
-    if(request.review?.native_listening)requireThat(request.lease.scope_type==='ORDER'&&!request.review.purpose
-      &&['REVIEW_FACTS','REVIEW_STYLE'].includes(request.lease.stage_name)&&request.input&&typeof request.input==='object'
+    if(request.review?.native_listening)requireThat(!request.review.purpose
+      &&(request.lease.scope_type==='ORDER'&&['REVIEW_FACTS','REVIEW_STYLE'].includes(request.lease.stage_name)
+        ||request.lease.scope_type==='SAMPLE'&&['SAMPLE_REVIEW_FACTS','SAMPLE_REVIEW_STYLE'].includes(request.lease.stage_name))
+      &&request.input&&typeof request.input==='object'
       &&hash((request.input as Record<string,unknown>).native_listening)===hash(request.review.native_listening),
     'CODEX_REVIEW_BINDING_INVALID','独立听音必须完整进入同一最终角色的实际输入',503);
     if(request.review?.retained_native_audio_hash)requireThat(request.lease.scope_type==='REVISION'&&!request.review.purpose

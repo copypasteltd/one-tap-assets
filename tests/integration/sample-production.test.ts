@@ -1,4 +1,12 @@
 import {readFile,mkdir} from 'node:fs/promises';
+import {nativeSampleRegistry} from '../helpers/native-sample.js';
+import {SpeechClient} from '../../src/worker/providers/dashscope-asr.js';
+import {ListeningClient} from '../../src/worker/providers/omni-listening.js';
+import {SampleSpeechGateway} from '../../src/worker/samples/speech.js';
+import {SampleListeningGateway} from '../../src/worker/samples/listening.js';
+import {syntheticControlListeningPass,syntheticListeningResult,listeningSse} from '../helpers/listening.js';
+import {sampleNativeSource} from '../../src/worker/samples/native-media.js';
+import {publicSampleMedia,expireAuthorizedSamples} from '../../src/api/modules/authorized-samples.js';
 import {syntheticArkContract} from '../helpers/generation.js';
 import {ArkClient,type ArkContract} from '../../src/worker/providers/ark.js';
 import type {HttpResponse} from '../../src/api/lib/http.js';
@@ -279,16 +287,16 @@ it('refuses a revoked publication grant for already completed media links', asyn
 });
 
 /** Real native sample pipeline, synthetic model bytes/meaning/identities only. */
-async function generatedFixture(engine:'PER_SHOT_AI'|'REFERENCE_FILM',lostAck=false,components:string[]=[]){
+async function generatedFixture(engine:'PER_SHOT_AI'|'REFERENCE_FILM',lostAck=false,components:string[]=[],native:boolean|'ORDER_ONLY'=false){
   const contracts=[syntheticArkContract('IMAGE'),syntheticArkContract('VIDEO')];
   const image=contracts[0]!,video=contracts[1]!;
-  if(components.length)video.video!.durations=[1,2];
+  if(components.length||native)video.video!.durations=[1,2];video.video!.native_audio=!!native;
   video.video!.ratios=['9:16'];video.video!.dimensions=[{resolution:'480p',ratio:'9:16',width:360,height:640}];
   const variant=engine==='PER_SHOT_AI'?'quiet-luxury.ai-detail':'portrait-social.ai-presenter-multi';
   const style=engine==='PER_SHOT_AI'?'quiet-luxury':'portrait-social';
   const row=(await db.pool.query('SELECT id,private FROM execution_variants WHERE variant_id=$1',[variant])).rows[0]!;
   const source=row.private.source;source.audio_policy={...source.audio_policy,speech:'none',language:null,preserve_native_speech:false,caption_alignment:'NO_SPEECH',music:'none'};
-  const duration=engine==='PER_SHOT_AI'||components.length?2:1;
+  const duration=engine==='PER_SHOT_AI'||components.length||native?2:1;
   source.ai_disclosure_required=true;source.timeline_policy={fps:30,target_frames:duration*30,base_segments:duration===2?
     [{role:'whole',start_seconds:0,end_seconds:1},{role:'detail',start_seconds:1,end_seconds:2}]:[{role:'show',start_seconds:0,end_seconds:1}]};
   source.output_slots=source.output_slots.filter((o:{kind:string})=>o.kind!=='video').slice(0,1);
@@ -296,13 +304,14 @@ async function generatedFixture(engine:'PER_SHOT_AI'|'REFERENCE_FILM',lostAck=fa
   for(const c of contracts){const binding={provider:c.provider,actual_model:c.actual_model,registry_version:c.registry_version,
     roles:[c.wire==='ARK_IMAGE'?'IMAGE':'VIDEO'],capability_hash:hash(c),rate_snapshot_id:c.rate_snapshot_id};
     await insert(db.pool,'provider_model_versions',{id:c.model_version_id,provider:c.provider,actual_model:c.actual_model,status:'ADMITTED',version:c.registry_version,data:binding,private:{ark_contract:c}});}
-  await db.pool.query(`UPDATE execution_variants SET private=private||jsonb_build_object('source',$2::jsonb,'model_version_ids',$3::jsonb) WHERE id=$1`,[row.id,JSON.stringify(source),JSON.stringify(contracts.map(c=>c.model_version_id))]);
+  const registry=native?await nativeSampleRegistry(db,f.cfg,source,video,native==='ORDER_ONLY'?'ORDER':'SAMPLE'):undefined;
+  await db.pool.query(`UPDATE execution_variants SET private=private||jsonb_build_object('source',$2::jsonb,'model_version_ids',$3::jsonb,'sample_native_voice',$4::jsonb) WHERE id=$1`,[row.id,JSON.stringify(source),JSON.stringify([...contracts.map(c=>c.model_version_id),...(registry?[registry.speech.model_version_id,registry.listening.model_version_id]:[])]),JSON.stringify(registry?{character_version_id:registry.character.character_version_id,native_voice_id:registry.character.native_voice_id}:null)]);
   Object.assign(f.cfg.provider,{baseUrl:image.base_url,apiKey:'synthetic-not-real',imageModel:image.request_model,videoModel:video.request_model});
   f.cfg.provider.allowedHosts=[...new Set([...f.cfg.provider.allowedHosts,'generation.example.test','media.example.test'])];
   const d=await createDraft(db.pool,f.p,{...draft.config,name:'Synthetic generated '+engine,component_versions:[`style.${style}.1`,...components],variant_blueprint_ids:[`blueprint.${variant}`]});
   const directory=inside(f.cfg.runtimeRoot,`tests/generated-sample/${id('media')}`);await mkdir(directory,{recursive:true});
   const videoPath=inside(directory,'provider.mp4');
-  await nativeCommand(f.cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-f','lavfi','-i','color=c=green:s=360x640:r=30','-t',engine==='REFERENCE_FILM'&&components.length?'2':'1','-an','-c:v','libx264','-pix_fmt','yuv420p',videoPath],{cwd:directory,timeoutMs:30000});
+  await nativeCommand(f.cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-f','lavfi','-i','color=c=green:s=360x640:r=30',...(native?['-f','lavfi','-i','sine=frequency=660:sample_rate=48000']:[]),'-t',engine==='REFERENCE_FILM'&&(components.length||native)?'2':'1',...(native?['-c:a','aac','-b:a','192k','-ac','2']:['-an']),'-c:v','libx264','-pix_fmt','yuv420p',videoPath],{cwd:directory,timeoutMs:30000});
   const videoBytes=await readFile(videoPath),imageBytes=await sharp({create:{width:640,height:800,channels:3,background:'#1F5F43'}}).png().toBuffer();
   const calls:{method:string;url:string}[]=[];let task=0;
   const http=(value:unknown):HttpResponse=>{const bytes=Buffer.isBuffer(value)?value:Buffer.from(JSON.stringify(value));return {status:200,headers:{},bytes,json:()=>JSON.parse(bytes.toString('utf8'))};};
@@ -314,10 +323,105 @@ async function generatedFixture(engine:'PER_SHOT_AI'|'REFERENCE_FILM',lostAck=fa
     return http({id:url.split('/').at(-1),model:video.actual_model,status:'succeeded',content:{video_url:'https://media.example.test/generated.mp4'},usage:{completion_tokens:250,total_tokens:250}});
   }));
   const old=consumer;controller.abort();await old;controller=new AbortController();
-  consumer=new ToolConsumer(db.pool,id('generated-sample-tools'),sampleTools(db.pool,f.cfg,store,gateway)).run(controller.signal);
+  const audioCalls={asrPosts:0,queries:0,listening:0,unknownAsr:false,blockListening:false};let signedInput='';
+  const sampleStore=Object.assign(Object.create(store) as LocalStorage,{signedReadUrl:(key:string,expiry:Date)=>`https://input.example.test/${key}?Expires=${Math.floor(expiry.getTime()/1000)}&Signature=SYNTHETIC`});
+  const speech=registry?new SampleSpeechGateway(db.pool,f.cfg,sampleStore,new SpeechClient(f.cfg,async(url,_hosts,options={})=>{
+    if(options.method==='POST'){audioCalls.asrPosts++;signedInput=JSON.parse(String(options.body)).input.file_url as string;
+      if(audioCalls.unknownAsr)throw new Error('Synthetic sample ASR lost ACK');
+      return http({request_id:'synthetic-request',output:{task_id:'synthetic-sample-asr',task_status:'PENDING'}});}
+    if(url.startsWith('https://result.example.test/'))return http({file_url:signedInput,transcripts:[{channel_id:0,text:'商品实拍。',sentences:[{begin_time:100,end_time:800,language:'zh',text:'商品实拍。',words:[{begin_time:100,end_time:400,text:'商品',punctuation:''},{begin_time:400,end_time:800,text:'实拍',punctuation:'。'}]}]}]});
+    audioCalls.queries++;return http({request_id:'synthetic-query',output:{task_id:'synthetic-sample-asr',task_status:'SUCCEEDED',result:{transcription_url:'https://result.example.test/sample.json'}},usage:{seconds:duration}});
+  })):undefined;
+  const listeningClient=new ListeningClient(f.cfg);
+  listeningClient.submit=async(c,prepared)=>{audioCalls.listening++;const result=audioCalls.blockListening?syntheticListeningResult(prepared.summary):syntheticControlListeningPass(prepared.summary);
+    return {...http(listeningSse(c,result)),headers:{'content-type':'text/event-stream'}};};
+  const listening=registry?new SampleListeningGateway(db.pool,f.cfg,sampleStore,listeningClient):undefined;
+  consumer=new ToolConsumer(db.pool,id('generated-sample-tools'),sampleTools(db.pool,f.cfg,sampleStore,gateway,speech)).run(controller.signal);
   const executor=new CodexRuntimeAdapter(db.pool,f.cfg,launcher);
-  return {draft:d,gateway,calls,service:new SampleProductionService(db.pool,f.cfg,store,executor,gateway),directory};
+  return {draft:d,gateway,calls,service:new SampleProductionService(db.pool,f.cfg,sampleStore,executor,gateway,listening),directory,registry,audioCalls,speech,listening,sampleStore};
 }
+
+for(const engine of ['PER_SHOT_AI','REFERENCE_FILM'] as const)it(`native SAMPLE ${engine} keeps whole original audio, actual ASR captions, settled listening and two fresh reviews`,async()=>{
+  const g=await generatedFixture(engine,false,[],true),s=await create(g.draft),before=launcher.launches;
+  try {
+    const input=await sampleContext(db.pool,f.p.tenantId,s.sample_id),binding=input.input.generation!;
+    expect(binding.ceiling_micro+binding.audio!.ceiling_micro+input.input.limits.ceiling_micro).toBe(f.cfg.samples.costCeilingMicro);
+    for(const name of SAMPLE_STAGES){
+      const lease=(await claimStage(db.pool,id('native-sample'),[name]))!;expect(lease.scope_id).toBe(s.sample_id);
+      await completeStage(db.pool,lease,await withFixtureLease(db.pool,lease,signal=>g.service.handle(lease,signal),controller.signal));
+    }
+    const c=await sampleContext(db.pool,f.p.tenantId,s.sample_id,undefined,false,true),packet=samplePacket(c);
+    await verifyCompletedSample(db.pool,f.cfg,f.p.tenantId,s.sample_id,c.private);
+    expect(launcher.launches-before).toBe(6);expect(g.audioCalls).toMatchObject({asrPosts:1,queries:1,listening:1});
+    expect(storedMedia(c,'PRODUCTION').artifacts.find(a=>a.kind==='video')!.inspection).toMatchObject({hasAudio:true,audioCodec:'alac',frames:60});
+    const video=storedMedia(c,'POST').artifacts.find(a=>a.kind==='video')!;
+    expect(video.inspection).toMatchObject({hasAudio:true,audioCodec:'aac',frames:60});
+    expect(video.native_audio?.phase).toBe('POST');expect(packet.native_audio?.audios.map(a=>a.kind)).toEqual(['NATIVE_AUDIO','FINAL_AUDIO']);
+    expect(packet.listening?.result.verdict).toBe('PASS');expect(packet.listening?.result.tracks).toHaveLength(2);
+    expect(packet.native_audio?.transcript.segments.flatMap(s=>s.words??[]).map(w=>w.text).join('')).toContain('商品实拍');
+    const nodes=(await db.pool.query('SELECT * FROM provider_submissions WHERE sample_id=$1',[s.sample_id])).rows;
+    expect(nodes.filter(n=>n.generation_kind==='ASR')).toHaveLength(1);expect(nodes.filter(n=>n.generation_kind==='LISTENING')).toHaveLength(1);
+    expect(nodes.every(n=>n.order_id===null&&n.state==='SUCCEEDED'&&n.private.billing_valid)).toBe(true);
+    expect((await db.pool.query('SELECT id FROM orders')).rowCount).toBe(0);expect((await db.pool.query('SELECT id FROM budget_reservations')).rowCount).toBe(0);
+    expect((await db.pool.query(`SELECT b.id FROM platform_budget_reservations b JOIN provider_submissions p ON p.reservation_id=b.id AND p.tenant_id=b.tenant_id WHERE p.sample_id=$1 AND b.state<>'SETTLED'`,[s.sample_id])).rowCount).toBe(0);
+    const runs=(await db.pool.query(`SELECT r.* FROM agent_runs r JOIN agent_instances i ON i.id=r.instance_id WHERE i.preview_session_id=$1`,[s.sample_id])).rows;
+    expect(runs.filter(r=>['REVIEW_FACTS','REVIEW_STYLE'].includes(r.role)&&!r.private.review_input?.purpose).every(r=>r.private.stage_result.audio_evidence_hash===hash({native_audio:packet.native_audio,listening:packet.listening}))).toBe(true);
+    const posts=g.audioCalls.asrPosts+g.audioCalls.listening;
+    await publishProducedSample(g.draft,s,c);expect(g.audioCalls.asrPosts+g.audioCalls.listening).toBe(posts);
+    if(process.env.YPCC_SAMPLE_PROOF_DIR){const root=inside(f.cfg.projectRoot,process.env.YPCC_SAMPLE_PROOF_DIR);await mkdir(root,{recursive:true});
+      await writeFile(inside(root,`${engine.toLowerCase()}.mp4`),await artifactBytes(db.pool,store,c,video));
+      await writeFile(inside(root,`${engine.toLowerCase()}.json`),JSON.stringify({synthetic:true,meaning:'Tones, fabricated ASR/listening/rights/AI identities and usage. Not real Chinese speech quality.',input_hash:c.inputHash,video_sha256:video.sha256,proof:video.native_audio,
+        source_set:process.env.YPCC_SAMPLE_SOURCE_HASH??null,audio_calls:g.audioCalls,budget:{generation:binding.ceiling_micro,audio:binding.audio!.ceiling_micro,agent:input.input.limits.ceiling_micro,total:binding.total_ceiling_micro}},null,2));}
+    const license=g.registry!.licenses[0]!;await db.pool.query('UPDATE resource_licenses SET revoked_at=now() WHERE id=$1',[license]);
+    await expect(verifyCompletedSample(db.pool,f.cfg,f.p.tenantId,s.sample_id,c.private)).rejects.toMatchObject({code:'AUDIO_LICENSE_UNAVAILABLE'});
+    const publicId=(await db.pool.query('SELECT id FROM authorized_samples WHERE source_sample_id=$1',[s.sample_id])).rows[0].id as string;
+    await expect(publicSampleMedia(db.pool,f.cfg,publicId)).rejects.toMatchObject({code:'PUBLIC_SAMPLE_RESOURCE_REVOKED'});
+    expect(await expireAuthorizedSamples(db.pool)).toBeGreaterThan(0);
+  }finally{await stop(s);await rm(g.directory,{recursive:true,force:true});}
+},240000);
+
+it('native SAMPLE refuses missing defaults, paid-order-only rights and an insufficient original allowance before spending',async()=>{
+  const g=await generatedFixture('PER_SHOT_AI',false,[],true),blueprint=g.draft.config.variant_blueprint_ids[0]!.slice('blueprint.'.length);
+  const row=(await db.pool.query('SELECT id,private FROM execution_variants WHERE variant_id=$1',[blueprint])).rows[0]!;
+  const before=upstreamImages.length,amount=(await db.pool.query('SELECT count(*)::int AS n FROM platform_budget_reservations')).rows[0].n;
+  try {
+    await db.pool.query("UPDATE execution_variants SET private=private-'sample_native_voice' WHERE id=$1",[row.id]);
+    let response=await api('POST',`/preset-drafts/${g.draft.draft_id}/samples`,request(g.draft));expect(response.statusCode).toBe(503);expect(response.json().code).toBe('SAMPLE_AUDIO_NOT_CONFIGURED');
+    await db.pool.query('UPDATE execution_variants SET private=$2 WHERE id=$1',[row.id,row.private]);
+    const extra={resource_version_id:id('unused_resource'),license_record_id:id('unused_license'),hash:sha256('SYNTHETIC UNUSED RESOURCE')};
+    await insert(db.pool,'resource_licenses',{id:extra.license_record_id,resource_id:extra.resource_version_id,version:'SYNTHETIC-UNUSED',data:{resource_version_id:extra.resource_version_id,resource_hash:extra.hash,license:'SYNTHETIC UNUSED RESOURCE'}});
+    await db.pool.query("UPDATE execution_variants SET private=jsonb_set(private,'{resource_versions}',$2) WHERE id=$1",[row.id,JSON.stringify([FONT_BINDING,extra])]);
+    response=await api('POST',`/preset-drafts/${g.draft.draft_id}/samples`,request(g.draft));expect(response.statusCode).toBe(503);expect(response.json().code).toBe('SAMPLE_RESOURCE_INVALID');
+    await db.pool.query('UPDATE execution_variants SET private=$2 WHERE id=$1',[row.id,row.private]);
+    const paid=await generatedFixture('PER_SHOT_AI',false,[],'ORDER_ONLY');
+    try{response=await api('POST',`/preset-drafts/${paid.draft.draft_id}/samples`,request(paid.draft));expect(response.statusCode).toBe(503);expect(response.json().code).toBe('AUDIO_LICENSE_UNAVAILABLE');}
+    finally{await rm(paid.directory,{recursive:true,force:true});}
+    const ceiling=f.cfg.samples.costCeilingMicro;f.cfg.samples.costCeilingMicro=1;
+    try{response=await api('POST',`/preset-drafts/${g.draft.draft_id}/samples`,request(g.draft));expect(response.statusCode).toBe(503);}
+    finally{f.cfg.samples.costCeilingMicro=ceiling;}
+    expect(upstreamImages).toHaveLength(before);expect(g.calls).toHaveLength(0);expect(g.audioCalls.asrPosts).toBe(0);
+    expect((await db.pool.query('SELECT count(*)::int AS n FROM platform_budget_reservations')).rows[0].n).toBe(amount);
+    expect((await db.pool.query(`SELECT id FROM public_samples WHERE draft_id=$1`,[g.draft.draft_id])).rowCount).toBe(0);
+  }finally{await db.pool.query('UPDATE execution_variants SET private=$2 WHERE id=$1',[row.id,row.private]);await rm(g.directory,{recursive:true,force:true});}
+});
+
+it('native SAMPLE holds an unknown ASR in its original platform reservation without a second POST',async()=>{
+  const g=await generatedFixture('REFERENCE_FILM',false,[],true),s=await create(g.draft);
+  try{
+    for(const name of ['SAMPLE','SAMPLE_PRODUCTION']){const lease=(await claimStage(db.pool,id('native-unknown'),[name]))!;
+      await completeStage(db.pool,lease,await withFixtureLease(db.pool,lease,signal=>g.service.handle(lease,signal),controller.signal));}
+    const lease=(await claimStage(db.pool,id('native-unknown'),['SAMPLE_POST']))!,c=await sampleContext(db.pool,f.p.tenantId,s.sample_id),source=await sampleNativeSource(db.pool,store,c);
+    g.audioCalls.unknownAsr=true;
+    await expect(g.speech!.submit(lease,source.writeId,controller.signal)).rejects.toThrow();
+    await expect(g.speech!.submit(lease,source.writeId,controller.signal)).rejects.toMatchObject({code:'ASR_ORIGINAL_ACK_UNKNOWN'});
+    const rows=(await db.pool.query(`SELECT p.*,b.state AS budget_state FROM provider_submissions p JOIN platform_budget_reservations b ON b.id=p.reservation_id WHERE p.sample_id=$1 AND p.generation_kind='ASR'`,[s.sample_id])).rows;
+    expect(rows).toHaveLength(1);expect(rows[0]).toMatchObject({state:'UNKNOWN',budget_state:'UNKNOWN',order_id:null});expect(g.audioCalls.asrPosts).toBe(1);
+    await db.pool.query("UPDATE provider_model_versions SET status='RETIRED' WHERE id=$1",[g.registry!.speech.model_version_id]);
+    await expect(g.speech!.submit(lease,source.writeId,controller.signal)).rejects.toMatchObject({code:'ASR_NOT_ADMITTED'});expect(g.audioCalls.asrPosts).toBe(1);
+    await expect(db.pool.query("UPDATE provider_submissions SET private=jsonb_set(private,'{sample_audio_contract_hash}',to_jsonb($2::text)) WHERE id=$1",[rows[0].id,'0'.repeat(64)])).rejects.toThrow('immutable');
+    expect(await g.speech!.reconcileReceipts()).toMatchObject({blocked:1});expect(g.audioCalls.asrPosts).toBe(1);
+  }finally{await stop(s);await rm(g.directory,{recursive:true,force:true});}
+},180000);
 for(const engine of ['PER_SHOT_AI','REFERENCE_FILM'] as const)it(`completes ${engine} creator sample, private download and independent public copies within platform funds`,async()=>{
   const g=await generatedFixture(engine);const s=await create(g.draft);const before=launcher.launches;
   try{

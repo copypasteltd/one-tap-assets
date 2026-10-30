@@ -15,6 +15,8 @@ import { expireAuthorizedSamples } from '../../api/modules/authorized-samples.js
 import {GenerationGateway} from '../generation/gateway.js';
 import {SpeechGateway} from '../speech/gateway.js';
 import {NativeListeningGateway} from '../audio/listening-gateway.js';
+import {SampleSpeechGateway} from '../samples/speech.js';
+import {SampleListeningGateway} from '../samples/listening.js';
 
 const cfg = config(); const pool = createPool(cfg); const controller = new AbortController(); const workerId = id('media_cleanup');
 for (const signal of ['SIGINT','SIGTERM'] as const) process.once(signal, () => controller.abort());
@@ -25,6 +27,7 @@ try {
   const generation=new GenerationGateway(pool,cfg,store),sampleGeneration=sampleGenerationGateway(pool,cfg,store);
   const speech=new SpeechGateway(pool,cfg,store);
   const listening=new NativeListeningGateway(pool,cfg,store);
+  const sampleSpeech=new SampleSpeechGateway(pool,cfg,store),sampleListening=new SampleListeningGateway(pool,cfg,store);
   const events = new WorkerRuntime({ pool, workerId, stages: {}, events: { PrivacyDeletionRequested: event => media.requestEvent(event) }, log });
   let lastScan = -Infinity; log({ event: 'media_maintenance_ready', worker_id: workerId });
   do {
@@ -33,7 +36,7 @@ try {
       try {
         const objects = await reconcileUncertainObjectWrites(pool, store);
         if (objects.recovered || objects.blocked) log({ event: 'private_object_writes_reconciled', ...objects });
-        const receipts = [await vision.reconcileReceipts(), await inference.reconcileReceipts(),await generation.reconcileReceipts(20,controller.signal),await sampleGeneration.reconcileReceipts(20,controller.signal),await speech.reconcileReceipts(),await listening.reconcileReceipts()];
+        const receipts = [await vision.reconcileReceipts(), await inference.reconcileReceipts(),await generation.reconcileReceipts(20,controller.signal),await sampleGeneration.reconcileReceipts(20,controller.signal),await speech.reconcileReceipts(),await listening.reconcileReceipts(),await sampleSpeech.reconcileReceipts(),await sampleListening.reconcileReceipts()];
         if (receipts.some(r => r.settled || r.blocked)) log({ event: 'private_receipts_reconciled', receipts });
         await expireAuthorizedSamples(pool); await media.expire(); await media.refreshPending();
       }

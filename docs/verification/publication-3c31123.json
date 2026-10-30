@@ -1,0 +1,195 @@
+{
+  "schema_version": "1.0",
+  "checked_at": "2026-10-30T07:20:55.625691+00:00",
+  "status": "FOCUSED_SOURCE_DELIVERY",
+  "source_set_hash": "6f318f706811807f9bc0818f5c2fae370b0032eeeea77d13e754b1809d7c86d3",
+  "source_files": 452,
+  "evidence": "docs/verification/mini-mount-source.json",
+  "reason": "User requested fast main functional closure without comprehensive green tests. Correct the late-mounted mobile recommendation before the final package.",
+  "original_publication_checker_status": "NOT_RUN",
+  "checker_weakened": false,
+  "builds_passed": false,
+  "selected_builds_passed": true,
+  "checks": [
+    {
+      "task": "typecheck",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+        "--noEmit"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 28544,
+      "log_path": "runtime/delivery-builds/2026-10-30T07-15-30-256Z-64dd0260/typecheck.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "build:server",
+      "command": "node --import tsx scripts/build-server.ts",
+      "argv": [
+        "--import",
+        "tsx",
+        "scripts/build-server.ts"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 555,
+      "log_path": "runtime/delivery-builds/2026-10-30T07-15-30-256Z-64dd0260/server.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T07-15-30-256Z-64dd0260\\runtime\\build\\preview",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
+        "build",
+        "--config",
+        "src/preview/vite.config.ts",
+        "--outDir",
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T07-15-30-256Z-64dd0260\\runtime\\build\\preview"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 7573,
+      "log_path": "runtime/delivery-builds/2026-10-30T07-15-30-256Z-64dd0260/preview.log",
+      "log_sha256": "7f5df439341e82a9321aadc0cc4e5005ccb4de95d9a368608b6e6b8bd86aee65"
+    }
+  ],
+  "local_checks": {
+    "doctor": {
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_seconds": 90,
+      "elapsed_seconds": 2.311,
+      "log_path": "runtime/delivery/mini-mount-doctor-1793344652011060700.log",
+      "log_sha256": "576a81a34a3e93ccc884afeac804f7caa80929280ce66b4092b81f249b8d2cc1",
+      "report": {
+        "checked_at": "2026-10-30T07:17:34.290Z",
+        "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
+        "rows": [
+          {
+            "id": "node",
+            "status": "PASS",
+            "detail": "24.22.1"
+          },
+          {
+            "id": "runtime/tools/package-manager/node_modules/pnpm/bin/pnpm.cjs",
+            "status": "PASS",
+            "detail": "present"
+          },
+          {
+            "id": "assets/presets/presets.v3.1.json",
+            "status": "PASS",
+            "detail": "present"
+          },
+          {
+            "id": "configuration",
+            "status": "PASS",
+            "detail": "environment=development; private values omitted"
+          },
+          {
+            "id": "database",
+            "status": "PASS",
+            "detail": "connected; 31 migrations"
+          },
+          {
+            "id": "ffmpeg",
+            "status": "PASS",
+            "detail": "Native executable on PATH responds"
+          },
+          {
+            "id": "ffprobe",
+            "status": "PASS",
+            "detail": "Native executable on PATH responds"
+          },
+          {
+            "id": "generation",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "codex",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "payments",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "community-publishing",
+            "status": "OFF",
+            "detail": "External service remains disabled"
+          },
+          {
+            "id": "server",
+            "status": "PRESENT_NOT_CERTIFIED",
+            "detail": "Existing default output; delivery:build records fresh isolated outputs"
+          },
+          {
+            "id": "preview",
+            "status": "PRESENT_NOT_CERTIFIED",
+            "detail": "Existing default output; delivery:build records fresh isolated outputs"
+          },
+          {
+            "id": "alipay",
+            "status": "NOT_BUILT",
+            "detail": "Run delivery:build"
+          },
+          {
+            "id": "douyin",
+            "status": "PRESENT_NOT_CERTIFIED",
+            "detail": "Existing default output; delivery:build records fresh isolated outputs"
+          },
+          {
+            "id": "catalog",
+            "status": "PASS",
+            "detail": "10 official presets; 14 variants"
+          }
+        ],
+        "full_product_verified": false,
+        "production_admitted": false
+      }
+    },
+    "backend": {
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_seconds": 90,
+      "elapsed_seconds": 10.576,
+      "log_path": "runtime/delivery/mini-mount-backend-1793344651980519200.log",
+      "log_sha256": "56060c93766f600a13d43bef074d76c53b34aff8c0321e0278f7c612b26ebd35",
+      "local_stack_ready": true,
+      "preview_http_ready": false
+    },
+    "preview": {
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_seconds": 90,
+      "elapsed_seconds": 2.136,
+      "log_path": "runtime/delivery/mini-mount-preview-1793344651979021600.log",
+      "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
+      "local_stack_ready": false,
+      "preview_http_ready": true
+    }
+  },
+  "new_browser_lifecycle_checks": 3,
+  "retained_original_checks": 15,
+  "prior_evidence": "docs/verification/recommendations-source.json",
+  "prior_captures_relabelled": false,
+  "full_suite_executed": false,
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false,
+  "historical_publication": "docs/verification/publication-b800422.json"
+}

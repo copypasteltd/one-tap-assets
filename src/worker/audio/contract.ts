@@ -14,6 +14,7 @@ import {reserve,settle} from '../budget/reservations.js';
 
 export const AUDIO_CONTRACT_VERSION='YPCC-NATIVE-AUDIO-CONTRACT-1';
 export type AudioRightKind='NATIVE_CHARACTER'|'NATIVE_VOICE'|'MUSIC';
+export type AudioLicenseUse='ORDER'|'SAMPLE';
 export interface CharacterVoiceAdmission {
   version:'YPCC-CHARACTER-VOICE-1';character_version_id:string;native_voice_id:string;video_model_version_id:string;
   evidence_sha256:string;valid_until:string;language:'zh-CN';secondary_tts:false;
@@ -134,15 +135,17 @@ async function readCharacter(db:Db,contract:FrozenContract,lock=false):Promise<C
     &&entries[0].video_model_version_id===videoContract(contract).model_version_id&&Date.parse(entries[0].valid_until)>Date.now(),
     'CHARACTER_VOICE_NOT_ADMITTED','人物、声音、视频模型组合或许可证据未准入或已过期',503);return structuredClone(entries[0]);
 }
-async function readRight(db:Db,binding:ResourceBinding,kind:AudioRightKind,lock=false):Promise<AudioRight>{
+async function readRight(db:Db,binding:ResourceBinding,kind:AudioRightKind,lock=false,use:AudioLicenseUse='ORDER'):Promise<AudioRight>{
   const row=(await db.query<{version:string;data:{resource_version_id?:string;resource_hash?:string;license_text?:string;license_sha256?:string;admission_state?:string;
-    audio_media?:AudioRight['media'];audio_rights?:{kind?:string;allowed_use?:string;allocation_mode?:string;allocation_micro?:number}}}>(
+    audio_media?:AudioRight['media'];audio_rights?:{kind?:string;allowed_use?:string;allocation_mode?:string;allocation_micro?:number;
+      sample?:{kind?:string;allowed_use?:string;allocation_mode?:string;allocation_micro?:number}}}}>(
     `SELECT version,data FROM resource_licenses WHERE id=$1 AND resource_id=$2 AND revoked_at IS NULL
       AND (expires_at IS NULL OR expires_at>clock_timestamp())${lock?' FOR SHARE':''}`,[binding.license_record_id,binding.resource_version_id])).rows[0];
-  const d=row?.data,rights=d?.audio_rights;
+  const d=row?.data,rights=use==='SAMPLE'?d?.audio_rights?.sample:d?.audio_rights;
   requireThat(row&&d?.admission_state==='ADMITTED'&&d.resource_version_id===binding.resource_version_id&&d.resource_hash===binding.hash
     &&typeof d.license_text==='string'&&d.license_text.length>0&&d.license_text.length<=50000&&sha256(d.license_text)===d.license_sha256
-    &&rights?.kind===kind&&rights.allowed_use==='GENERATED_COMMERCIAL_AD'&&rights.allocation_mode==='PREPAID_ORDER_ALLOCATION'
+    &&rights?.kind===kind&&rights.allowed_use===(use==='SAMPLE'?'PUBLIC_ADVERTISING_SAMPLE':'GENERATED_COMMERCIAL_AD')
+    &&rights.allocation_mode===(use==='SAMPLE'?'PREPAID_PLATFORM_SAMPLE_ALLOCATION':'PREPAID_ORDER_ALLOCATION')
     &&Number.isSafeInteger(rights.allocation_micro)&&rights.allocation_micro! >= 0&&rights.allocation_micro! <= 1_000_000_000,
     'AUDIO_LICENSE_UNAVAILABLE','声音资源许可缺失、撤销、内容摘要或固定成本不一致',503);
   const result:AudioRight={kind,binding:structuredClone(binding),license_version:row.version,license_sha256:d.license_sha256!,allocation_micro:rights.allocation_micro!,
@@ -153,19 +156,19 @@ async function readRight(db:Db,binding:ResourceBinding,kind:AudioRightKind,lock=
 }
 /** Quote compiler. Admission of the full audio order pipeline is a separate
  * gate: compiling this private contract does not open sales. */
-export async function freezeNativeAudio(db:Db,cfg:Config,contract:FrozenContract,models:SpeechModelRow[]):Promise<void>{
+export async function freezeNativeAudio(db:Db,cfg:Config,contract:FrozenContract,models:SpeechModelRow[],use:AudioLicenseUse='ORDER'):Promise<void>{
   if(contract.source.audio_policy.speech==='none'){frozenNativeAudio(contract);return;}
   checkedSource(contract);const rows=models.filter(m=>m.data.roles.includes('SPEECH'));
   requireThat(rows.length===1,'ASR_NOT_ADMITTED','声音方案必须选择唯一转写模型',503);
   const asr=admitSpeechContract(cfg,rows[0]!.private?.speech_contract);
   requireThat(rows[0]!.status==='ADMITTED'&&matchesSpeech(asr,rows[0]!),'ASR_MODEL_BINDING_INVALID','转写能力、版本和费率登记不一致',503);
   const character=await readCharacter(db,contract,true),c=contract.source.creative_components;
-  const rights=[await readRight(db,character.character_binding,'NATIVE_CHARACTER',true),await readRight(db,character.voice_binding,'NATIVE_VOICE',true)];
+  const rights=[await readRight(db,character.character_binding,'NATIVE_CHARACTER',true,use),await readRight(db,character.voice_binding,'NATIVE_VOICE',true,use)];
   let music:NativeAudioContract['music']=null;
   if(c.music_asset_version){const binding=contract.resource_versions.find(r=>r.resource_version_id===c.music_asset_version);
     requireThat(binding&&typeof c.bgm_volume==='number'&&c.bgm_volume>0&&c.bgm_volume<=1&&typeof c.bgm_duck==='boolean'
       &&(c.music_loop_to_timeline===undefined||typeof c.music_loop_to_timeline==='boolean'),'AUDIO_MUSIC_INVALID','配乐必须绑定明确许可、音量、压低和循环策略',503);
-    rights.push(await readRight(db,binding,'MUSIC',true));music={binding:structuredClone(binding),linear_gain:c.bgm_volume,
+    rights.push(await readRight(db,binding,'MUSIC',true,use));music={binding:structuredClone(binding),linear_gain:c.bgm_volume,
       gain_db:Math.round(20*Math.log10(c.bgm_volume)*1e6)/1e6,ducking:c.bgm_duck,loop_to_timeline:c.music_loop_to_timeline===true};
   }
   requireThat(c.font_asset_version==null||c.font_asset_version===FONT_BINDING.resource_version_id,'AUDIO_FONT_UNAVAILABLE','字幕字体未准入',503);
@@ -186,11 +189,33 @@ export async function freezeNativeAudio(db:Db,cfg:Config,contract:FrozenContract
     listening_ceiling_micro:listening.per_request_ceiling_micro,ceiling_micro:repairCeiling};
   frozenNativeAudio(contract);await verifyResourceLicenses(db,contract.resource_versions,true);
 }
-export async function verifyNativeAudioLive(db:Db,contract:FrozenContract,lock=false):Promise<void>{
+export async function verifyNativeAudioLive(db:Db,contract:FrozenContract,lock=false,use:AudioLicenseUse='ORDER'):Promise<void>{
   const audio=frozenNativeAudio(contract);if(!audio)return;
   requireThat(hash(await readCharacter(db,contract,lock))===audio.character_admission_hash,'AUDIO_CHARACTER_CHANGED','原人物声音准入证据已变化',503);
-  for(const right of audio.rights)requireThat(hash(await readRight(db,right.binding,right.kind,lock))===hash(right),'AUDIO_LICENSE_CHANGED','原资源许可或固定分摊成本已变化',503);
+  for(const right of audio.rights)requireThat(hash(await readRight(db,right.binding,right.kind,lock,use))===hash(right),'AUDIO_LICENSE_CHANGED','原资源许可或固定分摊成本已变化',503);
   await verifyResourceLicenses(db,contract.resource_versions,lock);
+}
+/** Public copies retain their own rights snapshot after private media expires.
+ * No model execution, source-media read or buyer payment is needed to withdraw them. */
+export async function verifySampleAudioPublicationRights(db:Db,raw:unknown,lock=false):Promise<string>{
+  requireThat(validAudio(raw),'AUDIO_CONTRACT_REQUIRED','有声公开样例缺少原完整声音许可',503);const audio=raw;
+  const row=(await db.query<{data:{admission_state?:string;native_voice_ids?:string[];native_audio_admissions?:unknown[]}}>(
+    `SELECT data FROM character_versions WHERE id=$1${lock?' FOR SHARE':''}`,[audio.character.character_version_id])).rows[0];
+  requireThat(row?.data.admission_state==='ADMITTED'&&row.data.native_voice_ids?.includes(audio.character.native_voice_id)
+    &&row.data.native_audio_admissions?.some(e=>validCharacter(e)&&hash(e)===audio.character_admission_hash)
+    &&hash(audio.character)===audio.character_admission_hash&&Date.parse(audio.character.valid_until)>Date.now(),
+    'AUDIO_CHARACTER_CHANGED','公开样例人物声音组合许可已撤销或到期',503);
+  requireThat(audio.rights.length===(audio.music?3:2)&&new Set(audio.rights.map(r=>r.kind)).size===audio.rights.length
+    &&audio.rights.some(r=>r.kind==='NATIVE_CHARACTER'&&hash(r.binding)===hash(audio.character.character_binding))
+    &&audio.rights.some(r=>r.kind==='NATIVE_VOICE'&&hash(r.binding)===hash(audio.character.voice_binding))
+    &&(!audio.music||audio.rights.some(r=>r.kind==='MUSIC'&&hash(r.binding)===hash(audio.music!.binding))),
+    'AUDIO_LICENSE_CHANGED','公开样例许可依赖与原人物、声音和配乐不一致',503);
+  for(const right of audio.rights)requireThat(hash(await readRight(db,right.binding,right.kind,lock,'SAMPLE'))===hash(right),
+    'AUDIO_LICENSE_CHANGED','公开样例声音许可或成本证据已变化',503);
+  await verifyResourceLicenses(db,[audio.font,...audio.rights.map(r=>r.binding)],lock);
+  const expiry=(await db.query<{until:Date|null}>(`SELECT min(expires_at) AS until FROM resource_licenses WHERE id=ANY($1)`,
+    [[audio.font.license_record_id,...audio.rights.map(r=>r.binding.license_record_id)]])).rows[0]?.until;
+  return new Date(Math.min(Date.parse(audio.character.valid_until),expiry?.getTime()??Infinity)).toISOString();
 }
 /** Fixed prepaid-license accounting, not an external provider purchase. Once
  * per original order/resource; later tools and checkpoints share the same fact. */

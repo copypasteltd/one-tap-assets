@@ -3,11 +3,11 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-30T07:16:07.746Z",
+  "checked_at": "2026-10-30T08:31:50.915Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "verification_mode": "FOCUSED_MINI_RECOMMENDATION_MOUNT_CLOSURE",
+  "verification_mode": "FOCUSED_NATIVE_SAMPLE_AUDIO_CLOSURE",
   "retained_integration": null,
   "command_checks_passed": false,
   "commands": [
@@ -23,8 +23,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 28544,
-      "log_path": "runtime/delivery-builds/2026-10-30T07-15-30-256Z-64dd0260/typecheck.log",
+      "elapsed_ms": 10224,
+      "log_path": "runtime/delivery-builds/2026-10-30T08-31-29-585Z-23cca323/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -40,34 +40,34 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 555,
-      "log_path": "runtime/delivery-builds/2026-10-30T07-15-30-256Z-64dd0260/server.log",
+      "elapsed_ms": 1321,
+      "log_path": "runtime/delivery-builds/2026-10-30T08-31-29-585Z-23cca323/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T07-15-30-256Z-64dd0260\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T08-31-29-585Z-23cca323\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T07-15-30-256Z-64dd0260\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T08-31-29-585Z-23cca323\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 7573,
-      "log_path": "runtime/delivery-builds/2026-10-30T07-15-30-256Z-64dd0260/preview.log",
-      "log_sha256": "7f5df439341e82a9321aadc0cc4e5005ccb4de95d9a368608b6e6b8bd86aee65"
+      "elapsed_ms": 8946,
+      "log_path": "runtime/delivery-builds/2026-10-30T08-31-29-585Z-23cca323/preview.log",
+      "log_sha256": "d45786aef0499872b740ca8fe275968e03c6203e7e1cc687329f27020bba03b7"
     }
   ],
   "suites": [],
-  "source_files": 452,
-  "source_set_hash": "6f318f706811807f9bc0818f5c2fae370b0032eeeea77d13e754b1809d7c86d3",
+  "source_files": 459,
+  "source_set_hash": "52416aa969b252c137015e7e8789eca8a4666d18ab61e3b81b74695f7a69383b",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -214,6 +214,10 @@
       "sha256": "7bcec1ac3d9e50391918d7aab1d66794146e9a8d2bdeb5e7e7783b05e400bb4a"
     },
     {
+      "path": "src/api/db/migrations/032_sample_native_audio.sql",
+      "sha256": "5ab53a708593478ceddc63f5e70291f64bfca07bf46cadadaf085879e0ae2fe8"
+    },
+    {
       "path": "src/api/db/pool.ts",
       "sha256": "81dff3e39d44a521e3a3cfafe6d7b734cfb477f5cd33926c14694c0364777850"
     },
@@ -255,7 +259,7 @@
     },
     {
       "path": "src/api/modules/authorized-samples.ts",
-      "sha256": "7d4566b6cfaebd1b57fb4402402bcb3a7c6d2d5190eeb04403bc6b006a6b179e"
+      "sha256": "e446276f9428c4b6c27a4ab8cc21355021f3ee511e2c21c78b75db709499ef6c"
     },
     {
       "path": "src/api/modules/catalog.ts",
@@ -795,7 +799,7 @@
     },
     {
       "path": "src/worker/audio/contract.ts",
-      "sha256": "ac9ec7098c2e80b05b308f45ed99255fb5a1df464c2832f0def6bfd24540d298"
+      "sha256": "db16d4b1727754dce7901e86c03a252eb5205f6fbc150343d929f5644663ea99"
     },
     {
       "path": "src/worker/audio/delivered-listening.ts",
@@ -807,7 +811,7 @@
     },
     {
       "path": "src/worker/audio/listening-gateway.ts",
-      "sha256": "36d02f6b3e489f7ea9959d30d2be0deda53a104db90b96df1d4772d91aa49943"
+      "sha256": "c28d2493a3b12b1ddbc84ef3c3e3f6006e68e4d6635d3dcb94b04e8041150ad2"
     },
     {
       "path": "src/worker/audio/order-proof.ts",
@@ -855,7 +859,7 @@
     },
     {
       "path": "src/worker/codex/runtime.ts",
-      "sha256": "004b8f0236ec8c23de6f200109ccd30010264ee2541cad0fae506a11c1fb009f"
+      "sha256": "3fe98c0ec9d3d058bf1845b16ecf40fcecd88bdb1f8308b39ee2eb0a5747e0c7"
     },
     {
       "path": "src/worker/codex/skills.ts",
@@ -951,7 +955,7 @@
     },
     {
       "path": "src/worker/lifecycle/media-maintenance-main.ts",
-      "sha256": "c378786c7878ade7a2df598b38b52008b37ef4dd3ef475e5bbf097c09cc5e041"
+      "sha256": "ea7b42cc07ca2277d7a3e94df2d6b811f8f845bfd7bf45f055a499995f147228"
     },
     {
       "path": "src/worker/lifecycle/privacy-journal-main.ts",
@@ -1182,24 +1186,40 @@
       "sha256": "de0e80fbc8a777317a5c01293337f0ef16cc6b095d2ef1e74594f0cbaaa3dc0a"
     },
     {
+      "path": "src/worker/samples/audio-context.ts",
+      "sha256": "8361bd338ee74b4f2ecf9df58ebfed6f06bc1c3a30576085166d0b23217902af"
+    },
+    {
+      "path": "src/worker/samples/audio-evidence.ts",
+      "sha256": "86d90721993da26d26b6ec3a73b9364c30e4bf08daf5a61d9e9a0b978c006c60"
+    },
+    {
       "path": "src/worker/samples/completion.ts",
-      "sha256": "7836458f365dff3a551fbd2f61ada947f7e90b9f0b1b7fe3ddff9f597aa06e3b"
+      "sha256": "124f88c3fb5619aa73c8b09cdb2f57b5768c672433f8737bc62912dc7a6f1fa9"
     },
     {
       "path": "src/worker/samples/context.ts",
-      "sha256": "c9a0bc1490a541829de2d14d4bdac8e72bd2dbf0d13e94f60e3a2b68735b15aa"
+      "sha256": "f9a45fc48550c32d49f2d7ad7a976f669cd153ccf9ec6eefba5828bd20484bca"
     },
     {
       "path": "src/worker/samples/generation-contract.ts",
-      "sha256": "4cb5f7ab1ed219568e3eb48e2a7b70985c4aa5bf5091b92a513b580150eeca19"
+      "sha256": "7fd4eaaf17e128cb2f64faab695da0d8d8224e3b6f7af1e129205979adf190b2"
     },
     {
       "path": "src/worker/samples/generation.ts",
-      "sha256": "c26540a22875d6e9311baa2894488fad9017e9b8087506077ed8e70018ae9f72"
+      "sha256": "7615babac354f56ec34e12de37b7fdc623c6970c5c45cb8e3788434a97bd7be2"
+    },
+    {
+      "path": "src/worker/samples/listening.ts",
+      "sha256": "143ec75e39188770ae6601d24e65b3f4dd9186b95a6991d88d7cc9aaa329914d"
     },
     {
       "path": "src/worker/samples/media.ts",
-      "sha256": "c21c4a8351dd34edab31b72613710fc21bc9eba3485e13f298f5b16c0f0f4927"
+      "sha256": "27850e5e71878d940603d671f22f9546b9842f032bf5c13ce85544266b5bc062"
+    },
+    {
+      "path": "src/worker/samples/native-media.ts",
+      "sha256": "219a9c8444d967c7936bd0712b9cbd0a82dbda46ff058e51f117cdb2c34655f6"
     },
     {
       "path": "src/worker/samples/publication.ts",
@@ -1207,11 +1227,15 @@
     },
     {
       "path": "src/worker/samples/review.ts",
-      "sha256": "4ad675f279084ff884429a8d6ecbbd4bb60e17ca7aa5be9aca8e69adf9bb4f50"
+      "sha256": "4f931d6053c713e85b16896a304782115e270e037fdb955f1d7797543fb25ee5"
     },
     {
       "path": "src/worker/samples/service.ts",
-      "sha256": "b75e47fe55582df77dbd8915be9a0e6e406a08a5b2da397a209f4d42079edc94"
+      "sha256": "f4e12f284984ec97724355dae26e710d671d26a311d2176746afb814e62dcf20"
+    },
+    {
+      "path": "src/worker/samples/speech.ts",
+      "sha256": "fe48b706a5e484d198aed1799a3c135b7b9e9c83ca24c653643260081050b24b"
     },
     {
       "path": "src/worker/speech/execute.ts",
@@ -1219,11 +1243,11 @@
     },
     {
       "path": "src/worker/speech/gateway.ts",
-      "sha256": "148246416ebb5a227bac9a733593e163b2c5e475799ad668957ac22baa9d5372"
+      "sha256": "4f3f2abcabd841b216020651b198e2a81dd335f818b27c398ebcaeb792271496"
     },
     {
       "path": "src/worker/speech/input.ts",
-      "sha256": "7ad15571eb277c55ac4195e371d3a6cc3ac2cb36fc7b1a6f187a3bdd30bcc62d"
+      "sha256": "83ffec1e4904697302a3318f6907ca10fcc1a30666ddd08d300b0b8914dbcae8"
     },
     {
       "path": "src/worker/tool-gateway/consumer.ts",
@@ -1267,7 +1291,7 @@
     },
     {
       "path": "src/worker/tool-gateway/sample-tools.ts",
-      "sha256": "e8bf730ddd2f49cd0975015d417cd7f0a2b88e37468075a5cf441f436fa9fa54"
+      "sha256": "2889007aa7cdad6c80ee4df4dda2282303703663b83bd46ee5a1168aff403b35"
     },
     {
       "path": "src/worker/tool-gateway/traffic.ts",
@@ -1316,6 +1340,10 @@
     {
       "path": "tests/helpers/native-order.ts",
       "sha256": "b74da8eb1434c8d27b8350099dcecd2f46e5363b710bc79500e1cedef939a442"
+    },
+    {
+      "path": "tests/helpers/native-sample.ts",
+      "sha256": "5bf4315badb25f0cb0ab8b9e0e5c18b60aba5e3a436601a1732bc32b523418d6"
     },
     {
       "path": "tests/helpers/reference.ts",
@@ -1511,7 +1539,7 @@
     },
     {
       "path": "tests/integration/sample-production.test.ts",
-      "sha256": "526754b27b7ed33af3ff9f1650c938cac1e674554fe1fef96f604afead299655"
+      "sha256": "c73134b8bc302f4cd371710505d975bacdaae0247f910f1949529139a937bcfc"
     },
     {
       "path": "tests/integration/speech-gateway.test.ts",
@@ -2790,14 +2818,21 @@
   },
   "product_recommendations": {
     "source_implemented": true,
-    "fixture_verified": true,
+    "fixture_verified": false,
     "evidence": "docs/verification/mini-mount-source.json",
     "retained_backend_checks": "docs/verification/recommendations-source.json"
   },
   "recommendation_mount": {
     "source_implemented": true,
-    "fixture_verified": true,
+    "fixture_verified": false,
     "native_device_verified": false,
     "evidence": "docs/verification/mini-mount-source.json"
-  }
+  },
+  "community_native_samples": {
+    "source_implemented": true,
+    "fixture_verified": true,
+    "production_verified": false,
+    "evidence": "docs/verification/native-sample-source.json"
+  },
+  "main_database_migrations": 32
 }

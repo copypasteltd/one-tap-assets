@@ -1,0 +1,23 @@
+{
+  "base": "runtime/test-results/native-sample-2026-10-30T08-14-18-014Z",
+  "source_set_hash": "ac04de4668ea775b0cb51ad86d3e77ae9b5b5d2dcaf207ff6b33b52fbac4878e",
+  "source_unchanged": true,
+  "commands": [
+    {
+      "task": "typecheck",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+        "--noEmit"
+      ],
+      "shell": false,
+      "status": "FAIL",
+      "exit_code": 2,
+      "signal": null,
+      "timeout_ms": 120000,
+      "elapsed_ms": 8762,
+      "log_path": "runtime/test-results/native-sample-2026-10-30T08-14-18-014Z/type.log",
+      "log_sha256": "579043da52c4d85faefffd6157f3b27e11386b4a1627834b5fde84e69dc4f1b3"
+    }
+  ]
+}

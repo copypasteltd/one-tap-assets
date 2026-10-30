@@ -1,0 +1,31 @@
+{
+  "base": "runtime/test-results/native-sample-2026-10-30T08-32-36-758Z",
+  "source_set_hash": "52416aa969b252c137015e7e8789eca8a4666d18ab61e3b81b74695f7a69383b",
+  "source_unchanged": true,
+  "commands": [
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts tests/integration/speech-gateway.test.ts tests/integration/audio-contract.test.ts -t native SAMPLE|completes PER_SHOT_AI creator sample|decodes actual audio|freezes (PER_SHOT_AI|REFERENCE_FILM) original voice --outputFile.json=runtime/test-results/native-sample-2026-10-30T08-32-36-758Z/api.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.integration.config.ts",
+        "tests/integration/sample-production.test.ts",
+        "tests/integration/speech-gateway.test.ts",
+        "tests/integration/audio-contract.test.ts",
+        "-t",
+        "native SAMPLE|completes PER_SHOT_AI creator sample|decodes actual audio|freezes (PER_SHOT_AI|REFERENCE_FILM) original voice",
+        "--outputFile.json=runtime/test-results/native-sample-2026-10-30T08-32-36-758Z/api.json"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 480000,
+      "elapsed_ms": 224211,
+      "log_path": "runtime/test-results/native-sample-2026-10-30T08-32-36-758Z/api.log",
+      "log_sha256": "f78935b03b2bfd949519d95199c3f93d779d9e0d4df5bed517a42cbaecbeb7f3"
+    }
+  ]
+}

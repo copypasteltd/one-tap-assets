@@ -15,6 +15,7 @@ import { renderSample, storedMedia, verifyMedia, verifySampleGeneratedReceipt, t
 import { samplePacket, packetAssetIds, validateSampleReview } from '../samples/review.js';
 import type { ToolHandler } from './consumer.js';
 import type { ToolScope } from './http.js';
+import type {SampleSpeechGateway} from '../samples/speech.js';
 
 export interface SampleMediaResult { phase: 'PRODUCTION' | 'POST'; snapshot_hash: string; operation_id: string; artifact_ids: string[]; tool_receipt_ids: string[] }
 const list = { type: 'array', minItems: 1, maxItems: 100, uniqueItems: true, items: { type: 'string', maxLength: 128 } };
@@ -46,12 +47,12 @@ async function persist(db: Db, scope: ToolScope, result: unknown): Promise<void>
     WHERE tenant_id=$1 AND id=$2 AND state='RUNNING' AND (output_hash IS NULL OR output_hash=$3)`, [scope.tenant_id, scope.run_id, hash(result), JSON.stringify(result)]);
   requireThat(saved.rowCount === 1, 'TOOL_SCOPE_ENDED', '样例角色已结束或结果已冻结', 409);
 }
-export function sampleTools(pool: pg.Pool, cfg: Config, store: ObjectStorage,gateway?:GenerationGateway): Record<string, ToolHandler> {
-  requireThat(!gateway||cfg.env==='test','TEST_PORT_FORBIDDEN','样例生成替身仅限测试',500);
+export function sampleTools(pool: pg.Pool, cfg: Config, store: ObjectStorage,gateway?:GenerationGateway,speech?:SampleSpeechGateway): Record<string, ToolHandler> {
+  requireThat((!gateway&&!speech)||cfg.env==='test','TEST_PORT_FORBIDDEN','样例供应商替身仅限测试',500);
   const references=referenceTools(pool,cfg,store,async(db,scope)=>sampleGenerationContext(await context(db,scope)));
   const media = (phase: 'PRODUCTION' | 'POST'): ToolHandler => async (scope, _args, intent, signal) => {
     requireThat(phaseFor(scope) === phase, 'SAMPLE_TOOL_SCOPE_INVALID', '样例制作工具与角色不匹配', 403);
-    const receipt = await renderSample(pool, cfg, store, scope, phase, signal,gateway);
+    const receipt = await renderSample(pool, cfg, store, scope, phase, signal,gateway,speech);
     const result: SampleMediaResult = { phase, snapshot_hash: receipt.snapshot_hash, operation_id: receipt.operation_id, artifact_ids: receipt.artifacts.map(a => a.artifact_id), tool_receipt_ids: [intent.id] };
     return { result, commit: async db => {
       const c = await context(db, scope); const key = phase.toLowerCase();
@@ -85,8 +86,10 @@ export function sampleTools(pool: pg.Pool, cfg: Config, store: ObjectStorage,gat
       const c = await context(pool, scope); const packet = samplePacket(c);
       requireThat(['REVIEW_FACTS','REVIEW_STYLE'].includes(scope.role) && scope.packet_hash === packet.packet_hash, 'SAMPLE_TOOL_SCOPE_INVALID', '复核材料与本角色不匹配', 403);
       return { result: { packet_hash: packet.packet_hash, output_set_hash: packet.output_set_hash, copy: packet.copy,
+        ...(packet.native_audio?{native_audio:packet.native_audio,listening:packet.listening}:{}),
         images: packet.images.map(({ object_key: _key, ...data }) => data), artifacts: packet.artifacts.map(({ object_key: _key, ...data }) => data),
-        report_requirements: { role: scope.role, packet_hash: packet.packet_hash, checked_asset_ids: packetAssetIds(packet) } } };
+        report_requirements: { role: scope.role, packet_hash: packet.packet_hash, checked_asset_ids: packetAssetIds(packet),
+          ...(packet.native_audio?{audio_evidence_hash:hash({native_audio:packet.native_audio,listening:packet.listening})}:{}) } } };
     },
     persist_stage_result: async (scope, args,intent,signal) => {
       if(scope.stage_name==='SAMPLE_PRODUCTION'&&scope.role==='REVIEW_FACTS')return references.persist_stage_result!(scope,args,intent,signal);

@@ -1,0 +1,495 @@
+{
+  "schema_version": "1.0",
+  "attempts": [
+    {
+      "attempt": 1,
+      "source_set_hash": "ac04de4668ea775b0cb51ad86d3e77ae9b5b5d2dcaf207ff6b33b52fbac4878e",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "typecheck",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+            "--noEmit"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 2,
+          "signal": null,
+          "timeout_ms": 120000,
+          "elapsed_ms": 8762,
+          "log_path": "runtime/test-results/native-sample-2026-10-30T08-14-18-014Z/type.log",
+          "log_sha256": "579043da52c4d85faefffd6157f3b27e11386b4a1627834b5fde84e69dc4f1b3"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/native-sample-attempt-01-source.json",
+          "sha256": "a968b444ff078bdd127c902327e00b1475e5e974a98ee6bb815b075c66085b33",
+          "bytes": 75305
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-01-result.json",
+          "sha256": "9f46927c7ee13b67ce91c4510e68276fec7221f29cad13d9ba6f0bb10940a94f",
+          "bytes": 836
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-01-type.log",
+          "sha256": "579043da52c4d85faefffd6157f3b27e11386b4a1627834b5fde84e69dc4f1b3",
+          "bytes": 240
+        }
+      ],
+      "correction": "Type error in test transcript access; corrected to segments.words.",
+      "is_final_integration": false
+    },
+    {
+      "attempt": 2,
+      "source_set_hash": "7fbce7e5930fd09949fbba9c565e82cad79192057d40560a3c9fe44001a24487",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "typecheck",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+            "--noEmit"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 120000,
+          "elapsed_ms": 7964,
+          "log_path": "runtime/test-results/native-sample-2026-10-30T08-16-21-382Z/type.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/native-sample-attempt-02-source.json",
+          "sha256": "7b257350a25061e52131c172678410082dfb50c53c805bd4c85d924b3210609a",
+          "bytes": 75305
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-02-result.json",
+          "sha256": "459aab846d122cca9431e8a154b11ef9bb595f19a0c3f8386e9661be73327874",
+          "bytes": 836
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-02-type.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ],
+      "correction": null,
+      "is_final_integration": false
+    },
+    {
+      "attempt": 3,
+      "source_set_hash": "7fbce7e5930fd09949fbba9c565e82cad79192057d40560a3c9fe44001a24487",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts -t native SAMPLE refuses --outputFile.json=runtime/test-results/native-sample-2026-10-30T08-16-49-308Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/sample-production.test.ts",
+            "-t",
+            "native SAMPLE refuses",
+            "--outputFile.json=runtime/test-results/native-sample-2026-10-30T08-16-49-308Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 45039,
+          "log_path": "runtime/test-results/native-sample-2026-10-30T08-16-49-308Z/api.log",
+          "log_sha256": "2fb34e76915ec7bdd54d22b90cc600f6dc908f587edb7b6b35ffe547ce859589"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/native-sample-attempt-03-source.json",
+          "sha256": "7b257350a25061e52131c172678410082dfb50c53c805bd4c85d924b3210609a",
+          "bytes": 75305
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-03-result.json",
+          "sha256": "fbcb6483a4fea8bb31a0eddccf48f042f18792b145be6a01eedb7fc12caebcc3",
+          "bytes": 1271
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-03-api.json",
+          "sha256": "96f811b3aecd4ebe8e816722a1c51a6f613700ed9fb7192272c4f485c2990582",
+          "bytes": 9004
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-03-api.log",
+          "sha256": "2fb34e76915ec7bdd54d22b90cc600f6dc908f587edb7b6b35ffe547ce859589",
+          "bytes": 3929
+        }
+      ],
+      "correction": "Test attempted to mutate an immutable license; now creates a separate ORDER-only record.",
+      "is_final_integration": false
+    },
+    {
+      "attempt": 4,
+      "source_set_hash": "e1b9560d09b7367f8c917353df9b9d13cccac83e00a0f337c0c0030776deee26",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts -t native SAMPLE PER_SHOT_AI --outputFile.json=runtime/test-results/native-sample-2026-10-30T08-18-41-231Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/sample-production.test.ts",
+            "-t",
+            "native SAMPLE PER_SHOT_AI",
+            "--outputFile.json=runtime/test-results/native-sample-2026-10-30T08-18-41-231Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 41142,
+          "log_path": "runtime/test-results/native-sample-2026-10-30T08-18-41-231Z/api.log",
+          "log_sha256": "516b8f030198b3bda01187ee46087c3373fab6416fd02253468a18d195be68a2"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/native-sample-attempt-04-source.json",
+          "sha256": "16c355d76162cddfe943ad0547e5eba270018afce72e3ad80d70b77c565f9772",
+          "bytes": 75305
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-04-result.json",
+          "sha256": "ef25514f83f046d18e5016b6d7b8364a70a39d8de5d929838aaa42e22de416b1",
+          "bytes": 1279
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-04-api.json",
+          "sha256": "f565c94fbc56b4a9b79f1248eeb03bde39821b380ee0762c27deb1d7142a35e9",
+          "bytes": 9320
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-04-api.log",
+          "sha256": "516b8f030198b3bda01187ee46087c3373fab6416fd02253468a18d195be68a2",
+          "bytes": 3949
+        }
+      ],
+      "correction": "JSONB object-key ordering broke an evidence re-read; actual facts now use the existing canonical JSON helper.",
+      "is_final_integration": false
+    },
+    {
+      "attempt": 5,
+      "source_set_hash": "734ae7784f425fcb76361fcd13fe0f3fed8fe50579eacb646db4faa8f5c3bd70",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts -t native SAMPLE --outputFile.json=runtime/test-results/native-sample-2026-10-30T08-20-32-594Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/sample-production.test.ts",
+            "-t",
+            "native SAMPLE",
+            "--outputFile.json=runtime/test-results/native-sample-2026-10-30T08-20-32-594Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 3390,
+          "log_path": "runtime/test-results/native-sample-2026-10-30T08-20-32-594Z/api.log",
+          "log_sha256": "68f2d8b6f5c29326f3d5f3619fef0627d8b3492f49a1f934468293c426bf6583"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/native-sample-attempt-05-source.json",
+          "sha256": "cf463cb75233540ec6c441448639dea0c0c9ba14768d1c213972ec06398d8b2e",
+          "bytes": 75305
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-05-result.json",
+          "sha256": "6ccc8cb879eb1eec8026d6f62e0bc87b3002b023df04b7d9dfeb263be3cc34cd",
+          "bytes": 1254
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-05-api.json",
+          "sha256": "17e6879406d350608688b64a9ded9c0374e8c4fef2489e3171da2c32548727e9",
+          "bytes": 819
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-05-api.log",
+          "sha256": "68f2d8b6f5c29326f3d5f3619fef0627d8b3492f49a1f934468293c426bf6583",
+          "bytes": 1093
+        }
+      ],
+      "correction": "Incorrect canonical helper import prevented suite loading; corrected to the repository helper.",
+      "is_final_integration": false
+    },
+    {
+      "attempt": 6,
+      "source_set_hash": "7ce39580c5505990459626e963f80e5002931bda05e24ffe9a6bbfca72904a00",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts -t native SAMPLE --outputFile.json=runtime/test-results/native-sample-2026-10-30T08-21-14-354Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/sample-production.test.ts",
+            "-t",
+            "native SAMPLE",
+            "--outputFile.json=runtime/test-results/native-sample-2026-10-30T08-21-14-354Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 47572,
+          "log_path": "runtime/test-results/native-sample-2026-10-30T08-21-14-354Z/api.log",
+          "log_sha256": "407348d09a85cf60f6f338e60145f3631b5b21882777a771a0fabe2a5b90f773"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/native-sample-attempt-06-source.json",
+          "sha256": "74dbece640577c932ae807f2cb8340640ce910f9e89b14caea54fb46c6133940",
+          "bytes": 75305
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-06-result.json",
+          "sha256": "0358a6fd3cc798a8e4face4774690c50ca1caf967d1975a2703654da8e638db8",
+          "bytes": 1255
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-06-api.json",
+          "sha256": "bebe4e0924060fe67a9cb0a5052832ace1de89e01911894d7e6a68ee32b53f89",
+          "bytes": 8988
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-06-api.log",
+          "sha256": "407348d09a85cf60f6f338e60145f3631b5b21882777a771a0fabe2a5b90f773",
+          "bytes": 3912
+        }
+      ],
+      "correction": "Test attempted to restore a permanently revoked license; export now precedes irreversible revocation.",
+      "is_final_integration": false
+    },
+    {
+      "attempt": 7,
+      "source_set_hash": "c188d59a9549b2ab88d6418af5dbbac7b2d9c6aa2d2577b4e7d70b5dfdefd68f",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "typecheck",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+            "--noEmit"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 120000,
+          "elapsed_ms": 7269,
+          "log_path": "runtime/test-results/native-sample-2026-10-30T08-25-12-624Z/type.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/native-sample-attempt-07-source.json",
+          "sha256": "a3010cca0e93d2cc7e687d46ae85b7e519a46e7f3011d60e126717f1afb1dd01",
+          "bytes": 75305
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-07-result.json",
+          "sha256": "acdbdb971dbafe5c6a6a11b3dd9c42088eae3ec2e1e1652c6391eea50a4af727",
+          "bytes": 836
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-07-type.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ],
+      "correction": null,
+      "is_final_integration": false
+    },
+    {
+      "attempt": 8,
+      "source_set_hash": "c188d59a9549b2ab88d6418af5dbbac7b2d9c6aa2d2577b4e7d70b5dfdefd68f",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts -t native SAMPLE --outputFile.json=runtime/test-results/native-sample-2026-10-30T08-25-43-088Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/sample-production.test.ts",
+            "-t",
+            "native SAMPLE",
+            "--outputFile.json=runtime/test-results/native-sample-2026-10-30T08-25-43-088Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 103406,
+          "log_path": "runtime/test-results/native-sample-2026-10-30T08-25-43-088Z/api.log",
+          "log_sha256": "404ff06d9522f2b0a6fae8b8041514f395b6f0d4f8773d3ea6180a4a152a9244"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/native-sample-attempt-08-source.json",
+          "sha256": "a3010cca0e93d2cc7e687d46ae85b7e519a46e7f3011d60e126717f1afb1dd01",
+          "bytes": 75305
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-08-result.json",
+          "sha256": "fe19863a8d03417e8e87183fc4ee1e8cc923fe681b0912dee7fa397e259c0b0b",
+          "bytes": 1256
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-08-api.json",
+          "sha256": "6d66df17ec4fb220ffaabaa73c9dc966780f0a93fd3c0cefc654d0d5588a39df",
+          "bytes": 8422
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-08-api.log",
+          "sha256": "404ff06d9522f2b0a6fae8b8041514f395b6f0d4f8773d3ea6180a4a152a9244",
+          "bytes": 920
+        }
+      ],
+      "correction": null,
+      "is_final_integration": false
+    },
+    {
+      "attempt": 9,
+      "source_set_hash": "52416aa969b252c137015e7e8789eca8a4666d18ab61e3b81b74695f7a69383b",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "typecheck",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+            "--noEmit"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 120000,
+          "elapsed_ms": 7431,
+          "log_path": "runtime/test-results/native-sample-2026-10-30T08-29-54-928Z/type.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/native-sample-attempt-09-source.json",
+          "sha256": "eaff36b4816e90c3e3a47495f9006acee72f9fd76d6c64f6f1edb0b3fde7ac32",
+          "bytes": 75305
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-09-result.json",
+          "sha256": "0474d033b14fe7ba5b22f0c484d4659ae2bdb6c5450108961bc7a5c308483457",
+          "bytes": 836
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-09-type.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ],
+      "correction": null,
+      "is_final_integration": false
+    },
+    {
+      "attempt": 10,
+      "source_set_hash": "52416aa969b252c137015e7e8789eca8a4666d18ab61e3b81b74695f7a69383b",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts tests/integration/speech-gateway.test.ts tests/integration/audio-contract.test.ts -t native SAMPLE|completes PER_SHOT_AI creator sample|decodes actual audio|freezes (PER_SHOT_AI|REFERENCE_FILM) original voice --outputFile.json=runtime/test-results/native-sample-2026-10-30T08-32-36-758Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/sample-production.test.ts",
+            "tests/integration/speech-gateway.test.ts",
+            "tests/integration/audio-contract.test.ts",
+            "-t",
+            "native SAMPLE|completes PER_SHOT_AI creator sample|decodes actual audio|freezes (PER_SHOT_AI|REFERENCE_FILM) original voice",
+            "--outputFile.json=runtime/test-results/native-sample-2026-10-30T08-32-36-758Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 224211,
+          "log_path": "runtime/test-results/native-sample-2026-10-30T08-32-36-758Z/api.log",
+          "log_sha256": "f78935b03b2bfd949519d95199c3f93d779d9e0d4df5bed517a42cbaecbeb7f3"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/native-sample-attempt-10-source.json",
+          "sha256": "eaff36b4816e90c3e3a47495f9006acee72f9fd76d6c64f6f1edb0b3fde7ac32",
+          "bytes": 75305
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-10-result.json",
+          "sha256": "058e3ae67bff8f0404d17e7b2f305fc76b5ed33aa0aede93916fdd6d01577afc",
+          "bytes": 1662
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-10-api.json",
+          "sha256": "b14647f25ecbbba0b41e0f56278948a67512e84bd88549dd774e585eda7f8c61",
+          "bytes": 27234
+        },
+        {
+          "path": "docs/verification/native-sample-attempt-10-api.log",
+          "sha256": "f78935b03b2bfd949519d95199c3f93d779d9e0d4df5bed517a42cbaecbeb7f3",
+          "bytes": 1737
+        }
+      ],
+      "correction": null,
+      "is_final_integration": true
+    }
+  ],
+  "earlier_failures_preserved": true,
+  "earlier_results_relabelled": false
+}

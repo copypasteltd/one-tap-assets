@@ -15,33 +15,40 @@ import { bundleForHash } from '../codex/skills.js';
 import { admissionHash } from '../codex/admission.js';
 import { sampleAdmission, samplePlan, type SampleContext } from './context.js';
 import { artifactBytes, storedMedia, verifyMedia, sampleGeneratedMaterial, type SampleArtifact } from './media.js';
+import {buildSampleAudioPacket,type SampleAudioPacket} from './audio-evidence.js';
+import {SampleListeningReader,type SampleListeningEvidence} from './listening.js';
 
 interface PacketImage extends ReviewImageBinding { object_key: string; source_artifact_id: string; frame_index: number | null; time_ms: number | null }
 export interface SamplePacket {
   sample_id: string; input_hash: string; output_set_hash: string; plan_hash: string; font_binding_hash: string;
   sampling_policy: string; artifacts: SampleArtifact[]; images: PacketImage[]; copy: string; packet_hash: string;
+  native_audio?:SampleAudioPacket;listening?:SampleListeningEvidence;
 }
 export interface SampleReview {
   packet_hash: string; role: 'REVIEW_FACTS' | 'REVIEW_STYLE'; verdict: 'PASS' | 'FAIL'; checked_asset_ids: string[];
   issues: { asset_id: string; code: string; message: string }[];
+  audio_evidence_hash?:string;
 }
 export const sampleReviewSchema = { type: 'object', additionalProperties: false, required: ['packet_hash','role','verdict','checked_asset_ids','issues'], properties: {
   packet_hash: { type: 'string', pattern: '^[a-f0-9]{64}$' }, role: { enum: ['REVIEW_FACTS','REVIEW_STYLE'] }, verdict: { enum: ['PASS','FAIL'] },
+  audio_evidence_hash:{type:'string',pattern:'^[a-f0-9]{64}$'},
   checked_asset_ids: { type: 'array', minItems: 1, maxItems: 1100, uniqueItems: true, items: { type: 'string', maxLength: 128 } },
   issues: { type: 'array', maxItems: 100, items: { type: 'object', additionalProperties: false, required: ['asset_id','code','message'], properties: {
-    asset_id: { type: 'string', maxLength: 128 }, code: { enum: ['FACT_MISMATCH','IDENTITY_DRIFT','TEXT','STYLE','QUALITY','SPEC','MISSING'] }, message: { type: 'string', minLength: 1, maxLength: 2000 } } } },
+    asset_id: { type: 'string', maxLength: 128 }, code: { enum: ['FACT_MISMATCH','IDENTITY_DRIFT','TEXT','STYLE','QUALITY','SPEC','MISSING','SPEECH','CAPTION','AUDIO','MUSIC'] }, message: { type: 'string', minLength: 1, maxLength: 2000 } } } },
 } };
 const validReview = new Ajv2020({ strict: false }).compile<SampleReview>(sampleReviewSchema);
 export function samplePacket(context: SampleContext): SamplePacket {
   const packet = context.private.qc_packet as SamplePacket | undefined;
   requireThat(packet, 'SAMPLE_QC_NOT_SEALED', '样例尚未完成实际文件验收', 503);
   const { packet_hash, ...body } = packet; const receipt = storedMedia(context, 'POST');
+  requireThat(context.input.generation?.audio?!!packet.native_audio&&!!packet.listening:!packet.native_audio&&!packet.listening,
+    'SAMPLE_PACKET_CHANGED','样例声音策略与原封存材料不一致',503);
   requireThat(hash(body) === packet_hash && packet.input_hash === context.inputHash && packet.sample_id === context.input.sample_id
     && packet.output_set_hash === hash(receipt.artifacts) && packet.plan_hash === hash(samplePlan(context))
     && packet.font_binding_hash === hash(FONT_BINDING) && hash(packet.artifacts) === hash(receipt.artifacts),
   'SAMPLE_PACKET_CHANGED', '样例封存包与实际制作记录不一致', 503); return packet;
 }
-export const packetAssetIds = (packet: SamplePacket): string[] => [...new Set([...packet.artifacts.map(a => a.artifact_id), ...packet.images.map(i => i.asset_id)])];
+export const packetAssetIds = (packet: SamplePacket): string[] => [...new Set([...packet.artifacts.map(a => a.artifact_id), ...packet.images.map(i => i.asset_id),...(packet.native_audio?.audios.map(a=>a.asset_id)??[])])];
 export async function packetImages(db: Db, cfg: Config, store: ObjectStorage, context: SampleContext, packet: SamplePacket): Promise<ReviewImage[]> {
   const images: ReviewImage[] = [];
   for (const item of packet.images) {
@@ -84,7 +91,8 @@ export async function buildSamplePacket(db: import('pg').Pool, cfg: Config, stor
       }
     }
     const body = { sample_id: context.input.sample_id, input_hash: context.inputHash, output_set_hash: hash(receipt.artifacts), plan_hash: hash(plan),
-      font_binding_hash: hash(FONT_BINDING), sampling_policy: FRAME_SAMPLING_POLICY, artifacts: receipt.artifacts, images, copy: plan.copy };
+      font_binding_hash: hash(FONT_BINDING), sampling_policy: FRAME_SAMPLING_POLICY, artifacts: receipt.artifacts, images, copy: plan.copy,
+      ...(context.input.generation?.audio?{native_audio:await buildSampleAudioPacket(db,cfg,store,context,directory,signal)}:{}) };
     const packet: SamplePacket = { ...body, packet_hash: hash(body) }; await packetImages(db, cfg, store, context, packet); return packet;
   } finally { await rm(inside(cfg.runtimeRoot, directory), { recursive: true, force: true }); }
 }
@@ -92,6 +100,10 @@ export async function buildSamplePacket(db: import('pg').Pool, cfg: Config, stor
 export async function validateSampleReview(db: Db, cfg: Config, context: SampleContext, runId: string, raw: unknown, persisted = false): Promise<SampleReview> {
   requireThat(validReview(raw), 'SAMPLE_REVIEW_INVALID', '样例复核未返回完整结构', 422); const report = raw;
   const packet = samplePacket(context); const ids = packetAssetIds(packet);
+  requireThat(!context.input.generation?.audio||packet.native_audio&&packet.listening?.result.verdict==='PASS',
+    'INDEPENDENT_AUDIO_NOT_PASSED','有声样例缺少完整原声、实际转写和独立听音证据',503);
+  requireThat(context.input.generation?.audio?report.audio_evidence_hash===hash({native_audio:packet.native_audio,listening:packet.listening}):!report.audio_evidence_hash,
+    'SAMPLE_REVIEW_AUDIO_INCOMPLETE','复核必须明确绑定原完整声音和听音证据',422);
   requireThat(report.packet_hash === packet.packet_hash && report.checked_asset_ids.length === ids.length && ids.every(i => report.checked_asset_ids.includes(i))
     && report.issues.every(i => ids.includes(i.asset_id)) && (report.verdict === 'PASS' ? report.issues.length === 0 : report.issues.length > 0),
   'SAMPLE_REVIEW_INCOMPLETE', '复核没有覆盖全部实际文件、画面或明确问题', 422);
@@ -102,6 +114,8 @@ export async function validateSampleReview(db: Db, cfg: Config, context: SampleC
     && run.input_hash === context.inputHash && run.thread_id && run.runtime_process_ref && run.role_identity_ref
     && run.private.review_input?.packet_hash === packet.packet_hash && hash(run.private.review_input.images) === hash(packet.images.map(({ asset_id,sha256,width,height }) => ({ asset_id,sha256,width,height })))
     && hash(run.private.runtime_admission) === hash(context.input.admission), 'SAMPLE_REVIEW_IDENTITY_INVALID', '复核进程、上下文或封存输入不一致', 503);
+  if(packet.listening)requireThat(hash(run.private.review_input.native_listening)===hash(packet.listening),
+    'SAMPLE_REVIEW_AUDIO_INCOMPLETE','完整原听音结果未进入独立角色实际推理输入',503);
   const stage = await db.query(`SELECT id FROM stage_runs WHERE tenant_id=$1 AND id=$2 AND scope_type='SAMPLE' AND scope_id=$3 AND stage_name=$4
     AND input_hash=$5`, [context.input.tenant_id, run.private.stage_run_id, context.input.sample_id, `SAMPLE_${report.role}`, context.inputHash]);
   const bundle = await bundleForHash(cfg, context.input.bundle_hash);
@@ -149,4 +163,12 @@ export async function validateSampleCompletion(db: Db, cfg: Config, context: Sam
     UNION ALL SELECT id FROM agent_instances WHERE tenant_id=$1 AND id=ANY($3) AND state<>'RELEASED'`,
   [context.input.tenant_id, runs.map(r => r.id), runs.map(r => r.instance_id)]);
   requireThat(pending.rowCount === 0, 'SAMPLE_SIDE_EFFECTS_UNRESOLVED', '样例仍有未决调用或未释放角色', 503);
+  if(context.input.generation?.audio){
+    const rows=(await db.query<{generation_kind:string;state:string;budget_state:string;order_id:string|null}>(`SELECT p.generation_kind,p.state,p.order_id,b.state AS budget_state
+      FROM provider_submissions p LEFT JOIN platform_budget_reservations b ON b.tenant_id=p.tenant_id AND b.id=p.reservation_id
+      WHERE p.tenant_id=$1 AND p.sample_id=$2`,[context.input.tenant_id,context.input.sample_id])).rows;
+    requireThat(rows.filter(r=>r.generation_kind==='ASR').length===1&&rows.filter(r=>r.generation_kind==='LISTENING').length===1
+      &&rows.every(r=>r.order_id===null&&r.state==='SUCCEEDED'&&r.budget_state==='SETTLED'),
+      'SAMPLE_SIDE_EFFECTS_UNRESOLVED','样例生成、转写或听音仍有未知费用，不能交付',503);
+  }
 }

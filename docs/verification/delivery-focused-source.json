@@ -1,33 +1,31 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T07:20:55.625691+00:00",
+  "checked_at": "2026-10-30T08:49:22.124371+00:00",
   "strategy": "USER_REQUESTED_FAST_MAIN_FUNCTIONAL_CLOSURE",
-  "source_set_hash": "6f318f706811807f9bc0818f5c2fae370b0032eeeea77d13e754b1809d7c86d3",
-  "source_files": 452,
+  "source_set_hash": "52416aa969b252c137015e7e8789eca8a4666d18ab61e3b81b74695f7a69383b",
+  "source_files": 459,
   "runtime_contract_files": 42,
   "resource_files": 4,
-  "source_snapshot": "docs/verification/mini-mount-build.json",
-  "functional_scope": "docs/实施/商品档案推荐与可用方案选择-v1.0.md",
+  "source_snapshot": "docs/verification/native-sample-tested-source.json",
+  "build_snapshot": "docs/verification/native-sample-build.json",
+  "functional_scope": "docs/实施/社区原生声音样例与平台声音账本-v1.0.md",
   "source_unchanged_during_tests": true,
-  "changed_functional_source": [
-    "src/shared/ui/recommendations.tsx"
-  ],
-  "added_diagnostic": [
-    "scripts/check-recommendations-mount.ts"
-  ],
+  "test_fixture_mcp_bridge_matches_current_build": true,
   "new_checks": {
     "status": "PASS",
-    "passed": 3,
-    "evidence": "docs/verification/mini-mount-browser.json",
-    "actual_react_and_hooks": true,
-    "native_page_show_emulated": true,
-    "native_mini_device_verified": false
+    "passed": 8,
+    "not_selected": 56,
+    "failed": 0,
+    "test_files": 3,
+    "new_native_sample_cases": 4,
+    "related_compatibility_cases": 4,
+    "evidence": "docs/verification/native-sample-integration.json",
+    "wrapper": "docs/verification/native-sample-targeted.json",
+    "actual_native_postgresql_and_ffmpeg": true,
+    "generation_semantics_asr_listening_rights_identity_and_prices_synthetic": true,
+    "real_chinese_speech_verified": false
   },
-  "prior_recommendation_checks": "docs/verification/recommendations-source.json",
-  "backend_client_domain_and_prior_test_files_byte_identical": true,
-  "prior_browser_capture": "docs/media/recommendations/capture-manifest.json",
-  "prior_capture_matches_current_source_set": false,
-  "prior_capture_note": "Recorded before the mount fix. Appearance is retained; the current lifecycle behavior is covered by the new actual React harness, not by relabeling old recordings.",
+  "attempt_history": "docs/verification/native-sample-attempts.json",
   "build_report": "docs/delivery/current.json",
   "build_checks": [
     {
@@ -42,8 +40,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 28544,
-      "log_path": "runtime/delivery-builds/2026-10-30T07-15-30-256Z-64dd0260/typecheck.log",
+      "elapsed_ms": 10224,
+      "log_path": "runtime/delivery-builds/2026-10-30T08-31-29-585Z-23cca323/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -59,29 +57,46 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 555,
-      "log_path": "runtime/delivery-builds/2026-10-30T07-15-30-256Z-64dd0260/server.log",
+      "elapsed_ms": 1321,
+      "log_path": "runtime/delivery-builds/2026-10-30T08-31-29-585Z-23cca323/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T07-15-30-256Z-64dd0260\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T08-31-29-585Z-23cca323\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T07-15-30-256Z-64dd0260\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T08-31-29-585Z-23cca323\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 7573,
-      "log_path": "runtime/delivery-builds/2026-10-30T07-15-30-256Z-64dd0260/preview.log",
-      "log_sha256": "7f5df439341e82a9321aadc0cc4e5005ccb4de95d9a368608b6e6b8bd86aee65"
+      "elapsed_ms": 8946,
+      "log_path": "runtime/delivery-builds/2026-10-30T08-31-29-585Z-23cca323/preview.log",
+      "log_sha256": "d45786aef0499872b740ca8fe275968e03c6203e7e1cc687329f27020bba03b7"
+    }
+  ],
+  "build_logs": [
+    {
+      "path": "docs/verification/native-sample-build-1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/verification/native-sample-build-2.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/verification/native-sample-build-3.log",
+      "sha256": "d45786aef0499872b740ca8fe275968e03c6203e7e1cc687329f27020bba03b7",
+      "bytes": 2820
     }
   ],
   "components": [
@@ -107,11 +122,11 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 2.311,
-      "log_path": "runtime/delivery/mini-mount-doctor-1793344652011060700.log",
-      "log_sha256": "576a81a34a3e93ccc884afeac804f7caa80929280ce66b4092b81f249b8d2cc1",
+      "elapsed_seconds": 1.266,
+      "log_path": "runtime/delivery/native-sample-doctor-1793349397094335400.log",
+      "log_sha256": "e746e35bacb0a0cecd1402405b69fd27b83ed8f9c3a320a2cbc66847d6dd9900",
       "report": {
-        "checked_at": "2026-10-30T07:17:34.290Z",
+        "checked_at": "2026-10-30T08:36:38.313Z",
         "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
         "rows": [
           {
@@ -137,7 +152,7 @@
           {
             "id": "database",
             "status": "PASS",
-            "detail": "connected; 31 migrations"
+            "detail": "connected; 32 migrations"
           },
           {
             "id": "ffmpeg",
@@ -197,33 +212,50 @@
         ],
         "full_product_verified": false,
         "production_admitted": false
+      },
+      "public_log": {
+        "path": "docs/verification/native-sample-doctor.log",
+        "sha256": "e746e35bacb0a0cecd1402405b69fd27b83ed8f9c3a320a2cbc66847d6dd9900",
+        "bytes": 2141
       }
     },
     "backend": {
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 10.576,
-      "log_path": "runtime/delivery/mini-mount-backend-1793344651980519200.log",
-      "log_sha256": "56060c93766f600a13d43bef074d76c53b34aff8c0321e0278f7c612b26ebd35",
+      "elapsed_seconds": 9.011,
+      "log_path": "runtime/delivery/native-sample-backend-1793349265436713600.log",
+      "log_sha256": "addced8923f717314a28f83fbe0a3a5a8b37c2b2b282dfd511d016042a55ebe9",
       "local_stack_ready": true,
-      "preview_http_ready": false
+      "preview_http_ready": false,
+      "public_log": {
+        "path": "docs/verification/native-sample-backend.log",
+        "sha256": "addced8923f717314a28f83fbe0a3a5a8b37c2b2b282dfd511d016042a55ebe9",
+        "bytes": 1562
+      }
     },
     "preview": {
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 2.136,
-      "log_path": "runtime/delivery/mini-mount-preview-1793344651979021600.log",
+      "elapsed_seconds": 1.033,
+      "log_path": "runtime/delivery/native-sample-preview-1793349397018987100.log",
       "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
       "local_stack_ready": false,
-      "preview_http_ready": true
+      "preview_http_ready": true,
+      "public_log": {
+        "path": "docs/verification/native-sample-preview.log",
+        "sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
+        "bytes": 91
+      }
     }
   },
-  "main_database_migrations": 31,
-  "no_new_migration": true,
+  "main_database_migrations": 32,
+  "new_migration": "src/api/db/migrations/032_sample_native_audio.sql",
+  "previous_31_migrations_byte_identical": true,
   "business_operations": 77,
   "management_operations": 35,
+  "creative_components": 25,
   "historical_evidence_unchanged": [
     {
       "path": "docs/verification/album-save-api.json",
@@ -562,6 +594,10 @@
       "sha256": "f8b3d3fc5df793098caa2be319a3c51bce3783e106e7a71da1173dcc82e4aea4"
     },
     {
+      "path": "docs/verification/delivery-focused-source-b800422.json",
+      "sha256": "a4f64dbc468399b8ef8dc0b86f87b88f41ebd5b3913962156dc4118f214305db"
+    },
+    {
       "path": "docs/verification/delivery-focused-source-bd22546.json",
       "sha256": "7abccf9f10658bebf1eef6bc365f244c0eae06e736a5aab2e480507286fc5605"
     },
@@ -784,6 +820,18 @@
     {
       "path": "docs/verification/mcp-observation-native-source.json",
       "sha256": "de9583465a2dc719d499e07ba32f6377851daaad331f9ba8cbaf07e47f71ab2d"
+    },
+    {
+      "path": "docs/verification/mini-mount-browser.json",
+      "sha256": "823d3da49b78d7cf5bab8227f04d5623da5b567cf7747e31ecf864fcb81e9da6"
+    },
+    {
+      "path": "docs/verification/mini-mount-build.json",
+      "sha256": "ba409391748a379d018245c00eefa7bacf6ff8a1e94935e8eb610b06e1ed6297"
+    },
+    {
+      "path": "docs/verification/mini-mount-source.json",
+      "sha256": "69f9cad293ed862d05b06d60e5fa31d621ffa71e0e3f6c85d835f2ff662f3ddc"
     },
     {
       "path": "docs/verification/native-aftercare-api.json",
@@ -1082,6 +1130,10 @@
       "sha256": "305c9e5bb5be0dc3527eb043fd9e5de1e2460ad5f4dd93c9f81319f9806d23d5"
     },
     {
+      "path": "docs/verification/publication-b800422.json",
+      "sha256": "ca23a8709e6d511a2bd0cc8008a15f10dace40278b609cd6cd92eae47c87b7db"
+    },
+    {
       "path": "docs/verification/publication-bd22546.json",
       "sha256": "9d6fa851b3a232d94bd6593ec9af1200aa4a9dbba3d7c3763963988fcb8f7b27"
     },
@@ -1232,6 +1284,10 @@
     {
       "path": "docs/verification/repository-audit-b31c3e8.json",
       "sha256": "8fe7ea95104d9f8ae7115a224792a888b79165a525c418e8a5dbf7a72f8a5830"
+    },
+    {
+      "path": "docs/verification/repository-audit-b800422.json",
+      "sha256": "2eeeb035fd065d839edb0ac0968479f98810edd31fe2a14f24816cc14ae7e9ea"
     },
     {
       "path": "docs/verification/repository-audit-bd22546.json",
@@ -1495,25 +1551,35 @@
     }
   ],
   "existing_media_files_verified": 116,
-  "new_media_files_verified": 0,
+  "new_media_files_verified": 6,
+  "total_media_files": 122,
   "baseline_media_files_with_metadata": 144,
+  "new_media_files_with_metadata": 10,
   "baseline_design_files": 48,
   "frozen_c_files": 25,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
-  "prior_delivery": "docs/verification/delivery-focused-source-b800422.json",
-  "browser_used": true,
-  "browser_tabs_closed": true,
-  "owned_preview_server_stopped": true,
+  "media_capture": "docs/media/native-sample/capture-manifest.json",
+  "prior_delivery": "docs/verification/delivery-focused-source-3c31123.json",
+  "prior_ui_captures_relabelled": false,
+  "browser_used": false,
+  "owned_test_and_local_services_stopped": true,
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
   "checker_weakened": false,
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "limitations": [
-    "Native lifecycle is emulated with actual React, the shared component and its actual paging hook; this is not native Alipay/Douyin device acceptance.",
-    "Earlier 6 strategy/client, 4 native PostgreSQL and 5 browser checks remain in their original versioned reports. Backend/client/domain/tests have unchanged bytes; earlier recordings are not relabeled as fresh current-source captures.",
-    "All original generation, audio, quote, budget, identity, payment and cleanup gates remain. Live services and sales stay off. Full suites, mini builds/devices, complete commercial admission, Plus, cloud and long-run acceptance remain pending."
+  "functional_changes": [
+    "PER_SHOT_AI and REFERENCE_FILM native-audio SAMPLE execution uses the existing author flow and independent platform ledger.",
+    "Frozen character/voice and explicit SAMPLE-use rights precede spending; unused resources and insufficient original budget are rejected.",
+    "Actual original-audio ALAC assembly, one source-bound ASR, AAC captions, complete original/final WAV listening and two fresh final reviews.",
+    "UNKNOWN requests are not repurchased; receipt-only reconciliation preserves the original budget, deadline, stage and append-only evidence.",
+    "Independent public copies recheck live audio rights and earliest expiry; revocation immediately denies reads and maintenance withdraws publication."
   ],
-  "canonical_mini_mount_provenance": "docs/verification/mini-mount-source.json"
+  "limitations": [
+    "Actual test audio consists of tones. Chinese ASR text, listening PASS, media semantics, model admission, identities, rights and pricing are synthetic; not real voice-quality acceptance.",
+    "Previous UI and frozen design captures retain their original sources; no browser or new native-device acceptance was performed.",
+    "Live services and sales remain off. Full suites, native mini-program builds/devices, complete community/official commercial admission, production isolation, Plus, cloud and all 58 acceptance items remain pending."
+  ],
+  "canonical_native_sample_provenance": "docs/verification/native-sample-source.json"
 }

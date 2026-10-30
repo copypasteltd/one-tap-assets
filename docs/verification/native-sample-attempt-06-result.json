@@ -1,0 +1,29 @@
+{
+  "base": "runtime/test-results/native-sample-2026-10-30T08-21-14-354Z",
+  "source_set_hash": "7ce39580c5505990459626e963f80e5002931bda05e24ffe9a6bbfca72904a00",
+  "source_unchanged": true,
+  "commands": [
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts -t native SAMPLE --outputFile.json=runtime/test-results/native-sample-2026-10-30T08-21-14-354Z/api.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.integration.config.ts",
+        "tests/integration/sample-production.test.ts",
+        "-t",
+        "native SAMPLE",
+        "--outputFile.json=runtime/test-results/native-sample-2026-10-30T08-21-14-354Z/api.json"
+      ],
+      "shell": false,
+      "status": "FAIL",
+      "exit_code": 1,
+      "signal": null,
+      "timeout_ms": 480000,
+      "elapsed_ms": 47572,
+      "log_path": "runtime/test-results/native-sample-2026-10-30T08-21-14-354Z/api.log",
+      "log_sha256": "407348d09a85cf60f6f338e60145f3631b5b21882777a771a0fabe2a5b90f773"
+    }
+  ]
+}

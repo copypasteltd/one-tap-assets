@@ -54,7 +54,7 @@ export async function speechContext(db:Db,lease:StageLease):Promise<ExecutionCon
   if(context.repair)requireThat(frozenNativeAudio(context.contract)?.repair,'ASR_REPAIR_NOT_FROZEN','原订单未预留有声修复转写',409);
   requireThat(context.snapshot.deadline_at===lease.deadline_at.toISOString(),'ASR_SCOPE_INVALID','转写不能延长原订单截止',403);return context;
 }
-export function boundSpeechContract(context:ExecutionContext):SpeechContract {
+export function boundSpeechContract(context:Pick<ExecutionContext,'contract'>):SpeechContract {
   const c=frozenSpeechContract(context.contract.speech_contract);
   requireThat(context.contract.model_versions.some(m=>m.roles.includes('SPEECH')&&m.provider===c.provider&&m.actual_model===c.actual_model
     &&m.registry_version===c.registry_version&&m.rate_snapshot_id===c.rate_snapshot_id&&m.capability_hash===hash(c)),
@@ -70,13 +70,17 @@ export async function sourceBytes(db:Db,store:ObjectStorage,context:ExecutionCon
 /** Explicit single-channel derivative; never silently discard a distinct stereo
  * channel. Native 48k stereo evidence stays bound to the original video. */
 export async function prepareSpeechSource(db:Db,cfg:Config,store:ObjectStorage,context:ExecutionContext,writeId:string,signal:AbortSignal):Promise<{source:SpeechSource;wav:Buffer}>{
-  const c=boundSpeechContract(context),root=inside(cfg.runtimeRoot,`tmp/asr-${id('input')}`);await mkdir(root,{recursive:true});
-  try{return await withAudioDeadline({directory:root,deadline_at:context.snapshot.deadline_at,signal},async execution=>{
-    const bytes=await sourceBytes(db,store,context,writeId);const path=join(root,'source.mp4');await writeFile(path,bytes);
+  return prepareSpeechBytes(cfg,context.contract,await sourceBytes(db,store,context,writeId),writeId,context.snapshot.deadline_at,signal);
+}
+/** Shared media preparation only. Each caller must authorize its own source and ledger. */
+export async function prepareSpeechBytes(cfg:Config,contract:ExecutionContext['contract'],bytes:Buffer,writeId:string,deadlineAt:string,signal:AbortSignal):Promise<{source:SpeechSource;wav:Buffer}>{
+  const c=boundSpeechContract({contract}),root=inside(cfg.runtimeRoot,`tmp/asr-${id('input')}`);await mkdir(root,{recursive:true});
+  try{return await withAudioDeadline({directory:root,deadline_at:deadlineAt,signal},async execution=>{
+    const path=join(root,'source.mp4');await writeFile(path,bytes);
     const inspected=await inspectVideo(cfg,path,execution.signal);
     requireThat(inspected.fps===30&&inspected.frames&&inspected.frames>0&&inspected.frames<=c.max_audio_seconds*30,
       'ASR_SOURCE_INVALID','转写源必须是原30fps且在冻结长度内的视频',422);
-    const audio=frozenNativeAudio(context.contract);
+    const audio=frozenNativeAudio(contract);
     requireThat(!audio||inspected.frames===audio.target_frames,'ASR_TIMELINE_MISMATCH','转写必须使用原合同完整时间轴，不能把单镜头当作整轨',422);
     const native=await decodeNativeAudio(cfg,{...execution,path,source_sha256:sha256(bytes),target_frames:inspected.frames});
     const {mono,proof}=speechMonoDerivative(native.pcm,c.channel_policy);

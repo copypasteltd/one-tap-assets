@@ -7,6 +7,7 @@ import { sampleContext } from './context.js';
 import { storedMedia, artifactBytes, verifySampleGeneratedReceipt } from './media.js';
 import { samplePacket, packetImages, validateSampleCompletion } from './review.js';
 import { FONT_BINDING, verifyResourceLicenses } from '../media/font.js';
+import {SampleListeningReader} from './listening.js';
 
 /** Publication rechecks actual production evidence, never a caller's QC flag. */
 export async function verifyCompletedSample(db: Db, cfg: Config, tenantId: string, sampleId: string, state: Record<string, unknown>): Promise<void> {
@@ -22,6 +23,7 @@ export async function verifyCompletedSample(db: Db, cfg: Config, tenantId: strin
     && hash(c.private.completion) === hash({ input_hash: c.inputHash, packet_hash: packet.packet_hash, media_hash: hash(media), review_hash: hash(c.private.review_reports) }),
   'SAMPLE_COMPLETION_CHANGED', '样例交付证据或文件清单已变化', 503);
   const store = storage(cfg); await packetImages(db, cfg, store, c, packet);
+  if(c.input.generation?.audio)await new SampleListeningReader(db,cfg,store).evidence(c,packet);
   await verifySampleGeneratedReceipt(db,cfg,store,c,receipt);
   for (const artifact of receipt.artifacts) await artifactBytes(db, store, c, artifact);
 }

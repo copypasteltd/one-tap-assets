@@ -267,7 +267,7 @@ export class NativeListeningGateway extends NativeListeningReader {
   async reconcileReceipts(limit=20):Promise<{settled:number;blocked:number}>{
     requireThat(Number.isSafeInteger(limit)&&limit>0&&limit<=100,'RECONCILIATION_LIMIT_INVALID','听音对账批次无效',500);
     const rows=(await this.pool.query<ListeningRow>(`SELECT * FROM provider_submissions WHERE generation_kind='LISTENING'
-      AND state IN ('SUBMITTING','UNKNOWN') AND NOT (private @> '{"privacy_deleted":true}'::jsonb) ORDER BY updated_at,id LIMIT $1`,[limit])).rows;
+      AND order_id IS NOT NULL AND sample_id IS NULL AND state IN ('SUBMITTING','UNKNOWN') AND NOT (private @> '{"privacy_deleted":true}'::jsonb) ORDER BY updated_at,id LIMIT $1`,[limit])).rows;
     let settled=0,blocked=0;
     for(const row of rows){try{const r=await this.finish(row);if(r.private.billing_valid)settled++;else blocked++;}catch{blocked++;}}
     return {settled,blocked};

@@ -10,7 +10,11 @@ import { bundleForHash } from '../codex/skills.js';
 import type { InferenceLimits } from '../codex/inference.js';
 import { basePlan, validateCreativePlan, type CreativePlan } from '../compiler/plan.js';
 import { FONT_BINDING, verifyResourceLicenses } from '../media/font.js';
-import {freezeSampleGeneration,type SampleGenerationBinding} from './generation-contract.js';
+import {freezeSampleGeneration,projectSampleContract,type SampleGenerationBinding} from './generation-contract.js';
+import {verifyNativeAudioLive} from '../audio/contract.js';
+import {verifyListeningLive} from '../audio/listening-contract.js';
+import {admitSpeechContract,speechRequest} from '../providers/dashscope-asr.js';
+import {storage} from '../../api/storage/storage.js';
 
 export const SAMPLE_STAGES = ['SAMPLE', 'SAMPLE_PRODUCTION', 'SAMPLE_POST', 'SAMPLE_QC', 'SAMPLE_REVIEW_FACTS', 'SAMPLE_REVIEW_STYLE', 'SAMPLE_COMPLETE'] as const;
 export interface SampleInput {
@@ -28,8 +32,11 @@ export async function freezeSample(db: Db, cfg: Config, subject: { tenantId: str
   const budget = cfg.samples;
   requireThat(budget.costCeilingMicro > 0 && budget.dailyBudgetMicro >= budget.costCeilingMicro && budget.maxConcurrent > 0
     && budget.maxConcurrent <= 20 && budget.deadlineSeconds >= 60 && budget.deadlineSeconds <= 86400, 'SAMPLE_LIMITS_NOT_CONFIGURED', '样例制作额度尚未配置', 503);
-  requireThat(['PHOTO_LAYOUT','PER_SHOT_AI','REFERENCE_FILM'].includes(compiled.source.engine) && compiled.source.audio_policy.speech === 'none'
-    && ['none','approved_licensed_or_contract_silent'].includes(compiled.source.audio_policy.music) && draft.config.resource_version_ids.length === 0,
+  const native=compiled.source.audio_policy.speech==='native_speech';
+  requireThat(['PHOTO_LAYOUT','PER_SHOT_AI','REFERENCE_FILM'].includes(compiled.source.engine)
+    && (compiled.source.audio_policy.speech==='none'||native&&compiled.source.engine!=='PHOTO_LAYOUT')
+    && ['none','approved_licensed_or_contract_silent'].includes(compiled.source.audio_policy.music)
+    && (native||draft.config.resource_version_ids.length===0),
   'SAMPLE_ROUTE_UNAVAILABLE', '所选样例路线或资源尚未接入，不能替换为其他效果', 503);
   await db.query('SELECT pg_advisory_xact_lock(hashtextextended($1,0))', [`sample-quota:${subject.tenantId}:${subject.userId}`]);
   const active = (await db.query<{ n: string }>(`SELECT count(*) AS n FROM public_samples WHERE tenant_id=$1 AND owner_id=$2 AND state IN ('QUEUED','GENERATING')`, [subject.tenantId, subject.userId])).rows[0]!;
@@ -42,7 +49,7 @@ export async function freezeSample(db: Db, cfg: Config, subject: { tenantId: str
     [subject.tenantId, request.product_id, profile.photo_version])).rows[0] ?? notFound();
   const lock = (await db.query<{ hash: string }>('SELECT hash FROM identity_locks WHERE tenant_id=$1 AND id=$2 AND profile_id=$3', [subject.tenantId, profile.identity_lock_id, profile.profile_id])).rows[0] ?? notFound();
   await verifyResourceLicenses(db, [FONT_BINDING], true);
-  validateCreativePlan(basePlan(profile, compiled.source), profile, compiled.source);
+  if(!native)validateCreativePlan(basePlan(profile, compiled.source), profile, compiled.source);
   const input:SampleInput={ sample_id: sampleId, tenant_id: subject.tenantId, owner_id: subject.userId, draft_id: draft.draft_id, draft_revision: draft.revision,
     request, profile: structuredClone(profile), source: structuredClone(compiled.source), config_hash: hash(draft.config), source_hash: compiled.source_hash,
     photo_version_id: photo.id, photo_set_hash: photo.photo_set_hash, identity_lock_hash: lock.hash, deadline_at: addSeconds(budget.deadlineSeconds),
@@ -53,7 +60,15 @@ export async function freezeSample(db: Db, cfg: Config, subject: { tenantId: str
     input.generation=await freezeSampleGeneration(db,cfg,input.source,profile,request.product_id,subject.tenantId,subject.userId,
       admission,bundle.sha256,input.source.skill_bundle.version,input.limits);
     input.limits.ceiling_micro=input.generation.codex_contract.agent_cost_ceiling_micro;
+    requireThat(draft.config.resource_version_ids.every(r=>input.generation!.resource_versions.some(b=>b.resource_version_id===r)),
+      'SAMPLE_RESOURCE_INVALID','所选资源必须属于原冻结声音方案，不能静默忽略或替换',422);
   }
+  if(input.generation?.audio&&cfg.env!=='test'){
+    const store=storage(cfg);requireThat(store.signedReadUrl,'ASR_PRIVATE_URL_UNAVAILABLE','有声样例尚未配置受限HTTPS私有存储',503);
+    speechRequest(input.generation.audio.speech_contract,store.signedReadUrl(`${input.tenant_id}/samples/${sampleId}/admission.wav`,
+      new Date(Math.min(Date.parse(input.deadline_at),Date.now()+7200000))));
+  }
+  validateCreativePlan(sampleSuggestedPlan({input}),profile,compiled.source);
   return input;
 }
 
@@ -87,6 +102,20 @@ export async function sampleContext(db: Db, tenantId: string, sampleId: string, 
 export function samplePlan(context: SampleContext): CreativePlan {
   const plan = context.private.creative as CreativePlan | undefined;
   requireThat(plan && context.private.creative_hash === hash(plan), 'SAMPLE_PLAN_MISSING', '样例缺少已冻结的内容计划', 503);
-  validateCreativePlan(plan, context.input.profile, context.input.source); return plan;
+  validateCreativePlan(plan, context.input.profile, context.input.source);
+  if(context.input.generation?.audio)projectSampleContract(context.input,plan);return plan;
+}
+export function sampleSuggestedPlan(context:Pick<SampleContext,'input'>):CreativePlan{
+  return structuredClone(context.input.generation?.base_plan??basePlan(context.input.profile,context.input.source));
 }
 export function sampleAdmission(cfg: Config, context: SampleContext): CodexAdmission { return checkAdmission(cfg, context.input.admission); }
+
+export async function verifySampleNativeLive(db:Db,cfg:Config,context:SampleContext,lock=false):Promise<void>{
+  if(!context.input.generation?.audio)return;
+  const contract=projectSampleContract(context.input,context.private.creative?samplePlan(context):sampleSuggestedPlan(context));
+  await verifyNativeAudioLive(db,contract,lock,'SAMPLE');await verifyListeningLive(db,cfg,contract,lock);
+  const speech=admitSpeechContract(cfg,contract.speech_contract);
+  requireThat((await db.query(`SELECT id FROM provider_model_versions WHERE id=$1 AND status='ADMITTED' AND data->>'capability_hash'=$2
+    AND private->'speech_contract'=$3::jsonb${lock?' FOR SHARE':''}`,[speech.model_version_id,hash(speech),JSON.stringify(speech)])).rowCount===1,
+    'ASR_NOT_ADMITTED','样例原转写能力已撤销或改变',503);
+}

@@ -12,6 +12,8 @@ import { lockMediaOwner } from './media-access.js';
 import { signDownload } from './delivery.js';
 import { enqueueStage } from '../../worker/queue/enqueue.js';
 import type { SampleObject } from './sample-evidence.js';
+import {verifySampleAudioPublicationRights,type NativeAudioContract} from '../../worker/audio/contract.js';
+import type {SampleInput} from '../../worker/samples/context.js';
 
 export const PUBLIC_SAMPLE_RETENTION_DAYS = 30;
 export interface AuthorizedInput {
@@ -19,6 +21,7 @@ export interface AuthorizedInput {
   photo_version: number; license_id: string; license_hash: string; rights_record_ids: string[];
   source_media: SampleObject[]; source_completion_hash: string; config_hash: string; compiled_hash: string;
   accepted_at: string; retention_days: 30; expires_at: string;
+  native_audio?:NativeAudioContract;
 }
 export interface AuthorizedRow extends RecordRow<Record<string, unknown>> {
   state: string;
@@ -31,7 +34,7 @@ export async function scheduleAuthorizedSamples(db: Db, publication: RecordRow<D
   const request = publication.private!.request as DTO<'PublicationRequest'>;
   requireThat(request.accept_sample_publication === true && request.public_sample_retention_days === PUBLIC_SAMPLE_RETENTION_DAYS,
     'PUBLIC_SAMPLE_CONSENT_REQUIRED', '请确认公开样例最长30天及可撤回的独立授权', 422);
-  const expiresAt = addSeconds(PUBLIC_SAMPLE_RETENTION_DAYS * 86400); const ids: string[] = [];
+  const expiresAt = addSeconds(PUBLIC_SAMPLE_RETENTION_DAYS * 86400);let actualExpiresAt=expiresAt; const ids: string[] = [];
   for (const sourceId of [...request.sample_ids].sort()) {
     const source = await owned<DTO<'Sample'>>(db, 'public_samples', sourceId, { tenantId: publication.tenant_id, userId: publication.owner_id! }, true);
     const productId = source.product_id as string | null;
@@ -40,20 +43,28 @@ export async function scheduleAuthorizedSamples(db: Db, publication: RecordRow<D
     requireThat(productId && productId === original.product_id && source.data.state === 'READY' && !source.private!.media_revoked,
       'SAMPLE_NOT_READY', '公开副本需要当前有效的自有私有样例', 422);
     const sampleId = id('publicsample'); const terms = publication.private!.license_acceptance as { accepted_at: string; content_hash: string };
+    const execution=source.private!.execution as {input:SampleInput;hash:string}|undefined;
+    const native=execution?.input.generation?.audio?.native_audio_contract;
+    let sampleExpiry=expiresAt;
+    if(native){
+      requireThat(execution&&hash(execution.input)===execution.hash,'SAMPLE_SNAPSHOT_CHANGED','公开样例声音来源摘要不一致',503);
+      sampleExpiry=new Date(Math.min(Date.parse(expiresAt),Date.parse(await verifySampleAudioPublicationRights(db,native,true)))).toISOString();
+      actualExpiresAt=new Date(Math.min(Date.parse(actualExpiresAt),Date.parse(sampleExpiry))).toISOString();
+    }
     const input: AuthorizedInput = { tenant_id: publication.tenant_id, owner_id: publication.owner_id!, publication_id: publication.id,
       public_sample_id: sampleId, source_sample_id: sourceId, source_product_id: productId, photo_version: photo.photo_version,
       license_id: request.license_version, license_hash: request.license_content_hash, rights_record_ids: [...request.rights_record_ids],
       source_media: source.private!.media as SampleObject[], source_completion_hash: hash(source.private!.completion ?? { explicit_test_fixture: source.private!.test_fixture === true }),
       config_hash: hash(publication.private!.config), compiled_hash: hash(publication.private!.compiled_variants),
-      accepted_at: terms.accepted_at, retention_days: 30, expires_at: expiresAt };
+      accepted_at: terms.accepted_at, retention_days: 30, expires_at: sampleExpiry,...(native?{native_audio:structuredClone(native)}:{}) };
     await insert(db, 'authorized_samples', { id: sampleId, tenant_id: publication.tenant_id, owner_id: publication.owner_id,
       publication_id: publication.id, source_sample_id: sourceId, source_product_id: productId, input_hash: hash(input), state: 'PREPARING',
-      expires_at: expiresAt, data: {}, private: { input } }); ids.push(sampleId);
+      expires_at: sampleExpiry, data: {}, private: { input } }); ids.push(sampleId);
   }
   const inputHash = hash({ publication_id: publication.id, public_sample_ids: ids });
   const stageId = await enqueueStage(db, { tenantId: publication.tenant_id, scopeType: 'PUBLICATION', scopeId: publication.id,
     name: 'PUBLIC_SAMPLE_PREPARE', inputHash, deadlineAt: addSeconds(3600), private: { public_sample_ids: ids } });
-  return { ids, expiresAt, stageId, inputHash };
+  return { ids, expiresAt:actualExpiresAt, stageId, inputHash };
 }
 
 /** Public reads depend on the separately approved consent, never the expired
@@ -67,6 +78,8 @@ export async function authorizedSample(db: Db, sampleId: string, states: string[
   'PUBLIC_SAMPLE_BINDING_CHANGED', '公开样例的冻结授权或来源不一致', 503);
   requireThat(states.includes(row.state) && row.expires_at.getTime() > Date.now(), 'PUBLIC_SAMPLE_UNAVAILABLE', '公开样例已撤回、到期或尚未发布', 410);
   const terms = await license(db, input.license_id);
+  if(input.native_audio)try{await verifySampleAudioPublicationRights(db,input.native_audio,lock);}
+  catch(error){if(!(error instanceof AppError))throw error;throw new AppError('PUBLIC_SAMPLE_RESOURCE_REVOKED','公开样例声音许可已撤销、变化或到期',410);}
   requireThat(terms.state === 'ACTIVE' && terms.content_hash === input.license_hash, 'PUBLIC_SAMPLE_LICENSE_REVOKED', '公开样例许可已失效', 410);
   const publication = (await db.query<{ review_state: string; data: DTO<'Publication'>; private: Record<string, unknown> }>('SELECT review_state,data,private FROM publications WHERE tenant_id=$1 AND owner_id=$2 AND id=$3',
     [row.tenant_id, row.owner_id, row.publication_id])).rows[0];

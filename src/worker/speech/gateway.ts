@@ -240,7 +240,7 @@ export class SpeechGateway {
    * never submits, renews a signed URL, downloads media or publishes content. */
   async reconcileReceipts(limit=20):Promise<{settled:number;blocked:number}>{
     requireThat(Number.isSafeInteger(limit)&&limit>0&&limit<=100,'RECONCILIATION_LIMIT_INVALID','转写对账批次无效',500);
-    const rows=(await this.pool.query<Submission>(`SELECT * FROM provider_submissions WHERE generation_kind='ASR' AND state IN ('SUBMITTING','UNKNOWN','RUNNING') ORDER BY updated_at,id LIMIT $1`,[limit])).rows;
+    const rows=(await this.pool.query<Submission>(`SELECT * FROM provider_submissions WHERE generation_kind='ASR' AND order_id IS NOT NULL AND sample_id IS NULL AND state IN ('SUBMITTING','UNKNOWN','RUNNING') ORDER BY updated_at,id LIMIT $1`,[limit])).rows;
     let settled=0,blocked=0;for(const row of rows){const claimed=await this.claim(row);if(!claimed){blocked++;continue;}
       try{const r=await this.recover(claimed);if(r.private.provider_terminal&&r.private.billing_valid){
         settled++;const live=(await this.pool.query(`SELECT id FROM orders WHERE tenant_id=$1 AND id=$2 AND payment_state='CONFIRMED'

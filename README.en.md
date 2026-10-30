@@ -4,27 +4,25 @@
 
 One Tap Assets turns product photos into an image, short-video and copy pack. Alipay and Douyin mini-programs are the primary clients. Multimodal analysis establishes visible features without a product form; the future Plus web client supports deeper editing.
 
-This delivery connects [profile-based recommendations and preset selection](docs/实施/商品档案推荐与可用方案选择-v1.0.md). After recognition, buyers see currently eligible offers, concrete reasons, authors and matching variant counts. They can browse other styles and retain their original selection. Reading recommendations does not invoke paid models, select a preset, or create plans, quotes or orders.
-
-The final patch starts recommendations when recognition mounts the component after the native page show event. Three checks use actual React with emulated page events: initial load, pagination and refresh on return. [Current build and evidence](docs/verification/mini-mount-source.json). The 15 earlier checks and recordings retain their original versions; backend/client/ranking bytes are unchanged and old captures are not relabeled as fresh current-source recordings.
+The latest source connects [community native-audio samples and their independent platform audio ledger](docs/实施/社区原生声音样例与平台声音账本-v1.0.md). Both AI-video routes use the existing author workflow: original-audio generation, complete assembly, one transcription, captions and post-production, whole-track original/final listening, and two fresh independent final reviews. Authors can download privately and submit for approval and independent public copies. Revoked audio rights immediately deny public access and maintenance withdraws publication. Sample costs use the original platform allocation without creating buyer orders.
 
 | Step | System behavior | Buyer action |
 | --- | --- | --- |
-| 1. Photograph | Bind 3–5 live photos of one product; recognize visible facts and unknowns | Capture whole, side and detail views without filling a product form |
-| 2. Select | Filter unavailable or incompatible variants, then rank category and photo-supported features | Read reasons and view matching specifications, or browse the community |
-| 3. Confirm | Preserve exact preset/variant versions; freeze identity, assets, Skills, budget and pricing | Review the asset list and price before explicitly paying |
+| 1. Photograph | Bind 3–5 photos of one product; recognize visible facts and unknowns | Capture whole, side and detail views without a product form |
+| 2. Select | Filter unavailable variants and rank photo-supported product matches | Read reasons, authors and asset specifications; select a community preset |
+| 3. Confirm | Freeze identity, exact preset/Skill, assets, models, rights, budget and price | Review the asset list and explicitly pay |
 | 4. Produce | Photo motion, per-shot AI or reference-film routes; Codex planning, production, post and independent reviews | Follow progress; failures use the original order rules |
-| 5. Receive | Receive the pack, save images/videos, copy text; release the instance after delivery | Save within the delivery window; use the original limited revision policy |
+| 5. Receive | Save images/videos, copy text, use limited aftercare; release the instance | Save within the delivery window |
 
-The community retains ten official styles and 25 trusted components, including three choices each for narrative, rhythm, camera and typography. Recommendations are read-only preselection: the exact plan, quote, audio, budget, payment and delivery gates revalidate live state.
+The community retains ten official styles and 25 trusted components for controlled author extensions. Recommendation initial loading, pagination and refresh remain implemented. Existing UI screenshots, recordings, GIFs and the frozen C design retain their original versioned provenance.
 
-Six strategy/client checks, four native PostgreSQL checks and five browser checks pass, together with typecheck, server/preview builds, native setup and local startup. 452 source files, 42 contract/Skill files and four font resources; 31 migrations and 77 business/35 management operations, with no new migration. Three screenshots and WebM/MP4/GIF add 6 media files; all 110 previous media and the frozen C design remain intact. [Evidence](docs/verification/recommendations-source.json) · [Package](docs/delivery/package.json) · [Run and package](docs/delivery/README.md).
+Eight focused checks pass; 56 other tests are not selected. Coverage includes both native SAMPLE delivery routes, rights/budget gates, UNKNOWN without repurchase, and existing silent-sample/order-audio compatibility. Typecheck, server/preview builds, native database checks and local startup pass. The current snapshot contains 459 source files, 42 contract/Skill files, four font resources, 32 migrations and 77 business/35 management operations. [Evidence](docs/verification/native-sample-source.json) · [Package metadata](docs/delivery/package.json) · [Run and package](docs/delivery/README.md) · [Completed and pending work](docs/guides/STATUS.md).
 
-![Profile-based preset selection in the shared mini-program UI](docs/media/recommendations/walkthrough.gif)
+![Profile-based preset selection, retained original UI recording](docs/media/recommendations/walkthrough.gif)
 
-[Screenshots and recording details](docs/media/recommendations/README.md)
+[Per-shot MP4](docs/media/native-sample/per_shot_ai.mp4) · [Reference-film MP4](docs/media/native-sample/reference_film.mp4) · [Frames, GIFs, hashes and provenance](docs/media/native-sample/README.md). Six new media files are added; all 116 earlier media and frozen design files retain their bytes. These are actual native pipeline outputs with tone audio. Chinese transcription, listening verdicts, generated semantics, rights, identities and prices are synthetic fixtures, not real Chinese voice-quality acceptance.
 
-Products, rankings, availability and model admission used in focused checks are synthetic; PostgreSQL, rendering and local startup are actual native operations. Full suites, fresh mini-program builds/devices, live generation/audio/payment, complete commercial admission, Plus, cloud deployment and long-run stability remain pending. Real service and sale switches remain off; full-product, production and cloud flags remain false. Packaging follows the requested focused delivery approach without requiring comprehensive green tests.
+This delivery follows the requested focused approach without full suites or fresh native mini-program builds/device checks. Live generation, Codex, audio, payment, complete community commercial admission, production isolation, Plus, cloud and long-run acceptance remain pending. Real services and sale switches remain off; full-product, production and cloud flags remain false.
 
 ## Screens and recorded interaction
 
