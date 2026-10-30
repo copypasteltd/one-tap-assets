@@ -37,7 +37,7 @@ export function config(overrides: Partial<Config> = {}): Config {
   const enabled = (key: string): boolean => text(key) === 'true';
   const result: Config = {
     env: env as Config['env'], host: text('HOST', '127.0.0.1'), port: num('PORT', 3100),
-    publicBaseUrl: text('PUBLIC_BASE_URL', 'https://localhost:3100'), projectRoot: root,
+    publicBaseUrl: text('PUBLIC_BASE_URL', 'http://localhost:3100'), projectRoot: root,
     runtimeRoot: inside(root, text('RUNTIME_ROOT', 'runtime')), databaseUrl: text('DATABASE_URL'), dbTls: text('DB_TLS_MODE') === 'verify-full',
     storage: { driver: text('STORAGE_DRIVER', 'local') as 'local' | 'oss', endpoint: text('STORAGE_ENDPOINT'), bucket: text('STORAGE_BUCKET'), region: text('STORAGE_REGION'), keyId: text('STORAGE_ACCESS_KEY_ID'), secret: text('STORAGE_ACCESS_KEY_SECRET') },
     signingKey: text('SIGNING_KEY'), devMode: env !== 'production' && enabled('DEV_MODE'), logLevel: text('LOG_LEVEL', 'info'),
@@ -64,7 +64,10 @@ export function config(overrides: Partial<Config> = {}): Config {
   };
   if (!result.databaseUrl) throw new Error('DATABASE_URL is required; run scripts/dev-setup.ps1');
   if (result.signingKey.length < 32) throw new Error('SIGNING_KEY must be at least 32 characters');
-  if (!result.publicBaseUrl.startsWith('https://')) throw new Error('PUBLIC_BASE_URL must use HTTPS');
+  let publicUrl: URL;
+  try { publicUrl = new URL(result.publicBaseUrl); } catch { throw new Error('PUBLIC_BASE_URL must be a valid HTTP or HTTPS URL'); }
+  if (!['http:', 'https:'].includes(publicUrl.protocol) || publicUrl.username || publicUrl.password || publicUrl.search || publicUrl.hash) throw new Error('PUBLIC_BASE_URL must use HTTP or HTTPS without credentials, query or fragment');
+  if (publicUrl.protocol === 'http:' && (result.tlsCert || result.tlsKey)) throw new Error('HTTP service must leave TLS_CERT_PATH and TLS_KEY_PATH empty');
   if (!['local', 'oss'].includes(result.storage.driver)) throw new Error('Unknown storage driver');
   if (result.env === 'production' && (result.devMode || !result.dbTls || result.storage.driver !== 'oss')) throw new Error('Production requires verified TLS DB and private OSS; development mode is forbidden');
   if (result.env === 'production' && !result.privacyJournal.enabled) throw new Error('Production requires the external privacy journal and restore gate');

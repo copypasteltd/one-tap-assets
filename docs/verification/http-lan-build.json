@@ -1,0 +1,146 @@
+{
+  "verified_at": "2026-10-30T20:38:48.848825+00:00",
+  "host": "native Ubuntu22.04 x86_64",
+  "application_base_commit": "88312df9abab92cc58abacdf6534d47d1958e8c2",
+  "previous_operations_commit": "d8a48d1c20204671e6889ba8a0941b786ec8ba53",
+  "http_source_overlay_sha256": "19f11f6a70d7622c42128873f70f81de081d6eeb1e67664ef429d6feea66b5b3",
+  "source_files": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 70107,
+      "sha256": "079ff9d289c380456051f03ba27fe4e4c9f9fae3dcb136693c8a3e7976ca8ce6"
+    },
+    {
+      "path": "src/api/config.ts",
+      "bytes": 9666,
+      "sha256": "c1e801e1b3d8c33f3274d10ee3e471b3b360095e61425e3345405ec560418c4d"
+    },
+    {
+      "path": "src/api/app.ts",
+      "bytes": 17459,
+      "sha256": "e4c9594499a13a653b01fd73baa215fe2ca48b82b281866460ef2d48cc09cf16"
+    },
+    {
+      "path": "src/shared/client/request-key.ts",
+      "bytes": 714,
+      "sha256": "24c39de6ca3a8770cd0b7cea59239cba3f0fb3d8a11a7abf6b28e4a705d677d7"
+    },
+    {
+      "path": "src/shared/client/browser-clipboard.ts",
+      "bytes": 831,
+      "sha256": "dcecd31763560d72feacf2a8469f98339de4a493a92a23c1336b10fab8a0115f"
+    },
+    {
+      "path": "src/shared/client/support-desk.ts",
+      "bytes": 7998,
+      "sha256": "19290b04bff62b39e83515304557818e7caa30603d5f8a16fbf21cd22a30862c"
+    },
+    {
+      "path": "src/shared/client/review-desk.ts",
+      "bytes": 7569,
+      "sha256": "d049338376f70960adb69065b4227b50b65a5b932ee3f28102d1725eefa88725"
+    },
+    {
+      "path": "src/web/video-workspace.tsx",
+      "bytes": 11760,
+      "sha256": "450b5799c7ad5fa8a118055e955c16e1443625d2cead4d8bfdfd0ed7afdd9f52"
+    },
+    {
+      "path": "src/web/private-preview.tsx",
+      "bytes": 3442,
+      "sha256": "ff0c2d1a5795919e4d025824d7aa0c2d1aa5cfd689af962da417fb18d5280885"
+    },
+    {
+      "path": "src/web/preset-workspace.tsx",
+      "bytes": 16177,
+      "sha256": "86f4e214ffc6ab6fe1d1c260c3aecb2e5d34ec9ec309cdf89708e09d47615ead"
+    },
+    {
+      "path": "src/web/main.tsx",
+      "bytes": 18102,
+      "sha256": "c675a0e6063e9426609147a6ae8861435555c72cb3142659e352d682758a302a"
+    },
+    {
+      "path": "src/web/batch-workspace.tsx",
+      "bytes": 10429,
+      "sha256": "9c154277a0d1a6580ea4d6c835eff804ca4c1cd186a4b209abf4c12ad81e14b7"
+    },
+    {
+      "path": "src/preview/fixtures.ts",
+      "bytes": 23126,
+      "sha256": "7283e5ea8ae60ed839c640b34a18f11919d8a4c819fac713459af12fb1521a7c"
+    },
+    {
+      "path": "tests/unit/http-transport.test.ts",
+      "bytes": 2084,
+      "sha256": "36bfcc3923b6cc64b76e8a3a58ada3c6f81b3d2c4defee8725db5666a349c639"
+    },
+    {
+      "path": "deploy/linux/nginx/one-tap-assets.conf",
+      "bytes": 1225,
+      "sha256": "be8946a25d26c3668c3c1c672ff526564163d1853fdafce29d47f554c344b91e"
+    },
+    {
+      "path": "deploy/linux/public/index.html",
+      "bytes": 2085,
+      "sha256": "a9a2c10f55df759990f5e5771bfe4eb8fc8650e13589eb75258cea9fe080ec81"
+    },
+    {
+      "path": "deploy/linux/install-config.sh",
+      "bytes": 2058,
+      "sha256": "a860e8d9037a03410cd50fd176f3c3fd7dedbff29d8d7875a7ced79d9d1eee23"
+    },
+    {
+      "path": "deploy/linux/healthcheck.sh",
+      "bytes": 1898,
+      "sha256": "b0ecab07d771de4208cef61fcb66e46231e67ac2ab3e70ea14f7d8969ae7fcae"
+    }
+  ],
+  "typecheck": "PASS",
+  "build_server": "PASS",
+  "build_preview": "PASS",
+  "mini_programs": {
+    "mini-alipay": {
+      "status": "PASS",
+      "pages": 17,
+      "api_base": "http://192.168.31.20:38480",
+      "native_host_verified": false
+    },
+    "mini-douyin": {
+      "status": "PASS",
+      "pages": 17,
+      "api_base": "http://192.168.31.20:38480",
+      "native_host_verified": false
+    }
+  },
+  "focused_tests": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "success": true,
+    "assertions": [
+      {
+        "name": "accepts the HTTP LAN origin without enabling an API TLS listener",
+        "status": "passed"
+      },
+      {
+        "name": "rejects non-HTTP base addresses and credentials in the public origin",
+        "status": "passed"
+      },
+      {
+        "name": "cannot accidentally enable API HTTPS for an HTTP deployment",
+        "status": "passed"
+      },
+      {
+        "name": "keeps distinct valid UUID request keys when HTTP provides getRandomValues but no randomUUID",
+        "status": "passed"
+      },
+      {
+        "name": "requires a cryptographic generator when the browser cannot provide either API",
+        "status": "passed"
+      }
+    ]
+  },
+  "full_suite_run": false,
+  "production_admitted": false
+}

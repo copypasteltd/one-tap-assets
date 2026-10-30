@@ -1,3 +1,4 @@
+import {requestKey} from '../shared/client/request-key';
 import React,{useEffect,useRef,useState} from 'react';
 import type {PlusClient} from './client';
 
@@ -17,7 +18,7 @@ export function PrivatePreview({api,deliverableId}:{api:PlusClient;deliverableId
   useEffect(()=>{
     const controller=new AbortController();let url='',started=false;
     const load=()=>{if(started)return;started=true;void previewSlot(controller.signal,async()=>{
-      const link=await api.call('createDownloadLink',{params:{deliverable_id:deliverableId},key:crypto.randomUUID()});
+      const link=await api.call('createDownloadLink',{params:{deliverable_id:deliverableId},key:requestKey()});
       if(controller.signal.aborted)return;const source=new URL(link.url);if(source.origin!==location.origin)throw new Error('Preview origin changed');
       const response=await fetch(source.href,{signal:controller.signal,credentials:'omit',cache:'no-store',redirect:'error',referrerPolicy:'no-referrer'});
       if(!response.ok||!response.headers.get('content-type')?.startsWith('image/png')||Number(response.headers.get('content-length')??0)>30*1024*1024)throw new Error('Preview unavailable');

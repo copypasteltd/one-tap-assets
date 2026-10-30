@@ -1,3 +1,4 @@
+import {requestKey} from './request-key';
 import type {DTO} from '../contracts/types';
 import {ClientError} from './api';
 
@@ -49,7 +50,7 @@ export class SupportDeskClient{
   }
   async process(ticketId:string,body:DTO<'SupportProcessRequest'>):Promise<DTO<'ManagedSupportTicket'>>{
     if(this.waiting&&(this.waiting.kind!=='PROCESS'||this.waiting.ticketId!==ticketId||JSON.stringify(this.waiting.body)!==JSON.stringify(body)))throw new ClientError('MANAGEMENT_ORIGINAL_PENDING','请先确认或继续原工单操作');
-    this.waiting??={kind:'PROCESS',ticketId,body:structuredClone(body),key:`support:${crypto.randomUUID()}`};
+    this.waiting??={kind:'PROCESS',ticketId,body:structuredClone(body),key:`support:${requestKey()}`};
     return this.retry();
   }
   async retry():Promise<DTO<'ManagedSupportTicket'>>{
@@ -63,7 +64,7 @@ export class SupportDeskClient{
   async repair(orderId:string,ticketId:string,body:DTO<'PlatformErrorRepairRequest'>):Promise<DTO<'Revision'>>{
     if(body.ticket_id!==ticketId)throw new ClientError('MANAGEMENT_REQUEST_INVALID','纠错请求必须关联当前原工单');
     if(this.waiting&&(this.waiting.kind!=='REPAIR'||this.waiting.orderId!==orderId||this.waiting.ticketId!==ticketId||JSON.stringify(this.waiting.body)!==JSON.stringify(body)))throw new ClientError('MANAGEMENT_ORIGINAL_PENDING','请先确认或继续原操作');
-    this.waiting??={kind:'REPAIR',orderId,ticketId,body:structuredClone(body),key:`support-repair:${crypto.randomUUID()}`};return this.retryRepair();
+    this.waiting??={kind:'REPAIR',orderId,ticketId,body:structuredClone(body),key:`support-repair:${requestKey()}`};return this.retryRepair();
   }
   async retryRepair():Promise<DTO<'Revision'>>{
     const pending=this.waiting;if(pending?.kind!=='REPAIR')throw new ClientError('MANAGEMENT_ORIGINAL_MISSING','没有待确认的原纠错请求');

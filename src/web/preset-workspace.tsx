@@ -1,3 +1,4 @@
+import {requestKey} from '../shared/client/request-key';
 import React,{useEffect,useRef,useState} from 'react';
 import type {DTO} from '../shared/contracts/types';
 import {ClientError} from '../shared/client/api';
@@ -29,17 +30,17 @@ function problems(form:DTO<'PresetConfig'>,catalog:Catalog):string[]{
 export function PlusPresetWorkspace({api,onBack}:{api:PlusClient;onBack:()=>void}){
   const [catalog,setCatalog]=useState<Catalog>(),[list,setList]=useState<DTO<'PresetDraftList'>>(),[draft,setDraft]=useState<DTO<'PresetDraft'>>(),[form,setForm]=useState<DTO<'PresetConfig'>>(),[tags,setTags]=useState('');
   const [remote,setRemote]=useState<DTO<'PresetDraft'>>(),[busy,setBusy]=useState(false),[error,setError]=useState(''),[message,setMessage]=useState(''),[uncertain,setUncertain]=useState(false);
-  const lock=useRef(false),mounted=useRef(true),saved=useRef(''),nonce=useRef(crypto.randomUUID()),pending=useRef<{key:string;config:DTO<'PresetConfig'>;draft:DTO<'PresetDraft'>|undefined}>();
+  const lock=useRef(false),mounted=useRef(true),saved=useRef(''),nonce=useRef(requestKey()),pending=useRef<{key:string;config:DTO<'PresetConfig'>;draft:DTO<'PresetDraft'>|undefined}>();
   const dirty=!!form&&JSON.stringify(form)!==saved.current;
   async function run(work:()=>Promise<void>){if(lock.current)return;lock.current=true;setBusy(true);setError('');setMessage('');try{await work();}catch(e){if(mounted.current)setError(e instanceof ClientError?e.message:'暂时无法完成，请保留当前内容后重试。');}finally{lock.current=false;if(mounted.current)setBusy(false);}}
-  function useDraft(value:DTO<'PresetDraft'>|undefined,c:Catalog){const config=value?.config??empty(c);setDraft(value);setForm(structuredClone(config));setTags(config.style_tags.join('，'));saved.current=JSON.stringify(config);setRemote(undefined);pending.current=undefined;setUncertain(false);nonce.current=crypto.randomUUID();}
+  function useDraft(value:DTO<'PresetDraft'>|undefined,c:Catalog){const config=value?.config??empty(c);setDraft(value);setForm(structuredClone(config));setTags(config.style_tags.join('，'));saved.current=JSON.stringify(config);setRemote(undefined);pending.current=undefined;setUncertain(false);nonce.current=requestKey();}
   useEffect(()=>{mounted.current=true;void run(async()=>{const [c,b,r,d]=await Promise.all([api.call('listCommunityComponents'),api.call('listVariantBlueprints'),api.call('listCommunityResources'),api.call('listPresetDrafts',{query:{limit:20}})]);if(!mounted.current)return;const next={components:c.items,blueprints:b.items,resources:r.items};setCatalog(next);setList(d);useDraft(undefined,next);});return()=>{mounted.current=false;};},[api]);
   useEffect(()=>{if(!dirty&&!uncertain)return;const protect=(event:BeforeUnloadEvent)=>{event.preventDefault();event.returnValue='';};window.addEventListener('beforeunload',protect);return()=>window.removeEventListener('beforeunload',protect);},[dirty,uncertain]);
   const leave=()=>!uncertain&&(!dirty||window.confirm('这份修改尚未保存。要离开并放弃当前修改吗？'));
   const patch=(value:Partial<DTO<'PresetConfig'>>)=>{if(!busy&&!uncertain)setForm(current=>current&&({...current,...value}));};
   const issues=form&&catalog?problems(form,catalog):[],selected=form&&catalog?catalog.components.filter(x=>form.component_versions.includes(x.component_version_id)):[];
   async function save(){if(!form||!catalog)return;
-    const attempt=pending.current??{key:`preset:${nonce.current}:${crypto.randomUUID()}`,config:{...form,name:form.name.trim(),description:form.description.trim()},draft};pending.current=attempt;
+    const attempt=pending.current??{key:`preset:${nonce.current}:${requestKey()}`,config:{...form,name:form.name.trim(),description:form.description.trim()},draft};pending.current=attempt;
     try{const value=attempt.draft?await api.call('updatePresetDraft',{params:{draft_id:attempt.draft.draft_id},body:{expected_revision:attempt.draft.revision,config:attempt.config},key:attempt.key}):await api.call('createPresetDraft',{body:{config:attempt.config},key:attempt.key});
       if(!mounted.current)return;useDraft(value,catalog);setMessage(`已保存到云端 · 修订 ${value.revision}。回原账号小程序「社区 → 我的草稿」继续样例与发布。`);setList(current=>({items:[value,...(current?.items??[]).filter(x=>x.draft_id!==value.draft_id)],next_cursor:current?.next_cursor??null}));
     }catch(e){if(!mounted.current)return;if(e instanceof ClientError&&e.code==='NETWORK_UNKNOWN'){setUncertain(true);setError('本次保存回执尚未确认。当前内容已保留，请核对原次保存；不要另建重复草稿。');return;}pending.current=undefined;setUncertain(false);if(e instanceof ClientError&&e.code==='REVISION_CONFLICT'&&attempt.draft){setRemote(await api.call('getPresetDraft',{params:{draft_id:attempt.draft.draft_id}}));setError('手机或另一台电脑已更新这份草稿。当前修改已保留，请比较后选择采用的版本。');return;}throw e;}

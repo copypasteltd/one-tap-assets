@@ -1,6 +1,6 @@
 # 源码交付与快速启动 / Source delivery and quick start
 
-**2026-10-31 部署更新 / Deployment update:** native LAN service is available at `https://192.168.31.20:38443/`. [实际部署与运维](../deployment/内网部署与运维-2026-10-31.md) · [配置快照](../../deploy/linux/README.md) · [16 项服务端核对](../verification/lan-server.json) · [8 项跨 LAN 可信 TLS 核对](../verification/lan-client.json)。以下包清单保持其原打包时点和验证范围，不代表生产准入；新部署状态由 LAN 回执说明。
+**2026-10-31 部署更新 / Deployment update:** native LAN service is available at `http://192.168.31.20:38480/`. [实际部署与运维](../deployment/HTTP内网部署与运维-2026-10-31.md) · [配置快照](../../deploy/linux/README.md) · [16 项服务端核对](../verification/http-lan-server.json) · [8 项跨 LAN HTTP 核对](../verification/http-lan-client.json)。以下包清单保持其原打包时点和验证范围，不代表生产准入；新部署状态由 LAN 回执说明。
 
 
 当前主要功能包已增加Plus社区预设编排，入口见[START-HERE](../../START-HERE.md)、[当前状态](../guides/STATUS.md)、[新媒体](../media/plus-presets/README.md)和[准确证据](../verification/plus-preset-source.json)。类型/服务端/Plus/双小程序的实际结果及ZIP/SHA以当前两个交付清单为准；13项作者/Plus原生重点检查，不执行全面测试。以下旧轮启动/媒体记录保留原来源。 / The current package adds preset composition. See current manifests for exact outputs; earlier startup/media records below retain their original scope.

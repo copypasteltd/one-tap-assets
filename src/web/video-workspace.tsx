@@ -1,3 +1,4 @@
+import {requestKey} from '../shared/client/request-key';
 import React,{useEffect,useRef,useState} from 'react';
 import type {DTO} from '../shared/contracts/types';
 import {ClientError} from '../shared/client/api';
@@ -15,7 +16,7 @@ export function PlusVideoWorkspace({api,initialDraft,onBack,onDelivered}:{api:Pl
     try{await work();}catch(e){if(mounted.current)setError(e instanceof ClientError?e.message:'视频草稿暂时无法读取，请刷新原记录');}
     finally{lock.current=false;if(mounted.current)setBusy(false);}}
   async function open(id:string){const value=await api.call('getPlusVideoDraft',{params:{draft_id:id}});
-    const link=await api.call('createDownloadLink',{params:{deliverable_id:value.deliverable_id},key:crypto.randomUUID()});
+    const link=await api.call('createDownloadLink',{params:{deliverable_id:value.deliverable_id},key:requestKey()});
     const url=new URL(link.url);if(url.origin!==location.origin)throw new ClientError('SOURCE_ORIGIN_CHANGED','素材地址已变化，请重新接续');
     if(!mounted.current)return;setDraft(value);setSettings(structuredClone(value.settings));setSrc(url.href);setCursor(value.settings.trim.start_frame);}
   async function refresh(){const value=await api.call('listPlusVideoDrafts',{query:{limit:20}});if(mounted.current){setItems(value.items);setNext(value.next_cursor);}}

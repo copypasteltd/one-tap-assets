@@ -1,5 +1,16 @@
 # 更新记录 / Changelog
 
+## 2026-10-31 — HTTP-only deployment / 改为纯 HTTP
+
+- 按用户明确约束移除 nginx HTTPS38443监听、HTTP升级跳转、网页证书入口及HSTS/CSP强制升级。唯一对外服务地址为 `http://192.168.31.20:38480`；内部API38410与数据库35432仍只监听本机。
+- 后端允许合法HTTP基址，HTTP部署拒绝意外配置API TLS证书。Plus与管理端使用普通HTTP可用的随机请求标识，复制操作兼容无Clipboard API的浏览器。真实收费和生成开关保持关闭。
+- 五项HTTP专项、类型检查与Linux服务端/网页/双小程序构建完成；双端API地址改为HTTP。实际页面、管理鉴权、无HTTPS监听和浏览器操作以本轮独立回执为准，不执行全面测试。
+- 同步明文配置与凭据说明、中英README、部署模板、截图/MP4/WebM/GIF及工作约定。此前HTTPS记录保留为已停用历史，不作为当前部署方案。
+- The service now exposes HTTP38480 only. No TLS listener, upgrade redirect, HSTS or CSP upgrade is configured for the web entry. HTTP-compatible request IDs and user-initiated clipboard fallback are included; live sales remain disabled.
+
+[HTTP部署细则](docs/deployment/HTTP内网部署与运维-2026-10-31.md) · [服务器回执](docs/verification/http-lan-server.json) · [HTTP媒体](docs/media/http-deployment/README.md)
+
+
 ## 2026-10-31 — Native LAN deployment / 原生内网部署
 
 - Deployed application source `88312df` to `192.168.31.20` with verified source ZIP SHA256; installed project-owned Node 24.22.1, pnpm 10.13.1, FFmpeg and signed-PGDG PostgreSQL 17.11 without containers or global runtime upgrades.

@@ -1,0 +1,53 @@
+{
+  "verified_at": "2026-10-30T20:37:28.892Z",
+  "origin": "http://192.168.31.20:38480",
+  "browser": "native Microsoft Edge; ordinary HTTP; no certificate overrides or secure-origin flags",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200,
+      "secure_context": false,
+      "random_uuid": false,
+      "get_random_values": true
+    },
+    {
+      "path": "/plus/",
+      "status": 200,
+      "secure_context": false,
+      "random_uuid": false,
+      "get_random_values": true
+    },
+    {
+      "path": "/preview/",
+      "status": 200,
+      "secure_context": false,
+      "random_uuid": false,
+      "get_random_values": true
+    },
+    {
+      "path": "/ops/metrics",
+      "status": 200,
+      "secure_context": false,
+      "random_uuid": false,
+      "get_random_values": true
+    }
+  ],
+  "request_keys": {
+    "used_deployed_module": true,
+    "generated": 128,
+    "unique": 128,
+    "all_uuid_v4": true,
+    "native_random_uuid_available": false
+  },
+  "clipboard": {
+    "native_success": true,
+    "selected_text_length": 41,
+    "synthetic_preview_only": true
+  },
+  "page_errors": [],
+  "https_requests": [],
+  "owned_tabs_closed": true,
+  "owned_browser_closed": true,
+  "real_native_host_verified": false,
+  "production_admitted": false
+}

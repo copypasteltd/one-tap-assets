@@ -1,3 +1,4 @@
+import {copyBrowserText} from '../shared/client/browser-clipboard';
 import source from '../../assets/presets/presets.v3.1.json';
 import {endpoints} from '../shared/contracts/endpoints.generated';
 import type {Transport,WireResponse} from '../shared/client/api';
@@ -194,7 +195,7 @@ export const previewHost:HostPort={platform:'alipay',transport,
     await new Promise(done=>setTimeout(done,120));
     if(path==='demo_image_detail'&&attempt===1){const {ClientError}=await import('../shared/client/api');throw new ClientError('ALBUM_PERMISSION_DENIED','Synthetic permission rejection');}
     return path==='demo_video'&&attempt===1?'UNKNOWN':'SAVED';
-  },copy:async text=>{await navigator.clipboard.writeText(text);}};
+  },copy:async text=>{await copyBrowserText(text);}};
 export function attachPreview(client:{attach(session:DTO<'Session'>):void;remember(ids:Record<string,string>):void}){
   client.attach(session as DTO<'Session'>);client.remember({productId:'demo_product',analysisId:'demo_analysis',planId:'demo_plan',orderId:'demo_order'});
   if(new URLSearchParams(location.search).get('scenario')==='draft-resume'){

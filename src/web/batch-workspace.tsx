@@ -1,3 +1,4 @@
+import {requestKey} from '../shared/client/request-key';
 import React,{useEffect,useRef,useState} from 'react';
 import type {DTO} from '../shared/contracts/types';
 import {ClientError} from '../shared/client/api';
@@ -41,7 +42,7 @@ export function PlusBatchWorkspace({api,onDelivered}:{api:PlusClient;onDelivered
       {drafts&&!drafts.items.length&&<p>先从「单图编辑」打开已交付素材，保存图片编辑草稿，再来批量选择。</p>}
       {drafts?.next_cursor&&<button disabled={busy} onClick={()=>void run(async()=>{const next=await api.call('listPlusEditDrafts',{query:{limit:20,cursor:drafts.next_cursor!}});if(mounted.current)setDrafts({...next,items:[...drafts.items,...next.items]});})}>更多图片草稿</button>}
       <div className='plus-batch-submit'><strong>已选择 {choices.length} / 10 份</strong><span>每件独立计价，不合并扣款</span><button className='plus-primary' disabled={busy||!allowed||!ready} onClick={()=>void run(async()=>{
-        if(!intent.current)intent.current={request_key:crypto.randomUUID(),items:choices.map(choice=>{const style=styles.find(s=>styleKey(s)===choice.variantKey)!;return {draft_id:choice.draft.draft_id,expected_revision:choice.draft.revision,variant_id:style.variant_id,variant_version:style.variant_version};})};
+        if(!intent.current)intent.current={request_key:requestKey(),items:choices.map(choice=>{const style=styles.find(s=>styleKey(s)===choice.variantKey)!;return {draft_id:choice.draft.draft_id,expected_revision:choice.draft.revision,variant_id:style.variant_id,variant_version:style.variant_version};})};
         const value=await api.call('createPlusRenderBatch',{body:intent.current});if(!mounted.current)return;intent.current=undefined;setBatch(value);
         const h=await api.call('listPlusRenderBatches',{query:{limit:10}});if(mounted.current)setHistory(h);
       })}>整理这批独立制作清单</button></div>

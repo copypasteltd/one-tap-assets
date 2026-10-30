@@ -27,8 +27,9 @@ for unit in one-tap-assets-db one-tap-assets-api one-tap-assets-worker one-tap-a
   printf 'active_and_enabled=%s\n' "$unit"
 done
 for path in / /healthz /readyz /plus/ /preview/ /ops/support /ops/review /ops/metrics; do
-  status=$(curl --cacert /opt/one-tap-assets/public/lan-ca.crt --silent --show-error --max-time 10 --output /dev/null --write-out '%{http_code}' "$PUBLIC_BASE_URL$path")
+  status=$(curl --silent --show-error --max-time 10 --output /dev/null --write-out '%{http_code}' "$PUBLIC_BASE_URL$path")
   test "$status" = 200
   printf 'http=%s path=%s\n' "$status" "$path"
 done
+if ss -H -ltn 'sport = :38443' | read -r unused; then printf '%s\n' 'Unexpected HTTPS listener on 38443' >&2; exit 1; fi
 printf '%s\n' 'focused_native_lan_healthcheck=PASS'

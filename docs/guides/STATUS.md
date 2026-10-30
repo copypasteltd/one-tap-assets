@@ -1,25 +1,42 @@
 # 当前交付与功能状态 / Delivery and functional status
 
+## 本轮纯 HTTP 收口 / HTTP-only correction
+
+| 编号 | 本轮已完成 | 结果 |
+| --- | --- | --- |
+| H01 | 服务入口 | HTTP38480直接访问；38443关闭，删除HTTPS跳转及网页证书入口 |
+| H02 | 后端和浏览器 | HTTP基址、禁止HTTP配置误开TLS、无HSTS/CSP升级；随机键和复制兼容普通HTTP |
+| H03 | 关键构建 | 5专项、类型、Linux服务端/网页/双小程序PASS；双端各17页、API均HTTP |
+| H04 | 实际访问 | 服务端16项、跨LAN8项、4页面；128个部署键及原生复制成功，无HTTPS请求 |
+| H05 | 配置与说明 | /root/cfg凭据说明同步HTTP；中英README、模板、证据和新截图/录屏/GIF |
+
+| 编号 | 待完成 | 条件 |
+| --- | --- | --- |
+| H06 | 正式域名 | 用户后续提供，继续按要求配置HTTP基址/跨域/回调及双端API |
+| H07 | 真实服务与验收 | 平台/商户/模型/Codex隔离准入、真机、OSS及恢复；目前真实生成和支付关闭 |
+
+来源：[HTTP部署](../deployment/HTTP内网部署与运维-2026-10-31.md)、[构建与5专项](../verification/http-lan-build.json)、[浏览器](../verification/http-lan-browser.json)。不执行全面测试，已关闭本轮所属浏览器；下方前轮历史记录不能用于重新启用HTTPS。
+
 ## 2026-10-31 内网部署 / LAN deployment
 
 | 编号 | 本轮完成 | 结果 |
 | --- | --- | --- |
 | D01 | 独立原生环境 | Node24 / pnpm10 / FFmpeg8.1 / PostgreSQL17；原有业务保留 |
-| D02 | 高位入口 | HTTPS38443、HTTP38480跳转；内部API38410/DB35432仅本机 |
+| D02 | 高位入口 | 仅HTTP38480，38443不监听、不升级跳转；内部API38410/DB35432仅本机 |
 | D03 | 构建与初始化 | Linux四目标；40迁移、10官方预设、14变体、19Skill/14bundle；全部禁售 |
 | D04 | 常驻与备份 | 四应用进程、专用DB、备份timer已自启；首份DB备份已生成 |
 | D05 | 明文凭据 | 服务器/root/cfg/one-tap-assets/credentials.txt，root/0600；不进入Git |
-| D06 | 关键核对与媒体 | 服务端16项/工作站可信TLS8项；4页面无异常，4截图与MP4/WebM/GIF |
+| D06 | 关键核对与媒体 | 服务端16项/工作站HTTP8项；4页面无异常，4截图与MP4/WebM/GIF |
 | D07 | 交付维护 | 中英README、部署运维、配置快照与健康检查、正常提交推送 |
 
 | 编号 | 待完成 | 条件 |
 | --- | --- | --- |
-| L01 | 正式域名切换 | 用户提供域名后改公开基址、回调、跨域、证书和双端API |
+| L01 | 正式域名切换 | 用户提供域名后改公开基址、回调、跨域和双端API，服务继续HTTP |
 | L02 | 实际身份与商户 | 平台AppID/密钥、商户、原生宿主与真机验证 |
 | L03 | 模型及Codex服务 | 专用凭据/费率/预算、原生隔离启动器、实际四阶段执行与双复核准入 |
 | L04 | 生产运行与恢复 | 私有OSS、素材及日志异机备份、生产质量/容量与恢复验收 |
 
-来源：[部署细则](../deployment/内网部署与运维-2026-10-31.md)、[服务端](../verification/lan-server.json)、[跨LAN](../verification/lan-client.json)、[浏览器](../verification/lan-browser.json)。LAN deployment已完成；公网正式部署、full_product_verified与production_admitted仍未成立。不执行全面测试；所属浏览器已关闭，不调用Docker/WSL/虚拟化。
+来源：[部署细则](../deployment/HTTP内网部署与运维-2026-10-31.md)、[服务端](../verification/http-lan-server.json)、[跨LAN](../verification/http-lan-client.json)、[浏览器](../verification/http-lan-browser.json)。LAN deployment已完成；公网正式部署、full_product_verified与production_admitted仍未成立。不执行全面测试；所属浏览器已关闭，不调用Docker/WSL/虚拟化。
 
 ## 上一轮源码功能收口记录 / Prior source delivery scope
 

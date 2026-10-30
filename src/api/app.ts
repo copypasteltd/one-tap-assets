@@ -40,7 +40,7 @@ export async function buildApp(deps: AppDependencies): Promise<FastifyInstance> 
     bodyLimit: 10_000_000, requestTimeout: 30000, connectionTimeout: 10000,
     genReqId: () => id('trace'), logger: cfg.env === 'test' ? false : { level: cfg.logLevel, serializers: { req: r => ({ method: r.method, route: r.routeOptions?.url }), res: r => ({ status: r.statusCode }) }, redact: ['req.headers.authorization', 'req.body', 'res.headers.location'] } });
   await app.register(cors, { origin: cfg.webOrigins, credentials: false, allowedHeaders: ['Content-Type', 'Authorization', 'Idempotency-Key', 'X-Upload-Token', 'X-Host-OS'], methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'] });
-  await app.register(helmet, { contentSecurityPolicy: { directives: { defaultSrc: ["'self'"], imgSrc: ["'self'", 'data:', 'blob:'], mediaSrc: ["'self'", 'blob:'], styleSrc: ["'self'", "'unsafe-inline'"], connectSrc: ["'self'", ...cfg.webOrigins] } } });
+  await app.register(helmet, { ...(!cfg.publicBaseUrl.startsWith('https://') ? { hsts: false } : {}), contentSecurityPolicy: { directives: { defaultSrc: ["'self'"], imgSrc: ["'self'", 'data:', 'blob:'], mediaSrc: ["'self'", 'blob:'], styleSrc: ["'self'", "'unsafe-inline'"], connectSrc: ["'self'", ...cfg.webOrigins], upgradeInsecureRequests: cfg.publicBaseUrl.startsWith('https://') ? [] : null } } });
   await app.register(rateLimit, requestRateLimit(pool,cfg));
   await app.register(multipart, { limits: { files: 1, fields: 0, parts: 1, fileSize: 10000000, fieldNameSize: 100, headerPairs: 20 }, throwFileSizeLimit: true });
   app.addContentTypeParser('application/octet-stream', { parseAs: 'buffer', bodyLimit: 10_000_000 }, (_req, body, done) => done(null, body));

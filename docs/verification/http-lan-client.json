@@ -1,0 +1,72 @@
+{
+  "origin": "http://192.168.31.20:38480",
+  "tested_from": "Windows workstation across LAN",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200,
+      "redirect": false,
+      "hsts": false,
+      "csp_upgrade_insecure_requests": false,
+      "bytes": 2085
+    },
+    {
+      "path": "/healthz",
+      "status": 200,
+      "redirect": false,
+      "hsts": false,
+      "csp_upgrade_insecure_requests": false,
+      "bytes": 58
+    },
+    {
+      "path": "/readyz",
+      "status": 200,
+      "redirect": false,
+      "hsts": false,
+      "csp_upgrade_insecure_requests": false,
+      "bytes": 18
+    },
+    {
+      "path": "/plus/",
+      "status": 200,
+      "redirect": false,
+      "hsts": false,
+      "csp_upgrade_insecure_requests": false,
+      "bytes": 666
+    },
+    {
+      "path": "/preview/",
+      "status": 200,
+      "redirect": false,
+      "hsts": false,
+      "csp_upgrade_insecure_requests": false,
+      "bytes": 675
+    },
+    {
+      "path": "/ops/support",
+      "status": 200,
+      "redirect": false,
+      "hsts": false,
+      "csp_upgrade_insecure_requests": false,
+      "bytes": 696
+    },
+    {
+      "path": "/ops/review",
+      "status": 200,
+      "redirect": false,
+      "hsts": false,
+      "csp_upgrade_insecure_requests": false,
+      "bytes": 623
+    },
+    {
+      "path": "/ops/metrics",
+      "status": 200,
+      "redirect": false,
+      "hsts": false,
+      "csp_upgrade_insecure_requests": false,
+      "bytes": 535
+    }
+  ],
+  "https_38443_reachable": false,
+  "https_overrides_or_certificates_used": false
+}

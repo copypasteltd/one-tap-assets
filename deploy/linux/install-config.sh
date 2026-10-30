@@ -6,7 +6,6 @@ test "$(id -u)" = 0
 source_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
 base=/opt/one-tap-assets
 test -s /root/cfg/one-tap-assets/app.env
-test -s /root/cfg/one-tap-assets/tls/lan-chain.crt
 test -f /var/lib/one-tap-assets/postgres/PG_VERSION
 test "$(cat /var/lib/one-tap-assets/postgres/PG_VERSION)" = 17
 test -x "$base/tools/node/bin/node"

@@ -1,6 +1,6 @@
 # 一品成片：交付使用入口 / Start here
 
-**内网已部署 / LAN service is live:** [首页 / Home](https://192.168.31.20:38443/), [Plus](https://192.168.31.20:38443/plus/), [演示 / Replay](https://192.168.31.20:38443/preview/)。高位端口 HTTPS 38443 / HTTP 38480；凭据见服务器 `/root/cfg/one-tap-assets/credentials.txt`。真实小程序身份、模型、商户和隔离准入仍待；先读[部署和使用边界](docs/deployment/内网部署与运维-2026-10-31.md)。 / LAN access is available; native identity, real providers/payments and production admission still require configuration.
+**内网已部署 / LAN service is live:** [首页 / Home](http://192.168.31.20:38480/), [Plus](http://192.168.31.20:38480/plus/), [演示 / Replay](http://192.168.31.20:38480/preview/)。高位端口仅 HTTP 38480（38443 已关闭）；凭据见服务器 `/root/cfg/one-tap-assets/credentials.txt`。真实小程序身份、模型、商户和隔离准入仍待；先读[部署和使用边界](docs/deployment/HTTP内网部署与运维-2026-10-31.md)。 / LAN access is available; native identity, real providers/payments and production admission still require configuration.
 
 
 主入口是**支付宝小程序、抖音小程序**；Plus网页承担图片深化、视频选段/裁切/定时字幕、原声保留/静音、图片批量和社区预设编排。普通用户拍照后由多模态识别商品，再选择社区方案，确认素材清单和费用，制作完成后领取并保存到相册。官方提供10套风格、14个执行变体。

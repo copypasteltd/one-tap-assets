@@ -1,3 +1,4 @@
+import {requestKey} from './request-key';
 import type {DTO} from '../contracts/types';
 import {ClientError} from './api';
 
@@ -53,8 +54,8 @@ export class ReviewDeskClient{
     if(this.waiting&&(this.waiting.operation!==next.operation||this.waiting.publicationId!==next.publicationId||JSON.stringify(this.waiting.body)!==JSON.stringify(next.body)))
       throw new ClientError('MANAGEMENT_ORIGINAL_PENDING','请先确认原申请的操作结果');this.waiting??=next;
   }
-  async decide(publicationId:string,body:DTO<'ReviewDecisionRequest'>){this.retain({operation:'DECISION',publicationId,body:structuredClone(body),key:`review:${crypto.randomUUID()}`});return this.retry();}
-  async publish(publicationId:string,body:DTO<'ManagementActionRequest'>){this.retain({operation:'PUBLISH',publicationId,body:structuredClone(body),key:`publish:${crypto.randomUUID()}`});return this.retry();}
+  async decide(publicationId:string,body:DTO<'ReviewDecisionRequest'>){this.retain({operation:'DECISION',publicationId,body:structuredClone(body),key:`review:${requestKey()}`});return this.retry();}
+  async publish(publicationId:string,body:DTO<'ManagementActionRequest'>){this.retain({operation:'PUBLISH',publicationId,body:structuredClone(body),key:`publish:${requestKey()}`});return this.retry();}
   async retry():Promise<DTO<'Publication'>>{
     const original=this.waiting;if(!original)throw new ClientError('MANAGEMENT_ORIGINAL_MISSING','当前没有待确认的原操作');
     try{
