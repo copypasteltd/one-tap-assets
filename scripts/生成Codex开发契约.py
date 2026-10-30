@@ -13,6 +13,7 @@ import sys
 from pathlib import Path
 from usage_insights_contracts import extend_usage_insights_contract, extend_usage_insights_data, usage_insights_catalog
 from recommendation_event_contracts import extend_recommendation_event_contract, extend_recommendation_event_data, recommendation_event_catalog
+from plus_contracts import extend_plus_contract, extend_plus_data, plus_catalog
 
 sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
@@ -778,7 +779,8 @@ def main() -> None:
             "pattern": "^[A-Za-z0-9._:-]+$"}
     extend_usage_insights_contract(api, admin, business_endpoints, admin_endpoints)
     extend_recommendation_event_contract(api, admin, business_endpoints)
-    entities = read(OLD / "data-model.json"); extend_data(entities); extend_usage_insights_data(entities); extend_recommendation_event_data(entities)
+    extend_plus_contract(api, admin, business_endpoints)
+    entities = read(OLD / "data-model.json"); extend_data(entities); extend_usage_insights_data(entities); extend_recommendation_event_data(entities); extend_plus_data(entities)
     save("state-machines.json", machines); save("data-model.json", entities)
     save("work-packages.json", extend_work(reqs, dmap, pages))
     save("contracts/openapi.json", api); save("contracts/management-openapi.json", admin)
@@ -843,6 +845,7 @@ def main() -> None:
     catalog += "\n".join(f"| {e['method']} {e['path']} | {e['operation_id']} | {e['permission']} |" for e in admin_endpoints["endpoints"] if e["operation_id"] not in legacy_admin_ids)
     catalog += usage_insights_catalog(business_endpoints, admin_endpoints)
     catalog += recommendation_event_catalog()
+    catalog += plus_catalog(business_endpoints)
     write("contracts/endpoint-catalog.md", catalog)
     write("README.md", """# 一品成片 · 开发契约 v1.1
 

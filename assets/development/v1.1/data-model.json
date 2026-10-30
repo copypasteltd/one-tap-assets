@@ -1810,6 +1810,75 @@
       ],
       "invariant": "Immutable collection start; pre-collection windows remain null; deployment start does not prove every client is instrumented.",
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "plus_links",
+      "primary_key": "id",
+      "scope": "global",
+      "fields": [
+        "id",
+        "code_hash",
+        "poll_key_hash",
+        "state",
+        "expires_at",
+        "tenant_id",
+        "owner_id",
+        "identity_id",
+        "session_id"
+      ],
+      "invariant": "Explicit native confirmation only; 5-minute challenge; hashed secrets; retries preserve original session and expiry.",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "plus_sessions",
+      "primary_key": "id",
+      "scope": "tenant",
+      "fields": [
+        "id",
+        "tenant_id",
+        "owner_id",
+        "identity_id",
+        "token_hash",
+        "created_at",
+        "expires_at",
+        "revoked_at"
+      ],
+      "invariant": "One-hour independent read/edit capability; no native payment/refund or identity merge; revocation checked inside each transaction and signed download.",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "plus_edit_drafts",
+      "primary_key": "id",
+      "scope": "tenant",
+      "fields": [
+        "id",
+        "tenant_id",
+        "owner_id",
+        "order_id",
+        "product_id",
+        "manifest_id",
+        "deliverable_id",
+        "revision",
+        "data",
+        "created_at",
+        "updated_at"
+      ],
+      "invariant": "Owned paid current image; separate draft/revision; user-supplied facts remain unverified; deletion physically erases draft and all saved versions.",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "plus_edit_versions",
+      "primary_key": "draft_id",
+      "scope": "tenant",
+      "fields": [
+        "draft_id",
+        "revision",
+        "settings_hash",
+        "settings",
+        "created_at"
+      ],
+      "invariant": "Append-only edit metadata versions, independent of immutable paid delivery; erased with source deletion.",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
     }
   ],
   "critical_composite_relations": [

@@ -12452,6 +12452,573 @@
           "trace_id"
         ],
         "additionalProperties": false
+      },
+      "PlusLinkCreateRequest": {
+        "type": "object",
+        "properties": {},
+        "required": [],
+        "additionalProperties": false
+      },
+      "PlusLink": {
+        "type": "object",
+        "properties": {
+          "link_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "user_code": {
+            "type": "string",
+            "pattern": "^[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{8}$"
+          },
+          "poll_key": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{43}$"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          },
+          "poll_interval_seconds": {
+            "const": 3
+          }
+        },
+        "required": [
+          "link_id",
+          "user_code",
+          "poll_key",
+          "expires_at",
+          "poll_interval_seconds"
+        ],
+        "additionalProperties": false
+      },
+      "PlusLinkInspectRequest": {
+        "type": "object",
+        "properties": {
+          "user_code": {
+            "type": "string",
+            "pattern": "^[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{8}$"
+          }
+        },
+        "required": [
+          "user_code"
+        ],
+        "additionalProperties": false
+      },
+      "PlusLinkDecisionRequest": {
+        "type": "object",
+        "properties": {
+          "user_code": {
+            "type": "string",
+            "pattern": "^[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{8}$"
+          },
+          "decision": {
+            "type": "string",
+            "enum": [
+              "APPROVE",
+              "DENY"
+            ]
+          }
+        },
+        "required": [
+          "user_code",
+          "decision"
+        ],
+        "additionalProperties": false
+      },
+      "PlusLinkApproval": {
+        "type": "object",
+        "properties": {
+          "link_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "user_code": {
+            "type": "string",
+            "pattern": "^[23456789ABCDEFGHJKLMNPQRSTUVWXYZ]{8}$"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "APPROVED",
+              "DENIED"
+            ]
+          },
+          "access": {
+            "const": "OWN_PROJECTS_AND_EDIT_DRAFTS"
+          }
+        },
+        "required": [
+          "link_id",
+          "user_code",
+          "expires_at",
+          "state",
+          "access"
+        ],
+        "additionalProperties": false
+      },
+      "PlusLinkPollRequest": {
+        "type": "object",
+        "properties": {
+          "poll_key": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{43}$"
+          }
+        },
+        "required": [
+          "poll_key"
+        ],
+        "additionalProperties": false
+      },
+      "PlusSessionInfo": {
+        "type": "object",
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "platform": {
+            "$ref": "#/components/schemas/Platform"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "REVOKED",
+              "EXPIRED"
+            ]
+          }
+        },
+        "required": [
+          "session_id",
+          "platform",
+          "created_at",
+          "expires_at",
+          "state"
+        ],
+        "additionalProperties": false
+      },
+      "PlusBrowserSession": {
+        "type": "object",
+        "properties": {
+          "access_token": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          },
+          "token_type": {
+            "const": "Bearer"
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40,
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$"
+          },
+          "user_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "connection": {
+            "$ref": "#/components/schemas/PlusSessionInfo"
+          }
+        },
+        "required": [
+          "access_token",
+          "token_type",
+          "expires_at",
+          "user_id",
+          "connection"
+        ],
+        "additionalProperties": false
+      },
+      "PlusLinkStatus": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "APPROVED",
+              "DENIED"
+            ]
+          },
+          "session": {
+            "$ref": "#/components/schemas/PlusBrowserSession"
+          }
+        },
+        "required": [
+          "state"
+        ],
+        "additionalProperties": false
+      },
+      "PlusSessionList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "maxItems": 5,
+            "items": {
+              "$ref": "#/components/schemas/PlusSessionInfo"
+            }
+          },
+          "next_cursor": {
+            "type": "null"
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "additionalProperties": false
+      },
+      "PlusEditSettings": {
+        "type": "object",
+        "properties": {
+          "crop": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "y": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "width": {
+                "type": "number",
+                "minimum": 0.01,
+                "maximum": 1
+              },
+              "height": {
+                "type": "number",
+                "minimum": 0.01,
+                "maximum": 1
+              }
+            },
+            "required": [
+              "x",
+              "y",
+              "width",
+              "height"
+            ],
+            "additionalProperties": false
+          },
+          "canvas": {
+            "type": "object",
+            "properties": {
+              "width": {
+                "type": "integer",
+                "minimum": 256,
+                "maximum": 3840
+              },
+              "height": {
+                "type": "integer",
+                "minimum": 256,
+                "maximum": 3840
+              }
+            },
+            "required": [
+              "width",
+              "height"
+            ],
+            "additionalProperties": false
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 80
+          },
+          "brand": {
+            "type": "string",
+            "maxLength": 60
+          },
+          "facts": {
+            "type": "array",
+            "maxItems": 8,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            }
+          }
+        },
+        "required": [
+          "crop",
+          "canvas",
+          "title",
+          "brand",
+          "facts"
+        ],
+        "additionalProperties": false
+      },
+      "PlusEditCreateRequest": {
+        "type": "object",
+        "properties": {
+          "order_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "deliverable_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          }
+        },
+        "required": [
+          "order_id",
+          "deliverable_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusEditSaveRequest": {
+        "type": "object",
+        "properties": {
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "settings": {
+            "$ref": "#/components/schemas/PlusEditSettings"
+          }
+        },
+        "required": [
+          "expected_revision",
+          "settings"
+        ],
+        "additionalProperties": false
+      },
+      "PlusEditDraft": {
+        "type": "object",
+        "properties": {
+          "draft_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "order_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "product_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "manifest_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "manifest_revision": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "deliverable_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "source_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 2147483647
+          },
+          "settings": {
+            "$ref": "#/components/schemas/PlusEditSettings"
+          },
+          "fact_status": {
+            "const": "USER_PROVIDED_UNVERIFIED"
+          },
+          "state": {
+            "const": "DRAFT"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          }
+        },
+        "required": [
+          "draft_id",
+          "order_id",
+          "product_id",
+          "manifest_id",
+          "manifest_revision",
+          "deliverable_id",
+          "source_sha256",
+          "revision",
+          "settings",
+          "fact_status",
+          "state",
+          "created_at",
+          "updated_at"
+        ],
+        "additionalProperties": false
+      },
+      "PlusEditList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "$ref": "#/components/schemas/PlusEditDraft"
+            }
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 4096
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "items",
+          "next_cursor"
+        ],
+        "additionalProperties": false
+      },
+      "PlusLinkResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusLink"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusLinkApprovalResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusLinkApproval"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusLinkStatusResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusLinkStatus"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusSessionInfoResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusSessionInfo"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusSessionListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusSessionList"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusEditDraftResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusEditDraft"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PlusEditListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PlusEditList"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
       }
     }
   },

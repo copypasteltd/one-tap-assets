@@ -1,0 +1,11 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/unit/plus-client.test.ts (3 tests) 9ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  20:39:55
+   Duration  2.63s (import 41%, transform 31%, worker 27%, tests 1%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/plus-workspace-2026-10-30T12-39-36-616Z-924759df/api.json

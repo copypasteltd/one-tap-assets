@@ -1,5 +1,15 @@
 # One Tap Assets · 一品成片
 
+2026-10-30 delivery update: **Plus now supports explicit phone approval and independent image editing drafts.** Open same-origin HTTPS `/plus/`, generate a five-minute code and approve it in the signed-in mini-program. The one-hour computer grant reads owned products, orders and delivered packs; edit crop, output dimensions, title, optional brand and unverified facts, save a separate revision and resume it. Revoke from the phone or this browser; existing Plus download links then fail. Credentials stay in browser memory. Payments and refunds remain in the original mini-program.
+
+![Actual Plus browser walkthrough](docs/media/plus-workspace/walkthrough.gif)
+
+[Screenshots, MP4/WebM/GIF and provenance](docs/media/plus-workspace/README.md) · [Detailed design, API and limits](docs/实施/Plus手机确认与独立编辑草稿-v1.0.md) · [Current status](docs/guides/STATUS.md) · [Exact evidence](docs/verification/plus-workspace-source.json).
+
+507 source files, 35 migrations, 91 business / 38 management operations; 288 schemas / 79 logical entities. Three client and seven native API checks, type/server/preview builds and native startup passed. No full test suite, mini-program rebuild or device acceptance was run. Computer capture uses actual local HTTPS, PostgreSQL and PNG bytes with synthetic identity/payment/QC metadata; the mini-program UI uses synthetic replies. Final rendering, separate purchase and reviews, subtitles, batches, complex preset authoring, permanent cross-platform binding and real service/cloud acceptance remain pending. All 58 requirements remain in scope; production, cloud and full-product claims remain false.
+
+以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
+
 [English](README.en.md) · [中文](README.md) · [Docs](docs/README.md) · [Quick start](docs/guides/QUICKSTART.md) · [Status](docs/guides/STATUS.md) · [Changelog](CHANGELOG.md)
 
 One Tap Assets turns product photos into a coordinated image, short-video and copy pack. **Alipay and Douyin mini-programs are the primary clients**. Multimodal analysis establishes visible features without a product form. Buyers select a community preset, confirm the pack and price, explicitly pay and receive downloadable assets after cloud production. The future Plus web client supports deeper editing.

@@ -21,6 +21,8 @@ import { getPreview } from '../modules/previews.js';
 import {recommendPresets} from '../modules/recommendations.js';
 import {recordRecommendationEvent} from '../modules/recommendation-events.js';
 import {getUsageFeedback,setUsageFeedback} from '../modules/usage-feedback.js';
+import * as plus from '../modules/plus-access.js';
+import * as edits from '../modules/plus-edits.js';
 
 export interface BusinessContext { db: PoolClient; cfg: Config; principal: Principal | null; params: Record<string, string>; query: PageQuery; body: unknown }
 export type BusinessHandler = (ctx: BusinessContext) => Promise<unknown>;
@@ -28,6 +30,17 @@ const principal = (ctx: BusinessContext): Principal => { if (!ctx.principal) thr
 const param = (ctx: BusinessContext, name: string): string => ctx.params[name] ?? notFound();
 
 export const businessHandlers: Record<string, BusinessHandler> = {
+  createPlusLink:async c=>plus.createPlusLink(c.db,c.cfg),
+  inspectPlusLink:async c=>plus.inspectPlusLink(c.db,c.cfg,principal(c),validate('PlusLinkInspectRequest',c.body)),
+  decidePlusLink:async c=>plus.decidePlusLink(c.db,c.cfg,principal(c),validate('PlusLinkDecisionRequest',c.body)),
+  pollPlusLink:async c=>plus.pollPlusLink(c.db,c.cfg,param(c,'link_id'),validate('PlusLinkPollRequest',c.body)),
+  getPlusSession:async c=>plus.getPlusSession(c.db,principal(c)),
+  listPlusSessions:async c=>plus.listPlusSessions(c.db,principal(c)),
+  revokePlusSession:async c=>plus.revokePlusSession(c.db,principal(c),param(c,'plus_session_id')),
+  createPlusEditDraft:async c=>edits.createPlusEditDraft(c.db,principal(c),validate('PlusEditCreateRequest',c.body)),
+  getPlusEditDraft:async c=>edits.getPlusEditDraft(c.db,principal(c),param(c,'draft_id')),
+  savePlusEditDraft:async c=>edits.savePlusEditDraft(c.db,principal(c),param(c,'draft_id'),validate('PlusEditSaveRequest',c.body)),
+  listPlusEditDrafts:async c=>edits.listPlusEditDrafts(c.db,c.cfg,principal(c),c.query),
   getUsageFeedback:async c=>getUsageFeedback(c.db,principal(c),param(c,'order_id')),
   setUsageFeedback:async c=>setUsageFeedback(c.db,principal(c),param(c,'order_id'),validate('UsageFeedbackRequest',c.body)),
   listPresetLicenses: async c => licenses(c.db, c.cfg, c.query),

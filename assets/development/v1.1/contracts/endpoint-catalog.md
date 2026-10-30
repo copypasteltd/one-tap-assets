@@ -161,3 +161,22 @@
 | POST /products/{product_id}/recommendation-events | recordRecommendationEvent | RecommendationEventRequest → RecommendationEventReceipt | 本人当前商品及签名推荐 |
 
 GET 推荐保持只读。可见比例至少 50% 且连续停留 500ms 后报曝光；点击独立，不推断曝光或转化率。服务端自然键去重；客户端体验证据不是已验证真人或付费凭证。历史采集前保持 null。
+
+
+## Plus主动接续与独立编辑草稿
+
+所有凭证只在内存流转，原生会话批准，电脑会话限制在本人读取/草稿；不复制支付权限。自然键与修订号提供幂等，避免通用缓存复活撤销连接。
+
+| 方法/路径 | operationId | 请求 → 响应 |
+| --- | --- | --- |
+| POST /plus/links | createPlusLink | PlusLinkCreateRequest → PlusLink |
+| POST /plus/links/inspect | inspectPlusLink | PlusLinkInspectRequest → PlusLinkApproval |
+| POST /plus/links/decision | decidePlusLink | PlusLinkDecisionRequest → PlusLinkApproval |
+| POST /plus/links/{link_id}/poll | pollPlusLink | PlusLinkPollRequest → PlusLinkStatus |
+| GET /plus/session | getPlusSession | 无 → PlusSessionInfo |
+| GET /plus/sessions | listPlusSessions | 无 → PlusSessionList |
+| DELETE /plus/sessions/{plus_session_id} | revokePlusSession | 无 → PlusSessionInfo |
+| POST /plus/edit-drafts | createPlusEditDraft | PlusEditCreateRequest → PlusEditDraft |
+| GET /plus/edit-drafts/{draft_id} | getPlusEditDraft | 无 → PlusEditDraft |
+| PUT /plus/edit-drafts/{draft_id} | savePlusEditDraft | PlusEditSaveRequest → PlusEditDraft |
+| GET /plus/edit-drafts | listPlusEditDrafts | 无 → PlusEditList |

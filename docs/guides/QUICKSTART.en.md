@@ -1,5 +1,9 @@
 # Native quick start
 
+The current native startup applies migration035 and serves the same-origin HTTPS `/plus/` workbench. Generate a code on the computer, then explicitly approve it in the signed-in mini-program under account/privacy → Plus. The one-hour grant supports owned assets and separate image editing drafts, with revocation. Use the current-build launcher; manual startup must point `YPCC_BUILD_ROOT` to the current build directory. Final rendering, separate purchase and acceptance remain pending. Sales remain disabled. [Scope and permissions](../实施/Plus手机确认与独立编辑草稿-v1.0.md).
+
+以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
+
 One-command development setup: `.\scripts\setup-local.ps1`; environment checks: `.\scripts\run.ps1 doctor`; start API/Worker/reaper/maintenance: `.\scripts\run.ps1 local:start`. See the [delivery guide](../delivery/README.md) for source ZIP and build details.
 
 Private [final audio review and publication](../实施/原生声音最终双复核与事务交付-v1.0.md) is connected for both generated routes. Tests use actual native database/media and explicitly fabricated semantic/provider/rights/usage/isolation responses. LISTENING and ASR configuration default to disabled; their endpoints, keys and exact host allowlists stay empty in the example. Model/rate/capability registration and the original sold contract are also required. Environment values never enable sales. Saved-original receipt maintenance does not repurchase UNKNOWN calls. Public audio orders and real-service/device admission remain closed.

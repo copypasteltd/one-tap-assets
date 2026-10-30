@@ -1,5 +1,9 @@
 # 历史实现说明 / Historical implementation notes
 
+2026-10-30快速功能收口：[Plus手机确认与独立编辑草稿](docs/实施/Plus手机确认与独立编辑草稿-v1.0.md) · [准确证据](docs/verification/plus-workspace-source.json)。小程序主动确认、5分钟码/1小时电脑连接、本人商品订单与实际原图、独立裁切/规格/文字草稿、修订冲突和撤销失效已接通；同源 `/plus/` 沿用C。507源码/35迁移/91业务38管理、288schema79实体。3客户端与7原生API专项、类型/server/preview和本机启动通过，只做相关检查；浏览器与媒体以本轮来源为准。身份/付款/验收语义合成，手机是共享UI回放，非真实服务或宿主验收。正式渲染/报价/双复核交付、字幕/批量/复杂作者工具、双平台长期绑定、真实准入与58项完整验收仍待，完整产品/生产/云端false。旧153媒体、方案C与历史原件保持。
+
+以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
+
 此文件保留仓库整理前的实现说明；当前入口与验证范围以[中文README](README.md)、[English README](README.en.md)、[状态指南](docs/guides/STATUS.md)及[实现索引](assets/implementation/current.json)为准。下文历史数量、命令和待办不自动代表当前版本。
 
 This preserves earlier implementation notes. Use the current entry points above for supported commands, evidence and remaining scope.

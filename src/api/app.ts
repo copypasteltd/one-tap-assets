@@ -19,6 +19,7 @@ import { businessHandlers, type BusinessContext } from './routes/business.js';
 import { idempotent } from './db/store.js';
 import { uploadAsset, authorizeUpload } from './modules/assets.js';
 import { getDeliverables, verifyDownload } from './modules/delivery.js';
+import {assertPlusOperation,assertPlusDownload} from './modules/plus-access.js';
 import type { DTO, Principal, SchemaName } from '../shared/contracts/types.js';
 import type { InferenceHttp } from '../worker/codex/inference.js';
 import { sampleContext } from '../worker/samples/context.js';
@@ -68,13 +69,14 @@ export async function buildApp(deps: AppDependencies): Promise<FastifyInstance> 
       }); continue;
     }
     const handler = businessHandlers[e.operation_id]; if (!handler) throw new Error(`Missing operation implementation: ${e.operation_id}`);
-    app.route({ method: e.method as HTTPMethods, url: `/v1/p01${e.path.replaceAll(/\{([^}]+)\}/g, ':$1')}`, handler: async (request, reply) => {
-      if(['getSupportTicket','listSupportTickets','recommendPresets','recordRecommendationEvent','getUsageFeedback','setUsageFeedback'].includes(e.operation_id))reply.header('Cache-Control','private, no-store').header('Referrer-Policy','no-referrer');
+    app.route({ ...(e.operation_id.includes('Plus')?{config:{rateLimit:{max:e.operation_id==='createPlusLink'?15:e.operation_id==='pollPlusLink'?60:30,timeWindow:'1 minute'}}}:{}), method: e.method as HTTPMethods, url: `/v1/p01${e.path.replaceAll(/\{([^}]+)\}/g, ':$1')}`, handler: async (request, reply) => {
+      if(e.operation_id.includes('Plus')||['getSupportTicket','listSupportTickets','recommendPresets','recordRecommendationEvent','getUsageFeedback','setUsageFeedback'].includes(e.operation_id))reply.header('Cache-Control','private, no-store').header('Referrer-Policy','no-referrer');
       const principal: Principal | null = e.auth_policy.startsWith('public') ? null : await authenticate(pool, request.headers.authorization, cfg);
       if (e.request_schema) validate(e.request_schema, request.body);
       const params = request.params as Record<string, string>;
       const body = request.body ?? {};
       const result = await transaction(pool, async db => {
+        await assertPlusOperation(db,principal,e.operation_id);
         const ctx: BusinessContext = { db, cfg, principal, params, body, query: request.query as BusinessContext['query'] };
         const execute = async (): Promise<unknown> => {
           const data = await handler(ctx);
@@ -116,6 +118,7 @@ export async function buildApp(deps: AppDependencies): Promise<FastifyInstance> 
   });
   app.get<{ Params: { encoded: string }; Querystring: { signature: string } }>('/storage/downloads/:encoded', async (request, reply) => {
     const grant = verifyDownload(cfg, request.params.encoded, request.query.signature ?? '');
+    await assertPlusDownload(pool,grant.plusSessionId,grant.tenantId,grant.ownerId);
     let key: string; let mime: string; let name: string; let expectedHash: string | undefined; let sampleExecution = false; let preparedBytes: Buffer | undefined;
     if (grant.purpose === 'DELIVERY') {
       const p = { tenantId: grant.tenantId, userId: grant.ownerId } as Principal;
@@ -144,6 +147,7 @@ export async function buildApp(deps: AppDependencies): Promise<FastifyInstance> 
       key = item.object_key; expectedHash = item.sha256; mime = item.kind === 'video' ? 'video/mp4' : 'image/png'; name = `方案样例.${item.kind === 'video' ? 'mp4' : 'png'}`;
     }
     const bytes = preparedBytes ?? await store.get(key, 512_000_000);
+    await assertPlusDownload(pool,grant.plusSessionId,grant.tenantId,grant.ownerId);
     if (expectedHash) {
       requireThat(sha256(bytes) === expectedHash, 'DELIVERY_FILE_CHANGED', '实际交付文件与已验收清单不一致', 503);
       if (grant.purpose === 'DELIVERY') {

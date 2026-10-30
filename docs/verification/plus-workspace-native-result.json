@@ -1,0 +1,27 @@
+{
+  "base": "runtime/test-results/plus-workspace-2026-10-30T12-41-12-590Z-b6910b21",
+  "source_set_hash": "83da1e6bae1aa7f3b18ee243301262c75fa1877be4ed8e14038b329010580752",
+  "source_unchanged": true,
+  "commands": [
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/plus-workspace.test.ts --outputFile.json=runtime/test-results/plus-workspace-2026-10-30T12-41-12-590Z-b6910b21/api.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.integration.config.ts",
+        "tests/integration/plus-workspace.test.ts",
+        "--outputFile.json=runtime/test-results/plus-workspace-2026-10-30T12-41-12-590Z-b6910b21/api.json"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 480000,
+      "elapsed_ms": 9532,
+      "log_path": "runtime/test-results/plus-workspace-2026-10-30T12-41-12-590Z-b6910b21/api.log",
+      "log_sha256": "3de7cb7ad89a4271b7e506395e0e38c859c1d6999e2a184f11459b4a199d1094"
+    }
+  ]
+}

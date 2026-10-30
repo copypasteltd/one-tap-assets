@@ -1,0 +1,103 @@
+{
+  "captured_at": "2026-10-30T12:47:34.006Z",
+  "status": "PASS",
+  "source_set_hash": "21c214025fd9aaeda2c2b1011b8a8c5b4253c72bbf2d905f2c5bc7363adeeb86",
+  "build_root": "runtime/delivery-builds/2026-10-30T12-46-02-363Z-6feeca84/runtime/build",
+  "data_source": "ACTUAL_HTTPS_POSTGRESQL_AND_PRIVATE_PNG_PLUS_WEB_UI_WITH_SYNTHETIC_IDENTITY_PAYMENT_QA_METADATA;SHARED_MINI_REPLAY_USES_SYNTHETIC_RESPONSES",
+  "checks": [
+    "ACTUAL_HTTPS_NATIVE_APPROVAL_AND_HASHED_POLL_CLAIM_CONNECT_BROWSER",
+    "OWNER_SCOPED_PAID_PACK_LOADED_FROM_NATIVE_DATABASE",
+    "ACTUAL_SIGNED_PRIVATE_PNG_BYTES_RENDERED",
+    "NATIVE_PERSISTED_CROP_SPEC_TEXT_AND_UNVERIFIED_FACTS_IN_SEPARATE_REVISION",
+    "SAVED_DRAFT_RECOVERS_FROM_NATIVE_API",
+    "NO_BROWSER_STORAGE_OR_COOKIE_CONTAINS_AUTHORIZATION",
+    "SHARED_MINI_APPROVAL_AND_REVOCATION_UI_WITH_EXPLICIT_SYNTHETIC_REPLIES",
+    "NATIVE_REVOCATION_DENIES_FUTURE_REQUESTS_AND_CLEARS_PRIVATE_BROWSER_VIEW",
+    "NO_HORIZONTAL_OVERFLOW_AT_320PX"
+  ],
+  "screenshots": [
+    {
+      "path": "docs/media/plus-workspace/01-browser-approval-code.png",
+      "page": "01-browser-approval-code"
+    },
+    {
+      "path": "docs/media/plus-workspace/02-owned-delivery.png",
+      "page": "02-owned-delivery"
+    },
+    {
+      "path": "docs/media/plus-workspace/03-versioned-edit-draft.png",
+      "page": "03-versioned-edit-draft"
+    },
+    {
+      "path": "docs/media/plus-workspace/04-shared-mini-explicit-approval.png",
+      "page": "04-shared-mini-explicit-approval"
+    },
+    {
+      "path": "docs/media/plus-workspace/05-shared-mini-revoke.png",
+      "page": "05-shared-mini-revoke"
+    },
+    {
+      "path": "docs/media/plus-workspace/06-revoked-browser-cleared.png",
+      "page": "06-revoked-browser-cleared"
+    }
+  ],
+  "files": [
+    {
+      "path": "docs/media/plus-workspace/01-browser-approval-code.png",
+      "bytes": 114835,
+      "sha256": "fa976c227543bb07e6dcc61592a038f7023e86bd6f9bed3d35df08a2fad62f17"
+    },
+    {
+      "path": "docs/media/plus-workspace/02-owned-delivery.png",
+      "bytes": 70052,
+      "sha256": "e5248b6dc039640ff4c82a763f5d9360d39b86a72e9568b489f9c70e60bcdae7"
+    },
+    {
+      "path": "docs/media/plus-workspace/03-versioned-edit-draft.png",
+      "bytes": 144015,
+      "sha256": "a8c232e1fe1a1fa11b453e837bbf1f3348259efe10f1542ced66132104cf7b38"
+    },
+    {
+      "path": "docs/media/plus-workspace/04-shared-mini-explicit-approval.png",
+      "bytes": 60156,
+      "sha256": "075ed0902752ab3dca143ef945fcfc0bd5f88575938404871e3c981b1244c191"
+    },
+    {
+      "path": "docs/media/plus-workspace/05-shared-mini-revoke.png",
+      "bytes": 62137,
+      "sha256": "880bf968763c28132157e7ea9fbd2b491242cf26b4e6e202fbd5ee01ad7f6bfe"
+    },
+    {
+      "path": "docs/media/plus-workspace/06-revoked-browser-cleared.png",
+      "bytes": 117439,
+      "sha256": "892eaee9caca3ef0d75ccd9d901ef08a6fc77121960c0c371eee70c9d93f511b"
+    },
+    {
+      "path": "docs/media/plus-workspace/walkthrough.mp4",
+      "bytes": 287553,
+      "sha256": "62a2e6334b7dfe4d33d3c5d8aeaf2542e8fce08c029c1f6c40834904ad049ed8"
+    },
+    {
+      "path": "docs/media/plus-workspace/walkthrough.webm",
+      "bytes": 1380208,
+      "sha256": "0043bb9f51ed3fcdad7137347ef82553ce8c0fdb1a12cba1f04bd8a5fbc34c7a"
+    },
+    {
+      "path": "docs/media/plus-workspace/walkthrough.gif",
+      "bytes": 461534,
+      "sha256": "d53240505f56eca78bb38e665b003e637423c4cf864b24694536e467f7cd7535"
+    }
+  ],
+  "recording": {
+    "format": {
+      "duration": "13.560000"
+    }
+  },
+  "browser_errors": [],
+  "external_network_requests": [],
+  "browser_tabs_closed": true,
+  "owned_api_and_database_pool_closed": true,
+  "real_service_or_payment_verified": false,
+  "native_mini_device_verified": false,
+  "full_product_verified": false
+}

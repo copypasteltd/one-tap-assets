@@ -2004,6 +2004,215 @@
         "D16"
       ],
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/plus/links",
+      "operation_id": "createPlusLink",
+      "summary": "创建短期电脑接续码",
+      "request_schema": "PlusLinkCreateRequest",
+      "response_schema": "PlusLink",
+      "success_status": 200,
+      "auth_policy": "public-plus-link-secret",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/plus/links/inspect",
+      "operation_id": "inspectPlusLink",
+      "summary": "小程序查看本人准备确认的电脑接续",
+      "request_schema": "PlusLinkInspectRequest",
+      "response_schema": "PlusLinkApproval",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/plus/links/decision",
+      "operation_id": "decidePlusLink",
+      "summary": "小程序主动允许或拒绝电脑接续",
+      "request_schema": "PlusLinkDecisionRequest",
+      "response_schema": "PlusLinkApproval",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/plus/links/{link_id}/poll",
+      "operation_id": "pollPlusLink",
+      "summary": "电脑持独立秘密等待确认；原确认不续期",
+      "request_schema": "PlusLinkPollRequest",
+      "response_schema": "PlusLinkStatus",
+      "success_status": 200,
+      "auth_policy": "public-plus-link-secret",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/session",
+      "operation_id": "getPlusSession",
+      "summary": "读取当前电脑连接",
+      "request_schema": null,
+      "response_schema": "PlusSessionInfo",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/sessions",
+      "operation_id": "listPlusSessions",
+      "summary": "小程序读取本人有效电脑连接",
+      "request_schema": null,
+      "response_schema": "PlusSessionList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "DELETE",
+      "path": "/plus/sessions/{plus_session_id}",
+      "operation_id": "revokePlusSession",
+      "summary": "撤销本人电脑连接及其短期下载权限",
+      "request_schema": null,
+      "response_schema": "PlusSessionInfo",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/plus/edit-drafts",
+      "operation_id": "createPlusEditDraft",
+      "summary": "为本人已交付图片建立独立编辑草稿",
+      "request_schema": "PlusEditCreateRequest",
+      "response_schema": "PlusEditDraft",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/edit-drafts/{draft_id}",
+      "operation_id": "getPlusEditDraft",
+      "summary": "读取本人当前有效来源的编辑草稿",
+      "request_schema": null,
+      "response_schema": "PlusEditDraft",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "PUT",
+      "path": "/plus/edit-drafts/{draft_id}",
+      "operation_id": "savePlusEditDraft",
+      "summary": "按修订号保存裁切、规格和待核对文字",
+      "request_schema": "PlusEditSaveRequest",
+      "response_schema": "PlusEditDraft",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/plus/edit-drafts",
+      "operation_id": "listPlusEditDrafts",
+      "summary": "按本人范围分页读取有效编辑草稿",
+      "request_schema": null,
+      "response_schema": "PlusEditList",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F18",
+        "P01-F24"
+      ],
+      "design_pages": [
+        "D22"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
     }
   ]
 }

@@ -23,7 +23,7 @@ export async function getDeliverables(db: Db, p: Principal, orderId: string): Pr
   const manifest = (await db.query<{ data: DTO<'Deliverables'> }>('SELECT data FROM delivery_manifests WHERE tenant_id=$1 AND order_id=$2 AND owner_id=$3 ORDER BY revision DESC LIMIT 1', [p.tenantId, orderId, p.userId])).rows[0] ?? notFound();
   return manifest.data;
 }
-export interface DownloadCapability { purpose: 'DELIVERY' | 'PREVIEW' | 'SAMPLE' | 'PUBLIC_SAMPLE'; tenantId: string; ownerId: string; resourceId: string; itemId: string; exp: number }
+export interface DownloadCapability { purpose: 'DELIVERY' | 'PREVIEW' | 'SAMPLE' | 'PUBLIC_SAMPLE'; tenantId: string; ownerId: string; resourceId: string; itemId: string; exp: number; plusSessionId?: string }
 export function signDownload(cfg: Config, grant: Omit<DownloadCapability, 'exp'>): { url: string; expires_at: string } {
   const expiry = Date.now() + POLICIES.linkTtlSeconds * 1000;
   const data = Buffer.from(JSON.stringify({ ...grant, exp: expiry })).toString('base64url');
@@ -34,6 +34,7 @@ export function verifyDownload(cfg: Config, encoded: string, signature: string):
   const grant = JSON.parse(Buffer.from(encoded, 'base64url').toString('utf8')) as DownloadCapability;
   requireThat(['DELIVERY', 'PREVIEW', 'SAMPLE', 'PUBLIC_SAMPLE'].includes(grant.purpose) && typeof grant.tenantId === 'string' && typeof grant.ownerId === 'string' && typeof grant.resourceId === 'string' && typeof grant.itemId === 'string' && Number.isSafeInteger(grant.exp), 'DOWNLOAD_NOT_AUTHORIZED', '下载授权无效', 401);
   requireThat(grant.exp > Date.now() && grant.exp <= Date.now() + 301000, 'DOWNLOAD_EXPIRED', '下载链接已过期，请重新获取', 410);
+  requireThat(grant.plusSessionId===undefined||(typeof grant.plusSessionId==='string'&&/^plussession_[a-f0-9]{32}$/.test(grant.plusSessionId)), 'DOWNLOAD_NOT_AUTHORIZED','下载连接范围无效',401);
   return grant;
 }
 export async function createDownloadLink(db: Db, cfg: Config, p: Principal, deliverableId: string): Promise<DTO<'DownloadLink'>> {
@@ -42,7 +43,7 @@ export async function createDownloadLink(db: Db, cfg: Config, p: Principal, deli
   const item = manifest.items.find(a => a.deliverable_id === deliverableId && a.sha256 === artifact.sha256);
   requireThat(item, 'DELIVERABLE_NOT_CURRENT', '该素材已更新，请刷新素材列表', 410);
   requireThat(item.kind !== 'copy', 'COPY_AS_TEXT', '文案请使用复制功能', 422);
-  return { deliverable_id: deliverableId, ...signDownload(cfg, { purpose: 'DELIVERY', tenantId: p.tenantId, ownerId: p.userId, resourceId: manifest.order_id, itemId: deliverableId }), ttl_seconds: 300 };
+  return { deliverable_id: deliverableId, ...signDownload(cfg, { purpose: 'DELIVERY', tenantId: p.tenantId, ownerId: p.userId, resourceId: manifest.order_id, itemId: deliverableId, ...(p.plusSessionId?{plusSessionId:p.plusSessionId}:{}) }), ttl_seconds: 300 };
 }
 export async function previewLink(db: Db, cfg: Config, p: Principal, previewId: string): Promise<DTO<'PreviewLink'>> {
   await previewMedia(db,p.tenantId,previewId,p.userId);

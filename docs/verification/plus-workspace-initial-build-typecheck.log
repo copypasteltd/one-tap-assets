@@ -1,0 +1,62 @@
+tests/integration/plus-workspace.test.ts(9,121): error TS2345: Argument of type '{ payload?: {} | null; headers?: { authorization: string; }; method: "DELETE" | "PUT" | "GET" | "POST"; url: string; }' is not assignable to parameter of type 'string | InjectOptions'.
+  Type '{ payload?: {} | null; headers?: { authorization: string; }; method: "DELETE" | "PUT" | "GET" | "POST"; url: string; }' is not assignable to type 'InjectOptions' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+    Types of property 'payload' are incompatible.
+      Type '{} | null' is not assignable to type 'InjectPayload'.
+        Type 'null' is not assignable to type 'InjectPayload'.
+tests/integration/plus-workspace.test.ts(13,68): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(13,79): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(actual: any, message?: string | undefined): Assertion<void, any>', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+  Overload 2 of 2, '(val: any, message?: string | undefined): Assertion', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+tests/integration/plus-workspace.test.ts(13,116): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(14,10): error TS7053: Element implicitly has an 'any' type because expression of type '"cache-control"' can't be used to index type '(headers: IncomingHttpHeaders | OutgoingHttpHeaders) => Chain'.
+  Property 'cache-control' does not exist on type '(headers: IncomingHttpHeaders | OutgoingHttpHeaders) => Chain'.
+tests/integration/plus-workspace.test.ts(15,92): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(16,91): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(17,113): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(17,124): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(actual: any, message?: string | undefined): Assertion<void, any>', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+  Overload 2 of 2, '(val: any, message?: string | undefined): Assertion', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+tests/integration/plus-workspace.test.ts(17,167): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(18,66): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(22,109): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(26,77): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(27,73): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(28,100): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(29,66): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(32,121): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(33,67): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(34,132): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(35,113): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(38,114): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(38,125): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(actual: any, message?: string | undefined): Assertion<void, any>', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+  Overload 2 of 2, '(val: any, message?: string | undefined): Assertion', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+tests/integration/plus-workspace.test.ts(43,97): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(43,108): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(actual: any, message?: string | undefined): Assertion<void, any>', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+  Overload 2 of 2, '(val: any, message?: string | undefined): Assertion', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+tests/integration/plus-workspace.test.ts(43,146): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(44,77): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(46,98): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(47,57): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(49,113): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(50,104): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(51,102): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(52,81): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(61,72): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(62,70): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(65,41): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(70,55): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(72,97): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(74,97): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(75,102): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(76,77): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-workspace.test.ts(78,91): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.

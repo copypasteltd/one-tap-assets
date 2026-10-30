@@ -8,6 +8,7 @@ import { AppError, requireThat } from '../lib/errors.js';
 import { AlipayClient } from '../adapters/alipay.js';
 import { remoteJson } from '../lib/http.js';
 import { object } from '../../shared/domain/json.js';
+import {plusPrincipal} from './plus-access.js';
 
 export interface PlatformIdentity { platform: DTO<'Platform'>; appId: string; subjectId: string }
 export async function exchangeIdentity(cfg: Config, request: DTO<'SessionRequest'>): Promise<PlatformIdentity> {
@@ -40,10 +41,12 @@ export async function issueSession(pool: pg.Pool, identity: PlatformIdentity): P
 export async function authenticate(db: Db, authorization: string | undefined, cfg: Config): Promise<Principal> {
   if (!authorization?.startsWith('Bearer ')) throw new AppError('UNAUTHENTICATED', '请先登录', 401);
   const result = await db.query<{ id: string; tenant_id: string; owner_id: string; platform: DTO<'Platform'>; app_id: string; subject_id: string }>('SELECT s.id,s.tenant_id,s.owner_id,i.platform,i.app_id,i.subject_id FROM sessions s JOIN platform_identities i ON i.id=s.identity_id AND i.tenant_id=s.tenant_id WHERE s.token_hash=$1 AND s.revoked_at IS NULL AND s.expires_at>now()', [sha256(authorization.slice(7))]);
-  const row = result.rows[0]; if (!row) throw new AppError('SESSION_EXPIRED', '登录已过期，请重新登录', 401);
-  const approvedApp = row.platform === 'alipay' ? cfg.alipay.appId : cfg.douyin.appId;
-  requireThat(row.app_id === approvedApp || (cfg.devMode && row.app_id === `dev-${row.platform}`), 'APP_SCOPE_INVALID', '登录应用不匹配', 403);
-  return { tenantId: row.tenant_id, userId: row.owner_id, sessionId: row.id, platform: row.platform, appId: row.app_id, subjectId: row.subject_id };
+  const row = result.rows[0];
+  const principal:Principal|undefined=row?{tenantId:row.tenant_id,userId:row.owner_id,sessionId:row.id,platform:row.platform,appId:row.app_id,subjectId:row.subject_id}:await plusPrincipal(db,authorization.slice(7));
+  if(!principal)throw new AppError('SESSION_EXPIRED','登录已过期，请重新登录',401);
+  const approvedApp = principal.platform === 'alipay' ? cfg.alipay.appId : cfg.douyin.appId;
+  requireThat(principal.appId === approvedApp || (cfg.devMode && principal.appId === `dev-${principal.platform}`), 'APP_SCOPE_INVALID', '登录应用不匹配', 403);
+  return principal;
 }
 export function authenticateManagement(cfg: Config, authorization: string | undefined, permission: string): ManagementPrincipal {
   const key = authorization?.startsWith('Bearer ') ? authorization.slice(7) : '';

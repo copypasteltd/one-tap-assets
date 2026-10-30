@@ -1,0 +1,40 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ❯ tests/integration/plus-workspace.test.ts (7 tests | 1 failed) 14908ms
+   ✓ requires explicit native approval and a separate high-entropy polling secret 802ms
+   ✓ issues one fixed-expiry session for concurrent claims and retains original native identity 226ms
+   × forbids approval, financial mutations, account deletion and other-owner revocation with a Plus grant 45ms
+   · creates an independent owned image draft once and preserves paid manifest bytes
+   · validates crop/canvas bounds and uses revision compare-and-set across editors
+   · rejects expired and denied links, and never reopens a revoked session from a poll retry
+   · erases source-deleted drafts and versions while preserving the paid original record
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/plus-workspace.test.ts > forbids approval, financial mutations, account deletion and other-owner revocation with a Plus grant
+AssertionError: {"code":"INVALID_REQUEST","message":"请求内容不符合规范","retryable":false,"trace_id":"trace_bd0d0557cc4245e195cb9183bedf8ac5","details":[{"field":"/","reason":"must have required property 'channel'"}]}: expected 400 to be 403 // Object.is equality
+
+- Expected
++ Received
+
+- 403
++ 400
+
+ ❯ tests/integration/plus-workspace.test.ts:38:138
+     36|   const before=(await f.db.pool.query('SELECT count(*) FROM orders')).…
+     37|   const order=await f.db.pool.query('SELECT quote_id FROM orders WHERE…
+     38|   const denied=await call('/orders','POST',{quote_id:order.rows[0].quo…
+       |                                                                                                                                          ^
+     39|   expect((await f.db.pool.query('SELECT count(*) FROM orders')).rows[0…
+     40| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 passed (7)
+   Start at  20:39:55
+   Duration  61.02s (import 41%, transform 34%, tests 25%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/plus-workspace-2026-10-30T12-39-47-181Z-9ef34fa2/api.json

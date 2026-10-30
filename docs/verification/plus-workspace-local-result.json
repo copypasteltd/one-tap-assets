@@ -1,0 +1,36 @@
+{
+  "base": "runtime/test-results/plus-workspace-local-2026-10-30T12-42-06-721Z-dc342e64",
+  "source_set_hash": "83da1e6bae1aa7f3b18ee243301262c75fa1877be4ed8e14038b329010580752",
+  "source_unchanged": true,
+  "commands": [
+    {
+      "task": "doctor",
+      "argv": [
+        "--import",
+        "tsx",
+        "scripts/delivery/doctor.ts"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_ms": 60000,
+      "elapsed_ms": 1334,
+      "log_path": "runtime/test-results/plus-workspace-local-2026-10-30T12-42-06-721Z-dc342e64/doctor.log",
+      "log_sha256": "f50894af0b972a78b9f8212bdd409499542bb606d067498d448203a47e68c6a3"
+    },
+    {
+      "task": "start-once",
+      "argv": [
+        "--import",
+        "tsx",
+        "scripts/delivery/start.ts",
+        "--once"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_ms": 60000,
+      "elapsed_ms": 5053,
+      "log_path": "runtime/test-results/plus-workspace-local-2026-10-30T12-42-06-721Z-dc342e64/start.log",
+      "log_sha256": "20a02a4f7c4c0d518bb495e4cb894d7fd81ac2baf4a10f7074dcee428649ee17"
+    }
+  ]
+}

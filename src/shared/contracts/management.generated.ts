@@ -2670,6 +2670,139 @@ export interface components {
             data: components["schemas"]["RecommendationEventReceipt"];
             trace_id: string;
         };
+        PlusLinkCreateRequest: Record<string, never>;
+        PlusLink: {
+            link_id: string;
+            user_code: string;
+            poll_key: string;
+            /** Format: date-time */
+            expires_at: string;
+            /** @constant */
+            poll_interval_seconds: 3;
+        };
+        PlusLinkInspectRequest: {
+            user_code: string;
+        };
+        PlusLinkDecisionRequest: {
+            user_code: string;
+            /** @enum {string} */
+            decision: "APPROVE" | "DENY";
+        };
+        PlusLinkApproval: {
+            link_id: string;
+            user_code: string;
+            /** Format: date-time */
+            expires_at: string;
+            /** @enum {string} */
+            state: "PENDING" | "APPROVED" | "DENIED";
+            /** @constant */
+            access: "OWN_PROJECTS_AND_EDIT_DRAFTS";
+        };
+        PlusLinkPollRequest: {
+            poll_key: string;
+        };
+        PlusSessionInfo: {
+            session_id: string;
+            platform: components["schemas"]["Platform"];
+            /** Format: date-time */
+            created_at: string;
+            /** Format: date-time */
+            expires_at: string;
+            /** @enum {string} */
+            state: "ACTIVE" | "REVOKED" | "EXPIRED";
+        };
+        PlusBrowserSession: {
+            access_token: string;
+            /** @constant */
+            token_type: "Bearer";
+            /** Format: date-time */
+            expires_at: string;
+            user_id: string;
+            connection: components["schemas"]["PlusSessionInfo"];
+        };
+        PlusLinkStatus: {
+            /** @enum {string} */
+            state: "PENDING" | "APPROVED" | "DENIED";
+            session?: components["schemas"]["PlusBrowserSession"];
+        };
+        PlusSessionList: {
+            items: components["schemas"]["PlusSessionInfo"][];
+            next_cursor: null;
+        };
+        PlusEditSettings: {
+            crop: {
+                x: number;
+                y: number;
+                width: number;
+                height: number;
+            };
+            canvas: {
+                width: number;
+                height: number;
+            };
+            title: string;
+            brand: string;
+            facts: string[];
+        };
+        PlusEditCreateRequest: {
+            order_id: string;
+            deliverable_id: string;
+        };
+        PlusEditSaveRequest: {
+            expected_revision: number;
+            settings: components["schemas"]["PlusEditSettings"];
+        };
+        PlusEditDraft: {
+            draft_id: string;
+            order_id: string;
+            product_id: string;
+            manifest_id: string;
+            manifest_revision: number;
+            deliverable_id: string;
+            source_sha256: string;
+            revision: number;
+            settings: components["schemas"]["PlusEditSettings"];
+            /** @constant */
+            fact_status: "USER_PROVIDED_UNVERIFIED";
+            /** @constant */
+            state: "DRAFT";
+            /** Format: date-time */
+            created_at: string;
+            /** Format: date-time */
+            updated_at: string;
+        };
+        PlusEditList: {
+            items: components["schemas"]["PlusEditDraft"][];
+            next_cursor: string | null;
+        };
+        PlusLinkResponse: {
+            data: components["schemas"]["PlusLink"];
+            trace_id: string;
+        };
+        PlusLinkApprovalResponse: {
+            data: components["schemas"]["PlusLinkApproval"];
+            trace_id: string;
+        };
+        PlusLinkStatusResponse: {
+            data: components["schemas"]["PlusLinkStatus"];
+            trace_id: string;
+        };
+        PlusSessionInfoResponse: {
+            data: components["schemas"]["PlusSessionInfo"];
+            trace_id: string;
+        };
+        PlusSessionListResponse: {
+            data: components["schemas"]["PlusSessionList"];
+            trace_id: string;
+        };
+        PlusEditDraftResponse: {
+            data: components["schemas"]["PlusEditDraft"];
+            trace_id: string;
+        };
+        PlusEditListResponse: {
+            data: components["schemas"]["PlusEditList"];
+            trace_id: string;
+        };
     };
     responses: never;
     parameters: {

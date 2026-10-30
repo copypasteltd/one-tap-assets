@@ -631,5 +631,93 @@ export const endpoints = {
     "idempotency": false,
     "request": "RecommendationEventRequest",
     "response": "RecommendationEventReceipt"
+  },
+  "createPlusLink": {
+    "method": "POST",
+    "path": "/plus/links",
+    "authenticated": false,
+    "idempotency": false,
+    "request": "PlusLinkCreateRequest",
+    "response": "PlusLink"
+  },
+  "inspectPlusLink": {
+    "method": "POST",
+    "path": "/plus/links/inspect",
+    "authenticated": true,
+    "idempotency": false,
+    "request": "PlusLinkInspectRequest",
+    "response": "PlusLinkApproval"
+  },
+  "decidePlusLink": {
+    "method": "POST",
+    "path": "/plus/links/decision",
+    "authenticated": true,
+    "idempotency": false,
+    "request": "PlusLinkDecisionRequest",
+    "response": "PlusLinkApproval"
+  },
+  "pollPlusLink": {
+    "method": "POST",
+    "path": "/plus/links/{link_id}/poll",
+    "authenticated": false,
+    "idempotency": false,
+    "request": "PlusLinkPollRequest",
+    "response": "PlusLinkStatus"
+  },
+  "getPlusSession": {
+    "method": "GET",
+    "path": "/plus/session",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "PlusSessionInfo"
+  },
+  "listPlusSessions": {
+    "method": "GET",
+    "path": "/plus/sessions",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "PlusSessionList"
+  },
+  "revokePlusSession": {
+    "method": "DELETE",
+    "path": "/plus/sessions/{plus_session_id}",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "PlusSessionInfo"
+  },
+  "createPlusEditDraft": {
+    "method": "POST",
+    "path": "/plus/edit-drafts",
+    "authenticated": true,
+    "idempotency": false,
+    "request": "PlusEditCreateRequest",
+    "response": "PlusEditDraft"
+  },
+  "getPlusEditDraft": {
+    "method": "GET",
+    "path": "/plus/edit-drafts/{draft_id}",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "PlusEditDraft"
+  },
+  "savePlusEditDraft": {
+    "method": "PUT",
+    "path": "/plus/edit-drafts/{draft_id}",
+    "authenticated": true,
+    "idempotency": false,
+    "request": "PlusEditSaveRequest",
+    "response": "PlusEditDraft"
+  },
+  "listPlusEditDrafts": {
+    "method": "GET",
+    "path": "/plus/edit-drafts",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "PlusEditList"
   }
 } as const;
