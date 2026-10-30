@@ -36,17 +36,21 @@ export async function resumeDraft(client:ClientSession,productId:string):Promise
 }
 
 export async function readDraftAnalysis(client:ClientSession):Promise<{product:DTO<'Product'>;analysis:DTO<'Analysis'>|null;profile:DTO<'Profile'>|null}>{
-  await client.login();const current=client.recover();
+  await client.login();const current=client.recover(),buyer=client.api.userId;
+  const scope=()=>{if(!buyer||client.api.userId!==buyer)throw new ClientError('ACCOUNT_CHANGED','账户已变化，请查询当前账户的草稿');
+    if(client.recover().productId!==current.productId)throw changed();};
   if(!current.productId)throw new ClientError('DRAFT_MISSING','请选择照片后开始整理');
-  const product=await client.api.call('getProduct',{params:{product_id:current.productId}});
+  const product=await client.api.call('getProduct',{params:{product_id:current.productId}});scope();
   if(product.product_id!==current.productId)throw changed();
   let analysis:DTO<'Analysis'>|null=null,profile:DTO<'Profile'>|null=null;
   if(!product.profile_id&&current.analysisId){
     analysis=await client.api.call('getAnalysis',{params:{analysis_id:current.analysisId}});
+    scope();
     if(analysis.product_id!==product.product_id||analysis.photo_version!==product.photo_version)throw changed();
   }
   if(product.profile_id||analysis?.state==='READY'){
     profile=await client.api.call('getProductProfile',{params:{product_id:product.product_id}});
+    scope();
     if(profile.product_id!==product.product_id||profile.photo_version!==product.photo_version
       ||(product.profile_id?profile.profile_id!==product.profile_id:profile.profile_id!==analysis?.profile_id))throw changed();
   }

@@ -1,0 +1,13 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/integration/profile-correction.test.ts (5 tests) 7404ms
+   ✓ writes one new profile/lock and replays the original ACK without changing its parent or adding inference/payment work 496ms
+   ✓ serializes two different corrections of the same expected revision instead of overwriting either parent 352ms
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  18:27:15
+   Duration  12.23s (tests 65%, import 24%, transform 11%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/profile-correction-2026-10-30T10-27-11-877Z-f0497137/api.json

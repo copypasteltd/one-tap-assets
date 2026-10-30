@@ -1,0 +1,32 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ❯ tests/integration/profile-correction.test.ts (5 tests | 1 failed) 6111ms
+   ✓ writes one new profile/lock and replays the original ACK without changing its parent or adding inference/payment work 389ms
+   ✓ serializes two different corrections of the same expected revision instead of overwriting either parent 146ms
+   ✓ rejects another owner, foreign evidence, duplicate evidence and absent observation evidence before any new version 131ms
+   × rejects invalid name/category lengths and blank text without persisting an invalid Profile 66ms
+   · keeps user label corrections separate from observed facts and preserves unknowns in the new identity lock
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/profile-correction.test.ts > rejects invalid name/category lengths and blank text without persisting an invalid Profile
+error: immutable snapshot
+ ❯ node_modules/.pnpm/pg-pool@3.14.0_pg@8.23.1/node_modules/pg-pool/index.js:45:11
+ ❯ tests/integration/profile-correction.test.ts:53:3
+     51|   expect((await db.pool.query('SELECT revision FROM product_drafts WHE…
+     52|   const capped={...f.profile,observations:Array.from({length:100},()=>…
+     53|   await db.pool.query('UPDATE profile_versions SET data=$2 WHERE id=$1…
+       |   ^
+     54|   const capacity=await post(owner.accessToken,f.product.product_id,{ex…
+     55|   expect(capacity.statusCode).toBe(422);expect(capacity.json().code).t…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 3 passed (5)
+   Start at  18:26:07
+   Duration  9.46s (tests 67%, transform 16%, import 16%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/profile-correction-2026-10-30T10-26-06-482Z-c2d1dacd/api.json

@@ -1,0 +1,4 @@
+{"engine":"PER_SHOT_AI","community":false,"phase":"SETUP","elapsed_ms":0}
+{"engine":"PER_SHOT_AI","community":false,"phase":"CONFIGURE","elapsed_ms":657}
+{"engine":"PER_SHOT_AI","community":false,"phase":"CREATE_PLAN","elapsed_ms":878}
+{"engine":"PER_SHOT_AI","community":false,"phase":"PLAN_ROLE","elapsed_ms":967}

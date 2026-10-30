@@ -1,61 +1,64 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T10:10:23.043163+00:00",
+  "checked_at": "2026-10-30T10:35:29.373597+00:00",
   "strategy": "USER_REQUESTED_FAST_MAIN_FUNCTIONAL_CLOSURE",
-  "source_set_hash": "ea335c9494249f5db9823c3b962f3534bae18a3518e0a594b1bfc5727a71a280",
-  "source_files": 470,
+  "source_set_hash": "e9b138c3350f5ca071371c9e26f74bf0c9a01a2920d431fadd918a862d177743",
+  "source_files": 475,
   "runtime_contract_files": 42,
   "resource_files": 4,
-  "source_snapshot": "docs/verification/metrics-dashboard-tested-source.json",
-  "build_snapshot": "docs/verification/metrics-dashboard-build.json",
-  "functional_scope": "docs/实施/运营看板与窗口一致统计-v1.0.md",
+  "source_snapshot": "docs/verification/profile-correction-tested-source.json",
+  "build_snapshot": "docs/verification/profile-correction-build.json",
+  "functional_scope": "docs/实施/商品档案轻量纠错与同版续制-v1.0.md",
   "source_unchanged_during_tests": true,
   "new_checks": {
     "status": "PASS",
-    "passed": 7,
-    "client_cases": 4,
-    "native_database_api_cases": 3,
+    "passed": 19,
+    "new_cases_passed": 10,
+    "client_cases": 5,
+    "draft_compatibility_cases": 9,
+    "native_database_api_cases": 5,
     "browser_checks": 6,
     "runs": [
       {
-        "name": "client",
-        "passed": 4,
+        "name": "api",
+        "passed": 5,
         "failed": 0,
-        "source_set_hash": "ea335c9494249f5db9823c3b962f3534bae18a3518e0a594b1bfc5727a71a280",
+        "source_set_hash": "e9b138c3350f5ca071371c9e26f74bf0c9a01a2920d431fadd918a862d177743",
         "report": {
-          "path": "docs/verification/metrics-dashboard-client.json",
-          "sha256": "a714cc093836613e8658d0d218d3f47618e8fd7b47a0f604f4eb6be445310d97",
-          "bytes": 2064
+          "path": "docs/verification/profile-correction-api.json",
+          "sha256": "3d88523aab858f2d4dc3e45cb2f59279ec726544546e1419143556a2d267d773",
+          "bytes": 2505
         },
         "log": {
-          "path": "docs/verification/metrics-dashboard-client.log",
-          "sha256": "26f6e778a317b8f2dd822e0afcfbfe23376ef022c1daabff27695a91684ac426",
-          "bytes": 413
+          "path": "docs/verification/profile-correction-api.log",
+          "sha256": "96c49cb1d652a2e1c4df9e2114a4b58ab41c105844fc79c5ff69b98bc8439cb7",
+          "bytes": 665
         }
       },
       {
-        "name": "api",
-        "passed": 3,
+        "name": "client",
+        "passed": 14,
         "failed": 0,
-        "source_set_hash": "ea335c9494249f5db9823c3b962f3534bae18a3518e0a594b1bfc5727a71a280",
+        "source_set_hash": "e9b138c3350f5ca071371c9e26f74bf0c9a01a2920d431fadd918a862d177743",
         "report": {
-          "path": "docs/verification/metrics-dashboard-api.json",
-          "sha256": "d82c0cdf7e299987c959283dfce5341ec0363f8388d3a32087b9027158c8e888",
-          "bytes": 1725
+          "path": "docs/verification/profile-correction-client.json",
+          "sha256": "cb12709f855c3a1990c6d5ba8e7105562825bcf055b651b1d039ae8a6fbaf202",
+          "bytes": 5637
         },
         "log": {
-          "path": "docs/verification/metrics-dashboard-api.log",
-          "sha256": "9992668d363ee59216125a491b3834fc639444f5b7f42a637d71b634207b3bcd",
-          "bytes": 402
+          "path": "docs/verification/profile-correction-client.log",
+          "sha256": "eb8ad2737e33e46d24ba7b29a7ca1715ae2f3421c23a71e3e9e5c6028e886ea8",
+          "bytes": 475
         }
       }
     ],
-    "browser_manifest": "docs/media/metrics-dashboard/capture-manifest.json",
-    "recording": "docs/verification/metrics-dashboard-recording.json",
-    "actual_native_postgresql_and_http": true,
-    "payment_delivery_cost_and_staff_identity_synthetic": true
+    "browser_manifest": "docs/media/profile-correction/capture-manifest.json",
+    "recording": "docs/verification/profile-correction-recording.json",
+    "actual_native_postgresql_transactions_and_api": true,
+    "browser_api_is_synthetic_replay": true,
+    "product_recognition_metadata_synthetic": true
   },
-  "attempt_history": "docs/verification/metrics-dashboard-attempts.json",
+  "attempt_history": "docs/verification/profile-correction-attempts.json",
   "unresolved_earlier_regression": {
     "status": "TIMEOUT",
     "attempt": 3,
@@ -80,8 +83,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 14452,
-      "log_path": "runtime/delivery-builds/2026-10-30T10-06-37-883Z-ddb3d828/typecheck.log",
+      "elapsed_ms": 31636,
+      "log_path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -97,46 +100,46 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 1126,
-      "log_path": "runtime/delivery-builds/2026-10-30T10-06-37-883Z-ddb3d828/server.log",
+      "elapsed_ms": 3110,
+      "log_path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T10-06-37-883Z-ddb3d828\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T10-27-37-004Z-dbd6b329\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T10-06-37-883Z-ddb3d828\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T10-27-37-004Z-dbd6b329\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 1570,
-      "log_path": "runtime/delivery-builds/2026-10-30T10-06-37-883Z-ddb3d828/preview.log",
-      "log_sha256": "c7467a09792d5dcaa4147d328d69d2bf4832342a0dabfd6b638ade92fd0257c9"
+      "elapsed_ms": 6380,
+      "log_path": "runtime/delivery-builds/2026-10-30T10-27-37-004Z-dbd6b329/preview.log",
+      "log_sha256": "da2b4d85eeccb176780d734ac1c20d47e7264a888e2f6210cd5d781ba108b67b"
     }
   ],
   "build_logs": [
     {
-      "path": "docs/verification/metrics-dashboard-build-1.log",
+      "path": "docs/verification/profile-correction-build-1.log",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0
     },
     {
-      "path": "docs/verification/metrics-dashboard-build-2.log",
+      "path": "docs/verification/profile-correction-build-2.log",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0
     },
     {
-      "path": "docs/verification/metrics-dashboard-build-3.log",
-      "sha256": "c7467a09792d5dcaa4147d328d69d2bf4832342a0dabfd6b638ade92fd0257c9",
-      "bytes": 2546
+      "path": "docs/verification/profile-correction-build-3.log",
+      "sha256": "da2b4d85eeccb176780d734ac1c20d47e7264a888e2f6210cd5d781ba108b67b",
+      "bytes": 2992
     }
   ],
   "components": [
@@ -162,11 +165,11 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 5.381,
-      "log_path": "runtime/delivery/metrics-dashboard-doctor-1793354872421845300.log",
-      "log_sha256": "720b696a1a3650e679e96889e05c8b50298292a59492f92357512f6dca72cc27",
+      "elapsed_seconds": 1.907,
+      "log_path": "runtime/delivery/profile-correction-doctor-1793356110089528700.log",
+      "log_sha256": "dfae8c52035955a312711b6f42492360f3f493a4b75e3d539c9e2519b0b79eca",
       "report": {
-        "checked_at": "2026-10-30T10:07:56.979Z",
+        "checked_at": "2026-10-30T10:28:31.842Z",
         "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
         "rows": [
           {
@@ -254,8 +257,8 @@
         "production_admitted": false
       },
       "public_log": {
-        "path": "docs/verification/metrics-dashboard-doctor.log",
-        "sha256": "720b696a1a3650e679e96889e05c8b50298292a59492f92357512f6dca72cc27",
+        "path": "docs/verification/profile-correction-doctor.log",
+        "sha256": "dfae8c52035955a312711b6f42492360f3f493a4b75e3d539c9e2519b0b79eca",
         "bytes": 2141
       }
     },
@@ -263,28 +266,28 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 3.722,
-      "log_path": "runtime/delivery/metrics-dashboard-backend-1793354879146357600.log",
-      "log_sha256": "fe0bdfb4de109a612b955dccd90e2689b5297f8daf243564ad7f1e2db1f02c9d",
+      "elapsed_seconds": 8.863,
+      "log_path": "runtime/delivery/profile-correction-backend-1793356112871194100.log",
+      "log_sha256": "87319ffd1fc00565411911e6588f36e64f574ce530fdcaf7a3195b5bdff61e24",
       "local_stack_ready": true,
       "preview_http_ready": false,
       "public_log": {
-        "path": "docs/verification/metrics-dashboard-backend.log",
-        "sha256": "fe0bdfb4de109a612b955dccd90e2689b5297f8daf243564ad7f1e2db1f02c9d",
-        "bytes": 1564
+        "path": "docs/verification/profile-correction-backend.log",
+        "sha256": "87319ffd1fc00565411911e6588f36e64f574ce530fdcaf7a3195b5bdff61e24",
+        "bytes": 1565
       }
     },
     "preview": {
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 1.331,
-      "log_path": "runtime/delivery/metrics-dashboard-preview-1793354883238550000.log",
+      "elapsed_seconds": 4.458,
+      "log_path": "runtime/delivery/profile-correction-preview-1793356123006945800.log",
       "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
       "local_stack_ready": false,
       "preview_http_ready": true,
       "public_log": {
-        "path": "docs/verification/metrics-dashboard-preview.log",
+        "path": "docs/verification/profile-correction-preview.log",
         "sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
         "bytes": 91
       }
@@ -738,6 +741,10 @@
       "sha256": "18853e3e184043682b7d0ea290a62469204e37527eb003f2e5dfb49f82e13276"
     },
     {
+      "path": "docs/verification/delivery-focused-source-7e849e2.json",
+      "sha256": "c6bb274d9b8b3a0fae57069f65868ed8367a0c1c8d90cce0672271207ef48e94"
+    },
+    {
       "path": "docs/verification/delivery-focused-source-89d135a.json",
       "sha256": "dbebfe0b854692200def16480f856579b1e57ce175b3b11209607c1f74f470c4"
     },
@@ -972,6 +979,122 @@
     {
       "path": "docs/verification/mcp-observation-native-source.json",
       "sha256": "de9583465a2dc719d499e07ba32f6377851daaad331f9ba8cbaf07e47f71ab2d"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-api.json",
+      "sha256": "d82c0cdf7e299987c959283dfce5341ec0363f8388d3a32087b9027158c8e888"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-attempt-01-result.json",
+      "sha256": "1ecc2ddb07a929d5b3cd9f9749828e43d89ba8c32fe1206c20844477cd9d926e"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-attempt-01-source.json",
+      "sha256": "9c4e8475cf86587ea528fc04062f6faf4b44d8831cdf8d3608715904989c51d3"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-attempt-02-api.json",
+      "sha256": "fbe3f2142a82c4cadf920f9d0ec75c6df5a2110595d5222713eaff1f44499288"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-attempt-02-result.json",
+      "sha256": "648698ad8f45b9c8ff71be196e09e61c7a2ff311f8f204ca7461cc875a0ca221"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-attempt-02-source.json",
+      "sha256": "3249b316da6abf0bb88e79542092a9b404ec64fedfd22a06f3a1936d33b9e165"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-attempt-03-api.json",
+      "sha256": "9e95f7c76f41606f245c2ebbca8e01c0237a62786e036744c9c4528284dad048"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-attempt-03-result.json",
+      "sha256": "a53036233e89ab829a22c6cbe530fa9a55961afb3962803e61e26b485040c13a"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-attempt-03-source.json",
+      "sha256": "3249b316da6abf0bb88e79542092a9b404ec64fedfd22a06f3a1936d33b9e165"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-attempt-04-api.json",
+      "sha256": "a714cc093836613e8658d0d218d3f47618e8fd7b47a0f604f4eb6be445310d97"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-attempt-04-result.json",
+      "sha256": "16bfe79213dbd40569b0455136c445ab2deee238566247362e7ae2481b704168"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-attempt-04-source.json",
+      "sha256": "2d7ff1b8df9ba3046d81747d1536ddc86bb48df9f11adcaf5e8478ecbaf1a8fd"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-attempt-05-api.json",
+      "sha256": "d82c0cdf7e299987c959283dfce5341ec0363f8388d3a32087b9027158c8e888"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-attempt-05-result.json",
+      "sha256": "be5fd07ecafc17a2f58fc0fd8a3ff424a026b9604632fb8098be5a4b7de6c493"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-attempt-05-source.json",
+      "sha256": "2d7ff1b8df9ba3046d81747d1536ddc86bb48df9f11adcaf5e8478ecbaf1a8fd"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-attempts.json",
+      "sha256": "e98bb399a6bf12499deb7a8bf31cc330301c7b4716d33cb0b335be168d42bbc1"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-backend.json",
+      "sha256": "13811baf2a82e70721b46e29cbaf82ecfa91bba8f43e588e5f8397c1b0d46e26"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-build.json",
+      "sha256": "c7feac07178ab4e768461d627138a34b8da363c07d0277da62ba2d0165129b7d"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-client.json",
+      "sha256": "a714cc093836613e8658d0d218d3f47618e8fd7b47a0f604f4eb6be445310d97"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-doctor.json",
+      "sha256": "97d658cec9283f90933bc51d69c79bbb9795f3623c2657c5bd97b2ce7c54206c"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-preview.json",
+      "sha256": "5081d312710c9c99188f641f7abba788af14d386c0b8f9d91b868ae4a8972b7d"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-recording-attempt-01.json",
+      "sha256": "77a923f8f6ad28ea49f60adf969c88203a1d6150b7eb9e9fa92878e684d69301"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-recording-attempt-02-build.json",
+      "sha256": "d2c23b9835e3c7135d6d0d72253d9257ba4c32e6807e0dc0d3f9c358bcf96f35"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-recording-attempt-02-observation.json",
+      "sha256": "8abcc921e40177809c6e5c17fbaf8300cc7d508efade9330e1dc77904d6f1646"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-recording-attempt-02-result.json",
+      "sha256": "1071ee557069eb1b748f69a7942a46088c83f1730bd7f8f6fda04cb54d20bee5"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-recording.json",
+      "sha256": "74f191ce03973dba374f774d513e8c45d532af9cd82a609fe0b56cc7954d86aa"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-runner-collision.json",
+      "sha256": "a53c57e2154c7b64cbd9b9450b68d4bfe0c44e1d6649cc4b7718961cfa573025"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-source.json",
+      "sha256": "0d8e19642ebd61a8dec636b33ff282356be19dd8692a0ca03d04c30292fccd52"
+    },
+    {
+      "path": "docs/verification/metrics-dashboard-tested-source.json",
+      "sha256": "2d7ff1b8df9ba3046d81747d1536ddc86bb48df9f11adcaf5e8478ecbaf1a8fd"
     },
     {
       "path": "docs/verification/mini-mount-browser.json",
@@ -1418,6 +1541,10 @@
       "sha256": "d60d9bfedd4d08991c5b8893b4c5b53192e9ee778210186288a005817602de48"
     },
     {
+      "path": "docs/verification/publication-7e849e2.json",
+      "sha256": "414a4698d2853d89a6d0ccdc4a605cede21b5e36c050d6cf461fc5b56fd0d328"
+    },
+    {
       "path": "docs/verification/publication-83bd7ee.json",
       "sha256": "6fb05310a33448111e16e459d5906df051a332f08ca4a5a0309631418594419b"
     },
@@ -1580,6 +1707,10 @@
     {
       "path": "docs/verification/repository-audit-723a727.json",
       "sha256": "3daf1bddfd95ec9c10f79934e15daf15b6d460b6f0589d21054132d33a221950"
+    },
+    {
+      "path": "docs/verification/repository-audit-7e849e2.json",
+      "sha256": "b6e1dbfbae8f27f29e6741646fec9804b0d6a43299bfea61351b41cf961ca405"
     },
     {
       "path": "docs/verification/repository-audit-83bd7ee.json",
@@ -1862,14 +1993,14 @@
       "sha256": "fbf919d88e4b3bb6b2e1ff5993fb62a4dacfd78c559bd7232f0c780b28b41846"
     }
   ],
-  "existing_media_files_verified": 122,
+  "existing_media_files_verified": 130,
   "new_media_files_verified": 8,
-  "total_media_files": 130,
-  "baseline_media_files_with_metadata": 154,
+  "total_media_files": 138,
+  "baseline_media_files_with_metadata": 164,
   "baseline_design_files": 48,
   "frozen_c_files": 25,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
-  "prior_delivery": "docs/verification/delivery-focused-source-7e849e2.json",
+  "prior_delivery": "docs/verification/delivery-focused-source-6e488cc.json",
   "prior_ui_captures_relabelled": false,
   "browser_used": true,
   "browser_tabs_closed": true,
@@ -1881,17 +2012,18 @@
   "production_admitted": false,
   "cloud_deployed": false,
   "functional_changes": [
-    "Requested UTC half-open window is validated and applied consistently to all aggregate measures in one read snapshot.",
-    "Paid first-manifest delivery, route timing and distinct deadline scopes exclude unpaid, missing, repeated and out-of-window records without inventing absent values.",
-    "Independent metrics:read operator UI uses C design, 1/7/30-day or custom windows, explicit empty/error/retry states and route/cost/exception context.",
-    "Memory-only credentials and stale-response rejection; successful aggregate reads are audited without buyer content or private resource addresses."
+    "Optional five-field correction is available inside the shared mini-program analysis page without a mandatory form or new purchase.",
+    "Per-field lengths, whitespace, distinct original-photo evidence and profile capacity are checked before any new Profile/lock is persisted; the complete output DTO is validated before writes.",
+    "One immutable in-memory intent survives an unknown ACK; current product/profile/version/hash is reread before clearing obsolete plan/preview/quote references.",
+    "Account/product changes and page disposal reject late results. User feature/label notes retain USER_CORRECTED status, original unknowns and observed identity facts; paid contracts remain unchanged."
   ],
   "limitations": [
-    "Counts show current state of records created in the window, not historical state as of its end. Costs cover the order ledger only.",
-    "Recognition, recommendations, album saves, effective community reuse, free platform costs and test/manual/real traffic segregation remain outside this metrics increment.",
-    "UI uses actual native HTTP and isolated PostgreSQL with synthetic payment, delivery, cost and staff metadata; not real payment, provider billing, quality or production identity validation.",
-    "An earlier official buyer case exceeded its unchanged 240-second limit. Root cause remains unresolved; no full-chain or full-suite pass is claimed this turn.",
-    "Live services and sales remain off. Native mini builds/devices, live services, commercial admission, production isolation, Plus, cloud and all 58 acceptance items remain pending."
+    "Browser captures are actual shared React/Taro rendering with synthetic recognition/correction/ACK metadata, separately from the native PostgreSQL/API checks; no real mini-program device or multimodal quality claim.",
+    "User corrections are not re-recognized or automatically promoted to verified facts. Existing observed facts and unknowns remain subject to independent evidence/review.",
+    "The earlier official buyer timeout is unresolved. A new diagnostic run on the previous snapshot exited natively with 0xc0000374 during PLAN_ROLE; no root cause or successful delivery is established. Its isolated database-schema cleanup has not been verified; no owned native child handle remained live.",
+    "Live services/sales remain off. Complete production isolation, official/community admission, native device checks, complete F17, Plus, cloud and all 58 acceptance items remain pending."
   ],
-  "canonical_metrics_dashboard_provenance": "docs/verification/metrics-dashboard-source.json"
+  "latest_native_buyer_observation": "docs/verification/profile-correction-native-buyer-observation.json",
+  "native_crash_test_schema_cleanup_verified": false,
+  "canonical_profile_correction_provenance": "docs/verification/profile-correction-source.json"
 }

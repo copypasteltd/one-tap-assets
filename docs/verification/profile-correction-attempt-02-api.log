@@ -1,0 +1,33 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ❯ tests/integration/profile-correction.test.ts (5 tests | 1 failed) 2531ms
+   × writes one new profile/lock and replays the original ACK without changing its parent or adding inference/payment work 152ms
+   · serializes two different corrections of the same expected revision instead of overwriting either parent
+   · rejects another owner, foreign evidence, duplicate evidence and absent observation evidence before any new version
+   · rejects invalid name/category lengths and blank text without persisting an invalid Profile
+   · keeps user label corrections separate from observed facts and preserves unknowns in the new identity lock
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/profile-correction.test.ts > writes one new profile/lock and replays the original ACK without changing its parent or adding inference/payment work
+AssertionError: expected 500 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 500
+
+ ❯ tests/integration/profile-correction.test.ts:27:28
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (5)
+   Start at  18:22:35
+   Duration  4.33s (tests 62%, import 28%, transform 10%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/profile-correction-2026-10-30T10-22-34-263Z-a49c5229/api.json

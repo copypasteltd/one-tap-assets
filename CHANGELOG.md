@@ -1,5 +1,18 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 — 可选商品纠错与同版续制
+
+- 小程序识别页增加五种可选轻量纠错，正常制作免填表；用户特征/标签补充保留“待复核”，不改变原观察事实及未知项。
+- 名称/类别限长、空白、重复/跨商品依据及档案容量在写入前拒绝，完整Profile先验再写入；新档案和商品锁沿用原事务与行锁。
+- 未确认回执沿用原键/正文核对，刷新当前档案后清除旧未付计划/预览/报价；账户/草稿变化和离页拒绝迟到回填，原已付合同保持。
+- 14客户端、5原生API、6实际共享页面浏览器检查通过，类型/server/preview/自检/启动通过；新增5PNG和MP4/WebM/GIF，双语说明及交付包同步。
+- 原失败记录保留；旧官方有声买家超时及本轮原快照PLAN_ROLE原生崩溃仍未解决。全面测试/双端真机本轮未执行，真实服务/销售关闭。
+- [实现及使用](docs/实施/商品档案轻量纠错与同版续制-v1.0.md) · [准确证据](docs/verification/profile-correction-source.json)。
+
+Optional profile correction now preserves immutable versions, replays unknown acknowledgements and continues from the current profile. User notes retain provenance. Nineteen focused tests and six browser checks pass; earlier native buyer failures remain unresolved. Live services stay off.
+
+以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
+
 ## 2026-10-30 — 运营窗口统计、实际界面和快速交付包
 
 - 管理统计修正忽略请求窗口、混入全历史、未付款状态及重复超时计数；统一半开UTC窗口和同一读取快照。已脱敏时间返回未知，首版交付与售后版本分开计量。

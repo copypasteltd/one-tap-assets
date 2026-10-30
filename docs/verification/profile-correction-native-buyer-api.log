@@ -1,0 +1,35 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+stdout | tests/integration/native-order.test.ts > checks out and delivers the native buyer PER_SHOT_AI pack from a real plan/quote through original paid audio review
+native-buyer-flow: E:\dev\sandbox\支付宝黑客松\一品成片\runtime\tests\native-order\media_4b027b3918644764a34485212daf8e86\buyer-flow_e423f3e8504e4a3ea4b4579d422b9bef.jsonl
+
+⎯⎯⎯⎯⎯⎯ Unhandled Errors ⎯⎯⎯⎯⎯⎯
+
+Vitest caught 1 unhandled error during the test run.
+This might cause false positive tests. Resolve unhandled errors to make sure your tests are not affected.
+
+⎯⎯⎯⎯⎯⎯ Unhandled Error ⎯⎯⎯⎯⎯⎯⎯
+Error: [vitest-pool]: Worker forks emitted error.
+ ❯ EventEmitter.onTaskError node_modules/.pnpm/vitest@5.0.5_@types+node@24_074c366c144b624165a2ee5270d15630/node_modules/vitest/dist/chunks/index.1TqnEahn.js:5915:21
+ ❯ EventEmitter.emit node:events:514:28
+ ❯ ChildProcess.emitUnexpectedExit node_modules/.pnpm/vitest@5.0.5_@types+node@24_074c366c144b624165a2ee5270d15630/node_modules/vitest/dist/chunks/index.1TqnEahn.js:5390:22
+ ❯ ChildProcess.emit node:events:514:28
+ ❯ ChildProcess._handle.onexit node:internal/child_process:324:12
+
+Caused by: Error: Worker exited unexpectedly with exit code 3221226356 during started state while running test file E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/native-order.test.ts
+ ❯ ChildProcess.emitUnexpectedExit node_modules/.pnpm/vitest@5.0.5_@types+node@24_074c366c144b624165a2ee5270d15630/node_modules/vitest/dist/chunks/index.1TqnEahn.js:5388:33
+ ❯ ChildProcess.emit node:events:514:28
+ ❯ ChildProcess._handle.onexit node:internal/child_process:324:12
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+
+
+ Test Files   (1)
+      Tests  36 skipped (37)
+     Errors  1 error
+   Start at  18:13:13
+   Duration  11.72s (transform 54%, import 46%)
+
+WARNING: Some tests are still running when generating the JSON report.This is likely an internal bug in Vitest.Please report it to https://github.com/vitest-dev/vitest/issues
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/native-core-2026-10-30T10-13-12-188Z-6bc5ee79/api.json

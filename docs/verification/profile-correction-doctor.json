@@ -1,0 +1,101 @@
+{
+  "status": "PASS",
+  "exit_code": 0,
+  "timeout_seconds": 90,
+  "elapsed_seconds": 1.907,
+  "log_path": "runtime/delivery/profile-correction-doctor-1793356110089528700.log",
+  "log_sha256": "dfae8c52035955a312711b6f42492360f3f493a4b75e3d539c9e2519b0b79eca",
+  "report": {
+    "checked_at": "2026-10-30T10:28:31.842Z",
+    "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
+    "rows": [
+      {
+        "id": "node",
+        "status": "PASS",
+        "detail": "24.22.1"
+      },
+      {
+        "id": "runtime/tools/package-manager/node_modules/pnpm/bin/pnpm.cjs",
+        "status": "PASS",
+        "detail": "present"
+      },
+      {
+        "id": "assets/presets/presets.v3.1.json",
+        "status": "PASS",
+        "detail": "present"
+      },
+      {
+        "id": "configuration",
+        "status": "PASS",
+        "detail": "environment=development; private values omitted"
+      },
+      {
+        "id": "database",
+        "status": "PASS",
+        "detail": "connected; 32 migrations"
+      },
+      {
+        "id": "ffmpeg",
+        "status": "PASS",
+        "detail": "Native executable on PATH responds"
+      },
+      {
+        "id": "ffprobe",
+        "status": "PASS",
+        "detail": "Native executable on PATH responds"
+      },
+      {
+        "id": "generation",
+        "status": "OFF",
+        "detail": "External service remains disabled"
+      },
+      {
+        "id": "codex",
+        "status": "OFF",
+        "detail": "External service remains disabled"
+      },
+      {
+        "id": "payments",
+        "status": "OFF",
+        "detail": "External service remains disabled"
+      },
+      {
+        "id": "community-publishing",
+        "status": "OFF",
+        "detail": "External service remains disabled"
+      },
+      {
+        "id": "server",
+        "status": "PRESENT_NOT_CERTIFIED",
+        "detail": "Existing default output; delivery:build records fresh isolated outputs"
+      },
+      {
+        "id": "preview",
+        "status": "PRESENT_NOT_CERTIFIED",
+        "detail": "Existing default output; delivery:build records fresh isolated outputs"
+      },
+      {
+        "id": "alipay",
+        "status": "NOT_BUILT",
+        "detail": "Run delivery:build"
+      },
+      {
+        "id": "douyin",
+        "status": "PRESENT_NOT_CERTIFIED",
+        "detail": "Existing default output; delivery:build records fresh isolated outputs"
+      },
+      {
+        "id": "catalog",
+        "status": "PASS",
+        "detail": "10 official presets; 14 variants"
+      }
+    ],
+    "full_product_verified": false,
+    "production_admitted": false
+  },
+  "public_log": {
+    "path": "docs/verification/profile-correction-doctor.log",
+    "sha256": "dfae8c52035955a312711b6f42492360f3f493a4b75e3d539c9e2519b0b79eca",
+    "bytes": 2141
+  }
+}

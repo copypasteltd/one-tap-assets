@@ -1,0 +1,12 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/unit/draft-selection.test.ts (9 tests) 15ms
+ ✓ tests/unit/profile-correction.test.ts (5 tests) 12ms
+
+ Test Files  2 passed (2)
+      Tests  14 passed (14)
+   Start at  18:22:31
+   Duration  1.54s (transform 72%, import 26%, tests 1%, worker 1%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/profile-correction-2026-10-30T10-22-29-713Z-d8bb9486/api.json

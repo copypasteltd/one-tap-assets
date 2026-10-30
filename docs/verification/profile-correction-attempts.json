@@ -1,0 +1,357 @@
+{
+  "schema_version": "1.0",
+  "checks": [
+    {
+      "attempt": 1,
+      "source_set_hash": "eb4c3e87f2c79adae7b1bd2710fb22fdafa9ba8ba15f9bf952e126c0caeea07e",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/profile-correction.test.ts tests/unit/draft-selection.test.ts --outputFile.json=runtime/test-results/profile-correction-2026-10-30T10-22-29-713Z-d8bb9486/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "tests/unit/profile-correction.test.ts",
+            "tests/unit/draft-selection.test.ts",
+            "--outputFile.json=runtime/test-results/profile-correction-2026-10-30T10-22-29-713Z-d8bb9486/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 2353,
+          "log_path": "runtime/test-results/profile-correction-2026-10-30T10-22-29-713Z-d8bb9486/api.log",
+          "log_sha256": "206d9cc0a68ab4d51bba81eed498c318a7574cd6596b4653ad1e36a10f5cb42d"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/profile-correction-attempt-01-source.json",
+          "sha256": "e74415a3f3012af50b5b3dd26e3304262aa75e95b67e2053ed1dff1b3082a2d2",
+          "bytes": 77483
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-01-result.json",
+          "sha256": "ac7d7b03db71d1fbc0d194a86e27f7b239ee22309ce0fe1d8c852e2684357af8",
+          "bytes": 1225
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-01-api.json",
+          "sha256": "da0ceb40d76569b41029c530618c6e21f4797a675375c238dfde2f32a960b9fa",
+          "bytes": 5641
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-01-api.log",
+          "sha256": "206d9cc0a68ab4d51bba81eed498c318a7574cd6596b4653ad1e36a10f5cb42d",
+          "bytes": 474
+        }
+      ],
+      "is_final_selected": false,
+      "observation": "Retained at its original source snapshot; only the final two selected runs count toward the current checks."
+    },
+    {
+      "attempt": 2,
+      "source_set_hash": "eb4c3e87f2c79adae7b1bd2710fb22fdafa9ba8ba15f9bf952e126c0caeea07e",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/profile-correction.test.ts --outputFile.json=runtime/test-results/profile-correction-2026-10-30T10-22-34-263Z-a49c5229/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/profile-correction.test.ts",
+            "--outputFile.json=runtime/test-results/profile-correction-2026-10-30T10-22-34-263Z-a49c5229/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 5239,
+          "log_path": "runtime/test-results/profile-correction-2026-10-30T10-22-34-263Z-a49c5229/api.log",
+          "log_sha256": "4bc7c986a86b95141248080903b064cf51ec2f17c3f22a1e3c156f0160a7e09c"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/profile-correction-attempt-02-source.json",
+          "sha256": "e74415a3f3012af50b5b3dd26e3304262aa75e95b67e2053ed1dff1b3082a2d2",
+          "bytes": 77483
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-02-result.json",
+          "sha256": "843d911286ac0574ded4fb6011962403af9639d50a99ef8c4503f1d5e16ef83b",
+          "bytes": 1256
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-02-api.json",
+          "sha256": "9973131e9b3e097398276e684e8ff7b48a7210cd0ab8bd845afa3ab3b809941f",
+          "bytes": 2910
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-02-api.log",
+          "sha256": "4bc7c986a86b95141248080903b064cf51ec2f17c3f22a1e3c156f0160a7e09c",
+          "bytes": 1468
+        }
+      ],
+      "is_final_selected": false,
+      "observation": "Missing validation import in the first increment caused a 500 before any new profile persisted; the import was added."
+    },
+    {
+      "attempt": 3,
+      "source_set_hash": "4a93a59557c93e922fb7f561043a5b93dd73b9d8fbe83b0e4ea19f9969fdc97e",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "typecheck",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+            "--noEmit"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 120000,
+          "elapsed_ms": 15896,
+          "log_path": "runtime/test-results/profile-correction-2026-10-30T10-25-46-863Z-922cef1b/type.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/profile-correction-attempt-03-source.json",
+          "sha256": "8a0bf99cf317e0a464be83e0a1323adc51db3fbaba7d9f68cb08aa41229d9137",
+          "bytes": 77633
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-03-result.json",
+          "sha256": "5f8bd8a3c5d13b393b1e5c94bbe1c79ebb58e53e33950cd94be8352b2f2a49a8",
+          "bytes": 865
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-03-type.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        }
+      ],
+      "is_final_selected": false,
+      "observation": "Retained at its original source snapshot; only the final two selected runs count toward the current checks."
+    },
+    {
+      "attempt": 4,
+      "source_set_hash": "4a93a59557c93e922fb7f561043a5b93dd73b9d8fbe83b0e4ea19f9969fdc97e",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/profile-correction.test.ts tests/unit/draft-selection.test.ts --outputFile.json=runtime/test-results/profile-correction-2026-10-30T10-26-03-974Z-896be168/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "tests/unit/profile-correction.test.ts",
+            "tests/unit/draft-selection.test.ts",
+            "--outputFile.json=runtime/test-results/profile-correction-2026-10-30T10-26-03-974Z-896be168/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 1493,
+          "log_path": "runtime/test-results/profile-correction-2026-10-30T10-26-03-974Z-896be168/api.log",
+          "log_sha256": "349b1897a505698f1e41544208330f50d752e2cefbf1e0a4f04eff3a63fd263f"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/profile-correction-attempt-04-source.json",
+          "sha256": "8a0bf99cf317e0a464be83e0a1323adc51db3fbaba7d9f68cb08aa41229d9137",
+          "bytes": 77633
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-04-result.json",
+          "sha256": "4388046ec584334e9db37068b84b3f639cff73f695cd4616de1736c00f4d3209",
+          "bytes": 1225
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-04-api.json",
+          "sha256": "778f8e9b9428e1bd0171c975cdf13107b9eac2e1d4255bcdbd7ae5e32cb41b3f",
+          "bytes": 5638
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-04-api.log",
+          "sha256": "349b1897a505698f1e41544208330f50d752e2cefbf1e0a4f04eff3a63fd263f",
+          "bytes": 475
+        }
+      ],
+      "is_final_selected": false,
+      "observation": "Retained at its original source snapshot; only the final two selected runs count toward the current checks."
+    },
+    {
+      "attempt": 5,
+      "source_set_hash": "4a93a59557c93e922fb7f561043a5b93dd73b9d8fbe83b0e4ea19f9969fdc97e",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/profile-correction.test.ts --outputFile.json=runtime/test-results/profile-correction-2026-10-30T10-26-06-482Z-c2d1dacd/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/profile-correction.test.ts",
+            "--outputFile.json=runtime/test-results/profile-correction-2026-10-30T10-26-06-482Z-c2d1dacd/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 10542,
+          "log_path": "runtime/test-results/profile-correction-2026-10-30T10-26-06-482Z-c2d1dacd/api.log",
+          "log_sha256": "6e8c36ea9556b16636546f5dea70a2497cc0613d6ddf8b7e252674038d24d856"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/profile-correction-attempt-05-source.json",
+          "sha256": "8a0bf99cf317e0a464be83e0a1323adc51db3fbaba7d9f68cb08aa41229d9137",
+          "bytes": 77633
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-05-result.json",
+          "sha256": "a5181eda5c7cbf968faaa3ab72331206dedd3626888d007ee1d95fbba0d3d936",
+          "bytes": 1257
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-05-api.json",
+          "sha256": "19a7996942c739a042c23f918076ee28cb144f1559dc9105358ac182240a1186",
+          "bytes": 3093
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-05-api.log",
+          "sha256": "6e8c36ea9556b16636546f5dea70a2497cc0613d6ddf8b7e252674038d24d856",
+          "bytes": 1911
+        }
+      ],
+      "is_final_selected": false,
+      "observation": "The capacity fixture attempted to UPDATE an immutable historical profile. The original trigger correctly rejected it; the capped fixture is now created before INSERT. No immutability gate changed."
+    },
+    {
+      "attempt": 6,
+      "source_set_hash": "e9b138c3350f5ca071371c9e26f74bf0c9a01a2920d431fadd918a862d177743",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/profile-correction.test.ts --outputFile.json=runtime/test-results/profile-correction-2026-10-30T10-27-11-877Z-f0497137/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/profile-correction.test.ts",
+            "--outputFile.json=runtime/test-results/profile-correction-2026-10-30T10-27-11-877Z-f0497137/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 14629,
+          "log_path": "runtime/test-results/profile-correction-2026-10-30T10-27-11-877Z-f0497137/api.log",
+          "log_sha256": "96c49cb1d652a2e1c4df9e2114a4b58ab41c105844fc79c5ff69b98bc8439cb7"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/profile-correction-attempt-06-source.json",
+          "sha256": "de42057b6fb78bc69434ba3491b4a2d920067ab65b3fa96e82399ecd7da9d980",
+          "bytes": 77633
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-06-result.json",
+          "sha256": "4e8ff829f29daa2bdbcf7453a5b370b238683647ecadd03eee6fc3267921722c",
+          "bytes": 1257
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-06-api.json",
+          "sha256": "3d88523aab858f2d4dc3e45cb2f59279ec726544546e1419143556a2d267d773",
+          "bytes": 2505
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-06-api.log",
+          "sha256": "96c49cb1d652a2e1c4df9e2114a4b58ab41c105844fc79c5ff69b98bc8439cb7",
+          "bytes": 665
+        }
+      ],
+      "is_final_selected": true,
+      "observation": "Retained at its original source snapshot; only the final two selected runs count toward the current checks."
+    },
+    {
+      "attempt": 7,
+      "source_set_hash": "e9b138c3350f5ca071371c9e26f74bf0c9a01a2920d431fadd918a862d177743",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/profile-correction.test.ts tests/unit/draft-selection.test.ts --outputFile.json=runtime/test-results/profile-correction-2026-10-30T10-27-29-381Z-835fb191/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "tests/unit/profile-correction.test.ts",
+            "tests/unit/draft-selection.test.ts",
+            "--outputFile.json=runtime/test-results/profile-correction-2026-10-30T10-27-29-381Z-835fb191/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 480000,
+          "elapsed_ms": 2697,
+          "log_path": "runtime/test-results/profile-correction-2026-10-30T10-27-29-381Z-835fb191/api.log",
+          "log_sha256": "eb8ad2737e33e46d24ba7b29a7ca1715ae2f3421c23a71e3e9e5c6028e886ea8"
+        }
+      ],
+      "files": [
+        {
+          "path": "docs/verification/profile-correction-attempt-07-source.json",
+          "sha256": "de42057b6fb78bc69434ba3491b4a2d920067ab65b3fa96e82399ecd7da9d980",
+          "bytes": 77633
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-07-result.json",
+          "sha256": "cc24dec1b31cb6268517022c37f5f3671d73c8b7d79c1c8b4a1ff10771112bd0",
+          "bytes": 1225
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-07-api.json",
+          "sha256": "cb12709f855c3a1990c6d5ba8e7105562825bcf055b651b1d039ae8a6fbaf202",
+          "bytes": 5637
+        },
+        {
+          "path": "docs/verification/profile-correction-attempt-07-api.log",
+          "sha256": "eb8ad2737e33e46d24ba7b29a7ca1715ae2f3421c23a71e3e9e5c6028e886ea8",
+          "bytes": 475
+        }
+      ],
+      "is_final_selected": true,
+      "observation": "Retained at its original source snapshot; only the final two selected runs count toward the current checks."
+    }
+  ],
+  "native_buyer_observation": "docs/verification/profile-correction-native-buyer-observation.json",
+  "recording": "docs/verification/profile-correction-recording.json",
+  "earlier_observations_preserved": true,
+  "earlier_results_relabelled": false,
+  "runtime_limits_increased": false,
+  "assertions_weakened": false,
+  "immutable_snapshot_trigger_changed": false
+}

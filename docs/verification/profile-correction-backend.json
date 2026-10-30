@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "exit_code": 0,
+  "timeout_seconds": 90,
+  "elapsed_seconds": 8.863,
+  "log_path": "runtime/delivery/profile-correction-backend-1793356112871194100.log",
+  "log_sha256": "87319ffd1fc00565411911e6588f36e64f574ce530fdcaf7a3195b5bdff61e24",
+  "local_stack_ready": true,
+  "preview_http_ready": false,
+  "public_log": {
+    "path": "docs/verification/profile-correction-backend.log",
+    "sha256": "87319ffd1fc00565411911e6588f36e64f574ce530fdcaf7a3195b5bdff61e24",
+    "bytes": 1565
+  }
+}

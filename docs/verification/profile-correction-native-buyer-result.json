@@ -1,0 +1,30 @@
+{
+  "base": "runtime/test-results/native-core-2026-10-30T10-13-12-188Z-6bc5ee79",
+  "source_set_hash": "ea335c9494249f5db9823c3b962f3534bae18a3518e0a594b1bfc5727a71a280",
+  "source_unchanged": true,
+  "commands": [
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/native-order.test.ts -t checks out and delivers the native buyer PER_SHOT_AI --bail=1 --outputFile.json=runtime/test-results/native-core-2026-10-30T10-13-12-188Z-6bc5ee79/api.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.integration.config.ts",
+        "tests/integration/native-order.test.ts",
+        "-t",
+        "checks out and delivers the native buyer PER_SHOT_AI",
+        "--bail=1",
+        "--outputFile.json=runtime/test-results/native-core-2026-10-30T10-13-12-188Z-6bc5ee79/api.json"
+      ],
+      "shell": false,
+      "status": "FAIL",
+      "exit_code": 1,
+      "signal": null,
+      "timeout_ms": 480000,
+      "elapsed_ms": 12368,
+      "log_path": "runtime/test-results/native-core-2026-10-30T10-13-12-188Z-6bc5ee79/api.log",
+      "log_sha256": "d9484b4e5f0b1f10c23c1f4c059757881a300e436ae05eb51d0261f7de01c92f"
+    }
+  ]
+}

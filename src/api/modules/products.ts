@@ -9,6 +9,7 @@ import { POLICIES } from '../../shared/domain/policies.js';
 import { makeIdentityLock } from '../../worker/analysis/profile.js';
 import { visionContract } from '../../worker/providers/vision.js';
 import { lockMediaOwner } from './media-access.js';
+import { validate } from '../lib/validation.js';
 
 export async function createProduct(db: Db, p: Principal): Promise<DTO<'Product'>> {
   await lockMediaOwner(db, p.tenantId, p.userId);
@@ -60,21 +61,27 @@ export async function correctProfile(db: Db, p: Principal, productId: string, re
   const original = await owned<DTO<'Profile'>>(db, 'profile_versions', request.profile_id, p);
   const photos = original.data.photo_roles.map(r => r.asset_id);
   const evidenceIds = request.evidence_asset_ids ?? [];
+  const value=request.value.trim(),limit=request.field==='name'?200:request.field==='category'?120:1000;
+  requireThat(value.length>0&&Array.from(value).length<=limit,'CORRECTION_VALUE_INVALID',`纠错内容须为1至${limit}字`,422);
+  requireThat(new Set(evidenceIds).size===evidenceIds.length,'EVIDENCE_SCOPE_INVALID','同一张依据照片只能选择一次',422);
   requireThat(evidenceIds.every(a => photos.includes(a)), 'EVIDENCE_SCOPE_INVALID', '纠错依据必须属于当前商品照片', 422);
   requireThat(['category', 'name'].includes(request.field) || evidenceIds.length > 0, 'EVIDENCE_REQUIRED', '请关联相应的商品照片', 422);
   const profileId = id('profile'); const lockId = id('lock'); const data = structuredClone(original.data);
   data.profile_id = profileId; data.identity_lock_id = lockId; data.revision++;
-  if (request.field === 'category' || request.field === 'name') data[request.field] = request.value;
+  if (request.field === 'category' || request.field === 'name') data[request.field] = value;
   else if (request.field === 'photo_role') {
-    requireThat(['WHOLE', 'SIDE', 'DETAIL', 'LABEL', 'OTHER'].includes(request.value), 'INVALID_PHOTO_ROLE', '照片用途无效', 400);
-    for (const role of data.photo_roles) if (evidenceIds.includes(role.asset_id)) role.role = request.value as DTO<'Profile'>['photo_roles'][number]['role'];
+    requireThat(['WHOLE', 'SIDE', 'DETAIL', 'LABEL', 'OTHER'].includes(value), 'INVALID_PHOTO_ROLE', '照片用途无效', 400);
+    for (const role of data.photo_roles) if (evidenceIds.includes(role.asset_id)) role.role = value as DTO<'Profile'>['photo_roles'][number]['role'];
   } else {
-    const evidence = evidenceIds.map(assetId => ({ evidence_id: id('evidence'), asset_id: assetId, kind: 'USER_CORRECTION' as const, text: request.value, region: null }));
+    const destination=request.field==='label_text'?data.label_texts:data.observations;
+    requireThat(destination.length<100&&data.evidence.length+evidenceIds.length<=100,'CORRECTION_CAPACITY_REACHED','当前档案纠错记录已达上限，请重新拍照整理',422);
+    const evidence = evidenceIds.map(assetId => ({ evidence_id: id('evidence'), asset_id: assetId, kind: 'USER_CORRECTION' as const, text: value, region: null }));
     data.evidence.push(...evidence);
-    const observation: DTO<'Observation'> = { feature: '用户纠错', value: request.value, status: 'USER_CORRECTED', source_asset_ids: evidenceIds, evidence_ids: evidence.map(e => e.evidence_id), note: '用户提供的纠错，未转为模型观察事实', model_reported_confidence: null };
-    (request.field === 'label_text' ? data.label_texts : data.observations).push(observation);
+    const observation: DTO<'Observation'> = { feature: '用户纠错', value, status: 'USER_CORRECTED', source_asset_ids: evidenceIds, evidence_ids: evidence.map(e => e.evidence_id), note: '用户提供的纠错，未转为模型观察事实', model_reported_confidence: null };
+    destination.push(observation);
   }
   const { profile_hash: _oldHash, ...body } = data; data.profile_hash = hash(body);
+  validate('Profile',data,true);
   await insert(db, 'profile_versions', { id: profileId, tenant_id: p.tenantId, owner_id: p.userId, product_id: productId, photo_version_id: original.photo_version_id, revision: data.revision, profile_hash: data.profile_hash, data });
   const lock = makeIdentityLock(p.tenantId, data);
   await insert(db, 'identity_locks', { id: lockId, tenant_id: p.tenantId, profile_id: profileId, hash: lock.content_hash, data: lock });

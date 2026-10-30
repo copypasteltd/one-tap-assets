@@ -2,29 +2,29 @@
 
 [English](README.en.md) · [中文](README.md) · [Docs](docs/README.md) · [Quick start](docs/guides/QUICKSTART.md) · [Status](docs/guides/STATUS.md) · [Changelog](CHANGELOG.md)
 
-One Tap Assets turns product photos into a coordinated image, short-video and copy pack. **Alipay and Douyin mini-programs are the primary clients**. Multimodal analysis identifies visible facts without a product form. Buyers select a community preset, confirm assets and price, explicitly pay, wait for cloud production and save the results to their album. The future Plus web client supports deeper editing.
+One Tap Assets turns product photos into a coordinated image, short-video and copy pack. **Alipay and Douyin mini-programs are the primary clients**. Multimodal analysis establishes visible features without a product form. Buyers select a community preset, confirm the pack and price, explicitly pay and receive downloadable assets after cloud production. The future Plus web client supports deeper editing.
 
-Ten official styles and 25 trusted components support controlled community extensions. Codex participates in planning, production, post, QC and independent factual/style reviews. Each job freezes its Skill, identity, resources, rights and budget, then releases its instance after private delivery. Source and bounded fixture evidence exist for three routes, native audio, community defaults, aftercare and support/review desks. [Product documents](docs/README.md) · [Development and constraints](docs/开发/README.md).
+Ten official styles and 25 trusted components support controlled community extensions. Codex participates in planning, production, post, QC and independent factual/style reviews. Each order freezes its Skill, identity, models, resources, rights and budget, then releases its instance after private delivery. [Product documents](docs/README.md) · [Development and constraints](docs/开发/README.md).
 
 | Step | Buyer action | System behavior |
 | --- | --- | --- |
-| 1. Photograph | Capture whole, side and detail views | Infer visible facts, features and unknowns |
-| 2. Select | Browse community styles, authors and asset lists | Recommend presets using photo evidence |
-| 3. Confirm | Review the complete pack and price; explicitly pay | Freeze product, Skill, models, voice, rights and budget |
+| 1. Photograph | Capture whole, side and detail views | Infer visible features, label text and unknowns |
+| 2. Select | Browse community styles and complete asset lists | Recommend presets; optionally correct one mistaken field |
+| 3. Confirm | Review the complete price; explicitly pay | Freeze current profile/identity, Skill, models, rights and total budget |
 | 4. Produce | Follow progress and original-order exceptions | Planning → production → post → QC → independent dual review |
-| 5. Receive | Save images/videos to the album; copy text | Private delivery, instance release and bounded aftercare |
+| 5. Receive | Save images/videos and copy text | Private delivery, instance release and bounded aftercare |
 
-This increment adds [window-consistent operational metrics](docs/实施/运营看板与窗口一致统计-v1.0.md). `/ops/metrics` requires independent operator permission and reads paid/first-delivered orders, unknown submissions, refunds, distinct deadline failures, order-ledger costs and three route P95 timings. The endpoint now respects the requested window instead of mixing fixed and all-history counts. Failed refreshes clear old values and can retry the same window. This is a current cohort delivery ratio; costs cover the order ledger only.
+This increment adds [optional profile correction and version-consistent continuation](docs/实施/商品档案轻量纠错与同版续制-v1.0.md). Buyers may correct the name, category, visible feature, label text or photo role without a mandatory form. A new profile and identity lock are created while old versions and paid orders remain unchanged. Obsolete unpaid plan/preview/quote references are cleared. Lost acknowledgements replay the original intent; account, version and photo scope are checked. User notes remain pending review and are not promoted to observed facts.
 
-![Actual operator UI; payment, delivery and costs are synthetic metadata](docs/media/metrics-dashboard/02-windowed-overview.png)
+![Optional correction in the actual shared UI with synthetic product metadata](docs/media/profile-correction/02-optional-correction.png)
 
-![Actual recorded operator flow](docs/media/metrics-dashboard/walkthrough.gif)
+![Actual correction, original-intent recovery and provenance flow](docs/media/profile-correction/walkthrough.gif)
 
-[Five screenshots, MP4/WebM/GIF and provenance](docs/media/metrics-dashboard/README.md) use the actual browser, API and native database with synthetic payment, delivery, cost and staff identity. Eight new media files were added; all 122 earlier media files and frozen C design assets retain their bytes and original versions.
+[Five screenshots, MP4/WebM/GIF and provenance](docs/media/profile-correction/README.md). Fourteen client checks (five new, nine draft compatibility), five native PostgreSQL/API checks and six browser checks pass, along with typecheck, server/preview builds, native setup and local startup. The snapshot contains 475 source files, 42 contract/Skill files, four fonts, 32 migrations and 77 business/35 management operations. Eight media files were added; all 130 earlier media and frozen C assets retain their bytes. [Evidence and earlier failures](docs/verification/profile-correction-source.json) · [Package](docs/delivery/package.json) · [Run and use](docs/delivery/README.md) · [Completed and pending work](docs/guides/STATUS.md).
 
-**Four client, three native-database API and six browser checks pass**. Typecheck, server/preview builds, native setup checks and local startup pass. The snapshot has 470 source files, 42 contract/Skill files, four fonts, 32 migrations and 77 business/35 management operations. [Evidence and earlier recording/runner issues](docs/verification/metrics-dashboard-source.json) · [Current package](docs/delivery/package.json) · [Run and package](docs/delivery/README.md) · [Completed and pending work](docs/guides/STATUS.md).
+The three routes, native audio, community commercial configuration, aftercare, support/review and [operational metrics](docs/实施/运营看板与窗口一致统计-v1.0.md) retain their source and bounded original evidence. Browser recognition/correction metadata is synthetic replay, separately from real native API transactions; neither proves real recognition, audio, payment or mini-program device quality.
 
-This follows the requested focused delivery without comprehensive suites or an all-green prerequisite. An earlier official buyer case exceeded its unchanged 240-second limit; its cause remains unresolved. Live Codex/generation/audio/payment, production isolation, complete commercial admission, mini-program devices, remaining metrics, Plus, cloud and all 58 acceptance items remain pending. Live services and sales remain off; full-product/production/cloud flags remain false. The ZIP contains source and current server/web outputs; documented native tools, dependencies and external service configuration are separate prerequisites.
+This follows the requested focused delivery without comprehensive suites or an all-green prerequisite. The earlier official buyer 240-second timeout remains unresolved; a new diagnostic run on the previous snapshot exited natively during PLAN_ROLE, with cause unconfirmed. Live services/isolation, complete commercial admission, devices, remaining F17, Plus/cloud and all 58 acceptance items remain pending. Live services and sales stay off; full-product/production/cloud flags remain false. The ZIP contains source and server/web builds; documented native tools, dependencies and formal configuration are separate prerequisites.
 
 ## Screens and recorded interaction
 
