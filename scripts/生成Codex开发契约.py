@@ -663,6 +663,48 @@ def extend_support_repair_ui_contract(api: dict, admin: dict, endpoints: dict) -
                 "requirements": ["P01-F12", "P01-F16"], "implementation_status": STATUS})
 
 
+def extend_review_console_contract(api: dict, admin: dict, endpoints: dict) -> None:
+    """Read only the author evidence frozen in the original publication request."""
+    ident = {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"}
+    digest = {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+    def bounded_text(n): return {"type": "string", "maxLength": n}
+    def items(schema, maximum=100): return {"type": "array", "items": schema, "maxItems": maximum}
+    size = {"type": "integer", "minimum": 1, "maximum": 125000000}
+    mime = {"enum": ["image/png", "video/mp4"]}
+    models = {
+        "PublicationReviewFile": obj({"sample_id": ident, "item_id": ident, "kind": {"enum": ["image", "video"]},
+            "mime_type": mime, "sha256": digest, "size_bytes": size}),
+        "PublicationReviewRights": obj({"record": ref("RightsRecord"), "statement": nullable(bounded_text(3000)),
+            "license_reference": nullable(bounded_text(1000)), "evidence_asset_ids": items(ident, 10)}),
+        "PublicationReviewSample": obj({"sample": ref("Sample"), "files": items(ref("PublicationReviewFile"))}),
+        "PublicationReviewDetail": obj({"publication": ref("Publication"), "config": nullable(ref("PresetConfig")),
+            "license": nullable(ref("PresetLicense")), "rights": items(ref("PublicationReviewRights"), 50),
+            "samples": items(ref("PublicationReviewSample")), "content_available": {"type": "boolean"}}),
+        "PublicationReviewMedia": obj({"publication_id": ident, "sample_id": nullable(ident), "rights_record_id": nullable(ident),
+            "item_id": ident, "mime_type": mime, "sha256": digest, "size_bytes": size,
+            "bytes_base64": {"type": "string", "maxLength": 166666668, "pattern": "^[A-Za-z0-9+/]+={0,2}$"}})}
+    for name in ["PublicationReviewDetail", "PublicationReviewMedia"]:
+        models[name + "Response"] = obj({"data": ref(name), "trace_id": bounded_text(128)})
+    for doc in (api, admin): doc["components"]["schemas"].update(copy.deepcopy(models))
+    for path, operation, title, response in [
+        ("/publications/{publication_id}", "getPublicationReview", "读取原发布申请、许可与授权样例", "PublicationReviewDetail"),
+        ("/publications/{publication_id}/samples/{sample_id}/media/{item_id}", "readPublicationReviewMedia", "核对原申请指定样例的实际私有文件", "PublicationReviewMedia"),
+        ("/publications/{publication_id}/rights/{rights_record_id}/evidence/{asset_id}", "readPublicationRightsEvidence", "核对原申请指定授权的证明图片", "PublicationReviewMedia")]:
+        template = copy.deepcopy(admin["paths"]["/publications"]["get"])
+        template.update(operationId=operation, summary=title,
+            description="独立审核权限，只投影原申请绑定的作者资料；实际字节逐项核对登记、撤回、SHA和文件签名。",
+            parameters=[{"name": key, "in": "path", "required": True, "schema": copy.deepcopy(ident)} for key in re.findall(r"\{([^}]+)\}", path)])
+        template["responses"]["200"]["content"]["application/json"]["schema"] = ref(response + "Response")
+        admin["paths"][path] = {"get": template}
+        if not any(e["operation_id"] == operation for e in endpoints["endpoints"]):
+            endpoints["endpoints"].append({"method": "GET", "path": path, "operation_id": operation, "summary": title,
+                "permission": "moderator:review", "request_schema": None, "response_schema": response,
+                "requirements": ["P01-F14", "P01-F28", "P01-F31"], "implementation_status": "SOURCE_IMPLEMENTED_NOT_PRODUCTION_ADMITTED"})
+    query = admin["paths"]["/publications"]["get"]["parameters"]
+    if not any(p.get("name") == "state" for p in query):
+        query.append({"name": "state", "in": "query", "required": False, "schema": ref("PublicationState")})
+
+
 def main() -> None:
     reqs = read("assets/requirements/requirements.v3.1.json")["requirements"]
     registry = read("assets/skills/ypcc/v1.0/registry.json")
@@ -706,6 +748,7 @@ def main() -> None:
     extend_support_contract(api, admin, admin_endpoints, dmap)
     extend_platform_repair_contract(api, admin, admin_endpoints)
     extend_support_repair_ui_contract(api, admin, admin_endpoints)
+    extend_review_console_contract(api, admin, admin_endpoints)
     # Real image-title revisions are optional, frozen before sale. Keep old
     # request forms mutually exclusive; never reinterpret DISPLAY_TEXT.
     revision_request_base = copy.deepcopy(api["components"]["schemas"]["RevisionRequest"])

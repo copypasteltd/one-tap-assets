@@ -3214,6 +3214,53 @@ export interface components {
             data: components["schemas"]["SupportRepairImage"];
             trace_id: string;
         };
+        PublicationReviewFile: {
+            sample_id: string;
+            item_id: string;
+            /** @enum {unknown} */
+            kind: "image" | "video";
+            /** @enum {unknown} */
+            mime_type: "image/png" | "video/mp4";
+            sha256: string;
+            size_bytes: number;
+        };
+        PublicationReviewRights: {
+            record: components["schemas"]["RightsRecord"];
+            statement: string | null;
+            license_reference: string | null;
+            evidence_asset_ids: string[];
+        };
+        PublicationReviewSample: {
+            sample: components["schemas"]["Sample"];
+            files: components["schemas"]["PublicationReviewFile"][];
+        };
+        PublicationReviewDetail: {
+            publication: components["schemas"]["Publication"];
+            config: components["schemas"]["PresetConfig"] | null;
+            license: components["schemas"]["PresetLicense"] | null;
+            rights: components["schemas"]["PublicationReviewRights"][];
+            samples: components["schemas"]["PublicationReviewSample"][];
+            content_available: boolean;
+        };
+        PublicationReviewMedia: {
+            publication_id: string;
+            sample_id: string | null;
+            rights_record_id: string | null;
+            item_id: string;
+            /** @enum {unknown} */
+            mime_type: "image/png" | "video/mp4";
+            sha256: string;
+            size_bytes: number;
+            bytes_base64: string;
+        };
+        PublicationReviewDetailResponse: {
+            data: components["schemas"]["PublicationReviewDetail"];
+            trace_id: string;
+        };
+        PublicationReviewMediaResponse: {
+            data: components["schemas"]["PublicationReviewMedia"];
+            trace_id: string;
+        };
     };
     responses: never;
     parameters: {

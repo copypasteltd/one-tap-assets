@@ -1,5 +1,15 @@
 # One Tap Assets · 一品成片
 
+This delivery adds the [community review workbench](docs/实施/社区审核工作台与原申请证据核对-v1.0.md) at `/ops/review`: staff inspect the original preset, actual PNG/MP4 samples and rights evidence, decide on content, then publish after a separate public-copy stage. A lost acknowledgement retries the original operation. Publication never enables sales. Alipay and Douyin mini-programs remain the primary customer clients.
+
+Six focused client, three native API (24 unselected) and seven browser checks pass, together with typecheck, server/preview builds, native setup and startup. Migration 31; no new migration. 439 source / 42 contract / 4 resource files, `9dc6f240`; 77 business / 35 management operations. Four screenshots and MP4/WebM/GIF are included; the previous 93 media files and frozen C artwork are unchanged. Full suites, fresh mini builds and host-device checks were not run. Authors, staff identities, rights, profiles and READY/QC inputs are synthetic; native HTTP, database, upload, file-reading and public-copy effects are real. Live providers, full admission, Plus and cloud remain pending; sales stay disabled. [Evidence](docs/verification/review-console-source.json) · [Package](docs/delivery/package.json) · [Startup](docs/delivery/README.md).
+
+![Actual community review workbench recording](docs/media/review-desk/walkthrough.gif)
+
+[Recording and screenshots](docs/media/review-desk/README.md)
+
+Earlier entries describe their original delivery snapshots; the current scope is stated above.
+
 This delivery connects [native-audio pre-sale binding and buyer delivery](docs/实施/原生声音售前完整绑定与购买交付-v1.0.md): original planning and quotes, checkout, payment confirmation, generation/post-production, independent listening, fresh facts/style reviews and private retrieval. Capability withdrawal before payment confirmation records the original payment and requests one original-order refund. The combined cost ceiling covers generation, audio rights, ASR, listening and original revision/repair allowances; historical internal quotes do not become purchasable.
 
 8 focused checks pass: five native-sale cases and three community-order regressions (28 not selected). Typecheck, server/preview builds, native setup and startup pass; migration 31 with no new migration. 431 source / 42 contract / 4 resource files, `59fe1100`. Full/unit suites, mini-program builds and browser recording were not run. Existing 93 media files and frozen C artwork stay unchanged. [Exact evidence](docs/verification/native-sale-source.json) · [Build](docs/delivery/current.json) · [Package](docs/delivery/package.json). Payments, rights, model semantics/usage, hearing, role identities and OSS metadata are synthetic, with local byte effects rather than live cloud or voice-quality evidence. Live services, devices, full admission, Plus and cloud remain pending; every preset stays unavailable for sale.

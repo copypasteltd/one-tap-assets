@@ -1,0 +1,313 @@
+{
+  "numTotalTestSuites": 1,
+  "numPassedTestSuites": 1,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 27,
+  "numPassedTests": 3,
+  "numFailedTests": 0,
+  "numPendingTests": 24,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793336900040,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "separates license registration/review permissions and exposes immutable versioned text without operator records",
+          "status": "skipped",
+          "title": "separates license registration/review permissions and exposes immutable versioned text without operator records",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "binds author proof to an owned photo version and rejects foreign products or ordinary product images as rights proof",
+          "status": "skipped",
+          "title": "binds author proof to an owned photo version and rejects foreign products or ordinary product images as rights proof",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "does not queue or charge sample work without an available execution service and refuses another photo set rights",
+          "status": "skipped",
+          "title": "does not queue or charge sample work without an available execution service and refuses another photo set rights",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects inactive/changed license acceptance, incompatible fork terms and duplicate evidence before publication",
+          "status": "skipped",
+          "title": "rejects inactive/changed license acceptance, incompatible fork terms and duplicate evidence before publication",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "requires a current sample for every selected execution blueprint and retains its actual style mapping",
+          "status": "skipped",
+          "title": "requires a current sample for every selected execution blueprint and retains its actual style mapping",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects foreign or altered sample bindings and an unavailable actual object without creating a publication",
+          "status": "skipped",
+          "title": "rejects foreign or altered sample bindings and an unavailable actual object without creating a publication",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "freezes acceptance and compiled sources, replays one submission and rejects a changed submission for the same draft version",
+          "status": "skipped",
+          "title": "freezes acceptance and compiled sources, replays one submission and rejects a changed submission for the same draft version",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "requires review of all original author grants and returns actionable reviewer feedback only to the owner",
+          "status": "skipped",
+          "title": "requires review of all original author grants and returns actionable reviewer feedback only to the owner",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rechecks binary media and rights before publishing and never treats publication as sales admission",
+          "status": "skipped",
+          "title": "rechecks binary media and rights before publishing and never treats publication as sales admission",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "retires a license permanently, blocks new review/publication and stops all affected new sales",
+          "status": "skipped",
+          "title": "retires a license permanently, blocks new review/publication and stops all affected new sales",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "requires separately bound third-party rights and detects changed registered resource content",
+          "status": "skipped",
+          "title": "requires separately bound third-party rights and detects changed registered resource content",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "preserves a community parent license and refuses new forks after its retirement",
+          "status": "skipped",
+          "title": "preserves a community parent license and refuses new forks after its retirement",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "requires explicit separate 30-day consent and prepares independent files before any public visibility",
+          "status": "skipped",
+          "title": "requires explicit separate 30-day consent and prepares independent files before any public visibility",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "preserves separately approved public bytes after natural input expiry and actual private-source redaction",
+          "status": "skipped",
+          "title": "preserves separately approved public bytes after natural input expiry and actual private-source redaction",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "lets only the owner withdraw, invalidates already issued links immediately and erases only the public copies",
+          "status": "skipped",
+          "title": "lets only the owner withdraw, invalidates already issued links immediately and erases only the public copies",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "recovers an uncertain original copy and a stale preparation lease without a second PUT or inference purchase",
+          "status": "skipped",
+          "title": "recovers an uncertain original copy and a stale preparation lease without a second PUT or inference purchase",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "revokes an inflight public copy, fences its stage and collects a late successful object write",
+          "status": "skipped",
+          "title": "revokes an inflight public copy, fences its stage and collects a late successful object write",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "ends an expired preparation without reviving its private sample or opening sales",
+          "status": "skipped",
+          "title": "ends an expired preparation without reviving its private sample or opening sales",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects changed prepared bytes and reclaims expired public grants",
+          "status": "skipped",
+          "title": "rejects changed prepared bytes and reclaims expired public grants",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "stops public downloads immediately when the frozen third-party resource is revoked",
+          "status": "skipped",
+          "title": "stops public downloads immediately when the frozen third-party resource is revoked",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "ends public distribution and stops new sales when its license retires",
+          "status": "skipped",
+          "title": "ends public distribution and stops new sales when its license retires",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "signs distinct retention and user-deletion scopes and keeps their public-copy behavior during journal replay",
+          "status": "skipped",
+          "title": "signs distinct retention and user-deletion scopes and keeps their public-copy behavior during journal replay",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "returns retryable 429 and Retry-After for an actual IP limit without reporting an internal failure",
+          "status": "skipped",
+          "title": "returns retryable 429 and Retry-After for an actual IP limit without reporting an internal failure",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "withdraws all of an account’s public samples while preserving a different owner’s authorized copies",
+          "status": "skipped",
+          "title": "withdraws all of an account’s public samples while preserving a different owner’s authorized copies",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "review console exposes original selected author samples and rights proofs with independent permission and actual file verification",
+          "status": "passed",
+          "title": "review console exposes original selected author samples and rights proofs with independent permission and actual file verification",
+          "duration": 660.1169,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "review console refuses unrelated evidence and redacts author content after the original product is deleted",
+          "status": "passed",
+          "title": "review console refuses unrelated evidence and redacts author content after the original product is deleted",
+          "duration": 1080.9020999999993,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "review console filters revision queues, reads actual video bytes and keeps review and publication separately idempotent",
+          "status": "passed",
+          "title": "review console filters revision queues, reads actual video bytes and keeps review and publication separately idempotent",
+          "duration": 404.46589999999924,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793336906667,
+      "endTime": 1793336908813.4658,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/publication-workflow.test.ts"
+    }
+  ]
+}

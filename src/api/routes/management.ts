@@ -21,6 +21,7 @@ import { scheduleAuthorizedSamples, authorizedSample, verifyAuthorizedFiles } fr
 import {listManagedTickets,managedTicket,processTicket,supportEvidence,requestSupportRepair} from '../modules/support-desk.js';
 import {storage,type ObjectStorage} from '../storage/storage.js';
 import {supportRepairContext,supportRepairImage} from '../modules/support-repair.js';
+import {getPublicationReview,readPublicationReviewMedia,readPublicationRightsEvidence} from '../modules/review-desk.js';
 
 interface Endpoint { method: string; path: string; operation_id: string; permission: string; request_schema: SchemaName | null; response_schema: SchemaName }
 interface Context { db: Db; cfg: Config; store:ObjectStorage; admin: ManagementPrincipal; params: Record<string, string>; body: unknown; traceId: string; query: { cursor?: string; limit?: string; state?:string } }
@@ -42,6 +43,9 @@ async function lockActiveCommunityLicense(c: Context): Promise<void> {
   if (source?.source === 'COMMUNITY') requireThat((await license(c.db, source.license_version, true)).state === 'ACTIVE', 'LICENSE_NOT_AVAILABLE', '当前许可已停止用于新交易', 422);
 }
 const handlers: Record<string, (c: Context) => Promise<unknown>> = {
+  getPublicationReview:async c=>getPublicationReview(c.db,c.admin,c.params.publication_id!,c.traceId),
+  readPublicationReviewMedia:async c=>readPublicationReviewMedia(c.db,c.cfg,c.store,c.admin,c.params.publication_id!,c.params.sample_id!,c.params.item_id!,c.traceId),
+  readPublicationRightsEvidence:async c=>readPublicationRightsEvidence(c.db,c.store,c.admin,c.params.publication_id!,c.params.rights_record_id!,c.params.asset_id!,c.traceId),
   getSupportRepairContext:async c=>supportRepairContext(c.db,c.cfg,c.admin,c.params.ticket_id!,c.traceId),
   readSupportRepairImage:async c=>supportRepairImage(c.db,c.cfg,c.store,c.admin,c.params.ticket_id!,c.params.manifest_revision!,c.params.deliverable_id!,c.traceId),
   listManagedSupportTickets: async c => listManagedTickets(c.db,c.cfg,c.admin,c.query),
@@ -51,8 +55,9 @@ const handlers: Record<string, (c: Context) => Promise<unknown>> = {
   registerPresetLicense: async c => registerLicense(c.db, validate('PresetLicenseRegistration', c.body)),
   decidePresetLicense: async c => decideLicense(c.db, c.params.license_id!, validate('PresetLicenseDecision', c.body)),
   listReviewQueue: async c => {
-    const size = limit(c.query.limit); const scope = 'management-publications'; const point = cursor.decode(c.cfg, c.query.cursor, scope);
-    const rows = await c.db.query<{ id: string; created_at: Date; data: DTO<'Publication'> }>(`SELECT id,created_at,data FROM publications WHERE ($1::timestamptz IS NULL OR (created_at,id)<($1,$2)) ORDER BY created_at DESC,id DESC LIMIT $3`, [point?.createdAt ?? null, point?.id ?? null, size + 1]);
+    const state=c.query.state===undefined?null:validate('PublicationState',c.query.state);
+    const size = limit(c.query.limit); const scope = `management-publications:${state??'*'}`; const point = cursor.decode(c.cfg, c.query.cursor, scope);
+    const rows = await c.db.query<{ id: string; created_at: Date; data: DTO<'Publication'> }>(`SELECT id,created_at,data FROM publications WHERE ($1::timestamptz IS NULL OR (created_at,id)<($1,$2)) AND ($4::text IS NULL OR review_state=$4) ORDER BY created_at DESC,id DESC LIMIT $3`, [point?.createdAt ?? null, point?.id ?? null, size + 1,state]);
     const slice = rows.rows.slice(0, size); const last = slice.at(-1); return { items: slice.map(r => r.data), next_cursor: last && rows.rows.length > size ? cursor.encode(c.cfg, { createdAt: last.created_at.toISOString(), id: last.id }, scope) : null };
   },
   decidePublicationReview: async c => {

@@ -1,0 +1,432 @@
+{
+  "checked_at": "2026-10-30T05:28:13.965551+00:00",
+  "attempts": [
+    {
+      "base": "runtime/test-results/review-console-2026-10-30T05-04-16-086Z",
+      "source_set_hash": "039136dd433f29cdcf50519d6c00eeac444aef102737c770bbac5d2e9a7b58ed",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "typecheck",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+            "--noEmit"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 120000,
+          "elapsed_ms": 7498,
+          "log_path": "runtime/test-results/review-console-2026-10-30T05-04-16-086Z/type.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "source_snapshot": "docs/verification/review-console-attempt-01-source.json"
+    },
+    {
+      "base": "runtime/test-results/review-console-2026-10-30T05-05-22-212Z",
+      "source_set_hash": "039136dd433f29cdcf50519d6c00eeac444aef102737c770bbac5d2e9a7b58ed",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/review-desk-client.test.ts --outputFile.json=runtime/test-results/review-console-2026-10-30T05-05-22-212Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "tests/unit/review-desk-client.test.ts",
+            "--outputFile.json=runtime/test-results/review-console-2026-10-30T05-05-22-212Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 3754,
+          "log_path": "runtime/test-results/review-console-2026-10-30T05-05-22-212Z/api.log",
+          "log_sha256": "cf7de379c152da07d663712465909067064ae6b630405f2b968879b803f5368e"
+        }
+      ],
+      "source_snapshot": "docs/verification/review-console-attempt-02-source.json",
+      "check_report": "docs/verification/review-console-attempt-02-checks.json",
+      "passed": 5,
+      "failed": 1,
+      "not_selected": 0
+    },
+    {
+      "base": "runtime/test-results/review-console-2026-10-30T05-05-43-381Z",
+      "source_set_hash": "c5a338fd50623c25629e0fe67ad1be93e3234757e27e080dc3f3db7d319b2fd3",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/review-desk-client.test.ts --outputFile.json=runtime/test-results/review-console-2026-10-30T05-05-43-381Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "tests/unit/review-desk-client.test.ts",
+            "--outputFile.json=runtime/test-results/review-console-2026-10-30T05-05-43-381Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 2951,
+          "log_path": "runtime/test-results/review-console-2026-10-30T05-05-43-381Z/api.log",
+          "log_sha256": "fb8b5c97374dd8d2f131ed62ce0b6c0246e43d4435a9408cfb97ce48f106c124"
+        }
+      ],
+      "source_snapshot": "docs/verification/review-console-attempt-03-source.json",
+      "check_report": "docs/verification/review-console-attempt-03-checks.json",
+      "passed": 6,
+      "failed": 0,
+      "not_selected": 0
+    },
+    {
+      "base": "runtime/test-results/review-console-2026-10-30T05-08-19-051Z",
+      "source_set_hash": "563a1b5b089a5cc27da77983672080ade266b583b1acbff0c98ae40b95eec31e",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/publication-workflow.test.ts -t review console --outputFile.json=runtime/test-results/review-console-2026-10-30T05-08-19-051Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/publication-workflow.test.ts",
+            "-t",
+            "review console",
+            "--outputFile.json=runtime/test-results/review-console-2026-10-30T05-08-19-051Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 10324,
+          "log_path": "runtime/test-results/review-console-2026-10-30T05-08-19-051Z/api.log",
+          "log_sha256": "d2b4ab7b7ae5ff1ec4ee6115d46246938b687667302135b47699940719e00cbe"
+        }
+      ],
+      "source_snapshot": "docs/verification/review-console-attempt-04-source.json",
+      "check_report": "docs/verification/review-console-attempt-04-checks.json",
+      "passed": 3,
+      "failed": 0,
+      "not_selected": 24
+    },
+    {
+      "base": "runtime/test-results/review-console-2026-10-30T05-12-28-602Z",
+      "source_set_hash": "6b58fd5883c8edc30cd834ad189e4b3b2c54977d970b0873e48d52e8dadbe65d",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/review-desk-client.test.ts --outputFile.json=runtime/test-results/review-console-2026-10-30T05-12-28-602Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "tests/unit/review-desk-client.test.ts",
+            "--outputFile.json=runtime/test-results/review-console-2026-10-30T05-12-28-602Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 2936,
+          "log_path": "runtime/test-results/review-console-2026-10-30T05-12-28-602Z/api.log",
+          "log_sha256": "30d4cf5b75a0c188332e774f8d9e0dd71f2408c20cbe1032177d0e26cb0cf080"
+        }
+      ],
+      "source_snapshot": "docs/verification/review-console-attempt-05-source.json",
+      "check_report": "docs/verification/review-console-attempt-05-checks.json",
+      "passed": 6,
+      "failed": 0,
+      "not_selected": 0
+    },
+    {
+      "base": "runtime/test-results/review-console-2026-10-30T05-13-00-177Z",
+      "source_set_hash": "6b58fd5883c8edc30cd834ad189e4b3b2c54977d970b0873e48d52e8dadbe65d",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/publication-workflow.test.ts -t review console --outputFile.json=runtime/test-results/review-console-2026-10-30T05-13-00-177Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/publication-workflow.test.ts",
+            "-t",
+            "review console",
+            "--outputFile.json=runtime/test-results/review-console-2026-10-30T05-13-00-177Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 15953,
+          "log_path": "runtime/test-results/review-console-2026-10-30T05-13-00-177Z/api.log",
+          "log_sha256": "cdda67733be27f4e0910c22eeaf1b4d4ace0cef8e7d365fb88f902af8babbc14"
+        }
+      ],
+      "source_snapshot": "docs/verification/review-console-attempt-06-source.json",
+      "check_report": "docs/verification/review-console-attempt-06-checks.json",
+      "passed": 3,
+      "failed": 0,
+      "not_selected": 24
+    },
+    {
+      "base": "runtime/test-results/review-console-2026-10-30T05-14-13-083Z",
+      "source_set_hash": "eb7ace74d51ad6f5accd22124a001f2f8d01006b14dd07a9ac219b97ba889761",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/review-desk-client.test.ts --outputFile.json=runtime/test-results/review-console-2026-10-30T05-14-13-083Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "tests/unit/review-desk-client.test.ts",
+            "--outputFile.json=runtime/test-results/review-console-2026-10-30T05-14-13-083Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 1268,
+          "log_path": "runtime/test-results/review-console-2026-10-30T05-14-13-083Z/api.log",
+          "log_sha256": "2eba240f0b07d954197c35d033bd5332bc9b839fbbcba49d15f236063d56c55f"
+        }
+      ],
+      "source_snapshot": "docs/verification/review-console-attempt-07-source.json",
+      "check_report": "docs/verification/review-console-attempt-07-checks.json",
+      "passed": 6,
+      "failed": 0,
+      "not_selected": 0
+    },
+    {
+      "base": "runtime/test-results/review-console-2026-10-30T05-14-23-588Z",
+      "source_set_hash": "eb7ace74d51ad6f5accd22124a001f2f8d01006b14dd07a9ac219b97ba889761",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/publication-workflow.test.ts -t review console --outputFile.json=runtime/test-results/review-console-2026-10-30T05-14-23-588Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/publication-workflow.test.ts",
+            "-t",
+            "review console",
+            "--outputFile.json=runtime/test-results/review-console-2026-10-30T05-14-23-588Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 11099,
+          "log_path": "runtime/test-results/review-console-2026-10-30T05-14-23-588Z/api.log",
+          "log_sha256": "daf0ab810da5f52225f3b5150d4368294864c1d34ecb04ea1322a38fd491c0da"
+        }
+      ],
+      "source_snapshot": "docs/verification/review-console-attempt-08-source.json",
+      "check_report": "docs/verification/review-console-attempt-08-checks.json",
+      "passed": 3,
+      "failed": 0,
+      "not_selected": 24
+    },
+    {
+      "base": "runtime/test-results/review-console-2026-10-30T05-16-39-662Z",
+      "source_set_hash": "42c39c395fd71d0e9f3b6e9dbb66d23529467b596fce8fb3880527bab008ba14",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/review-desk-client.test.ts --outputFile.json=runtime/test-results/review-console-2026-10-30T05-16-39-662Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "tests/unit/review-desk-client.test.ts",
+            "--outputFile.json=runtime/test-results/review-console-2026-10-30T05-16-39-662Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 1164,
+          "log_path": "runtime/test-results/review-console-2026-10-30T05-16-39-662Z/api.log",
+          "log_sha256": "9642de75b8e6698ad81dc6397ab484949f4a880e11c0724aaa06f6d4942a36cb"
+        }
+      ],
+      "source_snapshot": "docs/verification/review-console-attempt-09-source.json",
+      "check_report": "docs/verification/review-console-attempt-09-checks.json",
+      "passed": 6,
+      "failed": 0,
+      "not_selected": 0
+    },
+    {
+      "base": "runtime/test-results/review-console-2026-10-30T05-17-45-133Z",
+      "source_set_hash": "42c39c395fd71d0e9f3b6e9dbb66d23529467b596fce8fb3880527bab008ba14",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/publication-workflow.test.ts -t review console --outputFile.json=runtime/test-results/review-console-2026-10-30T05-17-45-133Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/publication-workflow.test.ts",
+            "-t",
+            "review console",
+            "--outputFile.json=runtime/test-results/review-console-2026-10-30T05-17-45-133Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 9577,
+          "log_path": "runtime/test-results/review-console-2026-10-30T05-17-45-133Z/api.log",
+          "log_sha256": "9dc12d89f2171031b54b92a066d7c5fde0fc8a33d32982f4783af36ed70cbb65"
+        }
+      ],
+      "source_snapshot": "docs/verification/review-console-attempt-10-source.json",
+      "check_report": "docs/verification/review-console-attempt-10-checks.json",
+      "passed": 3,
+      "failed": 0,
+      "not_selected": 24
+    },
+    {
+      "base": "runtime/test-results/review-console-2026-10-30T05-23-06-316Z",
+      "source_set_hash": "9dc6f240e2310ecc81bb09b458c9dc07376c3bdb4b92023985ba15d3f66be24a",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/review-desk-client.test.ts --outputFile.json=runtime/test-results/review-console-2026-10-30T05-23-06-316Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "tests/unit/review-desk-client.test.ts",
+            "--outputFile.json=runtime/test-results/review-console-2026-10-30T05-23-06-316Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 1175,
+          "log_path": "runtime/test-results/review-console-2026-10-30T05-23-06-316Z/api.log",
+          "log_sha256": "fd5903bb4208b8d04665c816195acb41e3907979434181932e26b3e95d770f97"
+        }
+      ],
+      "source_snapshot": "docs/verification/review-console-attempt-11-source.json",
+      "check_report": "docs/verification/review-console-attempt-11-checks.json",
+      "passed": 6,
+      "failed": 0,
+      "not_selected": 0
+    },
+    {
+      "base": "runtime/test-results/review-console-2026-10-30T05-23-19-475Z",
+      "source_set_hash": "9dc6f240e2310ecc81bb09b458c9dc07376c3bdb4b92023985ba15d3f66be24a",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/publication-workflow.test.ts -t review console --outputFile.json=runtime/test-results/review-console-2026-10-30T05-23-19-475Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/publication-workflow.test.ts",
+            "-t",
+            "review console",
+            "--outputFile.json=runtime/test-results/review-console-2026-10-30T05-23-19-475Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 300000,
+          "elapsed_ms": 10203,
+          "log_path": "runtime/test-results/review-console-2026-10-30T05-23-19-475Z/api.log",
+          "log_sha256": "bccd30167eec5709a8473e87a6565df2bc1e30fd173d9c3e41a34d117a8dc727"
+        }
+      ],
+      "source_snapshot": "docs/verification/review-console-attempt-12-source.json",
+      "check_report": "docs/verification/review-console-attempt-12-checks.json",
+      "passed": 3,
+      "failed": 0,
+      "not_selected": 24
+    }
+  ],
+  "browser_recording_attempts": [
+    {
+      "attempt": 1,
+      "result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "timeout_seconds": 180,
+        "elapsed_seconds": 33.926,
+        "log_path": "runtime/delivery/review-desk-recording.log",
+        "log_sha256": "6ac093a28bc5b5b7c2a9ddbce874ba6c2569f56b61b07a6430ffb4721667e4ba"
+      },
+      "failure": "VISION_EVIDENCE_INVALID: synthetic photo IDs did not match rawProfile evidence. No browser opened; original guard rejected the fixture.",
+      "source_snapshot": "docs/verification/review-console-recording-01-source.json",
+      "build_id": "2026-10-30T05-14-23-780Z-c7bdcffb"
+    },
+    {
+      "attempt": 2,
+      "result": {
+        "status": "FAIL",
+        "exit_code": 1,
+        "timeout_seconds": 180,
+        "elapsed_seconds": 13.285,
+        "log_path": "runtime/delivery/review-desk-recording.log",
+        "log_sha256": "1b614234f4aaff77e65beb1a900de36b7ff82116567f8dd1d6a01c84fb5960a5"
+      },
+      "failure": "INVALID_REQUEST: recording fixture used draft_revision instead of expected_revision in PublicationRequest. Original schema rejected it; browser not opened.",
+      "source_snapshot": "docs/verification/review-console-recording-02-source.json",
+      "build_id": "2026-10-30T05-16-39-735Z-d670f673"
+    },
+    {
+      "attempt": 3,
+      "result": {
+        "status": "PASS",
+        "exit_code": 0,
+        "timeout_seconds": 180,
+        "elapsed_seconds": 16.723,
+        "log_path": "runtime/delivery/review-desk-recording.log",
+        "log_sha256": "78cc07160ff6c8a1e9776d68a54b1e5475a4cf077fe1697cc9216833a4af0b59"
+      },
+      "failure": null,
+      "source_snapshot": "docs/verification/review-console-recording-03-source.json",
+      "build_id": "2026-10-30T05-19-07-618Z-010b18b0"
+    }
+  ],
+  "full_suite_executed": false,
+  "initial_types": "docs/verification/review-console-initial-types.json",
+  "initial_failed_build": "docs/verification/review-console-initial-build.json",
+  "failure_notes": [
+    "Initial UI type labels omitted DRAFT/VALIDATING and Blob bytes needed a concrete ArrayBuffer; the observed diagnostics retain the original source snapshot but not a raw log.",
+    "A client method initially threw synchronously when an original operation was pending; async methods now return the expected rejection and keep the original write.",
+    "The first browser-recording preparation was refused for photo/evidence ID mismatch; the second was refused because PublicationRequest used draft_revision rather than expected_revision. Only synthetic fixture inputs changed; production guards stayed intact.",
+    "A recording-helper unknown payload failed typecheck. It now sends explicit JSON. The build summary also requires typecheck PASS before selected_builds_passed can be true. The earlier contradictory report is retained as history."
+  ]
+}

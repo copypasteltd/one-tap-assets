@@ -33,6 +33,14 @@
           },
           {
             "$ref": "#/components/parameters/Limit"
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/PublicationState"
+            }
           }
         ],
         "x-required-permission": "moderator:review",
@@ -2112,6 +2120,201 @@
           },
           "default": {
             "description": "权限、版本或内容撤销错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/publications/{publication_id}": {
+      "get": {
+        "operationId": "getPublicationReview",
+        "summary": "读取原发布申请、许可与授权样例",
+        "description": "独立审核权限，只投影原申请绑定的作者资料；实际字节逐项核对登记、撤回、SHA和文件签名。",
+        "security": [
+          {
+            "managementSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "publication_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        ],
+        "x-required-permission": "moderator:review",
+        "x-requirements": [
+          "P01-F14",
+          "P01-F28",
+          "P01-F31"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+        "x-idempotency-required": false,
+        "responses": {
+          "200": {
+            "description": "持久化的动作/资源结果，异步进展通过返回ID查询；非真实能力证明",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicationReviewDetailResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "鉴权/状态/证据/依赖错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/publications/{publication_id}/samples/{sample_id}/media/{item_id}": {
+      "get": {
+        "operationId": "readPublicationReviewMedia",
+        "summary": "核对原申请指定样例的实际私有文件",
+        "description": "独立审核权限，只投影原申请绑定的作者资料；实际字节逐项核对登记、撤回、SHA和文件签名。",
+        "security": [
+          {
+            "managementSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "publication_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          },
+          {
+            "name": "sample_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        ],
+        "x-required-permission": "moderator:review",
+        "x-requirements": [
+          "P01-F14",
+          "P01-F28",
+          "P01-F31"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+        "x-idempotency-required": false,
+        "responses": {
+          "200": {
+            "description": "持久化的动作/资源结果，异步进展通过返回ID查询；非真实能力证明",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicationReviewMediaResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "鉴权/状态/证据/依赖错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/publications/{publication_id}/rights/{rights_record_id}/evidence/{asset_id}": {
+      "get": {
+        "operationId": "readPublicationRightsEvidence",
+        "summary": "核对原申请指定授权的证明图片",
+        "description": "独立审核权限，只投影原申请绑定的作者资料；实际字节逐项核对登记、撤回、SHA和文件签名。",
+        "security": [
+          {
+            "managementSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "publication_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          },
+          {
+            "name": "rights_record_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          },
+          {
+            "name": "asset_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        ],
+        "x-required-permission": "moderator:review",
+        "x-requirements": [
+          "P01-F14",
+          "P01-F28",
+          "P01-F31"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+        "x-idempotency-required": false,
+        "responses": {
+          "200": {
+            "description": "持久化的动作/资源结果，异步进展通过返回ID查询；非真实能力证明",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicationReviewMediaResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "鉴权/状态/证据/依赖错误",
             "content": {
               "application/json": {
                 "schema": {
@@ -11173,6 +11376,268 @@
         },
         "required": [
           "code",
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PublicationReviewFile": {
+        "type": "object",
+        "properties": {
+          "sample_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "item_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "kind": {
+            "enum": [
+              "image",
+              "video"
+            ]
+          },
+          "mime_type": {
+            "enum": [
+              "image/png",
+              "video/mp4"
+            ]
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 125000000
+          }
+        },
+        "required": [
+          "sample_id",
+          "item_id",
+          "kind",
+          "mime_type",
+          "sha256",
+          "size_bytes"
+        ],
+        "additionalProperties": false
+      },
+      "PublicationReviewRights": {
+        "type": "object",
+        "properties": {
+          "record": {
+            "$ref": "#/components/schemas/RightsRecord"
+          },
+          "statement": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 3000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "license_reference": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 1000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "evidence_asset_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            },
+            "maxItems": 10
+          }
+        },
+        "required": [
+          "record",
+          "statement",
+          "license_reference",
+          "evidence_asset_ids"
+        ],
+        "additionalProperties": false
+      },
+      "PublicationReviewSample": {
+        "type": "object",
+        "properties": {
+          "sample": {
+            "$ref": "#/components/schemas/Sample"
+          },
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicationReviewFile"
+            },
+            "maxItems": 100
+          }
+        },
+        "required": [
+          "sample",
+          "files"
+        ],
+        "additionalProperties": false
+      },
+      "PublicationReviewDetail": {
+        "type": "object",
+        "properties": {
+          "publication": {
+            "$ref": "#/components/schemas/Publication"
+          },
+          "config": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PresetConfig"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "license": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PresetLicense"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rights": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicationReviewRights"
+            },
+            "maxItems": 50
+          },
+          "samples": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PublicationReviewSample"
+            },
+            "maxItems": 100
+          },
+          "content_available": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "publication",
+          "config",
+          "license",
+          "rights",
+          "samples",
+          "content_available"
+        ],
+        "additionalProperties": false
+      },
+      "PublicationReviewMedia": {
+        "type": "object",
+        "properties": {
+          "publication_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "sample_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rights_record_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "item_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "mime_type": {
+            "enum": [
+              "image/png",
+              "video/mp4"
+            ]
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 125000000
+          },
+          "bytes_base64": {
+            "type": "string",
+            "maxLength": 166666668,
+            "pattern": "^[A-Za-z0-9+/]+={0,2}$"
+          }
+        },
+        "required": [
+          "publication_id",
+          "sample_id",
+          "rights_record_id",
+          "item_id",
+          "mime_type",
+          "sha256",
+          "size_bytes",
+          "bytes_base64"
+        ],
+        "additionalProperties": false
+      },
+      "PublicationReviewDetailResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PublicationReviewDetail"
+          },
+          "trace_id": {
+            "type": "string",
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "PublicationReviewMediaResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/PublicationReviewMedia"
+          },
+          "trace_id": {
+            "type": "string",
+            "maxLength": 128
+          }
+        },
+        "required": [
           "data",
           "trace_id"
         ],

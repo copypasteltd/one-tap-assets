@@ -1,5 +1,5 @@
 import { beforeAll, beforeEach, afterAll, it, expect, vi } from 'vitest';
-import { rm } from 'node:fs/promises';
+import { rm,readFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import type { FastifyInstance, HTTPMethods } from 'fastify';
 import { testDatabase, account, type TestDatabase } from '../helpers/database';
@@ -18,6 +18,7 @@ import { PublicSamplePreparationService } from '../../src/worker/samples/publica
 import { claimStage,completeStage } from '../../src/worker/queue/leases';
 import { expireAuthorizedSamples, type AuthorizedRow } from '../../src/api/modules/authorized-samples';
 import { MediaErasureService } from '../../src/worker/lifecycle/media-erasure';
+import {nativeCommand} from '../../src/worker/media/native';
 import { transaction } from '../../src/api/db/pool';
 import { requestDeletion } from '../../src/api/modules/support';
 import { DeletionJournal } from '../../src/api/privacy/journal';
@@ -387,4 +388,52 @@ it('withdraws all of an account’s public samples while preserving a different 
   const removed=await transaction(db.pool,d=>requestDeletion(d,b.principal,{scope:'ACCOUNT_MEDIA',acknowledge_inflight_contract:true}));expect(removed.state).toBe('REQUESTED');
   expect((await api('GET',`/public-samples/${copy.id}`)).statusCode).toBe(410);expect((await api('GET',`/public-samples/${kc.id}`)).statusCode).toBe(200);
   await drainMedia();expect(await store.exists(copy.private.media![0]!.object_key)).toBe(false);expect(await store.exists(kc.private.media![0]!.object_key)).toBe(true);
+});
+
+function reviewRead(path:string,token=adminToken){return app.inject({method:'GET',remoteAddress:testPeer,url:`/v1/internal/p01${path}`,headers:{authorization:`Bearer ${token}`}});}
+it('review console exposes original selected author samples and rights proofs with independent permission and actual file verification',async()=>{
+  const f=await fixture(),s=await ready(f),p=await submit(f,[s.sample_id]),base=`/publications/${p.publication_id}`;
+  expect((await reviewRead(base,readToken)).statusCode).toBe(403);expect((await reviewRead(base,a.accessToken)).statusCode).toBe(401);
+  const response=await reviewRead(base);expect(response.statusCode,response.body).toBe(200);const detail=response.json<{data:DTO<'PublicationReviewDetail'>}>().data;
+  expect(detail).toMatchObject({publication:{publication_id:p.publication_id},content_available:true,config:f.draft.config,rights:expect.any(Array)});
+  expect(detail.rights.map(r=>r.record.rights_record_id).sort()).toEqual([...f.rights].sort());expect(detail.license!.content_hash).toBe(f.license.content_hash);
+  expect(response.body).not.toContain('object_key');expect(response.body).not.toContain('token_hash');
+  const file=detail.samples[0]!.files[0]!,image=await reviewRead(`${base}/samples/${s.sample_id}/media/${file.item_id}`);
+  expect(image.statusCode,image.body).toBe(200);const media=image.json<{data:DTO<'PublicationReviewMedia'>}>().data;
+  expect(media).toMatchObject({publication_id:p.publication_id,sample_id:s.sample_id,rights_record_id:null,mime_type:'image/png',sha256:sha256(png)});expect(Buffer.from(media.bytes_base64,'base64')).toEqual(png);
+  const right=detail.rights[0]!,proofImage=await reviewRead(`${base}/rights/${right.record.rights_record_id}/evidence/${right.evidence_asset_ids[0]}`);
+  expect(proofImage.statusCode,proofImage.body).toBe(200);expect(proofImage.json().data.rights_record_id).toBe(right.record.rights_record_id);
+  expect((await db.pool.query("SELECT id FROM audit_events WHERE target=$1 AND action='PUBLICATION_REVIEW_MEDIA_READ'",[p.publication_id])).rowCount).toBe(2);
+  await store.put(s.key,Buffer.from('replaced bytes'),'image/png');const changed=await reviewRead(`${base}/samples/${s.sample_id}/media/${file.item_id}`);
+  expect(changed.statusCode,changed.body).toBe(410);expect(changed.json().code).toBe('REVIEW_MEDIA_CHANGED');
+});
+it('review console refuses unrelated evidence and redacts author content after the original product is deleted',async()=>{
+  const f=await fixture(),s=await ready(f),p=await submit(f,[s.sample_id]),other=await fixture({actor:b}),foreign=await ready(other),base=`/publications/${p.publication_id}`;
+  expect((await reviewRead(`${base}/samples/${foreign.sample_id}/media/hero`)).statusCode).toBe(404);
+  expect((await reviewRead(`${base}/rights/${other.rights[0]}/evidence/${otherProof}`)).statusCode).toBe(404);
+  expect((await reviewRead(`${base}/rights/${f.rights[0]}/evidence/${otherProof}`)).statusCode).toBe(404);
+  await db.pool.query('UPDATE private_object_writes SET delete_requested=true WHERE object_key=$1',[s.key]);
+  expect((await reviewRead(`${base}/samples/${s.sample_id}/media/hero`)).statusCode).toBe(410);
+  await db.pool.query('UPDATE product_drafts SET deleted_at=now() WHERE id=$1',[f.input.product_id]);
+  const hidden=await reviewRead(base);expect(hidden.statusCode,hidden.body).toBe(200);expect(hidden.json().data).toMatchObject({content_available:false,config:null,license:null,rights:[],samples:[]});
+  expect((await reviewRead(`${base}/rights/${f.rights[0]}/evidence/${proof}`)).statusCode).toBe(410);
+});
+it('review console filters revision queues, reads actual video bytes and keeps review and publication separately idempotent',async()=>{
+  const f=await fixture(),s=await ready(f),path=inside(folder,`${id('review-clip')}.mp4`);
+  await nativeCommand(cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-f','lavfi','-i','color=c=green:s=360x640:r=30:d=1','-frames:v','30','-c:v','libx264','-threads','2','-pix_fmt','yuv420p','-an','-y',path],{cwd:folder,timeoutMs:30000});
+  const video=await readFile(path),key=`${f.actor.principal.tenantId}/samples/${s.sample_id}/clip.mp4`;
+  await writePrivateObject(db.pool,store,{tenantId:f.actor.principal.tenantId,ownerId:f.actor.principal.userId,productId:f.input.product_id,kind:'MEDIA'},key,video,'video/mp4');
+  await db.pool.query("UPDATE public_samples SET private=jsonb_set(private,'{media}',(private->'media')||$2::jsonb) WHERE id=$1",[s.sample_id,JSON.stringify([{item_id:'clip',kind:'video',object_key:key,sha256:sha256(video),size_bytes:video.length}])]);
+  const p=await submit(f,[s.sample_id]),base=`/publications/${p.publication_id}`;
+  const clip=await reviewRead(`${base}/samples/${s.sample_id}/media/clip`);expect(clip.statusCode,clip.body).toBe(200);expect(clip.json().data.mime_type).toBe('video/mp4');expect(Buffer.from(clip.json().data.bytes_base64,'base64')).toEqual(video);
+  const queue=await reviewRead('/publications?state=UNDER_REVIEW&limit=1');expect(queue.statusCode,queue.body).toBe(200);expect(queue.json().data.items.every((v:DTO<'Publication'>)=>v.state==='UNDER_REVIEW')).toBe(true);
+  const next=queue.json().data.next_cursor;expect(next).toBeTruthy();expect((await reviewRead(`/publications?state=APPROVED&cursor=${encodeURIComponent(next)}`)).statusCode).toBe(400);
+  expect((await reviewRead('/publications?state=not-a-state')).statusCode).toBe(400);
+  const body={expected_revision:p.revision,decision:'APPROVE',reason:'合成审核资料和实际样例已核对，不代表生产准入',evidence_record_ids:f.rights},requestKey=id('review-original');
+  const approval=await managed(`${base}/review-decisions`,body,adminToken,requestKey);expect(approval.statusCode,approval.body).toBe(200);
+  expect((await managed(`${base}/review-decisions`,body,adminToken,requestKey)).json().data).toEqual(approval.json().data);
+  expect((await managed(`${base}/review-decisions`,{...body,reason:'changed'},adminToken,requestKey)).statusCode).toBe(409);
+  const approved=await prepare(approval.json().data),publishBody={reason:'发布合成测试方案，保持商业准入关闭',evidence_record_ids:f.rights},publishKey=id('publish-original');
+  expect(approved.public_sample_state).toBe('READY');const published=await managed(`${base}/publish`,publishBody,adminToken,publishKey);expect(published.statusCode,published.body).toBe(200);expect(published.json().data).toMatchObject({state:'PUBLISHED',sale_enabled:false});
+  expect((await managed(`${base}/publish`,publishBody,adminToken,publishKey)).json().data).toEqual(published.json().data);
 });

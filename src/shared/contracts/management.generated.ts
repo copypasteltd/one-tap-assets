@@ -639,6 +639,66 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/publications/{publication_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 读取原发布申请、许可与授权样例
+         * @description 独立审核权限，只投影原申请绑定的作者资料；实际字节逐项核对登记、撤回、SHA和文件签名。
+         */
+        get: operations["getPublicationReview"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/publications/{publication_id}/samples/{sample_id}/media/{item_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 核对原申请指定样例的实际私有文件
+         * @description 独立审核权限，只投影原申请绑定的作者资料；实际字节逐项核对登记、撤回、SHA和文件签名。
+         */
+        get: operations["readPublicationReviewMedia"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/publications/{publication_id}/rights/{rights_record_id}/evidence/{asset_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 核对原申请指定授权的证明图片
+         * @description 独立审核权限，只投影原申请绑定的作者资料；实际字节逐项核对登记、撤回、SHA和文件签名。
+         */
+        get: operations["readPublicationRightsEvidence"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -2399,6 +2459,53 @@ export interface components {
             data: components["schemas"]["SupportRepairImage"];
             trace_id: string;
         };
+        PublicationReviewFile: {
+            sample_id: string;
+            item_id: string;
+            /** @enum {unknown} */
+            kind: "image" | "video";
+            /** @enum {unknown} */
+            mime_type: "image/png" | "video/mp4";
+            sha256: string;
+            size_bytes: number;
+        };
+        PublicationReviewRights: {
+            record: components["schemas"]["RightsRecord"];
+            statement: string | null;
+            license_reference: string | null;
+            evidence_asset_ids: string[];
+        };
+        PublicationReviewSample: {
+            sample: components["schemas"]["Sample"];
+            files: components["schemas"]["PublicationReviewFile"][];
+        };
+        PublicationReviewDetail: {
+            publication: components["schemas"]["Publication"];
+            config: components["schemas"]["PresetConfig"] | null;
+            license: components["schemas"]["PresetLicense"] | null;
+            rights: components["schemas"]["PublicationReviewRights"][];
+            samples: components["schemas"]["PublicationReviewSample"][];
+            content_available: boolean;
+        };
+        PublicationReviewMedia: {
+            publication_id: string;
+            sample_id: string | null;
+            rights_record_id: string | null;
+            item_id: string;
+            /** @enum {unknown} */
+            mime_type: "image/png" | "video/mp4";
+            sha256: string;
+            size_bytes: number;
+            bytes_base64: string;
+        };
+        PublicationReviewDetailResponse: {
+            data: components["schemas"]["PublicationReviewDetail"];
+            trace_id: string;
+        };
+        PublicationReviewMediaResponse: {
+            data: components["schemas"]["PublicationReviewMedia"];
+            trace_id: string;
+        };
     };
     responses: never;
     parameters: {
@@ -2417,6 +2524,7 @@ export interface operations {
             query?: {
                 cursor?: components["parameters"]["Cursor"];
                 limit?: components["parameters"]["Limit"];
+                state?: components["schemas"]["PublicationState"];
             };
             header?: never;
             path?: never;
@@ -3508,6 +3616,103 @@ export interface operations {
                 };
             };
             /** @description 权限、版本或内容撤销错误 */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    getPublicationReview: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                publication_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 持久化的动作/资源结果，异步进展通过返回ID查询；非真实能力证明 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PublicationReviewDetailResponse"];
+                };
+            };
+            /** @description 鉴权/状态/证据/依赖错误 */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    readPublicationReviewMedia: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                publication_id: string;
+                sample_id: string;
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 持久化的动作/资源结果，异步进展通过返回ID查询；非真实能力证明 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PublicationReviewMediaResponse"];
+                };
+            };
+            /** @description 鉴权/状态/证据/依赖错误 */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    readPublicationRightsEvidence: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                publication_id: string;
+                rights_record_id: string;
+                asset_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 持久化的动作/资源结果，异步进展通过返回ID查询；非真实能力证明 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PublicationReviewMediaResponse"];
+                };
+            };
+            /** @description 鉴权/状态/证据/依赖错误 */
             default: {
                 headers: {
                     [name: string]: unknown;

@@ -3,11 +3,11 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-30T04:50:14.790810+00:00",
+  "checked_at": "2026-10-30T05:28:13.965551+00:00",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "verification_mode": "FOCUSED_NATIVE_SALE_CLOSURE",
+  "verification_mode": "FOCUSED_REVIEW_CONSOLE_CLOSURE",
   "retained_integration": null,
   "command_checks_passed": false,
   "commands": [
@@ -23,8 +23,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 9714,
-      "log_path": "runtime/delivery-builds/2026-10-30T04-47-26-892Z-95e9b8b2/typecheck.log",
+      "elapsed_ms": 16654,
+      "log_path": "runtime/delivery-builds/2026-10-30T05-25-59-640Z-e9f10a3d/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -40,34 +40,34 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 2691,
-      "log_path": "runtime/delivery-builds/2026-10-30T04-47-26-892Z-95e9b8b2/server.log",
+      "elapsed_ms": 808,
+      "log_path": "runtime/delivery-builds/2026-10-30T05-25-59-640Z-e9f10a3d/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T04-47-26-892Z-95e9b8b2\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T05-25-59-640Z-e9f10a3d\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T04-47-26-892Z-95e9b8b2\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T05-25-59-640Z-e9f10a3d\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 44407,
-      "log_path": "runtime/delivery-builds/2026-10-30T04-47-26-892Z-95e9b8b2/preview.log",
-      "log_sha256": "42ee9093d049b9609fc80b62717bd3c5246591603d089803ba0c5ad9bedeb05e"
+      "elapsed_ms": 2151,
+      "log_path": "runtime/delivery-builds/2026-10-30T05-25-59-640Z-e9f10a3d/preview.log",
+      "log_sha256": "f526db6ca0c1eb14edd5e47d2520ae10782d410d98a96ea30101823628445988"
     }
   ],
   "suites": [],
-  "source_files": 431,
-  "source_set_hash": "59fe11005651de6be3c992ff6483621e203368734cb9cd0318125fdbd30eeca5",
+  "source_files": 439,
+  "source_set_hash": "9dc6f240e2310ecc81bb09b458c9dc07376c3bdb4b92023985ba15d3f66be24a",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -314,6 +314,10 @@
       "sha256": "a39253dea258bc53d397d7f94ef1245022f06aac02351980f1a0c332b5d1ab9e"
     },
     {
+      "path": "src/api/modules/review-desk.ts",
+      "sha256": "8ed77d316c1eb668d6c8adfff8dbafa3697adce6875f5857528ac3d63fc2aa01"
+    },
+    {
       "path": "src/api/modules/sample-evidence.ts",
       "sha256": "09247cee3e4c5fddf337c118ae569b6ff17a7439e89e4498eb6c4205a595a9aa"
     },
@@ -339,7 +343,7 @@
     },
     {
       "path": "src/api/routes/management.ts",
-      "sha256": "60fd067a3144d926e8179e9214d480cfabe94d394e928ae61f89e0dfff6d8d55"
+      "sha256": "66f56ced5343a958aa6f8e24a8409f818ec209a5b3c0446599e6b489c7b217c2"
     },
     {
       "path": "src/api/routes/payments.ts",
@@ -347,7 +351,7 @@
     },
     {
       "path": "src/api/routes/support-console.ts",
-      "sha256": "aee3ecdd06df68963485e017e85f7ff1da4e59054fd458423f521f37d29a50fd"
+      "sha256": "479773f9b21846429b6aa9580f73646a91501e33ba3aeed0bea3bdd945a5f34a"
     },
     {
       "path": "src/api/storage/oss-versions.ts",
@@ -566,6 +570,18 @@
       "sha256": "5dd20f6fcc27de0cf1d8088c418873eb3cbe006f3b904dae968cacb584d0b174"
     },
     {
+      "path": "src/preview/review-console.css",
+      "sha256": "62cc47b942540be888b4d196ee9c8bbec1e82fb993c6e11626e284cc74eae50c"
+    },
+    {
+      "path": "src/preview/review-main.tsx",
+      "sha256": "a4ef805702afe2d77700b4682489e0c438729150e021fa661f264d089b5b9664"
+    },
+    {
+      "path": "src/preview/review.html",
+      "sha256": "1432b685ffa0d346968c6b1a6f75bddc741834e741c292c87c77c0820504bd13"
+    },
+    {
       "path": "src/preview/support-console.css",
       "sha256": "9c844b9c286b0aa43434bf21d6bc1195a78d5adb7e156ef70ea207ceacbb8c24"
     },
@@ -591,7 +607,7 @@
     },
     {
       "path": "src/preview/vite.config.ts",
-      "sha256": "763e44c8792f1538410819e3ab011f14d2cd1d509936e5d54cdae35090141646"
+      "sha256": "d594b688a7ee0ab0b57f1632d0250e3941ab18dfe3307cb4ae2d711211858f66"
     },
     {
       "path": "src/shared/client/album.ts",
@@ -626,6 +642,10 @@
       "sha256": "4a55f14857548d316fe7fa1adf2775615a1c8e964069e8ac72bbb70cff2c1201"
     },
     {
+      "path": "src/shared/client/review-desk.ts",
+      "sha256": "2226f5920c9e90d29881db49df88ef5d83010d44acc9a291e1abbdfc93af63fa"
+    },
+    {
       "path": "src/shared/client/revisions.ts",
       "sha256": "165238655d409932abbb2aeec8afc7fee49054c9fb898c84ad5355161715ef3a"
     },
@@ -647,7 +667,7 @@
     },
     {
       "path": "src/shared/contracts/api.generated.ts",
-      "sha256": "26ff51d4bc3c21a046af5520fb295eb89fa4c877468e7c552f6aba3c7fe75cbf"
+      "sha256": "778bbbc7285ceee2e1d3f7dcd6fae4b89fa0658d48b27ac8169d60b586180177"
     },
     {
       "path": "src/shared/contracts/endpoints.generated.ts",
@@ -655,7 +675,7 @@
     },
     {
       "path": "src/shared/contracts/management.generated.ts",
-      "sha256": "3a381c34898d99b246ce84c55855a4711b99c8162b78d2a635ee5409cef83a68"
+      "sha256": "a3e63b7ba0e2771f9ef27a3b1d43cbaf6e2bc804b13fb179f923ef54d8ff2ba9"
     },
     {
       "path": "src/shared/contracts/types.ts",
@@ -1274,6 +1294,10 @@
       "sha256": "c6484f4ba43cedc0f0103f413e8712575d77ced8fdc7a997da532dfa74c9c38a"
     },
     {
+      "path": "tests/helpers/review-desk.ts",
+      "sha256": "1ab646f6592bb54a4dbd45a76bbaddd9059ffdc3ca0fbd34da793b2c1b094eee"
+    },
+    {
       "path": "tests/helpers/role-launcher.ts",
       "sha256": "405270577c92459c98841d97bcf03354b1d82e7106839a3a7485c2a2320617aa"
     },
@@ -1423,7 +1447,7 @@
     },
     {
       "path": "tests/integration/publication-workflow.test.ts",
-      "sha256": "2c447305e391bae18f21dd47886d2eda051442b7603af42f836b8a37449635c6"
+      "sha256": "96ffb33504ae5b62e95e66fcc34f2c77d8e87566fe30c99df07950c353a9bf1b"
     },
     {
       "path": "tests/integration/queue-budget.test.ts",
@@ -1554,6 +1578,10 @@
       "sha256": "e4192931adc08bdd64ac8c142ccaec2bd472dcce0acac88d23a7151a33fdf1f1"
     },
     {
+      "path": "tests/unit/review-desk-client.test.ts",
+      "sha256": "9581c84b98f1d535ed69f434eb3dd5aedd342fcd1eb61162302bd2f30b4ced02"
+    },
+    {
       "path": "tests/unit/review-packet.test.ts",
       "sha256": "b852ee4e07e57d9c5a67a27f33eb0b7cc62dff4e556fe158255d42cae48537bb"
     },
@@ -1627,7 +1655,7 @@
     },
     {
       "path": "scripts/生成Codex开发契约.py",
-      "sha256": "fccb9de8a3a0491a6e9fe262872389a3c1edd0dac94f9d0e01bf6e16faaf1426"
+      "sha256": "e811aaa5afd25669f8fde2c1b2938c2db9d2cb3bd5c5da93ae19c09c9df2e26d"
     },
     {
       "path": "scripts/生成v3需求配置.py",
@@ -1655,7 +1683,7 @@
     },
     {
       "path": "scripts/delivery/build.ts",
-      "sha256": "f8c9e30e556d809e8d68acb046e6260293f9f3e91fce601a7ee82dc1e482aa78"
+      "sha256": "143d67ea6f46a792d0d97e4f03964bc345a620d08d55ce718fca91a2db59dd0f"
     },
     {
       "path": "scripts/delivery/common.ts",
@@ -1736,6 +1764,10 @@
     {
       "path": "scripts/record-preview.ts",
       "sha256": "c3167d1e5cfcc86f0310b4ce4fe5fa4a7f36ae10cb8d66e984dbb76ce297ea03"
+    },
+    {
+      "path": "scripts/record-review-desk.ts",
+      "sha256": "803d2be8161c4a177d79006c8f2688b53a42c7d1f1e5d46a6a7980a5407eb722"
     },
     {
       "path": "scripts/record-support-desk.ts",
@@ -1821,7 +1853,7 @@
     },
     {
       "path": "assets/development/v1.1/contracts/endpoint-catalog.md",
-      "sha256": "d3d1fdb8d7fbf9e44ec82609e7b9e89f2bd479cb25c847e5640b4b03d240cad7"
+      "sha256": "e25a9515b35bc31b305cabadae319ac5026ccb4e190986c031ffb6e87a178012"
     },
     {
       "path": "assets/development/v1.1/contracts/endpoints.json",
@@ -1833,15 +1865,15 @@
     },
     {
       "path": "assets/development/v1.1/contracts/management-endpoints.json",
-      "sha256": "b1b480bb1e54dc3fc0bdded795cfd7a41caed9c7926557bb6ea78d302c7b2e9d"
+      "sha256": "73af4e6dcb2dfdd62d7dcb97b2997e771fa815685fe25e46c29778bce7343f11"
     },
     {
       "path": "assets/development/v1.1/contracts/management-openapi.json",
-      "sha256": "b79dab5e14d02da17de1c591c03f4b4136c00db6a83a76b6dff8e09e758988bf"
+      "sha256": "74acdff4b9c16875fabe2444b642306dc012b235bae5bde04f6f2e3725532e22"
     },
     {
       "path": "assets/development/v1.1/contracts/openapi.json",
-      "sha256": "fe92b991c8753f3cd1ae4980f292b006be53180a63c75e712f1e1688fef13390"
+      "sha256": "16b9b0a71d5ae7e82cdd17851f7f977e4166a3dd5129f0d68f84ab5ebd32ac53"
     },
     {
       "path": "assets/development/v1.1/contracts/product-identity-lock.schema.json",
@@ -2669,19 +2701,28 @@
   },
   "native_sale": {
     "source_implemented": true,
-    "fixture_verified": true,
+    "fixture_verified": false,
     "evidence": "docs/verification/native-sale-source.json",
     "native_migrations": 31,
     "no_new_migration": true,
     "complete_original_cost_binding": true,
     "historical_internal_quotes_not_upgraded": true,
-    "native_buyer_routes_fixture_verified": [
-      "PER_SHOT_AI",
-      "REFERENCE_FILM"
-    ],
-    "post_payment_revocation_original_refund_fixture_verified": true,
+    "native_buyer_routes_fixture_verified": false,
+    "post_payment_revocation_original_refund_fixture_verified": false,
     "sale_enabled": false,
     "production_admitted": false,
     "live_oss_verified": false
+  },
+  "review_desk": {
+    "source_implemented": true,
+    "fixture_verified": true,
+    "evidence": "docs/verification/review-console-source.json",
+    "page": "/ops/review",
+    "business_operations": 77,
+    "management_operations": 35,
+    "original_author_evidence_only": true,
+    "review_publish_sale_separated": true,
+    "sale_enabled": false,
+    "production_staff_identity_verified": false
   }
 }

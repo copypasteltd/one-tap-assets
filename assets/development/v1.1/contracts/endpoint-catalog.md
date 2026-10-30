@@ -134,3 +134,6 @@
 | POST /support-tickets/{ticket_id}/process | processSupportTicket | support:write |
 | GET /support-tickets/{ticket_id}/repair-context | getSupportRepairContext | support:repair |
 | GET /support-tickets/{ticket_id}/repair-manifests/{manifest_revision}/images/{deliverable_id} | readSupportRepairImage | support:repair |
+| GET /publications/{publication_id} | getPublicationReview | moderator:review |
+| GET /publications/{publication_id}/samples/{sample_id}/media/{item_id} | readPublicationReviewMedia | moderator:review |
+| GET /publications/{publication_id}/rights/{rights_record_id}/evidence/{asset_id} | readPublicationRightsEvidence | moderator:review |

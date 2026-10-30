@@ -1,5 +1,9 @@
 # 核验来源与历史记录
 
+2026-10-30快速收口：[社区审核工作台](../实施/社区审核工作台与原申请证据核对-v1.0.md)和[准确来源](review-console-source.json)。`/ops/review` 以独立权限核对原方案、实际PNG/MP4、许可与授权证明，原键恢复未确认操作，批准/公开副本/发布独立且不开售。77业务/35管理操作，主库31无新迁移；6客户端、3API/24未选、7浏览器检查通过，类型/server/preview/原生启动PASS。新增7媒体，原93媒体与C冻结原件保持。合成作者/权利/档案/READY-QC/身份不代表真实准入；全面测试/小程序重编/真机NOT_RUN，真实服务、完整准入、Plus、云端和58项完整验收继续待完成。
+
+以下内容保留其历史来源，当前状态以上述记录为准。
+
 当前来源：[生成式社区样例](generated-sample-source.json)、[源码](generated-sample-tested-source.json)、[9项主专项/43未选](generated-sample-api.json)、[1项订单回归/34未选](generated-sample-order-regression.json)、[尝试与原失败](generated-sample-attempts.json)。426/42/4，`e7a80120`；类型/server/preview/自检/本机启动PASS。主库30；本轮没有全量或单元全套、真机、小程序重编和复录。原169份历史JSON保留，其中3个滚动入口原字节另存38eec3e。
 
 以下内容保留其历史来源，当前状态以上述记录为准。

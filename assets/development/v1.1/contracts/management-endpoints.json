@@ -467,6 +467,51 @@
         "P01-F16"
       ],
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/publications/{publication_id}",
+      "operation_id": "getPublicationReview",
+      "summary": "读取原发布申请、许可与授权样例",
+      "permission": "moderator:review",
+      "request_schema": null,
+      "response_schema": "PublicationReviewDetail",
+      "requirements": [
+        "P01-F14",
+        "P01-F28",
+        "P01-F31"
+      ],
+      "implementation_status": "SOURCE_IMPLEMENTED_NOT_PRODUCTION_ADMITTED"
+    },
+    {
+      "method": "GET",
+      "path": "/publications/{publication_id}/samples/{sample_id}/media/{item_id}",
+      "operation_id": "readPublicationReviewMedia",
+      "summary": "核对原申请指定样例的实际私有文件",
+      "permission": "moderator:review",
+      "request_schema": null,
+      "response_schema": "PublicationReviewMedia",
+      "requirements": [
+        "P01-F14",
+        "P01-F28",
+        "P01-F31"
+      ],
+      "implementation_status": "SOURCE_IMPLEMENTED_NOT_PRODUCTION_ADMITTED"
+    },
+    {
+      "method": "GET",
+      "path": "/publications/{publication_id}/rights/{rights_record_id}/evidence/{asset_id}",
+      "operation_id": "readPublicationRightsEvidence",
+      "summary": "核对原申请指定授权的证明图片",
+      "permission": "moderator:review",
+      "request_schema": null,
+      "response_schema": "PublicationReviewMedia",
+      "requirements": [
+        "P01-F14",
+        "P01-F28",
+        "P01-F31"
+      ],
+      "implementation_status": "SOURCE_IMPLEMENTED_NOT_PRODUCTION_ADMITTED"
     }
   ]
 }

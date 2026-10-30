@@ -1,5 +1,15 @@
 # 更新记录 / Changelog
 
+2026-10-30 — 社区审核工作台 / Community review workbench
+
+本轮收口[社区审核工作台](docs/实施/社区审核工作台与原申请证据核对-v1.0.md)：工作人员在 `/ops/review` 核对原方案、实际图片/视频与授权证明，批准或退回后，再独立准备公开副本与发布。已提交但回执丢失时沿用原编号恢复，发布不会自动开售。客户仍优先使用支付宝、抖音小程序。
+
+6项客户端、3项原生API（24项未选）、7项浏览器关键检查通过；类型/server/preview、自检及本地启动PASS，31迁移、无新迁移。439源码/42契约/4资源，`9dc6f240`；77业务/35管理操作。新增4截图、MP4/WebM/GIF，原93媒体及C原稿保留。全面测试、双小程序重编、真机NOT_RUN；真实服务、完整准入、Plus与云部署待完成，所有方案禁售。[准确证据](docs/verification/review-console-source.json) · [交付包](docs/delivery/package.json) · [启动指南](docs/delivery/README.md)。演示身份、权利、档案和READY/QC为合成；实际HTTP、数据库、上传、文件读取及公开副本不代表真实商业授权。
+
+This delivery adds the [community review workbench](docs/实施/社区审核工作台与原申请证据核对-v1.0.md) at `/ops/review`: staff inspect the original preset, actual PNG/MP4 samples and rights evidence, decide on content, then publish after a separate public-copy stage. A lost acknowledgement retries the original operation. Publication never enables sales. Alipay and Douyin mini-programs remain the primary customer clients.
+
+以下内容保留其历史来源，当前状态以上述记录为准。
+
 2026-10-30 — 原生声音购买与完整费用绑定 / Native-audio checkout and complete cost binding
 
 本轮接通[原生声音售前完整绑定与购买交付](docs/实施/原生声音售前完整绑定与购买交付-v1.0.md)：买家原方案、完整声音报价、下单、付款确认、制作/后期、独立听音、双复核和私有领取贯通；付款确认前原能力撤回则按原单退款。原总预算包含生成、声音授权、转写、听音及原售后/修复上限，历史内部报价不自动升级。

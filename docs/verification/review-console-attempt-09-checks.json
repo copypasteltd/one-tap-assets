@@ -1,0 +1,106 @@
+{
+  "numTotalTestSuites": 1,
+  "numPassedTestSuites": 1,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 6,
+  "numPassedTests": 6,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793337400673,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps an uncertain review decision on its original key and content until its matching receipt arrives",
+          "status": "passed",
+          "title": "keeps an uncertain review decision on its original key and content until its matching receipt arrives",
+          "duration": 23.05680000000001,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "requires a matching publication and decision revision before discarding an uncertain success receipt",
+          "status": "passed",
+          "title": "requires a matching publication and decision revision before discarding an uncertain success receipt",
+          "duration": 0.8781000000000176,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "clears a definitive conflict and keeps publish retries on their original publication",
+          "status": "passed",
+          "title": "clears a definitive conflict and keeps publish retries on their original publication",
+          "duration": 1.674000000000035,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "verifies actual sample bytes against the original list and rejects another sample or a replaced payload",
+          "status": "passed",
+          "title": "verifies actual sample bytes against the original list and rejects another sample or a replaced payload",
+          "duration": 5.75630000000001,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps rights proof separate from sample files and rejects a cross-purpose response",
+          "status": "passed",
+          "title": "keeps rights proof separate from sample files and rejects a cross-purpose response",
+          "duration": 1.681699999999978,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects late reads from a previous connection and clears its original write on disconnect",
+          "status": "passed",
+          "title": "rejects late reads from a previous connection and clears its original write on disconnect",
+          "duration": 0.8121000000000436,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793337400971,
+      "endTime": 1793337401004.812,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/review-desk-client.test.ts"
+    }
+  ]
+}

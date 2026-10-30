@@ -1,0 +1,108 @@
+{
+  "numTotalTestSuites": 1,
+  "numPassedTestSuites": 0,
+  "numFailedTestSuites": 1,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 6,
+  "numPassedTests": 5,
+  "numFailedTests": 1,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793336723180,
+  "success": false,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps an uncertain review decision on its original key and content until its matching receipt arrives",
+          "status": "failed",
+          "title": "keeps an uncertain review decision on its original key and content until its matching receipt arrives",
+          "duration": 11.433399999999892,
+          "failureMessages": [
+            "ClientError: 请先确认原申请的操作结果\n    at ReviewDeskClient.retain (E:/dev/sandbox/支付宝黑客松/一品成片/src/shared/client/review-desk.ts:54:13)\n    at ReviewDeskClient.decide (E:/dev/sandbox/支付宝黑客松/一品成片/src/shared/client/review-desk.ts:56:71)\n    at E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/review-desk-client.test.ts:12:21\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/node_modules/.pnpm/vitest@5.0.5_@types+node@24_074c366c144b624165a2ee5270d15630/node_modules/vitest/dist/chunks/run.BPv-BBRv.js:2801:20"
+          ],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "requires a matching publication and decision revision before discarding an uncertain success receipt",
+          "status": "passed",
+          "title": "requires a matching publication and decision revision before discarding an uncertain success receipt",
+          "duration": 282.5223000000001,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "clears a definitive conflict and keeps publish retries on their original publication",
+          "status": "passed",
+          "title": "clears a definitive conflict and keeps publish retries on their original publication",
+          "duration": 0.9300000000000637,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "verifies actual sample bytes against the original list and rejects another sample or a replaced payload",
+          "status": "passed",
+          "title": "verifies actual sample bytes against the original list and rejects another sample or a replaced payload",
+          "duration": 3.0720000000001164,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps rights proof separate from sample files and rejects a cross-purpose response",
+          "status": "passed",
+          "title": "keeps rights proof separate from sample files and rejects a cross-purpose response",
+          "duration": 0.8333000000000084,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects late reads from a previous connection and clears its original write on disconnect",
+          "status": "passed",
+          "title": "rejects late reads from a previous connection and clears its original write on disconnect",
+          "duration": 0.6992000000000189,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793336724492,
+      "endTime": 1793336724791.8333,
+      "status": "failed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/review-desk-client.test.ts"
+    }
+  ]
+}
