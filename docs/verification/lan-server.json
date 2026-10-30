@@ -1,0 +1,184 @@
+{
+  "verified_at": "2026-10-30T20:13:08.416071+00:00",
+  "deployment": "LAN",
+  "origin": "https://192.168.31.20:38443",
+  "http_port": 38480,
+  "https_port": 38443,
+  "api_loopback_port": 38410,
+  "postgres_loopback_port": 35432,
+  "source_commit": "88312df9abab92cc58abacdf6534d47d1958e8c2",
+  "package_sha256": "2934078e6bd878448c0a1227c78504b6f1ca0ba48a5980604dbf7fe4eafed0b2",
+  "tls_ca_der_sha256": "5c4790be818125b5d6f23bd8700a5a512b79a2bdb2ab7c22a109350df128fd41",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200,
+      "authenticated": false,
+      "content_type": "text/html",
+      "bytes": 2123
+    },
+    {
+      "path": "/healthz",
+      "status": 200,
+      "authenticated": false,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 58
+    },
+    {
+      "path": "/readyz",
+      "status": 200,
+      "authenticated": false,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 18
+    },
+    {
+      "path": "/v1/p01/runtime-info",
+      "status": 200,
+      "authenticated": false,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 152
+    },
+    {
+      "path": "/plus/",
+      "status": 200,
+      "authenticated": false,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 585
+    },
+    {
+      "path": "/preview/",
+      "status": 200,
+      "authenticated": false,
+      "content_type": "text/html",
+      "bytes": 675
+    },
+    {
+      "path": "/ops/support",
+      "status": 200,
+      "authenticated": false,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 615
+    },
+    {
+      "path": "/ops/review",
+      "status": 200,
+      "authenticated": false,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 542
+    },
+    {
+      "path": "/ops/metrics",
+      "status": 200,
+      "authenticated": false,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 535
+    },
+    {
+      "path": "/lan-ca.crt",
+      "status": 200,
+      "authenticated": false,
+      "content_type": "application/x-x509-ca-cert",
+      "bytes": 1582
+    },
+    {
+      "path": "/v1/internal/p01/publications",
+      "status": 401,
+      "authenticated": false,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 166
+    },
+    {
+      "path": "/v1/internal/p01/publications",
+      "status": 200,
+      "authenticated": true,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 92
+    },
+    {
+      "path": "/v1/internal/p01/metrics/summary?window_start=2026-10-23T20%3A13%3A08.328369%2B00%3A00&window_end=2026-10-30T20%3A13%3A08.328369%2B00%3A00",
+      "status": 401,
+      "authenticated": false,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 166
+    },
+    {
+      "path": "/v1/internal/p01/metrics/summary?window_start=2026-10-23T20%3A13%3A08.328369%2B00%3A00&window_end=2026-10-30T20%3A13%3A08.328369%2B00%3A00",
+      "status": 200,
+      "authenticated": true,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 430
+    },
+    {
+      "path": "/.env.local",
+      "status": 404,
+      "authenticated": false,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 82
+    },
+    {
+      "path": "/root/cfg/one-tap-assets/credentials.txt",
+      "status": 404,
+      "authenticated": false,
+      "content_type": "application/json; charset=utf-8",
+      "bytes": 111
+    }
+  ],
+  "runtime_info": {
+    "data": {
+      "dev_mode": false,
+      "payment_enabled": false,
+      "generation_enabled": false,
+      "codex_enabled": false
+    },
+    "trace_id": "trace_60c9bca0d03b49d39dc4a4424f57deff"
+  },
+  "database_counts": {
+    "migrations": 40,
+    "official_presets": 10,
+    "execution_variants": 14,
+    "sale_enabled_variants": 0,
+    "skills": 19,
+    "bundles": 14,
+    "postgres_version": "17.11 (Ubuntu 17.11-1.pgdg22.04+2)",
+    "database_tls_verified": true
+  },
+  "services": [
+    {
+      "unit": "one-tap-assets-api",
+      "active": "active",
+      "enabled": "enabled"
+    },
+    {
+      "unit": "one-tap-assets-worker",
+      "active": "active",
+      "enabled": "enabled"
+    },
+    {
+      "unit": "one-tap-assets-reaper",
+      "active": "active",
+      "enabled": "enabled"
+    },
+    {
+      "unit": "one-tap-assets-media-maintenance",
+      "active": "active",
+      "enabled": "enabled"
+    },
+    {
+      "unit": "one-tap-assets-backup.timer",
+      "active": "active",
+      "enabled": "enabled"
+    },
+    {
+      "unit": "one-tap-assets-db",
+      "active": "active",
+      "enabled": "enabled"
+    }
+  ],
+  "initial_database_backup": "/var/backups/one-tap-assets/ypcc-20261030T201223Z.dump",
+  "secret_file_modes": "0600/root; parent0700",
+  "full_suite_run": false,
+  "real_provider_verified": false,
+  "native_codex_admitted": false,
+  "real_payments_verified": false,
+  "production_admitted": false
+}

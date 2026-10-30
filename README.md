@@ -1,9 +1,16 @@
 # 一品成片 · One Tap Assets
 
+**2026-10-31 已完成内网部署。** [首页](https://192.168.31.20:38443/) · [Plus](https://192.168.31.20:38443/plus/) · [小程序演示回放](https://192.168.31.20:38443/preview/)。HTTPS **38443**，HTTP **38480** 跳转；内部 API/数据库仅监听本机。原生 Node 24.22.1、PostgreSQL 17.11、FFmpeg、开机自启和首份备份已配置，双端 Linux 构建均 17 页面。明文凭据仅在服务器 `/root/cfg/one-tap-assets/credentials.txt`（root/0600）。首次访问需处理内网证书；真实登录、生成、支付和 Codex 隔离准入仍待，当前不开放真实下单。
+
+[完整部署与运维](docs/deployment/内网部署与运维-2026-10-31.md) · [配置快照与健康检查](deploy/linux/README.md) · [服务端证据](docs/verification/lan-server.json) · [可信 TLS 跨内网核对](docs/verification/lan-client.json) · [截图/录屏/GIF](docs/media/lan-deployment/README.md)
+
+![实际内网部署浏览](docs/media/lan-deployment/lan-walkthrough.gif)
+
+
 2026-10-31主要功能收口：补齐Plus社区预设编排，可组合主风格、叙事/节奏/镜头/字幕与多种规格，进行兼容性检查并保存原账号云端草稿。手机明确批准独立作者权限，样例、授权和发布继续衔接小程序；原双端绑定与共享作品保留。[完整方案与操作](docs/实施/Plus社区预设编排与云端续编-v1.0.md) · [截图/录屏/GIF](docs/media/plus-presets/README.md) · [准确证据](docs/verification/plus-preset-source.json)。
 
 
-从[START-HERE](START-HERE.md)开始，使用`delivery:final`执行必要类型检查、构建和打包，全面测试不作为交付前提。13项预设编排/Plus原生重点检查通过；必要构建及媒体实际结果见[当前构建](docs/delivery/current.json)和[编号状态](docs/guides/STATUS.md)，ZIP路径与SHA256见[交付清单](docs/delivery/package.json)。当前40迁移、115业务/38管理接口、328schema/84实体，双端各17页面。真实服务/隔离准入、宿主真机和云部署属于上线前配置与验收；当前真实销售关闭。以下历史检查保留各自来源。
+从[START-HERE](START-HERE.md)开始，使用`delivery:final`执行必要类型检查、构建和打包，全面测试不作为交付前提。13项预设编排/Plus原生重点检查通过；必要构建及媒体实际结果见[当前构建](docs/delivery/current.json)和[编号状态](docs/guides/STATUS.md)，ZIP路径与SHA256见[交付清单](docs/delivery/package.json)。当前40迁移、115业务/38管理接口、328schema/84实体，双端各17页面。真实服务/隔离准入、宿主真机和公网生产部署属于上线前配置与验收；内网部署已完成；当前真实销售关闭。以下历史检查保留各自来源。
 
 **支付宝、抖音小程序优先的自助商品素材工作室。** 拍下商品，多模态识别可见特征，选择社区预设，确认清单与费用后制作整套素材。官方10套不同风格/节奏方案提供基础体验；风格Skill参与内容、制作、后期、文件预验收及独立事实/风格复核，交付后释放实例，手机领取和保存相册。
 
@@ -23,7 +30,7 @@
 
 [交付包路径与SHA256](docs/delivery/package.json) · [完整编号状态](docs/guides/STATUS.md) · [准确证据](docs/verification/plus-video-source.json) · [小程序导入说明](docs/guides/MINI-PROGRAM-IMPORT.md)
 
-演示实际运行原生PostgreSQL、HTTPS、MCP及FFmpeg；账户、原交付元数据、付款事件、模型/听音判定和隔离身份为合成，音频仅为提示音。真实服务和销售默认关闭；开发者工具/真机、真实身份支付/模型/隔离准入及云端部署仍待。先前失败与运行器启动超时单独留档。自动转写、多轨/视频批量、高级作者工具及58项完整验收继续保留在待办；本人双平台主动绑定现已实现，真实宿主验证仍待。
+演示实际运行原生PostgreSQL、HTTPS、MCP及FFmpeg；账户、原交付元数据、付款事件、模型/听音判定和隔离身份为合成，音频仅为提示音。真实服务和销售默认关闭；开发者工具/真机、真实身份支付/模型/隔离准入及公网正式部署仍待；实际内网服务见上方部署入口。先前失败与运行器启动超时单独留档。自动转写、多轨/视频批量、高级作者工具及58项完整验收继续保留在待办；本人双平台主动绑定现已实现，真实宿主验证仍待。
 
 ## 界面与操作演示
 

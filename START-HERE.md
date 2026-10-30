@@ -1,5 +1,8 @@
 # 一品成片：交付使用入口 / Start here
 
+**内网已部署 / LAN service is live:** [首页 / Home](https://192.168.31.20:38443/), [Plus](https://192.168.31.20:38443/plus/), [演示 / Replay](https://192.168.31.20:38443/preview/)。高位端口 HTTPS 38443 / HTTP 38480；凭据见服务器 `/root/cfg/one-tap-assets/credentials.txt`。真实小程序身份、模型、商户和隔离准入仍待；先读[部署和使用边界](docs/deployment/内网部署与运维-2026-10-31.md)。 / LAN access is available; native identity, real providers/payments and production admission still require configuration.
+
+
 主入口是**支付宝小程序、抖音小程序**；Plus网页承担图片深化、视频选段/裁切/定时字幕、原声保留/静音、图片批量和社区预设编排。普通用户拍照后由多模态识别商品，再选择社区方案，确认素材清单和费用，制作完成后领取并保存到相册。官方提供10套风格、14个执行变体。
 
 The primary clients are the Alipay and Douyin mini-programs. Photograph a product, review multimodal recognition, choose a community preset, confirm the deliverables and fee, then collect the assets. Plus adds advanced image/video editing, image batches and community preset composition. The official catalog has 10 styles and 14 execution variants.

@@ -1,5 +1,31 @@
 # 当前交付与功能状态 / Delivery and functional status
 
+## 2026-10-31 内网部署 / LAN deployment
+
+| 编号 | 本轮完成 | 结果 |
+| --- | --- | --- |
+| D01 | 独立原生环境 | Node24 / pnpm10 / FFmpeg8.1 / PostgreSQL17；原有业务保留 |
+| D02 | 高位入口 | HTTPS38443、HTTP38480跳转；内部API38410/DB35432仅本机 |
+| D03 | 构建与初始化 | Linux四目标；40迁移、10官方预设、14变体、19Skill/14bundle；全部禁售 |
+| D04 | 常驻与备份 | 四应用进程、专用DB、备份timer已自启；首份DB备份已生成 |
+| D05 | 明文凭据 | 服务器/root/cfg/one-tap-assets/credentials.txt，root/0600；不进入Git |
+| D06 | 关键核对与媒体 | 服务端16项/工作站可信TLS8项；4页面无异常，4截图与MP4/WebM/GIF |
+| D07 | 交付维护 | 中英README、部署运维、配置快照与健康检查、正常提交推送 |
+
+| 编号 | 待完成 | 条件 |
+| --- | --- | --- |
+| L01 | 正式域名切换 | 用户提供域名后改公开基址、回调、跨域、证书和双端API |
+| L02 | 实际身份与商户 | 平台AppID/密钥、商户、原生宿主与真机验证 |
+| L03 | 模型及Codex服务 | 专用凭据/费率/预算、原生隔离启动器、实际四阶段执行与双复核准入 |
+| L04 | 生产运行与恢复 | 私有OSS、素材及日志异机备份、生产质量/容量与恢复验收 |
+
+来源：[部署细则](../deployment/内网部署与运维-2026-10-31.md)、[服务端](../verification/lan-server.json)、[跨LAN](../verification/lan-client.json)、[浏览器](../verification/lan-browser.json)。LAN deployment已完成；公网正式部署、full_product_verified与production_admitted仍未成立。不执行全面测试；所属浏览器已关闭，不调用Docker/WSL/虚拟化。
+
+## 上一轮源码功能收口记录 / Prior source delivery scope
+
+以下原始构建/包状态保留当时范围，包括旧cloud_deployed标志；本轮部署以以上独立回执为准。
+
+
 2026-10-31：按主要功能可交付收口，不以全面测试绿灯为前提。双小程序拍照与多模态识别、社区预设、逐件确认付款、阶段制作/后期/QC/独立双复核、领取和相册接口已有源码；本人双端主动绑定和共享作品保留。Plus保留图片编辑、图片批量、原片视频剪辑，并补齐复杂社区预设编排及同一份云端草稿续编。
 
 [开始使用](../../START-HERE.md) · [预设编排细则](../实施/Plus社区预设编排与云端续编-v1.0.md) · [准确证据](../verification/plus-preset-source.json) · [截图与录屏](../media/plus-presets/README.md) · [当前构建](../delivery/current.json) · [ZIP及SHA256](../delivery/package.json)

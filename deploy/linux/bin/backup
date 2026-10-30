@@ -1,0 +1,16 @@
+#!/bin/bash
+set -euo pipefail
+umask 077
+exec 9>/var/backups/one-tap-assets/.backup.lock
+flock -n 9 || exit 0
+stamp=$(date -u +%Y%m%dT%H%M%SZ)
+target=/var/backups/one-tap-assets
+export LD_LIBRARY_PATH=/opt/one-tap-assets/tools/pgsql/usr/lib/x86_64-linux-gnu
+export PGSSLMODE=verify-full
+export PGSSLROOTCERT=/opt/one-tap-assets/public/lan-ca.crt
+export PGPASSFILE=/root/cfg/one-tap-assets/pgpass
+/opt/one-tap-assets/tools/pgsql/usr/lib/postgresql/17/bin/pg_dump --host=127.0.0.1 --port=35432 --username=ypcc_app --dbname=ypcc --format=custom --file="$target/ypcc-$stamp.dump.partial"
+mv "$target/ypcc-$stamp.dump.partial" "$target/ypcc-$stamp.dump"
+sha256sum "$target/ypcc-$stamp.dump" > "$target/ypcc-$stamp.dump.sha256"
+# The live privacy journal is deliberately excluded from database restores.
+printf 'database_backup_created=%s\n' "$target/ypcc-$stamp.dump"

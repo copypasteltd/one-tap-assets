@@ -1,0 +1,40 @@
+[Unit]
+Description=One Tap Assets media-maintenance
+After=network-online.target one-tap-assets-db.service
+Wants=network-online.target
+Requires=one-tap-assets-db.service
+StartLimitIntervalSec=120
+StartLimitBurst=8
+
+[Service]
+Type=simple
+User=ypcc
+Group=ypcc
+WorkingDirectory=/opt/one-tap-assets/app
+EnvironmentFile=/root/cfg/one-tap-assets/app.env
+Environment=PATH=/opt/one-tap-assets/tools/node/bin:/opt/one-tap-assets/tools/ffmpeg/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/opt/one-tap-assets/tools/node/bin/node runtime/build/worker/lifecycle/media-maintenance-main.js
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=90
+KillMode=control-group
+UMask=0027
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/opt/one-tap-assets/app/runtime
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+LimitNOFILE=8192
+MemoryMax=1G
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=one-tap-assets-media-maintenance
+
+[Install]
+WantedBy=multi-user.target

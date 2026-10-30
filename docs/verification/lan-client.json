@@ -1,0 +1,57 @@
+{
+  "origin": "https://192.168.31.20:38443",
+  "tested_from": "Windows workstation across LAN",
+  "ca_der_sha256": "5c4790be818125b5d6f23bd8700a5a512b79a2bdb2ab7c22a109350df128fd41",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 2123,
+      "certificate_hostname_verified": true
+    },
+    {
+      "path": "/healthz",
+      "status": 200,
+      "bytes": 58,
+      "certificate_hostname_verified": true
+    },
+    {
+      "path": "/readyz",
+      "status": 200,
+      "bytes": 18,
+      "certificate_hostname_verified": true
+    },
+    {
+      "path": "/plus/",
+      "status": 200,
+      "bytes": 585,
+      "certificate_hostname_verified": true
+    },
+    {
+      "path": "/preview/",
+      "status": 200,
+      "bytes": 675,
+      "certificate_hostname_verified": true
+    },
+    {
+      "path": "/ops/support",
+      "status": 200,
+      "bytes": 615,
+      "certificate_hostname_verified": true
+    },
+    {
+      "path": "/ops/review",
+      "status": 200,
+      "bytes": 542,
+      "certificate_hostname_verified": true
+    },
+    {
+      "path": "/ops/metrics",
+      "status": 200,
+      "bytes": 535,
+      "certificate_hostname_verified": true
+    }
+  ],
+  "http_redirect": 308,
+  "unverified_tls_used": false
+}

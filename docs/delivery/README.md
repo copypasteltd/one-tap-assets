@@ -1,5 +1,8 @@
 # 源码交付与快速启动 / Source delivery and quick start
 
+**2026-10-31 部署更新 / Deployment update:** native LAN service is available at `https://192.168.31.20:38443/`. [实际部署与运维](../deployment/内网部署与运维-2026-10-31.md) · [配置快照](../../deploy/linux/README.md) · [16 项服务端核对](../verification/lan-server.json) · [8 项跨 LAN 可信 TLS 核对](../verification/lan-client.json)。以下包清单保持其原打包时点和验证范围，不代表生产准入；新部署状态由 LAN 回执说明。
+
+
 当前主要功能包已增加Plus社区预设编排，入口见[START-HERE](../../START-HERE.md)、[当前状态](../guides/STATUS.md)、[新媒体](../media/plus-presets/README.md)和[准确证据](../verification/plus-preset-source.json)。类型/服务端/Plus/双小程序的实际结果及ZIP/SHA以当前两个交付清单为准；13项作者/Plus原生重点检查，不执行全面测试。以下旧轮启动/媒体记录保留原来源。 / The current package adds preset composition. See current manifests for exact outputs; earlier startup/media records below retain their original scope.
 
 当前统一入口为[START-HERE](../../START-HERE.md)。运行`.\scripts\run.ps1 delivery:final`即可执行必要类型检查、服务端/Plus/双小程序构建及打包；全面测试不作为交付前提。实际目标状态以[current.json](current.json)、ZIP和SHA256以[package.json](package.json)为准。启动和doctor校验当前记录并选择实际独立或解压目录，不再默认借用旧产物。详情见[本轮细则](../实施/最终交付入口与构建收口-v1.0.md)和[证据](../verification/final-closure-source.json)。以下为既有说明及历史交付来源。 / Use START-HERE and delivery:final for focused final packaging; current manifests supersede historical build selections below.

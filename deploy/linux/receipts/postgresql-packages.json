@@ -1,0 +1,23 @@
+{
+  "source": "https://apt.postgresql.org/pub/repos/apt",
+  "suite": "jammy-pgdg",
+  "key_fingerprint": "B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8",
+  "installed_globally": false,
+  "packages": [
+    {
+      "file": "libpq5_18.6-1.pgdg22.04+2_amd64.deb",
+      "bytes": 264656,
+      "sha256": "8af0b458834e219f3aa7c904fa1237ea484950486e3165a3a90204878e060530"
+    },
+    {
+      "file": "postgresql-17_17.11-1.pgdg22.04+2_amd64.deb",
+      "bytes": 18937760,
+      "sha256": "4a3db7ad8ebb016e966d5f1cc390782531f4c111fd234daaf766d18d2be885b4"
+    },
+    {
+      "file": "postgresql-client-17_17.11-1.pgdg22.04+2_amd64.deb",
+      "bytes": 2051188,
+      "sha256": "3719f32e1484b723c225cfb8c2cfdbf31bb56b8593c20c5264bab0376326e22f"
+    }
+  ]
+}

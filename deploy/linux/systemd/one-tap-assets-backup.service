@@ -1,0 +1,8 @@
+[Unit]
+Description=One Tap Assets database backup
+After=one-tap-assets-db.service
+Requires=one-tap-assets-db.service
+[Service]
+Type=oneshot
+ExecStart=/opt/one-tap-assets/bin/backup
+UMask=0077

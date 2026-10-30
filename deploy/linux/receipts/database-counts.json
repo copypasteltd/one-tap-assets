@@ -1,0 +1,10 @@
+{
+  "migrations": 40,
+  "official_presets": 10,
+  "execution_variants": 14,
+  "sale_enabled_variants": 0,
+  "skills": 19,
+  "bundles": 14,
+  "postgres_version": "17.11 (Ubuntu 17.11-1.pgdg22.04+2)",
+  "database_tls_verified": true
+}

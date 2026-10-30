@@ -1,5 +1,14 @@
 # 更新记录 / Changelog
 
+## 2026-10-31 — Native LAN deployment / 原生内网部署
+
+- Deployed application source `88312df` to `192.168.31.20` with verified source ZIP SHA256; installed project-owned Node 24.22.1, pnpm 10.13.1, FFmpeg and signed-PGDG PostgreSQL 17.11 without containers or global runtime upgrades.
+- Added HTTPS 38443 / HTTP redirect 38480, loopback API 38410 and PostgreSQL 35432 with verified TLS. Four Linux builds, 40 migrations, 10 official presets, 14 disabled-sale variants and independent deletion-journal initialization completed. Existing business database/service instances were preserved.
+- Configured dedicated app/database users, systemd startup/restart, daily database backups and root-only plaintext credentials under `/root/cfg/one-tap-assets/` as requested. Captured nginx/systemd/backup/landing configs in `deploy/linux/` with focused maintenance scripts.
+- 16 server HTTP checks and 8 workstation requests with CA/IP verification passed; four actual browser pages had no page errors. Added four screenshots, MP4/WebM/GIF and bilingual README updates. Owned browser tabs/processes were closed. No full suite or real native host, identity, model, payment or Codex runtime admission is claimed.
+- 正式域名由用户后续提供；真实服务/支付/原生隔离、OSS 和生产准入仍待，实际生成及销售保持关闭。历史交付包不改写为新部署证据。 [部署细则](docs/deployment/内网部署与运维-2026-10-31.md) · [准确回执](docs/verification/lan-server.json) · [媒体](docs/media/lan-deployment/README.md)
+
+
 ## 2026-10-31 · Plus community preset composition / 社区预设编排
 
 - 补齐P01-F18复杂预设创作：独立作者权限、原账号手机确认、风格/方向/规格/资源组合、兼容性检查、云端草稿恢复。 / Added separately approved original-account authoring, composition checks and shared mobile/desktop cloud drafts.
