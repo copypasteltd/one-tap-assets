@@ -32,7 +32,9 @@ export function revisionTools(pool:pg.Pool,cfg:Config,store:ObjectStorage):Recor
     const c=await revisionContext(pool,scope.tenant_id,scope.scope_id,scope.snapshot_hash);const packet=revisionPacket(c);
     requireThat(scope.packet_hash===packet.packet_hash && args.packet_hash===packet.packet_hash,'REVISION_PACKET_CHANGED','修改复核材料已变化',409);
     await revisionImages(pool,cfg,store,c);return {result:{packet_hash:packet.packet_hash,packet,original_request:c.input.request,
-      original_copy:c.parent.items.filter(i=>i.kind==='copy'),report_requirements:{packet_hash:packet.packet_hash,role:scope.role,checked_asset_ids:revisionAssetIds(c)}}};
+      original_copy:c.parent.items.filter(i=>i.kind==='copy'),
+      ...(packet.native_audio?{retained_native_audio:packet.native_audio,retained_native_audio_hash:hash(packet.native_audio)}:{}),
+      report_requirements:{packet_hash:packet.packet_hash,role:scope.role,checked_asset_ids:revisionAssetIds(c)}}};
   },
   persist_stage_result:async(scope,args)=>{
     const c=await revisionContext(pool,scope.tenant_id,scope.scope_id,scope.snapshot_hash);

@@ -50,10 +50,12 @@ export class RevisionService {
       input:{phase:'POST',snapshot_hash:c.inputHash,request:c.input.request,parent_manifest:c.parent,
         task:'仅执行冻结的小修改。调用execute_post_plan取得完整候选，inspect_actual_media检查全部artifact_ids，将回执加入tool_receipt_ids，经persist_stage_result保存并原样返回。禁止新增镜头、人物、商品事实、对白或修改预算。'}}:
       {...common,allowedTools:['extract_review_evidence','persist_stage_result'],outputSchema:revisionReviewSchema,
-        review:{packetHash:revisionPacket(c).packet_hash,images:await revisionImages(this.pool,this.cfg,this.store,c)},
+        review:{packetHash:revisionPacket(c).packet_hash,images:await revisionImages(this.pool,this.cfg,this.store,c),
+          ...(revisionPacket(c).native_audio?{retained_native_audio_hash:hash(revisionPacket(c).native_audio)}:{})},
         input:{phase:role,packet_hash:revisionPacket(c).packet_hash,request:c.input.request,profile:c.contract.profile,source:c.contract.source,
           original_plan:c.contract.creative,parent_manifest:c.parent,packet:revisionPacket(c),
-          task:`独立复核本次修改的${role==='REVIEW_FACTS'?'商品事实、原意、身份和交付规格':'风格、可读性、封面及展示顺序'}。调用extract_review_evidence并检查全部原图及实际视频画面。配套文案不得新增事实或改变原对白含义；图片、字幕、音轨与视频内容必须保持原版。报告覆盖完整素材和画面，问题绑定实际asset_id。只有全部符合才PASS，persist_stage_result后原样返回。`}};
+          ...(revisionPacket(c).native_audio?{retained_native_audio:revisionPacket(c).native_audio}:{}),
+          task:`独立复核本次修改的${role==='REVIEW_FACTS'?'商品事实、原意、身份和交付规格':'风格、可读性、封面及展示顺序'}。调用extract_review_evidence并检查全部原图及实际视频画面。有声单读取完整原听音观察、实际转写、字幕、时间码及声音检测，对照新文案确认不改变原声语义，不把脚本文字当实际听音。配套文案不得新增事实；图片、字幕、音轨与视频内容必须保持原版。报告覆盖完整素材、画面及全部声音证据，问题绑定实际asset_id。只有全部符合才PASS，persist_stage_result后原样返回。`}};
     const result=await this.execute(request,signal);
     requireThat(hash(result.result)===result.resultHash,'REVISION_ROLE_CHECKPOINT_CHANGED','修改角色结果摘要不一致',503);
     return async db=>{const current=await revisionContext(db,lease.tenant_id,lease.scope_id,lease.input_hash,true);

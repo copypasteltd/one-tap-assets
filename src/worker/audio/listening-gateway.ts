@@ -30,8 +30,15 @@ interface Receipt {version:'YPCC-LISTENING-RECEIPT-1';submission_id:string;reque
   content_type:string;response_sha256:string;body_base64:string}
 
 /** Reads original, settled evidence without purchase or settlement methods. */
-class NativeListeningReader {
+export class NativeListeningReader {
   constructor(protected database:Db,protected cfg:Config,protected store:ObjectStorage){}
+  protected async packetAuthorization(_db:Db,_context:ExecutionContext,packet:import('../../shared/contracts/types.js').DTO<'ReviewPacket'>):Promise<void>{
+    requireThat(['SEALED','REVIEWING','PASSED'].includes(packet.state)&&packet.publication_decision==='PENDING',
+      'LISTENING_PACKET_INVALID','听音需要当前封存且未阻断的完整审查包',409);
+  }
+  protected async deadlineAuthorization(_db:Db,context:ExecutionContext):Promise<void>{
+    requireThat(Date.parse(context.snapshot.deadline_at)>Date.now(),'LISTENING_INTERRUPTED','听音证据已超过原订单截止',409);
+  }
   protected async row(tenantId:string,submissionId:string,db:Db=this.database,lock=false):Promise<ListeningRow>{
     const r=(await db.query<ListeningRow>(`SELECT * FROM provider_submissions WHERE tenant_id=$1 AND id=$2 AND generation_kind='LISTENING'${lock?' FOR UPDATE':''}`,[tenantId,submissionId])).rows[0];
     requireThat(r,'LISTENING_ORIGINAL_MISSING','独立听音原请求不存在',409);return r;
@@ -60,8 +67,7 @@ class NativeListeningReader {
   }
   protected async compiled(db:Db,context:ExecutionContext):Promise<{c:ListeningContract;prepared:PreparedListening}>{
     const c=await verifyListeningLive(db,this.cfg,context.contract,true),packet=await currentReviewPacket(db,context);
-    requireThat(['SEALED','REVIEWING','PASSED'].includes(packet.state)&&packet.publication_decision==='PENDING',
-      'LISTENING_PACKET_INVALID','听音需要当前封存且未阻断的完整审查包',409);
+    await this.packetAuthorization(db,context,packet);
     const rows=await verifySealedEvidence(db,this.store,packet);
     await this.sources(db,context);
     await nativeQcResources(db,this.store,context);await nativeQcWrites(db,context,rows);
@@ -134,7 +140,7 @@ class NativeListeningReader {
     'LISTENING_BILLING_UNVERIFIED','听音缺少原订单、原费率与实际用量对应的已结算费用',503);
     requireThat(!requirePass||decoded.output.result.verdict==='PASS','INDEPENDENT_AUDIO_NOT_PASSED','独立听音仍有问题或证据不足，不能执行最终复核与交付',422);
     await verifyListeningLive(db,this.cfg,context.contract,true);
-    requireThat(Date.parse(context.snapshot.deadline_at)>Date.now(),'LISTENING_INTERRUPTED','听音证据已超过原订单截止',409);
+    await this.deadlineAuthorization(db,context);
     return decoded.output;
   }
   /** Read only: recompile the complete current input and reparse exact original

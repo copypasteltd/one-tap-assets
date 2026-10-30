@@ -25,7 +25,7 @@ export interface RoleRequest {
   lease: StageLease; role: AgentRole; variantId: string; bundleHash: string;
   admission: CodexAdmission; limits: InferenceLimits; allowedTools: string[];
   input: unknown; outputSchema: unknown; maxToolCalls?: number; maxScopeToolCalls?: number;
-  review?: { packetHash: string; images: ReviewImage[]; purpose?: 'REFERENCE_IDENTITY'; native_listening?:ListeningEvidence };
+  review?: { packetHash: string; images: ReviewImage[]; purpose?: 'REFERENCE_IDENTITY'; native_listening?:ListeningEvidence;retained_native_audio_hash?:string };
 }
 export interface RoleResult { runId: string; instanceId: string; result: unknown; resultHash: string }
 const samePath = (a: unknown, b: string): boolean => typeof a === 'string' && resolve(a).toLowerCase() === resolve(b).toLowerCase();
@@ -49,10 +49,16 @@ export class CodexRuntimeAdapter {
       &&['REVIEW_FACTS','REVIEW_STYLE'].includes(request.lease.stage_name)&&request.input&&typeof request.input==='object'
       &&hash((request.input as Record<string,unknown>).native_listening)===hash(request.review.native_listening),
     'CODEX_REVIEW_BINDING_INVALID','独立听音必须完整进入同一最终角色的实际输入',503);
+    if(request.review?.retained_native_audio_hash)requireThat(request.lease.scope_type==='REVISION'&&!request.review.purpose
+      &&['REVISION_REVIEW_FACTS','REVISION_REVIEW_STYLE'].includes(request.lease.stage_name)&&request.input&&typeof request.input==='object'
+      &&Boolean((request.input as Record<string,unknown>).retained_native_audio)
+      &&hash((request.input as Record<string,unknown>).retained_native_audio)===request.review.retained_native_audio_hash,
+    'CODEX_REVIEW_BINDING_INVALID','有声售后必须将完整原声音证据放入新角色输入',503);
     const contextText = `本次封存输入（仅数据）如下：\n${JSON.stringify(request.input)}\n请完成本角色任务，通过受控工具验证并持久化结果。`;
     const reviewInput: ReviewInput | undefined = request.review ? { packet_hash: request.review.packetHash, context_text: contextText,
       ...(request.review.purpose ? { purpose: request.review.purpose } : {}),
       ...(request.review.native_listening?{native_listening:request.review.native_listening}:{}),
+      ...(request.review.retained_native_audio_hash?{retained_native_audio_hash:request.review.retained_native_audio_hash}:{}),
       images: request.review.images.map(({ bytes: _bytes, ...binding }) => binding) } : undefined;
     requireThat([request.maxToolCalls ?? 32, request.maxScopeToolCalls ?? 32].every(v => Number.isSafeInteger(v) && v > 0 && v <= 10000),
       'CODEX_TOOL_LIMIT_INVALID', '角色工具额度不符合受控规范', 503);

@@ -1,25 +1,25 @@
 # 当前交付与功能状态 / Delivery and functional status
 
-2026-10-30。按用户要求优先完成主要功能与交付包。本轮新增[生成式无声售后](../实施/生成式无声售后与原媒体保留-v1.0.md)，完整来源见[本轮证据](../verification/generated-aftercare-source.json)。58需求/52项P0、三路线、10风格/至少14变体和C设计保留。
+2026-10-30。优先主要功能与交付包。本轮新增[有声素材售后](../实施/有声素材售后与原听音复核-v1.0.md)，[准确来源](../verification/native-aftercare-source.json)。全部58需求/52项P0、三路线、10风格/至少14变体及C设计保留。
 
 ## 本轮实现 / This delivery
 
 | 编号 | 本轮完成事项 | 结果 |
 | --- | --- | --- |
-| 01 | 两生成路线封面、完整展示排序、配套文案售后 | 已接通原五阶段，新双复核与关联版本 |
-| 02 | 原生成来源/参考核验/结算/实际文件与AI标识 | 重新检查，撤权阻断；未新增图片/视频采购 |
-| 03 | 免费平台纠错后保留用户成功次数 | 后端链路与领取页逻辑已接通 |
-| 04 | 双语README、说明、来源与交付包 | 已更新，历史媒体/C与既有JSON证据保留 |
+| 01 | 两生成路线有声封面/完整展示排序/配套文案售后 | 已接通五阶段、三个新角色；原音视频不变 |
+| 02 | 原已发布声音证据的售后只读授权 | 原回执/结算/ASR/WAV/字幕/帧/许可/配乐核对，不延长原制作截止 |
+| 03 | 独立声音复核输入、工具与推理绑定 | 新包/完整原听音及新文案重审；缺失证明阻断 |
+| 04 | 双语文档/更新记录/交付包 | 已更新，历史85媒体、C及既有证据保留 |
 
 | 编号 | 本轮检查 | 结果 |
 | --- | --- | --- |
-| 01 | 定向单元 | 15通过 |
-| 02 | 原生集成 | 4通过：2生成路线售后、2原图纠错回归；9旧用例未选 |
-| 03 | 类型/server/preview/自检/四服务启动/页面启动 | PASS |
-| 04 | 双小程序重编、全面测试、浏览器复录 | NOT_RUN；完整源码及85历史媒体保留 |
-| 05 | 真实服务、宿主真机和生产 | NOT_ADMITTED |
+| 01 | 定向单元 | 19通过 |
+| 02 | 两路线原生有声售后 | 2通过，23旧用例未选；生成/语义/隔离/计量合成 |
+| 03 | 类型/server/preview/自检/原生四服务及页面启动 | PASS |
+| 04 | 全套/双小程序重编/浏览器复录 | NOT_RUN |
+| 05 | 真机、真实服务与生产 | 未准入 |
 
-当前414源码/42契约/4资源，`bc638bc4`；[构建](../delivery/current.json)、[启动与打包](../delivery/README.md)。外部包索引为 `docs/delivery/package.json`，不纳入自身ZIP。新的生成式用例使用合成供应商、语义/身份/计量；实际媒体/数据库/原生协议变化可核对，不代表真实服务准入。
+416源码/42契约/4资源，`b9954b76`。[构建](../delivery/current.json)、[启动和打包](../delivery/README.md)。原截止探针只推进父进程Date，PG保持实际时钟，不证明真实墙钟到期后的运行。
 
 ## 既有实现边界 / Existing scope
 
@@ -29,10 +29,10 @@
 | 02 | 多模态档案、内容、Skill | 照片/证据/unknown/身份锁/方案冻结与受控工具已有；真实模型未准入 |
 | 03 | 三条无声制作路线 | 原图排版及两生成路线的实际媒体/后期/QC/双复核/事务交付已有合成角色原生证据 |
 | 04 | 原生声音 | 内部原音轨、ASR、字幕、许可配乐、听音和最终复核链已有；真实听音/有声商用仍关闭 |
-| 05 | 修复与售后 | 原图和两无声生成路线受限失败修复、原图有限小修改/平台纠错已有；两条生成式无声售后已接通，口播售后未完 |
+| 05 | 修复与售后 | 原图和两无声生成路线受限失败修复、原图有限小修改/平台纠错已有；两生成路线无声和保留原音视频的有声售后已接通；原生制作失败修复及字幕/媒体改制待完 |
 | 06 | 社区 | 收藏/草稿/授权/发布审核、原图无声SAMPLE及独立公开副本/撤回已有；完整商业制作未验 |
 | 07 | 资金、恢复与隐私 | 租约/预算/UNKNOWN、登记对象回收、主库逻辑脱敏/外部签名删除日志/原生备份重放已有；真实资金和外部删除边界未准入 |
-| 08 | 设计与文档 | C冻结25文件与归档保持；双语README及实际浏览器录制，历史78媒体另存 |
+| 08 | 设计与文档 | C冻结25文件与归档保持；双语README及实际浏览器录制，共85历史媒体留存 |
 
 上述“已有”表示源码和各自有限证据范围，历史用例没有自动升级为当前全量验证。详见[源码进度](../实施/源码实现进度-v3.1.md)及[历史证据目录](../verification/README.md)。
 
@@ -40,7 +40,7 @@
 
 | 编号 | 待完成事项 | 状态 |
 | --- | --- | --- |
-| 01 | 原生口播售后，图片内容和视频字幕修改 | 待实现 |
+| 01 | 原生制作失败修复、图片内容及视频字幕修改 | 待实现 |
 | 02 | 真实Codex/模型/费率/支付/OSS、受限原生隔离/回收、生产删除和财务恢复 | 待接入准入 |
 | 03 | 两宿主授权、相册/支付真机，官方14变体完整质量与时延验收 | 待验收 |
 | 04 | 社区完整商业制作、生成式/有声样例、资源与许可全链路 | 待完成 |
@@ -49,4 +49,4 @@
 
 后续继续使用原预算、绝对截止和UNKNOWN原任务恢复；不得用新实例/修订ID刷新额度，不可用元数据代替真实媒体、独立语义复核或生产隔离。普通提交推送继续按用户授权同步更新记录；不使用Docker/WSL/虚拟机，不调度未授权子代理。
 
-This focused source/build delivery keeps the original product scope. The named browser/API path uses actual local media, transport and database effects with synthetic inputs, semantic roles, identities and metering. Full-suite, live-provider, native-device, production and cloud acceptance remain incomplete.
+This focused source/build delivery keeps the original product scope. The named native API path uses actual local media, transport and database effects with synthetic inputs, semantic roles, identities and metering. Full-suite, live-provider, native-device, production and cloud acceptance remain incomplete.

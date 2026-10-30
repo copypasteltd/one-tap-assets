@@ -1,5 +1,15 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · Native audio aftercare / 有声素材售后
+
+本轮接通[有声素材售后与原听音复核](docs/实施/有声素材售后与原听音复核-v1.0.md)：两生成路线的已有封面、完整展示排序和配套文案可走原五阶段、新独立双复核，音视频字节保持原版；重新核对原听音/转写/费用/许可。19项单元、2项原生集成通过，未跑全面测试；原预算、次数、截止和UNKNOWN恢复保持。
+
+New: [native audio aftercare](docs/实施/有声素材售后与原听音复核-v1.0.md) supports existing cover, complete-list display order and companion copy on both generated routes while keeping every original image/video/audio byte. Fresh independent roles bind full original listening, transcript, costs and rights. Nineteen unit cases and two native integration cases pass; budgets, limits, deadlines and UNKNOWN recovery remain frozen.
+
+Both routes keep original media and paid ASR/listening receipts, with fresh five-stage revision review. The first fixture expected the wrong license error; its exact source/build and failure remain archived. Native caption/audio rewriting, production repair, live services, devices and cloud admission remain incomplete.
+
+以下旧轮次仅对应各自历史来源。
+
 ## 2026-10-30 · Silent generated aftercare / 生成式无声售后
 
 本轮接通[生成式无声售后与原媒体保留](docs/实施/生成式无声售后与原媒体保留-v1.0.md)：两生成路线可修改素材包封面、完整展示顺序与配套文案；沿用原图片/视频，核对原生成来源、已结算费用、AI标识和独立双复核。修复领取页将平台免费纠错误算为用户成功次数的问题。15项单元、4项原生集成通过，另9项旧用例未选；原预算/次数/截止与UNKNOWN规则保持。

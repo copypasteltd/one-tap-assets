@@ -1,4 +1,4 @@
-import {beforeAll,afterAll,afterEach,it,expect} from 'vitest';
+import {beforeAll,afterAll,afterEach,it,expect,vi} from 'vitest';
 import {mkdir,readFile,rm,writeFile,appendFile} from 'node:fs/promises';
 import {join} from 'node:path';
 import type {FastifyInstance} from 'fastify';
@@ -45,6 +45,15 @@ import {syntheticListeningResult,syntheticControlListeningPass,listeningSse} fro
 import {createDownloadLink,getDeliverables} from '../../src/api/modules/delivery.js';
 import {writePrivateObject} from '../../src/api/storage/private-objects.js';
 import {frozenOrderListening} from '../../src/worker/audio/listening-contract.js';
+import {issueSession} from '../../src/api/modules/identity.js';
+import type {DTO} from '../../src/shared/contracts/types.js';
+import type {NativeLaunchManifest} from '../../src/worker/codex/launcher.js';
+import {revisionTools} from '../../src/worker/tool-gateway/revision-tools.js';
+import {RevisionService} from '../../src/worker/revisions/service.js';
+import {revisionContext} from '../../src/worker/revisions/context.js';
+import {REVISION_STAGES} from '../../src/worker/revisions/contract.js';
+import {validateRevisionCompletion} from '../../src/worker/revisions/review.js';
+import {readDeliveredNativeListening} from '../../src/worker/audio/delivered-listening.js';
 
 // Real native PostgreSQL, HTTPS/stdio/MCP, actual tone/PNG/MP4/ALAC/AAC bytes.
 // Authorizations, recognizer text/usage, generation and isolation are synthetic.
@@ -62,6 +71,7 @@ beforeAll(async()=>{
     '-af','volume=0.1','-ac','2','-c:a','pcm_s16le','-y',path],{cwd:root,timeoutMs:30000});music=await readFile(path);
 });
 afterEach(async context=>{
+  vi.useRealTimers();
   // Preserve the original failure before a long serial suite or teardown ends.
   // Test-only diagnostics stay in ignored runtime, never in published media.
   const task=context.task as {name:string;result?:{errors?:{name?:string;message?:string;stack?:string;code?:unknown}[]}};
@@ -74,8 +84,8 @@ afterEach(async context=>{
 });
 afterAll(async()=>{await db?.close();if(root)await rm(inside(db.cfg.runtimeRoot,root),{recursive:true,force:true});});
 
-async function setup(options:{engine?:'PER_SHOT_AI'|'REFERENCE_FILM';music?:boolean;lostAsrAck?:boolean;crashPostCommit?:boolean;revokePostCommit?:boolean;listening?:boolean;dropListeningProof?:boolean}={}){
-  const f=await nativeOrderFixture(db,join(root,id('order')),{engine:options.engine??'PER_SHOT_AI',...(options.music?{music}:{}),style:options.engine==='REFERENCE_FILM'?'minimal':'karaoke',...(options.listening?{listening:true}:{})});
+async function setup(options:{engine?:'PER_SHOT_AI'|'REFERENCE_FILM';music?:boolean;lostAsrAck?:boolean;crashPostCommit?:boolean;revokePostCommit?:boolean;listening?:boolean;dropListeningProof?:boolean;revisions?:boolean}={}){
+  const f=await nativeOrderFixture(db,join(root,id('order')),{engine:options.engine??'PER_SHOT_AI',...(options.music?{music}:{}),style:options.engine==='REFERENCE_FILM'?'minimal':'karaoke',...(options.listening?{listening:true}:{}),revisions:options.revisions??false});
   const {image:ic,video:vc}=f.models,tasks=new Map<string,string>(),generationRequests:Record<string,unknown>[]=[];
   let providerCalls=0,asrPosts=0,inputUrl='',postCommits=0,inferences=0;const taskId=id('synthetic_asr_task');
   const gateway=new GenerationGateway(db.pool,f.cfg,f.store,new ArkClient(f.cfg,async(url,_hosts,opt={})=>{
@@ -110,13 +120,16 @@ async function setup(options:{engine?:'PER_SHOT_AI'|'REFERENCE_FILM';music?:bool
     }};
   };
   const toolEvents:WorkerLogEvent[]=[];
-  active.push({app,controller,task:new ToolConsumer(db.pool,id('native_tools'),{...media,...review,execute_post_plan:post,
+  const revisions=revisionTools(db.pool,f.cfg,f.store),handlers:Record<string,ToolHandler>={...media,...review,execute_post_plan:post,
     extract_review_evidence:async(...args)=>{const output=await review.extract_review_evidence!(...args);
       if(options.dropListeningProof&&['REVIEW_FACTS','REVIEW_STYLE'].includes(args[0].stage_name)){
         const {native_listening_hash:_,native_listening:__,...result}=output.result as Record<string,unknown>;
         return {...output,result};
       }return output;},
-    persist_stage_result:(scope,...args)=>(scope.role.startsWith('REVIEW_')?review:media).persist_stage_result!(scope,...args)},event=>{
+    persist_stage_result:(scope,...args)=>(scope.role.startsWith('REVIEW_')?review:media).persist_stage_result!(scope,...args)};
+  if(options.revisions)for(const name of Object.keys(revisions)){const original=handlers[name]!;
+    handlers[name]=(scope,...args)=>(scope.scope_type==='REVISION'?revisions[name]!:original)(scope,...args);}
+  active.push({app,controller,task:new ToolConsumer(db.pool,id('native_tools'),handlers,event=>{
       toolEvents.push(event);if(toolEvents.length>64)toolEvents.shift();
     }).run(controller.signal)});
   return {...f,app,controller,launcher,gateway,speech,toolEvents,generationRequests,providerCalls:()=>providerCalls,asrPosts:()=>asrPosts,postCommits:()=>postCommits,inferences:()=>inferences,
@@ -143,7 +156,7 @@ function directPost(f:Fixture,lease:StageLease):ToolScope{
     expires_at:lease.deadline_at,scope_type:'ORDER',scope_id:f.orderId,stage_name:'POST'};
 }
 
-async function listeningReady(engine:'PER_SHOT_AI'|'REFERENCE_FILM'='PER_SHOT_AI',options:{dropListeningProof?:boolean}={}){
+async function listeningReady(engine:'PER_SHOT_AI'|'REFERENCE_FILM'='PER_SHOT_AI',options:{dropListeningProof?:boolean;revisions?:boolean}={}){
   const f=await setup({engine,listening:true,music:engine==='REFERENCE_FILM',...options});await stage(f,f.lease);
   const post=await postLease(f);await stage(f,post);
   await enqueueStage(db.pool,{tenantId:f.p.tenantId,scopeType:'ORDER',scopeId:f.orderId,name:'QC',inputHash:f.snapshotHash,
@@ -482,3 +495,96 @@ it('assembles and rechecks both original tone segments losslessly, rejecting a g
   await expect(assembleNativeAudio(db.cfg,{...input,segments:[{...segments[0]!,end_frame:29},segments[1]!]})).rejects.toMatchObject({code:'AUDIO_ASSEMBLY_INVALID'});
   const path=join(directory,'actual.mp4');await writeFile(path,made.bytes);expect(await inspectVideo(db.cfg,path)).toMatchObject({frames:60,audioCodec:'alac'});
 });
+
+
+class NativeAftercareLauncher extends FixtureLauncher{
+  override async launch(path:string,manifest:NativeLaunchManifest){const result=await super.launch(path,manifest);
+    result.receipt.os_identity_ref=`SYNTHETIC-NOT-RESTRICTED:${manifest.run_id}`;return result;}
+}
+it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('retains original native audio for %s aftercare with fresh reviews and no new generation ASR or listening purchases',async engine=>{
+  const f=await listeningReady(engine,{revisions:true}),g=listeningClient(f,'SYNTHETIC_PASS');
+  const service=new ReviewStageService(db.pool,f.cfg,new CodexRuntimeAdapter(db.pool,f.cfg,f.launcher),g.gateway);
+  await completeStage(db.pool,f.review,await withFixtureLease(db.pool,f.review,s=>service.handle(f.review,s)));
+  const style=await finalStage(f,'REVIEW_STYLE',f.review);
+  await completeStage(db.pool,style,await withFixtureLease(db.pool,style,s=>service.handle(style,s)));
+  const deliver=await finalStage(f,'DELIVER',style),publisher=new PublicationService(db.pool,f.cfg,f.store);
+  await completeStage(db.pool,deliver,await withFixtureLease(db.pool,deliver,s=>publisher.handle(deliver,s)));
+  const original=await getDeliverables(db.pool,f.p,f.orderId),paid={provider:f.providerCalls(),asr:f.asrPosts(),listening:g.posts()};
+  const sold=(await db.pool.query('SELECT spent_micro,deadline_at,private FROM orders WHERE id=$1',[f.orderId])).rows[0];
+  const token=(await issueSession(db.pool,{platform:'alipay',appId:f.p.appId,subjectId:f.p.subjectId})).access_token;
+  const staffToken='SYNTHETIC-NATIVE-AFTERCARE-STAFF';
+  f.cfg.managementTokens=JSON.stringify([{actor:'native-aftercare-staff',token_hash:sha256(staffToken),permissions:['support:read','support:write','support:repair']}]);
+  const user=(key=id('native-aftercare-http'))=>({authorization:`Bearer ${token}`,'idempotency-key':key});
+  const staff=()=>({authorization:`Bearer ${staffToken}`,'idempotency-key':id('native-aftercare-staff')});
+  // Only the read-only parent clock advances. No sold snapshot, receipt,
+  // model limit or database deadline is rewritten to manufacture admission.
+  vi.useFakeTimers({toFake:['Date']});vi.setSystemTime(new Date(Date.parse(f.snapshot.deadline_at)+1000));
+  const created=await f.app.inject({method:'POST',url:`/v1/p01/orders/${f.orderId}/tickets`,headers:user(),
+    payload:{category:'PRODUCT_ERROR',message:'合成有声订单封面纠错，保留原音视频。',attachment_asset_ids:[]}});
+  expect(created.statusCode,created.body).toBe(201);
+  const ticket=created.json().data as DTO<'Ticket'>,ticketUrl=`/v1/internal/p01/support-tickets/${ticket.ticket_id}`;
+  expect((await f.app.inject({method:'POST',url:ticketUrl+'/process',headers:staff(),payload:{action:'CLAIM',expected_revision:0}})).statusCode).toBe(200);
+  const offered=await f.app.inject({url:ticketUrl+'/repair-context',headers:staff()});expect(offered.statusCode,offered.body).toBe(200);
+  expect(offered.json().data.can_submit).toBe(true);
+  const cover=original.items.filter(i=>i.kind==='image')[1]!.deliverable_id;
+  const accepted=await f.app.inject({method:'POST',url:`/v1/internal/p01/orders/${f.orderId}/platform-repairs`,headers:staff(),
+    payload:{ticket_id:ticket.ticket_id,expected_ticket_revision:1,change:{kind:'COVER',manifest_revision:1,cover_deliverable_id:cover}}});
+  expect(accepted.statusCode,accepted.body).toBe(200);const correction=accepted.json().data as DTO<'Revision'>;
+  const aftercare=new RevisionService(db.pool,f.cfg,f.store,new CodexRuntimeAdapter(db.pool,f.cfg,new NativeAftercareLauncher()));
+  const run=async(revision:DTO<'Revision'>,probes=false)=>{
+    for(const name of REVISION_STAGES){
+      const lease=(await claimStage(db.pool,id('native-aftercare-worker'),[name]))!;expect(lease?.scope_id).toBe(revision.revision_id);
+      if(probes&&name==='REVISION_COMPLETE'){
+        const current=await revisionContext(db.pool,f.p.tenantId,revision.revision_id),sealed=current.row.private.qc_packet as import('../../src/worker/revisions/media.js').RevisionPacket;
+        expect(sealed.native_audio!.text_evidence.map(e=>e.kind)).toEqual(['TRANSCRIPT','CAPTION_SCRIPT','AUDIO_QC']);
+        expect(sealed.native_audio!.audio_evidence).toHaveLength(2);expect(sealed.native_audio!.native_listening.result.verdict).toBe('PASS');
+        const originalCall=(await db.pool.query("SELECT private,reservation_id FROM provider_submissions WHERE order_id=$1 AND generation_kind='LISTENING'",[f.orderId])).rows[0];
+        const key=originalCall.private.receipts[0].key,bytes=await f.store.get(key,4000000);
+        try{await f.store.put(key,Buffer.from('tampered original paid listening response'),'application/json');
+          await expect(aftercare.handle(lease,f.controller.signal)).rejects.toMatchObject({code:'LISTENING_RECEIPT_CHANGED'});
+        }finally{await f.store.put(key,bytes,'application/json');}
+        const proof=(await db.pool.query("SELECT id,data FROM agent_tool_intents WHERE run_id=$1 AND tool_name='extract_review_evidence' AND state='SUCCEEDED'",
+          [(current.row.private.review_reports as Record<string,{run_id:string}>).REVIEW_FACTS!.run_id])).rows[0];
+        try{await db.pool.query("UPDATE agent_tool_intents SET data=jsonb_set(data,'{result,retained_native_audio_hash}',to_jsonb($2::text)) WHERE id=$1",[proof.id,'f'.repeat(64)]);
+          await expect(validateRevisionCompletion(db.pool,f.cfg,current)).rejects.toMatchObject({code:'REVISION_REVIEW_EVIDENCE_MISSING'});
+        }finally{await db.pool.query('UPDATE agent_tool_intents SET data=$2::jsonb WHERE id=$1',[proof.id,JSON.stringify(proof.data)]);}
+        await expect(readDeliveredNativeListening(db.pool,f.cfg,f.store,f.context,{revision_id:revision.revision_id,input_hash:'0'.repeat(64)}))
+          .rejects.toMatchObject({code:'REVISION_INPUT_CHANGED'});
+        expect((await getDeliverables(db.pool,f.p,f.orderId)).manifest_revision).toBe(1);
+      }
+      const commit=await withFixtureLease(db.pool,lease,s=>aftercare.handle(lease,s));await completeStage(db.pool,lease,commit);
+    }
+  };
+  await run(correction,true);const corrected=await getDeliverables(db.pool,f.p,f.orderId);
+  expect(corrected.manifest_revision).toBe(2);expect(corrected.items).toEqual(original.items);expect(corrected.cover_deliverable_id).toBe(cover);
+  const text=`${f.contract.creative.copy}\n实拍展示，欢迎了解。`,url=`/v1/p01/orders/${f.orderId}/revisions`,key=id('native-aftercare-copy');
+  const payload={kind:'DISPLAY_TEXT',manifest_revision:2,display_text:text};
+  const requested=await f.app.inject({method:'POST',url,headers:user(key),payload});expect(requested.statusCode,requested.body).toBe(202);
+  const revision=requested.json().data as DTO<'Revision'>;
+  expect((await f.app.inject({method:'POST',url,headers:user(key),payload})).json().data).toEqual(revision);
+  await run(revision);const updated=await getDeliverables(db.pool,f.p,f.orderId);
+  expect(updated.manifest_revision).toBe(3);expect(updated.expires_at).toBe(original.expires_at);
+  expect(updated.items.filter(i=>i.kind!=='copy')).toEqual(original.items.filter(i=>i.kind!=='copy'));
+  for(const item of updated.items.filter(i=>i.kind==='video')){
+    const link=await createDownloadLink(db.pool,f.cfg,f.p,item.deliverable_id),url=new URL(link.url);
+    const result=await f.app.inject({url:url.pathname+url.search});expect(result.statusCode,result.body.slice(0,100)).toBe(200);expect(sha256(result.rawPayload)).toBe(item.sha256);
+  }
+  expect({provider:f.providerCalls(),asr:f.asrPosts(),listening:g.posts()}).toEqual(paid);
+  const order=(await db.pool.query('SELECT spent_micro,deadline_at,private FROM orders WHERE id=$1',[f.orderId])).rows[0];expect(order).toEqual(sold);
+  expect((await db.pool.query('SELECT data FROM delivery_manifests WHERE id=$1',[original.manifest_id])).rows[0].data).toEqual(original);
+  for(const id of [correction.revision_id,revision.revision_id]){
+    const roles=(await db.pool.query("SELECT r.id,r.private FROM agent_runs r JOIN stage_runs s ON s.id=r.private->>'stage_run_id' AND s.tenant_id=r.tenant_id WHERE s.scope_type='REVISION' AND s.scope_id=$1 AND r.role IN ('REVIEW_FACTS','REVIEW_STYLE')",[id])).rows;
+    expect(roles).toHaveLength(2);
+    for(const role of roles){const evidence=role.private.review_input.retained_native_audio_hash;
+      expect(evidence).toMatch(/^[a-f0-9]{64}$/);expect(role.private.review_input.context_text).toContain('YPCC-REVISION-RETAINED-NATIVE-AUDIO-1');
+      const calls=(await db.pool.query('SELECT data FROM inference_requests WHERE run_id=$1',[role.id])).rows;
+      expect(calls).toHaveLength(1);expect(calls[0].data.review_listening_hash).toBe(evidence);
+    }
+  }
+  expect((await db.pool.query("SELECT id FROM agent_instances WHERE preview_session_id=ANY($1::text[]) AND state<>'RELEASED'",[[correction.revision_id,revision.revision_id]])).rowCount).toBe(0);
+  // Actual durable revocation is terminal; do not restore a license to pass.
+  await db.pool.query('UPDATE resource_licenses SET revoked_at=now() WHERE id=$1',[f.character.voice_binding.license_record_id]);
+  const denied=await f.app.inject({method:'POST',url,headers:user(),payload:{kind:'COVER',manifest_revision:3,cover_deliverable_id:original.items.find(i=>i.kind==='image')!.deliverable_id}});
+  expect(denied.statusCode,denied.body).toBe(503);expect(denied.json().code).toBe('RESOURCE_LICENSE_UNAVAILABLE');
+  expect((await getDeliverables(db.pool,f.p,f.orderId)).manifest_revision).toBe(3);
+},180000);

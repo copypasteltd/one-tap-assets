@@ -28,10 +28,11 @@ import {packetReports} from '../review/reports.js';
 import {generatedOutputs,checkGeneratedSources} from '../generation/outputs.js';
 import {frozenAiDisclosure} from '../compiler/disclosure.js';
 import {inspectDisclosure} from '../media/disclosure.js';
+import {audioAuthority,retainedNativeAudio,type RetainedNativeAudio} from './audio.js';
 
 export interface RevisionCandidate {revision_id:string;input_hash:string;items:DTO<'Deliverable'>[];cover_deliverable_id:string;candidate_hash:string}
 export interface RevisionPacket {revision_id:string;input_hash:string;parent_manifest_hash:string;source_packet_id:string;source_packet_hash:string;
-  candidate:RevisionCandidate;images:ReviewImageBinding[];packet_hash:string}
+  candidate:RevisionCandidate;images:ReviewImageBinding[];native_audio?:RetainedNativeAudio;packet_hash:string}
 export interface RevisionMediaResult {revision_id:string;input_hash:string;candidate_hash:string;artifact_ids:string[];tool_receipt_ids:string[]}
 const hs={type:'string',pattern:'^[a-f0-9]{64}$'};
 const ids={type:'array',minItems:1,maxItems:100,uniqueItems:true,items:{type:'string',maxLength:128}};
@@ -74,13 +75,14 @@ async function originalContext(db:Db,c:RevisionContext):Promise<ExecutionContext
     &&published[0]!.binding.snapshot_hash===c.input.original_snapshot_hash,'REVISION_PARENT_UNVERIFIED','原交付缺少唯一且一致的封存发布记录',503);
   return repairExecutionContext(db,base,published[0]!.qc_stage_id);
 }
-async function sourcePacket(db:Db,cfg:Config,store:ObjectStorage,c:RevisionContext):Promise<{context:ExecutionContext;packet:DTO<'ReviewPacket'>}> {
+async function sourcePacket(db:Db,cfg:Config,store:ObjectStorage,c:RevisionContext):Promise<{context:ExecutionContext;packet:DTO<'ReviewPacket'>;native_audio:RetainedNativeAudio|null}> {
   const context=await originalContext(db,c);const packet=await currentReviewPacket(db,context);assertReviewConsensus(packet);
   requireThat(packet.publication_decision==='ALLOW','REVISION_PARENT_UNVERIFIED','原交付缺少已发布的封存证据',503);
   const binding=(await db.query<{private:{packet_id:string;packet_hash:string}}>(`SELECT private FROM delivery_manifests
     WHERE tenant_id=$1 AND owner_id=$2 AND order_id=$3 AND revision=1`,[c.row.tenant_id,c.row.owner_id,c.row.order_id])).rows[0]?.private;
   requireThat(binding?.packet_id===packet.packet_id&&binding.packet_hash===packet.packet_hash
-    &&hash(await packetReports(db,cfg,context,packet))===hash(packet.reports),'REVISION_PARENT_UNVERIFIED','原发布版本与独立复核持久证据不一致',503);
+    &&hash(await packetReports(db,cfg,context,packet,null,c.snapshot.audio_policy.speech_mode==='NATIVE_ZH'?audioAuthority(c):undefined))===hash(packet.reports),
+    'REVISION_PARENT_UNVERIFIED','原发布版本与独立复核持久证据不一致',503);
   // A later correction may inherit copy from an earlier accepted revision.
   // Walk only immutable, completed links back to the original sealed media;
   // revalidate each prior packet/role proof instead of treating metadata as PASS.
@@ -126,7 +128,7 @@ async function sourcePacket(db:Db,cfg:Config,store:ObjectStorage,c:RevisionConte
     requireThat(post.receipt.artifacts.filter(a=>a.spec.kind!=='copy').every(a=>a.spec.ai_disclosure?.contract_hash===hash(disclosure)
       &&a.spec.ai_disclosure.output_sha256===a.sha256),'AI_DISCLOSURE_PROOF_INVALID','原生成素材缺少对应冻结标识与文件的验收证明',503);
   }
-  return {context,packet};
+  return {context,packet,native_audio:await retainedNativeAudio(db,cfg,store,c,context,packet)};
 }
 export async function candidateBytes(db:Db,store:ObjectStorage,c:RevisionContext,item:DTO<'Deliverable'>):Promise<Buffer> {
   const row=(await db.query<{object_key:string;sha256:string;slot_id:string}>(`SELECT a.object_key,a.sha256,a.slot_id FROM artifacts a
@@ -174,8 +176,9 @@ export async function inspectCandidate(db:Db,cfg:Config,store:ObjectStorage,c:Re
       if(disclosure)await inspectDisclosure(cfg,disclosure,bytes,{kind:'image',width:actual.width,height:actual.height,frames:1,directory,deadline_at:c.input.deadline_at,signal});}
     else {const file=join(directory,`${item.deliverable_id}.mp4`);await writeFile(file,bytes);const actual=await inspectVideo(cfg,file,signal);
       requireThat(actual.width===item.width && actual.height===item.height && actual.fps===item.fps && actual.frames===item.duration_frames
-        && actual.bytes===item.size_bytes && !actual.hasAudio && actual.codec==='h264','REVISION_MEDIA_SPEC_INVALID','修改视频规格与原交付不一致',503);
-      await nativeCommand(cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-hide_banner','-loglevel','error','-xerror','-nostdin','-threads','2','-protocol_whitelist','file,pipe','-i',file,'-map','0:v:0','-an','-f','null','-'],
+        && actual.bytes===item.size_bytes && actual.hasAudio===(c.snapshot.audio_policy.speech_mode==='NATIVE_ZH') && actual.codec==='h264','REVISION_MEDIA_SPEC_INVALID','修改视频规格与原交付不一致',503);
+      await nativeCommand(cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-hide_banner','-loglevel','error','-xerror','-nostdin','-threads','2','-protocol_whitelist','file,pipe','-i',file,'-map','0:v:0',
+        ...(actual.hasAudio?['-map','0:a:0']:['-an']),'-f','null','-'],
         {cwd:directory,timeoutMs:Math.max(1,Math.min(120000,Date.parse(c.input.deadline_at)-Date.now())),signal});}
     if(item.kind==='video'&&disclosure)await inspectDisclosure(cfg,disclosure,bytes,{kind:'video',width:item.width!,height:item.height!,frames:item.duration_frames!,directory,deadline_at:c.input.deadline_at,signal});
   }}finally{await rm(inside(cfg.runtimeRoot,directory),{recursive:true,force:true});}
@@ -184,7 +187,8 @@ export async function buildRevisionPacket(db:Db,cfg:Config,store:ObjectStorage,c
   await inspectCandidate(db,cfg,store,c,signal);const source=await sourcePacket(db,cfg,store,c);
   const images=await originalImages(db,store,source.context,source.packet);await checkReviewImages(images,revisionAdmission(cfg,c));
   const body={revision_id:c.row.id,input_hash:c.inputHash,parent_manifest_hash:c.input.parent_manifest_hash,source_packet_id:source.packet.packet_id,
-    source_packet_hash:source.packet.packet_hash,candidate:candidate(c),images:images.map(({bytes:_bytes,...binding})=>binding)};
+    source_packet_hash:source.packet.packet_hash,candidate:candidate(c),images:images.map(({bytes:_bytes,...binding})=>binding),
+    ...(source.native_audio?{native_audio:source.native_audio}:{})};
   return {...body,packet_hash:hash(body)};
 }
 export function revisionPacket(c:RevisionContext):RevisionPacket {
@@ -195,6 +199,7 @@ export function revisionPacket(c:RevisionContext):RevisionPacket {
 export async function revisionImages(db:Db,cfg:Config,store:ObjectStorage,c:RevisionContext):Promise<ReviewImage[]> {
   const packet=revisionPacket(c);const source=await sourcePacket(db,cfg,store,c);
   requireThat(source.packet.packet_id===packet.source_packet_id && source.packet.packet_hash===packet.source_packet_hash,'REVISION_PACKET_CHANGED','原画面证据封存不一致',503);
+  requireThat(hash(packet.native_audio??null)===hash(source.native_audio),'REVISION_AUDIO_EVIDENCE_CHANGED','售后原音视频、完整听音或转写封存不一致',503);
   const images=await originalImages(db,store,source.context,source.packet);
   requireThat(hash(images.map(({bytes:_bytes,...binding})=>binding))===hash(packet.images),'REVISION_PACKET_CHANGED','复核画面绑定已变化',503);
   await checkReviewImages(images,revisionAdmission(cfg,c));return images;

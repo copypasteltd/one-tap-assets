@@ -3,11 +3,13 @@ import type {DTO} from '../../shared/contracts/types.js';
 import {hash,id} from '../../api/lib/crypto.js';
 import {requireThat} from '../../api/lib/errors.js';
 import type {FrozenContract,Snapshot} from '../compiler/snapshot.js';
-import {GENERATED_QC_POLICY} from '../generation/contracts.js';
+import {GENERATED_QC_POLICY,NATIVE_AUDIO_QC_POLICY} from '../generation/contracts.js';
 
-/** The same bounded operations preserve existing media on all silent routes.
- * Native speech and licensed music need their separate aftercare contract. */
+/** These operations preserve all image/video/audio bytes. Native orders must
+ * additionally prove their frozen audio and original paid listening contract. */
 export function limitedRevisionRoute(snapshot:Snapshot):boolean {
+  if(snapshot.audio_policy.speech_mode==='NATIVE_ZH')return ['PER_SHOT_AI','REFERENCE_FILM'].includes(snapshot.engine)
+    &&snapshot.codex_contract.qc_policy_version===NATIVE_AUDIO_QC_POLICY&&Boolean(snapshot.native_audio_contract_hash&&snapshot.listening_contract_hash);
   return snapshot.audio_policy.speech_mode==='NONE'&&snapshot.audio_policy.music_license_ids.length===0
     &&(snapshot.engine==='PHOTO_LAYOUT'?snapshot.codex_contract.qc_policy_version==='YPCC-QC-PHOTO-1.0.0':
       ['PER_SHOT_AI','REFERENCE_FILM'].includes(snapshot.engine)&&snapshot.codex_contract.qc_policy_version===GENERATED_QC_POLICY);

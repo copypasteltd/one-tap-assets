@@ -1,0 +1,52 @@
+{
+  "base": "runtime/test-results/native-aftercare-2026-10-30T01-44-04-363Z",
+  "source_set_hash": "88f0b7ed99ec21bca9af58b8df55f57cf828dbc1f2c6c04e57135bb2827edc51",
+  "source_unchanged": true,
+  "commands": [
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.config.ts tests/unit/revision-progress.test.ts tests/unit/support-desk-client.test.ts tests/unit/support-repair-client.test.ts tests/unit/native-review-audio.test.ts --outputFile.json=runtime/test-results/native-aftercare-2026-10-30T01-44-04-363Z/unit.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.config.ts",
+        "tests/unit/revision-progress.test.ts",
+        "tests/unit/support-desk-client.test.ts",
+        "tests/unit/support-repair-client.test.ts",
+        "tests/unit/native-review-audio.test.ts",
+        "--outputFile.json=runtime/test-results/native-aftercare-2026-10-30T01-44-04-363Z/unit.json"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 90000,
+      "elapsed_ms": 4158,
+      "log_path": "runtime/test-results/native-aftercare-2026-10-30T01-44-04-363Z/unit.log",
+      "log_sha256": "863b5faa39f9e0dd5737c16ff3039b62058ebfcfb149201d0b192cb38dbfc13b"
+    },
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/native-order.test.ts -t retains original native audio for --outputFile.json=runtime/test-results/native-aftercare-2026-10-30T01-44-04-363Z/api.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.integration.config.ts",
+        "tests/integration/native-order.test.ts",
+        "-t",
+        "retains original native audio for",
+        "--outputFile.json=runtime/test-results/native-aftercare-2026-10-30T01-44-04-363Z/api.json"
+      ],
+      "shell": false,
+      "status": "FAIL",
+      "exit_code": 1,
+      "signal": null,
+      "timeout_ms": 300000,
+      "elapsed_ms": 128008,
+      "log_path": "runtime/test-results/native-aftercare-2026-10-30T01-44-04-363Z/api.log",
+      "log_sha256": "6c560713b835bb94f70c492be3a4bb3a695f645f0109c48124c3f13462a2b3cd"
+    }
+  ]
+}

@@ -13,6 +13,7 @@ import { assertSealedPacket } from './packet.js';
 import {requireAudioReviewAdmission} from './native-audio.js';
 import {reviewListening} from './listening.js';
 import type {ListeningEvidence} from '../audio/listening-gateway.js';
+import type {DeliveredListeningAuthority} from '../audio/delivered-listening.js';
 
 const packetSchema = JSON.parse(readFileSync('assets/development/v1.1/contracts/review-packet.schema.json', 'utf8')) as {
   properties: { reports: { items: object } };
@@ -23,7 +24,7 @@ interface ReviewRun {
   data: { runtime_process_ref: string; role_identity_ref: string; skill_bundle_hash: string; loaded_skill_hashes: string[] };
   private: { stage_run_id: string; review_input: ReviewInput; runtime_admission: CodexAdmission; inference_limits: unknown; stage_result?: unknown };
 }
-export async function reviewIdentity(db: Db, cfg: Config, context: ExecutionContext, packet: DTO<'ReviewPacket'>, runId: string): Promise<{
+export async function reviewIdentity(db: Db, cfg: Config, context: ExecutionContext, packet: DTO<'ReviewPacket'>, runId: string,aftercare?:DeliveredListeningAuthority): Promise<{
   run: ReviewRun; template: Omit<DTO<'ReviewReport'>, 'verdict' | 'evidence_complete' | 'findings'>;
   nativeListening:ListeningEvidence|null;
 }> {
@@ -66,7 +67,7 @@ export async function reviewIdentity(db: Db, cfg: Config, context: ExecutionCont
   requireThat(input?.packet_hash === packet.packet_hash
     && hash(input.images.map(({ asset_id, sha256 }) => ({ asset_id, sha256 }))) === hash(refs),
   'REVIEW_IMAGE_INPUT_INCOMPLETE', '复核未绑定原图和全部候选画面', 503);
-  const nativeListening=await reviewListening(db,cfg,context,packet);
+  const nativeListening=await reviewListening(db,cfg,context,packet,undefined,aftercare);
   requireThat(nativeListening?Boolean(input.native_listening)&&hash(input.native_listening)===hash(nativeListening):!input.native_listening,
     'REVIEW_LISTENING_INPUT_INVALID','最终复核未绑定完整、已结算的同包原听音',503);
   return { run,nativeListening, template: { report_id: `report_${hash({ runId, packet: packet.packet_hash }).slice(0, 40)}`,
@@ -75,8 +76,8 @@ export async function reviewIdentity(db: Db, cfg: Config, context: ExecutionCont
     packet_hash: packet.packet_hash, snapshot_hash: packet.snapshot_hash, output_set_hash: packet.output_set_hash, policy_version: packet.qc_policy_version } };
 }
 export async function validateReviewReport(db: Db, cfg: Config, context: ExecutionContext, packet: DTO<'ReviewPacket'>,
-  runId: string, raw: unknown, allowRunning = false): Promise<DTO<'ReviewReport'>> {
-  const report = validate('ReviewReport', raw, true); const { run, template,nativeListening } = await reviewIdentity(db, cfg, context, packet, runId);
+  runId: string, raw: unknown, allowRunning = false,aftercare?:DeliveredListeningAuthority): Promise<DTO<'ReviewReport'>> {
+  const report = validate('ReviewReport', raw, true); const { run, template,nativeListening } = await reviewIdentity(db, cfg, context, packet, runId,aftercare);
   requireThat((run.state === 'SUCCEEDED' || allowRunning && run.state === 'RUNNING')
     && Object.entries(template).every(([key, value]) => report[key as keyof DTO<'ReviewReport'>] === value),
   'REVIEW_REPORT_BINDING_INVALID', '复核报告身份、摘要或规则不符合实际运行', 422);
@@ -109,7 +110,7 @@ export async function validateReviewReport(db: Db, cfg: Config, context: Executi
 /** Only reports attached to successfully committed parent stages may authorize
  * publication. A current review can include its own pending stage commit. */
 export async function packetReports(db: Db, cfg: Config, context: ExecutionContext, packet: DTO<'ReviewPacket'>,
-  currentStageId: string | null = null): Promise<DTO<'ReviewReport'>[]> {
+  currentStageId: string | null = null,aftercare?:DeliveredListeningAuthority): Promise<DTO<'ReviewReport'>[]> {
   const rows = (await db.query<{ run_id: string; data: DTO<'ReviewReport'> }>(`SELECT p.run_id,p.data FROM review_reports p
     JOIN agent_runs r ON r.tenant_id=p.tenant_id AND r.id=p.run_id AND r.state='SUCCEEDED'
     JOIN stage_runs s ON s.tenant_id=r.tenant_id AND s.id=r.private->>'stage_run_id'
@@ -119,6 +120,6 @@ export async function packetReports(db: Db, cfg: Config, context: ExecutionConte
   requireThat(rows.length <= 2 && new Set(rows.map(r => r.data.role)).size === rows.length,
     'REVIEW_IDENTITY_REUSED', '同一封存包存在重复的复核角色', 409);
   const reports: DTO<'ReviewReport'>[] = [];
-  for (const row of rows) reports.push(await validateReviewReport(db, cfg, context, packet, row.run_id, row.data));
+  for (const row of rows) reports.push(await validateReviewReport(db, cfg, context, packet, row.run_id, row.data,false,aftercare));
   return reports;
 }

@@ -608,7 +608,7 @@ def extend_platform_repair_contract(api: dict, admin: dict, endpoints: dict) -> 
         document["components"]["schemas"]["PlatformErrorRepairRequest"] = copy.deepcopy(model)
     operation = admin["paths"]["/orders/{order_id}/platform-repairs"]["post"]
     operation["requestBody"]["content"]["application/json"]["schema"] = ref("PlatformErrorRepairRequest")
-    operation["description"] = "原接手客服及原版本工单；仅原图无声封面、完整清单顺序或配套文案纠错。共享原售后预算、推理和工具额度，冻结300秒/48小时/领取期最早截止，五阶段重新验收。不耗用户一次小修改，不自动解决工单。"
+    operation["description"] = "原接手客服及原版本工单；三路线已有封面、完整清单顺序或配套文案纠错；音视频字节保持不变，有声单重验原转写、已结算听音和许可，并由新角色复核原意。共享原售后预算、推理和工具额度，冻结300秒/48小时/领取期最早截止，五阶段重新验收。不耗用户一次小修改，不自动解决工单。"
     for endpoint in endpoints["endpoints"]:
         if endpoint["operation_id"] == "requestPlatformErrorRepair":
             endpoint["request_schema"] = "PlatformErrorRepairRequest"

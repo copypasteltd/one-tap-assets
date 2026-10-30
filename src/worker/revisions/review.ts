@@ -17,7 +17,8 @@ interface RoleRun {id:string;instance_id:string;role:'POST'|'REVIEW_FACTS'|'REVI
   thread_id:string;runtime_process_ref:string;role_identity_ref:string;
   private:{stage_run_id:string;runtime_admission:unknown;review_input?:ReviewInput;stage_result?:unknown};
   data:{loaded_skill_hashes:string[];runtime_process_ref:string;role_identity_ref:string}}
-export function revisionAssetIds(c:RevisionContext):string[]{const packet=revisionPacket(c);return [...new Set([...packet.candidate.items.map(i=>i.deliverable_id),...packet.images.map(i=>i.asset_id)])];}
+export function revisionAssetIds(c:RevisionContext):string[]{const packet=revisionPacket(c);return [...new Set([...packet.candidate.items.map(i=>i.deliverable_id),...packet.images.map(i=>i.asset_id),
+  ...(packet.native_audio?[...packet.native_audio.text_evidence,...packet.native_audio.audio_evidence].map(i=>i.asset_id):[])])];}
 async function roleProof(db:Db,cfg:Config,c:RevisionContext,runId:string,role:RoleRun['role'],persisted:boolean):Promise<RoleRun> {
   const run=(await db.query<RoleRun>('SELECT * FROM agent_runs WHERE tenant_id=$1 AND id=$2',[c.row.tenant_id,runId])).rows[0];
   requireThat(run && ['RUNNING','SUCCEEDED'].includes(run.state) && (!persisted || run.state==='SUCCEEDED') && run.role===role
@@ -47,6 +48,9 @@ async function roleProof(db:Db,cfg:Config,c:RevisionContext,runId:string,role:Ro
       && calls.every(i=>i.data.review_packet_hash===packet.packet_hash && i.data.review_image_binding_hash===hash(input)
         && hash(i.data.review_image_hashes)===hash(packet.images.map(i=>i.sha256))),
       'REVISION_REVIEW_INPUT_INCOMPLETE','修改复核没有完整读取封存画面和文案',503);
+    requireThat(packet.native_audio?input.retained_native_audio_hash===hash(packet.native_audio)
+      &&calls.every(i=>i.data.review_listening_hash===hash(packet.native_audio)):!input.retained_native_audio_hash,
+      'REVISION_AUDIO_INPUT_INVALID','有声售后复核没有完整原声音证据的已结算实际推理',503);
   }
   if(persisted)requireThat(run.output_hash && hash(run.private.stage_result)===run.output_hash,'REVISION_ROLE_CHECKPOINT_CHANGED','修改角色的最终结果与检查点不一致',503);
   return run;
@@ -57,8 +61,10 @@ export async function validateRevisionReview(db:Db,cfg:Config,c:RevisionContext,
     && report.issues.every(issue=>ids.includes(issue.asset_id)) && (report.verdict==='PASS'?report.issues.length===0:report.issues.length>0),
     'REVISION_REVIEW_INCOMPLETE','修改复核未覆盖完整清单、实际画面或问题定位',422);
   const run=await roleProof(db,cfg,c,runId,report.role,persisted);
-  requireThat((await db.query(`SELECT id FROM agent_tool_intents WHERE tenant_id=$1 AND run_id=$2 AND tool_name='extract_review_evidence'
-    AND state='SUCCEEDED' AND data->'result'->>'packet_hash'=$3`,[c.row.tenant_id,runId,packet.packet_hash])).rowCount!>0,
+  const proofs=(await db.query<{result:{retained_native_audio_hash?:string;retained_native_audio?:unknown}}>(`SELECT data->'result' AS result FROM agent_tool_intents WHERE tenant_id=$1 AND run_id=$2 AND tool_name='extract_review_evidence'
+    AND state='SUCCEEDED' AND data->'result'->>'packet_hash'=$3`,[c.row.tenant_id,runId,packet.packet_hash])).rows;
+  requireThat(proofs.some(p=>!packet.native_audio||p.result.retained_native_audio_hash===hash(packet.native_audio)
+    &&Boolean(p.result.retained_native_audio)&&hash(p.result.retained_native_audio)===hash(packet.native_audio)),
     'REVISION_REVIEW_EVIDENCE_MISSING','修改复核未读取实际封存材料',503);
   if(persisted){const saved=(c.row.private.review_reports as Record<string,SavedRevisionReview>|undefined)?.[report.role];
     requireThat(saved?.run_id===runId && saved.hash===hash(report) && hash(saved.report)===saved.hash && run.output_hash===saved.hash,

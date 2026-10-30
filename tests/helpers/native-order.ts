@@ -15,7 +15,7 @@ import {syntheticListeningContract} from './listening.js';
 
 /** A complete private ORDER input, with synthetic authorization/model/price
  * registrations. This never changes public sales or real-provider admission. */
-export async function nativeOrderFixture(db:TestDatabase,root:string,options:{engine:'PER_SHOT_AI'|'REFERENCE_FILM';music?:Buffer;style?:'standard'|'bold'|'minimal'|'karaoke';listening?:boolean}={engine:'PER_SHOT_AI'}){
+export async function nativeOrderFixture(db:TestDatabase,root:string,options:{engine:'PER_SHOT_AI'|'REFERENCE_FILM';music?:Buffer;style?:'standard'|'bold'|'minimal'|'karaoke';listening?:boolean;revisions?:boolean}={engine:'PER_SHOT_AI'}){
   if(db.cfg.env!=='test')throw new Error('Native order fixture requires APP_ENV=test');
   const directory=inside(db.cfg.runtimeRoot,root);await mkdir(directory,{recursive:true});
   const image=syntheticArkContract('IMAGE'),video=syntheticArkContract('VIDEO'),speech=syntheticSpeechContract(2);
@@ -27,7 +27,7 @@ export async function nativeOrderFixture(db:TestDatabase,root:string,options:{en
     ...(listening?{listening:{enabled:true,baseUrl:listening.base_url,apiKey:'SYNTHETIC-NOT-REAL',allowedHosts:['listening.example.test']}}:{}),
     speech:{enabled:true,baseUrl:speech.base_url,apiKey:'SYNTHETIC-NOT-REAL',allowedHosts:['speech.example.test','input.example.test','result.example.test']}}});
   let musicBinding:ResourceBinding|undefined,character:CharacterVoiceAdmission|undefined;
-  const fixture=await mediaFixture({...db,cfg},{speech,generation:{engine:options.engine,contracts:[image,video],twoShots:true,
+  const fixture=await mediaFixture({...db,cfg},{speech,revisions:options.revisions??false,generation:{engine:options.engine,contracts:[image,video],twoShots:true,
     variantId:options.engine==='PER_SHOT_AI'?'quiet-luxury.ai-detail':'portrait-social.ai-presenter-multi'},
     configureContract:async c=>{
       const license=async(kind:AudioRightKind,cost:number,bytes?:Buffer):Promise<ResourceBinding>=>{

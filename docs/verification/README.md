@@ -1,5 +1,9 @@
 当前来源：[生成式无声售后](generated-aftercare-source.json)。414源码/42契约/4资源，`bc638bc4`；15单元、4原生用例、类型/server/preview/自检/启动PASS，9旧用例未选。85历史媒体与C25/归档保持，未复录浏览器；首次类型诊断仅有报告记录，未伪造源码快照。未跑全面测试、未重编小程序，真实服务和真机未验。
 
+当前依据：[有声售后源码](native-aftercare-source.json)、[测试快照](native-aftercare-tested-source.json)、[19单元](native-aftercare-unit.json)、[2原生集成](native-aftercare-api.json)及[首次失败](native-aftercare-initial-attempt.json)。416/42/4，`b9954b76`；本轮未跑全面测试、未调用浏览器。
+
+以下旧轮次仅对应各自历史来源。
+
 以下“当前”只对应各自历史快照。
 
 当前来源：[客服素材纠错工作台](support-repair-ui-source.json)。412源码/42契约/4资源，`e6892212`；11客户端、9组浏览器/4组实际接口检查、类型/server/preview/自检/启动PASS。4PNG与MP4/WebM/GIF已留存且本次浏览器已关闭；78历史媒体/C原件及既有证据不变。全面测试、小程序编译、真实服务和真机未验；首次夹具断言失败单独保留。
