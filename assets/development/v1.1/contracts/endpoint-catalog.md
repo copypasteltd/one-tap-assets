@@ -204,3 +204,5 @@ GET 推荐保持只读。可见比例至少 50% 且连续停留 500ms 后报曝�
 | GET /account-bindings | listAccountBindings | 无 → AccountBindingList |
 | DELETE /account-bindings/{binding_id} | revokeAccountBinding | 无 → AccountBinding |
 | POST /account-bindings/{binding_id}/project-session | createBoundProjectSession | 无 → PlusBrowserSession |
+
+复杂预设编排仅在本机接续申请`prepare_community_drafts`、原账号小程序明确确认后开放。仅允许目录读取与本人草稿创建/续编/列表，不含样例、授权、发布、派生或交易。原连接默认不扩权，绑定端作品不能用于作者接续；撤销/到期逐请求重查，修订冲突保留当前编辑。

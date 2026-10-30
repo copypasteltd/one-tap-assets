@@ -1,0 +1,192 @@
+{
+  "numTotalTestSuites": 2,
+  "numPassedTestSuites": 2,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 13,
+  "numPassedTests": 13,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793387622435,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps existing grants out of community authoring and requires separate native approval",
+          "status": "passed",
+          "title": "keeps existing grants out of community authoring and requires separate native approval",
+          "duration": 387.78279999999995,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "creates one owned cloud draft on original intent replay, visible from the native account",
+          "status": "passed",
+          "title": "creates one owned cloud draft on original intent replay, visible from the native account",
+          "duration": 92.17140000000018,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "serializes conflicting phone/desktop revisions without overwriting the winner",
+          "status": "passed",
+          "title": "serializes conflicting phone/desktop revisions without overwriting the winner",
+          "duration": 129.82639999999992,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "revalidates declarations and retains native-only sample, rights, publication and financial gates",
+          "status": "passed",
+          "title": "revalidates declarations and retains native-only sample, rights, publication and financial gates",
+          "duration": 34.843699999999444,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects authoring through a bound-source approval and freezes requested scope in PostgreSQL",
+          "status": "passed",
+          "title": "rejects authoring through a bound-source approval and freezes requested scope in PostgreSQL",
+          "duration": 53.923499999999876,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "revokes all creator operations, including an already successful idempotent request",
+          "status": "passed",
+          "title": "revokes all creator operations, including an already successful idempotent request",
+          "duration": 165.94490000000042,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793387626719,
+      "endTime": 1793387627583.9448,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/plus-preset-authoring.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "requires explicit native approval and a separate high-entropy polling secret",
+          "status": "passed",
+          "title": "requires explicit native approval and a separate high-entropy polling secret",
+          "duration": 301.54280000000017,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "issues one fixed-expiry session for concurrent claims and retains original native identity",
+          "status": "passed",
+          "title": "issues one fixed-expiry session for concurrent claims and retains original native identity",
+          "duration": 162.70139999999992,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "forbids approval, financial mutations, account deletion and other-owner revocation with a Plus grant",
+          "status": "passed",
+          "title": "forbids approval, financial mutations, account deletion and other-owner revocation with a Plus grant",
+          "duration": 22.527999999999793,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "creates an independent owned image draft once and preserves paid manifest bytes",
+          "status": "passed",
+          "title": "creates an independent owned image draft once and preserves paid manifest bytes",
+          "duration": 153.16709999999966,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "validates crop/canvas bounds and uses revision compare-and-set across editors",
+          "status": "passed",
+          "title": "validates crop/canvas bounds and uses revision compare-and-set across editors",
+          "duration": 62.91579999999976,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects expired and denied links, and never reopens a revoked session from a poll retry",
+          "status": "passed",
+          "title": "rejects expired and denied links, and never reopens a revoked session from a poll retry",
+          "duration": 70.7464,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "erases source-deleted drafts and versions while preserving the paid original record",
+          "status": "passed",
+          "title": "erases source-deleted drafts and versions while preserving the paid original record",
+          "duration": 20.027400000000398,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793387631052,
+      "endTime": 1793387631846.0273,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/plus-workspace.test.ts"
+    }
+  ]
+}

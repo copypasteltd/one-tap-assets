@@ -1,0 +1,32 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ❯ tests/integration/plus-preset-authoring.test.ts (6 tests | 1 failed) 5558ms
+   ✓ keeps existing grants out of community authoring and requires separate native approval 607ms
+   ✓ creates one owned cloud draft on original intent replay, visible from the native account 201ms
+   ✓ serializes conflicting phone/desktop revisions without overwriting the winner 131ms
+   ✓ revalidates declarations and retains native-only sample, rights, publication and financial gates 41ms
+   × rejects authoring through a bound-source approval and freezes requested scope in PostgreSQL 217ms
+   · revokes all creator operations, including an already successful idempotent request
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/plus-preset-authoring.test.ts > rejects authoring through a bound-source approval and freezes requested scope in PostgreSQL
+TypeError: Cannot read properties of undefined (reading 'code')
+ ❯ tests/integration/plus-preset-authoring.test.ts:59:72
+     57|   const made=await call('/plus/links','POST',{prepare_community_drafts…
+     58|   const result=await call('/plus/links/decision','POST',{user_code:lin…
+     59|   expect(result.statusCode,result.body).toBe(403);expect(result.json()…
+       |                                                                        ^
+     60|   expect((await f.db.pool.query('SELECT state FROM plus_links WHERE id…
+     61|   await expect(f.db.pool.query('UPDATE plus_sessions SET allow_communi…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (2)
+      Tests  1 failed | 4 passed (6)
+   Start at  03:13:11
+   Duration  6.88s (tests 83%, import 11%, transform 6%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/integration.json

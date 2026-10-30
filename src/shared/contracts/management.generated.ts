@@ -2675,6 +2675,7 @@ export interface components {
         PlusLinkCreateRequest: {
             prepare_render_plans?: boolean;
             prepare_video_render_plans?: boolean;
+            prepare_community_drafts?: boolean;
         };
         PlusLink: {
             link_id: string;
@@ -2707,6 +2708,7 @@ export interface components {
             can_prepare_video_render_plans?: boolean;
             account_binding_id?: string;
             source_platform?: components["schemas"]["Platform"];
+            can_edit_community_drafts?: boolean;
         };
         PlusLinkPollRequest: {
             poll_key: string;
@@ -2723,6 +2725,7 @@ export interface components {
             can_prepare_render_plans: boolean;
             can_prepare_video_render_plans?: boolean;
             account_binding_id?: string;
+            can_edit_community_drafts?: boolean;
         };
         PlusBrowserSession: {
             access_token: string;

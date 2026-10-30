@@ -1828,9 +1828,10 @@
         "allow_render_plans",
         "allow_video_render_plans",
         "account_binding_id",
-        "approved_by_identity_id"
+        "approved_by_identity_id",
+        "allow_community_drafts"
       ],
-      "invariant": "Explicit native confirmation only; 5-minute challenge; hashed secrets; retries preserve original session and expiry.",
+      "invariant": "Explicit native confirmation only; 5-minute challenge; hashed secrets; retries preserve original session and expiry. Community drafts require a separate frozen native-source approval; shared-account grants cannot act as authors. Publication, rights submission and sample production remain native-only.",
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
     },
     {
@@ -1849,9 +1850,10 @@
         "allow_render_plans",
         "allow_video_render_plans",
         "account_binding_id",
-        "approved_by_identity_id"
+        "approved_by_identity_id",
+        "allow_community_drafts"
       ],
-      "invariant": "One-hour independent read/edit capability; no native payment/refund or identity merge; revocation checked inside each transaction and signed download.",
+      "invariant": "One-hour independent read/edit capability; no native payment/refund or identity merge; revocation checked inside each transaction and signed download. Community drafts require a separate frozen native-source approval; shared-account grants cannot act as authors. Publication, rights submission and sample production remain native-only.",
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
     },
     {

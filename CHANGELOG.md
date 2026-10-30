@@ -1,5 +1,12 @@
 # 更新记录 / Changelog
 
+## 2026-10-31 · Plus community preset composition / 社区预设编排
+
+- 补齐P01-F18复杂预设创作：独立作者权限、原账号手机确认、风格/方向/规格/资源组合、兼容性检查、云端草稿恢复。 / Added separately approved original-account authoring, composition checks and shared mobile/desktop cloud drafts.
+- 040迁移默认不扩权，数据库固定作者权限；绑定来源不能借用作者身份；样例、授权、派生与发布继续原生处理。 / Frozen scope defaults off; linked project grants cannot author; samples, rights, forking and publication remain native-only.
+- 回执未知复用原输入/键，修订冲突保留本地并展示云端声明；手机撤销使后续作者请求失效。 / Original-intent recovery, explicit conflict choices and revocation-aware operations.
+- 13项原生重点检查，必要构建与新截图/录屏/GIF记录在[准确证据](docs/verification/plus-preset-source.json)；未执行全面测试，真实服务/真机/云端未因此准入。原C设计、39迁移和200份历史媒体保留。 / Focused checks and exact build/media provenance; no comprehensive-suite or production claim.
+
 ## 2026-10-31 — 本人双平台绑定与共享作品 / Voluntary cross-platform linking
 
 - 新增039迁移、9个业务接口及生成契约/DTO，115业务/38管理、328schema/84实体，两端仍各17页面。原契约按原字节归档。 / Added native mutual binding, generated contracts and migration 039.

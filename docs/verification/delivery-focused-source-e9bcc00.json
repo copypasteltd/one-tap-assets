@@ -1,0 +1,22 @@
+{
+  "checked_at": "2026-10-30T18:51:25.460048+00:00",
+  "source_set_hash": "9943204b3a2c3a3f28648175f91bedfdb4c8b117d5de6b3b6ae46e453fe92700",
+  "evidence": "docs/verification/account-binding-source.json",
+  "build_report": "docs/verification/account-binding/build.json",
+  "focused_checks": {
+    "status": "PASS",
+    "tests": 13,
+    "passed": 13,
+    "failed": 0,
+    "test_files": [
+      "tests/integration/account-bindings.test.ts",
+      "tests/integration/plus-workspace.test.ts"
+    ],
+    "results": "docs/verification/account-binding/native-results.json",
+    "unchanged_native_inputs": "docs/verification/account-binding/native-inputs.json"
+  },
+  "full_suite_executed": false,
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false
+}

@@ -1,8 +1,8 @@
 # 一品成片：交付使用入口 / Start here
 
-主入口是**支付宝小程序、抖音小程序**；Plus网页承担图片深化、视频选段/裁切/定时字幕、原声保留/静音及图片批量制作。普通用户拍照后由多模态识别商品，再选择社区方案，确认素材清单和费用，制作完成后领取并保存到相册。官方提供10套风格、14个执行变体。
+主入口是**支付宝小程序、抖音小程序**；Plus网页承担图片深化、视频选段/裁切/定时字幕、原声保留/静音、图片批量和社区预设编排。普通用户拍照后由多模态识别商品，再选择社区方案，确认素材清单和费用，制作完成后领取并保存到相册。官方提供10套风格、14个执行变体。
 
-The primary clients are the Alipay and Douyin mini-programs. Users take photos, receive a multimodal product analysis, select a community preset, confirm the deliverables and price, then collect the resulting assets. Plus provides advanced image/video editing and image batches. The official catalog has 10 styles and 14 execution variants.
+The primary clients are the Alipay and Douyin mini-programs. Photograph a product, review multimodal recognition, choose a community preset, confirm the deliverables and fee, then collect the assets. Plus adds advanced image/video editing, image batches and community preset composition. The official catalog has 10 styles and 14 execution variants.
 
 ## 1. 先看交付范围 / Check the package
 
@@ -27,6 +27,10 @@ Repository builds use fresh isolated output directories. The ZIP maps successful
 账户与隐私 → 绑定支付宝与抖音账号 → 本端发起；本人另一平台输入码并加入；发起端核对双方第二确认码完成。我的素材 → 查看已绑定端作品。Plus批准时可明确选择作品来源。任一端可解除，原订单、付款与退款继续由原平台负责。
 
 Start from Account & privacy, join from your other mini-program, then verify matching second codes on the originating device. Open the bound source in My assets or select it during mobile Plus approval. Either end can revoke the link; payment and refund responsibility stay with the original platform. [Screens and recording](docs/media/account-bindings/README.md).
+
+复杂预设创作：Plus首页单独申请预设编排权限，原账号手机核对并允许当前端来源；电脑编排保存后，从手机“社区 → 我的草稿”继续样例、授权与发布。已绑定来源只能共享作品，不能借用作者身份。[详细操作及截图](docs/实施/Plus社区预设编排与云端续编-v1.0.md)。
+
+For advanced community creation, request authoring explicitly and approve it from the original native account. Compose and save on Plus, then continue samples, rights and publication from the same account's mobile draft list. Linked-source project access cannot author on behalf of that source.
 
 ## 3. Windows首次运行 / First run
 

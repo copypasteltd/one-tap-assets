@@ -1,0 +1,153 @@
+{
+  "checked_at": "2026-10-30T18:51:36.512843+00:00",
+  "status": "PASS",
+  "scope": "FOCUSED_ACCOUNT_BINDING_SOURCE_DOCUMENT_MEDIA_AND_BUILD_INTEGRITY_NOT_FULL_PRODUCT_ACCEPTANCE",
+  "source_set_hash": "9943204b3a2c3a3f28648175f91bedfdb4c8b117d5de6b3b6ae46e453fe92700",
+  "source_files": 554,
+  "runtime_contract_files": 42,
+  "resource_files": 4,
+  "evidence": "docs/verification/account-binding-source.json",
+  "markdown_files": 200,
+  "local_links_verified": 1975,
+  "public_diagnostic_logs": 17,
+  "media_files": 200,
+  "original_media_preserved": 190,
+  "protected_baseline_files_preserved": 1216,
+  "historical_json_preserved_with_archives": 649,
+  "old_migrations_preserved": 38,
+  "current_builds": [
+    {
+      "name": "server",
+      "status": "PASS"
+    },
+    {
+      "name": "preview",
+      "status": "PASS"
+    },
+    {
+      "name": "alipay",
+      "status": "PASS"
+    },
+    {
+      "name": "douyin",
+      "status": "PASS"
+    }
+  ],
+  "build_provenance": {
+    "initial_report": "docs/verification/account-binding/initial-build.json",
+    "initial_source_set_hash": "bc859c68dc4f5e78b397a161e071adc3644f71f236dc93eb4c608c9d4022ed6a",
+    "final_source_set_hash": "9943204b3a2c3a3f28648175f91bedfdb4c8b117d5de6b3b6ae46e453fe92700",
+    "source_changes": [
+      "src/preview/components.tsx",
+      "scripts/record-account-bindings.ts"
+    ],
+    "change_reason": "Browser-only Input ariaLabel mapping; native mini-program/server inputs unchanged. Rebuild preview and recheck types; retry only timed-out Alipay compiler.",
+    "retained_components": [
+      "server",
+      "douyin"
+    ],
+    "retained_outputs_byte_identical": true,
+    "recovery_checks": [
+      {
+        "task": "typecheck",
+        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+        "argv": [
+          "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+          "--noEmit"
+        ],
+        "shell": false,
+        "status": "PASS",
+        "exit_code": 0,
+        "signal": null,
+        "timeout_ms": 180000,
+        "elapsed_ms": 19235,
+        "log_path": "runtime/delivery-builds/2026-10-30T18-24-25-007Z-2dcdefda/typecheck-recovery.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "task": "exec",
+        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T18-24-25-007Z-2dcdefda\\runtime\\build\\preview",
+        "argv": [
+          "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
+          "build",
+          "--config",
+          "src/preview/vite.config.ts",
+          "--outDir",
+          "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T18-24-25-007Z-2dcdefda\\runtime\\build\\preview"
+        ],
+        "shell": false,
+        "status": "PASS",
+        "exit_code": 0,
+        "signal": null,
+        "timeout_ms": 180000,
+        "elapsed_ms": 5207,
+        "log_path": "runtime/delivery-builds/2026-10-30T18-24-25-007Z-2dcdefda/preview-recovery.log",
+        "log_sha256": "3258e74cc0da60cc55f1d8855586291601286b28ba055ae35f8465aae46a97bd"
+      },
+      {
+        "task": "build:alipay",
+        "command": "node scripts/build-mini.cjs alipay",
+        "argv": [
+          "scripts/build-mini.cjs",
+          "alipay"
+        ],
+        "shell": false,
+        "status": "PASS",
+        "exit_code": 0,
+        "signal": null,
+        "timeout_ms": 360000,
+        "elapsed_ms": 47240,
+        "log_path": "runtime/delivery-builds/2026-10-30T18-24-25-007Z-2dcdefda/alipay-recovery.log",
+        "log_sha256": "f3fa7521e2dbce2cc58b697321429ad9d2d712671deb9eda79771d6d52287e75"
+      },
+      {
+        "task": "typecheck",
+        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+        "argv": [
+          "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+          "--noEmit"
+        ],
+        "shell": false,
+        "status": "PASS",
+        "exit_code": 0,
+        "signal": null,
+        "timeout_ms": 180000,
+        "elapsed_ms": 10035,
+        "log_path": "runtime/delivery-builds/2026-10-30T18-24-25-007Z-2dcdefda/typecheck-recorder.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "task": "typecheck",
+        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+        "argv": [
+          "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+          "--noEmit"
+        ],
+        "shell": false,
+        "status": "PASS",
+        "exit_code": 0,
+        "signal": null,
+        "timeout_ms": 180000,
+        "elapsed_ms": 11152,
+        "log_path": "runtime/delivery-builds/2026-10-30T18-24-25-007Z-2dcdefda/typecheck-recorder-9943204b.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "recorder_fix": {
+      "file": "scripts/record-account-bindings.ts",
+      "reason": "Route the actual same-origin Plus API and check the alert container that also contains a reconnect button; current application and all compiled output bytes remain identical."
+    },
+    "compiled_source_sets": {
+      "server": "bc859c68dc4f5e78b397a161e071adc3644f71f236dc93eb4c608c9d4022ed6a",
+      "douyin": "bc859c68dc4f5e78b397a161e071adc3644f71f236dc93eb4c608c9d4022ed6a",
+      "preview": "dadfe7c3dc19341a15e98c81311fd98937b4c4ef500a79cbe6ba3b73c03b854c",
+      "alipay": "dadfe7c3dc19341a15e98c81311fd98937b4c4ef500a79cbe6ba3b73c03b854c"
+    },
+    "all_outputs_retained_after_recorder_fix": true
+  },
+  "legacy_full_command_verifier_executed": false,
+  "full_suite_executed": false,
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false
+}

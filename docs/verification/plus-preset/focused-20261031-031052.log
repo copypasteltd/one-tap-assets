@@ -1,0 +1,43 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/integration/plus-workspace.test.ts (7 tests) 18046ms
+   ✓ requires explicit native approval and a separate high-entropy polling secret 1560ms
+   ✓ issues one fixed-expiry session for concurrent claims and retains original native identity 423ms
+   ✓ creates an independent owned image draft once and preserves paid manifest bytes 572ms
+ ❯ tests/integration/plus-preset-authoring.test.ts (6 tests | 1 failed) 3378ms
+   ✓ keeps existing grants out of community authoring and requires separate native approval 238ms
+   × creates one owned cloud draft on original intent replay, visible from the native account 55ms
+   · serializes conflicting phone/desktop revisions without overwriting the winner
+   · revalidates declarations and retains native-only sample, rights, publication and financial gates
+   · rejects authoring through a bound-source approval and freezes requested scope in PostgreSQL
+   · revokes all creator operations, including an already successful idempotent request
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/plus-preset-authoring.test.ts > creates one owned cloud draft on original intent replay, visible from the native account
+AssertionError: {"data":{"draft_id":"draft_5668547ff2b94c0fad9083b4562ba0fe","revision":0,"config":{"name":"午后小店的轻快日常","description":"先展示商品整体，再看细节，以轻快节奏收束。","style_tags":["自然","轻快"],"parent_preset_version":null,"component_versions":["style.appetite-flash.1","narrative.detail-first.1","rhythm.even.1","camera.hold.1","caption.bold.1"],"variant_blueprint_ids":["blueprint.appetite-flash.photo-layout","blueprint.color-pop.photo-layout"],"resource_version_ids":[],"fork_allowed":true},"publication_id":null,"updated_at":"2026-10-30T19:12:05.011Z"},"trace_id":"trace_3a92e4f304774d5f9da9c4b25f3fa8c6"}: expected 201 to be 200 // Object.is equality
+
+- Expected
++ Received
+
+- 200
++ 201
+
+ ❯ tests/integration/plus-preset-authoring.test.ts:28:145
+     26| });
+     27| it('creates one owned cloud draft on original intent replay, visible f…
+     28|   const key=id('creatorintent'),first=await call('/preset-drafts','POS…
+       |                                                                                                                                                 ^
+     29|   expect((await call('/preset-drafts','POST',{config},creator.access_t…
+     30|   expect((await call(`/preset-drafts/${draft.draft_id}`,'GET',undefine…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 8 passed (13)
+   Start at  03:11:17
+   Duration  48.48s (tests 46%, import 33%, transform 20%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/integration.json

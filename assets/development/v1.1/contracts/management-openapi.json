@@ -12469,6 +12469,9 @@
           },
           "prepare_video_render_plans": {
             "type": "boolean"
+          },
+          "prepare_community_drafts": {
+            "type": "boolean"
           }
         },
         "required": [],
@@ -12584,6 +12587,9 @@
           },
           "source_platform": {
             "$ref": "#/components/schemas/Platform"
+          },
+          "can_edit_community_drafts": {
+            "type": "boolean"
           }
         },
         "required": [
@@ -12646,6 +12652,9 @@
           "account_binding_id": {
             "type": "string",
             "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "can_edit_community_drafts": {
+            "type": "boolean"
           }
         },
         "required": [

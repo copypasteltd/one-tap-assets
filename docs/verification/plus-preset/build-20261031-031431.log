@@ -1,0 +1,6 @@
+typecheck: PASS
+build:server: PASS
+exec: PASS
+build:alipay: PASS
+build:douyin: PASS
+{"id":"2026-10-30T19-14-31-976Z-c63e29b8","builds_passed":true,"selected_builds_passed":true,"components":[{"name":"server","status":"PASS"},{"name":"preview","status":"PASS"},{"name":"alipay","status":"PASS"},{"name":"douyin","status":"PASS"}],"report":"docs/delivery/current.json"}

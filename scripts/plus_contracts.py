@@ -104,6 +104,11 @@ def extend_plus_contract(a, m, e):
         e['endpoints'].append(row)
     extend_video_contract(a, m, e)
     extend_account_binding_contract(a,m,e)
+    for doc in [a,m]:
+        schema=doc['components']['schemas']
+        schema['PlusLinkCreateRequest']['properties']['prepare_community_drafts']={'type':'boolean'}
+        for name in ['PlusLinkApproval','PlusSessionInfo']:
+            schema[name]['properties']['can_edit_community_drafts']={'type':'boolean'}
 
 def extend_plus_data(model):
     for table,fields,invariant in [
@@ -117,9 +122,13 @@ def extend_plus_data(model):
     ]:model['entities'].append({'table':table,'primary_key':'draft_id' if table=='plus_edit_versions' else 'id','scope':'global' if table=='plus_links' else 'tenant','fields':fields,'invariant':invariant,'implementation_status':'DESIGN_NOT_IMPLEMENTED'})
     extend_video_data(model)
     extend_account_binding_data(model)
+    for entity in model['entities']:
+        if entity['table'] in ['plus_links','plus_sessions']:
+            entity['fields'].append('allow_community_drafts')
+            entity['invariant']+=' Community drafts require a separate frozen native-source approval; shared-account grants cannot act as authors. Publication, rights submission and sample production remain native-only.'
 
 def plus_catalog(e):
     text='\n\n## Plus主动接续与独立编辑草稿\n\n所有凭证只在内存流转，原生会话批准，电脑会话限制在本人读取/草稿；不复制支付权限。自然键与修订号提供幂等，避免通用缓存复活撤销连接。\n\n| 方法/路径 | operationId | 请求 → 响应 |\n| --- | --- | --- |\n'
     for x in e['endpoints']:
         if 'Plus' in x['operation_id'] or 'Binding' in x['operation_id'] or x['operation_id']=='createBoundProjectSession':text+=f"| {x['method']} {x['path']} | {x['operation_id']} | {x['request_schema'] or '无'} → {x['response_schema']} |\n"
-    return text
+    return text+'\n复杂预设编排仅在本机接续申请`prepare_community_drafts`、原账号小程序明确确认后开放。仅允许目录读取与本人草稿创建/续编/列表，不含样例、授权、发布、派生或交易。原连接默认不扩权，绑定端作品不能用于作者接续；撤销/到期逐请求重查，修订冲突保留当前编辑。\n'

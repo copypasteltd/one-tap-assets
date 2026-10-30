@@ -1,0 +1,39 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ❯ tests/integration/plus-preset-authoring.test.ts (6 tests | 1 failed) 4663ms
+   ✓ keeps existing grants out of community authoring and requires separate native approval 449ms
+   ✓ creates one owned cloud draft on original intent replay, visible from the native account 107ms
+   ✓ serializes conflicting phone/desktop revisions without overwriting the winner 63ms
+   × revalidates declarations and retains native-only sample, rights, publication and financial gates 25ms
+   · rejects authoring through a bound-source approval and freezes requested scope in PostgreSQL
+   · revokes all creator operations, including an already successful idempotent request
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/plus-preset-authoring.test.ts > revalidates declarations and retains native-only sample, rights, publication and financial gates
+AssertionError: expected 400 to be 403 // Object.is equality
+
+- Expected
++ Received
+
+- 403
++ 400
+
+ ❯ tests/integration/plus-preset-authoring.test.ts:46:97
+     44|   expect((await call('/preset-drafts','POST',{config:{...config,parent…
+     45|   for(const path of [`/preset-drafts/${draft.draft_id}/samples`,`/pres…
+     46|     expect((await call(path,'POST',{},creator.access_token,id('forbidd…
+       |                                                                                                 ^
+     47| });
+     48| it('rejects authoring through a bound-source approval and freezes requ…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (2)
+      Tests  1 failed | 3 passed (6)
+   Start at  03:12:36
+   Duration  6.09s (tests 80%, import 15%, transform 5%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/integration.json

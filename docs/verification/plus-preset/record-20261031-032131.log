@@ -1,0 +1,16 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at http://127.0.0.1:4188/plus/
+Call log:
+[2m  - navigating to "http://127.0.0.1:4188/plus/", waiting until "networkidle"[22m
+
+    at <anonymous> (E:\dev\sandbox\支付宝黑客松\一品成片\scripts\record-plus-presets.ts:39:18) {
+  log: [
+    '  - navigating to "http://127.0.0.1:4188/plus/", waiting until "networkidle"'
+  ],
+  name: 'Error'
+}
+
+Node.js v24.22.1

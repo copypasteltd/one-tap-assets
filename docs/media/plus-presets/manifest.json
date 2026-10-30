@@ -1,0 +1,116 @@
+{
+  "checked_at": "2026-10-30T19:26:52.556Z",
+  "source_set_hash": "e1147c4ee0703939dadf40d932c1c1696c2b3de00798bda496fb84d8e73ecd92",
+  "classification": "ACTUAL_COMPILED_PLUS_UI_NATIVE_HTTP_AND_POSTGRESQL_WITH_SYNTHETIC_NATIVE_IDENTITY",
+  "checks": [
+    "EXPLICIT_NATIVE_SCOPE_AND_ORIGINAL_INTENT_REPLAY_CREATE_ONE_CLOUD_DRAFT",
+    "REAL_PHONE_UPDATE_CONFLICT_PRESERVES_LOCAL_EDITS_AND_REQUIRES_EXPLICIT_CHOICE",
+    "SAVED_DRAFT_REOPENS_FROM_OWN_CLOUD_LIST",
+    "NATIVE_REVOCATION_CLOSES_EXISTING_CREATOR_WORKSPACE_ON_NEXT_REQUEST"
+  ],
+  "shots": [
+    {
+      "path": "docs/media/plus-presets/01-explicit-authoring-request.png",
+      "label": "Plus 单独申请原账号预设编排权限"
+    },
+    {
+      "path": "docs/media/plus-presets/02-composition-and-checks.png",
+      "label": "组合主风格、方向和多规格；侧栏核对清单"
+    },
+    {
+      "path": "docs/media/plus-presets/03-save-acknowledgement-unknown.png",
+      "label": "真实事务已提交，模拟回执丢失后保留原意图"
+    },
+    {
+      "path": "docs/media/plus-presets/04-cloud-saved.png",
+      "label": "云端草稿可由原账号小程序继续"
+    },
+    {
+      "path": "docs/media/plus-presets/05-revision-conflict.png",
+      "label": "手机与电脑同时修改时保留当前内容并明确比较"
+    },
+    {
+      "path": "docs/media/plus-presets/06-narrow-viewport.png",
+      "label": "窄屏布局与同一份云端草稿"
+    },
+    {
+      "path": "docs/media/plus-presets/07-native-revocation.png",
+      "label": "手机关闭连接后下一请求失效并清空工作台"
+    }
+  ],
+  "media": [
+    {
+      "path": "docs/media/plus-presets/01-explicit-authoring-request.png",
+      "bytes": 128708,
+      "sha256": "6bca4289e520f4c78844f8f189c0f0e5a4af6dc8450fa6d244285db18eace178"
+    },
+    {
+      "path": "docs/media/plus-presets/02-composition-and-checks.png",
+      "bytes": 158591,
+      "sha256": "80a228538970bc02435cea4a52e5b4fe235d0efd74444e7220ee118082112e22"
+    },
+    {
+      "path": "docs/media/plus-presets/03-save-acknowledgement-unknown.png",
+      "bytes": 166902,
+      "sha256": "8f7f0406c7f021915b7276426f04ee732183dc92df42c8af7e8016fa1f2564d0"
+    },
+    {
+      "path": "docs/media/plus-presets/04-cloud-saved.png",
+      "bytes": 166911,
+      "sha256": "bcea7df00b68c9ec8869aee9789d3f990c5278c70c23106c1e4c9632480d1804"
+    },
+    {
+      "path": "docs/media/plus-presets/05-revision-conflict.png",
+      "bytes": 175933,
+      "sha256": "442a5cee29098a3630c86a1b6298b67be5e528e153c3e56eaa78bf3dbe34ee4b"
+    },
+    {
+      "path": "docs/media/plus-presets/06-narrow-viewport.png",
+      "bytes": 63661,
+      "sha256": "49d5125733906aa4edf35def3f2a85270acb5a39767546e4169907b3cf18869c"
+    },
+    {
+      "path": "docs/media/plus-presets/07-native-revocation.png",
+      "bytes": 140569,
+      "sha256": "5ea4ffde890f285f77dc4713cc8743da75d806dd73ccd5ce6cbdf3c5b1721110"
+    },
+    {
+      "path": "docs/media/plus-presets/walkthrough.webm",
+      "bytes": 2733372,
+      "sha256": "6eb30fba89e5d18412f836265ff26bb8cbdd1c065a902c4ad94bf4d361487f5d"
+    },
+    {
+      "path": "docs/media/plus-presets/walkthrough.mp4",
+      "bytes": 721760,
+      "sha256": "efd2f5451989cfb0313a349205d294b90a85fbe9092a958cd8e7e63c37e5f07c"
+    },
+    {
+      "path": "docs/media/plus-presets/walkthrough.gif",
+      "bytes": 996704,
+      "sha256": "2f16a5a9dfa9695744f173982c8ce8181255ccef2ab35cae4c0be919d5f4de25"
+    }
+  ],
+  "video_probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1440,
+        "height": 1040
+      }
+    ],
+    "format": {
+      "duration": "9.080000"
+    }
+  },
+  "browser_errors": [],
+  "browser_closed": true,
+  "owned_tabs_closed": true,
+  "owned_preview_server_closed": true,
+  "temporary_schema_removed": true,
+  "full_suite_run": false,
+  "actual_platform_login_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false
+}

@@ -1,0 +1,74 @@
+src/web/preset-workspace.tsx(42,172): error TS2322: Type '{ key: string; config: { name: string; description: string; style_tags: string[]; parent_preset_version: string | null; component_versions: string[]; variant_blueprint_ids: string[]; resource_version_ids: string[]; fork_allowed: boolean; }; draft?: { ...; }; } | { ...; }' is not assignable to type '{ key: string; config: { name: string; description: string; style_tags: string[]; parent_preset_version: string | null; component_versions: string[]; variant_blueprint_ids: string[]; resource_version_ids: string[]; fork_allowed: boolean; }; draft?: { ...; }; } | undefined'.
+  Type '{ key: string; config: { name: string; description: string; style_tags: string[]; parent_preset_version: string | null; component_versions: string[]; variant_blueprint_ids: string[]; resource_version_ids: string[]; fork_allowed: boolean; }; draft: { ...; } | undefined; }' is not assignable to type '{ key: string; config: { name: string; description: string; style_tags: string[]; parent_preset_version: string | null; component_versions: string[]; variant_blueprint_ids: string[]; resource_version_ids: string[]; fork_allowed: boolean; }; draft?: { ...; }; }' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+    Types of property 'draft' are incompatible.
+      Type '{ draft_id: string; revision: number; config: { name: string; description: string; style_tags: string[]; parent_preset_version: string | null; component_versions: string[]; variant_blueprint_ids: string[]; resource_version_ids: string[]; fork_allowed: boolean; }; publication_id: string | null; updated_at: string; } ...' is not assignable to type '{ draft_id: string; revision: number; config: { name: string; description: string; style_tags: string[]; parent_preset_version: string | null; component_versions: string[]; variant_blueprint_ids: string[]; resource_version_ids: string[]; fork_allowed: boolean; }; publication_id: string | null; updated_at: string; }'.
+        Type 'undefined' is not assignable to type '{ draft_id: string; revision: number; config: { name: string; description: string; style_tags: string[]; parent_preset_version: string | null; component_versions: string[]; variant_blueprint_ids: string[]; resource_version_ids: string[]; fork_allowed: boolean; }; publication_id: string | null; updated_at: string; }'.
+tests/integration/plus-preset-authoring.test.ts(9,134): error TS2345: Argument of type '{ payload?: {} | null; method: "DELETE" | "GET" | "POST" | "PATCH"; url: string; headers: { 'idempotency-key'?: string; authorization?: string; }; }' is not assignable to parameter of type 'string | InjectOptions'.
+  Type '{ payload?: {} | null; method: "DELETE" | "GET" | "POST" | "PATCH"; url: string; headers: { 'idempotency-key'?: string; authorization?: string; }; }' is not assignable to type 'InjectOptions' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.
+    Types of property 'payload' are incompatible.
+      Type '{} | null' is not assignable to type 'InjectPayload'.
+        Type 'null' is not assignable to type 'InjectPayload'.
+tests/integration/plus-preset-authoring.test.ts(10,134): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(10,158): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(10,169): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(actual: any, message?: string | undefined): Assertion<void, any>', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+  Overload 2 of 2, '(val: any, message?: string | undefined): Assertion', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+tests/integration/plus-preset-authoring.test.ts(11,120): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(12,120): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(13,105): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(13,116): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(actual: any, message?: string | undefined): Assertion<void, any>', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+  Overload 2 of 2, '(val: any, message?: string | undefined): Assertion', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+tests/integration/plus-preset-authoring.test.ts(13,149): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(18,178): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(21,21): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(21,32): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(actual: any, message?: string | undefined): Assertion<void, any>', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+  Overload 2 of 2, '(val: any, message?: string | undefined): Assertion', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+tests/integration/plus-preset-authoring.test.ts(21,77): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(21,88): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(actual: any, message?: string | undefined): Assertion<void, any>', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+  Overload 2 of 2, '(val: any, message?: string | undefined): Assertion', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+tests/integration/plus-preset-authoring.test.ts(22,47): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(22,104): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(28,122): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(28,133): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(actual: any, message?: string | undefined): Assertion<void, any>', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+  Overload 2 of 2, '(val: any, message?: string | undefined): Assertion', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+tests/integration/plus-preset-authoring.test.ts(28,167): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(29,82): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(30,95): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(31,95): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(32,78): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(39,96): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(43,18): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(43,29): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(actual: any, message?: string | undefined): Assertion<void, any>', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+  Overload 2 of 2, '(val: any, message?: string | undefined): Assertion', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+tests/integration/plus-preset-authoring.test.ts(44,153): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(46,85): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(53,89): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(55,17): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(55,28): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(actual: any, message?: string | undefined): Assertion<void, any>', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+  Overload 2 of 2, '(val: any, message?: string | undefined): Assertion', gave the following error.
+    Argument of type '(body: InjectPayload) => Chain' is not assignable to parameter of type 'string'.
+tests/integration/plus-preset-authoring.test.ts(55,65): error TS2339: Property 'json' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(62,78): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(64,113): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(65,78): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(66,96): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.
+tests/integration/plus-preset-authoring.test.ts(68,95): error TS2339: Property 'statusCode' does not exist on type 'void & Promise<Response> & Chain'.

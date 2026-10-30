@@ -1,0 +1,14 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/integration/plus-preset-authoring.test.ts (6 tests) 4745ms
+   ✓ keeps existing grants out of community authoring and requires separate native approval 388ms
+ ✓ tests/integration/plus-workspace.test.ts (7 tests) 3189ms
+   ✓ requires explicit native approval and a separate high-entropy polling secret 302ms
+
+ Test Files  2 passed (2)
+      Tests  13 passed (13)
+   Start at  03:13:42
+   Duration  10.06s (tests 81%, import 15%, transform 3%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/integration.json
