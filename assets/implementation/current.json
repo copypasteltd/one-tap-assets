@@ -3,11 +3,11 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-30T14:44:18.626197+00:00",
+  "checked_at": "2026-10-30T15:10:37.241001+00:00",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "verification_mode": "FOCUSED_INDEPENDENT_PRODUCT_IMAGE_BATCH_DELIVERY",
+  "verification_mode": "FOCUSED_NATIVE_ARTIFACT_DELIVERY",
   "retained_integration": null,
   "command_checks_passed": false,
   "commands": [
@@ -23,8 +23,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 23710,
-      "log_path": "runtime/delivery-builds/2026-10-30T14-30-03-025Z-bb830a0c/typecheck.log",
+      "elapsed_ms": 37347,
+      "log_path": "runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -40,29 +40,29 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 1457,
-      "log_path": "runtime/delivery-builds/2026-10-30T14-30-03-025Z-bb830a0c/server.log",
+      "elapsed_ms": 637,
+      "log_path": "runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T14-30-03-025Z-bb830a0c\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T15-07-05-734Z-75c4f52e\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T14-30-03-025Z-bb830a0c\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T15-07-05-734Z-75c4f52e\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 17495,
-      "log_path": "runtime/delivery-builds/2026-10-30T14-30-03-025Z-bb830a0c/preview.log",
-      "log_sha256": "0ad956924cb0644d52261f869def0c831fe655b0530ab5112c08eb8c07b7af0a"
+      "elapsed_ms": 5152,
+      "log_path": "runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/preview.log",
+      "log_sha256": "1270c5f8d1a2b87aa519fde13e6b5ab5f291a1595d8f2dc3f8ce0f9db1d573c8"
     },
     {
       "task": "build:alipay",
@@ -72,13 +72,13 @@
         "alipay"
       ],
       "shell": false,
-      "status": "TIMEOUT",
-      "exit_code": 1,
+      "status": "PASS",
+      "exit_code": 0,
       "signal": null,
-      "timeout_ms": 180000,
-      "elapsed_ms": 180375,
-      "log_path": "runtime/delivery-builds/2026-10-30T14-30-03-025Z-bb830a0c/runtime/build/../../alipay.log",
-      "log_sha256": "a3962d30ad7865d74c5868e70abb352437fa1e6ea918cbe7d01ea686e9a6f4e5"
+      "timeout_ms": 360000,
+      "elapsed_ms": 12672,
+      "log_path": "runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/alipay.log",
+      "log_sha256": "03ca1396c8a9b60302185f9afd8e60d8a8514ef69952d3f6d23c9cac5ba2bc16"
     },
     {
       "task": "build:douyin",
@@ -88,18 +88,18 @@
         "tt"
       ],
       "shell": false,
-      "status": "TIMEOUT",
-      "exit_code": 1,
+      "status": "PASS",
+      "exit_code": 0,
       "signal": null,
-      "timeout_ms": 180000,
-      "elapsed_ms": 180301,
-      "log_path": "runtime/delivery-builds/2026-10-30T14-30-03-025Z-bb830a0c/runtime/build/../../douyin.log",
-      "log_sha256": "be8acd37f9a168d611c59e635a786a131a25cf7bd7ee2d242a23c5565ffc7a12"
+      "timeout_ms": 360000,
+      "elapsed_ms": 16090,
+      "log_path": "runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/douyin.log",
+      "log_sha256": "1680577279e599c642dfb144b63acd352925ce242c6ef886a36eb840a13b0762"
     }
   ],
   "suites": [],
-  "source_files": 527,
-  "source_set_hash": "034fdb1ba27431892c5e272775c494e526b0a7f207a8336f25b8f9a7be524888",
+  "source_files": 529,
+  "source_set_hash": "f83a34c4c251547aa12d7f0c8be258ef01fed3d0d6b027d452b102f2e9b2a077",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -1858,6 +1858,10 @@
       "sha256": "a9383c311a2bbe9b17b57cdb3cd161d5c262aeaaa8656441e4a347c803d89ba7"
     },
     {
+      "path": "tests/unit/mini-artifacts.test.ts",
+      "sha256": "58062484354a3dfb4d01424d9927a60e68fef69c611fc0b00ceb020b841e9dc6"
+    },
+    {
       "path": "tests/unit/native-review-audio.test.ts",
       "sha256": "ab1d1040e32313ca0787ec97e8fea72eac95da9ebda5c7d84ef6063a6bb6cfd9"
     },
@@ -1999,7 +2003,7 @@
     },
     {
       "path": "scripts/build-mini.cjs",
-      "sha256": "5db02b7a8e86ee256dd890feefc31788017809917a53b0ccfd9afdd6ed40fe09"
+      "sha256": "0a0698213dc3bdccfb4cca6a2e4b2deb1ab8411aa19e4b5786779df03dbbec3d"
     },
     {
       "path": "scripts/build-output.cjs",
@@ -2019,7 +2023,7 @@
     },
     {
       "path": "scripts/delivery/build.ts",
-      "sha256": "0025b6e3e32a47fbd79d92695ba21a3df7be327aacc160ebf2bad084b1b2108a"
+      "sha256": "8769b127cd2569bde360b0759eae0653a14405305ce863d43b9199a105846e0e"
     },
     {
       "path": "scripts/delivery/common.ts",
@@ -2064,6 +2068,10 @@
     {
       "path": "scripts/migrate.ts",
       "sha256": "98ce003bea8888fd116b0ee0d12b25c76574764ca199656369c61a844af312b3"
+    },
+    {
+      "path": "scripts/mini-artifacts.cjs",
+      "sha256": "5bad494956ddb26f09c4c2f3a4c2ace909758e47e0a5ee44e877461febbcc605"
     },
     {
       "path": "scripts/mini-build-entry.cjs",
@@ -2757,7 +2765,7 @@
   ],
   "source_license": "Independently written project source; upstream AGPL clone remains research-only; no upstream production implementation copied.",
   "historical_full_chain": "docs/verification/repair-cost-native-source.json",
-  "delivery_builds_passed": false,
+  "delivery_builds_passed": true,
   "full_suite_executed": false,
   "repair_candidate": {
     "photo_connected": true,
@@ -3172,9 +3180,9 @@
     "verification_pointer": "docs/delivery/package.json"
   },
   "selected_builds_passed": true,
-  "focused_tests_passed": 4,
-  "browser_checks_passed": 9,
-  "evidence": "docs/verification/plus-batches-source.json",
+  "focused_tests_passed": 5,
+  "browser_checks_passed": 0,
+  "evidence": "docs/verification/mini-closure-source.json",
   "media_files": 180,
   "plus_workspace": {
     "scope": "OWNED_READS_AND_VERSIONED_IMAGE_DRAFTS",
@@ -3205,8 +3213,47 @@
     "video_subtitle_authoring_verified": false,
     "evidence": "docs/verification/plus-batches-source.json"
   },
-  "native_mini_builds": {
-    "alipay": "TIMEOUT",
-    "douyin": "TIMEOUT"
-  }
+  "native_mini_builds": [
+    {
+      "host": "alipay",
+      "status": "PASS",
+      "files": 71,
+      "artifact_validation": {
+        "status": "PASS",
+        "page_count": 17,
+        "file_count": 71,
+        "javascript_files_parsed": 22,
+        "local_dependencies_checked": 22,
+        "project_configuration": "mini.project.json",
+        "host_launch_verified": false,
+        "real_device_verified": false
+      },
+      "manifest": {
+        "path": "docs/verification/mini-closure-alipay-artifacts.json",
+        "sha256": "0d101efe7c98a00c59790d1e17f5c96e829c720c0602668ce87124b4d853939b",
+        "bytes": 11580
+      }
+    },
+    {
+      "host": "douyin",
+      "status": "PASS",
+      "files": 70,
+      "artifact_validation": {
+        "status": "PASS",
+        "page_count": 17,
+        "file_count": 70,
+        "javascript_files_parsed": 22,
+        "local_dependencies_checked": 21,
+        "project_configuration": "project.config.json",
+        "host_launch_verified": false,
+        "real_device_verified": false
+      },
+      "manifest": {
+        "path": "docs/verification/mini-closure-douyin-artifacts.json",
+        "sha256": "edb1faac7312c8a7b0ff6cbf6d967c7cec7c3ff8e2c09085727609e8edbc4bd9",
+        "bytes": 11433
+      }
+    }
+  ],
+  "current_browser_checks_executed": false
 }

@@ -1,0 +1,25 @@
+{
+  "checked_at": "2026-10-30T14:45:15.761453+00:00",
+  "status": "PASS",
+  "scope": "DELIVERY_FILE_AND_DOCUMENT_INTEGRITY_NOT_FULL_PRODUCT_ACCEPTANCE",
+  "source_set_hash": "034fdb1ba27431892c5e272775c494e526b0a7f207a8336f25b8f9a7be524888",
+  "source_files": 527,
+  "runtime_contract_files": 42,
+  "resource_files": 4,
+  "evidence": "docs/verification/plus-batches-source.json",
+  "markdown_files": 191,
+  "local_links_verified": 2061,
+  "public_diagnostic_logs": 10,
+  "media_files": 180,
+  "historical_json_unchanged": 574,
+  "old_migrations_preserved": 36,
+  "prior_api_operations_and_schemas_unchanged": true,
+  "native_mini_builds": {
+    "alipay": "TIMEOUT",
+    "douyin": "TIMEOUT"
+  },
+  "full_suite_executed": false,
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false
+}

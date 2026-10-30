@@ -1,8 +1,14 @@
 import {readFile} from 'node:fs/promises';
 import {randomUUID} from 'node:crypto';
 import {resolve} from 'node:path';
+import {createRequire} from 'node:module';
 import {command,directory,inventory,json,local,sha,snapshot} from './common.js';
 import {apiBase} from '../../src/shared/client/api.js';
+import alipayConfig from '../../src/mini-alipay/app.config.js';
+import douyinConfig from '../../src/mini-douyin/app.config.js';
+const {validateMiniArtifacts}=createRequire(import.meta.url)('../mini-artifacts.cjs') as {
+ validateMiniArtifacts(directory:string,platform:string,expectedPages:string[]):{page_count:number;file_count:number;javascript_files_parsed:number;local_dependencies_checked:number;project_configuration:string;host_launch_verified:false;real_device_verified:false};
+};
 const id=new Date().toISOString().replace(/[:.]/g,'-')+'-'+randomUUID().slice(0,8);
 const base=`runtime/delivery-builds/${id}`,out=`${base}/runtime/build`;await directory(out);
 const before=await snapshot(),env={...process.env,YPCC_BUILD_ROOT:local(out),TARO_APP_API_BASE:apiBase(process.env.TARO_APP_API_BASE||'https://localhost:3100')};
@@ -13,7 +19,9 @@ checks.push(await command('typecheck',[],`${base}/typecheck.log`,180000,env));
 checks.push(await command('build:server',[],`${base}/server.log`,180000,env));
 if(!serverOnly){
   checks.push(await command('exec',['vite','build','--config','src/preview/vite.config.ts','--outDir',local(`${out}/preview`)],`${base}/preview.log`,180000,env));
-  if(!skipMini)for(const host of ['alipay','douyin'])checks.push(await command(`build:${host}`,[],`${base}/${host}.log`,180000,env));
+  // Measured native Windows toolchain initialization can exceed 180 seconds.
+  // Keep a bounded six-minute deadline for each real native compiler.
+  if(!skipMini)for(const host of ['alipay','douyin'])checks.push(await command(`build:${host}`,[],`${base}/${host}.log`,360000,env));
 }
 if(process.argv.includes('--smoke')){
   // The existing role fixture uses runtime/build. Its compiled bridge must be
@@ -26,15 +34,23 @@ if(process.argv.includes('--smoke')){
   }catch{checks.push({command:'focused-photo-and-delivery-smoke',status:'NOT_RUN',reason:'Candidate and fixture MCP bridge could not be matched'});}
 }
 const after=await snapshot();if(JSON.stringify(before)!==JSON.stringify(after))throw new Error('Source or contract changed during focused delivery checks');
-const components:{name:string;status:string;files:Awaited<ReturnType<typeof inventory>>}[]=[];
+const components:{name:string;status:string;files:Awaited<ReturnType<typeof inventory>>;artifact_validation?:unknown}[]=[];
 const groups=[['server','build:server',['api','worker']],['preview','exec',['preview']],['alipay','build:alipay',['mini-alipay']],['douyin','build:douyin',['mini-douyin']]] as const;
 for(const [name,task,folders] of groups){
   const check=checks.find(c=>'task' in c&&c.task===task);const files:Awaited<ReturnType<typeof inventory>>=[];
   if(check?.status==='PASS')for(const folder of folders)files.push(...await inventory(`${out}/${folder}`));
   const required=name==='server'?['api/main.js','worker/main.js','worker/tool-gateway/mcp-main.js','worker/lifecycle/reaper-main.js','worker/lifecycle/media-maintenance-main.js','worker/lifecycle/privacy-journal-main.js']
     :name==='preview'?['preview/index.html','preview/support.html','preview/review.html','preview/metrics.html','preview/plus.html']:[`${name==='alipay'?'mini-alipay':'mini-douyin'}/app.json`,`${name==='alipay'?'mini-alipay':'mini-douyin'}/app.js`];
-  const status=check?.status==='PASS'&&required.some(path=>!files.some(f=>f.path===`${out}/${path}`))?'MISSING_OUTPUT':check?.status??'NOT_RUN';
-  components.push({name,status,files:status==='PASS'?files:[]});
+  let status=check?.status==='PASS'&&required.some(path=>!files.some(f=>f.path===`${out}/${path}`))?'MISSING_OUTPUT':check?.status??'NOT_RUN';
+  let artifact_validation:unknown;
+  if(status==='PASS'&&(name==='alipay'||name==='douyin')){
+    try{
+      const manifest=validateMiniArtifacts(local(`${out}/${name==='alipay'?'mini-alipay':'mini-douyin'}`),name==='alipay'?'alipay':'tt',name==='alipay'?alipayConfig.pages:douyinConfig.pages);
+      const {page_count,file_count,javascript_files_parsed,local_dependencies_checked,project_configuration,host_launch_verified,real_device_verified}=manifest;
+      artifact_validation={status:'PASS',page_count,file_count:file_count+1,javascript_files_parsed,local_dependencies_checked,project_configuration,host_launch_verified,real_device_verified};
+    }catch(error){status='INVALID_OUTPUT';artifact_validation={status:'FAIL',reason:error instanceof Error?error.message:'Mini artifact validation failed'};}
+  }
+  components.push({name,status,files:status==='PASS'?files:[],...(artifact_validation?{artifact_validation}:{})});
 }
 const typePassed=checks.find(c=>'task' in c&&c.task==='typecheck')?.status==='PASS';
 const buildPassed=typePassed&&components.every(c=>c.status==='PASS');

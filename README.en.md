@@ -1,62 +1,18 @@
 # One Tap Assets · 一品成片
 
-2026-10-30 delivery update: **Multi-product image preparation and independent delivery are connected.** Select 2–10 saved drafts in Plus, choose each style and prepare each plan. On the original Alipay/Douyin mini-program, review every plan and its full fee, then intentionally pay for each order. Production, post-processing, file QC and separate facts/style reviews deliver a new private PNG and copy for each paid product. One stale, failed or unpaid item does not block a sibling; original media and entitlements remain available.
+**A mobile-first self-service product asset studio for Alipay and Douyin mini-programs.** Photograph a product, let multimodal analysis identify its visible features, choose a community preset, then explicitly confirm the asset list and fee. Style Skills guide planning, production, post, QC and independent factual/style review before private delivery and album saving. Ten official styles establish the baseline for community extensions.
 
-![Independent product-batch production walkthrough](docs/media/plus-batches/walkthrough.gif)
+**This delivery includes actual successful builds for both mini-programs.** Each has 17 pages, IDE configuration, local dependencies and a SHA256 inventory. The independent archive also contains server and Plus web builds. The repository contains 529 source files, 37 migrations, 98 business / 38 management operations, 305 schemas and 82 logical entities. All tools run natively on Windows, without Docker or WSL.
 
-[Complete flow, API and constraints](docs/实施/Plus批量商品独立制作与逐件交付-v1.0.md) · [Screenshots, actual output, MP4/WebM/GIF](docs/media/plus-batches/README.md) · [Numbered work and remaining items](docs/guides/STATUS.md) · [Exact evidence](docs/verification/plus-batches-source.json) · [Delivery package manifest](docs/delivery/package.json).
+[Package location and SHA256](docs/delivery/package.json) · [Mini-program import and device checklist](docs/guides/MINI-PROGRAM-IMPORT.md) · [Exact focused evidence](docs/verification/mini-closure-source.json) · [Numbered completed/pending work](docs/guides/STATUS.md) · [中文](README.md)
 
-Workflow: mobile photos/production → explicit phone approval for Plus → saved image drafts → computer batch selection/preparation → native batch history and per-item fee confirmation/payment → independent delivery. Browser access never authorizes payment or refund. Batch history is recoverable; replay uses a hashed request intent and current private visibility, and draft conflicts are isolated with database savepoints.
+Plus supports deeper image editing and independent batch preparation. Explicit phone approval grants a temporary connection; save crop, dimensions and text on the computer, choose 2–10 saved drafts and per-item style versions, then return to the original mini-program for separate quotes and payments. Each item gets its own production, review and new PNG/copy delivery. An unpaid or failed sibling does not block another item. Original assets and entitlements survive; request-intent deduplication and current deletion/expiry/revocation checks protect recovery.
 
-527 source files, 37 migrations, 98 business / 38 management operations, 305 schemas and 82 logical entities. Four final-source vertical checks, required type/server/Plus builds, native startup and nine browser checks passed. No full-suite green gate is imposed. Both Alipay and Douyin candidate compilers timed out at 180 seconds. Their failed records are retained; these candidates are excluded from executable delivery and do not block the successful server/Plus package. Nine new media files bring the total to 180; the original 171 and frozen C design remain intact. Local HTTPS, PostgreSQL, MCP and PNG execution are actual; identity, payment, inference, semantic verdicts and process identity are synthetic. Real services remain disabled. Video/subtitles/advanced authoring, permanent cross-platform binding, native-device acceptance and cloud deployment remain outstanding.
+![Independent product-batch walkthrough](docs/media/plus-batches/walkthrough.gif)
 
-Earlier delivery notes retain their original evidence and scope.
+[Single-image design](docs/实施/Plus独立图片正式制作与手机付款交付-v1.0.md) · [Batch design and flow](docs/实施/Plus批量商品独立制作与逐件交付-v1.0.md) · [Screenshots, actual PNG, MP4/WebM/GIF](docs/media/plus-batches/README.md). All 180 previous media assets and frozen C references remain unchanged; this build-only round reuses their explicitly stated provenance.
 
-2026-10-30 delivery update: **Plus now has a complete single-image production path.** Save a crop, exact canvas size and text on the computer, select a style and prepare a separate production plan. The original Alipay/Douyin mini-program explicitly approves this extra capability, displays the frozen version and full new fee, and requires an intentional native payment. CONTENT, production, post-processing, file QC and independent facts/style reviews then deliver a new private PNG and accompanying copy. Original media, orders and their revision rights remain available; old computer grants receive no automatic elevation.
-
-![Plus single-image production walkthrough](docs/media/plus-render/walkthrough.gif)
-
-[Complete flow, API, configuration and limits](docs/实施/Plus独立图片正式制作与手机付款交付-v1.0.md) · [Screenshots, actual PNG, MP4/WebM/GIF](docs/media/plus-render/README.md) · [Status and remaining work](docs/guides/STATUS.md) · [Exact evidence and initial failures](docs/verification/plus-render-source.json) · [Delivery package manifest](docs/delivery/package.json).
-
-518 source files, 36 migrations, 95 business / 38 management operations, 296 schemas and 80 logical entities. Four final-source vertical checks, required type/server/preview builds, native startup and six browser checks passed. Early unit/draft checks retain their actual source differences. No full-suite green gate, fresh mini-program builds or native-device acceptance was required. Nine new media files bring the total to 171; all original 162 media and the frozen C design remain intact. HTTPS, PostgreSQL, MCP and PNG processing are actual local execution; payment, inference, semantic verdicts and process identity are synthetic. Real services remain disabled pending configuration and admission. Video/subtitles/batch/advanced authoring and cloud release remain outstanding.
-
-Earlier delivery notes retain their original evidence and scope.
-
-2026-10-30 delivery update: **Plus now supports explicit phone approval and independent image editing drafts.** Open same-origin HTTPS `/plus/`, generate a five-minute code and approve it in the signed-in mini-program. The one-hour computer grant reads owned products, orders and delivered packs; edit crop, output dimensions, title, optional brand and unverified facts, save a separate revision and resume it. Revoke from the phone or this browser; existing Plus download links then fail. Credentials stay in browser memory. Payments and refunds remain in the original mini-program.
-
-![Actual Plus browser walkthrough](docs/media/plus-workspace/walkthrough.gif)
-
-[Screenshots, MP4/WebM/GIF and provenance](docs/media/plus-workspace/README.md) · [Detailed design, API and limits](docs/实施/Plus手机确认与独立编辑草稿-v1.0.md) · [Current status](docs/guides/STATUS.md) · [Exact evidence](docs/verification/plus-workspace-source.json).
-
-507 source files, 35 migrations, 91 business / 38 management operations; 288 schemas / 79 logical entities. Three client and seven native API checks, type/server/preview builds and native startup passed. No full test suite, mini-program rebuild or device acceptance was run. Computer capture uses actual local HTTPS, PostgreSQL and PNG bytes with synthetic identity/payment/QC metadata; the mini-program UI uses synthetic replies. Final rendering, separate purchase and reviews, subtitles, batches, complex preset authoring, permanent cross-platform binding and real service/cloud acceptance remain pending. All 58 requirements remain in scope; production, cloud and full-product claims remain false.
-
-以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
-
-[English](README.en.md) · [中文](README.md) · [Docs](docs/README.md) · [Quick start](docs/guides/QUICKSTART.md) · [Status](docs/guides/STATUS.md) · [Changelog](CHANGELOG.md)
-
-One Tap Assets turns product photos into a coordinated image, short-video and copy pack. **Alipay and Douyin mini-programs are the primary clients**. Multimodal analysis establishes visible features without a product form. Buyers select a community preset, confirm the pack and price, explicitly pay and receive downloadable assets after cloud production. The future Plus web client supports deeper editing.
-
-Ten official styles and 25 trusted components support controlled community extensions. Codex participates in planning, production, post, QC and independent factual/style reviews. Each order freezes its Skill, identity, models, resources, rights and budget, then releases its instance after private delivery. [Product documents](docs/README.md) · [Development and constraints](docs/开发/README.md).
-
-| Step | Buyer action | System behavior |
-| --- | --- | --- |
-| 1. Photograph | Capture whole, side and detail views | Infer visible features, label text and unknowns |
-| 2. Select | Browse community styles and complete asset lists | Recommend presets; optionally correct one mistaken field |
-| 3. Confirm | Review the complete price; explicitly pay | Freeze current profile/identity, Skill, models, rights and total budget |
-| 4. Produce | Follow progress and original-order exceptions | Planning → production → post → QC → independent dual review |
-| 5. Receive | Save images/videos and copy text | Private delivery, instance release and bounded aftercare |
-
-The app also provides **optional usage feedback** after pack delivery and a classified operations view. Buyers can select planned use, used or needs adjustment, then change or withdraw their answer while album saving and delivery access remain available. `/ops/metrics` reads durable recognition jobs, raw field coverage, deduplicated preset selections, payments and first delivery, server-received save confirmations, community reuse and settled platform-funded calls. Test, external and unclassified groups use server-managed markings with separate read and classification permissions.
-
-This release closes **recommendation impressions and clicks**. Cards report an impression after at least 50% visibility for 500 continuous milliseconds; clicks are independent and never wait for telemetry. Short-lived signatures bind the current buyer, product, profile, photos and preset version. Server-side natural keys deduplicate refreshes and concurrent retries. The operations console uses server receipt time and shows the collection start and historical gaps.
-
-Focused checks: 12 client, 10 native HTTP/database and 8 browser checks pass, along with typecheck, server/web builds and native startup. The package contains 494 source files, 34 migrations, 80 buyer and 38 management operations. [Precise evidence](docs/verification/recommendation-events-source.json) preserves the initial type failure and original test snapshots. No full-suite, mini-program rebuild or device acceptance was performed.
-
-![Actual recommendation browsing and click replay](docs/media/recommendation-events/walkthrough.gif)
-
-[Three screenshots, MP4/WebM and GIF](docs/media/recommendation-events/README.md) · [Usage and measurement definitions](docs/实施/推荐可见停留与选用记录-v1.0.md) · [Run and package](docs/delivery/README.md) · [Completed and pending work](docs/guides/STATUS.md). Six new media files bring the total to 153; the earlier 147 files, frozen C design and historical evidence keep their bytes. Optional usage feedback, album saving, support and community workflows remain available.
-
-Client-reported events do not verify real humans, providers or payments. Real-service/payment/isolation admission, both devices, ground-truth accuracy, verified full self-service and manual cost, qualified paid community reuse, Plus, cloud deployment and complete 58-requirement acceptance remain pending. Live services and sales remain disabled; full product verification, production admission and cloud deployment are false.
+Five artifact checks and the required type/server/web/native builds passed. No full suite, IDE launch or device acceptance was run. Rebuild the default loopback API origin with actual app/domain configuration for phones. Previous business checks execute actual PostgreSQL/HTTPS/MCP/PNG with synthetic identity, payment, inference, semantic verdicts and process identity. Real services and sales remain disabled. Plus video/subtitles/advanced authoring, permanent identity binding, real-service admission and cloud deployment remain outstanding.
 
 ## Screens and recorded interaction
 
@@ -228,11 +184,11 @@ flowchart LR
 | Mini-programs | Taro 4.3.1, React 18.3.1, TypeScript 5.9.3; 17 shared screens and platform ports |
 | Browser replay | Vite 8.3.5 and React DOM adapters with local fixtures |
 | Backend | Node.js 24, tested with 24.22.1; Fastify 5.12.7; worker/reaper/maintenance CLIs |
-| Persistence | Native PostgreSQL, local 17.6-1; durable stages/outbox, lease fencing and immutable receipts; 31 migrations |
+| Persistence | Native PostgreSQL, local 17.6-1; durable stages/outbox, lease fencing and immutable receipts; 37 migrations |
 | Media | Sharp 0.35.5, native FFmpeg/ffprobe, private storage and local development storage |
 | Agent | Codex app-server, bounded stdio/MCP, metered inference and style SkillBundles |
 | Verification | Vitest 5.0.5, Playwright 1.64.1, native PG/actual media and explicit synthetic provider/host fixtures |
-| Tooling | pnpm 10.13.1, one lockfile, JSON Schema 2020-12; 77 business/35 management endpoint contracts |
+| Tooling | pnpm 10.13.1, one lockfile, JSON Schema 2020-12; 98 business/38 management endpoint contracts |
 
 The project does not launch local Docker, WSL, virtual machines or Testcontainers, and does not require Redis. Native development scripts target Windows PowerShell. A complete startup on other operating systems has not been verified here.
 
@@ -303,7 +259,7 @@ New: [repair cost authorization within the original order](docs/实施/修复费
 ## Repository map and docs
 
 ```text
-src/api/            API, auth, domain services, 31 SQL migrations
+src/api/            API, auth, domain services, 37 SQL migrations
 src/worker/         Durable stages, Codex, MCP, media/review/reaping/privacy
 src/shared/         Shared screens, platform ports, recovery and generated contracts
 src/mini-alipay/    Alipay shell
@@ -337,7 +293,7 @@ For UI evidence, start `dev:preview` and run `docs:media` in another terminal. `
 
 Historical 346c8c21 results remain in [cost provenance](docs/verification/repair-cost-native-source.json). This round uses user-requested focused delivery checks. See the [delivery guide](docs/delivery/README.md) for current build/package results; prior passes and unexecuted tests are not promoted to current verification.
 
-完整命令未通过；源码进展与独立构建不升级为完整通过。 The full command chain fails; source progress and separate builds do not replace it.
+本轮仅执行上述专项及必要构建；全面测试未执行，不能将局部通过升级为完整产品验收。 / Only the stated focused checks and builds ran; full-product acceptance remains incomplete.
 
 Remaining work includes official-variant and real-service acceptance of both generative routes, real native-audio quality and commercial admission, real Codex/isolation/cleanup, provider/payment/storage admission, four device groups, complete bounded one-round automatic repair, 14 variants × 30 full-pack benchmarks, complete community/aftercare, Plus and remaining management workflows, and acceptance of all **58 requirements / 52 P0 requirements**. Follow [status and priorities](docs/guides/STATUS.md).
 

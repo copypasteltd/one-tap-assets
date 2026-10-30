@@ -4,6 +4,7 @@ const { resolve, join } = require('node:path');
 const { mkdir, writeFile } = require('node:fs/promises');
 const sharp = require('sharp');
 const { buildRoot } = require('./build-output.cjs');
+const { finalizeMiniArtifacts } = require('./mini-artifacts.cjs');
 const platform = process.argv[2];
 if (!['alipay', 'tt'].includes(platform)) throw new Error('Unsupported mini-program platform');
 const root = resolve(__dirname, '..'); const name = platform === 'alipay' ? 'mini-alipay' : 'mini-douyin';
@@ -19,4 +20,7 @@ if (result.status !== 0) process.exit(result.status || 1);
   const crops = [{ left: 36, top: 277, width: 97, height: 123 }, { left: 165, top: 249, width: 109, height: 142 }, { left: 301, top: 290, width: 96, height: 119 }];
   for (const [i, crop] of crops.entries()) await sharp(source).extract(crop).png().toFile(join(target, `example-${i}.png`));
   await writeFile(join(buildRoot(), name, 'example-source.json'), JSON.stringify({ source: 'YPCC-DS-C-1.0.0/C-拍照制作.png', purpose: 'Illustrative input photos, never a buyer result or a preset-specific sample', crops }, null, 2));
+  const manifest = finalizeMiniArtifacts(join(buildRoot(), name), platform);
+  console.log(JSON.stringify({ platform, artifact_status: 'PASS', pages: manifest.page_count, files: manifest.file_count + 1,
+    host_launch_verified: false, real_device_verified: false }));
 })().catch(error => { process.stderr.write(String(error)); process.exitCode = 1; });

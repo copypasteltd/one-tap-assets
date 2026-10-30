@@ -1,0 +1,27 @@
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 82 modules transformed.
+rendering chunks...
+computing gzip size...
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/metrics.html                               0.53 kB │ gzip:  0.35 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/review.html                                0.54 kB │ gzip:  0.36 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/plus.html                                  0.58 kB │ gzip:  0.36 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/support.html                               0.61 kB │ gzip:  0.36 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/index.html                                 0.67 kB │ gzip:  0.40 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/assets/NotoSansSC_wght_-Dz1u1FRy.ttf  17,772.30 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/assets/review-BdrArJjk.css                 2.01 kB │ gzip:  0.80 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/assets/support-Cakd7yMo.css                3.23 kB │ gzip:  1.03 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/assets/support-console-ClwvL2kG.css        4.21 kB │ gzip:  1.54 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/assets/metrics-DoY1tz2h.css                5.21 kB │ gzip:  1.38 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/assets/plus-Butl31dz.css                   8.77 kB │ gzip:  2.56 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/assets/index-atJc7AIw.css                  9.56 kB │ gzip:  2.58 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/assets/plus-batch-status-CUBSkd-x.js       0.74 kB │ gzip:  0.51 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/assets/support-DuUk0LQe.js                 3.56 kB │ gzip:  1.83 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/assets/review-3WVSwMOx.js                 17.15 kB │ gzip:  6.13 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/assets/support-Dia6bzXf.js                22.44 kB │ gzip:  7.60 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/assets/metrics-5VCQlS3u.js                22.49 kB │ gzip:  7.77 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/assets/plus-CQFFZMmy.js                   31.52 kB │ gzip:  9.70 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/assets/api-D8CkkOg8.js                   157.68 kB │ gzip: 49.85 kB
+runtime/delivery-builds/2026-10-30T15-07-05-734Z-75c4f52e/runtime/build/preview/assets/index-G0T1dVRC.js                 229.49 kB │ gzip: 54.78 kB
+
+✓ built in 3.43s

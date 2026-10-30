@@ -1,232 +1,155 @@
 {
-  "checked_at": "2026-10-30T14:44:18.626197+00:00",
-  "status": "FOCUSED_CORE_PASS_WITH_MINI_BUILD_FAILURES",
-  "source_set_hash": "034fdb1ba27431892c5e272775c494e526b0a7f207a8336f25b8f9a7be524888",
-  "source_files": 527,
-  "runtime_contract_files": 42,
-  "resource_files": 4,
-  "database_migrations": 37,
-  "business_operations": 98,
-  "management_operations": 38,
-  "schemas": 305,
-  "logical_entities": 82,
-  "specification": "docs/实施/Plus批量商品独立制作与逐件交付-v1.0.md",
-  "requirement": "P01-F18_IMAGE_BATCH_SUBSCOPE_ONLY",
+  "schema_version": "1.0",
+  "checked_at": "2026-10-30T15:10:37.241001+00:00",
+  "status": "FOCUSED_NATIVE_CLIENT_BUILD_AND_DELIVERY_PASS",
+  "classification": "PROGRESS_ON_FULL_PRODUCT_GOAL",
+  "source_set_hash": "f83a34c4c251547aa12d7f0c8be258ef01fed3d0d6b027d452b102f2e9b2a077",
+  "source_files": 529,
   "source_snapshot": {
-    "path": "docs/verification/plus-batches-source-snapshot.json",
-    "sha256": "98f3018f72290d31c175410121cf186c4850a4bdfbba9753d5abd7ea558ae804",
-    "bytes": 102611
+    "path": "docs/verification/mini-closure-source-snapshot.json",
+    "sha256": "f0e2c806f5bbd52258db714901caac067482f7483529b3018f9def6f3712bc11",
+    "bytes": 85595
   },
-  "tests": [
+  "tests_passed": 5,
+  "test_files": [
     {
-      "run": "plus-batches-2026-10-30T14-26-12-076Z-357c6206",
-      "status": "PASS",
-      "passed_tests": 4,
-      "failed_tests": 0,
-      "pending_tests": 0,
-      "failed_suites": 0,
-      "source_unchanged": true,
-      "source_set_hash": "21fa192f9f139e2feb109eac1d4295fd1c8586300a8b43a89e7971b1e31b5d43",
-      "source_differences_from_final": {
-        "files": [
-          "scripts/record-plus-batches.ts",
-          "src/web/batch-workspace.tsx",
-          "tests/integration/plus-batches.test.ts"
-        ],
-        "runtime_contract_files": [
-          "assets/development/v1.1/contracts/endpoint-catalog.md"
-        ],
-        "resource_files": []
-      },
-      "files": [
-        {
-          "path": "docs/verification/plus-batches-2026-10-30T14-26-12-076Z-357c6206-result.json",
-          "sha256": "1163d0e094d47c2204145476d5f341b856cc9a7a1c0b94f52a585a2fbc348380",
-          "bytes": 1221
-        },
-        {
-          "path": "docs/verification/plus-batches-2026-10-30T14-26-12-076Z-357c6206-api.json",
-          "sha256": "5ca22d6b8de4f78c8dbea33559eacc4a3019404064e62c18a0017e5d517ad835",
-          "bytes": 2119
-        },
-        {
-          "path": "docs/verification/plus-batches-2026-10-30T14-26-12-076Z-357c6206-source.json",
-          "sha256": "8798f9c5232235d5b4c910fbd2ec3fb4bb4cf2ed2b1d54dbf43d73d4309292d9",
-          "bytes": 85164
-        },
-        {
-          "path": "docs/verification/plus-batches-2026-10-30T14-26-12-076Z-357c6206-api.log",
-          "sha256": "00084490078fd77c19865984bf9845c148edda515f9b48d7e2cbcb646c0b0d14",
-          "bytes": 642
-        }
-      ]
+      "path": "docs/verification/mini-closure-result.json",
+      "sha256": "17f2963819597df9e60643bc2b915ed07209496a44b563d6251c6af7d1f0d4d7",
+      "bytes": 1187
     },
     {
-      "run": "plus-batches-2026-10-30T14-30-01-485Z-43fd8d03",
-      "status": "PASS",
-      "passed_tests": 4,
-      "failed_tests": 0,
-      "pending_tests": 0,
-      "failed_suites": 0,
-      "source_unchanged": true,
-      "source_set_hash": "034fdb1ba27431892c5e272775c494e526b0a7f207a8336f25b8f9a7be524888",
-      "source_differences_from_final": {
-        "files": [],
-        "runtime_contract_files": [],
-        "resource_files": []
-      },
-      "files": [
-        {
-          "path": "docs/verification/plus-batches-2026-10-30T14-30-01-485Z-43fd8d03-result.json",
-          "sha256": "34f1caa818b9da3f0e2b77003c3c6be282fb36c8c706fce9826e2ade864a3d48",
-          "bytes": 1221
-        },
-        {
-          "path": "docs/verification/plus-batches-2026-10-30T14-30-01-485Z-43fd8d03-api.json",
-          "sha256": "6d0eba0ddb8850e7954e31127ca63d0e4380f2f70b4a059dc79f8bf4f77a1c55",
-          "bytes": 2119
-        },
-        {
-          "path": "docs/verification/plus-batches-2026-10-30T14-30-01-485Z-43fd8d03-source.json",
-          "sha256": "7d281c62ad3f7d1d48b0cedca2f68998c8c3b17ccc5694d7343cdfb9e64d938f",
-          "bytes": 85308
-        },
-        {
-          "path": "docs/verification/plus-batches-2026-10-30T14-30-01-485Z-43fd8d03-api.log",
-          "sha256": "51ecfa0efd05850814ceb471ecb64d4acc81d67337456073c59168e3ad376ff9",
-          "bytes": 640
-        }
-      ]
+      "path": "docs/verification/mini-closure-source.json",
+      "sha256": "f0e2c806f5bbd52258db714901caac067482f7483529b3018f9def6f3712bc11",
+      "bytes": 85595
+    },
+    {
+      "path": "docs/verification/mini-closure-unit.json",
+      "sha256": "bd1a9b669a96d12d0bfff20ecb84a1f71594f8b60af74dc80d80ff8db9803d84",
+      "bytes": 2251
+    },
+    {
+      "path": "docs/verification/mini-closure-unit.log",
+      "sha256": "533ad68f873ae4ae015696c3dcabc0b93a4ece84ecafeba1ba8c31ea7691fec8",
+      "bytes": 411
     }
   ],
-  "initial_attempt_explanations": [
-    "The initial type check found a nullable style price; the UI now displays unavailable prices without treating them as zero.",
-    "The first full redirected generator comparison found two catalog whitespace differences; the runtime JSON and data model already matched. The exact generated catalog replaced the direct extension output.",
-    "Both optional native mini-program candidate compilers timed out at 180 seconds. Their process trees were stopped; the failed candidates are excluded from executable delivery. No compiler success or native-device acceptance is claimed."
-  ],
-  "source_correspondence_note": "The final four native vertical checks, type/server/Plus build, nine browser checks and native startup match this exact source snapshot. The first four native checks retain their original snapshot and explicit file differences. Initial type/catalog diagnostics are diagnostic-only and have no exact source snapshot. Optional mini candidate timeouts are retained as failures rather than relabelled as passes.",
-  "build_snapshot": "docs/verification/plus-batches-build.json",
+  "test_source_unchanged": true,
+  "build_snapshot": "docs/verification/mini-closure-build.json",
   "build_logs": [
     {
-      "path": "docs/verification/plus-batches-build-typecheck.log",
+      "path": "docs/verification/mini-closure-build-typecheck.log",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0
     },
     {
-      "path": "docs/verification/plus-batches-build-build-server.log",
+      "path": "docs/verification/mini-closure-build-build-server.log",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "bytes": 0
     },
     {
-      "path": "docs/verification/plus-batches-build-exec.log",
-      "sha256": "0ad956924cb0644d52261f869def0c831fe655b0530ab5112c08eb8c07b7af0a",
-      "bytes": 3147
+      "path": "docs/verification/mini-closure-build-exec.log",
+      "sha256": "1270c5f8d1a2b87aa519fde13e6b5ab5f291a1595d8f2dc3f8ce0f9db1d573c8",
+      "bytes": 3146
     },
     {
-      "path": "docs/verification/plus-batches-build-build-alipay.log",
-      "sha256": "a3962d30ad7865d74c5868e70abb352437fa1e6ea918cbe7d01ea686e9a6f4e5",
-      "bytes": 1981
+      "path": "docs/verification/mini-closure-build-build-alipay.log",
+      "sha256": "03ca1396c8a9b60302185f9afd8e60d8a8514ef69952d3f6d23c9cac5ba2bc16",
+      "bytes": 7407
     },
     {
-      "path": "docs/verification/plus-batches-build-build-douyin.log",
-      "sha256": "be8acd37f9a168d611c59e635a786a131a25cf7bd7ee2d242a23c5565ffc7a12",
-      "bytes": 1802
+      "path": "docs/verification/mini-closure-build-build-douyin.log",
+      "sha256": "1680577279e599c642dfb144b63acd352925ce242c6ef886a36eb840a13b0762",
+      "bytes": 6998
     },
     {
-      "path": "docs/verification/plus-batches-build.json",
-      "sha256": "98f3018f72290d31c175410121cf186c4850a4bdfbba9753d5abd7ea558ae804",
-      "bytes": 102611
+      "path": "docs/verification/mini-closure-build.json",
+      "sha256": "c94f7ef24a920e7457f3da3e4b67c67030c199e56fc127e4417efa730af2e8c1",
+      "bytes": 136594
     }
   ],
-  "generator": {
-    "path": "docs/verification/plus-batches-generator.json",
-    "sha256": "2681e403a6dc036d9866e1345e664d7bf44187ff4d7513d130d7ac31594599e4",
-    "bytes": 468
-  },
-  "diagnostic_files": [
+  "builds_passed": true,
+  "selected_builds_passed": true,
+  "build_selection": "ALL",
+  "native_mini_builds": [
     {
-      "path": "docs/verification/plus-batches-initial-typecheck.json",
-      "sha256": "ed63006a9e7a24ac734014290e770a056bf46716d05dc9da17908368f5c1ba5a",
-      "bytes": 263
-    },
-    {
-      "path": "docs/verification/plus-batches-generator-initial.json",
-      "sha256": "a07d9c85b48f55cf76b9f38eb8dd04b6e531187e1a3c405fe33f86eeccad0e05",
-      "bytes": 311
-    }
-  ],
-  "browser_capture": "docs/media/plus-batches/capture-manifest.json",
-  "browser_checks": 9,
-  "recording_files": [
-    {
-      "path": "docs/verification/plus-batches-recording-result.json",
-      "sha256": "d03adedd6917634b6ae991bbb7f840cc11d173f672e3efc4b43be2775d29db96",
-      "bytes": 465
-    },
-    {
-      "path": "docs/verification/plus-batches-recording-source.json",
-      "sha256": "257bf9848fc3e4c22c823d22290265d2c0dd986c54079b4a79eba64ae8e3562f",
-      "bytes": 85309
-    },
-    {
-      "path": "docs/verification/plus-batches-recording-recording.log",
-      "sha256": "17f96dddb9fee406c7308a4e3085a79b1b8d803b560542f0ff89294a83c0b066",
-      "bytes": 90
-    }
-  ],
-  "local_checks": {
-    "base": "runtime/test-results/plus-batches-local-2026-10-30T14-31-38-894Z-22c7a4cc",
-    "source_set_hash": "034fdb1ba27431892c5e272775c494e526b0a7f207a8336f25b8f9a7be524888",
-    "source_unchanged": true,
-    "commands": [
-      {
-        "task": "doctor",
-        "argv": [
-          "--import",
-          "tsx",
-          "scripts/delivery/doctor.ts"
-        ],
+      "host": "alipay",
+      "status": "PASS",
+      "files": 71,
+      "artifact_validation": {
         "status": "PASS",
-        "exit_code": 0,
-        "timeout_ms": 60000,
-        "elapsed_ms": 2833,
-        "log_path": "runtime/test-results/plus-batches-local-2026-10-30T14-31-38-894Z-22c7a4cc/doctor.log",
-        "log_sha256": "1051975cc2509e67292714ace30e790921c6a3c4610f240e6a789442445a083e"
+        "page_count": 17,
+        "file_count": 71,
+        "javascript_files_parsed": 22,
+        "local_dependencies_checked": 22,
+        "project_configuration": "mini.project.json",
+        "host_launch_verified": false,
+        "real_device_verified": false
+      },
+      "manifest": {
+        "path": "docs/verification/mini-closure-alipay-artifacts.json",
+        "sha256": "0d101efe7c98a00c59790d1e17f5c96e829c720c0602668ce87124b4d853939b",
+        "bytes": 11580
+      }
+    },
+    {
+      "host": "douyin",
+      "status": "PASS",
+      "files": 70,
+      "artifact_validation": {
+        "status": "PASS",
+        "page_count": 17,
+        "file_count": 70,
+        "javascript_files_parsed": 22,
+        "local_dependencies_checked": 21,
+        "project_configuration": "project.config.json",
+        "host_launch_verified": false,
+        "real_device_verified": false
+      },
+      "manifest": {
+        "path": "docs/verification/mini-closure-douyin-artifacts.json",
+        "sha256": "edb1faac7312c8a7b0ff6cbf6d967c7cec7c3ff8e2c09085727609e8edbc4bd9",
+        "bytes": 11433
+      }
+    }
+  ],
+  "native_mini_device_verified": false,
+  "root_cause_diagnostic": {
+    "files": [
+      {
+        "path": "docs/verification/mini-closure-diagnostic-result.json",
+        "sha256": "5e93fd7b987885f23037fdccb78d3576bf991049ff57793b776444a5d3c1e8fd",
+        "bytes": 731
       },
       {
-        "task": "start-once",
-        "argv": [
-          "--import",
-          "tsx",
-          "scripts/delivery/start.ts",
-          "--once"
-        ],
-        "status": "PASS",
-        "exit_code": 0,
-        "timeout_ms": 60000,
-        "elapsed_ms": 7784,
-        "log_path": "runtime/test-results/plus-batches-local-2026-10-30T14-31-38-894Z-22c7a4cc/start.log",
-        "log_sha256": "fd74d7d0a55881dcce284edf04d50254e1df7c7f9733a5e50a90ec98c4ed6181"
+        "path": "docs/verification/mini-closure-diagnostic-source.json",
+        "sha256": "7d281c62ad3f7d1d48b0cedca2f68998c8c3b17ccc5694d7343cdfb9e64d938f",
+        "bytes": 85308
+      },
+      {
+        "path": "docs/verification/mini-closure-diagnostic-alipay.log",
+        "sha256": "0602444f7b3e82c60dc5930ceb72b31c8df629c6e4a43ddeeb6ad3ec77ad5ee7",
+        "bytes": 289171
       }
-    ]
+    ],
+    "source_set_hash": "034fdb1ba27431892c5e272775c494e526b0a7f207a8336f25b8f9a7be524888",
+    "source_differences_from_final": {
+      "files": [
+        "scripts/build-mini.cjs",
+        "scripts/delivery/build.ts",
+        "scripts/mini-artifacts.cjs",
+        "tests/unit/mini-artifacts.test.ts"
+      ],
+      "runtime_contract_files": [],
+      "resource_files": []
+    },
+    "compiler_passed": true,
+    "elapsed_ms": 255544,
+    "prior_deadline_ms": 180000,
+    "diagnostic_deadline_ms": 360000,
+    "private_preload_instrumentation": true,
+    "final_build_uses_private_preload": false,
+    "finding": "Measured toolchain initialization exceeded the prior native deadline. No runtime compatibility/minifier semantics or Babel format was changed. Final candidates use the ordinary compiler without diagnostic instrumentation."
   },
-  "local_files": [
-    {
-      "path": "docs/verification/plus-batches-local-result.json",
-      "sha256": "95736ee8f0d66e63c5a1c702302a69f02c396062900015d63bab3c39c588c9e1",
-      "bytes": 1098
-    },
-    {
-      "path": "docs/verification/plus-batches-local-doctor.log",
-      "sha256": "1051975cc2509e67292714ace30e790921c6a3c4610f240e6a789442445a083e",
-      "bytes": 2141
-    },
-    {
-      "path": "docs/verification/plus-batches-local-start.log",
-      "sha256": "fd74d7d0a55881dcce284edf04d50254e1df7c7f9733a5e50a90ec98c4ed6181",
-      "bytes": 1565
-    }
-  ],
   "historical_evidence_unchanged": [
     {
       "path": "docs/verification/album-save-api.json",
@@ -525,6 +448,22 @@
       "sha256": "99f86ca0ea9653bdcf34fbd5af2489738826ac9fa715a0ddba3a3bb0546a460a"
     },
     {
+      "path": "docs/verification/contracts-ea8a4b0/endpoints.json",
+      "sha256": "5a8c3ef26d29d47fd8b8271e42499e384f95a353a176d4f977b1ad985372a0a9"
+    },
+    {
+      "path": "docs/verification/contracts-ea8a4b0/management-endpoints.json",
+      "sha256": "15b75fa29176933a0811db6dd6b4a44efc38163bfd0b610fcfce59264969ef3d"
+    },
+    {
+      "path": "docs/verification/contracts-ea8a4b0/management-openapi.json",
+      "sha256": "494024a637f0e402b9fc455c5789eeba8b28c3e1c004211ac46e2de760cc05d0"
+    },
+    {
+      "path": "docs/verification/contracts-ea8a4b0/openapi.json",
+      "sha256": "11bc62e19accc8abf55e463ca38350059020fde1dabd35c183776efb5d33ba58"
+    },
+    {
       "path": "docs/verification/contracts-fc7def0/endpoints.json",
       "sha256": "766a737a6c120934d18a577bcc6ec2b2e44503be37d9b7ffc7139d6aa55ca0f1"
     },
@@ -811,6 +750,10 @@
     {
       "path": "docs/verification/delivery-focused-source-d6584e3.json",
       "sha256": "0adbac089bffb694be1100c0545224de71d7864915cd4c5e01255762660fd5f9"
+    },
+    {
+      "path": "docs/verification/delivery-focused-source-ea8a4b0.json",
+      "sha256": "a62b85d1097b05d41038a06b8028d73404402154d5b7d98865770c193f597f4d"
     },
     {
       "path": "docs/verification/delivery-focused-source-fc7def0.json",
@@ -1585,6 +1528,66 @@
       "sha256": "49acd9d576bb3e963f7fcfe184f5260e3e0029a2585cd8176ddd898558047fc5"
     },
     {
+      "path": "docs/verification/plus-batches-2026-10-30T14-26-12-076Z-357c6206-api.json",
+      "sha256": "5ca22d6b8de4f78c8dbea33559eacc4a3019404064e62c18a0017e5d517ad835"
+    },
+    {
+      "path": "docs/verification/plus-batches-2026-10-30T14-26-12-076Z-357c6206-result.json",
+      "sha256": "1163d0e094d47c2204145476d5f341b856cc9a7a1c0b94f52a585a2fbc348380"
+    },
+    {
+      "path": "docs/verification/plus-batches-2026-10-30T14-26-12-076Z-357c6206-source.json",
+      "sha256": "8798f9c5232235d5b4c910fbd2ec3fb4bb4cf2ed2b1d54dbf43d73d4309292d9"
+    },
+    {
+      "path": "docs/verification/plus-batches-2026-10-30T14-30-01-485Z-43fd8d03-api.json",
+      "sha256": "6d0eba0ddb8850e7954e31127ca63d0e4380f2f70b4a059dc79f8bf4f77a1c55"
+    },
+    {
+      "path": "docs/verification/plus-batches-2026-10-30T14-30-01-485Z-43fd8d03-result.json",
+      "sha256": "34f1caa818b9da3f0e2b77003c3c6be282fb36c8c706fce9826e2ade864a3d48"
+    },
+    {
+      "path": "docs/verification/plus-batches-2026-10-30T14-30-01-485Z-43fd8d03-source.json",
+      "sha256": "7d281c62ad3f7d1d48b0cedca2f68998c8c3b17ccc5694d7343cdfb9e64d938f"
+    },
+    {
+      "path": "docs/verification/plus-batches-build.json",
+      "sha256": "98f3018f72290d31c175410121cf186c4850a4bdfbba9753d5abd7ea558ae804"
+    },
+    {
+      "path": "docs/verification/plus-batches-generator-initial.json",
+      "sha256": "a07d9c85b48f55cf76b9f38eb8dd04b6e531187e1a3c405fe33f86eeccad0e05"
+    },
+    {
+      "path": "docs/verification/plus-batches-generator.json",
+      "sha256": "2681e403a6dc036d9866e1345e664d7bf44187ff4d7513d130d7ac31594599e4"
+    },
+    {
+      "path": "docs/verification/plus-batches-initial-typecheck.json",
+      "sha256": "ed63006a9e7a24ac734014290e770a056bf46716d05dc9da17908368f5c1ba5a"
+    },
+    {
+      "path": "docs/verification/plus-batches-local-result.json",
+      "sha256": "95736ee8f0d66e63c5a1c702302a69f02c396062900015d63bab3c39c588c9e1"
+    },
+    {
+      "path": "docs/verification/plus-batches-recording-result.json",
+      "sha256": "d03adedd6917634b6ae991bbb7f840cc11d173f672e3efc4b43be2775d29db96"
+    },
+    {
+      "path": "docs/verification/plus-batches-recording-source.json",
+      "sha256": "257bf9848fc3e4c22c823d22290265d2c0dd986c54079b4a79eba64ae8e3562f"
+    },
+    {
+      "path": "docs/verification/plus-batches-source-snapshot.json",
+      "sha256": "98f3018f72290d31c175410121cf186c4850a4bdfbba9753d5abd7ea558ae804"
+    },
+    {
+      "path": "docs/verification/plus-batches-source.json",
+      "sha256": "be4a1d4ed749fff1488074e248f1f1a4021e9edd78d8cf07ffc488085bfafd39"
+    },
+    {
       "path": "docs/verification/plus-render-2026-10-30T13-26-49-534Z-5dedbbb4-api.json",
       "sha256": "3ad83f74d5a3d3bb6a20a212a18be614b3ea36f1d87ebba8eb7856b38bbf9cdf"
     },
@@ -2037,6 +2040,10 @@
       "sha256": "a59d241b4dbb2ff526973dd32cd9bff9622c90ea0c9f61986b6573627ab9e93f"
     },
     {
+      "path": "docs/verification/publication-ea8a4b0.json",
+      "sha256": "1f972ba712d1c709f238f55b84b6431284f41f8e6609d89c5a0c2e26f57f5d62"
+    },
+    {
       "path": "docs/verification/publication-fc7def0.json",
       "sha256": "20505dfa3ffd90219771a8bf8ece12cc00defdba3ff05639b5c999ebceb5468a"
     },
@@ -2275,6 +2282,10 @@
     {
       "path": "docs/verification/repository-audit-ea82904.json",
       "sha256": "5c914f924b2e955c829d7dffd967b9cc33ca520e9bac8a85c3ea1bfc9e210910"
+    },
+    {
+      "path": "docs/verification/repository-audit-ea8a4b0.json",
+      "sha256": "33a72b3804e02274882db86c5733a5ac2213e19b913c835bfdf0efdc59b20d64"
     },
     {
       "path": "docs/verification/repository-audit-fc7def0.json",
@@ -2525,40 +2536,29 @@
       "sha256": "fbf919d88e4b3bb6b2e1ff5993fb62a4dacfd78c559bd7232f0c780b28b41846"
     }
   ],
-  "historical_media_files": 171,
-  "new_media_files": 9,
+  "historical_media_files": 180,
+  "new_media_files": 0,
   "media_files": 180,
-  "provenance": "Actual native PostgreSQL, HTTPS, MCP role protocol, private PNG thumbnails, batch isolation, content/production/post/QC/dual-review workflow and private delivery. Original paid metadata, identity, inference, payment events, semantic verdicts and process identity are synthetic. Native APIs implement phone approval and checkout; the browser recording shows Plus, not a mini-program host.",
-  "full_suite_executed": false,
-  "native_mini_builds": {
-    "alipay": "TIMEOUT",
-    "douyin": "TIMEOUT"
+  "design_files_preserved": 48,
+  "previous_functional_evidence": {
+    "path": "docs/verification/plus-batches-source.json",
+    "sha256": "be4a1d4ed749fff1488074e248f1f1a4021e9edd78d8cf07ffc488085bfafd39",
+    "same_source_snapshot": false,
+    "current_application_source_unchanged_from_previous_publication": true,
+    "scope": "Previous native/API and browser workflow checks retain their exact earlier snapshot; this round changes build/packaging validation scripts and its focused test only. They are not rerun or relabelled as current full-product acceptance."
   },
-  "native_mini_device_verified": false,
-  "final_batch_image_workflow_verified_with_synthetic_services": true,
-  "plus_video_subtitle_and_advanced_authoring_verified": false,
-  "permanent_cross_platform_binding_verified": false,
+  "full_suite_executed": false,
+  "full_suite_required_for_packaging": false,
+  "host_ide_launch_verified": false,
+  "actual_login_payment_album_verified": false,
+  "production_services_default_off": true,
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "contract_compatibility": {
-    "original_slots_retained": 42,
-    "prior_contracts": "docs/verification/contracts-ea8a4b0",
-    "new_business_operations": 3,
-    "new_schemas": 9,
-    "new_logical_entities": 2,
-    "existing_grants_default_to_no_new_permission": true
-  },
-  "batch_isolation": {
-    "selected_items": 3,
-    "independent_prepared_items": 2,
-    "stale_failed_items": 1,
-    "independent_quotes_and_orders": 2,
-    "intentionally_paid_items": 1,
-    "delivered_items": 1,
-    "unpaid_sibling_preserved": true,
-    "source_originals_preserved": true,
-    "cached_private_responses": false,
-    "per_item_deleted_or_expired_redaction": true
-  }
+  "remaining": [
+    "Physical Alipay/Douyin IDE and device acceptance with actual AppIDs, domains, permissions, identity, payment and album handling",
+    "Real Codex/model/storage/isolation and cleanup admission; cloud deployment",
+    "Plus video, subtitles and advanced authoring; permanent cross-platform binding",
+    "Full 58-requirement acceptance and capacity checks"
+  ]
 }
