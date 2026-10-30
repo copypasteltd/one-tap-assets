@@ -1,0 +1,137 @@
+{
+  "numTotalTestSuites": 2,
+  "numPassedTestSuites": 2,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 8,
+  "numPassedTests": 8,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793327962954,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "renders a real title below the complete four-corner source without cropping or changing dimensions",
+          "status": "passed",
+          "title": "renders a real title below the complete four-corner source without cropping or changing dimensions",
+          "duration": 262.11850000000004,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects hidden controls markup overflow and a substituted font before rendering",
+          "status": "passed",
+          "title": "rejects hidden controls markup overflow and a substituted font before rendering",
+          "duration": 1.4797000000000935,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps IMAGE_TEXT mutually exclusive with copy cover and display order in the public schema",
+          "status": "passed",
+          "title": "keeps IMAGE_TEXT mutually exclusive with copy cover and display order in the public schema",
+          "duration": 5.615299999999934,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects image requests for historical orders without the optional frozen entitlement",
+          "status": "passed",
+          "title": "rejects image requests for historical orders without the optional frozen entitlement",
+          "duration": 0.4615000000001146,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793327963874,
+      "endTime": 1793327964143.4614,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/image-text-revision.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "refreshes a completed platform correction without hiding the customer modification editor",
+          "status": "passed",
+          "title": "refreshes a completed platform correction without hiding the customer modification editor",
+          "duration": 1.528899999999993,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "blocks simultaneous work while either a platform correction or a customer modification is active",
+          "status": "passed",
+          "title": "blocks simultaneous work while either a platform correction or a customer modification is active",
+          "duration": 0.2359000000000151,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "retains the used customer success when a later free correction updates the pack",
+          "status": "passed",
+          "title": "retains the used customer success when a later free correction updates the pack",
+          "duration": 0.6295999999999822,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "does not spend the customer success on failed attempts or an empty history",
+          "status": "passed",
+          "title": "does not spend the customer success on failed attempts or an empty history",
+          "duration": 0.3283999999999878,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793327963207,
+      "endTime": 1793327963209.6296,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/unit/revision-progress.test.ts"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T02:22:32.944565+00:00",
-  "strategy": "USER_REQUESTED_FAST_NATIVE_FAILED_CANDIDATE_REPAIR_CLOSURE",
-  "source_set_hash": "f159bc5f7bd4124745f050e04e16f72bc31a6f1ce46387b48e47eabcd326130a",
-  "source_files": 418,
+  "checked_at": "2026-10-30T03:01:25.967544+00:00",
+  "strategy": "USER_REQUESTED_FAST_IMAGE_TEXT_REVISION_CLOSURE",
+  "source_set_hash": "bc77e6cf3c2a93190613ff8971c5c018320734f9446e62175cd699a097d8e41d",
+  "source_files": 421,
   "runtime_contract_files": 42,
   "resource_files": 4,
   "build_report": "docs/delivery/current.json",
@@ -20,8 +20,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 6505,
-      "log_path": "runtime/delivery-builds/2026-10-30T02-13-49-020Z-71e33019/typecheck.log",
+      "elapsed_ms": 8835,
+      "log_path": "runtime/delivery-builds/2026-10-30T02-42-13-423Z-1d5834e0/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -37,29 +37,29 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 282,
-      "log_path": "runtime/delivery-builds/2026-10-30T02-13-49-020Z-71e33019/server.log",
+      "elapsed_ms": 290,
+      "log_path": "runtime/delivery-builds/2026-10-30T02-42-13-423Z-1d5834e0/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T02-13-49-020Z-71e33019\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T02-42-13-423Z-1d5834e0\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T02-13-49-020Z-71e33019\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T02-42-13-423Z-1d5834e0\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 686,
-      "log_path": "runtime/delivery-builds/2026-10-30T02-13-49-020Z-71e33019/preview.log",
-      "log_sha256": "89bf182facb9a9b22ba91276bc68dd76c96b7dadc9a589628a34687e99ab431b"
+      "elapsed_ms": 547,
+      "log_path": "runtime/delivery-builds/2026-10-30T02-42-13-423Z-1d5834e0/preview.log",
+      "log_sha256": "1887d0fd7661677837904c5ff4ad703f2c410e0febce7a6799c5d9c4c5cccd13"
     }
   ],
   "components": [
@@ -80,121 +80,100 @@
       "status": "NOT_RUN"
     }
   ],
-  "source_snapshot": "docs/verification/native-repair-tested-source.json",
+  "source_snapshot": "docs/verification/image-text-tested-source.json",
   "source_unchanged_during_tests": true,
   "unit_checks": {
     "status": "PASS",
-    "passed": 4,
+    "passed": 8,
     "failed": 0,
-    "report": "docs/verification/native-repair-unit.json",
+    "report": "docs/verification/image-text-unit.json",
     "command": {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.config.ts tests/unit/native-review-audio.test.ts --outputFile.json=runtime/test-results/native-repair-2026-10-30T02-14-15-063Z/unit.json",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.config.ts tests/unit/image-text-revision.test.ts tests/unit/revision-progress.test.ts --outputFile.json=runtime/test-results/image-text-2026-10-30T02-42-55-662Z/unit.json",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
         "run",
         "--config",
         "vitest.config.ts",
-        "tests/unit/native-review-audio.test.ts",
-        "--outputFile.json=runtime/test-results/native-repair-2026-10-30T02-14-15-063Z/unit.json"
+        "tests/unit/image-text-revision.test.ts",
+        "tests/unit/revision-progress.test.ts",
+        "--outputFile.json=runtime/test-results/image-text-2026-10-30T02-42-55-662Z/unit.json"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 90000,
-      "elapsed_ms": 1920,
-      "log_path": "runtime/test-results/native-repair-2026-10-30T02-14-15-063Z/unit.log",
-      "log_sha256": "4f9b7185563dcc05b9f8bc6486e7deea03eebc66dec222eab145a9964d1e9940"
+      "elapsed_ms": 1575,
+      "log_path": "runtime/test-results/image-text-2026-10-30T02-42-55-662Z/unit.log",
+      "log_sha256": "47de7d115e2043c3de2e8e09043058617985f0330d73847e5c7cb4d73c57d1e9"
     }
   },
-  "database_and_original_asr_checks": {
+  "api_checks": {
     "status": "PASS",
     "passed": 4,
     "failed": 0,
-    "not_selected": 20,
-    "report": "docs/verification/native-repair-db.json",
+    "not_selected": 42,
+    "report": "docs/verification/image-text-api.json",
     "command": {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/native-repair-migration.test.ts tests/integration/audio-contract.test.ts -t upgrades the original native ASR|does not acquire a second full-track ASR|unknown original ACK|resumes the same successful ASR --outputFile.json=runtime/test-results/native-repair-2026-10-30T02-14-15-063Z/db.json",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/limited-revision.test.ts tests/integration/native-order.test.ts tests/integration/native-repair-migration.test.ts -t renders and publishes a real image title|adds an actual image title|upgrades the original native ASR --outputFile.json=runtime/test-results/image-text-2026-10-30T02-42-55-662Z/api.json",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
         "run",
         "--config",
         "vitest.integration.config.ts",
-        "tests/integration/native-repair-migration.test.ts",
-        "tests/integration/audio-contract.test.ts",
-        "-t",
-        "upgrades the original native ASR|does not acquire a second full-track ASR|unknown original ACK|resumes the same successful ASR",
-        "--outputFile.json=runtime/test-results/native-repair-2026-10-30T02-14-15-063Z/db.json"
-      ],
-      "shell": false,
-      "status": "PASS",
-      "exit_code": 0,
-      "signal": null,
-      "timeout_ms": 90000,
-      "elapsed_ms": 8552,
-      "log_path": "runtime/test-results/native-repair-2026-10-30T02-14-15-063Z/db.log",
-      "log_sha256": "2bf91b6fd3d980cd995ef7e1ca61b448bf84963a3d9ce4e536e9d15e928f500f"
-    },
-    "upgrade_from_27_preserves_original_unknown_hold": true,
-    "old_orders_do_not_gain_asr_allowance": true,
-    "successful_original_resume_no_double_purchase": true
-  },
-  "native_api_checks": {
-    "status": "PASS",
-    "passed": 2,
-    "failed": 0,
-    "not_selected": 25,
-    "report": "docs/verification/native-repair-api.json",
-    "command": {
-      "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/native-order.test.ts -t repairs a native --outputFile.json=runtime/test-results/native-repair-2026-10-30T02-14-15-063Z/api.json",
-      "argv": [
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
-        "run",
-        "--config",
-        "vitest.integration.config.ts",
+        "tests/integration/limited-revision.test.ts",
         "tests/integration/native-order.test.ts",
+        "tests/integration/native-repair-migration.test.ts",
         "-t",
-        "repairs a native",
-        "--outputFile.json=runtime/test-results/native-repair-2026-10-30T02-14-15-063Z/api.json"
+        "renders and publishes a real image title|adds an actual image title|upgrades the original native ASR",
+        "--outputFile.json=runtime/test-results/image-text-2026-10-30T02-42-55-662Z/api.json"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
-      "timeout_ms": 540000,
-      "elapsed_ms": 249995,
-      "log_path": "runtime/test-results/native-repair-2026-10-30T02-14-15-063Z/api.log",
-      "log_sha256": "7557aedb699ed9f61d449cd47be3bdfbb08fe0518541168fc9051c43bf90c986"
+      "timeout_ms": 660000,
+      "elapsed_ms": 263329,
+      "log_path": "runtime/test-results/image-text-2026-10-30T02-42-55-662Z/api.log",
+      "log_sha256": "3c57b5858370088dc1602d9bf33c3dde6c485d3e60bb7ea0f560978589f53415"
     },
     "engines": [
+      "PHOTO_LAYOUT",
       "PER_SHOT_AI",
       "REFERENCE_FILM"
     ],
-    "failed_candidate_repair_new_qc_review_delivery_then_cover_aftercare": true,
-    "first_pass_asr_limit_one_and_optional_pre_sale_additional_asr_one": true,
-    "new_native_source_required": true,
-    "two_asr_and_two_listening_purchases_before_aftercare": true,
-    "aftercare_no_third_purchase": true,
-    "actual_output_sha_verified": true,
+    "actual_new_png_and_download_sha_verified": true,
+    "new_five_stage_candidate_and_fresh_full_image_reviews": true,
+    "output_intent_immutable": true,
+    "late_image_bytes_rejected": true,
+    "native_video_audio_asr_listening_and_other_items_unchanged": true,
+    "no_new_generation_asr_or_listening_purchase": true,
     "original_contract_budget_deadline_unchanged": true,
-    "instances_released_in_fixture": true,
+    "migration_27_to_29_preserves_unknown_financial_hold": true,
     "actual_postgresql_https_stdio_mcp_png_mp4_wav": true,
-    "synthetic_generation_speech_listening_semantics_identity_and_metering": true,
-    "real_chinese_audio_os_isolation_or_production_verified": false
+    "synthetic_product_generation_speech_listening_semantics_identity_and_metering": true,
+    "live_external_or_os_isolation_verified": false
+  },
+  "browser_capture": {
+    "status": "PASS",
+    "checks": 5,
+    "report": "docs/media/image-text/capture-manifest.json",
+    "actual_shared_mini_component_and_https_api": true,
+    "native_device_verified": false,
+    "browser_and_owned_services_closed": true
   },
   "local_checks": {
     "doctor": {
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 0.707,
+      "elapsed_seconds": 0.532,
       "log_path": "runtime/delivery/doctor-focused.log",
-      "log_sha256": "ce16aef54ac475d3add273669a121d4070712421475bc3dcea7dbfa0dd4e41bf",
+      "log_sha256": "c004730ca18e9a3506a171508572c62f472fc840bef83eb666112422aa205fca",
       "report": {
-        "checked_at": "2026-10-30T02:18:59.586Z",
+        "checked_at": "2026-10-30T02:51:05.199Z",
         "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
         "rows": [
           {
@@ -220,7 +199,7 @@
           {
             "id": "database",
             "status": "PASS",
-            "detail": "connected; 28 migrations"
+            "detail": "connected; 29 migrations"
           },
           {
             "id": "ffmpeg",
@@ -286,9 +265,9 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 2.213,
+      "elapsed_seconds": 2.243,
       "log_path": "runtime/delivery/backend-focused.log",
-      "log_sha256": "3ed44092681d1a544235a6ef241f8dc1c99b981dcdf4386778caeafd0e54e275",
+      "log_sha256": "c8f3511e8c77430d4f3cfccbdd4f6c11056c706fe181ba13d00264430250fa05",
       "local_stack_ready": true,
       "preview_http_ready": false
     },
@@ -296,22 +275,22 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 0.96,
+      "elapsed_seconds": 0.884,
       "log_path": "runtime/delivery/preview-focused.log",
       "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
       "local_stack_ready": false,
       "preview_http_ready": true
     }
   },
-  "attempts_report": "docs/verification/native-repair-attempts.json",
-  "prior_delivery": "docs/verification/delivery-focused-source-191b9eb.json",
+  "attempts_report": "docs/verification/image-text-attempts.json",
+  "prior_delivery": "docs/verification/delivery-focused-source-b31b408.json",
   "functional_scope": [
-    "freeze optional native repair ASR/listening allowance before sale inside existing repair reserve",
-    "one scoped CONTENT repair plan and six new candidate stages with regenerated authorized nodes and reference identity review",
-    "original identity, spoken text, timing, voice, music and font remain fixed; new native source receives new ASR, post, QC, listening and facts/style reviews",
-    "failed packet remains read-only for the second opinion; paid gateway cannot buy listening for a blocked packet",
-    "migration 028 backfills original attempt 1, makes it immutable and gates a unique attempt 2 by sold snapshot, current repair grant and settled original ASR",
-    "repaired published pack supports existing retained-media aftercare without another generation, ASR or listening purchase"
+    "Optional pre-sale frozen IMAGE_TEXT grant using original style colors and pinned font; historical orders gain no grant",
+    "Customer and assigned support staff select an existing delivered image and a title of at most 28 code points",
+    "Actual PNG output preserves the complete original picture in an upper contain region, draws the complete short title in a 22-percent bottom panel and reapplies frozen generated-image disclosure",
+    "A deterministic persisted output intent, actual pixels, private artifact, current manifest item and policy hashes are rechecked before publication",
+    "New independent facts and style roles receive all original product/film images and every changed current image; old PASS cannot authorize new bytes",
+    "A new manifest is published atomically while the original remains retrievable; original video/audio bytes and original ASR/listening receipts are retained"
   ],
   "historical_evidence_unchanged": [
     {
@@ -393,6 +372,10 @@
     {
       "path": "docs/verification/delivery-focused-ea82904.json",
       "sha256": "94c518660b0bdeddcd80d6f19e433292b14ae297fb4f07461c2a207384533bc4"
+    },
+    {
+      "path": "docs/verification/delivery-focused-source-191b9eb.json",
+      "sha256": "8bec94822d9f0a977689011f6ea2eab6cca036a09d06eeb341cba5258d31d847"
     },
     {
       "path": "docs/verification/delivery-focused-source-42dc446.json",
@@ -543,6 +526,82 @@
       "sha256": "f9a19248cdcd21ec6855770cb67a256469d8b9c4dbe0a806eb685ef3176e9365"
     },
     {
+      "path": "docs/verification/native-repair-api.json",
+      "sha256": "4615d6c02ce559f32fa832b7b8006292d2f2dd8297250ff28ea04b9fc9e656aa"
+    },
+    {
+      "path": "docs/verification/native-repair-attempt-1-api.json",
+      "sha256": "dd34975c55e7320a5b30fe0347bf918f0d4b4baae61d2f872caa202d7e5daf37"
+    },
+    {
+      "path": "docs/verification/native-repair-attempt-1-build.json",
+      "sha256": "6e5ad9f563f78fdd89ebdf340de5a39ce9f3974f1efa1e44a79da07a17c67aa3"
+    },
+    {
+      "path": "docs/verification/native-repair-attempt-1-source.json",
+      "sha256": "e67220422379ba29fd58dafe451b6ac1f31214590709e9213bb407793ae68d8e"
+    },
+    {
+      "path": "docs/verification/native-repair-attempt-1-unit.json",
+      "sha256": "936589ec8d9bcd3a6456a7e10e3a8e8c61f1d8d70b98b749f7b2cc2847aaeec1"
+    },
+    {
+      "path": "docs/verification/native-repair-attempt-2-api.json",
+      "sha256": "a59c85a2e96061c30808597691466e6a146bdc73cea7acf67b8a240c9a5a6973"
+    },
+    {
+      "path": "docs/verification/native-repair-attempt-2-build.json",
+      "sha256": "de10c7b7a588e0de4629e05d10a271cf34b083d5d51e89f5122f05277091015d"
+    },
+    {
+      "path": "docs/verification/native-repair-attempt-2-source.json",
+      "sha256": "3565d2651b7f76c7828a2170f779933615b2e83eae86d72e4d9d52c4d7fc348e"
+    },
+    {
+      "path": "docs/verification/native-repair-attempt-2-unit.json",
+      "sha256": "9de57ba8ffb3d5b936b3f3eefb59d22bbcb3fed2300f9bfdf8efb98586e0d79e"
+    },
+    {
+      "path": "docs/verification/native-repair-attempt-3-api.json",
+      "sha256": "4615d6c02ce559f32fa832b7b8006292d2f2dd8297250ff28ea04b9fc9e656aa"
+    },
+    {
+      "path": "docs/verification/native-repair-attempt-3-build.json",
+      "sha256": "8a6f89bee9205544dcbe38ffdfdf1d085a6dbf4684f7ed5b686f185f195eca15"
+    },
+    {
+      "path": "docs/verification/native-repair-attempt-3-db.json",
+      "sha256": "221ad081c3f397e63e3313228af7e50048493993da425e5449e989476a8dda04"
+    },
+    {
+      "path": "docs/verification/native-repair-attempt-3-source.json",
+      "sha256": "5368d4ad3bd48b44727438b416ebc5c81595bdf6cfe1d72224f6dad2bf988ddc"
+    },
+    {
+      "path": "docs/verification/native-repair-attempt-3-unit.json",
+      "sha256": "186597d0c7522aa377d7c586c3470f7ab9d86b886222eb58c9ff928fd0f4cfd0"
+    },
+    {
+      "path": "docs/verification/native-repair-attempts.json",
+      "sha256": "e4e6fad55f11e0663e7f2754d0caafe79453c9b0d99372e4de925851162062e7"
+    },
+    {
+      "path": "docs/verification/native-repair-db.json",
+      "sha256": "221ad081c3f397e63e3313228af7e50048493993da425e5449e989476a8dda04"
+    },
+    {
+      "path": "docs/verification/native-repair-source.json",
+      "sha256": "da910293e5a940c2fa9d6c9713eae7c7d738e7663b645e82076ed13bebd08439"
+    },
+    {
+      "path": "docs/verification/native-repair-tested-source.json",
+      "sha256": "5368d4ad3bd48b44727438b416ebc5c81595bdf6cfe1d72224f6dad2bf988ddc"
+    },
+    {
+      "path": "docs/verification/native-repair-unit.json",
+      "sha256": "186597d0c7522aa377d7c586c3470f7ab9d86b886222eb58c9ff928fd0f4cfd0"
+    },
+    {
       "path": "docs/verification/order-actions-api.json",
       "sha256": "b56089dbdc0f3c036934132ab082f1cf260dc37cbc8ea642a3a50abbaab6f2a0"
     },
@@ -597,6 +656,10 @@
     {
       "path": "docs/verification/platform-repair-tested-source.json",
       "sha256": "49acd9d576bb3e963f7fcfe184f5260e3e0029a2585cd8176ddd898558047fc5"
+    },
+    {
+      "path": "docs/verification/publication-191b9eb.json",
+      "sha256": "62e994d11ca0af1eeafaa48c19bae26298827a084f3a35876965b16031387dd2"
     },
     {
       "path": "docs/verification/publication-3533cb4.json",
@@ -665,6 +728,10 @@
     {
       "path": "docs/verification/repair-cost-native-source.json",
       "sha256": "d206192f519e620ec7690171c81eb0973c91f81e82989c21b4d11bdf15d125c6"
+    },
+    {
+      "path": "docs/verification/repository-audit-191b9eb.json",
+      "sha256": "52577b4e7442c89608861c25efd163a3372d7a59cc448d5f0d9462575246a2c7"
     },
     {
       "path": "docs/verification/repository-audit-3533cb4.json",
@@ -828,10 +895,10 @@
     }
   ],
   "existing_media_files_verified": 85,
-  "new_media_files_verified": 0,
+  "new_media_files_verified": 8,
   "frozen_c_files": 25,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
-  "browser_used": false,
+  "browser_used": true,
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
   "original_publication_checker_executed": false,
@@ -840,11 +907,10 @@
   "production_admitted": false,
   "cloud_deployed": false,
   "limitations": [
-    "no arbitrary image redraw, in-video caption/timeline/dialogue/voice rewriting aftercare",
-    "two-second synthetic tones and fabricated Chinese semantic approval do not prove real speech quality or commercial rights",
-    "native aftercare after repair covers COVER; other operations retain their earlier source-bound evidence",
-    "both mini builds and browser recapture NOT_RUN; previous 85 media files remain historical",
-    "58 requirements/52 P0, all three routes, 10 styles/14 variants retained; real services/isolation/devices/community/Plus/cloud/full acceptance incomplete"
+    "No arbitrary image redraw or replacement of text already inside a picture; no video-caption, timeline, dialogue or voice rewrite",
+    "Synthetic product colors, two-second tones and fabricated semantic approval do not prove real product/audio quality, commercial rights or OS isolation",
+    "Both mini builds NOT_RUN; source is included, historical mini build outputs are excluded",
+    "58 requirements/52 P0, all three routes and 10 styles/14 variants retained; real services/isolation/devices/community/Plus/cloud/full acceptance incomplete"
   ],
-  "canonical_native_repair_provenance": "docs/verification/native-repair-source.json"
+  "canonical_image_text_provenance": "docs/verification/image-text-source.json"
 }

@@ -29,6 +29,7 @@ import {generatedOutputs,checkGeneratedSources} from '../generation/outputs.js';
 import {frozenAiDisclosure} from '../compiler/disclosure.js';
 import {inspectDisclosure} from '../media/disclosure.js';
 import {audioAuthority,retainedNativeAudio,type RetainedNativeAudio} from './audio.js';
+import {renderImageText,type ImageTextOutput} from './image-text.js';
 
 export interface RevisionCandidate {revision_id:string;input_hash:string;items:DTO<'Deliverable'>[];cover_deliverable_id:string;candidate_hash:string}
 export interface RevisionPacket {revision_id:string;input_hash:string;parent_manifest_hash:string;source_packet_id:string;source_packet_hash:string;
@@ -43,7 +44,19 @@ export function expectedCandidate(c:RevisionContext):RevisionCandidate {
   if(request.kind==='ALLOWED_ORDER')items=request.ordered_deliverable_ids!.map(id=>items.find(i=>i.deliverable_id===id)!);
   if(request.kind==='DISPLAY_TEXT')items=items.map(item=>item.kind==='copy'?{...item,
     deliverable_id:`revisioncopy_${sha256(`${c.row.id}:${item.slot_id}`).slice(0,32)}`,text:request.display_text!,sha256:sha256(Buffer.from(request.display_text!,'utf8'))}:item);
-  const cover=request.kind==='COVER'?request.cover_deliverable_id!:c.parent.cover_deliverable_id??items.find(i=>i.kind==='image')!.deliverable_id;
+  let cover=request.kind==='COVER'?request.cover_deliverable_id!:c.parent.cover_deliverable_id??items.find(i=>i.kind==='image')!.deliverable_id;
+  if(request.kind==='IMAGE_TEXT'){
+    const original=c.parent.items.find(i=>i.deliverable_id===request.image_text!.deliverable_id&&i.kind==='image');
+    const made=c.row.private.image_text_output as ImageTextOutput|undefined;
+    requireThat(original&&made&&c.policy.image_text&&made.artifact_id===`revisionimage_${sha256(`${c.row.id}:${original.slot_id}`).slice(0,32)}`
+      &&made.slot_id===original.slot_id&&made.proof.policy_hash===hash(c.policy.image_text)&&made.proof.source_id===original.deliverable_id
+      &&made.proof.source_sha256===original.sha256&&made.proof.text===request.image_text!.text&&made.proof.output_sha256===made.sha256
+      &&made.proof.width===original.width&&made.proof.height===original.height&&made.size_bytes>0&&made.size_bytes<=30_000_000,
+      'REVISION_IMAGE_OUTPUT_CHANGED','图片加字结果与原图片、标题或冻结规格不一致',503);
+    items=items.map(i=>i.deliverable_id===original.deliverable_id?{...i,deliverable_id:made.artifact_id,sha256:made.sha256,
+      size_bytes:made.size_bytes,file_name:`${made.artifact_id}.png`}:i);
+    if(cover===original.deliverable_id)cover=made.artifact_id;
+  }
   const body={revision_id:c.row.id,input_hash:c.inputHash,items,cover_deliverable_id:cover};return {...body,candidate_hash:hash(body)};
 }
 export function candidate(c:RevisionContext):RevisionCandidate {
@@ -139,8 +152,33 @@ export async function candidateBytes(db:Db,store:ObjectStorage,c:RevisionContext
   const bytes=await store.get(row.object_key,item.kind==='video'?512_000_000:30_000_000);
   requireThat(sha256(bytes)===item.sha256,'ARTIFACT_HASH_MISMATCH','修改素材实际字节摘要不一致',503);return bytes;
 }
-export async function makeCandidate(pool:pg.Pool,store:ObjectStorage,scope:ToolScope,intent:ToolLease):Promise<RevisionCandidate> {
-  let c=await transaction(pool,db=>assertRevisionTool(db,scope,intent));const output=expectedCandidate(c);
+export async function makeCandidate(pool:pg.Pool,cfg:Config,store:ObjectStorage,scope:ToolScope,intent:ToolLease,signal:AbortSignal):Promise<RevisionCandidate> {
+  let c=await transaction(pool,db=>assertRevisionTool(db,scope,intent));
+  if(c.input.request.kind==='IMAGE_TEXT'){
+    const original=c.parent.items.find(i=>i.deliverable_id===c.input.request.image_text!.deliverable_id&&i.kind==='image')!;
+    requireThat(c.policy.image_text&&!signal.aborted&&Date.parse(c.input.deadline_at)>Date.now(),'REVISION_IMAGE_TEXT_NOT_FROZEN','图片加字规格缺失或已到期',422);
+    const source=await candidateBytes(pool,store,c,original),disclosure=frozenAiDisclosure(c.contract);
+    const rendered=await renderImageText(cfg,{source_id:original.deliverable_id,source,text:c.input.request.image_text!.text,
+      policy:c.policy.image_text,width:original.width!,height:original.height!,...(disclosure?{disclosure}:{})});
+    const artifactId=`revisionimage_${sha256(`${c.row.id}:${original.slot_id}`).slice(0,32)}`;
+    const made:ImageTextOutput={artifact_id:artifactId,object_key:`${c.row.tenant_id}/revisions/${c.row.id}/${artifactId}.png`,
+      sha256:sha256(rendered.bytes),size_bytes:rendered.bytes.length,slot_id:original.slot_id,proof:rendered.proof};
+    await transaction(pool,async db=>{const current=await assertRevisionTool(db,scope,intent);
+      requireThat(hash(current.input)===hash(c.input)&&(!current.row.private.image_text_output||hash(current.row.private.image_text_output)===hash(made)),
+        'REVISION_IMAGE_OUTPUT_CHANGED','原图片加字意图不可替换',503);
+      requireThat(!signal.aborted&&Date.parse(current.input.deadline_at)>Date.now(),'REVISION_DEADLINE_EXCEEDED','图片加字已经取消或到期',409);
+      await db.query(`UPDATE revision_requests SET private=private||jsonb_build_object('image_text_output',$3::jsonb) WHERE tenant_id=$1 AND id=$2`,[c.row.tenant_id,c.row.id,JSON.stringify(made)]);});
+    try{await writePrivateObject(pool,store,{tenantId:c.row.tenant_id,ownerId:c.row.owner_id,orderId:c.row.order_id,productId:c.input.product_id,
+      revisionId:c.row.id,kind:'MEDIA',expiresAt:c.input.delivery_expires_at},made.object_key,rendered.bytes,'image/png');}
+    catch(error){if(error instanceof AppError&&error.code==='PRIVATE_OBJECT_WRITE_PENDING')throw new PendingExternal(3,'REVISION_ORIGINAL_WRITE_UNRESOLVED');throw error;}
+    await transaction(pool,async db=>{c=await assertRevisionTool(db,scope,intent);
+      requireThat(hash(c.row.private.image_text_output)===hash(made)&&!signal.aborted,'REVISION_IMAGE_OUTPUT_CHANGED','图片加字已撤销或意图变化',409);
+      await db.query(`INSERT INTO artifacts(id,tenant_id,order_id,stage_run_id,slot_id,object_key,sha256,spec_json,data,expires_at)
+        VALUES($1,$2,$3,$4,$5,$6,$7,$8::jsonb,$9::jsonb,$10) ON CONFLICT(id) DO NOTHING`,[made.artifact_id,c.row.tenant_id,c.row.order_id,scope.stage_run_id,
+        made.slot_id,made.object_key,made.sha256,JSON.stringify({kind:'image',phase:'REVISION',revision_id:c.row.id,input_hash:c.inputHash,
+          parent_manifest_hash:c.input.parent_manifest_hash,image_text:made.proof}),JSON.stringify({artifact_id:made.artifact_id,slot_id:made.slot_id,revision_id:c.row.id}),c.input.delivery_expires_at]);});
+  }
+  const output=expectedCandidate(c);
   if(c.input.request.kind==='DISPLAY_TEXT') {
     const item=output.items.find(i=>i.kind==='copy')!;const bytes=Buffer.from(item.text!,'utf8');
     const key=`${c.row.tenant_id}/revisions/${c.row.id}/${item.deliverable_id}.txt`;
@@ -165,6 +203,14 @@ export async function makeCandidate(pool:pg.Pool,store:ObjectStorage,scope:ToolS
 }
 export async function inspectCandidate(db:Db,cfg:Config,store:ObjectStorage,c:RevisionContext,signal:AbortSignal):Promise<void> {
   const output=candidate(c);const source=await sourcePacket(db,cfg,store,c);
+  if(c.input.request.kind==='IMAGE_TEXT'){
+    const original=c.parent.items.find(i=>i.deliverable_id===c.input.request.image_text!.deliverable_id)!;
+    const input=await candidateBytes(db,store,c,original),policy=c.policy.image_text!,disclosure=frozenAiDisclosure(c.contract);
+    const actual=await renderImageText(cfg,{source_id:original.deliverable_id,source:input,text:c.input.request.image_text!.text,
+      policy,width:original.width!,height:original.height!,...(disclosure?{disclosure}:{})});
+    const made=c.row.private.image_text_output as ImageTextOutput;
+    requireThat(hash(actual.proof)===hash(made.proof)&&sha256(actual.bytes)===made.sha256,'REVISION_IMAGE_OUTPUT_CHANGED','实际图片加字像素与冻结标题或原图片不一致',503);
+  }
   const disclosure=frozenAiDisclosure(source.context.contract);
   const directory=inside(cfg.runtimeRoot,`revision-qc/${c.row.id}/${id('attempt')}`);await mkdir(directory,{recursive:true});
   try {for(const item of output.items){
@@ -183,9 +229,19 @@ export async function inspectCandidate(db:Db,cfg:Config,store:ObjectStorage,c:Re
     if(item.kind==='video'&&disclosure)await inspectDisclosure(cfg,disclosure,bytes,{kind:'video',width:item.width!,height:item.height!,frames:item.duration_frames!,directory,deadline_at:c.input.deadline_at,signal});
   }}finally{await rm(inside(cfg.runtimeRoot,directory),{recursive:true,force:true});}
 }
+async function candidateReviewImages(db:Db,store:ObjectStorage,c:RevisionContext,source:{context:ExecutionContext;packet:DTO<'ReviewPacket'>}):Promise<ReviewImage[]> {
+  const images=await originalImages(db,store,source.context,source.packet);
+  // Keep all original product/film observations and add every changed image,
+  // including inherited corrections. Fresh roles must see the actual output.
+  for(const item of candidate(c).items.filter(i=>i.kind==='image')){
+    if(source.packet.outputs.some(o=>o.asset_id===item.deliverable_id&&o.sha256===item.sha256))continue;
+    images.push({asset_id:item.deliverable_id,sha256:item.sha256,width:item.width!,height:item.height!,bytes:await candidateBytes(db,store,c,item)});
+  }
+  return images;
+}
 export async function buildRevisionPacket(db:Db,cfg:Config,store:ObjectStorage,c:RevisionContext,signal:AbortSignal):Promise<RevisionPacket> {
   await inspectCandidate(db,cfg,store,c,signal);const source=await sourcePacket(db,cfg,store,c);
-  const images=await originalImages(db,store,source.context,source.packet);await checkReviewImages(images,revisionAdmission(cfg,c));
+  const images=await candidateReviewImages(db,store,c,source);await checkReviewImages(images,revisionAdmission(cfg,c));
   const body={revision_id:c.row.id,input_hash:c.inputHash,parent_manifest_hash:c.input.parent_manifest_hash,source_packet_id:source.packet.packet_id,
     source_packet_hash:source.packet.packet_hash,candidate:candidate(c),images:images.map(({bytes:_bytes,...binding})=>binding),
     ...(source.native_audio?{native_audio:source.native_audio}:{})};
@@ -200,7 +256,7 @@ export async function revisionImages(db:Db,cfg:Config,store:ObjectStorage,c:Revi
   const packet=revisionPacket(c);const source=await sourcePacket(db,cfg,store,c);
   requireThat(source.packet.packet_id===packet.source_packet_id && source.packet.packet_hash===packet.source_packet_hash,'REVISION_PACKET_CHANGED','原画面证据封存不一致',503);
   requireThat(hash(packet.native_audio??null)===hash(source.native_audio),'REVISION_AUDIO_EVIDENCE_CHANGED','售后原音视频、完整听音或转写封存不一致',503);
-  const images=await originalImages(db,store,source.context,source.packet);
+  const images=await candidateReviewImages(db,store,c,source);
   requireThat(hash(images.map(({bytes:_bytes,...binding})=>binding))===hash(packet.images),'REVISION_PACKET_CHANGED','复核画面绑定已变化',503);
   await checkReviewImages(images,revisionAdmission(cfg,c));return images;
 }

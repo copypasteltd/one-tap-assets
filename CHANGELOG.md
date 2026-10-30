@@ -1,5 +1,15 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · Actual image title revisions / 真实图片加字
+
+本轮收口[图片加字与实际素材售后](docs/实施/图片加字与实际素材售后-v1.0.md)：小程序领取页选图并输入短标题，实际生成保留完整原画面的标题卡PNG，重新验收后交付新版本；客服原工单同类纠错接通。三路线专项通过，原音视频/预算/次数/截止保持；旧订单无授权不增加权益。
+
+This delivery adds [actual image-title revisions](docs/实施/图片加字与实际素材售后-v1.0.md): select a delivered image and enter a short title in the mini-program component, receive a real PNG with the complete original picture and a bottom title panel after fresh review. Assigned support staff can make the same authorized correction. All three route checks pass; original video/audio, budgets, quotas and deadlines remain fixed. Historical orders gain no grant.
+
+Migration 029 makes persisted output intentions immutable. Full actual image inputs bind fresh independent reviews; late file replacement blocks publication. Eight unit, four focused API and five shared-component browser checks pass; 42 API cases and the comprehensive suite were not selected. Both mini builds were not run. Added original/edited PNGs, three UI screenshots, WebM/MP4/GIF and bilingual documentation; no production or native-device claim.
+
+以下记录属于各自历史来源，当前结论以上述增补为准。
+
 ## 2026-10-30 · Native candidate repair / 有声候选失败修复
 
 本轮收口[有声候选失败修复](docs/实施/有声候选修复与原冻结转写额度-v1.0.md)：两生成路线可在下单前冻结的一次额外识别/听音额度内，限定重制、新验收并交付，修复后可继续已有封面售后。旧订单不增次数，原预算与截止不变。4单元、4数据库/旧识别回归、2条原生整链通过；不等待全面测试。

@@ -2,7 +2,7 @@
 
 [English](README.en.md) · [中文](README.md) · [Documentation](docs/README.md) · [Quick start](docs/guides/QUICKSTART.en.md) · [Implementation status](docs/guides/STATUS.md) · [Changelog](CHANGELOG.md)
 
-This delivery closes [failed native-candidate repair](docs/实施/有声候选修复与原冻结转写额度-v1.0.md) on both generated routes: a pre-sale optional ASR/listening allowance permits one scoped repair with fresh media, QC, listening and independent reviews, then existing cover aftercare. Historical orders gain no allowance; budgets and deadlines stay fixed. Four unit, four database/original-ASR and two native flow cases pass; no comprehensive suite was required.
+This delivery adds [actual image-title revisions](docs/实施/图片加字与实际素材售后-v1.0.md): select a delivered image and enter a short title in the mini-program component, receive a real PNG with the complete original picture and a bottom title panel after fresh review. Assigned support staff can make the same authorized correction. All three route checks pass; original video/audio, budgets, quotas and deadlines remain fixed. Historical orders gain no grant.
 
 **Photograph a product, choose a preset, receive a coordinated asset pack.** One Tap Assets is a recoverable cloud production service designed primarily for **Alipay and Douyin mini-programs**. It covers product recognition, content planning, image/video production, post-production, review and asset retrieval. The planned **Plus web application** serves advanced editing and deeper production and remains P1 work.
 
@@ -10,10 +10,16 @@ This repository is under active development: requirements **v3.1**, development 
 
 Quick delivery: see the [handover and startup guide](docs/delivery/README.md). Run `.\scripts\setup-local.ps1`, then `doctor`, `local:start` or `preview:serve`. `delivery:build --smoke` runs bounded builds and focused smoke checks; `delivery:package` creates a ZIP with source and successful outputs. A fully green comprehensive suite is not a packaging prerequisite.
 
-Current candidate: type/server/preview/doctor/startup PASS; 4 unit, 4 database regressions and 2 native repair flows pass, with 20/25 existing cases not selected. Bound: 418 source files / 42 contracts / 4 resources, `f159bc5f`, migration 28. Full suite, mini builds and browser recapture NOT_RUN; 85 historical media files and C design remain. See [delivery](docs/delivery/current.json) and [provenance](docs/verification/native-repair-source.json).
+Current candidate: type/server/preview/doctor/startup PASS; 8 unit, 4 three-route/migration API checks and 5 shared-component capture checks pass, with 42 existing API cases not selected. Bound: 421 source files / 42 contracts / 4 resources, `bc77e6cf`, migration 29. Full suite and mini builds NOT_RUN; 85 historical media files and C originals remain unchanged, with 8 new media files. See [delivery](docs/delivery/current.json) and [provenance](docs/verification/image-text-source.json).
 
 ## Screens and recorded interaction
 
+
+最新实际图片修改 / Latest actual image revision: [操作与来源](docs/media/image-text/README.md)
+
+![图片加字与重新交付 / Image title and a new delivered version](docs/media/image-text/walkthrough.gif)
+
+[MP4](docs/media/image-text/walkthrough.mp4) · [WebM](docs/media/image-text/walkthrough.webm) · [实际原图与新图 / Actual before and after](docs/media/image-text/README.md)。真实共享组件、HTTPS、五阶段和新PNG；商品/语义/身份/计量合成，非宿主真机或生产证明。Actual shared-component and native file effects with synthetic product/semantic/identity/metering inputs.
 
 最新素材纠错 / Latest support repair: [操作与来源](docs/media/support-repair/README.md)
 

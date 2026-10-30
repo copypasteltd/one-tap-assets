@@ -17,9 +17,9 @@ async function persist(db:Db,scope:ToolScope,result:unknown):Promise<void>{
   requireThat(saved.rowCount===1,'TOOL_SCOPE_ENDED','修改角色已结束或结果已冻结',409);
 }
 export function revisionTools(pool:pg.Pool,cfg:Config,store:ObjectStorage):Record<string,ToolHandler>{return {
-  execute_post_plan:async(scope,args,intent)=>{
+  execute_post_plan:async(scope,args,intent,signal)=>{
     requireThat(scope.role==='POST' && args.snapshot_hash===scope.snapshot_hash,'REVISION_TOOL_INVALID','修改制作工具绑定不一致',403);
-    const made=await makeCandidate(pool,store,scope,intent);
+    const made=await makeCandidate(pool,cfg,store,scope,intent,signal);
     return {result:{stage_result:{revision_id:scope.scope_id,input_hash:scope.snapshot_hash,candidate_hash:made.candidate_hash,
       artifact_ids:made.items.map(i=>i.deliverable_id),tool_receipt_ids:[intent.id]} satisfies RevisionMediaResult}};
   },

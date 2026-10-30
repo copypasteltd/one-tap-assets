@@ -1,14 +1,14 @@
 {
   "baseline_id": "YPCC-DEV-1.1.0",
-  "checked_at": "2026-10-29T19:20:54.241198+00:00",
+  "checked_at": "2026-10-30T02:46:22.229082+00:00",
   "status": "PASS",
   "scope": "开发文档、官方OpenAPI结构、JSON Schema/合成正负例、状态图、实体/需求/设计/工作包追踪及C留存一致性",
   "counts": {
     "development_documents": 20,
     "api_operations": 77,
-    "openapi_schemas": 229,
-    "management_api_operations": 26,
-    "total_api_operations": 103,
+    "openapi_schemas": 244,
+    "management_api_operations": 32,
+    "total_api_operations": 109,
     "internal_schemas": 3,
     "synthetic_contract_examples": 39,
     "state_machines": 18,
@@ -16,9 +16,9 @@
     "requirements": 58,
     "work_packages": 20,
     "frozen_design_files": 25,
-    "checks": 3319
+    "checks": 3465
   },
-  "passed": 3319,
+  "passed": 3465,
   "failed": 0,
   "limitations": [
     "本检查仅核验文档与契约，不运行应用测试；已实现源码和局部测试证据另见 assets/implementation/current.json。",
@@ -1212,6 +1212,81 @@
     },
     {
       "check": "json_schema_2020_12:PublicSampleWithdrawalRequest",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "json_schema_2020_12:SupportReply",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "json_schema_2020_12:ManagedSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "json_schema_2020_12:ManagedSupportTicketList",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "json_schema_2020_12:ManagedSupportDetail",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "json_schema_2020_12:SupportProcessRequest",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "json_schema_2020_12:SupportEvidence",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "json_schema_2020_12:ManagedSupportTicketResponse",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "json_schema_2020_12:ManagedSupportTicketListResponse",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "json_schema_2020_12:ManagedSupportDetailResponse",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "json_schema_2020_12:SupportEvidenceResponse",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "json_schema_2020_12:PlatformErrorRepairRequest",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "json_schema_2020_12:SupportRepairContext",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "json_schema_2020_12:SupportRepairImage",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "json_schema_2020_12:SupportRepairContextResponse",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "json_schema_2020_12:SupportRepairImageResponse",
       "status": "PASS",
       "detail": ""
     },
@@ -6106,6 +6181,11 @@
       "detail": ""
     },
     {
+      "check": "local_openapi_ref:#/components/schemas/SupportReply",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "check": "local_openapi_ref:#/components/schemas/Engine",
       "status": "PASS",
       "detail": ""
@@ -6712,6 +6792,76 @@
     },
     {
       "check": "local_openapi_ref:#/components/schemas/PresetLicenseList",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_openapi_ref:#/components/schemas/ManagedSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_openapi_ref:#/components/schemas/ManagedSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_openapi_ref:#/components/schemas/SupportReply",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_openapi_ref:#/components/schemas/ManagedSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_openapi_ref:#/components/schemas/ManagedSupportTicketList",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_openapi_ref:#/components/schemas/ManagedSupportDetail",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_openapi_ref:#/components/schemas/SupportEvidence",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_openapi_ref:#/components/schemas/RevisionRequest",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_openapi_ref:#/components/schemas/ManagedSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_openapi_ref:#/components/schemas/Deliverables",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_openapi_ref:#/components/schemas/Profile",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_openapi_ref:#/components/schemas/Revision",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_openapi_ref:#/components/schemas/SupportRepairContext",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_openapi_ref:#/components/schemas/SupportRepairImage",
       "status": "PASS",
       "detail": ""
     },
@@ -10466,6 +10616,156 @@
       "detail": ""
     },
     {
+      "check": "management_permission:listManagedSupportTickets",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_scope:listManagedSupportTickets",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_path_params:listManagedSupportTickets",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_idempotency:listManagedSupportTickets",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_readable_inventory:listManagedSupportTickets",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_permission:getManagedSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_scope:getManagedSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_path_params:getManagedSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_idempotency:getManagedSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_readable_inventory:getManagedSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_permission:readSupportEvidence",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_scope:readSupportEvidence",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_path_params:readSupportEvidence",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_idempotency:readSupportEvidence",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_readable_inventory:readSupportEvidence",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_permission:processSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_scope:processSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_path_params:processSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_idempotency:processSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_readable_inventory:processSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_permission:getSupportRepairContext",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_scope:getSupportRepairContext",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_path_params:getSupportRepairContext",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_idempotency:getSupportRepairContext",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_readable_inventory:getSupportRepairContext",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_permission:readSupportRepairImage",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_scope:readSupportRepairImage",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_path_params:readSupportRepairImage",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_idempotency:readSupportRepairImage",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_readable_inventory:readSupportRepairImage",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "check": "management_local_ref:#/components/parameters/Cursor",
       "status": "PASS",
       "detail": ""
@@ -10681,7 +10981,7 @@
       "detail": ""
     },
     {
-      "check": "management_local_ref:#/components/schemas/ManagementActionRequest",
+      "check": "management_local_ref:#/components/schemas/PlatformErrorRepairRequest",
       "status": "PASS",
       "detail": ""
     },
@@ -10946,6 +11246,86 @@
       "detail": ""
     },
     {
+      "check": "management_local_ref:#/components/parameters/Cursor",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/parameters/Limit",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/ManagedSupportTicketListResponse",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/Error",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/ManagedSupportDetailResponse",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/Error",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/SupportEvidenceResponse",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/Error",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/parameters/IdempotencyKey",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/ManagedSupportTicketResponse",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/Error",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/SupportProcessRequest",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/SupportRepairContextResponse",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/Error",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/SupportRepairImageResponse",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/Error",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "check": "management_local_ref:#/components/schemas/Platform",
       "status": "PASS",
       "detail": ""
@@ -11097,6 +11477,11 @@
     },
     {
       "check": "management_local_ref:#/components/schemas/RefundState",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/SupportReply",
       "status": "PASS",
       "detail": ""
     },
@@ -11667,6 +12052,76 @@
     },
     {
       "check": "management_local_ref:#/components/schemas/PresetLicenseList",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/ManagedSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/ManagedSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/SupportReply",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/ManagedSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/ManagedSupportTicketList",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/ManagedSupportDetail",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/SupportEvidence",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/RevisionRequest",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/ManagedSupportTicket",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/Deliverables",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/Profile",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/Revision",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/SupportRepairContext",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "management_local_ref:#/components/schemas/SupportRepairImage",
       "status": "PASS",
       "detail": ""
     },
@@ -15361,6 +15816,21 @@
       "detail": ""
     },
     {
+      "check": "local_link:docs\\开发\\05-云端任务与生成管线.md->../实施/有声候选修复与原冻结转写额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:docs\\开发\\05-云端任务与生成管线.md->../实施/有声素材售后与原听音复核-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:docs\\开发\\05-云端任务与生成管线.md->../实施/生成式无声售后与原媒体保留-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "check": "local_link:docs\\开发\\05-云端任务与生成管线.md->../实施/修复费用授权与原订单额度-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -15771,6 +16241,11 @@
       "detail": ""
     },
     {
+      "check": "local_link:docs\\开发\\18-Codex接入验证与实施计划.md->../实施/有声候选修复与原冻结转写额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "check": "local_link:docs\\开发\\18-Codex接入验证与实施计划.md->../实施/独立实例回收与冻结输入保留-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -15817,6 +16292,61 @@
     },
     {
       "check": "balanced_fences:README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:docs\\开发\\README.md->../实施/有声候选修复与原冻结转写额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:docs\\开发\\README.md->../实施/有声素材售后与原听音复核-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:docs\\开发\\README.md->../实施/生成式无声售后与原媒体保留-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:docs\\开发\\README.md->../实施/客服素材纠错工作台-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:docs\\开发\\README.md->../实施/客服接单回复与处理工作台-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:docs\\开发\\README.md->../实施/订单反馈与售后记录-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:docs\\开发\\README.md->../实施/相册分类保存与宿主回调-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:docs\\开发\\README.md->../实施/订单取消与原支付动作-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:docs\\开发\\README.md->../实施/草稿恢复与方案规格续选-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:docs\\开发\\README.md->../实施/逐张拍照与原上传批次-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:docs\\开发\\README.md->../实施/生成式受限修复与原素材复用-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -16106,12 +16636,207 @@
       "detail": ""
     },
     {
+      "check": "local_link:README.md->docs/实施/有声候选修复与原冻结转写额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "check": "local_link:README.md->assets/implementation/current.json",
       "status": "PASS",
       "detail": ""
     },
     {
       "check": "local_link:README.md->docs/verification/publication.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/delivery/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/delivery/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/verification/native-repair-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/support-repair/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/support-repair/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/support-repair/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/support-repair/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/support-repair/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/support-desk/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/support-desk/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/support-desk/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/support-desk/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/support-desk/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/support/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/support/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/support/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/support/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/support/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/album-save/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/album-save/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/album-save/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/album-save/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/album-save/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/order-actions/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/order-actions/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/order-actions/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/order-actions/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/order-actions/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/draft-resume/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/draft-resume/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/draft-resume/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/draft-resume/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/draft-resume/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/photo-capture/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/photo-capture/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/photo-capture/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/photo-capture/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/media/photo-capture/capture-manifest.json",
       "status": "PASS",
       "detail": ""
     },
@@ -16372,6 +17097,11 @@
     },
     {
       "check": "local_link:README.md->docs/verification/repair-cost-native-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "local_link:README.md->docs/delivery/README.md",
       "status": "PASS",
       "detail": ""
     },

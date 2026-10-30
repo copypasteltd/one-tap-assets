@@ -706,6 +706,25 @@ def main() -> None:
     extend_support_contract(api, admin, admin_endpoints, dmap)
     extend_platform_repair_contract(api, admin, admin_endpoints)
     extend_support_repair_ui_contract(api, admin, admin_endpoints)
+    # Real image-title revisions are optional, frozen before sale. Keep old
+    # request forms mutually exclusive; never reinterpret DISPLAY_TEXT.
+    revision_request_base = copy.deepcopy(api["components"]["schemas"]["RevisionRequest"])
+    for document in (api, admin):
+        schemas = document["components"]["schemas"]
+        schemas["RevisionRequest"] = copy.deepcopy(revision_request_base)
+        schemas["Deliverables"] = copy.deepcopy(schemas["Deliverables"])
+        if "SupportRepairContext" in schemas: schemas["SupportRepairContext"] = copy.deepcopy(schemas["SupportRepairContext"])
+        request = schemas["RevisionRequest"]
+        request["properties"]["kind"]["enum"].append("IMAGE_TEXT")
+        request["properties"]["image_text"] = obj({"deliverable_id": ID, "text": {"type": "string", "minLength": 1, "maxLength": 28}})
+        for rule in request["allOf"]:
+            rule["then"]["not"]["anyOf"].append({"required": ["image_text"]})
+        request["allOf"].append({"if": {"properties": {"kind": {"const": "IMAGE_TEXT"}}, "required": ["kind"]},
+            "then": {"required": ["image_text"], "not": {"anyOf": [{"required": [f]} for f in revision_fields.values()]}}})
+        schemas["Deliverables"]["properties"]["revision_capabilities"] = {"type": "array", "items": enum("COVER", "ALLOWED_ORDER", "DISPLAY_TEXT", "IMAGE_TEXT"), "minItems": 0, "maxItems": 4, "uniqueItems": True}
+        if "SupportRepairContext" in schemas:
+            schemas["SupportRepairContext"]["properties"]["allowed_changes"]["items"]["enum"].append("IMAGE_TEXT")
+            schemas["SupportRepairContext"]["properties"]["allowed_changes"]["maxItems"] = 4
     # UI intent keys contain ':' and '.', matching both runtime domains.
     # Normalize only the current contracts; v1.0 remains a preserved snapshot.
     for document in (api, admin):

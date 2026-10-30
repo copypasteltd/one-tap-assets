@@ -690,3 +690,39 @@ it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('repairs a native %s failed v
   expect(BigInt(order.spent_micro)).toBeLessThanOrEqual(BigInt(order.budget_micro));expect(order.reserved_micro).toBe('0');
   expect((await db.pool.query("SELECT id FROM agent_instances WHERE order_id=$1 AND state<>'RELEASED'",[f.orderId])).rowCount).toBe(0);
 },240000);
+
+it.each(['PER_SHOT_AI','REFERENCE_FILM'] as const)('adds an actual image title to a delivered native %s pack without buying generation ASR or listening again',async engine=>{
+  const f=await listeningReady(engine,{revisions:true}),g=listeningClient(f,'SYNTHETIC_PASS');
+  const executor=new CodexRuntimeAdapter(db.pool,f.cfg,new NativeAftercareLauncher());
+  const reviews=new ReviewStageService(db.pool,f.cfg,executor,g.gateway);
+  await completeStage(db.pool,f.review,await withFixtureLease(db.pool,f.review,s=>reviews.handle(f.review,s)));
+  const style=await finalStage(f,'REVIEW_STYLE',f.review);
+  await completeStage(db.pool,style,await withFixtureLease(db.pool,style,s=>reviews.handle(style,s)));
+  const deliver=await finalStage(f,'DELIVER',style);
+  await completeStage(db.pool,deliver,await withFixtureLease(db.pool,deliver,s=>new PublicationService(db.pool,f.cfg,f.store).handle(deliver,s)));
+  const original=await getDeliverables(db.pool,f.p,f.orderId),target=original.items.find(i=>i.kind==='image')!;
+  expect(original.revision_capabilities).toContain('IMAGE_TEXT');
+  const paid={generation:f.providerCalls(),asr:f.asrPosts(),listening:g.posts()},sold=hash(f.contract);
+  const token=(await issueSession(db.pool,{platform:'alipay',appId:f.p.appId,subjectId:f.p.subjectId})).access_token;
+  const requested=await f.app.inject({method:'POST',url:`/v1/p01/orders/${f.orderId}/revisions`,headers:{authorization:`Bearer ${token}`,'idempotency-key':id('native-image-title')},
+    payload:{kind:'IMAGE_TEXT',manifest_revision:1,image_text:{deliverable_id:target.deliverable_id,text:'看得见的真实细节'}}});
+  expect(requested.statusCode,requested.body).toBe(202);const revision=requested.json().data as DTO<'Revision'>;
+  const worker=new RevisionService(db.pool,f.cfg,f.store,executor);
+  for(const name of REVISION_STAGES){
+    const lease=(await claimStage(db.pool,id('native-image-title'),[name]))!;expect(lease.scope_id).toBe(revision.revision_id);
+    const commit=await withFixtureLease(db.pool,lease,s=>worker.handle(lease,s));await completeStage(db.pool,lease,commit);
+  }
+  const updated=await getDeliverables(db.pool,f.p,f.orderId),edited=updated.items.find(i=>i.slot_id===target.slot_id)!;
+  expect(updated.manifest_revision).toBe(2);expect(edited.sha256).not.toBe(target.sha256);expect(edited.deliverable_id).not.toBe(target.deliverable_id);
+  expect(updated.items.filter(i=>i.slot_id!==target.slot_id)).toEqual(original.items.filter(i=>i.slot_id!==target.slot_id));
+  const saved=(await db.pool.query('SELECT private FROM revision_requests WHERE tenant_id=$1 AND id=$2',[f.p.tenantId,revision.revision_id])).rows[0];
+  const packet=saved.private.qc_packet as import('../../src/worker/revisions/media.js').RevisionPacket;
+  expect(packet.images.some(i=>i.asset_id===edited.deliverable_id&&i.sha256===edited.sha256)).toBe(true);
+  expect(packet.native_audio!.video_bindings).toEqual(original.items.filter(i=>i.kind==='video').map(i=>({deliverable_id:i.deliverable_id,slot_id:i.slot_id,sha256:i.sha256})));
+  const link=await createDownloadLink(db.pool,f.cfg,f.p,edited.deliverable_id),url=new URL(link.url),response=await f.app.inject({url:url.pathname+url.search});
+  expect(response.statusCode).toBe(200);expect(sha256(response.rawPayload)).toBe(edited.sha256);
+  expect({generation:f.providerCalls(),asr:f.asrPosts(),listening:g.posts()}).toEqual(paid);
+  const order=(await db.pool.query('SELECT private,reserved_micro,deadline_at FROM orders WHERE id=$1',[f.orderId])).rows[0];
+  expect(hash(order.private.contract)).toBe(sold);expect(order.reserved_micro).toBe('0');expect(order.deadline_at.toISOString()).toBe(f.snapshot.deadline_at);
+  expect((await db.pool.query("SELECT id FROM agent_instances WHERE order_id=$1 AND state<>'RELEASED'",[f.orderId])).rowCount).toBe(0);
+},240000);

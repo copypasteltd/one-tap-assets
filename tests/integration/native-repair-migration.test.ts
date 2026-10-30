@@ -36,7 +36,7 @@ it('upgrades the original native ASR hold from migration 27 without refilling it
     const order=(await pool.query('SELECT * FROM orders WHERE id=$1',[f.orderId])).rows[0],money=(await pool.query('SELECT * FROM budget_reservations WHERE id=$1',[cost])).rows[0];
     const prior=(await pool.query('SELECT * FROM provider_submissions WHERE id=$1',[original.id])).rows[0];
     await migrate(pool);await migrate(pool);
-    expect((await pool.query('SELECT count(*)::int AS n FROM schema_migrations')).rows[0].n).toBe(28);
+    expect((await pool.query('SELECT count(*)::int AS n FROM schema_migrations')).rows[0].n).toBe((await readdir('src/api/db/migrations')).filter(f=>f.endsWith('.sql')).length);
     expect((await pool.query('SELECT * FROM orders WHERE id=$1',[f.orderId])).rows[0]).toEqual(order);
     expect((await pool.query('SELECT * FROM budget_reservations WHERE id=$1',[cost])).rows[0]).toEqual(money);
     expect((await pool.query('SELECT * FROM provider_submissions WHERE id=$1',[original.id])).rows[0]).toEqual({...prior,native_asr_attempt:1});

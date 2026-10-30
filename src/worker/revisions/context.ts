@@ -15,6 +15,7 @@ import type {Config} from '../../api/config.js';
 import {validateGenerationExecution} from '../generation/contracts.js';
 import {verifyNativeAudioLive} from '../audio/contract.js';
 import {frozenOrderListening} from '../audio/listening-contract.js';
+import {checkImageText} from './image-text.js';
 
 export interface RevisionRow {
   id:string;tenant_id:string;owner_id:string;order_id:string;state:DTO<'Revision'>['state'];deadline_at:Date;input_hash:string;
@@ -28,7 +29,7 @@ export interface RevisionContext {
 export function checkedRevisionChange(pack:DTO<'Deliverables'>,request:DTO<'RevisionRequest'>,contract:FrozenContract):DTO<'RevisionRequest'> {
   validate('RevisionRequest',request);
   requireThat(pack.manifest_revision===request.manifest_revision,'MANIFEST_CHANGED','素材已更新，请刷新后修改',409);
-  const fields=request.kind==='COVER'?['cover_deliverable_id']:request.kind==='ALLOWED_ORDER'?['ordered_deliverable_ids']:['display_text'];
+  const fields=request.kind==='COVER'?['cover_deliverable_id']:request.kind==='ALLOWED_ORDER'?['ordered_deliverable_ids']:request.kind==='IMAGE_TEXT'?['image_text']:['display_text'];
   requireThat(Object.keys(request).every(key=>['kind','manifest_revision',...fields].includes(key)),
     'REVISION_FIELDS_CONFLICT','一次小修改只能提交对应类型的内容',422);
   if(request.kind==='COVER')requireThat(pack.items.some(i=>i.deliverable_id===request.cover_deliverable_id && i.kind==='image'),'INVALID_COVER','请选择本单交付的图片作为封面',422);
@@ -38,6 +39,14 @@ export function checkedRevisionChange(pack:DTO<'Deliverables'>,request:DTO<'Revi
     && new Set(request.ordered_deliverable_ids).size===pack.items.length && request.ordered_deliverable_ids.every(i=>pack.items.some(x=>x.deliverable_id===i)),
   'INVALID_DELIVERY_ORDER','排序必须包含完整且不重复的素材列表',422);
   if(request.kind==='ALLOWED_ORDER')requireThat(hash(request.ordered_deliverable_ids)!==hash(pack.items.map(i=>i.deliverable_id)),'REVISION_NO_CHANGE','素材展示顺序尚未改变',422);
+  if(request.kind==='IMAGE_TEXT'){
+    const policy=contract.revision_policy?.image_text;
+    requireThat(policy,'REVISION_IMAGE_TEXT_NOT_FROZEN','原订单未包含图片加字规格',422);
+    requireThat(request.image_text&&pack.items.some(i=>i.kind==='image'&&i.deliverable_id===request.image_text!.deliverable_id),
+      'REVISION_IMAGE_NOT_OWNED','请选择当前本单已交付的图片',422);
+    checkImageText(request.image_text.text,policy);
+    validateCreativePlan({...contract.creative,copy:request.image_text.text},contract.profile,contract.source);
+  }
   if(request.kind==='DISPLAY_TEXT'){
     requireThat(request.display_text?.trim() && request.display_text===request.display_text.trim(),'REVISION_TEXT_INVALID','请输入完整的展示文字并去除首尾空白',422);
     requireThat(pack.items.filter(i=>i.kind==='copy').length===1,'REVISION_TEXT_UNAVAILABLE','本单缺少唯一可修改的配套展示文案',422);

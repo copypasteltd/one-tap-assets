@@ -1799,6 +1799,7 @@ export interface components {
             parent_manifest_id?: string;
             revision_id?: string;
             cover_deliverable_id?: string;
+            revision_capabilities?: ("COVER" | "ALLOWED_ORDER" | "DISPLAY_TEXT" | "IMAGE_TEXT")[];
         };
         DownloadLink: {
             deliverable_id: string;
@@ -1859,11 +1860,15 @@ export interface components {
         RevisionRequest: {
             manifest_revision: number;
             /** @enum {string} */
-            kind: "COVER" | "ALLOWED_ORDER" | "DISPLAY_TEXT";
+            kind: "COVER" | "ALLOWED_ORDER" | "DISPLAY_TEXT" | "IMAGE_TEXT";
             cover_deliverable_id?: string;
             ordered_deliverable_ids?: string[];
             display_text?: string;
-        } & (unknown & unknown & unknown);
+            image_text?: {
+                deliverable_id: string;
+                text: string;
+            };
+        } & (unknown & unknown & unknown & unknown);
         Revision: {
             revision_id: string;
             order_id: string;
@@ -3185,7 +3190,7 @@ export interface components {
             product_profile: components["schemas"]["Profile"] | null;
             repair: components["schemas"]["Revision"] | null;
             can_submit: boolean;
-            allowed_changes: ("COVER" | "ALLOWED_ORDER" | "DISPLAY_TEXT")[];
+            allowed_changes: ("COVER" | "ALLOWED_ORDER" | "DISPLAY_TEXT" | "IMAGE_TEXT")[];
             reason_codes: string[];
             window_expires_at: string | null;
         };

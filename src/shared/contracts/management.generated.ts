@@ -210,7 +210,7 @@ export interface paths {
         put?: never;
         /**
          * 平台错误关联免费纠错不耗小改额度
-         * @description 原接手客服及原版本工单；仅原图无声封面、完整清单顺序或配套文案纠错。共享原售后预算、推理和工具额度，冻结300秒/48小时/领取期最早截止，五阶段重新验收。不耗用户一次小修改，不自动解决工单。
+         * @description 原接手客服及原版本工单；三路线已有封面、完整清单顺序或配套文案纠错；音视频字节保持不变，有声单重验原转写、已结算听音和许可，并由新角色复核原意。共享原售后预算、推理和工具额度，冻结300秒/48小时/领取期最早截止，五阶段重新验收。不耗用户一次小修改，不自动解决工单。
          */
         post: operations["requestPlatformErrorRepair"];
         delete?: never;
@@ -1024,6 +1024,7 @@ export interface components {
             /** Format: date-time */
             expires_at: string;
             items: components["schemas"]["Deliverable"][];
+            revision_capabilities?: ("COVER" | "ALLOWED_ORDER" | "DISPLAY_TEXT" | "IMAGE_TEXT")[];
         };
         DownloadLink: {
             deliverable_id: string;
@@ -1084,11 +1085,15 @@ export interface components {
         RevisionRequest: {
             manifest_revision: number;
             /** @enum {string} */
-            kind: "COVER" | "ALLOWED_ORDER" | "DISPLAY_TEXT";
+            kind: "COVER" | "ALLOWED_ORDER" | "DISPLAY_TEXT" | "IMAGE_TEXT";
             cover_deliverable_id?: string;
             ordered_deliverable_ids?: string[];
             display_text?: string;
-        } & (unknown & unknown & unknown);
+            image_text?: {
+                deliverable_id: string;
+                text: string;
+            };
+        } & (unknown & unknown & unknown & unknown);
         Revision: {
             revision_id: string;
             order_id: string;
@@ -2370,7 +2375,7 @@ export interface components {
             product_profile: components["schemas"]["Profile"] | null;
             repair: components["schemas"]["Revision"] | null;
             can_submit: boolean;
-            allowed_changes: ("COVER" | "ALLOWED_ORDER" | "DISPLAY_TEXT")[];
+            allowed_changes: ("COVER" | "ALLOWED_ORDER" | "DISPLAY_TEXT" | "IMAGE_TEXT")[];
             reason_codes: string[];
             window_expires_at: string | null;
         };

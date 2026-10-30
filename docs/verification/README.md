@@ -1,5 +1,9 @@
 # 核验来源与历史记录
 
+当前来源：[图片加字](image-text-source.json)、[源码](image-text-tested-source.json)、[8单元](image-text-unit.json)、[4API/42未选](image-text-api.json)、[尝试与原失败](image-text-attempts.json)、[5共享组件检查/8媒体](../media/image-text/capture-manifest.json)。421/42/4，`bc77e6cf`；类型/server/preview/本机启动PASS，全面测试和双小程序重编NOT_RUN。原153历史JSON保留（3个滚动入口另存b31b408），旧结果不升级为当前全量验收。
+
+以下记录属于各自历史来源，当前结论以上述增补为准。
+
 当前来源：[有声候选修复](native-repair-source.json)、[测试快照](native-repair-tested-source.json)、[4单元](native-repair-unit.json)、[4数据库回归](native-repair-db.json)、[2原生整链](native-repair-api.json)、[3次尝试与原失败](native-repair-attempts.json)。418/42/4，`f159bc5f`；类型/server/preview/原生启动PASS，全面测试/小程序重编/浏览器复录NOT_RUN。下列“当前”仅对应各自历史来源，不自动升级为本轮证据。
 
 当前来源：[生成式无声售后](generated-aftercare-source.json)。414源码/42契约/4资源，`bc638bc4`；15单元、4原生用例、类型/server/preview/自检/启动PASS，9旧用例未选。85历史媒体与C25/归档保持，未复录浏览器；首次类型诊断仅有报告记录，未伪造源码快照。未跑全面测试、未重编小程序，真实服务和真机未验。

@@ -16,13 +16,16 @@ export function limitedRevisionRoute(snapshot:Snapshot):boolean {
 }
 import type {CodexAdmission} from '../codex/admission.js';
 import type {InferenceLimits} from '../codex/inference.js';
+import {STYLES} from '../media/layout.js';
+import {FONT_BINDING} from '../media/font.js';
+import {validateImageTextPolicy,type ImageTextPolicy} from './image-text.js';
 
 export const REVISION_POLICY_VERSION='YPCC-LIMITED-REVISION-1';
 export const REVISION_STAGES=['REVISION','REVISION_QC','REVISION_REVIEW_FACTS','REVISION_REVIEW_STYLE','REVISION_COMPLETE'] as const;
 export interface RevisionPolicy {
   version:typeof REVISION_POLICY_VERSION;window_hours:48;deadline_seconds:300;max_successes:1;
   budget_micro:number;bundle_hash:string;skill_variant_id:string;
-  admission:CodexAdmission;limits:InferenceLimits;
+  admission:CodexAdmission;limits:InferenceLimits;image_text?:ImageTextPolicy;
 }
 export interface RevisionInput {
   revision_id:string;tenant_id:string;owner_id:string;order_id:string;product_id:string;
@@ -40,9 +43,13 @@ export function freezeRevisionPolicy(contract:FrozenContract):RevisionPolicy {
     budget_micro:c.agent_cost_ceiling_micro,bundle_hash:c.skill_bundle_hash,skill_variant_id:contract.source.variant_id,
     admission:structuredClone(binding.admission),limits:{...structuredClone(binding.limits),max_requests:c.max_turns_per_role*3,
       max_requests_per_role:c.max_turns_per_role,ceiling_micro:c.agent_cost_ceiling_micro,daily_ceiling_micro:c.agent_cost_ceiling_micro}};
+  const style=STYLES[contract.request.preset_id];
+  if(style&&contract.resource_versions.some(r=>hash(r)===hash(FONT_BINDING)))policy.image_text={version:'YPCC-IMAGE-TEXT-1',max_chars:28,
+    max_lines:2,panel_fraction:0.22,font:{...FONT_BINDING},background:style.bg,ink:style.ink,accent:style.accent};
   validateRevisionPolicy(policy);return policy;
 }
 export function validateRevisionPolicy(policy:RevisionPolicy):void {
+  if(policy?.image_text)validateImageTextPolicy(policy.image_text);
   requireThat(policy?.version===REVISION_POLICY_VERSION && policy.window_hours===48 && policy.deadline_seconds===300 && policy.max_successes===1
     && Number.isSafeInteger(policy.budget_micro) && policy.budget_micro>0 && policy.limits?.ceiling_micro===policy.budget_micro
     && policy.limits.daily_ceiling_micro===policy.budget_micro && typeof policy.limits.owner_id==='string' && policy.limits.owner_id.length>0

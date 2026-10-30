@@ -101,7 +101,8 @@ export class PublicationService {
         'INPUT_HASH_MISMATCH', '发布时原订单照片已失效，不能延长其他照片的保留期', 409);
       const manifest = validate('Deliverables', { order_id: context.orderId,
         manifest_id: `manifest_${hash({ packet: packet.packet_id, outputs: packet.output_set_hash }).slice(0, 40)}`,
-        manifest_revision: 1, expires_at: expiresAt, items }, true);
+        manifest_revision: 1, expires_at: expiresAt, items,
+        ...(context.contract.revision_policy?.image_text?{revision_capabilities:['COVER','ALLOWED_ORDER','DISPLAY_TEXT','IMAGE_TEXT']}: {}) }, true);
       await insert(db, 'delivery_manifests', { id: manifest.manifest_id, tenant_id: context.tenantId, owner_id: context.ownerId,
         order_id: context.orderId, revision: 1, hash: hash(manifest), data: manifest, expires_at: expiresAt, delivered_at: deliveredAt,
         private: { packet_id: packet.packet_id, packet_hash: packet.packet_hash, snapshot_hash: context.snapshotHash, report_ids: latest.reports.map(r => r.report_id),

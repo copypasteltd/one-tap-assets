@@ -1,7 +1,7 @@
 {
   "baseline_id": "YPCC-DEV-1.1.0",
   "requirements_version": "3.1",
-  "checked_at": "2026-10-29T19:21:02.269697+00:00",
+  "checked_at": "2026-10-30T02:46:26.295964+00:00",
   "status": "PASS",
   "scope": "文档、OpenAPI/JSON Schema、合成门禁例、需求/工作包/设计关联、Skill/Bundle摘要和历史留存；不执行产品验收",
   "counts": {
@@ -10,9 +10,9 @@
     "skills": 19,
     "skill_bundles": 14,
     "development_documents": 20,
-    "base_contract_checks": 3319,
-    "codex_checks": 1489,
-    "total_checks": 4808,
+    "base_contract_checks": 3465,
+    "codex_checks": 1818,
+    "total_checks": 5283,
     "codex_synthetic_examples": 39
   },
   "product_tests_executed": false,
@@ -2469,6 +2469,76 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/README.md->实施/有声候选修复与原冻结转写额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->实施/有声素材售后与原听音复核-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->实施/生成式无声售后与原媒体保留-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->实施/客服素材纠错工作台-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->实施/工单关联免费纠错与售后原额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->实施/客服接单回复与处理工作台-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->实施/订单反馈与售后记录-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->实施/相册分类保存与宿主回调-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->实施/订单取消与原支付动作-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->实施/草稿恢复与方案规格续选-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->实施/逐张拍照与原上传批次-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->实施/生成式受限修复与原素材复用-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->实施/原图候选修复与重新验收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/README.md->delivery/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/README.md->实施/修复费用授权与原订单额度-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -2714,6 +2784,131 @@
       "detail": ""
     },
     {
+      "name": "document_encoding_fences:docs/delivery/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../实施/有声候选修复与原冻结转写额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../实施/有声素材售后与原听音复核-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../实施/生成式无声售后与原媒体保留-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../实施/客服素材纠错工作台-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../实施/工单关联免费纠错与售后原额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../实施/客服接单回复与处理工作台-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../实施/订单反馈与售后记录-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../实施/相册分类保存与宿主回调-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../实施/订单取消与原支付动作-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../实施/草稿恢复与方案规格续选-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../实施/逐张拍照与原上传批次-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../实施/生成式受限修复与原素材复用-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../实施/原图候选修复与重新验收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../guides/QUICKSTART.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../../.env.example",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../guides/QUICKSTART.en.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../../.env.example",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../verification/support-desk-initial-build.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../verification/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../guides/STATUS.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../verification/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/delivery/README.md->../guides/STATUS.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/guides/ARCHITECTURE.md",
       "status": "PASS",
       "detail": ""
@@ -2784,12 +2979,167 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/DEMO.md->../media/support-repair/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/guides/DEMO.md->../../README.md",
       "status": "PASS",
       "detail": ""
     },
     {
       "name": "document_link:docs/guides/DEMO.md->../../README.en.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/support-desk/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/support-desk/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/support-desk/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/support-desk/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/support-desk/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/support/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/support/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/support/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/support/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/support/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/album-save/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/album-save/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/album-save/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/album-save/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/album-save/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/order-actions/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/order-actions/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/order-actions/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/order-actions/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/order-actions/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/draft-resume/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/draft-resume/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/draft-resume/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/draft-resume/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/draft-resume/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/photo-capture/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/photo-capture/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/photo-capture/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/photo-capture/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/DEMO.md->../media/photo-capture/capture-manifest.json",
       "status": "PASS",
       "detail": ""
     },
@@ -2899,6 +3249,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/PUBLISHING.md->../delivery/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/guides/PUBLISHING.md->../../README.md",
       "status": "PASS",
       "detail": ""
@@ -2950,6 +3305,11 @@
     },
     {
       "name": "document_encoding_fences:docs/guides/QUICKSTART.en.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/QUICKSTART.en.md->../delivery/README.md",
       "status": "PASS",
       "detail": ""
     },
@@ -3009,6 +3369,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/guides/QUICKSTART.md->../delivery/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/guides/QUICKSTART.md->../实施/原生声音最终双复核与事务交付-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3060,6 +3425,56 @@
     },
     {
       "name": "document_encoding_fences:docs/guides/RECOVERY.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/RECOVERY.md->../实施/有声候选修复与原冻结转写额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/RECOVERY.md->../实施/有声素材售后与原听音复核-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/RECOVERY.md->../实施/客服接单回复与处理工作台-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/RECOVERY.md->../实施/订单反馈与售后记录-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/RECOVERY.md->../实施/相册分类保存与宿主回调-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/RECOVERY.md->../实施/订单取消与原支付动作-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/RECOVERY.md->../实施/草稿恢复与方案规格续选-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/RECOVERY.md->../实施/逐张拍照与原上传批次-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/RECOVERY.md->../实施/生成式受限修复与原素材复用-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/guides/RECOVERY.md->../实施/原图候选修复与重新验收-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -3159,87 +3574,187 @@
       "detail": ""
     },
     {
-      "name": "document_link:docs/guides/STATUS.md->../实施/修复费用授权与原订单额度-v1.0.md",
+      "name": "document_link:docs/guides/STATUS.md->../实施/有声候选修复与原冻结转写额度-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "document_link:docs/guides/STATUS.md->../实施/MCP原工具查询恢复与桥接回收-v1.0.md",
+      "name": "document_link:docs/guides/STATUS.md->../verification/native-repair-source.json",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "document_link:docs/guides/STATUS.md->../实施/首轮制作费用隔离与原费用回执-v1.0.md",
+      "name": "document_link:docs/guides/STATUS.md->../delivery/current.json",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "document_link:docs/guides/STATUS.md->../实施/Worker脱敏故障诊断与日志隔离-v1.0.md",
+      "name": "document_link:docs/guides/STATUS.md->../delivery/README.md",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "document_link:docs/guides/STATUS.md->../实施/工具队列原子领取与并发租约-v1.0.md",
+      "name": "document_link:docs/guides/STATUS.md->../实施/源码实现进度-v3.1.md",
       "status": "PASS",
       "detail": ""
     },
     {
-      "name": "document_link:docs/guides/STATUS.md->../实施/完整展示文字与购买前排版校验-v1.0.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:docs/guides/STATUS.md->../实施/AI可见标识与逐帧文件验收-v1.0.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:docs/guides/STATUS.md->../实施/原生声音最终双复核与事务交付-v1.0.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:docs/guides/STATUS.md->../../assets/implementation/current.json",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:docs/guides/STATUS.md->../verification/publication.json",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:docs/guides/STATUS.md->../media/capture-manifest.json",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:docs/guides/STATUS.md->../verification/repair-cost-native-source.json",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:docs/guides/STATUS.md->../verification/repair-cost-native-source.json",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:docs/guides/STATUS.md->RECOVERY.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:docs/guides/STATUS.md->PUBLISHING.md",
-      "status": "PASS",
-      "detail": ""
-    },
-    {
-      "name": "document_link:docs/guides/STATUS.md->../实施/修复费用授权与原订单额度-v1.0.md",
+      "name": "document_link:docs/guides/STATUS.md->../verification/README.md",
       "status": "PASS",
       "detail": ""
     },
     {
       "name": "document_encoding_fences:docs/verification/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->native-repair-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->native-repair-tested-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->native-repair-unit.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->native-repair-db.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->native-repair-api.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->native-repair-attempts.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->generated-aftercare-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->native-aftercare-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->native-aftercare-tested-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->native-aftercare-unit.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->native-aftercare-api.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->native-aftercare-initial-attempt.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->support-repair-ui-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->platform-repair-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->support-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->support-initial-attempt.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->album-save-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->album-save-initial-attempt.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->order-actions-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->draft-resume-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->draft-resume-initial-typecheck.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->photo-capture-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->generated-repair-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->generated-repair-attempts.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->repair-candidate-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->delivery-focused-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->../delivery/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->publication.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->repository-audit.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/verification/README.md->../delivery/README.md",
       "status": "PASS",
       "detail": ""
     },
@@ -3509,6 +4024,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/实施/修复费用授权与原订单额度-v1.0.md->原图候选修复与重新验收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/实施/修复费用授权与原订单额度-v1.0.md->../../src/worker/repair/cost-authorization.ts",
       "status": "PASS",
       "detail": ""
@@ -3534,6 +4054,11 @@
       "detail": ""
     },
     {
+      "name": "document_encoding_fences:docs/实施/原图候选修复与重新验收-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/实施/原图制作与后期阶段接入-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3550,6 +4075,11 @@
     },
     {
       "name": "document_encoding_fences:docs/实施/原生声音合同与原订单费用-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/原生声音合同与原订单费用-v1.0.md->有声候选修复与原冻结转写额度-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -3879,6 +4409,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/实施/受限修改执行与新版本交付-v1.0.md->生成式无声售后与原媒体保留-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/实施/受限修改执行与新版本交付-v1.0.md->../../assets/implementation/current.json",
       "status": "PASS",
       "detail": ""
@@ -3944,6 +4479,66 @@
       "detail": ""
     },
     {
+      "name": "document_encoding_fences:docs/实施/客服接单回复与处理工作台-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/客服接单回复与处理工作台-v1.0.md->订单反馈与售后记录-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/客服接单回复与处理工作台-v1.0.md->../delivery/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/客服接单回复与处理工作台-v1.0.md->../verification/support-desk-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/客服接单回复与处理工作台-v1.0.md->../delivery/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/客服接单回复与处理工作台-v1.0.md->../media/support-desk/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/客服素材纠错工作台-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/客服素材纠错工作台-v1.0.md->有声素材售后与原听音复核-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/客服素材纠错工作台-v1.0.md->生成式无声售后与原媒体保留-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/客服素材纠错工作台-v1.0.md->../verification/support-repair-ui-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/客服素材纠错工作台-v1.0.md->../media/support-repair/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/客服素材纠错工作台-v1.0.md->工单关联免费纠错与售后原额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/实施/工具队列原子领取与并发租约-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -3970,6 +4565,26 @@
     },
     {
       "name": "document_link:docs/实施/工具队列原子领取与并发租约-v1.0.md->../verification/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/工单关联免费纠错与售后原额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/工单关联免费纠错与售后原额度-v1.0.md->客服素材纠错工作台-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/工单关联免费纠错与售后原额度-v1.0.md->../delivery/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/工单关联免费纠错与售后原额度-v1.0.md->../verification/platform-repair-source.json",
       "status": "PASS",
       "detail": ""
     },
@@ -4274,12 +4889,197 @@
       "detail": ""
     },
     {
+      "name": "document_encoding_fences:docs/实施/有声候选修复与原冻结转写额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声候选修复与原冻结转写额度-v1.0.md->../../src/api/db/migrations/028_native_repair_asr.sql",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声候选修复与原冻结转写额度-v1.0.md->../../src/worker/audio/contract.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声候选修复与原冻结转写额度-v1.0.md->../../src/worker/repair/coordinator.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声候选修复与原冻结转写额度-v1.0.md->../../src/worker/repair/planning.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声候选修复与原冻结转写额度-v1.0.md->../../src/worker/speech/gateway.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声候选修复与原冻结转写额度-v1.0.md->../../src/worker/media/native-order-pipeline.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声候选修复与原冻结转写额度-v1.0.md->../../src/worker/audio/listening-gateway.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声候选修复与原冻结转写额度-v1.0.md->../../src/worker/audio/delivered-listening.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声候选修复与原冻结转写额度-v1.0.md->../verification/native-repair-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声候选修复与原冻结转写额度-v1.0.md->../verification/native-repair-tested-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声候选修复与原冻结转写额度-v1.0.md->../verification/native-repair-api.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声候选修复与原冻结转写额度-v1.0.md->../verification/native-repair-attempts.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/有声素材售后与原听音复核-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声素材售后与原听音复核-v1.0.md->有声候选修复与原冻结转写额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声素材售后与原听音复核-v1.0.md->../../src/worker/audio/delivered-listening.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声素材售后与原听音复核-v1.0.md->../../src/worker/revisions/audio.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声素材售后与原听音复核-v1.0.md->../../src/worker/revisions/media.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声素材售后与原听音复核-v1.0.md->../../src/worker/revisions/review.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声素材售后与原听音复核-v1.0.md->../../src/worker/revisions/service.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声素材售后与原听音复核-v1.0.md->../verification/native-aftercare-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声素材售后与原听音复核-v1.0.md->../verification/native-aftercare-api.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声素材售后与原听音复核-v1.0.md->../delivery/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/有声素材售后与原听音复核-v1.0.md->../verification/native-aftercare-initial-api.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/实施/本人预览执行与私有恢复-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
     {
       "name": "document_encoding_fences:docs/实施/源码实现进度-v3.1.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../实施/有声候选修复与原冻结转写额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../实施/有声素材售后与原听音复核-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->生成式无声售后与原媒体保留-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->客服素材纠错工作台-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../实施/工单关联免费纠错与售后原额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../实施/客服接单回复与处理工作台-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../实施/订单反馈与售后记录-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../实施/相册分类保存与宿主回调-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../实施/订单取消与原支付动作-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../实施/草稿恢复与方案规格续选-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->逐张拍照与原上传批次-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->生成式受限修复与原素材复用-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->原图候选修复与重新验收-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -4315,6 +5115,11 @@
     },
     {
       "name": "document_link:docs/实施/源码实现进度-v3.1.md->../verification/repair-cost-native-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/源码实现进度-v3.1.md->../delivery/README.md",
       "status": "PASS",
       "detail": ""
     },
@@ -4539,6 +5344,41 @@
       "detail": ""
     },
     {
+      "name": "document_encoding_fences:docs/实施/生成式受限修复与原素材复用-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式受限修复与原素材复用-v1.0.md->有声候选修复与原冻结转写额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/生成式无声售后与原媒体保留-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式无声售后与原媒体保留-v1.0.md->有声素材售后与原听音复核-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式无声售后与原媒体保留-v1.0.md->../verification/generated-aftercare-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式无声售后与原媒体保留-v1.0.md->../verification/generated-aftercare-api.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/生成式无声售后与原媒体保留-v1.0.md->客服素材纠错工作台-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/实施/生成式无声整包与阶段编排-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -4640,6 +5480,51 @@
     },
     {
       "name": "document_link:docs/实施/生成服务持久调用与媒体转存-v1.0.md->生成式购买门禁与MCP工具接入-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/相册分类保存与宿主回调-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/相册分类保存与宿主回调-v1.0.md->../../src/shared/ui/pack.tsx",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/相册分类保存与宿主回调-v1.0.md->../../src/shared/client/album.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/相册分类保存与宿主回调-v1.0.md->../../src/shared/platform/album-save.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/相册分类保存与宿主回调-v1.0.md->../../src/mini-alipay/host.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/相册分类保存与宿主回调-v1.0.md->../../src/mini-douyin/host.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/相册分类保存与宿主回调-v1.0.md->../../src/api/modules/delivery.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/相册分类保存与宿主回调-v1.0.md->../verification/album-save-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/相册分类保存与宿主回调-v1.0.md->../media/album-save/README.md",
       "status": "PASS",
       "detail": ""
     },
@@ -4780,6 +5665,136 @@
     },
     {
       "name": "document_link:docs/实施/私有对象登记与媒体物理回收-v1.0.md->数据库外删除日志与原生备份恢复-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/草稿恢复与方案规格续选-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/草稿恢复与方案规格续选-v1.0.md->../../src/shared/client/drafts.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/草稿恢复与方案规格续选-v1.0.md->../../src/shared/client/preset-selection.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/草稿恢复与方案规格续选-v1.0.md->../../src/shared/client/session.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/草稿恢复与方案规格续选-v1.0.md->../../src/shared/ui/drafts.tsx",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/草稿恢复与方案规格续选-v1.0.md->../../src/shared/ui/analysis.tsx",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/草稿恢复与方案规格续选-v1.0.md->../verification/draft-resume-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/草稿恢复与方案规格续选-v1.0.md->../media/draft-resume/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/订单反馈与售后记录-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/订单反馈与售后记录-v1.0.md->../../src/shared/ui/help.tsx",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/订单反馈与售后记录-v1.0.md->../../src/shared/client/support.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/订单反馈与售后记录-v1.0.md->../../src/shared/client/evidence.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/订单反馈与售后记录-v1.0.md->../../src/api/modules/support.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/订单反馈与售后记录-v1.0.md->../verification/support-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/订单反馈与售后记录-v1.0.md->../media/support/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/订单反馈与售后记录-v1.0.md->../verification/support-startup-initial.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/订单反馈与售后记录-v1.0.md->../../scripts/delivery/start.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/订单反馈与售后记录-v1.0.md->../../scripts/delivery/readiness.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/订单取消与原支付动作-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/订单取消与原支付动作-v1.0.md->../../src/api/modules/payment-actions.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/订单取消与原支付动作-v1.0.md->../../src/api/db/store.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/订单取消与原支付动作-v1.0.md->../../src/shared/client/order-actions.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/订单取消与原支付动作-v1.0.md->../../src/shared/ui/order.tsx",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/订单取消与原支付动作-v1.0.md->../verification/order-actions-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/实施/订单取消与原支付动作-v1.0.md->../media/order-actions/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/实施/逐张拍照与原上传批次-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -4990,6 +6005,21 @@
     },
     {
       "name": "document_encoding_fences:docs/开发/05-云端任务与生成管线.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/05-云端任务与生成管线.md->../实施/有声候选修复与原冻结转写额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/05-云端任务与生成管线.md->../实施/有声素材售后与原听音复核-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/05-云端任务与生成管线.md->../实施/生成式无声售后与原媒体保留-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -5339,6 +6369,11 @@
       "detail": ""
     },
     {
+      "name": "document_link:docs/开发/18-Codex接入验证与实施计划.md->../实施/有声候选修复与原冻结转写额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:docs/开发/18-Codex接入验证与实施计划.md->../实施/独立实例回收与冻结输入保留-v1.0.md",
       "status": "PASS",
       "detail": ""
@@ -5380,6 +6415,61 @@
     },
     {
       "name": "document_encoding_fences:docs/开发/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/有声候选修复与原冻结转写额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/有声素材售后与原听音复核-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/生成式无声售后与原媒体保留-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/客服素材纠错工作台-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/客服接单回复与处理工作台-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/订单反馈与售后记录-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/相册分类保存与宿主回调-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/订单取消与原支付动作-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/草稿恢复与方案规格续选-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/逐张拍照与原上传批次-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/开发/README.md->../实施/生成式受限修复与原素材复用-v1.0.md",
       "status": "PASS",
       "detail": ""
     },
@@ -6729,6 +7819,106 @@
       "detail": ""
     },
     {
+      "name": "document_encoding_fences:docs/media/album-save/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/album-save/README.md->walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/album-save/README.md->walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/album-save/README.md->walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/album-save/README.md->capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/album-save/README.md->01-save-options.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/album-save/README.md->02-partial-save.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/album-save/README.md->03-restored-progress.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/album-save/README.md->04-confirmed-completion.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/album-save/README.md->../../verification/album-save-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/media/draft-resume/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/draft-resume/README.md->walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/draft-resume/README.md->walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/draft-resume/README.md->walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/draft-resume/README.md->capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/draft-resume/README.md->01-resume-home.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/draft-resume/README.md->02-original-plan.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/draft-resume/README.md->03-server-drafts.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/draft-resume/README.md->04-selected-spec.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/draft-resume/README.md->../../verification/draft-resume-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_encoding_fences:docs/media/native-audio/README.md",
       "status": "PASS",
       "detail": ""
@@ -6810,6 +8000,261 @@
     },
     {
       "name": "document_link:docs/media/native-audio/README.md->synthetic-bed.wav",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/media/order-actions/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/order-actions/README.md->walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/order-actions/README.md->walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/order-actions/README.md->walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/order-actions/README.md->capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/order-actions/README.md->01-original-order.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/order-actions/README.md->02-cancelled.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/order-actions/README.md->03-refund-requested.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/order-actions/README.md->04-production-support.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/order-actions/README.md->../../verification/order-actions-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/media/photo-capture/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/photo-capture/README.md->walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/photo-capture/README.md->walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/photo-capture/README.md->walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/photo-capture/README.md->capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/photo-capture/README.md->01-empty.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/photo-capture/README.md->02-three-photos.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/photo-capture/README.md->03-five-photos.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/photo-capture/README.md->04-narrow.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/media/support/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support/README.md->walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support/README.md->walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support/README.md->walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support/README.md->capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support/README.md->01-feedback-form.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support/README.md->02-original-request-pending.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support/README.md->03-feedback-accepted.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support/README.md->04-reopened-history.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support/README.md->../../verification/support-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/media/support-desk/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-desk/README.md->01-independent-login.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-desk/README.md->02-authorized-proof.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-desk/README.md->03-original-claim-pending.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-desk/README.md->04-reply-and-resolution.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-desk/README.md->walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-desk/README.md->walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-desk/README.md->walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-desk/README.md->capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-desk/README.md->../../实施/客服接单回复与处理工作台-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-desk/README.md->../../verification/support-desk-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_encoding_fences:docs/media/support-repair/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-repair/README.md->../../实施/客服素材纠错工作台-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-repair/README.md->../../verification/support-repair-ui-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-repair/README.md->capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-repair/README.md->01-source-profile-and-pack.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-repair/README.md->02-private-delivered-image.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-repair/README.md->03-correction-review.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-repair/README.md->04-completed-linked-delivery.png",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-repair/README.md->walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-repair/README.md->walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:docs/media/support-repair/README.md->walkthrough.webm",
       "status": "PASS",
       "detail": ""
     },
@@ -7054,12 +8499,207 @@
       "detail": ""
     },
     {
+      "name": "document_link:README.md->docs/实施/有声候选修复与原冻结转写额度-v1.0.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
       "name": "document_link:README.md->assets/implementation/current.json",
       "status": "PASS",
       "detail": ""
     },
     {
       "name": "document_link:README.md->docs/verification/publication.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/delivery/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/delivery/current.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/verification/native-repair-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/support-repair/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/support-repair/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/support-repair/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/support-repair/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/support-repair/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/support-desk/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/support-desk/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/support-desk/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/support-desk/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/support-desk/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/support/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/support/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/support/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/support/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/support/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/album-save/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/album-save/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/album-save/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/album-save/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/album-save/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/order-actions/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/order-actions/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/order-actions/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/order-actions/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/order-actions/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/draft-resume/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/draft-resume/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/draft-resume/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/draft-resume/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/draft-resume/capture-manifest.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/photo-capture/README.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/photo-capture/walkthrough.gif",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/photo-capture/walkthrough.mp4",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/photo-capture/walkthrough.webm",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/media/photo-capture/capture-manifest.json",
       "status": "PASS",
       "detail": ""
     },
@@ -7320,6 +8960,11 @@
     },
     {
       "name": "document_link:README.md->docs/verification/repair-cost-native-source.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "name": "document_link:README.md->docs/delivery/README.md",
       "status": "PASS",
       "detail": ""
     },

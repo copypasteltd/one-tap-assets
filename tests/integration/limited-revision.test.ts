@@ -25,7 +25,7 @@ import {PublicationService} from '../../src/worker/review/publication.js';
 import {RevisionService} from '../../src/worker/revisions/service.js';
 import {REVISION_STAGES} from '../../src/worker/revisions/contract.js';
 import {revisionContext} from '../../src/worker/revisions/context.js';
-import {candidateBytes,revisionPacket} from '../../src/worker/revisions/media.js';
+import {candidateBytes,revisionPacket,revisionImages} from '../../src/worker/revisions/media.js';
 import {validateRevisionReview} from '../../src/worker/revisions/review.js';
 import {reserveRevisionCost,settleRevisionCost} from '../../src/worker/revisions/budget.js';
 import {stopScope} from '../../src/worker/lifecycle/termination.js';
@@ -105,6 +105,38 @@ beforeAll(async()=>{
   worker=new RevisionService(db.pool,f.cfg,f.store,new CodexRuntimeAdapter(db.pool,f.cfg,new RevisionLauncher()));
 });
 afterAll(async()=>{controller.abort();await consumer;await app?.close();await db?.close();});
+
+it('renders and publishes a real image title with fresh complete images and rejects a changed output intent or late image bytes',async()=>{
+  const fixture=await delivered(),parent=await getDeliverables(db.pool,fixture.p,fixture.orderId),target=parent.items.find(i=>i.kind==='image')!;
+  expect(parent.revision_capabilities).toContain('IMAGE_TEXT');
+  const sold=(await db.pool.query('SELECT private,deadline_at,budget_micro FROM orders WHERE id=$1',[fixture.orderId])).rows[0];
+  const revision=await transaction(db.pool,tx=>requestRevision(tx,fixture.p,fixture.orderId,{kind:'IMAGE_TEXT',manifest_revision:1,
+    image_text:{deliverable_id:target.deliverable_id,text:'看得见的真实细节'}}));
+  const worker=new RevisionService(db.pool,fixture.cfg,fixture.store,new CodexRuntimeAdapter(db.pool,fixture.cfg,new RevisionLauncher()));
+  for(const name of REVISION_STAGES){
+    const lease=await next(name);expect(lease.scope_id).toBe(revision.revision_id);
+    const commit=await whileLease(lease,()=>worker.handle(lease,controller.signal));
+    const context=await revisionContext(db.pool,fixture.p.tenantId,revision.revision_id);
+    if(name==='REVISION')await expect(db.pool.query("UPDATE revision_requests SET private=jsonb_set(private,'{image_text_output,proof,text}','\"changed\"'::jsonb) WHERE id=$1",[revision.revision_id]))
+      .rejects.toThrow('immutable');
+    if(name==='REVISION_COMPLETE'){
+      const packet=revisionPacket(context),changed=packet.candidate.items.find(i=>i.slot_id===target.slot_id)!;
+      const images=await revisionImages(db.pool,fixture.cfg,fixture.store,context);
+      expect(images.find(i=>i.asset_id===changed.deliverable_id)?.sha256).toBe(changed.sha256);
+      expect(changed.sha256).not.toBe(target.sha256);expect(packet.candidate.items.filter(i=>i.slot_id!==target.slot_id)).toEqual(parent.items.filter(i=>i.slot_id!==target.slot_id));
+      const bytes=await candidateBytes(db.pool,fixture.store,context,changed),artifact=(await db.pool.query('SELECT object_key FROM artifacts WHERE id=$1',[changed.deliverable_id])).rows[0];
+      try{await fixture.store.put(artifact.object_key,Buffer.from('late substituted image'),'image/png');
+        await expect(completeStage(db.pool,lease,commit)).rejects.toMatchObject({code:'ARTIFACT_HASH_MISMATCH'});
+        expect((await getDeliverables(db.pool,fixture.p,fixture.orderId)).manifest_revision).toBe(1);
+      }finally{await fixture.store.put(artifact.object_key,bytes,'image/png');}
+    }
+    await completeStage(db.pool,lease,commit);
+  }
+  const updated=await getDeliverables(db.pool,fixture.p,fixture.orderId),edited=updated.items.find(i=>i.slot_id===target.slot_id)!;
+  expect(updated.manifest_revision).toBe(2);expect(updated.cover_deliverable_id).toBe(edited.deliverable_id);
+  const row=(await db.pool.query('SELECT private,deadline_at,budget_micro FROM orders WHERE id=$1',[fixture.orderId])).rows[0];expect(row).toEqual(sold);
+  expect((await db.pool.query('SELECT count(*)::int AS n FROM delivery_manifests WHERE order_id=$1',[fixture.orderId])).rows[0].n).toBe(2);
+},240000);
 
 it('keeps the sold aftercare allowance inside the original total instead of making it an extra production budget',async()=>{
   // Accounting boundary only; this minimal order is not a media or delivery fixture.

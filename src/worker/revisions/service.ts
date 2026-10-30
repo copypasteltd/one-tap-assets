@@ -55,7 +55,7 @@ export class RevisionService {
         input:{phase:role,packet_hash:revisionPacket(c).packet_hash,request:c.input.request,profile:c.contract.profile,source:c.contract.source,
           original_plan:c.contract.creative,parent_manifest:c.parent,packet:revisionPacket(c),
           ...(revisionPacket(c).native_audio?{retained_native_audio:revisionPacket(c).native_audio}:{}),
-          task:`独立复核本次修改的${role==='REVIEW_FACTS'?'商品事实、原意、身份和交付规格':'风格、可读性、封面及展示顺序'}。调用extract_review_evidence并检查全部原图及实际视频画面。有声单读取完整原听音观察、实际转写、字幕、时间码及声音检测，对照新文案确认不改变原声语义，不把脚本文字当实际听音。配套文案不得新增事实；图片、字幕、音轨与视频内容必须保持原版。报告覆盖完整素材、画面及全部声音证据，问题绑定实际asset_id。只有全部符合才PASS，persist_stage_result后原样返回。`}};
+          task:`独立复核本次修改的${role==='REVIEW_FACTS'?'商品事实、原意、身份和交付规格':'风格、可读性、封面及展示顺序'}。调用extract_review_evidence并检查全部原图及实际视频画面。有声单读取完整原听音观察、实际转写、字幕、时间码及声音检测，对照新文案确认不改变原声语义，不把脚本文字当实际听音。配套文案不得新增事实；仅IMAGE_TEXT可按冻结标题区生成一张新图，必须检查新增图片实际像素、完整商品及全部标题，不能用旧图代替；其余图片、字幕、音轨与视频内容保持原版。报告覆盖完整素材、画面及全部声音证据，问题绑定实际asset_id。只有全部符合才PASS，persist_stage_result后原样返回。`}};
     const result=await this.execute(request,signal);
     requireThat(hash(result.result)===result.resultHash,'REVISION_ROLE_CHECKPOINT_CHANGED','修改角色结果摘要不一致',503);
     return async db=>{const current=await revisionContext(db,lease.tenant_id,lease.scope_id,lease.input_hash,true);
@@ -81,7 +81,8 @@ export class RevisionService {
       requireThat(!signal.aborted,'REVISION_ABORTED','修改发布已经中断',409);
       const manifest=validate('Deliverables',{order_id:current.row.order_id,manifest_id:`manifest_${hash({revision:current.row.id,packet:packet.packet_hash}).slice(0,40)}`,
         manifest_revision:current.parent.manifest_revision+1,expires_at:current.parent.expires_at,items:packet.candidate.items,
-        parent_manifest_id:current.parent.manifest_id,revision_id:current.row.id,cover_deliverable_id:packet.candidate.cover_deliverable_id},true);
+        parent_manifest_id:current.parent.manifest_id,revision_id:current.row.id,cover_deliverable_id:packet.candidate.cover_deliverable_id,
+        ...(current.parent.revision_capabilities?{revision_capabilities:current.parent.revision_capabilities}:{})},true);
       await insert(db,'delivery_manifests',{id:manifest.manifest_id,tenant_id:current.row.tenant_id,owner_id:current.row.owner_id,order_id:current.row.order_id,
         revision:manifest.manifest_revision,hash:hash(manifest),data:manifest,expires_at:manifest.expires_at,delivered_at:iso(),
         private:{revision_id:current.row.id,parent_manifest_hash:current.input.parent_manifest_hash,packet_hash:packet.packet_hash,review_hash:hash(current.row.private.review_reports)}});

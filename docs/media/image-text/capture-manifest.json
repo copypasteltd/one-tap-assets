@@ -1,0 +1,67 @@
+{
+  "captured_at": "2026-10-30T03:01:32.869Z",
+  "source_set_hash": "bc77e6cf3c2a93190613ff8971c5c018320734f9446e62175cd699a097d8e41d",
+  "build_root": "runtime/delivery-builds/2026-10-30T02-42-13-423Z-1d5834e0/runtime/build",
+  "type": "ACTUAL_SHARED_MINI_COMPONENT_HTTPS_FIVE_STAGE_IMAGE_TITLE",
+  "synthetic_product_semantics_identity_and_metering": true,
+  "native_mini_device_verified": false,
+  "production_admitted": false,
+  "full_product_verified": false,
+  "browser_tabs_closed": true,
+  "owned_api_and_database_pool_closed": true,
+  "capture_script": {
+    "path": "docs/media/image-text/capture.mts",
+    "sha256": "1876051070798fa7234509e650d5ca473570a1263ce3182ebcdd14fc9e60c8dd"
+  },
+  "checks": [
+    "EMPTY_TITLE_CANNOT_SUBMIT",
+    "SHARED_MINI_COMPONENT_POSTS_REAL_FROZEN_IMAGE_REQUEST",
+    "ACTUAL_FIVE_STAGE_IMAGE_PIXELS_FRESH_DUAL_REVIEW_AND_DOWNLOAD_SHA",
+    "COMPONENT_POLLS_ORIGINAL_REQUEST_AND_LOADS_ACTUAL_NEW_MANIFEST",
+    "NO_HORIZONTAL_OVERFLOW_AT_430PX"
+  ],
+  "browser_errors": [],
+  "external_network_requests": [],
+  "files": [
+    {
+      "path": "docs/media/image-text/original.png",
+      "bytes": 19377,
+      "sha256": "1390827ae98d2d90ae20670bc2c8605e2645f5306db2c90a28efc20dfc2a7fb7"
+    },
+    {
+      "path": "docs/media/image-text/edited.png",
+      "bytes": 66893,
+      "sha256": "b17702f55da20613779e0b68091c4df9e804479e3e1d6f92b4ed7ba4508297eb"
+    },
+    {
+      "path": "docs/media/image-text/01-delivered-pack.png",
+      "bytes": 51494,
+      "sha256": "2da8868fe023e3f46656a2e4f56686903d8414929545c4d845e6ad340045e353"
+    },
+    {
+      "path": "docs/media/image-text/02-image-title.png",
+      "bytes": 60997,
+      "sha256": "a1fac98edf982c6557b8dcacbe4151e126800721ebc338a8a196bf4927d32d1c"
+    },
+    {
+      "path": "docs/media/image-text/03-new-image-delivered.png",
+      "bytes": 51580,
+      "sha256": "43db72f94e056a7cdcbffefa5f4bffd354aeb6b725a895bbf4c2785ea7f2e9f2"
+    },
+    {
+      "path": "docs/media/image-text/walkthrough.webm",
+      "bytes": 2360430,
+      "sha256": "58b289f52ef99d0a0d281849dd65f5a492af1b935630eed9d8bfe247f1673eda"
+    },
+    {
+      "path": "docs/media/image-text/walkthrough.mp4",
+      "bytes": 310901,
+      "sha256": "b051c610ca846db63659b0ebac3ef16bcfa033bb95a3164cf53a078cce4a7564"
+    },
+    {
+      "path": "docs/media/image-text/walkthrough.gif",
+      "bytes": 3410969,
+      "sha256": "64166ff7a723d85880b55772eb9368bd163bc86b6fa1d248cba0f95d0ae1e334"
+    }
+  ]
+}

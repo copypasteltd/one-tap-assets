@@ -132,3 +132,5 @@
 | GET /support-tickets/{ticket_id} | getManagedSupportTicket | support:read |
 | GET /support-tickets/{ticket_id}/evidence/{asset_id} | readSupportEvidence | support:evidence |
 | POST /support-tickets/{ticket_id}/process | processSupportTicket | support:write |
+| GET /support-tickets/{ticket_id}/repair-context | getSupportRepairContext | support:repair |
+| GET /support-tickets/{ticket_id}/repair-manifests/{manifest_revision}/images/{deliverable_id} | readSupportRepairImage | support:repair |

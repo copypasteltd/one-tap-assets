@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T02:22:32.944565+00:00",
+  "checked_at": "2026-10-30T03:01:25.967544+00:00",
   "status": "PASS_FOCUSED_SOURCE_DELIVERY",
-  "scope": "NATIVE_FAILED_CANDIDATE_REPAIR_CLOSURE",
-  "reason": "User requested main-function closure and packaging without comprehensive green tests; only the named focused cases and current server/web builds were checked.",
+  "scope": "IMAGE_TEXT_REVISION_CLOSURE",
+  "reason": "User requested fast main-function closure and packaging without comprehensive green tests; only named focused cases, local startup, current server/web builds and the shared-component capture were checked.",
   "original_publication_checker_status": "NOT_RUN",
   "checker_weakened": false,
-  "source_set_hash": "f159bc5f7bd4124745f050e04e16f72bc31a6f1ce46387b48e47eabcd326130a",
-  "source_files": 418,
+  "source_set_hash": "bc77e6cf3c2a93190613ff8971c5c018320734f9446e62175cd699a097d8e41d",
+  "source_files": 421,
   "builds_passed": false,
   "selected_builds_passed": true,
   "checks": [
@@ -23,8 +23,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 6505,
-      "log_path": "runtime/delivery-builds/2026-10-30T02-13-49-020Z-71e33019/typecheck.log",
+      "elapsed_ms": 8835,
+      "log_path": "runtime/delivery-builds/2026-10-30T02-42-13-423Z-1d5834e0/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -40,29 +40,29 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 282,
-      "log_path": "runtime/delivery-builds/2026-10-30T02-13-49-020Z-71e33019/server.log",
+      "elapsed_ms": 290,
+      "log_path": "runtime/delivery-builds/2026-10-30T02-42-13-423Z-1d5834e0/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T02-13-49-020Z-71e33019\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T02-42-13-423Z-1d5834e0\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T02-13-49-020Z-71e33019\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T02-42-13-423Z-1d5834e0\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 686,
-      "log_path": "runtime/delivery-builds/2026-10-30T02-13-49-020Z-71e33019/preview.log",
-      "log_sha256": "89bf182facb9a9b22ba91276bc68dd76c96b7dadc9a589628a34687e99ab431b"
+      "elapsed_ms": 547,
+      "log_path": "runtime/delivery-builds/2026-10-30T02-42-13-423Z-1d5834e0/preview.log",
+      "log_sha256": "1887d0fd7661677837904c5ff4ad703f2c410e0febce7a6799c5d9c4c5cccd13"
     }
   ],
   "local_checks": {
@@ -70,11 +70,11 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 0.707,
+      "elapsed_seconds": 0.532,
       "log_path": "runtime/delivery/doctor-focused.log",
-      "log_sha256": "ce16aef54ac475d3add273669a121d4070712421475bc3dcea7dbfa0dd4e41bf",
+      "log_sha256": "c004730ca18e9a3506a171508572c62f472fc840bef83eb666112422aa205fca",
       "report": {
-        "checked_at": "2026-10-30T02:18:59.586Z",
+        "checked_at": "2026-10-30T02:51:05.199Z",
         "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
         "rows": [
           {
@@ -100,7 +100,7 @@
           {
             "id": "database",
             "status": "PASS",
-            "detail": "connected; 28 migrations"
+            "detail": "connected; 29 migrations"
           },
           {
             "id": "ffmpeg",
@@ -166,9 +166,9 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 2.213,
+      "elapsed_seconds": 2.243,
       "log_path": "runtime/delivery/backend-focused.log",
-      "log_sha256": "3ed44092681d1a544235a6ef241f8dc1c99b981dcdf4386778caeafd0e54e275",
+      "log_sha256": "c8f3511e8c77430d4f3cfccbdd4f6c11056c706fe181ba13d00264430250fa05",
       "local_stack_ready": true,
       "preview_http_ready": false
     },
@@ -176,23 +176,22 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 0.96,
+      "elapsed_seconds": 0.884,
       "log_path": "runtime/delivery/preview-focused.log",
       "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
       "local_stack_ready": false,
       "preview_http_ready": true
     }
   },
-  "unit_cases": 4,
-  "database_and_original_asr_cases": 4,
-  "native_api_cases": 2,
-  "not_selected_database_cases": 20,
-  "not_selected_native_cases": 25,
-  "browser_checks": "NOT_RUN",
+  "unit_cases": 8,
+  "api_cases": 4,
+  "not_selected_api_cases": 42,
+  "browser_checks": 5,
+  "new_media_files": 8,
   "full_suite_executed": false,
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "evidence": "docs/verification/native-repair-source.json",
-  "historical_publication": "docs/verification/publication-191b9eb.json"
+  "evidence": "docs/verification/image-text-source.json",
+  "historical_publication": "docs/verification/publication-b31b408.json"
 }

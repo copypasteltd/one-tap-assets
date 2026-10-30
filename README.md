@@ -2,7 +2,7 @@
 
 [中文](README.md) · [English](README.en.md) · [文档目录](docs/README.md) · [快速启动](docs/guides/QUICKSTART.md) · [实现与待办](docs/guides/STATUS.md) · [更新记录](CHANGELOG.md)
 
-本轮收口[有声候选失败修复](docs/实施/有声候选修复与原冻结转写额度-v1.0.md)：两生成路线可在下单前冻结的一次额外识别/听音额度内，限定重制、新验收并交付，修复后可继续已有封面售后。旧订单不增次数，原预算与截止不变。4单元、4数据库/旧识别回归、2条原生整链通过；不等待全面测试。
+本轮收口[图片加字与实际素材售后](docs/实施/图片加字与实际素材售后-v1.0.md)：小程序领取页选图并输入短标题，实际生成保留完整原画面的标题卡PNG，重新验收后交付新版本；客服原工单同类纠错接通。三路线专项通过，原音视频/预算/次数/截止保持；旧订单无授权不增加权益。
 
 **拍下商品，选一套方案，得到成体系的商品素材。** 一品成片以支付宝小程序、抖音小程序为主要入口，把商品识别、内容规划、图片/视频制作、后期、验收和素材领取组织成可恢复的云端服务。网页 Plus 定位于复杂编辑与深化制作，属于后续 P1 范围。
 
@@ -10,8 +10,14 @@
 
 快速交付入口：[交付与启动指南](docs/delivery/README.md)。执行`.\scripts\setup-local.ps1`初始化，再用`doctor`自检、`local:start`启动后端、`preview:serve`查看共享页面。`delivery:build --smoke`只做有界构建和核心冒烟，`delivery:package`生成源码与实际成功产物ZIP；按本轮要求不等待全面测试绿灯。
 
-当前候选：类型/server/preview/自检/启动PASS；4单元、4数据库回归、2条有声修复整链通过，分别20/25项旧用例未选。绑定418源码/42契约/4资源，`f159bc5f`，28迁移。全面测试/双小程序重编/浏览器复录NOT_RUN；85历史媒体和C设计保持。见[交付记录](docs/delivery/current.json)、[精确来源](docs/verification/native-repair-source.json)。
+当前候选：类型/server/preview/自检/启动PASS；8单元、4项三路线/迁移API专项与5项共享组件录制检查通过，42旧API用例未选。绑定421源码/42契约/4资源，`bc77e6cf`，29迁移。全面测试/双小程序重编NOT_RUN；85历史媒体/C设计原字节保持，新录8媒体。见[交付记录](docs/delivery/current.json)、[精确来源](docs/verification/image-text-source.json)。
 
+
+最新实际图片修改 / Latest actual image revision: [操作与来源](docs/media/image-text/README.md)
+
+![图片加字与重新交付 / Image title and a new delivered version](docs/media/image-text/walkthrough.gif)
+
+[MP4](docs/media/image-text/walkthrough.mp4) · [WebM](docs/media/image-text/walkthrough.webm) · [实际原图与新图 / Actual before and after](docs/media/image-text/README.md)。真实共享组件、HTTPS、五阶段和新PNG；商品/语义/身份/计量合成，非宿主真机或生产证明。Actual shared-component and native file effects with synthetic product/semantic/identity/metering inputs.
 
 最新素材纠错 / Latest support repair: [操作与来源](docs/media/support-repair/README.md)
 

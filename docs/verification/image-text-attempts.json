@@ -1,0 +1,144 @@
+{
+  "checked_at": "2026-10-30T03:01:25.967544+00:00",
+  "attempts": [
+    {
+      "base": "runtime/test-results/image-text-2026-10-30T02-39-22-300Z",
+      "build_id": "2026-10-30T02-38-59-812Z-d0aec451",
+      "source_set_hash": "acf87dd06d80ee9be5535b8ad984560734286a19801e4290932baad06c9ac7f0",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.config.ts tests/unit/image-text-revision.test.ts tests/unit/revision-progress.test.ts --outputFile.json=runtime/test-results/image-text-2026-10-30T02-39-22-300Z/unit.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.config.ts",
+            "tests/unit/image-text-revision.test.ts",
+            "tests/unit/revision-progress.test.ts",
+            "--outputFile.json=runtime/test-results/image-text-2026-10-30T02-39-22-300Z/unit.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 90000,
+          "elapsed_ms": 1694,
+          "log_path": "runtime/test-results/image-text-2026-10-30T02-39-22-300Z/unit.log",
+          "log_sha256": "5951ef2b9ef04dfe02cf2131a9a085425c6fd12f4b5d332bb7203f5b3ae6b240"
+        },
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/limited-revision.test.ts tests/integration/native-order.test.ts tests/integration/native-repair-migration.test.ts -t renders and publishes a real image title|adds an actual image title|upgrades the original native ASR --outputFile.json=runtime/test-results/image-text-2026-10-30T02-39-22-300Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/limited-revision.test.ts",
+            "tests/integration/native-order.test.ts",
+            "tests/integration/native-repair-migration.test.ts",
+            "-t",
+            "renders and publishes a real image title|adds an actual image title|upgrades the original native ASR",
+            "--outputFile.json=runtime/test-results/image-text-2026-10-30T02-39-22-300Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 660000,
+          "elapsed_ms": 82261,
+          "log_path": "runtime/test-results/image-text-2026-10-30T02-39-22-300Z/api.log",
+          "log_sha256": "d23febf7c1d5d6c6fdb5f2b792bce787d48b0170525cacd1bae6379425d9c152"
+        }
+      ],
+      "source_report": "docs/verification/image-text-attempt-1-source.json",
+      "build_report": "docs/verification/image-text-attempt-1-build.json",
+      "reports": {
+        "unit": "docs/verification/image-text-attempt-1-unit.json",
+        "api": "docs/verification/image-text-attempt-1-api.json"
+      }
+    },
+    {
+      "base": "runtime/test-results/image-text-2026-10-30T02-42-55-662Z",
+      "build_id": "2026-10-30T02-42-13-423Z-1d5834e0",
+      "source_set_hash": "bc77e6cf3c2a93190613ff8971c5c018320734f9446e62175cd699a097d8e41d",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.config.ts tests/unit/image-text-revision.test.ts tests/unit/revision-progress.test.ts --outputFile.json=runtime/test-results/image-text-2026-10-30T02-42-55-662Z/unit.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.config.ts",
+            "tests/unit/image-text-revision.test.ts",
+            "tests/unit/revision-progress.test.ts",
+            "--outputFile.json=runtime/test-results/image-text-2026-10-30T02-42-55-662Z/unit.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 90000,
+          "elapsed_ms": 1575,
+          "log_path": "runtime/test-results/image-text-2026-10-30T02-42-55-662Z/unit.log",
+          "log_sha256": "47de7d115e2043c3de2e8e09043058617985f0330d73847e5c7cb4d73c57d1e9"
+        },
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/limited-revision.test.ts tests/integration/native-order.test.ts tests/integration/native-repair-migration.test.ts -t renders and publishes a real image title|adds an actual image title|upgrades the original native ASR --outputFile.json=runtime/test-results/image-text-2026-10-30T02-42-55-662Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/limited-revision.test.ts",
+            "tests/integration/native-order.test.ts",
+            "tests/integration/native-repair-migration.test.ts",
+            "-t",
+            "renders and publishes a real image title|adds an actual image title|upgrades the original native ASR",
+            "--outputFile.json=runtime/test-results/image-text-2026-10-30T02-42-55-662Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 660000,
+          "elapsed_ms": 263329,
+          "log_path": "runtime/test-results/image-text-2026-10-30T02-42-55-662Z/api.log",
+          "log_sha256": "3c57b5858370088dc1602d9bf33c3dde6c485d3e60bb7ea0f560978589f53415"
+        }
+      ],
+      "source_report": "docs/verification/image-text-attempt-2-source.json",
+      "build_report": "docs/verification/image-text-attempt-2-build.json",
+      "reports": {
+        "unit": "docs/verification/image-text-attempt-2-unit.json",
+        "api": "docs/verification/image-text-attempt-2-api.json"
+      }
+    }
+  ],
+  "failed_test_attempts_preserved": 1,
+  "notes": [
+    "Attempt 1 produced a revised native image, then the fixture incorrectly requested an execution-only context after COMPLETED. The original permission gate correctly refused it.",
+    "Only the fixture inspection changed to read its completed private QC packet. No production permission or immutable gate was weakened. The current build passes 8 unit and 4 selected API cases; 42 existing API cases were not selected.",
+    "Browser capture separately used the real shared mini-program component and HTTPS API; record setup/navigation attempts are listed below."
+  ],
+  "browser_capture_attempts": {
+    "initial_environment_log_sha256": "751cec00bcb1e25abaa9f5492cf2ccfe6e451d8435bd69bfc665c72cac8fcd83",
+    "initial_environment_cause": "Direct launcher omitted PLAYWRIGHT_BROWSERS_PATH; project-local ffmpeg-1013 already existed. No new browser binary downloaded.",
+    "navigation_logs": [
+      {
+        "path": "runtime/tmp/image-text-capture-navigation.log",
+        "sha256": "a77a25c283019cb328a68e126c860b07c339f266878a6566ac0e5ede8cf1db5b"
+      },
+      {
+        "path": "runtime/tmp/image-text-capture-domloaded.log",
+        "sha256": "0f8a9f99ac9da3a0cb20371d179a85576a7b0f63928979b681e2be41a791003f"
+      }
+    ],
+    "final_capture": "docs/media/image-text/capture-manifest.json"
+  }
+}

@@ -55,7 +55,7 @@ export async function supportRepairContext(db:Db,cfg:Config,admin:ManagementPrin
   if(calls.reduce((n,c)=>n+Number(c.n),0)+3>source.policy.limits.max_requests
     ||['POST','REVIEW_FACTS','REVIEW_STYLE'].some(role=>Number(calls.find(c=>c.role===role)?.n??0)>=source.policy.limits.max_requests_per_role!))result.reason_codes.push('CODEX_ROLE_INFERENCE_LIMIT');
   result.can_submit=result.reason_codes.length===0;
-  if(result.can_submit)result.allowed_changes=['COVER','ALLOWED_ORDER','DISPLAY_TEXT'];
+  if(result.can_submit)result.allowed_changes=['COVER','ALLOWED_ORDER','DISPLAY_TEXT',...(source.policy.image_text?['IMAGE_TEXT' as const]:[])];
   await audit(db,ticket.tenant_id,admin.actor,'SUPPORT_REPAIR_CONTEXT_READ',ticket.id,{manifest_revision:manifest.data.manifest_revision,linked_revision:repair?.revision_id??null},traceId);
   return result;
 }

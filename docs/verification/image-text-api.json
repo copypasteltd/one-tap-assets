@@ -1,0 +1,522 @@
+{
+  "numTotalTestSuites": 3,
+  "numPassedTestSuites": 3,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 46,
+  "numPassedTests": 4,
+  "numFailedTests": 0,
+  "numPendingTests": 42,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793328178083,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "renders and publishes a real image title with fresh complete images and rejects a changed output intent or late image bytes",
+          "status": "passed",
+          "title": "renders and publishes a real image title with fresh complete images and rejects a changed output intent or late image bytes",
+          "duration": 26509.034600000003,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps the sold aftercare allowance inside the original total instead of making it an extra production budget",
+          "status": "skipped",
+          "title": "keeps the sold aftercare allowance inside the original total instead of making it an extra production budget",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects mixed fields, no-op, stale manifests, unsupported claims and foreign ownership before allocating a revision",
+          "status": "skipped",
+          "title": "rejects mixed fields, no-op, stale manifests, unsupported claims and foreign ownership before allocating a revision",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "serializes concurrent claims, replays the original receipt and recovers records only for the owner",
+          "status": "skipped",
+          "title": "serializes concurrent claims, replays the original receipt and recovers records only for the owner",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "protects frozen inputs, deadline, policy ceiling and already published parent bytes",
+          "status": "skipped",
+          "title": "protects frozen inputs, deadline, policy ceiling and already published parent bytes",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps UNKNOWN costs reserved across a failed request and settles the original intent before retry",
+          "status": "skipped",
+          "title": "keeps UNKNOWN costs reserved across a failed request and settles the original intent before retry",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "changes actual copy bytes and recovers a completed POST checkpoint without purchasing a second inference",
+          "status": "skipped",
+          "title": "changes actual copy bytes and recovers a completed POST checkpoint without purchasing a second inference",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "checks actual candidate bytes and seals a new packet with all original and video pictures",
+          "status": "skipped",
+          "title": "checks actual candidate bytes and seals a new packet with all original and video pictures",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects stale reports and preserves the original delivery when the independent style review fails",
+          "status": "skipped",
+          "title": "rejects stale reports and preserves the original delivery when the independent style review fails",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "retries within the original shared budget and requires two fresh reviews before preparing atomic publication",
+          "status": "skipped",
+          "title": "retries within the original shared budget and requires two fresh reviews before preparing atomic publication",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rolls back expired final fences and byte tampering before atomically publishing the linked new version",
+          "status": "skipped",
+          "title": "rolls back expired final fences and byte tampering before atomically publishing the linked new version",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "expires revision work without changing the original delivery deadline or asking for a refund",
+          "status": "skipped",
+          "title": "expires revision work without changing the original delivery deadline or asking for a refund",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "reclaims a late object PUT when revision permission ends and never issues a second PUT for the same key",
+          "status": "skipped",
+          "title": "reclaims a late object PUT when revision permission ends and never issues a second PUT for the same key",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "completes a cover change using existing image bytes and retains the original expiry",
+          "status": "skipped",
+          "title": "completes a cover change using existing image bytes and retains the original expiry",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "publishes a reordered full manifest without changing any image, video or copy file",
+          "status": "skipped",
+          "title": "publishes a reordered full manifest without changing any image, video or copy file",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "includes all revision roles in privacy scope and withdraws delivery before physical erasure",
+          "status": "skipped",
+          "title": "includes all revision roles in privacy scope and withdraws delivery before physical erasure",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793328409500,
+      "endTime": 1793328436009.0347,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/limited-revision.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "persists original independent listening for PER_SHOT_AI and keeps insufficient synthetic observations out of delivery",
+          "status": "skipped",
+          "title": "persists original independent listening for PER_SHOT_AI and keeps insufficient synthetic observations out of delivery",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "persists original independent listening for REFERENCE_FILM and keeps insufficient synthetic observations out of delivery",
+          "status": "skipped",
+          "title": "persists original independent listening for REFERENCE_FILM and keeps insufficient synthetic observations out of delivery",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "binds synthetic native final review and delivery for PER_SHOT_AI to one original listening receipt",
+          "status": "skipped",
+          "title": "binds synthetic native final review and delivery for PER_SHOT_AI to one original listening receipt",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "binds synthetic native final review and delivery for REFERENCE_FILM to one original listening receipt",
+          "status": "skipped",
+          "title": "binds synthetic native final review and delivery for REFERENCE_FILM to one original listening receipt",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "blocks synthetic native final review publication after durable voice revocation before commit",
+          "status": "skipped",
+          "title": "blocks synthetic native final review publication after durable voice revocation before commit",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "blocks synthetic native final review when OMIT_ROLE_LISTENING is missing",
+          "status": "skipped",
+          "title": "blocks synthetic native final review when OMIT_ROLE_LISTENING is missing",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "blocks synthetic native final review when OMIT_TOOL_LISTENING is missing",
+          "status": "skipped",
+          "title": "blocks synthetic native final review when OMIT_TOOL_LISTENING is missing",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "recovers only the saved original independent listening response after UNKNOWN without a second purchase",
+          "status": "skipped",
+          "title": "recovers only the saved original independent listening response after UNKNOWN without a second purchase",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "holds delivery and retains original costs after independent listening BAD_RESULT",
+          "status": "skipped",
+          "title": "holds delivery and retains original costs after independent listening BAD_RESULT",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "holds delivery and retains original costs after independent listening CACHED",
+          "status": "skipped",
+          "title": "holds delivery and retains original costs after independent listening CACHED",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "holds delivery and retains original costs after independent listening REVOKE",
+          "status": "skipped",
+          "title": "holds delivery and retains original costs after independent listening REVOKE",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "seals private PER_SHOT_AI native production/ASR/POST/QC through real HTTPS/MCP while independent listening and delivery stay closed",
+          "status": "skipped",
+          "title": "seals private PER_SHOT_AI native production/ASR/POST/QC through real HTTPS/MCP while independent listening and delivery stay closed",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "seals private REFERENCE_FILM native production/ASR/POST/QC through real HTTPS/MCP while independent listening and delivery stay closed",
+          "status": "skipped",
+          "title": "seals private REFERENCE_FILM native production/ASR/POST/QC through real HTTPS/MCP while independent listening and delivery stay closed",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "refuses native QC sealing after original-write is revoked between preparation and commit",
+          "status": "skipped",
+          "title": "refuses native QC sealing after original-write is revoked between preparation and commit",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "refuses native QC sealing after voice-license is revoked between preparation and commit",
+          "status": "skipped",
+          "title": "refuses native QC sealing after voice-license is revoked between preparation and commit",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "restores the stored POST receipt after its transaction rolls back without another ASR or render generation",
+          "status": "skipped",
+          "title": "restores the stored POST receipt after its transaction rolls back without another ASR or render generation",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "defers the original UNKNOWN ASR acknowledgement and never replaces its source or purchase",
+          "status": "skipped",
+          "title": "defers the original UNKNOWN ASR acknowledgement and never replaces its source or purchase",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects missing licensed music bytes before reference generation or inference",
+          "status": "skipped",
+          "title": "rejects missing licensed music bytes before reference generation or inference",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects changed licensed music bytes before reference generation or inference",
+          "status": "skipped",
+          "title": "rejects changed licensed music bytes before reference generation or inference",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects a different artifact, invented assembly proof and changed original bytes before ASR",
+          "status": "skipped",
+          "title": "rejects a different artifact, invented assembly proof and changed original bytes before ASR",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects native POST commit after voice revocation and exposes no READY post checkpoint",
+          "status": "skipped",
+          "title": "rejects native POST commit after voice revocation and exposes no READY post checkpoint",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "keeps public order creation closed for a structurally valid internal native contract",
+          "status": "skipped",
+          "title": "keeps public order creation closed for a structurally valid internal native contract",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "assembles and rechecks both original tone segments losslessly, rejecting a gap and replaced PCM evidence",
+          "status": "skipped",
+          "title": "assembles and rechecks both original tone segments losslessly, rejecting a gap and replaced PCM evidence",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "retains original native audio for PER_SHOT_AI aftercare with fresh reviews and no new generation ASR or listening purchases",
+          "status": "skipped",
+          "title": "retains original native audio for PER_SHOT_AI aftercare with fresh reviews and no new generation ASR or listening purchases",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "retains original native audio for REFERENCE_FILM aftercare with fresh reviews and no new generation ASR or listening purchases",
+          "status": "skipped",
+          "title": "retains original native audio for REFERENCE_FILM aftercare with fresh reviews and no new generation ASR or listening purchases",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "repairs a native PER_SHOT_AI failed video using its pre-sale ASR allowance and fresh listening before delivery",
+          "status": "skipped",
+          "title": "repairs a native PER_SHOT_AI failed video using its pre-sale ASR allowance and fresh listening before delivery",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "repairs a native REFERENCE_FILM failed video using its pre-sale ASR allowance and fresh listening before delivery",
+          "status": "skipped",
+          "title": "repairs a native REFERENCE_FILM failed video using its pre-sale ASR allowance and fresh listening before delivery",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "adds an actual image title to a delivered native PER_SHOT_AI pack without buying generation ASR or listening again",
+          "status": "passed",
+          "title": "adds an actual image title to a delivered native PER_SHOT_AI pack without buying generation ASR or listening again",
+          "duration": 119391.85919999999,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "adds an actual image title to a delivered native REFERENCE_FILM pack without buying generation ASR or listening again",
+          "status": "passed",
+          "title": "adds an actual image title to a delivered native REFERENCE_FILM pack without buying generation ASR or listening again",
+          "duration": 83058.4629,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793328181192,
+      "endTime": 1793328383645.463,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/native-order.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "upgrades the original native ASR hold from migration 27 without refilling its allowance or changing its financial facts",
+          "status": "passed",
+          "title": "upgrades the original native ASR hold from migration 27 without refilling its allowance or changing its financial facts",
+          "duration": 3475.9737,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793328437238,
+      "endTime": 1793328440713.9736,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/native-repair-migration.test.ts"
+    }
+  ]
+}

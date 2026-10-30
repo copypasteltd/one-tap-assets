@@ -4344,6 +4344,21 @@
             },
             "minItems": 1,
             "maxItems": 100
+          },
+          "revision_capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "COVER",
+                "ALLOWED_ORDER",
+                "DISPLAY_TEXT",
+                "IMAGE_TEXT"
+              ]
+            },
+            "minItems": 0,
+            "maxItems": 4,
+            "uniqueItems": true
           }
         },
         "required": [
@@ -4618,7 +4633,8 @@
             "enum": [
               "COVER",
               "ALLOWED_ORDER",
-              "DISPLAY_TEXT"
+              "DISPLAY_TEXT",
+              "IMAGE_TEXT"
             ]
           },
           "cover_deliverable_id": {
@@ -4632,12 +4648,32 @@
               "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
             },
             "minItems": 1,
-            "maxItems": 100
+            "maxItems": 100,
+            "uniqueItems": true
           },
           "display_text": {
             "type": "string",
             "minLength": 1,
             "maxLength": 2000
+          },
+          "image_text": {
+            "type": "object",
+            "properties": {
+              "deliverable_id": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 28
+              }
+            },
+            "required": [
+              "deliverable_id",
+              "text"
+            ],
+            "additionalProperties": false
           }
         },
         "required": [
@@ -4660,7 +4696,26 @@
             "then": {
               "required": [
                 "cover_deliverable_id"
-              ]
+              ],
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "ordered_deliverable_ids"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "display_text"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "image_text"
+                    ]
+                  }
+                ]
+              }
             }
           },
           {
@@ -4677,7 +4732,26 @@
             "then": {
               "required": [
                 "ordered_deliverable_ids"
-              ]
+              ],
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "cover_deliverable_id"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "display_text"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "image_text"
+                    ]
+                  }
+                ]
+              }
             }
           },
           {
@@ -4694,7 +4768,62 @@
             "then": {
               "required": [
                 "display_text"
+              ],
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "cover_deliverable_id"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "ordered_deliverable_ids"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "image_text"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "IMAGE_TEXT"
+                }
+              },
+              "required": [
+                "kind"
               ]
+            },
+            "then": {
+              "required": [
+                "image_text"
+              ],
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "cover_deliverable_id"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "ordered_deliverable_ids"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "display_text"
+                    ]
+                  }
+                ]
+              }
             }
           }
         ]
@@ -10929,11 +11058,12 @@
               "enum": [
                 "COVER",
                 "ALLOWED_ORDER",
-                "DISPLAY_TEXT"
+                "DISPLAY_TEXT",
+                "IMAGE_TEXT"
               ]
             },
             "minItems": 0,
-            "maxItems": 3
+            "maxItems": 4
           },
           "reason_codes": {
             "type": "array",
