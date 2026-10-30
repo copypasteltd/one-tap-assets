@@ -8,12 +8,15 @@ import {referenceMaterial} from '../generation/reference-material.js';
 import {referenceReviewIdentity,validateReferenceReport} from '../generation/reference-report.js';
 import type {ToolHandler} from './consumer.js';
 import type {ToolScope} from './http.js';
+import type {Db} from '../../api/db/pool.js';
+import type {GenerationContext} from '../generation/scope.js';
 
-export function referenceTools(pool:pg.Pool,cfg:Config,store:ObjectStorage):Record<string,ToolHandler>{
+export function referenceTools(pool:pg.Pool,cfg:Config,store:ObjectStorage,resolver?:(db:Db,scope:ToolScope)=>Promise<GenerationContext>):Record<string,ToolHandler>{
+  const resolve=async(db:Db,scope:ToolScope)=>resolver?resolver(db,scope):executionContext(db,scope.tenant_id,scope.order_id!,scope.snapshot_hash,scope.stage_run_id);
   const load=async(scope:ToolScope)=>{
-    requireThat(scope.scope_type==='ORDER'&&scope.stage_name==='PRODUCTION'&&scope.order_id&&scope.role==='REVIEW_FACTS',
+    requireThat(scope.role==='REVIEW_FACTS'&&(resolver?scope.scope_type==='SAMPLE'&&scope.stage_name==='SAMPLE_PRODUCTION':scope.scope_type==='ORDER'&&scope.stage_name==='PRODUCTION'&&scope.order_id),
       'REFERENCE_SCOPE_INVALID','参考工具仅供制作阶段的独立事实核验',403);
-    const context=await executionContext(pool,scope.tenant_id,scope.order_id,scope.snapshot_hash,scope.stage_run_id);
+    const context=await resolve(pool,scope);
     const material=await referenceMaterial(pool,store,context,scope.stage_run_id);
     requireThat(material.packet.packet_hash===scope.packet_hash,'REFERENCE_PACKET_CHANGED','原参考帧材料已经变化',409);
     return {context,material};
@@ -32,7 +35,7 @@ export function referenceTools(pool:pg.Pool,cfg:Config,store:ObjectStorage):Reco
       const {context,material}=await load(scope);
       const report=await validateReferenceReport(pool,cfg,context,material,scope.run_id,args.result,true),digest=hash(report);
       return {result:{persisted:true,result_hash:digest},commit:async db=>{
-        const current=await executionContext(db,scope.tenant_id,scope.order_id!,scope.snapshot_hash,scope.stage_run_id);
+        const current=await resolve(db,scope);
         const latest=await referenceMaterial(db,store,current,scope.stage_run_id);
         requireThat(latest.packet.packet_hash===material.packet.packet_hash,'REFERENCE_PACKET_CHANGED','提交时原帧已经变化',409);
         await validateReferenceReport(db,cfg,current,latest,scope.run_id,report,true);

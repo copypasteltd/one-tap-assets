@@ -5,33 +5,34 @@ import {requireThat} from '../../api/lib/errors.js';
 import {validateInternal} from '../../api/lib/validation.js';
 import type {ObjectStorage} from '../../api/storage/storage.js';
 import type {IdentityLock} from '../analysis/profile.js';
-import type {ExecutionContext} from '../compiler/order-context.js';
+import {generationScope,generationCostConfirmed,generationSource,orderGenerationContext,type GenerationContext} from './scope.js';
 import {checkReviewImages,type ReviewImage,type ReviewImageBinding} from '../codex/review-images.js';
 import {generationContract} from './contracts.js';
-import {generationSourceStage} from '../repair/generation.js';
+
 
 export const REFERENCE_IDENTITY_POLICY='YPCC-REFERENCE-IDENTITY-1.0.0';
 export interface ReferenceFrame extends ReviewImageBinding {operation_key:string}
 export interface ReferencePacket {
   version:'1.0.0';purpose:'REFERENCE_IDENTITY';policy_version:typeof REFERENCE_IDENTITY_POLICY;
-  tenant_id:string;order_id:string;stage_run_id:string;snapshot_hash:string;identity_lock_hash:string;photo_set_hash:string;
+  tenant_id:string;order_id:string|null;sample_id?:string;stage_run_id:string;snapshot_hash:string;identity_lock_hash:string;photo_set_hash:string;
   skill_bundle_hash:string;originals:ReviewImageBinding[];frames:ReferenceFrame[];identity:IdentityLock;
   anchors:{anchor_id:string;kind:IdentityLock['features'][number]['kind'];value:string;evidence_ids:string[]}[];
   packet_hash:string;
 }
 export interface ReferenceMaterial {packet:ReferencePacket;images:ReviewImage[]}
-export function referenceOperations(context:ExecutionContext):string[]{
+export function referenceOperations(context:GenerationContext):string[]{
   requireThat(context.snapshot.engine!=='PHOTO_LAYOUT','REFERENCE_ROUTE_INVALID','原图路线不需要生成参考帧',422);
   return context.snapshot.engine==='PER_SHOT_AI'?context.contract.creative.shots.map(shot=>`reference:${shot.shot_id}`):['reference:film'];
 }
 /** Rebuild from original versions and registered bytes; caller/model declarations
  * never become evidence that a generated frame still depicts this product. */
-export async function referenceMaterial(db:Db,store:ObjectStorage,context:ExecutionContext,stageId:string):Promise<ReferenceMaterial>{
+export async function referenceMaterial(db:Db,store:ObjectStorage,context:GenerationContext,stageId:string):Promise<ReferenceMaterial>{
+  const scoped=generationScope(context);
   const admission=context.contract.runtime_binding?.admission,policy=admission?.review_vision;
   requireThat(admission&&policy,'REFERENCE_VISION_NOT_ADMITTED','原订单未冻结参考帧视觉核验能力',503);
-  const stage=(await db.query(`SELECT id FROM stage_runs WHERE tenant_id=$1 AND id=$2 AND scope_type='ORDER'
-    AND scope_id=$3 AND stage_name='PRODUCTION' AND input_hash=$4 AND deadline_at=$5`,
-  [context.tenantId,stageId,context.orderId,context.snapshotHash,context.snapshot.deadline_at])).rowCount;
+  const stage=(await db.query(`SELECT id FROM stage_runs WHERE tenant_id=$1 AND id=$2 AND scope_type=$6
+    AND scope_id=$3 AND stage_name=$7 AND input_hash=$4 AND deadline_at=$5`,
+  [context.tenantId,stageId,scoped.id,context.snapshotHash,context.snapshot.deadline_at,scoped.type,scoped.stage])).rowCount;
   requireThat(stage===1,'REFERENCE_SCOPE_INVALID','参考帧不属于原订单制作阶段',403);
   const locked=(await db.query<{hash:string;data:IdentityLock}>(`SELECT hash,data FROM identity_locks WHERE tenant_id=$1 AND id=$2 AND profile_id=$3`,
     [context.tenantId,context.snapshot.identity_lock_id,context.snapshot.profile_id])).rows[0];
@@ -52,11 +53,10 @@ export async function referenceMaterial(db:Db,store:ObjectStorage,context:Execut
   const frames=(await db.query<{id:string;stage_run_id:string;operation_key:string;model_version_id:string;state:string;input_hash:string;cost_confirmed:boolean;
     private:{billing_valid?:boolean;provider_terminal?:boolean;prepared:{contract_hash:string};output?:{
     object_key:string;sha256:string;inspection:{kind:string;width:number;height:number;codec:string}}}}>(`SELECT id,stage_run_id,operation_key,model_version_id,state,input_hash,private,
-    EXISTS(SELECT 1 FROM budget_reservations b WHERE b.tenant_id=s.tenant_id AND b.order_id=s.order_id
-      AND b.id=s.reservation_id AND b.submission_id=s.id AND b.state='SETTLED') AS cost_confirmed
-    FROM provider_submissions s WHERE tenant_id=$1 AND order_id=$2 AND stage_run_id=ANY($3::text[]) AND generation_kind='IMAGE' AND operation_key=ANY($4)`,
-  [context.tenantId,context.orderId,[stageId,...(context.repair?[context.repair.source_production_stage_id]:[])],operations])).rows
-    .filter(row=>row.stage_run_id===generationSourceStage(context,stageId,'IMAGE',row.operation_key));
+    ${generationCostConfirmed(context)} AS cost_confirmed
+    FROM provider_submissions s WHERE tenant_id=$1 AND ${scoped.column}=$2 AND stage_run_id=ANY($3::text[]) AND generation_kind='IMAGE' AND operation_key=ANY($4)`,
+  [context.tenantId,scoped.id,[stageId,...(context.repair?[context.repair.source_production_stage_id]:[])],operations])).rows
+    .filter(row=>row.stage_run_id===generationSource(context,stageId,'IMAGE',row.operation_key));
   requireThat(frames.length===operations.length&&new Set(frames.map(f=>f.operation_key)).size===operations.length,
     'REFERENCE_FRAMES_INCOMPLETE','完整参考帧尚未持久生成，不得购买视频',409);
   requireThat(originals.length+frames.length<=policy.max_images,'REFERENCE_VISION_NOT_ADMITTED','完整原图和参考帧超出冻结视觉能力',503);
@@ -74,7 +74,7 @@ export async function referenceMaterial(db:Db,store:ObjectStorage,context:Execut
     requireThat(frame.state==='SUCCEEDED'&&frame.cost_confirmed&&frame.private.billing_valid&&frame.private.provider_terminal
       &&frame.model_version_id===model.model_version_id&&frame.private.prepared.contract_hash===hash(model)
       &&output?.inspection.kind==='image'&&output.inspection.codec==='png','REFERENCE_FRAMES_INCOMPLETE','参考帧未成功或生成模型与原合同不同',409);
-    requireThat((await db.query(`SELECT id FROM private_object_writes WHERE tenant_id=$1 AND owner_id=$2 AND order_id=$3 AND product_id=$4
+    requireThat((await db.query(`SELECT id FROM private_object_writes WHERE tenant_id=$1 AND owner_id=$2 AND order_id IS NOT DISTINCT FROM $3::text AND product_id=$4
       AND object_key=$5 AND kind='MEDIA' AND state='STORED' AND sha256=$6 AND NOT delete_requested AND expires_at>now()`,
     [context.tenantId,context.ownerId,context.orderId,context.snapshot.product_id,output.object_key,output.sha256])).rowCount===1,
     'REFERENCE_MEDIA_REVOKED','参考帧未登记、过期或已撤权',410);
@@ -83,7 +83,7 @@ export async function referenceMaterial(db:Db,store:ObjectStorage,context:Execut
   }
   await checkReviewImages(images,admission);
   const body:Omit<ReferencePacket,'packet_hash'>={version:'1.0.0',purpose:'REFERENCE_IDENTITY',policy_version:REFERENCE_IDENTITY_POLICY,
-    tenant_id:context.tenantId,order_id:context.orderId,stage_run_id:stageId,snapshot_hash:context.snapshotHash,
+    tenant_id:context.tenantId,order_id:context.orderId,...(context.sampleId?{sample_id:context.sampleId}:{}),stage_run_id:stageId,snapshot_hash:context.snapshotHash,
     identity_lock_hash:context.snapshot.identity_lock_hash,photo_set_hash:context.snapshot.photo_set_hash,
     skill_bundle_hash:context.snapshot.codex_contract.skill_bundle_hash,
     originals:images.slice(0,originals.length).map(({bytes:_,...binding})=>binding),frames:referenceFrames,identity,

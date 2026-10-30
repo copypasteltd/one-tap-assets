@@ -14,7 +14,7 @@ import { checkReviewImages, type ReviewImage, type ReviewImageBinding, type Revi
 import { bundleForHash } from '../codex/skills.js';
 import { admissionHash } from '../codex/admission.js';
 import { sampleAdmission, samplePlan, type SampleContext } from './context.js';
-import { artifactBytes, storedMedia, verifyMedia, type SampleArtifact } from './media.js';
+import { artifactBytes, storedMedia, verifyMedia, sampleGeneratedMaterial, type SampleArtifact } from './media.js';
 
 interface PacketImage extends ReviewImageBinding { object_key: string; source_artifact_id: string; frame_index: number | null; time_ms: number | null }
 export interface SamplePacket {
@@ -59,6 +59,14 @@ export async function buildSamplePacket(db: import('pg').Pool, cfg: Config, stor
   try {
     await verifyResourceLicenses(db, [FONT_BINDING]); await verifyMedia(db, cfg, store, context, receipt, directory, signal);
     const images: PacketImage[] = [];
+    if(context.input.generation){
+      const material=await sampleGeneratedMaterial(db,cfg,store,context);
+      for(const input of material.referenceMaterial.images){
+        const key=`${context.input.tenant_id}/samples/${context.input.sample_id}/qc/${receipt.operation_id}/${input.asset_id}-reference.png`;
+        await writePrivateObject(db,store,{tenantId:context.input.tenant_id,ownerId:context.input.owner_id,productId:context.input.request.product_id,kind:'QC'},key,input.bytes,'image/png');
+        images.push({asset_id:input.asset_id,object_key:key,sha256:input.sha256,width:input.width,height:input.height,source_artifact_id:input.asset_id,frame_index:null,time_ms:null});
+      }
+    }
     for (const a of receipt.artifacts) {
       if (a.kind === 'copy') continue;
       const bytes = await artifactBytes(db, store, context, a);
@@ -128,12 +136,14 @@ export async function validateSampleCompletion(db: Db, cfg: Config, context: Sam
     const saved = reports[role]!; const report = await validateSampleReview(db, cfg, context, saved.run_id, saved.report, true);
     requireThat(report.verdict === 'PASS', 'SAMPLE_REVIEW_NOT_PASSED', '样例独立复核存在未解决问题', 422);
   }
-  const runs = (await db.query<{ id: string; instance_id: string; thread_id: string; runtime_process_ref: string; role_identity_ref: string; state: string; role: string; input_hash: string; output_hash: string; private: { stage_result?: unknown } }>(`SELECT r.* FROM agent_runs r JOIN stage_runs s ON s.tenant_id=r.tenant_id AND s.id=(r.private->>'stage_run_id')
+  const runs = (await db.query<{ id: string; instance_id: string; thread_id: string; runtime_process_ref: string; role_identity_ref: string; state: string; role: string; input_hash: string; output_hash: string; private: { stage_result?: unknown;review_input?:{purpose?:string} } }>(`SELECT r.* FROM agent_runs r JOIN stage_runs s ON s.tenant_id=r.tenant_id AND s.id=(r.private->>'stage_run_id')
     WHERE s.tenant_id=$1 AND s.scope_type='SAMPLE' AND s.scope_id=$2`, [context.input.tenant_id, context.input.sample_id])).rows;
-  requireThat(runs.length === 5 && ['CONTENT','PRODUCTION','POST','REVIEW_FACTS','REVIEW_STYLE'].every(role => runs.some(r => r.role === role && r.state === 'SUCCEEDED'))
+  const expected=context.input.generation?6:5;
+  requireThat(runs.length === expected && ['CONTENT','PRODUCTION','POST','REVIEW_FACTS','REVIEW_STYLE'].every(role => runs.some(r => r.role === role && r.state === 'SUCCEEDED'))
     && runs.every(r => r.input_hash === context.inputHash && r.output_hash && hash(r.private.stage_result) === r.output_hash)
-    && ['instance_id','thread_id','runtime_process_ref','role_identity_ref'].every(field => new Set(runs.map(r => r[field as keyof typeof r])).size === 5),
-  'SAMPLE_ROLE_EVIDENCE_INCOMPLETE', '样例缺少五个独立且已完成的角色运行', 503);
+    && ['instance_id','thread_id','runtime_process_ref','role_identity_ref'].every(field => new Set(runs.map(r => r[field as keyof typeof r])).size === expected),
+  'SAMPLE_ROLE_EVIDENCE_INCOMPLETE', '样例缺少完整独立且已完成的角色运行', 503);
+  requireThat(runs.filter(r=>r.private.review_input?.purpose==='REFERENCE_IDENTITY').length===(context.input.generation?1:0),'SAMPLE_ROLE_EVIDENCE_INCOMPLETE','样例的独立参考核验数量不一致',503);
   const pending = await db.query(`SELECT id FROM inference_requests WHERE tenant_id=$1 AND run_id=ANY($2) AND state<>'SUCCEEDED'
     UNION ALL SELECT id FROM agent_tool_intents WHERE tenant_id=$1 AND run_id=ANY($2) AND state<>'SUCCEEDED'
     UNION ALL SELECT id FROM agent_instances WHERE tenant_id=$1 AND id=ANY($3) AND state<>'RELEASED'`,

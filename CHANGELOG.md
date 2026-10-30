@@ -1,5 +1,17 @@
 # 更新记录 / Changelog
 
+2026-10-30 — Generated creator sample closure / 生成式社区样例收口
+
+本轮接通[生成式社区样例与独立平台额度](docs/实施/生成式社区样例与独立平台额度-v1.0.md)：作者可选逐镜头生成或参考整片的无声样例，经参考身份核验、实际制作/后期和全新双复核，再私有下载并申请独立公开副本。样例使用平台额度，不创建买家订单；原预算/次数/截止及 UNKNOWN 处理保持。
+
+This delivery connects [silent generated creator samples](docs/实施/生成式社区样例与独立平台额度-v1.0.md): per-shot generation and reference-film generation, independent reference identity review before video purchase, actual post-production and fresh final facts/style reviews, private downloads and separately authorized public copies. Samples use platform funds and create no buyer order; original budgets, quotas, deadlines and UNKNOWN recovery stay fixed.
+
+本轮10项定向检查通过（主专项9，原订单回归1）；类型/server/preview/自检/本机启动PASS，主库30迁移。426源码/42契约/4资源，`e7a80120`。全面测试、单元全套、双小程序重编和复录NOT_RUN；原93媒体及C原件保留。[精确来源](docs/verification/generated-sample-source.json) · [当前构建](docs/delivery/current.json) · [交付包入口](docs/delivery/package.json)。真实服务、真机与云部署待完成，全部方案仍禁售。
+
+Ten focused checks pass (nine main cases plus one original-order regression), together with typecheck, server/web builds, native startup and setup checks. Database migration 30; 426 source / 42 contract / 4 resource files, `e7a80120`. Full/unit suites, fresh Alipay/Douyin builds and new browser capture were not run. Existing 93 media files and frozen C artwork remain byte-identical. [Exact evidence](docs/verification/generated-sample-source.json) · [Current build](docs/delivery/current.json) · [Delivery package](docs/delivery/package.json). Live services, devices and cloud deployment remain pending; every preset remains unavailable for sale.
+
+以下内容保留其历史来源，当前状态以上述记录为准。
+
 ## 2026-10-30 · Actual image title revisions / 真实图片加字
 
 本轮收口[图片加字与实际素材售后](docs/实施/图片加字与实际素材售后-v1.0.md)：小程序领取页选图并输入短标题，实际生成保留完整原画面的标题卡PNG，重新验收后交付新版本；客服原工单同类纠错接通。三路线专项通过，原音视频/预算/次数/截止保持；旧订单无授权不增加权益。

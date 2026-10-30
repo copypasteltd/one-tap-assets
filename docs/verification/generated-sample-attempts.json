@@ -1,0 +1,273 @@
+{
+  "checked_at": "2026-10-30T03:48:03.078566+00:00",
+  "attempts": [
+    {
+      "base": "runtime/test-results/generated-sample-2026-10-30T03-29-35-875Z",
+      "source_set_hash": "2374015241397260858e87dc5baf0c083dce8adeadd4a8056bfa1ad848ca9b04",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "typecheck",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+            "--noEmit"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 2,
+          "signal": null,
+          "timeout_ms": 120000,
+          "elapsed_ms": 37068,
+          "log_path": "runtime/test-results/generated-sample-2026-10-30T03-29-35-875Z/type.log",
+          "log_sha256": "f881d988adafd417736683161cfd6a88da840646d219cd6712603b9c68545ea0"
+        }
+      ],
+      "source_snapshot": "docs/verification/generated-sample-attempt-1-source.json",
+      "logs": [
+        {
+          "path": "runtime/test-results/generated-sample-2026-10-30T03-29-35-875Z/type.log",
+          "sha256": "f881d988adafd417736683161cfd6a88da840646d219cd6712603b9c68545ea0",
+          "text": "src/worker/generation/reference-service.ts(26,51): error TS2322: Type 'Promise<ExecutionContext> | Promise<GenerationContext>' is not assignable to type 'Promise<ExecutionContext>'.\n  Type 'Promise<GenerationContext>' is not assignable to type 'Promise<ExecutionContext>'.\n    Type 'GenerationContext' is not assignable to type 'ExecutionContext' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.\n      Types of property 'orderId' are incompatible.\n        Type 'string | null' is not assignable to type 'string'.\n          Type 'null' is not assignable to type 'string'.\nsrc/worker/generation/reference-service.ts(27,65): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'GenerationContext'.\nsrc/worker/generation/reference-service.ts(27,86): error TS18046: 'context' is of type 'unknown'.\nsrc/worker/generation/reference-service.ts(27,126): error TS18046: 'context' is of type 'unknown'.\nsrc/worker/generation/reference-service.ts(28,52): error TS18046: 'context' is of type 'unknown'.\nsrc/worker/generation/reference-service.ts(30,124): error TS18046: 'context' is of type 'unknown'.\nsrc/worker/generation/reference-service.ts(38,90): error TS18046: 'context' is of type 'unknown'.\nsrc/worker/generation/reference-service.ts(48,90): error TS18046: 'context' is of type 'unknown'.\nsrc/worker/generation/reference-service.ts(48,114): error TS18046: 'context' is of type 'unknown'.\nsrc/worker/generation/reference-service.ts(56,51): error TS2322: Type 'Promise<ExecutionContext> | Promise<GenerationContext>' is not assignable to type 'Promise<ExecutionContext>'.\n  Type 'Promise<GenerationContext>' is not assignable to type 'Promise<ExecutionContext>'.\n    Type 'GenerationContext' is not assignable to type 'ExecutionContext' with 'exactOptionalPropertyTypes: true'. Consider adding 'undefined' to the types of the target's properties.\n      Types of property 'orderId' are incompatible.\n        Type 'string | null' is not assignable to type 'string'.\n          Type 'null' is not assignable to type 'string'.\nsrc/worker/generation/reference-service.ts(57,63): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'GenerationContext'.\nsrc/worker/generation/reference-service.ts(59,67): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'GenerationContext'.\nsrc/worker/samples/context.ts(54,46): error TS2339: Property 'version' does not exist on type '{ preset_id: string; variant_id: string; engine: string; roles: Record<AgentRole, SkillRef[]>; }'.\n"
+        }
+      ]
+    },
+    {
+      "base": "runtime/test-results/generated-sample-2026-10-30T03-32-36-509Z",
+      "source_set_hash": "e18673456cfc23cf1a766a23c0c321b3519164c414ad6f9c8c6f5a8fb8953ad5",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "typecheck",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+            "--noEmit"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 120000,
+          "elapsed_ms": 16800,
+          "log_path": "runtime/test-results/generated-sample-2026-10-30T03-32-36-509Z/type.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "source_snapshot": "docs/verification/generated-sample-attempt-2-source.json",
+      "logs": [
+        {
+          "path": "runtime/test-results/generated-sample-2026-10-30T03-32-36-509Z/type.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "base": "runtime/test-results/generated-sample-2026-10-30T03-33-48-046Z",
+      "source_set_hash": "7af78dcb0ccd295c65abfe04dd47abf2ad102075a4234b5306c5af4793ca07d7",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts tests/integration/generation-gateway.test.ts -t produces actual full-spec|publishes the actually produced|without admitted model protocols|completes .* creator sample|retains an UNKNOWN sample|refuses a reference-film video purchase|also refuses a per-shot video purchase|blocks a charged video when --outputFile.json=runtime/test-results/generated-sample-2026-10-30T03-33-48-046Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/sample-production.test.ts",
+            "tests/integration/generation-gateway.test.ts",
+            "-t",
+            "produces actual full-spec|publishes the actually produced|without admitted model protocols|completes .* creator sample|retains an UNKNOWN sample|refuses a reference-film video purchase|also refuses a per-shot video purchase|blocks a charged video when",
+            "--outputFile.json=runtime/test-results/generated-sample-2026-10-30T03-33-48-046Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 660000,
+          "elapsed_ms": 103655,
+          "log_path": "runtime/test-results/generated-sample-2026-10-30T03-33-48-046Z/api.log",
+          "log_sha256": "6331398c1ea28dedfbbda3f0017d2c8c270f10065cb1d4196d928875c82d04ce"
+        }
+      ],
+      "source_snapshot": "docs/verification/generated-sample-attempt-3-source.json",
+      "api_report": "docs/verification/generated-sample-attempt-3-api.json",
+      "logs": [
+        {
+          "path": "runtime/test-results/generated-sample-2026-10-30T03-33-48-046Z/api.log",
+          "sha256": "6331398c1ea28dedfbbda3f0017d2c8c270f10065cb1d4196d928875c82d04ce",
+          "text": "\n RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片\n\n ✓ tests/integration/generation-gateway.test.ts (35 tests | 33 skipped) 10425ms\n   ✓ generation gateway / native PG, actual PNG + MP4, synthetic provider only (35)\n     ✓ refuses a reference-film video purchase before any generated-frame identity approval 1065ms\n ❯ tests/integration/sample-production.test.ts (16 tests | 1 failed | 10 skipped) 51451ms\n   ↓ requires all seven live handlers and configured independent budgets before queuing\n   ✓ produces actual full-spec photos/video/copy through five fresh synthetic roles without an order or buyer charge 44617ms\n   ↓ serves only private owned sample files and rejects post-QC byte tampering\n   ✓ publishes the actually produced complete sample as independent public PNG/MP4 copies without repeating any model work 1283ms\n   ↓ rejects incomplete, wrong-packet and forged PASS reports and changed completion bindings\n   ↓ does not accept READY/QC flags or test-fixture markers outside APP_ENV=test\n   ↓ recovers the original content checkpoint after lease takeover without another role or inference\n   ↓ checks the frozen sample cost ceiling before submitting any upstream request\n   ↓ holds an ambiguous sample reservation and does not rebuy inference on stage recovery\n   ↓ rechecks the pinned resource license before completed samples can be published\n   ✓ fails closed for generated blueprints without admitted model protocols before any sample stages or inference 22ms\n   ↓ stops a deleted or expired input before consuming any inference budget\n   ↓ refuses a revoked publication grant for already completed media links\n   × completes PER_SHOT_AI creator sample, private download and independent public copies within platform funds 123ms\n   · completes REFERENCE_FILM creator sample, private download and independent public copies within platform funds\n   · retains an UNKNOWN sample generation reservation and resumes only its original intent without buyer funds\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/integration/sample-production.test.ts > completes PER_SHOT_AI creator sample, private download and independent public copies within platform funds\nerror: invalid input syntax for type json\n ❯ node_modules/.pnpm/pg-pool@3.14.0_pg@8.23.1/node_modules/pg-pool/index.js:45:11\n ❯ generatedFixture tests/integration/sample-production.test.ts:295:3\n\n ❯ tests/integration/sample-production.test.ts:318:11\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed | 1 passed (2)\n      Tests  1 failed | 5 passed | 43 skipped (51)\n   Start at  11:33:57\n   Duration  94.69s (tests 68%, import 21%, transform 11%)\n\nJSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/generated-sample-2026-10-30T03-33-48-046Z/api.json\n"
+        }
+      ]
+    },
+    {
+      "base": "runtime/test-results/generated-sample-2026-10-30T03-36-39-296Z",
+      "source_set_hash": "9f896a3156cad80c180d065b3579235b4644dee41a4295be3ab837d0c9b7523a",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts -t completes .* creator sample|retains an UNKNOWN sample --outputFile.json=runtime/test-results/generated-sample-2026-10-30T03-36-39-296Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/sample-production.test.ts",
+            "-t",
+            "completes .* creator sample|retains an UNKNOWN sample",
+            "--outputFile.json=runtime/test-results/generated-sample-2026-10-30T03-36-39-296Z/api.json"
+          ],
+          "shell": false,
+          "status": "FAIL",
+          "exit_code": 1,
+          "signal": null,
+          "timeout_ms": 660000,
+          "elapsed_ms": 4213,
+          "log_path": "runtime/test-results/generated-sample-2026-10-30T03-36-39-296Z/api.log",
+          "log_sha256": "1dc0ba262a682d83183f88883bd9bc26ee32b0d166681a56cab3961d8c1c5bbf"
+        }
+      ],
+      "source_snapshot": "docs/verification/generated-sample-attempt-4-source.json",
+      "api_report": "docs/verification/generated-sample-attempt-4-api.json",
+      "logs": [
+        {
+          "path": "runtime/test-results/generated-sample-2026-10-30T03-36-39-296Z/api.log",
+          "sha256": "1dc0ba262a682d83183f88883bd9bc26ee32b0d166681a56cab3961d8c1c5bbf",
+          "text": "\n RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片\n\n ❯ tests/integration/sample-production.test.ts (16 tests | 1 failed | 13 skipped) 2380ms\n   ↓ requires all seven live handlers and configured independent budgets before queuing\n   ↓ produces actual full-spec photos/video/copy through five fresh synthetic roles without an order or buyer charge\n   ↓ serves only private owned sample files and rejects post-QC byte tampering\n   ↓ publishes the actually produced complete sample as independent public PNG/MP4 copies without repeating any model work\n   ↓ rejects incomplete, wrong-packet and forged PASS reports and changed completion bindings\n   ↓ does not accept READY/QC flags or test-fixture markers outside APP_ENV=test\n   ↓ recovers the original content checkpoint after lease takeover without another role or inference\n   ↓ checks the frozen sample cost ceiling before submitting any upstream request\n   ↓ holds an ambiguous sample reservation and does not rebuy inference on stage recovery\n   ↓ rechecks the pinned resource license before completed samples can be published\n   ↓ fails closed for generated blueprints without admitted model protocols before any sample stages or inference\n   ↓ stops a deleted or expired input before consuming any inference budget\n   ↓ refuses a revoked publication grant for already completed media links\n   × completes PER_SHOT_AI creator sample, private download and independent public copies within platform funds 186ms\n   · completes REFERENCE_FILM creator sample, private download and independent public copies within platform funds\n   · retains an UNKNOWN sample generation reservation and resumes only its original intent without buyer funds\n\n⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯\n\n FAIL  tests/integration/sample-production.test.ts > completes PER_SHOT_AI creator sample, private download and independent public copies within platform funds\nAssertionError: {\"code\":\"SAMPLE_GENERATION_NOT_CONFIGURED\",\"message\":\"样例的生成执行契约尚未配置\",\"retryable\":false,\"trace_id\":\"trace_b5bb51387b7146858dea4cb657e22a70\",\"details\":[]}: expected 503 to be 202 // Object.is equality\n\n- Expected\n+ Received\n\n- 202\n+ 503\n\n ❯ create tests/integration/sample-production.test.ts:71:42\n     69|   await heartbeat();\n     70|   const result = await api('POST', `/preset-drafts/${d.draft_id}/sampl…\n     71|   expect(result.statusCode, result.body).toBe(202); return result.json…\n       |                                          ^\n     72| }\n     73| async function stop(s: DTO<'Sample'>) { await transaction(db.pool, d =…\n ❯ tests/integration/sample-production.test.ts:318:50\n\n⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯\n\n\n Test Files  1 failed (1)\n      Tests  1 failed | 13 skipped (16)\n   Start at  11:36:39\n   Duration  3.68s (tests 68%, import 23%, transform 9%)\n\nJSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/generated-sample-2026-10-30T03-36-39-296Z/api.json\n"
+        }
+      ]
+    },
+    {
+      "base": "runtime/test-results/generated-sample-2026-10-30T03-37-21-789Z",
+      "source_set_hash": "d07f9dc6f87740411bbb2f736406fadb10201f9e6c62e2d87b9913f56e34aa27",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts -t completes .* creator sample|retains an UNKNOWN sample --outputFile.json=runtime/test-results/generated-sample-2026-10-30T03-37-21-789Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/sample-production.test.ts",
+            "-t",
+            "completes .* creator sample|retains an UNKNOWN sample",
+            "--outputFile.json=runtime/test-results/generated-sample-2026-10-30T03-37-21-789Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 660000,
+          "elapsed_ms": 56857,
+          "log_path": "runtime/test-results/generated-sample-2026-10-30T03-37-21-789Z/api.log",
+          "log_sha256": "21885e5ce00be0c16aac8be39c137cc5911c4b6041805d147cc65c53af544c09"
+        }
+      ],
+      "source_snapshot": "docs/verification/generated-sample-attempt-5-source.json",
+      "api_report": "docs/verification/generated-sample-attempt-5-api.json",
+      "logs": [
+        {
+          "path": "runtime/test-results/generated-sample-2026-10-30T03-37-21-789Z/api.log",
+          "sha256": "21885e5ce00be0c16aac8be39c137cc5911c4b6041805d147cc65c53af544c09",
+          "text": "\n RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片\n\n ✓ tests/integration/sample-production.test.ts (16 tests | 13 skipped) 55174ms\n   ✓ completes PER_SHOT_AI creator sample, private download and independent public copies within platform funds 24263ms\n   ✓ completes REFERENCE_FILM creator sample, private download and independent public copies within platform funds 25596ms\n   ✓ retains an UNKNOWN sample generation reservation and resumes only its original intent without buyer funds 3577ms\n\n Test Files  1 passed (1)\n      Tests  3 passed | 13 skipped (16)\n   Start at  11:37:22\n   Duration  56.33s (tests 98%, import 1%)\n\nJSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/generated-sample-2026-10-30T03-37-21-789Z/api.json\n"
+        }
+      ]
+    },
+    {
+      "base": "runtime/test-results/generated-sample-2026-10-30T03-40-40-197Z",
+      "source_set_hash": "e7a80120958ea9cc601ec785f82bb1512ddd0df62edb9e6db6d07d85fab8635f",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts tests/integration/generation-gateway.test.ts -t produces actual full-spec|publishes the actually produced|without admitted model protocols|completes .* creator sample|retains an UNKNOWN sample|rejects insufficient frozen sample funds|refuses a reference-film video purchase|also refuses a per-shot video purchase --outputFile.json=runtime/test-results/generated-sample-2026-10-30T03-40-40-197Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/sample-production.test.ts",
+            "tests/integration/generation-gateway.test.ts",
+            "-t",
+            "produces actual full-spec|publishes the actually produced|without admitted model protocols|completes .* creator sample|retains an UNKNOWN sample|rejects insufficient frozen sample funds|refuses a reference-film video purchase|also refuses a per-shot video purchase",
+            "--outputFile.json=runtime/test-results/generated-sample-2026-10-30T03-40-40-197Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 660000,
+          "elapsed_ms": 128723,
+          "log_path": "runtime/test-results/generated-sample-2026-10-30T03-40-40-197Z/api.log",
+          "log_sha256": "cd79e5c7e2ca0765dc64acb651428fa7d31c775f7ff36b5b26796fe6f42e5d69"
+        }
+      ],
+      "source_snapshot": "docs/verification/generated-sample-attempt-6-source.json",
+      "api_report": "docs/verification/generated-sample-attempt-6-api.json",
+      "logs": [
+        {
+          "path": "runtime/test-results/generated-sample-2026-10-30T03-40-40-197Z/api.log",
+          "sha256": "cd79e5c7e2ca0765dc64acb651428fa7d31c775f7ff36b5b26796fe6f42e5d69",
+          "text": "\n RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片\n\n ✓ tests/integration/sample-production.test.ts (17 tests | 10 skipped) 118307ms\n   ✓ produces actual full-spec photos/video/copy through five fresh synthetic roles without an order or buyer charge 40204ms\n   ✓ publishes the actually produced complete sample as independent public PNG/MP4 copies without repeating any model work 1527ms\n   ✓ completes PER_SHOT_AI creator sample, private download and independent public copies within platform funds 32715ms\n   ✓ completes REFERENCE_FILM creator sample, private download and independent public copies within platform funds 29907ms\n   ✓ rejects insufficient frozen sample funds and UNCERTAIN reference identity before buying any video 5790ms\n   ✓ retains an UNKNOWN sample generation reservation and resumes only its original intent without buyer funds 3462ms\n ✓ tests/integration/generation-gateway.test.ts (35 tests | 33 skipped) 2410ms\n   ✓ generation gateway / native PG, actual PNG + MP4, synthetic provider only (35)\n     ✓ refuses a reference-film video purchase before any generated-frame identity approval 368ms\n\n Test Files  2 passed (2)\n      Tests  9 passed | 43 skipped (52)\n   Start at  11:40:42\n   Duration  127.28s (tests 95%, import 3%, transform 1%)\n\nJSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/generated-sample-2026-10-30T03-40-40-197Z/api.json\n"
+        }
+      ]
+    },
+    {
+      "base": "runtime/test-results/generated-sample-2026-10-30T03-45-19-723Z",
+      "source_set_hash": "e7a80120958ea9cc601ec785f82bb1512ddd0df62edb9e6db6d07d85fab8635f",
+      "source_unchanged": true,
+      "commands": [
+        {
+          "task": "exec",
+          "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/generation-gateway.test.ts -t binds the original report and generated per-shot bytes --outputFile.json=runtime/test-results/generated-sample-2026-10-30T03-45-19-723Z/api.json",
+          "argv": [
+            "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+            "run",
+            "--config",
+            "vitest.integration.config.ts",
+            "tests/integration/generation-gateway.test.ts",
+            "-t",
+            "binds the original report and generated per-shot bytes",
+            "--outputFile.json=runtime/test-results/generated-sample-2026-10-30T03-45-19-723Z/api.json"
+          ],
+          "shell": false,
+          "status": "PASS",
+          "exit_code": 0,
+          "signal": null,
+          "timeout_ms": 660000,
+          "elapsed_ms": 20131,
+          "log_path": "runtime/test-results/generated-sample-2026-10-30T03-45-19-723Z/api.log",
+          "log_sha256": "48214cab347f3fc6f866547fef01f2f46407ed93bf0d0d578d0c533b57f0af76"
+        }
+      ],
+      "source_snapshot": "docs/verification/generated-sample-attempt-7-source.json",
+      "api_report": "docs/verification/generated-sample-attempt-7-api.json",
+      "logs": [
+        {
+          "path": "runtime/test-results/generated-sample-2026-10-30T03-45-19-723Z/api.log",
+          "sha256": "48214cab347f3fc6f866547fef01f2f46407ed93bf0d0d578d0c533b57f0af76",
+          "text": "\n RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片\n\n ✓ tests/integration/generation-gateway.test.ts (35 tests | 34 skipped) 15707ms\n   ✓ generation gateway / native PG, actual PNG + MP4, synthetic provider only (35)\n     ✓ binds the original report and generated per-shot bytes, rejecting original-photo substitution 6807ms\n\n Test Files  1 passed (1)\n      Tests  1 passed | 34 skipped (35)\n   Start at  11:45:22\n   Duration  18.73s (tests 86%, import 9%, transform 5%)\n\nJSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/generated-sample-2026-10-30T03-45-19-723Z/api.json\n"
+        }
+      ]
+    }
+  ],
+  "invoker_diagnostics": [
+    {
+      "source_snapshot": "docs/verification/generated-sample-invoker-diagnostic-source.json",
+      "cause": "The first local helper requested unsupported command exec(tsc). It stopped before invoking tsc. The helper then used the supported typecheck command and the project Node 24 runtime.",
+      "application_check_executed": false
+    }
+  ],
+  "notes": [
+    "All source snapshots preserve their own file hashes. Earlier checks are not promoted to the final source.",
+    "Initial type errors were corrected with an explicit shared transaction result and the frozen source Skill version.",
+    "The first API failure was a test JSON-array binding; the next exposed the inappropriate dependency on a sale contract. Samples now construct their own noncommercial runtime contract from existing operator limits and admitted capabilities.",
+    "The earlier three-case success was expanded to two actual per-shot clips and an UNCERTAIN reference block. Final main and order regression reports use the exact candidate source.",
+    "No comprehensive suite, new browser capture or mini-program build was requested for this delivery."
+  ]
+}

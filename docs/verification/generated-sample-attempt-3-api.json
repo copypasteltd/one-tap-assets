@@ -1,0 +1,637 @@
+{
+  "numTotalTestSuites": 3,
+  "numPassedTestSuites": 2,
+  "numFailedTestSuites": 1,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 51,
+  "numPassedTests": 5,
+  "numFailedTests": 1,
+  "numPendingTests": 43,
+  "numTodoTests": 0,
+  "snapshot": {
+    "added": 0,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0,
+    "didUpdate": false
+  },
+  "startTime": 1793331237408,
+  "success": false,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only refuses a reference-film video purchase before any generated-frame identity approval",
+          "status": "passed",
+          "title": "refuses a reference-film video purchase before any generated-frame identity approval",
+          "duration": 1065.1149000000005,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only also refuses a per-shot video purchase without a complete reference review",
+          "status": "passed",
+          "title": "also refuses a per-shot video purchase without a complete reference review",
+          "duration": 228.7309000000023,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only does not purchase a video after persisted REFERENCE_FAIL",
+          "status": "skipped",
+          "title": "does not purchase a video after persisted REFERENCE_FAIL",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only does not purchase a video after persisted REFERENCE_UNCERTAIN",
+          "status": "skipped",
+          "title": "does not purchase a video after persisted REFERENCE_UNCERTAIN",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only binds the original report and generated per-shot bytes, rejecting original-photo substitution",
+          "status": "skipped",
+          "title": "binds the original report and generated per-shot bytes, rejecting original-photo substitution",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only blocks polling on changed reference bytes and restores only the original accepted task",
+          "status": "skipped",
+          "title": "blocks polling on changed reference bytes and restores only the original accepted task",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only rejects a valid stage lease rebound to another order of the same owner before purchase",
+          "status": "skipped",
+          "title": "rejects a valid stage lease rebound to another order of the same owner before purchase",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only rejects an extended deadline on an otherwise valid stage lease before reserving money",
+          "status": "skipped",
+          "title": "rejects an extended deadline on an otherwise valid stage lease before reserving money",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only normalizes the actual generated JPEG, registers private bytes and settles original cost once",
+          "status": "skipped",
+          "title": "normalizes the actual generated JPEG, registers private bytes and settles original cost once",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only allows only one POST under concurrent replay of the same paid node",
+          "status": "skipped",
+          "title": "allows only one POST under concurrent replay of the same paid node",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only holds an ambiguous image purchase and never resubmits it after retry",
+          "status": "skipped",
+          "title": "holds an ambiguous image purchase and never resubmits it after retry",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only recovers the original stored receipt after an uncertain PUT without purchasing again",
+          "status": "skipped",
+          "title": "recovers the original stored receipt after an uncertain PUT without purchasing again",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only persists a video acknowledgement, polls only that task and inspects the actual MP4",
+          "status": "skipped",
+          "title": "persists a video acknowledgement, polls only that task and inspects the actual MP4",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only recovers a lost original video ACK and keeps the same paid task",
+          "status": "skipped",
+          "title": "recovers a lost original video ACK and keeps the same paid task",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only settles a stored historical receipt while purchases are disabled and the model admission has expired",
+          "status": "skipped",
+          "title": "settles a stored historical receipt while purchases are disabled and the model admission has expired",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only does not redownload or repurchase corrupted registered output bytes",
+          "status": "skipped",
+          "title": "does not redownload or repurchase corrupted registered output bytes",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only rejects changed replay prompts before another charge or call",
+          "status": "skipped",
+          "title": "rejects changed replay prompts before another charge or call",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only holds unknown billing when the provider returns another model or omits usage",
+          "status": "skipped",
+          "title": "holds unknown billing when the provider returns another model or omits usage",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only releases only an explicitly frozen non-chargeable submission error",
+          "status": "skipped",
+          "title": "releases only an explicitly frozen non-chargeable submission error",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only settles late costs after cancellation but never writes or exposes media",
+          "status": "skipped",
+          "title": "settles late costs after cancellation but never writes or exposes media",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only rejects foreign photos, old stage leases and conflicting frozen registry bindings",
+          "status": "skipped",
+          "title": "rejects foreign photos, old stage leases and conflicting frozen registry bindings",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only protects the original task, frozen rate, receipt history and completed result in PostgreSQL",
+          "status": "skipped",
+          "title": "protects the original task, frozen rate, receipt history and completed result in PostgreSQL",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only rejects unauthorized media origins and redirects without leaking API credentials",
+          "status": "skipped",
+          "title": "rejects unauthorized media origins and redirects without leaking API credentials",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only isolates generation credentials from a different vision origin and refuses an empty dedicated key",
+          "status": "skipped",
+          "title": "isolates generation credentials from a different vision origin and refuses an empty dedicated key",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only holds a possibly chargeable error instead of releasing its original reservation",
+          "status": "skipped",
+          "title": "holds a possibly chargeable error instead of releasing its original reservation",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only keeps polling the accepted task after HTTP errors and running responses without a new POST",
+          "status": "skipped",
+          "title": "keeps polling the accepted task after HTTP errors and running responses without a new POST",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only enforces the frozen query limit without reopening the purchase or its budget",
+          "status": "skipped",
+          "title": "enforces the frozen query limit without reopening the purchase or its budget",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only recovers an uncertain generated-media PUT by its original key, with one write and one purchase",
+          "status": "skipped",
+          "title": "recovers an uncertain generated-media PUT by its original key, with one write and one purchase",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only rejects a wrong-size image after recording its actual cost, then preserves that terminal failure",
+          "status": "skipped",
+          "title": "rejects a wrong-size image after recording its actual cost, then preserves that terminal failure",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only fences a late old stage while allowing the new owner to recover the paid original result",
+          "status": "skipped",
+          "title": "fences a late old stage while allowing the new owner to recover the paid original result",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only rejects a real MP4 with the wrong admitted dimensions after settling the original video cost",
+          "status": "skipped",
+          "title": "rejects a real MP4 with the wrong admitted dimensions after settling the original video cost",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only rejects unsold nodes, changed duration and newly revoked model capability before reserving money",
+          "status": "skipped",
+          "title": "rejects unsold nodes, changed duration and newly revoked model capability before reserving money",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only retains every generation request/receipt while billing is unknown and erases them after original settlement",
+          "status": "skipped",
+          "title": "retains every generation request/receipt while billing is unknown and erases them after original settlement",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only propagates the absolute purchase deadline into its signal before a slow transport can submit",
+          "status": "skipped",
+          "title": "propagates the absolute purchase deadline into its signal before a slow transport can submit",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [
+            "generation gateway / native PG, actual PNG + MP4, synthetic provider only"
+          ],
+          "fullName": "generation gateway / native PG, actual PNG + MP4, synthetic provider only accepts optional absent tool usage but rejects extra tools, invalid contracts and unbounded units",
+          "status": "skipped",
+          "title": "accepts optional absent tool usage but rejects extra tools, invalid contracts and unbounded units",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793331273512,
+      "endTime": 1793331274805.731,
+      "status": "passed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/generation-gateway.test.ts"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "fullName": "requires all seven live handlers and configured independent budgets before queuing",
+          "status": "skipped",
+          "title": "requires all seven live handlers and configured independent budgets before queuing",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "produces actual full-spec photos/video/copy through five fresh synthetic roles without an order or buyer charge",
+          "status": "passed",
+          "title": "produces actual full-spec photos/video/copy through five fresh synthetic roles without an order or buyer charge",
+          "duration": 44616.988,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "serves only private owned sample files and rejects post-QC byte tampering",
+          "status": "skipped",
+          "title": "serves only private owned sample files and rejects post-QC byte tampering",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "publishes the actually produced complete sample as independent public PNG/MP4 copies without repeating any model work",
+          "status": "passed",
+          "title": "publishes the actually produced complete sample as independent public PNG/MP4 copies without repeating any model work",
+          "duration": 1282.515800000001,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rejects incomplete, wrong-packet and forged PASS reports and changed completion bindings",
+          "status": "skipped",
+          "title": "rejects incomplete, wrong-packet and forged PASS reports and changed completion bindings",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "does not accept READY/QC flags or test-fixture markers outside APP_ENV=test",
+          "status": "skipped",
+          "title": "does not accept READY/QC flags or test-fixture markers outside APP_ENV=test",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "recovers the original content checkpoint after lease takeover without another role or inference",
+          "status": "skipped",
+          "title": "recovers the original content checkpoint after lease takeover without another role or inference",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "checks the frozen sample cost ceiling before submitting any upstream request",
+          "status": "skipped",
+          "title": "checks the frozen sample cost ceiling before submitting any upstream request",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "holds an ambiguous sample reservation and does not rebuy inference on stage recovery",
+          "status": "skipped",
+          "title": "holds an ambiguous sample reservation and does not rebuy inference on stage recovery",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "rechecks the pinned resource license before completed samples can be published",
+          "status": "skipped",
+          "title": "rechecks the pinned resource license before completed samples can be published",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "fails closed for generated blueprints without admitted model protocols before any sample stages or inference",
+          "status": "passed",
+          "title": "fails closed for generated blueprints without admitted model protocols before any sample stages or inference",
+          "duration": 21.51720000000205,
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "stops a deleted or expired input before consuming any inference budget",
+          "status": "skipped",
+          "title": "stops a deleted or expired input before consuming any inference budget",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "refuses a revoked publication grant for already completed media links",
+          "status": "skipped",
+          "title": "refuses a revoked publication grant for already completed media links",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "completes PER_SHOT_AI creator sample, private download and independent public copies within platform funds",
+          "status": "failed",
+          "title": "completes PER_SHOT_AI creator sample, private download and independent public copies within platform funds",
+          "duration": 122.74319999999716,
+          "failureMessages": [
+            "error: invalid input syntax for type json\n    at E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\.pnpm\\pg-pool@3.14.0_pg@8.23.1\\node_modules\\pg-pool\\index.js:45:11\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at generatedFixture (E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/sample-production.test.ts:295:3)\n    at E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/sample-production.test.ts:318:11\n    at async file:///E:/dev/sandbox/%E6%94%AF%E4%BB%98%E5%AE%9D%E9%BB%91%E5%AE%A2%E6%9D%BE/%E4%B8%80%E5%93%81%E6%88%90%E7%89%87/node_modules/.pnpm/vitest@5.0.5_@types+node@24_074c366c144b624165a2ee5270d15630/node_modules/vitest/dist/chunks/run.BPv-BBRv.js:2801:20"
+          ],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "completes REFERENCE_FILM creator sample, private download and independent public copies within platform funds",
+          "status": "pending",
+          "title": "completes REFERENCE_FILM creator sample, private download and independent public copies within platform funds",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        },
+        {
+          "ancestorTitles": [],
+          "fullName": "retains an UNKNOWN sample generation reservation and resumes only its original intent without buyer funds",
+          "status": "pending",
+          "title": "retains an UNKNOWN sample generation reservation and resumes only its original intent without buyer funds",
+          "failureMessages": [],
+          "meta": {},
+          "tags": [],
+          "benchmarks": []
+        }
+      ],
+      "startTime": 1793331285456,
+      "endTime": 1793331331500.7432,
+      "status": "failed",
+      "message": "",
+      "name": "E:/dev/sandbox/支付宝黑客松/一品成片/tests/integration/sample-production.test.ts"
+    }
+  ]
+}

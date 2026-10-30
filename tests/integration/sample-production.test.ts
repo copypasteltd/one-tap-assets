@@ -1,3 +1,11 @@
+import {readFile,mkdir} from 'node:fs/promises';
+import {syntheticArkContract} from '../helpers/generation.js';
+import {ArkClient,type ArkContract} from '../../src/worker/providers/ark.js';
+import type {HttpResponse} from '../../src/api/lib/http.js';
+import {nativeCommand} from '../../src/worker/media/native.js';
+import {sampleGenerationGateway,sampleGenerationContext} from '../../src/worker/samples/generation.js';
+import {referenceRequest} from '../../src/worker/generation/requests.js';
+import {PendingExternal} from '../../src/worker/queue/leases.js';
 import { beforeAll, afterAll, it, expect } from 'vitest';
 import { writeFile, rm } from 'node:fs/promises';
 import sharp from 'sharp';
@@ -161,7 +169,7 @@ it('serves only private owned sample files and rejects post-QC byte tampering', 
     await expect(verifyCompletedSample(db.pool, f.cfg, f.p.tenantId, sample.sample_id, completed.private)).rejects.toMatchObject({ code: 'REVIEW_IMAGE_INVALID' });
   } finally { await store.put(item.object_key, original, 'image/png'); }
 });
-it('publishes the actually produced complete sample as independent public PNG/MP4 copies without repeating any model work',async()=>{
+async function publishProducedSample(draft:DTO<'PresetDraft'>,sample:DTO<'Sample'>,completed:SampleContext){
   const managed=(path:string,body:unknown)=>app.inject({method:'POST',url:`/v1/internal/p01${path}`,remoteAddress:'198.19.0.1',
     headers:{authorization:`Bearer ${publicationAdmin}`,'idempotency-key':id('management'),'content-type':'application/json'},payload:JSON.stringify(body)});
   const licenseId=id('license');const text='Synthetic license for actual sample production integration only. No production rights are granted.';
@@ -193,9 +201,10 @@ it('publishes the actually produced complete sample as independent public PNG/MP
   const stages=(await db.pool.query<{id:string}>("SELECT id FROM stage_runs WHERE tenant_id=$1 AND scope_type='SAMPLE' AND scope_id=$2",[f.p.tenantId,sample.sample_id])).rows;
   for (const stage of stages) expect(scoped.some(r=>r.table_name==='stage_runs' && r.id===stage.id && r.owner_id===f.p.userId)).toBe(true);
   const instances=(await db.pool.query<{id:string}>('SELECT id FROM agent_instances WHERE tenant_id=$1 AND preview_session_id=$2',[f.p.tenantId,sample.sample_id])).rows;
-  expect(instances).toHaveLength(5);
+  expect(instances).toHaveLength(completed.input.generation?6:5);
   for (const instance of instances) expect(scoped.some(r=>r.table_name==='agent_instances' && r.id===instance.id && r.owner_id===f.p.userId)).toBe(true);
-});
+}
+it('publishes the actually produced complete sample as independent public PNG/MP4 copies without repeating any model work',()=>publishProducedSample(draft,sample,completed));
 it('rejects incomplete, wrong-packet and forged PASS reports and changed completion bindings', async () => {
   const saved = (completed.private.review_reports as Record<string, { run_id: string; report: SampleReview }>).REVIEW_FACTS!;
   await expect(validateSampleReview(db.pool, f.cfg, completed, saved.run_id, { ...saved.report, checked_asset_ids: saved.report.checked_asset_ids.slice(1) }, true)).rejects.toMatchObject({ code: 'SAMPLE_REVIEW_INCOMPLETE' });
@@ -251,10 +260,10 @@ it('rechecks the pinned resource license before completed samples can be publish
   try { await expect(verifyCompletedSample(db.pool, f.cfg, f.p.tenantId, sample.sample_id, completed.private)).rejects.toMatchObject({ code: 'RESOURCE_LICENSE_UNAVAILABLE' }); }
   finally { await db.pool.query('UPDATE resource_licenses SET revoked_at=NULL WHERE id=$1', [FONT_BINDING.license_record_id]); }
 });
-it('fails closed for unsupported generated blueprints before any sample stages or inference', async () => {
+it('fails closed for generated blueprints without admitted model protocols before any sample stages or inference', async () => {
   const other = await createDraft(db.pool, f.p, { ...draft.config, component_versions: ['style.quiet-luxury.1'], variant_blueprint_ids: ['blueprint.quiet-luxury.ai-detail'] });
   const calls = upstreamImages.length; const result = await api('POST', `/preset-drafts/${other.draft_id}/samples`, request(other));
-  expect(result.statusCode).toBe(503); expect(result.json().code).toBe('SAMPLE_ROUTE_UNAVAILABLE'); expect(upstreamImages).toHaveLength(calls);
+  expect(result.statusCode).toBe(503); expect(['GENERATION_MODEL_NOT_ADMITTED','GENERATION_MODEL_BINDING_INVALID','ARK_CONTRACT_INVALID','ARK_CONTRACT_NOT_ADMITTED','SAMPLE_GENERATION_NOT_CONFIGURED']).toContain(result.json().code); expect(upstreamImages).toHaveLength(calls);
 });
 it('stops a deleted or expired input before consuming any inference budget', async () => {
   const s = await create(); const lease = (await claimStage(db.pool, id('revoked-worker'), ['SAMPLE']))!; const calls = upstreamImages.length;
@@ -266,4 +275,113 @@ it('refuses a revoked publication grant for already completed media links', asyn
   const grant = rights[1]!; await db.pool.query("UPDATE rights_records SET state='REVOKED',data=data||'{\"state\":\"REVOKED\"}'::jsonb WHERE id=$1", [grant]);
   try { const r = await api('POST', `/preset-samples/${sample.sample_id}/media-links`); expect(r.statusCode).toBe(409); expect(r.json().code).toBe('SAMPLE_RIGHTS_REVOKED'); }
   finally { await db.pool.query("UPDATE rights_records SET state='SUBMITTED',data=data||'{\"state\":\"SUBMITTED\"}'::jsonb WHERE id=$1", [grant]); }
+});
+
+/** Real native sample pipeline, synthetic model bytes/meaning/identities only. */
+async function generatedFixture(engine:'PER_SHOT_AI'|'REFERENCE_FILM',lostAck=false){
+  const contracts=[syntheticArkContract('IMAGE'),syntheticArkContract('VIDEO')];
+  const image=contracts[0]!,video=contracts[1]!;
+  video.video!.ratios=['9:16'];video.video!.dimensions=[{resolution:'480p',ratio:'9:16',width:360,height:640}];
+  const variant=engine==='PER_SHOT_AI'?'quiet-luxury.ai-detail':'portrait-social.ai-presenter-multi';
+  const style=engine==='PER_SHOT_AI'?'quiet-luxury':'portrait-social';
+  const row=(await db.pool.query('SELECT id,private FROM execution_variants WHERE variant_id=$1',[variant])).rows[0]!;
+  const source=row.private.source;source.audio_policy={...source.audio_policy,speech:'none',language:null,preserve_native_speech:false,caption_alignment:'NO_SPEECH',music:'none'};
+  const duration=engine==='PER_SHOT_AI'?2:1;
+  source.ai_disclosure_required=true;source.timeline_policy={fps:30,target_frames:duration*30,base_segments:duration===2?
+    [{role:'whole',start_seconds:0,end_seconds:1},{role:'detail',start_seconds:1,end_seconds:2}]:[{role:'show',start_seconds:0,end_seconds:1}]};
+  source.output_slots=source.output_slots.filter((o:{kind:string})=>o.kind!=='video').slice(0,1);
+  source.output_slots.push({slot_id:'video-main',kind:'video',width:1080,height:1920,fps:30,duration_seconds:duration,role:'main'});
+  for(const c of contracts){const binding={provider:c.provider,actual_model:c.actual_model,registry_version:c.registry_version,
+    roles:[c.wire==='ARK_IMAGE'?'IMAGE':'VIDEO'],capability_hash:hash(c),rate_snapshot_id:c.rate_snapshot_id};
+    await insert(db.pool,'provider_model_versions',{id:c.model_version_id,provider:c.provider,actual_model:c.actual_model,status:'ADMITTED',version:c.registry_version,data:binding,private:{ark_contract:c}});}
+  await db.pool.query(`UPDATE execution_variants SET private=private||jsonb_build_object('source',$2::jsonb,'model_version_ids',$3::jsonb) WHERE id=$1`,[row.id,JSON.stringify(source),JSON.stringify(contracts.map(c=>c.model_version_id))]);
+  Object.assign(f.cfg.provider,{baseUrl:image.base_url,apiKey:'synthetic-not-real',imageModel:image.request_model,videoModel:video.request_model});
+  f.cfg.provider.allowedHosts=[...new Set([...f.cfg.provider.allowedHosts,'generation.example.test','media.example.test'])];
+  const d=await createDraft(db.pool,f.p,{...draft.config,name:'Synthetic generated '+engine,component_versions:[`style.${style}.1`],variant_blueprint_ids:[`blueprint.${variant}`]});
+  const directory=inside(f.cfg.runtimeRoot,`tests/generated-sample/${id('media')}`);await mkdir(directory,{recursive:true});
+  const videoPath=inside(directory,'provider.mp4');
+  await nativeCommand(f.cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-v','error','-f','lavfi','-i','color=c=green:s=360x640:r=30','-t','1','-an','-c:v','libx264','-pix_fmt','yuv420p',videoPath],{cwd:directory,timeoutMs:30000});
+  const videoBytes=await readFile(videoPath),imageBytes=await sharp({create:{width:640,height:800,channels:3,background:'#1F5F43'}}).png().toBuffer();
+  const calls:{method:string;url:string}[]=[];let task=0;
+  const http=(value:unknown):HttpResponse=>{const bytes=Buffer.isBuffer(value)?value:Buffer.from(JSON.stringify(value));return {status:200,headers:{},bytes,json:()=>JSON.parse(bytes.toString('utf8'))};};
+  const gateway=sampleGenerationGateway(db.pool,f.cfg,store,new ArkClient(f.cfg,async(url,_hosts,options={})=>{
+    calls.push({method:options.method??'GET',url});if(lostAck)throw new Error('Synthetic lost sample ACK');
+    if(url.includes('/images/generations'))return http({model:image.actual_model,data:[{b64_json:imageBytes.toString('base64')}],usage:{generated_images:1}});
+    if(options.method==='POST')return http({id:`sample-task-${++task}`});
+    if(url.startsWith('https://media.example.test/'))return http(videoBytes);
+    return http({id:url.split('/').at(-1),model:video.actual_model,status:'succeeded',content:{video_url:'https://media.example.test/generated.mp4'},usage:{completion_tokens:250,total_tokens:250}});
+  }));
+  const old=consumer;controller.abort();await old;controller=new AbortController();
+  consumer=new ToolConsumer(db.pool,id('generated-sample-tools'),sampleTools(db.pool,f.cfg,store,gateway)).run(controller.signal);
+  const executor=new CodexRuntimeAdapter(db.pool,f.cfg,launcher);
+  return {draft:d,gateway,calls,service:new SampleProductionService(db.pool,f.cfg,store,executor,gateway),directory};
+}
+for(const engine of ['PER_SHOT_AI','REFERENCE_FILM'] as const)it(`completes ${engine} creator sample, private download and independent public copies within platform funds`,async()=>{
+  const g=await generatedFixture(engine);const s=await create(g.draft);const before=launcher.launches;
+  try{
+    const initial=await sampleContext(db.pool,f.p.tenantId,s.sample_id);
+    expect(initial.input.generation!.ceiling_micro+initial.input.limits.ceiling_micro).toBe(f.cfg.samples.costCeilingMicro);
+    for(const name of SAMPLE_STAGES){const lease=(await claimStage(db.pool,id('generated-sample'),[name]))!;expect(lease.scope_id).toBe(s.sample_id);
+      await completeStage(db.pool,lease,await withFixtureLease(db.pool,lease,signal=>g.service.handle(lease,signal),controller.signal));}
+    const c=await sampleContext(db.pool,f.p.tenantId,s.sample_id,undefined,false,true);
+    await verifyCompletedSample(db.pool,f.cfg,f.p.tenantId,s.sample_id,c.private);
+    expect(launcher.launches-before).toBe(6);
+    const runs=(await db.pool.query(`SELECT r.* FROM agent_runs r JOIN agent_instances i ON i.tenant_id=r.tenant_id AND i.id=r.instance_id WHERE i.preview_session_id=$1`,[s.sample_id])).rows;
+    expect(runs.filter(r=>r.private.review_input?.purpose==='REFERENCE_IDENTITY')).toHaveLength(1);
+    const nodes=(await db.pool.query('SELECT * FROM provider_submissions WHERE sample_id=$1',[s.sample_id])).rows;
+    const expectedNodes=engine==='PER_SHOT_AI'?5:3;
+    expect(nodes).toHaveLength(expectedNodes);expect(nodes.every(n=>n.order_id===null&&n.state==='SUCCEEDED'&&n.private.billing_valid)).toBe(true);
+    const output=(c.private.post as {artifacts:{kind:string;ai_disclosure?:{frames_checked:number};generation_sources?:unknown[];object_key:string}[]}).artifacts;
+    expect(output.filter(a=>a.kind!=='copy').every(a=>a.ai_disclosure&&a.generation_sources?.length)).toBe(true);
+    expect(output.find(a=>a.kind==='video')!.ai_disclosure!.frames_checked).toBe(engine==='PER_SHOT_AI'?60:30);
+    expect(samplePacket(c).images.some(i=>i.asset_id===c.input.profile.photo_roles[0]!.asset_id)).toBe(true);
+    expect((await api('POST',`/preset-samples/${s.sample_id}/media-links`,undefined,outsider)).statusCode).toBe(404);
+    expect((await api('POST',`/preset-samples/${s.sample_id}/media-links`)).statusCode).toBe(200);
+    const purchases=g.calls.filter(c=>c.method==='POST').length;expect(purchases).toBe(expectedNodes);
+    await publishProducedSample(g.draft,s,c);expect(g.calls.filter(c=>c.method==='POST')).toHaveLength(purchases);
+    expect((await db.pool.query('SELECT id FROM orders')).rowCount).toBe(0);expect((await db.pool.query('SELECT id FROM budget_reservations')).rowCount).toBe(0);
+    expect((await db.pool.query(`SELECT b.id FROM platform_budget_reservations b JOIN provider_submissions p ON p.tenant_id=b.tenant_id AND p.reservation_id=b.id WHERE p.sample_id=$1 AND b.state<>'SETTLED'`,[s.sample_id])).rowCount).toBe(0);
+    const model=nodes[0]!.model_version_id;await db.pool.query(`UPDATE provider_model_versions SET status='RETIRED' WHERE id=$1`,[model]);
+    try{await verifyCompletedSample(db.pool,f.cfg,f.p.tenantId,s.sample_id,c.private);}finally{await db.pool.query(`UPDATE provider_model_versions SET status='ADMITTED' WHERE id=$1`,[model]);}
+    const artifact=output.find(a=>a.kind==='image')!,original=await store.get(artifact.object_key);
+    await store.put(artifact.object_key,Buffer.from('changed'),'image/png');
+    try{await expect(verifyCompletedSample(db.pool,f.cfg,f.p.tenantId,s.sample_id,c.private)).rejects.toMatchObject({code:expect.stringMatching(/REVIEW_IMAGE_INVALID|SAMPLE_OBJECT_CHANGED/)});}finally{await store.put(artifact.object_key,original,'image/png');}
+  }finally{await rm(g.directory,{recursive:true,force:true});}
+});
+it('rejects insufficient frozen sample funds and UNCERTAIN reference identity before buying any video',async()=>{
+  const g=await generatedFixture('REFERENCE_FILM');let s:DTO<'Sample'>|undefined;
+  try{
+    const budget=f.cfg.samples.costCeilingMicro;f.cfg.samples.costCeilingMicro=100;
+    try{const rejected=await api('POST',`/preset-drafts/${g.draft.draft_id}/samples`,request(g.draft));
+      expect(rejected.statusCode).toBe(503);expect(rejected.json().code).toBe('SAMPLE_GENERATION_BUDGET_INVALID');expect(g.calls).toHaveLength(0);
+    }finally{f.cfg.samples.costCeilingMicro=budget;}
+    s=await create(g.draft);const content=(await claimStage(db.pool,id('rejected-reference'),['SAMPLE']))!;
+    await completeStage(db.pool,content,await withFixtureLease(db.pool,content,signal=>g.service.handle(content,signal),controller.signal));
+    const lease=(await claimStage(db.pool,id('rejected-reference'),['SAMPLE_PRODUCTION']))!;
+    const active=new SampleProductionService(db.pool,f.cfg,store,new CodexRuntimeAdapter(db.pool,f.cfg,new SampleLauncher('REFERENCE_UNCERTAIN')),g.gateway);
+    await expect(withFixtureLease(db.pool,lease,signal=>active.handle(lease,signal),controller.signal)).rejects.toMatchObject({code:'REFERENCE_IDENTITY_REJECTED'});
+    expect((await db.pool.query(`SELECT id FROM provider_submissions WHERE sample_id=$1 AND generation_kind='VIDEO'`,[s.sample_id])).rowCount).toBe(0);
+    expect(g.calls.filter(c=>c.method==='POST')).toHaveLength(1);
+    expect((await db.pool.query(`SELECT r.id FROM agent_runs r JOIN agent_instances i ON i.id=r.instance_id WHERE i.preview_session_id=$1 AND r.role='PRODUCTION'`,[s.sample_id])).rowCount).toBe(0);
+  }finally{if(s)await stop(s);await rm(g.directory,{recursive:true,force:true});}
+});
+it('retains an UNKNOWN sample generation reservation and resumes only its original intent without buyer funds',async()=>{
+  const g=await generatedFixture('PER_SHOT_AI',true),s=await create(g.draft);
+  try{
+    const content=(await claimStage(db.pool,id('sample-content'),['SAMPLE']))!;
+    await completeStage(db.pool,content,await withFixtureLease(db.pool,content,signal=>g.service.handle(content,signal),controller.signal));
+    const lease=(await claimStage(db.pool,id('sample-reference'),['SAMPLE_PRODUCTION']))!;
+    const c=await sampleContext(db.pool,f.p.tenantId,s.sample_id),gc=sampleGenerationContext(c),request=referenceRequest(gc,gc.contract.creative.shots[0]!.shot_id);
+    await expect(g.gateway.submit(lease,request,controller.signal)).rejects.toThrow('Synthetic lost sample ACK');
+    expect((await g.gateway.submit(lease,request,controller.signal)).state).toBe('UNKNOWN');
+    expect(g.calls.filter(c=>c.method==='POST')).toHaveLength(1);
+    const nodes=(await db.pool.query('SELECT p.*,b.state AS budget_state FROM provider_submissions p JOIN platform_budget_reservations b ON b.id=p.reservation_id WHERE p.sample_id=$1',[s.sample_id])).rows;
+    expect(nodes).toHaveLength(1);expect(nodes[0]).toMatchObject({order_id:null,state:'UNKNOWN',budget_state:'UNKNOWN'});
+    await expect(db.pool.query(`UPDATE provider_submissions SET sample_id=NULL WHERE id=$1`,[nodes[0]!.id])).rejects.toThrow(/immutable/);
+    await expect(db.pool.query(`UPDATE public_samples SET private=jsonb_set(private,'{execution,input,limits,ceiling_micro}','9999999') WHERE id=$1`,[s.sample_id])).rejects.toThrow(/immutable/);
+    await expect(g.gateway.resume({...lease,tenant_id:id('foreign-tenant')},nodes[0]!.id,controller.signal)).rejects.toBeDefined();
+    expect((await db.pool.query('SELECT id FROM orders')).rowCount).toBe(0);expect((await db.pool.query('SELECT id FROM budget_reservations')).rowCount).toBe(0);
+    await stop(s);const result=await g.gateway.reconcileReceipts();expect(result.blocked).toBeGreaterThan(0);
+    expect(g.calls.filter(c=>c.method==='POST')).toHaveLength(1);
+  }finally{await stop(s);await rm(g.directory,{recursive:true,force:true});}
 });

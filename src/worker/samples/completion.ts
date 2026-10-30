@@ -4,7 +4,7 @@ import { storage } from '../../api/storage/storage.js';
 import { hash } from '../../api/lib/crypto.js';
 import { requireThat } from '../../api/lib/errors.js';
 import { sampleContext } from './context.js';
-import { storedMedia, artifactBytes } from './media.js';
+import { storedMedia, artifactBytes, verifySampleGeneratedReceipt } from './media.js';
 import { samplePacket, packetImages, validateSampleCompletion } from './review.js';
 import { FONT_BINDING, verifyResourceLicenses } from '../media/font.js';
 
@@ -22,5 +22,6 @@ export async function verifyCompletedSample(db: Db, cfg: Config, tenantId: strin
     && hash(c.private.completion) === hash({ input_hash: c.inputHash, packet_hash: packet.packet_hash, media_hash: hash(media), review_hash: hash(c.private.review_reports) }),
   'SAMPLE_COMPLETION_CHANGED', '样例交付证据或文件清单已变化', 503);
   const store = storage(cfg); await packetImages(db, cfg, store, c, packet);
+  await verifySampleGeneratedReceipt(db,cfg,store,c,receipt);
   for (const artifact of receipt.artifacts) await artifactBytes(db, store, c, artifact);
 }

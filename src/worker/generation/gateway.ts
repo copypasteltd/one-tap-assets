@@ -13,14 +13,14 @@ import type {ObjectStorage} from '../../api/storage/storage.js';
 import type {HttpResponse} from '../../api/lib/http.js';
 import {object} from '../../shared/domain/json.js';
 import {reserveStageCost,settle} from '../budget/reservations.js';
-import type {ExecutionContext} from '../compiler/order-context.js';
+import {generationScope,generationCostConfirmed,generationSource,orderGenerationContext,type GenerationContext,type GenerationScopeAdapter} from './scope.js';
 import {inspectVideo,nativeCommand,type MediaInspection} from '../media/native.js';
 import {PendingExternal,type StageLease} from '../queue/leases.js';
 import {ArkClient,admitArkContract,arkUsage,frozenArkContract,prepareArkImage,prepareArkVideo,type ArkContract,type PreparedArk,type ArkImage} from '../providers/ark.js';
 import {generationContract} from './contracts.js';
 import {generationContext} from './context.js';
 import {readReferenceApproval,type ReferenceApproval} from './reference-approval.js';
-import {generationSourceStage,originalRepairContext} from '../repair/generation.js';
+import {originalRepairContext} from '../repair/generation.js';
 import {imageRequest,referenceRequest,videoRequest} from './requests.js';
 
 export interface GenerationRequest {
@@ -32,7 +32,7 @@ interface RawReceipt {version:1;submission_id:string;ordinal:number;kind:'SUBMIT
   status:number;response_sha256:string;response_base64:string}
 export interface GenerationOutput {object_key:string;sha256:string;inspection:MediaInspection}
 interface Submission {
-  id:string;tenant_id:string;order_id:string;stage_run_id:string;generation_kind:'IMAGE'|'VIDEO';model_version_id:string;
+  id:string;tenant_id:string;order_id:string|null;sample_id:string|null;stage_run_id:string;generation_kind:'IMAGE'|'VIDEO';model_version_id:string;
   operation_key:string;input_hash:string;state:string;provider_task_id:string|null;reservation_id:string;
   lease_generation:string;lease_owner:string|null;next_query_at:Date|null;
   private:{owner_id:string;product_id:string;wire_contract:ArkContract;contract_hash:string;request_key:string;request_sha256:string;
@@ -47,12 +47,17 @@ const receiptLimit=(c:ArkContract):number=>Math.ceil(c.max_response_bytes*4/3)+8
  * A caller must hold the original production stage lease. Final delivery still
  * requires the separate actual-file QC and independent review pipeline. */
 export class GenerationGateway {
-  constructor(private pool:pg.Pool,private cfg:Config,private store:ObjectStorage,private client=new ArkClient(cfg)){}
+  constructor(private pool:pg.Pool,private cfg:Config,private store:ObjectStorage,private client=new ArkClient(cfg),private adapter?:GenerationScopeAdapter){}
+  private get scopeColumn(){return this.adapter?.column??'order_id';}
+  private scopeId(row:Submission):string{const value=row[this.scopeColumn];requireThat(value,'GENERATION_SCOPE_INVALID','生成任务缺少原执行范围',403);return value;}
+  private prefix(row:Submission):string{return this.adapter?`${row.tenant_id}/samples/${this.scopeId(row)}/generation/${row.id}`:`${row.tenant_id}/generation/${this.scopeId(row)}/${row.id}`;}
+  private async lockParent(db:Db,row:Submission){if(this.adapter)await this.adapter.lock(db,row.tenant_id,this.scopeId(row));else await db.query('SELECT id FROM orders WHERE tenant_id=$1 AND id=$2 FOR UPDATE',[row.tenant_id,row.order_id]);}
+  private async settleCost(db:Db,row:Submission,actual:number|null,noCharge=false){if(this.adapter)await this.adapter.settle(db,row,actual,noCharge);else await settle(db,row.tenant_id,row.reservation_id,actual,noCharge);}
   private scope(row:Submission,kind:'RECEIPT'|'MEDIA'){
-    return {tenantId:row.tenant_id,ownerId:row.private.owner_id,productId:row.private.product_id,orderId:row.order_id,kind};
+    return {tenantId:row.tenant_id,ownerId:row.private.owner_id,productId:row.private.product_id,...(row.order_id?{orderId:row.order_id}:{}),kind};
   }
   private async row(tenantId:string,submissionId:string,db:Db=this.pool,lock=false):Promise<Submission>{
-    return (await db.query<Submission>(`SELECT * FROM provider_submissions WHERE tenant_id=$1 AND id=$2 AND generation_kind IN ('IMAGE','VIDEO')${lock?' FOR UPDATE':''}`,
+    return (await db.query<Submission>(`SELECT * FROM provider_submissions WHERE tenant_id=$1 AND id=$2 AND generation_kind IN ('IMAGE','VIDEO') AND ${this.scopeColumn} IS NOT NULL${lock?' FOR UPDATE':''}`,
       [tenantId,submissionId])).rows[0]??notFound();
   }
   private contract(row:Submission):ArkContract{
@@ -62,10 +67,10 @@ export class GenerationGateway {
       &&row.private.request_sha256===row.input_hash&&row.private.prepared.request_hash===row.input_hash,
       'GENERATION_CONTRACT_CHANGED','原生成协议或模型绑定不一致',503);return c;
   }
-  private async live(lease:StageLease,db:Db=this.pool):Promise<ExecutionContext>{
-    return generationContext(db,lease);
+  private async live(lease:StageLease,db:Db=this.pool):Promise<GenerationContext>{
+    return this.adapter?this.adapter.context(db,lease):generationContext(db,lease);
   }
-  private async videoInputs(context:ExecutionContext,stageId:string,operation:string,assetIds:string[],db:Db=this.pool){
+  private async videoInputs(context:GenerationContext,stageId:string,operation:string,assetIds:string[],db:Db=this.pool){
     const checked=await readReferenceApproval(db,this.cfg,this.store,context,stageId);
     const key=context.snapshot.engine==='REFERENCE_FILM'?'reference:film':`reference:${operation.slice('video:'.length)}`;
     const frame=checked.approval.frames.find(f=>f.operation_key===key);
@@ -74,7 +79,7 @@ export class GenerationGateway {
     const image=checked.material.images.find(i=>i.asset_id===frame.asset_id)!;
     return {approval:checked.approval,images:[{id:image.asset_id,sha256:image.sha256,bytes:image.bytes}]};
   }
-  private async videoAuthorization(row:Submission,context:ExecutionContext,db:Db=this.pool):Promise<void>{
+  private async videoAuthorization(row:Submission,context:GenerationContext,db:Db=this.pool):Promise<void>{
     if(row.generation_kind!=='VIDEO')return;
     requireThat(row.private.prepared.reference_approval,'GENERATION_REFERENCE_REVIEW_REQUIRED','原视频缺少冻结的参考核验凭证，只允许独立财务对账',409);
     const checked=await this.videoInputs(context,row.stage_run_id,row.operation_key,row.private.prepared.references.map(i=>i.id),db);
@@ -82,7 +87,7 @@ export class GenerationGateway {
       &&checked.images.every(i=>row.private.prepared.references.some(r=>r.id===i.id&&r.sha256===i.sha256)),
     'GENERATION_REFERENCE_APPROVAL_CHANGED','原视频的核验报告或实际参考帧绑定已变化',409);
   }
-  private async images(context:ExecutionContext,assetIds:string[]):Promise<ArkImage[]>{
+  private async images(context:GenerationContext,assetIds:string[]):Promise<ArkImage[]>{
     requireThat(assetIds.length>0&&assetIds.length<=5&&new Set(assetIds).size===assetIds.length,'GENERATION_REFERENCE_INVALID','生成参考必须引用冻结商品照片',422);
     const all=(await this.pool.query<{id:string;object_key:string;sha256:string}>(`SELECT a.id,a.object_key,a.sha256 FROM product_photo_items p
       JOIN assets a ON a.tenant_id=p.tenant_id AND a.id=p.asset_id WHERE p.tenant_id=$1 AND p.photo_version_id=$2
@@ -96,7 +101,7 @@ export class GenerationGateway {
   }
   private async registered(row:Submission,key:string,maximum:number,kind:'MEDIA'|'RECEIPT'='RECEIPT'):Promise<Buffer|null>{
     const record=(await this.pool.query<{state:string;sha256:string;delete_requested:boolean;expires_at:Date}>(`SELECT state,sha256,delete_requested,expires_at FROM private_object_writes
-      WHERE tenant_id=$1 AND owner_id=$2 AND order_id=$3 AND product_id=$4 AND object_key=$5 AND kind=$6`,
+      WHERE tenant_id=$1 AND owner_id=$2 AND order_id IS NOT DISTINCT FROM $3::text AND product_id=$4 AND object_key=$5 AND kind=$6`,
     [row.tenant_id,row.private.owner_id,row.order_id,row.private.product_id,key,kind])).rows[0];
     if(!record)return null;
     requireThat(kind!=='MEDIA'||!record.delete_requested&&record.expires_at.getTime()>Date.now(),'GENERATION_MEDIA_REVOKED','原生成媒体已撤权或过期',410);
@@ -145,9 +150,9 @@ export class GenerationGateway {
     const produced=successful&&(row.generation_kind==='IMAGE'||receipt.body.status==='succeeded');
     await transaction(this.pool,async db=>{
       await lockMediaOwner(db,row.tenant_id,row.private.owner_id);
-      await db.query('SELECT id FROM orders WHERE tenant_id=$1 AND id=$2 FOR UPDATE',[row.tenant_id,row.order_id]);
+      await this.lockParent(db,row);
       const current=await this.row(row.tenant_id,row.id,db,true);if(current.private.provider_terminal)return;
-      await settle(db,row.tenant_id,row.reservation_id,actual,noCharge);
+      await this.settleCost(db,row,actual,noCharge);
       const state=produced&&actual!==null?'RUNNING':'FAILED';
       await db.query(`UPDATE provider_submissions SET state=$3,private=private||$4::jsonb,updated_at=now(),
         data=data||jsonb_build_object('state',$3::text) WHERE tenant_id=$1 AND id=$2`,[row.tenant_id,row.id,state,
@@ -186,7 +191,7 @@ export class GenerationGateway {
       const count=current.private.receipts.filter(p=>p.kind==='QUERY').length;
       requireThat(count<c.video!.max_status_queries,'GENERATION_QUERY_LIMIT','原视频查询次数已达到冻结上限',503);
       const ordinal=current.private.receipts.length;
-      const pointer:ReceiptPointer={ordinal,kind:'QUERY',key:`${row.tenant_id}/generation/${row.order_id}/${row.id}/query-${ordinal}.json`};
+      const pointer:ReceiptPointer={ordinal,kind:'QUERY',key:`${this.prefix(row)}/query-${ordinal}.json`};
       await db.query(`UPDATE provider_submissions SET private=jsonb_set(private,'{receipts}',(private->'receipts')||$3::jsonb),
         next_query_at=now()+$4::int*interval '1 second',updated_at=now() WHERE tenant_id=$1 AND id=$2`,
       [row.tenant_id,row.id,JSON.stringify([pointer]),c.video!.poll_seconds]);return pointer;
@@ -223,7 +228,7 @@ export class GenerationGateway {
     }
     const pointer=row.private.receipts.find(p=>p.ordinal===row.private.terminal_receipt_ordinal)!;
     const receipt=await this.readReceipt(row,pointer);requireThat(receipt,'GENERATION_RECEIPT_INVALID','原终态回执尚未确认',503);
-    const c=this.contract(row),key=`${row.tenant_id}/generation/${row.order_id}/${row.id}/output.${row.generation_kind==='IMAGE'?'png':'mp4'}`;
+    const c=this.contract(row),key=`${this.prefix(row)}/output.${row.generation_kind==='IMAGE'?'png':'mp4'}`;
     let bytes=await this.registered(row,key,c.max_download_bytes,'MEDIA');
     if(!bytes){
       if(row.generation_kind==='IMAGE'){
@@ -249,7 +254,7 @@ export class GenerationGateway {
     return this.row(row.tenant_id,row.id);
   }
   private result(row:Submission):GenerationResult{return {submission_id:row.id,state:row.state,...(row.private.output?{output:row.private.output}:{})};}
-  private validateNode(context:ExecutionContext,request:GenerationRequest):void{
+  private validateNode(context:GenerationContext,request:GenerationRequest):void{
     if(request.kind==='IMAGE'){
       const slot=context.snapshot.outputs.some(slot=>slot.kind==='image'&&request.operation_key===`image:${slot.slot_id}`);
       const reference=context.snapshot.engine==='REFERENCE_FILM'?request.operation_key==='reference:film'
@@ -274,7 +279,7 @@ export class GenerationGateway {
     requireThat(!signal.aborted&&/^[A-Za-z0-9][A-Za-z0-9_.:-]{0,159}$/.test(request.operation_key),'GENERATION_REQUEST_INVALID','生成操作标识无效或执行已取消',422);
     requireThat((request.kind==='IMAGE'&&!request.video)||(request.kind==='VIDEO'&&request.video),'GENERATION_REQUEST_INVALID','生成请求类型与视频参数不匹配',422);
     const context=await transaction(this.pool,db=>this.live(lease,db));this.validateNode(context,request);
-    const sourceStage=generationSourceStage(context,lease.id,request.kind,request.operation_key);
+    const sourceStage=generationSource(context,lease.id,request.kind,request.operation_key);
     if(sourceStage!==lease.id){
       const sources=(await this.pool.query<{id:string}>(`SELECT id FROM provider_submissions WHERE tenant_id=$1 AND order_id=$2
         AND stage_run_id=$3 AND generation_kind=$4 AND operation_key=$5`,
@@ -292,7 +297,7 @@ export class GenerationGateway {
       const latest=await this.live(lease,db);
       if(checked){const current=await this.videoInputs(latest,lease.id,request.operation_key,request.reference_asset_ids,db);
         requireThat(hash(current.approval)===hash(checked.approval),'GENERATION_REFERENCE_APPROVAL_CHANGED','购买前参考核验绑定发生变化',409);}
-      const intent=`generation:${lease.tenant_id}:${lease.scope_id}:${lease.id}:${request.operation_key}`;
+      const intent=`${this.adapter?'sample-generation':'generation'}:${lease.tenant_id}:${lease.scope_id}:${lease.id}:${request.operation_key}`;
       await db.query('SELECT pg_advisory_xact_lock(hashtextextended($1,0))',[intent]);
       const prior=(await db.query<Submission>('SELECT * FROM provider_submissions WHERE intent_key=$1',[intent])).rows[0];
       if(prior){requireThat(prior.input_hash===prepared.request_hash&&prior.private.contract_hash===hash(c)&&prior.generation_kind===request.kind,
@@ -304,17 +309,17 @@ export class GenerationGateway {
       requireThat((await db.query(`SELECT id FROM provider_model_versions WHERE id=$1 AND status='ADMITTED'
         AND data->>'capability_hash'=$2 AND private->'ark_contract'=$3::jsonb FOR SHARE`,[c.model_version_id,hash(c),JSON.stringify(c)])).rowCount===1,
         'GENERATION_MODEL_NOT_ADMITTED','原生成模型已撤销准入，不能发起新购买',503);
-      const reservation=await reserveStageCost(db,lease,intent,c.rate.ceiling_micro,{contract_hash:hash(c),rate_snapshot_id:c.rate_snapshot_id,rate:c.rate},
+      const reservation=this.adapter?await this.adapter.reserve(db,lease,intent,c):await reserveStageCost(db,lease,intent,c.rate.ceiling_micro,{contract_hash:hash(c),rate_snapshot_id:c.rate_snapshot_id,rate:c.rate},
         {kind:request.kind,operationKey:request.operation_key});
-      const submissionId=id('submission'),prefix=`${lease.tenant_id}/generation/${lease.scope_id}/${submissionId}`;
+      const submissionId=id('submission'),prefix=this.adapter?`${lease.tenant_id}/samples/${lease.scope_id}/generation/${submissionId}`:`${lease.tenant_id}/generation/${lease.scope_id}/${submissionId}`;
       const pointer:ReceiptPointer={ordinal:0,kind:'SUBMIT',key:`${prefix}/submit.json`};
-      await insert(db,'provider_submissions',{id:submissionId,tenant_id:lease.tenant_id,order_id:lease.scope_id,stage_run_id:lease.id,
+      await insert(db,'provider_submissions',{id:submissionId,tenant_id:lease.tenant_id,[this.scopeColumn]:lease.scope_id,stage_run_id:lease.id,
         generation_kind:request.kind,model_version_id:c.model_version_id,operation_key:request.operation_key,intent_key:intent,
         input_hash:prepared.request_hash,state:'SUBMITTING',reservation_id:reservation,lease_generation:1,lease_owner:id('generation_worker'),
         lease_expires_at:new Date(Date.now()+180000),data:{submission_id:submissionId,state:'SUBMITTING',kind:request.kind},
         private:{owner_id:context.ownerId,product_id:context.snapshot.product_id,wire_contract:c,contract_hash:hash(c),
           request_key:`${prefix}/request.json`,request_sha256:sha256(body),prepared:summary,receipts:[pointer]}});
-      await db.query('UPDATE budget_reservations SET submission_id=$2 WHERE id=$1',[reservation,submissionId]);
+      if(!this.adapter)await db.query('UPDATE budget_reservations SET submission_id=$2 WHERE id=$1',[reservation,submissionId]);
       return {row:await this.row(lease.tenant_id,submissionId,db),created:true};
     });
     if(!claimed.created)return this.resume(lease,claimed.row.id,signal);
@@ -328,7 +333,7 @@ export class GenerationGateway {
     }catch(error){
       await this.mediaFailure(row,error);
       await transaction(this.pool,async db=>{await lockMediaOwner(db,row.tenant_id,row.private.owner_id);
-        await db.query('SELECT id FROM orders WHERE tenant_id=$1 AND id=$2 FOR UPDATE',[row.tenant_id,row.order_id]);await settle(db,row.tenant_id,row.reservation_id,null);
+        await this.lockParent(db,row);await this.settleCost(db,row,null);
         await db.query(`UPDATE provider_submissions SET state=CASE WHEN state='SUBMITTING' THEN 'UNKNOWN' ELSE state END,
           private=private||jsonb_build_object('last_error',$3::text),updated_at=now() WHERE tenant_id=$1 AND id=$2`,[row.tenant_id,row.id,code(error)]);});
       throw error;
@@ -338,7 +343,7 @@ export class GenerationGateway {
     const context=await transaction(this.pool,db=>this.live(lease,db));let row=await this.row(lease.tenant_id,submissionId);
     if(context.repair&&row.stage_run_id===context.repair.source_production_stage_id)
       return this.reuse(lease,context,row,signal);
-    requireThat(row.order_id===lease.scope_id&&row.stage_run_id===lease.id,'GENERATION_SCOPE_INVALID','原生成任务不属于当前阶段',403);
+    requireThat(this.scopeId(row)===lease.scope_id&&row.stage_run_id===lease.id,'GENERATION_SCOPE_INVALID','原生成任务不属于当前阶段',403);
     requireThat(hash(generationContract(context.contract,row.generation_kind))===hash(this.contract(row)),
       'GENERATION_CONTRACT_CHANGED','原生成协议不属于已售订单',503);
     await this.videoAuthorization(row,context);
@@ -355,9 +360,9 @@ export class GenerationGateway {
       throw error;
     }finally{await this.release(claimed);}
   }
-  private async reuse(lease:StageLease,context:ExecutionContext,row:Submission,signal:AbortSignal,request?:GenerationRequest):Promise<GenerationResult>{
+  private async reuse(lease:StageLease,context:GenerationContext,row:Submission,signal:AbortSignal,request?:GenerationRequest):Promise<GenerationResult>{
     requireThat(context.repair&&row.order_id===context.orderId&&row.stage_run_id===context.repair.source_production_stage_id
-      &&generationSourceStage(context,lease.id,row.generation_kind,row.operation_key)===row.stage_run_id
+      &&generationSource(context,lease.id,row.generation_kind,row.operation_key)===row.stage_run_id
       &&row.private.owner_id===context.ownerId&&row.private.product_id===context.snapshot.product_id
       &&row.state==='SUCCEEDED'&&row.private.billing_valid&&row.private.provider_terminal,
       'REPAIR_REUSE_SOURCE_INVALID','只能复用本单未受影响且已完成的原生成节点',409);
@@ -365,7 +370,7 @@ export class GenerationGateway {
       AND id=$3 AND submission_id=$4 AND purpose='FIRST_PASS' AND state='SETTLED'`,
       [context.tenantId,context.orderId,row.reservation_id,row.id])).rowCount===1,
       'REPAIR_REUSE_COST_UNRESOLVED','原生成来源未核对费用，禁止复用或补购',409);
-    const original=originalRepairContext(context);
+    const original=originalRepairContext(orderGenerationContext(context));
     let expected:GenerationRequest;
     if(row.generation_kind==='VIDEO'){
       const {approval}=await readReferenceApproval(this.pool,this.cfg,this.store,original,row.stage_run_id);
@@ -376,29 +381,29 @@ export class GenerationGateway {
     const result=await this.describe(original,row.id,signal);
     await transaction(this.pool,async db=>{
       const live=await this.live(lease,db);
-      requireThat(generationSourceStage(live,lease.id,row.generation_kind,row.operation_key)===row.stage_run_id,
+      requireThat(generationSource(live,lease.id,row.generation_kind,row.operation_key)===row.stage_run_id,
         'REPAIR_REUSE_SOURCE_INVALID','复用提交前原授权已变化',409);
     });
     return result;
   }
   /** Read-only completed input for an already-authorized POST role. Unresolved
    * supplier tasks stay in PRODUCTION and cannot be polled through this path. */
-  async describe(context:ExecutionContext,submissionId:string,signal:AbortSignal):Promise<GenerationResult>{
+  async describe(context:GenerationContext,submissionId:string,signal:AbortSignal):Promise<GenerationResult>{
     requireThat(!signal.aborted,'TOOL_EXECUTION_INTERRUPTED','原生成结果读取已停止',409);
     const row=await this.row(context.tenantId,submissionId);
     if(context.repair&&row.stage_run_id===context.repair.source_production_stage_id){
       requireThat(!context.repair.generation_nodes.some(n=>n.kind===row.generation_kind&&n.operation_key===row.operation_key),
         'REPAIR_REUSE_SOURCE_INVALID','受影响节点必须读取本次修复的新结果',409);
-      context=originalRepairContext(context);
+      context=originalRepairContext(orderGenerationContext(context));
     }
-    requireThat(row.order_id===context.orderId&&(await this.pool.query(`SELECT id FROM stage_runs
-      WHERE tenant_id=$1 AND id=$2 AND scope_type='ORDER' AND scope_id=$3 AND stage_name='PRODUCTION'
-      AND input_hash=$4 AND state='SUCCEEDED'`,[context.tenantId,row.stage_run_id,context.orderId,context.snapshotHash])).rowCount===1,
+    const scoped=generationScope(context);
+    requireThat(this.scopeId(row)===scoped.id&&(await this.pool.query(`SELECT id FROM stage_runs
+      WHERE tenant_id=$1 AND id=$2 AND scope_type=$5 AND scope_id=$3 AND stage_name=$6
+      AND input_hash=$4 AND state='SUCCEEDED'`,[context.tenantId,row.stage_run_id,scoped.id,context.snapshotHash,scoped.type,scoped.stage])).rowCount===1,
     'GENERATION_SCOPE_INVALID','后期只能读取原订单已完成制作阶段的生成结果',403);
     requireThat(row.state==='SUCCEEDED'&&row.private.output&&row.private.billing_valid&&row.private.provider_terminal,
       'GENERATION_OUTPUT_MISSING','后期输入或原费用尚未完成，不能另购任务',409);
-    requireThat((await this.pool.query(`SELECT id FROM budget_reservations WHERE tenant_id=$1 AND order_id=$2
-      AND id=$3 AND submission_id=$4 AND state='SETTLED'`,[context.tenantId,context.orderId,row.reservation_id,row.id])).rowCount===1,
+    requireThat((await this.pool.query(`SELECT s.id FROM provider_submissions s WHERE s.tenant_id=$1 AND s.id=$2 AND ${generationCostConfirmed(context)}`,[context.tenantId,row.id])).rowCount===1,
       'REPAIR_REUSE_COST_UNRESOLVED','原生成费用尚未确认，不能读取或补购',409);
     requireThat(hash(generationContract(context.contract,row.generation_kind))===hash(this.contract(row)),
       'GENERATION_CONTRACT_CHANGED','原生成模型与订单不同',503);
@@ -411,7 +416,7 @@ export class GenerationGateway {
    * retired runtime sessions and expired model admission. It never submits. */
   async reconcileReceipts(limit=20,signal:AbortSignal=new AbortController().signal):Promise<{settled:number;blocked:number}>{
     requireThat(Number.isSafeInteger(limit)&&limit>0&&limit<=100,'RECONCILIATION_LIMIT_INVALID','对账批次无效',500);
-    const rows=(await this.pool.query<Submission>(`SELECT * FROM provider_submissions WHERE generation_kind IN ('IMAGE','VIDEO')
+    const rows=(await this.pool.query<Submission>(`SELECT * FROM provider_submissions WHERE generation_kind IN ('IMAGE','VIDEO') AND ${this.scopeColumn} IS NOT NULL
       AND state IN ('SUBMITTING','UNKNOWN','RUNNING') ORDER BY updated_at,id LIMIT $1`,[limit])).rows;
     let settled=0,blocked=0;
     for(const candidate of rows){const claimed=await this.claim(candidate);if(!claimed){blocked++;continue;}
@@ -420,7 +425,7 @@ export class GenerationGateway {
         if(row.private.provider_terminal&&row.private.billing_valid){
           settled++;
           // Stopped orders retain financial facts but cannot publish new media.
-          const live=(await this.pool.query(`SELECT id FROM orders WHERE tenant_id=$1 AND id=$2 AND payment_state='CONFIRMED'
+          const live=this.adapter?await this.adapter.live(this.pool,row.tenant_id,this.scopeId(row)):(await this.pool.query(`SELECT id FROM orders WHERE tenant_id=$1 AND id=$2 AND payment_state='CONFIRMED'
             AND fulfillment_state IN ('QUEUED','IN_PROGRESS') AND deadline_at>now() AND NOT (private ? 'media_revoked')`,[row.tenant_id,row.order_id])).rowCount;
           if(!live)await this.pool.query(`UPDATE provider_submissions SET state='FAILED',data=data||'{"state":"FAILED"}'::jsonb,
             private=private||'{"last_error":"GENERATION_SCOPE_ENDED"}'::jsonb WHERE tenant_id=$1 AND id=$2 AND state='RUNNING'`,[row.tenant_id,row.id]);

@@ -1,3 +1,4 @@
+import {sampleGenerationGateway} from '../samples/generation.js';
 import { setTimeout as delay } from 'node:timers/promises';
 import { config } from '../../api/config.js';
 import { createPool } from '../../api/db/pool.js';
@@ -21,7 +22,7 @@ const log = (event: Record<string, unknown>): void => { process.stdout.write(`${
 try {
   await migrate(pool); const store = storage(cfg); const media = new MediaErasureService(pool, store, workerId, deletionJournal(cfg));
   const vision = new VisionAnalysisService(pool, cfg, store); const inference = new InferenceGateway(pool, cfg, store);
-  const generation=new GenerationGateway(pool,cfg,store);
+  const generation=new GenerationGateway(pool,cfg,store),sampleGeneration=sampleGenerationGateway(pool,cfg,store);
   const speech=new SpeechGateway(pool,cfg,store);
   const listening=new NativeListeningGateway(pool,cfg,store);
   const events = new WorkerRuntime({ pool, workerId, stages: {}, events: { PrivacyDeletionRequested: event => media.requestEvent(event) }, log });
@@ -32,7 +33,7 @@ try {
       try {
         const objects = await reconcileUncertainObjectWrites(pool, store);
         if (objects.recovered || objects.blocked) log({ event: 'private_object_writes_reconciled', ...objects });
-        const receipts = [await vision.reconcileReceipts(), await inference.reconcileReceipts(),await generation.reconcileReceipts(20,controller.signal),await speech.reconcileReceipts(),await listening.reconcileReceipts()];
+        const receipts = [await vision.reconcileReceipts(), await inference.reconcileReceipts(),await generation.reconcileReceipts(20,controller.signal),await sampleGeneration.reconcileReceipts(20,controller.signal),await speech.reconcileReceipts(),await listening.reconcileReceipts()];
         if (receipts.some(r => r.settled || r.blocked)) log({ event: 'private_receipts_reconciled', receipts });
         await expireAuthorizedSamples(pool); await media.expire(); await media.refreshPending();
       }

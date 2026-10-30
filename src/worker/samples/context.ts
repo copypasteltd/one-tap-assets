@@ -10,6 +10,7 @@ import { bundleForHash } from '../codex/skills.js';
 import type { InferenceLimits } from '../codex/inference.js';
 import { basePlan, validateCreativePlan, type CreativePlan } from '../compiler/plan.js';
 import { FONT_BINDING, verifyResourceLicenses } from '../media/font.js';
+import {freezeSampleGeneration,type SampleGenerationBinding} from './generation-contract.js';
 
 export const SAMPLE_STAGES = ['SAMPLE', 'SAMPLE_PRODUCTION', 'SAMPLE_POST', 'SAMPLE_QC', 'SAMPLE_REVIEW_FACTS', 'SAMPLE_REVIEW_STYLE', 'SAMPLE_COMPLETE'] as const;
 export interface SampleInput {
@@ -18,6 +19,7 @@ export interface SampleInput {
   source_hash: string; photo_version_id: string; photo_set_hash: string; identity_lock_hash: string;
   deadline_at: string; skill_variant_id: string; bundle_hash: string;
   admission: CodexAdmission; limits: InferenceLimits;
+  generation?:SampleGenerationBinding;
 }
 export interface SampleContext { input: SampleInput; inputHash: string; state: string; private: Record<string, unknown> }
 
@@ -26,7 +28,7 @@ export async function freezeSample(db: Db, cfg: Config, subject: { tenantId: str
   const budget = cfg.samples;
   requireThat(budget.costCeilingMicro > 0 && budget.dailyBudgetMicro >= budget.costCeilingMicro && budget.maxConcurrent > 0
     && budget.maxConcurrent <= 20 && budget.deadlineSeconds >= 60 && budget.deadlineSeconds <= 86400, 'SAMPLE_LIMITS_NOT_CONFIGURED', '样例制作额度尚未配置', 503);
-  requireThat(compiled.source.engine === 'PHOTO_LAYOUT' && compiled.source.audio_policy.speech === 'none'
+  requireThat(['PHOTO_LAYOUT','PER_SHOT_AI','REFERENCE_FILM'].includes(compiled.source.engine) && compiled.source.audio_policy.speech === 'none'
     && ['none','approved_licensed_or_contract_silent'].includes(compiled.source.audio_policy.music) && draft.config.resource_version_ids.length === 0,
   'SAMPLE_ROUTE_UNAVAILABLE', '所选样例路线或资源尚未接入，不能替换为其他效果', 503);
   await db.query('SELECT pg_advisory_xact_lock(hashtextextended($1,0))', [`sample-quota:${subject.tenantId}:${subject.userId}`]);
@@ -41,12 +43,18 @@ export async function freezeSample(db: Db, cfg: Config, subject: { tenantId: str
   const lock = (await db.query<{ hash: string }>('SELECT hash FROM identity_locks WHERE tenant_id=$1 AND id=$2 AND profile_id=$3', [subject.tenantId, profile.identity_lock_id, profile.profile_id])).rows[0] ?? notFound();
   await verifyResourceLicenses(db, [FONT_BINDING], true);
   validateCreativePlan(basePlan(profile, compiled.source), profile, compiled.source);
-  return { sample_id: sampleId, tenant_id: subject.tenantId, owner_id: subject.userId, draft_id: draft.draft_id, draft_revision: draft.revision,
+  const input:SampleInput={ sample_id: sampleId, tenant_id: subject.tenantId, owner_id: subject.userId, draft_id: draft.draft_id, draft_revision: draft.revision,
     request, profile: structuredClone(profile), source: structuredClone(compiled.source), config_hash: hash(draft.config), source_hash: compiled.source_hash,
     photo_version_id: photo.id, photo_set_hash: photo.photo_set_hash, identity_lock_hash: lock.hash, deadline_at: addSeconds(budget.deadlineSeconds),
     skill_variant_id: bundle.payload.variant_id, bundle_hash: bundle.sha256, admission,
     limits: { max_requests: cfg.codex.maxTurns * 5, max_requests_per_role: cfg.codex.maxTurns, max_input_tokens: cfg.codex.maxInputTokens,
       max_output_tokens: cfg.codex.maxOutputTokens, ceiling_micro: budget.costCeilingMicro, daily_ceiling_micro: budget.dailyBudgetMicro, owner_id: subject.userId } };
+  if(compiled.source.engine!=='PHOTO_LAYOUT'){
+    input.generation=await freezeSampleGeneration(db,cfg,input.source,profile,request.product_id,subject.tenantId,subject.userId,
+      admission,bundle.sha256,input.source.skill_bundle.version,input.limits);
+    input.limits.ceiling_micro=input.generation.codex_contract.agent_cost_ceiling_micro;
+  }
+  return input;
 }
 
 /** A sample has its own frozen context and cost scope, never a fabricated payment. */

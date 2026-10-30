@@ -3,7 +3,7 @@ import type {Config} from '../../api/config.js';
 import type {ObjectStorage} from '../../api/storage/storage.js';
 import {hash} from '../../api/lib/crypto.js';
 import {requireThat} from '../../api/lib/errors.js';
-import type {ExecutionContext} from '../compiler/order-context.js';
+import {generationScope,generationCostConfirmed,generationSource,orderGenerationContext,type GenerationContext} from './scope.js';
 import {referenceMaterial} from './reference-material.js';
 import {validateReferenceReport,type ReferenceReport} from './reference-report.js';
 
@@ -13,7 +13,7 @@ export interface ReferenceApproval {
 }
 /** No caller-supplied approval and no model purchase here. Rebuild the actual
  * material and independently validate the original completed/released role. */
-export async function readReferenceApproval(db:Db,cfg:Config,store:ObjectStorage,context:ExecutionContext,stageId:string){
+export async function readReferenceApproval(db:Db,cfg:Config,store:ObjectStorage,context:GenerationContext,stageId:string){
   const runs=(await db.query<{id:string;state:string;private:{stage_result?:ReferenceReport}}>(
     `SELECT id,state,private FROM agent_runs WHERE tenant_id=$1 AND private->>'stage_run_id'=$2
       AND private->'review_input'->>'purpose'='REFERENCE_IDENTITY' ORDER BY created_at`,[context.tenantId,stageId])).rows;

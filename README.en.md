@@ -1,5 +1,11 @@
 # One Tap Assets · 一品成片
 
+This delivery connects [silent generated creator samples](docs/实施/生成式社区样例与独立平台额度-v1.0.md): per-shot generation and reference-film generation, independent reference identity review before video purchase, actual post-production and fresh final facts/style reviews, private downloads and separately authorized public copies. Samples use platform funds and create no buyer order; original budgets, quotas, deadlines and UNKNOWN recovery stay fixed.
+
+Ten focused checks pass (nine main cases plus one original-order regression), together with typecheck, server/web builds, native startup and setup checks. Database migration 30; 426 source / 42 contract / 4 resource files, `e7a80120`. Full/unit suites, fresh Alipay/Douyin builds and new browser capture were not run. Existing 93 media files and frozen C artwork remain byte-identical. [Exact evidence](docs/verification/generated-sample-source.json) · [Current build](docs/delivery/current.json) · [Delivery package](docs/delivery/package.json). Live services, devices and cloud deployment remain pending; every preset remains unavailable for sale.
+
+以下内容保留其历史来源，当前状态以上述记录为准。
+
 [English](README.en.md) · [中文](README.md) · [Documentation](docs/README.md) · [Quick start](docs/guides/QUICKSTART.en.md) · [Implementation status](docs/guides/STATUS.md) · [Changelog](CHANGELOG.md)
 
 This delivery adds [actual image-title revisions](docs/实施/图片加字与实际素材售后-v1.0.md): select a delivered image and enter a short title in the mini-program component, receive a real PNG with the complete original picture and a bottom title panel after fresh review. Assigned support staff can make the same authorized correction. All three route checks pass; original video/audio, budgets, quotas and deadlines remain fixed. Historical orders gain no grant.

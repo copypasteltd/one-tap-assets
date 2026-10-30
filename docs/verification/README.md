@@ -1,5 +1,9 @@
 # 核验来源与历史记录
 
+当前来源：[生成式社区样例](generated-sample-source.json)、[源码](generated-sample-tested-source.json)、[9项主专项/43未选](generated-sample-api.json)、[1项订单回归/34未选](generated-sample-order-regression.json)、[尝试与原失败](generated-sample-attempts.json)。426/42/4，`e7a80120`；类型/server/preview/自检/本机启动PASS。主库30；本轮没有全量或单元全套、真机、小程序重编和复录。原169份历史JSON保留，其中3个滚动入口原字节另存38eec3e。
+
+以下内容保留其历史来源，当前状态以上述记录为准。
+
 当前来源：[图片加字](image-text-source.json)、[源码](image-text-tested-source.json)、[8单元](image-text-unit.json)、[4API/42未选](image-text-api.json)、[尝试与原失败](image-text-attempts.json)、[5共享组件检查/8媒体](../media/image-text/capture-manifest.json)。421/42/4，`bc77e6cf`；类型/server/preview/本机启动PASS，全面测试和双小程序重编NOT_RUN。原153历史JSON保留（3个滚动入口另存b31b408），旧结果不升级为当前全量验收。
 
 以下记录属于各自历史来源，当前结论以上述增补为准。

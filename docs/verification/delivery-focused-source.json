@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T03:01:25.967544+00:00",
-  "strategy": "USER_REQUESTED_FAST_IMAGE_TEXT_REVISION_CLOSURE",
-  "source_set_hash": "bc77e6cf3c2a93190613ff8971c5c018320734f9446e62175cd699a097d8e41d",
-  "source_files": 421,
+  "checked_at": "2026-10-30T03:48:03.078566+00:00",
+  "strategy": "USER_REQUESTED_FAST_GENERATED_CREATOR_SAMPLE_CLOSURE",
+  "source_set_hash": "e7a80120958ea9cc601ec785f82bb1512ddd0df62edb9e6db6d07d85fab8635f",
+  "source_files": 426,
   "runtime_contract_files": 42,
   "resource_files": 4,
   "build_report": "docs/delivery/current.json",
@@ -20,8 +20,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 8835,
-      "log_path": "runtime/delivery-builds/2026-10-30T02-42-13-423Z-1d5834e0/typecheck.log",
+      "elapsed_ms": 8029,
+      "log_path": "runtime/delivery-builds/2026-10-30T03-41-35-360Z-aad06a60/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -37,29 +37,29 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 290,
-      "log_path": "runtime/delivery-builds/2026-10-30T02-42-13-423Z-1d5834e0/server.log",
+      "elapsed_ms": 1082,
+      "log_path": "runtime/delivery-builds/2026-10-30T03-41-35-360Z-aad06a60/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T02-42-13-423Z-1d5834e0\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T03-41-35-360Z-aad06a60\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T02-42-13-423Z-1d5834e0\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T03-41-35-360Z-aad06a60\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 547,
-      "log_path": "runtime/delivery-builds/2026-10-30T02-42-13-423Z-1d5834e0/preview.log",
-      "log_sha256": "1887d0fd7661677837904c5ff4ad703f2c410e0febce7a6799c5d9c4c5cccd13"
+      "elapsed_ms": 5036,
+      "log_path": "runtime/delivery-builds/2026-10-30T03-41-35-360Z-aad06a60/preview.log",
+      "log_sha256": "48ad8cdbb2bf9a7d7d229787ce2a37e3f15d4c5da9c91a70b8a54e8e026a30d3"
     }
   ],
   "components": [
@@ -80,100 +80,90 @@
       "status": "NOT_RUN"
     }
   ],
-  "source_snapshot": "docs/verification/image-text-tested-source.json",
+  "source_snapshot": "docs/verification/generated-sample-tested-source.json",
   "source_unchanged_during_tests": true,
-  "unit_checks": {
-    "status": "PASS",
-    "passed": 8,
-    "failed": 0,
-    "report": "docs/verification/image-text-unit.json",
-    "command": {
-      "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.config.ts tests/unit/image-text-revision.test.ts tests/unit/revision-progress.test.ts --outputFile.json=runtime/test-results/image-text-2026-10-30T02-42-55-662Z/unit.json",
-      "argv": [
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
-        "run",
-        "--config",
-        "vitest.config.ts",
-        "tests/unit/image-text-revision.test.ts",
-        "tests/unit/revision-progress.test.ts",
-        "--outputFile.json=runtime/test-results/image-text-2026-10-30T02-42-55-662Z/unit.json"
-      ],
-      "shell": false,
-      "status": "PASS",
-      "exit_code": 0,
-      "signal": null,
-      "timeout_ms": 90000,
-      "elapsed_ms": 1575,
-      "log_path": "runtime/test-results/image-text-2026-10-30T02-42-55-662Z/unit.log",
-      "log_sha256": "47de7d115e2043c3de2e8e09043058617985f0330d73847e5c7cb4d73c57d1e9"
-    }
-  },
   "api_checks": {
     "status": "PASS",
-    "passed": 4,
-    "failed": 0,
-    "not_selected": 42,
-    "report": "docs/verification/image-text-api.json",
-    "command": {
-      "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/limited-revision.test.ts tests/integration/native-order.test.ts tests/integration/native-repair-migration.test.ts -t renders and publishes a real image title|adds an actual image title|upgrades the original native ASR --outputFile.json=runtime/test-results/image-text-2026-10-30T02-42-55-662Z/api.json",
-      "argv": [
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
-        "run",
-        "--config",
-        "vitest.integration.config.ts",
-        "tests/integration/limited-revision.test.ts",
-        "tests/integration/native-order.test.ts",
-        "tests/integration/native-repair-migration.test.ts",
-        "-t",
-        "renders and publishes a real image title|adds an actual image title|upgrades the original native ASR",
-        "--outputFile.json=runtime/test-results/image-text-2026-10-30T02-42-55-662Z/api.json"
-      ],
-      "shell": false,
-      "status": "PASS",
-      "exit_code": 0,
-      "signal": null,
-      "timeout_ms": 660000,
-      "elapsed_ms": 263329,
-      "log_path": "runtime/test-results/image-text-2026-10-30T02-42-55-662Z/api.log",
-      "log_sha256": "3c57b5858370088dc1602d9bf33c3dde6c485d3e60bb7ea0f560978589f53415"
+    "passed": 10,
+    "main": {
+      "passed": 9,
+      "not_selected": 43,
+      "report": "docs/verification/generated-sample-api.json",
+      "command": {
+        "task": "exec",
+        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/sample-production.test.ts tests/integration/generation-gateway.test.ts -t produces actual full-spec|publishes the actually produced|without admitted model protocols|completes .* creator sample|retains an UNKNOWN sample|rejects insufficient frozen sample funds|refuses a reference-film video purchase|also refuses a per-shot video purchase --outputFile.json=runtime/test-results/generated-sample-2026-10-30T03-40-40-197Z/api.json",
+        "argv": [
+          "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+          "run",
+          "--config",
+          "vitest.integration.config.ts",
+          "tests/integration/sample-production.test.ts",
+          "tests/integration/generation-gateway.test.ts",
+          "-t",
+          "produces actual full-spec|publishes the actually produced|without admitted model protocols|completes .* creator sample|retains an UNKNOWN sample|rejects insufficient frozen sample funds|refuses a reference-film video purchase|also refuses a per-shot video purchase",
+          "--outputFile.json=runtime/test-results/generated-sample-2026-10-30T03-40-40-197Z/api.json"
+        ],
+        "shell": false,
+        "status": "PASS",
+        "exit_code": 0,
+        "signal": null,
+        "timeout_ms": 660000,
+        "elapsed_ms": 128723,
+        "log_path": "runtime/test-results/generated-sample-2026-10-30T03-40-40-197Z/api.log",
+        "log_sha256": "cd79e5c7e2ca0765dc64acb651428fa7d31c775f7ff36b5b26796fe6f42e5d69"
+      }
+    },
+    "order_regression": {
+      "passed": 1,
+      "not_selected": 34,
+      "report": "docs/verification/generated-sample-order-regression.json",
+      "command": {
+        "task": "exec",
+        "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/generation-gateway.test.ts -t binds the original report and generated per-shot bytes --outputFile.json=runtime/test-results/generated-sample-2026-10-30T03-45-19-723Z/api.json",
+        "argv": [
+          "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+          "run",
+          "--config",
+          "vitest.integration.config.ts",
+          "tests/integration/generation-gateway.test.ts",
+          "-t",
+          "binds the original report and generated per-shot bytes",
+          "--outputFile.json=runtime/test-results/generated-sample-2026-10-30T03-45-19-723Z/api.json"
+        ],
+        "shell": false,
+        "status": "PASS",
+        "exit_code": 0,
+        "signal": null,
+        "timeout_ms": 660000,
+        "elapsed_ms": 20131,
+        "log_path": "runtime/test-results/generated-sample-2026-10-30T03-45-19-723Z/api.log",
+        "log_sha256": "48214cab347f3fc6f866547fef01f2f46407ed93bf0d0d578d0c533b57f0af76"
+      }
     },
     "engines": [
       "PHOTO_LAYOUT",
       "PER_SHOT_AI",
       "REFERENCE_FILM"
     ],
-    "actual_new_png_and_download_sha_verified": true,
-    "new_five_stage_candidate_and_fresh_full_image_reviews": true,
-    "output_intent_immutable": true,
-    "late_image_bytes_rejected": true,
-    "native_video_audio_asr_listening_and_other_items_unchanged": true,
-    "no_new_generation_asr_or_listening_purchase": true,
-    "original_contract_budget_deadline_unchanged": true,
-    "migration_27_to_29_preserves_unknown_financial_hold": true,
-    "actual_postgresql_https_stdio_mcp_png_mp4_wav": true,
-    "synthetic_product_generation_speech_listening_semantics_identity_and_metering": true,
-    "live_external_or_os_isolation_verified": false
+    "per_shot_generated_video_segments": 2,
+    "per_shot_frames_checked": 60,
+    "reference_film_frames_checked": 30,
+    "private_download_and_independent_public_copy": true,
+    "synthetic_model_semantics_identity_and_usage": true
   },
-  "browser_capture": {
-    "status": "PASS",
-    "checks": 5,
-    "report": "docs/media/image-text/capture-manifest.json",
-    "actual_shared_mini_component_and_https_api": true,
-    "native_device_verified": false,
-    "browser_and_owned_services_closed": true
-  },
+  "current_unit_suite_executed": false,
+  "fixture_bridge_matches_current_build": true,
+  "fixture_bridge_sha256": "a8b3d90fd9743d2f7f04d27829fa00ccf0460920b660c0d5cf64094da753a297",
   "local_checks": {
     "doctor": {
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 0.532,
+      "elapsed_seconds": 1.052,
       "log_path": "runtime/delivery/doctor-focused.log",
-      "log_sha256": "c004730ca18e9a3506a171508572c62f472fc840bef83eb666112422aa205fca",
+      "log_sha256": "27486014701ca204a8a72f7a1226fe3e1eee62a74c34121bf94463f1bcdb1940",
       "report": {
-        "checked_at": "2026-10-30T02:51:05.199Z",
+        "checked_at": "2026-10-30T03:43:38.747Z",
         "scope": "LOCAL_SETUP_NOT_PRODUCTION_ADMISSION",
         "rows": [
           {
@@ -199,7 +189,7 @@
           {
             "id": "database",
             "status": "PASS",
-            "detail": "connected; 29 migrations"
+            "detail": "connected; 30 migrations"
           },
           {
             "id": "ffmpeg",
@@ -265,9 +255,9 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 2.243,
+      "elapsed_seconds": 4.501,
       "log_path": "runtime/delivery/backend-focused.log",
-      "log_sha256": "c8f3511e8c77430d4f3cfccbdd4f6c11056c706fe181ba13d00264430250fa05",
+      "log_sha256": "ff96f81ac6a78ec2e2da9f807d226b2112be6d4f2c5a1ab78ffdc8ff52ab0ced",
       "local_stack_ready": true,
       "preview_http_ready": false
     },
@@ -275,23 +265,41 @@
       "status": "PASS",
       "exit_code": 0,
       "timeout_seconds": 90,
-      "elapsed_seconds": 0.884,
+      "elapsed_seconds": 0.812,
       "log_path": "runtime/delivery/preview-focused.log",
       "log_sha256": "707a2410ea2594193b204ef40fe202dd55071d19f49f1b822e382f0ef480372e",
       "local_stack_ready": false,
       "preview_http_ready": true
     }
   },
-  "attempts_report": "docs/verification/image-text-attempts.json",
-  "prior_delivery": "docs/verification/delivery-focused-source-b31b408.json",
-  "functional_scope": [
-    "Optional pre-sale frozen IMAGE_TEXT grant using original style colors and pinned font; historical orders gain no grant",
-    "Customer and assigned support staff select an existing delivered image and a title of at most 28 code points",
-    "Actual PNG output preserves the complete original picture in an upper contain region, draws the complete short title in a 22-percent bottom panel and reapplies frozen generated-image disclosure",
-    "A deterministic persisted output intent, actual pixels, private artifact, current manifest item and policy hashes are rechecked before publication",
-    "New independent facts and style roles receive all original product/film images and every changed current image; old PASS cannot authorize new bytes",
-    "A new manifest is published atomically while the original remains retrievable; original video/audio bytes and original ASR/listening receipts are retained"
-  ],
+  "main_database_migrations": 30,
+  "attempts_report": "docs/verification/generated-sample-attempts.json",
+  "prior_delivery": {
+    "commit": "38eec3eb1529651a4fe6671d4917a364723db924",
+    "source_set_hash": "bc77e6cf3c2a93190613ff8971c5c018320734f9446e62175cd699a097d8e41d",
+    "evidence": "docs/verification/image-text-source.json",
+    "publication": "docs/verification/publication-38eec3e.json"
+  },
+  "functional_scope": {
+    "specification": "docs/实施/生成式社区样例与独立平台额度-v1.0.md",
+    "new_silent_generated_sample_routes": [
+      "PER_SHOT_AI",
+      "REFERENCE_FILM"
+    ],
+    "no_fabricated_order_or_payment": true,
+    "separate_sample_provider_scope": true,
+    "original_sample_total_cost_split_not_increased": true,
+    "shared_owner_daily_platform_account": true,
+    "reference_identity_before_video_purchase": true,
+    "fresh_final_facts_and_style_reviews": true,
+    "all_originals_references_and_final_media_in_review": true,
+    "all_generated_frames_visible_ai_label": true,
+    "unknown_original_intent_recovery": true,
+    "stopped_scope_financial_receipt_recovery": true,
+    "migration": 30,
+    "historical_samples_not_upgraded": true,
+    "original_order_limits_unchanged": true
+  },
   "historical_evidence_unchanged": [
     {
       "path": "docs/verification/album-save-api.json",
@@ -386,6 +394,10 @@
       "sha256": "18853e3e184043682b7d0ea290a62469204e37527eb003f2e5dfb49f82e13276"
     },
     {
+      "path": "docs/verification/delivery-focused-source-b31b408.json",
+      "sha256": "f8b3d3fc5df793098caa2be319a3c51bce3783e106e7a71da1173dcc82e4aea4"
+    },
+    {
       "path": "docs/verification/delivery-focused-source-d6584e3.json",
       "sha256": "0adbac089bffb694be1100c0545224de71d7864915cd4c5e01255762660fd5f9"
     },
@@ -468,6 +480,58 @@
     {
       "path": "docs/verification/generated-repair-tests.json",
       "sha256": "a446104bb54334cc347ca1684277096608793cb5dd2685c358d837d7e70c7c1b"
+    },
+    {
+      "path": "docs/verification/image-text-api.json",
+      "sha256": "d5893bcf3e9ab9aa5ddf58690aeb9d1653573c88162e098ae1b3f9ebba08852b"
+    },
+    {
+      "path": "docs/verification/image-text-attempt-1-api.json",
+      "sha256": "2fa34771dbdbdbb79480e5f5eaee3a836be510d8b09d960c4d73381f7cbabe7e"
+    },
+    {
+      "path": "docs/verification/image-text-attempt-1-build.json",
+      "sha256": "c120c3ed5c48947a4827ba36b4f0cc4e25c2790b5fb1fe1ad7005dbbdc7572c7"
+    },
+    {
+      "path": "docs/verification/image-text-attempt-1-source.json",
+      "sha256": "ede86322c75b662df03e89892e8c8c431384722dd1dad10e00ad77085fffd233"
+    },
+    {
+      "path": "docs/verification/image-text-attempt-1-unit.json",
+      "sha256": "e3bc547ff620aa4ec7dc25c3b06fd53ad1b17a8bb525a9071a18b127832ff424"
+    },
+    {
+      "path": "docs/verification/image-text-attempt-2-api.json",
+      "sha256": "d5893bcf3e9ab9aa5ddf58690aeb9d1653573c88162e098ae1b3f9ebba08852b"
+    },
+    {
+      "path": "docs/verification/image-text-attempt-2-build.json",
+      "sha256": "d17b7980d7cf0bd5af0b77c2ddb685e53f1d87035893c56ba37fe02eb383c129"
+    },
+    {
+      "path": "docs/verification/image-text-attempt-2-source.json",
+      "sha256": "602c530e5600c7d27ae715be2d0f9243afd4fa70f8c3b2b434c9fe15972e23b2"
+    },
+    {
+      "path": "docs/verification/image-text-attempt-2-unit.json",
+      "sha256": "cf849af23f37c26ae7e30f86baa0470f205dd71fee171e7718a2fe76f4e3f36f"
+    },
+    {
+      "path": "docs/verification/image-text-attempts.json",
+      "sha256": "562f8bad7773d90a32aac4cf2b7b02368a65f414ec73c728c13ac5865ce9cb5d"
+    },
+    {
+      "path": "docs/verification/image-text-source.json",
+      "sha256": "f48be2188226eb239afe438635ef00cb9b82edab73f2cec6faad5525a53fa597"
+    },
+    {
+      "path": "docs/verification/image-text-tested-source.json",
+      "sha256": "602c530e5600c7d27ae715be2d0f9243afd4fa70f8c3b2b434c9fe15972e23b2"
+    },
+    {
+      "path": "docs/verification/image-text-unit.json",
+      "sha256": "cf849af23f37c26ae7e30f86baa0470f205dd71fee171e7718a2fe76f4e3f36f"
     },
     {
       "path": "docs/verification/listening-attempts.json",
@@ -694,6 +758,10 @@
       "sha256": "6fb05310a33448111e16e459d5906df051a332f08ca4a5a0309631418594419b"
     },
     {
+      "path": "docs/verification/publication-b31b408.json",
+      "sha256": "a66f1ddbfbcd5eeeb063631e9852cd486bf4e0d4d101594c611468fed3c30a0c"
+    },
+    {
       "path": "docs/verification/publication-b31c3e8.json",
       "sha256": "305c9e5bb5be0dc3527eb043fd9e5de1e2460ad5f4dd93c9f81319f9806d23d5"
     },
@@ -764,6 +832,10 @@
     {
       "path": "docs/verification/repository-audit-83bd7ee.json",
       "sha256": "c48857242ca77b07f193c22a46c5d48c398777c5a8b090ea7755d87f607ba647"
+    },
+    {
+      "path": "docs/verification/repository-audit-b31b408.json",
+      "sha256": "bc25fa8a9d4e6762cf6a060c35a543ead9ae0bc41b3c12255bf3b6715dae08db"
     },
     {
       "path": "docs/verification/repository-audit-b31c3e8.json",
@@ -894,11 +966,12 @@
       "sha256": "fbf919d88e4b3bb6b2e1ff5993fb62a4dacfd78c559bd7232f0c780b28b41846"
     }
   ],
-  "existing_media_files_verified": 85,
-  "new_media_files_verified": 8,
+  "existing_media_files_verified": 93,
+  "new_media_files_verified": 0,
   "frozen_c_files": 25,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
-  "browser_used": true,
+  "browser_used": false,
+  "ui_layout_changed": false,
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
   "original_publication_checker_executed": false,
@@ -907,10 +980,11 @@
   "production_admitted": false,
   "cloud_deployed": false,
   "limitations": [
-    "No arbitrary image redraw or replacement of text already inside a picture; no video-caption, timeline, dialogue or voice rewrite",
-    "Synthetic product colors, two-second tones and fabricated semantic approval do not prove real product/audio quality, commercial rights or OS isolation",
-    "Both mini builds NOT_RUN; source is included, historical mini build outputs are excluded",
-    "58 requirements/52 P0, all three routes and 10 styles/14 variants retained; real services/isolation/devices/community/Plus/cloud/full acceptance incomplete"
+    "Representative cases use short synthetic source videos and model semantics, identities and usage. Actual PostgreSQL, HTTPS/MCP, PNG/MP4, private/public objects and platform ledgers are exercised.",
+    "Generated creator samples support silent routes and the platform font only. Native speech, music and external author resources remain unsupported without their own execution and rights admission.",
+    "No current unit/full suite, fresh mini builds or new browser capture. All existing 93 media and C design baseline are preserved.",
+    "The native local stack starts with external Codex, generation, payment and community publishing OFF. Startup readiness does not admit production stage handlers or real transactions.",
+    "Real providers/rates/payment/OSS, restricted native identities, devices, 10 styles/14 variants at actual durations, community commerce, Plus and cloud/full 58-requirement acceptance remain incomplete."
   ],
-  "canonical_image_text_provenance": "docs/verification/image-text-source.json"
+  "canonical_generated_sample_provenance": "docs/verification/generated-sample-source.json"
 }

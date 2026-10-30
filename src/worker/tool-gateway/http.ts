@@ -52,7 +52,7 @@ async function loadToolScope(db: Db, field: 'token_hash' | 'id', value: string, 
       WHEN s.scope_type='REVISION' AND s.stage_name IN ('REVISION_REVIEW_FACTS','REVISION_REVIEW_STYLE') THEN substr(s.stage_name,10)
       WHEN s.stage_name IN ('ANALYZE','PLAN','REPAIR_PLAN') THEN 'CONTENT'
       WHEN s.stage_name IN ('PRODUCTION','POST','REVIEW_FACTS','REVIEW_STYLE') THEN s.stage_name ELSE NULL END
-      OR (s.scope_type='ORDER' AND s.stage_name='PRODUCTION' AND r.role='REVIEW_FACTS'
+      OR (((s.scope_type='ORDER' AND s.stage_name='PRODUCTION') OR (s.scope_type='SAMPLE' AND s.stage_name='SAMPLE_PRODUCTION')) AND r.role='REVIEW_FACTS'
         AND r.private->'review_input'->>'purpose'='REFERENCE_IDENTITY'
         AND r.private->'review_input'->>'packet_hash'=c.packet_hash
         AND r.private->'allowed_tools'='["extract_review_evidence","persist_stage_result"]'::jsonb))

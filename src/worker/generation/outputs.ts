@@ -3,32 +3,32 @@ import type {Config} from '../../api/config.js';
 import type {ObjectStorage} from '../../api/storage/storage.js';
 import {hash,sha256} from '../../api/lib/crypto.js';
 import {requireThat} from '../../api/lib/errors.js';
-import type {ExecutionContext} from '../compiler/order-context.js';
+import {generationScope,generationCostConfirmed,generationSource,orderGenerationContext,type GenerationContext} from './scope.js';
 import type {MediaReceipt} from '../media/artifacts.js';
 import type {GenerationOutput} from './gateway.js';
 import {generationContract} from './contracts.js';
 import {readReferenceApproval} from './reference-approval.js';
-import {generationSourceStage,originalRepairContext} from '../repair/generation.js';
+import {originalRepairContext} from '../repair/generation.js';
 
 export interface GenerationSource {submission_id:string;operation_key:string;sha256:string}
-export async function generatedOutputs(db:Db,cfg:Config,store:ObjectStorage,context:ExecutionContext,stageId:string){
-  const {approval}=await readReferenceApproval(db,cfg,store,context,stageId);
+export async function generatedOutputs(db:Db,cfg:Config,store:ObjectStorage,context:GenerationContext,stageId:string){
+  const scoped=generationScope(context);
+  const {approval,material:referenceMaterial}=await readReferenceApproval(db,cfg,store,context,stageId);
   const videoKeys=context.snapshot.engine==='PER_SHOT_AI'?context.contract.creative.shots.map(s=>`video:${s.shot_id}`):['film:original'];
   const required=[...approval.frames.map(f=>f.operation_key),...context.snapshot.outputs.filter(s=>s.kind==='image').map(s=>`image:${s.slot_id}`),...videoKeys];
   const rows=(await db.query<{id:string;stage_run_id:string;operation_key:string;generation_kind:'IMAGE'|'VIDEO';model_version_id:string;input_hash:string;state:string;cost_confirmed:boolean;
     private:{owner_id:string;product_id:string;contract_hash:string;wire_contract:unknown;request_sha256:string;billing_valid?:boolean;provider_terminal?:boolean;
       prepared:{request_hash:string;contract_hash:string;reference_approval?:unknown;references:{id:string;sha256:string}[]};output?:GenerationOutput}}>(
     `SELECT id,stage_run_id,operation_key,generation_kind,model_version_id,input_hash,state,private,
-    EXISTS(SELECT 1 FROM budget_reservations b WHERE b.tenant_id=s.tenant_id AND b.order_id=s.order_id
-      AND b.id=s.reservation_id AND b.submission_id=s.id AND b.state='SETTLED') AS cost_confirmed FROM provider_submissions s
-    WHERE tenant_id=$1 AND order_id=$2 AND stage_run_id=ANY($3::text[]) AND operation_key=ANY($4) AND generation_kind IN ('IMAGE','VIDEO')`,
-    [context.tenantId,context.orderId,[stageId,...(context.repair?[context.repair.source_production_stage_id]:[])],required])).rows
-    .filter(row=>row.stage_run_id===generationSourceStage(context,stageId,row.generation_kind,row.operation_key));
+    ${generationCostConfirmed(context)} AS cost_confirmed FROM provider_submissions s
+    WHERE tenant_id=$1 AND ${scoped.column}=$2 AND stage_run_id=ANY($3::text[]) AND operation_key=ANY($4) AND generation_kind IN ('IMAGE','VIDEO')`,
+    [context.tenantId,scoped.id,[stageId,...(context.repair?[context.repair.source_production_stage_id]:[])],required])).rows
+    .filter(row=>row.stage_run_id===generationSource(context,stageId,row.generation_kind,row.operation_key));
   requireThat(rows.length===required.length&&new Set(rows.map(r=>r.operation_key)).size===required.length,
     'GENERATED_PACK_INCOMPLETE','生成式整包缺少原计划节点',409);
   const outputs=new Map<string,{source:GenerationSource;output:GenerationOutput;bytes:Buffer}>();
   const originalApproval=context.repair&&rows.some(r=>r.generation_kind==='VIDEO'&&r.stage_run_id!==stageId)
-    ?(await readReferenceApproval(db,cfg,store,originalRepairContext(context),context.repair.source_production_stage_id)).approval:null;
+    ?(await readReferenceApproval(db,cfg,store,originalRepairContext(orderGenerationContext(context)),context.repair.source_production_stage_id)).approval:null;
   for(const row of rows){
     const c=generationContract(context.contract,row.generation_kind),p=row.private;
     requireThat(row.state==='SUCCEEDED'&&p.output&&p.billing_valid&&p.provider_terminal&&row.cost_confirmed
@@ -44,14 +44,14 @@ export async function generatedOutputs(db:Db,cfg:Config,store:ObjectStorage,cont
         'GENERATION_REFERENCE_APPROVAL_CHANGED','视频实际参考与原报告不一致',503);
     }
     const object=(await db.query<{sha256:string}>(`SELECT sha256 FROM private_object_writes WHERE tenant_id=$1 AND owner_id=$2
-      AND order_id=$3 AND product_id=$4 AND kind='MEDIA' AND object_key=$5 AND state='STORED' AND NOT delete_requested AND expires_at>now()`,
+      AND order_id IS NOT DISTINCT FROM $3::text AND product_id=$4 AND kind='MEDIA' AND object_key=$5 AND state='STORED' AND NOT delete_requested AND expires_at>now()`,
       [context.tenantId,context.ownerId,context.orderId,context.snapshot.product_id,p.output.object_key])).rows[0];
     requireThat(object?.sha256===p.output.sha256,'GENERATION_MEDIA_REVOKED','原生成成品已撤权或缺少登记',410);
     const bytes=await store.get(p.output.object_key,c.max_download_bytes);
     requireThat(sha256(bytes)===p.output.sha256,'GENERATION_OBJECT_HASH_MISMATCH','原生成成品字节已变化',503);
     outputs.set(row.operation_key,{source:{submission_id:row.id,operation_key:row.operation_key,sha256:p.output.sha256},output:p.output,bytes});
   }
-  return {approval,outputs,videoKeys};
+  return {approval,outputs,videoKeys,referenceMaterial};
 }
 export function sourcesForSlot(material:Awaited<ReturnType<typeof generatedOutputs>>,kind:string,slotId:string):GenerationSource[]{
   const keys=kind==='image'?[`image:${slotId}`]:kind==='video'?[...material.approval.frames.map(f=>f.operation_key),...material.videoKeys]:[];

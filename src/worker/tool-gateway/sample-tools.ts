@@ -1,3 +1,6 @@
+import type {GenerationGateway} from '../generation/gateway.js';
+import {sampleGenerationContext} from '../samples/generation.js';
+import {referenceTools} from './reference-tools.js';
 import Ajv2020 from 'ajv/dist/2020.js';
 import type pg from 'pg';
 import { mkdir, rm } from 'node:fs/promises';
@@ -8,7 +11,7 @@ import type { Db } from '../../api/db/pool.js';
 import type { ObjectStorage } from '../../api/storage/storage.js';
 import { validateCreativePlan, type CreativePlan } from '../compiler/plan.js';
 import { sampleContext, type SampleContext } from '../samples/context.js';
-import { renderSample, storedMedia, verifyMedia, type SampleMediaReceipt } from '../samples/media.js';
+import { renderSample, storedMedia, verifyMedia, verifySampleGeneratedReceipt, type SampleMediaReceipt } from '../samples/media.js';
 import { samplePacket, packetAssetIds, validateSampleReview } from '../samples/review.js';
 import type { ToolHandler } from './consumer.js';
 import type { ToolScope } from './http.js';
@@ -33,7 +36,7 @@ export async function validateSampleMediaResult(db: Db, c: SampleContext, runId:
     && media.artifacts.every(a => result.artifact_ids.includes(a.artifact_id)), 'SAMPLE_MEDIA_RESULT_INVALID', '样例制作结果与实际文件不一致', 422);
   const proofs = (await db.query<{ id: string; tool_name: string; data: { result: { operation_id?: string; artifact_ids?: string[] } } }>(`SELECT id,tool_name,data FROM agent_tool_intents WHERE tenant_id=$1 AND run_id=$2
     AND state='SUCCEEDED' AND id=ANY($3)`, [c.input.tenant_id, runId, result.tool_receipt_ids])).rows;
-  requireThat(proofs.length === result.tool_receipt_ids.length && [result.phase === 'PRODUCTION' ? 'render_photo_pack' : 'execute_post_plan','inspect_actual_media'].every(name =>
+  requireThat(proofs.length === result.tool_receipt_ids.length && [result.phase === 'PRODUCTION' ? c.input.source.engine==='PHOTO_LAYOUT'?'render_photo_pack':'render_generated_pack' : 'execute_post_plan','inspect_actual_media'].every(name =>
     proofs.some(p => p.tool_name === name && p.data.result.operation_id === media.operation_id && hash(p.data.result.artifact_ids) === hash(media.artifacts.map(a => a.artifact_id)))),
   'SAMPLE_MEDIA_INSPECTION_MISSING', '样例缺少本角色的实际制作与完整检测回执', 503); return result;
 }
@@ -43,13 +46,16 @@ async function persist(db: Db, scope: ToolScope, result: unknown): Promise<void>
     WHERE tenant_id=$1 AND id=$2 AND state='RUNNING' AND (output_hash IS NULL OR output_hash=$3)`, [scope.tenant_id, scope.run_id, hash(result), JSON.stringify(result)]);
   requireThat(saved.rowCount === 1, 'TOOL_SCOPE_ENDED', '样例角色已结束或结果已冻结', 409);
 }
-export function sampleTools(pool: pg.Pool, cfg: Config, store: ObjectStorage): Record<string, ToolHandler> {
+export function sampleTools(pool: pg.Pool, cfg: Config, store: ObjectStorage,gateway?:GenerationGateway): Record<string, ToolHandler> {
+  requireThat(!gateway||cfg.env==='test','TEST_PORT_FORBIDDEN','样例生成替身仅限测试',500);
+  const references=referenceTools(pool,cfg,store,async(db,scope)=>sampleGenerationContext(await context(db,scope)));
   const media = (phase: 'PRODUCTION' | 'POST'): ToolHandler => async (scope, _args, intent, signal) => {
     requireThat(phaseFor(scope) === phase, 'SAMPLE_TOOL_SCOPE_INVALID', '样例制作工具与角色不匹配', 403);
-    const receipt = await renderSample(pool, cfg, store, scope, phase, signal);
+    const receipt = await renderSample(pool, cfg, store, scope, phase, signal,gateway);
     const result: SampleMediaResult = { phase, snapshot_hash: receipt.snapshot_hash, operation_id: receipt.operation_id, artifact_ids: receipt.artifacts.map(a => a.artifact_id), tool_receipt_ids: [intent.id] };
     return { result, commit: async db => {
       const c = await context(db, scope); const key = phase.toLowerCase();
+      await verifySampleGeneratedReceipt(db,cfg,store,c,receipt);
       requireThat(!c.private[key] || hash(c.private[key]) === hash(receipt), 'SAMPLE_OPERATION_CHANGED', '样例原制作记录不可替换', 409);
       await db.query(`UPDATE public_samples SET private=private||jsonb_build_object($3::text,$4::jsonb,$5::text,$6::text),updated_at=now()
         WHERE tenant_id=$1 AND id=$2`, [scope.tenant_id, scope.scope_id, key, JSON.stringify(receipt), `${key}_hash`, hash(receipt)]);
@@ -64,7 +70,8 @@ export function sampleTools(pool: pg.Pool, cfg: Config, store: ObjectStorage): R
       const c = await context(pool, scope); requireThat(scope.role === 'CONTENT', 'SAMPLE_TOOL_SCOPE_INVALID', '计划校验工具只供内容角色使用', 403);
       validateCreativePlan(args.plan as CreativePlan, c.input.profile, c.input.source); return { result: { valid: true, plan_hash: hash(args.plan) } };
     },
-    render_photo_pack: media('PRODUCTION'), execute_post_plan: media('POST'),
+    render_photo_pack:async(scope,args,intent,signal)=>{const c=await context(pool,scope);requireThat(c.input.source.engine==='PHOTO_LAYOUT','SAMPLE_ROUTE_UNAVAILABLE','该样例不能换成原图路线',403);return media('PRODUCTION')(scope,args,intent,signal);},
+    render_generated_pack:async(scope,args,intent,signal)=>{const c=await context(pool,scope);requireThat(c.input.generation,'SAMPLE_GENERATION_NOT_FROZEN','该样例未冻结生成路线',403);return media('PRODUCTION')(scope,args,intent,signal);},execute_post_plan: media('POST'),
     inspect_actual_media: async (scope, args, intent, signal) => {
       const phase = phaseFor(scope); const c = await context(pool, scope); const receipt = storedMedia(c, phase); const ids = args.asset_ids as string[];
       requireThat(ids.length === receipt.artifacts.length && receipt.artifacts.every(a => ids.includes(a.artifact_id)), 'SAMPLE_PACK_INCOMPLETE', '必须检测本阶段全部实际素材', 422);
@@ -73,14 +80,16 @@ export function sampleTools(pool: pg.Pool, cfg: Config, store: ObjectStorage): R
       finally { await rm(inside(cfg.runtimeRoot, directory), { recursive: true, force: true }); }
       return { result: { operation_id: receipt.operation_id, artifact_ids: receipt.artifacts.map(a => a.artifact_id), tool_receipt_id: intent.id } };
     },
-    extract_review_evidence: async scope => {
+    extract_review_evidence: async (scope,args,intent,signal) => {
+      if(scope.stage_name==='SAMPLE_PRODUCTION')return references.extract_review_evidence!(scope,args,intent,signal);
       const c = await context(pool, scope); const packet = samplePacket(c);
       requireThat(['REVIEW_FACTS','REVIEW_STYLE'].includes(scope.role) && scope.packet_hash === packet.packet_hash, 'SAMPLE_TOOL_SCOPE_INVALID', '复核材料与本角色不匹配', 403);
       return { result: { packet_hash: packet.packet_hash, output_set_hash: packet.output_set_hash, copy: packet.copy,
         images: packet.images.map(({ object_key: _key, ...data }) => data), artifacts: packet.artifacts.map(({ object_key: _key, ...data }) => data),
         report_requirements: { role: scope.role, packet_hash: packet.packet_hash, checked_asset_ids: packetAssetIds(packet) } } };
     },
-    persist_stage_result: async (scope, args) => {
+    persist_stage_result: async (scope, args,intent,signal) => {
+      if(scope.stage_name==='SAMPLE_PRODUCTION'&&scope.role==='REVIEW_FACTS')return references.persist_stage_result!(scope,args,intent,signal);
       const c = await context(pool, scope);
       if (scope.role === 'CONTENT') {
         validateCreativePlan(args.result as CreativePlan, c.input.profile, c.input.source);

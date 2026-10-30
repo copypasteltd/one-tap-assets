@@ -41,7 +41,8 @@ export class CodexRuntimeAdapter {
     requireThat(isReview === Boolean(request.review) && (!isReview || ['ORDER','SAMPLE','REVISION'].includes(request.lease.scope_type)),
       'CODEX_REVIEW_BINDING_INVALID', '独立复核必须有本单封存材料和实际图片', 503);
     requireThat(!request.review?.purpose || request.review.purpose === 'REFERENCE_IDENTITY'
-      && request.role === 'REVIEW_FACTS' && request.lease.scope_type === 'ORDER' && request.lease.stage_name === 'PRODUCTION'
+      && request.role === 'REVIEW_FACTS' && (request.lease.scope_type === 'ORDER' && request.lease.stage_name === 'PRODUCTION'
+        || request.lease.scope_type === 'SAMPLE' && request.lease.stage_name === 'SAMPLE_PRODUCTION')
       && hash(request.allowedTools) === hash(['extract_review_evidence','persist_stage_result']),
     'CODEX_REVIEW_BINDING_INVALID', '参考帧核验只准在原制作阶段运行独立事实角色和两个核验工具', 503);
     if (request.review) await checkReviewImages(request.review.images, request.admission);

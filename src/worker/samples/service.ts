@@ -1,3 +1,5 @@
+import {sampleGenerationGateway,prepareSampleReferences} from './generation.js';
+import type {GenerationGateway} from '../generation/gateway.js';
 import type pg from 'pg';
 import { transaction } from '../../api/db/pool.js';
 import type { Config } from '../../api/config.js';
@@ -10,14 +12,14 @@ import type { StageCommit } from '../runtime.js';
 import { CodexRuntimeAdapter, type RoleRequest, type RoleResult } from '../codex/runtime.js';
 import type { RoleExecutor } from '../codex/planning.js';
 import { SAMPLE_STAGES, sampleContext, sampleAdmission, samplePlan, type SampleContext } from './context.js';
-import { storedMedia, artifactBytes } from './media.js';
+import { storedMedia, artifactBytes, verifySampleGeneratedReceipt } from './media.js';
 import { buildSamplePacket, samplePacket, packetImages, sampleReviewSchema, validateSampleReview, validateSampleCompletion } from './review.js';
 import { sampleMediaResultSchema, validateSampleMediaResult } from '../tool-gateway/sample-tools.js';
 
 export class SampleProductionService {
   private executor: RoleExecutor;
-  constructor(private pool: pg.Pool, private cfg: Config, private store: ObjectStorage, executor?: RoleExecutor) {
-    requireThat(!executor || cfg.env === 'test', 'TEST_PORT_FORBIDDEN', '样例角色替身只可用于显式测试环境', 500);
+  constructor(private pool: pg.Pool, private cfg: Config, private store: ObjectStorage, executor?: RoleExecutor,private gateway?:GenerationGateway) {
+    requireThat((!executor&&!gateway) || cfg.env === 'test', 'TEST_PORT_FORBIDDEN', '样例角色替身只可用于显式测试环境', 500);
     this.executor = executor ?? new CodexRuntimeAdapter(pool, cfg);
   }
   private async execute(request: RoleRequest, signal: AbortSignal): Promise<RoleResult> {
@@ -45,6 +47,7 @@ export class SampleProductionService {
       };
     }
     if (lease.stage_name === 'SAMPLE_COMPLETE') return this.finalize(lease, context);
+    if(lease.stage_name==='SAMPLE_PRODUCTION'&&context.input.generation)await prepareSampleReferences(this.pool,this.cfg,this.store,lease,context,this.executor,this.gateway??sampleGenerationGateway(this.pool,this.cfg,this.store),signal);
     const role = lease.stage_name === 'SAMPLE' ? 'CONTENT' : lease.stage_name.slice(7) as RoleRequest['role'];
     const common = { lease, role, variantId: context.input.skill_variant_id, bundleHash: context.input.bundle_hash,
       admission: sampleAdmission(this.cfg, context), limits: context.input.limits, maxToolCalls: 32, maxScopeToolCalls: 160 };
@@ -52,9 +55,9 @@ export class SampleProductionService {
     if (role === 'CONTENT') request = { ...common, allowedTools: ['analyze_photos','validate_content_plan','persist_stage_result'], outputSchema: creativePlanSchema,
       input: { phase: 'CONTENT', task: '根据作者本人商品证据和已选风格规划完整样例。调用analyze_photos，校验完整计划后持久化，未知属性不得编造。',
         profile: context.input.profile, source: context.input.source, suggested_plan: basePlan(context.input.profile, context.input.source) } };
-    else if (role === 'PRODUCTION' || role === 'POST') request = { ...common, allowedTools: [role === 'PRODUCTION' ? 'render_photo_pack' : 'execute_post_plan','inspect_actual_media','persist_stage_result'], outputSchema: sampleMediaResultSchema,
+    else if (role === 'PRODUCTION' || role === 'POST') request = { ...common, allowedTools: [role === 'PRODUCTION' ? context.input.generation?'render_generated_pack':'render_photo_pack' : 'execute_post_plan','inspect_actual_media','persist_stage_result'], outputSchema: sampleMediaResultSchema,
       input: { phase: role, snapshot_hash: context.inputHash, creative_plan: samplePlan(context), source: context.input.source,
-        task: '调用本阶段制作工具，再inspect_actual_media检测全部artifact_ids。将返回的tool_receipt_id加入tool_receipt_ids，通过persist_stage_result保存完整结果并原样返回。样例合同为原图无声，不能更换路线、商品或预算。' } };
+        task: '调用本阶段制作工具，再inspect_actual_media检测全部artifact_ids。将返回的tool_receipt_id加入tool_receipt_ids，通过persist_stage_result保存完整结果并原样返回。必须遵守冻结的原图或生成式无声路线，不得更换商品、预算或重新购买未知任务。' } };
     else {
       const packet = samplePacket(context); const images = await packetImages(this.pool, this.cfg, this.store, context, packet);
       request = { ...common, allowedTools: ['extract_review_evidence','persist_stage_result'], outputSchema: sampleReviewSchema, review: { packetHash: packet.packet_hash, images },
@@ -80,9 +83,12 @@ export class SampleProductionService {
     await validateSampleCompletion(this.pool, this.cfg, context); const packet = samplePacket(context); const receipt = storedMedia(context, 'POST');
     await packetImages(this.pool, this.cfg, this.store, context, packet);
     for (const artifact of receipt.artifacts) await artifactBytes(this.pool, this.store, context, artifact);
+    await verifySampleGeneratedReceipt(this.pool,this.cfg,this.store,context,receipt);
     return async db => {
       const current = await sampleContext(db, lease.tenant_id, lease.scope_id, lease.input_hash, true); await validateSampleCompletion(db, this.cfg, current);
       requireThat(samplePacket(current).packet_hash === packet.packet_hash && hash(storedMedia(current, 'POST')) === hash(receipt), 'SAMPLE_PACKET_CHANGED', '样例封存包在提交前已变化', 503);
+      for(const artifact of receipt.artifacts)await artifactBytes(db,this.store,current,artifact);
+      await verifySampleGeneratedReceipt(db,this.cfg,this.store,current,receipt);
       const media = receipt.artifacts.filter(a => a.kind !== 'copy').map(a => ({ item_id: a.artifact_id, kind: a.kind, object_key: a.object_key, sha256: a.sha256, size_bytes: a.size_bytes }));
       await db.query(`UPDATE public_samples SET state='READY',data=data||'{"state":"READY"}'::jsonb,updated_at=now(),
         private=private||jsonb_build_object('media',$3::jsonb,'qc_passed',true,'completion',$4::jsonb) WHERE tenant_id=$1 AND id=$2 AND state='GENERATING'`,
