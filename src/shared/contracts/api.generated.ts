@@ -1411,6 +1411,30 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/orders/{order_id}/usage-feedback": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 读取本人订单的自愿使用反馈
+         * @description 读取本人订单的自愿使用反馈
+         */
+        get: operations["getUsageFeedback"];
+        /**
+         * 按原修订号更新或撤回自愿反馈；不影响保存和交付
+         * @description 按原修订号更新或撤回自愿反馈；不影响保存和交付
+         */
+        put: operations["setUsageFeedback"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -3259,6 +3283,97 @@ export interface components {
         };
         PublicationReviewMediaResponse: {
             data: components["schemas"]["PublicationReviewMedia"];
+            trace_id: string;
+        };
+        /** @enum {string} */
+        UsageChoice: "PLANNED_USE" | "USED" | "NEEDS_ADJUSTMENT";
+        UsageFeedback: {
+            order_id: string;
+            choice: components["schemas"]["UsageChoice"] | null;
+            revision: number;
+            updated_at: string | null;
+        };
+        UsageFeedbackRequest: {
+            choice: components["schemas"]["UsageChoice"] | null;
+            expected_revision: number;
+        };
+        /** @enum {string} */
+        TrafficGroup: "UNCLASSIFIED" | "INTERNAL_TEST" | "EXTERNAL";
+        TrafficClassificationRequest: {
+            traffic_group: components["schemas"]["TrafficGroup"];
+        };
+        TrafficClassification: {
+            traffic_group: components["schemas"]["TrafficGroup"];
+            updated_at: string | null;
+        };
+        ProductInsights: {
+            /** Format: date-time */
+            window_start: string;
+            /** Format: date-time */
+            window_end: string;
+            /** @enum {string} */
+            traffic_group: "ALL" | "UNCLASSIFIED" | "INTERNAL_TEST" | "EXTERNAL";
+            recognition: {
+                jobs: number;
+                ready_jobs: number;
+                blocked_jobs: number;
+                failed_jobs: number;
+                attempts: number;
+                machine_profiles: number;
+                profiles_with_observed_fields: number;
+                observed_fields: number;
+                ocr_fields: number;
+                hypothesis_fields: number;
+                unknown_fields: number;
+                conflicted_fields: number;
+                evidenced_field_share: number | null;
+                accuracy: null;
+            };
+            funnel: {
+                selected_product_presets: number;
+                paid_orders: number;
+                paid_buyers: number;
+                first_deliveries: number;
+                recommendation_impressions: null;
+                recommendation_clicks: null;
+                automatic_success_ratio: null;
+            };
+            album: {
+                saved_files: number;
+                saved_orders: number;
+                unwindowed_receipts: number;
+            };
+            feedback: {
+                planned_use: number;
+                used: number;
+                needs_adjustment: number;
+                withdrawn: number;
+            };
+            community: {
+                published_versions: number;
+                effective_reuses: number;
+            };
+            costs: {
+                /** @constant */
+                currency: "CNY";
+                order_settled_micro: number;
+                platform_settled_micro: number;
+                platform_unresolved_reservations: number;
+                platform_unclassified_reservations: number;
+                review_support_micro: null;
+                complete_cost_micro: null;
+            };
+        };
+        UsageFeedbackResponse: {
+            data: components["schemas"]["UsageFeedback"];
+            trace_id: string;
+        };
+        TrafficClassificationResponse: {
+            data: components["schemas"]["TrafficClassification"];
+            trace_id: string;
+        };
+        ProductInsightsResponse: {
+            data: components["schemas"]["ProductInsights"];
             trace_id: string;
         };
     };
@@ -11992,6 +12107,234 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PresetLicenseResponse"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    getUsageFeedback: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                order_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 成功 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UsageFeedbackResponse"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    setUsageFeedback: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                order_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UsageFeedbackRequest"];
+            };
+        };
+        responses: {
+            /** @description 成功 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UsageFeedbackResponse"];
                 };
             };
             /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */

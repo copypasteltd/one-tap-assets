@@ -1276,7 +1276,8 @@
         "deliverable_id",
         "attempt",
         "state",
-        "occurred_at"
+        "occurred_at",
+        "received_at"
       ],
       "unique_key": [
         "tenant_id",
@@ -1744,6 +1745,42 @@
         "reservation_id"
       ],
       "invariant": "UNKNOWN按原推理回执结算；所有修改尝试共享原订单账户",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "order_usage_feedback",
+      "primary_key": "order_id",
+      "scope": "tenant",
+      "fields": [
+        "tenant_id",
+        "owner_id",
+        "order_id",
+        "choice",
+        "revision",
+        "updated_at"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "order_id"
+      ],
+      "invariant": "Mutable optional feedback; revision compare-and-set; no immutable-manifest writes or cached personal response; owner/deletion gates and revocation erasure.",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "metrics_traffic_classifications",
+      "primary_key": "owner_id",
+      "scope": "tenant",
+      "fields": [
+        "tenant_id",
+        "owner_id",
+        "traffic_group",
+        "updated_at"
+      ],
+      "ownership_unique_key": [
+        "tenant_id",
+        "owner_id"
+      ],
+      "invariant": "Server-managed classification; missing is UNCLASSIFIED; metrics:classify is separate from metrics:read; EXTERNAL is not proof of a verified human customer.",
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
     }
   ],

@@ -13,8 +13,8 @@ export async function reservePlatform(db: Db, scope: { tenantId: string; ownerId
   const day = (await db.query<{ day: string; until: Date }>(`SELECT to_char(now() AT TIME ZONE 'Asia/Shanghai','YYYY-MM-DD') AS day,
     ((date_trunc('day',now() AT TIME ZONE 'Asia/Shanghai')+interval '1 day') AT TIME ZONE 'Asia/Shanghai') AS until`)).rows[0]!;
   const scopeId = `${scope.category}:${scope.ownerId}:${day.day}`;
-  await db.query(`INSERT INTO platform_cost_accounts(id,tenant_id,scope_id,ceiling_micro,deadline_at) VALUES($1,$2,$3,$4,$5)
-    ON CONFLICT(tenant_id,scope_id) DO NOTHING`, [id('platformcost'), scope.tenantId, scopeId, scope.dailyCeilingMicro, day.until]);
+  await db.query(`INSERT INTO platform_cost_accounts(id,tenant_id,scope_id,ceiling_micro,deadline_at,owner_id) VALUES($1,$2,$3,$4,$5,$6)
+    ON CONFLICT(tenant_id,scope_id) DO NOTHING`, [id('platformcost'), scope.tenantId, scopeId, scope.dailyCeilingMicro, day.until,scope.ownerId]);
   const account = (await db.query<{ id: string }>(`UPDATE platform_cost_accounts SET reserved_micro=reserved_micro+$4
     WHERE tenant_id=$1 AND scope_id=$2 AND ceiling_micro=$3 AND spent_micro+reserved_micro+$4<=ceiling_micro AND deadline_at>now() RETURNING id`,
   [scope.tenantId, scopeId, scope.dailyCeilingMicro, amountMicro])).rows[0];

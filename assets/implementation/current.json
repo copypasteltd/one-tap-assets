@@ -3,13 +3,22 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-30T10:57:44.862Z",
+  "checked_at": "2026-10-30T11:37:33.913298+00:00",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "verification_mode": "FOCUSED_NATIVE_BUYER_AND_REPACK",
-  "retained_integration": null,
-  "command_checks_passed": false,
+  "verification_mode": "FOCUSED_USAGE_FEEDBACK_AND_PRODUCT_INSIGHTS",
+  "retained_integration": {
+    "original_source_set_hash": "f94399290dc574341c0e2ce9b371357cd8f95d84f9c6e842fa1e280d03fa35d6",
+    "unchanged_backend_shared_client_and_test_files": true,
+    "changed_since_execution": [
+      "scripts/record-usage-insights.ts",
+      "scripts/usage_insights_contracts.py",
+      "scripts/生成Codex开发契约.py",
+      "src/preview/fixtures.ts"
+    ]
+  },
+  "command_checks_passed": true,
   "commands": [
     {
       "task": "typecheck",
@@ -19,12 +28,12 @@
         "--noEmit"
       ],
       "shell": false,
-      "status": "TIMEOUT",
-      "exit_code": 1,
+      "status": "PASS",
+      "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 180984,
-      "log_path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/typecheck.log",
+      "elapsed_ms": 8968,
+      "log_path": "runtime/delivery-builds/2026-10-30T11-32-53-302Z-d04b3218/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -40,34 +49,115 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 5291,
-      "log_path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/server.log",
+      "elapsed_ms": 324,
+      "log_path": "runtime/delivery-builds/2026-10-30T11-32-53-302Z-d04b3218/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T10-53-45-033Z-445716dc\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T11-32-53-302Z-d04b3218\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T10-53-45-033Z-445716dc\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T11-32-53-302Z-d04b3218\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 44795,
-      "log_path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/preview.log",
-      "log_sha256": "bec25238dcccc5f62ad7690ef949fa1994592175a9b423f0ce2f6c1dae5214f0"
+      "elapsed_ms": 644,
+      "log_path": "runtime/delivery-builds/2026-10-30T11-32-53-302Z-d04b3218/preview.log",
+      "log_sha256": "77517d4c3d9b24615105b48cbe15be361ce64b69b3fd5be982634d3d8bfcb63b"
+    },
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/usage-feedback.test.ts tests/unit/product-insights-client.test.ts tests/unit/metrics-client.test.ts --outputFile.json=runtime/test-results/feedback-insights-2026-10-30T11-21-46-055Z-b0d20570/api.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "tests/unit/usage-feedback.test.ts",
+        "tests/unit/product-insights-client.test.ts",
+        "tests/unit/metrics-client.test.ts",
+        "--outputFile.json=runtime/test-results/feedback-insights-2026-10-30T11-21-46-055Z-b0d20570/api.json"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 480000,
+      "elapsed_ms": 11609,
+      "log_path": "runtime/test-results/feedback-insights-2026-10-30T11-21-46-055Z-b0d20570/api.log",
+      "log_sha256": "87d8a1a69f7d77d6662515ebd6c14d4d60e077cc8fb895646e8db6a22d34f500"
+    },
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/usage-insights.test.ts tests/integration/metrics.test.ts --outputFile.json=runtime/test-results/feedback-insights-2026-10-30T11-21-46-055Z-5be8bef8/api.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.integration.config.ts",
+        "tests/integration/usage-insights.test.ts",
+        "tests/integration/metrics.test.ts",
+        "--outputFile.json=runtime/test-results/feedback-insights-2026-10-30T11-21-46-055Z-5be8bef8/api.json"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 480000,
+      "elapsed_ms": 44799,
+      "log_path": "runtime/test-results/feedback-insights-2026-10-30T11-21-46-055Z-5be8bef8/api.log",
+      "log_sha256": "1d6130a6909c81b2420e8daac3751c449c076965cd58a5fe40b1b9e9678c0181"
+    },
+    {
+      "task": "doctor",
+      "argv": [
+        "--import",
+        "tsx",
+        "scripts/delivery/doctor.ts"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_ms": 60000,
+      "elapsed_ms": 999,
+      "log_path": "runtime/test-results/feedback-insights-local-2026-10-30T11-28-33-877Z-77ed33fe/doctor.log",
+      "log_sha256": "e583fc56b2322854d926728f8be26e5473e83d5c8dcc854234c4d0eca8e0a350"
+    },
+    {
+      "task": "start-once",
+      "argv": [
+        "--import",
+        "tsx",
+        "scripts/delivery/start.ts",
+        "--once"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_ms": 60000,
+      "elapsed_ms": 5138,
+      "log_path": "runtime/test-results/feedback-insights-local-2026-10-30T11-28-33-877Z-77ed33fe/start.log",
+      "log_sha256": "5c34f98bdfd0617ddbe483d4919df5ae81b48e5436e5abd9792ec25ad26c5f2a"
     }
   ],
-  "suites": [],
-  "source_files": 475,
-  "source_set_hash": "9e820572b9557cada27d9b2444dec0f7e8c2764db6af3184f3005381dbe70a81",
+  "suites": [
+    {
+      "kind": "unit",
+      "passed": 8,
+      "source_set_hash": "f94399290dc574341c0e2ce9b371357cd8f95d84f9c6e842fa1e280d03fa35d6"
+    },
+    {
+      "kind": "native",
+      "passed": 7,
+      "source_set_hash": "f94399290dc574341c0e2ce9b371357cd8f95d84f9c6e842fa1e280d03fa35d6"
+    }
+  ],
+  "source_files": 486,
+  "source_set_hash": "c86577a4af193ecc0b1f27d8b052e1a0b9e814b7587fb00b5fe5ca027eb55d40",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -79,7 +169,7 @@
     },
     {
       "path": "src/api/app.ts",
-      "sha256": "ffa15eed0f43d39c4c282dba6b2beb9edabc20f045431dc5b1f8357dccad47ae"
+      "sha256": "acbeed862f96735769003eb81a7b89b9cd92225409301e777f4c8f0c3a665edf"
     },
     {
       "path": "src/api/config.ts",
@@ -218,6 +308,10 @@
       "sha256": "5ab53a708593478ceddc63f5e70291f64bfca07bf46cadadaf085879e0ae2fe8"
     },
     {
+      "path": "src/api/db/migrations/033_usage_insights.sql",
+      "sha256": "dd2877ffdff4e79108e67121c911212acbf0691d2483d935095e976049879042"
+    },
+    {
       "path": "src/api/db/pool.ts",
       "sha256": "81dff3e39d44a521e3a3cfafe6d7b734cfb477f5cd33926c14694c0364777850"
     },
@@ -314,6 +408,10 @@
       "sha256": "2e26384da04b3b429de0ac993fe0e21db326263652d287700589eb897eb59f28"
     },
     {
+      "path": "src/api/modules/product-insights.ts",
+      "sha256": "d2e4819645b6469de343fdd7b6b028381a4fd272d1ce11f6992b1bb12c2ce51e"
+    },
+    {
       "path": "src/api/modules/products.ts",
       "sha256": "0cf6af87181e7cd79b3e1110cb072df69d536db4e4a579e7aa68325aee29bcdb"
     },
@@ -350,16 +448,20 @@
       "sha256": "209f28569e50fdcffeb06ba44fb913158b3a1f8bcc5a14e92605415790361c30"
     },
     {
+      "path": "src/api/modules/usage-feedback.ts",
+      "sha256": "cdd423761df3152ced8365aa234359c8b5557503e6d1f793a96113c90346fd46"
+    },
+    {
       "path": "src/api/privacy/journal.ts",
       "sha256": "77be478a56de3323ecb85eca2bcba8d27f8463b0cf1837c1c9231bb67c8c0089"
     },
     {
       "path": "src/api/routes/business.ts",
-      "sha256": "53d2045d90886c718e233dd48d65c2b8a6bda33921e0c1ac4e6c25809cd941a0"
+      "sha256": "719ea97584ab721543cc434f53e157bdda9d23917b1de011ef1566696e994297"
     },
     {
       "path": "src/api/routes/management.ts",
-      "sha256": "ae9c799fff7e2232de72ea67f1201ef9594b0d22b789754bf67152eedf339c19"
+      "sha256": "6883cb3b936c266df82e09f50242ff2e35820d324fe665f271ed92d57a6e760c"
     },
     {
       "path": "src/api/routes/payments.ts",
@@ -571,7 +673,7 @@
     },
     {
       "path": "src/preview/fixtures.ts",
-      "sha256": "f144d23a2153bbbd71936c2fc102a2299c02f095d9efb8d94f3297267c77d427"
+      "sha256": "3a6d415263ff2a46045ff3d63dbff4aca25e6b7161065e5d61243f80554a00d9"
     },
     {
       "path": "src/preview/index.html",
@@ -582,12 +684,16 @@
       "sha256": "4bb337ccb4652b6c1342501a05839755a9c566c207900c3364dc41bad8478407"
     },
     {
+      "path": "src/preview/metrics-insights.tsx",
+      "sha256": "a4dad2658ba42dcd4271242ed0590f02bbe8c458bcc09f558a8a7c2aa966a661"
+    },
+    {
       "path": "src/preview/metrics-main.tsx",
-      "sha256": "1c27962d19797a91994f31cc5cc4971eb5687539ea892b0a5b2189383c956f98"
+      "sha256": "3d4a173a365be1da8e931b82845f6c5e31a6cdb237c775fccb25f1f32e8041d9"
     },
     {
       "path": "src/preview/metrics.css",
-      "sha256": "8cb1313f5b1107a5a1acf0952bd6f3ada968aefe59035c11f6dcbab527a0ea45"
+      "sha256": "b7caea63227e34565118242b259b75f169d87fb4ea3b882fb04e2f6e33483e8c"
     },
     {
       "path": "src/preview/metrics.html",
@@ -655,7 +761,7 @@
     },
     {
       "path": "src/shared/client/metrics.ts",
-      "sha256": "5efa3fcc133c647939bee3e8b5469729f0b3b207785ed879efab480046183363"
+      "sha256": "43d5a18f65787638ede9ec3851d6ba12722637d99c86f147f63986f388105249"
     },
     {
       "path": "src/shared/client/order-actions.ts",
@@ -706,16 +812,20 @@
       "sha256": "c5a554bb1bb72d26025c7fed1e9bc4556139fb66fd2a11a3253922e153a2d87a"
     },
     {
+      "path": "src/shared/client/usage-feedback.ts",
+      "sha256": "266f4d84af738e6d026d3ff4cb010895594330bc4f7900886cadb56e516ed64b"
+    },
+    {
       "path": "src/shared/contracts/api.generated.ts",
-      "sha256": "778bbbc7285ceee2e1d3f7dcd6fae4b89fa0658d48b27ac8169d60b586180177"
+      "sha256": "39b6525ae700af22f5a359085c8d1d435dfd3c2244130424c3a4dddabc76ca1f"
     },
     {
       "path": "src/shared/contracts/endpoints.generated.ts",
-      "sha256": "10842013f3f04d14812b3bb166749355000d0f1c932c36ce496c030a26be4844"
+      "sha256": "888f9b1002875594515e9c8e2f9621f9e7a6fcd04c7252f1ddb5d15a231323d8"
     },
     {
       "path": "src/shared/contracts/management.generated.ts",
-      "sha256": "a3e63b7ba0e2771f9ef27a3b1d43cbaf6e2bc804b13fb179f923ef54d8ff2ba9"
+      "sha256": "6f3da01264ba91c05d679261908d590dba908c28ad22ec7c776488318337be23"
     },
     {
       "path": "src/shared/contracts/types.ts",
@@ -783,7 +893,7 @@
     },
     {
       "path": "src/shared/ui/pack.tsx",
-      "sha256": "411d48ef0fba9e4abf97fcdb63b0d9ca968614e5e753e60479d28ed6b6274eb6"
+      "sha256": "af0b30426caa04bf25c2eac1d920c499e810f69985425c0774aa12be5a68a31d"
     },
     {
       "path": "src/shared/ui/pages.tsx",
@@ -816,6 +926,10 @@
     {
       "path": "src/shared/ui/theme.css",
       "sha256": "05d8df730b321437a6dab56cd51d5a40c7d24d39504abf40562edbbd0e875737"
+    },
+    {
+      "path": "src/shared/ui/usage-feedback.tsx",
+      "sha256": "9c2204d959c14a137dbd36fc97317aad743327f8a5029f206e7fecf4b838efbb"
     },
     {
       "path": "src/worker/analysis/profile.ts",
@@ -855,7 +969,7 @@
     },
     {
       "path": "src/worker/budget/platform.ts",
-      "sha256": "0a966b6bd867670b4d992a336e156e44d05422fb2448632398b24c7a642035d1"
+      "sha256": "3d5fb70e5c4a40269faae2ddbd0e37dca6db73b89fd715be9ff16d454fa49d20"
     },
     {
       "path": "src/worker/budget/reservations.ts",
@@ -1606,6 +1720,10 @@
       "sha256": "af5eb539dac2766f19a47f7b83eef8afe7ba3a55d7e0caf277f0d867d16e57a0"
     },
     {
+      "path": "tests/integration/usage-insights.test.ts",
+      "sha256": "c38393c44ede1d155df21cfa0fb28cdfc307f5eae348cbab9877aad6a7cf7f65"
+    },
+    {
       "path": "tests/integration/vision-analysis.test.ts",
       "sha256": "d25b2efdeccbdde2ed5f263fb97a76676f4b73d033753712df537050b26e56ab"
     },
@@ -1690,6 +1808,10 @@
       "sha256": "c420c60e9155d7715fc2c733349d1855564305c734bfccde6a55383df8fffc5d"
     },
     {
+      "path": "tests/unit/product-insights-client.test.ts",
+      "sha256": "bfacc007fd2b9109ee395741a73bdd35d4273b7b3b446cf47b8e0e9d2a0eb73d"
+    },
+    {
       "path": "tests/unit/profile-correction.test.ts",
       "sha256": "8d30b8a3baeedbb23f8c4705a231f84d5865e8f807db2dac69cb0e178a83959e"
     },
@@ -1728,6 +1850,10 @@
     {
       "path": "tests/unit/support.test.ts",
       "sha256": "61df1dafe3ee4b11102a175f173b0541b801bffc37f6b02c7cba4314a86f5452"
+    },
+    {
+      "path": "tests/unit/usage-feedback.test.ts",
+      "sha256": "05376cadff21b4bdaaa9ae041ab38f491655a0e7eb87e758fbbee20d7b29822c"
     },
     {
       "path": "tests/unit/vision-wire.test.ts",
@@ -1779,7 +1905,7 @@
     },
     {
       "path": "scripts/生成Codex开发契约.py",
-      "sha256": "e811aaa5afd25669f8fde2c1b2938c2db9d2cb3bd5c5da93ae19c09c9df2e26d"
+      "sha256": "243dd80f46c25be3d026f4e6354af413b5f86651f51415dc849474989b06e817"
     },
     {
       "path": "scripts/生成v3需求配置.py",
@@ -1926,6 +2052,10 @@
       "sha256": "5f52d0d995c7244cbeb0e37827a2c208425be2829e9d1505a66c9963f93615aa"
     },
     {
+      "path": "scripts/record-usage-insights.ts",
+      "sha256": "90beed4d7f4f3c34f2a2ccbcf2e96b901b48156182a5afa906ec6efb87e5b039"
+    },
+    {
       "path": "scripts/run.ps1",
       "sha256": "6d1f64bef24f092b5ff7bc27de78625d3d584ee1f7f6603c5acf64da4462ed98"
     },
@@ -1936,6 +2066,10 @@
     {
       "path": "scripts/setup-local.ps1",
       "sha256": "f2af7e71dc51c6cf0a84040a4973ff21808abdbcca27a15d8123bfd197648e3c"
+    },
+    {
+      "path": "scripts/usage_insights_contracts.py",
+      "sha256": "a07e986aa4fd434f2c5a184cb8ca559c087f35092c91be9663e4ca48a5e6145b"
     },
     {
       "path": "scripts/verify-implementation.ts",
@@ -1997,11 +2131,11 @@
     },
     {
       "path": "assets/development/v1.1/contracts/endpoint-catalog.md",
-      "sha256": "e25a9515b35bc31b305cabadae319ac5026ccb4e190986c031ffb6e87a178012"
+      "sha256": "380802069b58cddf4e370ad7bff672dd7e40fb666dc49bf024d8892cdbcb588c"
     },
     {
       "path": "assets/development/v1.1/contracts/endpoints.json",
-      "sha256": "719804c34046bd28edf4cf61b347890f2893d30391ad33f4beb2781cd5d35782"
+      "sha256": "766a737a6c120934d18a577bcc6ec2b2e44503be37d9b7ffc7139d6aa55ca0f1"
     },
     {
       "path": "assets/development/v1.1/contracts/execution-snapshot.schema.json",
@@ -2009,15 +2143,15 @@
     },
     {
       "path": "assets/development/v1.1/contracts/management-endpoints.json",
-      "sha256": "73af4e6dcb2dfdd62d7dcb97b2997e771fa815685fe25e46c29778bce7343f11"
+      "sha256": "15b75fa29176933a0811db6dd6b4a44efc38163bfd0b610fcfce59264969ef3d"
     },
     {
       "path": "assets/development/v1.1/contracts/management-openapi.json",
-      "sha256": "74acdff4b9c16875fabe2444b642306dc012b235bae5bde04f6f2e3725532e22"
+      "sha256": "b205553f6adb5978e9d5cdfa33ec35abd6b46012372e993a244bced0aceb1cb6"
     },
     {
       "path": "assets/development/v1.1/contracts/openapi.json",
-      "sha256": "16b9b0a71d5ae7e82cdd17851f7f977e4166a3dd5129f0d68f84ab5ebd32ac53"
+      "sha256": "276a6e8bf83eb7358ef4317c6e7aeb66652686d188766b5cd272469020e3e4ee"
     },
     {
       "path": "assets/development/v1.1/contracts/product-identity-lock.schema.json",
@@ -2898,7 +3032,7 @@
     "production_verified": false,
     "evidence": "docs/verification/native-sample-source.json"
   },
-  "main_database_migrations": 32,
+  "main_database_migrations": 33,
   "community_native_commercial": {
     "source_implemented": true,
     "fixture_verified": false,
@@ -2930,5 +3064,9 @@
   "repeat_packaging": {
     "source_implemented": true,
     "verification_pointer": "docs/delivery/package.json"
-  }
+  },
+  "selected_builds_passed": true,
+  "focused_tests_passed": 15,
+  "browser_checks_passed": 5,
+  "evidence": "docs/verification/feedback-insights-source.json"
 }

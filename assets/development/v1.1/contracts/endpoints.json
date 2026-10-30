@@ -1940,6 +1940,44 @@
         "D20"
       ],
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/orders/{order_id}/usage-feedback",
+      "operation_id": "getUsageFeedback",
+      "summary": "读取本人订单的自愿使用反馈",
+      "request_schema": null,
+      "response_schema": "UsageFeedback",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F17",
+        "P01-F23"
+      ],
+      "design_pages": [
+        "D11"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "PUT",
+      "path": "/orders/{order_id}/usage-feedback",
+      "operation_id": "setUsageFeedback",
+      "summary": "按原修订号更新或撤回自愿反馈；不影响保存和交付",
+      "request_schema": "UsageFeedbackRequest",
+      "response_schema": "UsageFeedback",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F17",
+        "P01-F23"
+      ],
+      "design_pages": [
+        "D11"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
     }
   ]
 }

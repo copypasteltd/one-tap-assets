@@ -607,5 +607,21 @@ export const endpoints = {
     "idempotency": false,
     "request": null,
     "response": "PresetLicense"
+  },
+  "getUsageFeedback": {
+    "method": "GET",
+    "path": "/orders/{order_id}/usage-feedback",
+    "authenticated": true,
+    "idempotency": false,
+    "request": null,
+    "response": "UsageFeedback"
+  },
+  "setUsageFeedback": {
+    "method": "PUT",
+    "path": "/orders/{order_id}/usage-feedback",
+    "authenticated": true,
+    "idempotency": false,
+    "request": "UsageFeedbackRequest",
+    "response": "UsageFeedback"
   }
 } as const;

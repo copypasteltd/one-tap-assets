@@ -512,6 +512,48 @@
         "P01-F31"
       ],
       "implementation_status": "SOURCE_IMPLEMENTED_NOT_PRODUCTION_ADMITTED"
+    },
+    {
+      "method": "GET",
+      "path": "/metrics/product-insights",
+      "operation_id": "readProductInsights",
+      "summary": "读取分群识别、保存、反馈、社区复用与已入账成本",
+      "permission": "metrics:read",
+      "request_schema": null,
+      "response_schema": "ProductInsights",
+      "requirements": [
+        "P01-F17",
+        "P01-F50"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "GET",
+      "path": "/metrics/accounts/{tenant_id}/{user_id}",
+      "operation_id": "getTrafficClassification",
+      "summary": "读取服务端流量标记",
+      "permission": "metrics:classify",
+      "request_schema": null,
+      "response_schema": "TrafficClassification",
+      "requirements": [
+        "P01-F17",
+        "P01-F50"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "PUT",
+      "path": "/metrics/accounts/{tenant_id}/{user_id}",
+      "operation_id": "setTrafficClassification",
+      "summary": "标记内部测试、外部或未分类流量；不是客户真实性认证",
+      "permission": "metrics:classify",
+      "request_schema": "TrafficClassificationRequest",
+      "response_schema": "TrafficClassification",
+      "requirements": [
+        "P01-F17",
+        "P01-F50"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
     }
   ]
 }

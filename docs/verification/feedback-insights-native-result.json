@@ -1,0 +1,28 @@
+{
+  "base": "runtime/test-results/feedback-insights-2026-10-30T11-21-46-055Z-5be8bef8",
+  "source_set_hash": "f94399290dc574341c0e2ce9b371357cd8f95d84f9c6e842fa1e280d03fa35d6",
+  "source_unchanged": true,
+  "commands": [
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/usage-insights.test.ts tests/integration/metrics.test.ts --outputFile.json=runtime/test-results/feedback-insights-2026-10-30T11-21-46-055Z-5be8bef8/api.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.integration.config.ts",
+        "tests/integration/usage-insights.test.ts",
+        "tests/integration/metrics.test.ts",
+        "--outputFile.json=runtime/test-results/feedback-insights-2026-10-30T11-21-46-055Z-5be8bef8/api.json"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 480000,
+      "elapsed_ms": 44799,
+      "log_path": "runtime/test-results/feedback-insights-2026-10-30T11-21-46-055Z-5be8bef8/api.log",
+      "log_sha256": "1d6130a6909c81b2420e8daac3751c449c076965cd58a5fe40b1b9e9678c0181"
+    }
+  ]
+}

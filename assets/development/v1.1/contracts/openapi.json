@@ -12122,6 +12122,310 @@
         ],
         "x-implementation-status": "DESIGN_NOT_IMPLEMENTED"
       }
+    },
+    "/orders/{order_id}/usage-feedback": {
+      "get": {
+        "operationId": "getUsageFeedback",
+        "summary": "读取本人订单的自愿使用反馈",
+        "description": "读取本人订单的自愿使用反馈",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageFeedbackResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F17",
+          "P01-F23"
+        ],
+        "x-design-pages": [
+          "D11"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED"
+      },
+      "put": {
+        "operationId": "setUsageFeedback",
+        "summary": "按原修订号更新或撤回自愿反馈；不影响保存和交付",
+        "description": "按原修订号更新或撤回自愿反馈；不影响保存和交付",
+        "tags": [
+          "delivery"
+        ],
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsageFeedbackResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F17",
+          "P01-F23"
+        ],
+        "x-design-pages": [
+          "D11"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsageFeedbackRequest"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -21648,6 +21952,478 @@
           "trace_id": {
             "type": "string",
             "maxLength": 128
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "UsageChoice": {
+        "type": "string",
+        "enum": [
+          "PLANNED_USE",
+          "USED",
+          "NEEDS_ADJUSTMENT"
+        ]
+      },
+      "UsageFeedback": {
+        "type": "object",
+        "properties": {
+          "order_id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+          },
+          "choice": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UsageChoice"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time",
+                "maxLength": 40,
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "order_id",
+          "choice",
+          "revision",
+          "updated_at"
+        ],
+        "additionalProperties": false
+      },
+      "UsageFeedbackRequest": {
+        "type": "object",
+        "properties": {
+          "choice": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UsageChoice"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "expected_revision": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+          }
+        },
+        "required": [
+          "choice",
+          "expected_revision"
+        ],
+        "additionalProperties": false
+      },
+      "TrafficGroup": {
+        "type": "string",
+        "enum": [
+          "UNCLASSIFIED",
+          "INTERNAL_TEST",
+          "EXTERNAL"
+        ]
+      },
+      "TrafficClassificationRequest": {
+        "type": "object",
+        "properties": {
+          "traffic_group": {
+            "$ref": "#/components/schemas/TrafficGroup"
+          }
+        },
+        "required": [
+          "traffic_group"
+        ],
+        "additionalProperties": false
+      },
+      "TrafficClassification": {
+        "type": "object",
+        "properties": {
+          "traffic_group": {
+            "$ref": "#/components/schemas/TrafficGroup"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time",
+                "maxLength": 40,
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "traffic_group",
+          "updated_at"
+        ],
+        "additionalProperties": false
+      },
+      "ProductInsights": {
+        "type": "object",
+        "properties": {
+          "window_start": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40,
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$"
+          },
+          "window_end": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40,
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{1,6})?(?:Z|\\+00:00)$"
+          },
+          "traffic_group": {
+            "type": "string",
+            "enum": [
+              "ALL",
+              "UNCLASSIFIED",
+              "INTERNAL_TEST",
+              "EXTERNAL"
+            ]
+          },
+          "recognition": {
+            "type": "object",
+            "properties": {
+              "jobs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "ready_jobs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "blocked_jobs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "failed_jobs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "attempts": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "machine_profiles": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "profiles_with_observed_fields": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "observed_fields": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "ocr_fields": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "hypothesis_fields": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "unknown_fields": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "conflicted_fields": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "evidenced_field_share": {
+                "anyOf": [
+                  {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "accuracy": {
+                "type": "null"
+              }
+            },
+            "required": [
+              "jobs",
+              "ready_jobs",
+              "blocked_jobs",
+              "failed_jobs",
+              "attempts",
+              "machine_profiles",
+              "profiles_with_observed_fields",
+              "observed_fields",
+              "ocr_fields",
+              "hypothesis_fields",
+              "unknown_fields",
+              "conflicted_fields",
+              "evidenced_field_share",
+              "accuracy"
+            ],
+            "additionalProperties": false
+          },
+          "funnel": {
+            "type": "object",
+            "properties": {
+              "selected_product_presets": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "paid_orders": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "paid_buyers": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "first_deliveries": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "recommendation_impressions": {
+                "type": "null"
+              },
+              "recommendation_clicks": {
+                "type": "null"
+              },
+              "automatic_success_ratio": {
+                "type": "null"
+              }
+            },
+            "required": [
+              "selected_product_presets",
+              "paid_orders",
+              "paid_buyers",
+              "first_deliveries",
+              "recommendation_impressions",
+              "recommendation_clicks",
+              "automatic_success_ratio"
+            ],
+            "additionalProperties": false
+          },
+          "album": {
+            "type": "object",
+            "properties": {
+              "saved_files": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "saved_orders": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "unwindowed_receipts": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              }
+            },
+            "required": [
+              "saved_files",
+              "saved_orders",
+              "unwindowed_receipts"
+            ],
+            "additionalProperties": false
+          },
+          "feedback": {
+            "type": "object",
+            "properties": {
+              "planned_use": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "used": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "needs_adjustment": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "withdrawn": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              }
+            },
+            "required": [
+              "planned_use",
+              "used",
+              "needs_adjustment",
+              "withdrawn"
+            ],
+            "additionalProperties": false
+          },
+          "community": {
+            "type": "object",
+            "properties": {
+              "published_versions": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "effective_reuses": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              }
+            },
+            "required": [
+              "published_versions",
+              "effective_reuses"
+            ],
+            "additionalProperties": false
+          },
+          "costs": {
+            "type": "object",
+            "properties": {
+              "currency": {
+                "const": "CNY"
+              },
+              "order_settled_micro": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "platform_settled_micro": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "platform_unresolved_reservations": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "platform_unclassified_reservations": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 2147483647
+              },
+              "review_support_micro": {
+                "type": "null"
+              },
+              "complete_cost_micro": {
+                "type": "null"
+              }
+            },
+            "required": [
+              "currency",
+              "order_settled_micro",
+              "platform_settled_micro",
+              "platform_unresolved_reservations",
+              "platform_unclassified_reservations",
+              "review_support_micro",
+              "complete_cost_micro"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "window_start",
+          "window_end",
+          "traffic_group",
+          "recognition",
+          "funnel",
+          "album",
+          "feedback",
+          "community",
+          "costs"
+        ],
+        "additionalProperties": false
+      },
+      "UsageFeedbackResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/UsageFeedback"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "TrafficClassificationResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/TrafficClassification"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "ProductInsightsResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ProductInsights"
+          },
+          "trace_id": {
+            "type": "string"
           }
         },
         "required": [

@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "created_at": "2026-10-30T11:04:51.588Z",
-  "id": "2026-10-30T10-53-45-033Z-445716dc",
-  "package_id": "2026-10-30T11-04-51-588Z-d47f4787",
-  "source_set_hash": "9e820572b9557cada27d9b2444dec0f7e8c2764db6af3184f3005381dbe70a81",
-  "archive_path": "runtime/releases/one-tap-assets-2026-10-30T11-04-51-588Z-d47f4787/one-tap-assets-source-and-builds.zip",
-  "archive_sha256": "6619206990cf94a51e61dcf814625b1a9453b5ae85d68606c53e1328cb0d361f",
-  "archive_bytes": 107521061,
-  "source_files": 1481,
+  "created_at": "2026-10-30T11:42:36.023Z",
+  "id": "2026-10-30T11-32-53-302Z-d04b3218",
+  "package_id": "2026-10-30T11-42-36-023Z-a03c909b",
+  "source_set_hash": "c86577a4af193ecc0b1f27d8b052e1a0b9e814b7587fb00b5fe5ca027eb55d40",
+  "archive_path": "runtime/releases/one-tap-assets-2026-10-30T11-42-36-023Z-a03c909b/one-tap-assets-source-and-builds.zip",
+  "archive_sha256": "5b609193e3849b28bb90f6a9b4af3bc6ac7979ab7e66910c621611ad6624c4da",
+  "archive_bytes": 111033067,
+  "source_files": 1531,
   "build_files": 34,
   "components": [
     {
@@ -27,18 +27,18 @@
       "status": "NOT_RUN"
     }
   ],
-  "manifest_path": "runtime/releases/one-tap-assets-2026-10-30T11-04-51-588Z-d47f4787/manifest.json",
+  "manifest_path": "runtime/releases/one-tap-assets-2026-10-30T11-42-36-023Z-a03c909b/manifest.json",
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
   "full_product_verified": false,
   "production_admitted": false,
   "independent_archive_verification": {
     "status": "PASS",
-    "checked_at": "2026-10-30T11:05:40.840802+00:00",
+    "checked_at": "2026-10-30T11:44:36.227115+00:00",
     "method": "INDEPENDENT_PYTHON_ZIPFILE_CRC_AND_SHA256",
-    "archive_sha256": "6619206990cf94a51e61dcf814625b1a9453b5ae85d68606c53e1328cb0d361f",
-    "payload_files_verified": 1515,
-    "archive_entries": 1516,
+    "archive_sha256": "5b609193e3849b28bb90f6a9b4af3bc6ac7979ab7e66910c621611ad6624c4da",
+    "payload_files_verified": 1565,
+    "archive_entries": 1566,
     "workspace_payload_bytes_matched": true,
     "successful_build_components_verified": [
       "server",
@@ -47,48 +47,11 @@
     "private_runtime_and_credentials_excluded": true,
     "full_product_verified": false
   },
-  "repeat_packaging_verification": {
-    "status": "PASS",
-    "checked_at": "2026-10-30T11:05:51.171877+00:00",
-    "same_build_id": "2026-10-30T10-53-45-033Z-445716dc",
-    "same_source_set_hash": "9e820572b9557cada27d9b2444dec0f7e8c2764db6af3184f3005381dbe70a81",
-    "distinct_package_ids": [
-      "2026-10-30T11-03-52-187Z-017e75b5",
-      "2026-10-30T11-04-51-588Z-d47f4787"
-    ],
-    "first_archive_path": "runtime/releases/one-tap-assets-2026-10-30T11-03-52-187Z-017e75b5/one-tap-assets-source-and-builds.zip",
-    "first_archive_sha256": "b2300619c7f13422be85fbba99554be40e38f844d872095d9f8e64c95051431c",
-    "earlier_archive_path": "runtime/releases/one-tap-assets-2026-10-30T10-27-37-004Z-dbd6b329/one-tap-assets-source-and-builds.zip",
-    "earlier_archive_sha256": "f8d314db60cb4e4b6294bbc22e86be410c93fe4c98c658eed3005e172f142222",
-    "both_earlier_archives_retained_with_original_sha256": true,
-    "same_application_contract_and_build_payloads": true,
-    "changed_document_paths": [
-      "docs/verification/buyer-release-repack.json"
-    ],
-    "input_or_output_checks_weakened": false,
+  "build_verification": {
+    "typecheck_status": "PASS",
+    "selected_builds_passed": true,
+    "mini_program_rebuilds": "NOT_RUN",
     "full_suite_executed": false
   },
-  "build_verification": {
-    "typecheck_status": "TIMEOUT",
-    "typecheck_original_timeout_ms": 180000,
-    "selected_builds_passed": false,
-    "components": [
-      {
-        "name": "server",
-        "status": "PASS"
-      },
-      {
-        "name": "preview",
-        "status": "PASS"
-      },
-      {
-        "name": "alipay",
-        "status": "NOT_RUN"
-      },
-      {
-        "name": "douyin",
-        "status": "NOT_RUN"
-      }
-    ]
-  }
+  "cloud_deployed": false
 }

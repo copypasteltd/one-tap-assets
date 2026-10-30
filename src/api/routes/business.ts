@@ -19,6 +19,7 @@ import {originalPaymentAction} from '../modules/payment-actions.js';
 import { publicSampleMedia, withdrawPublicSamples } from '../modules/authorized-samples.js';
 import { getPreview } from '../modules/previews.js';
 import {recommendPresets} from '../modules/recommendations.js';
+import {getUsageFeedback,setUsageFeedback} from '../modules/usage-feedback.js';
 
 export interface BusinessContext { db: PoolClient; cfg: Config; principal: Principal | null; params: Record<string, string>; query: PageQuery; body: unknown }
 export type BusinessHandler = (ctx: BusinessContext) => Promise<unknown>;
@@ -26,6 +27,8 @@ const principal = (ctx: BusinessContext): Principal => { if (!ctx.principal) thr
 const param = (ctx: BusinessContext, name: string): string => ctx.params[name] ?? notFound();
 
 export const businessHandlers: Record<string, BusinessHandler> = {
+  getUsageFeedback:async c=>getUsageFeedback(c.db,principal(c),param(c,'order_id')),
+  setUsageFeedback:async c=>setUsageFeedback(c.db,principal(c),param(c,'order_id'),validate('UsageFeedbackRequest',c.body)),
   listPresetLicenses: async c => licenses(c.db, c.cfg, c.query),
   getPresetLicense: async c => license(c.db, param(c, 'license_id')),
   createProduct: async c => createProduct(c.db, principal(c)),

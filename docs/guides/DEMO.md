@@ -1,5 +1,9 @@
 # 页面与录制 / Screens and recording
 
+新增[自愿反馈与运营分群6截图/录屏](../media/usage-insights/README.md)：实际共享小程序界面，反馈为浏览器合成夹具；运营页真实HTTP/原生数据库配合合成元数据。原始录制摘要不改标，最终仅生成器变化且应用/产物字节相同的关系见[证据](../verification/feedback-insights-source.json)。
+
+以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
+
 最新素材纠错演示见[4张截图与录像/GIF](../media/support-repair/README.md)，实际原生五阶段更正与新文件交付；输入/语义/身份/计量合成。本次浏览器和服务已关闭，旧录制来源保持。
 
 [中文README](../../README.md) · [English README](../../README.en.md)

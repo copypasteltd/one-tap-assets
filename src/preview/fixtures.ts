@@ -56,6 +56,7 @@ const demoPack:DTO<'Deliverables'>={manifest_id:'demo_manifest',order_id:order.o
     deliverable_id:id!,slot_id:id!,kind:kind as 'image'|'video'|'copy',file_name:label!,mime_type:kind==='image'?'image/png':kind==='video'?'video/mp4':null,
     size_bytes:null,width:kind==='copy'?null:1080,height:kind==='image'?1440:kind==='video'?1920:null,fps:kind==='video'?30:null,duration_frames:kind==='video'?60:null,
     text:kind==='copy'?'让日常多一点清新的仪式感。白色泵头，琥珀色瓶身。此为合成演示文案，不包含功效承诺。':null,sha256:'a'.repeat(64)}))};
+let demoUsageFeedback:DTO<'UsageFeedback'>={order_id:demoPack.order_id,choice:null,revision:0,updated_at:null};
 function response(operation:string,path:string,body:any,key=''):unknown{
   switch(operation){
     case 'listCommunityComponents':if(!creativeScenario)throw new Error('Synthetic creator scenario only');return {items:creativeOptions,next_cursor:null};
@@ -105,6 +106,12 @@ function response(operation:string,path:string,body:any,key=''):unknown{
     }
     case 'getAnalysis':return {analysis_id:'demo_analysis',state:'READY'};
     case 'getDeliverables':return demoPack;
+    case 'getUsageFeedback':return demoUsageFeedback;
+    case 'setUsageFeedback':{
+      if(body.expected_revision!==demoUsageFeedback.revision)throw new Error('Synthetic feedback revision conflict');
+      if(body.choice!==demoUsageFeedback.choice)demoUsageFeedback={...demoUsageFeedback,choice:body.choice,revision:demoUsageFeedback.revision+1,updated_at:new Date().toISOString()};
+      return demoUsageFeedback;
+    }
     case 'createDownloadLink':return {deliverable_id:path.split('/').at(-2),url:path.includes('demo_video')?'/product-motion.mp4':'/product-card.png',expires_at:expires,ttl_seconds:300};
     case 'createSaveSession':if(!albumScenario)throw new Error('Synthetic album scenario only');return {save_session_id:'demo_save',...body,created_at:created};
     case 'recordSaveReceipt':if(!albumScenario)throw new Error('Synthetic album scenario only');return {receipt_id:`demo_receipt_${body.deliverable_id}_${body.attempt}`,accepted:true};

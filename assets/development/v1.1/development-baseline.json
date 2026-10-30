@@ -139,8 +139,8 @@
     "design_units": 23,
     "design_components": 22,
     "state_machines": 18,
-    "api_operations": 77,
-    "management_api_operations": 32,
+    "api_operations": 79,
+    "management_api_operations": 38,
     "work_packages": 20,
     "skills": 19,
     "skill_bundles": 14

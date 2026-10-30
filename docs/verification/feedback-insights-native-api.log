@@ -1,0 +1,17 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/integration/usage-insights.test.ts (4 tests) 10859ms
+   ✓ authorizes optional feedback, compares revisions, and lets withdrawal survive a late old write 1134ms
+ ✓ tests/integration/metrics.test.ts (3 tests) 2784ms
+
+ Test Files  2 passed (2)
+      Tests  7 passed (7)
+   Start at  19:22:18
+   Duration  36.90s (tests 40%, import 39%, transform 21%, worker 1%)
+
+     Import  154 modules were evaluated 296 times · 13.17s total, 39% of tracked time
+             ~6.32s faster with isolate: false — shared modules are evaluated once per worker instead of once per file
+             learn more: https://vitest.dev/guide/improving-performance#test-isolation
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/feedback-insights-2026-10-30T11-21-46-055Z-5be8bef8/api.json

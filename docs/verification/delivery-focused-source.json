@@ -1,38 +1,292 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T11:00:32.569094+00:00",
-  "strategy": "USER_REQUESTED_FAST_CORE_FLOW_AND_REPACK",
-  "source_set_hash": "9e820572b9557cada27d9b2444dec0f7e8c2764db6af3184f3005381dbe70a81",
-  "source_files": 475,
+  "checked_at": "2026-10-30T11:37:33.913298+00:00",
+  "status": "FOCUSED_SOURCE_IMPLEMENTED_NOT_FULL_PRODUCT_ACCEPTANCE",
+  "source_set_hash": "c86577a4af193ecc0b1f27d8b052e1a0b9e814b7587fb00b5fe5ca027eb55d40",
+  "source_files": 486,
   "runtime_contract_files": 42,
   "resource_files": 4,
-  "main_database_migrations": 32,
-  "source_snapshot": "docs/verification/buyer-release-build.json",
-  "build_snapshot": "docs/verification/buyer-release-build.json",
-  "functional_scope": "docs/实施/原生买家主流程核验与交付复打包-v1.0.md",
-  "native_buyer": {
-    "status": "PASS",
-    "passed": 1,
-    "failed": 0,
-    "not_selected": 36,
-    "test_body_timeout_ms": 240000,
-    "test_body_elapsed_ms": 214848,
-    "tested_source_set_hash": "e9b138c3350f5ca071371c9e26f74bf0c9a01a2920d431fadd918a862d177743",
-    "tested_source": "docs/verification/buyer-release-native-source.json",
-    "report": "docs/verification/buyer-release-native-api.json",
-    "log": "docs/verification/buyer-release-native-api.log",
-    "application_and_test_files_unchanged": true,
-    "changes_since_test": [
-      "scripts/delivery/package.ts"
+  "database_migrations": 33,
+  "business_operations": 79,
+  "management_operations": 38,
+  "logical_entities": 73,
+  "source_snapshot": "docs/delivery/current.json",
+  "build_snapshot": "docs/verification/feedback-insights-build.json",
+  "build_checks": [
+    {
+      "task": "typecheck",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+        "--noEmit"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 8968,
+      "log_path": "runtime/delivery-builds/2026-10-30T11-32-53-302Z-d04b3218/typecheck.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "build:server",
+      "command": "node --import tsx scripts/build-server.ts",
+      "argv": [
+        "--import",
+        "tsx",
+        "scripts/build-server.ts"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 324,
+      "log_path": "runtime/delivery-builds/2026-10-30T11-32-53-302Z-d04b3218/server.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T11-32-53-302Z-d04b3218\\runtime\\build\\preview",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
+        "build",
+        "--config",
+        "src/preview/vite.config.ts",
+        "--outDir",
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T11-32-53-302Z-d04b3218\\runtime\\build\\preview"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 644,
+      "log_path": "runtime/delivery-builds/2026-10-30T11-32-53-302Z-d04b3218/preview.log",
+      "log_sha256": "77517d4c3d9b24615105b48cbe15be361ce64b69b3fd5be982634d3d8bfcb63b"
+    }
+  ],
+  "build_logs": [
+    {
+      "path": "docs/verification/feedback-insights-build-1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/verification/feedback-insights-build-2.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/verification/feedback-insights-build-3.log",
+      "sha256": "77517d4c3d9b24615105b48cbe15be361ce64b69b3fd5be982634d3d8bfcb63b",
+      "bytes": 2546
+    }
+  ],
+  "functional_scope": [
+    "OPTIONAL_ORDER_USAGE_FEEDBACK_WITH_REVISION_AND_WITHDRAWAL",
+    "OWNER_GATE_AND_PRIVACY_REVOCATION_ERASURE",
+    "SERVER_MANAGED_TRAFFIC_CLASSIFICATION_WITH_SEPARATE_PERMISSION",
+    "RAW_MACHINE_PROFILE_FIELDS_DISTINCT_FROM_HYPOTHESES_CORRECTIONS_AND_ACCURACY",
+    "DEDUPLICATED_SERVER_RECEIVED_SAVES_WITH_LEGACY_MISSING_TIME",
+    "PAID_FIRST_DELIVERY_AND_NON_AUTHOR_DEDUPLICATED_COMMUNITY_REUSE",
+    "SETTLED_PLATFORM_RESERVATIONS_DISTINCT_FROM_ORDER_COHORT_COSTS",
+    "EXPLICIT_UNMEASURED_IMPRESSIONS_ACCURACY_AUTOMATION_AND_MANUAL_COST"
+  ],
+  "contract_compatibility": {
+    "original_commit": "cdaa60fc1056d023a7ce0e86447eab0f36ae3855",
+    "archived_originals": [
+      {
+        "path": "docs/verification/contracts-cdaa60f/endpoint-catalog.md",
+        "sha256": "e25a9515b35bc31b305cabadae319ac5026ccb4e190986c031ffb6e87a178012"
+      },
+      {
+        "path": "docs/verification/contracts-cdaa60f/endpoints.json",
+        "sha256": "719804c34046bd28edf4cf61b347890f2893d30391ad33f4beb2781cd5d35782"
+      },
+      {
+        "path": "docs/verification/contracts-cdaa60f/management-endpoints.json",
+        "sha256": "73af4e6dcb2dfdd62d7dcb97b2997e771fa815685fe25e46c29778bce7343f11"
+      },
+      {
+        "path": "docs/verification/contracts-cdaa60f/management-openapi.json",
+        "sha256": "74acdff4b9c16875fabe2444b642306dc012b235bae5bde04f6f2e3725532e22"
+      },
+      {
+        "path": "docs/verification/contracts-cdaa60f/openapi.json",
+        "sha256": "16b9b0a71d5ae7e82cdd17851f7f977e4166a3dd5129f0d68f84ab5ebd32ac53"
+      }
     ],
-    "current_source_relabelled_as_tested": false,
-    "native_postgresql_https_mcp_and_media_bytes": true,
-    "synthetic_model_recognition_payment_authorization_listening_and_isolation": true,
-    "fixture_mcp_bridge_matches_current_build": true,
-    "fixture_mcp_bridge_sha256": "a8b3d90fd9743d2f7f04d27829fa00ccf0460920b660c0d5cf64094da753a297"
+    "existing_schemas_paths_and_operations_unchanged": true,
+    "generator_check": {
+      "path": "docs/verification/feedback-insights-generator.json",
+      "sha256": "2681e403a6dc036d9866e1345e664d7bf44187ff4d7513d130d7ac31594599e4",
+      "bytes": 468
+    },
+    "initial_candidate_observation": "Four OpenAPI/catalog JSON artifacts and data model matched; three new management rows were missing from the current Markdown main catalog. Synchronized the catalog; exact final regeneration comparison passed."
   },
-  "attempt_history": "docs/verification/buyer-release-attempts.json",
-  "cleanup": "docs/verification/buyer-release-cleanup.json",
+  "focused_tests": [
+    {
+      "kind": "unit",
+      "passed": 8,
+      "failed": 0,
+      "original_source_set_hash": "f94399290dc574341c0e2ce9b371357cd8f95d84f9c6e842fa1e280d03fa35d6",
+      "original_source_unchanged": true,
+      "changed_since_execution": [
+        "scripts/record-usage-insights.ts",
+        "scripts/usage_insights_contracts.py",
+        "scripts/生成Codex开发契约.py",
+        "src/preview/fixtures.ts"
+      ],
+      "runtime_contract_files_changed_since_execution": [
+        "assets/development/v1.1/contracts/endpoint-catalog.md"
+      ],
+      "backend_shared_client_and_test_files_unchanged": true,
+      "original_files": [
+        {
+          "path": "docs/verification/feedback-insights-unit-source.json",
+          "sha256": "981ae71ea3bd7f7eb06b0fc1bebaafd01f050dd4e981f0cc2cf231b5703d76d5",
+          "bytes": 78985
+        },
+        {
+          "path": "docs/verification/feedback-insights-unit-result.json",
+          "sha256": "3e8eed99ee816fe26092768e6a3d539f986da189b44ba5336ab52299c0c8a87f",
+          "bytes": 1309
+        },
+        {
+          "path": "docs/verification/feedback-insights-unit-api.json",
+          "sha256": "9d7aec81eb21c1a88f4a8b035ed01f25fe024352a992a146a0da6bfa415865ec",
+          "bytes": 3749
+        },
+        {
+          "path": "docs/verification/feedback-insights-unit-api.log",
+          "sha256": "87d8a1a69f7d77d6662515ebd6c14d4d60e077cc8fb895646e8db6a22d34f500",
+          "bytes": 727
+        }
+      ]
+    },
+    {
+      "kind": "native",
+      "passed": 7,
+      "failed": 0,
+      "original_source_set_hash": "f94399290dc574341c0e2ce9b371357cd8f95d84f9c6e842fa1e280d03fa35d6",
+      "original_source_unchanged": true,
+      "changed_since_execution": [
+        "scripts/record-usage-insights.ts",
+        "scripts/usage_insights_contracts.py",
+        "scripts/生成Codex开发契约.py",
+        "src/preview/fixtures.ts"
+      ],
+      "runtime_contract_files_changed_since_execution": [
+        "assets/development/v1.1/contracts/endpoint-catalog.md"
+      ],
+      "backend_shared_client_and_test_files_unchanged": true,
+      "original_files": [
+        {
+          "path": "docs/verification/feedback-insights-native-source.json",
+          "sha256": "981ae71ea3bd7f7eb06b0fc1bebaafd01f050dd4e981f0cc2cf231b5703d76d5",
+          "bytes": 78985
+        },
+        {
+          "path": "docs/verification/feedback-insights-native-result.json",
+          "sha256": "1f23139fe138c7511ea465b02a8afec7e44f2b01ff49f572843bd67c3f992fc6",
+          "bytes": 1324
+        },
+        {
+          "path": "docs/verification/feedback-insights-native-api.json",
+          "sha256": "bb063bc06779ed126f83f9852bf3c50878a71f41c69231226694908fe9735a3f",
+          "bytes": 3368
+        },
+        {
+          "path": "docs/verification/feedback-insights-native-api.log",
+          "sha256": "1d6130a6909c81b2420e8daac3751c449c076965cd58a5fe40b1b9e9678c0181",
+          "bytes": 885
+        }
+      ]
+    }
+  ],
+  "browser_capture": "docs/media/usage-insights/capture-manifest.json",
+  "browser_checks": [
+    "ACTUAL_NATIVE_HTTP_AND_POSTGRES_AGGREGATES_KEEP_ALL_TRAFFIC_SUMMARY_SEPARATE_FROM_SERVER_CLASSIFIED_DETAILS",
+    "MISSING_IMPRESSIONS_ACCURACY_AUTOMATION_AND_HUMAN_COST_STAY_UNMEASURED",
+    "DISCONNECT_CLEARS_INSIGHTS_AND_NO_OPERATOR_TOKEN_IS_STORED",
+    "ACTUAL_SHARED_MINI_UI_SYNTHETIC_FEEDBACK_SELECTION_AND_WITHDRAWAL_LEAVE_ALBUM_SAVE_AVAILABLE",
+    "DESKTOP_AND_390PX_LAYOUTS_HAVE_NO_HORIZONTAL_OVERFLOW"
+  ],
+  "browser_original_source_set_hash": "9fabb5ab8209d3a1097a68149e0fed812e8ce75aef928f3fd478abc48c1c7756",
+  "browser_source_binding": {
+    "original_build_snapshot": "docs/verification/feedback-insights-captured-build.json",
+    "changed_since_capture": [
+      "scripts/usage_insights_contracts.py",
+      "scripts/生成Codex开发契约.py"
+    ],
+    "runtime_contract_files_changed_since_capture": [
+      "assets/development/v1.1/contracts/endpoint-catalog.md"
+    ],
+    "all_application_api_json_skill_font_and_successful_build_output_bytes_identical": true,
+    "original_capture_not_relabelled": true
+  },
+  "local_checks": {
+    "base": "runtime/test-results/feedback-insights-local-2026-10-30T11-28-33-877Z-77ed33fe",
+    "source_set_hash": "9fabb5ab8209d3a1097a68149e0fed812e8ce75aef928f3fd478abc48c1c7756",
+    "source_unchanged": true,
+    "commands": [
+      {
+        "task": "doctor",
+        "argv": [
+          "--import",
+          "tsx",
+          "scripts/delivery/doctor.ts"
+        ],
+        "status": "PASS",
+        "exit_code": 0,
+        "timeout_ms": 60000,
+        "elapsed_ms": 999,
+        "log_path": "runtime/test-results/feedback-insights-local-2026-10-30T11-28-33-877Z-77ed33fe/doctor.log",
+        "log_sha256": "e583fc56b2322854d926728f8be26e5473e83d5c8dcc854234c4d0eca8e0a350"
+      },
+      {
+        "task": "start-once",
+        "argv": [
+          "--import",
+          "tsx",
+          "scripts/delivery/start.ts",
+          "--once"
+        ],
+        "status": "PASS",
+        "exit_code": 0,
+        "timeout_ms": 60000,
+        "elapsed_ms": 5138,
+        "log_path": "runtime/test-results/feedback-insights-local-2026-10-30T11-28-33-877Z-77ed33fe/start.log",
+        "log_sha256": "5c34f98bdfd0617ddbe483d4919df5ae81b48e5436e5abd9792ec25ad26c5f2a"
+      }
+    ]
+  },
+  "local_files": [
+    {
+      "path": "docs/verification/feedback-insights-local-result.json",
+      "sha256": "04a919de76426fefe2200c945bb631b8d53c2c2297c61de86f23b372a9465d16",
+      "bytes": 1112
+    },
+    {
+      "path": "docs/verification/feedback-insights-local-doctor.log",
+      "sha256": "e583fc56b2322854d926728f8be26e5473e83d5c8dcc854234c4d0eca8e0a350",
+      "bytes": 2141
+    },
+    {
+      "path": "docs/verification/feedback-insights-local-start.log",
+      "sha256": "5c34f98bdfd0617ddbe483d4919df5ae81b48e5436e5abd9792ec25ad26c5f2a",
+      "bytes": 1566
+    },
+    {
+      "path": "docs/verification/feedback-insights-doctor.json",
+      "sha256": "e583fc56b2322854d926728f8be26e5473e83d5c8dcc854234c4d0eca8e0a350",
+      "bytes": 2141
+    }
+  ],
+  "local_source_binding": "Original 485-file source retained; final source changes only contract-generator Python sources, plus the Markdown endpoint catalog. Application/API JSON/migrations and all successful build outputs are byte-identical.",
+  "local_runner_initial_observation": "An initial private wrapper requested an unsupported common-command task and stopped before dispatch. The common command allowlist was unchanged; a local native-only wrapper then ran doctor/start once successfully.",
   "historical_evidence_unchanged": [
     {
       "path": "docs/verification/album-save-api.json",
@@ -73,6 +327,42 @@
     {
       "path": "docs/verification/audio-review-native-source.json",
       "sha256": "73f2c5ee3e832feba155b3cfb89bc362de626d231237ef0fd2bb501750a4191b"
+    },
+    {
+      "path": "docs/verification/buyer-release-attempts.json",
+      "sha256": "537035b5e92b1d581f6d9335a88924a12b6d5f353949b7aa23945c12e3b42ad3"
+    },
+    {
+      "path": "docs/verification/buyer-release-build.json",
+      "sha256": "a82dd46ed98e4b9ed7221175e6a19c2e431980ad25d677da362bd1e69545dab4"
+    },
+    {
+      "path": "docs/verification/buyer-release-cleanup.json",
+      "sha256": "84d4f134d48fae231ad442d62af33fee680b5719dff1bc8909bfd76e2ac31ad9"
+    },
+    {
+      "path": "docs/verification/buyer-release-layout-diagnostic.json",
+      "sha256": "e9a7b144feddbca0fb8ad5f79b117566fedcbcf7d9e314a357677868e1cd50b7"
+    },
+    {
+      "path": "docs/verification/buyer-release-native-api.json",
+      "sha256": "535002c72aec07944c5d09e32d39c9fd30e15c978d6ce96822d5edc95f3b9c77"
+    },
+    {
+      "path": "docs/verification/buyer-release-native-result.json",
+      "sha256": "5b953ecc41ed1287c509ab1586b5abccb777a97eaf8f5b96161c95aaa47d67b8"
+    },
+    {
+      "path": "docs/verification/buyer-release-native-source.json",
+      "sha256": "de42057b6fb78bc69434ba3491b4a2d920067ab65b3fa96e82399ecd7da9d980"
+    },
+    {
+      "path": "docs/verification/buyer-release-repack.json",
+      "sha256": "c76dc765a0e03035de1043ff313ecf919fc4cce55b0ec6ca0eaafb539826599e"
+    },
+    {
+      "path": "docs/verification/buyer-release-source.json",
+      "sha256": "4c145f1435d3e95332e0580ceeb0149b9618c3d1dbaa0eb8dc085ea672199fea"
     },
     {
       "path": "docs/verification/community-commerce-api.json",
@@ -477,6 +767,10 @@
     {
       "path": "docs/verification/delivery-focused-source-6e488cc.json",
       "sha256": "4f6df34fb709e128a3822c9c3fdef48857126ba3aa51a65488b8d72937b9851a"
+    },
+    {
+      "path": "docs/verification/delivery-focused-source-77cd845.json",
+      "sha256": "139ca3098b5f2f9d995a3821f3502382c8379fb9aa18ca2e4e234074df9527dd"
     },
     {
       "path": "docs/verification/delivery-focused-source-7e849e2.json",
@@ -1419,6 +1713,10 @@
       "sha256": "d60d9bfedd4d08991c5b8893b4c5b53192e9ee778210186288a005817602de48"
     },
     {
+      "path": "docs/verification/publication-77cd845.json",
+      "sha256": "577305d98a050841e7bb43cc8cbb50025373f668f2138d920b128e910281fdc5"
+    },
+    {
       "path": "docs/verification/publication-7e849e2.json",
       "sha256": "414a4698d2853d89a6d0ccdc4a605cede21b5e36c050d6cf461fc5b56fd0d328"
     },
@@ -1589,6 +1887,10 @@
     {
       "path": "docs/verification/repository-audit-723a727.json",
       "sha256": "3daf1bddfd95ec9c10f79934e15daf15b6d460b6f0589d21054132d33a221950"
+    },
+    {
+      "path": "docs/verification/repository-audit-77cd845.json",
+      "sha256": "1ee8041b7bd365b44289afb8fa73c44623a490e308858c048f12b7d2268348c3"
     },
     {
       "path": "docs/verification/repository-audit-7e849e2.json",
@@ -1875,126 +2177,27 @@
       "sha256": "fbf919d88e4b3bb6b2e1ff5993fb62a4dacfd78c559bd7232f0c780b28b41846"
     }
   ],
-  "build_checks": [
-    {
-      "task": "typecheck",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
-      "argv": [
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
-        "--noEmit"
-      ],
-      "shell": false,
-      "status": "TIMEOUT",
-      "exit_code": 1,
-      "signal": null,
-      "timeout_ms": 180000,
-      "elapsed_ms": 180984,
-      "log_path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/typecheck.log",
-      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
-      "task": "build:server",
-      "command": "node --import tsx scripts/build-server.ts",
-      "argv": [
-        "--import",
-        "tsx",
-        "scripts/build-server.ts"
-      ],
-      "shell": false,
-      "status": "PASS",
-      "exit_code": 0,
-      "signal": null,
-      "timeout_ms": 180000,
-      "elapsed_ms": 5291,
-      "log_path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/server.log",
-      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
-      "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T10-53-45-033Z-445716dc\\runtime\\build\\preview",
-      "argv": [
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
-        "build",
-        "--config",
-        "src/preview/vite.config.ts",
-        "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T10-53-45-033Z-445716dc\\runtime\\build\\preview"
-      ],
-      "shell": false,
-      "status": "PASS",
-      "exit_code": 0,
-      "signal": null,
-      "timeout_ms": 180000,
-      "elapsed_ms": 44795,
-      "log_path": "runtime/delivery-builds/2026-10-30T10-53-45-033Z-445716dc/preview.log",
-      "log_sha256": "bec25238dcccc5f62ad7690ef949fa1994592175a9b423f0ce2f6c1dae5214f0"
-    }
-  ],
-  "build_logs": [
-    {
-      "path": "docs/verification/buyer-release-build-1.log",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "bytes": 0
-    },
-    {
-      "path": "docs/verification/buyer-release-build-2.log",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "bytes": 0
-    },
-    {
-      "path": "docs/verification/buyer-release-build-3.log",
-      "sha256": "bec25238dcccc5f62ad7690ef949fa1994592175a9b423f0ce2f6c1dae5214f0",
-      "bytes": 3268
-    }
-  ],
-  "components": [
-    {
-      "name": "server",
-      "status": "PASS"
-    },
-    {
-      "name": "preview",
-      "status": "PASS"
-    },
-    {
-      "name": "alipay",
-      "status": "NOT_RUN"
-    },
-    {
-      "name": "douyin",
-      "status": "NOT_RUN"
-    }
-  ],
-  "compiled_output_files_identical_to_prior": 34,
-  "local_startup_rerun": false,
-  "prior_identical_output_startup_evidence": [
-    "docs/verification/profile-correction-backend.json",
-    "docs/verification/profile-correction-preview.json"
-  ],
-  "repack_first_archive": "docs/verification/buyer-release-repack.json",
-  "repack_final_verification": "docs/delivery/package.json",
-  "final_package_pointer_excluded_from_zip_to_avoid_self_reference": true,
-  "existing_media_files_verified": 138,
-  "new_media_files_verified": 0,
-  "total_media_files": 138,
-  "browser_used": false,
-  "prior_ui_captures_relabelled": false,
+  "historical_payload_files_preserved": 765,
+  "new_media_files": 9,
+  "historical_media_files": 138,
+  "media_files": 147,
+  "frozen_design_files": 48,
+  "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
   "full_suite_executed": false,
+  "native_mini_builds_and_devices": "NOT_RUN",
+  "real_service_or_payment_verified": false,
+  "production_isolation_verified": false,
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "unresolved_earlier_regression": {
-    "original_timeout_not_reproduced_in_this_run": true,
-    "native_crash_not_reproduced_in_this_run": true,
-    "native_crash_root_cause_confirmed": false,
-    "prior_observation": "docs/verification/profile-correction-native-buyer-observation.json",
-    "old_synthetic_schema_cleanup_now_verified": true
-  },
-  "limitations": [
-    "Only the official PER_SHOT_AI buyer case was selected; the remaining 36 cases were not run. Real models/rights/paid users/audio quality/isolation are not established.",
-    "Current typecheck reached its original 180000ms cap. The timeout is retained; selected_builds_passed remains false. Server and preview builds passed; their 34 outputs exactly match the previous successful build.",
-    "The native buyer pass retains its original source snapshot. Only the release script changed afterwards; the current typecheck/build/package checks have their own current snapshot.",
-    "Real services/sales, native-device and production isolation/admission, complete F17, Plus/cloud and all 58 acceptance requirements remain pending."
-  ],
-  "canonical_buyer_release_provenance": "docs/verification/buyer-release-source.json"
+  "pending": [
+    "RELIABLE_RECOMMENDATION_IMPRESSION_AND_CLICK_MEASUREMENT",
+    "GROUNDED_RECOGNITION_ACCURACY_DATASET",
+    "VERIFIED_FULL_SELF_SERVICE_AND_EXTERNAL_USER_QUALIFICATION",
+    "MANUAL_REVIEW_AND_SUPPORT_COST_LEDGER",
+    "REAL_SERVICES_PAYMENT_AND_PRODUCTION_ISOLATION_ADMISSION",
+    "BOTH_MINI_PROGRAM_DEVICES",
+    "PLUS_CLOUD_AND_COMPLETE_REQUIREMENTS_ACCEPTANCE",
+    "EARLIER_NATIVE_CRASH_ROOT_CAUSE_AND_LONG_TERM_STABILITY"
+  ]
 }

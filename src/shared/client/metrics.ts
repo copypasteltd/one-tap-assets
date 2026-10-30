@@ -22,6 +22,32 @@ function summary(raw:unknown,range:MetricsRange):DTO<'MetricsSummary'> {
     throw new ClientError('MANAGEMENT_RESPONSE_INVALID','统计回执与原时间窗口不一致，请重新读取');
   return s;
 }
+type Group=DTO<'ProductInsights'>['traffic_group'];
+const insightFields={recognition:['jobs','ready_jobs','blocked_jobs','failed_jobs','attempts','machine_profiles','profiles_with_observed_fields','observed_fields','ocr_fields','hypothesis_fields','unknown_fields','conflicted_fields','evidenced_field_share','accuracy'],
+  funnel:['selected_product_presets','paid_orders','paid_buyers','first_deliveries','recommendation_impressions','recommendation_clicks','automatic_success_ratio'],album:['saved_files','saved_orders','unwindowed_receipts'],
+  feedback:['planned_use','used','needs_adjustment','withdrawn'],community:['published_versions','effective_reuses'],costs:['currency','order_settled_micro','platform_settled_micro','platform_unresolved_reservations','platform_unclassified_reservations','review_support_micro','complete_cost_micro']};
+function insights(raw:unknown,range:MetricsRange,group:Group):DTO<'ProductInsights'>{
+  const value=raw as DTO<'ProductInsights'>|null;
+  const fail=()=>{throw new ClientError('MANAGEMENT_RESPONSE_INVALID','运营数据与原窗口或流量分组不一致，请重新读取');};
+  if(!value||typeof value!=='object'||Object.keys(value).length!==9||Object.keys(value).some(k=>!['window_start','window_end','traffic_group',...Object.keys(insightFields)].includes(k))
+    ||value.window_start!==range.window_start||value.window_end!==range.window_end||value.traffic_group!==group)fail();
+  const s=value!;
+  for(const [name,keys] of Object.entries(insightFields)){
+    const section=(s as unknown as Record<string,Record<string,unknown>>)[name];
+    if(!section||typeof section!=='object'||Object.keys(section).length!==keys.length||Object.keys(section).some(k=>!keys.includes(k)))fail();
+    for(const key of keys){const n=section![key];
+      if(['accuracy','recommendation_impressions','recommendation_clicks','automatic_success_ratio','review_support_micro','complete_cost_micro'].includes(key)){if(n!==null)fail();}
+      else if(key==='currency'){if(n!=='CNY')fail();}
+      else if(key==='evidenced_field_share'){if(n!==null&&(typeof n!=='number'||!Number.isFinite(n)||n<0||n>1))fail();}
+      else if(typeof n!=='number'||!Number.isSafeInteger(n)||n<0||n>(key.endsWith('_micro')?Number.MAX_SAFE_INTEGER:2147483647))fail();
+    }
+  }
+  const r=s.recognition,total=r.observed_fields+r.ocr_fields+r.hypothesis_fields+r.unknown_fields+r.conflicted_fields;
+  if((total===0?r.evidenced_field_share!==null:r.evidenced_field_share===null||Math.abs(r.evidenced_field_share-(r.observed_fields+r.ocr_fields)/total)>1e-12)
+    ||r.ready_jobs+r.blocked_jobs+r.failed_jobs>r.jobs||r.machine_profiles>r.ready_jobs||r.profiles_with_observed_fields>r.machine_profiles
+    ||s.funnel.first_deliveries>s.funnel.paid_orders||s.funnel.paid_buyers>s.funnel.paid_orders||s.album.saved_orders>s.album.saved_files)fail();
+  return s;
+}
 /** Read-only, fixed same-origin endpoint. Tokens and results are never put in
  * browser storage. A disconnected or superseded request cannot repopulate UI. */
 export class MetricsClient {
@@ -30,17 +56,24 @@ export class MetricsClient {
   connect(token:string){this.disconnect();if(!token.trim())throw new ClientError('MANAGEMENT_LOGIN_REQUIRED','请输入独立运营访问令牌');this.token=token.trim();}
   disconnect(){this.generation++;this.active?.abort();this.active=undefined;this.token='';}
   async read(start:string,end:string):Promise<DTO<'MetricsSummary'>> {
+    const range=metricsRange(start,end);return summary(await this.request('/metrics/summary',{...range}),range);
+  }
+  async readInsights(start:string,end:string,group:Group='ALL'):Promise<DTO<'ProductInsights'>>{
+    if(!['ALL','UNCLASSIFIED','INTERNAL_TEST','EXTERNAL'].includes(group))throw new ClientError('METRICS_GROUP_INVALID','请选择有效流量分组');
+    const range=metricsRange(start,end);return insights(await this.request('/metrics/product-insights',{...range,traffic_group:group}),range,group);
+  }
+  private async request(path:string,query:Record<string,string>):Promise<unknown>{
     if(!this.token)throw new ClientError('MANAGEMENT_LOGIN_REQUIRED','请先连接运营账户');
-    const range=metricsRange(start,end),generation=++this.generation;this.active?.abort();
+    const generation=++this.generation;this.active?.abort();
     const controller=new AbortController();this.active=controller;const timer=setTimeout(()=>controller.abort(),20000);
     const current=()=>{if(generation!==this.generation)throw new ClientError('MANAGEMENT_ACCOUNT_CHANGED','运营连接或查询窗口已变化，请重新读取');};
     try{
-      const response=await this.transport(`/v1/internal/p01/metrics/summary?${new URLSearchParams({...range})}`,{method:'GET',credentials:'omit',redirect:'error',cache:'no-store',
+      const response=await this.transport(`/v1/internal/p01${path}?${new URLSearchParams(query)}`,{method:'GET',credentials:'omit',redirect:'error',cache:'no-store',
         headers:{Authorization:`Bearer ${this.token}`},signal:controller.signal});current();
       const raw=await response.text();current();if(raw.length>16384)throw new ClientError('MANAGEMENT_RESPONSE_INVALID','统计回执超过展示范围，请缩小窗口');
       let value:{data?:unknown;code?:string;message?:string};try{value=JSON.parse(raw);}catch{throw new ClientError('MANAGEMENT_RESPONSE_INVALID','未收到有效统计回执，请重新读取');}
       if(!response.ok)throw new ClientError(value.code??'MANAGEMENT_REQUEST_FAILED',value.message??'统计读取失败，请稍后重试',response.status);
-      return summary(value.data,range);
+      return value.data;
     }catch(error){current();if(error instanceof ClientError)throw error;throw new ClientError('NETWORK_UNKNOWN','统计暂未读到，请重试原时间窗口');}
     finally{clearTimeout(timer);if(this.active===controller)this.active=undefined;}
   }

@@ -23,9 +23,10 @@ import {storage,type ObjectStorage} from '../storage/storage.js';
 import {supportRepairContext,supportRepairImage} from '../modules/support-repair.js';
 import {getPublicationReview,readPublicationReviewMedia,readPublicationRightsEvidence} from '../modules/review-desk.js';
 import {operationalSummary} from '../modules/metrics.js';
+import {productInsights,trafficClassification} from '../modules/product-insights.js';
 
 interface Endpoint { method: string; path: string; operation_id: string; permission: string; request_schema: SchemaName | null; response_schema: SchemaName }
-interface Context { db: Db; cfg: Config; store:ObjectStorage; admin: ManagementPrincipal; params: Record<string, string>; body: unknown; traceId: string; query: { cursor?: string; limit?: string; state?:string;window_start?:unknown;window_end?:unknown } }
+interface Context { db: Db; cfg: Config; store:ObjectStorage; admin: ManagementPrincipal; params: Record<string, string>; body: unknown; traceId: string; query: { cursor?: string; limit?: string; state?:string;window_start?:unknown;window_end?:unknown;traffic_group?:unknown } }
 async function record<T>(db: Db, table: Table, resourceId: string, lock = false): Promise<RecordRow<T>> { return (await db.query<RecordRow<T>>(`SELECT * FROM ${table} WHERE id=$1${lock ? ' FOR UPDATE' : ''}`, [resourceId])).rows[0] ?? notFound(); }
 async function action(c: Context, target: string, operation: string, state: DTO<'ManagementResult'>['state'] = 'ACCEPTED', reasons: string[] = []): Promise<DTO<'ManagementResult'>> {
   const data: DTO<'ManagementResult'> = { action_id: id('action'), resource_id: target, state, reason_codes: reasons, updated_at: iso() };
@@ -44,6 +45,9 @@ async function lockActiveCommunityLicense(c: Context): Promise<void> {
   if (source?.source === 'COMMUNITY') requireThat((await license(c.db, source.license_version, true)).state === 'ACTIVE', 'LICENSE_NOT_AVAILABLE', '当前许可已停止用于新交易', 422);
 }
 const handlers: Record<string, (c: Context) => Promise<unknown>> = {
+  readProductInsights:async c=>{const data=await productInsights(c.db,c.query);await audit(c.db,null,c.admin.actor,'PRODUCT_INSIGHTS_READ','aggregate',{window_start:data.window_start,window_end:data.window_end,traffic_group:data.traffic_group},c.traceId);return data;},
+  getTrafficClassification:async c=>{const data=await trafficClassification(c.db,c.params.tenant_id!,c.params.user_id!);await audit(c.db,null,c.admin.actor,'TRAFFIC_CLASSIFICATION_READ',hash(c.params),{},c.traceId);return data;},
+  setTrafficClassification:async c=>trafficClassification(c.db,c.params.tenant_id!,c.params.user_id!,validate('TrafficClassificationRequest',c.body)),
   getPublicationReview:async c=>getPublicationReview(c.db,c.admin,c.params.publication_id!,c.traceId),
   readPublicationReviewMedia:async c=>readPublicationReviewMedia(c.db,c.cfg,c.store,c.admin,c.params.publication_id!,c.params.sample_id!,c.params.item_id!,c.traceId),
   readPublicationRightsEvidence:async c=>readPublicationRightsEvidence(c.db,c.store,c.admin,c.params.publication_id!,c.params.rights_record_id!,c.params.asset_id!,c.traceId),

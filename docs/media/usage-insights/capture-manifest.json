@@ -1,0 +1,111 @@
+{
+  "captured_at": "2026-10-30T11:27:51.223Z",
+  "type": "ACTUAL_UI_NATIVE_METRICS_AND_BROWSER_SYNTHETIC_USAGE_FEEDBACK",
+  "metrics_source": "ISOLATED_NATIVE_POSTGRESQL_SYNTHETIC_ORDER_AND_OPERATOR_METADATA",
+  "feedback_source": "EXPLICIT_IN_MEMORY_BROWSER_FIXTURE_NOT_BACKEND_OR_DEVICE_EVIDENCE",
+  "source_set_hash": "9fabb5ab8209d3a1097a68149e0fed812e8ce75aef928f3fd478abc48c1c7756",
+  "build_root": "runtime/delivery-builds/2026-10-30T11-24-42-668Z-f762581c/runtime/build",
+  "native_mini_device_verified": false,
+  "real_payment_verified": false,
+  "real_provider_cost_verified": false,
+  "production_staff_identity_verified": false,
+  "production_admitted": false,
+  "browser_tabs_closed": true,
+  "owned_api_and_database_pool_closed": true,
+  "browser_errors": [],
+  "external_network_requests": [],
+  "checks": [
+    "ACTUAL_NATIVE_HTTP_AND_POSTGRES_AGGREGATES_KEEP_ALL_TRAFFIC_SUMMARY_SEPARATE_FROM_SERVER_CLASSIFIED_DETAILS",
+    "MISSING_IMPRESSIONS_ACCURACY_AUTOMATION_AND_HUMAN_COST_STAY_UNMEASURED",
+    "DISCONNECT_CLEARS_INSIGHTS_AND_NO_OPERATOR_TOKEN_IS_STORED",
+    "ACTUAL_SHARED_MINI_UI_SYNTHETIC_FEEDBACK_SELECTION_AND_WITHDRAWAL_LEAVE_ALBUM_SAVE_AVAILABLE",
+    "DESKTOP_AND_390PX_LAYOUTS_HAVE_NO_HORIZONTAL_OVERFLOW"
+  ],
+  "screenshots": [
+    {
+      "page": "01-all-traffic",
+      "path": "docs/media/usage-insights/01-all-traffic.png"
+    },
+    {
+      "page": "02-test-cohort",
+      "path": "docs/media/usage-insights/02-test-cohort.png"
+    },
+    {
+      "page": "03-external-empty",
+      "path": "docs/media/usage-insights/03-external-empty.png"
+    },
+    {
+      "page": "04-narrow-insights",
+      "path": "docs/media/usage-insights/04-narrow-insights.png"
+    },
+    {
+      "page": "05-feedback-selected",
+      "path": "docs/media/usage-insights/05-feedback-selected.png"
+    },
+    {
+      "page": "06-feedback-withdrawn",
+      "path": "docs/media/usage-insights/06-feedback-withdrawn.png"
+    }
+  ],
+  "recording": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 1000
+      }
+    ],
+    "format": {
+      "duration": "9.840000"
+    }
+  },
+  "files": [
+    {
+      "path": "docs/media/usage-insights/01-all-traffic.png",
+      "bytes": 366765,
+      "sha256": "7de363bb88a56f4b8857819eeba9ffaa7962b6046fba8aecbdbba06890d5efc2"
+    },
+    {
+      "path": "docs/media/usage-insights/02-test-cohort.png",
+      "bytes": 362581,
+      "sha256": "72f0b9671586ac84fcee1f363087b7fb1c3dc1a352bc319d509a1ee680b35b62"
+    },
+    {
+      "path": "docs/media/usage-insights/03-external-empty.png",
+      "bytes": 362690,
+      "sha256": "46b71c086bc1fd2ca43c08048a4e3c3ebaa35d56cc6ffd08b2e1213dd8de9810"
+    },
+    {
+      "path": "docs/media/usage-insights/04-narrow-insights.png",
+      "bytes": 350108,
+      "sha256": "7e10133a2e8ab3cfc89d021cf540a712889e153ad3f9dbc4682614fd70c4306d"
+    },
+    {
+      "path": "docs/media/usage-insights/05-feedback-selected.png",
+      "bytes": 166614,
+      "sha256": "9d609a831790b8fe11797918c0b579f1447b6bcf3d9ea6e11d98e02662e02dfc"
+    },
+    {
+      "path": "docs/media/usage-insights/06-feedback-withdrawn.png",
+      "bytes": 161499,
+      "sha256": "d6fc5606e7c525c5aacfd8b79ba7803fb8ddb015d6eaeece2059ddef231e9d12"
+    },
+    {
+      "path": "docs/media/usage-insights/walkthrough.webm",
+      "bytes": 1049184,
+      "sha256": "a8d4042c242d7cb70fd6723a007f0321a727e7c2d6a4e3c45221bc39153b319e"
+    },
+    {
+      "path": "docs/media/usage-insights/walkthrough.mp4",
+      "bytes": 239915,
+      "sha256": "4ec423f218f0f249d3142b08148cc113f9ef3092caff60e5bcfd1b165df1bd2d"
+    },
+    {
+      "path": "docs/media/usage-insights/walkthrough.gif",
+      "bytes": 163323,
+      "sha256": "420f5c6be905e9d56762be2d8b8680fbd11a3f7335a799ec4320dba6d3804a07"
+    }
+  ]
+}

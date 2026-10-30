@@ -1,0 +1,36 @@
+{
+  "base": "runtime/test-results/feedback-insights-local-2026-10-30T11-28-33-877Z-77ed33fe",
+  "source_set_hash": "9fabb5ab8209d3a1097a68149e0fed812e8ce75aef928f3fd478abc48c1c7756",
+  "source_unchanged": true,
+  "commands": [
+    {
+      "task": "doctor",
+      "argv": [
+        "--import",
+        "tsx",
+        "scripts/delivery/doctor.ts"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_ms": 60000,
+      "elapsed_ms": 999,
+      "log_path": "runtime/test-results/feedback-insights-local-2026-10-30T11-28-33-877Z-77ed33fe/doctor.log",
+      "log_sha256": "e583fc56b2322854d926728f8be26e5473e83d5c8dcc854234c4d0eca8e0a350"
+    },
+    {
+      "task": "start-once",
+      "argv": [
+        "--import",
+        "tsx",
+        "scripts/delivery/start.ts",
+        "--once"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_ms": 60000,
+      "elapsed_ms": 5138,
+      "log_path": "runtime/test-results/feedback-insights-local-2026-10-30T11-28-33-877Z-77ed33fe/start.log",
+      "log_sha256": "5c34f98bdfd0617ddbe483d4919df5ae81b48e5436e5abd9792ec25ad26c5f2a"
+    }
+  ]
+}

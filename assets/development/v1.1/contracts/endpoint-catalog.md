@@ -137,3 +137,18 @@
 | GET /publications/{publication_id} | getPublicationReview | moderator:review |
 | GET /publications/{publication_id}/samples/{sample_id}/media/{item_id} | readPublicationReviewMedia | moderator:review |
 | GET /publications/{publication_id}/rights/{rights_record_id}/evidence/{asset_id} | readPublicationRightsEvidence | moderator:review |
+| GET /metrics/product-insights | readProductInsights | metrics:read |
+| GET /metrics/accounts/{tenant_id}/{user_id} | getTrafficClassification | metrics:classify |
+| PUT /metrics/accounts/{tenant_id}/{user_id} | setTrafficClassification | metrics:classify |
+
+## 自愿反馈与运营分群增补（兼容扩展）
+
+原目录状态标签保留为设计合同；源码和验证状态见实施文档。PUT 自愿反馈使用 expected_revision 比较更新，无通用幂等缓存，避免撤回后从缓存重放个人选择。
+
+| 方法/路径 | operationId | 请求 → 响应 | 权限 |
+| --- | --- | --- | --- |
+| GET /orders/{order_id}/usage-feedback | getUsageFeedback | 无 → UsageFeedback | 本人订单 |
+| PUT /orders/{order_id}/usage-feedback | setUsageFeedback | UsageFeedbackRequest → UsageFeedback | 本人订单 |
+| GET /metrics/product-insights | readProductInsights | 无 → ProductInsights | metrics:read |
+| GET /metrics/accounts/{tenant_id}/{user_id} | getTrafficClassification | 无 → TrafficClassification | metrics:classify |
+| PUT /metrics/accounts/{tenant_id}/{user_id} | setTrafficClassification | TrafficClassificationRequest → TrafficClassification | metrics:classify |

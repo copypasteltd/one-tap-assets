@@ -7,6 +7,7 @@ import {ClientError} from '../client/api';
 import {client} from './runtime';
 import {Action,Notice,Panel,ResourceState,navigate,useAction,useResource} from './base';
 import {LimitedRevision} from './revision';
+import {UsageFeedback} from './usage-feedback';
 
 const states={PENDING:'等待保存',DOWNLOADING:'下载中',SAVING:'正在写入相册',SAVED:'已保存',FAILED:'保存未完成',UNKNOWN:'需要核对相册'};
 const errors:Record<string,string>={ALBUM_PERMISSION_DENIED:'请在系统设置中允许相册权限后再重试。',PERMISSION_DENIED:'请在系统设置中允许相册权限后再重试。',
@@ -73,6 +74,7 @@ function PackContents({pack,buyer,reload}:{pack:DTO<'Deliverables'>;buyer:string
             setLinks(old=>({...old,[item.deliverable_id]:link}));
           })}>{links[item.deliverable_id]?'重新获取查看链接':'查看素材'}</Action></>}
     </Panel>)}
+    <UsageFeedback orderId={pack.order_id} buyer={buyer}/>
     <LimitedRevision key={pack.manifest_id} pack={pack} onDelivered={reload}/>
     <Action secondary onClick={()=>navigate('help',{order_id:pack.order_id})}>素材问题反馈</Action>
   </>;

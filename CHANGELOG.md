@@ -1,5 +1,18 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 — 自愿反馈、服务端分群与运营明细
+
+- 领取页加入可选择、更改和撤回的自愿使用反馈；所有权/已付首版门槛、修订比较、删除清除和防复活。
+- 运营新增独立分群API及查看界面，统计原始机器字段、方案、交付、服务器保存、非作者去重复用和实际平台费用；未测量指标保留null。
+- 新增033迁移、2业务/3管理操作，生成源、契约、数据目录和调用方同步；原始契约逐字节留档。
+- 8客户端、7原生API、5浏览器检查及类型/服务端/网页/本地启动通过；不运行全面测试或双端真机。
+- 六截图与MP4/WebM/GIF、双语README、口径/恢复/权限说明及交付包同步；真实服务/销售和完整准入保持未开启。
+- [实现与使用](docs/实施/自愿使用反馈与分群运营统计-v1.0.md) · [准确证据](docs/verification/feedback-insights-source.json)。
+
+Optional usage feedback and server-classified operations data now have source, APIs, privacy gates and recorded UI. Missing measurements remain explicit; historical evidence retains its original snapshot.
+
+以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
+
 ## 2026-10-30 — 原生买家流程核验与交付复打包
 
 - 原官方PER_SHOT_AI买家用例在原240秒内完成新规划、报价、付款确认、实际媒体、后期、QC、双复核、私有下载与实例释放；1通过/36未选，保留原执行摘要。

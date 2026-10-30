@@ -699,6 +699,50 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/metrics/product-insights": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 读取分群识别、保存、反馈、社区复用与已入账成本
+         * @description 管理域独立audience与角色，所有访问/动作审计；产品会话不得提升权限。审批不能覆盖缺失的能力/价格/权利证据。
+         */
+        get: operations["readProductInsights"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/metrics/accounts/{tenant_id}/{user_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 读取服务端流量标记
+         * @description 管理域独立audience与角色，所有访问/动作审计；产品会话不得提升权限。审批不能覆盖缺失的能力/价格/权利证据。
+         */
+        get: operations["getTrafficClassification"];
+        /**
+         * 标记内部测试、外部或未分类流量；不是客户真实性认证
+         * @description 管理域独立audience与角色，所有访问/动作审计；产品会话不得提升权限。审批不能覆盖缺失的能力/价格/权利证据。
+         */
+        put: operations["setTrafficClassification"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -2506,6 +2550,97 @@ export interface components {
             data: components["schemas"]["PublicationReviewMedia"];
             trace_id: string;
         };
+        /** @enum {string} */
+        UsageChoice: "PLANNED_USE" | "USED" | "NEEDS_ADJUSTMENT";
+        UsageFeedback: {
+            order_id: string;
+            choice: components["schemas"]["UsageChoice"] | null;
+            revision: number;
+            updated_at: string | null;
+        };
+        UsageFeedbackRequest: {
+            choice: components["schemas"]["UsageChoice"] | null;
+            expected_revision: number;
+        };
+        /** @enum {string} */
+        TrafficGroup: "UNCLASSIFIED" | "INTERNAL_TEST" | "EXTERNAL";
+        TrafficClassificationRequest: {
+            traffic_group: components["schemas"]["TrafficGroup"];
+        };
+        TrafficClassification: {
+            traffic_group: components["schemas"]["TrafficGroup"];
+            updated_at: string | null;
+        };
+        ProductInsights: {
+            /** Format: date-time */
+            window_start: string;
+            /** Format: date-time */
+            window_end: string;
+            /** @enum {string} */
+            traffic_group: "ALL" | "UNCLASSIFIED" | "INTERNAL_TEST" | "EXTERNAL";
+            recognition: {
+                jobs: number;
+                ready_jobs: number;
+                blocked_jobs: number;
+                failed_jobs: number;
+                attempts: number;
+                machine_profiles: number;
+                profiles_with_observed_fields: number;
+                observed_fields: number;
+                ocr_fields: number;
+                hypothesis_fields: number;
+                unknown_fields: number;
+                conflicted_fields: number;
+                evidenced_field_share: number | null;
+                accuracy: null;
+            };
+            funnel: {
+                selected_product_presets: number;
+                paid_orders: number;
+                paid_buyers: number;
+                first_deliveries: number;
+                recommendation_impressions: null;
+                recommendation_clicks: null;
+                automatic_success_ratio: null;
+            };
+            album: {
+                saved_files: number;
+                saved_orders: number;
+                unwindowed_receipts: number;
+            };
+            feedback: {
+                planned_use: number;
+                used: number;
+                needs_adjustment: number;
+                withdrawn: number;
+            };
+            community: {
+                published_versions: number;
+                effective_reuses: number;
+            };
+            costs: {
+                /** @constant */
+                currency: "CNY";
+                order_settled_micro: number;
+                platform_settled_micro: number;
+                platform_unresolved_reservations: number;
+                platform_unclassified_reservations: number;
+                review_support_micro: null;
+                complete_cost_micro: null;
+            };
+        };
+        UsageFeedbackResponse: {
+            data: components["schemas"]["UsageFeedback"];
+            trace_id: string;
+        };
+        TrafficClassificationResponse: {
+            data: components["schemas"]["TrafficClassification"];
+            trace_id: string;
+        };
+        ProductInsightsResponse: {
+            data: components["schemas"]["ProductInsights"];
+            trace_id: string;
+        };
     };
     responses: never;
     parameters: {
@@ -3710,6 +3845,109 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PublicationReviewMediaResponse"];
+                };
+            };
+            /** @description 鉴权/状态/证据/依赖错误 */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    readProductInsights: {
+        parameters: {
+            query: {
+                window_start: string;
+                window_end: string;
+                traffic_group?: "ALL" | "UNCLASSIFIED" | "INTERNAL_TEST" | "EXTERNAL";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 持久化的动作/资源结果，异步进展通过返回ID查询；非真实能力证明 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductInsightsResponse"];
+                };
+            };
+            /** @description 鉴权/状态/证据/依赖错误 */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    getTrafficClassification: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                tenant_id: string;
+                user_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 持久化的动作/资源结果，异步进展通过返回ID查询；非真实能力证明 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TrafficClassificationResponse"];
+                };
+            };
+            /** @description 鉴权/状态/证据/依赖错误 */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    setTrafficClassification: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": components["parameters"]["IdempotencyKey"];
+            };
+            path: {
+                tenant_id: string;
+                user_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TrafficClassificationRequest"];
+            };
+        };
+        responses: {
+            /** @description 持久化的动作/资源结果，异步进展通过返回ID查询；非真实能力证明 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TrafficClassificationResponse"];
                 };
             };
             /** @description 鉴权/状态/证据/依赖错误 */

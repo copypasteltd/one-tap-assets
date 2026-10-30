@@ -11,6 +11,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from usage_insights_contracts import extend_usage_insights_contract, extend_usage_insights_data, usage_insights_catalog
 
 sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parents[1]
@@ -774,7 +775,8 @@ def main() -> None:
         document["components"]["parameters"]["IdempotencyKey"]["schema"] = {
             "type": "string", "minLength": 8, "maxLength": 128,
             "pattern": "^[A-Za-z0-9._:-]+$"}
-    entities = read(OLD / "data-model.json"); extend_data(entities)
+    extend_usage_insights_contract(api, admin, business_endpoints, admin_endpoints)
+    entities = read(OLD / "data-model.json"); extend_data(entities); extend_usage_insights_data(entities)
     save("state-machines.json", machines); save("data-model.json", entities)
     save("work-packages.json", extend_work(reqs, dmap, pages))
     save("contracts/openapi.json", api); save("contracts/management-openapi.json", admin)
@@ -837,6 +839,7 @@ def main() -> None:
     catalog += "\n## Codex管理增补 v1.1\n\n| 方法/路径 | operationId | 权限 |\n| --- | --- | --- |\n"
     legacy_admin_ids = {e["operation_id"] for e in read(OLD / "contracts/management-endpoints.json")["endpoints"]}
     catalog += "\n".join(f"| {e['method']} {e['path']} | {e['operation_id']} | {e['permission']} |" for e in admin_endpoints["endpoints"] if e["operation_id"] not in legacy_admin_ids)
+    catalog += usage_insights_catalog(business_endpoints, admin_endpoints)
     write("contracts/endpoint-catalog.md", catalog)
     write("README.md", """# 一品成片 · 开发契约 v1.1
 

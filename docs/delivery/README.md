@@ -1,5 +1,9 @@
 # 源码交付与快速启动 / Source delivery and quick start
 
+2026-10-30快速收口：[自愿反馈与分群统计](../实施/自愿使用反馈与分群运营统计-v1.0.md) · [准确证据](../verification/feedback-insights-source.json)。领取后可选、更改与撤回反馈，保存独立；服务器权限分群、机器字段/推测/未知、方案与首版交付、去重服务器相册回执、非作者社区复用及已结算免费费用入库统计。推荐曝光/准确率/完整自助/人工成本保留未测量。8客户端+7原生API+5浏览器检查及类型/server/preview/本地启动通过，非全套；486源码/33迁移/79业务38管理、261schema73实体，生成源与产物同步。6截图及MP4/WebM/GIF新增9，总147，旧138媒体/C与历史原件保持。测试/录制原摘要和后续仅脚本变化的等价关系保留，不把合成记录当真实服务；真机/真实服务隔离准入/Plus云端/58项完整验收仍待，完整产品/生产/云端false。
+
+以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
+
 当前交付支持同一构建重复出包：`id`继续表示构建编号，新增`package_id`标记每次打包和独立目录；旧ZIP不覆盖。文档变更可复用仍与当前源码/契约/字体完全匹配的构建，源码或产物改变继续拒绝打包。最近包与独立核验见[交付指针](package.json)，[主流程与复打包来源](../实施/原生买家主流程核验与交付复打包-v1.0.md)。本轮类型检查原180秒超时，server/preview成功；未等待全面绿灯，也不把类型超时改为通过。
 
 Packages now have distinct `package_id` values and directories while retaining build `id`. Documentation-only repacks reuse a matching build; source/output changes remain blocked. The current 180-second typecheck timeout is retained separately from successful server/web outputs.

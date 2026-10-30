@@ -1,0 +1,16 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/unit/product-insights-client.test.ts (3 tests) 58ms
+ ✓ tests/unit/metrics-client.test.ts (4 tests) 59ms
+ ✓ tests/unit/usage-feedback.test.ts (1 test) 6ms
+
+ Test Files  3 passed (3)
+      Tests  8 passed (8)
+   Start at  19:22:18
+   Duration  3.76s (transform 58%, worker 23%, import 12%, tests 7%)
+
+    Isolate  3 workers spawned · ~1.75s startup each (spawn + environment, per file)
+             at least ~875ms faster with isolate: false — reuses workers across files instead of one per file
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/feedback-insights-2026-10-30T11-21-46-055Z-b0d20570/api.json
