@@ -16,6 +16,7 @@ $directTasks = @{
   'preview:serve' = 'scripts/delivery/start.ts'
   'delivery:build' = 'scripts/delivery/build.ts'
   'delivery:package' = 'scripts/delivery/package.ts'
+  'delivery:final' = 'scripts/delivery/final.ts'
 }
 if ($TaskArgs.Count -gt 0 -and $directTasks.ContainsKey($TaskArgs[0])) {
   $directArgs = @()

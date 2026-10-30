@@ -4,6 +4,7 @@ import {basename} from 'node:path';
 import {config} from '../../src/api/config.js';
 import {createPool} from '../../src/api/db/pool.js';
 import {local,json} from './common.js';
+import {resolveLocalBuild} from './resolve-build.js';
 const rows:{id:string;status:string;detail:string}[]=[];
 function row(id:string,status:string,detail:string){rows.push({id,status,detail});}
 row('node',Number(process.versions.node.split('.')[0])===24?'PASS':'MISSING',process.versions.node);
@@ -25,8 +26,10 @@ try{
     try{if(!path)throw new Error();await access(local(path));row(name!,'PRESENT_NOT_CERTIFIED','Configured project-local file exists');}catch{row(name!,'MISSING','Required configured runtime file is unavailable');}
   }
 }catch{row('configuration','MISSING','Run local:setup; keep real configuration in .env.local');}
-for(const [name,path] of [['server','runtime/build/api/main.js'],['preview','runtime/build/preview/index.html'],['alipay','runtime/build/mini-alipay/app.json'],['douyin','runtime/build/mini-douyin/app.json']]){
-  try{await access(local(path!));row(name!,'PRESENT_NOT_CERTIFIED','Existing default output; delivery:build records fresh isolated outputs');}catch{row(name!,'NOT_BUILT','Run delivery:build');}
+for(const name of ['server','preview','alipay','douyin'] as const){
+  try{const build=await resolveLocalBuild(name,{explicitRoot:process.env.YPCC_BUILD_ROOT});
+    row(name,build.hashes_verified?'PASS':'PRESENT_NOT_CERTIFIED',`${build.selection}; ${build.build_id??'developer output'}; ${build.hashes_verified?'recorded source and output hashes match':'hashes unverified'}; not production admission`);
+  }catch{row(name,name==='server'||name==='preview'?'MISSING':'NOT_BUILT','Current build missing, changed or unsuccessful; run delivery:build. An old default output is not substituted; host/device checks remain separate');}
 }
 const presets=JSON.parse(await readFile('assets/presets/presets.v3.1.json','utf8')) as {presets:{execution_variants:unknown[]}[]};
 row('catalog','PASS',`${presets.presets.length} official presets; ${presets.presets.reduce((n,p)=>n+p.execution_variants.length,0)} variants`);

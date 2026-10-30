@@ -1,0 +1,12 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/unit/local-readiness.test.ts (4 tests) 4ms
+ ✓ tests/unit/delivery-build-selection.test.ts (6 tests) 248ms
+
+ Test Files  2 passed (2)
+      Tests  10 passed (10)
+   Start at  01:32:32
+   Duration  570ms (tests 52%, transform 27%, import 18%, worker 3%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/delivery/final-closure-unit-final.json

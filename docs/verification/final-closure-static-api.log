@@ -1,0 +1,19 @@
+{"level":30,"time":1793381915571,"pid":40260,"hostname":"wikigspc","msg":"Server listening at https://127.0.0.1:3100"}
+{"level":30,"time":1793381915694,"pid":40260,"hostname":"wikigspc","reqId":"trace_e0243d8572d3499db3a0c413b9106b4f","req":{"method":"GET","route":"/readyz"},"msg":"incoming request"}
+{"level":30,"time":1793381915805,"pid":40260,"hostname":"wikigspc","reqId":"trace_e0243d8572d3499db3a0c413b9106b4f","res":{"status":200},"responseTime":108.65210000000002,"msg":"request completed"}
+{"level":30,"time":1793381915808,"pid":40260,"hostname":"wikigspc","reqId":"trace_b1b6359b17e749018db00d2e43bc6c62","req":{"method":"GET","route":"/plus/"},"msg":"incoming request"}
+{"level":30,"time":1793381915813,"pid":40260,"hostname":"wikigspc","reqId":"trace_b1b6359b17e749018db00d2e43bc6c62","res":{"status":200},"responseTime":4.834699999999884,"msg":"request completed"}
+{"level":30,"time":1793381915816,"pid":40260,"hostname":"wikigspc","reqId":"trace_84b01858ab4d456dac1be74ec5bf8efa","req":{"method":"GET","route":"/ops/support"},"msg":"incoming request"}
+{"level":30,"time":1793381915820,"pid":40260,"hostname":"wikigspc","reqId":"trace_84b01858ab4d456dac1be74ec5bf8efa","res":{"status":200},"responseTime":3.319500000000062,"msg":"request completed"}
+{"level":30,"time":1793381915822,"pid":40260,"hostname":"wikigspc","reqId":"trace_6d628ec106c64dfeb4b5dcb674d8efcd","req":{"method":"GET","route":"/ops/review"},"msg":"incoming request"}
+{"level":30,"time":1793381915825,"pid":40260,"hostname":"wikigspc","reqId":"trace_6d628ec106c64dfeb4b5dcb674d8efcd","res":{"status":200},"responseTime":2.829100000000153,"msg":"request completed"}
+{"level":30,"time":1793381915828,"pid":40260,"hostname":"wikigspc","reqId":"trace_780312f35588486cb4ba3c0a5fb53be5","req":{"method":"GET","route":"/ops/metrics"},"msg":"incoming request"}
+{"level":30,"time":1793381915831,"pid":40260,"hostname":"wikigspc","reqId":"trace_780312f35588486cb4ba3c0a5fb53be5","res":{"status":200},"responseTime":3.2684999999999036,"msg":"request completed"}
+{"level":30,"time":1793381915834,"pid":40260,"hostname":"wikigspc","reqId":"trace_85da28c32908414ca80e4ea3406b3ba4","req":{"method":"GET","route":"/plus/assets/:file"},"msg":"incoming request"}
+{"level":30,"time":1793381915838,"pid":40260,"hostname":"wikigspc","reqId":"trace_85da28c32908414ca80e4ea3406b3ba4","res":{"status":200},"responseTime":3.61220000000003,"msg":"request completed"}
+{"level":30,"time":1793381915842,"pid":40260,"hostname":"wikigspc","reqId":"trace_f44efc19bc7c4ae39cf13096f4f5fd7f","req":{"method":"GET","route":"/plus/assets/:file"},"msg":"incoming request"}
+{"level":30,"time":1793381915847,"pid":40260,"hostname":"wikigspc","reqId":"trace_f44efc19bc7c4ae39cf13096f4f5fd7f","res":{"status":200},"responseTime":4.93529999999987,"msg":"request completed"}
+{"level":30,"time":1793381915853,"pid":40260,"hostname":"wikigspc","reqId":"trace_8d16ad68edc64779a19dadf9f5c57787","req":{"method":"GET","route":"/plus/assets/:file"},"msg":"incoming request"}
+{"level":30,"time":1793381915856,"pid":40260,"hostname":"wikigspc","reqId":"trace_8d16ad68edc64779a19dadf9f5c57787","res":{"status":200},"responseTime":3.2133000000001175,"msg":"request completed"}
+{"level":30,"time":1793381915859,"pid":40260,"hostname":"wikigspc","reqId":"trace_4b7ed9fae2824ebc843800633e6c3943","req":{"method":"GET","route":"/plus/assets/:file"},"msg":"incoming request"}
+{"level":30,"time":1793381915863,"pid":40260,"hostname":"wikigspc","reqId":"trace_4b7ed9fae2824ebc843800633e6c3943","res":{"status":200},"responseTime":3.2929999999998927,"msg":"request completed"}

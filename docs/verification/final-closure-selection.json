@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "scope": "FINAL_RECORDED_SOURCE_AND_RETAINED_OUTPUT_HASHES_NOT_RUNTIME_RERUN",
+  "source_set_hash": "b00375bf3877f2e8600ec1a3516794f8cbc0db402341de704b46820a0dcf0bd7",
+  "rows": [
+    {
+      "name": "server",
+      "status": "PASS",
+      "build_id": "2026-10-30T17-46-56-011Z-a226bcf7",
+      "hashes_verified": true
+    },
+    {
+      "name": "preview",
+      "status": "PASS",
+      "build_id": "2026-10-30T17-46-56-011Z-a226bcf7",
+      "hashes_verified": true
+    },
+    {
+      "name": "alipay",
+      "status": "PASS",
+      "build_id": "2026-10-30T17-46-56-011Z-a226bcf7",
+      "hashes_verified": true
+    },
+    {
+      "name": "douyin",
+      "status": "PASS",
+      "build_id": "2026-10-30T17-46-56-011Z-a226bcf7",
+      "hashes_verified": true
+    }
+  ],
+  "full_suite_executed": false,
+  "full_product_verified": false,
+  "production_admitted": false
+}

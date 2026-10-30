@@ -1,5 +1,15 @@
 # 更新记录 / Changelog
 
+## 2026-10-31 — 当前构建启动与最终交付入口 / Current-build startup and final delivery
+
+- 新增`START-HERE.md`与`delivery:final`，将必要构建和打包串联；部分失败保持实际状态，全面测试不作为出包前提。/ Added the handoff entry and focused build/package command.
+- 启动、回放和doctor统一核对当前构建摘要，适配仓库独立目录与解压包映射；拒绝当前字节错误和目录链接，显式开发产物标注未校验。/ Startup and doctor select and verify current outputs, including extracted mappings.
+- 初始化生成新的服务端/网页交付记录，后端子服务共享所选目录；公开协作文件随包保留。/ Setup records fresh outputs and all backend children share the selected directory.
+- 本轮仅启动选择专项、关键原生启动和必要构建；无业务协议、迁移、客户端或视觉改版，保留既有媒体。首次类型诊断保留，真实服务/隔离/设备/云端/完整验收仍待。/ Focused checks only; existing UI, media and production limitations retained.
+
+[细则 / Details](docs/实施/最终交付入口与构建收口-v1.0.md) · [证据 / Evidence](docs/verification/final-closure-source.json)
+
+
 ## 2026-10-31 · Plus 选段复核与售前容量 / Selected-range review
 
 - 原片参考限定在确认选段内，保留绝对帧号、首尾/每秒/字幕边界及场景变化；成片保持完整验收。

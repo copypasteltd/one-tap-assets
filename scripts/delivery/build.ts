@@ -69,7 +69,8 @@ function resetClaims(value:unknown):unknown{
 }
 await json('assets/implementation/current.json',{...resetClaims(previous) as Record<string,unknown>,checked_at:report.checked_at,
  verification_mode:'FOCUSED_DELIVERY',historical_full_chain:'docs/verification/repair-cost-native-source.json',retained_integration:null,
- ...before,source_files:before.files.length,command_checks_passed:false,delivery_builds_passed:buildPassed,
+  ...before,source_files:before.files.length,command_checks_passed:false,delivery_build_id:id,delivery_builds_passed:buildPassed,
+  delivery_selected_builds_passed:selectedPassed,delivery_all_builds_passed:buildPassed,
  full_suite_executed:false,commands:checks,suites:[],full_product_verified:false,production_admitted:false,cloud_deployed:false});
 console.log(JSON.stringify({id,builds_passed:buildPassed,selected_builds_passed:selectedPassed,components:components.map(({name,status})=>({name,status})),report:'docs/delivery/current.json'}));
 if(!selectedPassed)process.exitCode=1;

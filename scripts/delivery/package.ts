@@ -13,10 +13,10 @@ const current=await snapshot();
 for(const key of ['source_set_hash','files','runtime_contract_files','resource_files'] as const)
   if(JSON.stringify(current[key])!==JSON.stringify(report[key]))throw new Error('Build source or contracts changed; run delivery:build again');
 if(!/^runtime\/delivery-builds\/[A-Za-z0-9T.-]+\/runtime\/build$/.test(report.build_root))throw new Error('Invalid owned build directory');
-const candidates=[...new Set(execFileSync('git',['ls-files','--cached','--others','--exclude-standard','-z'],{encoding:'utf8',windowsHide:true}).split('\0').filter(Boolean))];
-const rootFiles=/^(?:README(?:\.[A-Za-z-]+)?\.md|AGENTS\.md|CHANGELOG\.md|CONTRIBUTING\.md|SECURITY\.md|THIRD_PARTY_NOTICES\.md|LICENSE(?:\.[A-Za-z]+)?|package\.json|pnpm-lock\.yaml|tsconfig\.json|vitest(?:\.integration)?\.config\.ts|\.gitignore|\.gitattributes|\.npmrc|\.env\.example)$/;
-const source=candidates.filter(p=>(/^(src|scripts|tests|assets|docs)\//.test(p)||rootFiles.test(p))&&p!=='docs/delivery/package.json');
-const files:{path:string;source:string;sha256:string;bytes:number}[]=[];
+const candidates=[...new Set(execFileSync('git',['-c','core.fsmonitor=false','-c','core.untrackedCache=false','ls-files','--cached','--others','--exclude-standard','-z'],{encoding:'utf8',windowsHide:true}).split('\0').filter(Boolean))];
+const rootFiles=/^(?:README(?:\.[A-Za-z-]+)?\.md|START-HERE\.md|AGENTS\.md|CHANGELOG\.md|CONTRIBUTING\.md|SECURITY\.md|THIRD_PARTY_NOTICES\.md|LICENSE(?:\.[A-Za-z]+)?|package\.json|pnpm-lock\.yaml|tsconfig\.json|vitest(?:\.integration)?\.config\.ts|\.editorconfig|\.gitignore|\.gitattributes|\.npmrc|\.env\.example)$/;
+const source=candidates.filter(p=>(/^(src|scripts|tests|assets|docs|\.github)\//.test(p)||rootFiles.test(p))&&p!=='docs/delivery/package.json');
+const files:{path:string;source:string|null;sha256:string;bytes:number}[]=[];
 const secrets=[/-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/,/\bsk-(?:(?:proj|svcacct)-)?[A-Za-z0-9_-]{40,}\b/,/\bgh[pousr]_[A-Za-z0-9]{30,}\b/,/\bgithub_pat_[A-Za-z0-9_]{40,}\b/];
 async function add(path:string,target:string,expected?:string){
   if(target.startsWith('/')||target.split('/').some(s=>s==='..'||s==='.git'||s.startsWith('.env')&&target!=='.env.example'))throw new Error('Private or unsafe archive entry');
@@ -32,14 +32,24 @@ for(const component of report.components.filter(c=>c.status==='PASS'))for(const 
   if(!/^(api|worker|preview|mini-alipay|mini-douyin)\//.test(suffix))throw new Error('Build is outside the deliverable roots');
   await add(file.path,`runtime/build/${suffix}`,file.sha256);
 }
-if(new Set(files.map(f=>f.path)).size!==files.length||files.length>=65534)throw new Error('Duplicate or excessive delivery entries');
 // A documentation/evidence update can reuse the verified build. Each package
 // still gets its own directory; never overwrite an earlier delivered archive.
 const createdAt=new Date().toISOString(),packageId=createdAt.replace(/[:.]/g,'-')+'-'+randomUUID().slice(0,8);
+// The external pointer contains the ZIP digest and cannot contain itself.
+// Ship a separate generated descriptor so documentation links work after extraction.
+const descriptor=Buffer.from(JSON.stringify({schema_version:'1.0',descriptor_scope:'INSIDE_ARCHIVE',created_at:createdAt,
+ id:report.id,package_id:packageId,source_set_hash:report.source_set_hash,
+ archive_file:'one-tap-assets-source-and-builds.zip',archive_sha256:null,
+ checksum_note:'The ZIP SHA256 is in SHA256SUMS alongside the original ZIP and in the repository delivery pointer. A ZIP cannot embed its own final digest.',
+ manifest_path:'../../DELIVERY-MANIFEST.json',build_root:'runtime/build',source_files:source.length,
+ build_files:files.length-source.length,components:report.components.map(({name,status})=>({name,status})),
+ full_suite_executed:false,full_product_verified:false,production_admitted:false,cloud_deployed:false},null,2)+'\n');
+files.push({path:'docs/delivery/package.json',source:null,sha256:sha(descriptor),bytes:descriptor.length});
+if(new Set(files.map(f=>f.path)).size!==files.length||files.length>=65534)throw new Error('Duplicate or excessive delivery entries');
 const manifest={schema_version:'1.0',kind:'SOURCE_AND_AVAILABLE_BUILDS',id:report.id,package_id:packageId,created_at:createdAt,
  source_set_hash:report.source_set_hash,builds_passed:report.builds_passed,full_suite_executed:false,
  verification_strategy:'USER_REQUESTED_FOCUSED_DELIVERY',components:report.components.map(({name,status})=>({name,status})),
- requirements_preserved:58,full_product_verified:false,production_admitted:false,cloud_deployed:false,
+  requirements_preserved:58,archive_metadata_files:1,full_product_verified:false,production_admitted:false,cloud_deployed:false,
  excluded:['.git','.env.local','node_modules','private media','databases','logs','service credentials','personal Codex profiles'],
  prerequisites:'Windows; native Node 24/pnpm/PostgreSQL/FFmpeg and external service configuration as documented. Not an offline installer.',
  files:files.map(({path,sha256,bytes})=>({path,sha256,bytes}))};
@@ -60,13 +70,14 @@ async function entry(name:string,bytes:Buffer){
   c.writeUInt16LE(0x21,14);c.writeUInt32LE(crc,16);c.writeUInt32LE(compressed.length,20);c.writeUInt32LE(bytes.length,24);c.writeUInt16LE(filename.length,28);c.writeUInt32LE(start,42);
   central.push(Buffer.concat([c,filename]));
 }
-for(const file of files){const bytes=await readFile(await checked(file.source));if(sha(bytes)!==file.sha256)throw new Error('Source changed during packaging');await entry(file.path,bytes);}
+for(const file of files){const bytes=file.source===null?descriptor:await readFile(await checked(file.source));if(sha(bytes)!==file.sha256)throw new Error('Source changed during packaging');await entry(file.path,bytes);}
 await entry('DELIVERY-MANIFEST.json',Buffer.from(JSON.stringify(manifest,null,2)+'\n'));
 const centralStart=offset;for(const item of central)await write(item);const end=Buffer.alloc(22);
 end.writeUInt32LE(0x06054b50,0);end.writeUInt16LE(central.length,8);end.writeUInt16LE(central.length,10);end.writeUInt32LE(offset-centralStart,12);end.writeUInt32LE(centralStart,16);
 await write(end);await new Promise<void>((done,fail)=>{output.once('error',fail);output.end(done);});
 const digest=sha(await readFile(zipPath));await json(`${out}/manifest.json`,manifest);await writeFile(`${out}/SHA256SUMS`,`${digest}  one-tap-assets-source-and-builds.zip\n`);
 const exported={schema_version:'1.0',created_at:manifest.created_at,id:report.id,package_id:packageId,source_set_hash:report.source_set_hash,archive_path:zipPath,
- archive_sha256:digest,archive_bytes:offset,source_files:source.length,build_files:files.length-source.length,components:manifest.components,
+  archive_sha256:digest,archive_bytes:offset,source_files:source.length,build_files:files.length-source.length-1,archive_metadata_files:1,
+  embedded_descriptor:'docs/delivery/package.json',components:manifest.components,
  manifest_path:`${out}/manifest.json`,full_suite_executed:false,full_suite_required_for_packaging:false,full_product_verified:false,production_admitted:false};
 await json('docs/delivery/package.json',exported);console.log(JSON.stringify(exported,null,2));

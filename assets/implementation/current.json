@@ -3,69 +3,111 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-30T17:05:52.818298+00:00",
+  "checked_at": "2026-10-30T17:36:31.227Z",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "verification_mode": "FOCUSED_PLUS_VIDEO_RANGE_DELIVERY",
-  "retained_integration": "docs/verification/video-range-attempt-2-integration.json",
+  "verification_mode": "FOCUSED_DELIVERY",
+  "retained_integration": null,
   "command_checks_passed": false,
   "commands": [
     {
       "task": "typecheck",
-      "status": "PASS",
-      "exit_code": 0,
-      "elapsed_ms": 11048,
-      "log_path": "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\tmp\\video-range-attempt-3-typecheck.log",
-      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "evidence_scope": "FOCUSED_CHECK_REUSED_WITHOUT_REPEAT_SAME_SOURCE"
-    },
-    {
-      "task": "build:server",
-      "status": "PASS",
-      "exit_code": 0,
-      "elapsed_ms": 3839,
-      "log_path": "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\tmp\\video-range-attempt-2-server.log",
-      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "evidence_scope": "FOCUSED_CHECK_REUSED_WITHOUT_REPEAT_SAME_SOURCE"
-    },
-    {
-      "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T17-02-48-386Z-8ce97c0c\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
       "argv": [
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
-        "build",
-        "--config",
-        "src/preview/vite.config.ts",
-        "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T17-02-48-386Z-8ce97c0c\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
+        "--noEmit"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 12714,
-      "log_path": "runtime/delivery-builds/2026-10-30T17-02-48-386Z-8ce97c0c/preview.log",
-      "log_sha256": "559bdfc8a751199c40e4b2166e54cea4e814a5670012bb9803922deab1baacaf"
-    }
-  ],
-  "suites": [
-    {
-      "kind": "NEW_NATIVE_RANGE_FOCUSED",
-      "tests": 3,
-      "passed": 3,
-      "failed": 0
+      "elapsed_ms": 18425,
+      "log_path": "runtime/delivery/final-closure-package-typecheck.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
-      "kind": "RETAINED_NATIVE_VIDEO_IDENTICAL_APPLICATION",
-      "tests": 4,
-      "passed": 4,
-      "failed": 0
+      "task": "build:server",
+      "command": "node --import tsx scripts/build-server.ts",
+      "argv": [
+        "--import",
+        "tsx",
+        "scripts/build-server.ts"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 419,
+      "log_path": "runtime/delivery-builds/2026-10-30T17-32-49-676Z-d552a8fa/server.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_from_source_set_hash": "9791cc29900941316ab4a25b5b5b1e70346a9d90e072558376e226a8a6fcd13a",
+      "rerun": false
+    },
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T17-32-49-676Z-d552a8fa\\runtime\\build\\preview",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
+        "build",
+        "--config",
+        "src/preview/vite.config.ts",
+        "--outDir",
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T17-32-49-676Z-d552a8fa\\runtime\\build\\preview"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 180000,
+      "elapsed_ms": 18962,
+      "log_path": "runtime/delivery-builds/2026-10-30T17-32-49-676Z-d552a8fa/preview.log",
+      "log_sha256": "7d5a9589760e9dec66e17505ef41eb85d5dbe25e01915623db7ddb77fa103232",
+      "retained_from_source_set_hash": "9791cc29900941316ab4a25b5b5b1e70346a9d90e072558376e226a8a6fcd13a",
+      "rerun": false
+    },
+    {
+      "task": "build:alipay",
+      "command": "node scripts/build-mini.cjs alipay",
+      "argv": [
+        "scripts/build-mini.cjs",
+        "alipay"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 360000,
+      "elapsed_ms": 181751,
+      "log_path": "runtime/delivery-builds/2026-10-30T17-32-49-676Z-d552a8fa/alipay.log",
+      "log_sha256": "a12aaacb0b9df8042e5315bc17f180df582fa4b122c1f094ce7b4dfd7497eced",
+      "retained_from_source_set_hash": "9791cc29900941316ab4a25b5b5b1e70346a9d90e072558376e226a8a6fcd13a",
+      "rerun": false
+    },
+    {
+      "task": "build:douyin",
+      "command": "node scripts/build-mini.cjs tt",
+      "argv": [
+        "scripts/build-mini.cjs",
+        "tt"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 360000,
+      "elapsed_ms": 10259,
+      "log_path": "runtime/delivery-builds/2026-10-30T17-32-49-676Z-d552a8fa/douyin.log",
+      "log_sha256": "1a13e01067b427f77264124fabf90d4ac16b1be64340e587ff378c9ed97dd445",
+      "retained_from_source_set_hash": "9791cc29900941316ab4a25b5b5b1e70346a9d90e072558376e226a8a6fcd13a",
+      "rerun": false
     }
   ],
-  "source_files": 545,
-  "source_set_hash": "fd9c0811948782726bc1aa47036d02f138b376b7f25b1c33122b73561a66d205",
+  "suites": [],
+  "source_files": 548,
+  "source_set_hash": "b00375bf3877f2e8600ec1a3516794f8cbc0db402341de704b46820a0dcf0bd7",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -1856,6 +1898,10 @@
       "sha256": "9e5e19dce061c0c443241282afb1b434d33002bff67c333acc7a95543f9e112f"
     },
     {
+      "path": "tests/unit/delivery-build-selection.test.ts",
+      "sha256": "a75081c1a6c54e506a635ba6af67513ccdae59611b905d53b27667f53c3230f2"
+    },
+    {
       "path": "tests/unit/disclosure.test.ts",
       "sha256": "65f5fd38f2bd676b42b4c051a056667a4d5d5aa3f964b60bdaa1c6c11c105b57"
     },
@@ -2045,7 +2091,7 @@
     },
     {
       "path": "scripts/delivery/build.ts",
-      "sha256": "8769b127cd2569bde360b0759eae0653a14405305ce863d43b9199a105846e0e"
+      "sha256": "0d4d5d3e544a73e1123d7e4feaa13e60b1c5b228258823127e29a707e2518c82"
     },
     {
       "path": "scripts/delivery/common.ts",
@@ -2053,7 +2099,11 @@
     },
     {
       "path": "scripts/delivery/doctor.ts",
-      "sha256": "256d11b60b5da7ca7fe5d00f2d1d1c1a9389c863637a216bf85f3889cd1e95d7"
+      "sha256": "7869164ce896abdb8eb45ce9cfbe4d58b0a5f43a685a1a613a5a7af313a84122"
+    },
+    {
+      "path": "scripts/delivery/final.ts",
+      "sha256": "2e6db92c7c9799a7ab1849e3726dbbc92c1a7c6f05c3174f2bd341057f41d593"
     },
     {
       "path": "scripts/delivery/local-env.ts",
@@ -2061,11 +2111,15 @@
     },
     {
       "path": "scripts/delivery/package.ts",
-      "sha256": "ccc6880d77e3bdad91a905c5da91c2c0eec3acc310bdb603cf3f47710d753d4a"
+      "sha256": "8453cd903b61a40bd6ec9e43e3462e349a0cdf006273943c4d8804c425f458b1"
     },
     {
       "path": "scripts/delivery/readiness.ts",
       "sha256": "ca4cb039bb1f3ccbb68bd89c3661d3f248d2ab64a1afb9a2e743790885ace572"
+    },
+    {
+      "path": "scripts/delivery/resolve-build.ts",
+      "sha256": "7d8a3edfbfb4e9a7d1490e2de0994fb408a839fc877f3cd5f534db34a4466833"
     },
     {
       "path": "scripts/delivery/serve-preview.ts",
@@ -2073,7 +2127,7 @@
     },
     {
       "path": "scripts/delivery/start.ts",
-      "sha256": "c681ceec315632cf07ac8ed7d90ea31e204fc01603e850f5fe778c45ba27de70"
+      "sha256": "a1cd4b3c67c9937a7bdd00c73193c1ffd4a297a2be36ec646cfbaedc4ef11a01"
     },
     {
       "path": "scripts/dev-setup.ts",
@@ -2201,7 +2255,7 @@
     },
     {
       "path": "scripts/run.ps1",
-      "sha256": "6d1f64bef24f092b5ff7bc27de78625d3d584ee1f7f6603c5acf64da4462ed98"
+      "sha256": "5e147f21c06ddc892d2b1bc7798062d1496cdf82cb1488f2e7f91288e20b829e"
     },
     {
       "path": "scripts/seed.ts",
@@ -2209,7 +2263,7 @@
     },
     {
       "path": "scripts/setup-local.ps1",
-      "sha256": "f2af7e71dc51c6cf0a84040a4973ff21808abdbcca27a15d8123bfd197648e3c"
+      "sha256": "1563fcf1a5a3ff9a1a769d38f4195bb9c35d28c537d0a19b1bc365c01bbc0bca"
     },
     {
       "path": "scripts/usage_insights_contracts.py",
@@ -2225,7 +2279,7 @@
     },
     {
       "path": "package.json",
-      "sha256": "339abab98fafc363681df86cb754e9802a1e3d3657f309557a333415c3327775"
+      "sha256": "50fee4498d2f97c5f635a1fdd39899f6dcfc380c22bdcfde6e96257f629705b6"
     },
     {
       "path": "pnpm-lock.yaml",
@@ -2795,7 +2849,7 @@
   ],
   "source_license": "Independently written project source; upstream AGPL clone remains research-only; no upstream production implementation copied.",
   "historical_full_chain": "docs/verification/repair-cost-native-source.json",
-  "delivery_builds_passed": false,
+  "delivery_builds_passed": true,
   "full_suite_executed": false,
   "repair_candidate": {
     "photo_connected": true,
@@ -3287,5 +3341,30 @@
   ],
   "current_browser_checks_executed": true,
   "delivery_selected_builds_passed": true,
-  "latest_evidence": "docs/verification/video-range-source.json"
+  "latest_evidence": "docs/verification/video-range-source.json",
+  "delivery_build_id": "2026-10-30T17-46-56-011Z-a226bcf7",
+  "delivery_all_builds_passed": true,
+  "focused_functional_evidence": "docs/verification/final-closure-source.json",
+  "retained_application_evidence": {
+    "baseline_commit": "a4798df2388a9d35db7cf6db854dd39760052bbb",
+    "application_files_unchanged": 358,
+    "evidence": "docs/verification/video-range-source.json",
+    "rerun": false
+  },
+  "selected_delivery_scope": "ALL_SOURCE_AND_CURRENT_SERVER_PLUS_ALIPAY_DOUYIN_BUILDS",
+  "owned_processes_closed": true,
+  "build_provenance": {
+    "compiler_build_id": "2026-10-30T17-32-49-676Z-d552a8fa",
+    "compiler_source_set_hash": "9791cc29900941316ab4a25b5b5b1e70346a9d90e072558376e226a8a6fcd13a",
+    "changed_source_files": [
+      "scripts/delivery/package.ts"
+    ],
+    "all_compiler_and_application_inputs_identical": true,
+    "all_179_compiler_outputs_byte_identical": true,
+    "compiler_rerun_after_packager_only_change": false,
+    "native_startup_repeated_after_packager_only_change": false,
+    "original_compiler_report": "docs/verification/final-closure-build.json",
+    "native_startup_report": "docs/verification/final-closure-native.json",
+    "note": "The only source change adds generated in-archive delivery metadata. All source used by the four compilers and native services remains identical. Existing 179 outputs and startup results are retained with exact byte checks."
+  }
 }

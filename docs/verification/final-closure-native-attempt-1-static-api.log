@@ -1,0 +1,14 @@
+{"level":30,"time":1793381845280,"pid":43656,"hostname":"wikigspc","msg":"Server listening at https://127.0.0.1:3100"}
+{"level":30,"time":1793381845302,"pid":43656,"hostname":"wikigspc","reqId":"trace_98d2c9bfe9df4772836975011fed738f","req":{"method":"GET","route":"/readyz"},"msg":"incoming request"}
+{"level":30,"time":1793381845358,"pid":43656,"hostname":"wikigspc","reqId":"trace_98d2c9bfe9df4772836975011fed738f","res":{"status":200},"responseTime":55.30640000000017,"msg":"request completed"}
+{"level":30,"time":1793381845359,"pid":43656,"hostname":"wikigspc","reqId":"trace_28711391ea684e9aa5d8f5548306b9f0","req":{"method":"GET","route":"/plus/"},"msg":"incoming request"}
+{"level":30,"time":1793381845362,"pid":43656,"hostname":"wikigspc","reqId":"trace_28711391ea684e9aa5d8f5548306b9f0","res":{"status":200},"responseTime":2.2590000000000146,"msg":"request completed"}
+{"level":30,"time":1793381845363,"pid":43656,"hostname":"wikigspc","reqId":"trace_6cc3d066835f4a1ea54a698e11bdc928","req":{"method":"GET","route":"/ops/support"},"msg":"incoming request"}
+{"level":30,"time":1793381845364,"pid":43656,"hostname":"wikigspc","reqId":"trace_6cc3d066835f4a1ea54a698e11bdc928","res":{"status":200},"responseTime":1.47849999999994,"msg":"request completed"}
+{"level":30,"time":1793381845365,"pid":43656,"hostname":"wikigspc","reqId":"trace_10280f1e07d646979302336f0d106c86","req":{"method":"GET","route":"/ops/review"},"msg":"incoming request"}
+{"level":30,"time":1793381845367,"pid":43656,"hostname":"wikigspc","reqId":"trace_10280f1e07d646979302336f0d106c86","res":{"status":200},"responseTime":1.8437000000001262,"msg":"request completed"}
+{"level":30,"time":1793381845369,"pid":43656,"hostname":"wikigspc","reqId":"trace_929627a8960941849c051ce17a218d71","req":{"method":"GET","route":"/ops/metrics"},"msg":"incoming request"}
+{"level":30,"time":1793381845371,"pid":43656,"hostname":"wikigspc","reqId":"trace_929627a8960941849c051ce17a218d71","res":{"status":200},"responseTime":1.8097999999999956,"msg":"request completed"}
+{"level":30,"time":1793381845372,"pid":43656,"hostname":"wikigspc","reqId":"trace_6d0e9b090df6430884844afb83ff997b","req":{"method":"GET"},"msg":"incoming request"}
+{"level":30,"time":1793381845372,"pid":43656,"hostname":"wikigspc","reqId":"trace_6d0e9b090df6430884844afb83ff997b","msg":"Route GET:/assets/plus-DXJlIvKt.js not found"}
+{"level":30,"time":1793381845373,"pid":43656,"hostname":"wikigspc","reqId":"trace_6d0e9b090df6430884844afb83ff997b","res":{"status":404},"responseTime":0.6684999999999945,"msg":"request completed"}

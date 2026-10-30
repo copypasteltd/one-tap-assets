@@ -1,0 +1,13 @@
+{
+  "checked_at": "2026-10-30T17:05:52.818298+00:00",
+  "scope": "FOCUSED_SELECTED_RANGE_DELIVERY",
+  "source_set_hash": "fd9c0811948782726bc1aa47036d02f138b376b7f25b1c33122b73561a66d205",
+  "source_files": 545,
+  "evidence": "docs/verification/video-range-source.json",
+  "build_evidence": "docs/verification/video-range-build.json",
+  "selected_builds_passed": true,
+  "full_suite_executed": false,
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false
+}

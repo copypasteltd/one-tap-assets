@@ -1,0 +1,30 @@
+{
+  "checked_at": "2026-10-30T17:36:38.805Z",
+  "build_id": "2026-10-30T17-32-49-676Z-d552a8fa",
+  "build_exit_code": 0,
+  "selected_builds_passed": true,
+  "components": [
+    {
+      "name": "server",
+      "status": "PASS"
+    },
+    {
+      "name": "preview",
+      "status": "PASS"
+    },
+    {
+      "name": "alipay",
+      "status": "PASS"
+    },
+    {
+      "name": "douyin",
+      "status": "PASS"
+    }
+  ],
+  "archive_path": "runtime/releases/one-tap-assets-2026-10-30T17-36-34-257Z-87f74698/one-tap-assets-source-and-builds.zip",
+  "archive_sha256": "bc5fdaa04ca09341dfc954cf0bc2f64367eebac9035cdb1fc3ca029754ec2319",
+  "full_suite_executed": false,
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false
+}

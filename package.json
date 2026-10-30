@@ -39,6 +39,7 @@
     "preview:serve": "tsx scripts/delivery/start.ts --preview-only",
     "delivery:build": "tsx scripts/delivery/build.ts",
     "delivery:package": "tsx scripts/delivery/package.ts",
+    "delivery:final": "tsx scripts/delivery/final.ts",
     "start:api": "node runtime/build/api/main.js",
     "start:worker": "node runtime/build/worker/main.js",
     "start:reaper": "node runtime/build/worker/lifecycle/reaper-main.js",

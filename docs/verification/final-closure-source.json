@@ -1,0 +1,211 @@
+{
+  "schema_version": "1.0",
+  "checked_at": "2026-10-30T17:39:59.485158+00:00",
+  "baseline_commit": "a4798df2388a9d35db7cf6db854dd39760052bbb",
+  "scope": "USER_REQUESTED_MAIN_FUNCTIONAL_DELIVERY_CLOSURE_WITH_FOCUSED_CHECKS",
+  "source_set_hash": "b00375bf3877f2e8600ec1a3516794f8cbc0db402341de704b46820a0dcf0bd7",
+  "source_files": 548,
+  "runtime_contract_files": 42,
+  "resource_files": 4,
+  "implementation": "docs/实施/最终交付入口与构建收口-v1.0.md",
+  "entry": "START-HERE.md",
+  "changes": [
+    "Current recorded output selection, source/contract/font/output checks and extracted mappings",
+    "Shared selected root for the four native services",
+    "Focused delivery:final build/package entry",
+    "Fresh setup build report and aligned doctor",
+    "Bilingual handoff and source/build archive",
+    "Self-contained generated delivery descriptor in the ZIP; external SHA256 kept outside the archive"
+  ],
+  "focused_checks": {
+    "tests": 10,
+    "passed": 10,
+    "failed": 0,
+    "files": [
+      "tests/unit/delivery-build-selection.test.ts",
+      "tests/unit/local-readiness.test.ts"
+    ],
+    "result": "docs/verification/final-closure-unit.json",
+    "source": "docs/verification/final-closure-functional-source.json",
+    "source_set_hash": "9791cc29900941316ab4a25b5b5b1e70346a9d90e072558376e226a8a6fcd13a"
+  },
+  "typecheck": "PASS",
+  "build_id": "2026-10-30T17-46-56-011Z-a226bcf7",
+  "builds": [
+    {
+      "name": "server",
+      "status": "PASS"
+    },
+    {
+      "name": "preview",
+      "status": "PASS"
+    },
+    {
+      "name": "alipay",
+      "status": "PASS"
+    },
+    {
+      "name": "douyin",
+      "status": "PASS"
+    }
+  ],
+  "build_report": "docs/verification/final-closure-build.json",
+  "final_command": "docs/verification/final-closure-command.json",
+  "native_startup": {
+    "status": "PASS",
+    "services": 4,
+    "http_files_byte_matched": 8,
+    "doctor_all_components": "PASS",
+    "result": "docs/verification/final-closure-native.json"
+  },
+  "diagnostics_preserved": [
+    {
+      "kind": "TYPECHECK_FAIL",
+      "source": "docs/verification/final-closure-attempt-1-source.json",
+      "reason": "Two exactOptionalPropertyTypes mismatches; fixed explicitRoot type before final checks/builds."
+    },
+    {
+      "kind": "NATIVE_PROBE_FAIL",
+      "result": "docs/verification/final-closure-native-attempt-1.json",
+      "reason": "Probe resolved ./assets against origin instead of /plus/; corrected only private probe, application and build unchanged."
+    }
+  ],
+  "public_logs": [
+    {
+      "path": "docs/verification/final-closure-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "original_path": "runtime/delivery-builds/2026-10-30T17-32-49-676Z-d552a8fa/typecheck.log"
+    },
+    {
+      "path": "docs/verification/final-closure-server.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "original_path": "runtime/delivery-builds/2026-10-30T17-32-49-676Z-d552a8fa/server.log"
+    },
+    {
+      "path": "docs/verification/final-closure-preview.log",
+      "sha256": "7d5a9589760e9dec66e17505ef41eb85d5dbe25e01915623db7ddb77fa103232",
+      "bytes": 3868,
+      "original_path": "runtime/delivery-builds/2026-10-30T17-32-49-676Z-d552a8fa/preview.log"
+    },
+    {
+      "path": "docs/verification/final-closure-alipay.log",
+      "sha256": "a12aaacb0b9df8042e5315bc17f180df582fa4b122c1f094ce7b4dfd7497eced",
+      "bytes": 11720,
+      "original_path": "runtime/delivery-builds/2026-10-30T17-32-49-676Z-d552a8fa/alipay.log"
+    },
+    {
+      "path": "docs/verification/final-closure-douyin.log",
+      "sha256": "1a13e01067b427f77264124fabf90d4ac16b1be64340e587ff378c9ed97dd445",
+      "bytes": 6552,
+      "original_path": "runtime/delivery-builds/2026-10-30T17-32-49-676Z-d552a8fa/douyin.log"
+    },
+    {
+      "path": "docs/verification/final-closure-unit.log",
+      "sha256": "46f731bacbca612e36ac5163797c9526c30c6e62c2fc59a024c76114d731483f",
+      "bytes": 445,
+      "original_path": "runtime/delivery/final-closure-unit-final.log"
+    },
+    {
+      "path": "docs/verification/final-closure-typecheck-attempt-1.log",
+      "sha256": "cc37b564bca64f2f8b1f346df81df79dd002fa6f194efe1b2c86dd15ed37d578",
+      "bytes": 975,
+      "original_path": "runtime/delivery/final-closure-attempt-1-typecheck.log"
+    },
+    {
+      "path": "docs/verification/final-closure-unit-attempt-1.log",
+      "sha256": "2b1ac4197f69fb99bba19cd19ccca8effae85c887ca79582565a77b9c65c4568",
+      "bytes": 438,
+      "original_path": "runtime/delivery/final-closure-attempt-1-unit.log"
+    },
+    {
+      "path": "docs/verification/final-closure-startup.log",
+      "sha256": "8ece862f438c725da7cec24142a2575c4014c21e80df11005699dfc8730d0bdc",
+      "bytes": 2084,
+      "original_path": "runtime/delivery/final-closure-startup.log"
+    },
+    {
+      "path": "docs/verification/final-closure-static-api.log",
+      "sha256": "7bab8be111ac3c9a6ef8e361a141315d3c474a99d761f068770c017bb52ebc8d",
+      "bytes": 3598,
+      "original_path": "runtime/delivery/final-closure-static-api.log"
+    },
+    {
+      "path": "docs/verification/final-closure-doctor.log",
+      "sha256": "dc0cac1a13fa3570954a462209ad06efc95894a26a3d85a66cd7d94efe9e83bc",
+      "bytes": 2329,
+      "original_path": "runtime/delivery/final-closure-doctor.log"
+    },
+    {
+      "path": "docs/verification/final-closure-native-attempt-1-startup.log",
+      "sha256": "aeddfff6cc19a7afec70dfc41fa7cc2e80ed26290bf1b1cd13d81e3c4f894de3",
+      "bytes": 2087,
+      "original_path": "runtime/delivery/final-closure-native-attempt-1-startup.log"
+    },
+    {
+      "path": "docs/verification/final-closure-native-attempt-1-static-api.log",
+      "sha256": "c134b17eecd09a59eab5c29ad9a4dcc1ae71df0338918d1c72c8431ab0f3cd75",
+      "bytes": 2567,
+      "original_path": "runtime/delivery/final-closure-native-attempt-1-static-api.log"
+    },
+    {
+      "path": "docs/verification/final-closure-package-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "original_path": "runtime/delivery/final-closure-package-typecheck.log"
+    }
+  ],
+  "all_application_files_unchanged_from_baseline": 358,
+  "protected_baseline_files_unchanged": 1187,
+  "media_files": 190,
+  "new_media_files": 0,
+  "old_migrations_preserved": 38,
+  "api_contracts_unchanged": true,
+  "retained_business_evidence": "docs/verification/video-range-source.json",
+  "retained_evidence_note": "All src/ application bytes match baseline; prior synthetic-provider/native-media scopes are retained, not rerun or upgraded.",
+  "native_client_configuration": "LOOPBACK_DEVELOPMENT_DEFAULT_REBUILD_FOR_DEVICE",
+  "host_launch_verified": false,
+  "real_device_verified": false,
+  "not_run": [
+    "full test suite",
+    "new UI recording or browser",
+    "clean-machine dependency installation",
+    "real provider semantics and billing",
+    "production OS isolation",
+    "host/device acceptance",
+    "cloud deployment",
+    "full 58-case acceptance"
+  ],
+  "owned_processes_closed": true,
+  "native_database_preserved": true,
+  "browser_used": false,
+  "full_suite_executed": false,
+  "full_suite_required_for_packaging": false,
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false,
+  "command_archive_note": "The actual delivery:final command created an initial archive. Final documentation/evidence are subsequently packaged with the same exact source/build hashes. docs/delivery/package.json identifies the final archive.",
+  "compiler_build_id": "2026-10-30T17-32-49-676Z-d552a8fa",
+  "compiler_and_focused_test_source_set_hash": "9791cc29900941316ab4a25b5b5b1e70346a9d90e072558376e226a8a6fcd13a",
+  "final_packager_source": "docs/verification/final-closure-package-source.json",
+  "current_delivery_report": "docs/verification/final-closure-delivery-build.json",
+  "build_provenance": {
+    "compiler_build_id": "2026-10-30T17-32-49-676Z-d552a8fa",
+    "compiler_source_set_hash": "9791cc29900941316ab4a25b5b5b1e70346a9d90e072558376e226a8a6fcd13a",
+    "changed_source_files": [
+      "scripts/delivery/package.ts"
+    ],
+    "all_compiler_and_application_inputs_identical": true,
+    "all_179_compiler_outputs_byte_identical": true,
+    "compiler_rerun_after_packager_only_change": false,
+    "native_startup_repeated_after_packager_only_change": false,
+    "original_compiler_report": "docs/verification/final-closure-build.json",
+    "native_startup_report": "docs/verification/final-closure-native.json",
+    "note": "The only source change adds generated in-archive delivery metadata. All source used by the four compilers and native services remains identical. Existing 179 outputs and startup results are retained with exact byte checks."
+  },
+  "embedded_delivery_descriptor": "docs/delivery/package.json; generated inside ZIP without recursive self-digest",
+  "final_packager_check": "TYPECHECK_PASS; final generated descriptor and archive content verification are recorded in docs/delivery/package.json after packaging.",
+  "compiler_and_native_startup_note": "All four actual compiler runs, ten focused tests and native startup preceded the final packager-only descriptor change. All their application/compiler inputs and 179 output bytes remain identical; they were not redundantly rerun.",
+  "final_selection_result": "docs/verification/final-closure-selection.json"
+}

@@ -1,0 +1,154 @@
+{
+  "status": "PASS",
+  "checked_at": "2026-10-30T17:38:39.522Z",
+  "scope": "NATIVE_STARTUP_AND_ACTUAL_STATIC_HTTP_BYTES_NOT_PROVIDER_OR_DEVICE_ACCEPTANCE",
+  "build_id": "2026-10-30T17-32-49-676Z-d552a8fa",
+  "build_selection": "CURRENT_DELIVERY",
+  "hashes_verified": true,
+  "ready_services": [
+    "api/main.js",
+    "worker/main.js",
+    "worker/lifecycle/reaper-main.js",
+    "worker/lifecycle/media-maintenance-main.js"
+  ],
+  "static_http_files": [
+    {
+      "path": "/plus/",
+      "file": "plus.html",
+      "sha256": "c3fa55f446322d8b0fb60bab53d9882305f20c08f7e318b76f0c01b59771a7e4",
+      "bytes": 585
+    },
+    {
+      "path": "/ops/support",
+      "file": "support.html",
+      "sha256": "9bfecacc9560b5a9e13900fe2c8328c38950b7cd5246de3f93caf238c40f1c9c",
+      "bytes": 615
+    },
+    {
+      "path": "/ops/review",
+      "file": "review.html",
+      "sha256": "c6fff4754ef25708bea8744a57b7262c330260351efa8548c0e503abf3575e1e",
+      "bytes": 542
+    },
+    {
+      "path": "/ops/metrics",
+      "file": "metrics.html",
+      "sha256": "94cd03c48226247a29746466944f2ec747d389d851fd6346b89bee6de2a338a2",
+      "bytes": 535
+    },
+    {
+      "path": "/plus/assets/plus-DXJlIvKt.js",
+      "file": "plus-DXJlIvKt.js",
+      "sha256": "bcea48adec25f401f32b3c20ad2af782a70d3eedaca13f28d3f13e6a02d85f8f",
+      "bytes": 47804
+    },
+    {
+      "path": "/plus/assets/api-Cb0l7aLS.js",
+      "file": "api-Cb0l7aLS.js",
+      "sha256": "3047de18834a44f2c8f2dda288c712ed29edeb9c17a761647bca25b1ee06affa",
+      "bytes": 158895
+    },
+    {
+      "path": "/plus/assets/plus-batch-status-CUBSkd-x.js",
+      "file": "plus-batch-status-CUBSkd-x.js",
+      "sha256": "e189759a3e3f47f3fcd8e7c8a63f0306853deb5fe943d34e077bb5b72b39c3d4",
+      "bytes": 749
+    },
+    {
+      "path": "/plus/assets/plus-cvjMVbhq.css",
+      "file": "plus-cvjMVbhq.css",
+      "sha256": "b960d85558a5efde6a8e6877e906a0caac7745554d420720c89500832430c8d0",
+      "bytes": 11175
+    }
+  ],
+  "doctor_rows": [
+    {
+      "id": "node",
+      "status": "PASS",
+      "detail": "24.22.1"
+    },
+    {
+      "id": "runtime/tools/package-manager/node_modules/pnpm/bin/pnpm.cjs",
+      "status": "PASS",
+      "detail": "present"
+    },
+    {
+      "id": "assets/presets/presets.v3.1.json",
+      "status": "PASS",
+      "detail": "present"
+    },
+    {
+      "id": "configuration",
+      "status": "PASS",
+      "detail": "environment=development; private values omitted"
+    },
+    {
+      "id": "database",
+      "status": "PASS",
+      "detail": "connected; 38 migrations"
+    },
+    {
+      "id": "ffmpeg",
+      "status": "PASS",
+      "detail": "Native executable on PATH responds"
+    },
+    {
+      "id": "ffprobe",
+      "status": "PASS",
+      "detail": "Native executable on PATH responds"
+    },
+    {
+      "id": "generation",
+      "status": "OFF",
+      "detail": "External service remains disabled"
+    },
+    {
+      "id": "codex",
+      "status": "OFF",
+      "detail": "External service remains disabled"
+    },
+    {
+      "id": "payments",
+      "status": "OFF",
+      "detail": "External service remains disabled"
+    },
+    {
+      "id": "community-publishing",
+      "status": "OFF",
+      "detail": "External service remains disabled"
+    },
+    {
+      "id": "server",
+      "status": "PASS",
+      "detail": "CURRENT_DELIVERY; 2026-10-30T17-32-49-676Z-d552a8fa; recorded source and output hashes match; not production admission"
+    },
+    {
+      "id": "preview",
+      "status": "PASS",
+      "detail": "CURRENT_DELIVERY; 2026-10-30T17-32-49-676Z-d552a8fa; recorded source and output hashes match; not production admission"
+    },
+    {
+      "id": "alipay",
+      "status": "PASS",
+      "detail": "CURRENT_DELIVERY; 2026-10-30T17-32-49-676Z-d552a8fa; recorded source and output hashes match; not production admission"
+    },
+    {
+      "id": "douyin",
+      "status": "PASS",
+      "detail": "CURRENT_DELIVERY; 2026-10-30T17-32-49-676Z-d552a8fa; recorded source and output hashes match; not production admission"
+    },
+    {
+      "id": "catalog",
+      "status": "PASS",
+      "detail": "10 official presets; 14 variants"
+    }
+  ],
+  "external_services_exercised": false,
+  "browser_used": false,
+  "owned_processes_closed": true,
+  "native_database_preserved": true,
+  "full_suite_executed": false,
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false
+}

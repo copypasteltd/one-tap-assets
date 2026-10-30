@@ -1,5 +1,8 @@
 # Native quick start
 
+Use [START-HERE](../../START-HERE.md) for the current handoff. `.\scripts\run.ps1 delivery:final` builds selected targets and packages without the full test suite. Startup verifies the recorded source and outputs and selects the current isolated/extracted build. See [STATUS](STATUS.md) and [delivery details](../实施/最终交付入口与构建收口-v1.0.md) for exact scope and pending work.
+
+
 The current delivery adds Plus source-video trim, crop, timed captions, explicit audio retention/mute and independent native approval/payment. Four focused native checks, four browser workflow checks and the required server/web/Alipay/Douyin builds passed; no full suite or device acceptance ran. Real services and sales remain disabled. See [video workflow and configuration](../实施/Plus原片视频剪辑与定时字幕-v1.0.md), [exact evidence](../verification/plus-video-source.json), [recordings](../media/plus-video/README.md) and [numbered status](STATUS.md).
 
 ## 1. Dependencies and browser replay

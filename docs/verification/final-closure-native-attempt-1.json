@@ -1,0 +1,12 @@
+{
+  "status": "FAIL",
+  "build_id": "2026-10-30T17-32-49-676Z-d552a8fa",
+  "source_set_hash": "9791cc29900941316ab4a25b5b5b1e70346a9d90e072558376e226a8a6fcd13a",
+  "reason": "Probe incorrectly resolved ./assets against the API origin rather than /plus/. Actual HTML uses a relative base and the API already serves /plus/assets.",
+  "corrected_probe_only": true,
+  "application_changed": false,
+  "startup_once_passed": true,
+  "four_html_pages_matched": true,
+  "doctor": "NOT_RUN",
+  "owned_processes_closed": true
+}

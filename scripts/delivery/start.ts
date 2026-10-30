@@ -7,10 +7,13 @@ import {setTimeout as delay} from 'node:timers/promises';
 import {config} from '../../src/api/config.js';
 import {createPool} from '../../src/api/db/pool.js';
 import {migrate} from '../../src/api/db/migrate.js';
-import {checked,local} from './common.js';
+import {checked} from './common.js';
 import {waitForLocalReady} from './readiness.js';
+import {resolveLocalBuild} from './resolve-build.js';
 const previewOnly=process.argv.includes('--preview-only'),once=process.argv.includes('--once');
-const build=local(process.env.YPCC_BUILD_ROOT||'runtime/build');
+const selected=await resolveLocalBuild(previewOnly?'preview':'server',{explicitRoot:process.env.YPCC_BUILD_ROOT});
+const build=selected.root;
+console.log(JSON.stringify({event:'local_build_selected',...selected}));
 const cfg=previewOnly?null:config();
 if(cfg&&(cfg.env!=='development'||!['localhost','127.0.0.1','::1'].includes(cfg.host)))throw new Error('local:start requires a loopback development configuration');
 const files=previewOnly?['scripts/delivery/serve-preview.ts']:['api/main.js','worker/main.js','worker/lifecycle/reaper-main.js','worker/lifecycle/media-maintenance-main.js'];
@@ -39,7 +42,7 @@ try{
   }
   else{
     const pool=createPool(cfg!);try{await migrate(pool);}finally{await pool.end();}
-    for(const file of files)launch(file,[`${build}/${file}`]);
+    for(const file of files)launch(file,[`${build}/${file}`],{YPCC_BUILD_ROOT:build});
     const ca=cfg!.tlsCert?await readFile(cfg!.tlsCert):undefined;
     const origin=new URL(cfg!.publicBaseUrl);if(!['localhost','127.0.0.1','[::1]'].includes(origin.hostname)||origin.username||origin.password||origin.search||origin.hash||origin.pathname!=='/')throw new Error('Local health checks require a loopback origin without credentials');
     const ready=await waitForLocalReady({timeoutMs:45000,stopped:()=>stopping,probe:async remaining=>{
@@ -47,7 +50,7 @@ try{
       return apiReady&&Object.keys(readyEvent).every(name=>servicesReady.has(name));
     }});
     if(!ready)throw new Error('Local API, Worker, reaper or media maintenance did not become ready; inspect startup output and run doctor');
-    console.log(JSON.stringify({event:'local_stack_ready',api:cfg!.publicBaseUrl,ready_services:files,payments_enabled:cfg!.paymentsEnabled,generation_enabled:cfg!.generationEnabled,codex_enabled:cfg!.codex.enabled}));
+    console.log(JSON.stringify({event:'local_stack_ready',api:cfg!.publicBaseUrl,plus:new URL('/plus/',cfg!.publicBaseUrl).href,build_id:selected.build_id,build_root:build,hashes_verified:selected.hashes_verified,ready_services:files,payments_enabled:cfg!.paymentsEnabled,generation_enabled:cfg!.generationEnabled,codex_enabled:cfg!.codex.enabled}));
   }
   if(once)await stop();else while(!stopping)await delay(500);
 }finally{await stop();}

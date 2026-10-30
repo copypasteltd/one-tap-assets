@@ -1,11 +1,9 @@
 # 源码交付与快速启动 / Source delivery and quick start
 
-2026-10-31当前候选选择为 `SERVER_AND_PREVIEW`：全部功能性源码、当前服务端和Plus构建入包，双小程序源码保持前轮字节但本轮没有重编，旧二进制不混入新包。之前双端编译证据仍见[前轮记录](../verification/plus-video-build.json)。本轮仅相关检查，非全面绿灯；[选段修正与容量边界](../实施/Plus选段复核与售前容量-v1.1.md)、[证据](../verification/video-range-source.json)及[ZIP清单](package.json)明确实际范围。 / Current package: all source and current server/Plus outputs; native clients are unchanged but not rebuilt, and old binaries are excluded.
+当前统一入口为[START-HERE](../../START-HERE.md)。运行`.\scripts\run.ps1 delivery:final`即可执行必要类型检查、服务端/Plus/双小程序构建及打包；全面测试不作为交付前提。实际目标状态以[current.json](current.json)、ZIP和SHA256以[package.json](package.json)为准。启动和doctor校验当前记录并选择实际独立或解压目录，不再默认借用旧产物。详情见[本轮细则](../实施/最终交付入口与构建收口-v1.0.md)和[证据](../verification/final-closure-source.json)。以下为既有说明及历史交付来源。 / Use START-HERE and delivery:final for focused final packaging; current manifests supersede historical build selections below.
 
 
-2026-10-31快速功能收口：Plus原片视频选段、裁切、定时字幕、原声保留/静音、独立手机授权与确认付款、新MP4/真实首帧封面/文案交付已接通。有声选段封存完整原选段与成片WAV，通过原声技术比对、独立听音及事实/风格双复核；手填字幕不冒充ASR。有声视频的免费受限售后仅修改文案并保留原音视频。4项原生关键链路检查、4项真实浏览器流程及类型/server/Plus/支付宝/抖音构建通过，未执行全面测试。543源码、38迁移、106业务/38管理接口、316schema/82实体；新增10份截图/MP4/WebM/GIF，原180媒体及方案C保持。原生数据库/HTTPS/MCP/FFmpeg实际运行，账户、付款、模型/听音判定及隔离身份为合成；真实服务和销售默认关闭。双端真机、真实服务/隔离准入、云端部署、多轨与视频批量/自动转写/复杂作者工具、长期身份绑定及58项完整验收仍待。
-
-[视频剪辑需求、协议与配置](../实施/Plus原片视频剪辑与定时字幕-v1.0.md) · [截图与录屏](../media/plus-video/README.md) · [准确证据](../verification/plus-video-source.json) · [编号完成与待办](../guides/STATUS.md)。下文保留此前方案和历史验证来源；当前新增范围以上述视频剪辑说明及本轮证据为准。
+本轮服务端、Plus、支付宝和抖音均为当前源码重新构建的成功产物，随完整源码入包；10项关键检查及四服务启动/停止通过，实际HTTPS核对4个HTML和4份Plus资源。全面测试、真实服务/隔离、宿主/真机和云端未执行或未准入，仍需分别完成。[具体证据](../verification/final-closure-source.json) · [既有截图/录屏](../media/plus-video/README.md)。 / All four current build targets pass and are included; focused native startup and HTTP checks do not establish provider, device or production acceptance.
 
 ## 1. 交付内容 / Contents
 
@@ -16,7 +14,7 @@
 | 03 | 内容、制作、后期、QC、独立双复核、交付及实例回收 / Production and recovery workers | `src/worker/` |
 | 04 | 十套官方风格、三路线规格、Skill和固定字体 / Presets, specifications, skills and fonts | `assets/` |
 | 05 | 双语说明、C定型稿、截图、MP4/WebM/GIF、开发文档 / Bilingual docs, designs and media | `README.md`, `README.en.md`, `docs/` |
-| 06 | 本轮成功构建的服务端与网页；双小程序保留完整源码 / Current server/web outputs; complete mini-program sources retained | 包内 / In archive: `runtime/build/` |
+| 06 | 当前服务端、网页和双小程序成功产物 / Current server, web and both mini-program outputs | 包内 / In archive: `runtime/build/` |
 | 07 | 每项文件SHA-256、构建状态与排除项 / File hashes, build status and exclusions | 包内 / In archive: `DELIVERY-MANIFEST.json` |
 
 源码与构建文件放在同一ZIP，成功产物按实际状态纳入；失败或超时的目标不借用历史文件。包不包含真实配置、个人Codex账户、客户照片、数据库、运行日志或依赖目录。需要联网安装固定依赖及原生工具，并配置外部服务；这不是离线安装器。
@@ -78,13 +76,13 @@ Without an explicit origin, delivery builds use `https://localhost:3100` for loc
 
 `delivery:build --server-only`仅进行类型与服务端构建，其他目标记为NOT_RUN；适用于后端专项收口。该模式的成功只代表所选服务端构建，完整构建状态仍单独保留。The server-only mode explicitly leaves other build targets NOT_RUN.
 
-`delivery:build --skip-mini`执行类型、服务端和网页构建，小程序目标记为NOT_RUN。当前快速交付采用此模式；ZIP包含两端完整源码及当前服务端/网页产物，最终快照未重建小程序，也没有混入旧编译物。初版支付宝TIMEOUT、抖音PASS见[原构建记录](../verification/support-desk-initial-build.json)，不升级为最终快照通过。需要小程序产物时，配置实际HTTPS地址并执行上面的完整构建。
+`delivery:build --skip-mini`执行类型、服务端和网页构建，小程序目标记为NOT_RUN。这是可选缩减模式；本轮实际采用完整构建，四个目标产物均在包内，未混入旧编译物。初版支付宝TIMEOUT、抖音PASS见[原构建记录](../verification/support-desk-initial-build.json)，不升级为最终快照通过。需要小程序产物时，配置实际HTTPS地址并执行上面的完整构建。
 
-`delivery:build --skip-mini` builds the server and web pages, explicitly leaving both mini-program outputs NOT_RUN. This focused package includes complete mini-program source and current server/web outputs. Earlier Alipay TIMEOUT and Douyin PASS belong to the original snapshot; current mini-program binaries are excluded. Run a full build with the configured HTTPS API when producing host outputs.
+`delivery:build --skip-mini` builds the server and web pages, explicitly leaving both mini-program outputs NOT_RUN. This is an optional reduced mode. The current delivery actually builds all four targets and includes both current mini-program outputs. Earlier Alipay TIMEOUT and Douyin PASS remain tied to their original snapshot. Run a full build with the configured HTTPS API when producing host outputs.
 
-`delivery:build`直接调用已安装的固定工具，输出到新的独立目录。执行类型检查、服务端、共享页面、支付宝和抖音构建，每个命令最多180秒；一个目标失败后仍记录其他目标。`--smoke`仅选照片上传/恢复及原图素材完整双复核交付相关文件，最多180秒；不运行全套。所有状态和日志摘要写入[current.json](current.json)，完整日志留在忽略目录。打包不要求全部检查通过，包清单会显示实际缺项。
+`delivery:build`直接调用已安装的固定工具，输出到新的独立目录。执行类型检查、服务端、共享页面、支付宝和抖音构建，类型/服务端/网页各180秒、双原生编译各360秒；一个目标失败后仍记录其他目标。`--smoke`仅选照片上传/恢复及原图素材完整双复核交付相关文件，最多180秒；不运行全套。所有状态和日志摘要写入[current.json](current.json)，完整日志留在忽略目录。打包不要求全部检查通过，包清单会显示实际缺项。
 
-`delivery:build` directly invokes installed pinned tools into a fresh isolated directory. Type/server/replay/Alipay/Douyin commands each have a 180-second delivery-check cap, and failures do not hide other targets. Optional `--smoke` selects photo upload/recovery and photo-pack review/delivery cases, with its own 180-second cap; it does not run the full suite. [current.json](current.json) records exact results and local log hashes. Packaging does not require all checks to pass, and missing components remain explicit.
+`delivery:build` directly invokes installed pinned tools into a fresh isolated directory. Type/server/web commands have a 180-second cap and each native mini-program compiler has a 360-second cap, and failures do not hide other targets. Optional `--smoke` selects photo upload/recovery and photo-pack review/delivery cases, with its own 180-second cap; it does not run the full suite. [current.json](current.json) records exact results and local log hashes. Packaging does not require all checks to pass, and missing components remain explicit.
 
 打包后终端输出ZIP路径、SHA-256、文件数量和各目标状态，产物位于`runtime/releases/`。ZIP包含自身之外每份文件的摘要清单。源码或运行契约变更后必须重新构建；打包时逐项校验成功构建的字节，拒绝悄悄混入新源码或旧产物。
 

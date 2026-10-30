@@ -1,13 +1,51 @@
 {
-  "checked_at": "2026-10-30T17:05:52.818298+00:00",
-  "scope": "FOCUSED_SELECTED_RANGE_DELIVERY",
-  "source_set_hash": "fd9c0811948782726bc1aa47036d02f138b376b7f25b1c33122b73561a66d205",
-  "source_files": 545,
-  "evidence": "docs/verification/video-range-source.json",
-  "build_evidence": "docs/verification/video-range-build.json",
-  "selected_builds_passed": true,
+  "schema_version": "1.0",
+  "checked_at": "2026-10-30T17:39:59.485158+00:00",
+  "scope": "USER_REQUESTED_MAIN_FUNCTIONAL_DELIVERY_CLOSURE_WITH_FOCUSED_CHECKS",
+  "source_set_hash": "b00375bf3877f2e8600ec1a3516794f8cbc0db402341de704b46820a0dcf0bd7",
+  "source_files": 548,
+  "evidence": "docs/verification/final-closure-source.json",
+  "focused_tests": {
+    "passed": 10,
+    "failed": 0
+  },
+  "native_startup": "PASS",
+  "builds": [
+    {
+      "name": "server",
+      "status": "PASS"
+    },
+    {
+      "name": "preview",
+      "status": "PASS"
+    },
+    {
+      "name": "alipay",
+      "status": "PASS"
+    },
+    {
+      "name": "douyin",
+      "status": "PASS"
+    }
+  ],
+  "all_application_files_unchanged_from_baseline": 358,
   "full_suite_executed": false,
   "full_product_verified": false,
   "production_admitted": false,
-  "cloud_deployed": false
+  "cloud_deployed": false,
+  "build_provenance": {
+    "compiler_build_id": "2026-10-30T17-32-49-676Z-d552a8fa",
+    "compiler_source_set_hash": "9791cc29900941316ab4a25b5b5b1e70346a9d90e072558376e226a8a6fcd13a",
+    "changed_source_files": [
+      "scripts/delivery/package.ts"
+    ],
+    "all_compiler_and_application_inputs_identical": true,
+    "all_179_compiler_outputs_byte_identical": true,
+    "compiler_rerun_after_packager_only_change": false,
+    "native_startup_repeated_after_packager_only_change": false,
+    "original_compiler_report": "docs/verification/final-closure-build.json",
+    "native_startup_report": "docs/verification/final-closure-native.json",
+    "note": "The only source change adds generated in-archive delivery metadata. All source used by the four compilers and native services remains identical. Existing 179 outputs and startup results are retained with exact byte checks."
+  },
+  "focused_tests_source_set_hash": "9791cc29900941316ab4a25b5b5b1e70346a9d90e072558376e226a8a6fcd13a"
 }

@@ -1,13 +1,9 @@
 # One Tap Assets · 一品成片
 
-2026-10-31 selected-range closure: reference sampling now covers the explicitly confirmed source segment, retaining absolute frame/time bindings, caption boundaries and actual scene changes. The encoded output still receives full-timeline review. Quotes reject a known minimum image/token footprint or source/output pixel count beyond the frozen admission. New v2 evidence binds the range and actual PNG hashes; old v1 deliveries remain readable.
+2026-10-31 delivery closure: [START-HERE](START-HERE.md) is the handoff entry. `delivery:final` runs required type checking, selected builds and packaging without requiring a full test-suite pass. Startup and doctor verify recorded files and select current isolated or extracted outputs instead of stale default binaries. Complete mini-program/API/Worker/Plus source, designs and existing screenshots/recordings/GIFs are retained. See [actual build results](docs/delivery/current.json), [archive and SHA256](docs/delivery/package.json), [implementation details](docs/实施/最终交付入口与构建收口-v1.0.md), [focused evidence](docs/verification/final-closure-source.json) and [numbered status](docs/guides/STATUS.md). Actual providers, production isolation, devices, cloud deployment and full acceptance remain pending. Historical results below retain their original scope.
 
-Three new native checks pass; four existing checks are retained with identical application source. Typecheck, server and Plus builds pass. Initial type/assertion diagnostics are preserved. The full suite and native mini-program compilers were not run this turn. Mini/shared client files are unchanged. The new ZIP includes all source plus the current server/Plus outputs, and excludes prior mini-program binaries. Real services, isolation, cloud and physical devices remain unverified; sales stay disabled.
 
-[Implementation and limits](docs/实施/Plus选段复核与售前容量-v1.1.md) · [Evidence](docs/verification/video-range-source.json) · [Delivery manifest](docs/delivery/package.json) · [Numbered status](docs/guides/STATUS.md)
-
-Earlier sections retain their own historical scope. The current build selection is stated above and in the delivery manifest.
-
+Current delivery: Alipay, Douyin, server and Plus builds pass, alongside 10 focused checks and native startup/shutdown of four services. Actual HTTPS bytes match four HTML pages and four Plus assets. The full suite was not run; production and device acceptance remain pending. The earlier selected-source range, minimum quote capacity and v2 evidence changes are retained; see [range details](docs/实施/Plus选段复核与售前容量-v1.1.md).
 
 **A mobile-first self-service product asset studio for Alipay and Douyin mini-programs.** Photograph a product, let multimodal analysis identify visible features, choose a community preset and explicitly confirm the asset list and fee. Ten official styles establish the community baseline. Style Skills guide planning, production, post, deterministic QC and independent factual/style review; instances are released after delivery, and customers save assets on their phones.
 
@@ -292,6 +288,8 @@ runtime/           Private runtime/tools/builds/logs; excluded from Git
 Root READMEs and operational guides are bilingual. Detailed historical requirements/design/implementation records are primarily Chinese and retain their authoritative versions.
 
 ## Validation and remaining work
+
+The current delivery uses `delivery:final`. The complete verification commands below are optional separate runs; the full suite was not run for this delivery.
 
 ```powershell
 .\scripts\run.ps1 verify:implementation  # Types, units, native integration, server and both mini builds

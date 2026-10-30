@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "checked_at": "2026-10-30T17:09:05.792053+00:00",
+  "status": "PASS",
+  "scope": "FOCUSED_REPOSITORY_DOCUMENTATION_MEDIA_SOURCE_AND_AVAILABLE_BUILD_INTEGRITY",
+  "method": "ACTUAL_FILE_SHA256_AND_MARKDOWN_LINKS_WITH_RETAINED_BASELINE_MEDIA_PROVENANCE; not the legacy full-command verifier",
+  "evidence": "docs/verification/video-range-source.json",
+  "source_set_hash": "fd9c0811948782726bc1aa47036d02f138b376b7f25b1c33122b73561a66d205",
+  "source_files_verified": 545,
+  "runtime_contract_files_verified": 42,
+  "resource_files_verified": 4,
+  "documentation_files": 195,
+  "local_links": 1911,
+  "media_files": 190,
+  "historical_baseline_files_preserved": 1096,
+  "selected_builds_passed": true,
+  "native_builds_this_turn": "NOT_RUN",
+  "browser_this_turn": "NOT_USED",
+  "suites": [
+    {
+      "kind": "NEW_NATIVE_RANGE_FOCUSED",
+      "tests": 3,
+      "passed": 3,
+      "failed": 0
+    },
+    {
+      "kind": "RETAINED_NATIVE_VIDEO_IDENTICAL_APPLICATION",
+      "tests": 4,
+      "passed": 4,
+      "failed": 0
+    }
+  ],
+  "full_suite_executed": false,
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false
+}

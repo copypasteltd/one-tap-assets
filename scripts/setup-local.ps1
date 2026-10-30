@@ -10,9 +10,7 @@ if (-not $SkipInstall) {
 }
 & (Join-Path $PSScriptRoot 'run.ps1') exec tsx scripts/dev-setup.ts
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-& (Join-Path $PSScriptRoot 'run.ps1') build:server
-if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-& (Join-Path $PSScriptRoot 'run.ps1') build:preview
+& (Join-Path $PSScriptRoot 'run.ps1') delivery:build --skip-mini
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 Write-Host 'Local setup complete. Run: .\scripts\run.ps1 doctor'
 Write-Host 'Start backend: .\scripts\run.ps1 local:start'
