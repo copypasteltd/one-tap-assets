@@ -1,0 +1,14 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/integration/plus-video-range.test.ts (3 tests) 46139ms
+   ✓ preserves absolute non-second trim indices and ignores scenes outside the confirmed source range 512ms
+   ✓ rejects known impossible image, token and pixel capacity before creating a quote 6330ms
+   ✓ delivers a short selection from a 120-second source and seals complete selected references without altering the original 28029ms
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  01:01:04
+   Duration  47.43s (tests 98%, import 2%, transform 1%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/integration.json

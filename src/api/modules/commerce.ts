@@ -28,6 +28,7 @@ import {plusWorkBinding,derivePlusWorkSource} from '../../shared/domain/plus-wor
 import {PLUS_VIDEO_VERSION,PLUS_VIDEO_QC,plusVideoNeedsListening} from '../../shared/domain/plus-video.js';
 import {freezeOrderListening,verifyListeningLive} from '../../worker/audio/listening-contract.js';
 import {verifyPlusRenderSource} from './plus-render-source.js';
+import {checkPlusVideoReviewCapacity} from '../../worker/review/plus-video-capacity.js';
 export { requestRefundInternal } from './refunds.js';
 
 export async function createQuote(db: Db, cfg: Config, p: Principal, request: DTO<'QuoteRequest'>): Promise<DTO<'Quote'>> {
@@ -90,6 +91,10 @@ export async function createQuote(db: Db, cfg: Config, p: Principal, request: DT
       max_requests_per_role: codexContract.max_turns_per_role, max_input_tokens: codexContract.max_input_tokens,
       max_output_tokens: codexContract.max_output_tokens, ceiling_micro: codexContract.agent_cost_ceiling_micro,
       daily_ceiling_micro: codexContract.agent_cost_ceiling_micro } } };
+  if(plus?.version===PLUS_VIDEO_VERSION){
+    const photos=(await db.query<{count:number}>('SELECT count(DISTINCT asset_id)::int count FROM product_photo_items WHERE tenant_id=$1 AND photo_version_id=$2',[p.tenantId,plan.photo_version_id])).rows[0]!;
+    checkPlusVideoReviewCapacity(contract,photos.count);
+  }
   contract.revision_policy=freezeRevisionPolicy(contract,skill.payload.variant_id);
   freezeAiDisclosure(contract);
   requireThat(creativePlanHash(contract.creative)===contract.plan_hash,'PLAN_CHANGED','报价的完整文案与原规划摘要不一致',409);

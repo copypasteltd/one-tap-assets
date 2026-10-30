@@ -1,54 +1,24 @@
 {
-  "checked_at": "2026-10-30T16:27:37.321579+00:00",
+  "checked_at": "2026-10-30T17:09:05.792053+00:00",
   "status": "PASS",
-  "scope": "DELIVERY_FILE_AND_DOCUMENT_INTEGRITY_NOT_FULL_PRODUCT_ACCEPTANCE",
-  "source_set_hash": "539634851c52a6f1a661b05a8c0723ac443cac3744d809027a256256e942c1b8",
-  "source_files": 543,
+  "scope": "DELIVERY_FILE_DOCUMENT_AND_SOURCE_INTEGRITY_NOT_FULL_PRODUCT_ACCEPTANCE",
+  "source_set_hash": "fd9c0811948782726bc1aa47036d02f138b376b7f25b1c33122b73561a66d205",
+  "source_files": 545,
   "runtime_contract_files": 42,
   "resource_files": 4,
-  "evidence": "docs/verification/plus-video-source.json",
-  "markdown_files": 194,
-  "local_links_verified": 1883,
-  "public_diagnostic_logs": 12,
+  "evidence": "docs/verification/video-range-source.json",
+  "markdown_files": 195,
+  "local_links_verified": 1911,
+  "public_diagnostic_logs": 7,
   "media_files": 190,
-  "historical_json_unchanged": 608,
-  "old_migrations_preserved": 37,
-  "prior_api_operations_preserved": true,
-  "optional_video_fields_added_without_changing_existing_schema_requirements": true,
-  "native_mini_builds": [
-    {
-      "name": "alipay",
-      "status": "PASS",
-      "artifact_validation": {
-        "status": "PASS",
-        "page_count": 17,
-        "file_count": 71,
-        "javascript_files_parsed": 22,
-        "local_dependencies_checked": 22,
-        "project_configuration": "mini.project.json",
-        "host_launch_verified": false,
-        "real_device_verified": false
-      }
-    },
-    {
-      "name": "douyin",
-      "status": "PASS",
-      "artifact_validation": {
-        "status": "PASS",
-        "page_count": 17,
-        "file_count": 70,
-        "javascript_files_parsed": 22,
-        "local_dependencies_checked": 21,
-        "project_configuration": "project.config.json",
-        "host_launch_verified": false,
-        "real_device_verified": false
-      }
-    }
-  ],
+  "all_baseline_files_unchanged_except_archived_rolling_indices": 1093,
+  "historical_json_unchanged": 619,
+  "historical_json_preserved_with_archives": 622,
+  "old_migrations_preserved": 38,
+  "prior_api_operations_and_schemas_unchanged": true,
+  "native_mini_builds_this_turn": "NOT_RUN; no previous binaries mixed into current package",
   "full_suite_executed": false,
   "full_product_verified": false,
   "production_admitted": false,
-  "cloud_deployed": false,
-  "all_baseline_files_unchanged_except_archived_rolling_indices": 882,
-  "historical_json_preserved_with_archives": 611
+  "cloud_deployed": false
 }

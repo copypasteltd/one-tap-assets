@@ -1,44 +1,37 @@
 {
-  "checked_at": "2026-10-30T16:25:13.535554+00:00",
-  "status": "PLUS_VIDEO_FUNCTIONAL_CLOSURE",
-  "source_set_hash": "539634851c52a6f1a661b05a8c0723ac443cac3744d809027a256256e942c1b8",
-  "source_files": 543,
-  "focused_tests_passed": 4,
-  "browser_checks_passed": 4,
-  "builds_passed": true,
-  "native_mini_builds": [
+  "schema_version": "1.0",
+  "checked_at": "2026-10-30T17:09:05.792053+00:00",
+  "status": "PASS",
+  "scope": "FOCUSED_REPOSITORY_DOCUMENTATION_MEDIA_SOURCE_AND_AVAILABLE_BUILD_INTEGRITY",
+  "method": "ACTUAL_FILE_SHA256_AND_MARKDOWN_LINKS_WITH_RETAINED_BASELINE_MEDIA_PROVENANCE; not the legacy full-command verifier",
+  "evidence": "docs/verification/video-range-source.json",
+  "source_set_hash": "fd9c0811948782726bc1aa47036d02f138b376b7f25b1c33122b73561a66d205",
+  "source_files_verified": 545,
+  "runtime_contract_files_verified": 42,
+  "resource_files_verified": 4,
+  "documentation_files": 195,
+  "local_links": 1911,
+  "media_files": 190,
+  "historical_baseline_files_preserved": 1096,
+  "selected_builds_passed": true,
+  "native_builds_this_turn": "NOT_RUN",
+  "browser_this_turn": "NOT_USED",
+  "suites": [
     {
-      "name": "alipay",
-      "status": "PASS",
-      "artifact_validation": {
-        "status": "PASS",
-        "page_count": 17,
-        "file_count": 71,
-        "javascript_files_parsed": 22,
-        "local_dependencies_checked": 22,
-        "project_configuration": "mini.project.json",
-        "host_launch_verified": false,
-        "real_device_verified": false
-      }
+      "kind": "NEW_NATIVE_RANGE_FOCUSED",
+      "tests": 3,
+      "passed": 3,
+      "failed": 0
     },
     {
-      "name": "douyin",
-      "status": "PASS",
-      "artifact_validation": {
-        "status": "PASS",
-        "page_count": 17,
-        "file_count": 70,
-        "javascript_files_parsed": 22,
-        "local_dependencies_checked": 21,
-        "project_configuration": "project.config.json",
-        "host_launch_verified": false,
-        "real_device_verified": false
-      }
+      "kind": "RETAINED_NATIVE_VIDEO_IDENTICAL_APPLICATION",
+      "tests": 4,
+      "passed": 4,
+      "failed": 0
     }
   ],
   "full_suite_executed": false,
   "full_product_verified": false,
   "production_admitted": false,
-  "cloud_deployed": false,
-  "evidence": "docs/verification/plus-video-source.json"
+  "cloud_deployed": false
 }

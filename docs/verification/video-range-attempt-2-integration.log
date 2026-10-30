@@ -1,0 +1,34 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/integration/plus-video.test.ts (4 tests) 93282ms
+   ✓ requires a separately approved video capability and preserves isolated optimistic drafts 1489ms
+   ✓ freezes a video plan and independent native price, rejects unavailable listening before payment 8673ms
+   ✓ encodes a real selected MP4 with timed captions, retains sound, seals two complete WAVs and publishes only after both reviews 31034ms
+   ✓ honors explicit mute in a separate paid version without reusing or buying listening 20186ms
+ ❯ tests/integration/plus-video-range.test.ts (3 tests | 1 failed) 14085ms
+   ✓ preserves absolute non-second trim indices and ignores scenes outside the confirmed source range 255ms
+   × rejects known impossible image, token and pixel capacity before creating a quote 3718ms
+   · delivers a short selection from a 120-second source and seals complete selected references without altering the original
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/plus-video-range.test.ts > rejects known impossible image, token and pixel capacity before creating a quote
+TypeError: Cannot read properties of undefined (reading 'code')
+ ❯ tests/integration/plus-video-range.test.ts:45:125
+     43|   for(const vision of [{...original.review_vision,max_images:2},{...or…
+     44|     await f.db.pool.query("UPDATE plan_versions SET private=jsonb_set(…
+     45|     const quote=await call('/quotes','POST',request,true);expect(quote…
+       |                                                                                                                             ^
+     46|   }
+     47|   expect((await f.db.pool.query('SELECT id FROM quotes WHERE plan_id=$…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 5 passed (7)
+   Start at  00:56:16
+   Duration  177.04s (tests 61%, import 25%, transform 13%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/integration.json

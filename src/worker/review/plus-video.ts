@@ -10,11 +10,12 @@ import type {ExecutionContext} from '../compiler/order-context.js';
 import type {MediaReceipt} from '../media/artifacts.js';
 import {nativeCommand} from '../media/native.js';
 import {compareEncodedMix} from '../media/native-audio-post.js';
-import {extractEvidenceFrames,type EvidenceFrame} from './evidence.js';
+import {extractEvidenceFrames,requiredEvidenceFrameIndices,RANGE_FRAME_SAMPLING_POLICY,type EvidenceFrame} from './evidence.js';
 import {nativeReviewWav} from './native-audio.js';
 import type {ReviewEvidence} from './qc.js';
 
-const VERSION='YPCC-PLUS-VIDEO-EVIDENCE-1';
+const VERSION='YPCC-PLUS-VIDEO-EVIDENCE-2';
+const LEGACY_VERSION='YPCC-PLUS-VIDEO-EVIDENCE-1';
 type Kind='NATIVE_AUDIO'|'FINAL_AUDIO'|'CAPTION_SCRIPT'|'AUDIO_QC';
 export interface PlusVideoQcBundle{files:{kind:Kind;bytes:Buffer;artifact_id:string|null;mime_type:string}[];source_frames:EvidenceFrame[];caption_frames:number[]}
 export function plusVideoCaptionFrames(b:PlusVideoBinding):number[]{
@@ -33,9 +34,10 @@ export async function plusVideoQc(cfg:Config,store:ObjectStorage,c:ExecutionCont
   const source=await store.get(b.source_object_key,512000000);requireThat(source.length===b.source_bytes&&sha256(source)===b.source_sha256,
     'PLUS_SOURCE_BYTES_CHANGED','原片审查来源已变化',503);
   const sourcePath=join(directory,'source.mp4');await writeFile(sourcePath,source,{flag:'wx'});
+  const caption_frames=plusVideoCaptionFrames(b);
   const source_frames=await extractEvidenceFrames(cfg,sourcePath,join(directory,'source-frames'),b.source_frames,
-    [b.settings.trim.start_frame,b.settings.trim.end_frame-1],c.snapshot.deadline_at,signal);
-  const caption_frames=plusVideoCaptionFrames(b),script=Buffer.from(JSON.stringify({version:VERSION,binding_hash:hash(b),
+    caption_frames.map(n=>n+b.settings.trim.start_frame),c.snapshot.deadline_at,signal,b.settings.trim);
+  const script=Buffer.from(JSON.stringify({version:VERSION,binding_hash:hash(b),
     target_frames:c.snapshot.timeline.target_frames,captions:b.settings.captions,user_input_status:'USER_PROVIDED_UNVERIFIED',
     instruction:'SUBTITLE须与实际声音逐句核对；ON_SCREEN_COPY是画面文案，仍须核对商品证据。没有自动转写或已验证台词的承诺。'}));
   const files:PlusVideoQcBundle['files']=[{kind:'CAPTION_SCRIPT',bytes:script,artifact_id:null,mime_type:'application/json'}];
@@ -54,6 +56,8 @@ export async function plusVideoQc(cfg:Config,store:ObjectStorage,c:ExecutionCont
   }
   files.push({kind:'AUDIO_QC',artifact_id:video.id,mime_type:'application/json',bytes:Buffer.from(JSON.stringify({version:VERSION,binding_hash:hash(b),
     snapshot_hash:c.snapshotHash,source_sha256:b.source_sha256,encoded_video_sha256:video.sha256,target_frames:c.snapshot.timeline.target_frames,
+    source_review:{sampling_policy:RANGE_FRAME_SAMPLING_POLICY,range:b.settings.trim,source_frames:b.source_frames,
+      frames:source_frames.map(f=>({index:f.index,time_ms:f.timeMs,sha256:sha256(f.bytes)}))},
     audio_mode:b.settings.audio_mode,source_has_audio:b.source_has_audio,comparison,caption_script_sha256:sha256(script),
     files:files.map(f=>({kind:f.kind,sha256:sha256(f.bytes),size_bytes:f.bytes.length})),semantic_review:'PENDING',
     independent_listening:plusVideoNeedsListening(c.contract.source)?'REQUIRED':'NOT_APPLICABLE'}))});
@@ -66,11 +70,11 @@ export function verifyPlusVideoEvidence(packet:DTO<'ReviewPacket'>,rows:ReviewEv
   const b=contract.plus_video?.binding;requireThat(b?.version==='YPCC-PLUS-VIDEO-1'&&hash(contract.snapshot)===packet.snapshot_hash,
     'PLUS_VIDEO_EVIDENCE_CHANGED','视频编辑的封存合同与快照不一致',503);
   const script=unique('CAPTION_SCRIPT'),report=JSON.parse(bytes.get(unique('AUDIO_QC').id)!.toString('utf8')) as Record<string,unknown>;
-  const parsed=JSON.parse(bytes.get(script.id)!.toString('utf8')) as {binding_hash:string;captions:unknown};
+  const parsed=JSON.parse(bytes.get(script.id)!.toString('utf8')) as {version:string;binding_hash:string;captions:unknown};
   const sound=b.source_has_audio&&b.settings.audio_mode==='PRESERVE';
-  requireThat(parsed.binding_hash===hash(b)&&hash(parsed.captions)===hash(b.settings.captions)&&report.version===VERSION&&report.binding_hash===hash(b)
+  requireThat(parsed.version===report.version&&parsed.binding_hash===hash(b)&&hash(parsed.captions)===hash(b.settings.captions)&&(report.version===VERSION||report.version===LEGACY_VERSION)&&report.binding_hash===hash(b)
     &&report.snapshot_hash===packet.snapshot_hash&&report.caption_script_sha256===script.sha256&&report.source_sha256===b.source_sha256
-    &&report.target_frames===b.settings.trim.end_frame-b.settings.trim.start_frame&&report.audio_mode===b.settings.audio_mode
+    &&report.target_frames===b.settings.trim.end_frame-b.settings.trim.start_frame&&report.audio_mode===b.settings.audio_mode&&report.source_has_audio===b.source_has_audio
     &&report.independent_listening===(sound?'REQUIRED':'NOT_APPLICABLE')&&packet.outputs.some(o=>o.sha256===report.encoded_video_sha256),
     'PLUS_VIDEO_EVIDENCE_CHANGED','视频编辑的声音、字幕或实际成片摘要不匹配',503);
   for(const kind of ['NATIVE_AUDIO','FINAL_AUDIO']){
@@ -80,4 +84,21 @@ export function verifyPlusVideoEvidence(packet:DTO<'ReviewPacket'>,rows:ReviewEv
     requireThat(row.sha256===f.sha256&&raw.length===f.size_bytes&&sha256(raw)===f.sha256,'PLUS_VIDEO_EVIDENCE_CHANGED','视频编辑审查文件字节已变化',503);}
   requireThat(rows.some(r=>r.kind==='CANDIDATE_IMAGE'&&r.data.purpose==='PLUS_VIDEO_SOURCE_REFERENCE'&&r.data.source_sha256===b.source_sha256),
     'PLUS_VIDEO_SOURCE_EVIDENCE_MISSING','视频编辑缺少实际原片参考帧',503);
+  if(report.version===VERSION){
+    const source=report.source_review as {sampling_policy:string;range:unknown;source_frames:number;frames:{index:number;time_ms:number;sha256:string}[]}|undefined;
+    const references=rows.filter(r=>r.kind==='CANDIDATE_IMAGE'&&r.data.purpose==='PLUS_VIDEO_SOURCE_REFERENCE').sort((a,c)=>a.frame_index!-c.frame_index!);
+    requireThat(source?.sampling_policy===RANGE_FRAME_SAMPLING_POLICY&&hash(source.range)===hash(b.settings.trim)&&source.source_frames===b.source_frames
+      &&Array.isArray(source.frames)&&source.frames.length===references.length&&new Set(source.frames.map(f=>f.index)).size===source.frames.length,
+      'PLUS_VIDEO_SOURCE_EVIDENCE_INVALID','原片参考帧的选段、策略或数量与冻结合同不一致',503);
+    for(const [i,frame] of source.frames.entries()){
+      const row=references[i]!;
+      requireThat(Number.isSafeInteger(frame.index)&&frame.index>=b.settings.trim.start_frame&&frame.index<b.settings.trim.end_frame
+        &&(!i||frame.index>source.frames[i-1]!.index)&&frame.time_ms===Math.round(frame.index*1000/30)
+        &&row.frame_index===frame.index&&row.time_ms===frame.time_ms&&row.artifact_id===null&&row.data.source_artifact_id===b.source_artifact_id
+        &&row.data.source_sha256===b.source_sha256&&row.sha256===frame.sha256&&bytes.has(row.id)&&sha256(bytes.get(row.id)!)===frame.sha256,
+        'PLUS_VIDEO_SOURCE_EVIDENCE_INVALID','原片参考帧不在已确认选段内或时间码、来源及实际字节不一致',503);
+    }
+    const required=requiredEvidenceFrameIndices(b.source_frames,plusVideoCaptionFrames(b).map(n=>n+b.settings.trim.start_frame),b.settings.trim);
+    requireThat(required.every(n=>source.frames.some(f=>f.index===n)),'PLUS_VIDEO_SOURCE_EVIDENCE_INCOMPLETE','原片选段缺少固定抽帧或字幕边界参考',503);
+  }
 }

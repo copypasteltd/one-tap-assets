@@ -1,0 +1,1 @@
+tests/integration/plus-video-range.test.ts(16,79): error TS2345: Argument of type 'string' is not assignable to parameter of type '"DELETE" | "PUT" | "GET" | "POST" | undefined'.

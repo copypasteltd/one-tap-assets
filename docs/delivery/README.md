@@ -1,5 +1,8 @@
 # 源码交付与快速启动 / Source delivery and quick start
 
+2026-10-31当前候选选择为 `SERVER_AND_PREVIEW`：全部功能性源码、当前服务端和Plus构建入包，双小程序源码保持前轮字节但本轮没有重编，旧二进制不混入新包。之前双端编译证据仍见[前轮记录](../verification/plus-video-build.json)。本轮仅相关检查，非全面绿灯；[选段修正与容量边界](../实施/Plus选段复核与售前容量-v1.1.md)、[证据](../verification/video-range-source.json)及[ZIP清单](package.json)明确实际范围。 / Current package: all source and current server/Plus outputs; native clients are unchanged but not rebuilt, and old binaries are excluded.
+
+
 2026-10-31快速功能收口：Plus原片视频选段、裁切、定时字幕、原声保留/静音、独立手机授权与确认付款、新MP4/真实首帧封面/文案交付已接通。有声选段封存完整原选段与成片WAV，通过原声技术比对、独立听音及事实/风格双复核；手填字幕不冒充ASR。有声视频的免费受限售后仅修改文案并保留原音视频。4项原生关键链路检查、4项真实浏览器流程及类型/server/Plus/支付宝/抖音构建通过，未执行全面测试。543源码、38迁移、106业务/38管理接口、316schema/82实体；新增10份截图/MP4/WebM/GIF，原180媒体及方案C保持。原生数据库/HTTPS/MCP/FFmpeg实际运行，账户、付款、模型/听音判定及隔离身份为合成；真实服务和销售默认关闭。双端真机、真实服务/隔离准入、云端部署、多轨与视频批量/自动转写/复杂作者工具、长期身份绑定及58项完整验收仍待。
 
 [视频剪辑需求、协议与配置](../实施/Plus原片视频剪辑与定时字幕-v1.0.md) · [截图与录屏](../media/plus-video/README.md) · [准确证据](../verification/plus-video-source.json) · [编号完成与待办](../guides/STATUS.md)。下文保留此前方案和历史验证来源；当前新增范围以上述视频剪辑说明及本轮证据为准。

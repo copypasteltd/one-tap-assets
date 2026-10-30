@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "checked_at": "2026-10-30T17:05:52.818298+00:00",
+  "scope": "PLUS_VIDEO_SELECTED_SOURCE_RANGE_AND_PREPAYMENT_REVIEW_FLOOR",
+  "requirements": [
+    "P01-F18/T18",
+    "P01-F41/T41",
+    "P01-F46/T46",
+    "P01-F55/T55"
+  ],
+  "requirements_preserved": 58,
+  "source_set_hash": "fd9c0811948782726bc1aa47036d02f138b376b7f25b1c33122b73561a66d205",
+  "source_files": 545,
+  "runtime_contract_files": 42,
+  "resource_files": 4,
+  "source_snapshot": "docs/verification/video-range-functional-source.json",
+  "snapshot_timing": "CAPTURED_AFTER_SUCCESSFUL_FOCUSED_RUN; SAME_BYTES_CHECKED_BEFORE_AND_AFTER_SELECTED_PLUS_BUILD",
+  "selected_builds_passed": true,
+  "all_builds_run": false,
+  "typecheck": {
+    "status": "PASS",
+    "log": "docs/verification/video-range-attempt-3-typecheck.log"
+  },
+  "server_build": {
+    "status": "PASS",
+    "log": "docs/verification/video-range-attempt-2-server.log",
+    "application_source_matches_final": true,
+    "only_source_difference": "New range-test error-code assertion; no application/scripts/contracts difference"
+  },
+  "plus_build": {
+    "status": "PASS",
+    "log": "docs/verification/video-range-preview.log"
+  },
+  "native_builds_this_turn": "NOT_RUN",
+  "native_build_previous_source": "docs/verification/plus-video-build.json",
+  "native_and_web_client_files_unchanged": 132,
+  "contracts_and_font_resources_unchanged": true,
+  "migrations_unchanged": 38,
+  "retained_existing_native_checks": {
+    "passed": 4,
+    "failed": 0,
+    "file": "tests/integration/plus-video.test.ts",
+    "evidence": "docs/verification/video-range-attempt-2-integration.json",
+    "source_inventory": "docs/verification/video-range-retained-source.json",
+    "application_source_unchanged": true,
+    "original_combined_run_status": "FAIL; the new range-test assertion failed, and its final case was not executed"
+  },
+  "new_range_native_checks": {
+    "passed": 3,
+    "failed": 0,
+    "file": "tests/integration/plus-video-range.test.ts",
+    "evidence": "docs/verification/video-range-integration.json",
+    "log": "docs/verification/video-range-attempt-3-integration.log"
+  },
+  "observed_cases": [
+    "Non-second range starts retain absolute indices and real color/scene transitions; outside-range scene excluded; full-output sampler preserved",
+    "Image/token/pixel capacity rejected before issuing a quote; no quote row created",
+    "120-second H264/AAC source, frames3017–3077, actual60-frame muted output, original source and manifest unchanged, complete v2 source references, both reviews and instance release",
+    "Outside-range/missing sealed references rejected; original four retained cases include preserved audio, exact cover and independent listening evidence"
+  ],
+  "preliminary_attempts": [
+    {
+      "kind": "TYPE_DIAGNOSTIC",
+      "evidence": "docs/verification/video-range-attempt-1-results.json",
+      "log": "docs/verification/video-range-attempt-1-typecheck.log",
+      "failing_source_inventory_available": false,
+      "reason": "New test helper method inferred as string; corrected to the existing API method union"
+    },
+    {
+      "kind": "TEST_ASSERTION_DIAGNOSTIC",
+      "evidence": "docs/verification/video-range-attempt-2-integration.json",
+      "log": "docs/verification/video-range-attempt-2-integration.log",
+      "passed": 5,
+      "failed": 1,
+      "not_run": 0,
+      "reason": "Test read error.code; the API actual error code is top-level code. Application check had returned422. Final three-case run uses the corrected assertion."
+    }
+  ],
+  "capacity_preflight": "KNOWN_MINIMUM_ONLY; actual scene count, PNG bytes, complete context and runtime limits remain binding",
+  "new_evidence_version": "YPCC-PLUS-VIDEO-EVIDENCE-2",
+  "legacy_evidence_version_retained": "YPCC-PLUS-VIDEO-EVIDENCE-1",
+  "browser_this_turn": "NOT_USED",
+  "media_this_turn": 0,
+  "media_files": 190,
+  "public_diagnostic_logs": [
+    "docs/verification/video-range-attempt-1-typecheck.log",
+    "docs/verification/video-range-attempt-2-typecheck.log",
+    "docs/verification/video-range-attempt-2-server.log",
+    "docs/verification/video-range-attempt-2-integration.log",
+    "docs/verification/video-range-attempt-3-typecheck.log",
+    "docs/verification/video-range-attempt-3-integration.log",
+    "docs/verification/video-range-preview.log"
+  ],
+  "data_provenance": "Native PostgreSQL, HTTPS, MCP and FFmpeg; synthetic identity, payment, model/semantic verdicts and process identity. Audio is a synthetic tone.",
+  "full_suite_executed": false,
+  "full_product_verified": false,
+  "production_admitted": false,
+  "cloud_deployed": false,
+  "pending": [
+    "Real services and native isolation admission/cloud deployment",
+    "Dual mini-program host and physical-device acceptance",
+    "ASR, multitrack/video batch and advanced authorship",
+    "Persistent cross-platform binding",
+    "Full58 requirements,420 official-variant runs,quality/capacity and operations"
+  ]
+}

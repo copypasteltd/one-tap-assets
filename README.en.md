@@ -1,5 +1,14 @@
 # One Tap Assets · 一品成片
 
+2026-10-31 selected-range closure: reference sampling now covers the explicitly confirmed source segment, retaining absolute frame/time bindings, caption boundaries and actual scene changes. The encoded output still receives full-timeline review. Quotes reject a known minimum image/token footprint or source/output pixel count beyond the frozen admission. New v2 evidence binds the range and actual PNG hashes; old v1 deliveries remain readable.
+
+Three new native checks pass; four existing checks are retained with identical application source. Typecheck, server and Plus builds pass. Initial type/assertion diagnostics are preserved. The full suite and native mini-program compilers were not run this turn. Mini/shared client files are unchanged. The new ZIP includes all source plus the current server/Plus outputs, and excludes prior mini-program binaries. Real services, isolation, cloud and physical devices remain unverified; sales stay disabled.
+
+[Implementation and limits](docs/实施/Plus选段复核与售前容量-v1.1.md) · [Evidence](docs/verification/video-range-source.json) · [Delivery manifest](docs/delivery/package.json) · [Numbered status](docs/guides/STATUS.md)
+
+Earlier sections retain their own historical scope. The current build selection is stated above and in the delivery manifest.
+
+
 **A mobile-first self-service product asset studio for Alipay and Douyin mini-programs.** Photograph a product, let multimodal analysis identify visible features, choose a community preset and explicitly confirm the asset list and fee. Ten official styles establish the community baseline. Style Skills guide planning, production, post, deterministic QC and independent factual/style review; instances are released after delivery, and customers save assets on their phones.
 
 **This round closes the Plus source-video editing workflow.** Trim an owned delivered MP4 by frame, crop it, choose dimensions, add timed cues, retain or mute its original audio and save an independent revision. Explicit video permission is approved on the phone; each production has its own native confirmation, fee and payment. The new private pack contains an actual edited MP4, a PNG extracted from its first frame and copy. The original assets survive. Audio retention requires full-track comparison, separately settled listening evidence and both reviewers. Manual captions remain unverified input; automatic ASR is not claimed.

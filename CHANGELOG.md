@@ -1,5 +1,14 @@
 # 更新记录 / Changelog
 
+## 2026-10-31 · Plus 选段复核与售前容量 / Selected-range review
+
+- 原片参考限定在确认选段内，保留绝对帧号、首尾/每秒/字幕边界及场景变化；成片保持完整验收。
+- 新报价先校验已知最低画面/Token和原片/输出像素；超限拒绝，不提高原预算或额度。
+- v2封存绑定选段、时间码与实际PNG，兼容原v1；无新API、迁移或界面。
+- Three new native checks pass; four existing checks are retained with identical application code. Typecheck/server/Plus pass; native compilers and full suite not run. Initial diagnostics remain archived.
+- [本轮说明 / Details](docs/实施/Plus选段复核与售前容量-v1.1.md) · [证据 / Evidence](docs/verification/video-range-source.json)。真实服务/隔离/真机与完整产品仍待验收。
+
+
 ## 2026-10-31 · Plus 原片视频剪辑与定时字幕
 
 - 原片按帧选段、归一裁切、偶数尺寸、定时字幕、原声保留或显式关闭；实际编码MP4及真实首帧封面，原版本保留。

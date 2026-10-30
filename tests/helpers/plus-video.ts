@@ -13,7 +13,7 @@ import type {DTO} from '../../src/shared/contracts/types';
 
 /** Real native media/HTTPS/PG/MCP; identities, payment and positive listening
  * verdicts are synthetic control fixtures, never production admission. */
-export async function plusVideoFixture(){
+export async function plusVideoFixture(options:{sourceFrames?:number;sourceWidth?:number;sourceHeight?:number}={}){
   const f=await plusRenderFixture();
   try{
     const listening=syntheticListeningContract();
@@ -25,16 +25,18 @@ export async function plusVideoFixture(){
       status:'ADMITTED',version:model.registry_version,data:model,private:{listening_contract:listening}});
     await f.db.pool.query(`UPDATE execution_variants SET private=jsonb_set(private,'{codex_contract,max_input_tokens}','600000'::jsonb)
       WHERE variant_id='minimal-clean.photo-layout'`);
+    const frames=options.sourceFrames??120,width=options.sourceWidth??800,height=options.sourceHeight??1000;
+    if(!Number.isSafeInteger(frames)||frames<30||frames>3600)throw new Error('Invalid synthetic source duration');
     const directory=join(f.cfg.runtimeRoot,'test-plus-video',id('source'));await mkdir(directory,{recursive:true});
     const png=join(directory,'source.png'),path=join(directory,'source.mp4');await writeFile(png,f.png);
     await nativeCommand(f.cfg,process.env.FFMPEG_PATH?.trim()||'ffmpeg',['-hide_banner','-loglevel','error','-nostdin','-threads','2','-loop','1','-framerate','30','-i',png,
-      '-f','lavfi','-i','sine=frequency=660:sample_rate=48000:duration=4','-map','0:v:0','-map','1:a:0','-t','4','-frames:v','120',
+      '-f','lavfi','-i',`sine=frequency=660:sample_rate=48000:duration=${frames/30}`,'-map','0:v:0','-map','1:a:0','-t',String(frames/30),'-frames:v',String(frames),'-vf',`scale=${width}:${height}`,
       '-c:v','libx264','-threads','2','-preset','veryfast','-pix_fmt','yuv420p','-c:a','aac','-b:a','192k','-ac','2','-movflags','+faststart',path],{cwd:directory,timeoutMs:60000});
     const artifactId=id('artifact'),manifestId=id('manifest');
     const bytes=await readFile(path),inspection=await inspectVideo(f.cfg,path),key=`${f.buyer.principal.tenantId}/synthetic-plus-parent/${artifactId}.mp4`;
     await f.store.put(key,bytes,'video/mp4');
     const item:DTO<'Deliverable'>={...f.pack.items[0]!,deliverable_id:artifactId,kind:'video',file_name:'synthetic-original-video.mp4',mime_type:'video/mp4',
-      size_bytes:bytes.length,sha256:sha256(bytes),fps:30,duration_frames:120};
+      size_bytes:bytes.length,sha256:sha256(bytes),width:inspection.width,height:inspection.height,fps:30,duration_frames:frames};
     const pack:DTO<'Deliverables'>={...f.pack,manifest_id:manifestId,manifest_revision:2,items:[item]};
     await insert(f.db.pool,'artifacts',{id:artifactId,tenant_id:f.buyer.principal.tenantId,order_id:f.originalId,stage_run_id:f.lease.id,
       slot_id:'hero-video',object_key:key,sha256:item.sha256,spec_json:{kind:'video',inspection},data:{synthetic_original:true},expires_at:pack.expires_at});
