@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "checked_at": "2026-10-30T11:37:33.913298+00:00",
+  "checked_at": "2026-10-30T12:06:23.176225+00:00",
   "status": "FOCUSED_DELIVERY_NOT_FULL_PUBLICATION_ACCEPTANCE",
-  "source_set_hash": "c86577a4af193ecc0b1f27d8b052e1a0b9e814b7587fb00b5fe5ca027eb55d40",
+  "source_set_hash": "926fe75ab13f4a8f485bc70b812fdbdda4e366ca7b59dd64d6b7fcb05a6cab56",
   "source_files": 486,
-  "evidence": "docs/verification/feedback-insights-source.json",
+  "evidence": "docs/verification/recommendation-events-source.json",
   "builds_passed": false,
   "selected_builds_passed": true,
   "checks": [
@@ -62,8 +62,8 @@
       "log_sha256": "77517d4c3d9b24615105b48cbe15be361ce64b69b3fd5be982634d3d8bfcb63b"
     }
   ],
-  "focused_tests_passed": 15,
-  "browser_checks_passed": 5,
+  "focused_tests_passed": 22,
+  "browser_checks_passed": 8,
   "native_mini_builds_and_devices": "NOT_RUN",
   "prior_captures_relabelled": false,
   "checker_weakened": false,
@@ -71,5 +71,7 @@
   "full_suite_executed": false,
   "full_product_verified": false,
   "production_admitted": false,
-  "cloud_deployed": false
+  "cloud_deployed": false,
+  "verification_mode": "FOCUSED_RECOMMENDATION_VISIBLE_EVENTS",
+  "media_files": 153
 }

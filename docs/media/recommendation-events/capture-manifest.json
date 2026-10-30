@@ -1,0 +1,114 @@
+{
+  "captured_at": "2026-10-30T12:03:41.799Z",
+  "type": "ACTUAL_BROWSER_RECORDING_SHARED_MINI_PRODUCT_RECOMMENDATIONS",
+  "data_source": "SYNTHETIC_PRODUCT_RECOMMENDATIONS_AND_WITHDRAWAL_METADATA_ACTUAL_BROWSER_RENDERING",
+  "source_set_hash": "926fe75ab13f4a8f485bc70b812fdbdda4e366ca7b59dd64d6b7fcb05a6cab56",
+  "build_root": "runtime/delivery-builds/2026-10-30T12-02-30-068Z-4b5de9ee/runtime/build",
+  "native_mini_device_verified": false,
+  "real_generation_verified": false,
+  "real_payment_verified": false,
+  "browser_tabs_closed": true,
+  "owned_preview_server_stopped": true,
+  "browser_errors": [],
+  "external_network_requests": [],
+  "checks": [
+    "ACTUAL_BROWSER_VIEWPORT_DWELL_REPORTS_AN_IMPRESSION",
+    "ACTUAL_SHARED_ANALYSIS_DISPLAYS_THREE_SYNTHETIC_REASONS_AND_VARIANT_COUNTS",
+    "DETAIL_NAVIGATION_REPORTS_ONE_INDEPENDENT_CLICK",
+    "UNMOUNTED_CARDS_STOP_DWELL_AND_OBSERVERS",
+    "EXACT_VERSION_AND_RECOMMENDED_VARIANT_PRESERVED_DETAIL_RECHECKS_SYNTHETIC_WITHDRAWAL",
+    "BUYER_CAN_BROWSE_ALL_TEN_STYLES_WITHOUT_AUTOMATIC_SELECTION",
+    "EMPTY_LIST_OFFERS_CATALOG_AND_RECAPTURE_WITHOUT_REQUIRED_FORM",
+    "NO_HORIZONTAL_OVERFLOW_AT_320PX"
+  ],
+  "screenshots": [
+    {
+      "page": "01-product-recommendations",
+      "path": "docs/media/recommendation-events/01-product-recommendations.png"
+    },
+    {
+      "page": "02-exact-version-recheck",
+      "path": "docs/media/recommendation-events/02-exact-version-recheck.png"
+    },
+    {
+      "page": "03-empty-recommendations",
+      "path": "docs/media/recommendation-events/03-empty-recommendations.png"
+    }
+  ],
+  "recording": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 430,
+        "height": 932
+      }
+    ],
+    "format": {
+      "duration": "4.520000"
+    }
+  },
+  "files": [
+    {
+      "path": "docs/media/recommendation-events/01-product-recommendations.png",
+      "bytes": 85726,
+      "sha256": "ef3acc11e973f8fb7aabd66c5a80c37259483f95010552629ec38f0118a8c731"
+    },
+    {
+      "path": "docs/media/recommendation-events/02-exact-version-recheck.png",
+      "bytes": 57395,
+      "sha256": "25408dfe876e875fea09c54895353edc0716933de8f9a5741e7ba65db1a5e80d"
+    },
+    {
+      "path": "docs/media/recommendation-events/03-empty-recommendations.png",
+      "bytes": 82502,
+      "sha256": "62e08cf17d3cbc34b8333a751c3f9602ab9d117f944956a054c2887ea72c8fee"
+    },
+    {
+      "path": "docs/media/recommendation-events/walkthrough.webm",
+      "bytes": 593739,
+      "sha256": "0e2b01b6a1a5b608eccac4ef8e1e77b8437b9d143270c293c04e0577d6c14576"
+    },
+    {
+      "path": "docs/media/recommendation-events/walkthrough.mp4",
+      "bytes": 161003,
+      "sha256": "7e79eced2e3263171f0e243598efcba16110f2560e2d97ec5f980f8f09a958d6"
+    },
+    {
+      "path": "docs/media/recommendation-events/walkthrough.gif",
+      "bytes": 609924,
+      "sha256": "d0dfcf31f4fc075289d1d843ea092f9664904a4fa39f0e18a61b52a7f3ad30e0"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "scripts/record-recommendation-events.ts",
+      "sha256": "2e79e3767e8a49c1e12002595be793144b603e5a763cf3103fabc52a3649e5b9"
+    },
+    {
+      "path": "src/shared/ui/analysis.tsx",
+      "sha256": "12e42dceec4940a010d2afb4f1fd52702b5bd0eff7f55f06497765fa47a27ac7"
+    },
+    {
+      "path": "src/shared/ui/recommendations.tsx",
+      "sha256": "0e4233be8b7ae9b8f0b1acae588cf6eb7b1d2ec3c2ea0472fae156251bbdb60a"
+    },
+    {
+      "path": "src/shared/client/recommendations.ts",
+      "sha256": "e2cf0e58f0fcf0c8c4b4ecef472b6ecd75889f75f0e73fbd80fcf1388595dd2c"
+    },
+    {
+      "path": "src/shared/domain/recommendations.ts",
+      "sha256": "0176927841d681de59994721d549b901e3966f28e994256c7699edd6a47c895c"
+    },
+    {
+      "path": "src/api/modules/recommendations.ts",
+      "sha256": "fe74fcac323d3a22b289fb4a55ab35b34c5595b399948833589b27fc496321e8"
+    },
+    {
+      "path": "src/preview/fixtures.ts",
+      "sha256": "63ac4b5aea38d7fa39176219abeb65e8e6d14961b8978f9460dd4b708d227dca"
+    }
+  ]
+}

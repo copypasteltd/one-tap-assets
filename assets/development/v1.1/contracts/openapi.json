@@ -12426,6 +12426,171 @@
           }
         }
       }
+    },
+    "/products/{product_id}/recommendation-events": {
+      "post": {
+        "operationId": "recordRecommendationEvent",
+        "summary": "记录本人当前推荐的可见停留或点击；自然键去重，不影响制作",
+        "description": "记录本人当前推荐的可见停留或点击；自然键去重，不影响制作",
+        "tags": [
+          "catalog"
+        ],
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecommendationEventReceiptResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "业务/鉴权错误，具体code及恢复语义见接口文档",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "productSession": []
+          }
+        ],
+        "x-auth-policy": "product-session-and-resource-ownership",
+        "x-idempotency-required": false,
+        "x-requirements": [
+          "P01-F17",
+          "P01-F21"
+        ],
+        "x-design-pages": [
+          "D01",
+          "D02",
+          "D03",
+          "D04",
+          "D05",
+          "D07",
+          "D10",
+          "D16"
+        ],
+        "x-implementation-status": "DESIGN_NOT_IMPLEMENTED",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecommendationEventRequest"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -13809,6 +13974,9 @@
             },
             "minItems": 0,
             "maxItems": 100
+          },
+          "measurement": {
+            "$ref": "#/components/schemas/RecommendationMeasurement"
           }
         },
         "required": [
@@ -22228,10 +22396,28 @@
                 "maximum": 2147483647
               },
               "recommendation_impressions": {
-                "type": "null"
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               },
               "recommendation_clicks": {
-                "type": "null"
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               },
               "automatic_success_ratio": {
                 "type": "null"
@@ -22369,6 +22555,9 @@
               "complete_cost_micro"
             ],
             "additionalProperties": false
+          },
+          "recommendation_measurement": {
+            "$ref": "#/components/schemas/RecommendationMeasurementCoverage"
           }
         },
         "required": [
@@ -22380,7 +22569,8 @@
           "album",
           "feedback",
           "community",
-          "costs"
+          "costs",
+          "recommendation_measurement"
         ],
         "additionalProperties": false
       },
@@ -22421,6 +22611,107 @@
         "properties": {
           "data": {
             "$ref": "#/components/schemas/ProductInsights"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "RecommendationMeasurement": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "minLength": 32,
+            "maxLength": 4096
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          }
+        },
+        "required": [
+          "token",
+          "expires_at"
+        ],
+        "additionalProperties": false
+      },
+      "RecommendationEventRequest": {
+        "type": "object",
+        "properties": {
+          "measurement_token": {
+            "type": "string",
+            "minLength": 32,
+            "maxLength": 4096
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "IMPRESSION",
+              "CLICK"
+            ]
+          }
+        },
+        "required": [
+          "measurement_token",
+          "kind"
+        ],
+        "additionalProperties": false
+      },
+      "RecommendationEventReceipt": {
+        "type": "object",
+        "properties": {
+          "accepted": {
+            "const": true
+          },
+          "duplicate": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "accepted",
+          "duplicate"
+        ],
+        "additionalProperties": false
+      },
+      "RecommendationMeasurementCoverage": {
+        "type": "object",
+        "properties": {
+          "started_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          },
+          "window_coverage": {
+            "type": "string",
+            "enum": [
+              "UNCOLLECTED",
+              "PARTIAL",
+              "SINCE_START"
+            ]
+          },
+          "evidence": {
+            "const": "CLIENT_REPORTED"
+          }
+        },
+        "required": [
+          "started_at",
+          "window_coverage",
+          "evidence"
+        ],
+        "additionalProperties": false
+      },
+      "RecommendationEventReceiptResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/RecommendationEventReceipt"
           },
           "trace_id": {
             "type": "string"

@@ -1,5 +1,16 @@
 # 更新记录 / Changelog
 
+## 2026-10-30 · 推荐可见停留与选用记录 / Recommendation measurement
+
+- 新增50%可见连续500ms曝光和独立点击；上报失败不阻碍选型/付款/交付。
+- 15分钟用途签名、本人当前输入与方案版校验、并发自然键去重、删除清除。
+- 服务器接收时间与运营分群计数；明确采集起点、历史null和客户端证据局限。
+- 034迁移、80业务/38管理操作；契约生成源、类型、数据目录与调用方同步，原件留档。
+- 12客户端/10原生/8浏览器及类型/server/preview/本机启动通过；初始两处类型失败保留，非全套或真机。
+- Three screenshots, MP4/WebM/GIF, bilingual README and source/build package updated. Real services, qualified customer acceptance and cloud deployment remain pending.
+
+以下内容保留其历史来源，当前状态以上述记录及本轮证据为准。
+
 ## 2026-10-30 — 自愿反馈、服务端分群与运营明细
 
 - 领取页加入可选择、更改和撤回的自愿使用反馈；所有权/已付首版门槛、修订比较、删除清除和防复活。

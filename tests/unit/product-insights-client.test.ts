@@ -1,7 +1,7 @@
 import {it,expect,vi} from 'vitest';
 import {MetricsClient} from '../../src/shared/client/metrics';
 const range={window_start:'2026-10-01T00:00:00.000Z',window_end:'2026-10-08T00:00:00.000Z'};
-const sample=()=>({...range,traffic_group:'INTERNAL_TEST',recognition:{jobs:1,ready_jobs:1,blocked_jobs:0,failed_jobs:0,attempts:2,machine_profiles:1,
+const sample=()=>({...range,traffic_group:'INTERNAL_TEST',recommendation_measurement:{started_at:'2026-10-30T00:00:00.000Z',window_coverage:'UNCOLLECTED',evidence:'CLIENT_REPORTED'},recognition:{jobs:1,ready_jobs:1,blocked_jobs:0,failed_jobs:0,attempts:2,machine_profiles:1,
   profiles_with_observed_fields:0,observed_fields:0,ocr_fields:0,hypothesis_fields:1,unknown_fields:3,conflicted_fields:0,evidenced_field_share:0,accuracy:null},
   funnel:{selected_product_presets:1,paid_orders:1,paid_buyers:1,first_deliveries:1,recommendation_impressions:null,recommendation_clicks:null,automatic_success_ratio:null},
   album:{saved_files:1,saved_orders:1,unwindowed_receipts:2},feedback:{planned_use:0,used:1,needs_adjustment:0,withdrawn:0},community:{published_versions:0,effective_reuses:0},

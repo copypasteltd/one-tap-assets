@@ -1,0 +1,5 @@
+scripts/record-recommendation-events.ts(41,193): error TS2352: Conversion of type '(event: CustomEvent<{ kind: string; }>) => number' to type 'EventListener' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Types of parameters 'event' and 'evt' are incompatible.
+    Type 'Event' is missing the following properties from type 'CustomEvent<{ kind: string; }>': detail, initCustomEvent
+src/shared/platform/taro-host.ts(29,96): error TS2345: Argument of type 'number | undefined' is not assignable to parameter of type 'number'.
+  Type 'undefined' is not assignable to type 'number'.

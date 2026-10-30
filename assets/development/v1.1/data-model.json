@@ -1782,6 +1782,34 @@
       ],
       "invariant": "Server-managed classification; missing is UNCLASSIFIED; metrics:classify is separate from metrics:read; EXTERNAL is not proof of a verified human customer.",
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "recommendation_events",
+      "primary_key": "product_id",
+      "scope": "tenant",
+      "fields": [
+        "tenant_id",
+        "owner_id",
+        "product_id",
+        "profile_id",
+        "preset_version_id",
+        "policy",
+        "kind",
+        "received_at"
+      ],
+      "invariant": "Signed eligible recommendation; current owner/profile/photo/version; immutable server time; unique owner/product/profile/preset/policy/kind; deletion erases events.",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "table": "metrics_collection_epochs",
+      "primary_key": "id",
+      "scope": "global",
+      "fields": [
+        "id",
+        "started_at"
+      ],
+      "invariant": "Immutable collection start; pre-collection windows remain null; deployment start does not prove every client is instrumented.",
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
     }
   ],
   "critical_composite_relations": [

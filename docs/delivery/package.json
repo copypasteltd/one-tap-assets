@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "created_at": "2026-10-30T11:42:36.023Z",
-  "id": "2026-10-30T11-32-53-302Z-d04b3218",
-  "package_id": "2026-10-30T11-42-36-023Z-a03c909b",
-  "source_set_hash": "c86577a4af193ecc0b1f27d8b052e1a0b9e814b7587fb00b5fe5ca027eb55d40",
-  "archive_path": "runtime/releases/one-tap-assets-2026-10-30T11-42-36-023Z-a03c909b/one-tap-assets-source-and-builds.zip",
-  "archive_sha256": "5b609193e3849b28bb90f6a9b4af3bc6ac7979ab7e66910c621611ad6624c4da",
-  "archive_bytes": 111033067,
-  "source_files": 1531,
+  "created_at": "2026-10-30T12:08:12.259Z",
+  "id": "2026-10-30T12-02-30-068Z-4b5de9ee",
+  "package_id": "2026-10-30T12-08-12-259Z-6b3106f9",
+  "source_set_hash": "926fe75ab13f4a8f485bc70b812fdbdda4e366ca7b59dd64d6b7fcb05a6cab56",
+  "archive_path": "runtime/releases/one-tap-assets-2026-10-30T12-08-12-259Z-6b3106f9/one-tap-assets-source-and-builds.zip",
+  "archive_sha256": "861be529a354d5f9220a1e5ff26a5b8cb564e9ec11d89c8955b5febbbe592afe",
+  "archive_bytes": 112894062,
+  "source_files": 1576,
   "build_files": 34,
   "components": [
     {
@@ -27,18 +27,18 @@
       "status": "NOT_RUN"
     }
   ],
-  "manifest_path": "runtime/releases/one-tap-assets-2026-10-30T11-42-36-023Z-a03c909b/manifest.json",
+  "manifest_path": "runtime/releases/one-tap-assets-2026-10-30T12-08-12-259Z-6b3106f9/manifest.json",
   "full_suite_executed": false,
   "full_suite_required_for_packaging": false,
   "full_product_verified": false,
   "production_admitted": false,
   "independent_archive_verification": {
     "status": "PASS",
-    "checked_at": "2026-10-30T11:44:36.227115+00:00",
+    "checked_at": "2026-10-30T12:08:48.210755+00:00",
     "method": "INDEPENDENT_PYTHON_ZIPFILE_CRC_AND_SHA256",
-    "archive_sha256": "5b609193e3849b28bb90f6a9b4af3bc6ac7979ab7e66910c621611ad6624c4da",
-    "payload_files_verified": 1565,
-    "archive_entries": 1566,
+    "archive_sha256": "861be529a354d5f9220a1e5ff26a5b8cb564e9ec11d89c8955b5febbbe592afe",
+    "payload_files_verified": 1610,
+    "archive_entries": 1611,
     "workspace_payload_bytes_matched": true,
     "successful_build_components_verified": [
       "server",
@@ -48,10 +48,11 @@
     "full_product_verified": false
   },
   "build_verification": {
-    "typecheck_status": "PASS",
+    "source_set_hash": "926fe75ab13f4a8f485bc70b812fdbdda4e366ca7b59dd64d6b7fcb05a6cab56",
+    "typecheck": "PASS",
     "selected_builds_passed": true,
-    "mini_program_rebuilds": "NOT_RUN",
+    "alipay": "NOT_RUN",
+    "douyin": "NOT_RUN",
     "full_suite_executed": false
-  },
-  "cloud_deployed": false
+  }
 }

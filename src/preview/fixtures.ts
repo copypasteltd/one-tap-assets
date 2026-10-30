@@ -86,9 +86,10 @@ function response(operation:string,path:string,body:any,key=''):unknown{
     case 'getPlan':return {plan_id:'demo_plan',product_id:product.product_id,profile_id:profile.profile_id,variant_id:first.execution_variants[0]!.variant_id,state:'READY',engine:'PHOTO_LAYOUT',plan_hash:'a'.repeat(64),summary:'演示清单：同一件商品，按极简净白方案制作配套图片、短片与文案。',output_slots:firstSlots};
     case 'createQuote':return {quote_id:'demo_quote',amount_fen:0,currency:'CNY',expires_at:expires,hard_deadline_seconds:600};
     case 'createOrder':return order;
+    case 'recordRecommendationEvent':window.dispatchEvent(new CustomEvent('preview:recommendation-event',{detail:{kind:body.kind}}));return {accepted:true,duplicate:false};
     case 'recommendPresets':return new URLSearchParams(location.search).get('scenario')==='recommendations'
       ?{items:['fresh-daily','feature-cards','color-pop'].map(id=>({preset:{...summaries.find(p=>p.preset_id===id)!,sale_enabled:true},
-        variant_ids:[`${id}.photo-layout`],reason:{'fresh-daily':'当前商品类别适合明亮轻盈的日常风格。','feature-cards':'照片已确认结构细节，适合用信息卡片逐项展示。','color-pop':'照片已确认可见配色，可以用色块突出商品原色。'}[id],missing_inputs:[]})),next_cursor:null}
+        variant_ids:[`${id}.photo-layout`],reason:{'fresh-daily':'当前商品类别适合明亮轻盈的日常风格。','feature-cards':'照片已确认结构细节，适合用信息卡片逐项展示。','color-pop':'照片已确认可见配色，可以用色块突出商品原色。'}[id],missing_inputs:[],measurement:{token:`synthetic-recommendation-${id}-not-a-server-token`,expires_at:new Date(Date.now()+900000).toISOString()}})),next_cursor:null}
       :{items:[],next_cursor:null};
     case 'getProductProfile':return profile;
     case 'correctProfile':{
@@ -150,7 +151,14 @@ const transport:Transport=async request=>{
   catch(error){return {status:409,headers:{},data:{code:error instanceof Error&&error.message==='UPLOAD_NOT_COMPLETE'?'UPLOAD_NOT_COMPLETE':'PREVIEW_ONLY',message:'该操作需要真实服务，本回放不执行'}};}
 };
 let photoSequence=0;
-export const previewHost:HostPort={platform:'alipay',transport,storage:{get:<T>(key:string)=>(memory.get(key)??null) as T|null,set:(k,v)=>{memory.set(k,v);},remove:k=>{memory.delete(k);}},
+export const previewHost:HostPort={platform:'alipay',transport,
+  observeVisibility(nodeId,onRatio){
+    const target=document.getElementById(nodeId);if(!target||typeof IntersectionObserver==='undefined')return()=>{};
+    const observer=new IntersectionObserver(values=>{for(const value of values)onRatio(document.hidden?0:value.intersectionRatio);},{threshold:[0,.5,1]});
+    const visibility=()=>{observer.disconnect();onRatio(0);if(!document.hidden)observer.observe(target);};
+    visibility();document.addEventListener('visibilitychange',visibility);
+    return()=>{observer.disconnect();document.removeEventListener('visibilitychange',visibility);};
+  },storage:{get:<T>(key:string)=>(memory.get(key)??null) as T|null,set:(k,v)=>{memory.set(k,v);},remove:k=>{memory.delete(k);}},
   login:async()=> 'synthetic-browser-code',choosePhotos:async options=>{
     const bitmap=await createImageBitmap(await(await fetch('/product-card.png')).blob());
     try{

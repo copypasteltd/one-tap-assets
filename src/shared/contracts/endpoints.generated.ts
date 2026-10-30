@@ -623,5 +623,13 @@ export const endpoints = {
     "idempotency": false,
     "request": "UsageFeedbackRequest",
     "response": "UsageFeedback"
+  },
+  "recordRecommendationEvent": {
+    "method": "POST",
+    "path": "/products/{product_id}/recommendation-events",
+    "authenticated": true,
+    "idempotency": false,
+    "request": "RecommendationEventRequest",
+    "response": "RecommendationEventReceipt"
   }
 } as const;

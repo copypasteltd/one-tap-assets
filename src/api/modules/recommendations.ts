@@ -11,6 +11,7 @@ import { codexAdmission } from '../../worker/codex/admission.js';
 import { bundleForSource } from '../../worker/codex/skills.js';
 import { bindProductionFont, verifyResourceLicenses } from '../../worker/media/font.js';
 import type { ResourceBinding } from '../../worker/compiler/snapshot.js';
+import { recommendationMeasurement } from './recommendation-events.js';
 
 interface CandidateVariant { data: DTO<'Variant'>; private: { source: VariantSource; resource_versions?: ResourceBinding[] } }
 interface Candidate { id: string; data: DTO<'PresetSummary'>; score: number; variants: CandidateVariant[] }
@@ -95,7 +96,8 @@ export async function recommendPresets(db: Db, cfg: Config, p: Principal, produc
         const style = accepted.map(v => candidate.data.source === 'OFFICIAL' ? candidate.id : String(v.private.source.creative_components.platform_style_id ?? ''))
           .sort((a, b) => (matches[b]?.score ?? 0) - (matches[a]?.score ?? 0))[0]!;
         items.push({ preset: { ...candidate.data, sale_enabled: true }, variant_ids: accepted.map(v => v.data.variant_id),
-          reason: matches[style]?.reason ?? '当前照片满足该方案的输入要求，你可以按喜欢的风格选择。', missing_inputs: [] });
+          reason: matches[style]?.reason ?? '当前照片满足该方案的输入要求，你可以按喜欢的风格选择。', missing_inputs: [],
+          measurement: recommendationMeasurement(cfg, p, profile, photo.photo_set_hash, candidate.data) });
       }
       if (items.length === size || scanned === 500) { more = true; break; }
     }

@@ -152,3 +152,12 @@
 | GET /metrics/product-insights | readProductInsights | 无 → ProductInsights | metrics:read |
 | GET /metrics/accounts/{tenant_id}/{user_id} | getTrafficClassification | 无 → TrafficClassification | metrics:classify |
 | PUT /metrics/accounts/{tenant_id}/{user_id} | setTrafficClassification | TrafficClassificationRequest → TrafficClassification | metrics:classify |
+
+
+## 推荐体验记录增补
+
+| 方法/路径 | operationId | 请求 → 响应 | 权限 |
+| --- | --- | --- | --- |
+| POST /products/{product_id}/recommendation-events | recordRecommendationEvent | RecommendationEventRequest → RecommendationEventReceipt | 本人当前商品及签名推荐 |
+
+GET 推荐保持只读。可见比例至少 50% 且连续停留 500ms 后报曝光；点击独立，不推断曝光或转化率。服务端自然键去重；客户端体验证据不是已验证真人或付费凭证。历史采集前保持 null。

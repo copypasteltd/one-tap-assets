@@ -975,6 +975,7 @@ export interface components {
             variant_ids: string[];
             reason: string;
             missing_inputs: string[];
+            measurement?: components["schemas"]["RecommendationMeasurement"];
         };
         InputCheckRequest: {
             product_id: string;
@@ -2599,8 +2600,8 @@ export interface components {
                 paid_orders: number;
                 paid_buyers: number;
                 first_deliveries: number;
-                recommendation_impressions: null;
-                recommendation_clicks: null;
+                recommendation_impressions: number | null;
+                recommendation_clicks: number | null;
                 automatic_success_ratio: null;
             };
             album: {
@@ -2628,6 +2629,7 @@ export interface components {
                 review_support_micro: null;
                 complete_cost_micro: null;
             };
+            recommendation_measurement: components["schemas"]["RecommendationMeasurementCoverage"];
         };
         UsageFeedbackResponse: {
             data: components["schemas"]["UsageFeedback"];
@@ -2639,6 +2641,33 @@ export interface components {
         };
         ProductInsightsResponse: {
             data: components["schemas"]["ProductInsights"];
+            trace_id: string;
+        };
+        RecommendationMeasurement: {
+            token: string;
+            /** Format: date-time */
+            expires_at: string;
+        };
+        RecommendationEventRequest: {
+            measurement_token: string;
+            /** @enum {string} */
+            kind: "IMPRESSION" | "CLICK";
+        };
+        RecommendationEventReceipt: {
+            /** @constant */
+            accepted: true;
+            duplicate: boolean;
+        };
+        RecommendationMeasurementCoverage: {
+            /** Format: date-time */
+            started_at: string;
+            /** @enum {string} */
+            window_coverage: "UNCOLLECTED" | "PARTIAL" | "SINCE_START";
+            /** @constant */
+            evidence: "CLIENT_REPORTED";
+        };
+        RecommendationEventReceiptResponse: {
+            data: components["schemas"]["RecommendationEventReceipt"];
             trace_id: string;
         };
     };

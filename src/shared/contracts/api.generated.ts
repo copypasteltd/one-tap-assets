@@ -1435,6 +1435,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/products/{product_id}/recommendation-events": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * 记录本人当前推荐的可见停留或点击；自然键去重，不影响制作
+         * @description 记录本人当前推荐的可见停留或点击；自然键去重，不影响制作
+         */
+        post: operations["recordRecommendationEvent"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1667,6 +1687,7 @@ export interface components {
             variant_ids: string[];
             reason: string;
             missing_inputs: string[];
+            measurement?: components["schemas"]["RecommendationMeasurement"];
         };
         InputCheckRequest: {
             product_id: string;
@@ -3334,8 +3355,8 @@ export interface components {
                 paid_orders: number;
                 paid_buyers: number;
                 first_deliveries: number;
-                recommendation_impressions: null;
-                recommendation_clicks: null;
+                recommendation_impressions: number | null;
+                recommendation_clicks: number | null;
                 automatic_success_ratio: null;
             };
             album: {
@@ -3363,6 +3384,7 @@ export interface components {
                 review_support_micro: null;
                 complete_cost_micro: null;
             };
+            recommendation_measurement: components["schemas"]["RecommendationMeasurementCoverage"];
         };
         UsageFeedbackResponse: {
             data: components["schemas"]["UsageFeedback"];
@@ -3374,6 +3396,33 @@ export interface components {
         };
         ProductInsightsResponse: {
             data: components["schemas"]["ProductInsights"];
+            trace_id: string;
+        };
+        RecommendationMeasurement: {
+            token: string;
+            /** Format: date-time */
+            expires_at: string;
+        };
+        RecommendationEventRequest: {
+            measurement_token: string;
+            /** @enum {string} */
+            kind: "IMPRESSION" | "CLICK";
+        };
+        RecommendationEventReceipt: {
+            /** @constant */
+            accepted: true;
+            duplicate: boolean;
+        };
+        RecommendationMeasurementCoverage: {
+            /** Format: date-time */
+            started_at: string;
+            /** @enum {string} */
+            window_coverage: "UNCOLLECTED" | "PARTIAL" | "SINCE_START";
+            /** @constant */
+            evidence: "CLIENT_REPORTED";
+        };
+        RecommendationEventReceiptResponse: {
+            data: components["schemas"]["RecommendationEventReceipt"];
             trace_id: string;
         };
     };
@@ -12335,6 +12384,122 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["UsageFeedbackResponse"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            410: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+            /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Error"];
+                };
+            };
+        };
+    };
+    recordRecommendationEvent: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                product_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RecommendationEventRequest"];
+            };
+        };
+        responses: {
+            /** @description 成功 */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RecommendationEventReceiptResponse"];
                 };
             };
             /** @description 业务/鉴权错误，具体code及恢复语义见接口文档 */

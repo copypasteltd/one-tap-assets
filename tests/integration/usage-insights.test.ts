@@ -61,7 +61,7 @@ it('counts durable unknown evidence, deduplicated server-time saves and settled 
     const unknown=await reservePlatform(tx,scope,id('platform-intent'),1000,{});await settlePlatform(tx,tenant,unknown,null);});
   const result=await app.inject({url:insights(),headers:headers(reader)});expect(result.statusCode,result.body).toBe(200);
   expect(result.json().data).toMatchObject({traffic_group:'ALL',recognition:{jobs:1,attempts:2,machine_profiles:1,observed_fields:0,hypothesis_fields:1,unknown_fields:2,evidenced_field_share:0,accuracy:null},
-    album:{saved_files:1,saved_orders:1,unwindowed_receipts:1},feedback:{withdrawn:1,used:0},funnel:{paid_orders:1,first_deliveries:1,recommendation_impressions:null,automatic_success_ratio:null},
+    album:{saved_files:1,saved_orders:1,unwindowed_receipts:1},feedback:{withdrawn:1,used:0},funnel:{paid_orders:1,first_deliveries:1,recommendation_impressions:0,automatic_success_ratio:null},
     costs:{order_settled_micro:200,platform_settled_micro:100,platform_unresolved_reservations:1,complete_cost_micro:null,review_support_micro:null}});
   for(const value of [orderId,productId,profileId,machine,analysis,tenant,owner,reader,'unproven'])expect(result.body).not.toContain(value);
 });

@@ -1978,6 +1978,32 @@
         "D11"
       ],
       "implementation_status": "DESIGN_NOT_IMPLEMENTED"
+    },
+    {
+      "method": "POST",
+      "path": "/products/{product_id}/recommendation-events",
+      "operation_id": "recordRecommendationEvent",
+      "summary": "记录本人当前推荐的可见停留或点击；自然键去重，不影响制作",
+      "request_schema": "RecommendationEventRequest",
+      "response_schema": "RecommendationEventReceipt",
+      "success_status": 200,
+      "auth_policy": "product-session-and-resource-ownership",
+      "idempotency_required": false,
+      "requirements": [
+        "P01-F17",
+        "P01-F21"
+      ],
+      "design_pages": [
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05",
+        "D07",
+        "D10",
+        "D16"
+      ],
+      "implementation_status": "DESIGN_NOT_IMPLEMENTED"
     }
   ]
 }

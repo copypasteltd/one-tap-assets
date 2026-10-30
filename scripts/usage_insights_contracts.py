@@ -56,7 +56,9 @@ def extend_usage_insights_contract(a,m,e,me):
 def usage_insights_catalog(e,me):
     parts=[]
     parts.append('\n\n## 自愿反馈与运营分群增补（兼容扩展）\n\n原目录状态标签保留为设计合同；源码和验证状态见实施文档。PUT 自愿反馈使用 expected_revision 比较更新，无通用幂等缓存，避免撤回后从缓存重放个人选择。\n\n| 方法/路径 | operationId | 请求 → 响应 | 权限 |\n| --- | --- | --- | --- |\n')
-    for x in e['endpoints'][-2:]:parts.append(f"| {x['method']} {x['path']} | {x['operation_id']} | {x['request_schema'] or '无'} → {x['response_schema']} | 本人订单 |\n")
+    for x in e['endpoints']:
+        if x['operation_id'] not in ['getUsageFeedback','setUsageFeedback']:continue
+        parts.append(f"| {x['method']} {x['path']} | {x['operation_id']} | {x['request_schema'] or '无'} → {x['response_schema']} | 本人订单 |\n")
     for x in me['endpoints'][-3:]:parts.append(f"| {x['method']} {x['path']} | {x['operation_id']} | {x['request_schema'] or '无'} → {x['response_schema']} | {x['permission']} |\n")
     return "".join(parts)
 

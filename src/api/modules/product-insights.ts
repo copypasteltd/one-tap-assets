@@ -2,6 +2,7 @@ import type {Db} from '../db/pool.js';
 import type {DTO} from '../../shared/contracts/types.js';
 import {requireThat,notFound} from '../lib/errors.js';
 import {metricsWindow} from './metrics.js';
+import {RECOMMENDATION_MEASUREMENT} from '../../shared/domain/recommendation-events.js';
 
 export async function trafficClassification(db:Db,tenantId:string,userId:string,request?:DTO<'TrafficClassificationRequest'>):Promise<DTO<'TrafficClassification'>>{
   requireThat([tenantId,userId].every(v=>/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/.test(v)),'RESOURCE_ID_INVALID','账户标识无效',400);
@@ -23,6 +24,9 @@ export async function productInsights(db:Db,query:{window_start?:unknown;window_
     WITH people AS MATERIALIZED (
       SELECT u.tenant_id,u.id FROM users u LEFT JOIN metrics_traffic_classifications c ON c.tenant_id=u.tenant_id AND c.owner_id=u.id
       WHERE $3='ALL' OR coalesce(c.traffic_group,'UNCLASSIFIED')=$3
+    ), recommendation AS MATERIALIZED (
+      SELECT e.* FROM recommendation_events e JOIN people u ON u.tenant_id=e.tenant_id AND u.id=e.owner_id
+      WHERE e.received_at >= $1 AND e.received_at < $2 AND e.policy=$4
     ), jobs AS MATERIALIZED (
       SELECT a.* FROM analysis_jobs a JOIN people u ON u.tenant_id=a.tenant_id AND u.id=a.owner_id WHERE a.created_at >= $1::timestamptz AND a.created_at < $2::timestamptz
     ), profiles AS MATERIALIZED (
@@ -54,6 +58,7 @@ export async function productInsights(db:Db,query:{window_start?:unknown;window_
         (EXISTS(SELECT 1 FROM people u WHERE u.tenant_id=a.tenant_id AND u.id=a.owner_id) OR (a.owner_id IS NULL AND $3 IN ('ALL','UNCLASSIFIED')))
     )
     SELECT jsonb_build_object(
+      'collection',jsonb_build_object('started_at',(SELECT started_at FROM metrics_collection_epochs WHERE id=$4)),
       'recognition',jsonb_build_object(
         'jobs',(SELECT count(*)::text FROM jobs),'ready_jobs',(SELECT count(*)::text FROM jobs WHERE state='READY'),
         'blocked_jobs',(SELECT count(*)::text FROM jobs WHERE state IN ('BLOCKED','NEEDS_PHOTOS')),'failed_jobs',(SELECT count(*)::text FROM jobs WHERE state='FAILED'),
@@ -65,6 +70,8 @@ export async function productInsights(db:Db,query:{window_start?:unknown;window_
         'unknown_fields',(SELECT count(*)::text FROM fields WHERE kind='unknown'),
         'conflicted_fields',(SELECT count(*)::text FROM fields WHERE status='CONFLICTED')),
       'funnel',jsonb_build_object(
+        'recommendation_impressions',(SELECT count(*)::text FROM recommendation WHERE kind='IMPRESSION'),
+        'recommendation_clicks',(SELECT count(*)::text FROM recommendation WHERE kind='CLICK'),
         'selected_product_presets',(SELECT count(DISTINCT (p.tenant_id,p.owner_id,p.product_id,v.preset_version_id))::text FROM plan_versions p
           JOIN people u ON u.tenant_id=p.tenant_id AND u.id=p.owner_id JOIN execution_variants v ON v.id=p.variant_version_id WHERE p.created_at >= $1 AND p.created_at < $2),
         'paid_orders',(SELECT count(*)::text FROM cohort WHERE payment_state='CONFIRMED'),
@@ -85,14 +92,18 @@ export async function productInsights(db:Db,query:{window_start?:unknown;window_
         'platform_settled_micro',(SELECT coalesce(sum(settled_micro),0)::text FROM reservations WHERE state='SETTLED'),
         'platform_unresolved_reservations',(SELECT count(*)::text FROM reservations WHERE state IN ('RESERVED','UNKNOWN')),
         'platform_unclassified_reservations',(SELECT count(*)::text FROM reservations r JOIN platform_cost_accounts a ON a.id=r.account_id AND a.tenant_id=r.tenant_id WHERE a.owner_id IS NULL))
-    ) AS data`,[window.window_start,window.window_end,group]);
+    ) AS data`,[window.window_start,window.window_end,group,RECOMMENDATION_MEASUREMENT]);
   const raw=result.rows[0]!.data;
+  const started = Date.parse(raw.collection!.started_at!);
+  requireThat(Number.isFinite(started),'METRICS_COLLECTION_UNAVAILABLE','推荐采集起点未就绪，请完成数据库迁移',503);
+  const coverage = Date.parse(window.window_end) <= started ? 'UNCOLLECTED' : Date.parse(window.window_start) < started ? 'PARTIAL' : 'SINCE_START';
   const part=(name:string)=>Object.fromEntries(Object.entries(raw[name]!).map(([key,value])=>[key,amount(value,key.endsWith('_micro'))]));
   const recognition=part('recognition') as Omit<DTO<'ProductInsights'>['recognition'],'accuracy'|'evidenced_field_share'>;
   const total=recognition.observed_fields+recognition.ocr_fields+recognition.hypothesis_fields+recognition.unknown_fields+recognition.conflicted_fields;
   return {...window,traffic_group:group as DTO<'ProductInsights'>['traffic_group'],
     recognition:{...recognition,evidenced_field_share:total?(recognition.observed_fields+recognition.ocr_fields)/total:null,accuracy:null},
-    funnel:{...part('funnel'),recommendation_impressions:null,recommendation_clicks:null,automatic_success_ratio:null} as DTO<'ProductInsights'>['funnel'],
+    recommendation_measurement:{started_at:new Date(started).toISOString(),window_coverage:coverage,evidence:'CLIENT_REPORTED'},
+    funnel:{...part('funnel'),recommendation_impressions:coverage==='UNCOLLECTED'?null:amount(raw.funnel!.recommendation_impressions!),recommendation_clicks:coverage==='UNCOLLECTED'?null:amount(raw.funnel!.recommendation_clicks!),automatic_success_ratio:null} as DTO<'ProductInsights'>['funnel'],
     album:part('album') as DTO<'ProductInsights'>['album'],feedback:part('feedback') as DTO<'ProductInsights'>['feedback'],community:part('community') as DTO<'ProductInsights'>['community'],
     costs:{...part('costs'),currency:'CNY',review_support_micro:null,complete_cost_micro:null} as DTO<'ProductInsights'>['costs']};
 }

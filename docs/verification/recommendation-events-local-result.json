@@ -1,0 +1,36 @@
+{
+  "base": "runtime/test-results/recommendation-events-local-2026-10-30T12-03-33-844Z-7c70a7a0",
+  "source_set_hash": "926fe75ab13f4a8f485bc70b812fdbdda4e366ca7b59dd64d6b7fcb05a6cab56",
+  "source_unchanged": true,
+  "commands": [
+    {
+      "task": "doctor",
+      "argv": [
+        "--import",
+        "tsx",
+        "scripts/delivery/doctor.ts"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_ms": 60000,
+      "elapsed_ms": 897,
+      "log_path": "runtime/test-results/recommendation-events-local-2026-10-30T12-03-33-844Z-7c70a7a0/doctor.log",
+      "log_sha256": "bdaae0423a6911ff21cbd51d6be2ce36537a7d118dede614a6340bb2d492146d"
+    },
+    {
+      "task": "start-once",
+      "argv": [
+        "--import",
+        "tsx",
+        "scripts/delivery/start.ts",
+        "--once"
+      ],
+      "status": "PASS",
+      "exit_code": 0,
+      "timeout_ms": 60000,
+      "elapsed_ms": 4417,
+      "log_path": "runtime/test-results/recommendation-events-local-2026-10-30T12-03-33-844Z-7c70a7a0/start.log",
+      "log_sha256": "5625064ca6cd8c30687b927c8c2b76511fd487dd8454a539050e123c6ffde32d"
+    }
+  ]
+}

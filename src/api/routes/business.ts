@@ -19,6 +19,7 @@ import {originalPaymentAction} from '../modules/payment-actions.js';
 import { publicSampleMedia, withdrawPublicSamples } from '../modules/authorized-samples.js';
 import { getPreview } from '../modules/previews.js';
 import {recommendPresets} from '../modules/recommendations.js';
+import {recordRecommendationEvent} from '../modules/recommendation-events.js';
 import {getUsageFeedback,setUsageFeedback} from '../modules/usage-feedback.js';
 
 export interface BusinessContext { db: PoolClient; cfg: Config; principal: Principal | null; params: Record<string, string>; query: PageQuery; body: unknown }
@@ -44,6 +45,7 @@ export const businessHandlers: Record<string, BusinessHandler> = {
   listPresets: async c => listPresets(c.db, c.cfg, c.query),
   getPresetVersion: async c => presetVersion(c.db, param(c, 'preset_id'), param(c, 'version')),
   listPresetVariants: async c => ({ items: (await presetVersion(c.db, param(c, 'preset_id'), param(c, 'version'))).variants, next_cursor: null }),
+  recordRecommendationEvent: async c => recordRecommendationEvent(c.db,c.cfg,principal(c),param(c,'product_id'),validate('RecommendationEventRequest',c.body)),
   recommendPresets: async c => recommendPresets(c.db,c.cfg,principal(c),param(c,'product_id'),c.query),
   checkVariantInput: async c => checkInput(c.db, principal(c), validate('InputCheckRequest', c.body)),
   createPlan: async c => createPlan(c.db, c.cfg, principal(c), validate('PlanRequest', c.body)),

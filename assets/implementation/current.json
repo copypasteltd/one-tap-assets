@@ -3,20 +3,27 @@
   "requirements_version": "3.1",
   "development_contract_version": "1.1",
   "status": "IN_PROGRESS",
-  "checked_at": "2026-10-30T11:37:33.913298+00:00",
+  "checked_at": "2026-10-30T12:06:23.176225+00:00",
   "full_product_verified": false,
   "production_admitted": false,
   "cloud_deployed": false,
-  "verification_mode": "FOCUSED_USAGE_FEEDBACK_AND_PRODUCT_INSIGHTS",
+  "verification_mode": "FOCUSED_RECOMMENDATION_VISIBLE_EVENTS",
   "retained_integration": {
-    "original_source_set_hash": "f94399290dc574341c0e2ce9b371357cd8f95d84f9c6e842fa1e280d03fa35d6",
-    "unchanged_backend_shared_client_and_test_files": true,
-    "changed_since_execution": [
-      "scripts/record-usage-insights.ts",
-      "scripts/usage_insights_contracts.py",
-      "scripts/生成Codex开发契约.py",
-      "src/preview/fixtures.ts"
-    ]
+    "changed_source_paths": [
+      "scripts/record-recommendation-events.ts",
+      "src/shared/platform/taro-host.ts",
+      "src/shared/ui/recommendations.tsx"
+    ],
+    "line_ending_only_paths": [
+      "assets/development/v1.1/contracts/endpoints.json",
+      "assets/development/v1.1/contracts/management-openapi.json",
+      "assets/development/v1.1/contracts/openapi.json",
+      "src/shared/ui/recommendations.tsx"
+    ],
+    "backend_shared_client_and_test_files_unchanged": true,
+    "native_adapter_change": "Ignore absent intersectionRatio; prior shared dwell already ignored non-finite input. Device runtime remains unverified.",
+    "recorder_change": "Use an Event callback and cast only its CustomEvent payload, fixing the type error without changing the recording scenario.",
+    "original_results_not_relabelled": true
   },
   "command_checks_passed": true,
   "commands": [
@@ -32,8 +39,8 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 8968,
-      "log_path": "runtime/delivery-builds/2026-10-30T11-32-53-302Z-d04b3218/typecheck.log",
+      "elapsed_ms": 7416,
+      "log_path": "runtime/delivery-builds/2026-10-30T12-02-30-068Z-4b5de9ee/typecheck.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
@@ -49,115 +56,34 @@
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 324,
-      "log_path": "runtime/delivery-builds/2026-10-30T11-32-53-302Z-d04b3218/server.log",
+      "elapsed_ms": 317,
+      "log_path": "runtime/delivery-builds/2026-10-30T12-02-30-068Z-4b5de9ee/server.log",
       "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
     {
       "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T11-32-53-302Z-d04b3218\\runtime\\build\\preview",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T12-02-30-068Z-4b5de9ee\\runtime\\build\\preview",
       "argv": [
         "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
         "build",
         "--config",
         "src/preview/vite.config.ts",
         "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T11-32-53-302Z-d04b3218\\runtime\\build\\preview"
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T12-02-30-068Z-4b5de9ee\\runtime\\build\\preview"
       ],
       "shell": false,
       "status": "PASS",
       "exit_code": 0,
       "signal": null,
       "timeout_ms": 180000,
-      "elapsed_ms": 644,
-      "log_path": "runtime/delivery-builds/2026-10-30T11-32-53-302Z-d04b3218/preview.log",
-      "log_sha256": "77517d4c3d9b24615105b48cbe15be361ce64b69b3fd5be982634d3d8bfcb63b"
-    },
-    {
-      "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run tests/unit/usage-feedback.test.ts tests/unit/product-insights-client.test.ts tests/unit/metrics-client.test.ts --outputFile.json=runtime/test-results/feedback-insights-2026-10-30T11-21-46-055Z-b0d20570/api.json",
-      "argv": [
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
-        "run",
-        "tests/unit/usage-feedback.test.ts",
-        "tests/unit/product-insights-client.test.ts",
-        "tests/unit/metrics-client.test.ts",
-        "--outputFile.json=runtime/test-results/feedback-insights-2026-10-30T11-21-46-055Z-b0d20570/api.json"
-      ],
-      "shell": false,
-      "status": "PASS",
-      "exit_code": 0,
-      "signal": null,
-      "timeout_ms": 480000,
-      "elapsed_ms": 11609,
-      "log_path": "runtime/test-results/feedback-insights-2026-10-30T11-21-46-055Z-b0d20570/api.log",
-      "log_sha256": "87d8a1a69f7d77d6662515ebd6c14d4d60e077cc8fb895646e8db6a22d34f500"
-    },
-    {
-      "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/usage-insights.test.ts tests/integration/metrics.test.ts --outputFile.json=runtime/test-results/feedback-insights-2026-10-30T11-21-46-055Z-5be8bef8/api.json",
-      "argv": [
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
-        "run",
-        "--config",
-        "vitest.integration.config.ts",
-        "tests/integration/usage-insights.test.ts",
-        "tests/integration/metrics.test.ts",
-        "--outputFile.json=runtime/test-results/feedback-insights-2026-10-30T11-21-46-055Z-5be8bef8/api.json"
-      ],
-      "shell": false,
-      "status": "PASS",
-      "exit_code": 0,
-      "signal": null,
-      "timeout_ms": 480000,
-      "elapsed_ms": 44799,
-      "log_path": "runtime/test-results/feedback-insights-2026-10-30T11-21-46-055Z-5be8bef8/api.log",
-      "log_sha256": "1d6130a6909c81b2420e8daac3751c449c076965cd58a5fe40b1b9e9678c0181"
-    },
-    {
-      "task": "doctor",
-      "argv": [
-        "--import",
-        "tsx",
-        "scripts/delivery/doctor.ts"
-      ],
-      "status": "PASS",
-      "exit_code": 0,
-      "timeout_ms": 60000,
-      "elapsed_ms": 999,
-      "log_path": "runtime/test-results/feedback-insights-local-2026-10-30T11-28-33-877Z-77ed33fe/doctor.log",
-      "log_sha256": "e583fc56b2322854d926728f8be26e5473e83d5c8dcc854234c4d0eca8e0a350"
-    },
-    {
-      "task": "start-once",
-      "argv": [
-        "--import",
-        "tsx",
-        "scripts/delivery/start.ts",
-        "--once"
-      ],
-      "status": "PASS",
-      "exit_code": 0,
-      "timeout_ms": 60000,
-      "elapsed_ms": 5138,
-      "log_path": "runtime/test-results/feedback-insights-local-2026-10-30T11-28-33-877Z-77ed33fe/start.log",
-      "log_sha256": "5c34f98bdfd0617ddbe483d4919df5ae81b48e5436e5abd9792ec25ad26c5f2a"
+      "elapsed_ms": 620,
+      "log_path": "runtime/delivery-builds/2026-10-30T12-02-30-068Z-4b5de9ee/preview.log",
+      "log_sha256": "abeaadae89e754df535ceecf97a185b2f0292bdd6ff414223d4791e8438a30d2"
     }
   ],
-  "suites": [
-    {
-      "kind": "unit",
-      "passed": 8,
-      "source_set_hash": "f94399290dc574341c0e2ce9b371357cd8f95d84f9c6e842fa1e280d03fa35d6"
-    },
-    {
-      "kind": "native",
-      "passed": 7,
-      "source_set_hash": "f94399290dc574341c0e2ce9b371357cd8f95d84f9c6e842fa1e280d03fa35d6"
-    }
-  ],
-  "source_files": 486,
-  "source_set_hash": "c86577a4af193ecc0b1f27d8b052e1a0b9e814b7587fb00b5fe5ca027eb55d40",
+  "suites": [],
+  "source_files": 494,
+  "source_set_hash": "926fe75ab13f4a8f485bc70b812fdbdda4e366ca7b59dd64d6b7fcb05a6cab56",
   "files": [
     {
       "path": "src/api/adapters/alipay.ts",
@@ -169,7 +95,7 @@
     },
     {
       "path": "src/api/app.ts",
-      "sha256": "acbeed862f96735769003eb81a7b89b9cd92225409301e777f4c8f0c3a665edf"
+      "sha256": "fd45708b41db294358010d393d2280fedc77141c512620053c2c11653c8d189e"
     },
     {
       "path": "src/api/config.ts",
@@ -312,6 +238,10 @@
       "sha256": "dd2877ffdff4e79108e67121c911212acbf0691d2483d935095e976049879042"
     },
     {
+      "path": "src/api/db/migrations/034_recommendation_events.sql",
+      "sha256": "edda3aa115f5a2ee2dcb9b20704beb734dc023738307ee2e8d05604016257c0d"
+    },
+    {
       "path": "src/api/db/pool.ts",
       "sha256": "81dff3e39d44a521e3a3cfafe6d7b734cfb477f5cd33926c14694c0364777850"
     },
@@ -409,15 +339,19 @@
     },
     {
       "path": "src/api/modules/product-insights.ts",
-      "sha256": "d2e4819645b6469de343fdd7b6b028381a4fd272d1ce11f6992b1bb12c2ce51e"
+      "sha256": "6f3bb06719fbd29083fe88b826e2f2cca4449cc81be3f06db0ddf88a10bd2ac8"
     },
     {
       "path": "src/api/modules/products.ts",
       "sha256": "0cf6af87181e7cd79b3e1110cb072df69d536db4e4a579e7aa68325aee29bcdb"
     },
     {
+      "path": "src/api/modules/recommendation-events.ts",
+      "sha256": "038e84f22347e0e41c34117dc1f92f65195be4afc36abfc21922ef48da6f7651"
+    },
+    {
       "path": "src/api/modules/recommendations.ts",
-      "sha256": "b49d32c929c957c1b501d1adff5fe945a6c7126add6c3d5599fb6bd89d5b15ce"
+      "sha256": "fe74fcac323d3a22b289fb4a55ab35b34c5595b399948833589b27fc496321e8"
     },
     {
       "path": "src/api/modules/refunds.ts",
@@ -457,7 +391,7 @@
     },
     {
       "path": "src/api/routes/business.ts",
-      "sha256": "719ea97584ab721543cc434f53e157bdda9d23917b1de011ef1566696e994297"
+      "sha256": "649f4f24c679eecd1f6ba4b2474941162ea6fa13e1dc85838601416e0eeec6cc"
     },
     {
       "path": "src/api/routes/management.ts",
@@ -673,7 +607,7 @@
     },
     {
       "path": "src/preview/fixtures.ts",
-      "sha256": "3a6d415263ff2a46045ff3d63dbff4aca25e6b7161065e5d61243f80554a00d9"
+      "sha256": "63ac4b5aea38d7fa39176219abeb65e8e6d14961b8978f9460dd4b708d227dca"
     },
     {
       "path": "src/preview/index.html",
@@ -685,7 +619,7 @@
     },
     {
       "path": "src/preview/metrics-insights.tsx",
-      "sha256": "a4dad2658ba42dcd4271242ed0590f02bbe8c458bcc09f558a8a7c2aa966a661"
+      "sha256": "8bc9126e0407d86f49749b814ac49b5eeb0bac0631d567335a152bc03f8f624e"
     },
     {
       "path": "src/preview/metrics-main.tsx",
@@ -761,7 +695,7 @@
     },
     {
       "path": "src/shared/client/metrics.ts",
-      "sha256": "43d5a18f65787638ede9ec3851d6ba12722637d99c86f147f63986f388105249"
+      "sha256": "68975911f6e0fba55005288615771abc945e30f98d0284e38d3d767521cc1dae"
     },
     {
       "path": "src/shared/client/order-actions.ts",
@@ -782,6 +716,10 @@
     {
       "path": "src/shared/client/profile-correction.ts",
       "sha256": "0fdd3cf8d0a16e5b6dcce4dd4dd600f150f0460b3acd9a23019ba232515a5490"
+    },
+    {
+      "path": "src/shared/client/recommendation-events.ts",
+      "sha256": "36b953440dfa22cb64497eb1a917317d7d4e1d2f741b286272dfd826d8b1434d"
     },
     {
       "path": "src/shared/client/recommendations.ts",
@@ -817,15 +755,15 @@
     },
     {
       "path": "src/shared/contracts/api.generated.ts",
-      "sha256": "39b6525ae700af22f5a359085c8d1d435dfd3c2244130424c3a4dddabc76ca1f"
+      "sha256": "2d7dfc936f6e5902f0034132dc87d112de9ea36561d277d1814cf03ecc251efb"
     },
     {
       "path": "src/shared/contracts/endpoints.generated.ts",
-      "sha256": "888f9b1002875594515e9c8e2f9621f9e7a6fcd04c7252f1ddb5d15a231323d8"
+      "sha256": "1806e554fb18e0571d3d879138b6ec7168aa2bddb327cc75800ab6ef61bc0224"
     },
     {
       "path": "src/shared/contracts/management.generated.ts",
-      "sha256": "6f3da01264ba91c05d679261908d590dba908c28ad22ec7c776488318337be23"
+      "sha256": "239640ace7eb26ff7ce48360977f8afc0c86c39f9616c0a69671550bafc65aef"
     },
     {
       "path": "src/shared/contracts/types.ts",
@@ -844,6 +782,10 @@
       "sha256": "3d0bc2d31b3d1d3ebf3a62ff35bf99e58464cbb7bf265979e1472ee729a56ce6"
     },
     {
+      "path": "src/shared/domain/recommendation-events.ts",
+      "sha256": "437e0fbe582b16e5683ce126e133de3b38b6012b5ac400d47aea98f63845c5e1"
+    },
+    {
       "path": "src/shared/domain/recommendations.ts",
       "sha256": "0176927841d681de59994721d549b901e3966f28e994256c7699edd6a47c895c"
     },
@@ -857,11 +799,11 @@
     },
     {
       "path": "src/shared/platform/ports.ts",
-      "sha256": "c2460944f37c12ac8f634c00e0e8a61f0c5379b172d686028cbbab48b7dbc5e2"
+      "sha256": "1c0a28a61257ea14bf15b654bea154d33f11d4b056532196fa3dc12d6ac9d4b2"
     },
     {
       "path": "src/shared/platform/taro-host.ts",
-      "sha256": "72946b9897e6013dbcb878accb7ffd62a8d350874d263f86f2b8c0f1aa4f4814"
+      "sha256": "2b850ca49e782a8825c4a43418016ecb7c31d361d8f0b2ad02f000bf9a66a513"
     },
     {
       "path": "src/shared/ui/analysis.tsx",
@@ -912,8 +854,12 @@
       "sha256": "17758cd83d7e0c0edae89bd090a589923c153d7d1986f464bb5110e232852b76"
     },
     {
+      "path": "src/shared/ui/recommendation-card.tsx",
+      "sha256": "e07c194e26dbd776aee3d486b0311ae7a952e45657b7fe3b598a8c642aadaa49"
+    },
+    {
       "path": "src/shared/ui/recommendations.tsx",
-      "sha256": "58de639ea1ee68173158da1d47e71e5c892ac2fa18625101bf0f4c043289194e"
+      "sha256": "0e4233be8b7ae9b8f0b1acae588cf6eb7b1d2ec3c2ea0472fae156251bbdb60a"
     },
     {
       "path": "src/shared/ui/revision.tsx",
@@ -1673,7 +1619,7 @@
     },
     {
       "path": "tests/integration/recommendations.test.ts",
-      "sha256": "2ed96c7fda41794ec4c727f17a96f378f936d4a223b1d52932bbfc67bf02a285"
+      "sha256": "f496365c894ceaad5461667be852aa645d027242ae4336863f7fcbc0430d57ef"
     },
     {
       "path": "tests/integration/reference-identity.test.ts",
@@ -1721,7 +1667,7 @@
     },
     {
       "path": "tests/integration/usage-insights.test.ts",
-      "sha256": "c38393c44ede1d155df21cfa0fb28cdfc307f5eae348cbab9877aad6a7cf7f65"
+      "sha256": "69ae513e28f2f0cf9fabd8ef91a7df4b5e4e4961f55591fc61f339238513086c"
     },
     {
       "path": "tests/integration/vision-analysis.test.ts",
@@ -1809,7 +1755,7 @@
     },
     {
       "path": "tests/unit/product-insights-client.test.ts",
-      "sha256": "bfacc007fd2b9109ee395741a73bdd35d4273b7b3b446cf47b8e0e9d2a0eb73d"
+      "sha256": "cc6db9268f90adf29ee358ce7aff6069ee0c262bc773d3051de59cbc4239e9ad"
     },
     {
       "path": "tests/unit/profile-correction.test.ts",
@@ -1818,6 +1764,10 @@
     {
       "path": "tests/unit/profile-plan.test.ts",
       "sha256": "e4192931adc08bdd64ac8c142ccaec2bd472dcce0acac88d23a7151a33fdf1f1"
+    },
+    {
+      "path": "tests/unit/recommendation-events.test.ts",
+      "sha256": "3243463169d4ccdee388803391696e4ae7e4e3fd7ae227734c0cc821e437aede"
     },
     {
       "path": "tests/unit/recommendations.test.ts",
@@ -1905,7 +1855,7 @@
     },
     {
       "path": "scripts/生成Codex开发契约.py",
-      "sha256": "243dd80f46c25be3d026f4e6354af413b5f86651f51415dc849474989b06e817"
+      "sha256": "82078b62f9741036fd36ce21a24dd5291887fa3ff2b013b60a60377169db099c"
     },
     {
       "path": "scripts/生成v3需求配置.py",
@@ -1992,6 +1942,10 @@
       "sha256": "91412d283b43d56da5df97fdfc42e36836dd06e1bbbf503512ff7fa38113413f"
     },
     {
+      "path": "scripts/recommendation_event_contracts.py",
+      "sha256": "d36610b29d160f31b2d84e4537215a5ec9d487f350d5d6d61134a0aceb715460"
+    },
+    {
       "path": "scripts/record-album-save.ts",
       "sha256": "26b7ec404d7349af56d3331a48db1e799815cf04c925e219e256e9f148236c71"
     },
@@ -2032,6 +1986,10 @@
       "sha256": "db0ac1f5c360615c65af7569a3b27593dedcec96f2bc0b8101cca8f987d751f2"
     },
     {
+      "path": "scripts/record-recommendation-events.ts",
+      "sha256": "2e79e3767e8a49c1e12002595be793144b603e5a763cf3103fabc52a3649e5b9"
+    },
+    {
       "path": "scripts/record-recommendations.ts",
       "sha256": "ca82986475284cf1dacf228c93bccccd0069b881ae42d6dc7e2295fbf16512a3"
     },
@@ -2069,7 +2027,7 @@
     },
     {
       "path": "scripts/usage_insights_contracts.py",
-      "sha256": "a07e986aa4fd434f2c5a184cb8ca559c087f35092c91be9663e4ca48a5e6145b"
+      "sha256": "017aa30a34981bf09a2f9407d0aa9fd052ceb285ef84064ed8256555796b9c88"
     },
     {
       "path": "scripts/verify-implementation.ts",
@@ -2131,11 +2089,11 @@
     },
     {
       "path": "assets/development/v1.1/contracts/endpoint-catalog.md",
-      "sha256": "380802069b58cddf4e370ad7bff672dd7e40fb666dc49bf024d8892cdbcb588c"
+      "sha256": "eb580ea9915b1b6a8fb5c2438d5fe5ce186c42a940344eb4b287e0fd0126de80"
     },
     {
       "path": "assets/development/v1.1/contracts/endpoints.json",
-      "sha256": "766a737a6c120934d18a577bcc6ec2b2e44503be37d9b7ffc7139d6aa55ca0f1"
+      "sha256": "09828c9937e6b1bfdac31e14ba33076890f6c907f5fe42ab5d8efa5d595161fd"
     },
     {
       "path": "assets/development/v1.1/contracts/execution-snapshot.schema.json",
@@ -2147,11 +2105,11 @@
     },
     {
       "path": "assets/development/v1.1/contracts/management-openapi.json",
-      "sha256": "b205553f6adb5978e9d5cdfa33ec35abd6b46012372e993a244bced0aceb1cb6"
+      "sha256": "1bfb9d562981e349b6df961d58098718c0e519fb79dfdc5b32391f0317325182"
     },
     {
       "path": "assets/development/v1.1/contracts/openapi.json",
-      "sha256": "276a6e8bf83eb7358ef4317c6e7aeb66652686d188766b5cd272469020e3e4ee"
+      "sha256": "181d573da372a5bf727deeaeca8c4c4358ab3e626f78c19f903cefafe4b914ca"
     },
     {
       "path": "assets/development/v1.1/contracts/product-identity-lock.schema.json",
@@ -3066,7 +3024,8 @@
     "verification_pointer": "docs/delivery/package.json"
   },
   "selected_builds_passed": true,
-  "focused_tests_passed": 15,
-  "browser_checks_passed": 5,
-  "evidence": "docs/verification/feedback-insights-source.json"
+  "focused_tests_passed": 22,
+  "browser_checks_passed": 8,
+  "evidence": "docs/verification/recommendation-events-source.json",
+  "media_files": 153
 }

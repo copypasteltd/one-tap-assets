@@ -1,0 +1,13 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/integration/recommendations.test.ts (6 tests) 16275ms
+   ✓ records signed actual events through HTTP, deduplicates retries, and preserves collection windows 6804ms
+ ✓ tests/integration/usage-insights.test.ts (4 tests) 5521ms
+
+ Test Files  2 passed (2)
+      Tests  10 passed (10)
+   Start at  20:00:37
+   Duration  68.20s (import 42%, tests 34%, transform 23%)
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/recommendation-events-2026-10-30T12-00-22-748Z-188fbf1f/api.json

@@ -29,19 +29,25 @@ const insightFields={recognition:['jobs','ready_jobs','blocked_jobs','failed_job
 function insights(raw:unknown,range:MetricsRange,group:Group):DTO<'ProductInsights'>{
   const value=raw as DTO<'ProductInsights'>|null;
   const fail=()=>{throw new ClientError('MANAGEMENT_RESPONSE_INVALID','运营数据与原窗口或流量分组不一致，请重新读取');};
-  if(!value||typeof value!=='object'||Object.keys(value).length!==9||Object.keys(value).some(k=>!['window_start','window_end','traffic_group',...Object.keys(insightFields)].includes(k))
+  if(!value||typeof value!=='object'||Object.keys(value).length!==10||Object.keys(value).some(k=>!['window_start','window_end','traffic_group','recommendation_measurement',...Object.keys(insightFields)].includes(k))
     ||value.window_start!==range.window_start||value.window_end!==range.window_end||value.traffic_group!==group)fail();
   const s=value!;
   for(const [name,keys] of Object.entries(insightFields)){
     const section=(s as unknown as Record<string,Record<string,unknown>>)[name];
     if(!section||typeof section!=='object'||Object.keys(section).length!==keys.length||Object.keys(section).some(k=>!keys.includes(k)))fail();
     for(const key of keys){const n=section![key];
-      if(['accuracy','recommendation_impressions','recommendation_clicks','automatic_success_ratio','review_support_micro','complete_cost_micro'].includes(key)){if(n!==null)fail();}
+      if(['accuracy','automatic_success_ratio','review_support_micro','complete_cost_micro'].includes(key)){if(n!==null)fail();}
+      else if(['recommendation_impressions','recommendation_clicks'].includes(key)){if(n!==null&&(typeof n!=='number'||!Number.isSafeInteger(n)||n<0||n>2147483647))fail();}
       else if(key==='currency'){if(n!=='CNY')fail();}
       else if(key==='evidenced_field_share'){if(n!==null&&(typeof n!=='number'||!Number.isFinite(n)||n<0||n>1))fail();}
       else if(typeof n!=='number'||!Number.isSafeInteger(n)||n<0||n>(key.endsWith('_micro')?Number.MAX_SAFE_INTEGER:2147483647))fail();
     }
   }
+  const c=s.recommendation_measurement,start=c&&Date.parse(c.started_at);
+  if(!c||Object.keys(c).length!==3||Object.keys(c).some(k=>!['started_at','window_coverage','evidence'].includes(k))
+    ||!Number.isFinite(start)||c.started_at!==new Date(start).toISOString()||c.evidence!=='CLIENT_REPORTED')fail();
+  const expected=Date.parse(range.window_end)<=start?'UNCOLLECTED':Date.parse(range.window_start)<start?'PARTIAL':'SINCE_START';
+  if(c.window_coverage!==expected||[s.funnel.recommendation_impressions,s.funnel.recommendation_clicks].some(n=>expected==='UNCOLLECTED'?n!==null:n===null))fail();
   const r=s.recognition,total=r.observed_fields+r.ocr_fields+r.hypothesis_fields+r.unknown_fields+r.conflicted_fields;
   if((total===0?r.evidenced_field_share!==null:r.evidenced_field_share===null||Math.abs(r.evidenced_field_share-(r.observed_fields+r.ocr_fields)/total)>1e-12)
     ||r.ready_jobs+r.blocked_jobs+r.failed_jobs>r.jobs||r.machine_profiles>r.ready_jobs||r.profiles_with_observed_fields>r.machine_profiles

@@ -1,4 +1,6 @@
 import Taro from '@tarojs/taro';
+import { IMPRESSION_MIN_RATIO } from '../domain/recommendation-events';
+declare const my: { createIntersectionObserver?: (options: { thresholds: number[]; initialRatio: number }) => Taro.IntersectionObserver };
 import type { HostPort, LocalPhoto } from './ports';
 import { ClientError } from '../client/api';
 import { digest } from '../client/sha256';
@@ -14,7 +16,21 @@ export function taroHost(native: Pick<HostPort, 'platform' | 'login' | 'pay' | '
       headers: Object.fromEntries(Object.entries(result.header ?? {}).map(([k, v]) => [k.toLowerCase(), String(v)])) }; }
     finally { input.signal?.removeEventListener('abort', abort); }
   };
-  return { ...native, transport, storage: {
+  return { ...native, transport,
+    observeVisibility(nodeId, onRatio) {
+      let observer: Taro.IntersectionObserver | undefined, stopped = false;
+      // The card mounts after recognition, once the page has already become ready.
+      Taro.nextTick(() => {
+        if (stopped) return;
+        try {
+          const options = { thresholds: [0, IMPRESSION_MIN_RATIO, 1], initialRatio: 0 };
+          observer = native.platform === 'alipay' && typeof my !== 'undefined' && my.createIntersectionObserver
+            ? my.createIntersectionObserver(options) : Taro.createIntersectionObserver(Taro.getCurrentInstance().page ?? {}, options);
+          observer.relativeToViewport().observe(`#${nodeId}`, value => { if (!stopped && typeof value.intersectionRatio === 'number') onRatio(value.intersectionRatio); });
+        } catch { observer?.disconnect(); observer = undefined; }
+      });
+      return () => { stopped = true; observer?.disconnect(); };
+    }, storage: {
     get: <T,>(key: string): T | null => { const value: unknown = Taro.getStorageSync(key); return value === '' || value === undefined ? null : value as T; },
     set: <T,>(key: string, value: T): void => Taro.setStorageSync(key, value), remove: (key: string): void => Taro.removeStorageSync(key),
   },

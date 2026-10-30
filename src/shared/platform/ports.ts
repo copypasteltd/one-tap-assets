@@ -11,4 +11,5 @@ export interface HostPort {
   download(link: DTO<'DownloadLink'>): Promise<string>;
   save(path: string, kind: 'image' | 'video'): Promise<'SAVED' | 'UNKNOWN'>;
   copy(text: string): Promise<void>;
+  observeVisibility?(nodeId: string, onRatio: (ratio: number) => void): () => void;
 }

@@ -3920,6 +3920,9 @@
             },
             "minItems": 0,
             "maxItems": 100
+          },
+          "measurement": {
+            "$ref": "#/components/schemas/RecommendationMeasurement"
           }
         },
         "required": [
@@ -12123,10 +12126,28 @@
                 "maximum": 2147483647
               },
               "recommendation_impressions": {
-                "type": "null"
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               },
               "recommendation_clicks": {
-                "type": "null"
+                "anyOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 2147483647
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
               },
               "automatic_success_ratio": {
                 "type": "null"
@@ -12264,6 +12285,9 @@
               "complete_cost_micro"
             ],
             "additionalProperties": false
+          },
+          "recommendation_measurement": {
+            "$ref": "#/components/schemas/RecommendationMeasurementCoverage"
           }
         },
         "required": [
@@ -12275,7 +12299,8 @@
           "album",
           "feedback",
           "community",
-          "costs"
+          "costs",
+          "recommendation_measurement"
         ],
         "additionalProperties": false
       },
@@ -12316,6 +12341,107 @@
         "properties": {
           "data": {
             "$ref": "#/components/schemas/ProductInsights"
+          },
+          "trace_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "data",
+          "trace_id"
+        ],
+        "additionalProperties": false
+      },
+      "RecommendationMeasurement": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "minLength": 32,
+            "maxLength": 4096
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          }
+        },
+        "required": [
+          "token",
+          "expires_at"
+        ],
+        "additionalProperties": false
+      },
+      "RecommendationEventRequest": {
+        "type": "object",
+        "properties": {
+          "measurement_token": {
+            "type": "string",
+            "minLength": 32,
+            "maxLength": 4096
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "IMPRESSION",
+              "CLICK"
+            ]
+          }
+        },
+        "required": [
+          "measurement_token",
+          "kind"
+        ],
+        "additionalProperties": false
+      },
+      "RecommendationEventReceipt": {
+        "type": "object",
+        "properties": {
+          "accepted": {
+            "const": true
+          },
+          "duplicate": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "accepted",
+          "duplicate"
+        ],
+        "additionalProperties": false
+      },
+      "RecommendationMeasurementCoverage": {
+        "type": "object",
+        "properties": {
+          "started_at": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 40
+          },
+          "window_coverage": {
+            "type": "string",
+            "enum": [
+              "UNCOLLECTED",
+              "PARTIAL",
+              "SINCE_START"
+            ]
+          },
+          "evidence": {
+            "const": "CLIENT_REPORTED"
+          }
+        },
+        "required": [
+          "started_at",
+          "window_coverage",
+          "evidence"
+        ],
+        "additionalProperties": false
+      },
+      "RecommendationEventReceiptResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/RecommendationEventReceipt"
           },
           "trace_id": {
             "type": "string"

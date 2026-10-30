@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "method": "FULL_GENERATOR_RUN_REDIRECTED_TO_PROJECT_TEMP_WITH_EXACT_PARSED_RUNTIME_CONTRACT_AND_DATA_MODEL_COMPARISON",
+  "runtime_contracts_compared": [
+    "openapi.json",
+    "management-openapi.json",
+    "endpoints.json",
+    "management-endpoints.json"
+  ],
+  "endpoint_catalog_matches": true,
+  "data_model_matches": true,
+  "research_output_redirected": true,
+  "prior_research_and_verification_outputs_unchanged": true
+}

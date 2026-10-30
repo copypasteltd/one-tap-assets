@@ -1,235 +1,148 @@
 {
-  "schema_version": "1.0",
-  "checked_at": "2026-10-30T11:37:33.913298+00:00",
+  "checked_at": "2026-10-30T12:06:23.176225+00:00",
   "status": "FOCUSED_SOURCE_IMPLEMENTED_NOT_FULL_PRODUCT_ACCEPTANCE",
-  "source_set_hash": "c86577a4af193ecc0b1f27d8b052e1a0b9e814b7587fb00b5fe5ca027eb55d40",
-  "source_files": 486,
+  "source_set_hash": "926fe75ab13f4a8f485bc70b812fdbdda4e366ca7b59dd64d6b7fcb05a6cab56",
+  "source_files": 494,
   "runtime_contract_files": 42,
   "resource_files": 4,
-  "database_migrations": 33,
-  "business_operations": 79,
+  "database_migrations": 34,
+  "business_operations": 80,
   "management_operations": 38,
-  "logical_entities": 73,
+  "schemas": 266,
+  "logical_entities": 75,
   "source_snapshot": "docs/delivery/current.json",
-  "build_snapshot": "docs/verification/feedback-insights-build.json",
-  "build_checks": [
-    {
-      "task": "typecheck",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc --noEmit",
-      "argv": [
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\typescript\\bin\\tsc",
-        "--noEmit"
-      ],
-      "shell": false,
-      "status": "PASS",
-      "exit_code": 0,
-      "signal": null,
-      "timeout_ms": 180000,
-      "elapsed_ms": 8968,
-      "log_path": "runtime/delivery-builds/2026-10-30T11-32-53-302Z-d04b3218/typecheck.log",
-      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
-      "task": "build:server",
-      "command": "node --import tsx scripts/build-server.ts",
-      "argv": [
-        "--import",
-        "tsx",
-        "scripts/build-server.ts"
-      ],
-      "shell": false,
-      "status": "PASS",
-      "exit_code": 0,
-      "signal": null,
-      "timeout_ms": 180000,
-      "elapsed_ms": 324,
-      "log_path": "runtime/delivery-builds/2026-10-30T11-32-53-302Z-d04b3218/server.log",
-      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
-      "task": "exec",
-      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js build --config src/preview/vite.config.ts --outDir E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T11-32-53-302Z-d04b3218\\runtime\\build\\preview",
-      "argv": [
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vite\\bin\\vite.js",
-        "build",
-        "--config",
-        "src/preview/vite.config.ts",
-        "--outDir",
-        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\runtime\\delivery-builds\\2026-10-30T11-32-53-302Z-d04b3218\\runtime\\build\\preview"
-      ],
-      "shell": false,
-      "status": "PASS",
-      "exit_code": 0,
-      "signal": null,
-      "timeout_ms": 180000,
-      "elapsed_ms": 644,
-      "log_path": "runtime/delivery-builds/2026-10-30T11-32-53-302Z-d04b3218/preview.log",
-      "log_sha256": "77517d4c3d9b24615105b48cbe15be361ce64b69b3fd5be982634d3d8bfcb63b"
-    }
-  ],
-  "build_logs": [
-    {
-      "path": "docs/verification/feedback-insights-build-1.log",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "bytes": 0
-    },
-    {
-      "path": "docs/verification/feedback-insights-build-2.log",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "bytes": 0
-    },
-    {
-      "path": "docs/verification/feedback-insights-build-3.log",
-      "sha256": "77517d4c3d9b24615105b48cbe15be361ce64b69b3fd5be982634d3d8bfcb63b",
-      "bytes": 2546
-    }
-  ],
   "functional_scope": [
-    "OPTIONAL_ORDER_USAGE_FEEDBACK_WITH_REVISION_AND_WITHDRAWAL",
-    "OWNER_GATE_AND_PRIVACY_REVOCATION_ERASURE",
-    "SERVER_MANAGED_TRAFFIC_CLASSIFICATION_WITH_SEPARATE_PERMISSION",
-    "RAW_MACHINE_PROFILE_FIELDS_DISTINCT_FROM_HYPOTHESES_CORRECTIONS_AND_ACCURACY",
-    "DEDUPLICATED_SERVER_RECEIVED_SAVES_WITH_LEGACY_MISSING_TIME",
-    "PAID_FIRST_DELIVERY_AND_NON_AUTHOR_DEDUPLICATED_COMMUNITY_REUSE",
-    "SETTLED_PLATFORM_RESERVATIONS_DISTINCT_FROM_ORDER_COHORT_COSTS",
-    "EXPLICIT_UNMEASURED_IMPRESSIONS_ACCURACY_AUTOMATION_AND_MANUAL_COST"
+    "SIGNED_OPTIONAL_RECOMMENDATION_CONTEXT_WITH_15_MINUTE_EXPIRY",
+    "HALF_VISIBLE_CONTINUOUS_500MS_DWELL_AND_INDEPENDENT_CLICK",
+    "OWNER_CURRENT_PRODUCT_PROFILE_PHOTO_AND_PRESET_VERSION_GATES",
+    "NATURAL_KEY_CONCURRENT_RETRY_DEDUP",
+    "SERVER_TIME_WINDOW_AND_EXPLICIT_COLLECTION_COVERAGE",
+    "PRODUCT_DELETION_EVENT_ERASURE",
+    "BEST_EFFORT_REPORTING_WITHOUT_BLOCKING_BUYER_FLOW"
   ],
-  "contract_compatibility": {
-    "original_commit": "cdaa60fc1056d023a7ce0e86447eab0f36ae3855",
-    "archived_originals": [
-      {
-        "path": "docs/verification/contracts-cdaa60f/endpoint-catalog.md",
-        "sha256": "e25a9515b35bc31b305cabadae319ac5026ccb4e190986c031ffb6e87a178012"
-      },
-      {
-        "path": "docs/verification/contracts-cdaa60f/endpoints.json",
-        "sha256": "719804c34046bd28edf4cf61b347890f2893d30391ad33f4beb2781cd5d35782"
-      },
-      {
-        "path": "docs/verification/contracts-cdaa60f/management-endpoints.json",
-        "sha256": "73af4e6dcb2dfdd62d7dcb97b2997e771fa815685fe25e46c29778bce7343f11"
-      },
-      {
-        "path": "docs/verification/contracts-cdaa60f/management-openapi.json",
-        "sha256": "74acdff4b9c16875fabe2444b642306dc012b235bae5bde04f6f2e3725532e22"
-      },
-      {
-        "path": "docs/verification/contracts-cdaa60f/openapi.json",
-        "sha256": "16b9b0a71d5ae7e82cdd17851f7f977e4166a3dd5129f0d68f84ab5ebd32ac53"
-      }
-    ],
-    "existing_schemas_paths_and_operations_unchanged": true,
-    "generator_check": {
-      "path": "docs/verification/feedback-insights-generator.json",
-      "sha256": "2681e403a6dc036d9866e1345e664d7bf44187ff4d7513d130d7ac31594599e4",
-      "bytes": 468
-    },
-    "initial_candidate_observation": "Four OpenAPI/catalog JSON artifacts and data model matched; three new management rows were missing from the current Markdown main catalog. Synchronized the catalog; exact final regeneration comparison passed."
-  },
   "focused_tests": [
     {
       "kind": "unit",
-      "passed": 8,
-      "failed": 0,
-      "original_source_set_hash": "f94399290dc574341c0e2ce9b371357cd8f95d84f9c6e842fa1e280d03fa35d6",
-      "original_source_unchanged": true,
-      "changed_since_execution": [
-        "scripts/record-usage-insights.ts",
-        "scripts/usage_insights_contracts.py",
-        "scripts/生成Codex开发契约.py",
-        "src/preview/fixtures.ts"
-      ],
-      "runtime_contract_files_changed_since_execution": [
-        "assets/development/v1.1/contracts/endpoint-catalog.md"
-      ],
-      "backend_shared_client_and_test_files_unchanged": true,
-      "original_files": [
+      "passed": 12,
+      "original_source_set_hash": "ded13191c44ea68d49b9ae810b503b27bebd22915d10847b6191e1fbc428f362",
+      "files": [
         {
-          "path": "docs/verification/feedback-insights-unit-source.json",
-          "sha256": "981ae71ea3bd7f7eb06b0fc1bebaafd01f050dd4e981f0cc2cf231b5703d76d5",
-          "bytes": 78985
+          "path": "docs/verification/recommendation-events-unit-source.json",
+          "sha256": "d37d5f1b7d370f377caa2d0b18b93bb52ae4af2a82c9c3d561a66e3c3a3974b5",
+          "bytes": 80524
         },
         {
-          "path": "docs/verification/feedback-insights-unit-result.json",
-          "sha256": "3e8eed99ee816fe26092768e6a3d539f986da189b44ba5336ab52299c0c8a87f",
-          "bytes": 1309
+          "path": "docs/verification/recommendation-events-unit-result.json",
+          "sha256": "942e7660d3daf732b4d4c05e913008d85df7d69f1ac06c11e35710f1fa3396bf",
+          "bytes": 1341
         },
         {
-          "path": "docs/verification/feedback-insights-unit-api.json",
-          "sha256": "9d7aec81eb21c1a88f4a8b035ed01f25fe024352a992a146a0da6bfa415865ec",
-          "bytes": 3749
+          "path": "docs/verification/recommendation-events-unit-api.json",
+          "sha256": "53fe78654183483467f5381d544ef50ef6b79b4fff6a3b2e6bfe243e8c27209b",
+          "bytes": 4732
         },
         {
-          "path": "docs/verification/feedback-insights-unit-api.log",
-          "sha256": "87d8a1a69f7d77d6662515ebd6c14d4d60e077cc8fb895646e8db6a22d34f500",
-          "bytes": 727
+          "path": "docs/verification/recommendation-events-unit-api.log",
+          "sha256": "9b2bc092f8a5307e2af9ded31695a72bb0cfe7b2748dc63c31e388addadd7efa",
+          "bytes": 744
         }
       ]
     },
     {
       "kind": "native",
-      "passed": 7,
-      "failed": 0,
-      "original_source_set_hash": "f94399290dc574341c0e2ce9b371357cd8f95d84f9c6e842fa1e280d03fa35d6",
-      "original_source_unchanged": true,
-      "changed_since_execution": [
-        "scripts/record-usage-insights.ts",
-        "scripts/usage_insights_contracts.py",
-        "scripts/生成Codex开发契约.py",
-        "src/preview/fixtures.ts"
-      ],
-      "runtime_contract_files_changed_since_execution": [
-        "assets/development/v1.1/contracts/endpoint-catalog.md"
-      ],
-      "backend_shared_client_and_test_files_unchanged": true,
-      "original_files": [
+      "passed": 10,
+      "original_source_set_hash": "ded13191c44ea68d49b9ae810b503b27bebd22915d10847b6191e1fbc428f362",
+      "files": [
         {
-          "path": "docs/verification/feedback-insights-native-source.json",
-          "sha256": "981ae71ea3bd7f7eb06b0fc1bebaafd01f050dd4e981f0cc2cf231b5703d76d5",
-          "bytes": 78985
+          "path": "docs/verification/recommendation-events-native-source.json",
+          "sha256": "d37d5f1b7d370f377caa2d0b18b93bb52ae4af2a82c9c3d561a66e3c3a3974b5",
+          "bytes": 80524
         },
         {
-          "path": "docs/verification/feedback-insights-native-result.json",
-          "sha256": "1f23139fe138c7511ea465b02a8afec7e44f2b01ff49f572843bd67c3f992fc6",
-          "bytes": 1324
+          "path": "docs/verification/recommendation-events-native-result.json",
+          "sha256": "cc9afc20e4c838bed8b7f135306dcd339f506a488f7377cd433b971fc9ffc389",
+          "bytes": 1356
         },
         {
-          "path": "docs/verification/feedback-insights-native-api.json",
-          "sha256": "bb063bc06779ed126f83f9852bf3c50878a71f41c69231226694908fe9735a3f",
-          "bytes": 3368
+          "path": "docs/verification/recommendation-events-native-api.json",
+          "sha256": "9b7384a534a66f047f12b92661c42de741bebbf6ea7245035fb7fdd88d8c3a14",
+          "bytes": 4207
         },
         {
-          "path": "docs/verification/feedback-insights-native-api.log",
-          "sha256": "1d6130a6909c81b2420e8daac3751c449c076965cd58a5fe40b1b9e9678c0181",
-          "bytes": 885
+          "path": "docs/verification/recommendation-events-native-api.log",
+          "sha256": "ed58c64c8dec21c0df9b40a5168806c4b31c93829fa120bc479a5bca1d212d32",
+          "bytes": 595
         }
       ]
     }
   ],
-  "browser_capture": "docs/media/usage-insights/capture-manifest.json",
-  "browser_checks": [
-    "ACTUAL_NATIVE_HTTP_AND_POSTGRES_AGGREGATES_KEEP_ALL_TRAFFIC_SUMMARY_SEPARATE_FROM_SERVER_CLASSIFIED_DETAILS",
-    "MISSING_IMPRESSIONS_ACCURACY_AUTOMATION_AND_HUMAN_COST_STAY_UNMEASURED",
-    "DISCONNECT_CLEARS_INSIGHTS_AND_NO_OPERATOR_TOKEN_IS_STORED",
-    "ACTUAL_SHARED_MINI_UI_SYNTHETIC_FEEDBACK_SELECTION_AND_WITHDRAWAL_LEAVE_ALBUM_SAVE_AVAILABLE",
-    "DESKTOP_AND_390PX_LAYOUTS_HAVE_NO_HORIZONTAL_OVERFLOW"
-  ],
-  "browser_original_source_set_hash": "9fabb5ab8209d3a1097a68149e0fed812e8ce75aef928f3fd478abc48c1c7756",
-  "browser_source_binding": {
-    "original_build_snapshot": "docs/verification/feedback-insights-captured-build.json",
-    "changed_since_capture": [
-      "scripts/usage_insights_contracts.py",
-      "scripts/生成Codex开发契约.py"
+  "original_test_source_binding": {
+    "changed_source_paths": [
+      "scripts/record-recommendation-events.ts",
+      "src/shared/platform/taro-host.ts",
+      "src/shared/ui/recommendations.tsx"
     ],
-    "runtime_contract_files_changed_since_capture": [
-      "assets/development/v1.1/contracts/endpoint-catalog.md"
+    "line_ending_only_paths": [
+      "assets/development/v1.1/contracts/endpoints.json",
+      "assets/development/v1.1/contracts/management-openapi.json",
+      "assets/development/v1.1/contracts/openapi.json",
+      "src/shared/ui/recommendations.tsx"
     ],
-    "all_application_api_json_skill_font_and_successful_build_output_bytes_identical": true,
-    "original_capture_not_relabelled": true
+    "backend_shared_client_and_test_files_unchanged": true,
+    "native_adapter_change": "Ignore absent intersectionRatio; prior shared dwell already ignored non-finite input. Device runtime remains unverified.",
+    "recorder_change": "Use an Event callback and cast only its CustomEvent payload, fixing the type error without changing the recording scenario.",
+    "original_results_not_relabelled": true
   },
+  "build_snapshot": "docs/verification/recommendation-events-build.json",
+  "build_logs": [
+    {
+      "path": "docs/verification/recommendation-events-build-1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/verification/recommendation-events-build-2.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "docs/verification/recommendation-events-build-3.log",
+      "sha256": "abeaadae89e754df535ceecf97a185b2f0292bdd6ff414223d4791e8438a30d2",
+      "bytes": 2546
+    }
+  ],
+  "initial_build": {
+    "path": "docs/verification/recommendation-events-initial-build.json",
+    "sha256": "36ec27e53a69f03c41f74caab5875106460d605944724e7d517a6bb498e521eb",
+    "bytes": 92443
+  },
+  "initial_typecheck_log": {
+    "path": "docs/verification/recommendation-events-initial-typecheck.log",
+    "sha256": "26903a44ab00b377924caf3d105b970bb3a2ad75b41427066633fbb9a3d0cdb3",
+    "bytes": 683
+  },
+  "initial_build_observation": "Typecheck found incompatible EventListener casting and an optional native intersectionRatio; both corrected, then final typecheck/server/preview passed under the original time limits. Original failure retained.",
+  "generator_check": {
+    "path": "docs/verification/recommendation-events-generator.json",
+    "sha256": "2681e403a6dc036d9866e1345e664d7bf44187ff4d7513d130d7ac31594599e4",
+    "bytes": 468
+  },
+  "original_contracts": "docs/verification/contracts-fc7def0",
+  "contract_change": "Optional recommendation measurement; new event operation and response schemas; ProductInsights adds explicit coverage and nullable counts. Current consumers and generator synchronized; older internal console clients must update.",
+  "browser_capture": "docs/media/recommendation-events/capture-manifest.json",
+  "browser_checks": [
+    "ACTUAL_BROWSER_VIEWPORT_DWELL_REPORTS_AN_IMPRESSION",
+    "ACTUAL_SHARED_ANALYSIS_DISPLAYS_THREE_SYNTHETIC_REASONS_AND_VARIANT_COUNTS",
+    "DETAIL_NAVIGATION_REPORTS_ONE_INDEPENDENT_CLICK",
+    "UNMOUNTED_CARDS_STOP_DWELL_AND_OBSERVERS",
+    "EXACT_VERSION_AND_RECOMMENDED_VARIANT_PRESERVED_DETAIL_RECHECKS_SYNTHETIC_WITHDRAWAL",
+    "BUYER_CAN_BROWSE_ALL_TEN_STYLES_WITHOUT_AUTOMATIC_SELECTION",
+    "EMPTY_LIST_OFFERS_CATALOG_AND_RECAPTURE_WITHOUT_REQUIRED_FORM",
+    "NO_HORIZONTAL_OVERFLOW_AT_320PX"
+  ],
   "local_checks": {
-    "base": "runtime/test-results/feedback-insights-local-2026-10-30T11-28-33-877Z-77ed33fe",
-    "source_set_hash": "9fabb5ab8209d3a1097a68149e0fed812e8ce75aef928f3fd478abc48c1c7756",
+    "base": "runtime/test-results/recommendation-events-local-2026-10-30T12-03-33-844Z-7c70a7a0",
+    "source_set_hash": "926fe75ab13f4a8f485bc70b812fdbdda4e366ca7b59dd64d6b7fcb05a6cab56",
     "source_unchanged": true,
     "commands": [
       {
@@ -242,9 +155,9 @@
         "status": "PASS",
         "exit_code": 0,
         "timeout_ms": 60000,
-        "elapsed_ms": 999,
-        "log_path": "runtime/test-results/feedback-insights-local-2026-10-30T11-28-33-877Z-77ed33fe/doctor.log",
-        "log_sha256": "e583fc56b2322854d926728f8be26e5473e83d5c8dcc854234c4d0eca8e0a350"
+        "elapsed_ms": 897,
+        "log_path": "runtime/test-results/recommendation-events-local-2026-10-30T12-03-33-844Z-7c70a7a0/doctor.log",
+        "log_sha256": "bdaae0423a6911ff21cbd51d6be2ce36537a7d118dede614a6340bb2d492146d"
       },
       {
         "task": "start-once",
@@ -257,36 +170,34 @@
         "status": "PASS",
         "exit_code": 0,
         "timeout_ms": 60000,
-        "elapsed_ms": 5138,
-        "log_path": "runtime/test-results/feedback-insights-local-2026-10-30T11-28-33-877Z-77ed33fe/start.log",
-        "log_sha256": "5c34f98bdfd0617ddbe483d4919df5ae81b48e5436e5abd9792ec25ad26c5f2a"
+        "elapsed_ms": 4417,
+        "log_path": "runtime/test-results/recommendation-events-local-2026-10-30T12-03-33-844Z-7c70a7a0/start.log",
+        "log_sha256": "5625064ca6cd8c30687b927c8c2b76511fd487dd8454a539050e123c6ffde32d"
       }
     ]
   },
   "local_files": [
     {
-      "path": "docs/verification/feedback-insights-local-result.json",
-      "sha256": "04a919de76426fefe2200c945bb631b8d53c2c2297c61de86f23b372a9465d16",
-      "bytes": 1112
+      "path": "docs/verification/recommendation-events-local-result.json",
+      "sha256": "9406ef0f63d8f650738befd0f4a1f850d88acda6f85e4b3c859c5687d67eb353",
+      "bytes": 1124
     },
     {
-      "path": "docs/verification/feedback-insights-local-doctor.log",
-      "sha256": "e583fc56b2322854d926728f8be26e5473e83d5c8dcc854234c4d0eca8e0a350",
+      "path": "docs/verification/recommendation-events-local-doctor.log",
+      "sha256": "bdaae0423a6911ff21cbd51d6be2ce36537a7d118dede614a6340bb2d492146d",
       "bytes": 2141
     },
     {
-      "path": "docs/verification/feedback-insights-local-start.log",
-      "sha256": "5c34f98bdfd0617ddbe483d4919df5ae81b48e5436e5abd9792ec25ad26c5f2a",
+      "path": "docs/verification/recommendation-events-local-start.log",
+      "sha256": "5625064ca6cd8c30687b927c8c2b76511fd487dd8454a539050e123c6ffde32d",
       "bytes": 1566
     },
     {
-      "path": "docs/verification/feedback-insights-doctor.json",
-      "sha256": "e583fc56b2322854d926728f8be26e5473e83d5c8dcc854234c4d0eca8e0a350",
+      "path": "docs/verification/recommendation-events-doctor.json",
+      "sha256": "bdaae0423a6911ff21cbd51d6be2ce36537a7d118dede614a6340bb2d492146d",
       "bytes": 2141
     }
   ],
-  "local_source_binding": "Original 485-file source retained; final source changes only contract-generator Python sources, plus the Markdown endpoint catalog. Application/API JSON/migrations and all successful build outputs are byte-identical.",
-  "local_runner_initial_observation": "An initial private wrapper requested an unsupported common-command task and stopped before dispatch. The common command allowlist was unchanged; a local native-only wrapper then ran doctor/start once successfully.",
   "historical_evidence_unchanged": [
     {
       "path": "docs/verification/album-save-api.json",
@@ -535,6 +446,22 @@
     {
       "path": "docs/verification/community-native-tested-source.json",
       "sha256": "83664897daa116b74864bbda4e8b0aab30badb6bed39e20a87cbd1f00b78b494"
+    },
+    {
+      "path": "docs/verification/contracts-cdaa60f/endpoints.json",
+      "sha256": "719804c34046bd28edf4cf61b347890f2893d30391ad33f4beb2781cd5d35782"
+    },
+    {
+      "path": "docs/verification/contracts-cdaa60f/management-endpoints.json",
+      "sha256": "73af4e6dcb2dfdd62d7dcb97b2997e771fa815685fe25e46c29778bce7343f11"
+    },
+    {
+      "path": "docs/verification/contracts-cdaa60f/management-openapi.json",
+      "sha256": "74acdff4b9c16875fabe2444b642306dc012b235bae5bde04f6f2e3725532e22"
+    },
+    {
+      "path": "docs/verification/contracts-cdaa60f/openapi.json",
+      "sha256": "16b9b0a71d5ae7e82cdd17851f7f977e4166a3dd5129f0d68f84ab5ebd32ac53"
     },
     {
       "path": "docs/verification/contracts.json",
@@ -793,6 +720,10 @@
       "sha256": "7abccf9f10658bebf1eef6bc365f244c0eae06e736a5aab2e480507286fc5605"
     },
     {
+      "path": "docs/verification/delivery-focused-source-cdaa60f.json",
+      "sha256": "97b61bd82a9025f62e5a7f9b061277a1fd3f9c0a4b0b65cd3c5ad0a1807dc9e8"
+    },
+    {
       "path": "docs/verification/delivery-focused-source-d6584e3.json",
       "sha256": "0adbac089bffb694be1100c0545224de71d7864915cd4c5e01255762660fd5f9"
     },
@@ -823,6 +754,54 @@
     {
       "path": "docs/verification/draft-resume-unit.json",
       "sha256": "51ead16fa990ca316d9fe12040ce87b19746281d8a0c8ff6164397d97f64ed6a"
+    },
+    {
+      "path": "docs/verification/feedback-insights-build.json",
+      "sha256": "a01bd720946be5463b2a80ccc77950e3bf0833619da27ed82f5437d5fc99fa0a"
+    },
+    {
+      "path": "docs/verification/feedback-insights-captured-build.json",
+      "sha256": "6fd539302188e6074457671249b80f19e49b11c48e8584bba071b73ba41a3336"
+    },
+    {
+      "path": "docs/verification/feedback-insights-doctor.json",
+      "sha256": "e583fc56b2322854d926728f8be26e5473e83d5c8dcc854234c4d0eca8e0a350"
+    },
+    {
+      "path": "docs/verification/feedback-insights-generator.json",
+      "sha256": "2681e403a6dc036d9866e1345e664d7bf44187ff4d7513d130d7ac31594599e4"
+    },
+    {
+      "path": "docs/verification/feedback-insights-local-result.json",
+      "sha256": "04a919de76426fefe2200c945bb631b8d53c2c2297c61de86f23b372a9465d16"
+    },
+    {
+      "path": "docs/verification/feedback-insights-native-api.json",
+      "sha256": "bb063bc06779ed126f83f9852bf3c50878a71f41c69231226694908fe9735a3f"
+    },
+    {
+      "path": "docs/verification/feedback-insights-native-result.json",
+      "sha256": "1f23139fe138c7511ea465b02a8afec7e44f2b01ff49f572843bd67c3f992fc6"
+    },
+    {
+      "path": "docs/verification/feedback-insights-native-source.json",
+      "sha256": "981ae71ea3bd7f7eb06b0fc1bebaafd01f050dd4e981f0cc2cf231b5703d76d5"
+    },
+    {
+      "path": "docs/verification/feedback-insights-source.json",
+      "sha256": "b21de9aebfdedcb81c01eca0540ff2d4fb5d80b5f7edbb74fa0799f996be2f08"
+    },
+    {
+      "path": "docs/verification/feedback-insights-unit-api.json",
+      "sha256": "9d7aec81eb21c1a88f4a8b035ed01f25fe024352a992a146a0da6bfa415865ec"
+    },
+    {
+      "path": "docs/verification/feedback-insights-unit-result.json",
+      "sha256": "3e8eed99ee816fe26092768e6a3d539f986da189b44ba5336ab52299c0c8a87f"
+    },
+    {
+      "path": "docs/verification/feedback-insights-unit-source.json",
+      "sha256": "981ae71ea3bd7f7eb06b0fc1bebaafd01f050dd4e981f0cc2cf231b5703d76d5"
     },
     {
       "path": "docs/verification/generated-aftercare-api.json",
@@ -1749,6 +1728,10 @@
       "sha256": "8e6caefbc9a3685f12953b53864870a30954a5512f62ab264e36040b6495b15b"
     },
     {
+      "path": "docs/verification/publication-cdaa60f.json",
+      "sha256": "6fb46b19d21b8cb75ffe163dc229c13ac7fdc8a1352c7023a97abdfec247627e"
+    },
+    {
       "path": "docs/verification/publication-d6584e3.json",
       "sha256": "948ed6fc4dffae378d496bb78674714289a2e186a8e119dd2fd13f83b80e3b8c"
     },
@@ -1923,6 +1906,10 @@
     {
       "path": "docs/verification/repository-audit-c7bbf39.json",
       "sha256": "43dbc663e94bcf0d2e631230545ddb0529341d4b3a5feaf0cbd7bdd1e55bf523"
+    },
+    {
+      "path": "docs/verification/repository-audit-cdaa60f.json",
+      "sha256": "c21deb62123e4e2081749a924ce30d712d435f54078fec3fcadb5a6b4a724aa7"
     },
     {
       "path": "docs/verification/repository-audit-d6584e3.json",
@@ -2177,10 +2164,9 @@
       "sha256": "fbf919d88e4b3bb6b2e1ff5993fb62a4dacfd78c559bd7232f0c780b28b41846"
     }
   ],
-  "historical_payload_files_preserved": 765,
-  "new_media_files": 9,
-  "historical_media_files": 138,
-  "media_files": 147,
+  "historical_media_files": 147,
+  "new_media_files": 6,
+  "media_files": 153,
   "frozen_design_files": 48,
   "frozen_c_archive_sha256": "9a6cafcc59f06c9e5803f2d7ef3f3891c9c2553869b70ebeff8ce7a54b7abdb8",
   "full_suite_executed": false,
@@ -2191,13 +2177,13 @@
   "production_admitted": false,
   "cloud_deployed": false,
   "pending": [
-    "RELIABLE_RECOMMENDATION_IMPRESSION_AND_CLICK_MEASUREMENT",
-    "GROUNDED_RECOGNITION_ACCURACY_DATASET",
-    "VERIFIED_FULL_SELF_SERVICE_AND_EXTERNAL_USER_QUALIFICATION",
-    "MANUAL_REVIEW_AND_SUPPORT_COST_LEDGER",
-    "REAL_SERVICES_PAYMENT_AND_PRODUCTION_ISOLATION_ADMISSION",
+    "RECOGNITION_GROUND_TRUTH_ACCURACY",
+    "VERIFIED_FULL_SELF_SERVICE_AND_REAL_EXTERNAL_CUSTOMER_QUALIFICATION",
+    "COMMUNITY_PAID_NON_REFUNDED_ANTI_ABUSE_QUALIFICATION",
+    "MANUAL_REVIEW_SUPPORT_COST_LEDGER",
+    "REAL_SERVICES_PAYMENT_ISOLATION_AND_COMMERCIAL_ADMISSION",
     "BOTH_MINI_PROGRAM_DEVICES",
-    "PLUS_CLOUD_AND_COMPLETE_REQUIREMENTS_ACCEPTANCE",
-    "EARLIER_NATIVE_CRASH_ROOT_CAUSE_AND_LONG_TERM_STABILITY"
+    "PLUS_CLOUD_AND_COMPLETE_58_REQUIREMENT_ACCEPTANCE",
+    "EARLIER_NATIVE_CRASH_ROOT_CAUSE"
   ]
 }

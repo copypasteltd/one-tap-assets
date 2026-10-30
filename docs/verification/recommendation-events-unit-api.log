@@ -1,0 +1,16 @@
+
+ RUN  v5.0.5 E:/dev/sandbox/支付宝黑客松/一品成片
+
+ ✓ tests/unit/product-insights-client.test.ts (3 tests) 152ms
+ ✓ tests/unit/recommendation-events.test.ts (3 tests) 18ms
+ ✓ tests/unit/recommendations.test.ts (6 tests) 37ms
+
+ Test Files  3 passed (3)
+      Tests  12 passed (12)
+   Start at  20:00:37
+   Duration  12.29s (transform 53%, import 41%, worker 4%, tests 2%)
+
+    Isolate  3 workers spawned · ~3.38s startup each (spawn + environment, per file)
+             at least ~1.69s faster with isolate: false — reuses workers across files instead of one per file
+
+JSON report written to E:/dev/sandbox/支付宝黑客松/一品成片/runtime/test-results/recommendation-events-2026-10-30T12-00-22-970Z-04929cfc/api.json

@@ -1,0 +1,28 @@
+{
+  "base": "runtime/test-results/recommendation-events-2026-10-30T12-00-22-748Z-188fbf1f",
+  "source_set_hash": "ded13191c44ea68d49b9ae810b503b27bebd22915d10847b6191e1fbc428f362",
+  "source_unchanged": true,
+  "commands": [
+    {
+      "task": "exec",
+      "command": "node E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs run --config vitest.integration.config.ts tests/integration/recommendations.test.ts tests/integration/usage-insights.test.ts --outputFile.json=runtime/test-results/recommendation-events-2026-10-30T12-00-22-748Z-188fbf1f/api.json",
+      "argv": [
+        "E:\\dev\\sandbox\\支付宝黑客松\\一品成片\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--config",
+        "vitest.integration.config.ts",
+        "tests/integration/recommendations.test.ts",
+        "tests/integration/usage-insights.test.ts",
+        "--outputFile.json=runtime/test-results/recommendation-events-2026-10-30T12-00-22-748Z-188fbf1f/api.json"
+      ],
+      "shell": false,
+      "status": "PASS",
+      "exit_code": 0,
+      "signal": null,
+      "timeout_ms": 480000,
+      "elapsed_ms": 79473,
+      "log_path": "runtime/test-results/recommendation-events-2026-10-30T12-00-22-748Z-188fbf1f/api.log",
+      "log_sha256": "ed58c64c8dec21c0df9b40a5168806c4b31c93829fa120bc479a5bca1d212d32"
+    }
+  ]
+}
