@@ -1,0 +1,23 @@
+{
+  "project": "一品成片",
+  "date": "2026-11-01",
+  "scope": "Chinese mini-program listing copy only",
+  "platforms": [
+    "Alipay",
+    "Douyin"
+  ],
+  "document": "docs/launch/小程序上架文案-v1.0.md",
+  "counting_rule": "Unicode characters including punctuation; body only, excluding headings and newlines",
+  "introduction": {
+    "characters": 14,
+    "maximum": 20,
+    "sha256": "a64e219942d6c8d403ea85c58d84623cda67a1813c63bb0d05800e3164f9f1a3"
+  },
+  "description": {
+    "characters": 300,
+    "required": 300,
+    "sha256": "4c419a0a1f064e59cbadde60ac57812660666e5cd1e4113f9d504aeba480a404"
+  },
+  "character_checks": "PASS",
+  "backend_submission": "NOT_PERFORMED"
+}

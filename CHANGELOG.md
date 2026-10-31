@@ -1,5 +1,10 @@
 # 更新记录 / Changelog
 
+## 2026-11-01 — Mini-program listing copy / 小程序上架文案
+
+- 新增支付宝、抖音通用简介与描述，分别14、300字符（含标点）；突出拍照识别、免填表、官方/社区预设和成套素材交付，进阶编辑作为补充。 / Added shared Chinese listing copy: a 14-character introduction and a 300-character description, including punctuation.
+- 同步中英README、编号状态及字符核对回执；后台填报待处理。 [文案正文](docs/launch/小程序上架文案-v1.0.md) · [核对回执](docs/verification/mini-program-listing-copy-2026-11-01.json)
+
 ## 2026-11-01 — Approved 06 brand release 1.0.0 / 柚子小导正式定稿
 
 - 用户选择06，新增独立品牌当前指针与版本化定稿目录；保留原质感主标志，补齐独立扁平真矢量和转路径字标。原候选及C冻结稿保留。 / Recorded the user's 06 decision and added the versioned brand baseline with a shaded primary mascot and separate true-vector applications.

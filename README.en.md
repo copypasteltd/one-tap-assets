@@ -4,6 +4,8 @@
 
 ![Final One Tap Assets brand identity](assets/brand/citrus-director/v1.0.0/brand-overview-web.png)
 
+[Chinese mini-program listing copy](docs/launch/小程序上架文案-v1.0.md) provides a 14-character introduction and a 300-character description, including punctuation, for consistent Alipay and Douyin product listings. The body text is ready to copy.
+
 **2026-10-31: native LAN deployment now uses HTTP only, as requested.** [Home](http://192.168.31.20:38480/) · [Plus](http://192.168.31.20:38480/plus/) · [Synthetic mini-program replay](http://192.168.31.20:38480/preview/). HTTP **38480** only; HTTPS and upgrade redirects have been removed; API and database bind to loopback only. Project-owned Node 24.22.1, PostgreSQL 17.11, FFmpeg, systemd startup and the initial database backup are configured. All four targets were rebuilt on Linux, with 17 pages per mini-program. Plaintext credentials are stored only on the server at `/root/cfg/one-tap-assets/credentials.txt` (root/0600). Real native identity, models, payments and Codex isolation admission still require configuration; live ordering remains disabled.
 
 [Deployment and operations](docs/deployment/HTTP内网部署与运维-2026-10-31.md) · [Config snapshot and health check](deploy/linux/README.md) · [Server evidence](docs/verification/http-lan-server.json) · [HTTP checks from the workstation](docs/verification/http-lan-client.json) · [Screens, recording and GIF](docs/media/http-deployment/README.md)

@@ -4,6 +4,8 @@
 
 ![一品成片正式品牌定稿](assets/brand/citrus-director/v1.0.0/brand-overview-web.png)
 
+[小程序上架文案](docs/launch/小程序上架文案-v1.0.md)：简介14字，描述300字（均含标点），统一支付宝和抖音小程序的产品介绍口径，正文可直接复制。
+
 **2026-10-31 已按要求切换为纯 HTTP 内网部署。** [首页](http://192.168.31.20:38480/) · [Plus](http://192.168.31.20:38480/plus/) · [小程序演示回放](http://192.168.31.20:38480/preview/)。仅 HTTP **38480**，HTTPS 监听及升级跳转已移除；内部 API/数据库仅监听本机。原生 Node 24.22.1、PostgreSQL 17.11、FFmpeg、开机自启和首份备份已配置，双端 Linux 构建均 17 页面。明文凭据仅在服务器 `/root/cfg/one-tap-assets/credentials.txt`（root/0600）。真实登录、生成、支付和 Codex 隔离准入仍待，当前不开放真实下单。
 
 [完整部署与运维](docs/deployment/HTTP内网部署与运维-2026-10-31.md) · [配置快照与健康检查](deploy/linux/README.md) · [服务端证据](docs/verification/http-lan-server.json) · [HTTP 跨内网核对](docs/verification/http-lan-client.json) · [截图/录屏/GIF](docs/media/http-deployment/README.md)
