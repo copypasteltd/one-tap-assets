@@ -1,5 +1,12 @@
 # 更新记录 / Changelog
 
+## 2026-11-01 — Approved 06 brand release 1.0.0 / 柚子小导正式定稿
+
+- 用户选择06，新增独立品牌当前指针与版本化定稿目录；保留原质感主标志，补齐独立扁平真矢量和转路径字标。原候选及C冻结稿保留。 / Recorded the user's 06 decision and added the versioned brand baseline with a shaded primary mascot and separate true-vector applications.
+- 交付134文件，含93PNG、22SVG、原图/提示词、横竖/中文组合、单色/反白、三背景图标、小尺寸稿、ICO/网页接入文件、上线物料、ASE/CSS/JSON/GPL和8页手册；提供离线浏览、GIF、SHA256与完整本地ZIP。 / Added complete brand and launch assets, a guide and a checksum-verified local ZIP.
+- 保留原图字节和主体RGB，清理7600个孤立/极低透明度像素；没有新增生图调用。核对路径SVG无嵌入图片/字体、单色填充、尺寸/透明度、ICO/GIF、ASE、8页PDF及全部链接/ZIP，逐页实际查看最终手册。 / Preserved source and retained RGB, verified formats and inspected all final PDF pages.
+- 中英README、状态与定型说明同步；本轮仅品牌资产，应用页面接入及宿主上传显示待处理，HTTP-only和真实服务准入状态不变。 [定稿素材](assets/brand/citrus-director/v1.0.0/README.md) · [专项回执](docs/verification/citrus-brand-final-2026-11-01.json)
+
 ## 2026-11-01 — Ten logo candidates / 十款品牌LOGO候选
 
 - 按用户指定的sub2-image-gen / gpt-image-2.5实际生成十款独立风格图形，保存1254×1254原图、完整提示词、方案说明与来源。 / Generated ten distinct logo symbols through the requested gateway and model; original pixels and prompts are archived.

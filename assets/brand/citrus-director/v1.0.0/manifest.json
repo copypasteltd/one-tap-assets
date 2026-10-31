@@ -1,0 +1,1006 @@
+{
+  "project": "一品成片",
+  "identity": "06 柚子小导",
+  "version": "1.0.0",
+  "date": "2026-11-01",
+  "timezone": "Asia/Taipei",
+  "status": "FINAL_BRAND_ASSETS",
+  "file_count": 132,
+  "total_bytes": 19135909,
+  "types": {
+    ".png": 93,
+    ".gif": 1,
+    ".json": 3,
+    ".pdf": 1,
+    ".html": 2,
+    ".ico": 1,
+    ".svg": 22,
+    ".webmanifest": 1,
+    ".jpg": 1,
+    ".md": 2,
+    ".txt": 2,
+    ".ase": 1,
+    ".css": 1,
+    ".gpl": 1
+  },
+  "checks": {
+    "source_byte_identical": true,
+    "retained_rgb_byte_identical": true,
+    "alpha_cleanup_pixels": 7600,
+    "svg_path_only": 22,
+    "monochrome_fills": true,
+    "vector_symbol_clear_space": true,
+    "rasters_decoded": 96,
+    "app_icon_sizes": true,
+    "tiny_icon_sizes": true,
+    "transparent_alpha_and_corners": true,
+    "ico_frames": 5,
+    "gif_frames": 5,
+    "ase_rgb_colors": 9,
+    "pdf_pages": 8,
+    "pdf_text_and_canonical_copy": true,
+    "pdf_all_pages_visually_inspected": true,
+    "html_local_links": 41,
+    "markdown_local_links": 29,
+    "public_text_secret_pattern_files": 36,
+    "browser_used": false,
+    "virtualization_used": false,
+    "subagents_used": false,
+    "application_builds": "NOT_RUN_ASSET_ONLY",
+    "comprehensive_suite": "NOT_RUN_ASSET_ONLY"
+  },
+  "self_exclusions": [
+    "manifest.json",
+    "package-receipt.json"
+  ],
+  "files": [
+    {
+      "path": "brand-overview-web.png",
+      "bytes": 161985,
+      "sha256": "7117a40ae0bf92e7a4bc79ed48f43a73609d6920184d59986a6f512fc8a716b7",
+      "width": 1100,
+      "height": 800,
+      "format": "PNG"
+    },
+    {
+      "path": "brand-overview.png",
+      "bytes": 307388,
+      "sha256": "c5825038f1c6fcda1bad84ae0ce9de56203b2f7eb0b5e89449fdbcf5dcf9bcb3",
+      "width": 2200,
+      "height": 1600,
+      "format": "PNG"
+    },
+    {
+      "path": "brand-showcase.gif",
+      "bytes": 239859,
+      "sha256": "7d141b87612b962b1ac8bcc5bc8c0499a1dd9617c21605f233d6225518135a4d",
+      "width": 960,
+      "height": 640,
+      "format": "GIF"
+    },
+    {
+      "path": "brand.json",
+      "bytes": 2322,
+      "sha256": "4d56f01a514b5375210155223b2e9c7d06c19239cdf55bfa93a8a30e392a36d2"
+    },
+    {
+      "path": "guidelines/guide-preview.png",
+      "bytes": 316252,
+      "sha256": "42898607bfd02dac097cb02da915dd016179323bba2d6309d530d29c64241714",
+      "width": 1600,
+      "height": 1230,
+      "format": "PNG"
+    },
+    {
+      "path": "guidelines/preview/01.png",
+      "bytes": 277583,
+      "sha256": "8243f3f97ed2f72e6e8b0e558e30ccfc45aafbfe82382fec9e3390e62114c1bc",
+      "width": 1600,
+      "height": 1134,
+      "format": "PNG"
+    },
+    {
+      "path": "guidelines/preview/02.png",
+      "bytes": 166497,
+      "sha256": "a8c8adfbb853999143c617979f5d462fbb6a41011c5f121c1d8d09adeb63d04a",
+      "width": 1600,
+      "height": 1134,
+      "format": "PNG"
+    },
+    {
+      "path": "guidelines/preview/03.png",
+      "bytes": 170639,
+      "sha256": "e8ce018765eed5ec0d1af9a5d991ec977ae6a311a37fea4432ec4e34a4114fa9",
+      "width": 1600,
+      "height": 1134,
+      "format": "PNG"
+    },
+    {
+      "path": "guidelines/preview/04.png",
+      "bytes": 119442,
+      "sha256": "584fe8b24ad0dff7446817d4d0ef8ccdde69b9b4acd3478a9149ba6ad52e91a8",
+      "width": 1600,
+      "height": 1134,
+      "format": "PNG"
+    },
+    {
+      "path": "guidelines/preview/05.png",
+      "bytes": 145359,
+      "sha256": "3e09d2c8cd3fc8835d45f1fac89c9cc243aeb00b84f6d726aca85307d69458c3",
+      "width": 1600,
+      "height": 1134,
+      "format": "PNG"
+    },
+    {
+      "path": "guidelines/preview/06.png",
+      "bytes": 240334,
+      "sha256": "2c1e5eb09df3d5ac64fb799f3091dda57d931434027403047d204a3fcdf87072",
+      "width": 1600,
+      "height": 1134,
+      "format": "PNG"
+    },
+    {
+      "path": "guidelines/preview/07.png",
+      "bytes": 133923,
+      "sha256": "d66035c17562b708718e3e8f9c032bf9e544a305ced70c2860d0a091f48ece8a",
+      "width": 1600,
+      "height": 1134,
+      "format": "PNG"
+    },
+    {
+      "path": "guidelines/preview/08.png",
+      "bytes": 196096,
+      "sha256": "ab7ac45685087c1eb8334a3ecc07f88931741cafe2e2a53af3e00fe10838f3da",
+      "width": 1600,
+      "height": 1134,
+      "format": "PNG"
+    },
+    {
+      "path": "guidelines/small-size-inspection.png",
+      "bytes": 24274,
+      "sha256": "090f9de174f8ef8e4588a69f721c797ad2fb0bce427f4543fb6f87acf923f6eb",
+      "width": 1480,
+      "height": 330,
+      "format": "PNG"
+    },
+    {
+      "path": "guidelines/一品成片-柚子小导-品牌手册-v1.0.pdf",
+      "bytes": 2833606,
+      "sha256": "91df491fdd1c857f974b6dd481ad4284e90be8953d363d690110d2ed037e91b4"
+    },
+    {
+      "path": "icons/app/cream/icon-1024.png",
+      "bytes": 427800,
+      "sha256": "d8a0764acb85d5702eb391ebaf2f8c37a064fd4b97c07df0a0997abd1cb88613",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/app/cream/icon-128.png",
+      "bytes": 11544,
+      "sha256": "a2da7802eb017a165f36ce202cee68a991e007702124a532c0db49952f9c31c5",
+      "width": 128,
+      "height": 128,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/app/cream/icon-180.png",
+      "bytes": 19659,
+      "sha256": "4acb9236c1ac8b9e52d082f37c98e4761d4a0dcf64fe73d7b9234ee339d23566",
+      "width": 180,
+      "height": 180,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/app/cream/icon-192.png",
+      "bytes": 21827,
+      "sha256": "d965721c7b9e3b44452d792a8aeba6164c653b35d7e3b38b574d167208c391d3",
+      "width": 192,
+      "height": 192,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/app/cream/icon-256.png",
+      "bytes": 34506,
+      "sha256": "ed4ca36611b19f6f803f51fa392b94f7615c023713a747f0f6990f0e30f9d6ae",
+      "width": 256,
+      "height": 256,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/app/cream/icon-512.png",
+      "bytes": 117271,
+      "sha256": "814e9ff643c56ac3a31b8d3bf606b502e089f435451454f86750ecf3c9916025",
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/app/dark/icon-1024.png",
+      "bytes": 426577,
+      "sha256": "132ef2a1191e7a90a0f9d9731195b60210c873c027c74fe0284a511226f5743a",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/app/dark/icon-128.png",
+      "bytes": 11758,
+      "sha256": "0ccaabb6e02c65756364a9a884fa24a166f37156f669737716a21fec1e44c32b",
+      "width": 128,
+      "height": 128,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/app/dark/icon-180.png",
+      "bytes": 20031,
+      "sha256": "272709e83118e147eda8164e296f77ef996080357b32f356ba24bc296e8a30eb",
+      "width": 180,
+      "height": 180,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/app/dark/icon-192.png",
+      "bytes": 22287,
+      "sha256": "fa9027ee6f012451110d7f5bbef4b34e0b140cb4f03084d27fe6c6f0ae119183",
+      "width": 192,
+      "height": 192,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/app/dark/icon-256.png",
+      "bytes": 35031,
+      "sha256": "1de3ceb6d5e90f3350d13b245fd41bb6e11f909c8032a663304bea2a79a0970a",
+      "width": 256,
+      "height": 256,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/app/dark/icon-512.png",
+      "bytes": 117569,
+      "sha256": "56b439c4c9a882322e5abfd2bf55b367655b074dd2bf3958786ecef632b6a9a1",
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/app/white/icon-1024.png",
+      "bytes": 428963,
+      "sha256": "6b7ffb2db4db9ba86ce84767450beccb35032378c655e4f7fe1ba75fb5431677",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/app/white/icon-128.png",
+      "bytes": 11554,
+      "sha256": "8b4281e923794e2f50dd4ee228fd0e7e3d4e376841caa0bf92170c50d1c0c045",
+      "width": 128,
+      "height": 128,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/app/white/icon-180.png",
+      "bytes": 19756,
+      "sha256": "0e49dc88974c5afad7dc51a65ebcaed63ecf4b32ea98009d097aff454e27042b",
+      "width": 180,
+      "height": 180,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/app/white/icon-192.png",
+      "bytes": 21894,
+      "sha256": "cdafd7a51d8c07d07734840f372676ae94f6ab3e98e8f0c0bbff873e442ba08c",
+      "width": 192,
+      "height": 192,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/app/white/icon-256.png",
+      "bytes": 34706,
+      "sha256": "193d3f6fab85c80278651e1db0741d08190290e25a2e581dcb971b1a327a4591",
+      "width": 256,
+      "height": 256,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/app/white/icon-512.png",
+      "bytes": 117670,
+      "sha256": "322606c6b4c56f536dfa0e493f196b88c09019c0b1a1e72c6c521151a2f4685f",
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/small/icon-128.png",
+      "bytes": 3290,
+      "sha256": "f5283e857dde44cdd5438a0a03a49baa56a02b71dd4ca1c2964bf493f03017e7",
+      "width": 128,
+      "height": 128,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/small/icon-16.png",
+      "bytes": 393,
+      "sha256": "6b785925ac0e4fbe7079648aa51392a2e4bc96c322f4dc762ffaa79801e39163",
+      "width": 16,
+      "height": 16,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/small/icon-24.png",
+      "bytes": 580,
+      "sha256": "8a8419de86fd3a79058f6b888e6929c93ae0fb1bef2f384d338bd3400863da70",
+      "width": 24,
+      "height": 24,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/small/icon-32.png",
+      "bytes": 723,
+      "sha256": "1a4ed2f5c247b4692b2619f739452cd744802ce8e1ff11d4263e700a606f2b1f",
+      "width": 32,
+      "height": 32,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/small/icon-48.png",
+      "bytes": 1247,
+      "sha256": "df6ce6df422d1c1bb8d653b34fed3d15ca2db3d91ead854439410f349cb83f91",
+      "width": 48,
+      "height": 48,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/small/icon-64.png",
+      "bytes": 1677,
+      "sha256": "5871b48c010f2fb77f7fe542ecb89560192bc4fa247ba9e68676eea6e047f53c",
+      "width": 64,
+      "height": 64,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/small/icon-96.png",
+      "bytes": 2434,
+      "sha256": "982b92225b6d3ec0473296e03ea853b2ccc03cdf5291bb17ba14390055379ad8",
+      "width": 96,
+      "height": 96,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/small/symbol-128.png",
+      "bytes": 3700,
+      "sha256": "e3508da5343741c65c7fc520cf9880087fd8822d73ca83a022b97b775f7acc4e",
+      "width": 128,
+      "height": 128,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/small/symbol-16.png",
+      "bytes": 438,
+      "sha256": "22b47e7fac9e45d7344523241d6339943fe666dc4a2dfc5db2c69e4ad2d18f4f",
+      "width": 16,
+      "height": 16,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/small/symbol-24.png",
+      "bytes": 635,
+      "sha256": "2a7e66532edc6df004eeb841998696ddfdf7043834f39f8ac22821d0dec340dc",
+      "width": 24,
+      "height": 24,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/small/symbol-32.png",
+      "bytes": 797,
+      "sha256": "3a81ebfbacdc47ac52399d0f6aaebb02a219bb6054768b0d431dc483e5db8b8c",
+      "width": 32,
+      "height": 32,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/small/symbol-48.png",
+      "bytes": 1361,
+      "sha256": "bdf2ea64a0e8428582355f7f52ffb7fff2f3a50e4e89ead6f385889514e73fa5",
+      "width": 48,
+      "height": 48,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/small/symbol-64.png",
+      "bytes": 1846,
+      "sha256": "4705e4a99dc302a997d01df161e5ccef9cbc1a78c5ef85e89cbb530157a228e6",
+      "width": 64,
+      "height": 64,
+      "format": "PNG"
+    },
+    {
+      "path": "icons/small/symbol-96.png",
+      "bytes": 2716,
+      "sha256": "ffbcd18b2d70e2704d58c745b42d019d0a140aa79fd0b679ebc1c84333a25108",
+      "width": 96,
+      "height": 96,
+      "format": "PNG"
+    },
+    {
+      "path": "index.html",
+      "bytes": 5498,
+      "sha256": "74705aa95f23ec07e2fbf389050213d9154fc35538d71b5d84017052051a8f1e"
+    },
+    {
+      "path": "integration/web/apple-touch-icon.png",
+      "bytes": 19659,
+      "sha256": "4acb9236c1ac8b9e52d082f37c98e4761d4a0dcf64fe73d7b9234ee339d23566",
+      "width": 180,
+      "height": 180,
+      "format": "PNG"
+    },
+    {
+      "path": "integration/web/favicon.ico",
+      "bytes": 7018,
+      "sha256": "71cf740ee168d56fa80b376e511349fea8a9df1f270f163e72d98315140e890d",
+      "width": 64,
+      "height": 64,
+      "format": "ICO"
+    },
+    {
+      "path": "integration/web/favicon.svg",
+      "bytes": 797,
+      "sha256": "4888de6f41d5a213240a11b9c5fd21c9d01b1f93ebb9084dd334a90d138684e6"
+    },
+    {
+      "path": "integration/web/head-snippet.html",
+      "bytes": 368,
+      "sha256": "672b19145170d96735c54a17a361381e46e240b610d288ecdffc6d86dabc1cd8"
+    },
+    {
+      "path": "integration/web/site.webmanifest",
+      "bytes": 549,
+      "sha256": "42e885a603f47c0c020cdf67f1a81a87520e4b5ac75e89d37bbabdad8dab325c"
+    },
+    {
+      "path": "integration/web/web-app-icon-192.png",
+      "bytes": 21827,
+      "sha256": "d965721c7b9e3b44452d792a8aeba6164c653b35d7e3b38b574d167208c391d3",
+      "width": 192,
+      "height": 192,
+      "format": "PNG"
+    },
+    {
+      "path": "integration/web/web-app-icon-512.png",
+      "bytes": 117271,
+      "sha256": "814e9ff643c56ac3a31b8d3bf606b502e089f435451454f86750ecf3c9916025",
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    },
+    {
+      "path": "launch/portrait-poster-1080x1920.png",
+      "bytes": 463582,
+      "sha256": "4dca6d8210a25fb7620e899a5a378a404d7641b26614c6151f75042b43ebfe6f",
+      "width": 1080,
+      "height": 1920,
+      "format": "PNG"
+    },
+    {
+      "path": "launch/share-card-1200x960.png",
+      "bytes": 215894,
+      "sha256": "0ae0c0b58029fb28a7b89349d57425fc4b0bf4f9b265b31c313a5b6de0898f63",
+      "width": 1200,
+      "height": 960,
+      "format": "PNG"
+    },
+    {
+      "path": "launch/site-banner-1920x640.png",
+      "bytes": 189178,
+      "sha256": "b54f45f099f756058014bd00ba422dc7bc4a466ae67afa939918f9f27d69d219",
+      "width": 1920,
+      "height": 640,
+      "format": "PNG"
+    },
+    {
+      "path": "launch/social-cover-1200x630.jpg",
+      "bytes": 90130,
+      "sha256": "d1b13665be00632495cf0e01dd6bbf22ee1d6c25cbf092218afa9283b3c1d19e",
+      "width": 1200,
+      "height": 630,
+      "format": "JPEG"
+    },
+    {
+      "path": "launch/social-cover-1200x630.png",
+      "bytes": 140991,
+      "sha256": "b0a6aa734aee7f3d57168e7d40aedb59c85905a9c31705d3de893cbc36ef3967",
+      "width": 1200,
+      "height": 630,
+      "format": "PNG"
+    },
+    {
+      "path": "launch/square-poster-1080x1080.png",
+      "bytes": 261008,
+      "sha256": "65b7e423e67d562952e6e369f0d0d37df2846cad4caaf8b35b7b416471810b7c",
+      "width": 1080,
+      "height": 1080,
+      "format": "PNG"
+    },
+    {
+      "path": "launch/video-endmark-transparent-800x240.png",
+      "bytes": 56101,
+      "sha256": "88880ce33a1ba3e6c1a82c535f7c095805bc3ba073d8e08f956dac5cb1fb8e6e",
+      "width": 800,
+      "height": 240,
+      "format": "PNG"
+    },
+    {
+      "path": "master/symbol-color-native-transparent-1254.png",
+      "bytes": 568711,
+      "sha256": "3fb2ef0d42237d85caff97834e7bf56e705caf84ee90ed7fececdff70ca718ef",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG"
+    },
+    {
+      "path": "master/symbol-color-tight-native.png",
+      "bytes": 542980,
+      "sha256": "1346d5cd2379a64c6b1259b3c3acd481d13b184bba9a5b12351223a8f5f91e80",
+      "width": 886,
+      "height": 853,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/hero-lockup-horizontal-cream.png",
+      "bytes": 257308,
+      "sha256": "b4e840a572f36d5d96c6b07519cc0a178ffa522818da8927fdc9b28d9d4fd75b",
+      "width": 2400,
+      "height": 720,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/hero-lockup-horizontal-dark.png",
+      "bytes": 258931,
+      "sha256": "b3cb28d87f442963f29140b7d1463c709ea37960b4966afa452e978b4cf8c2cf",
+      "width": 2400,
+      "height": 720,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/hero-lockup-horizontal-reverse-transparent.png",
+      "bytes": 299107,
+      "sha256": "628cba73e65073783028232c8f6f3fa869554da76d248671fc3ccdc414a5ebb0",
+      "width": 2400,
+      "height": 720,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/hero-lockup-horizontal-transparent.png",
+      "bytes": 301110,
+      "sha256": "d98084e881430054ab0908c7ee17b2626402c613980c798bb5169f35a341323c",
+      "width": 2400,
+      "height": 720,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/hero-lockup-horizontal-white.png",
+      "bytes": 258167,
+      "sha256": "f75f73af51f9387b120f8a7f14c4d0f7751155dbfc81b4443428d4c7211c9399",
+      "width": 2400,
+      "height": 720,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/hero-lockup-vertical-cream.png",
+      "bytes": 517333,
+      "sha256": "5ace74dcd4640119d2f7f9be94cc2ddf9e6859abd66bcfef7bd41086bf9b7aed",
+      "width": 1200,
+      "height": 1500,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/hero-lockup-vertical-dark.png",
+      "bytes": 516696,
+      "sha256": "afc65f13f4ff77fcd20dd696802ea9def2527e0c95382db0a79ac7a7999c7a33",
+      "width": 1200,
+      "height": 1500,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/hero-lockup-vertical-reverse-transparent.png",
+      "bytes": 609446,
+      "sha256": "37c034656e816d61868c40e35df519794bd255299d517c631cbc92787f5ba18d",
+      "width": 1200,
+      "height": 1500,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/hero-lockup-vertical-transparent.png",
+      "bytes": 610161,
+      "sha256": "e52cfeb166b8f8de585909e9e95985b62a2fa480db0f77279a726ae48c6a6f5a",
+      "width": 1200,
+      "height": 1500,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/hero-lockup-vertical-white.png",
+      "bytes": 519129,
+      "sha256": "5cd2e8f0a360bc0a3d62d838070fb29943938412702d9b74f9ef9aa23e671b37",
+      "width": 1200,
+      "height": 1500,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/lockup-horizontal-black.png",
+      "bytes": 41640,
+      "sha256": "1f6115a0cbe5aa5f0bbd9e4852921688bb0702c62bff9132287e7759b21a55cb",
+      "width": 2400,
+      "height": 794,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/lockup-horizontal-color.png",
+      "bytes": 62835,
+      "sha256": "10aa192888e43e6c2c025421fb92b32beb522b9d7e1906ba9a0882cf373df416",
+      "width": 2400,
+      "height": 794,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/lockup-horizontal-ink.png",
+      "bytes": 59227,
+      "sha256": "61658a5c26cdc58a1245014d53c9389638e9d2f300d59140dfe6dcb5b8baa362",
+      "width": 2400,
+      "height": 794,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/lockup-horizontal-orange.png",
+      "bytes": 55979,
+      "sha256": "b96e53ddece720f7ae3f4c2a94790ff3d265c6a3e39b41fdd0788cb808e33b05",
+      "width": 2400,
+      "height": 794,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/lockup-horizontal-white.png",
+      "bytes": 45957,
+      "sha256": "80906c1c58d9dde2758f7204ef4b4adc43d7d6a3ac962da9f80508bfde91855d",
+      "width": 2400,
+      "height": 794,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/lockup-horizontal-zh-black.png",
+      "bytes": 35094,
+      "sha256": "fe0dada32489614b631da9a5be1679d82bea990b343b4c5b815400c3c2a2bf26",
+      "width": 2400,
+      "height": 794,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/lockup-horizontal-zh-color.png",
+      "bytes": 51783,
+      "sha256": "b07814c745707a320e7b29cc443e8764403f0fc61da8d1d7615f2200dc8c4034",
+      "width": 2400,
+      "height": 794,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/lockup-horizontal-zh-ink.png",
+      "bytes": 48144,
+      "sha256": "cf5be40f971454398fc8935c627cf973f0b6ed456d6ed8a54f99e2b1070c09c9",
+      "width": 2400,
+      "height": 794,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/lockup-horizontal-zh-orange.png",
+      "bytes": 45534,
+      "sha256": "5661ab68239c453f2370ff399c5e2c56dd550280cba85e8359ff93b3966acae1",
+      "width": 2400,
+      "height": 794,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/lockup-horizontal-zh-white.png",
+      "bytes": 38393,
+      "sha256": "4f7204b09217c2f0e43ddefb6bd98a8d45a656e104fb03da46e232955ce06872",
+      "width": 2400,
+      "height": 794,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/lockup-vertical-black.png",
+      "bytes": 35199,
+      "sha256": "1c3b82ef544a1891ad459e08cbe803db331a068def6839d8c882b14f99c2f252",
+      "width": 1024,
+      "height": 1340,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/lockup-vertical-color.png",
+      "bytes": 54122,
+      "sha256": "0af718b549558a344500ff74144f19f29e4748407710dcc49ac26200cdf91519",
+      "width": 1024,
+      "height": 1340,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/lockup-vertical-ink.png",
+      "bytes": 50400,
+      "sha256": "9989ec4471b58cad43d78ea7501ee181a593ebf0b086bcd432e868cfe7fcee49",
+      "width": 1024,
+      "height": 1340,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/lockup-vertical-orange.png",
+      "bytes": 47249,
+      "sha256": "577d6cc94ffd8a817fb12a0c2aa9638dca2a9336ff6b2b4d6f59788741e2ac75",
+      "width": 1024,
+      "height": 1340,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/lockup-vertical-white.png",
+      "bytes": 39296,
+      "sha256": "0a6ac6a137b14e864dfdbaafca99797f09bfb77358165a3d74e8d2f6819d3351",
+      "width": 1024,
+      "height": 1340,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/symbol-color-cream-1024.png",
+      "bytes": 427800,
+      "sha256": "d8a0764acb85d5702eb391ebaf2f8c37a064fd4b97c07df0a0997abd1cb88613",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/symbol-color-ink-1024.png",
+      "bytes": 426577,
+      "sha256": "132ef2a1191e7a90a0f9d9731195b60210c873c027c74fe0284a511226f5743a",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/symbol-color-transparent-1024.png",
+      "bytes": 508592,
+      "sha256": "9ba839d79e14076ede8821143ffd6315bfa7e036ff2534f699ce9604199db596",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/symbol-color-transparent-2048.png",
+      "bytes": 1216860,
+      "sha256": "f38fd0aed13fe00e26454ecdeadfa4f4bf4d0b2cecd682bb394c2f220e9a271e",
+      "width": 2048,
+      "height": 2048,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/symbol-color-transparent-256.png",
+      "bytes": 41541,
+      "sha256": "d82c004b073440b64c2bc138555e24959587d3d0cbd0a680cd44d47386cc4fd9",
+      "width": 256,
+      "height": 256,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/symbol-color-transparent-512.png",
+      "bytes": 139779,
+      "sha256": "7dd7cdcae8c6b1869a4073d9533b4955779171060194b40970c2423ebd7d90b9",
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/symbol-color-white-1024.png",
+      "bytes": 428963,
+      "sha256": "6b7ffb2db4db9ba86ce84767450beccb35032378c655e4f7fe1ba75fb5431677",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/symbol-flat-black.png",
+      "bytes": 23802,
+      "sha256": "faf01159fb67a7374c9885a3e8304914871c7be98581240a840f6f03c69a5af0",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/symbol-flat-color.png",
+      "bytes": 36625,
+      "sha256": "06e32cbaec1912646b1a96f9654cb6ab2449f1f77b90218a37204d8c3aec16da",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/symbol-flat-ink.png",
+      "bytes": 32740,
+      "sha256": "694ab6a2699658f3dd6fe0768d4cb62ab75035215d287da011cca36ca8b11677",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/symbol-flat-orange.png",
+      "bytes": 30775,
+      "sha256": "377008930420a5f114b29b52ed6ec946f616f7c4796af249b2e93c4367d18b3d",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "raster/symbol-flat-white.png",
+      "bytes": 26572,
+      "sha256": "05fac9227bad39112ceb0a3f0efcf0acf660432983ca6b3729f78731dad1ae96",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7234,
+      "sha256": "4b54322ae3fa1ce772e8ab6e97711358ed88f870bb3ae1ad146550883f5549d4"
+    },
+    {
+      "path": "source/06-citrus-director-original.png",
+      "bytes": 710683,
+      "sha256": "11030b663707aa359d26caab1b8062fcdff357fb7eaca2e78c09ce3ce6567aad",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG"
+    },
+    {
+      "path": "source/font-OFL.txt",
+      "bytes": 4388,
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"
+    },
+    {
+      "path": "source/font-source.json",
+      "bytes": 1370,
+      "sha256": "2b543755c8bc721507c9d9dbc3da537bd4486db425dd032524aeeabff4df76d0"
+    },
+    {
+      "path": "source/original-prompt.txt",
+      "bytes": 2088,
+      "sha256": "314acb7cd5b26c1e5d3a0edf304bc483add7f7702bcf0ee64bb0b9d705a2da99"
+    },
+    {
+      "path": "START-HERE.md",
+      "bytes": 1682,
+      "sha256": "0e65e817805f5bb8926e9b4306b82a8aff0dbaf71f8bd6972177bfc62643dfb7"
+    },
+    {
+      "path": "tokens/brand-colors.ase",
+      "bytes": 372,
+      "sha256": "eda41e1c3a3510e83e1612feab7cf1003ce0b36d56afaa3228263bd2fb1ab56f"
+    },
+    {
+      "path": "tokens/brand-colors.css",
+      "bytes": 385,
+      "sha256": "5cc48a507d4eab3b533033d4712a93d2008396aa6c2186c1c4f765a922793f22"
+    },
+    {
+      "path": "tokens/brand-colors.gpl",
+      "bytes": 284,
+      "sha256": "be40f3c1b2f65d2c320b79ecd12da88583c559d8e5e3588243002d7496793cf8"
+    },
+    {
+      "path": "tokens/brand-colors.json",
+      "bytes": 1451,
+      "sha256": "d61f823de0f8590974d9ad9cdecc0c0c6a285db828300e2d0711a075db62c042"
+    },
+    {
+      "path": "vector/lockup-horizontal-black.svg",
+      "bytes": 20112,
+      "sha256": "007689fa97819cec6ceb79edd0ab2248e86b223bb13fa413fae5812af20ef860"
+    },
+    {
+      "path": "vector/lockup-horizontal-color.svg",
+      "bytes": 20279,
+      "sha256": "e3276671b791e90a597f82b72a64075311c3436eb13aae97da115436a0e78489"
+    },
+    {
+      "path": "vector/lockup-horizontal-ink.svg",
+      "bytes": 20112,
+      "sha256": "05ed4ea65fa84252b70ce7fcbdc9780038c7c05fdc50185e1a51f7e8789dc55f"
+    },
+    {
+      "path": "vector/lockup-horizontal-orange.svg",
+      "bytes": 20112,
+      "sha256": "51069a1f2483decda19586ace0b07e6451ebee12d3f85dc98c499a8880c1dbe4"
+    },
+    {
+      "path": "vector/lockup-horizontal-white.svg",
+      "bytes": 20112,
+      "sha256": "1f7333c0ab02cd3b6fe05049cc53623413580f13b0650c56c70d418044bcc43a"
+    },
+    {
+      "path": "vector/lockup-horizontal-zh-black.svg",
+      "bytes": 7883,
+      "sha256": "0c7622bcf7a0d609c7e23b449fae001acf60ddd6f905706a6f5b526a5ef645a4"
+    },
+    {
+      "path": "vector/lockup-horizontal-zh-color.svg",
+      "bytes": 8050,
+      "sha256": "354e803206659ba0bf9cf0bcba2e8b71715acffcd152a010e2da5d1b4ca0ae05"
+    },
+    {
+      "path": "vector/lockup-horizontal-zh-ink.svg",
+      "bytes": 7883,
+      "sha256": "d7681c53aec445c1c2bd3058b26f16210efa9814456ef6562a8f273577ecd3b5"
+    },
+    {
+      "path": "vector/lockup-horizontal-zh-orange.svg",
+      "bytes": 7883,
+      "sha256": "d5be98b211ceec30d5aef109ff640d63b3b91846e90c5881e6695311c4c3a3de"
+    },
+    {
+      "path": "vector/lockup-horizontal-zh-white.svg",
+      "bytes": 7883,
+      "sha256": "635034fccc7a4d546ed6e7b1ac1c2cd264f64125e108dda96f588efa7fcd35d9"
+    },
+    {
+      "path": "vector/lockup-vertical-black.svg",
+      "bytes": 20303,
+      "sha256": "ec4f4b5ffa47ad41a5cb95047fe0e48a14e7153ea99d0d49ff00f57ecc0adead"
+    },
+    {
+      "path": "vector/lockup-vertical-color.svg",
+      "bytes": 20470,
+      "sha256": "4b7d6a01d1eaae9fde1edab2e835db266ab18f5c1fe3274d2e9c3aad179b3d36"
+    },
+    {
+      "path": "vector/lockup-vertical-ink.svg",
+      "bytes": 20303,
+      "sha256": "88331af25a58771954bdaab0126ea2ec4577db530f212ec1144ca84e05e409cc"
+    },
+    {
+      "path": "vector/lockup-vertical-orange.svg",
+      "bytes": 20303,
+      "sha256": "1846e2c5b07a2e2269d41bd30ef69e5bc13f2243891539e3784498d7fcfde57e"
+    },
+    {
+      "path": "vector/lockup-vertical-white.svg",
+      "bytes": 20303,
+      "sha256": "8b011cf90fd08ab825e4bd7b1cddfed3014436a2cf3091ea8db06aa1645ad704"
+    },
+    {
+      "path": "vector/symbol-flat-black.svg",
+      "bytes": 958,
+      "sha256": "e977f7610554600992aa132cc7893ff0faad5a538fee2d8b31e25e23c240684d"
+    },
+    {
+      "path": "vector/symbol-flat-color.svg",
+      "bytes": 1125,
+      "sha256": "f93285ba7fbcbdf26f9672835fa54e0798bcded548c7efa67b727e866622ee23"
+    },
+    {
+      "path": "vector/symbol-flat-ink.svg",
+      "bytes": 958,
+      "sha256": "5206bbf118df1d3f03b5db54e08444990a373153bbf39af5e625a679615418cf"
+    },
+    {
+      "path": "vector/symbol-flat-orange.svg",
+      "bytes": 958,
+      "sha256": "90d97c988f485c9e0132f90cd57e79e0862107d698b866f7e2ed8cf028d84561"
+    },
+    {
+      "path": "vector/symbol-flat-white.svg",
+      "bytes": 958,
+      "sha256": "aacb400585433213ca0b9673dd8504bb9f68d845eea5d72b424453cf17ef7ddc"
+    },
+    {
+      "path": "vector/symbol-small.svg",
+      "bytes": 797,
+      "sha256": "4888de6f41d5a213240a11b9c5fd21c9d01b1f93ebb9084dd334a90d138684e6"
+    }
+  ]
+}

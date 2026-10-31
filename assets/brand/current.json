@@ -1,0 +1,17 @@
+{
+  "project": "一品成片",
+  "brand_id": "YPCC-BRAND-06-1.0.0",
+  "version": "1.0.0",
+  "selected_candidate": "06",
+  "identity": "柚子小导",
+  "status": "USER_SELECTED_ASSETS_BASELINED",
+  "decision_date": "2026-11-01",
+  "user_decision": "选择06，并且给我完整的定稿素材。",
+  "asset_root": "assets/brand/citrus-director/v1.0.0",
+  "documentation": "assets/brand/citrus-director/v1.0.0/README.md",
+  "manifest": "assets/brand/citrus-director/v1.0.0/manifest.json",
+  "primary_png": "assets/brand/citrus-director/v1.0.0/raster/hero-lockup-horizontal-transparent.png",
+  "vector_svg": "assets/brand/citrus-director/v1.0.0/vector/symbol-flat-color.svg",
+  "ui_baseline": "assets/design/current.json",
+  "application_integration": "NOT_CHANGED_THIS_ASSET_ROUND"
+}

@@ -3,3 +3,7 @@
 * -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 # Preserve the upstream OFL notice exactly, including its original line spaces.
 assets/resources/fonts/noto-sans-sc/OFL.txt whitespace=-blank-at-eol
+# ASCII85 PDF streams are documents, not text diffs; retain their exact bytes.
+assets/brand/**/*.pdf binary
+# Brand archives retain the same unchanged upstream license notice.
+assets/brand/**/source/font-OFL.txt whitespace=-blank-at-eol

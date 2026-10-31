@@ -1,0 +1,96 @@
+{
+  "version": "1.0.0",
+  "space": "sRGB",
+  "colors": [
+    {
+      "name": "orange",
+      "hex": "#FF9C4C",
+      "rgb": [
+        255,
+        156,
+        76
+      ],
+      "space": "sRGB"
+    },
+    {
+      "name": "orange_shadow",
+      "hex": "#F28B39",
+      "rgb": [
+        242,
+        139,
+        57
+      ],
+      "space": "sRGB"
+    },
+    {
+      "name": "ink",
+      "hex": "#263B32",
+      "rgb": [
+        38,
+        59,
+        50
+      ],
+      "space": "sRGB"
+    },
+    {
+      "name": "mint",
+      "hex": "#CFE9D6",
+      "rgb": [
+        207,
+        233,
+        214
+      ],
+      "space": "sRGB"
+    },
+    {
+      "name": "leaf",
+      "hex": "#76A983",
+      "rgb": [
+        118,
+        169,
+        131
+      ],
+      "space": "sRGB"
+    },
+    {
+      "name": "cream",
+      "hex": "#FFFAEE",
+      "rgb": [
+        255,
+        250,
+        238
+      ],
+      "space": "sRGB"
+    },
+    {
+      "name": "white",
+      "hex": "#FFFFFF",
+      "rgb": [
+        255,
+        255,
+        255
+      ],
+      "space": "sRGB"
+    },
+    {
+      "name": "black",
+      "hex": "#000000",
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "space": "sRGB"
+    },
+    {
+      "name": "ui_orange",
+      "hex": "#FF7948",
+      "rgb": [
+        255,
+        121,
+        72
+      ],
+      "space": "sRGB"
+    }
+  ]
+}

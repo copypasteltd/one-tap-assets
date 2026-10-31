@@ -1,0 +1,64 @@
+{
+  "project": "一品成片",
+  "english_name": "One Tap Assets",
+  "identity": "柚子小导 / Citrus Director",
+  "version": "1.0.0",
+  "selected_candidate": "06",
+  "selected_by": "User: 选择06，并且给我完整的定稿素材。",
+  "date": "2026-11-01",
+  "timezone": "Asia/Taipei",
+  "status": "USER_SELECTED_BRAND_ASSET_BASELINE",
+  "source_model": "gpt-image-2.5",
+  "source_skill": "sub2-image-gen",
+  "original_sha256": "11030b663707aa359d26caab1b8062fcdff357fb7eaca2e78c09ce3ce6567aad",
+  "original_size": [
+    1254,
+    1254
+  ],
+  "primary": "Original soft shaded citrus-camera mascot; colors/shape preserved",
+  "vector": "Separate flat vector redraw based on the selected mascot; true paths, outlined text, no embedded raster",
+  "colors": {
+    "orange": "#FF9C4C",
+    "orange_shadow": "#F28B39",
+    "ink": "#263B32",
+    "mint": "#CFE9D6",
+    "leaf": "#76A983",
+    "cream": "#FFFAEE",
+    "white": "#FFFFFF",
+    "black": "#000000",
+    "ui_orange": "#FF7948"
+  },
+  "ui_baseline": "C 柚子创作社; logo brand tokens do not modify frozen UI tokens",
+  "cleaning": {
+    "method": "Keep largest alpha>16 connected component plus 3-pixel antialias support; alpha<3 removed; RGB values inside retained geometry preserved",
+    "alpha_changed_pixels": 7600,
+    "original_alpha_bbox": [
+      29,
+      18,
+      1234,
+      1254
+    ],
+    "clean_alpha_bbox": [
+      196,
+      202,
+      1082,
+      1055
+    ]
+  },
+  "resolution_note": "Original 1254x1254 preserved; 2048 hero exports are resampled derivatives and do not add source detail. SVG flat artwork scales independently.",
+  "clear_space": "u = maximum visible symbol dimension / 8; leave at least u clear space",
+  "minimums": {
+    "full_color_symbol_px": 64,
+    "flat_color_symbol_px": 32,
+    "tiny_favicon_px": 16,
+    "bilingual_horizontal_px": 240,
+    "zh_only_horizontal_px": 160,
+    "flat_print_mm": 12
+  },
+  "deployed_to_application": false,
+  "https_changes": false,
+  "visual_review": "Reviewed final original, brand board, vector/mono/reverse, launch images, actual-size icons and all eight final PDF pages",
+  "delivery_status": "FINAL_ASSET_PACKAGE_READY",
+  "approved_direction": "06",
+  "application_integration": "NOT_CHANGED_THIS_ASSET_ROUND"
+}
