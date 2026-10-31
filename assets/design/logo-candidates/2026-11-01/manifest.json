@@ -1,0 +1,1086 @@
+{
+  "project": "一品成片",
+  "date": "2026-11-01",
+  "scope": "Ten unselected logo candidates, source and derivative assets",
+  "model": "gpt-image-2.5",
+  "distinct_originals": 10,
+  "candidate_pngs_verified": 110,
+  "gif_frames": 10,
+  "local_html_links_verified": 54,
+  "visual_inspection": true,
+  "public_file_count": 139,
+  "total_bytes": 18613261,
+  "self_exclusions": [
+    "manifest.json",
+    "package-receipt.json"
+  ],
+  "files": [
+    {
+      "path": "01-tap-frame/favicon.ico",
+      "bytes": 5770,
+      "sha256": "4f03ddbf936749fa7cbbb73bd472598763dab53e0c4f99ce9b2ce23b1469fc05",
+      "width": 64,
+      "height": 64,
+      "format": "ICO"
+    },
+    {
+      "path": "01-tap-frame/icon-1024.png",
+      "bytes": 156179,
+      "sha256": "1cacb33e043ba3cdd03a33b08e5f609e4708dd845399437110481d5e5e9eeb36",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "01-tap-frame/icon-128.png",
+      "bytes": 5487,
+      "sha256": "b96f4be10ac089a8b01631fab08c2194cf16c11131dcece7996d9471a6ea845b",
+      "width": 128,
+      "height": 128,
+      "format": "PNG"
+    },
+    {
+      "path": "01-tap-frame/icon-256.png",
+      "bytes": 15245,
+      "sha256": "8843f2b494fdca86f167e6889515b310326bc9563cd6fcd8022289b0b3b805e8",
+      "width": 256,
+      "height": 256,
+      "format": "PNG"
+    },
+    {
+      "path": "01-tap-frame/icon-32.png",
+      "bytes": 1057,
+      "sha256": "d090bc91378063a07469756459baff5f994a185a4efae7421c87c67c1f9da116",
+      "width": 32,
+      "height": 32,
+      "format": "PNG"
+    },
+    {
+      "path": "01-tap-frame/icon-512.png",
+      "bytes": 48930,
+      "sha256": "18477558008eb061949a6067541c6318f2bf4eb87526a6901291ba9fd7145ffc",
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    },
+    {
+      "path": "01-tap-frame/icon-64.png",
+      "bytes": 2298,
+      "sha256": "8a32979677cba83ef8a3bdb58125c265de51d313937a3c07fa7ee3bbf2336f9a",
+      "width": 64,
+      "height": 64,
+      "format": "PNG"
+    },
+    {
+      "path": "01-tap-frame/preview.png",
+      "bytes": 120742,
+      "sha256": "09627200529141c6b04417775ee9e7d94f97e2e2d553ec6140b87cecb7779bec",
+      "width": 1440,
+      "height": 960,
+      "format": "PNG"
+    },
+    {
+      "path": "01-tap-frame/prompt.txt",
+      "bytes": 1960,
+      "sha256": "5af6ac3de5b4e27bb39a0ed9107444af56879bdaf66d51572878fb39a531b06c"
+    },
+    {
+      "path": "01-tap-frame/small-sizes.png",
+      "bytes": 17792,
+      "sha256": "6e68c0f10cc4bbb39744641c72788bd97447e407e6e4df70a466b0de60534587",
+      "width": 960,
+      "height": 260,
+      "format": "PNG"
+    },
+    {
+      "path": "01-tap-frame/source.png",
+      "bytes": 343096,
+      "sha256": "7fc397957b79fa2a32b522badb11bc86314d5766df4ce57e3eb5e13e715a79b8",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG"
+    },
+    {
+      "path": "01-tap-frame/wordmark-horizontal.png",
+      "bytes": 93181,
+      "sha256": "0cc11481a50bd51198db655f241aec9bacdf7c20347951a42d441598e2d55e7d",
+      "width": 2048,
+      "height": 640,
+      "format": "PNG"
+    },
+    {
+      "path": "01-tap-frame/wordmark-vertical.png",
+      "bytes": 166968,
+      "sha256": "7687131647811a6b55467dadcc6b438c922902cb9d9ed3cefd3eefd4e0719c34",
+      "width": 1024,
+      "height": 1280,
+      "format": "PNG"
+    },
+    {
+      "path": "02-three-frames/favicon.ico",
+      "bytes": 7120,
+      "sha256": "a6791281ce645e7b9bd901a3864cbe16d7b5b8cf6f21ddf3bd40ba521f86d772",
+      "width": 64,
+      "height": 64,
+      "format": "ICO"
+    },
+    {
+      "path": "02-three-frames/icon-1024.png",
+      "bytes": 206824,
+      "sha256": "4ec4aeaee46f44b21c790f1fad7219c0d9cd04435ec4186719285fecfdb41f61",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "02-three-frames/icon-128.png",
+      "bytes": 7771,
+      "sha256": "884ab6e0790b25d5b187254a213812139b3b1dac35dc5416289ce955cb00c988",
+      "width": 128,
+      "height": 128,
+      "format": "PNG"
+    },
+    {
+      "path": "02-three-frames/icon-256.png",
+      "bytes": 22168,
+      "sha256": "a792803c86b58ef95c260afc68d55a57f9da56a90ec55bdd0aeb499ec547f9f8",
+      "width": 256,
+      "height": 256,
+      "format": "PNG"
+    },
+    {
+      "path": "02-three-frames/icon-32.png",
+      "bytes": 1275,
+      "sha256": "7874f75211a5ab84606c2f756342b44a4e5ba95648b1f6d80821726490a6921d",
+      "width": 32,
+      "height": 32,
+      "format": "PNG"
+    },
+    {
+      "path": "02-three-frames/icon-512.png",
+      "bytes": 68900,
+      "sha256": "e340b883a8dfe236f536bdb658b622a4c00c763e8e4b2a9ab5f62f40ac9b993b",
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    },
+    {
+      "path": "02-three-frames/icon-64.png",
+      "bytes": 3019,
+      "sha256": "93193c457a0cfd21590259fdd257e6d184c23430f4b48fe9a56131747e434467",
+      "width": 64,
+      "height": 64,
+      "format": "PNG"
+    },
+    {
+      "path": "02-three-frames/preview.png",
+      "bytes": 147305,
+      "sha256": "977792a8362ca929c93db4270d9bcd82a7c1c56aae4f8528143bef682cd21d39",
+      "width": 1440,
+      "height": 960,
+      "format": "PNG"
+    },
+    {
+      "path": "02-three-frames/prompt.txt",
+      "bytes": 1996,
+      "sha256": "2695f70b813e07c819815c8f6c7deea5c1257bcaabbfea4e7c9f2a6110c54d63"
+    },
+    {
+      "path": "02-three-frames/small-sizes.png",
+      "bytes": 21834,
+      "sha256": "42d49377b44788ee2a7b798c9939aec43040a48c5faf5d9033ab152774dcbc9b",
+      "width": 960,
+      "height": 260,
+      "format": "PNG"
+    },
+    {
+      "path": "02-three-frames/source.png",
+      "bytes": 427002,
+      "sha256": "151e09c5f31d74bbb1b0263a234f4e957793660b581244821f9373842e3c1ba5",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG"
+    },
+    {
+      "path": "02-three-frames/wordmark-horizontal.png",
+      "bytes": 121362,
+      "sha256": "15296f14ef07817fc020d15f385359918688c38aa5da733fb70351e43320f676",
+      "width": 2048,
+      "height": 640,
+      "format": "PNG"
+    },
+    {
+      "path": "02-three-frames/wordmark-vertical.png",
+      "bytes": 217183,
+      "sha256": "4aadb7b9b76d5b3f489e34f73d1389b9a4be638c5e40cf748a39b6de0e782209",
+      "width": 1024,
+      "height": 1280,
+      "format": "PNG"
+    },
+    {
+      "path": "03-one-ribbon/favicon.ico",
+      "bytes": 6321,
+      "sha256": "07c7afdf958dbc604958da54f3e2e6a0b556b527319e54c2604ac71477cf2ba1",
+      "width": 64,
+      "height": 64,
+      "format": "ICO"
+    },
+    {
+      "path": "03-one-ribbon/icon-1024.png",
+      "bytes": 215279,
+      "sha256": "3f12a0d7c59ab5a52f25f318d4e93f49dc478f9ad529fb603f1f959ebd97f9e7",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "03-one-ribbon/icon-128.png",
+      "bytes": 6820,
+      "sha256": "d25d251142e9ec1925826cd7b7d2fc6df3b08318cc6952353a871887676969a2",
+      "width": 128,
+      "height": 128,
+      "format": "PNG"
+    },
+    {
+      "path": "03-one-ribbon/icon-256.png",
+      "bytes": 19878,
+      "sha256": "2f9af259b897428cf7c2284f40bb4a18948e8ac98518edf911efb4d1e165b525",
+      "width": 256,
+      "height": 256,
+      "format": "PNG"
+    },
+    {
+      "path": "03-one-ribbon/icon-32.png",
+      "bytes": 1142,
+      "sha256": "76972ba9b66f91dfce694d95834fe9594c42157a0f5db759da679705b5a86442",
+      "width": 32,
+      "height": 32,
+      "format": "PNG"
+    },
+    {
+      "path": "03-one-ribbon/icon-512.png",
+      "bytes": 65940,
+      "sha256": "bc66de770e1d20d83edf7143b8a066c3934c9c617bfae784f9c52df121312dac",
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    },
+    {
+      "path": "03-one-ribbon/icon-64.png",
+      "bytes": 2630,
+      "sha256": "c4c459ab09050a6c5c4f8981119d8dfab82e18aa1610e95d044bbe341d69eeaf",
+      "width": 64,
+      "height": 64,
+      "format": "PNG"
+    },
+    {
+      "path": "03-one-ribbon/preview.png",
+      "bytes": 150081,
+      "sha256": "2cfda2486c0de2f852e3bda6bff54ff0156552c075b5c44c7c09b627e255fe3a",
+      "width": 1440,
+      "height": 960,
+      "format": "PNG"
+    },
+    {
+      "path": "03-one-ribbon/prompt.txt",
+      "bytes": 1956,
+      "sha256": "92ac423c86dc502b229bf4e1d2a18002ac554caf0e334766172fa0d440b09d36"
+    },
+    {
+      "path": "03-one-ribbon/small-sizes.png",
+      "bytes": 20154,
+      "sha256": "18bbe2ce2a9c0b9979637c5f4746819e6421c28fbed887e69deedd9b66f4a617",
+      "width": 960,
+      "height": 260,
+      "format": "PNG"
+    },
+    {
+      "path": "03-one-ribbon/source.png",
+      "bytes": 456383,
+      "sha256": "a4cba27935f82cc887ea1c65ccacaf68819ac5d14bd6063d71a82ce94fc91c7a",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG"
+    },
+    {
+      "path": "03-one-ribbon/wordmark-horizontal.png",
+      "bytes": 119766,
+      "sha256": "463df5f505efc96312562a3803e1527151ff273b9eda6653dd89943d8837b3fc",
+      "width": 2048,
+      "height": 640,
+      "format": "PNG"
+    },
+    {
+      "path": "03-one-ribbon/wordmark-vertical.png",
+      "bytes": 226202,
+      "sha256": "2a6ecc8a2ecb765b08da9dd2a0c8f6a01590c129a3dcb78ba735bca3ec41a11b",
+      "width": 1024,
+      "height": 1280,
+      "format": "PNG"
+    },
+    {
+      "path": "04-vermilion-seal/favicon.ico",
+      "bytes": 9757,
+      "sha256": "6efaafd30b9f6e78d651ab788e45758ab2f960ae326f2c4fb00e5792e0196298",
+      "width": 64,
+      "height": 64,
+      "format": "ICO"
+    },
+    {
+      "path": "04-vermilion-seal/icon-1024.png",
+      "bytes": 636770,
+      "sha256": "4964bc45bb4d08a45f39d35796723d9ee0540d193dbd83d0d0ea490de68da9b2",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "04-vermilion-seal/icon-128.png",
+      "bytes": 13900,
+      "sha256": "c56d389d8305bd52184507488cc9da8f9b5265f6215e5a02d4d7aceb444bd264",
+      "width": 128,
+      "height": 128,
+      "format": "PNG"
+    },
+    {
+      "path": "04-vermilion-seal/icon-256.png",
+      "bytes": 52149,
+      "sha256": "f9bd21fbfdb5d3b8f57976e3b3ea9ba2da728bcdd8acef4adde7750c58fdbb71",
+      "width": 256,
+      "height": 256,
+      "format": "PNG"
+    },
+    {
+      "path": "04-vermilion-seal/icon-32.png",
+      "bytes": 1575,
+      "sha256": "e31cc671a7fcf4527f7af1ff4e44b4060b12c7dcc66a3e513664e5cadfe4fd66",
+      "width": 32,
+      "height": 32,
+      "format": "PNG"
+    },
+    {
+      "path": "04-vermilion-seal/icon-512.png",
+      "bytes": 204910,
+      "sha256": "6d4bdd23b59920d4c26b83946b5005b2c67f0cf127cb37842a14996006ed92db",
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    },
+    {
+      "path": "04-vermilion-seal/icon-64.png",
+      "bytes": 4505,
+      "sha256": "ea4da6743d7fc0a8c72c5f4d1cc7fe2a9e84a31a46f68242c3e504133f6e5ba0",
+      "width": 64,
+      "height": 64,
+      "format": "PNG"
+    },
+    {
+      "path": "04-vermilion-seal/preview.png",
+      "bytes": 386884,
+      "sha256": "1b64b66471858c8a3650528837fbf711cbb727bf6236f9592d4d6794e1a1a7b8",
+      "width": 1440,
+      "height": 960,
+      "format": "PNG"
+    },
+    {
+      "path": "04-vermilion-seal/prompt.txt",
+      "bytes": 2014,
+      "sha256": "d6b4146d83158c4f30e87afab3edd17adf4f70ad95e1ffb211759d8016a63ad1"
+    },
+    {
+      "path": "04-vermilion-seal/small-sizes.png",
+      "bytes": 32112,
+      "sha256": "6d9d733efd73b106d81f88ac2341cfe90f7dff32ed833f889fc23f004e4775f8",
+      "width": 960,
+      "height": 260,
+      "format": "PNG"
+    },
+    {
+      "path": "04-vermilion-seal/source.png",
+      "bytes": 1179319,
+      "sha256": "cf089a8a70fa788470f9886c5ece058106daf534eb89d2ae127425acb9f883f0",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG"
+    },
+    {
+      "path": "04-vermilion-seal/wordmark-horizontal.png",
+      "bytes": 330462,
+      "sha256": "9356c525cfd1ba21a49bc3b402f3f42fc5c78649f1020ceac2df22412f68193a",
+      "width": 2048,
+      "height": 640,
+      "format": "PNG"
+    },
+    {
+      "path": "04-vermilion-seal/wordmark-vertical.png",
+      "bytes": 647746,
+      "sha256": "4c00e84b0d4fe9ea24ec0d10bae142ac35852b29f8b1aa6761a93a634760d86d",
+      "width": 1024,
+      "height": 1280,
+      "format": "PNG"
+    },
+    {
+      "path": "05-spectral-prism/favicon.ico",
+      "bytes": 7382,
+      "sha256": "ff755b084cd207e0fedf3610d3c185ab699d18d1558f4a418addc8cdae5eea3a",
+      "width": 64,
+      "height": 64,
+      "format": "ICO"
+    },
+    {
+      "path": "05-spectral-prism/icon-1024.png",
+      "bytes": 263580,
+      "sha256": "c38ee3af61b91d49fd0dd7bcf60e0e6904a2b97ac4fcf981f6507b590ff75ce3",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "05-spectral-prism/icon-128.png",
+      "bytes": 8815,
+      "sha256": "a1f14a4047b4ce9eb151fe8373f3ceafd7a9047afb877c3f66a7a5455549bb94",
+      "width": 128,
+      "height": 128,
+      "format": "PNG"
+    },
+    {
+      "path": "05-spectral-prism/icon-256.png",
+      "bytes": 25068,
+      "sha256": "12470f1ff79c6c48fb39785d977bc880db2bc1897910e853c557bbce640bebc5",
+      "width": 256,
+      "height": 256,
+      "format": "PNG"
+    },
+    {
+      "path": "05-spectral-prism/icon-32.png",
+      "bytes": 1276,
+      "sha256": "ac1ceaf632b9be15a3ef5b9a32c247843f40bcbd366eda9be0c5378f7ac27f53",
+      "width": 32,
+      "height": 32,
+      "format": "PNG"
+    },
+    {
+      "path": "05-spectral-prism/icon-512.png",
+      "bytes": 77090,
+      "sha256": "332bf983611ea5361e63e6a8426d2ee58def7b5cf9083b9d5ac6e04348169406",
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    },
+    {
+      "path": "05-spectral-prism/icon-64.png",
+      "bytes": 3211,
+      "sha256": "2bac30c369e81e4cd44c7f466cc53c20b65baebb180f9bc7d98f875c410680a4",
+      "width": 64,
+      "height": 64,
+      "format": "PNG"
+    },
+    {
+      "path": "05-spectral-prism/preview.png",
+      "bytes": 169728,
+      "sha256": "74b5f5b7216ad160489f521fe84a647c68687e38269927dc735972a57f2c84bf",
+      "width": 1440,
+      "height": 960,
+      "format": "PNG"
+    },
+    {
+      "path": "05-spectral-prism/prompt.txt",
+      "bytes": 2019,
+      "sha256": "a6195e42fc678f391c8bc0f0ef2272de1f42a90d2757c3a904067ca198aba0ce"
+    },
+    {
+      "path": "05-spectral-prism/small-sizes.png",
+      "bytes": 23129,
+      "sha256": "cd0c14758b3588db7c460e6922d99825dfc8e8e7803636194388db58d79d2ebd",
+      "width": 960,
+      "height": 260,
+      "format": "PNG"
+    },
+    {
+      "path": "05-spectral-prism/source.png",
+      "bytes": 529792,
+      "sha256": "08cec7b5c45299b0cf91a2a368d7d7a7ed42cf34e53384667b6cfd80dd063321",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG"
+    },
+    {
+      "path": "05-spectral-prism/wordmark-horizontal.png",
+      "bytes": 132533,
+      "sha256": "44c443dcb923001b4f3e23bdcffa71915ba1ebe525e5b1ae3e7b2bb531fc8f73",
+      "width": 2048,
+      "height": 640,
+      "format": "PNG"
+    },
+    {
+      "path": "05-spectral-prism/wordmark-vertical.png",
+      "bytes": 274162,
+      "sha256": "fd8f5390db5bf0e37fc7b3e6e06b52cf0665f3ef690c2506b34bfde215d25c89",
+      "width": 1024,
+      "height": 1280,
+      "format": "PNG"
+    },
+    {
+      "path": "06-citrus-director/favicon.ico",
+      "bytes": 8103,
+      "sha256": "ee4b004850a641c07b5c7d4cf86091dcf06d48afdd56f6fa3356cdf2cd56e947",
+      "width": 64,
+      "height": 64,
+      "format": "ICO"
+    },
+    {
+      "path": "06-citrus-director/icon-1024.png",
+      "bytes": 351510,
+      "sha256": "7cfa1c22f5fc976169fa78dd0953b498b0a351007d2c43c4587828681f988edf",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "06-citrus-director/icon-128.png",
+      "bytes": 9993,
+      "sha256": "5f12f839e6a2bd253456817bb1287c8b627c5d48a4f7a2bf1632d8d6a44ab3ab",
+      "width": 128,
+      "height": 128,
+      "format": "PNG"
+    },
+    {
+      "path": "06-citrus-director/icon-256.png",
+      "bytes": 29179,
+      "sha256": "aee14f460ed98185f631a14e80bcb556976e7f1dcd41f864bb903ab93cad594e",
+      "width": 256,
+      "height": 256,
+      "format": "PNG"
+    },
+    {
+      "path": "06-citrus-director/icon-32.png",
+      "bytes": 1339,
+      "sha256": "2e3a06330c20ff01a1eb9a02d10dedd78229090bfd66dc5d3e852f41c1fee01e",
+      "width": 32,
+      "height": 32,
+      "format": "PNG"
+    },
+    {
+      "path": "06-citrus-director/icon-512.png",
+      "bytes": 97027,
+      "sha256": "a8658735ac773618e10440934f033513a5f63087432ccc48cd1424c4d9c5796c",
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    },
+    {
+      "path": "06-citrus-director/icon-64.png",
+      "bytes": 3576,
+      "sha256": "fc71bc5607b3bbb9664fb85652288bcaba25578cf5945d1bc51539b200708b98",
+      "width": 64,
+      "height": 64,
+      "format": "PNG"
+    },
+    {
+      "path": "06-citrus-director/preview.png",
+      "bytes": 206529,
+      "sha256": "ae22efe8a18829a594c6069c28719878dae648bce0d1a5799e5db7a4a78bf2fe",
+      "width": 1440,
+      "height": 960,
+      "format": "PNG"
+    },
+    {
+      "path": "06-citrus-director/prompt.txt",
+      "bytes": 2088,
+      "sha256": "314acb7cd5b26c1e5d3a0edf304bc483add7f7702bcf0ee64bb0b9d705a2da99"
+    },
+    {
+      "path": "06-citrus-director/small-sizes.png",
+      "bytes": 25640,
+      "sha256": "61460085d52b7a24664f014164f5a151a84c1e36a3650d4a3c5092a004264710",
+      "width": 960,
+      "height": 260,
+      "format": "PNG"
+    },
+    {
+      "path": "06-citrus-director/source.png",
+      "bytes": 710683,
+      "sha256": "11030b663707aa359d26caab1b8062fcdff357fb7eaca2e78c09ce3ce6567aad",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG"
+    },
+    {
+      "path": "06-citrus-director/wordmark-horizontal.png",
+      "bytes": 166354,
+      "sha256": "e1b03d15d1c31ae450e8d7827606302996659a5bb0d2a878d9520ea8cbdc0be9",
+      "width": 2048,
+      "height": 640,
+      "format": "PNG"
+    },
+    {
+      "path": "06-citrus-director/wordmark-vertical.png",
+      "bytes": 361494,
+      "sha256": "6bfb7358e0c60d414d694ed4bf7a4d240ec20b900723e468935baf895c515e96",
+      "width": 1024,
+      "height": 1280,
+      "format": "PNG"
+    },
+    {
+      "path": "07-retro-film/favicon.ico",
+      "bytes": 7874,
+      "sha256": "004dfef989e834e8331cc15da2c6ac739897c8a75cac7a736a594ce0f0b7abc8",
+      "width": 64,
+      "height": 64,
+      "format": "ICO"
+    },
+    {
+      "path": "07-retro-film/icon-1024.png",
+      "bytes": 270905,
+      "sha256": "ac591136632b4c53be30dfae43670d4d73be35c4065fc44a7d5b63d3cb61a268",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "07-retro-film/icon-128.png",
+      "bytes": 9283,
+      "sha256": "710dfac1d9b4ef0e70cc163e1d30e059ef53150c08f867182246b96ab5d73a7d",
+      "width": 128,
+      "height": 128,
+      "format": "PNG"
+    },
+    {
+      "path": "07-retro-film/icon-256.png",
+      "bytes": 26906,
+      "sha256": "0ecf735f5cf35198181bb06eff585e6534543c4ee4b49fe62da6c70392e93a4b",
+      "width": 256,
+      "height": 256,
+      "format": "PNG"
+    },
+    {
+      "path": "07-retro-film/icon-32.png",
+      "bytes": 1357,
+      "sha256": "05fb4e833498e8d5ddf0caab9cecb658ad1726c32d7a7cb0cb11ea6cfa8f87b7",
+      "width": 32,
+      "height": 32,
+      "format": "PNG"
+    },
+    {
+      "path": "07-retro-film/icon-512.png",
+      "bytes": 87126,
+      "sha256": "be3e070e425e8e59ce37814d4bfd0501582198f8136f57265b4e44d765ccc95e",
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    },
+    {
+      "path": "07-retro-film/icon-64.png",
+      "bytes": 3425,
+      "sha256": "77eedec3a31b56a38382fbf1737fcbc97ef596ebf63f0795ba4e60f1136992cf",
+      "width": 64,
+      "height": 64,
+      "format": "PNG"
+    },
+    {
+      "path": "07-retro-film/preview.png",
+      "bytes": 181675,
+      "sha256": "54f33d86a8b11c87dab324c5ed7aaa59c676edef5be37fc9dd0f1f38d8dd3dc0",
+      "width": 1440,
+      "height": 960,
+      "format": "PNG"
+    },
+    {
+      "path": "07-retro-film/prompt.txt",
+      "bytes": 2008,
+      "sha256": "e4ccc6d4520b5dd93858ccbf31c3ee8f6d859ce87b8c26fb4abf4cbed483d25b"
+    },
+    {
+      "path": "07-retro-film/small-sizes.png",
+      "bytes": 24092,
+      "sha256": "04877dd36520a58a31b3c605827b47335d9ca87f8a2b1cc876558da44ebc44d2",
+      "width": 960,
+      "height": 260,
+      "format": "PNG"
+    },
+    {
+      "path": "07-retro-film/source.png",
+      "bytes": 564002,
+      "sha256": "26c5e1dbb63394300b616068f3c81f70638e7f1bf605ea034ee00e1106f40f64",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG"
+    },
+    {
+      "path": "07-retro-film/wordmark-horizontal.png",
+      "bytes": 148337,
+      "sha256": "f4380d54d70a5812172c699d27f358a90ef23d8ee5ac94b32e160e915138f16b",
+      "width": 2048,
+      "height": 640,
+      "format": "PNG"
+    },
+    {
+      "path": "07-retro-film/wordmark-vertical.png",
+      "bytes": 281619,
+      "sha256": "ae70513c30f962418978f479343fe7e75460c66083044da4a02b011ca85df40a",
+      "width": 1024,
+      "height": 1280,
+      "format": "PNG"
+    },
+    {
+      "path": "08-precision-aperture/favicon.ico",
+      "bytes": 6564,
+      "sha256": "71b789f45b5f8e8029a23a7f7a0810b876d45fa657b82469aac8dbf8f594eca5",
+      "width": 64,
+      "height": 64,
+      "format": "ICO"
+    },
+    {
+      "path": "08-precision-aperture/icon-1024.png",
+      "bytes": 296105,
+      "sha256": "8d8d74d14f12ff757933185d4094df12d11bc8b2b512242ba0a90c7801835850",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "08-precision-aperture/icon-128.png",
+      "bytes": 7977,
+      "sha256": "a71aaacef620ac8b1e4638cd81fed32aaeb0e26d7e896a0f1f54ae8b85e3fa14",
+      "width": 128,
+      "height": 128,
+      "format": "PNG"
+    },
+    {
+      "path": "08-precision-aperture/icon-256.png",
+      "bytes": 25477,
+      "sha256": "4a15b693bdd2edef039398512f4893fe2c94d96396085cd4a4ae17d8753e6f1a",
+      "width": 256,
+      "height": 256,
+      "format": "PNG"
+    },
+    {
+      "path": "08-precision-aperture/icon-32.png",
+      "bytes": 1169,
+      "sha256": "50103c8768a6a5fbd7dedb17501d5b29e8671987a074484290431cf8207b84ee",
+      "width": 32,
+      "height": 32,
+      "format": "PNG"
+    },
+    {
+      "path": "08-precision-aperture/icon-512.png",
+      "bytes": 88076,
+      "sha256": "3058b668b767f1022cb52a0fdcf2cd164da1946185279f333569665e850e6ac0",
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    },
+    {
+      "path": "08-precision-aperture/icon-64.png",
+      "bytes": 2806,
+      "sha256": "6e555c5ac4fbff2097d00d7b5b5b7a374670c2047ea0176b23aa24b32ae6b66e",
+      "width": 64,
+      "height": 64,
+      "format": "PNG"
+    },
+    {
+      "path": "08-precision-aperture/preview.png",
+      "bytes": 188292,
+      "sha256": "146d3054276a8167ee1f5d5e003da2a93e71099135a2fcad2a99660bff1dc60a",
+      "width": 1440,
+      "height": 960,
+      "format": "PNG"
+    },
+    {
+      "path": "08-precision-aperture/prompt.txt",
+      "bytes": 2012,
+      "sha256": "d13848e4f299e4ffa8b0803222e45f8be57e3437bc10ff2b4555f9a80770e686"
+    },
+    {
+      "path": "08-precision-aperture/small-sizes.png",
+      "bytes": 22011,
+      "sha256": "c58d879f7a1c012d1a70295d1e04398f5afa2e38f9833280b137bb6349f4361b",
+      "width": 960,
+      "height": 260,
+      "format": "PNG"
+    },
+    {
+      "path": "08-precision-aperture/source.png",
+      "bytes": 749749,
+      "sha256": "80a7a801d62729dc5954e67b11e7d172ea2190383dc326d367533bd92273d241",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG"
+    },
+    {
+      "path": "08-precision-aperture/wordmark-horizontal.png",
+      "bytes": 153806,
+      "sha256": "3a3c3d758c8792af075d7d8c854874cb4857a7ba5f2f53e267f0384acba7dc7c",
+      "width": 2048,
+      "height": 640,
+      "format": "PNG"
+    },
+    {
+      "path": "08-precision-aperture/wordmark-vertical.png",
+      "bytes": 306440,
+      "sha256": "b7961e3b9981b433a0c736eba75c179f20adc5c3b0388545a2cc573e2954500c",
+      "width": 1024,
+      "height": 1280,
+      "format": "PNG"
+    },
+    {
+      "path": "09-pixel-snapshot/favicon.ico",
+      "bytes": 7114,
+      "sha256": "5f6db702ea086bfd7498922113536dc8ed1def19e149621dff37da3b7015f1f5",
+      "width": 64,
+      "height": 64,
+      "format": "ICO"
+    },
+    {
+      "path": "09-pixel-snapshot/icon-1024.png",
+      "bytes": 222631,
+      "sha256": "b8eff432ad03ac67528f14428a809608b32339698ea1e19caffa6291edf4337b",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "09-pixel-snapshot/icon-128.png",
+      "bytes": 7230,
+      "sha256": "8ef70403f196bad523339af68a899e79f1f3605221a64b28be034531ea7dfc7e",
+      "width": 128,
+      "height": 128,
+      "format": "PNG"
+    },
+    {
+      "path": "09-pixel-snapshot/icon-256.png",
+      "bytes": 20306,
+      "sha256": "f397eaeb40d518e12ea82c55cc13e8aeb9d08019b63d5622fb8103511922cb02",
+      "width": 256,
+      "height": 256,
+      "format": "PNG"
+    },
+    {
+      "path": "09-pixel-snapshot/icon-32.png",
+      "bytes": 1253,
+      "sha256": "1f6e525ba603b5a1c491759e29967e74a0c601c0cc2c7107e0aa5e31bc141637",
+      "width": 32,
+      "height": 32,
+      "format": "PNG"
+    },
+    {
+      "path": "09-pixel-snapshot/icon-512.png",
+      "bytes": 68064,
+      "sha256": "e4d1c38ff12981b2509bb2d9e7d7f655b4d8ee0433e502a17f4b3cfee08d52be",
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    },
+    {
+      "path": "09-pixel-snapshot/icon-64.png",
+      "bytes": 3010,
+      "sha256": "0537b40fd1e24eeaad4db03893f88102c7108937a06c3af9fab31e63afe2d779",
+      "width": 64,
+      "height": 64,
+      "format": "PNG"
+    },
+    {
+      "path": "09-pixel-snapshot/preview.png",
+      "bytes": 157153,
+      "sha256": "80c7d2cc20bbeae5e5587ff7ed11c03be61228a07899fbc4e7a47dde2afdd42b",
+      "width": 1440,
+      "height": 960,
+      "format": "PNG"
+    },
+    {
+      "path": "09-pixel-snapshot/prompt.txt",
+      "bytes": 2001,
+      "sha256": "1143e71e3c60422f27a6a9f17c6c6b70fb782d24b9e926bec952c2906d2ab7be"
+    },
+    {
+      "path": "09-pixel-snapshot/small-sizes.png",
+      "bytes": 21421,
+      "sha256": "260c400e4e84fea94c6988a1d1099006f4ae2f097695cd62ef488304330e973d",
+      "width": 960,
+      "height": 260,
+      "format": "PNG"
+    },
+    {
+      "path": "09-pixel-snapshot/source.png",
+      "bytes": 482568,
+      "sha256": "c7265b889f365a640c64c77e8763e5d7de0c8e8f3c14ada83c405777722a0526",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG"
+    },
+    {
+      "path": "09-pixel-snapshot/wordmark-horizontal.png",
+      "bytes": 126402,
+      "sha256": "ba3ba885c01015d546e19d552a428a957cc938598880bd51561fa805c85d198d",
+      "width": 2048,
+      "height": 640,
+      "format": "PNG"
+    },
+    {
+      "path": "09-pixel-snapshot/wordmark-vertical.png",
+      "bytes": 233548,
+      "sha256": "d20fd68f59d76d8a427015a3bb271527791939e6e0e92350bcb1d3fb0c2ebde7",
+      "width": 1024,
+      "height": 1280,
+      "format": "PNG"
+    },
+    {
+      "path": "10-folded-assets/favicon.ico",
+      "bytes": 6876,
+      "sha256": "46731a0329887714f356338ee4dc321deefd5f3fbc4003569c95b64495d7c2b7",
+      "width": 64,
+      "height": 64,
+      "format": "ICO"
+    },
+    {
+      "path": "10-folded-assets/icon-1024.png",
+      "bytes": 226727,
+      "sha256": "6599ab00aaa62f6179c23b2babae71d0c5230abbc4a6f1b719e9f8982e6b10f2",
+      "width": 1024,
+      "height": 1024,
+      "format": "PNG"
+    },
+    {
+      "path": "10-folded-assets/icon-128.png",
+      "bytes": 7526,
+      "sha256": "2c5cfc5d7b3c5466df4515f49f5418c47ac7749cc5bd70d90e0a24bb29f6b7e8",
+      "width": 128,
+      "height": 128,
+      "format": "PNG"
+    },
+    {
+      "path": "10-folded-assets/icon-256.png",
+      "bytes": 21601,
+      "sha256": "bc567e1c586bac95503ac91bc131385ff77b28d9516533ede5fd68467c36363f",
+      "width": 256,
+      "height": 256,
+      "format": "PNG"
+    },
+    {
+      "path": "10-folded-assets/icon-32.png",
+      "bytes": 1199,
+      "sha256": "a26d5b35004d667407d0ef8280e91e8058386916cedd35d52313fa58497e341e",
+      "width": 32,
+      "height": 32,
+      "format": "PNG"
+    },
+    {
+      "path": "10-folded-assets/icon-512.png",
+      "bytes": 72310,
+      "sha256": "0aaead630715903d5ed312b4d09a435341ad9f36f123d04cd3e116847324cf39",
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    },
+    {
+      "path": "10-folded-assets/icon-64.png",
+      "bytes": 2870,
+      "sha256": "95ad081349f7b1aecaec895b47d5c6a677afcd4bb92e96beab5a875d31766470",
+      "width": 64,
+      "height": 64,
+      "format": "PNG"
+    },
+    {
+      "path": "10-folded-assets/preview.png",
+      "bytes": 156509,
+      "sha256": "c0343daa740bf37b426bc412eacf592dbff521ccf6a2105d271b188eb01282de",
+      "width": 1440,
+      "height": 960,
+      "format": "PNG"
+    },
+    {
+      "path": "10-folded-assets/prompt.txt",
+      "bytes": 2047,
+      "sha256": "77d1f23afb9ec382f0d7da0bcba769498daaad6623a9dae2385b2a4d7e848665"
+    },
+    {
+      "path": "10-folded-assets/small-sizes.png",
+      "bytes": 20794,
+      "sha256": "04fd9408340b093179f88c2e3f5712d0b1d5c483060d256a1840e5b8b1de4743",
+      "width": 960,
+      "height": 260,
+      "format": "PNG"
+    },
+    {
+      "path": "10-folded-assets/source.png",
+      "bytes": 489889,
+      "sha256": "17fbf8adb1d233e912b3709c6ba24b906024a5e7a30d455d61576ae82fa8a0ea",
+      "width": 1254,
+      "height": 1254,
+      "format": "PNG"
+    },
+    {
+      "path": "10-folded-assets/wordmark-horizontal.png",
+      "bytes": 126758,
+      "sha256": "2c965c5c4a2fda328c3c7451d1b89af85a113dc4df6ff8da33ae32b5ec337e2d",
+      "width": 2048,
+      "height": 640,
+      "format": "PNG"
+    },
+    {
+      "path": "10-folded-assets/wordmark-vertical.png",
+      "bytes": 237288,
+      "sha256": "0526f492f5c5fae97ad93ceb27e815f1138bfd68c90ed7ef31a416f721b74df2",
+      "width": 1024,
+      "height": 1280,
+      "format": "PNG"
+    },
+    {
+      "path": "candidates.json",
+      "bytes": 15153,
+      "sha256": "8b1be0185de0f2052050b9bdbd75c7cc3a3879501f746c1f1a747595215e3913"
+    },
+    {
+      "path": "font-OFL.txt",
+      "bytes": 4388,
+      "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"
+    },
+    {
+      "path": "font-source.json",
+      "bytes": 1370,
+      "sha256": "2b543755c8bc721507c9d9dbc3da537bd4486db425dd032524aeeabff4df76d0"
+    },
+    {
+      "path": "index.html",
+      "bytes": 8851,
+      "sha256": "5107c068dce13cacb1da4d58c2348cf69d03069aba1482b0abf16b04ded336cd"
+    },
+    {
+      "path": "logo-showcase.gif",
+      "bytes": 689097,
+      "sha256": "43fd0ac87714977f4f7cce41e48f414166c90c728033c87e1a433038e4e8d7d0",
+      "width": 900,
+      "height": 600,
+      "format": "GIF"
+    },
+    {
+      "path": "overview-web.png",
+      "bytes": 273499,
+      "sha256": "846e7eb8a81236130dad07418b81f0bf0b7b0b8b4547d4b34982aec487a77d09",
+      "width": 1180,
+      "height": 695,
+      "format": "PNG"
+    },
+    {
+      "path": "overview.png",
+      "bytes": 680687,
+      "sha256": "1d2604cf20402595baa32067d491068576dcd30093f6edf5f06c80d0db2476af",
+      "width": 2360,
+      "height": 1390,
+      "format": "PNG"
+    },
+    {
+      "path": "README.md",
+      "bytes": 9165,
+      "sha256": "aefe09dda9d08e0f7b6bcc5bd1bcc5f34f40e459b8643bda7d8d9160bcfc4add"
+    },
+    {
+      "path": "small-size-comparison.png",
+      "bytes": 228444,
+      "sha256": "daca85086a53ac55fe61698f94d7b0ba5e72d52c4722da30d065b16336808c5c",
+      "width": 960,
+      "height": 2600,
+      "format": "PNG"
+    }
+  ]
+}

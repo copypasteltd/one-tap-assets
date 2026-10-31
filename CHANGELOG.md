@@ -1,5 +1,12 @@
 # 更新记录 / Changelog
 
+## 2026-11-01 — Ten logo candidates / 十款品牌LOGO候选
+
+- 按用户指定的sub2-image-gen / gpt-image-2.5实际生成十款独立风格图形，保存1254×1254原图、完整提示词、方案说明与来源。 / Generated ten distinct logo symbols through the requested gateway and model; original pixels and prompts are archived.
+- 每款导出1024/512/256/128/64/32图标、横竖规范字标、ICO、设计卡及小尺寸对照；补齐总览、十帧GIF、离线HTML、SHA256清单与本地ZIP。中文字标使用现有OFL字体准确排版。 / Added six icon sizes, exact typeset lockups, ICO, boards, a contact sheet, GIF, offline gallery, checksums and local ZIP.
+- 实际查看十张原图及总览/小尺寸，核对文件解码、尺寸、不同原图、工作副本一致性、GIF帧、静态链接和ZIP内容；仅资产专项，无业务构建或全面测试。曾误启动的重复生成协调进程已停止；不以十份交付图推断上游计费。 / Inspected originals and boards and verified files/ZIP; no application changes or comprehensive testing.
+- 推荐02主标志、01适配C、06品牌角色，最终方向待用户选择。C界面基线和HTTP部署保留；后续进行选定款矢量/单色/小尺寸精修及双端/Plus/官网上线素材应用。 [候选资产与完整说明](assets/design/logo-candidates/2026-11-01/README.md)
+
 ## 2026-10-31 — HTTP-only deployment / 改为纯 HTTP
 
 - 按用户明确约束移除 nginx HTTPS38443监听、HTTP升级跳转、网页证书入口及HSTS/CSP强制升级。唯一对外服务地址为 `http://192.168.31.20:38480`；内部API38410与数据库35432仍只监听本机。

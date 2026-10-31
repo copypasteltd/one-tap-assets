@@ -1,5 +1,9 @@
 # 一品成片 · One Tap Assets
 
+**2026-11-01 品牌上线素材：已生成 10 款不同风格 LOGO，等待选型。** 使用用户指定的 sub2-image-gen / gpt-image-2.5，保留逐款原图与提示词；配套六档尺寸图标、横竖字标、ICO、设计卡、小尺寸对照、GIF和本地下载包。推荐02「一品三帧」作为主标志，01适配当前C界面，06可延展品牌角色。[逐款说明与下载目录](assets/design/logo-candidates/2026-11-01/README.md) · [大图总览](assets/design/logo-candidates/2026-11-01/overview.png) · [GIF](assets/design/logo-candidates/2026-11-01/logo-showcase.gif) · [文件校验](assets/design/logo-candidates/2026-11-01/manifest.json)。本轮为候选资产，选定后再应用。
+
+![一品成片十款LOGO候选](assets/design/logo-candidates/2026-11-01/overview-web.png)
+
 **2026-10-31 已按要求切换为纯 HTTP 内网部署。** [首页](http://192.168.31.20:38480/) · [Plus](http://192.168.31.20:38480/plus/) · [小程序演示回放](http://192.168.31.20:38480/preview/)。仅 HTTP **38480**，HTTPS 监听及升级跳转已移除；内部 API/数据库仅监听本机。原生 Node 24.22.1、PostgreSQL 17.11、FFmpeg、开机自启和首份备份已配置，双端 Linux 构建均 17 页面。明文凭据仅在服务器 `/root/cfg/one-tap-assets/credentials.txt`（root/0600）。真实登录、生成、支付和 Codex 隔离准入仍待，当前不开放真实下单。
 
 [完整部署与运维](docs/deployment/HTTP内网部署与运维-2026-10-31.md) · [配置快照与健康检查](deploy/linux/README.md) · [服务端证据](docs/verification/http-lan-server.json) · [HTTP 跨内网核对](docs/verification/http-lan-client.json) · [截图/录屏/GIF](docs/media/http-deployment/README.md)

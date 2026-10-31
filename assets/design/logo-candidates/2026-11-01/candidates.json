@@ -1,0 +1,432 @@
+{
+  "project": "一品成片",
+  "date": "2026-11-01",
+  "timezone": "Asia/Taipei",
+  "status": "TEN_GENERATED_CANDIDATES_AWAITING_USER_SELECTION",
+  "skill": "sub2-image-gen",
+  "model": "gpt-image-2.5",
+  "entries": [
+    {
+      "id": "01",
+      "slug": "tap-frame",
+      "name": "拍即成片",
+      "style": "果橙极简",
+      "style_en": "Citrus minimalism",
+      "background": "#FFFAEE",
+      "ink": "#263B32",
+      "palette": [
+        "#FF7948",
+        "#263B32",
+        "#FFFAEE"
+      ],
+      "meaning": "拍照取景框与播放切口合一，直接表达拍照成片。",
+      "fit": "首推：与现有 C 配色与圆角语言最接近。",
+      "source": "01-tap-frame/source.png",
+      "prompt": "01-tap-frame/prompt.txt",
+      "status": "GENERATED_UNSELECTED",
+      "model": "gpt-image-2.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "actual_source": {
+        "width": 1254,
+        "height": 1254,
+        "mode": "RGBA",
+        "format": "PNG",
+        "has_alpha": true
+      },
+      "visual_inspection": "INSPECTED_ORIGINAL_CONTACT_SHEET_AND_SMALL_SIZE_BOARD",
+      "derivative_sizes": [
+        1024,
+        512,
+        256,
+        128,
+        64,
+        32
+      ],
+      "wordmark_font": "Noto Sans SC, OFL-1.1, repository font",
+      "background_handling": "Original preserved; existing alpha composited over specified background; square containment and Lanczos resizing; no vector tracing or inferred cutout",
+      "recommended_role": "C-compatible minimal main identity"
+    },
+    {
+      "id": "02",
+      "slug": "three-frames",
+      "name": "一品三帧",
+      "style": "几何负形",
+      "style_en": "Geometric negative space",
+      "background": "#FFFAEE",
+      "ink": "#263B32",
+      "palette": [
+        "#263B32",
+        "#FF7948",
+        "#FFFAEE"
+      ],
+      "meaning": "三枚素材方块借“品”字结构组合，突出一件商品生成一套素材。",
+      "fit": "适合做稳定、长期使用的主品牌符号。",
+      "source": "02-three-frames/source.png",
+      "prompt": "02-three-frames/prompt.txt",
+      "status": "GENERATED_UNSELECTED",
+      "model": "gpt-image-2.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "actual_source": {
+        "width": 1254,
+        "height": 1254,
+        "mode": "RGBA",
+        "format": "PNG",
+        "has_alpha": true
+      },
+      "visual_inspection": "INSPECTED_ORIGINAL_CONTACT_SHEET_AND_SMALL_SIZE_BOARD",
+      "derivative_sizes": [
+        1024,
+        512,
+        256,
+        128,
+        64,
+        32
+      ],
+      "wordmark_font": "Noto Sans SC, OFL-1.1, repository font",
+      "background_handling": "Original preserved; existing alpha composited over specified background; square containment and Lanczos resizing; no vector tracing or inferred cutout",
+      "recommended_role": "Recommended main brand symbol"
+    },
+    {
+      "id": "03",
+      "slug": "one-ribbon",
+      "name": "一笔成片",
+      "style": "流动线带",
+      "style_en": "Continuous ribbon",
+      "background": "#FFFFFF",
+      "ink": "#244A3D",
+      "palette": [
+        "#F46B3F",
+        "#244A3D",
+        "#FFFFFF"
+      ],
+      "meaning": "连续线带把照片边角转成播放形，表达一次操作完成制作。",
+      "fit": "适合动效、开屏和视频片尾延展。",
+      "source": "03-one-ribbon/source.png",
+      "prompt": "03-one-ribbon/prompt.txt",
+      "status": "GENERATED_UNSELECTED",
+      "model": "gpt-image-2.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "actual_source": {
+        "width": 1254,
+        "height": 1254,
+        "mode": "RGBA",
+        "format": "PNG",
+        "has_alpha": true
+      },
+      "visual_inspection": "INSPECTED_ORIGINAL_CONTACT_SHEET_AND_SMALL_SIZE_BOARD",
+      "derivative_sizes": [
+        1024,
+        512,
+        256,
+        128,
+        64,
+        32
+      ],
+      "wordmark_font": "Noto Sans SC, OFL-1.1, repository font",
+      "background_handling": "Original preserved; existing alpha composited over specified background; square containment and Lanczos resizing; no vector tracing or inferred cutout",
+      "recommended_role": "Alternative brand direction"
+    },
+    {
+      "id": "04",
+      "slug": "vermilion-seal",
+      "name": "东方成印",
+      "style": "新中式印记",
+      "style_en": "Contemporary seal",
+      "background": "#F7F0E3",
+      "ink": "#392A24",
+      "palette": [
+        "#C94732",
+        "#392A24",
+        "#F7F0E3"
+      ],
+      "meaning": "印章结构结合素材格与播放切口，强调有章法、有成品感。",
+      "fit": "适合国货、手作、美食与文化商品的品牌调性。",
+      "source": "04-vermilion-seal/source.png",
+      "prompt": "04-vermilion-seal/prompt.txt",
+      "status": "GENERATED_UNSELECTED",
+      "model": "gpt-image-2.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "actual_source": {
+        "width": 1254,
+        "height": 1254,
+        "mode": "RGB",
+        "format": "PNG",
+        "has_alpha": false
+      },
+      "visual_inspection": "INSPECTED_ORIGINAL_CONTACT_SHEET_AND_SMALL_SIZE_BOARD",
+      "derivative_sizes": [
+        1024,
+        512,
+        256,
+        128,
+        64,
+        32
+      ],
+      "wordmark_font": "Noto Sans SC, OFL-1.1, repository font",
+      "background_handling": "Original preserved; existing alpha composited over specified background; square containment and Lanczos resizing; no vector tracing or inferred cutout",
+      "recommended_role": "Alternative brand direction"
+    },
+    {
+      "id": "05",
+      "slug": "spectral-prism",
+      "name": "光谱棱镜",
+      "style": "未来渐变",
+      "style_en": "Spectral technology",
+      "background": "#101326",
+      "ink": "#FFFFFF",
+      "palette": [
+        "#8A6BFF",
+        "#54E9E0",
+        "#101326"
+      ],
+      "meaning": "棱镜将单个输入分解为多种内容，突出 AI 创作和多规格产出。",
+      "fit": "偏科技与 Plus 进阶工具，和 C 的气质差异较大。",
+      "source": "05-spectral-prism/source.png",
+      "prompt": "05-spectral-prism/prompt.txt",
+      "status": "GENERATED_UNSELECTED",
+      "model": "gpt-image-2.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "actual_source": {
+        "width": 1254,
+        "height": 1254,
+        "mode": "RGBA",
+        "format": "PNG",
+        "has_alpha": true
+      },
+      "visual_inspection": "INSPECTED_ORIGINAL_CONTACT_SHEET_AND_SMALL_SIZE_BOARD",
+      "derivative_sizes": [
+        1024,
+        512,
+        256,
+        128,
+        64,
+        32
+      ],
+      "wordmark_font": "Noto Sans SC, OFL-1.1, repository font",
+      "background_handling": "Original preserved; existing alpha composited over specified background; square containment and Lanczos resizing; no vector tracing or inferred cutout",
+      "recommended_role": "Alternative brand direction"
+    },
+    {
+      "id": "06",
+      "slug": "citrus-director",
+      "name": "柚子小导",
+      "style": "亲和吉祥物",
+      "style_en": "Friendly mascot",
+      "background": "#FFFAEE",
+      "ink": "#263B32",
+      "palette": [
+        "#FF9C4C",
+        "#263B32",
+        "#CFE9D6"
+      ],
+      "meaning": "把柚子与小导演合为亲和角色，传递轻松自助的创作体验。",
+      "fit": "与 C 社区气质相容，适合开屏、客服和运营表情延展。",
+      "source": "06-citrus-director/source.png",
+      "prompt": "06-citrus-director/prompt.txt",
+      "status": "GENERATED_UNSELECTED",
+      "model": "gpt-image-2.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "actual_source": {
+        "width": 1254,
+        "height": 1254,
+        "mode": "RGBA",
+        "format": "PNG",
+        "has_alpha": true
+      },
+      "visual_inspection": "INSPECTED_ORIGINAL_CONTACT_SHEET_AND_SMALL_SIZE_BOARD",
+      "derivative_sizes": [
+        1024,
+        512,
+        256,
+        128,
+        64,
+        32
+      ],
+      "wordmark_font": "Noto Sans SC, OFL-1.1, repository font",
+      "background_handling": "Original preserved; existing alpha composited over specified background; square containment and Lanczos resizing; no vector tracing or inferred cutout",
+      "recommended_role": "C-compatible brand mascot"
+    },
+    {
+      "id": "07",
+      "slug": "retro-film",
+      "name": "复古片场",
+      "style": "七十年代胶片",
+      "style_en": "Seventies film badge",
+      "background": "#F5E5BD",
+      "ink": "#5A3226",
+      "palette": [
+        "#B95732",
+        "#5A3226",
+        "#F6BC51"
+      ],
+      "meaning": "胶片匣、票券与暖色块组合，形成有记忆点的复古影像品牌。",
+      "fit": "适合生活方式、小店、美食和文艺内容。",
+      "source": "07-retro-film/source.png",
+      "prompt": "07-retro-film/prompt.txt",
+      "status": "GENERATED_UNSELECTED",
+      "model": "gpt-image-2.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "actual_source": {
+        "width": 1254,
+        "height": 1254,
+        "mode": "RGBA",
+        "format": "PNG",
+        "has_alpha": true
+      },
+      "visual_inspection": "INSPECTED_ORIGINAL_CONTACT_SHEET_AND_SMALL_SIZE_BOARD",
+      "derivative_sizes": [
+        1024,
+        512,
+        256,
+        128,
+        64,
+        32
+      ],
+      "wordmark_font": "Noto Sans SC, OFL-1.1, repository font",
+      "background_handling": "Original preserved; existing alpha composited over specified background; square containment and Lanczos resizing; no vector tracing or inferred cutout",
+      "recommended_role": "Alternative brand direction"
+    },
+    {
+      "id": "08",
+      "slug": "precision-aperture",
+      "name": "精工影匣",
+      "style": "黑金精品",
+      "style_en": "Luxury precision",
+      "background": "#171A18",
+      "ink": "#F3E8D2",
+      "palette": [
+        "#D8BC83",
+        "#171A18",
+        "#F3E8D2"
+      ],
+      "meaning": "精密光圈与播放负形结合，强调品质、稳定和专业交付。",
+      "fit": "适合精品商家与高级商品素材服务。",
+      "source": "08-precision-aperture/source.png",
+      "prompt": "08-precision-aperture/prompt.txt",
+      "status": "GENERATED_UNSELECTED",
+      "model": "gpt-image-2.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "actual_source": {
+        "width": 1254,
+        "height": 1254,
+        "mode": "RGBA",
+        "format": "PNG",
+        "has_alpha": true
+      },
+      "visual_inspection": "INSPECTED_ORIGINAL_CONTACT_SHEET_AND_SMALL_SIZE_BOARD",
+      "derivative_sizes": [
+        1024,
+        512,
+        256,
+        128,
+        64,
+        32
+      ],
+      "wordmark_font": "Noto Sans SC, OFL-1.1, repository font",
+      "background_handling": "Original preserved; existing alpha composited over specified background; square containment and Lanczos resizing; no vector tracing or inferred cutout",
+      "recommended_role": "Alternative brand direction"
+    },
+    {
+      "id": "09",
+      "slug": "pixel-snapshot",
+      "name": "像素快拍",
+      "style": "像素潮玩",
+      "style_en": "Pixel pop",
+      "background": "#CEF889",
+      "ink": "#20382C",
+      "palette": [
+        "#20382C",
+        "#FF774B",
+        "#CEF889"
+      ],
+      "meaning": "像素相机结合播放符号，突出快速、好玩和内容创作者属性。",
+      "fit": "适合潮玩、年轻社区和活动传播。",
+      "source": "09-pixel-snapshot/source.png",
+      "prompt": "09-pixel-snapshot/prompt.txt",
+      "status": "GENERATED_UNSELECTED",
+      "model": "gpt-image-2.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "actual_source": {
+        "width": 1254,
+        "height": 1254,
+        "mode": "RGBA",
+        "format": "PNG",
+        "has_alpha": true
+      },
+      "visual_inspection": "INSPECTED_ORIGINAL_CONTACT_SHEET_AND_SMALL_SIZE_BOARD",
+      "derivative_sizes": [
+        1024,
+        512,
+        256,
+        128,
+        64,
+        32
+      ],
+      "wordmark_font": "Noto Sans SC, OFL-1.1, repository font",
+      "background_handling": "Original preserved; existing alpha composited over specified background; square containment and Lanczos resizing; no vector tracing or inferred cutout",
+      "recommended_role": "Alternative brand direction"
+    },
+    {
+      "id": "10",
+      "slug": "folded-assets",
+      "name": "折纸成套",
+      "style": "蓝黄折纸",
+      "style_en": "Folded editorial",
+      "background": "#F7F8FC",
+      "ink": "#2444B6",
+      "palette": [
+        "#3259D9",
+        "#F3CB36",
+        "#F7F8FC"
+      ],
+      "meaning": "三张折纸素材合成前进箭头，表达规范成套、快速交付。",
+      "fit": "适合工具型产品、批量素材与商业服务。",
+      "source": "10-folded-assets/source.png",
+      "prompt": "10-folded-assets/prompt.txt",
+      "status": "GENERATED_UNSELECTED",
+      "model": "gpt-image-2.5",
+      "size": "1024x1024",
+      "quality": "high",
+      "actual_source": {
+        "width": 1254,
+        "height": 1254,
+        "mode": "RGBA",
+        "format": "PNG",
+        "has_alpha": true
+      },
+      "visual_inspection": "INSPECTED_ORIGINAL_CONTACT_SHEET_AND_SMALL_SIZE_BOARD",
+      "derivative_sizes": [
+        1024,
+        512,
+        256,
+        128,
+        64,
+        32
+      ],
+      "wordmark_font": "Noto Sans SC, OFL-1.1, repository font",
+      "background_handling": "Original preserved; existing alpha composited over specified background; square containment and Lanczos resizing; no vector tracing or inferred cutout",
+      "recommended_role": "Alternative brand direction"
+    }
+  ],
+  "selection": null,
+  "existing_design_baseline": "C 柚子创作社 remains the UI baseline",
+  "requested_size": "1024x1024",
+  "source_size_note": "Gateway returned actual dimensions recorded per source; original pixels preserved, icon derivatives normalized to named sizes.",
+  "generation_route": "Each source generated by the unmodified sub2-image-gen/scripts/sub2_image_gen.py via its configured gateway; default gpt-image-2.5 model, high quality; no alternate provider.",
+  "packaging_script": "scripts/design/package-logo-candidates.py",
+  "packaged_at": "2026-11-01T03:05:32.447531+08:00",
+  "visual_inspection_completed": true,
+  "selected_candidate": null,
+  "selection_status": "AWAITING_USER_SELECTION",
+  "transport_changes": "NONE; HTTP-only server configuration preserved",
+  "generation_attempt_note": "An accidental duplicate coordinator invocation was stopped. Ten retained distinct source files are verified; gateway billing and canceled upstream work are not inferred from file count."
+}

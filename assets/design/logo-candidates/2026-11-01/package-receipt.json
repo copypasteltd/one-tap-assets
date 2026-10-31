@@ -1,0 +1,10 @@
+{
+  "filename": "one-tap-assets-logo-candidates-2026-11-01.zip",
+  "project_relative_path": "output/imagegen/2026-11-01-logo-candidates/one-tap-assets-logo-candidates-2026-11-01.zip",
+  "bytes": 17178819,
+  "sha256": "04dba362503721348d4e05ddfe2e70caf27d2c2adad8374c08cce2d8529a7948",
+  "scope": "All candidate files and manifest, excluding this external ZIP receipt",
+  "source_originals": 10,
+  "model": "gpt-image-2.5",
+  "status": "CANDIDATES_AWAITING_SELECTION"
+}

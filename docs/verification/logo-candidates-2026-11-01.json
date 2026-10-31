@@ -1,0 +1,58 @@
+{
+  "project": "一品成片",
+  "date": "2026-11-01",
+  "timezone": "Asia/Taipei",
+  "scope": "LOGO candidate asset generation and packaging only",
+  "model": "gpt-image-2.5",
+  "skill": "sub2-image-gen",
+  "quality": "high",
+  "requested_size": "1024x1024",
+  "actual_originals": "Ten distinct 1254x1254 PNGs; originals inspected and retained byte-for-byte",
+  "candidate_status": "AWAITING_USER_SELECTION",
+  "asset_root": "assets/design/logo-candidates/2026-11-01",
+  "checks": {
+    "distinct_source_hashes": 10,
+    "source_working_copies_equal": true,
+    "candidate_pngs_decoded": 110,
+    "six_icon_sizes_verified_per_candidate": true,
+    "visual_inspection_originals_contact_sheet_and_small_sizes": true,
+    "typeset_brand_wordmark": "一品成片 / ONE TAP ASSETS",
+    "gif_frames": 10,
+    "html_local_links": 54,
+    "markdown_local_links": 50,
+    "archived_files": 141,
+    "manifest_sha256_files": 139,
+    "zip_entries": 140,
+    "zip_crc_and_entry_sha256": true,
+    "public_text_secret_pattern_check_files": 17,
+    "packaging_scripts_parse": true
+  },
+  "zip": {
+    "filename": "one-tap-assets-logo-candidates-2026-11-01.zip",
+    "project_relative_path": "output/imagegen/2026-11-01-logo-candidates/one-tap-assets-logo-candidates-2026-11-01.zip",
+    "bytes": 17178819,
+    "sha256": "04dba362503721348d4e05ddfe2e70caf27d2c2adad8374c08cce2d8529a7948",
+    "scope": "All candidate files and manifest, excluding this external ZIP receipt",
+    "source_originals": 10,
+    "model": "gpt-image-2.5",
+    "status": "CANDIDATES_AWAITING_SELECTION"
+  },
+  "application_code_changes": false,
+  "server_changes": false,
+  "https_configuration": false,
+  "browser_used": false,
+  "docker_wsl_vm_used": false,
+  "subagents_used": false,
+  "application_builds": "NOT_RUN_ASSET_ONLY_CHANGE",
+  "comprehensive_tests": "NOT_RUN_NOT_REQUIRED_FOR_ASSET_CHANGE",
+  "notes": [
+    "Existing C UI baseline preserved; logo direction not yet selected.",
+    "An accidental duplicate generator coordinator invocation was stopped; gateway billing or upstream cancellation is not inferred from retained file count.",
+    "GIF is a ten-card logo showcase, not an application screen recording."
+  ],
+  "pending": [
+    "User selects main direction.",
+    "Selected logo vector/monochrome/reverse/tiny-icon refinement and brand application rules.",
+    "Apply selected assets to mini-programs, Plus, landing and launch content."
+  ]
+}
