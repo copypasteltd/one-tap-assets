@@ -1,6 +1,8 @@
 # 一品成片 · One Tap Assets
 
-**2026-11-06 真实Agent就绪性实查：尚未可用。** 页面和6个基础服务正常；实际生成、Codex、支付开关关闭，模型接入与原生执行器未配置，模型登记及Agent运行/推理/复核记录均为0，14个Skill组合均待准入。Ubuntu部署与现有Windows式.exe启动器仍需原生平台适配。[阻塞清单与处理顺序](docs/评估/真实Agent可用性与阻塞清单-2026-11-06.md) · [本次只读实查回执](docs/verification/agent-readiness-2026-11-06.json)。本轮未启用服务或调用付费模型。
+**2026-11-06 原生 Agent 代码修复：已补齐 Ubuntu 执行器和本机 HTTP 通道。** Linux ELF、独立受限账号、AppArmor/ACL、限定出站、进程组清理与断线/重启回收已实现；服务器15项实际隔离检查通过，官方 Codex 0.166.0 在受限身份下完成初始化、六份协议 Skill 发现、只读上下文和实际 Node MCP 启动 / HTTP 工具目录连接。新增脱敏 `agent:doctor` 与完整依赖摘要锁定，Linux 文件纳入交付包。[实现与部署说明](docs/deployment/Agent原生执行与HTTP内网通道-2026-11-06.md) · [实际隔离证据](docs/verification/native-agent-linux-2026-11-06.json) · [实际协议证据](docs/verification/codex-native-protocol-2026-11-06.json)。真实模型凭据、计价/预算、业务 Skill 准入及真实交付仍待配置核验；未购买模型调用、启用销售或配置 HTTPS。
+
+同日较早的[阻塞基线](docs/评估/真实Agent可用性与阻塞清单-2026-11-06.md)和[只读实查](docs/verification/agent-readiness-2026-11-06.json)保留原时点；本轮修复不把协议/隔离检查当作真实模型交付。
 
 **2026-11-01 品牌正式定稿：用户选定06「柚子小导」，版本1.0.0。** 完整交付134份文件：原选定质感标志、透明PNG、22份真正路径SVG、横竖/仅中文字标、单色/反白、多尺寸图标与ICO、网页交接包、上线封面/海报/片尾、颜色文件及8页品牌手册。[快速取用](assets/brand/citrus-director/v1.0.0/START-HERE.md) · [完整素材说明](assets/brand/citrus-director/v1.0.0/README.md) · [手册PDF](assets/brand/citrus-director/v1.0.0/guidelines/一品成片-柚子小导-品牌手册-v1.0.pdf) · [定型记录](docs/设计/品牌/06-柚子小导-v1.0.0.md) · [当前品牌指针](assets/brand/current.json)。素材已定稿，页面接入另行实施；[原十款候选](assets/design/logo-candidates/2026-11-01/README.md)保留历史原件。
 

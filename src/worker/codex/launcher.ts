@@ -1,6 +1,7 @@
 import { spawn, type ChildProcessWithoutNullStreams } from 'node:child_process';
 import { readFile, writeFile, lstat, realpath } from 'node:fs/promises';
-import { createReadStream } from 'node:fs';
+import { createReadStream, constants } from 'node:fs';
+import { access, open } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { setTimeout as delay } from 'node:timers/promises';
@@ -47,8 +48,34 @@ export async function checkedProjectPath(cfg: Config, path: string): Promise<str
     cursor = resolve(cursor, part); const info = await lstat(cursor);
     requireThat(!info.isSymbolicLink(), 'CODEX_PATH_REPARSE', '运行路径不可经过链接或重解析点', 503);
   }
-  requireThat(resolve(await realpath(target)).toLowerCase() === target.toLowerCase(), 'CODEX_PATH_REPARSE', '运行路径解析不一致', 503);
+  const actual = resolve(await realpath(target));
+  requireThat(process.platform === 'win32' ? actual.toLowerCase() === target.toLowerCase() : actual === target, 'CODEX_PATH_REPARSE', '运行路径解析不一致', 503);
   return target;
+}
+/** A Linux launcher can be the pinned Python broker client supplied with this
+ * project. The model runtime itself must be native ELF; generic shells and
+ * interpreters are never accepted as the launcher or model executable. */
+export async function checkedNativeExecutable(path: string, kind: 'launcher' | 'runtime', platform: NodeJS.Platform = process.platform): Promise<void> {
+  const name = path.split(/[\\/]/).at(-1)!;
+  requireThat(!/^(?:docker|podman|wsl|cmd|powershell|pwsh|bash|sh|dash|zsh|python\d*(?:\.\d+)?|node)(?:\.exe)?$/i.test(name),
+    'CODEX_LAUNCHER_INVALID', '只允许锁定的原生运行程序', 503);
+  const info = await lstat(path);
+  requireThat(info.isFile() && !info.isSymbolicLink(), 'CODEX_LAUNCHER_INVALID', '运行程序必须是普通文件', 503);
+  if (platform === 'win32') {
+    requireThat(/\.exe$/i.test(name), 'CODEX_LAUNCHER_INVALID', 'Windows 需要原生 EXE 运行程序', 503); return;
+  }
+  requireThat(platform === 'linux', 'CODEX_PLATFORM_UNSUPPORTED', '当前平台尚无经过核验的原生隔离适配', 503);
+  await access(path, constants.X_OK);
+  const file = await open(path, 'r'); const bytes = Buffer.alloc(64);
+  try { await file.read(bytes, 0, bytes.length, 0); } finally { await file.close(); }
+  requireThat(bytes.subarray(0, 4).equals(Buffer.from([0x7f, 0x45, 0x4c, 0x46]))
+    || kind === 'launcher' && bytes.toString('utf8').startsWith('#!/usr/bin/python3\n'),
+  'CODEX_LAUNCHER_INVALID', 'Linux 需要原生 ELF 或锁定的 Python 启动器客户端', 503);
+}
+function launcherEnvironment(directory: string): NodeJS.ProcessEnv {
+  return process.platform === 'win32'
+    ? { SystemRoot: process.env.SystemRoot ?? 'C:\\Windows', WINDIR: process.env.WINDIR ?? 'C:\\Windows', TEMP: directory, TMP: directory }
+    : { PATH: '/usr/bin:/bin', LANG: 'C.UTF-8', TMPDIR: directory };
 }
 async function fileDigest(path: string): Promise<string> {
   const digest = createHash('sha256'); let count = 0;
@@ -70,13 +97,11 @@ export class NativeRoleLauncher implements RoleLauncher {
     requireThat(!signal.aborted && Date.parse(manifest.deadline_at) > Date.now(), 'CODEX_TURN_INTERRUPTED', '执行授权已结束', 409);
     const launcher = await checkedProjectPath(this.cfg, this.cfg.codex.isolationCommand);
     const binary = await checkedProjectPath(this.cfg, manifest.executable);
-    requireThat(/\.exe$/i.test(launcher) && /\.exe$/i.test(binary) && !/^(?:docker|wsl|cmd|powershell|pwsh|bash)\.exe$/i.test(launcher.split(/[\\/]/).at(-1)!),
-      'CODEX_LAUNCHER_INVALID', '只允许锁定的原生运行程序', 503);
+    await checkedNativeExecutable(launcher, 'launcher'); await checkedNativeExecutable(binary, 'runtime');
     requireThat(await fileDigest(launcher) === this.admission.launcher_sha256 && await fileDigest(binary) === this.admission.runtime_sha256,
       'CODEX_BUILD_HASH_MISMATCH', 'Codex 或原生隔离器构建摘要不匹配', 503);
     await checkedProjectPath(this.cfg, manifestPath);
-    const environment: NodeJS.ProcessEnv = { SystemRoot: process.env.SystemRoot ?? 'C:\\Windows', WINDIR: process.env.WINDIR ?? 'C:\\Windows',
-      TEMP: dirname(manifestPath), TMP: dirname(manifestPath) };
+    const environment = launcherEnvironment(dirname(manifestPath));
     const child = spawn(launcher, ['run', '--manifest', manifestPath], { cwd: dirname(manifestPath), env: environment,
       stdio: ['pipe', 'pipe', 'pipe'], shell: false, windowsHide: true });
     let spawnFailed = false; child.once('error', () => { spawnFailed = true; });
@@ -97,7 +122,9 @@ export class NativeRoleLauncher implements RoleLauncher {
         && (child.exitCode !== null || child.signalCode !== null), 'CODEX_CLEANUP_UNVERIFIED', '原生实例释放回执尚未核验通过', 503);
       return result as unknown as NativeCleanupReceipt;
     };
-    const until = Math.min(Date.now() + 10000, Date.parse(manifest.deadline_at));
+    // Account/ACL setup may queue behind another role's verified cleanup. The
+    // original role deadline still bounds the whole launch; never extend it.
+    const until = Math.min(Date.now() + 45000, Date.parse(manifest.deadline_at));
     let receipt: NativeLaunchReceipt | null = null;
     try {
       while (Date.now() < until) {
@@ -132,8 +159,8 @@ export class NativeDetachedCleaner implements DetachedCleaner {
     requireThat(!signal.aborted && binding.mode === 'ADMITTED_NATIVE' && hash(binding.manifest) === binding.manifest_hash
       && Object.keys(binding.manifest.environment).length === 0, 'CODEX_CLEANUP_BINDING_INVALID', '清理计划缺失、变更或包含凭证', 503);
     const launcher = await checkedProjectPath(this.cfg, binding.launcher_path);
-    requireThat(/\.exe$/i.test(launcher) && !/^(?:docker|wsl|cmd|powershell|pwsh|bash)\.exe$/i.test(launcher.split(/[\\/]/).at(-1)!)
-      && await fileDigest(launcher) === binding.launcher_sha256, 'CODEX_BUILD_HASH_MISMATCH', '原生清理程序与冻结构建不一致', 503);
+    await checkedNativeExecutable(launcher, 'launcher');
+    requireThat(await fileDigest(launcher) === binding.launcher_sha256, 'CODEX_BUILD_HASH_MISMATCH', '原生清理程序与冻结构建不一致', 503);
     const directory = dirname(binding.manifest.cleanup_receipt_path); await checkedProjectPath(this.cfg, directory);
     const path = resolve(directory, 'release-request.json');
     try { await writeFile(path, JSON.stringify(binding.manifest), { flag: 'wx', mode: 0o600 }); }
@@ -143,7 +170,7 @@ export class NativeDetachedCleaner implements DetachedCleaner {
       requireThat(hash(JSON.parse(await readFile(path, 'utf8'))) === binding.manifest_hash, 'CODEX_CLEANUP_BINDING_INVALID', '已有清理计划与冻结记录不一致', 503);
     }
     const child = spawn(launcher, ['release', '--manifest', path], { cwd: directory, shell: false, windowsHide: true,
-      env: { SystemRoot: process.env.SystemRoot ?? 'C:\\Windows', WINDIR: process.env.WINDIR ?? 'C:\\Windows', TEMP: directory, TMP: directory },
+      env: launcherEnvironment(directory),
       stdio: ['pipe', 'pipe', 'pipe'] });
     child.stdin.end(); child.stdout.resume(); child.stderr.resume(); const stop = (): void => { child.kill(); };
     signal.addEventListener('abort', stop, { once: true }); if (signal.aborted) stop();

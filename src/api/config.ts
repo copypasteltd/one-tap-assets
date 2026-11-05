@@ -20,7 +20,7 @@ export interface Config {
   plusVideoRender:{enabled:boolean;priceFen:number;pricingVersion:string;budgetMicro:number;listeningModelVersionId:string};
   samples: { dailyBudgetMicro: number; costCeilingMicro: number; maxConcurrent: number; deadlineSeconds: number };
   privacyJournal: { enabled: boolean; directory: string; sourceId: string; keyId: string; hmacKey: string };
-  codex: { enabled: boolean; binary: string; sha256: string; model: string; apiKey: string; inferenceProxy: string; protocol: string; rateVersion: string; maxTurns: number; maxInputTokens: number; maxOutputTokens: number; costCeilingMicro: number; isolationCommand: string; admissionPath: string; dailyBudgetMicro: number };
+  codex: { enabled: boolean; binary: string; sha256: string; model: string; apiKey: string; inferenceProxy: string; protocol: string; rateVersion: string; maxTurns: number; maxInputTokens: number; maxOutputTokens: number; costCeilingMicro: number; isolationCommand: string; admissionPath: string; dailyBudgetMicro: number; gatewayOrigin?: string };
 }
 export function inside(root: string, target: string): string {
   const absolute = resolve(root, target); const rel = relative(root, absolute);
@@ -62,6 +62,7 @@ export function config(overrides: Partial<Config> = {}): Config {
     codex: { enabled: enabled('CODEX_SERVICE_ENABLED'), binary: text('CODEX_BINARY_PATH'), sha256: text('CODEX_BUILD_SHA256'), model: text('CODEX_MODEL_ID'), apiKey: text('CODEX_SERVICE_API_KEY'), inferenceProxy: text('CODEX_INFERENCE_PROXY'), protocol: text('CODEX_PROTOCOL_VERSION'), rateVersion: text('CODEX_INFERENCE_RATE_VERSION'), maxTurns: num('CODEX_ROLE_MAX_TURNS', 8), maxInputTokens: num('CODEX_ORDER_MAX_INPUT_TOKENS', 40000), maxOutputTokens: num('CODEX_ORDER_MAX_OUTPUT_TOKENS', 8000), costCeilingMicro: num('CODEX_ORDER_COST_CEILING_MICRO', 0), isolationCommand: text('CODEX_ISOLATION_LAUNCHER'), admissionPath: text('CODEX_RUNTIME_ADMISSION_PATH'), dailyBudgetMicro: num('CODEX_PLANNING_DAILY_BUDGET_MICRO', 0) },
     ...overrides,
   };
+  if (process.env.CODEX_GATEWAY_ORIGIN && !overrides.codex) result.codex.gatewayOrigin = process.env.CODEX_GATEWAY_ORIGIN;
   if (!result.databaseUrl) throw new Error('DATABASE_URL is required; run scripts/dev-setup.ps1');
   if (result.signingKey.length < 32) throw new Error('SIGNING_KEY must be at least 32 characters');
   let publicUrl: URL;

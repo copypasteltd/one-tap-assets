@@ -15,7 +15,7 @@ interface Report {
   components:{name:string;status:string;files:FileEntry[]}[];
 }
 const required={
-  server:['api/main.js','worker/main.js','worker/tool-gateway/mcp-main.js','worker/lifecycle/reaper-main.js','worker/lifecycle/media-maintenance-main.js','worker/lifecycle/privacy-journal-main.js'],
+  server:['api/main.js','worker/main.js','ops/agent-doctor.js','worker/tool-gateway/mcp-main.js','worker/lifecycle/reaper-main.js','worker/lifecycle/media-maintenance-main.js','worker/lifecycle/privacy-journal-main.js'],
   preview:['preview/index.html','preview/plus.html','preview/support.html','preview/review.html','preview/metrics.html'],
   alipay:['mini-alipay/app.json','mini-alipay/app.js'],
   douyin:['mini-douyin/app.json','mini-douyin/app.js'],
@@ -75,7 +75,7 @@ export async function resolveLocalBuild(purpose:Purpose,options:{projectRoot?:st
       const prefix=report.build_root+'/';
       if(!file.path.startsWith(prefix))throw new Error('Build output escaped the current delivery root');
       const suffix=file.path.slice(prefix.length);
-      if(!/^(api|worker|preview|mini-alipay|mini-douyin)\//.test(suffix))throw new Error('Unexpected local build component');
+      if(!/^(api|worker|ops|preview|mini-alipay|mini-douyin)\//.test(suffix))throw new Error('Unexpected local build component');
       await verify(project,join(build,suffix),file.sha256);
     }
     const need=required[component.name as Purpose];

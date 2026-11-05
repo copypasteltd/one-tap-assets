@@ -9,7 +9,7 @@ afterEach(async()=>{for(const root of roots.splice(0)){
   const rel=relative(resolve('runtime/tmp'),resolve(root));if(!rel||rel.startsWith('..')||isAbsolute(rel))throw new Error('Unexpected fixture cleanup target');
   await rm(root,{recursive:true,force:true});
 }});
-const entries={server:['api/main.js','worker/main.js','worker/tool-gateway/mcp-main.js','worker/lifecycle/reaper-main.js','worker/lifecycle/media-maintenance-main.js','worker/lifecycle/privacy-journal-main.js'],
+const entries={server:['api/main.js','worker/main.js','ops/agent-doctor.js','worker/tool-gateway/mcp-main.js','worker/lifecycle/reaper-main.js','worker/lifecycle/media-maintenance-main.js','worker/lifecycle/privacy-journal-main.js'],
   preview:['preview/index.html','preview/plus.html','preview/support.html','preview/review.html','preview/metrics.html']};
 async function fixture(mapped=false){
   const temp=resolve('runtime/tmp');await mkdir(temp,{recursive:true});const root=await mkdtemp(join(temp,'delivery-selection-'));roots.push(root);

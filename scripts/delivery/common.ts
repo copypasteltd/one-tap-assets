@@ -30,7 +30,8 @@ export async function inventory(directory:string,accept:(name:string)=>boolean=(
 }
 export async function snapshot(){
   const files:Pick<FileEntry,'path'|'sha256'>[]=[];
-  for(const dir of ['src','tests','scripts'])files.push(...(await inventory(dir,n=>/\.(?:ts|tsx|cjs|js|css|html|sql|json|py|ps1)$/.test(n))).map(({path,sha256})=>({path,sha256})));
+  for(const dir of ['src','tests','scripts'])files.push(...(await inventory(dir,n=>/\.(?:ts|tsx|cjs|js|css|html|sql|json|py|ps1|c)$/.test(n))).map(({path,sha256})=>({path,sha256})));
+  files.push(...(await inventory('deploy/linux',n=>/\.(?:py|c|sh|conf|service|timer)$/.test(n)||['agent-launcher','backup'].includes(n))).map(({path,sha256})=>({path,sha256})));
   for(const path of ['package.json','pnpm-lock.yaml','.npmrc','tsconfig.json','vitest.config.ts','vitest.integration.config.ts'])files.push({path,sha256:sha(await readFile(path))});
   const contracts:Pick<FileEntry,'path'|'sha256'>[]=[];
   for(const dir of ['assets/development/v1.1/contracts','assets/skills/ypcc/v1.0'])contracts.push(...(await inventory(dir,n=>/\.(json|md)$/.test(n))).map(({path,sha256})=>({path,sha256})));

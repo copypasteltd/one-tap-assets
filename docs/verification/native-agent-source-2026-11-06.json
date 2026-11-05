@@ -1,0 +1,187 @@
+{
+  "checked_at": "2026-11-05T21:58:02.268892+00:00",
+  "scope": "FOCUSED_NATIVE_AGENT_CODE_FIXES",
+  "base_commit": "3e8aca5",
+  "source_files": [
+    {
+      "path": ".env.example",
+      "sha256": "0157751504f356eceec62c079d1b0d885f1200fe2b68cd8a2789ce23bffa8497"
+    },
+    {
+      "path": "deploy/linux/README.md",
+      "sha256": "54996c383f2930191b3f53af1413cbb57ecd027f9ec51cc1bdc3d31032eacf8d"
+    },
+    {
+      "path": "deploy/linux/bin/agent-broker.py",
+      "sha256": "73289bbf435159e6483c2e7f5380e057401c8d90b3d4113c497e4cd8e9b1be7b"
+    },
+    {
+      "path": "deploy/linux/bin/agent-env-exec.c",
+      "sha256": "de613a2d4a1a2ea2a40c2183c4e50b51894344ec45636403110d582e1ed213ae"
+    },
+    {
+      "path": "deploy/linux/bin/agent-launcher",
+      "sha256": "965434af25c287449489db4173bd3cf67d05a3df4d441c2b5fa85143ef713b11"
+    },
+    {
+      "path": "deploy/linux/systemd/one-tap-assets-agent-broker.service",
+      "sha256": "2f3300ad3142a2d127d59a5f19f62ed1cc49ff051f9077a2cccf92053d9f48ee"
+    },
+    {
+      "path": "package.json",
+      "sha256": "81c2f7899555250c0b4fc6697e34b2d8d3115c6da99a50fecd7e3053b46e28d4"
+    },
+    {
+      "path": "scripts/build-server.ts",
+      "sha256": "45f0c3fac16b4de300b2ff14b98c935e4cd18db3208928ae56ea3896eca53374"
+    },
+    {
+      "path": "scripts/delivery/build.ts",
+      "sha256": "28208c28bcdb23312da112794ddaa9bdf4d6ebfa45409a811228618dc8faa04f"
+    },
+    {
+      "path": "scripts/delivery/common.ts",
+      "sha256": "7c4332c3dec38836cd19e41920f3f0f9d3b9feadd3302358b0fcd238964fbe4f"
+    },
+    {
+      "path": "scripts/delivery/package.ts",
+      "sha256": "04e803e1e9b0653d2a4584f1433e26db90bfaf31867095f490f3bfee4e0ffbf7"
+    },
+    {
+      "path": "scripts/delivery/resolve-build.ts",
+      "sha256": "36322e4d9357361d63ec42b35f989be38540fa8f08df72f0368b521b1b5cf0e1"
+    },
+    {
+      "path": "scripts/ops/install-codex-native.py",
+      "sha256": "f0f5cc2d74451d69d6f937310ab18fe15893f738436991623802babe7c8a003c"
+    },
+    {
+      "path": "scripts/ops/install-native-agent.py",
+      "sha256": "261a0f5ec342d34748e8906c9826e8354795e6744f5849d3c14ba43c5f083375"
+    },
+    {
+      "path": "scripts/ops/probe-codex-protocol.py",
+      "sha256": "66fcb388e173101d0bc186af186387af28f9d5bb50c1e3a6f7837cad84a0d8ec"
+    },
+    {
+      "path": "scripts/ops/probe-native-agent.py",
+      "sha256": "e23d19e249cf6ae088294ed692579ea4daaee29ddd6ecf8509d03d06b4598591"
+    },
+    {
+      "path": "src/api/config.ts",
+      "sha256": "a18e842529d77a1da5c5715abe55463e2a363a15e03b7c31e9f2f4cf58eea352"
+    },
+    {
+      "path": "src/ops/agent-doctor.ts",
+      "sha256": "0cd9870abaa135a34413e0490e2725ff70f5d56021b1b762d601d70ba009ebb2"
+    },
+    {
+      "path": "src/shared/domain/role-gateway.ts",
+      "sha256": "8623ff6176bedcdd403ae4888d6d9ad5301163285d4ff6e69e44f3e7597f020f"
+    },
+    {
+      "path": "src/worker/codex/launcher.ts",
+      "sha256": "a6063599381657707e248c54fdb44f02a71f5538277482b417b903b09d28913a"
+    },
+    {
+      "path": "src/worker/codex/runtime.ts",
+      "sha256": "fc6413c14907ea7706f882044a0e94fe3164b5b178b62ddde66d5653c7044780"
+    },
+    {
+      "path": "src/worker/tool-gateway/mcp-main.ts",
+      "sha256": "432e7a185920f91330529af443286d4aaa51d1c571dcf4884e42b09d3e5efc9b"
+    },
+    {
+      "path": "tests/fixtures/native-agent-probe.c",
+      "sha256": "9cfbc7a5ed09cce7f5b217ec7d053c9889290d260b343fb3d78a7b726c50a177"
+    },
+    {
+      "path": "tests/unit/delivery-build-selection.test.ts",
+      "sha256": "89562e9fe83b8965664b47d1dc61e7edee1fcae1feb4a3d7cd324367ac07985c"
+    },
+    {
+      "path": "tests/unit/mcp-loopback.test.ts",
+      "sha256": "2c82ecd0364231213812f465c4f525b3e5134e709f6a4abf726d2e013de730e7"
+    },
+    {
+      "path": "tests/unit/native-executable.test.ts",
+      "sha256": "bb6d5a0a8c7cf8c48cd63ccd0ab56a951c9b93b1dd2b5ec3fd705ffcbe70898f"
+    },
+    {
+      "path": "tests/unit/role-gateway.test.ts",
+      "sha256": "f0945e14e5160ccf30217d56b390f5c71e611e79eb116f5787aa81c912eeaed0"
+    }
+  ],
+  "source_set_sha256": "eaa755df279cd8b4f2c68b6971455da38a7925c53ae170fa53251fe646ee713d",
+  "checks": {
+    "typecheck": "PASS",
+    "server_build": "PASS",
+    "focused_tests": {
+      "total": 15,
+      "passed": 15,
+      "failed": 0,
+      "source_report_sha256": "c6420b15698e9a1eb482bdab7f35535ba762bed17f257e33694c1166173d6e85",
+      "suites": [
+        {
+          "file": "codex-inference.test.ts",
+          "status": "passed",
+          "tests": 2
+        },
+        {
+          "file": "codex-transport.test.ts",
+          "status": "passed",
+          "tests": 3
+        },
+        {
+          "file": "delivery-build-selection.test.ts",
+          "status": "passed",
+          "tests": 6
+        },
+        {
+          "file": "mcp-loopback.test.ts",
+          "status": "passed",
+          "tests": 1
+        },
+        {
+          "file": "native-executable.test.ts",
+          "status": "passed",
+          "tests": 1
+        },
+        {
+          "file": "role-gateway.test.ts",
+          "status": "passed",
+          "tests": 2
+        }
+      ]
+    },
+    "linux_os_probe": {
+      "report": "docs/verification/native-agent-linux-2026-11-06.json",
+      "sha256": "bb921fe7840f706668a8b27dbf7707f06b2e2ca64778d0647b49e9cdf941f6c0",
+      "passed": 15
+    },
+    "native_codex_protocol": {
+      "report": "docs/verification/codex-native-protocol-2026-11-06.json",
+      "sha256": "af0e15f16b10fdc5e0ad1ae73c04bd2d48c6dcfb26ea48f32ae6c3cf75070f5a",
+      "model_turn_called": false
+    },
+    "publication_verifier": {
+      "status": "FAIL_EXISTING_HISTORICAL_EVIDENCE",
+      "message": "Stale disclosure capture source: src/worker/compiler/disclosure.ts",
+      "file_unchanged_from_base_commit": true,
+      "actual_source_sha256": "f5666e9d8ebd70d1bcf70b5d26e4191e103863e81edfa44b70ce322d98765f3a",
+      "historical_evidence_not_relabelled": true
+    }
+  },
+  "earlier_focused_attempt": {
+    "passed": 12,
+    "failed": 3,
+    "cause": "New ops build directory omitted from the build-selection allowlist; fixed and all 15 focused tests rerun successfully"
+  },
+  "full_suite_executed": false,
+  "real_model_turn_called": false,
+  "business_skill_admission_changed": false,
+  "production_admitted": false,
+  "full_product_verified": false,
+  "browser_used": false,
+  "virtualization_used": false
+}

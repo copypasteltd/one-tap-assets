@@ -1,0 +1,67 @@
+{
+  "checked_at": "2026-11-05T21:46:01.804753+00:00",
+  "scope": "ACTUAL_CODEX_NATIVE_DISCOVERY_WITHOUT_MODEL_TURN",
+  "runtime_sha256": "b8a11fedf24b2dfb59a70c9e52b030f9a508dcd49cd2dd0d41956f4c785156b8",
+  "initialized": true,
+  "skill_count": 6,
+  "skill_names": [
+    "probe-0",
+    "probe-1",
+    "probe-2",
+    "probe-3",
+    "probe-4",
+    "probe-5"
+  ],
+  "skill_errors": [
+    []
+  ],
+  "thread_policy": {
+    "model": "synthetic-no-model-call",
+    "modelProvider": "ypcc",
+    "approvalPolicy": "never",
+    "cwd": "/opt/one-tap-assets/app/runtime/agent-instances/native_probe_instance_4cff49abe2d34f49a8a834fd9e376005/native_probe_run_4cff49abe2d34f49a8a834fd9e376005/work",
+    "sandbox": {
+      "type": "readOnly",
+      "networkAccess": false
+    }
+  },
+  "mcp_status_protocol": true,
+  "mcp_servers": [
+    {
+      "name": "ypcc",
+      "runtimeStatus": "connected",
+      "pluginId": null,
+      "httpOrigin": null,
+      "serverInfo": {
+        "name": "ypcc-scoped-tools",
+        "title": null,
+        "version": "1.0.0",
+        "description": null,
+        "icons": null,
+        "websiteUrl": null
+      },
+      "serverCapabilities": {
+        "tools": {}
+      },
+      "toolListMeta": null,
+      "tools": {
+        "synthetic_probe_tool": {
+          "name": "synthetic_probe_tool",
+          "description": "Discovery only; no model turn",
+          "inputSchema": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          }
+        }
+      },
+      "toolsError": null,
+      "resources": [],
+      "resourceTemplates": [],
+      "authStatus": "unsupported"
+    }
+  ],
+  "platform_answers": "SYNTHETIC_LOOPBACK_HTTP_GATEWAY",
+  "model_called": false,
+  "production_admitted": false
+}

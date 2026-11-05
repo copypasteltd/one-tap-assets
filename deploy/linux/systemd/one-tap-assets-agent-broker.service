@@ -1,0 +1,21 @@
+[Unit]
+Description=One Tap Assets native restricted-identity Agent broker
+After=network.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=/usr/bin/python3 -I -B /opt/one-tap-assets/native-agent/agent-broker.py
+Restart=on-failure
+RestartSec=3
+UMask=0077
+Environment=PYTHONUNBUFFERED=1
+MemoryMax=512M
+TasksMax=128
+# Deliberately separate from the unprivileged API/Worker. Kernel-native role
+# confinement is enforced by per-role AppArmor, UID firewall and cgroup units.
+# No Docker, WSL, containers, VMs, shell dispatch or public listener.
+
+[Install]
+WantedBy=multi-user.target

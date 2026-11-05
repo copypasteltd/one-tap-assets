@@ -1,5 +1,7 @@
 # 一品成片工作约定
 
+2026-11-06代码修复：Linux原生账号/AppArmor/ACL/UID出站/cgroup执行器、回收与重启恢复已补齐；15项服务器实际隔离及Codex0.166.0实际初始化/六份合成Skill发现/只读thread协议通过。内部CODEX_GATEWAY_ORIGIN使用http://127.0.0.1:38410，与公开域名独立；禁止HTTP将角色令牌送至DNS名或非回环IP，外部模型出口保持原校验。生成客户端锁定root broker与C bootstrap摘要，准入使用部署后客户端摘要；升级必须重做相应核验。真实模型密钥/计价/预算/业务Skill准入/真实交付仍待，不能翻转开关冒充已可用。说明见docs/deployment/Agent原生执行与HTTP内网通道-2026-11-06.md，证据分别为native-agent-linux和codex-native-protocol回执。诊断构建与deploy源码纳入打包。HTTP-only、原生环境、无子代理、普通提交推送持续有效。下段为同日较早的历史实查。
+
 2026-11-06只读实查：当前真实Agent主流程尚不可用，以`docs/评估/真实Agent可用性与阻塞清单-2026-11-06.md`和`docs/verification/agent-readiness-2026-11-06.json`为准。页面/6个基础服务正常，实际生成/Codex/支付关闭；模型配置、模型登记、真实运行/推理/复核记录为空，14个Skill组合均DRAFT_NOT_ADMITTED。Ubuntu部署与Worker编译包现有Windows式.exe启动器仍有原生平台适配缺口，不得仅翻转开关或修改准入状态宣称真实Agent可用。该轮仅状态评估，未改服务配置；HTTP-only、原生环境、无子代理及普通提交推送约束持续有效。
 
 2026-11-01品牌定稿：用户明确选择06「柚子小导」。当前正式LOGO以`assets/brand/current.json`及`assets/brand/citrus-director/v1.0.0/`为准，规范见`docs/设计/品牌/06-柚子小导-v1.0.0.md`。保留原质感形象为主标志，扁平真矢量/单色/反白为配套应用稿；后续品牌修订新建版本，原十款候选和C冻结设计不覆盖。C仍为页面视觉基线，06为品牌标志基线；不得继续将02推荐或候选“待选”当作当前决策。本轮仅品牌素材，应用接入待处理；原HTTP-only、原生环境、无子代理与常规推送约束有效。

@@ -1,0 +1,73 @@
+{
+  "checked_at": "2026-11-05T21:46:53.399750+00:00",
+  "scope": "ACTUAL_LINUX_OS_BOUNDARIES_WITH_SYNTHETIC_MODEL_EXECUTABLE",
+  "host": "192.168.31.20",
+  "virtualization_used": false,
+  "rows": [
+    {
+      "id": "own_input_read",
+      "status": "PASS"
+    },
+    {
+      "id": "own_output_write",
+      "status": "PASS"
+    },
+    {
+      "id": "config_write_denied",
+      "status": "PASS"
+    },
+    {
+      "id": "skills_write_denied",
+      "status": "PASS"
+    },
+    {
+      "id": "other_workspace_denied",
+      "status": "PASS"
+    },
+    {
+      "id": "root_credentials_denied",
+      "status": "PASS"
+    },
+    {
+      "id": "shell_exec_denied",
+      "status": "PASS"
+    },
+    {
+      "id": "gateway_connect",
+      "status": "PASS"
+    },
+    {
+      "id": "db_connect_denied",
+      "status": "PASS"
+    },
+    {
+      "id": "capability_absent_from_unit_properties",
+      "status": "PASS"
+    },
+    {
+      "id": "detached_release_tree_cleanup_and_idempotency",
+      "status": "PASS"
+    },
+    {
+      "id": "worker_stdio_disconnect_releases_role",
+      "status": "PASS"
+    },
+    {
+      "id": "broker_restart_reaps_durable_owned_roles",
+      "status": "PASS"
+    },
+    {
+      "id": "off_loopback_manifest_rejected",
+      "status": "PASS"
+    },
+    {
+      "id": "untrusted_socket_peer_rejected",
+      "status": "PASS"
+    }
+  ],
+  "broker_sha256": "73289bbf435159e6483c2e7f5380e057401c8d90b3d4113c497e4cd8e9b1be7b",
+  "launcher_sha256": "650da8846cb0c44ae9bb9dbbc11b65d9f195551392e8fc405a1c7a2a92b2522b",
+  "real_model_called": false,
+  "real_skill_admitted": false,
+  "production_admitted": false
+}

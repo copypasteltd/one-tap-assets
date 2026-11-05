@@ -35,6 +35,7 @@
     "verify:implementation": "tsx scripts/verify-implementation.ts",
     "verify:publication": "tsx scripts/verify-publication.ts",
     "doctor": "tsx scripts/delivery/doctor.ts",
+    "agent:doctor": "tsx src/ops/agent-doctor.ts",
     "local:start": "tsx scripts/delivery/start.ts",
     "preview:serve": "tsx scripts/delivery/start.ts --preview-only",
     "delivery:build": "tsx scripts/delivery/build.ts",

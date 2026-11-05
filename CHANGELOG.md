@@ -1,5 +1,13 @@
 # 更新记录 / Changelog
 
+## 2026-11-06 — Native Agent code repairs / 原生Agent代码修复
+
+- 修复Ubuntu被Windows `.exe`条件阻断和内部角色网关强制HTTPS的问题；只许本机回环HTTP传递短期权限，外部模型出口保留原校验。 / Added Linux-native execution checks and private loopback HTTP transport.
+- 新增root Unix broker、独立不可登录账号、AppArmor/ACL、UID出站约束、cgroup清理、断线/重启回收及完整构建摘要绑定；临时令牌不进入命令参数或systemd环境属性。 / Added bounded native isolation and durable cleanup with transitive build pins.
+- 安装官方Linux Codex0.166.0；15项服务器实际隔离检查与实际初始化、六份合成Skill发现、只读thread及实际Node MCP/HTTP工具发现通过，未运行模型turn或修改业务准入。 / Verified actual OS boundaries, native Skill discovery and a connected Node MCP process without paid model calls.
+- 新增脱敏就绪性诊断，修复Linux部署文件与诊断构建在交付打包/选择中的遗漏。 / Included Linux deployment sources and the diagnostic in delivery snapshots, selection and packages.
+- [实施与后续配置](docs/deployment/Agent原生执行与HTTP内网通道-2026-11-06.md) · [OS回执](docs/verification/native-agent-linux-2026-11-06.json) · [协议回执](docs/verification/codex-native-protocol-2026-11-06.json)
+
 ## 2026-11-06 — Live Agent readiness audit / 真实Agent阻塞核查
 
 - 只读检查线上接口、6个常驻服务、实际进程环境、Worker源码/编译包和数据库聚合；真实生成/Codex/支付关闭，模型接入字段为空，模型登记与真实执行记录均0，14个Skill组合均未准入。 / Audited the live instance without paid model calls; real Agent execution remains unavailable.

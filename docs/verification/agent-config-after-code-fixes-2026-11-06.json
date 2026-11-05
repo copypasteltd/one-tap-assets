@@ -1,0 +1,135 @@
+{
+  "checked_at": "2026-11-05T21:58:19.127Z",
+  "scope": "READ_ONLY_CONFIGURATION_DIAGNOSTIC",
+  "rows": [
+    {
+      "id": "private_gateway",
+      "status": "PASS",
+      "detail": "http://127.0.0.1:38410"
+    },
+    {
+      "id": "codex_service",
+      "status": "DISABLED",
+      "detail": "Explicitly disabled"
+    },
+    {
+      "id": "generation",
+      "status": "DISABLED",
+      "detail": "Explicitly disabled"
+    },
+    {
+      "id": "payments",
+      "status": "DISABLED",
+      "detail": "Explicitly disabled"
+    },
+    {
+      "id": "service_key",
+      "status": "MISSING_CONFIG",
+      "detail": "Required service setting is absent"
+    },
+    {
+      "id": "model_id",
+      "status": "MISSING_CONFIG",
+      "detail": "Required service setting is absent"
+    },
+    {
+      "id": "runtime_hash",
+      "status": "PASS",
+      "detail": "Configured; private value omitted"
+    },
+    {
+      "id": "protocol_pin",
+      "status": "PASS",
+      "detail": "Configured; private value omitted"
+    },
+    {
+      "id": "rate_version",
+      "status": "MISSING_CONFIG",
+      "detail": "Required service setting is absent"
+    },
+    {
+      "id": "provider_url",
+      "status": "MISSING_CONFIG",
+      "detail": "Required service setting is absent"
+    },
+    {
+      "id": "provider_key",
+      "status": "MISSING_CONFIG",
+      "detail": "Required service setting is absent"
+    },
+    {
+      "id": "vision_model",
+      "status": "MISSING_CONFIG",
+      "detail": "Required service setting is absent"
+    },
+    {
+      "id": "image_model",
+      "status": "MISSING_CONFIG",
+      "detail": "Required service setting is absent"
+    },
+    {
+      "id": "video_model",
+      "status": "MISSING_CONFIG",
+      "detail": "Required service setting is absent"
+    },
+    {
+      "id": "vision_contract",
+      "status": "MISSING_CONFIG",
+      "detail": "Required service setting is absent"
+    },
+    {
+      "id": "native_runtime",
+      "status": "PASS",
+      "detail": "Native executable exists and passes the platform check; runtime hash checked"
+    },
+    {
+      "id": "native_launcher",
+      "status": "PASS",
+      "detail": "Native executable exists and passes the platform check; runtime hash checked"
+    },
+    {
+      "id": "order_cost_ceiling",
+      "status": "MISSING_CONFIG",
+      "detail": "Budget remains zero"
+    },
+    {
+      "id": "planning_daily_budget",
+      "status": "MISSING_CONFIG",
+      "detail": "Budget remains zero"
+    },
+    {
+      "id": "vision_daily_budget",
+      "status": "MISSING_CONFIG",
+      "detail": "Budget remains zero"
+    },
+    {
+      "id": "runtime_admission",
+      "status": "MISSING_CONFIG",
+      "detail": "Genuine runtime/model/rate/isolation admission is absent or does not match"
+    },
+    {
+      "id": "native_broker_socket",
+      "status": "PASS",
+      "detail": "Private socket exists; run the operator OS probe for actual isolation"
+    },
+    {
+      "id": "registered_models",
+      "status": "MISSING_CONFIG",
+      "detail": "0 registered model versions; compatibility still requires actual receipts"
+    },
+    {
+      "id": "admitted_skill_bundles",
+      "status": "MISSING_CONFIG",
+      "detail": "0 admitted; 14 total"
+    },
+    {
+      "id": "real_order_verification",
+      "status": "UNVERIFIED",
+      "detail": "0 successful run records; this diagnostic never certifies real model or end-to-end acceptance"
+    }
+  ],
+  "configuration_complete": false,
+  "real_end_to_end_verified": false,
+  "production_admitted": false,
+  "secrets_included": false
+}

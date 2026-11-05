@@ -9,6 +9,7 @@ import { AppError, requireThat, notFound } from '../../api/lib/errors.js';
 import { validate } from '../../api/lib/validation.js';
 import type { DTO } from '../../shared/contracts/types.js';
 import { object } from '../../shared/domain/json.js';
+import { configuredRoleGateway } from '../../shared/domain/role-gateway.js';
 import { assertLease, type StageLease } from '../queue/leases.js';
 import { type AgentRole } from '../tool-gateway/policy.js';
 import { AppServerRpc } from './rpc.js';
@@ -114,22 +115,22 @@ export class CodexRuntimeAdapter {
       await checkedProjectPath(this.cfg, root); await checkedProjectPath(this.cfg, control);
       const loaded = await materializeRoleSkills(this.cfg, this.pool, request.variantId, request.role, home, request.bundleHash);
       const inputPath = join(work, 'input.json'); await writeFile(inputPath, JSON.stringify(request.input), { flag: 'wx', mode: 0o400 });
-      const endpoint = new URL(this.cfg.publicBaseUrl);
-      requireThat(endpoint.protocol === 'https:' && endpoint.pathname === '/' && !endpoint.search && !endpoint.hash && !endpoint.username && !endpoint.password,
-        'CODEX_GATEWAY_INVALID', '角色网关必须是受控 HTTPS 服务原点', 503);
+      let endpoint: URL;
+      try { endpoint = configuredRoleGateway(this.cfg); }
+      catch { throw new AppError('CODEX_GATEWAY_INVALID', '角色网关必须使用受控 HTTPS 或本机回环 HTTP 原点', 503); }
       const proxy = `${endpoint.origin}/v1/internal/p01/agent-inference`;
       requireThat(!this.cfg.codex.inferenceProxy || this.cfg.codex.inferenceProxy.replace(/\/$/, '') === proxy,
         'CODEX_GATEWAY_INVALID', '角色推理不能绕过本平台预算出口', 503);
       const bridge = inside(this.cfg.runtimeRoot, 'build/worker/tool-gateway/mcp-main.js'); await checkedProjectPath(this.cfg, bridge);
       const ca = join(home, 'gateway-ca.pem');
       if (this.cfg.tlsCert) await writeFile(ca, await readFile(inside(this.cfg.projectRoot, this.cfg.tlsCert)), { flag: 'wx', mode: 0o400 });
-      const env: Record<string, string> = { CODEX_HOME: home, HOME: home, USERPROFILE: home, TMP: temp, TEMP: temp,
+      const env: Record<string, string> = { CODEX_HOME: home, HOME: home, USERPROFILE: home, TMP: temp, TEMP: temp, TMPDIR: temp,
         YPCC_ROLE_CAPABILITY: secret, YPCC_TOOL_CAPABILITY: secret, YPCC_TOOL_ENDPOINT: endpoint.origin,
         YPCC_ROLE_DEADLINE_MS: String(lease.deadline_at.getTime()), ...(this.cfg.tlsCert ? { NODE_EXTRA_CA_CERTS: ca, YPCC_TOOL_CA_FILE: ca } : {}) };
       const config = [
         `model = ${JSON.stringify(request.admission.actual_model)}`, 'model_provider = "ypcc"', 'approval_policy = "never"',
         'sandbox_mode = "read-only"', 'web_search = "disabled"', 'project_doc_max_bytes = 0',
-        `[features]`, 'shell_tool = false', 'unified_exec = false', 'multi_agent = false',
+        `[features]`, 'shell_tool = false', 'unified_exec = false', 'multi_agent = false', 'code_mode = false',
         '[windows]', 'allow_mxc = false', '[shell_environment_policy]', 'inherit = "none"',
         '[model_providers.ypcc]', 'name = "一品成片受控推理"', `base_url = ${JSON.stringify(proxy)}`,
         'env_key = "YPCC_ROLE_CAPABILITY"', 'wire_api = "responses"', 'requires_openai_auth = false', 'supports_websockets = false',
@@ -137,11 +138,12 @@ export class CodexRuntimeAdapter {
         '[mcp_servers.ypcc]', `command = ${JSON.stringify(processExecPath())}`, `args = [${JSON.stringify(bridge)}]`, 'required = true',
         'env_vars = ["YPCC_TOOL_CAPABILITY", "YPCC_TOOL_ENDPOINT", "YPCC_TOOL_CA_FILE", "YPCC_ROLE_DEADLINE_MS"]',
       ].join('\n') + '\n';
-      await writeFile(join(home, 'config.toml'), config, { flag: 'wx', mode: 0o400 });
+      const configPath = join(home, 'config.toml');
+      await writeFile(configPath, config, { flag: 'wx', mode: 0o400 });
       const manifest: NativeLaunchManifest = { version: 'YPCC-NATIVE-LAUNCH-1', nonce, instance_id: instanceId, run_id: runId,
         executable: inside(this.cfg.projectRoot, this.cfg.codex.binary), executable_sha256: request.admission.runtime_sha256,
         args: ['app-server', '--listen', 'stdio://'], cwd: work, environment: env,
-        read_only_paths: [join(home, 'skills'), inputPath, bridge, processExecPath(), inside(this.cfg.projectRoot, this.cfg.codex.binary)],
+        read_only_paths: [join(home, 'skills'), configPath, inputPath, bridge, processExecPath(), inside(this.cfg.projectRoot, this.cfg.codex.binary), join(this.cfg.projectRoot, 'package.json'), ...(this.cfg.tlsCert ? [ca] : [])],
         writable_paths: [home, work, temp], virtualization: 'FORBIDDEN', shell_tools: 'DISABLED', network_origins: [endpoint.origin],
         deadline_at: lease.deadline_at.toISOString(), launch_receipt_path: join(control, 'launch-receipt.json'), cleanup_receipt_path: join(control, 'native-cleanup.json') };
       await writeFile(manifestPath, JSON.stringify(manifest), { flag: 'wx', mode: 0o600 });

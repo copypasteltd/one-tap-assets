@@ -15,7 +15,7 @@ for(const key of ['source_set_hash','files','runtime_contract_files','resource_f
 if(!/^runtime\/delivery-builds\/[A-Za-z0-9T.-]+\/runtime\/build$/.test(report.build_root))throw new Error('Invalid owned build directory');
 const candidates=[...new Set(execFileSync('git',['-c','core.fsmonitor=false','-c','core.untrackedCache=false','ls-files','--cached','--others','--exclude-standard','-z'],{encoding:'utf8',windowsHide:true}).split('\0').filter(Boolean))];
 const rootFiles=/^(?:README(?:\.[A-Za-z-]+)?\.md|START-HERE\.md|AGENTS\.md|CHANGELOG\.md|CONTRIBUTING\.md|SECURITY\.md|THIRD_PARTY_NOTICES\.md|LICENSE(?:\.[A-Za-z]+)?|package\.json|pnpm-lock\.yaml|tsconfig\.json|vitest(?:\.integration)?\.config\.ts|\.editorconfig|\.gitignore|\.gitattributes|\.npmrc|\.env\.example)$/;
-const source=candidates.filter(p=>(/^(src|scripts|tests|assets|docs|\.github)\//.test(p)||rootFiles.test(p))&&p!=='docs/delivery/package.json');
+const source=candidates.filter(p=>(/^(src|scripts|tests|assets|docs|deploy|\.github)\//.test(p)||rootFiles.test(p))&&p!=='docs/delivery/package.json');
 const files:{path:string;source:string|null;sha256:string;bytes:number}[]=[];
 const secrets=[/-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/,/\bsk-(?:(?:proj|svcacct)-)?[A-Za-z0-9_-]{40,}\b/,/\bgh[pousr]_[A-Za-z0-9]{30,}\b/,/\bgithub_pat_[A-Za-z0-9_]{40,}\b/];
 async function add(path:string,target:string,expected?:string){
@@ -29,7 +29,7 @@ for(const path of source.sort())await add(path,path);
 for(const component of report.components.filter(c=>c.status==='PASS'))for(const file of component.files){
   if(!file.path.startsWith(report.build_root+'/'))throw new Error('Unexpected build entry');
   const suffix=file.path.slice(report.build_root.length+1);
-  if(!/^(api|worker|preview|mini-alipay|mini-douyin)\//.test(suffix))throw new Error('Build is outside the deliverable roots');
+  if(!/^(api|worker|ops|preview|mini-alipay|mini-douyin)\//.test(suffix))throw new Error('Build is outside the deliverable roots');
   await add(file.path,`runtime/build/${suffix}`,file.sha256);
 }
 // A documentation/evidence update can reuse the verified build. Each package
@@ -51,7 +51,7 @@ const manifest={schema_version:'1.0',kind:'SOURCE_AND_AVAILABLE_BUILDS',id:repor
  verification_strategy:'USER_REQUESTED_FOCUSED_DELIVERY',components:report.components.map(({name,status})=>({name,status})),
   requirements_preserved:58,archive_metadata_files:1,full_product_verified:false,production_admitted:false,cloud_deployed:false,
  excluded:['.git','.env.local','node_modules','private media','databases','logs','service credentials','personal Codex profiles'],
- prerequisites:'Windows; native Node 24/pnpm/PostgreSQL/FFmpeg and external service configuration as documented. Not an offline installer.',
+ prerequisites:'Native Node 24/pnpm/PostgreSQL/FFmpeg; Windows development or the documented Ubuntu/systemd/AppArmor deployment, with external service configuration. Not an offline installer.',
  files:files.map(({path,sha256,bytes})=>({path,sha256,bytes}))};
 const out=`runtime/releases/one-tap-assets-${packageId}`;await directory(out);
 const zipPath=`${out}/one-tap-assets-source-and-builds.zip`,output=createWriteStream(local(zipPath),{flags:'wx'});

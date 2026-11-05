@@ -1,5 +1,7 @@
 # HTTP-only LAN deployment / 纯 HTTP 内网部署
 
+2026-11-06补齐原生Agent适配：[安装、私有配置与限制](../../docs/deployment/Agent原生执行与HTTP内网通道-2026-11-06.md)。新增root Unix broker、独立临时账号、AppArmor/ACL/UID出站与cgroup回收；内部Agent使用`http://127.0.0.1:38410`。已完成15项实际OS隔离及Codex0.166.0无模型turn的协议核验，真实业务准入另行处理。`install-native-agent.py`会生成绑定依赖摘要的客户端，不能用Git模板直接替换运行客户端。
+
 **Current entry: `http://192.168.31.20:38480`.** Per the user's explicit requirement, this service has no HTTPS listener, certificate endpoint or HTTP-to-HTTPS redirect. Port `38443` is closed. The native API on `127.0.0.1:38410` also runs HTTP.
 
 当前网页服务只使用 HTTP。本目录的 nginx、配置安装器和健康检查均已同步，不申请或安装网页证书，也不自动升级 HTTPS。后续提供正式域名时继续按用户指定的 HTTP 方案处理。实际环境、凭据和运维入口见 [HTTP 部署细则](../../docs/deployment/HTTP内网部署与运维-2026-10-31.md)。

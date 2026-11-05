@@ -1,5 +1,24 @@
 # 当前交付与功能状态 / Delivery and functional status
 
+## 2026-11-06 · 原生Agent代码修复 / Native Agent repairs
+
+| 编号 | 本轮已实现 | 核验 |
+| --- | --- | --- |
+| C01 | Linux原生程序与隔离客户端适配 | 保留Windows检查；Linux ELF / 锁定客户端分开核验 |
+| C02 | 内部回环HTTP工具与推理通道 | 实际HTTP/stdio核验；公开域名不会决定角色出口 |
+| C03 | 原生账号、AppArmor/ACL、出站及进程树 | 服务器15项实际OS边界检查通过 |
+| C04 | 原生Codex0.166.0安装与协议 | 受限身份中初始化、六份合成Skill发现、只读上下文、实际Node MCP启动与HTTP工具发现通过；无模型turn |
+| C05 | 脱敏诊断、部署及打包 | 新增agent:doctor；Linux源文件与诊断产物纳入源摘要和交付 |
+
+| 编号 | 待处理 | 条件 |
+| --- | --- | --- |
+| P01 | 实际模型与服务凭据、价格和预算 | root私有配置、真实模型登记 |
+| P02 | 业务Skill和完整真实交付准入 | 实际素材、模型、工具、独立双复核、费用与最终释放回执 |
+| P03 | 平台登录/支付、正式存储资料 | 外部主体和服务配置 |
+| P04 | 正式域名解析和反代 | 用户处理；内部Agent通道已独立于域名 |
+
+[实现、边界及运维](../deployment/Agent原生执行与HTTP内网通道-2026-11-06.md) · [OS证据](../verification/native-agent-linux-2026-11-06.json) · [协议证据](../verification/codex-native-protocol-2026-11-06.json)。原生隔离和协议通过不等于真实模型交付可用，销售和付费生成保持关闭。以下保留同日较早的只读基线。
+
 ## 2026-11-06 · 真实Agent就绪性 / Live Agent readiness
 
 **真实Agent主流程尚未可用。** 以下为当前部署实查，历史代码、演示和部署通过不代表真实模型/Agent接入已完成。

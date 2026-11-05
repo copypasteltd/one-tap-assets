@@ -1,0 +1,107 @@
+{
+  "checked_at": "2026-11-05T21:51:33.514006+00:00",
+  "public_origin": "http://192.168.31.20:38480",
+  "internal_gateway": "http://127.0.0.1:38410",
+  "health": [
+    {
+      "path": "/",
+      "status": 200,
+      "protocol": "http"
+    },
+    {
+      "path": "/plus/",
+      "status": 200,
+      "protocol": "http"
+    },
+    {
+      "path": "/ops/support",
+      "status": 200,
+      "protocol": "http"
+    },
+    {
+      "path": "/ops/review",
+      "status": 200,
+      "protocol": "http"
+    },
+    {
+      "path": "/ops/metrics",
+      "status": 200,
+      "protocol": "http"
+    },
+    {
+      "path": "/healthz",
+      "status": 200,
+      "protocol": "http"
+    },
+    {
+      "path": "/readyz",
+      "status": 200,
+      "protocol": "http"
+    },
+    {
+      "path": "/v1/p01/runtime-info",
+      "status": 200,
+      "protocol": "http"
+    }
+  ],
+  "services": [
+    {
+      "name": "one-tap-assets-db",
+      "state": "active"
+    },
+    {
+      "name": "one-tap-assets-api",
+      "state": "active"
+    },
+    {
+      "name": "one-tap-assets-worker",
+      "state": "active"
+    },
+    {
+      "name": "one-tap-assets-reaper",
+      "state": "active"
+    },
+    {
+      "name": "one-tap-assets-media-maintenance",
+      "state": "active"
+    },
+    {
+      "name": "one-tap-assets-backup.timer",
+      "state": "active"
+    },
+    {
+      "name": "one-tap-assets-agent-broker",
+      "state": "active"
+    }
+  ],
+  "https_38443_closed": true,
+  "saved_and_running_flags_match": true,
+  "flags": {
+    "DEV_MODE": "false",
+    "CODEX_SERVICE_ENABLED": "false",
+    "PROVIDER_GENERATION_ENABLED": "false",
+    "PAYMENTS_ENABLED": "false",
+    "COMMUNITY_PUBLISHING_ENABLED": "false"
+  },
+  "runtime": {
+    "checked_at": "2026-11-05T21:22:56.559328+00:00",
+    "version": "0.166.0",
+    "reported_version": "codex-cli 0.166.0",
+    "executable": "/opt/one-tap-assets/app/runtime/tools/codex/0.166.0/codex",
+    "sha256": "b8a11fedf24b2dfb59a70c9e52b030f9a508dcd49cd2dd0d41956f4c785156b8",
+    "source": "https://registry.npmjs.org/@openai/codex/-/codex-0.166.0-linux-x64.tgz",
+    "npm_integrity_verified": true,
+    "model_called": false,
+    "production_admitted": false
+  },
+  "native_build": {
+    "broker_sha256": "73289bbf435159e6483c2e7f5380e057401c8d90b3d4113c497e4cd8e9b1be7b",
+    "env_exec_sha256": "9d6a895759317a24c985d1fa0e54fb1fe878b52baefdd16645a8c7bf5383b47b"
+  },
+  "launcher_sha256": "650da8846cb0c44ae9bb9dbbc11b65d9f195551392e8fc405a1c7a2a92b2522b",
+  "worker_sha256": "5aa9722278df15bcf303e4de3c6d14e9dfa317b2f29b3a50b8d7266951475cdd",
+  "broker_source_matches_installed": true,
+  "model_turn_called": false,
+  "business_admission_changed": false,
+  "production_admitted": false
+}

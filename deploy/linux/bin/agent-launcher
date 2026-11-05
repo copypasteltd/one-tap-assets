@@ -1,0 +1,81 @@
+#!/usr/bin/python3
+"""Unprivileged stdio client. No shell, sudo, provider secret or personal profile."""
+import argparse
+import base64
+import json
+import os
+import socket
+import struct
+import sys
+import threading
+
+# Installer renders the hashes of the root-owned broker and native bootstrap.
+# Admission pins this rendered client, so updating either dependency fails
+# closed until the operator reapplies and re-admits the complete build.
+EXPECTED_BUILD = None
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('action', choices=('run', 'release'))
+    parser.add_argument('--manifest', required=True)
+    args = parser.parse_args()
+    client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    # Override is for an operator's isolated native probe. Worker does not
+    # inherit this variable; its launcher environment is explicitly constructed.
+    client.connect(os.environ.get('YPCC_NATIVE_SOCKET', '/run/one-tap-assets-agent/launcher.sock'))
+    _, peer_uid, _ = struct.unpack('3i', client.getsockopt(socket.SOL_SOCKET, socket.SO_PEERCRED, 12))
+    if peer_uid != 0 or not EXPECTED_BUILD:
+        raise ValueError('Unpinned native broker')
+    client.settimeout(5)
+    reader = client.makefile('rb')
+    hello = reader.readline(4096)
+    if not hello.endswith(b'\n') or json.loads(hello).get('native_build') != EXPECTED_BUILD:
+        raise ValueError('Native broker build mismatch')
+    client.settimeout(None)
+    lock = threading.Lock()
+
+    def send(message):
+        with lock:
+            client.sendall((json.dumps(message, separators=(',', ':')) + '\n').encode())
+
+    send({'action': args.action, 'manifest': os.path.abspath(args.manifest)})
+
+    def input_loop():
+        try:
+            while True:
+                chunk = os.read(0, 32768)
+                send({'stdin': base64.b64encode(chunk).decode()} if chunk else {'eof': True})
+                if not chunk:
+                    return
+        except (OSError, BrokenPipeError):
+            return
+
+    if args.action == 'run':
+        threading.Thread(target=input_loop, daemon=True).start()
+    try:
+        with reader:
+            while True:
+                line = reader.readline(150000)
+                if not line or not line.endswith(b'\n'):
+                    return 1
+                message = json.loads(line)
+                for name, fd in (('stdout', 1), ('stderr', 2)):
+                    if name in message:
+                        data = base64.b64decode(message[name], validate=True)
+                        while data:
+                            count = os.write(fd, data)
+                            data = data[count:]
+                if 'exit' in message:
+                    return message['exit'] if isinstance(message['exit'], int) and 0 <= message['exit'] <= 255 else 1
+    finally:
+        client.close()
+
+
+if __name__ == '__main__':
+    try:
+        sys.exit(main())
+    except Exception:
+        # Never echo a manifest, environment, capability or server traceback.
+        sys.stderr.write('Native Agent launcher unavailable; inspect the private broker journal.\n')
+        sys.exit(1)

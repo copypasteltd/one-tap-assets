@@ -1,14 +1,15 @@
 import { createInterface } from 'node:readline';
 import https from 'node:https';
+import http from 'node:http';
 import { readFileSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
 import { setTimeout as pause } from 'node:timers/promises';
 import { object } from '../../shared/domain/json.js';
+import { roleGatewayUrl } from '../../shared/domain/role-gateway.js';
 
 // This subprocess has only a short-lived platform capability, never a provider,
 // database, payment or service-account secret. Its endpoint is operator supplied.
-const base = new URL(process.env.YPCC_TOOL_ENDPOINT ?? 'https://localhost:3100');
-if (base.protocol !== 'https:' || base.username || base.password || base.pathname !== '/') throw new Error('Invalid tool endpoint');
+const base = roleGatewayUrl(process.env.YPCC_TOOL_ENDPOINT ?? 'http://127.0.0.1:3100');
 const secret = process.env.YPCC_TOOL_CAPABILITY;
 if (!secret) throw new Error('Missing scoped capability');
 const ca = process.env.YPCC_TOOL_CA_FILE ? readFileSync(process.env.YPCC_TOOL_CA_FILE) : undefined;
@@ -32,7 +33,8 @@ async function call(path: string, method: 'GET' | 'POST', body?: unknown): Promi
       reject(method === 'GET' && !lifetime.signal.aborted && (timeout.aborted || transientTransport(error))
         ? new ObservationUnavailable('Original tool observation unavailable') : new Error('Platform tool unavailable'));
     };
-    const req = https.request(new URL(path, base), { method, ...(ca ? { ca } : {}), rejectUnauthorized: true,
+    const request = base.protocol === 'https:' ? https.request : http.request;
+    const req = request(new URL(path, base), { method, ...(base.protocol === 'https:' ? { ...(ca ? { ca } : {}), rejectUnauthorized: true } : {}),
       headers: { Authorization: `Bearer ${secret}`, ...(bytes ? { 'Content-Type': 'application/json', 'Content-Length': String(bytes.length) } : {}) },
       signal: AbortSignal.any([lifetime.signal, timeout]) }, res => {
       const parts: Buffer[] = []; let size = 0;
