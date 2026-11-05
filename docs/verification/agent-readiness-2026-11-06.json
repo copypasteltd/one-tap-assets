@@ -1,0 +1,330 @@
+{
+  "project": "一品成片",
+  "report_date": "2026-11-06",
+  "report_timezone": "Asia/Taipei",
+  "scope": "Read-only live agent readiness audit; no provider purchases or feature changes",
+  "origin": "http://192.168.31.20:38480",
+  "server": {
+    "server_os": "Linux",
+    "server_machine": "x86_64",
+    "services": [
+      {
+        "unit": "one-tap-assets-api",
+        "MainPID": "125134",
+        "ActiveState": "active",
+        "SubState": "running"
+      },
+      {
+        "unit": "one-tap-assets-worker",
+        "MainPID": "125148",
+        "ActiveState": "active",
+        "SubState": "running"
+      },
+      {
+        "unit": "one-tap-assets-db",
+        "MainPID": "122942",
+        "ActiveState": "active",
+        "SubState": "running"
+      },
+      {
+        "unit": "one-tap-assets-reaper",
+        "MainPID": "125140",
+        "ActiveState": "active",
+        "SubState": "running"
+      },
+      {
+        "unit": "one-tap-assets-media-maintenance",
+        "MainPID": "125146",
+        "ActiveState": "active",
+        "SubState": "running"
+      },
+      {
+        "unit": "one-tap-assets-backup.timer",
+        "ActiveState": "active",
+        "SubState": "waiting"
+      }
+    ],
+    "worker_process_configuration": {
+      "flags": {
+        "DEV_MODE": false,
+        "PAYMENTS_ENABLED": false,
+        "PROVIDER_GENERATION_ENABLED": false,
+        "CODEX_SERVICE_ENABLED": false,
+        "COMMUNITY_PUBLISHING_ENABLED": false,
+        "LISTENING_SERVICE_ENABLED": false,
+        "ASR_SERVICE_ENABLED": false,
+        "PLUS_IMAGE_RENDER_ENABLED": false,
+        "PLUS_VIDEO_RENDER_ENABLED": false
+      },
+      "models": {
+        "VISION_MODEL_ID": "",
+        "IMAGE_MODEL_ID": "",
+        "VIDEO_MODEL_ID": "",
+        "MODEL_REGISTRY_VERSION": "",
+        "CODEX_MODEL_ID": "",
+        "CODEX_PROTOCOL_VERSION": "",
+        "CODEX_INFERENCE_RATE_VERSION": ""
+      },
+      "configured_presence_only": {
+        "PROVIDER_BASE_URL": false,
+        "PROVIDER_API_KEY": false,
+        "GENERATION_BASE_URL": false,
+        "GENERATION_API_KEY": false,
+        "LISTENING_BASE_URL": false,
+        "LISTENING_API_KEY": false,
+        "ASR_BASE_URL": false,
+        "ASR_API_KEY": false,
+        "CODEX_SERVICE_API_KEY": false,
+        "CODEX_INFERENCE_PROXY": false,
+        "ALIPAY_APP_ID": false,
+        "ALIPAY_APP_PRIVATE_KEY": false,
+        "ALIPAY_PLATFORM_PUBLIC_KEY": false,
+        "ALIPAY_MERCHANT_ID": false,
+        "DOUYIN_APP_ID": false,
+        "DOUYIN_APP_SECRET": false,
+        "DOUYIN_MERCHANT_ID": false,
+        "DOUYIN_PAYMENT_VERIFY_KEY": false,
+        "STORAGE_ACCESS_KEY_ID": false,
+        "STORAGE_ACCESS_KEY_SECRET": false,
+        "STORAGE_BUCKET": false
+      },
+      "budgets_micro": {
+        "VISION_DAILY_BUDGET_MICRO": "0",
+        "CODEX_PLANNING_DAILY_BUDGET_MICRO": "0",
+        "CODEX_ORDER_COST_CEILING_MICRO": "0",
+        "SAMPLE_DAILY_BUDGET_MICRO": "0",
+        "SAMPLE_COST_CEILING_MICRO": "0",
+        "PLUS_VIDEO_RENDER_BUDGET_MICRO": "0"
+      },
+      "files": {
+        "CODEX_BINARY_PATH": {
+          "configured": false,
+          "exists": false
+        },
+        "CODEX_ISOLATION_LAUNCHER": {
+          "configured": false,
+          "exists": false
+        },
+        "CODEX_RUNTIME_ADMISSION_PATH": {
+          "configured": false,
+          "exists": false
+        },
+        "VISION_CONTRACT_PATH": {
+          "configured": false,
+          "exists": false
+        },
+        "DOUYIN_TRADE_CONTRACT_PATH": {
+          "configured": false,
+          "exists": false
+        }
+      },
+      "storage_driver": "local",
+      "public_base_url": "http://192.168.31.20:38480",
+      "web_origins": "http://192.168.31.20:38480",
+      "codex_build_sha256_configured": false
+    },
+    "app_env_configuration": {
+      "flags": {
+        "DEV_MODE": false,
+        "PAYMENTS_ENABLED": false,
+        "PROVIDER_GENERATION_ENABLED": false,
+        "CODEX_SERVICE_ENABLED": false,
+        "COMMUNITY_PUBLISHING_ENABLED": false,
+        "LISTENING_SERVICE_ENABLED": false,
+        "ASR_SERVICE_ENABLED": false,
+        "PLUS_IMAGE_RENDER_ENABLED": false,
+        "PLUS_VIDEO_RENDER_ENABLED": false
+      },
+      "models": {
+        "VISION_MODEL_ID": "",
+        "IMAGE_MODEL_ID": "",
+        "VIDEO_MODEL_ID": "",
+        "MODEL_REGISTRY_VERSION": "",
+        "CODEX_MODEL_ID": "",
+        "CODEX_PROTOCOL_VERSION": "",
+        "CODEX_INFERENCE_RATE_VERSION": ""
+      },
+      "configured_presence_only": {
+        "PROVIDER_BASE_URL": false,
+        "PROVIDER_API_KEY": false,
+        "GENERATION_BASE_URL": false,
+        "GENERATION_API_KEY": false,
+        "LISTENING_BASE_URL": false,
+        "LISTENING_API_KEY": false,
+        "ASR_BASE_URL": false,
+        "ASR_API_KEY": false,
+        "CODEX_SERVICE_API_KEY": false,
+        "CODEX_INFERENCE_PROXY": false,
+        "ALIPAY_APP_ID": false,
+        "ALIPAY_APP_PRIVATE_KEY": false,
+        "ALIPAY_PLATFORM_PUBLIC_KEY": false,
+        "ALIPAY_MERCHANT_ID": false,
+        "DOUYIN_APP_ID": false,
+        "DOUYIN_APP_SECRET": false,
+        "DOUYIN_MERCHANT_ID": false,
+        "DOUYIN_PAYMENT_VERIFY_KEY": false,
+        "STORAGE_ACCESS_KEY_ID": false,
+        "STORAGE_ACCESS_KEY_SECRET": false,
+        "STORAGE_BUCKET": false
+      },
+      "budgets_micro": {
+        "VISION_DAILY_BUDGET_MICRO": "0",
+        "CODEX_PLANNING_DAILY_BUDGET_MICRO": "0",
+        "CODEX_ORDER_COST_CEILING_MICRO": "0",
+        "SAMPLE_DAILY_BUDGET_MICRO": "0",
+        "SAMPLE_COST_CEILING_MICRO": "0",
+        "PLUS_VIDEO_RENDER_BUDGET_MICRO": "0"
+      },
+      "files": {
+        "CODEX_BINARY_PATH": {
+          "configured": false,
+          "exists": false
+        },
+        "CODEX_ISOLATION_LAUNCHER": {
+          "configured": false,
+          "exists": false
+        },
+        "CODEX_RUNTIME_ADMISSION_PATH": {
+          "configured": false,
+          "exists": false
+        },
+        "VISION_CONTRACT_PATH": {
+          "configured": false,
+          "exists": false
+        },
+        "DOUYIN_TRADE_CONTRACT_PATH": {
+          "configured": false,
+          "exists": false
+        }
+      },
+      "storage_driver": "local",
+      "public_base_url": "http://192.168.31.20:38480",
+      "web_origins": "http://192.168.31.20:38480",
+      "codex_build_sha256_configured": false
+    },
+    "api_running_flags": {
+      "DEV_MODE": false,
+      "PAYMENTS_ENABLED": false,
+      "PROVIDER_GENERATION_ENABLED": false,
+      "CODEX_SERVICE_ENABLED": false,
+      "COMMUNITY_PUBLISHING_ENABLED": false,
+      "LISTENING_SERVICE_ENABLED": false,
+      "ASR_SERVICE_ENABLED": false,
+      "PLUS_IMAGE_RENDER_ENABLED": false,
+      "PLUS_VIDEO_RENDER_ENABLED": false
+    },
+    "worker_vs_saved_env_differing_keys": [],
+    "deployed_launcher_inspection": [
+      {
+        "path": "src/worker/codex/launcher.ts",
+        "sha256": "a880b6a27fe1245c3b5a5d47704d4fc2f566ce98fb56294e00f4bbcc4b40d38c",
+        "requires_exe_marker": true,
+        "windows_environment_present": true,
+        "native_launcher_guard_present": true
+      }
+    ],
+    "database_read_only": {
+      "counts": {
+        "orders": 0,
+        "agent_instances": 0,
+        "agent_runs": 0,
+        "inference_requests": 0,
+        "skill_load_evidence": 0,
+        "agent_isolation_evidence": 0,
+        "review_reports": 0,
+        "cleanup_receipts": 0,
+        "provider_submissions": 0,
+        "analysis_jobs": 0,
+        "skill_versions": 19,
+        "skill_bundles": 14,
+        "provider_model_versions": 0
+      },
+      "agent_roles": [],
+      "model_statuses": [],
+      "variants": {
+        "total": 14,
+        "sale_enabled": 0
+      },
+      "official_presets": 10,
+      "bundle_states": [
+        {
+          "state": "DRAFT_NOT_ADMITTED",
+          "count": 14
+        }
+      ]
+    },
+    "compiled_launcher_files": [
+      {
+        "path": "runtime/build/worker/main.js",
+        "sha256": "2dcb0f6558fc6dee2e7e6616384fea9c05fa4c8bb29793f1d84a44a73169cb2d",
+        "requires_exe_marker": true,
+        "windows_environment_present": true
+      }
+    ]
+  },
+  "http_checks": [
+    {
+      "path": "/",
+      "status": 200,
+      "final_url": "http://192.168.31.20:38480/"
+    },
+    {
+      "path": "/healthz",
+      "status": 200,
+      "final_url": "http://192.168.31.20:38480/healthz",
+      "body": {
+        "status": "ok",
+        "service": "一品成片",
+        "version": "0.1.0"
+      }
+    },
+    {
+      "path": "/readyz",
+      "status": 200,
+      "final_url": "http://192.168.31.20:38480/readyz",
+      "body": {
+        "status": "ready"
+      }
+    },
+    {
+      "path": "/plus/",
+      "status": 200,
+      "final_url": "http://192.168.31.20:38480/plus/"
+    },
+    {
+      "path": "/ops/support",
+      "status": 200,
+      "final_url": "http://192.168.31.20:38480/ops/support"
+    },
+    {
+      "path": "/ops/review",
+      "status": 200,
+      "final_url": "http://192.168.31.20:38480/ops/review"
+    },
+    {
+      "path": "/ops/metrics",
+      "status": 200,
+      "final_url": "http://192.168.31.20:38480/ops/metrics"
+    },
+    {
+      "path": "/v1/p01/runtime-info",
+      "status": 200,
+      "final_url": "http://192.168.31.20:38480/v1/p01/runtime-info",
+      "body": {
+        "data": {
+          "dev_mode": false,
+          "payment_enabled": false,
+          "generation_enabled": false,
+          "codex_enabled": false
+        },
+        "trace_id": "trace_880d54ff156a4279af267bd62e047494"
+      }
+    }
+  ],
+  "observed_at_utc": "2026-11-05T19:45:47.231617+00:00",
+  "paid_model_calls_performed": false,
+  "browser_used": false,
+  "virtualization_used": false,
+  "configuration_changed": false,
+  "conclusion": "REAL_AGENT_PIPELINE_NOT_READY"
+}

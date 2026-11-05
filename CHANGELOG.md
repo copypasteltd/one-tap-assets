@@ -1,5 +1,11 @@
 # 更新记录 / Changelog
 
+## 2026-11-06 — Live Agent readiness audit / 真实Agent阻塞核查
+
+- 只读检查线上接口、6个常驻服务、实际进程环境、Worker源码/编译包和数据库聚合；真实生成/Codex/支付关闭，模型接入字段为空，模型登记与真实执行记录均0，14个Skill组合均未准入。 / Audited the live instance without paid model calls; real Agent execution remains unavailable.
+- 明确Ubuntu部署与现有Windows式.exe角色启动器的适配缺口，列出原生执行、Codex/模型接入、Skill与真实闭环、平台交易及生产交付六项待办。同步中英README和状态，不修改线上配置。 / Documented native platform support and remaining integration blockers; runtime settings were unchanged.
+- [实查与阻塞清单](docs/评估/真实Agent可用性与阻塞清单-2026-11-06.md) · [脱敏回执](docs/verification/agent-readiness-2026-11-06.json)
+
 ## 2026-11-01 — Mini-program listing copy / 小程序上架文案
 
 - 新增支付宝、抖音通用简介与描述，分别14、300字符（含标点）；突出拍照识别、免填表、官方/社区预设和成套素材交付，进阶编辑作为补充。 / Added shared Chinese listing copy: a 14-character introduction and a 300-character description, including punctuation.
